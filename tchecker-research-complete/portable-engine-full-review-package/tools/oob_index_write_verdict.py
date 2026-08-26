@@ -29,20 +29,29 @@ def emit_candidates(prefix):
     calls = d.get('calls', [])
     locals_ = d.get('locals', [])
     call_by_id = {c['id']: c for c in calls}
-    # fixed-array locals -> element count N (opaque element types OK: count is syntactic)
-    arr_count = {}
+    # fixed-array locals -> element count N (opaque element types OK: count is syntactic).
+    # Keyed by (declaring function, name), NOT name alone: two different functions in the same
+    # file can each declare a same-named local array with a DIFFERENT size (this happens for
+    # real -- e.g. mpi.c's mp_gcd declares `mp_int *clear[3]` while s_mp_invmod_odd_m declares
+    # its own, unrelated `mp_int *clear[6]`). A bare name-keyed dict lets whichever same-named
+    # local is last in file order silently overwrite every earlier one's count, so a candidate
+    # in mp_gcd was reported with capacity 6 (borrowed from a different function entirely)
+    # instead of its own, correct capacity of 3. Scoping by method_id fixes that; see the
+    # already-correctly-scoped guarded_arrays_by_fn/bounded_idx_by_fn below for the same idiom.
+    arr_count = {}   # (function_id, name) -> N
     for l in locals_:
         n = _elem_count(l.get('type_full_name'))
         if n is not None:
-            arr_count[l.get('name')] = n
+            arr_count[(l.get('method_id'), l.get('name'))] = n
     if not arr_count:
         return []
 
     # comparison-code text that references a fixed array's own sizeof-capacity, and which array
-    def _cap_guard_arrays(code):
+    # -- scoped to the function containing the comparison, for the same reason as above.
+    def _cap_guard_arrays(code, fn):
         hits = set()
-        for name in arr_count:
-            if ('sizeof(%s)' % name) in (code or ''):
+        for (mid, name) in arr_count:
+            if mid == fn and ('sizeof(%s)' % name) in (code or ''):
                 hits.add(name)
         return hits
 
@@ -70,7 +79,7 @@ def emit_candidates(prefix):
         if _in_assert(code):
             continue    # assert-only comparison -> does NOT gate (compiled out in release)
         fn = c.get('enclosing_function_id')
-        arrs = _cap_guard_arrays(code)
+        arrs = _cap_guard_arrays(code, fn)
         if arrs:
             guarded_arrays_by_fn.setdefault(fn, set()).update(arrs)
         if c.get('name') in ('<operator>.lessThan', '<operator>.lessEqualsThan'):
@@ -91,16 +100,16 @@ def emit_candidates(prefix):
         if not m:
             continue
         arr = m.group(1)
-        if arr not in arr_count:
+        fn = c.get('enclosing_function_id')
+        if (fn, arr) not in arr_count:
             continue
-        N = arr_count[arr]
+        N = arr_count[(fn, arr)]
         # index operand = the text inside [ ... ]
         mi = re.match(r'^\s*[A-Za-z_]\w*\s*\[\s*([^\]]+?)\s*\]', code)
         idx = (mi.group(1).strip() if mi else '')
         # constant, provably in-bounds -> safe
         if re.fullmatch(r'\d+', idx) and int(idx) < N:
             continue
-        fn = c.get('enclosing_function_id')
         # (b) upstream count guard referencing sizeof(arr) -> suppress
         if arr in guarded_arrays_by_fn.get(fn, set()):
             continue

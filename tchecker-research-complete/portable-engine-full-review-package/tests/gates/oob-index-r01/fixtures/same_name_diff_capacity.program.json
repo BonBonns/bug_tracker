@@ -1,0 +1,15 @@
+{
+  "schema": "portable-c-cpp-facts/0.1",
+  "functions": [
+    {"id": 900000000001, "name": "fn_small", "full_name": "fn_small", "file": "t2.c", "line": 1, "line_end": 3, "is_external": false, "parameters": []},
+    {"id": 900000000002, "name": "fn_big", "full_name": "fn_big", "file": "t2.c", "line": 4, "line_end": 6, "is_external": false, "parameters": []}
+  ],
+  "locals": [
+    {"id": 900000000101, "name": "sh", "type_full_name": "int[3]", "method_id": 900000000001, "code": "int sh[3]", "line": 2},
+    {"id": 900000000102, "name": "sh", "type_full_name": "int[9]", "method_id": 900000000002, "code": "int sh[9]", "line": 5}
+  ],
+  "calls": [
+    {"id": 900000000201, "name": "<operator>.indirectIndexAccess", "code": "sh[i]", "enclosing_function_id": 900000000001, "file": "t2.c", "line": 2},
+    {"id": 900000000202, "name": "<operator>.indirectIndexAccess", "code": "sh[j]", "enclosing_function_id": 900000000002, "file": "t2.c", "line": 5}
+  ]
+}
