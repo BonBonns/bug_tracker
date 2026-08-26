@@ -1,0 +1,19 @@
+diff --git a/lib/ssl/tls13con.c b/lib/ssl/tls13con.c
+index cc482f4..a6fb834 100644
+--- a/lib/ssl/tls13con.c
++++ b/lib/ssl/tls13con.c
+@@ -5191,6 +5191,14 @@ tls13_SetupAeadIv(PRBool isDTLS, SSL3ProtocolVersion v, unsigned char *ivOut, un
+         if (offset >= ivLen) {
+             ivOut[offset] = ivOut[offset + 1] = 0;
+         }
++        /* The writes below are unconditional (unlike the clear above), so the
++         * bound must hold regardless of the offset>=ivLen branch taken above.
++         * Every AEAD cipher's iv_size/explicit_nonce_size pairing in
++         * ssl_bulk_cipher_defs[] currently keeps offset well clear of
++         * MAX_IV_LENGTH, but nothing enforces that invariant at this call
++         * site -- assert it so a future cipher table entry can't silently
++         * turn this into a stack buffer overflow. */
++        PORT_Assert(offset + 1 < MAX_IV_LENGTH);
+         ivOut[offset] ^= (unsigned char)(epoch >> BPB) & 0xff;
+         ivOut[offset + 1] ^= (unsigned char)(epoch) & 0xff;
+         offset += 2;
