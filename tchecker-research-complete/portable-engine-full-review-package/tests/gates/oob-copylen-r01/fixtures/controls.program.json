@@ -1,0 +1,312 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {
+   "id": 910000000001,
+   "name": "vuln_unbounded",
+   "full_name": "vuln_unbounded",
+   "file": "cl.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000002,
+   "name": "guarded_sizeof",
+   "full_name": "guarded_sizeof",
+   "file": "cl.c",
+   "line": 4,
+   "line_end": 7,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000003,
+   "name": "guarded_literal",
+   "full_name": "guarded_literal",
+   "file": "cl.c",
+   "line": 8,
+   "line_end": 11,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000004,
+   "name": "safe_const_len",
+   "full_name": "safe_const_len",
+   "file": "cl.c",
+   "line": 12,
+   "line_end": 14,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000005,
+   "name": "out_of_scope_pointer",
+   "full_name": "out_of_scope_pointer",
+   "file": "cl.c",
+   "line": 15,
+   "line_end": 17,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000006,
+   "name": "out_of_scope_int_array",
+   "full_name": "out_of_scope_int_array",
+   "file": "cl.c",
+   "line": 18,
+   "line_end": 20,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000007,
+   "name": "guarded_field_access",
+   "full_name": "guarded_field_access",
+   "file": "cl.c",
+   "line": 21,
+   "line_end": 24,
+   "is_external": false,
+   "parameters": []
+  }
+ ],
+ "locals": [
+  {
+   "id": 910000000101,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000001,
+   "code": "char buf[16]",
+   "line": 2
+  },
+  {
+   "id": 910000000102,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000002,
+   "code": "char buf[16]",
+   "line": 5
+  },
+  {
+   "id": 910000000103,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000003,
+   "code": "char buf[16]",
+   "line": 9
+  },
+  {
+   "id": 910000000104,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000004,
+   "code": "char buf[16]",
+   "line": 13
+  },
+  {
+   "id": 910000000105,
+   "name": "buf",
+   "type_full_name": "int[8]",
+   "method_id": 910000000006,
+   "code": "int buf[8]",
+   "line": 19
+  },
+  {
+   "id": 910000000106,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000007,
+   "code": "char buf[16]",
+   "line": 22
+  }
+ ],
+ "calls": [
+  {
+   "id": 910000000201,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 910000000001,
+   "file": "cl.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000210,
+   "name": "<operator>.greaterThan",
+   "code": "len > sizeof(buf)",
+   "enclosing_function_id": 910000000002,
+   "file": "cl.c",
+   "line": 6
+  },
+  {
+   "id": 910000000211,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 910000000002,
+   "file": "cl.c",
+   "line": 6,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000220,
+   "name": "<operator>.lessThan",
+   "code": "len < 16",
+   "enclosing_function_id": 910000000003,
+   "file": "cl.c",
+   "line": 10
+  },
+  {
+   "id": 910000000221,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 910000000003,
+   "file": "cl.c",
+   "line": 10,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000230,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, src, 8)",
+   "enclosing_function_id": 910000000004,
+   "file": "cl.c",
+   "line": 13,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "8"
+    }
+   ]
+  },
+  {
+   "id": 910000000240,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 910000000005,
+   "file": "cl.c",
+   "line": 16,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000250,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 910000000006,
+   "file": "cl.c",
+   "line": 19,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000260,
+   "name": "<operator>.lessThan",
+   "code": "io.iov_len < 16",
+   "enclosing_function_id": 910000000007,
+   "file": "cl.c",
+   "line": 23
+  },
+  {
+   "id": 910000000261,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf, io.iov_base, io.iov_len)",
+   "enclosing_function_id": 910000000007,
+   "file": "cl.c",
+   "line": 23,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf"
+    },
+    {
+     "index": 1,
+     "code": "io.iov_base"
+    },
+    {
+     "index": 2,
+     "code": "io.iov_len"
+    }
+   ]
+  }
+ ]
+}
