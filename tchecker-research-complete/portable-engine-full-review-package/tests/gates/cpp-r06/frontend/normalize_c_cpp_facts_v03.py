@@ -525,6 +525,21 @@ def main():
         '<operator>.assignmentArithmeticShiftRight','<operator>.assignmentLogicalShiftRight'}
     compound_id=next_synth_id+500000
     memory_stats['compound_assignments']=0
+    # Index assignments by (function_id, target_local_id) so the "prior contribution"
+    # lookup below (COMPOUND-R02) doesn't rescan the entire, ever-growing `assignments`
+    # list on every compound assignment. That rescan was O(existing assignments) PER
+    # compound assignment; on a function with K compound assignments to the same
+    # target it's O(K^2) -- measured on a real file (mozjpeg's jchuff.c, heavy
+    # PUT_BITS/EMIT_BYTE macro expansion): one function alone produced 181,502
+    # assignment facts and drove the downstream reaching-def worklist to its 200,000-
+    # iteration cap. Seed the index once from whatever's already in `assignments`
+    # (from the CPP_EXACT_POINTER_PARAM_WRITE block above), then keep it updated
+    # at this loop's own two append sites below -- the two append sites further
+    # down in the file run in a later pass and can't be "prior" to anything seen
+    # here, so they don't need indexing for this lookup.
+    _prior_idx={}
+    for _pa in assignments:
+        _prior_idx.setdefault((_pa['function_id'],_pa['target_local_id']),[]).append(_pa)
     for c in sorted((c for c in calls if c['name'] in COMPOUND_OPS), key=lambda x:(x.get('line') or 0,x['id'])):
         mid=c['enclosing_function_id']; ops=operand_nodes(c['id'])
         if len(ops)<2: continue
@@ -542,10 +557,11 @@ def main():
         if not targets: continue
         vr=value_ref(rhs_node,next((a['code'] for a in raw_arg_nodes(c['id']) if a['id']==rhs_node),''),mid)
         for target in targets:
-            assignments.append({'id':c['id'],'function_id':mid,'target_local_id':target,'line':c.get('line') or 0,
+            _new_a={'id':c['id'],'function_id':mid,'target_local_id':target,'line':c.get('line') or 0,
                 'cfg_anchor':c['id'],
                 'value_ref':vr,'derivation':{'origin':'FRONTEND_DERIVED','rule':'CPP_COMPOUND_ASSIGNMENT',
-                'source_node_ids':[c['id'],lhs_node,rhs_node]}})
+                'source_node_ids':[c['id'],lhs_node,rhs_node]}}
+            assignments.append(_new_a); _prior_idx.setdefault((mid,target),[]).append(_new_a)
             # COMPOUND-R02: `a op= b` derives from the PREVIOUS value of a as well
             # as from b. An opaque UNKNOWN prior was enough to prevent false EXACT,
             # but carried NO provenance edge back to the target's earlier
@@ -553,20 +569,22 @@ def main():
             # definition (PARAM-R02 shadow), parameter 0 silently vanished from the
             # origin set. The prior contribution now references each PRECEDING
             # definition of the same target; UNKNOWN remains the fallback.
-            _prior_refs=[dict(x['value_ref']) for x in assignments
-                         if x['target_local_id']==target and x['function_id']==mid
-                         and x['derivation']['rule']!='CPP_COMPOUND_PRIOR_VALUE'
+            # Looked up via _prior_idx (see its seeding above this loop), not by
+            # rescanning all of `assignments` -- that rescan was the O(n^2) driver.
+            _prior_refs=[dict(x['value_ref']) for x in _prior_idx.get((mid,target),())
+                         if x['derivation']['rule']!='CPP_COMPOUND_PRIOR_VALUE'
                          and (x.get('line') or 0)<=(c.get('line') or 0)] or [
                 {'kind':'UNKNOWN','id':-1,'code':'<prior value of '+(c.get('code') or '').split()[0]+'>'}]
             for _pr in _prior_refs:
-                assignments.append({'id':compound_id,'function_id':mid,'target_local_id':target,'line':c.get('line') or 0,
+                _new_pv={'id':compound_id,'function_id':mid,'target_local_id':target,'line':c.get('line') or 0,
                     # SAME anchor as the rhs contribution: one statement, two
                     # semantic defs — this is what stops CFG filtering from dropping
                     # the uncertainty contribution (utf8PrevCharLen hazard).
                     'cfg_anchor':c['id'],
                     'value_ref':_pr,
                     'derivation':{'origin':'FRONTEND_DERIVED','rule':'CPP_COMPOUND_PRIOR_VALUE',
-                    'source_node_ids':[c['id'],lhs_node]}})
+                    'source_node_ids':[c['id'],lhs_node]}}
+                assignments.append(_new_pv); _prior_idx.setdefault((mid,target),[]).append(_new_pv)
                 compound_id+=1
             memory_stats['compound_assignments']+=1
 
@@ -877,6 +895,17 @@ def main():
                 _defs_of[_a['target_local_id']].add(_a['id'])
             _anchor_local={}
             for _a in _fdefs: _anchor_local.setdefault(_a['cfg_anchor'],set()).add(_a['target_local_id'])
+            # Precompute once, outside the worklist loop: which anchors carry an
+            # unmodelled-pointer-write definition. This used to be an any(... for _a5
+            # in _fdefs ...) linear scan over EVERY definition in the function,
+            # re-run on EVERY worklist pop -- fine for a handful of nodes, but the
+            # worklist can revisit a node many times on a cyclic/branch-heavy CFG
+            # (measured: a single real-world file with heavy bit-packing macro
+            # expansion -- many small basic blocks, i.e. exactly a dense CFG -- drove
+            # this one line to >30s of a ~45s run, dwarfing everything else combined).
+            # Same precompute-then-O(1)-lookup idiom as _anchor_local just above.
+            _unmodelled_ptr_write_anchors={_a5['cfg_anchor'] for _a5 in _fdefs
+                                           if _a5['derivation']['rule']=='CPP_UNMODELLED_POINTER_WRITE'}
             _IN={_n:set() for _n in _nodes}; _OUT={_n:set() for _n in _nodes}
             _wl=_dq(_nodes); _guard=0
             while _wl and _guard < 200000:
@@ -891,8 +920,7 @@ def main():
                 # REMOVES nothing: it may not have targeted this location at all.
                 # Letting it kill made k5 lose the external origin entirely, which
                 # is the mirror image of the over-claim it originally exposed.
-                if any(_a5['derivation']['rule']=='CPP_UNMODELLED_POINTER_WRITE'
-                       for _a5 in _fdefs if _a5['cfg_anchor']==_n):
+                if _n in _unmodelled_ptr_write_anchors:
                     _kill=set()
                 _newout=_gen.get(_n,set()) | (_newin-_kill)
                 if _newout!=_OUT[_n] or _newin!=_IN[_n]:
