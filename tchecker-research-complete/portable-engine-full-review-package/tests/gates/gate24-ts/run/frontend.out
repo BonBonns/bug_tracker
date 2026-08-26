@@ -1,16 +1,16 @@
-[INFO ] initialising from existing storage (/home/user/work/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin3/cpg.bin.tmp)
+[INFO ] initialising from existing storage (/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin5/cpg.bin.tmp)
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.FileCreationPass
-[INFO ] Pass io.joern.x2cpg.passes.base.FileCreationPass completed in 28 ms (64% on mutations). 110 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.FileCreationPass completed in 42 ms (74% on mutations). 110 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.NamespaceCreator
-[INFO ] Pass io.joern.x2cpg.passes.base.NamespaceCreator completed in 20 ms (74% on mutations). 9 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.NamespaceCreator completed in 31 ms (66% on mutations). 9 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeDeclStubCreator
-[INFO ] Pass io.joern.x2cpg.passes.base.TypeDeclStubCreator completed in 10 ms (30% on mutations). 10 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeDeclStubCreator completed in 19 ms (34% on mutations). 10 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodStubCreator
-[INFO ] Pass io.joern.x2cpg.passes.base.MethodStubCreator completed in 35 ms (13% on mutations). 27 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodStubCreator completed in 54 ms (13% on mutations). 27 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.ParameterIndexCompatPass
-[INFO ] Pass io.joern.x2cpg.passes.base.ParameterIndexCompatPass completed in 4 ms (43% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.ParameterIndexCompatPass completed in 7 ms (55% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodDecoratorPass
-[INFO ] Pass io.joern.x2cpg.passes.base.MethodDecoratorPass completed in 14 ms (46% on mutations). 243 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodDecoratorPass completed in 20 ms (40% on mutations). 243 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.AstLinkerPass
 [INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182444
 [INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182445
@@ -25,27 +25,27 @@
 [INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724609
 [INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724610
 [INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724611
-[INFO ] Pass io.joern.x2cpg.passes.base.AstLinkerPass completed in 13 ms (17% on mutations). 36 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.AstLinkerPass completed in 20 ms (20% on mutations). 36 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.ContainsEdgePass
-[INFO ] Pass io.joern.x2cpg.passes.base.ContainsEdgePass completed in 15 ms (35% on mutations). 397 + 0 changes committed from 123 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.ContainsEdgePass completed in 13 ms (39% on mutations). 397 + 0 changes committed from 123 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeRefPass
-[INFO ] Pass io.joern.x2cpg.passes.base.TypeRefPass completed in 8 ms (30% on mutations). 68 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeRefPass completed in 10 ms (46% on mutations). 68 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeEvalPass
-[INFO ] Pass io.joern.x2cpg.passes.base.TypeEvalPass completed in 10 ms (24% on mutations). 504 + 0 changes committed from 6 parts.
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeEvalPass completed in 9 ms (24% on mutations). 504 + 0 changes committed from 6 parts.
 [INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
-[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 6 ms (30% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 5 ms (31% on mutations). 1 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.CfgCreationPass
-[INFO ] Pass io.joern.x2cpg.passes.controlflow.CfgCreationPass completed in 53 ms (4% on mutations). 295 + 0 changes committed from 47 parts.
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.CfgCreationPass completed in 54 ms (3% on mutations). 295 + 0 changes committed from 47 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass
-[INFO ] Pass io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass completed in 24 ms (9% on mutations). 590 + 0 changes committed from 47 parts.
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass completed in 35 ms (24% on mutations). 590 + 0 changes committed from 47 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass
-[INFO ] Pass io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass completed in 5 ms (8% on mutations). 0 + 0 changes committed from 47 parts.
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass completed in 10 ms (43% on mutations). 0 + 0 changes committed from 47 parts.
 [INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
 [INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (76% on mutations). 1 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.TypeHierarchyPass
-[INFO ] Pass io.joern.x2cpg.passes.typerelations.TypeHierarchyPass completed in 4 ms (29% on mutations). 48 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.TypeHierarchyPass completed in 4 ms (35% on mutations). 48 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.AliasLinkerPass
-[INFO ] Pass io.joern.x2cpg.passes.typerelations.AliasLinkerPass completed in 2 ms (23% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.AliasLinkerPass completed in 2 ms (32% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass
 [INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771073, dstNodeType=MEMBER, dstFullName=ANY.process
 [INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771077, dstNodeType=MEMBER, dstFullName=ANY.exact
@@ -68,131 +68,131 @@
 [INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771132, dstNodeType=MEMBER, dstFullName=ANY.genericCall
 [INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771134, dstNodeType=MEMBER, dstFullName=ANY.process
 [INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771137, dstNodeType=MEMBER, dstFullName=ANY.anyCall
-[INFO ] Pass io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass completed in 22 ms (3% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass completed in 31 ms (12% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
-[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (67% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 4 ms (93% on mutations). 1 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.MethodRefLinker
-[INFO ] Pass io.joern.x2cpg.passes.callgraph.MethodRefLinker completed in 4 ms (26% on mutations). 22 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.MethodRefLinker completed in 5 ms (72% on mutations). 22 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.StaticCallLinker
-[INFO ] Pass io.joern.x2cpg.passes.callgraph.StaticCallLinker completed in 17 ms (86% on mutations). 56 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.StaticCallLinker completed in 7 ms (63% on mutations). 56 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.DynamicCallLinker
-[INFO ] Pass io.joern.x2cpg.passes.callgraph.DynamicCallLinker completed in 31 ms (3% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.DynamicCallLinker completed in 10 ms (5% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
-[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 2 ms (72% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (79% on mutations). 1 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass
 [INFO ] Calculating reaching definitions for: 06_inheritance.ts::program in 06_inheritance.ts
-[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:propertyCall in 03_typed_property.ts
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:genericCall in 07_generic_receiver.ts
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program in 07_generic_receiver.ts
-[INFO ] Number of definitions for 07_generic_receiver.ts::program: 8
-[INFO ] Number of definitions for 07_generic_receiver.ts::program:genericCall: 6
-[INFO ] Number of definitions for 03_typed_property.ts::program:propertyCall: 9
-[INFO ] Number of definitions for 06_inheritance.ts::program: 15
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:A:<init> in 07_generic_receiver.ts
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Base:<init> in 06_inheritance.ts
-[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program in 04_return_receiver.ts
-[INFO ] Number of definitions for 06_inheritance.ts::program:Base:<init>: 1
-[INFO ] Calculating reaching definitions for: 08_any_unknown.ts::program:anyCall in 08_any_unknown.ts
-[INFO ] Number of definitions for 04_return_receiver.ts::program: 15
-[INFO ] Number of definitions for 07_generic_receiver.ts::program:A:<init>: 1
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Base:process in 06_inheritance.ts
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:A:process in 07_generic_receiver.ts
-[INFO ] Number of definitions for 08_any_unknown.ts::program:anyCall: 6
-[INFO ] Number of definitions for 07_generic_receiver.ts::program:A:process: 2
-[INFO ] Number of definitions for 06_inheritance.ts::program:Base:process: 2
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:childCall in 06_inheritance.ts
-[INFO ] Number of definitions for 06_inheritance.ts::program:childCall: 6
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Child:<init> in 06_inheritance.ts
-[INFO ] Calculating reaching definitions for: 08_any_unknown.ts::program in 08_any_unknown.ts
-[INFO ] Number of definitions for 06_inheritance.ts::program:Child:<init>: 1
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Child:process in 06_inheritance.ts
-[INFO ] Number of definitions for 08_any_unknown.ts::program: 6
-[INFO ] Number of definitions for 06_inheritance.ts::program:Child:process: 4
-[INFO ] Calculating reaching definitions for: <operator>.fieldAccess in <empty>
-[INFO ] Number of definitions for <operator>.fieldAccess: 2
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:Worker:<init> in 07_generic_receiver.ts
-[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:A:<init> in 04_return_receiver.ts
-[INFO ] Calculating reaching definitions for: <operator>.assignment in <empty>
-[INFO ] Number of definitions for 04_return_receiver.ts::program:A:<init>: 1
-[INFO ] Number of definitions for 07_generic_receiver.ts::program:Worker:<init>: 1
-[INFO ] Number of definitions for <operator>.assignment: 2
-[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:Worker:process in 07_generic_receiver.ts
-[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:A:<init> in 03_typed_property.ts
-[INFO ] Calculating reaching definitions for: <operator>.addition in <empty>
-[INFO ] Number of definitions for <operator>.addition: 2
-[INFO ] Number of definitions for 07_generic_receiver.ts::program:Worker:process: 2
-[INFO ] Number of definitions for 03_typed_property.ts::program:A:<init>: 1
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program in 05_interface_dispatch.ts
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:B:<init> in 05_interface_dispatch.ts
-[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:baseCall in 06_inheritance.ts
-[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:A:process in 03_typed_property.ts
-[INFO ] Number of definitions for 03_typed_property.ts::program:A:process: 2
-[INFO ] Number of definitions for 06_inheritance.ts::program:baseCall: 6
-[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:Holder:<init> in 03_typed_property.ts
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program: 10
-[INFO ] Number of definitions for 03_typed_property.ts::program:Holder:<init>: 1
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:B:<init>: 1
 [INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program:A:<init> in 02_union_receiver.ts
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:genericCall in 07_generic_receiver.ts
+[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:propertyCall in 03_typed_property.ts
 [INFO ] Number of definitions for 02_union_receiver.ts::program:A:<init>: 1
+[INFO ] Number of definitions for 07_generic_receiver.ts::program:genericCall: 6
+[INFO ] Number of definitions for 06_inheritance.ts::program: 15
+[INFO ] Number of definitions for 03_typed_property.ts::program:propertyCall: 9
 [INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program:A:process in 02_union_receiver.ts
 [INFO ] Number of definitions for 02_union_receiver.ts::program:A:process: 2
 [INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program:B:<init> in 02_union_receiver.ts
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Base:<init> in 06_inheritance.ts
 [INFO ] Number of definitions for 02_union_receiver.ts::program:B:<init>: 1
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:A:<init> in 05_interface_dispatch.ts
-[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:returnReceiver in 04_return_receiver.ts
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:A:<init>: 1
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:A:process in 05_interface_dispatch.ts
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:B:process in 05_interface_dispatch.ts
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:A:process: 2
+[INFO ] Number of definitions for 06_inheritance.ts::program:Base:<init>: 1
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Base:process in 06_inheritance.ts
 [INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program:B:process in 02_union_receiver.ts
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:B:process: 2
+[INFO ] Number of definitions for 06_inheritance.ts::program:Base:process: 2
 [INFO ] Number of definitions for 02_union_receiver.ts::program:B:process: 2
-[INFO ] Number of definitions for 04_return_receiver.ts::program:returnReceiver: 12
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Child:<init> in 06_inheritance.ts
+[INFO ] Number of definitions for 06_inheritance.ts::program:Child:<init>: 1
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:Child:process in 06_inheritance.ts
+[INFO ] Number of definitions for 06_inheritance.ts::program:Child:process: 4
+[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program in 04_return_receiver.ts
+[INFO ] Calculating reaching definitions for: 08_any_unknown.ts::program:anyCall in 08_any_unknown.ts
+[INFO ] Number of definitions for 08_any_unknown.ts::program:anyCall: 6
+[INFO ] Number of definitions for 04_return_receiver.ts::program: 15
+[INFO ] Calculating reaching definitions for: 08_any_unknown.ts::program in 08_any_unknown.ts
+[INFO ] Number of definitions for 08_any_unknown.ts::program: 6
+[INFO ] Calculating reaching definitions for: <operator>.fieldAccess in <empty>
+[INFO ] Number of definitions for <operator>.fieldAccess: 2
+[INFO ] Calculating reaching definitions for: <operator>.assignment in <empty>
+[INFO ] Number of definitions for <operator>.assignment: 2
+[INFO ] Calculating reaching definitions for: <operator>.addition in <empty>
+[INFO ] Number of definitions for <operator>.addition: 2
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program in 07_generic_receiver.ts
 [INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program:unionCall in 02_union_receiver.ts
+[INFO ] Number of definitions for 07_generic_receiver.ts::program: 8
+[INFO ] Number of definitions for 02_union_receiver.ts::program:unionCall: 6
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:baseCall in 06_inheritance.ts
+[INFO ] Number of definitions for 06_inheritance.ts::program:baseCall: 6
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:B:<init> in 05_interface_dispatch.ts
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:A:<init> in 07_generic_receiver.ts
+[INFO ] Number of definitions for 07_generic_receiver.ts::program:A:<init>: 1
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:A:process in 07_generic_receiver.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:B:<init>: 1
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:B:process in 05_interface_dispatch.ts
+[INFO ] Number of definitions for 07_generic_receiver.ts::program:A:process: 2
+[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program in 03_typed_property.ts
+[INFO ] Calculating reaching definitions for: 06_inheritance.ts::program:childCall in 06_inheritance.ts
+[INFO ] Number of definitions for 03_typed_property.ts::program: 10
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:B:process: 2
+[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:A:<init> in 04_return_receiver.ts
+[INFO ] Number of definitions for 04_return_receiver.ts::program:A:<init>: 1
+[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:A:<init> in 03_typed_property.ts
+[INFO ] Number of definitions for 03_typed_property.ts::program:A:<init>: 1
+[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:A:process in 03_typed_property.ts
+[INFO ] Number of definitions for 03_typed_property.ts::program:A:process: 2
+[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program:Holder:<init> in 03_typed_property.ts
+[INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program:A:process in 01_exact_parameter.ts
+[INFO ] Number of definitions for 03_typed_property.ts::program:Holder:<init>: 1
+[INFO ] Number of definitions for 01_exact_parameter.ts::program:A:process: 2
+[INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:returnReceiver in 04_return_receiver.ts
+[INFO ] Number of definitions for 06_inheritance.ts::program:childCall: 6
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:Worker:<init> in 07_generic_receiver.ts
+[INFO ] Number of definitions for 07_generic_receiver.ts::program:Worker:<init>: 1
+[INFO ] Calculating reaching definitions for: 07_generic_receiver.ts::program:Worker:process in 07_generic_receiver.ts
+[INFO ] Number of definitions for 07_generic_receiver.ts::program:Worker:process: 2
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program in 05_interface_dispatch.ts
+[INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program:exact in 01_exact_parameter.ts
+[INFO ] Number of definitions for 04_return_receiver.ts::program:returnReceiver: 12
 [INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:interfaceCall in 05_interface_dispatch.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:interfaceCall: 6
+[INFO ] Number of definitions for 01_exact_parameter.ts::program:exact: 6
+[INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program in 02_union_receiver.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program: 10
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:Worker:<init> in 05_interface_dispatch.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:Worker:<init>: 1
 [INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:A:process in 04_return_receiver.ts
 [INFO ] Number of definitions for 04_return_receiver.ts::program:A:process: 2
+[INFO ] Number of definitions for 02_union_receiver.ts::program: 10
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:Worker:process in 05_interface_dispatch.ts
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:A:<init> in 05_interface_dispatch.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:A:<init>: 1
 [INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:Holder:<init> in 04_return_receiver.ts
-[INFO ] Number of definitions for 02_union_receiver.ts::program:unionCall: 6
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:interfaceCall: 6
-[INFO ] Calculating reaching definitions for: 03_typed_property.ts::program in 03_typed_property.ts
-[INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program:A:process in 01_exact_parameter.ts
 [INFO ] Number of definitions for 04_return_receiver.ts::program:Holder:<init>: 1
 [INFO ] Calculating reaching definitions for: 04_return_receiver.ts::program:getWorker in 04_return_receiver.ts
-[INFO ] Number of definitions for 01_exact_parameter.ts::program:A:process: 2
-[INFO ] Number of definitions for 04_return_receiver.ts::program:getWorker: 2
-[INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program:exact in 01_exact_parameter.ts
 [INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program in 01_exact_parameter.ts
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:Worker:<init> in 05_interface_dispatch.ts
-[INFO ] Number of definitions for 01_exact_parameter.ts::program: 8
-[INFO ] Number of definitions for 05_interface_dispatch.ts::program:Worker:<init>: 1
-[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:Worker:process in 05_interface_dispatch.ts
 [INFO ] Number of definitions for 05_interface_dispatch.ts::program:Worker:process: 2
-[INFO ] Number of definitions for 01_exact_parameter.ts::program:exact: 6
-[INFO ] Number of definitions for 03_typed_property.ts::program: 10
-[INFO ] Calculating reaching definitions for: 02_union_receiver.ts::program in 02_union_receiver.ts
+[INFO ] Number of definitions for 04_return_receiver.ts::program:getWorker: 2
+[INFO ] Calculating reaching definitions for: 05_interface_dispatch.ts::program:A:process in 05_interface_dispatch.ts
+[INFO ] Number of definitions for 05_interface_dispatch.ts::program:A:process: 2
+[INFO ] Number of definitions for 01_exact_parameter.ts::program: 8
 [INFO ] Calculating reaching definitions for: 01_exact_parameter.ts::program:A:<init> in 01_exact_parameter.ts
 [INFO ] Number of definitions for 01_exact_parameter.ts::program:A:<init>: 1
-[INFO ] Number of definitions for 02_union_receiver.ts::program: 10
-[INFO ] Pass io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass completed in 245 ms (1% on mutations). 743 + 0 changes committed from 47 parts.
+[INFO ] Pass io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass completed in 145 ms (2% on mutations). 743 + 0 changes committed from 47 parts.
 [INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
-[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 2 ms (74% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (67% on mutations). 1 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass completed in 14 ms (9% on mutations). 15 + 0 changes committed from 4 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass completed in 13 ms (6% on mutations). 15 + 0 changes committed from 4 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass completed in 10 ms (8% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass completed in 23 ms (69% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass completed in 1 ms (70% on mutations). 0 + 0 changes committed from 0 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass completed in 2 ms (36% on mutations). 0 + 0 changes committed from 0 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 90 ms (6% on mutations). 236 + 0 changes committed from 8 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 106 ms (4% on mutations). 236 + 0 changes committed from 8 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 73 ms (10% on mutations). 292 + 0 changes committed from 8 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 73 ms (6% on mutations). 292 + 0 changes committed from 8 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker completed in 41 ms (21% on mutations). 189 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker completed in 39 ms (20% on mutations). 189 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker
-[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker completed in 11 ms (29% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker completed in 6 ms (7% on mutations). 0 + 0 changes committed from 1 parts.
 [INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.NaiveCallLinker
-[INFO ] Pass io.joern.x2cpg.passes.callgraph.NaiveCallLinker completed in 12 ms (36% on mutations). 26 + 0 changes committed from 1 parts.
-[INFO ] writing to storage at `/home/user/work/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin3/cpg.bin.tmp`
-[INFO ] closed graph at /home/user/work/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin3/cpg.bin.tmp
-REAL_JOERN_TS_COMPLETE: /home/user/work/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/run/joern/typescript_facts.json
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.NaiveCallLinker completed in 5 ms (13% on mutations). 26 + 0 changes committed from 1 parts.
+[INFO ] writing to storage at `/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin5/cpg.bin.tmp`
+[INFO ] closed graph at /home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/workspace/cpg.bin5/cpg.bin.tmp
+REAL_JOERN_TS_COMPLETE: /home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24-ts/run/joern/typescript_facts.json
