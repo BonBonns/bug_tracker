@@ -1,0 +1,12 @@
+PASS object exact
+PASS object rename
+PASS different property isolated
+PASS overwrite kills source
+PASS array exact
+PASS array index isolated
+PASS computed destructure stays ambiguous
+PASS object rest stays ambiguous
+PASS array rest stays ambiguous
+PASS distinct receiver isolated
+PASS adapter lowers destructuring to AST_DIM
+GATE21=11/11

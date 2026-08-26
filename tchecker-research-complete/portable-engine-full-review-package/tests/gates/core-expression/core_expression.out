@@ -1,0 +1,6 @@
+PASS combined value -> AMBIGUOUS may={0,1}, proven empty
+PASS unresolved operand keeps unknown=true while may={0} survives
+PASS even identical operands stay AMBIGUOUS (never hardened to EXACT)
+PASS constant operand adds no origin and no unknown
+PASS record forbids <2 operands, EXACT resolution, and missing derivation
+CORE_EXPRESSION=5/5

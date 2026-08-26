@@ -1,0 +1,7 @@
+PASS mayAliasWrite: ('AMBIGUOUS', [1]) - got ('AMBIGUOUS', [1])
+PASS sameAliasBothBranches: ('EXACT', [1]) - got ('EXACT', [1])
+PASS mayAliasDifferentField: ('UNKNOWN', []) - got ('UNKNOWN', [])
+PASS mayAliasOverwrite: ('AMBIGUOUS', [1]) - got ('AMBIGUOUS', [1])
+PASS mayAliasRead: ('AMBIGUOUS', [1]) - got ('AMBIGUOUS', [1])
+PASS non_hardening: only sameAliasBothBranches is EXACT - ['sameAliasBothBranches']
+GATE40_ALIAS=6/6

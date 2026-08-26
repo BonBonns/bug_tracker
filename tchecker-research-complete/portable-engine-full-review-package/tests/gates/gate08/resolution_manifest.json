@@ -1,0 +1,39 @@
+[
+  {
+    "line": 30,
+    "method": "process",
+    "resolution": "EXACT",
+    "targets": [
+      "A.process"
+    ],
+    "basis": "return annotation of getWorker()",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 34,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "return annotation of getUnionWorker()",
+    "receiverTypes": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "line": 38,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "return type of getUnknownWorker() not known; multiple in-scope implementations",
+    "receiverTypes": []
+  }
+]

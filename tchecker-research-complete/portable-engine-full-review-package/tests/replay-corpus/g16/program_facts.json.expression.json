@@ -1,0 +1,61 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771174,
+     68719476925,
+     68719476926,
+     90194313221
+    ]
+   },
+   "function_id": 107374182421,
+   "id": 30064771174,
+   "operands": [
+    {
+     "code": "y",
+     "id": 94489280568,
+     "kind": "LOCAL"
+    },
+    {
+     "code": "\"CONST\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.conditional",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771175,
+     68719476927,
+     68719476928,
+     90194313222
+    ]
+   },
+   "function_id": 107374182422,
+   "id": 30064771175,
+   "operands": [
+    {
+     "code": "source",
+     "id": 111669149759,
+     "kind": "PARAMETER"
+    },
+    {
+     "code": "\"CONST\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.conditional",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

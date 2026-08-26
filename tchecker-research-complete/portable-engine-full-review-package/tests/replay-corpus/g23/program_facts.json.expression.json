@@ -1,0 +1,32 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771095,
+     68719476779,
+     68719476780
+    ]
+   },
+   "function_id": 107374182418,
+   "id": 30064771095,
+   "operands": [
+    {
+     "code": "a",
+     "id": 94489280539,
+     "kind": "LOCAL"
+    },
+    {
+     "code": "b",
+     "id": 94489280538,
+     "kind": "LOCAL"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

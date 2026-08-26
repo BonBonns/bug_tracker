@@ -1,0 +1,96 @@
+--- /mnt/data/PHPCGFactory.java	2026-08-15 08:47:07.841156441 +0000
++++ /mnt/data/gate6_engine/detector/joern-php/src/main/java/cg/PHPCGFactory.java	2026-08-15 09:18:59.511360160 +0000
+@@ -103,6 +103,13 @@
+ 	//MethodDef node id => return classDef node id 
+ 	public static HashMap<Long, Long> ret = new HashMap<Long, Long>();
+ 	public static MultiHashMap<Long, Long> call2mtd = new MultiHashMap<Long, Long>();
++	// Gate 6: frontend-provided call-resolution facts.  This sidecar is intentionally
++	// separate from call2mtd so AMBIGUOUS/UNRESOLVED facts are not flattened into hard
++	// legacy call edges.  Only EXACT facts are admitted to call2mtd, and even then via
++	// addCallEdge() so the engine's existing arity/vendor/test guards still apply.
++	public static java.util.HashMap<Long,String> frontendCallResolution = new java.util.HashMap<Long,String>();
++	public static MultiHashMap<Long,Long> frontendCallTargets = new MultiHashMap<Long,Long>();
++	public static java.util.HashMap<String,Integer> frontendResolutionCounts = new java.util.HashMap<String,Integer>();
+ 	// Return-taint summary (interproc): fid -> param positions whose value flows (unsanitized)
+ 	// into a `return`. Lets a caller's `$v = f($tainted)` propagate taint to $v when the
+ 	// tainted arg lands on a return-relevant position. Mirrors the wrapper param-derived model.
+@@ -12417,6 +12424,71 @@
+ 		}
+ 	}
+ 
++
++	/**
++	 * Load language-frontend call-resolution facts from a small TSV sidecar.
++	 * Enabled only when WP_FRONTEND_CALL_RESOLUTION points at a readable file.
++	 *
++	 * Format (one record per line):
++	 *   callNodeId<TAB>EXACT|HEURISTIC|AMBIGUOUS|UNRESOLVED<TAB>targetId[,targetId...]
++	 *
++	 * EXACT with exactly one valid target may add a legacy call2mtd edge.  The other
++	 * resolution classes are recorded but deliberately do not create hard edges.
++	 */
++	private static void loadFrontendCallResolution(CG cg) {
++		String sidecar = System.getenv("WP_FRONTEND_CALL_RESOLUTION");
++		if( sidecar == null || sidecar.trim().isEmpty() ) return;
++		File f = new File(sidecar);
++		if( !f.isFile() ) {
++			System.err.println("FRONTEND_RESOLUTION missing sidecar: "+sidecar);
++			return;
++		}
++		int loaded=0, exactAdded=0, rejected=0;
++		try(BufferedReader br = new BufferedReader(new FileReader(f))) {
++			String line;
++			while((line=br.readLine())!=null) {
++				line=line.trim();
++				if(line.isEmpty() || line.startsWith("#")) continue;
++				String[] parts=line.split("\\t",-1);
++				if(parts.length<2) { rejected++; continue; }
++				long callId;
++				try { callId=Long.parseLong(parts[0].trim()); }
++				catch(NumberFormatException nfe) { rejected++; continue; }
++				String resolution=parts[1].trim().toUpperCase();
++				if(!(resolution.equals("EXACT") || resolution.equals("HEURISTIC") || resolution.equals("AMBIGUOUS") || resolution.equals("UNRESOLVED"))) {
++					rejected++; continue;
++				}
++				ASTNode callNode=ASTUnderConstruction.idToNode.get(callId);
++				if(!(callNode instanceof CallExpressionBase)) { rejected++; continue; }
++				frontendCallResolution.put(callId,resolution);
++				frontendResolutionCounts.put(resolution, frontendResolutionCounts.getOrDefault(resolution,0)+1);
++				java.util.ArrayList<Long> targets=new java.util.ArrayList<Long>();
++				if(parts.length>=3 && !parts[2].trim().isEmpty()) {
++					for(String tok: parts[2].split(",")) {
++						try {
++							Long tid=Long.parseLong(tok.trim());
++							ASTNode target=ASTUnderConstruction.idToNode.get(tid);
++							if(target instanceof FunctionDef) { targets.add(tid); frontendCallTargets.add(callId,tid); }
++							else rejected++;
++						} catch(NumberFormatException nfe) { rejected++; }
++					}
++				}
++				loaded++;
++				if(resolution.equals("EXACT") && targets.size()==1) {
++					FunctionDef target=(FunctionDef)ASTUnderConstruction.idToNode.get(targets.get(0));
++					if(addCallEdge(cg,(CallExpressionBase)callNode,target,false)) exactAdded++;
++				} else if(resolution.equals("EXACT") && targets.size()!=1) {
++					System.err.println("FRONTEND_RESOLUTION rejected EXACT call "+callId+" with "+targets.size()+" targets");
++					rejected++;
++				}
++			}
++		} catch(IOException ioe) {
++			System.err.println("FRONTEND_RESOLUTION read error: "+ioe.getMessage());
++			return;
++		}
++		System.err.println("FRONTEND_RESOLUTION loaded="+loaded+" exact_edges_added="+exactAdded+" rejected="+rejected+" classes="+frontendResolutionCounts);
++	}
++
+ 	public static CG newInstance() {
+ 		CG cg = new CG();
+ 		
+@@ -12456,6 +12528,7 @@
+ 		// OPTIONS_WRITE audit or XSS_ONLY happens to be on. Both are idempotent.
+ 		augmentStaticDispatchEdges();
+ 		augmentInstanceDispatchEdges();
++		loadFrontendCallResolution(cg);   // Gate 6: explicit frontend facts; exact-only hard-edge bridge
+ 		if( System.getenv("WP_DECLARATIVE_DISPATCH") != null ) scanDeclarativeDispatchCandidates();
+ 		dumpCallGraph();             // export resolved call2mtd for the adjudicator (node-accurate chain)
+ 		dumpCallResolutionStats();   // WP_CALL_RESOLUTION_STATS=1: M/N call2mtd resolution rate by call kind

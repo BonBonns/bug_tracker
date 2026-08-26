@@ -1,0 +1,305 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate13.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			61	"./gate13.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate13.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate13.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_CLASS		1		0	2			7	A	
+7	AST	NULL		1		0	2					
+8	AST	NULL		1		1	2					
+9	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	1		2	2			7	"A"	
+10	Artificial	CFG_FUNC_ENTRY		1		0	9				"A"	
+11	Artificial	CFG_FUNC_EXIT		1		0	9				"A"	
+12	AST	AST_STMT_LIST		1		0	9					
+13	AST	AST_PROP_DECL	MODIFIER_PUBLIC	2		0	9	A				
+14	AST	AST_PROP_ELEM		2		0	9	A				
+15	AST	string		2	"value"	0	9	A				
+16	AST	NULL		2		1	9	A				
+17	AST	AST_PROP_DECL	MODIFIER_PUBLIC	3		1	9	A				
+18	AST	AST_PROP_ELEM		3		0	9	A				
+19	AST	string		3	"other"	0	9	A				
+20	AST	NULL		3		1	9	A				
+21	AST	AST_METHOD		4		2	9	A		4	setValue	
+22	Artificial	CFG_FUNC_ENTRY		4		0	21				setValue	
+23	Artificial	CFG_FUNC_EXIT		4		0	21				setValue	
+24	AST	AST_PARAM_LIST		4		0	21	A				
+25	AST	AST_PARAM		4		0	21	A			v	
+26	AST	NULL		4		0	21	A				
+27	AST	string		4	"v"	1	21	A				
+28	AST	NULL		4		2	21	A				
+29	AST	NULL		4		1	21	A				
+30	AST	AST_STMT_LIST		4		2	21	A				
+31	AST	NULL		4		3	21	A				
+32	AST	AST_ASSIGN		4		0	21	A				
+33	AST	AST_PROP		4		0	21	A				
+34	AST	AST_VAR		4		0	21	A			this	
+35	AST	string		4	"this"	0	21	A				
+36	AST	string		4	"value"	1	21	A				
+37	AST	AST_VAR		4		1	21	A			v	
+38	AST	string		4	"v"	0	21	A				
+39	AST	AST_METHOD		5		3	9	A		5	setOther	
+40	Artificial	CFG_FUNC_ENTRY		5		0	39				setOther	
+41	Artificial	CFG_FUNC_EXIT		5		0	39				setOther	
+42	AST	AST_PARAM_LIST		5		0	39	A				
+43	AST	AST_PARAM		5		0	39	A			v	
+44	AST	NULL		5		0	39	A				
+45	AST	string		5	"v"	1	39	A				
+46	AST	NULL		5		2	39	A				
+47	AST	NULL		5		1	39	A				
+48	AST	AST_STMT_LIST		5		2	39	A				
+49	AST	NULL		5		3	39	A				
+50	AST	AST_ASSIGN		5		0	39	A				
+51	AST	AST_PROP		5		0	39	A				
+52	AST	AST_VAR		5		0	39	A			this	
+53	AST	string		5	"this"	0	39	A				
+54	AST	string		5	"other"	1	39	A				
+55	AST	AST_VAR		5		1	39	A			v	
+56	AST	string		5	"v"	0	39	A				
+57	AST	AST_METHOD		6		4	9	A		6	readValue	
+58	Artificial	CFG_FUNC_ENTRY		6		0	57				readValue	
+59	Artificial	CFG_FUNC_EXIT		6		0	57				readValue	
+60	AST	AST_PARAM_LIST		6		0	57	A				
+61	AST	NULL		6		1	57	A				
+62	AST	AST_STMT_LIST		6		2	57	A				
+63	AST	NULL		6		3	57	A				
+64	AST	AST_RETURN		6		0	57	A				
+65	AST	AST_PROP		6		0	57	A				
+66	AST	AST_VAR		6		0	57	A			this	
+67	AST	string		6	"this"	0	57	A				
+68	AST	string		6	"value"	1	57	A				
+69	AST	AST_FUNC_DECL		11		1	2			18	mayAliasWrite	
+70	Artificial	CFG_FUNC_ENTRY		11		0	69				mayAliasWrite	
+71	Artificial	CFG_FUNC_EXIT		11		0	69				mayAliasWrite	
+72	AST	AST_PARAM_LIST		11		0	69					
+73	AST	AST_PARAM		11		0	69				cond	
+74	AST	NULL		11		0	69					
+75	AST	string		11	"cond"	1	69					
+76	AST	NULL		11		2	69					
+77	AST	AST_PARAM		11		1	69				source	
+78	AST	NULL		11		0	69					
+79	AST	string		11	"source"	1	69					
+80	AST	NULL		11		2	69					
+81	AST	NULL		11		1	69					
+82	AST	AST_STMT_LIST		11		2	69					
+83	AST	NULL		11		3	69					
+84	AST	AST_ASSIGN		12		0	69					
+85	AST	AST_VAR		12		0	69				a	
+86	AST	string		12	"a"	0	69					
+87	AST	AST_NEW		12		1	69					
+88	AST	AST_NAME		12		0	69				A	
+89	AST	string		12	"A"	0	69					
+90	AST	AST_ARG_LIST		0		1	69					
+91	AST	AST_ASSIGN		13		1	69					
+92	AST	AST_VAR		13		0	69				b	
+93	AST	string		13	"b"	0	69					
+94	AST	AST_NEW		13		1	69					
+95	AST	AST_NAME		13		0	69				A	
+96	AST	string		13	"A"	0	69					
+97	AST	AST_ARG_LIST		0		1	69					
+98	AST	AST_ASSIGN		14		2	69					
+99	AST	AST_VAR		14		0	69				x	
+100	AST	string		14	"x"	0	69					
+101	AST	NULL		0		1	69					
+102	AST	AST_METHOD_CALL		16		4	69					
+103	AST	AST_VAR		16		0	69				x	
+104	AST	string		16	"x"	0	69					
+105	AST	string		16	"setValue"	1	69					
+106	AST	AST_ARG_LIST		16		2	69					
+107	AST	AST_VAR		16		0	69				source	
+108	AST	string		16	"source"	0	69					
+109	AST	AST_RETURN		17		5	69					
+110	AST	AST_METHOD_CALL		17		0	69					
+111	AST	AST_VAR		17		0	69				a	
+112	AST	string		17	"a"	0	69					
+113	AST	string		17	"readValue"	1	69					
+114	AST	AST_ARG_LIST		0		2	69					
+115	AST	AST_FUNC_DECL		21		2	2			27	sameAliasBothBranches	
+116	Artificial	CFG_FUNC_ENTRY		21		0	115				sameAliasBothBranches	
+117	Artificial	CFG_FUNC_EXIT		21		0	115				sameAliasBothBranches	
+118	AST	AST_PARAM_LIST		21		0	115					
+119	AST	AST_PARAM		21		0	115				cond	
+120	AST	NULL		21		0	115					
+121	AST	string		21	"cond"	1	115					
+122	AST	NULL		21		2	115					
+123	AST	AST_PARAM		21		1	115				source	
+124	AST	NULL		21		0	115					
+125	AST	string		21	"source"	1	115					
+126	AST	NULL		21		2	115					
+127	AST	NULL		21		1	115					
+128	AST	AST_STMT_LIST		21		2	115					
+129	AST	NULL		21		3	115					
+130	AST	AST_ASSIGN		22		0	115					
+131	AST	AST_VAR		22		0	115				a	
+132	AST	string		22	"a"	0	115					
+133	AST	AST_NEW		22		1	115					
+134	AST	AST_NAME		22		0	115				A	
+135	AST	string		22	"A"	0	115					
+136	AST	AST_ARG_LIST		0		1	115					
+137	AST	AST_ASSIGN		23		1	115					
+138	AST	AST_VAR		23		0	115				x	
+139	AST	string		23	"x"	0	115					
+140	AST	NULL		0		1	115					
+141	AST	AST_METHOD_CALL		25		3	115					
+142	AST	AST_VAR		25		0	115				x	
+143	AST	string		25	"x"	0	115					
+144	AST	string		25	"setValue"	1	115					
+145	AST	AST_ARG_LIST		25		2	115					
+146	AST	AST_VAR		25		0	115				source	
+147	AST	string		25	"source"	0	115					
+148	AST	AST_RETURN		26		4	115					
+149	AST	AST_METHOD_CALL		26		0	115					
+150	AST	AST_VAR		26		0	115				a	
+151	AST	string		26	"a"	0	115					
+152	AST	string		26	"readValue"	1	115					
+153	AST	AST_ARG_LIST		0		2	115					
+154	AST	AST_FUNC_DECL		30		3	2			37	mayAliasDifferentField	
+155	Artificial	CFG_FUNC_ENTRY		30		0	154				mayAliasDifferentField	
+156	Artificial	CFG_FUNC_EXIT		30		0	154				mayAliasDifferentField	
+157	AST	AST_PARAM_LIST		30		0	154					
+158	AST	AST_PARAM		30		0	154				cond	
+159	AST	NULL		30		0	154					
+160	AST	string		30	"cond"	1	154					
+161	AST	NULL		30		2	154					
+162	AST	AST_PARAM		30		1	154				source	
+163	AST	NULL		30		0	154					
+164	AST	string		30	"source"	1	154					
+165	AST	NULL		30		2	154					
+166	AST	NULL		30		1	154					
+167	AST	AST_STMT_LIST		30		2	154					
+168	AST	NULL		30		3	154					
+169	AST	AST_ASSIGN		31		0	154					
+170	AST	AST_VAR		31		0	154				a	
+171	AST	string		31	"a"	0	154					
+172	AST	AST_NEW		31		1	154					
+173	AST	AST_NAME		31		0	154				A	
+174	AST	string		31	"A"	0	154					
+175	AST	AST_ARG_LIST		0		1	154					
+176	AST	AST_ASSIGN		32		1	154					
+177	AST	AST_VAR		32		0	154				b	
+178	AST	string		32	"b"	0	154					
+179	AST	AST_NEW		32		1	154					
+180	AST	AST_NAME		32		0	154				A	
+181	AST	string		32	"A"	0	154					
+182	AST	AST_ARG_LIST		0		1	154					
+183	AST	AST_ASSIGN		33		2	154					
+184	AST	AST_VAR		33		0	154				x	
+185	AST	string		33	"x"	0	154					
+186	AST	NULL		0		1	154					
+187	AST	AST_METHOD_CALL		35		4	154					
+188	AST	AST_VAR		35		0	154				x	
+189	AST	string		35	"x"	0	154					
+190	AST	string		35	"setOther"	1	154					
+191	AST	AST_ARG_LIST		35		2	154					
+192	AST	AST_VAR		35		0	154				source	
+193	AST	string		35	"source"	0	154					
+194	AST	AST_RETURN		36		5	154					
+195	AST	AST_METHOD_CALL		36		0	154					
+196	AST	AST_VAR		36		0	154				a	
+197	AST	string		36	"a"	0	154					
+198	AST	string		36	"readValue"	1	154					
+199	AST	AST_ARG_LIST		0		2	154					
+200	AST	AST_FUNC_DECL		41		4	2			49	mayAliasOverwrite	
+201	Artificial	CFG_FUNC_ENTRY		41		0	200				mayAliasOverwrite	
+202	Artificial	CFG_FUNC_EXIT		41		0	200				mayAliasOverwrite	
+203	AST	AST_PARAM_LIST		41		0	200					
+204	AST	AST_PARAM		41		0	200				cond	
+205	AST	NULL		41		0	200					
+206	AST	string		41	"cond"	1	200					
+207	AST	NULL		41		2	200					
+208	AST	AST_PARAM		41		1	200				source	
+209	AST	NULL		41		0	200					
+210	AST	string		41	"source"	1	200					
+211	AST	NULL		41		2	200					
+212	AST	NULL		41		1	200					
+213	AST	AST_STMT_LIST		41		2	200					
+214	AST	NULL		41		3	200					
+215	AST	AST_ASSIGN		42		0	200					
+216	AST	AST_VAR		42		0	200				a	
+217	AST	string		42	"a"	0	200					
+218	AST	AST_NEW		42		1	200					
+219	AST	AST_NAME		42		0	200				A	
+220	AST	string		42	"A"	0	200					
+221	AST	AST_ARG_LIST		0		1	200					
+222	AST	AST_ASSIGN		43		1	200					
+223	AST	AST_VAR		43		0	200				b	
+224	AST	string		43	"b"	0	200					
+225	AST	AST_NEW		43		1	200					
+226	AST	AST_NAME		43		0	200				A	
+227	AST	string		43	"A"	0	200					
+228	AST	AST_ARG_LIST		0		1	200					
+229	AST	AST_METHOD_CALL		44		2	200					
+230	AST	AST_VAR		44		0	200				a	
+231	AST	string		44	"a"	0	200					
+232	AST	string		44	"setValue"	1	200					
+233	AST	AST_ARG_LIST		44		2	200					
+234	AST	AST_VAR		44		0	200				source	
+235	AST	string		44	"source"	0	200					
+236	AST	AST_ASSIGN		45		3	200					
+237	AST	AST_VAR		45		0	200				x	
+238	AST	string		45	"x"	0	200					
+239	AST	NULL		0		1	200					
+240	AST	AST_METHOD_CALL		47		5	200					
+241	AST	AST_VAR		47		0	200				x	
+242	AST	string		47	"x"	0	200					
+243	AST	string		47	"setValue"	1	200					
+244	AST	AST_ARG_LIST		47		2	200					
+245	AST	string		47	"CONST"	0	200					
+246	AST	AST_RETURN		48		6	200					
+247	AST	AST_METHOD_CALL		48		0	200					
+248	AST	AST_VAR		48		0	200				a	
+249	AST	string		48	"a"	0	200					
+250	AST	string		48	"readValue"	1	200					
+251	AST	AST_ARG_LIST		0		2	200					
+252	AST	AST_FUNC_DECL		52		5	2			60	mayAliasRead	
+253	Artificial	CFG_FUNC_ENTRY		52		0	252				mayAliasRead	
+254	Artificial	CFG_FUNC_EXIT		52		0	252				mayAliasRead	
+255	AST	AST_PARAM_LIST		52		0	252					
+256	AST	AST_PARAM		52		0	252				cond	
+257	AST	NULL		52		0	252					
+258	AST	string		52	"cond"	1	252					
+259	AST	NULL		52		2	252					
+260	AST	AST_PARAM		52		1	252				source	
+261	AST	NULL		52		0	252					
+262	AST	string		52	"source"	1	252					
+263	AST	NULL		52		2	252					
+264	AST	NULL		52		1	252					
+265	AST	AST_STMT_LIST		52		2	252					
+266	AST	NULL		52		3	252					
+267	AST	AST_ASSIGN		53		0	252					
+268	AST	AST_VAR		53		0	252				a	
+269	AST	string		53	"a"	0	252					
+270	AST	AST_NEW		53		1	252					
+271	AST	AST_NAME		53		0	252				A	
+272	AST	string		53	"A"	0	252					
+273	AST	AST_ARG_LIST		0		1	252					
+274	AST	AST_ASSIGN		54		1	252					
+275	AST	AST_VAR		54		0	252				b	
+276	AST	string		54	"b"	0	252					
+277	AST	AST_NEW		54		1	252					
+278	AST	AST_NAME		54		0	252				A	
+279	AST	string		54	"A"	0	252					
+280	AST	AST_ARG_LIST		0		1	252					
+281	AST	AST_METHOD_CALL		55		2	252					
+282	AST	AST_VAR		55		0	252				a	
+283	AST	string		55	"a"	0	252					
+284	AST	string		55	"setValue"	1	252					
+285	AST	AST_ARG_LIST		55		2	252					
+286	AST	AST_VAR		55		0	252				source	
+287	AST	string		55	"source"	0	252					
+288	AST	AST_METHOD_CALL		56		3	252					
+289	AST	AST_VAR		56		0	252				b	
+290	AST	string		56	"b"	0	252					
+291	AST	string		56	"setValue"	1	252					
+292	AST	AST_ARG_LIST		56		2	252					
+293	AST	string		56	"CONST"	0	252					
+294	AST	AST_ASSIGN		57		4	252					
+295	AST	AST_VAR		57		0	252				x	
+296	AST	string		57	"x"	0	252					
+297	AST	NULL		0		1	252					
+298	AST	AST_RETURN		59		6	252					
+299	AST	AST_METHOD_CALL		59		0	252					
+300	AST	AST_VAR		59		0	252				x	
+301	AST	string		59	"x"	0	252					
+302	AST	string		59	"readValue"	1	252					
+303	AST	AST_ARG_LIST		0		2	252					

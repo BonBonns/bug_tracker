@@ -1,0 +1,136 @@
+[
+  {
+    "line": 16,
+    "method": "setValue",
+    "resolution": "HEURISTIC",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "receiver x type not known; only one in-scope implementation",
+    "receiverTypes": []
+  },
+  {
+    "line": 17,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 25,
+    "method": "setValue",
+    "resolution": "HEURISTIC",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "receiver x type not known; only one in-scope implementation",
+    "receiverTypes": []
+  },
+  {
+    "line": 26,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 35,
+    "method": "setOther",
+    "resolution": "HEURISTIC",
+    "targets": [
+      "A.setOther"
+    ],
+    "basis": "receiver x type not known; only one in-scope implementation",
+    "receiverTypes": []
+  },
+  {
+    "line": 36,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 44,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 47,
+    "method": "setValue",
+    "resolution": "HEURISTIC",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "receiver x type not known; only one in-scope implementation",
+    "receiverTypes": []
+  },
+  {
+    "line": 48,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 55,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 56,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local b has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 59,
+    "method": "readValue",
+    "resolution": "HEURISTIC",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "receiver x type not known; only one in-scope implementation",
+    "receiverTypes": []
+  }
+]

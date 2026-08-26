@@ -1,0 +1,543 @@
+{
+  "schema": "portable-external-input-origin/0.1",
+  "note": "NestJS parameter-decorator producer. Family level only; origin_key is ALWAYS UNKNOWN and never parsed from annotation code. Decorators outside the closed set yield UNKNOWN, never a name-based guess. Derived locals consume the boundary fact rather than receiving fresh decorator facts.",
+  "facts": [
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:register",
+        "parameter_index": 1,
+        "parameter_name": "registerUserDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:login",
+        "parameter_index": 3,
+        "parameter_name": "userLoginDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:activateAccount",
+        "parameter_index": 1,
+        "parameter_name": "token"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:forgotPassword",
+        "parameter_index": 1,
+        "parameter_name": "forgetPasswordDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:resetPassword",
+        "parameter_index": 1,
+        "parameter_name": "resetPasswordDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:updateProfile",
+        "parameter_index": 3,
+        "parameter_name": "updateUserDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:changePassword",
+        "parameter_index": 2,
+        "parameter_name": "changePasswordDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:findAll",
+        "parameter_index": 1,
+        "parameter_name": "userSearchFilterDto"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:create",
+        "parameter_index": 1,
+        "parameter_name": "createUserDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:update",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:update",
+        "parameter_index": 2,
+        "parameter_name": "updateUserDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:findOne",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:getRefreshToken",
+        "parameter_index": 1,
+        "parameter_name": "filter"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "auth/auth.controller.ts::program:AuthController:revokeToken",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:cre",
+        "parameter_index": 1,
+        "parameter_name": "createEmailTemplateDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:fin",
+        "parameter_index": 1,
+        "parameter_name": "filter"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:fin",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:upd",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:upd",
+        "parameter_index": 2,
+        "parameter_name": "updateEmailTemplateDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "email-template/email-template.controller.ts::program:EmailTemplateController:rem",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:create",
+        "parameter_index": 1,
+        "parameter_name": "createPermissionDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:findAll",
+        "parameter_index": 1,
+        "parameter_name": "permissionFilterDto"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:findOne",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:update",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:update",
+        "parameter_index": 2,
+        "parameter_name": "updatePermissionDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "permission/permissions.controller.ts::program:PermissionsController:remove",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:create",
+        "parameter_index": 1,
+        "parameter_name": "createRoleDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:findAll",
+        "parameter_index": 1,
+        "parameter_name": "roleFilterDto"
+      },
+      "origin_family": "HTTP_QUERY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:findOne",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:update",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:update",
+        "parameter_index": 2,
+        "parameter_name": "updateRoleDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "role/roles.controller.ts::program:RolesController:remove",
+        "parameter_index": 1,
+        "parameter_name": "id"
+      },
+      "origin_family": "HTTP_PARAM",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "twofa/twofa.controller.ts::program:TwofaController:authenticate",
+        "parameter_index": 4,
+        "parameter_name": "twofaCodeDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    },
+    {
+      "value": {
+        "method": "twofa/twofa.controller.ts::program:TwofaController:toggleTwoFa",
+        "parameter_index": 1,
+        "parameter_name": "twofaStatusUpdateDto"
+      },
+      "origin_family": "HTTP_BODY",
+      "origin_key": "UNKNOWN",
+      "evidence": "NESTJS_PARAMETER_DECORATOR",
+      "established": true
+    }
+  ],
+  "unknown_decorators": [
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:login",
+      "parameter_index": 1,
+      "parameter_name": "req",
+      "decorators": [
+        "Req"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:login",
+      "parameter_index": 2,
+      "parameter_name": "response",
+      "decorators": [
+        "Res"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:refresh",
+      "parameter_index": 1,
+      "parameter_name": "req",
+      "decorators": [
+        "Req"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:refresh",
+      "parameter_index": 2,
+      "parameter_name": "response",
+      "decorators": [
+        "Res"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:profile",
+      "parameter_index": 1,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:updateProfile",
+      "parameter_index": 1,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:updateProfile",
+      "parameter_index": 2,
+      "parameter_name": "file",
+      "decorators": [
+        "UploadedFile"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:changePassword",
+      "parameter_index": 1,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:logOut",
+      "parameter_index": 1,
+      "parameter_name": "req",
+      "decorators": [
+        "Req"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:logOut",
+      "parameter_index": 2,
+      "parameter_name": "response",
+      "decorators": [
+        "Res"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:getRefreshToken",
+      "parameter_index": 2,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "auth/auth.controller.ts::program:AuthController:revokeToken",
+      "parameter_index": 2,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "twofa/twofa.controller.ts::program:TwofaController:authenticate",
+      "parameter_index": 1,
+      "parameter_name": "req",
+      "decorators": [
+        "Req"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "twofa/twofa.controller.ts::program:TwofaController:authenticate",
+      "parameter_index": 2,
+      "parameter_name": "response",
+      "decorators": [
+        "Res"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "twofa/twofa.controller.ts::program:TwofaController:authenticate",
+      "parameter_index": 3,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    },
+    {
+      "method": "twofa/twofa.controller.ts::program:TwofaController:toggleTwoFa",
+      "parameter_index": 2,
+      "parameter_name": "user",
+      "decorators": [
+        "GetUser"
+      ],
+      "origin_family": "UNKNOWN",
+      "reason": "DECORATOR_NOT_IN_CLOSED_SET"
+    }
+  ],
+  "derived": []
+}

@@ -1,0 +1,368 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate22.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			64	"./gate22.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate22.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate22.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_FUNC_DECL		1		0	2			5	objectSpreadExact	
+7	Artificial	CFG_FUNC_ENTRY		1		0	6				objectSpreadExact	
+8	Artificial	CFG_FUNC_EXIT		1		0	6				objectSpreadExact	
+9	AST	AST_PARAM_LIST		1		0	6					
+10	AST	AST_PARAM		1		0	6				a	
+11	AST	AST_NAME		1		0	6				Record	
+12	AST	string		1	"Record"	0	6					
+13	AST	string		1	"a"	1	6					
+14	AST	NULL		1		2	6					
+15	AST	AST_PARAM		1		1	6				source	
+16	AST	NULL		1		0	6					
+17	AST	string		1	"source"	1	6					
+18	AST	NULL		1		2	6					
+19	AST	NULL		1		1	6					
+20	AST	AST_STMT_LIST		1		2	6					
+21	AST	NULL		1		3	6					
+22	AST	AST_ASSIGN		2		0	6					
+23	AST	AST_DIM		2		0	6					
+24	AST	AST_VAR		2		0	6				a	
+25	AST	string		2	"a"	0	6					
+26	AST	string		2	"fixed"	1	6					
+27	AST	AST_VAR		2		1	6				source	
+28	AST	string		2	"source"	0	6					
+29	AST	AST_ASSIGN		3		1	6					
+30	AST	AST_VAR		3		0	6				copy	
+31	AST	string		3	"copy"	0	6					
+32	AST	NULL		3		1	6					
+33	AST	AST_RETURN		4		2	6					
+34	AST	AST_DIM		4		0	6					
+35	AST	AST_VAR		4		0	6				copy	
+36	AST	string		4	"copy"	0	6					
+37	AST	string		4	"fixed"	1	6					
+38	AST	AST_FUNC_DECL		7		1	2			11	objectSpreadOverrideAfter	
+39	Artificial	CFG_FUNC_ENTRY		7		0	38				objectSpreadOverrideAfter	
+40	Artificial	CFG_FUNC_EXIT		7		0	38				objectSpreadOverrideAfter	
+41	AST	AST_PARAM_LIST		7		0	38					
+42	AST	AST_PARAM		7		0	38				a	
+43	AST	AST_NAME		7		0	38				Record	
+44	AST	string		7	"Record"	0	38					
+45	AST	string		7	"a"	1	38					
+46	AST	NULL		7		2	38					
+47	AST	AST_PARAM		7		1	38				source	
+48	AST	NULL		7		0	38					
+49	AST	string		7	"source"	1	38					
+50	AST	NULL		7		2	38					
+51	AST	NULL		7		1	38					
+52	AST	AST_STMT_LIST		7		2	38					
+53	AST	NULL		7		3	38					
+54	AST	AST_ASSIGN		8		0	38					
+55	AST	AST_DIM		8		0	38					
+56	AST	AST_VAR		8		0	38				a	
+57	AST	string		8	"a"	0	38					
+58	AST	string		8	"fixed"	1	38					
+59	AST	AST_VAR		8		1	38				source	
+60	AST	string		8	"source"	0	38					
+61	AST	AST_ASSIGN		9		1	38					
+62	AST	AST_VAR		9		0	38				copy	
+63	AST	string		9	"copy"	0	38					
+64	AST	NULL		9		1	38					
+65	AST	AST_RETURN		10		2	38					
+66	AST	AST_DIM		10		0	38					
+67	AST	AST_VAR		10		0	38				copy	
+68	AST	string		10	"copy"	0	38					
+69	AST	string		10	"fixed"	1	38					
+70	AST	AST_FUNC_DECL		13		2	2			17	objectSpreadOverrideBefore	
+71	Artificial	CFG_FUNC_ENTRY		13		0	70				objectSpreadOverrideBefore	
+72	Artificial	CFG_FUNC_EXIT		13		0	70				objectSpreadOverrideBefore	
+73	AST	AST_PARAM_LIST		13		0	70					
+74	AST	AST_PARAM		13		0	70				a	
+75	AST	AST_NAME		13		0	70				Record	
+76	AST	string		13	"Record"	0	70					
+77	AST	string		13	"a"	1	70					
+78	AST	NULL		13		2	70					
+79	AST	AST_PARAM		13		1	70				source	
+80	AST	NULL		13		0	70					
+81	AST	string		13	"source"	1	70					
+82	AST	NULL		13		2	70					
+83	AST	NULL		13		1	70					
+84	AST	AST_STMT_LIST		13		2	70					
+85	AST	NULL		13		3	70					
+86	AST	AST_ASSIGN		14		0	70					
+87	AST	AST_DIM		14		0	70					
+88	AST	AST_VAR		14		0	70				a	
+89	AST	string		14	"a"	0	70					
+90	AST	string		14	"fixed"	1	70					
+91	AST	AST_VAR		14		1	70				source	
+92	AST	string		14	"source"	0	70					
+93	AST	AST_ASSIGN		15		1	70					
+94	AST	AST_VAR		15		0	70				copy	
+95	AST	string		15	"copy"	0	70					
+96	AST	NULL		15		1	70					
+97	AST	AST_RETURN		16		2	70					
+98	AST	AST_DIM		16		0	70					
+99	AST	AST_VAR		16		0	70				copy	
+100	AST	string		16	"copy"	0	70					
+101	AST	string		16	"fixed"	1	70					
+102	AST	AST_FUNC_DECL		19		3	2			24	objectSpreadLaterObjectWins	
+103	Artificial	CFG_FUNC_ENTRY		19		0	102				objectSpreadLaterObjectWins	
+104	Artificial	CFG_FUNC_EXIT		19		0	102				objectSpreadLaterObjectWins	
+105	AST	AST_PARAM_LIST		19		0	102					
+106	AST	AST_PARAM		19		0	102				a	
+107	AST	AST_NAME		19		0	102				Record	
+108	AST	string		19	"Record"	0	102					
+109	AST	string		19	"a"	1	102					
+110	AST	NULL		19		2	102					
+111	AST	AST_PARAM		19		1	102				b	
+112	AST	AST_NAME		19		0	102				Record	
+113	AST	string		19	"Record"	0	102					
+114	AST	string		19	"b"	1	102					
+115	AST	NULL		19		2	102					
+116	AST	AST_PARAM		19		2	102				source	
+117	AST	NULL		19		0	102					
+118	AST	string		19	"source"	1	102					
+119	AST	NULL		19		2	102					
+120	AST	NULL		19		1	102					
+121	AST	AST_STMT_LIST		19		2	102					
+122	AST	NULL		19		3	102					
+123	AST	AST_ASSIGN		20		0	102					
+124	AST	AST_DIM		20		0	102					
+125	AST	AST_VAR		20		0	102				a	
+126	AST	string		20	"a"	0	102					
+127	AST	string		20	"fixed"	1	102					
+128	AST	AST_VAR		20		1	102				source	
+129	AST	string		20	"source"	0	102					
+130	AST	AST_ASSIGN		21		1	102					
+131	AST	AST_DIM		21		0	102					
+132	AST	AST_VAR		21		0	102				b	
+133	AST	string		21	"b"	0	102					
+134	AST	string		21	"fixed"	1	102					
+135	AST	string		21	"CONST"	1	102					
+136	AST	AST_ASSIGN		22		2	102					
+137	AST	AST_VAR		22		0	102				copy	
+138	AST	string		22	"copy"	0	102					
+139	AST	NULL		22		1	102					
+140	AST	AST_RETURN		23		3	102					
+141	AST	AST_DIM		23		0	102					
+142	AST	AST_VAR		23		0	102				copy	
+143	AST	string		23	"copy"	0	102					
+144	AST	string		23	"fixed"	1	102					
+145	AST	AST_FUNC_DECL		26		4	2			31	objectSpreadEarlierObjectLoses	
+146	Artificial	CFG_FUNC_ENTRY		26		0	145				objectSpreadEarlierObjectLoses	
+147	Artificial	CFG_FUNC_EXIT		26		0	145				objectSpreadEarlierObjectLoses	
+148	AST	AST_PARAM_LIST		26		0	145					
+149	AST	AST_PARAM		26		0	145				a	
+150	AST	AST_NAME		26		0	145				Record	
+151	AST	string		26	"Record"	0	145					
+152	AST	string		26	"a"	1	145					
+153	AST	NULL		26		2	145					
+154	AST	AST_PARAM		26		1	145				b	
+155	AST	AST_NAME		26		0	145				Record	
+156	AST	string		26	"Record"	0	145					
+157	AST	string		26	"b"	1	145					
+158	AST	NULL		26		2	145					
+159	AST	AST_PARAM		26		2	145				source	
+160	AST	NULL		26		0	145					
+161	AST	string		26	"source"	1	145					
+162	AST	NULL		26		2	145					
+163	AST	NULL		26		1	145					
+164	AST	AST_STMT_LIST		26		2	145					
+165	AST	NULL		26		3	145					
+166	AST	AST_ASSIGN		27		0	145					
+167	AST	AST_DIM		27		0	145					
+168	AST	AST_VAR		27		0	145				a	
+169	AST	string		27	"a"	0	145					
+170	AST	string		27	"fixed"	1	145					
+171	AST	string		27	"CONST"	1	145					
+172	AST	AST_ASSIGN		28		1	145					
+173	AST	AST_DIM		28		0	145					
+174	AST	AST_VAR		28		0	145				b	
+175	AST	string		28	"b"	0	145					
+176	AST	string		28	"fixed"	1	145					
+177	AST	AST_VAR		28		1	145				source	
+178	AST	string		28	"source"	0	145					
+179	AST	AST_ASSIGN		29		2	145					
+180	AST	AST_VAR		29		0	145				copy	
+181	AST	string		29	"copy"	0	145					
+182	AST	NULL		29		1	145					
+183	AST	AST_RETURN		30		3	145					
+184	AST	AST_DIM		30		0	145					
+185	AST	AST_VAR		30		0	145				copy	
+186	AST	string		30	"copy"	0	145					
+187	AST	string		30	"fixed"	1	145					
+188	AST	AST_FUNC_DECL		33		5	2			38	objectSpreadDynamicWrite	
+189	Artificial	CFG_FUNC_ENTRY		33		0	188				objectSpreadDynamicWrite	
+190	Artificial	CFG_FUNC_EXIT		33		0	188				objectSpreadDynamicWrite	
+191	AST	AST_PARAM_LIST		33		0	188					
+192	AST	AST_PARAM		33		0	188				a	
+193	AST	AST_NAME		33		0	188				Record	
+194	AST	string		33	"Record"	0	188					
+195	AST	string		33	"a"	1	188					
+196	AST	NULL		33		2	188					
+197	AST	AST_PARAM		33		1	188				key	
+198	AST	NULL		33		0	188					
+199	AST	string		33	"key"	1	188					
+200	AST	NULL		33		2	188					
+201	AST	AST_PARAM		33		2	188				source	
+202	AST	NULL		33		0	188					
+203	AST	string		33	"source"	1	188					
+204	AST	NULL		33		2	188					
+205	AST	NULL		33		1	188					
+206	AST	AST_STMT_LIST		33		2	188					
+207	AST	NULL		33		3	188					
+208	AST	AST_ASSIGN		34		0	188					
+209	AST	AST_DIM		34		0	188					
+210	AST	AST_VAR		34		0	188				a	
+211	AST	string		34	"a"	0	188					
+212	AST	string		34	"fixed"	1	188					
+213	AST	string		34	"CONST"	1	188					
+214	AST	AST_ASSIGN		35		1	188					
+215	AST	AST_DIM		35		0	188					
+216	AST	AST_VAR		35		0	188				a	
+217	AST	string		35	"a"	0	188					
+218	AST	AST_VAR		35		1	188				key	
+219	AST	string		35	"key"	0	188					
+220	AST	AST_VAR		35		1	188				source	
+221	AST	string		35	"source"	0	188					
+222	AST	AST_ASSIGN		36		2	188					
+223	AST	AST_VAR		36		0	188				copy	
+224	AST	string		36	"copy"	0	188					
+225	AST	NULL		36		1	188					
+226	AST	AST_RETURN		37		3	188					
+227	AST	AST_DIM		37		0	188					
+228	AST	AST_VAR		37		0	188				copy	
+229	AST	string		37	"copy"	0	188					
+230	AST	string		37	"fixed"	1	188					
+231	AST	AST_FUNC_DECL		40		6	2			44	arraySpreadExact	
+232	Artificial	CFG_FUNC_ENTRY		40		0	231				arraySpreadExact	
+233	Artificial	CFG_FUNC_EXIT		40		0	231				arraySpreadExact	
+234	AST	AST_PARAM_LIST		40		0	231					
+235	AST	AST_PARAM		40		0	231				a	
+236	AST	NULL		40		0	231					
+237	AST	string		40	"a"	1	231					
+238	AST	NULL		40		2	231					
+239	AST	AST_PARAM		40		1	231				source	
+240	AST	NULL		40		0	231					
+241	AST	string		40	"source"	1	231					
+242	AST	NULL		40		2	231					
+243	AST	NULL		40		1	231					
+244	AST	AST_STMT_LIST		40		2	231					
+245	AST	NULL		40		3	231					
+246	AST	AST_ASSIGN		41		0	231					
+247	AST	AST_DIM		41		0	231					
+248	AST	AST_VAR		41		0	231				a	
+249	AST	string		41	"a"	0	231					
+250	AST	string		41	"0"	1	231					
+251	AST	AST_VAR		41		1	231				source	
+252	AST	string		41	"source"	0	231					
+253	AST	AST_ASSIGN		42		1	231					
+254	AST	AST_VAR		42		0	231				copy	
+255	AST	string		42	"copy"	0	231					
+256	AST	NULL		42		1	231					
+257	AST	AST_RETURN		43		2	231					
+258	AST	AST_DIM		43		0	231					
+259	AST	AST_VAR		43		0	231				copy	
+260	AST	string		43	"copy"	0	231					
+261	AST	string		43	"0"	1	231					
+262	AST	AST_FUNC_DECL		46		7	2			50	arraySpreadPrefix	
+263	Artificial	CFG_FUNC_ENTRY		46		0	262				arraySpreadPrefix	
+264	Artificial	CFG_FUNC_EXIT		46		0	262				arraySpreadPrefix	
+265	AST	AST_PARAM_LIST		46		0	262					
+266	AST	AST_PARAM		46		0	262				a	
+267	AST	NULL		46		0	262					
+268	AST	string		46	"a"	1	262					
+269	AST	NULL		46		2	262					
+270	AST	AST_PARAM		46		1	262				source	
+271	AST	NULL		46		0	262					
+272	AST	string		46	"source"	1	262					
+273	AST	NULL		46		2	262					
+274	AST	NULL		46		1	262					
+275	AST	AST_STMT_LIST		46		2	262					
+276	AST	NULL		46		3	262					
+277	AST	AST_ASSIGN		47		0	262					
+278	AST	AST_DIM		47		0	262					
+279	AST	AST_VAR		47		0	262				a	
+280	AST	string		47	"a"	0	262					
+281	AST	string		47	"0"	1	262					
+282	AST	AST_VAR		47		1	262				source	
+283	AST	string		47	"source"	0	262					
+284	AST	AST_ASSIGN		48		1	262					
+285	AST	AST_VAR		48		0	262				copy	
+286	AST	string		48	"copy"	0	262					
+287	AST	NULL		48		1	262					
+288	AST	AST_RETURN		49		2	262					
+289	AST	AST_DIM		49		0	262					
+290	AST	AST_VAR		49		0	262				copy	
+291	AST	string		49	"copy"	0	262					
+292	AST	string		49	"1"	1	262					
+293	AST	AST_FUNC_DECL		52		8	2			56	arraySpreadSuffix	
+294	Artificial	CFG_FUNC_ENTRY		52		0	293				arraySpreadSuffix	
+295	Artificial	CFG_FUNC_EXIT		52		0	293				arraySpreadSuffix	
+296	AST	AST_PARAM_LIST		52		0	293					
+297	AST	AST_PARAM		52		0	293				a	
+298	AST	NULL		52		0	293					
+299	AST	string		52	"a"	1	293					
+300	AST	NULL		52		2	293					
+301	AST	AST_PARAM		52		1	293				source	
+302	AST	NULL		52		0	293					
+303	AST	string		52	"source"	1	293					
+304	AST	NULL		52		2	293					
+305	AST	NULL		52		1	293					
+306	AST	AST_STMT_LIST		52		2	293					
+307	AST	NULL		52		3	293					
+308	AST	AST_ASSIGN		53		0	293					
+309	AST	AST_DIM		53		0	293					
+310	AST	AST_VAR		53		0	293				a	
+311	AST	string		53	"a"	0	293					
+312	AST	string		53	"0"	1	293					
+313	AST	AST_VAR		53		1	293				source	
+314	AST	string		53	"source"	0	293					
+315	AST	AST_ASSIGN		54		1	293					
+316	AST	AST_VAR		54		0	293				copy	
+317	AST	string		54	"copy"	0	293					
+318	AST	NULL		54		1	293					
+319	AST	AST_RETURN		55		2	293					
+320	AST	AST_DIM		55		0	293					
+321	AST	AST_VAR		55		0	293				copy	
+322	AST	string		55	"copy"	0	293					
+323	AST	string		55	"0"	1	293					
+324	AST	AST_FUNC_DECL		58		9	2			63	distinctReceiverSpread	
+325	Artificial	CFG_FUNC_ENTRY		58		0	324				distinctReceiverSpread	
+326	Artificial	CFG_FUNC_EXIT		58		0	324				distinctReceiverSpread	
+327	AST	AST_PARAM_LIST		58		0	324					
+328	AST	AST_PARAM		58		0	324				a	
+329	AST	AST_NAME		58		0	324				Record	
+330	AST	string		58	"Record"	0	324					
+331	AST	string		58	"a"	1	324					
+332	AST	NULL		58		2	324					
+333	AST	AST_PARAM		58		1	324				b	
+334	AST	AST_NAME		58		0	324				Record	
+335	AST	string		58	"Record"	0	324					
+336	AST	string		58	"b"	1	324					
+337	AST	NULL		58		2	324					
+338	AST	AST_PARAM		58		2	324				source	
+339	AST	NULL		58		0	324					
+340	AST	string		58	"source"	1	324					
+341	AST	NULL		58		2	324					
+342	AST	NULL		58		1	324					
+343	AST	AST_STMT_LIST		58		2	324					
+344	AST	NULL		58		3	324					
+345	AST	AST_ASSIGN		59		0	324					
+346	AST	AST_DIM		59		0	324					
+347	AST	AST_VAR		59		0	324				a	
+348	AST	string		59	"a"	0	324					
+349	AST	string		59	"fixed"	1	324					
+350	AST	string		59	"CONST"	1	324					
+351	AST	AST_ASSIGN		60		1	324					
+352	AST	AST_DIM		60		0	324					
+353	AST	AST_VAR		60		0	324				b	
+354	AST	string		60	"b"	0	324					
+355	AST	string		60	"fixed"	1	324					
+356	AST	AST_VAR		60		1	324				source	
+357	AST	string		60	"source"	0	324					
+358	AST	AST_ASSIGN		61		2	324					
+359	AST	AST_VAR		61		0	324				copy	
+360	AST	string		61	"copy"	0	324					
+361	AST	NULL		61		1	324					
+362	AST	AST_RETURN		62		3	324					
+363	AST	AST_DIM		62		0	324					
+364	AST	AST_VAR		62		0	324				copy	
+365	AST	string		62	"copy"	0	324					
+366	AST	string		62	"fixed"	1	324					

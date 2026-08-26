@@ -1,0 +1,1369 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "INDEX",
+      "code": "box[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771074
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771074,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "box[\"other\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771079
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771079,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "box[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771084
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771084,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "box[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771089
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771089,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "box[key]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771094
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771094,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149710,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "arr[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771097
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771097,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149714,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "arr[1]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771102
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771102,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "arr[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771107
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771107,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149720,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "arr[i]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771112
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771112,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "i"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149724,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "a[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771117
+        ]
+      },
+      "function_id": 107374182410,
+      "index_call_id": 30064771117,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149728,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": [
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771072000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771072,
+          30064771073,
+          30064771073,
+          68719476737
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149698,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771119000,
+      "code": "exports.objectStaticExact = objectStaticExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771119,
+          30064771120,
+          30064771120,
+          68719476781
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectStaticExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectStaticExact",
+        "type": "gate20.ts::program:objectStaticExact"
+      },
+      "value_ref": {
+        "code": "objectStaticExact",
+        "id": 94489280512,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771122000,
+      "code": "exports.objectStaticDifferent = objectStaticDifferent",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771122,
+          30064771123,
+          30064771123,
+          68719476784
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectStaticDifferent"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectStaticDifferent",
+        "type": "gate20.ts::program:objectStaticDifferent"
+      },
+      "value_ref": {
+        "code": "objectStaticDifferent",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771125000,
+      "code": "exports.objectStaticOverwrite = objectStaticOverwrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771125,
+          30064771126,
+          30064771126,
+          68719476787
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectStaticOverwrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectStaticOverwrite",
+        "type": "gate20.ts::program:objectStaticOverwrite"
+      },
+      "value_ref": {
+        "code": "objectStaticOverwrite",
+        "id": 94489280514,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771128000,
+      "code": "exports.objectDynamicWrite = objectDynamicWrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771128,
+          30064771129,
+          30064771129,
+          68719476790
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDynamicWrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDynamicWrite",
+        "type": "gate20.ts::program:objectDynamicWrite"
+      },
+      "value_ref": {
+        "code": "objectDynamicWrite",
+        "id": 94489280515,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771131000,
+      "code": "exports.objectDynamicRead = objectDynamicRead",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771131,
+          30064771132,
+          30064771132,
+          68719476793
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDynamicRead"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDynamicRead",
+        "type": "gate20.ts::program:objectDynamicRead"
+      },
+      "value_ref": {
+        "code": "objectDynamicRead",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771134000,
+      "code": "exports.arrayStaticExact = arrayStaticExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771134,
+          30064771135,
+          30064771135,
+          68719476796
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayStaticExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayStaticExact",
+        "type": "gate20.ts::program:arrayStaticExact"
+      },
+      "value_ref": {
+        "code": "arrayStaticExact",
+        "id": 94489280517,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771137000,
+      "code": "exports.arrayStaticDifferent = arrayStaticDifferent",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771137,
+          30064771138,
+          30064771138,
+          68719476799
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayStaticDifferent"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayStaticDifferent",
+        "type": "gate20.ts::program:arrayStaticDifferent"
+      },
+      "value_ref": {
+        "code": "arrayStaticDifferent",
+        "id": 94489280518,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771140000,
+      "code": "exports.arrayDynamicWrite = arrayDynamicWrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771140,
+          30064771141,
+          30064771141,
+          68719476802
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayDynamicWrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayDynamicWrite",
+        "type": "gate20.ts::program:arrayDynamicWrite"
+      },
+      "value_ref": {
+        "code": "arrayDynamicWrite",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771143000,
+      "code": "exports.arrayDynamicRead = arrayDynamicRead",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771143,
+          30064771144,
+          30064771144,
+          68719476805
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayDynamicRead"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayDynamicRead",
+        "type": "gate20.ts::program:arrayDynamicRead"
+      },
+      "value_ref": {
+        "code": "arrayDynamicRead",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771146000,
+      "code": "exports.differentReceiver = differentReceiver",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771146,
+          30064771147,
+          30064771147,
+          68719476808
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "differentReceiver"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "differentReceiver",
+        "type": "gate20.ts::program:differentReceiver"
+      },
+      "value_ref": {
+        "code": "differentReceiver",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771075000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771075,
+          30064771076,
+          30064771076,
+          68719476740
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149701,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771077000,
+      "code": "box[\"other\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771077,
+          30064771078,
+          30064771078,
+          90194313220
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771080000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771080,
+          30064771081,
+          30064771081,
+          68719476744
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149704,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771082000,
+      "code": "box[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771082,
+          30064771083,
+          30064771083,
+          90194313224
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771085000,
+      "code": "box[\"fixed\"] = \"BASE\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771085,
+          30064771086,
+          30064771086,
+          90194313227
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"BASE\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"BASE\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771087000,
+      "code": "box[key] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771087,
+          30064771088,
+          30064771088,
+          68719476750
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149708,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771090000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771090,
+          30064771091,
+          30064771091,
+          68719476753
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149710,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771092000,
+      "code": "box[\"other\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771092,
+          30064771093,
+          30064771093,
+          90194313231
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149710,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771095000,
+      "code": "arr[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771095,
+          30064771096,
+          30064771096,
+          68719476758
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149714,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149715,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771098000,
+      "code": "arr[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771098,
+          30064771099,
+          30064771099,
+          68719476761
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149718,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771100000,
+      "code": "arr[1] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771100,
+          30064771101,
+          30064771101,
+          90194313236
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771103000,
+      "code": "arr[0] = \"BASE\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771103,
+          30064771104,
+          30064771104,
+          90194313239
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149720,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"BASE\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"BASE\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771105000,
+      "code": "arr[i] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771105,
+          30064771106,
+          30064771106,
+          68719476767
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "i"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149720,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149722,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771108000,
+      "code": "arr[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771108,
+          30064771109,
+          30064771109,
+          68719476770
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149724,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149726,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771110000,
+      "code": "arr[1] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771110,
+          30064771111,
+          30064771111,
+          90194313243
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149724,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771113000,
+      "code": "a[\"fixed\"] = \"BASE\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771113,
+          30064771114,
+          30064771114,
+          90194313245
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149728,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"BASE\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"BASE\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771115000,
+      "code": "b[key] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771115,
+          30064771116,
+          30064771116,
+          68719476777
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 111669149729,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149731,
+        "kind": "PARAMETER"
+      }
+    }
+  ]
+}

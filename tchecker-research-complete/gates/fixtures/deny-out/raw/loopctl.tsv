@@ -1,0 +1,20 @@
+lib/denylist-escaped.js::program:checkFiletype	12	RETURN	141733920770	13	ENCLOSING	-	true	return { ext, valid: true }
+lib/denylist-normalized.js::program:checkFiletype	14	RETURN	141733920778	15	ENCLOSING	-	true	return { ext, valid: true }
+lib/denylist-vuln.js::program:checkFiletype	19	RETURN	141733920782	21	ENCLOSING	-	true	return { ext, mime, valid: true }
+lib/denylist-escaped.js::program	2	RETURN	141733920768	2	CALLBACK	<operator>.assignment	true	return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+lib/denylist-escaped.js::program	3	RETURN	141733920769	9	CALLBACK	<operator>.assignment	true	return mimes
+lib/denylist-escaped.js::program	11	RETURN	141733920770	13	CALLBACK	<operator>.assignment	true	return { ext, valid: true }
+lib/denylist-escaped.js::program	11	RETURN	141733920771	15	CALLBACK	<operator>.assignment	true	return { valid: false }
+lib/denylist-escaped.js::program	17	RETURN	141733920772	18	CALLBACK	<operator>.assignment	true	return checkFiletype(filename, allowedEscaped(mimes, false))
+lib/denylist-exact-consumer.js::program	2	RETURN	141733920773	8	CALLBACK	<operator>.assignment	true	return mimes
+lib/denylist-exact-consumer.js::program	10	RETURN	141733920774	12	CALLBACK	<operator>.assignment	true	return { ext, valid: Object.keys(mimes).includes(ext) }
+lib/denylist-exact-consumer.js::program	14	RETURN	141733920775	15	CALLBACK	<operator>.assignment	true	return checkFiletypeExact(filename, allowedExact(mimes, fals
+lib/denylist-normalized.js::program	2	RETURN	141733920776	2	CALLBACK	<operator>.assignment	true	return k.toLowerCase().replace(/[()|*?.\\]/g, "")
+lib/denylist-normalized.js::program	3	RETURN	141733920777	11	CALLBACK	<operator>.assignment	true	return mimes
+lib/denylist-normalized.js::program	13	RETURN	141733920778	15	CALLBACK	<operator>.assignment	true	return { ext, valid: true }
+lib/denylist-normalized.js::program	13	RETURN	141733920779	17	CALLBACK	<operator>.assignment	true	return { valid: false }
+lib/denylist-normalized.js::program	19	RETURN	141733920780	20	CALLBACK	<operator>.assignment	true	return checkFiletype(filename, allowedNormalized(mimes, fals
+lib/denylist-vuln.js::program	5	RETURN	141733920781	13	CALLBACK	<operator>.assignment	true	return mimes
+lib/denylist-vuln.js::program	18	RETURN	141733920782	21	CALLBACK	<operator>.assignment	true	return { ext, mime, valid: true }
+lib/denylist-vuln.js::program	18	RETURN	141733920783	23	CALLBACK	<operator>.assignment	true	return { valid: false }
+lib/denylist-vuln.js::program	26	RETURN	141733920784	28	CALLBACK	<operator>.assignment	true	return checkFiletype(filename, filtered)

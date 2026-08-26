@@ -1,0 +1,13 @@
+PASS weakest edge caps exact call at AMBIGUOUS
+PASS MAY cannot hard-project
+PASS AMBIGUOUS survives two return hops
+PASS local assignment is shown as a path segment
+PASS exact identity wrapper does not upgrade MAY
+PASS conditional join is path-AMBIGUOUS
+PASS binary composition preserves uncertain path
+PASS UNKNOWN path remains non-hard
+PASS all-EXACT proven path may hard-project
+PASS multi-parameter exact path remains hard eligible
+PASS reporter does not mutate hard summaries
+PASS reporter does not mutate MAY or Vul Source state
+GATE19=12/12

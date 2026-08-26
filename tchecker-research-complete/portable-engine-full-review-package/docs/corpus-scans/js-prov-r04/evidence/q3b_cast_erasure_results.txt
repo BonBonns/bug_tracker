@@ -1,0 +1,9 @@
+CALL g callee=[q3b.ts::program:g]
+   ARGS   0:this:q3b.ts::program  1:concreteB as any:ANY
+   PARAMS 0:this:q3b.ts::program  1:x:q3b.ts::program:ConcreteA:<init>
+CALL g2 callee=[q3b.ts::program:g2]
+   ARGS   0:this:q3b.ts::program  1:concreteA:q3b.ts::program:ConcreteA
+   PARAMS 0:this:q3b.ts::program  1:x:q3b.ts::program:ConcreteA:<init>
+CALL g3 callee=[q3b.ts::program:g3]
+   ARGS   0:this:q3b.ts::program  1:concreteB as any:ANY
+   PARAMS 0:this:q3b.ts::program  1:x:ANY

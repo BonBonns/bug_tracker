@@ -1,0 +1,32 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771093,
+     30064771094,
+     90194313225
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771093,
+   "operands": [
+    {
+     "code": "sizeof(dst)",
+     "id": 30064771094,
+     "kind": "CALL"
+    },
+    {
+     "code": "1",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

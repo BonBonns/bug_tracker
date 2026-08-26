@@ -1,0 +1,142 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate4.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			27	"./gate4.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate4.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate4.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_CLASS		1		0	2			3	A	
+7	AST	NULL		1		0	2					
+8	AST	NULL		1		1	2					
+9	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	1		2	2			3	"A"	
+10	Artificial	CFG_FUNC_ENTRY		1		0	9				"A"	
+11	Artificial	CFG_FUNC_EXIT		1		0	9				"A"	
+12	AST	AST_STMT_LIST		1		0	9					
+13	AST	AST_METHOD		2		0	9	A		2	process	
+14	Artificial	CFG_FUNC_ENTRY		2		0	13				process	
+15	Artificial	CFG_FUNC_EXIT		2		0	13				process	
+16	AST	AST_PARAM_LIST		2		0	13	A				
+17	AST	AST_PARAM		2		0	13	A			x	
+18	AST	NULL		2		0	13	A				
+19	AST	string		2	"x"	1	13	A				
+20	AST	NULL		2		2	13	A				
+21	AST	NULL		2		1	13	A				
+22	AST	AST_STMT_LIST		2		2	13	A				
+23	AST	NULL		2		3	13	A				
+24	AST	AST_RETURN		2		0	13	A				
+25	AST	AST_VAR		2		0	13	A			x	
+26	AST	string		2	"x"	0	13	A				
+27	AST	AST_CLASS		4		1	2			6	B	
+28	AST	NULL		4		0	2					
+29	AST	NULL		4		1	2					
+30	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	4		2	2			6	"B"	
+31	Artificial	CFG_FUNC_ENTRY		4		0	30				"B"	
+32	Artificial	CFG_FUNC_EXIT		4		0	30				"B"	
+33	AST	AST_STMT_LIST		4		0	30					
+34	AST	AST_METHOD		5		0	30	B		5	process	
+35	Artificial	CFG_FUNC_ENTRY		5		0	34				process	
+36	Artificial	CFG_FUNC_EXIT		5		0	34				process	
+37	AST	AST_PARAM_LIST		5		0	34	B				
+38	AST	AST_PARAM		5		0	34	B			x	
+39	AST	NULL		5		0	34	B				
+40	AST	string		5	"x"	1	34	B				
+41	AST	NULL		5		2	34	B				
+42	AST	NULL		5		1	34	B				
+43	AST	AST_STMT_LIST		5		2	34	B				
+44	AST	NULL		5		3	34	B				
+45	AST	AST_RETURN		5		0	34	B				
+46	AST	string		5	"CONST"	0	34	B				
+47	AST	AST_FUNC_DECL		9		2	2			11	untyped	
+48	Artificial	CFG_FUNC_ENTRY		9		0	47				untyped	
+49	Artificial	CFG_FUNC_EXIT		9		0	47				untyped	
+50	AST	AST_PARAM_LIST		9		0	47					
+51	AST	AST_PARAM		9		0	47				obj	
+52	AST	NULL		9		0	47					
+53	AST	string		9	"obj"	1	47					
+54	AST	NULL		9		2	47					
+55	AST	AST_PARAM		9		1	47				input	
+56	AST	NULL		9		0	47					
+57	AST	string		9	"input"	1	47					
+58	AST	NULL		9		2	47					
+59	AST	NULL		9		1	47					
+60	AST	AST_STMT_LIST		9		2	47					
+61	AST	NULL		9		3	47					
+62	AST	AST_RETURN		10		0	47					
+63	AST	AST_METHOD_CALL		10		0	47					
+64	AST	AST_VAR		10		0	47				obj	
+65	AST	string		10	"obj"	0	47					
+66	AST	string		10	"process"	1	47					
+67	AST	AST_ARG_LIST		10		2	47					
+68	AST	AST_VAR		10		0	47				input	
+69	AST	string		10	"input"	0	47					
+70	AST	AST_FUNC_DECL		14		3	2			16	typed	
+71	Artificial	CFG_FUNC_ENTRY		14		0	70				typed	
+72	Artificial	CFG_FUNC_EXIT		14		0	70				typed	
+73	AST	AST_PARAM_LIST		14		0	70					
+74	AST	AST_PARAM		14		0	70				obj	
+75	AST	AST_NAME		14		0	70				A	
+76	AST	string		14	"A"	0	70					
+77	AST	string		14	"obj"	1	70					
+78	AST	NULL		14		2	70					
+79	AST	AST_PARAM		14		1	70				input	
+80	AST	NULL		14		0	70					
+81	AST	string		14	"input"	1	70					
+82	AST	NULL		14		2	70					
+83	AST	NULL		14		1	70					
+84	AST	AST_STMT_LIST		14		2	70					
+85	AST	NULL		14		3	70					
+86	AST	AST_RETURN		15		0	70					
+87	AST	AST_METHOD_CALL		15		0	70					
+88	AST	AST_VAR		15		0	70				obj	
+89	AST	string		15	"obj"	0	70					
+90	AST	string		15	"process"	1	70					
+91	AST	AST_ARG_LIST		15		2	70					
+92	AST	AST_VAR		15		0	70				input	
+93	AST	string		15	"input"	0	70					
+94	AST	AST_FUNC_DECL		19		4	2			21	unionTyped	
+95	Artificial	CFG_FUNC_ENTRY		19		0	94				unionTyped	
+96	Artificial	CFG_FUNC_EXIT		19		0	94				unionTyped	
+97	AST	AST_PARAM_LIST		19		0	94					
+98	AST	AST_PARAM		19		0	94				obj	
+99	AST	NULL		19		0	94					
+100	AST	string		19	"obj"	1	94					
+101	AST	NULL		19		2	94					
+102	AST	AST_PARAM		19		1	94				input	
+103	AST	NULL		19		0	94					
+104	AST	string		19	"input"	1	94					
+105	AST	NULL		19		2	94					
+106	AST	NULL		19		1	94					
+107	AST	AST_STMT_LIST		19		2	94					
+108	AST	NULL		19		3	94					
+109	AST	AST_RETURN		20		0	94					
+110	AST	AST_METHOD_CALL		20		0	94					
+111	AST	AST_VAR		20		0	94				obj	
+112	AST	string		20	"obj"	0	94					
+113	AST	string		20	"process"	1	94					
+114	AST	AST_ARG_LIST		20		2	94					
+115	AST	AST_VAR		20		0	94				input	
+116	AST	string		20	"input"	0	94					
+117	AST	AST_FUNC_DECL		24		5	2			26	missing	
+118	Artificial	CFG_FUNC_ENTRY		24		0	117				missing	
+119	Artificial	CFG_FUNC_EXIT		24		0	117				missing	
+120	AST	AST_PARAM_LIST		24		0	117					
+121	AST	AST_PARAM		24		0	117				obj	
+122	AST	AST_NAME		24		0	117				A	
+123	AST	string		24	"A"	0	117					
+124	AST	string		24	"obj"	1	117					
+125	AST	NULL		24		2	117					
+126	AST	AST_PARAM		24		1	117				input	
+127	AST	NULL		24		0	117					
+128	AST	string		24	"input"	1	117					
+129	AST	NULL		24		2	117					
+130	AST	NULL		24		1	117					
+131	AST	AST_STMT_LIST		24		2	117					
+132	AST	NULL		24		3	117					
+133	AST	AST_RETURN		25		0	117					
+134	AST	AST_METHOD_CALL		25		0	117					
+135	AST	AST_VAR		25		0	117				obj	
+136	AST	string		25	"obj"	0	117					
+137	AST	string		25	"missing"	1	117					
+138	AST	AST_ARG_LIST		25		2	117					
+139	AST	AST_VAR		25		0	117				input	
+140	AST	string		25	"input"	0	117					

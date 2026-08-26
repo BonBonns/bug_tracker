@@ -1,0 +1,203 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate7.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			40	"./gate7.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate7.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate7.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_CLASS		1		0	2			3	A	
+7	AST	NULL		1		0	2					
+8	AST	NULL		1		1	2					
+9	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	1		2	2			3	"A"	
+10	Artificial	CFG_FUNC_ENTRY		1		0	9				"A"	
+11	Artificial	CFG_FUNC_EXIT		1		0	9				"A"	
+12	AST	AST_STMT_LIST		1		0	9					
+13	AST	AST_METHOD		2		0	9	A		2	process	
+14	Artificial	CFG_FUNC_ENTRY		2		0	13				process	
+15	Artificial	CFG_FUNC_EXIT		2		0	13				process	
+16	AST	AST_PARAM_LIST		2		0	13	A				
+17	AST	AST_PARAM		2		0	13	A			x	
+18	AST	NULL		2		0	13	A				
+19	AST	string		2	"x"	1	13	A				
+20	AST	NULL		2		2	13	A				
+21	AST	NULL		2		1	13	A				
+22	AST	AST_STMT_LIST		2		2	13	A				
+23	AST	NULL		2		3	13	A				
+24	AST	AST_RETURN		2		0	13	A				
+25	AST	AST_VAR		2		0	13	A			x	
+26	AST	string		2	"x"	0	13	A				
+27	AST	AST_CLASS		5		1	2			7	B	
+28	AST	NULL		5		0	2					
+29	AST	NULL		5		1	2					
+30	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	5		2	2			7	"B"	
+31	Artificial	CFG_FUNC_ENTRY		5		0	30				"B"	
+32	Artificial	CFG_FUNC_EXIT		5		0	30				"B"	
+33	AST	AST_STMT_LIST		5		0	30					
+34	AST	AST_METHOD		6		0	30	B		6	process	
+35	Artificial	CFG_FUNC_ENTRY		6		0	34				process	
+36	Artificial	CFG_FUNC_EXIT		6		0	34				process	
+37	AST	AST_PARAM_LIST		6		0	34	B				
+38	AST	AST_PARAM		6		0	34	B			x	
+39	AST	NULL		6		0	34	B				
+40	AST	string		6	"x"	1	34	B				
+41	AST	NULL		6		2	34	B				
+42	AST	NULL		6		1	34	B				
+43	AST	AST_STMT_LIST		6		2	34	B				
+44	AST	NULL		6		3	34	B				
+45	AST	AST_RETURN		6		0	34	B				
+46	AST	string		6	"CONST"	0	34	B				
+47	AST	AST_CLASS		9		2	2			11	Holder	
+48	AST	NULL		9		0	2					
+49	AST	NULL		9		1	2					
+50	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	9		2	2			11	"Holder"	
+51	Artificial	CFG_FUNC_ENTRY		9		0	50				"Holder"	
+52	Artificial	CFG_FUNC_EXIT		9		0	50				"Holder"	
+53	AST	AST_STMT_LIST		9		0	50					
+54	AST	AST_PROP_DECL	MODIFIER_PUBLIC	10		0	50	Holder				
+55	AST	AST_PROP_ELEM		10		0	50	Holder				
+56	AST	string		10	"worker"	0	50	Holder				
+57	AST	NULL		10		1	50	Holder				
+58	AST	AST_CLASS		13		3	2			15	UnionHolder	
+59	AST	NULL		13		0	2					
+60	AST	NULL		13		1	2					
+61	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	13		2	2			15	"UnionHolder"	
+62	Artificial	CFG_FUNC_ENTRY		13		0	61				"UnionHolder"	
+63	Artificial	CFG_FUNC_EXIT		13		0	61				"UnionHolder"	
+64	AST	AST_STMT_LIST		13		0	61					
+65	AST	AST_PROP_DECL	MODIFIER_PUBLIC	14		0	61	UnionHolder				
+66	AST	AST_PROP_ELEM		14		0	61	UnionHolder				
+67	AST	string		14	"worker"	0	61	UnionHolder				
+68	AST	NULL		14		1	61	UnionHolder				
+69	AST	AST_FUNC_DECL		17		4	2			19	getWorker	
+70	Artificial	CFG_FUNC_ENTRY		17		0	69				getWorker	
+71	Artificial	CFG_FUNC_EXIT		17		0	69				getWorker	
+72	AST	AST_PARAM_LIST		17		0	69					
+73	AST	AST_PARAM		17		0	69				h	
+74	AST	AST_NAME		17		0	69				Holder	
+75	AST	string		17	"Holder"	0	69					
+76	AST	string		17	"h"	1	69					
+77	AST	NULL		17		2	69					
+78	AST	NULL		17		1	69					
+79	AST	AST_STMT_LIST		17		2	69					
+80	AST	NULL		17		3	69					
+81	AST	AST_RETURN		18		0	69					
+82	AST	AST_PROP		18		0	69					
+83	AST	AST_VAR		18		0	69				h	
+84	AST	string		18	"h"	0	69					
+85	AST	string		18	"worker"	1	69					
+86	AST	AST_FUNC_DECL		21		5	2			23	getUnionWorker	
+87	Artificial	CFG_FUNC_ENTRY		21		0	86				getUnionWorker	
+88	Artificial	CFG_FUNC_EXIT		21		0	86				getUnionWorker	
+89	AST	AST_PARAM_LIST		21		0	86					
+90	AST	AST_PARAM		21		0	86				h	
+91	AST	AST_NAME		21		0	86				UnionHolder	
+92	AST	string		21	"UnionHolder"	0	86					
+93	AST	string		21	"h"	1	86					
+94	AST	NULL		21		2	86					
+95	AST	NULL		21		1	86					
+96	AST	AST_STMT_LIST		21		2	86					
+97	AST	NULL		21		3	86					
+98	AST	AST_RETURN		22		0	86					
+99	AST	AST_PROP		22		0	86					
+100	AST	AST_VAR		22		0	86				h	
+101	AST	string		22	"h"	0	86					
+102	AST	string		22	"worker"	1	86					
+103	AST	AST_FUNC_DECL		25		6	2			27	getUnknownWorker	
+104	Artificial	CFG_FUNC_ENTRY		25		0	103				getUnknownWorker	
+105	Artificial	CFG_FUNC_EXIT		25		0	103				getUnknownWorker	
+106	AST	AST_PARAM_LIST		25		0	103					
+107	AST	AST_PARAM		25		0	103				h	
+108	AST	NULL		25		0	103					
+109	AST	string		25	"h"	1	103					
+110	AST	NULL		25		2	103					
+111	AST	NULL		25		1	103					
+112	AST	AST_STMT_LIST		25		2	103					
+113	AST	NULL		25		3	103					
+114	AST	AST_RETURN		26		0	103					
+115	AST	AST_PROP		26		0	103					
+116	AST	AST_VAR		26		0	103				h	
+117	AST	string		26	"h"	0	103					
+118	AST	string		26	"worker"	1	103					
+119	AST	AST_FUNC_DECL		29		7	2			31	runExact	
+120	Artificial	CFG_FUNC_ENTRY		29		0	119				runExact	
+121	Artificial	CFG_FUNC_EXIT		29		0	119				runExact	
+122	AST	AST_PARAM_LIST		29		0	119					
+123	AST	AST_PARAM		29		0	119				h	
+124	AST	AST_NAME		29		0	119				Holder	
+125	AST	string		29	"Holder"	0	119					
+126	AST	string		29	"h"	1	119					
+127	AST	NULL		29		2	119					
+128	AST	AST_PARAM		29		1	119				input	
+129	AST	NULL		29		0	119					
+130	AST	string		29	"input"	1	119					
+131	AST	NULL		29		2	119					
+132	AST	NULL		29		1	119					
+133	AST	AST_STMT_LIST		29		2	119					
+134	AST	NULL		29		3	119					
+135	AST	AST_RETURN		30		0	119					
+136	AST	AST_METHOD_CALL		30		0	119					
+137	AST	AST_CALL		30		0	119					
+138	AST	AST_NAME		30		0	119				getWorker	
+139	AST	string		30	"getWorker"	0	119					
+140	AST	AST_ARG_LIST		30		1	119					
+141	AST	AST_VAR		30		0	119				h	
+142	AST	string		30	"h"	0	119					
+143	AST	string		30	"process"	1	119					
+144	AST	AST_ARG_LIST		30		2	119					
+145	AST	AST_VAR		30		0	119				input	
+146	AST	string		30	"input"	0	119					
+147	AST	AST_FUNC_DECL		33		8	2			35	runAmbiguous	
+148	Artificial	CFG_FUNC_ENTRY		33		0	147				runAmbiguous	
+149	Artificial	CFG_FUNC_EXIT		33		0	147				runAmbiguous	
+150	AST	AST_PARAM_LIST		33		0	147					
+151	AST	AST_PARAM		33		0	147				h	
+152	AST	AST_NAME		33		0	147				UnionHolder	
+153	AST	string		33	"UnionHolder"	0	147					
+154	AST	string		33	"h"	1	147					
+155	AST	NULL		33		2	147					
+156	AST	AST_PARAM		33		1	147				input	
+157	AST	NULL		33		0	147					
+158	AST	string		33	"input"	1	147					
+159	AST	NULL		33		2	147					
+160	AST	NULL		33		1	147					
+161	AST	AST_STMT_LIST		33		2	147					
+162	AST	NULL		33		3	147					
+163	AST	AST_RETURN		34		0	147					
+164	AST	AST_METHOD_CALL		34		0	147					
+165	AST	AST_CALL		34		0	147					
+166	AST	AST_NAME		34		0	147				getUnionWorker	
+167	AST	string		34	"getUnionWorker"	0	147					
+168	AST	AST_ARG_LIST		34		1	147					
+169	AST	AST_VAR		34		0	147				h	
+170	AST	string		34	"h"	0	147					
+171	AST	string		34	"process"	1	147					
+172	AST	AST_ARG_LIST		34		2	147					
+173	AST	AST_VAR		34		0	147				input	
+174	AST	string		34	"input"	0	147					
+175	AST	AST_FUNC_DECL		37		9	2			39	runUnknown	
+176	Artificial	CFG_FUNC_ENTRY		37		0	175				runUnknown	
+177	Artificial	CFG_FUNC_EXIT		37		0	175				runUnknown	
+178	AST	AST_PARAM_LIST		37		0	175					
+179	AST	AST_PARAM		37		0	175				h	
+180	AST	NULL		37		0	175					
+181	AST	string		37	"h"	1	175					
+182	AST	NULL		37		2	175					
+183	AST	AST_PARAM		37		1	175				input	
+184	AST	NULL		37		0	175					
+185	AST	string		37	"input"	1	175					
+186	AST	NULL		37		2	175					
+187	AST	NULL		37		1	175					
+188	AST	AST_STMT_LIST		37		2	175					
+189	AST	NULL		37		3	175					
+190	AST	AST_RETURN		38		0	175					
+191	AST	AST_METHOD_CALL		38		0	175					
+192	AST	AST_CALL		38		0	175					
+193	AST	AST_NAME		38		0	175				getUnknownWorker	
+194	AST	string		38	"getUnknownWorker"	0	175					
+195	AST	AST_ARG_LIST		38		1	175					
+196	AST	AST_VAR		38		0	175				h	
+197	AST	string		38	"h"	0	175					
+198	AST	string		38	"process"	1	175					
+199	AST	AST_ARG_LIST		38		2	175					
+200	AST	AST_VAR		38		0	175				input	
+201	AST	string		38	"input"	0	175					

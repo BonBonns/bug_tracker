@@ -1,0 +1,2004 @@
+{
+  "assignments": [
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771072,
+          94489280513,
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771072,
+      "line": 2,
+      "target_local_id": 94489280513,
+      "value_ref": {
+        "code": "fs.readFileSync(p)",
+        "id": 30064771073,
+        "kind": "CALL"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771075,
+          94489280514,
+          30064771076
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771075,
+      "line": 2,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "compute(p)",
+        "id": 30064771076,
+        "kind": "CALL"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771084,
+          94489280512,
+          120259084288
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771084,
+      "line": 2,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "reader",
+        "id": 107374182400,
+        "kind": "FUNCTION"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771085,
+          94489280515,
+          120259084289
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771085,
+      "line": 3,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "sink",
+        "id": 107374182402,
+        "kind": "FUNCTION"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771086,
+          94489280517,
+          30064771083
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771086,
+      "line": 1,
+      "target_local_id": 94489280517,
+      "value_ref": {
+        "code": "require('fs')",
+        "id": 30064771083,
+        "kind": "CALL"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771079,
+          94489280516,
+          30064771080
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771079,
+      "line": 3,
+      "target_local_id": 94489280516,
+      "value_ref": {
+        "code": "fs.readFileSync(p)",
+        "id": 30064771080,
+        "kind": "CALL"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "data",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "data",
+          "type_full_name": "fs:readFileSync:<returnValue>",
+          "value_ref": {
+            "code": "data",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "fs.readFileSync(p)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771073
+            ]
+          },
+          "id": 30064771073,
+          "index": 2,
+          "kind": "CALL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "fs.readFileSync(p)",
+            "id": 30064771073,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const data=fs.readFileSync(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771072,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "other",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476740
+            ]
+          },
+          "id": 68719476740,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "other",
+          "type_full_name": "a.js::program:compute:<returnValue>",
+          "value_ref": {
+            "code": "other",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "compute(p)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771076
+            ]
+          },
+          "id": 30064771076,
+          "index": 2,
+          "kind": "CALL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "compute(p)",
+            "id": 30064771076,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const other=compute(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771075,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476746
+            ]
+          },
+          "id": 68719476746,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "p",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "p",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "fs:readFileSync"
+      ],
+      "candidate_target_ids": [
+        107374182406
+      ],
+      "canonical_targets": [
+        "fs:readFileSync"
+      ],
+      "code": "fs.readFileSync(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771077,
+      "line": 2,
+      "method_full_name": "fs:readFileSync",
+      "name": "readFileSync",
+      "receiver_declared_type": "fs",
+      "receiver_name": "fs",
+      "receiver_owner_match": false,
+      "receiver_type": "fs",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "fs:readFileSync"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476739
+            ]
+          },
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "p",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "p",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "fs:readFileSync"
+      ],
+      "candidate_target_ids": [
+        107374182406
+      ],
+      "canonical_targets": [
+        "fs:readFileSync"
+      ],
+      "code": "fs.readFileSync(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771073,
+      "line": 2,
+      "method_full_name": "fs:readFileSync",
+      "name": "readFileSync",
+      "receiver_declared_type": "fs",
+      "receiver_name": "fs",
+      "receiver_owner_match": false,
+      "receiver_type": "fs",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "fs:readFileSync"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476743
+            ]
+          },
+          "id": 68719476743,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "p",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "p",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "a.js::program:compute"
+      ],
+      "candidate_target_ids": [
+        107374182407
+      ],
+      "canonical_targets": [
+        "a.js::program:compute"
+      ],
+      "code": "compute(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771076,
+      "line": 2,
+      "method_full_name": "a.js::program:compute",
+      "name": "compute",
+      "receiver_declared_type": "a.js::program",
+      "receiver_name": "this",
+      "receiver_owner_match": false,
+      "receiver_type": "a.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "a.js::program:compute"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "fs",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476744
+            ]
+          },
+          "id": 68719476744,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "fs",
+          "type_full_name": "fs",
+          "value_ref": {
+            "code": "fs",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "readFileSync",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574849
+            ]
+          },
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 2,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readFileSync",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "fs.readFileSync",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771078,
+      "line": 2,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "fs",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "fs",
+          "type_full_name": "fs",
+          "value_ref": {
+            "code": "fs",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "readFileSync",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574848
+            ]
+          },
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 2,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readFileSync",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "fs.readFileSync",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "a.js",
+      "id": 30064771074,
+      "line": 2,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "reader",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476753
+            ]
+          },
+          "id": 68719476753,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "reader",
+          "type_full_name": "a.js::program:reader",
+          "value_ref": {
+            "code": "reader",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "reader",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084288
+            ]
+          },
+          "id": 120259084288,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 2,
+          "name": "",
+          "type_full_name": "a.js::program:reader",
+          "value_ref": {
+            "code": "reader",
+            "id": 107374182400,
+            "kind": "FUNCTION"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function reader = function reader(p){ const data=fs.readFileSync(p); const other=compute(p); fs.readFileSync(p); return data; }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "a.js",
+      "id": 30064771084,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "sink",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476754
+            ]
+          },
+          "id": 68719476754,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "sink",
+          "type_full_name": "a.js::program:sink",
+          "value_ref": {
+            "code": "sink",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sink",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084289
+            ]
+          },
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 3,
+          "name": "",
+          "type_full_name": "a.js::program:sink",
+          "value_ref": {
+            "code": "sink",
+            "id": 107374182402,
+            "kind": "FUNCTION"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function sink = function sink(p){ const code=fs.readFileSync(p); eval(code); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "a.js",
+      "id": 30064771085,
+      "line": 3,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "fs",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476755
+            ]
+          },
+          "id": 68719476755,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "fs",
+          "type_full_name": "fs",
+          "value_ref": {
+            "code": "fs",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "require('fs')",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771083
+            ]
+          },
+          "id": 30064771083,
+          "index": 2,
+          "kind": "CALL",
+          "line": 1,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "require('fs')",
+            "id": 30064771083,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const fs=require('fs')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "a.js",
+      "id": 30064771086,
+      "line": 1,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "\"fs\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313216
+            ]
+          },
+          "id": 90194313216,
+          "index": 0,
+          "kind": "LITERAL",
+          "line": 1,
+          "name": "",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "\"fs\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "a.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182408
+      ],
+      "canonical_targets": [
+        "a.js::program:require"
+      ],
+      "code": "require('fs')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "a.js",
+      "id": 30064771083,
+      "line": 1,
+      "method_full_name": "a.js::program:require",
+      "name": "require",
+      "receiver_declared_type": "a.js::program",
+      "receiver_name": "this",
+      "receiver_owner_match": false,
+      "receiver_type": "a.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "a.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "code",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476748
+            ]
+          },
+          "id": 68719476748,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "code",
+          "type_full_name": "fs:readFileSync:<returnValue>",
+          "value_ref": {
+            "code": "code",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "fs.readFileSync(p)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771080
+            ]
+          },
+          "id": 30064771080,
+          "index": 2,
+          "kind": "CALL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "fs.readFileSync(p)",
+            "id": 30064771080,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const code=fs.readFileSync(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "a.js",
+      "id": 30064771079,
+      "line": 3,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "code",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476752
+            ]
+          },
+          "id": 68719476752,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "code",
+          "type_full_name": "fs:readFileSync:<returnValue>",
+          "value_ref": {
+            "code": "code",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "eval"
+      ],
+      "candidate_target_ids": [
+        107374182403
+      ],
+      "canonical_targets": [
+        "eval"
+      ],
+      "code": "eval(code)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "a.js",
+      "id": 30064771082,
+      "line": 3,
+      "method_full_name": "eval",
+      "name": "eval",
+      "receiver_owner_match": false,
+      "receiver_type": "fs:readFileSync:<returnValue>",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "eval"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476751
+            ]
+          },
+          "id": 68719476751,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "p",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "p",
+            "id": 111669149699,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "fs:readFileSync"
+      ],
+      "candidate_target_ids": [
+        107374182406
+      ],
+      "canonical_targets": [
+        "fs:readFileSync"
+      ],
+      "code": "fs.readFileSync(p)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "a.js",
+      "id": 30064771080,
+      "line": 3,
+      "method_full_name": "fs:readFileSync",
+      "name": "readFileSync",
+      "receiver_declared_type": "fs",
+      "receiver_name": "fs",
+      "receiver_owner_match": false,
+      "receiver_type": "fs",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "fs:readFileSync"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "fs",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476749
+            ]
+          },
+          "id": 68719476749,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "fs",
+          "type_full_name": "fs",
+          "value_ref": {
+            "code": "fs",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "readFileSync",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574850
+            ]
+          },
+          "id": 55834574850,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 3,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readFileSync",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "fs.readFileSync",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "a.js",
+      "id": 30064771081,
+      "line": 3,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "frontend_counters": {
+    "exported_calls": 15,
+    "exported_functions": 9,
+    "exported_identifiers": 39,
+    "exported_locals": 10,
+    "exported_returns": 1,
+    "exported_type_decls": 5
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "a.js",
+      "full_name": "a.js::program:reader",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 2,
+      "line_end": 2,
+      "name": "reader",
+      "parameters": [
+        {
+          "code": "p",
+          "id": 111669149697,
+          "index": 0,
+          "line": 2,
+          "method_id": 107374182400,
+          "name": "p",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "a.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "a.js",
+      "full_name": "a.js::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 4,
+      "name": ":program",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "a.js",
+      "full_name": "a.js::program:sink",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 3,
+      "line_end": 3,
+      "name": "sink",
+      "parameters": [
+        {
+          "code": "p",
+          "id": 111669149699,
+          "index": 0,
+          "line": 3,
+          "method_id": 107374182402,
+          "name": "p",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "eval",
+      "id": 107374182403,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "eval",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149701,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182403,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182404,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149702,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182404,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149703,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182404,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182405,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149704,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182405,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149705,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182405,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "fs:readFileSync",
+      "id": 107374182406,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "readFileSync",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149706,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182406,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149707,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182406,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149708,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182406,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "a.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "a.js::program:compute",
+      "id": 107374182407,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "compute",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149709,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182407,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149710,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182407,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149711,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182407,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "a.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "a.js::program:require",
+      "id": 107374182408,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "require",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149712,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182408,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149713,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182408,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149714,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182408,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "data",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "data",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 68719476737,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476738,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476739,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "other",
+      "id": 68719476740,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "a.js::program:compute:<returnValue>"
+    },
+    {
+      "code": "compute",
+      "id": 68719476741,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "compute",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476742,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "this",
+      "ref_target_ids": [
+        111669149696
+      ],
+      "type_full_name": "a.js::program"
+    },
+    {
+      "code": "p",
+      "id": 68719476743,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "fs",
+      "id": 68719476744,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476745,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476746,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "data",
+      "id": 68719476747,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "data",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "data",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "data",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 68719476737,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476738,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476739,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "other",
+      "id": 68719476740,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "a.js::program:compute:<returnValue>"
+    },
+    {
+      "code": "compute",
+      "id": 68719476741,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "compute",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476742,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149696
+      ],
+      "type_full_name": "a.js::program"
+    },
+    {
+      "code": "p",
+      "id": 68719476743,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "fs",
+      "id": 68719476744,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476745,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476746,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "data",
+      "id": 68719476747,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "data",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "code",
+      "id": 68719476748,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "code",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 68719476749,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476750,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476751,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "code",
+      "id": 68719476752,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "code",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "reader",
+      "id": 68719476753,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "reader",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "a.js::program:reader"
+    },
+    {
+      "code": "sink",
+      "id": 68719476754,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "sink",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "a.js::program:sink"
+    },
+    {
+      "code": "fs",
+      "id": 68719476755,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "require",
+      "id": 68719476756,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476757,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "a.js::program"
+    },
+    {
+      "code": "code",
+      "id": 68719476748,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "code",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 68719476749,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "fs",
+      "id": 68719476750,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "fs",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "fs"
+    },
+    {
+      "code": "p",
+      "id": 68719476751,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "p",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "code",
+      "id": 68719476752,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "code",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    }
+  ],
+  "locals": [
+    {
+      "code": "data",
+      "id": 94489280513,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "data",
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "other",
+      "id": 94489280514,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "other",
+      "type_full_name": "a.js::program:compute:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 94489280520,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "fs",
+      "type_full_name": "fs"
+    },
+    {
+      "code": "compute",
+      "id": 94489280521,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "compute",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "reader",
+      "id": 94489280512,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "reader",
+      "type_full_name": "a.js::program:reader"
+    },
+    {
+      "code": "sink",
+      "id": 94489280515,
+      "line": 3,
+      "method_id": 107374182401,
+      "name": "sink",
+      "type_full_name": "a.js::program:sink"
+    },
+    {
+      "code": "fs",
+      "id": 94489280517,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "fs",
+      "type_full_name": "fs"
+    },
+    {
+      "code": "require",
+      "id": 94489280518,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "require",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "code",
+      "id": 94489280516,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "code",
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "fs",
+      "id": 94489280519,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "fs",
+      "type_full_name": "fs"
+    }
+  ],
+  "members": [],
+  "metadata": [
+    {
+      "language": "JSSRC",
+      "root": "/tmp/verify_run/portable-engine-full-review-package/tests/gates/guard-r01/jssrc_fixture/jssrc",
+      "version": "0.1"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 2,
+      "method_id": 107374182400,
+      "type_full_name": "fs:readFileSync:<returnValue>"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 1,
+      "method_id": 107374182401,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 3,
+      "method_id": 107374182402,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 0,
+      "method_id": 107374182403,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 0,
+      "method_id": 107374182404,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 0,
+      "method_id": 107374182405,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 0,
+      "method_id": 107374182406,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 0,
+      "method_id": 107374182407,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 0,
+      "method_id": 107374182408,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [
+    {
+      "code": "return data",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920768,
+          68719476747
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 141733920768,
+      "line": 2,
+      "value_ref": {
+        "code": "data",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      }
+    }
+  ],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "a.js",
+      "full_name": "a.js::program:reader",
+      "id": 167503724544,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 2,
+      "name": "reader"
+    },
+    {
+      "file": "a.js",
+      "full_name": "a.js::program:sink",
+      "id": 167503724545,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 3,
+      "name": "sink"
+    },
+    {
+      "file": "a.js",
+      "full_name": "a.js::program",
+      "id": 167503724546,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 1,
+      "name": ":program"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "ANY",
+      "id": 167503724547,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "void",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "void"
+    }
+  ]
+}

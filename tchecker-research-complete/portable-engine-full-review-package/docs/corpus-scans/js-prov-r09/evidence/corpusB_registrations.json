@@ -1,0 +1,2095 @@
+{
+  "schema": "portable-framework-registration/0.1",
+  "note": "Framework identity derived ONLY from receiver-domain evidence (JS-PROV-R08). methodFullName and resolved-callee identity are deliberately NOT used: JS-PROV-R07 measured them as correlated error under an ANY receiver. Call name selects the verb only AFTER the receiver is established.",
+  "registrations": [
+    {
+      "registration_call_id": 30064771824,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/forgot-password/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771888
+      ],
+      "declaring_method": "resources/account/forgot-password/index.js::program:<lambda>",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064771964,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/resend-email/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771900
+      ],
+      "declaring_method": "resources/account/resend-email/index.js::program:<lambda>1",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772050,
+      "verb": "put",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/reset-password/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771892
+      ],
+      "declaring_method": "resources/account/reset-password/index.js::program:<lambda>1",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772168,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/sign-in/index.js::program:<lambda>0",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771876
+      ],
+      "declaring_method": "resources/account/sign-in/index.js::program:<lambda>0",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772242,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/sign-out/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771880
+      ],
+      "declaring_method": "resources/account/sign-out/index.js::program:<lambda>1",
+      "argument_count": 3,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772331,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/sign-up/index.js::program:<lambda>0",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771872
+      ],
+      "declaring_method": "resources/account/sign-up/index.js::program:<lambda>0",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772485,
+      "verb": "get",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/verify-email/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771884
+      ],
+      "declaring_method": "resources/account/verify-email/index.js::program:<lambda>1",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772539,
+      "verb": "get",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/account/verify-reset-token/index.js::program:<lambda>0",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064771896
+      ],
+      "declaring_method": "resources/account/verify-reset-token/index.js::program:<lamb",
+      "argument_count": 4,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772583,
+      "verb": "get",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/health/get/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772595
+      ],
+      "declaring_method": "resources/health/get/index.js::program:<lambda>1",
+      "argument_count": 3,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772732,
+      "verb": "get",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/user/get-current/index.js::program:<lambda>0",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772746
+      ],
+      "declaring_method": "resources/user/get-current/index.js::program:<lambda>0",
+      "argument_count": 3,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772842,
+      "verb": "get",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/user/list/index.js::program:<lambda>0",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772762
+      ],
+      "declaring_method": "resources/user/list/index.js::program:<lambda>0",
+      "argument_count": 4,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064772943,
+      "verb": "delete",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/user/remove-avatar/index.js::program:<lambda>2",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772758
+      ],
+      "declaring_method": "resources/user/remove-avatar/index.js::program:<lambda>2",
+      "argument_count": 4,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064773004,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/user/update-current/index.js::program:<lambda>1",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772750
+      ],
+      "declaring_method": "resources/user/update-current/index.js::program:<lambda>1",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "registration_call_id": 30064773105,
+      "verb": "post",
+      "framework_family": "KOA_ROUTER",
+      "framework_identity": "@koa/router",
+      "identity_evidence": "RECEIVER_DOMAIN_EVIDENCE",
+      "receiver_parameter": {
+        "method": "resources/user/upload-avatar/index.js::program:<lambda>2",
+        "index": 1
+      },
+      "receiver_evidence_calls": [
+        30064772754
+      ],
+      "declaring_method": "resources/user/upload-avatar/index.js::program:<lambda>2",
+      "argument_count": 5,
+      "cpg_receiver_type": "ANY",
+      "cpg_receiver_type_disagrees": false,
+      "resolution": "ESTABLISHED"
+    }
+  ],
+  "abstentions": [
+    {
+      "call_id": 30064771090,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771091,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771092,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771093,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771094,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771095,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771096,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771097,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771098,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771099,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771113,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771132,
+      "call_name": "cors",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771137,
+      "call_name": "helmet",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771138,
+      "call_name": "qs",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771141,
+      "call_name": "bodyParser",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771154,
+      "call_name": "requestLogger",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771155,
+      "call_name": "routes",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771161,
+      "call_name": "require('services/socket/socket.service')",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771162,
+      "call_name": "require",
+      "receiver_param": "app.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771168,
+      "call_name": "require",
+      "receiver_param": "config/environment/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771191,
+      "call_name": "require",
+      "receiver_param": "config/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771192,
+      "call_name": "require",
+      "receiver_param": "db.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771198,
+      "call_name": "require",
+      "receiver_param": "db.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771202,
+      "call_name": "require",
+      "receiver_param": "ioEmitter.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771203,
+      "call_name": "require",
+      "receiver_param": "ioEmitter.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771205,
+      "call_name": "require('socket.io-emitter')",
+      "receiver_param": "ioEmitter.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771214,
+      "call_name": "require",
+      "receiver_param": "ioEmitter.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771228,
+      "call_name": "require",
+      "receiver_param": "ioEmitter.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771235,
+      "call_name": "require",
+      "receiver_param": "logger.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771236,
+      "call_name": "require",
+      "receiver_param": "logger.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771301,
+      "call_name": "createConsoleLogger",
+      "receiver_param": "logger.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771302,
+      "call_name": "require",
+      "receiver_param": "middlewares/upload-file.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771309,
+      "call_name": "multer",
+      "receiver_param": "middlewares/upload-file.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771353,
+      "call_name": "throw",
+      "receiver_param": "middlewares/validate.middleware.js::program:validate:<lambda>1#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771357,
+      "call_name": "formatError",
+      "receiver_param": "middlewares/validate.middleware.js::program:validate:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771361,
+      "call_name": "next",
+      "receiver_param": "middlewares/validate.middleware.js::program:validate:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771373,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.schema.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771403,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771404,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771405,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771406,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771407,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771408,
+      "call_name": "reject",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>0:<lambda>1:<lambda>2#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771409,
+      "call_name": "resolve",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>0:<lambda>1:<lambda>2#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771427,
+      "call_name": "require",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>5:<lambda>6:<lambda>7#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771429,
+      "call_name": "map",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>5:<lambda>6#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771438,
+      "call_name": "getMigrationNames",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>5#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771455,
+      "call_name": "operator",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>10:<lambda>11:<lambda>12:<lambda>13#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771459,
+      "call_name": "then",
+      "receiver_param": "migrations/migration.service.js::program:<lambda>10:<lambda>11#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771497,
+      "call_name": "require",
+      "receiver_param": "migrations/migrations-log/migration-log.schema.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771557,
+      "call_name": "require",
+      "receiver_param": "migrations/migrations-log/migration-log.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771558,
+      "call_name": "require",
+      "receiver_param": "migrations/migrations-log/migration-log.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771626,
+      "call_name": "require",
+      "receiver_param": "migrations/migrations/1.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771636,
+      "call_name": "require",
+      "receiver_param": "migrations/migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771637,
+      "call_name": "require",
+      "receiver_param": "migrations/migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771638,
+      "call_name": "require",
+      "receiver_param": "migrations/migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771639,
+      "call_name": "require",
+      "receiver_param": "migrations/migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771652,
+      "call_name": "filter",
+      "receiver_param": "migrations/migrator.js::program:run#1",
+      "reason": "RECEIVER_DOMAIN_NOT_ESTABLISHED",
+      "detail": {
+        "observed": [],
+        "unconstrained": true
+      }
+    },
+    {
+      "call_id": 30064771745,
+      "call_name": "run",
+      "receiver_param": "migrations/migrator.js::program:<lambda>3#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771748,
+      "call_name": "require",
+      "receiver_param": "migrations/migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771759,
+      "call_name": "require",
+      "receiver_param": "migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771763,
+      "call_name": "require",
+      "receiver_param": "migrator.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771782,
+      "call_name": "next",
+      "receiver_param": "resources/account/forgot-password/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771818,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771819,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771820,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771821,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771822,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771823,
+      "call_name": "require",
+      "receiver_param": "resources/account/forgot-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771826,
+      "call_name": "validate",
+      "receiver_param": "resources/account/forgot-password/index.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771866,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771875,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771879,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771883,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771887,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771891,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771895,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771899,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771903,
+      "call_name": "require",
+      "receiver_param": "resources/account/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771925,
+      "call_name": "next",
+      "receiver_param": "resources/account/resend-email/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771959,
+      "call_name": "require",
+      "receiver_param": "resources/account/resend-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771960,
+      "call_name": "require",
+      "receiver_param": "resources/account/resend-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771961,
+      "call_name": "require",
+      "receiver_param": "resources/account/resend-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771962,
+      "call_name": "require",
+      "receiver_param": "resources/account/resend-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771963,
+      "call_name": "require",
+      "receiver_param": "resources/account/resend-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064771966,
+      "call_name": "validate",
+      "receiver_param": "resources/account/resend-email/index.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772022,
+      "call_name": "next",
+      "receiver_param": "resources/account/reset-password/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772046,
+      "call_name": "require",
+      "receiver_param": "resources/account/reset-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772047,
+      "call_name": "require",
+      "receiver_param": "resources/account/reset-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772048,
+      "call_name": "require",
+      "receiver_param": "resources/account/reset-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772049,
+      "call_name": "require",
+      "receiver_param": "resources/account/reset-password/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772052,
+      "call_name": "validate",
+      "receiver_param": "resources/account/reset-password/index.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772118,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/account/sign-in/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772127,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/account/sign-in/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772131,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/account/sign-in/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772140,
+      "call_name": "next",
+      "receiver_param": "resources/account/sign-in/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772163,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-in/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772164,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-in/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772165,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-in/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772166,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-in/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772167,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-in/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772170,
+      "call_name": "validate",
+      "receiver_param": "resources/account/sign-in/index.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772236,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-out/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772259,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/account/sign-up/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772265,
+      "call_name": "next",
+      "receiver_param": "resources/account/sign-up/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772325,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772326,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772327,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772328,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772329,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772330,
+      "call_name": "require",
+      "receiver_param": "resources/account/sign-up/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772333,
+      "call_name": "validate",
+      "receiver_param": "resources/account/sign-up/index.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772442,
+      "call_name": "assertError",
+      "receiver_param": "resources/account/verify-email/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772449,
+      "call_name": "next",
+      "receiver_param": "resources/account/verify-email/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772477,
+      "call_name": "redirect",
+      "receiver_param": "resources/account/verify-email/index.js::program:handler#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772480,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772481,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772482,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772483,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772484,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-email/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772487,
+      "call_name": "validate",
+      "receiver_param": "resources/account/verify-email/index.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772527,
+      "call_name": "redirect",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772531,
+      "call_name": "redirect",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772535,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772536,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772537,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772538,
+      "call_name": "require",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772541,
+      "call_name": "validate",
+      "receiver_param": "resources/account/verify-reset-token/index.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772589,
+      "call_name": "require",
+      "receiver_param": "resources/health/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772598,
+      "call_name": "require",
+      "receiver_param": "resources/health/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772603,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.schema.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772604,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.schema.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772655,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772656,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772657,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772658,
+      "call_name": "require",
+      "receiver_param": "resources/token/token.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772675,
+      "call_name": "createToken",
+      "receiver_param": "resources/token/token.service.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772731,
+      "call_name": "require",
+      "receiver_param": "resources/user/get-current/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772739,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772741,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772749,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772753,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772757,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772761,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772765,
+      "call_name": "require",
+      "receiver_param": "resources/user/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772839,
+      "call_name": "require",
+      "receiver_param": "resources/user/list/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772840,
+      "call_name": "require",
+      "receiver_param": "resources/user/list/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772841,
+      "call_name": "require",
+      "receiver_param": "resources/user/list/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772844,
+      "call_name": "validate",
+      "receiver_param": "resources/user/list/index.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772900,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/user/remove-avatar/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772906,
+      "call_name": "next",
+      "receiver_param": "resources/user/remove-avatar/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772922,
+      "call_name": "getFileKey",
+      "receiver_param": "resources/user/remove-avatar/index.js::program:handler#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772933,
+      "call_name": "require",
+      "receiver_param": "resources/user/remove-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772934,
+      "call_name": "require",
+      "receiver_param": "resources/user/remove-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772935,
+      "call_name": "require",
+      "receiver_param": "resources/user/remove-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772936,
+      "call_name": "replace",
+      "receiver_param": "resources/user/remove-avatar/index.js::program:getFileKey#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772967,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/user/update-current/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064772973,
+      "call_name": "next",
+      "receiver_param": "resources/user/update-current/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773000,
+      "call_name": "require",
+      "receiver_param": "resources/user/update-current/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773001,
+      "call_name": "require",
+      "receiver_param": "resources/user/update-current/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773002,
+      "call_name": "require",
+      "receiver_param": "resources/user/update-current/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773003,
+      "call_name": "require",
+      "receiver_param": "resources/user/update-current/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773006,
+      "call_name": "validate",
+      "receiver_param": "resources/user/update-current/index.js::program:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773047,
+      "call_name": "assertClientError",
+      "receiver_param": "resources/user/upload-avatar/index.js::program:validator#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773052,
+      "call_name": "next",
+      "receiver_param": "resources/user/upload-avatar/index.js::program:validator#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773068,
+      "call_name": "getFileKey",
+      "receiver_param": "resources/user/upload-avatar/index.js::program:handler#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773094,
+      "call_name": "require",
+      "receiver_param": "resources/user/upload-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773095,
+      "call_name": "require",
+      "receiver_param": "resources/user/upload-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773096,
+      "call_name": "require",
+      "receiver_param": "resources/user/upload-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773097,
+      "call_name": "require",
+      "receiver_param": "resources/user/upload-avatar/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773098,
+      "call_name": "replace",
+      "receiver_param": "resources/user/upload-avatar/index.js::program:getFileKey#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773119,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.handler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773120,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.handler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773135,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.schema.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773221,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773222,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773223,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773224,
+      "call_name": "require",
+      "receiver_param": "resources/user/user.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773271,
+      "call_name": "require",
+      "receiver_param": "routes/authenticated.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773272,
+      "call_name": "require",
+      "receiver_param": "routes/authenticated.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773273,
+      "call_name": "use",
+      "receiver_param": "routes/authenticated.js::program:<lambda>0#1",
+      "reason": "RECEIVER_DOMAIN_NOT_ESTABLISHED",
+      "detail": {
+        "observed": [],
+        "unconstrained": true
+      }
+    },
+    {
+      "call_id": 30064773275,
+      "call_name": "mount",
+      "receiver_param": "routes/authenticated.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773280,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773281,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773282,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773283,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773284,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773285,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773286,
+      "call_name": "require",
+      "receiver_param": "routes/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773287,
+      "call_name": "use",
+      "receiver_param": "routes/index.js::program:defineRoutes#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773289,
+      "call_name": "use",
+      "receiver_param": "routes/index.js::program:defineRoutes#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773291,
+      "call_name": "use",
+      "receiver_param": "routes/index.js::program:defineRoutes#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773293,
+      "call_name": "use",
+      "receiver_param": "routes/index.js::program:defineRoutes#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773295,
+      "call_name": "publicRoutes",
+      "receiver_param": "routes/index.js::program:defineRoutes#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773296,
+      "call_name": "use",
+      "receiver_param": "routes/index.js::program:defineRoutes#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773298,
+      "call_name": "authenticatedRoutes",
+      "receiver_param": "routes/index.js::program:defineRoutes#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773309,
+      "call_name": "require",
+      "receiver_param": "routes/middlewares/attach-custom-errors.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773339,
+      "call_name": "formatError",
+      "receiver_param": "routes/middlewares/attach-custom-errors.middleware.js::program:<lambda>2:<lambda>5#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773344,
+      "call_name": "formatError",
+      "receiver_param": "routes/middlewares/attach-custom-errors.middleware.js::program:<lambda>2:<lambda>6#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773354,
+      "call_name": "next",
+      "receiver_param": "routes/middlewares/attach-custom-errors.middleware.js::program:attachCustomErrors#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773362,
+      "call_name": "next",
+      "receiver_param": "routes/middlewares/auth.middleware.js::program:auth#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773370,
+      "call_name": "require",
+      "receiver_param": "routes/middlewares/extract-tokens.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773392,
+      "call_name": "next",
+      "receiver_param": "routes/middlewares/extract-tokens.middleware.js::program:storeTokenToState#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773399,
+      "call_name": "require",
+      "receiver_param": "routes/middlewares/route-error-handler.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773401,
+      "call_name": "next",
+      "receiver_param": "routes/middlewares/route-error-handler.middleware.js::program:routeErrorHandler#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773430,
+      "call_name": "require",
+      "receiver_param": "routes/middlewares/try-to-attach-user.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773431,
+      "call_name": "require",
+      "receiver_param": "routes/middlewares/try-to-attach-user.middleware.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773453,
+      "call_name": "next",
+      "receiver_param": "routes/middlewares/try-to-attach-user.middleware.js::program:tryToAttachUser#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773459,
+      "call_name": "require",
+      "receiver_param": "routes/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773460,
+      "call_name": "require",
+      "receiver_param": "routes/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773461,
+      "call_name": "require",
+      "receiver_param": "routes/public.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773462,
+      "call_name": "use",
+      "receiver_param": "routes/public.js::program:<lambda>0#1",
+      "reason": "RECEIVER_DOMAIN_NOT_ESTABLISHED",
+      "detail": {
+        "observed": [],
+        "unconstrained": true
+      }
+    },
+    {
+      "call_id": 30064773464,
+      "call_name": "mount",
+      "receiver_param": "routes/public.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773465,
+      "call_name": "use",
+      "receiver_param": "routes/public.js::program:<lambda>0#1",
+      "reason": "RECEIVER_DOMAIN_NOT_ESTABLISHED",
+      "detail": {
+        "observed": [],
+        "unconstrained": true
+      }
+    },
+    {
+      "call_id": 30064773467,
+      "call_name": "mount",
+      "receiver_param": "routes/public.js::program:<lambda>0#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773476,
+      "call_name": "require",
+      "receiver_param": "scheduler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773477,
+      "call_name": "require",
+      "receiver_param": "scheduler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773478,
+      "call_name": "require",
+      "receiver_param": "scheduler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773479,
+      "call_name": "require",
+      "receiver_param": "scheduler/cron/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773480,
+      "call_name": "require",
+      "receiver_param": "scheduler/cron/index.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773493,
+      "call_name": "require",
+      "receiver_param": "scheduler/handlers/action.example.handler.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773497,
+      "call_name": "require",
+      "receiver_param": "security.util.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773498,
+      "call_name": "require",
+      "receiver_param": "security.util.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773499,
+      "call_name": "require",
+      "receiver_param": "security.util.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773506,
+      "call_name": "randomBytes",
+      "receiver_param": "security.util.js::program:generateSecureToken#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773509,
+      "call_name": "bcryptHash",
+      "receiver_param": "security.util.js::program:getHash#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773510,
+      "call_name": "compare",
+      "receiver_param": "security.util.js::program:compareTextWithHash#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773532,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773533,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773534,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773535,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773587,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773588,
+      "call_name": "require",
+      "receiver_param": "services/auth/auth.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773695,
+      "call_name": "require",
+      "receiver_param": "services/cloud-storage/cloud-storage.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773696,
+      "call_name": "require",
+      "receiver_param": "services/cloud-storage/cloud-storage.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773728,
+      "call_name": "require",
+      "receiver_param": "services/email/email.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773729,
+      "call_name": "require",
+      "receiver_param": "services/email/email.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773730,
+      "call_name": "require",
+      "receiver_param": "services/email/email.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773731,
+      "call_name": "require",
+      "receiver_param": "services/email/email.helper.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773741,
+      "call_name": "compiledHtml",
+      "receiver_param": "services/email/email.helper.js::program:render#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773772,
+      "call_name": "render",
+      "receiver_param": "services/email/email.helper.js::program:MailService:sendTemplate#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773817,
+      "call_name": "require",
+      "receiver_param": "services/email/email.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773818,
+      "call_name": "require",
+      "receiver_param": "services/email/email.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773819,
+      "call_name": "require",
+      "receiver_param": "services/email/email.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773854,
+      "call_name": "join",
+      "receiver_param": "services/email/email.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773882,
+      "call_name": "split",
+      "receiver_param": "services/socket/socket.helper.js::program:checkAccessToRoom#1",
+      "reason": "RECEIVER_DOMAIN_NOT_ESTABLISHED",
+      "detail": {
+        "observed": [],
+        "unconstrained": true
+      }
+    },
+    {
+      "call_id": 30064773894,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773895,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773896,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773897,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773898,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773899,
+      "call_name": "require",
+      "receiver_param": "services/socket/socket.service.js::program#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773917,
+      "call_name": "next",
+      "receiver_param": "services/socket/socket.service.js::program:<lambda>0:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773918,
+      "call_name": "next",
+      "receiver_param": "services/socket/socket.service.js::program:<lambda>0:<lambda>1#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773936,
+      "call_name": "on",
+      "receiver_param": "services/socket/socket.service.js::program:<lambda>0:<lambda>2#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773938,
+      "call_name": "on",
+      "receiver_param": "services/socket/socket.service.js::program:<lambda>0:<lambda>2#1",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773941,
+      "call_name": "socketIo",
+      "receiver_param": "services/socket/socket.service.js::program:socketService#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    },
+    {
+      "call_id": 30064773944,
+      "call_name": "redisAdapter",
+      "receiver_param": "services/socket/socket.service.js::program:socketService#0",
+      "reason": "NO_RECEIVER_EVIDENCE",
+      "detail": null
+    }
+  ]
+}

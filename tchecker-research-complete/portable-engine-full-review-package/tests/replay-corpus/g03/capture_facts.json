@@ -1,0 +1,43 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182402,
+      "inner_binding": "A",
+      "inner_local_id": 94489280521,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280519,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280521,
+          34359738368,
+          94489280519
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "A",
+      "inner_local_id": 94489280524,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280519,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280524,
+          34359738369,
+          94489280519
+        ]
+      }
+    }
+  ]
+}

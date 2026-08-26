@@ -1,0 +1,55 @@
+--- /tmp/SA.bak2	2026-07-04 00:30:46.119130932 +0000
++++ /home/claude/work/tchecker_v8/pkg/engine/tchecker/detector/joern-php/src/main/java/tools/php/ast2cpg/StaticAnalysis.java	2026-07-04 04:26:59.483998970 +0000
+@@ -680,6 +680,12 @@
+ 					if(cb != null) nm = cb;
+ 				}
+ 				if(nm != null) {
++					// Align the inline-source path with the main XSS suppressor: credit the WP esc_*
++					// family (htmlEscapers: esc_html/esc_attr/esc_url/wp_kses*/...) in addition to the
++					// numeric xssSanitizers list. Without this, `echo esc_html($_GET[...])` (and any
++					// inline-forwarded param use wrapped in an escaper) was a false positive — the inline
++					// path only checked xssSanitizers while the reaching-def path credited htmlEscapers.
++					if(xss && cg.PHPCGFactory.isXssOutputEscaper(nm)) return true;
+ 					if(xss && PHPCSVEdgeInterpreter.xssSanitizers.contains(nm)) return true;
+ 					if(xss && PHPCSVEdgeInterpreter.xssInputSanitizers.contains(nm)) return true;
+ 					// preg_replace with a character-stripping pattern that removes < and >
+@@ -912,6 +918,7 @@
+ 	private void emitVulPath(Long sinkId, Stack<Long> callstack) {
+ 		// Step 0: source (already emitted by emitVulSource, repeat here for path coherence)
+ 		int step = 0;
++		java.util.TreeSet<Integer> plines = new java.util.TreeSet<Integer>();  // taint-path line numbers
+ 		if(vulSources.containsKey(sinkId)) {
+ 			java.util.Set<Long> seen = new java.util.HashSet<>();
+ 			for(Long srcId : vulSources.get(sinkId)) {
+@@ -920,6 +927,7 @@
+ 				if(sn == null) continue;
+ 				String srcFile = shortFile(cg.PHPCGFactory.getDir(srcId));
+ 				int srcLine = (sn.getLocation() != null) ? sn.getLocation().startLine : -1;
++				if(srcLine>0) plines.add(srcLine);
+ 				String srcCode = vulSourceCode(sn);
+ 				System.out.printf("Vul Path Step %d [source]:  %s:%d  %s%n",
+ 					step++, srcFile, srcLine, srcCode);
+@@ -935,6 +943,7 @@
+ 			if(csNode == null) continue;
+ 			String csFile = shortFile(cg.PHPCGFactory.getDir(csId));
+ 			int csLine = (csNode.getLocation() != null) ? csNode.getLocation().startLine : -1;
++			if(csLine>0) plines.add(csLine);
+ 			// Enclosing function of this call site
+ 			String enclosing = enclosingFuncName(csNode);
+ 			// The callee being invoked
+@@ -952,9 +961,15 @@
+ 			int sinkLine = (sinkNode.getLocation() != null) ? sinkNode.getLocation().startLine : -1;
+ 			String sinkEnclosing = enclosingFuncName(sinkNode);
+ 			String sinkType = sinkNode.getProperty("type");
++			if(sinkLine>0) plines.add(sinkLine);
+ 			System.out.printf("Vul Path Step %d [sink]:    %s:%d  in %s()  (%s)%n",
+ 				step, sinkFile, sinkLine, sinkEnclosing, sinkType != null ? sinkType : "sink");
+ 		}
++		if(System.getenv("WP_DUMP_CALLGRAPH") != null && !plines.isEmpty()) {
++			StringBuilder sb = new StringBuilder();
++			for(Integer l : plines) { if(sb.length()>0) sb.append(","); sb.append(l); }
++			System.out.println("Vul Lines: "+sinkId+" "+sb.toString());
++		}
+ 	}
+ 
+ 	// Return just the filename (no path) for compact display. Falls back to full path if needed.

@@ -1,0 +1,8 @@
+benign-network/index.js	benign-network/index.js::program	2	HTTPS_GET	module.exports	false
+benign-network/index.js	benign-network/index.js::program:getWeather	4	HTTPS_GET	url	false
+benign-network/index.js	benign-network/index.js::program:getWeather	4	HTTPS_GET	https	false
+launder-mal/collect.js	launder-mal/collect.js::program	7	HTTPS_GET	send	false
+launder-mal/collect.js	launder-mal/collect.js::program:send	9	HTTPS_GET	"https://example.invalid/c?" + qs	true
+launder-mal/collect.js	launder-mal/collect.js::program:send	9	HTTPS_GET	https	false
+mal-pkg/dc.js	mal-pkg/dc.js::program	16	HTTPS_GET	url	false
+mal-pkg/dc.js	mal-pkg/dc.js::program	16	HTTPS_GET	https	false

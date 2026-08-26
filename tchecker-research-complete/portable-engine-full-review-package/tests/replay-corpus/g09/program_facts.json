@@ -1,0 +1,4763 @@
+{
+  "assignments": [
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771074,
+          94489280529,
+          30064771075
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771074,
+      "line": 18,
+      "target_local_id": 94489280529,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771075,
+        "kind": "STATE_READ"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771103,
+          94489280512,
+          120259084288
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771103,
+      "line": 17,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "store",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771104,
+          94489280513,
+          120259084289
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771104,
+      "line": 21,
+      "target_local_id": 94489280513,
+      "value_ref": {
+        "code": "load",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771105,
+          94489280514,
+          120259084290
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771105,
+      "line": 25,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "topState",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771106,
+          94489280515,
+          120259084291
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771106,
+      "line": 30,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "topConstant",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771107,
+          94489280516,
+          120259084292
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771107,
+      "line": 35,
+      "target_local_id": 94489280516,
+      "value_ref": {
+        "code": "directState",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771108,
+          94489280517,
+          120259084293
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771108,
+      "line": 40,
+      "target_local_id": 94489280517,
+      "value_ref": {
+        "code": "directConstant",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771109,
+          94489280518,
+          120259084294
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771109,
+      "line": 1,
+      "target_local_id": 94489280518,
+      "value_ref": {
+        "code": "constructor() {}",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771110,
+          94489280519,
+          120259084295
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771110,
+      "line": 13,
+      "target_local_id": 94489280519,
+      "value_ref": {
+        "code": "constructor() {}",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771078,
+          94489280528,
+          30064771079
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771078,
+      "line": 22,
+      "target_local_id": 94489280528,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771079,
+        "kind": "STATE_READ"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771086,
+          94489280523,
+          30064771087
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 30064771086,
+      "line": 36,
+      "target_local_id": 94489280523,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771087,
+        "kind": "STATE_READ"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771090,
+          94489280522,
+          30064771091
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 30064771090,
+      "line": 37,
+      "target_local_id": 94489280522,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771091,
+        "kind": "STATE_READ"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771094,
+          94489280521,
+          30064771095
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 30064771094,
+      "line": 41,
+      "target_local_id": 94489280521,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771095,
+        "kind": "STATE_READ"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771098,
+          94489280520,
+          30064771099
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 30064771098,
+      "line": 42,
+      "target_local_id": 94489280520,
+      "value_ref": {
+        "code": "h.worker",
+        "id": 30064771099,
+        "kind": "STATE_READ"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "input",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476739
+            ]
+          },
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 18,
+          "name": "input",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "input",
+            "id": 111669149698,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "candidate_target_ids": [
+        107374182413,
+        107374182414
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):setValue"
+      ],
+      "code": "h.worker.setValue(input)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate9.ts",
+      "id": 30064771072,
+      "line": 18,
+      "method_full_name": "<unknownFullName>",
+      "name": "setValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_0",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_0 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771074
+            ]
+          },
+          "id": 30064771074,
+          "index": 1,
+          "kind": "CALL",
+          "line": 18,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_0 = h.worker)",
+            "id": 30064771074,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "setValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574849
+            ]
+          },
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 18,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "setValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_0 = h.worker).setValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate9.ts",
+      "id": 30064771073,
+      "line": 18,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 18,
+          "name": "_tmp_0",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_0",
+            "id": 94489280529,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771075
+            ]
+          },
+          "id": 30064771075,
+          "index": 2,
+          "kind": "CALL",
+          "line": 18,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771075,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_0 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate9.ts",
+      "id": 30064771074,
+      "line": 18,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 18,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574848
+            ]
+          },
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 18,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate9.ts",
+      "id": 30064771075,
+      "line": 18,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "store",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476772
+            ]
+          },
+          "id": 68719476772,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 17,
+          "name": "store",
+          "type_full_name": "gate9.ts::program:store",
+          "value_ref": {
+            "code": "store",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "store",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084288
+            ]
+          },
+          "id": 120259084288,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 17,
+          "name": "",
+          "type_full_name": "gate9.ts::program:store",
+          "value_ref": {
+            "code": "store",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function store = function store(h: Holder, input: string) {\n  h.worker.setValue(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771103,
+      "line": 17,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "load",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476773
+            ]
+          },
+          "id": 68719476773,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 21,
+          "name": "load",
+          "type_full_name": "gate9.ts::program:load",
+          "value_ref": {
+            "code": "load",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "load",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084289
+            ]
+          },
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 21,
+          "name": "",
+          "type_full_name": "gate9.ts::program:load",
+          "value_ref": {
+            "code": "load",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function load = function load(h: Holder) {\n  return h.worker.readValue();\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771104,
+      "line": 21,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "topState",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476774
+            ]
+          },
+          "id": 68719476774,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "topState",
+          "type_full_name": "gate9.ts::program:topState",
+          "value_ref": {
+            "code": "topState",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "topState",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084290
+            ]
+          },
+          "id": 120259084290,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 25,
+          "name": "",
+          "type_full_name": "gate9.ts::program:topState",
+          "value_ref": {
+            "code": "topState",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function topState = function topState(h: Holder, source: string) {\n  store(h, source);\n  return load(h);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771105,
+      "line": 25,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "topConstant",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476775
+            ]
+          },
+          "id": 68719476775,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 30,
+          "name": "topConstant",
+          "type_full_name": "gate9.ts::program:topConstant",
+          "value_ref": {
+            "code": "topConstant",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "topConstant",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084291
+            ]
+          },
+          "id": 120259084291,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 30,
+          "name": "",
+          "type_full_name": "gate9.ts::program:topConstant",
+          "value_ref": {
+            "code": "topConstant",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function topConstant = function topConstant(h: Holder, source: string) {\n  store(h, \"CONST\");\n  return load(h);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771106,
+      "line": 30,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "directState",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476776
+            ]
+          },
+          "id": 68719476776,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 35,
+          "name": "directState",
+          "type_full_name": "gate9.ts::program:directState",
+          "value_ref": {
+            "code": "directState",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "directState",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084292
+            ]
+          },
+          "id": 120259084292,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 35,
+          "name": "",
+          "type_full_name": "gate9.ts::program:directState",
+          "value_ref": {
+            "code": "directState",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function directState = function directState(h: Holder, source: string) {\n  h.worker.setValue(source);\n  return h.worker.readValue();\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771107,
+      "line": 35,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "directConstant",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476777
+            ]
+          },
+          "id": 68719476777,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 40,
+          "name": "directConstant",
+          "type_full_name": "gate9.ts::program:directConstant",
+          "value_ref": {
+            "code": "directConstant",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "directConstant",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084293
+            ]
+          },
+          "id": 120259084293,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 40,
+          "name": "",
+          "type_full_name": "gate9.ts::program:directConstant",
+          "value_ref": {
+            "code": "directConstant",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function directConstant = function directConstant(h: Holder, source: string) {\n  h.worker.setValue(\"CONST\");\n  return h.worker.readValue();\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771108,
+      "line": 40,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "A",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476778
+            ]
+          },
+          "id": 68719476778,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "A",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "A",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "constructor() {}",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084294
+            ]
+          },
+          "id": 120259084294,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 1,
+          "name": "",
+          "type_full_name": "gate9.ts::program:A:<init>",
+          "value_ref": {
+            "code": "constructor() {}",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "A = gate9.ts::program:A:<init>",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771109,
+      "line": 1,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "Holder",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476779
+            ]
+          },
+          "id": 68719476779,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "Holder",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "Holder",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "constructor() {}",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084295
+            ]
+          },
+          "id": 120259084295,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 13,
+          "name": "",
+          "type_full_name": "gate9.ts::program:Holder:<init>",
+          "value_ref": {
+            "code": "constructor() {}",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "Holder = gate9.ts::program:Holder:<init>",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate9.ts",
+      "id": 30064771110,
+      "line": 13,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "candidate_target_ids": [
+        107374182415,
+        107374182416
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):readValue"
+      ],
+      "code": "h.worker.readValue()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate9.ts",
+      "id": 30064771076,
+      "line": 22,
+      "method_full_name": "<unknownFullName>",
+      "name": "readValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_1",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_1 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771078
+            ]
+          },
+          "id": 30064771078,
+          "index": 1,
+          "kind": "CALL",
+          "line": 22,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_1 = h.worker)",
+            "id": 30064771078,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "readValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574851
+            ]
+          },
+          "id": 55834574851,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 22,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_1 = h.worker).readValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate9.ts",
+      "id": 30064771077,
+      "line": 22,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476740
+            ]
+          },
+          "id": 68719476740,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 22,
+          "name": "_tmp_1",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_1",
+            "id": 94489280528,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771079
+            ]
+          },
+          "id": 30064771079,
+          "index": 2,
+          "kind": "CALL",
+          "line": 22,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771079,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_1 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate9.ts",
+      "id": 30064771078,
+      "line": 22,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476741
+            ]
+          },
+          "id": 68719476741,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 22,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574850
+            ]
+          },
+          "id": 55834574850,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 22,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate9.ts",
+      "id": 30064771079,
+      "line": 22,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476745
+            ]
+          },
+          "id": 68719476745,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 26,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149702,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "source",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476746
+            ]
+          },
+          "id": 68719476746,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 26,
+          "name": "source",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "source",
+            "id": 111669149703,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:store"
+      ],
+      "candidate_target_ids": [
+        107374182400
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:store"
+      ],
+      "code": "store(h, source)",
+      "concrete_targets": [
+        "gate9.ts::program:store"
+      ],
+      "corrected_targets": [
+        "gate9.ts::program:store"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "gate9.ts",
+      "id": 30064771080,
+      "line": 26,
+      "method_full_name": "gate9.ts::program:store",
+      "name": "store",
+      "receiver_declared_type": "gate9.ts::program",
+      "receiver_name": "this",
+      "receiver_owner_match": true,
+      "receiver_type": "gate9.ts::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476749
+            ]
+          },
+          "id": 68719476749,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 27,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149702,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:load"
+      ],
+      "candidate_target_ids": [
+        107374182402
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:load"
+      ],
+      "code": "load(h)",
+      "concrete_targets": [
+        "gate9.ts::program:load"
+      ],
+      "corrected_targets": [
+        "gate9.ts::program:load"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "gate9.ts",
+      "id": 30064771081,
+      "line": 27,
+      "method_full_name": "gate9.ts::program:load",
+      "name": "load",
+      "receiver_declared_type": "gate9.ts::program",
+      "receiver_name": "this",
+      "receiver_owner_match": true,
+      "receiver_type": "gate9.ts::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476752
+            ]
+          },
+          "id": 68719476752,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 31,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149705,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "\"CONST\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313216
+            ]
+          },
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 31,
+          "name": "",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "\"CONST\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:store"
+      ],
+      "candidate_target_ids": [
+        107374182400
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:store"
+      ],
+      "code": "store(h, \"CONST\")",
+      "concrete_targets": [
+        "gate9.ts::program:store"
+      ],
+      "corrected_targets": [
+        "gate9.ts::program:store"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "gate9.ts",
+      "id": 30064771082,
+      "line": 31,
+      "method_full_name": "gate9.ts::program:store",
+      "name": "store",
+      "receiver_declared_type": "gate9.ts::program",
+      "receiver_name": "this",
+      "receiver_owner_match": true,
+      "receiver_type": "gate9.ts::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476755
+            ]
+          },
+          "id": 68719476755,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149705,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:load"
+      ],
+      "candidate_target_ids": [
+        107374182402
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:load"
+      ],
+      "code": "load(h)",
+      "concrete_targets": [
+        "gate9.ts::program:load"
+      ],
+      "corrected_targets": [
+        "gate9.ts::program:load"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "gate9.ts",
+      "id": 30064771083,
+      "line": 32,
+      "method_full_name": "gate9.ts::program:load",
+      "name": "load",
+      "receiver_declared_type": "gate9.ts::program",
+      "receiver_name": "this",
+      "receiver_owner_match": true,
+      "receiver_type": "gate9.ts::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "arguments": [
+        {
+          "code": "source",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "source",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "source",
+            "id": 111669149709,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "candidate_target_ids": [
+        107374182413,
+        107374182414
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):setValue"
+      ],
+      "code": "h.worker.setValue(source)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771084,
+      "line": 36,
+      "method_full_name": "<unknownFullName>",
+      "name": "setValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_2",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_2 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771086
+            ]
+          },
+          "id": 30064771086,
+          "index": 1,
+          "kind": "CALL",
+          "line": 36,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_2 = h.worker)",
+            "id": 30064771086,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "setValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574853
+            ]
+          },
+          "id": 55834574853,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 36,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "setValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_2 = h.worker).setValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771085,
+      "line": 36,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "candidate_target_ids": [
+        107374182415,
+        107374182416
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):readValue"
+      ],
+      "code": "h.worker.readValue()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771088,
+      "line": 37,
+      "method_full_name": "<unknownFullName>",
+      "name": "readValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_3",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_2",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "_tmp_2",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_2",
+            "id": 94489280523,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771087
+            ]
+          },
+          "id": 30064771087,
+          "index": 2,
+          "kind": "CALL",
+          "line": 36,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771087,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_2 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771086,
+      "line": 36,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_3 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771090
+            ]
+          },
+          "id": 30064771090,
+          "index": 1,
+          "kind": "CALL",
+          "line": 37,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_3 = h.worker)",
+            "id": 30064771090,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "readValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574855
+            ]
+          },
+          "id": 55834574855,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 37,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_3 = h.worker).readValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771089,
+      "line": 37,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476757
+            ]
+          },
+          "id": 68719476757,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149708,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574852
+            ]
+          },
+          "id": 55834574852,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 36,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771087,
+      "line": 36,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_3",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476760
+            ]
+          },
+          "id": 68719476760,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 37,
+          "name": "_tmp_3",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_3",
+            "id": 94489280522,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771091
+            ]
+          },
+          "id": 30064771091,
+          "index": 2,
+          "kind": "CALL",
+          "line": 37,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771091,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_3 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771090,
+      "line": 37,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 37,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149708,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574854
+            ]
+          },
+          "id": 55834574854,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 37,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "gate9.ts",
+      "id": 30064771091,
+      "line": 37,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "\"CONST\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313217
+            ]
+          },
+          "id": 90194313217,
+          "index": 0,
+          "kind": "LITERAL",
+          "line": 41,
+          "name": "",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "\"CONST\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "candidate_target_ids": [
+        107374182413,
+        107374182414
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):setValue"
+      ],
+      "code": "h.worker.setValue(\"CONST\")",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771092,
+      "line": 41,
+      "method_full_name": "<unknownFullName>",
+      "name": "setValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_4",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+        "gate9:ts::program:Holder:<member>(worker):setValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_4 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771094
+            ]
+          },
+          "id": 30064771094,
+          "index": 1,
+          "kind": "CALL",
+          "line": 41,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_4 = h.worker)",
+            "id": 30064771094,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "setValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574857
+            ]
+          },
+          "id": 55834574857,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 41,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "setValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_4 = h.worker).setValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771093,
+      "line": 41,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "candidate_target_ids": [
+        107374182415,
+        107374182416
+      ],
+      "canonical_targets": [
+        "gate9.ts::program:Holder:<member>(worker):readValue"
+      ],
+      "code": "h.worker.readValue()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771096,
+      "line": 42,
+      "method_full_name": "<unknownFullName>",
+      "name": "readValue",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "_tmp_5",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "MEMBER_STUB_RESOLVED",
+      "stub_targets": [
+        "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+        "gate9:ts::program:Holder:<member>(worker):readValue"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_4",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476763
+            ]
+          },
+          "id": 68719476763,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 41,
+          "name": "_tmp_4",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_4",
+            "id": 94489280521,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771095
+            ]
+          },
+          "id": 30064771095,
+          "index": 2,
+          "kind": "CALL",
+          "line": 41,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771095,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_4 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771094,
+      "line": 41,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_5 = h.worker)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771098
+            ]
+          },
+          "id": 30064771098,
+          "index": 1,
+          "kind": "CALL",
+          "line": 42,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_5 = h.worker)",
+            "id": 30064771098,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "readValue",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574859
+            ]
+          },
+          "id": 55834574859,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 42,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "readValue",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_5 = h.worker).readValue",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771097,
+      "line": 42,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476764
+            ]
+          },
+          "id": 68719476764,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 41,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149711,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574856
+            ]
+          },
+          "id": 55834574856,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 41,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771095,
+      "line": 41,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_5",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476766
+            ]
+          },
+          "id": 68719476766,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 42,
+          "name": "_tmp_5",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "_tmp_5",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "h.worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771099
+            ]
+          },
+          "id": 30064771099,
+          "index": 2,
+          "kind": "CALL",
+          "line": 42,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "h.worker",
+            "id": 30064771099,
+            "kind": "STATE_READ"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_5 = h.worker)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771098,
+      "line": 42,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "h",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476767
+            ]
+          },
+          "id": 68719476767,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 42,
+          "name": "h",
+          "type_full_name": "gate9:ts::program:Holder",
+          "value_ref": {
+            "code": "h",
+            "id": 111669149711,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "worker",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574858
+            ]
+          },
+          "id": 55834574858,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 42,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "worker",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "h.worker",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "gate9.ts",
+      "id": 30064771099,
+      "line": 42,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "this.value",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771101
+            ]
+          },
+          "id": 30064771101,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "this.value",
+            "id": 30064771101,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "v",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476770
+            ]
+          },
+          "id": 68719476770,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "v",
+          "type_full_name": "__ecma.String",
+          "value_ref": {
+            "code": "v",
+            "id": 111669149715,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "this.value = v",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "gate9.ts",
+      "id": 30064771100,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "this",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476769
+            ]
+          },
+          "id": 68719476769,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "this",
+          "type_full_name": "gate9.ts::program:A",
+          "value_ref": {
+            "code": "this",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "value",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574860
+            ]
+          },
+          "id": 55834574860,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 5,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "value",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "this.value",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "gate9.ts",
+      "id": 30064771101,
+      "line": 5,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "this",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476771
+            ]
+          },
+          "id": 68719476771,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "this",
+          "type_full_name": "gate9.ts::program:A",
+          "value_ref": {
+            "code": "this",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "value",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574861
+            ]
+          },
+          "id": 55834574861,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 9,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "value",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "this.value",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182409,
+      "file": "gate9.ts",
+      "id": 30064771102,
+      "line": 9,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "frontend_counters": {
+    "exported_calls": 39,
+    "exported_functions": 17,
+    "exported_identifiers": 80,
+    "exported_locals": 18,
+    "exported_returns": 6,
+    "exported_type_decls": 18
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:store",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 17,
+      "line_end": 19,
+      "name": "store",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149697,
+          "index": 0,
+          "line": 17,
+          "method_id": 107374182400,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        },
+        {
+          "code": "input: string",
+          "id": 111669149698,
+          "index": 1,
+          "line": 17,
+          "method_id": 107374182400,
+          "name": "input",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "gate9.ts::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 44,
+      "name": ":program",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:load",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 21,
+      "line_end": 23,
+      "name": "load",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149700,
+          "index": 0,
+          "line": 21,
+          "method_id": 107374182402,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:topState",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 25,
+      "line_end": 28,
+      "name": "topState",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149702,
+          "index": 0,
+          "line": 25,
+          "method_id": 107374182403,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        },
+        {
+          "code": "source: string",
+          "id": 111669149703,
+          "index": 1,
+          "line": 25,
+          "method_id": 107374182403,
+          "name": "source",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:topConstant",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 30,
+      "line_end": 33,
+      "name": "topConstant",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149705,
+          "index": 0,
+          "line": 30,
+          "method_id": 107374182404,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        },
+        {
+          "code": "source: string",
+          "id": 111669149706,
+          "index": 1,
+          "line": 30,
+          "method_id": 107374182404,
+          "name": "source",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:directState",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 35,
+      "line_end": 38,
+      "name": "directState",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149708,
+          "index": 0,
+          "line": 35,
+          "method_id": 107374182405,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        },
+        {
+          "code": "source: string",
+          "id": 111669149709,
+          "index": 1,
+          "line": 35,
+          "method_id": 107374182405,
+          "name": "source",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:directConstant",
+      "id": 107374182406,
+      "is_external": false,
+      "line": 40,
+      "line_end": 43,
+      "name": "directConstant",
+      "parameters": [
+        {
+          "code": "h: Holder",
+          "id": 111669149711,
+          "index": 0,
+          "line": 40,
+          "method_id": 107374182406,
+          "name": "h",
+          "type_full_name": "gate9.ts::program:Holder:<init>"
+        },
+        {
+          "code": "source: string",
+          "id": 111669149712,
+          "index": 1,
+          "line": 40,
+          "method_id": 107374182406,
+          "name": "source",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:<init>",
+      "id": 107374182407,
+      "is_external": false,
+      "line": 1,
+      "line_end": 11,
+      "name": "<init>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:setValue",
+      "id": 107374182408,
+      "is_external": false,
+      "line": 4,
+      "line_end": 6,
+      "name": "setValue",
+      "parameters": [
+        {
+          "code": "v: string",
+          "id": 111669149715,
+          "index": 0,
+          "line": 4,
+          "method_id": 107374182408,
+          "name": "v",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:readValue",
+      "id": 107374182409,
+      "is_external": false,
+      "line": 8,
+      "line_end": 10,
+      "name": "readValue",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:Holder:<init>",
+      "id": 107374182410,
+      "is_external": false,
+      "line": 13,
+      "line_end": 15,
+      "name": "<init>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182411,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149719,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149720,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182412,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149721,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149722,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "gate9.ts::program:Holder:<init>:<member>(worker):setValue",
+      "id": 107374182413,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "setValue",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149723,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149724,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149725,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "gate9:ts::program:Holder:<member>(worker):setValue",
+      "id": 107374182414,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "setValue",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149726,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149727,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149728,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "gate9.ts::program:Holder:<init>:<member>(worker):readValue",
+      "id": 107374182415,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "readValue",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149729,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149730,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "gate9:ts::program:Holder:<member>(worker):readValue",
+      "id": 107374182416,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "readValue",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149731,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182416,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149732,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182416,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "_tmp_0",
+      "id": 68719476736,
+      "line": 18,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476737,
+      "line": 18,
+      "method_id": 107374182400,
+      "name": "h",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476738,
+      "line": 18,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476739,
+      "line": 18,
+      "method_id": 107374182400,
+      "name": "input",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476736,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476737,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476738,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476739,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476740,
+      "line": 22,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476741,
+      "line": 22,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476742,
+      "line": 22,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "store",
+      "id": 68719476743,
+      "line": 26,
+      "method_id": 107374182401,
+      "name": "store",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "this",
+      "id": 68719476744,
+      "line": 26,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476745,
+      "line": 26,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "source",
+      "id": 68719476746,
+      "line": 26,
+      "method_id": 107374182401,
+      "name": "source",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "load",
+      "id": 68719476747,
+      "line": 27,
+      "method_id": 107374182401,
+      "name": "load",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "this",
+      "id": 68719476748,
+      "line": 27,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476749,
+      "line": 27,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "store",
+      "id": 68719476750,
+      "line": 31,
+      "method_id": 107374182401,
+      "name": "store",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "this",
+      "id": 68719476751,
+      "line": 31,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476752,
+      "line": 31,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "load",
+      "id": 68719476753,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "load",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "this",
+      "id": 68719476754,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476755,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476756,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476757,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476758,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "source",
+      "id": 68719476759,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "source",
+      "ref_target_ids": [
+        111669149709
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476760,
+      "line": 37,
+      "method_id": 107374182401,
+      "name": "_tmp_3",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476761,
+      "line": 37,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476762,
+      "line": 37,
+      "method_id": 107374182401,
+      "name": "_tmp_3",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476763,
+      "line": 41,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476764,
+      "line": 41,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476765,
+      "line": 41,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_5",
+      "id": 68719476766,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "_tmp_5",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476767,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "h",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_5",
+      "id": 68719476768,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "_tmp_5",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476769,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149714
+      ],
+      "type_full_name": "gate9.ts::program:A"
+    },
+    {
+      "code": "v",
+      "id": 68719476770,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "v",
+      "ref_target_ids": [
+        111669149715
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "this",
+      "id": 68719476771,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149716
+      ],
+      "type_full_name": "gate9.ts::program:A"
+    },
+    {
+      "code": "store",
+      "id": 68719476772,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "store",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "load",
+      "id": 68719476773,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "load",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "topState",
+      "id": 68719476774,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "topState",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "gate9.ts::program:topState"
+    },
+    {
+      "code": "topConstant",
+      "id": 68719476775,
+      "line": 30,
+      "method_id": 107374182401,
+      "name": "topConstant",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate9.ts::program:topConstant"
+    },
+    {
+      "code": "directState",
+      "id": 68719476776,
+      "line": 35,
+      "method_id": 107374182401,
+      "name": "directState",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "gate9.ts::program:directState"
+    },
+    {
+      "code": "directConstant",
+      "id": 68719476777,
+      "line": 40,
+      "method_id": 107374182401,
+      "name": "directConstant",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "gate9.ts::program:directConstant"
+    },
+    {
+      "code": "A",
+      "id": 68719476778,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "A",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "Holder",
+      "id": 68719476779,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "Holder",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476740,
+      "line": 22,
+      "method_id": 107374182402,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476741,
+      "line": 22,
+      "method_id": 107374182402,
+      "name": "h",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476742,
+      "line": 22,
+      "method_id": 107374182402,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "store",
+      "id": 68719476743,
+      "line": 26,
+      "method_id": 107374182403,
+      "name": "store",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "this",
+      "id": 68719476744,
+      "line": 26,
+      "method_id": 107374182403,
+      "name": "this",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476745,
+      "line": 26,
+      "method_id": 107374182403,
+      "name": "h",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "source",
+      "id": 68719476746,
+      "line": 26,
+      "method_id": 107374182403,
+      "name": "source",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "load",
+      "id": 68719476747,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "load",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "this",
+      "id": 68719476748,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "this",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476749,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "h",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "store",
+      "id": 68719476750,
+      "line": 31,
+      "method_id": 107374182404,
+      "name": "store",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "this",
+      "id": 68719476751,
+      "line": 31,
+      "method_id": 107374182404,
+      "name": "this",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476752,
+      "line": 31,
+      "method_id": 107374182404,
+      "name": "h",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "load",
+      "id": 68719476753,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "load",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "this",
+      "id": 68719476754,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "this",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "gate9.ts::program"
+    },
+    {
+      "code": "h",
+      "id": 68719476755,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "h",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476756,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476757,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "h",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476758,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "source",
+      "id": 68719476759,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "source",
+      "ref_target_ids": [
+        111669149709
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476760,
+      "line": 37,
+      "method_id": 107374182405,
+      "name": "_tmp_3",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476761,
+      "line": 37,
+      "method_id": 107374182405,
+      "name": "h",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476762,
+      "line": 37,
+      "method_id": 107374182405,
+      "name": "_tmp_3",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476763,
+      "line": 41,
+      "method_id": 107374182406,
+      "name": "_tmp_4",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476764,
+      "line": 41,
+      "method_id": 107374182406,
+      "name": "h",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476765,
+      "line": 41,
+      "method_id": 107374182406,
+      "name": "_tmp_4",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_5",
+      "id": 68719476766,
+      "line": 42,
+      "method_id": 107374182406,
+      "name": "_tmp_5",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "h",
+      "id": 68719476767,
+      "line": 42,
+      "method_id": 107374182406,
+      "name": "h",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "gate9:ts::program:Holder"
+    },
+    {
+      "code": "_tmp_5",
+      "id": 68719476768,
+      "line": 42,
+      "method_id": 107374182406,
+      "name": "_tmp_5",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476769,
+      "line": 5,
+      "method_id": 107374182408,
+      "name": "this",
+      "ref_target_ids": [
+        111669149714
+      ],
+      "type_full_name": "gate9.ts::program:A"
+    },
+    {
+      "code": "v",
+      "id": 68719476770,
+      "line": 5,
+      "method_id": 107374182408,
+      "name": "v",
+      "ref_target_ids": [
+        111669149715
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "this",
+      "id": 68719476771,
+      "line": 9,
+      "method_id": 107374182409,
+      "name": "this",
+      "ref_target_ids": [
+        111669149716
+      ],
+      "type_full_name": "gate9.ts::program:A"
+    }
+  ],
+  "locals": [
+    {
+      "code": "_tmp_0",
+      "id": 94489280529,
+      "line": 18,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "store",
+      "id": 94489280512,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "store",
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "load",
+      "id": 94489280513,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "load",
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "topState",
+      "id": 94489280514,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "topState",
+      "type_full_name": "gate9.ts::program:topState"
+    },
+    {
+      "code": "topConstant",
+      "id": 94489280515,
+      "line": 30,
+      "method_id": 107374182401,
+      "name": "topConstant",
+      "type_full_name": "gate9.ts::program:topConstant"
+    },
+    {
+      "code": "directState",
+      "id": 94489280516,
+      "line": 35,
+      "method_id": 107374182401,
+      "name": "directState",
+      "type_full_name": "gate9.ts::program:directState"
+    },
+    {
+      "code": "directConstant",
+      "id": 94489280517,
+      "line": 40,
+      "method_id": 107374182401,
+      "name": "directConstant",
+      "type_full_name": "gate9.ts::program:directConstant"
+    },
+    {
+      "code": "A",
+      "id": 94489280518,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "A",
+      "type_full_name": "gate9.ts::program:A"
+    },
+    {
+      "code": "Holder",
+      "id": 94489280519,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "Holder",
+      "type_full_name": "gate9.ts::program:Holder"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 94489280528,
+      "line": 22,
+      "method_id": 107374182402,
+      "name": "_tmp_1",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "load",
+      "id": 94489280526,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "load",
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "store",
+      "id": 94489280527,
+      "line": 26,
+      "method_id": 107374182403,
+      "name": "store",
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "load",
+      "id": 94489280524,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "load",
+      "type_full_name": "gate9.ts::program:load"
+    },
+    {
+      "code": "store",
+      "id": 94489280525,
+      "line": 31,
+      "method_id": 107374182404,
+      "name": "store",
+      "type_full_name": "gate9.ts::program:store"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 94489280522,
+      "line": 37,
+      "method_id": 107374182405,
+      "name": "_tmp_3",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 94489280523,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "_tmp_2",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_5",
+      "id": 94489280520,
+      "line": 42,
+      "method_id": 107374182406,
+      "name": "_tmp_5",
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 94489280521,
+      "line": 41,
+      "method_id": 107374182406,
+      "name": "_tmp_4",
+      "type_full_name": "ANY"
+    }
+  ],
+  "members": [
+    {
+      "code": "value: string;",
+      "id": 98784247808,
+      "line": 2,
+      "name": "value",
+      "type_decl_id": 167503724550,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "setValue(v: string) {\n    this.value = v;\n  }",
+      "id": 98784247809,
+      "line": 4,
+      "name": "setValue",
+      "type_decl_id": 167503724550,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "readValue() {\n    return this.value;\n  }",
+      "id": 98784247810,
+      "line": 8,
+      "name": "readValue",
+      "type_decl_id": 167503724550,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "worker: A;",
+      "id": 98784247811,
+      "line": 14,
+      "name": "worker",
+      "type_decl_id": 167503724554,
+      "type_full_name": "ANY"
+    }
+  ],
+  "metadata": [
+    {
+      "language": "JSSRC",
+      "root": "/tmp/replay/g09/src",
+      "version": "0.1"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 17,
+      "method_id": 107374182400,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051594,
+      "line": 1,
+      "method_id": 107374182401,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 21,
+      "method_id": 107374182402,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 25,
+      "method_id": 107374182403,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 30,
+      "method_id": 107374182404,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 35,
+      "method_id": 107374182405,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 40,
+      "method_id": 107374182406,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 1,
+      "method_id": 107374182407,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 4,
+      "method_id": 107374182408,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 8,
+      "method_id": 107374182409,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051593,
+      "line": 13,
+      "method_id": 107374182410,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051595,
+      "line": 0,
+      "method_id": 107374182411,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051596,
+      "line": 0,
+      "method_id": 107374182412,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051597,
+      "line": 0,
+      "method_id": 107374182413,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051598,
+      "line": 0,
+      "method_id": 107374182414,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051599,
+      "line": 0,
+      "method_id": 107374182415,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051600,
+      "line": 0,
+      "method_id": 107374182416,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [
+    {
+      "code": "return h.worker.readValue()",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920768,
+          30064771076
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 141733920768,
+      "line": 22,
+      "value_ref": {
+        "code": "return h.worker.readValue()",
+        "id": 30064771076,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return load(h)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920769,
+          30064771081
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 141733920769,
+      "line": 27,
+      "value_ref": {
+        "code": "return load(h)",
+        "id": 30064771081,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return load(h)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920770,
+          30064771083
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 141733920770,
+      "line": 32,
+      "value_ref": {
+        "code": "return load(h)",
+        "id": 30064771083,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return h.worker.readValue()",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920771,
+          30064771088
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 141733920771,
+      "line": 37,
+      "value_ref": {
+        "code": "return h.worker.readValue()",
+        "id": 30064771088,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return h.worker.readValue()",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920772,
+          30064771096
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 141733920772,
+      "line": 42,
+      "value_ref": {
+        "code": "return h.worker.readValue()",
+        "id": 30064771096,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return this.value",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920773,
+          30064771102
+        ]
+      },
+      "function_id": 107374182409,
+      "id": 141733920773,
+      "line": 9,
+      "value_ref": {
+        "code": "return this.value",
+        "id": 30064771102,
+        "kind": "STATE_READ"
+      }
+    }
+  ],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:store",
+      "id": 167503724544,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 17,
+      "name": "store"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:load",
+      "id": 167503724545,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 21,
+      "name": "load"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:topState",
+      "id": 167503724546,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 25,
+      "name": "topState"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:topConstant",
+      "id": 167503724547,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 30,
+      "name": "topConstant"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:directState",
+      "id": 167503724548,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 35,
+      "name": "directState"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:directConstant",
+      "id": 167503724549,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 40,
+      "name": "directConstant"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A",
+      "id": 167503724550,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "A"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:<init>",
+      "id": 167503724551,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 1,
+      "name": "<init>"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:setValue",
+      "id": 167503724552,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 4,
+      "name": "setValue"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:A:readValue",
+      "id": 167503724553,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 8,
+      "name": "readValue"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:Holder",
+      "id": 167503724554,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 13,
+      "name": "Holder"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program:Holder:<init>",
+      "id": 167503724555,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 13,
+      "name": "<init>"
+    },
+    {
+      "file": "gate9.ts",
+      "full_name": "gate9.ts::program",
+      "id": 167503724556,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 1,
+      "name": ":program"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "A",
+      "id": 167503724557,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "A"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "ANY",
+      "id": 167503724558,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "Holder",
+      "id": 167503724559,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "Holder"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "__ecma.String",
+      "id": 167503724560,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "String"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "void",
+      "id": 167503724561,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "void"
+    }
+  ]
+}

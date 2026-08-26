@@ -1,0 +1,71 @@
+=== Q1/Q2: every router.<verb> registration ? 3 evidence levels ===
+  L59    post    file=resources/account/forgot-password/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719477496 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/forgot-password") 2:CALL 3:ID(validator:resources/account/forgot-password/index.js::program:validator) 4:ID(handler:resources/account/forgot-password/index.js::program:handler)
+  L55    post    file=resources/account/resend-email/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719477647 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/resend-email") 2:CALL 3:ID(validator:resources/account/resend-email/index.js::program:validator) 4:ID(handler:resources/account/resend-email/index.js::program:handler)
+  L55    put     file=resources/account/reset-password/index.js
+       L1_name=put  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719477735 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/reset-password") 2:CALL 3:ID(validator:resources/account/reset-password/index.js::program:validator) 4:ID(handler:resources/account/reset-password/index.js::program:handler)
+  L67    post    file=resources/account/sign-in/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719477848 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/sign-in") 2:CALL 3:ID(validator:resources/account/sign-in/index.js::program:validator) 4:ID(handler:resources/account/sign-in/index.js::program:handler)
+  L9     post    file=resources/account/sign-out/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719477917 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/sign-out") 2:ID(handler:(ctx: ANY) => Promise<void>)
+  L92    post    file=resources/account/sign-up/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719478000 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/sign-up") 2:CALL 3:ID(validator:resources/account/sign-up/index.js::program:validator) 4:ID(handler:resources/account/sign-up/index.js::program:handler)
+  L42    get     file=resources/account/verify-email/index.js
+       L1_name=get  L2_mfn=ctx:cookies:<returnValue>:<member>(cookies):get
+       L3_callee=[107374182768:ctx:cookies:<returnValue>:<member>(cookies):get]  n=1
+       RECV id=68719478137 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/verify-email") 2:CALL 3:ID(validator:resources/account/verify-email/index.js::program:validator) 4:ID(handler:resources/account/verify-email/index.js::program:handler)
+  L35    get     file=resources/account/verify-reset-token/index.js
+       L1_name=get  L2_mfn=ctx:cookies:<returnValue>:<member>(cookies):get
+       L3_callee=[107374182768:ctx:cookies:<returnValue>:<member>(cookies):get]  n=1
+       RECV id=68719478198 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/verify-reset-token") 2:CALL 3:ID(validator:resources/account/verify-reset-token/index.js::program:validator)
+  L6     get     file=resources/health/get/index.js
+       L1_name=get  L2_mfn=ctx:cookies:<returnValue>:<member>(cookies):get
+       L3_callee=[107374182768:ctx:cookies:<returnValue>:<member>(cookies):get]  n=1
+       RECV id=68719478243 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/") 2:ID(handler:(ctx: ANY) => ANY)
+  L8     get     file=resources/user/get-current/index.js
+       L1_name=get  L2_mfn=ctx:cookies:<returnValue>:<member>(cookies):get
+       L3_callee=[107374182768:ctx:cookies:<returnValue>:<member>(cookies):get]  n=1
+       RECV id=68719478390 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/current") 2:ID(handler:resources/user/get-current/index.js::program:handler)
+  L46    get     file=resources/user/list/index.js
+       L1_name=get  L2_mfn=ctx:cookies:<returnValue>:<member>(cookies):get
+       L3_callee=[107374182768:ctx:cookies:<returnValue>:<member>(cookies):get]  n=1
+       RECV id=68719478505 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/") 2:CALL 3:ID(handler:resources/user/list/index.js::program:handler)
+  L36    delete  file=resources/user/remove-avatar/index.js
+       L1_name=delete  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719478600 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/remove-photo") 2:ID(validator:resources/user/remove-avatar/index.js::program:validator) 3:ID(handler:resources/user/remove-avatar/index.js::program:handler)
+  L52    post    file=resources/user/update-current/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719478668 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/current") 2:CALL 3:ID(validator:resources/user/update-current/index.js::program:validator) 4:ID(handler:resources/user/update-current/index.js::program:handler)
+  L40    post    file=resources/user/upload-avatar/index.js
+       L1_name=post  L2_mfn=<unknownFullName>
+       L3_callee=[]  n=0
+       RECV id=68719478770 type=ANY hints=[]  dispatch=DYNAMIC_DISPATCH
+       ARGS=0:ID(router:ANY) 1:LIT("/upload-photo") 2:CALL 3:ID(validator:resources/user/upload-avatar/index.js::program:validator) 4:ID(handler:resources/user/upload-avatar/index.js::program:handler)

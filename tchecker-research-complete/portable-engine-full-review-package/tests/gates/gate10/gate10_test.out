@@ -1,0 +1,8 @@
+PASS topState => ['PARAM:topState.source']
+PASS topConstantOverwrite => ['CONST:"CONST"']
+PASS directState => ['PARAM:directState.source']
+PASS directConstant => ['CONST:"CONST"']
+PASS sameObject => ['PARAM:sameObject.source']
+PASS differentField => ['STATE_UNKNOWN:PARAMOBJ:differentField.h.worker.value'] (no source flow expected)
+PASS twoObjects => ['STATE_UNKNOWN:ALLOC:twoObjects:49:A.value'] (no source flow expected)
+GATE10=7/7

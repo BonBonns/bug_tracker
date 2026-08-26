@@ -1,0 +1,1425 @@
+{
+  "schema": "portable-state-facts/0.4",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771072
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771072,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149697,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771073,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771073,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149697,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771077
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771077,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149699,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771078,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771076
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771076,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149699,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149699,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771078
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771078,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149699,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149699,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771081
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771081,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149702,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771082,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771082
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771082,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149702,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149702,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771086
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771086,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149705,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771087,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "other.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771085
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771085,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "other",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "other",
+          "id": 111669149706,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "other",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771087
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771087,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149705,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149705,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input[key].url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771088
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771088,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input[key]",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "DYNAMIC",
+            "ref": "key"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149709,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input[key]",
+        "id": 30064771089,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "input[key]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771089
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771089,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149709,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149709,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771093
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771093,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149712,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771094,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771092
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771092,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149712,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771094
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771094,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149712,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "copy.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771096
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771096,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "copy.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "copy",
+          "id": 94489280519,
+          "kind": "LOCAL"
+        }
+      },
+      "receiver_ref": {
+        "code": "copy.profile",
+        "id": 30064771097,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "copy.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771097
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771097,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "copy",
+          "id": 94489280519,
+          "kind": "LOCAL"
+        }
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile.url",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771103
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771103,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149717,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771104,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771100
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771100,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149717,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "input.profile",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771104
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771104,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149717,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": [
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771106000,
+      "code": "exports.nestedPositive = nestedPositive",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771106,
+          30064771107,
+          30064771107,
+          68719476761
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "nestedPositive"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "nestedPositive",
+        "type": "nested_state_identity.js::program:nestedPositive"
+      },
+      "value_ref": {
+        "code": "nestedPositive",
+        "id": 94489280512,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771109000,
+      "code": "exports.samePathOverwrite = samePathOverwrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771109,
+          30064771110,
+          30064771110,
+          68719476764
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "samePathOverwrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "samePathOverwrite",
+        "type": "nested_state_identity.js::program:samePathOverwrite"
+      },
+      "value_ref": {
+        "code": "samePathOverwrite",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771112000,
+      "code": "exports.parentOverwrite = parentOverwrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771112,
+          30064771113,
+          30064771113,
+          68719476767
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "parentOverwrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "parentOverwrite",
+        "type": "nested_state_identity.js::program:parentOverwrite"
+      },
+      "value_ref": {
+        "code": "parentOverwrite",
+        "id": 94489280514,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771115000,
+      "code": "exports.distinctRoot = distinctRoot",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771115,
+          30064771116,
+          30064771116,
+          68719476770
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "distinctRoot"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "distinctRoot",
+        "type": "nested_state_identity.js::program:distinctRoot"
+      },
+      "value_ref": {
+        "code": "distinctRoot",
+        "id": 94489280515,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771118000,
+      "code": "exports.dynamicPath = dynamicPath",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771118,
+          30064771119,
+          30064771119,
+          68719476773
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "dynamicPath"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "dynamicPath",
+        "type": "nested_state_identity.js::program:dynamicPath"
+      },
+      "value_ref": {
+        "code": "dynamicPath",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771121000,
+      "code": "exports.siblingWrite = siblingWrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771121,
+          30064771122,
+          30064771122,
+          68719476776
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "siblingWrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "siblingWrite",
+        "type": "nested_state_identity.js::program:siblingWrite"
+      },
+      "value_ref": {
+        "code": "siblingWrite",
+        "id": 94489280517,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771124000,
+      "code": "exports.localPositive = localPositive",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771124,
+          30064771125,
+          30064771125,
+          68719476779
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "localPositive"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "localPositive",
+        "type": "nested_state_identity.js::program:localPositive"
+      },
+      "value_ref": {
+        "code": "localPositive",
+        "id": 94489280518,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771127000,
+      "code": "exports.childThenParent = childThenParent",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771127,
+          30064771128,
+          30064771128,
+          68719476782
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "childThenParent"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "exports",
+          "id": -1,
+          "kind": "UNKNOWN"
+        }
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "childThenParent",
+        "type": "nested_state_identity.js::program:childThenParent"
+      },
+      "value_ref": {
+        "code": "childThenParent",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771074000,
+      "code": "input.profile.url = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771074,
+          30064771075,
+          30064771075,
+          68719476738
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149699,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771076,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771079000,
+      "code": "input.profile = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771079,
+          30064771080,
+          30064771080,
+          68719476741
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149702,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149702,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771083000,
+      "code": "other.profile.url = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771083,
+          30064771084,
+          30064771084,
+          68719476744
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "other.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "other",
+          "id": 111669149706,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "other.profile",
+        "id": 30064771085,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149707,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771090000,
+      "code": "input.profile.other = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771090,
+          30064771091,
+          30064771091,
+          68719476749
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149712,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771092,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149713,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771098000,
+      "code": "input.profile.url = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771098,
+          30064771099,
+          30064771099,
+          68719476755
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "url"
+      },
+      "receiver": {
+        "name": "input.profile",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [
+          {
+            "kind": "LITERAL",
+            "value": "profile"
+          }
+        ],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149717,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input.profile",
+        "id": 30064771100,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149718,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771101000,
+      "code": "input.profile = replacement",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771101,
+          30064771102,
+          30064771102,
+          68719476757
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "profile"
+      },
+      "receiver": {
+        "name": "input",
+        "type": "ANY"
+      },
+      "receiver_location": {
+        "path": [],
+        "root_ref": {
+          "code": "input",
+          "id": 111669149717,
+          "kind": "PARAMETER"
+        }
+      },
+      "receiver_ref": {
+        "code": "input",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "replacement",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "replacement",
+        "id": 111669149718,
+        "kind": "PARAMETER"
+      }
+    }
+  ]
+}

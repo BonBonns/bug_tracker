@@ -1,0 +1,27 @@
+30064771225	SOURCE	request.payload	_tmp_16.payload = this.sanitizePayload(request.payload)	c1/customs.js::program:CustomsClient:check
+30064771145	SINK	JSON.stringify(requestData)	_tmp_8.body = JSON.stringify(requestData)	c1/customs.js::program:CustomsClient:makeRequest
+30064772713	SOURCE	request.payload	_tmp_132 = request.payload	c2/emails.js::program:<lambda>3:handler
+30064771228	SOURCE	request.query	_tmp_16.query = request.query	c1/customs.js::program:CustomsClient:check
+30064773007	SOURCE	request.payload	_tmp_212 = request.payload	c2/emails.js::program:<lambda>3:handler
+30064771763	SINK	JSON.stringify({ uid: uidStr, secret })	const value = JSON.stringify({ uid: uidStr, secret })	c2/emails.js::program:<lambda>3:recreateSecondaryEmailReservation
+30064771867	SOURCE	request.payload	_tmp_24 = request.payload	c2/emails.js::program:<lambda>3:recoveryEmailPost
+30064771931	SINK	JSON.stringify({ uid: uidStr, secret })	const value = JSON.stringify({ uid: uidStr, secret })	c2/emails.js::program:<lambda>3:recoveryEmailPost
+30064773968	SOURCE	req.body.client_id	_tmp_6.client_id = req.body.client_id	c3/post-nimbus-experiments.js::program:<lambda>0:process
+30064773965	SINK	JSON.stringify({         client_id: req.body.client_id,         context: req.body.context,       })	const body = JSON.stringify({         client_id: req.body.client_id,         context: req.body.context,       })	c3/post-nimbus-experiments.js::program:<lambda>0:process
+30064773972	SOURCE	req.body.context	_tmp_6.context = req.body.context	c3/post-nimbus-experiments.js::program:<lambda>0:process
+30064774396	SOURCE	req.body	db.set(req.session.user, JSON.stringify(req.body))	c4/server.js::program:<lambda>7
+30064774395	SINK	JSON.stringify(req.body)	db.set(req.session.user, JSON.stringify(req.body))	c4/server.js::program:<lambda>7
+30064774741	SOURCE	req.query.code	var code = req.query.code	c5/oauth.js::program:<lambda>3:<lambda>24
+30064774802	SINK	JSON.stringify({             code: code,             client_id: config.client_id,             client_secret: config.client_secret,           })	_tmp_27.body = JSON.stringify({             code: code,             client_id: config.client_id,             client_secret: config.client_secret,           })	c5/oauth.js::program:<lambda>3:<lambda>24
+30064774738	SOURCE	req.query.state	var state = req.query.state	c5/oauth.js::program:<lambda>3:<lambda>24
+30064771223	STEP	this.sanitizePayload(request.payload)	_tmp_16.payload = this.sanitizePayload(request.payload)	c1/customs.js::program:CustomsClient:check
+30064771209	STEP	this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num	...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone 	c1/customs.js::program:CustomsClient:check
+30064771249	STEP	this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })	...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })	c1/customs.js::program:CustomsClient:checkAuthenticated
+30064773011	STEP	normalizeEmail(email)	const normalizedEmail = normalizeEmail(email)	c2/emails.js::program:<lambda>3:handler
+30064771729	STEP	db.getSecondaryEmail(normalizedEmail)	const existingRecord = await db.getSecondaryEmail(normalizedEmail)	c2/emails.js::program:<lambda>3:recreateSecondaryEmailReservation
+30064771733	STEP	butil.buffersAreEqual(existingRecord.uid, uid)	if (existingRecord && !butil.buffersAreEqual(existingRecord.uid, uid)) {         // Email belongs to another account         throw error.cannotResendEmailCodeToUnownedEmail();       }	c2/emails.js::program:<lambda>3:recreateSecondaryEmailReservation
+30064771889	STEP	normalizeEmail(primaryEmail)	const normalizedPrimary = normalizeEmail(primaryEmail)	c2/emails.js::program:<lambda>3:recoveryEmailPost
+30064771709	STEP	toRedisSecondaryEmailReservationKey(normalizedEmail)	const key = toRedisSecondaryEmailReservationKey(normalizedEmail)	c2/emails.js::program:getExistingSecondaryEmailRecord
+30064771712	STEP	authServerCacheRedis.get(key)	rawRecord = await authServerCacheRedis.get(key)	c2/emails.js::program:getExistingSecondaryEmailRecord
+30064771716	STEP	JSON.parse(rawRecord)	parsedRecord = JSON.parse(rawRecord)	c2/emails.js::program:getExistingSecondaryEmailRecord
+30064771911	STEP	getExistingSecondaryEmailRecord(           normalizedEmail,           request,           authServerCacheRedis         )	const existingSecondaryEmailRecord =         await getExistingSecondaryEmailRecord(           normalizedEmail,           request,           authServerCacheRedis         )	c2/emails.js::program:<lambda>3:recoveryEmailPost

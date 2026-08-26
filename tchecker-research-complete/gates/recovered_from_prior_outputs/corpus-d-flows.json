@@ -1,0 +1,512 @@
+{
+  "schema": "portable-app-mount-flow/0.1",
+  "note": "APP-level middleware joins ROUTER-level readers ONLY through an ESTABLISHED mount (require-bound router local -> resolved module -> default-export local identity -> that local's registrations) and ONLY when the middleware registration precedes the mount. NEG-2 is untouched: route-scoped writers never cross routers, and R12's within-route output is unchanged.",
+  "mounts": [
+    {
+      "mount_call_id": 30064773088,
+      "app_file": "lib/app.js",
+      "mount_line": 53,
+      "router_file": "routes/index.js",
+      "router_local": "router",
+      "composition_closure": [
+        [
+          "routes/articles-router.js",
+          "router"
+        ],
+        [
+          "routes/index.js",
+          "api"
+        ],
+        [
+          "routes/index.js",
+          "router"
+        ],
+        [
+          "routes/profiles-router.js",
+          "router"
+        ],
+        [
+          "routes/tags-router.js",
+          "router"
+        ],
+        [
+          "routes/users-router.js",
+          "router"
+        ]
+      ],
+      "mounted_registrations": [
+        30064774164,
+        30064774167,
+        30064774170,
+        30064774174,
+        30064774177,
+        30064774183,
+        30064774191,
+        30064774195,
+        30064774253,
+        30064774256,
+        30064774277,
+        30064774295,
+        30064774298,
+        30064774301,
+        30064774304
+      ],
+      "resolution": "ESTABLISHED"
+    }
+  ],
+  "middleware": [
+    {
+      "use_call_id": 30064773069,
+      "app_file": "lib/app.js",
+      "use_line": 40,
+      "method": "middleware/camelize-middleware.js::program:<lambda>0",
+      "identity_source": "MODULE_EXPORT_IDENTITY"
+    },
+    {
+      "use_call_id": 30064773071,
+      "app_file": "lib/app.js",
+      "use_line": 42,
+      "method": "middleware/error-middleware.js::program:<lambda>2",
+      "identity_source": "MODULE_EXPORT_IDENTITY"
+    },
+    {
+      "use_call_id": 30064773084,
+      "app_file": "lib/app.js",
+      "use_line": 50,
+      "method": "middleware/user-middleware.js::program:<lambda>0",
+      "identity_source": "MODULE_EXPORT_IDENTITY"
+    },
+    {
+      "use_call_id": 30064773086,
+      "app_file": "lib/app.js",
+      "use_line": 51,
+      "method": "middleware/pager-middleware.js::program:<lambda>0",
+      "identity_source": "MODULE_EXPORT_IDENTITY"
+    }
+  ],
+  "flows": [
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774167,
+      "reader_verb": "post",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774167,
+      "reader_verb": "post",
+      "reader_method": "controllers/articles-controller.js::program:post",
+      "reader_arg_index": 3,
+      "reader_path": "state.user.id",
+      "path_relation": "ANCESTOR_WRITE",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774167,
+      "reader_verb": "post",
+      "reader_method": "controllers/articles-controller.js::program:post",
+      "reader_arg_index": 3,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774167,
+      "reader_verb": "post",
+      "reader_method": "controllers/articles-controller.js::program:post",
+      "reader_arg_index": 3,
+      "reader_path": "state.user.id",
+      "path_relation": "ANCESTOR_WRITE",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774170,
+      "reader_verb": "get",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774177,
+      "reader_verb": "put",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774177,
+      "reader_verb": "put",
+      "reader_method": "controllers/articles-controller.js::program:put",
+      "reader_arg_index": 3,
+      "reader_path": "state.user.id",
+      "path_relation": "ANCESTOR_WRITE",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774183,
+      "reader_verb": "post",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774195,
+      "reader_verb": "post",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774256,
+      "reader_verb": "post",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774301,
+      "reader_verb": "get",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774301,
+      "reader_verb": "get",
+      "reader_method": "controllers/users-controller.js::program:get",
+      "reader_arg_index": 3,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774304,
+      "reader_verb": "put",
+      "reader_method": "middleware/auth-required-middleware.js::program:<lambda>0",
+      "reader_arg_index": 2,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    },
+    {
+      "relation": "APP_MOUNT_UPSTREAM",
+      "writer_method": "middleware/user-middleware.js::program:<lambda>0",
+      "writer_use_call_id": 30064773084,
+      "writer_identity_source": "MODULE_EXPORT_IDENTITY",
+      "writer_path": "state.user",
+      "writer_source": "await db(\"users\")       .first(         \"id\",         \"email\",         \"username\",         \"image\",         \"bio\",      ",
+      "relative_to_next": "BEFORE_NEXT",
+      "mount_call_id": 30064773088,
+      "mount_evidence": {
+        "app_file": "lib/app.js",
+        "use_line": 50,
+        "mount_line": 53,
+        "router_file": "routes/index.js",
+        "router_local": "router"
+      },
+      "reader_registration": 30064774304,
+      "reader_verb": "put",
+      "reader_method": "controllers/users-controller.js::program:put",
+      "reader_arg_index": 3,
+      "reader_path": "state.user",
+      "path_relation": "EXACT",
+      "state_flow_strength": "MAY"
+    }
+  ],
+  "abstentions": [
+    {
+      "registration": 30064773020,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "responseTime()"
+    },
+    {
+      "registration": 30064773023,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "xRequestId({ inject: true }, app)"
+    },
+    {
+      "registration": 30064773028,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "logger()"
+    },
+    {
+      "registration": 30064773031,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "helmet()"
+    },
+    {
+      "registration": 30064773034,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "cors({     origin: \"*\",     exposeHeaders: [\"Authorization\"],     credentials: true,     allowMethods: [\"GET\", \"PUT\", \"P"
+    },
+    {
+      "registration": 30064773073,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "jwt"
+    },
+    {
+      "registration": 30064773075,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "bodyParser({     enableTypes: [\"json\"],   })"
+    },
+    {
+      "registration": 30064773092,
+      "reason": "MIDDLEWARE_IDENTITY_UNKNOWN_OR_STUB",
+      "code": "routes.allowedMethods()"
+    },
+    {
+      "middleware": "middleware/camelize-middleware.js::program:<lambda>0",
+      "path": "body",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "type",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "response.body",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "body.errors",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "status",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "status",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "status",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/error-middleware.js::program:<lambda>2",
+      "path": "status",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "middleware": "middleware/pager-middleware.js::program:<lambda>0",
+      "path": "query",
+      "reason": "WRITE_AFTER_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    }
+  ]
+}

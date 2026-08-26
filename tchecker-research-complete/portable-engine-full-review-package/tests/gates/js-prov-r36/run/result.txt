@@ -1,0 +1,9 @@
+PASS S1 `require('./outer').inner` RESOLVES to ./inner (no longer refused)
+PASS S2 SHARED-NAME: outer.js and inner.js BOTH export `shared`
+PASS S2 they are genuinely different declarations
+PASS S2 ctrl.shared reaches inner.js:innerShared
+PASS S2 ctrl.shared NEVER reaches outer.js:outerShared
+PASS S3 unresolved selection (`.nope`) ABSTAINS, no outer fallback
+PASS S4 bare `require('./outer')` is not a selector binding
+PASS R36 selector resolution is derived from require bindings, not guessed
+JS_PROV_R36=8/8

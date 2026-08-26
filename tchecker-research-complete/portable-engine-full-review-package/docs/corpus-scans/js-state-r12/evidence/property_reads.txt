@@ -1,0 +1,29 @@
+=== INDEX/FIELD READS ===
+t1_constantOwnKey            <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key="alice":LITERAL
+t2_constantProtoKey          <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key="__proto__":LITERAL
+t3_attackerKey               <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=input:IDENTIFIER
+t4_nullPrototypeBase         <operator>.indexAccess   base=safe:IDENTIFIER        baseType=Object.create:<returnValue>                key="alice":LITERAL
+t4_nullPrototypeBase         <operator>.indexAccess   base=safe:IDENTIFIER        baseType=Object.create:<returnValue>                key=input:IDENTIFIER
+t5_hasOwnPropertyGate        <operator>.fieldAccess   base=(_tmp_0 = Object.prototype.hasOwnProperty):CALL baseType=ANY                                        key=call:FIELD_IDENTIFIER
+t5_hasOwnPropertyGate        <operator>.fieldAccess   base=Object.prototype:CALL  baseType=ANY                                        key=hasOwnProperty:FIELD_IDENTIFIER
+t5_hasOwnPropertyGate        <operator>.fieldAccess   base=Object:IDENTIFIER      baseType=ObjectConstructor                          key=prototype:FIELD_IDENTIFIER
+t5_hasOwnPropertyGate        <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=input:IDENTIFIER
+t6_objectHasOwnGate          <operator>.fieldAccess   base=Object:IDENTIFIER      baseType=ObjectConstructor                          key=hasOwn:FIELD_IDENTIFIER
+t6_objectHasOwnGate          <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=input:IDENTIFIER
+t7_mapGetControl             <operator>.fieldAccess   base=m:IDENTIFIER           baseType=ANY                                        key=set:FIELD_IDENTIFIER
+t7_mapGetControl             <operator>.fieldAccess   base=m:IDENTIFIER           baseType=ANY                                        key=get:FIELD_IDENTIFIER
+t8_uncontrolledUnknownKey    <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=k:IDENTIFIER
+t9_cveReplay                 <operator>.fieldAccess   base=request.body:CALL      baseType=ANY                                        key=password:FIELD_IDENTIFIER
+t9_cveReplay                 <operator>.fieldAccess   base=request:IDENTIFIER     baseType=ANY                                        key=body:FIELD_IDENTIFIER
+t9_cveReplay                 <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=username:IDENTIFIER
+t9_cveReplay                 <operator>.indexAccess   base=users:IDENTIFIER       baseType={ [x: __ecma.String]: __ecma.String; }     key=username:IDENTIFIER
+=== CALLS that could be guards / storage models ===
+t4_nullPrototypeBase         name=create           code=Object.create(null)
+t5_hasOwnPropertyGate        name=call             code=Object.prototype.hasOwnProperty.call(users, input)
+t6_objectHasOwnGate          name=hasOwn           code=Object.hasOwn(users, input)
+t7_mapGetControl             name=set              code=m.set("alice", "secret")
+t7_mapGetControl             name=get              code=m.get(input)
+=== control structures (guards) ===
+t5_hasOwnPropertyGate        cond=!Object.prototype.hasOwnProperty.call(users, input)
+t6_objectHasOwnGate          cond=!Object.hasOwn(users, input)
+t9_cveReplay                 cond=users[username] && users[username] == password

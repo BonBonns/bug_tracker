@@ -1,0 +1,4355 @@
+{
+  "assignments": [
+    {
+      "cfg_anchor": 30064771072,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771072,
+          68719476736,
+          30064771073
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771072,
+      "line": 2,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "buf[8]",
+        "id": 30064771073,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771079,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771079,
+          68719476743,
+          30064771080
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771079,
+      "line": 3,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "rg[1]",
+        "id": 30064771080,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771081,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_EXACT_FIELD_WRITE",
+        "source_node_ids": [
+          30064771081,
+          30064771082,
+          90194313222
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771081,
+      "line": 3,
+      "target_local_id": 111669149719,
+      "value_ref": {
+        "code": "1",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "cfg_anchor": 30064771084,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771084,
+          68719476746,
+          30064771085
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771084,
+      "line": 4,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "rg[1]",
+        "id": 30064771085,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771086,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771086,
+          68719476748,
+          90194313224
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771086,
+      "line": 4,
+      "target_local_id": 94489280516,
+      "value_ref": {
+        "code": "0",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "cfg_anchor": 30064771094,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771094,
+          68719476756,
+          30064771095
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771094,
+      "line": 5,
+      "target_local_id": 94489280518,
+      "value_ref": {
+        "code": "rg[1]",
+        "id": 30064771095,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771102,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771102,
+          68719476761,
+          90194313229
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771102,
+      "line": 5,
+      "target_local_id": 94489280519,
+      "value_ref": {
+        "code": "0",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "buf",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "buf",
+          "type_full_name": "int[8]",
+          "value_ref": {
+            "code": "buf",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "buf[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771073
+            ]
+          },
+          "id": 30064771073,
+          "index": 1,
+          "kind": "CALL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "int[8]",
+          "value_ref": {
+            "code": "buf[8]",
+            "id": 30064771073,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "buf[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771072,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "int[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "int[8]",
+          "type_full_name": "int[8]",
+          "value_ref": {
+            "code": "int[8]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313216
+            ]
+          },
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "buf[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771073,
+      "line": 2,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "int[8]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476738
+            ]
+          },
+          "id": 68719476738,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313217
+            ]
+          },
+          "id": 90194313217,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771074,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476739
+            ]
+          },
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313218
+            ]
+          },
+          "id": 90194313218,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i<8",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771075,
+      "line": 2,
+      "method_full_name": "<operator>.lessThan",
+      "name": "<operator>.lessThan",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476740
+            ]
+          },
+          "id": 68719476740,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i++",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771076,
+      "line": 2,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "buf[i]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771078
+            ]
+          },
+          "id": 30064771078,
+          "index": 0,
+          "kind": "CALL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "buf[i]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313219
+            ]
+          },
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 2,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "buf[i]=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771077,
+      "line": 2,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "buf",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476741
+            ]
+          },
+          "id": 68719476741,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "buf",
+          "type_full_name": "int[8]",
+          "value_ref": {
+            "code": "buf",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476742
+            ]
+          },
+          "id": 68719476742,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 2,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "buf[i]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "t.c",
+      "id": 30064771078,
+      "line": 2,
+      "method_full_name": "<operator>.indirectIndexAccess",
+      "name": "<operator>.indirectIndexAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476743
+            ]
+          },
+          "id": 68719476743,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "rg[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771080
+            ]
+          },
+          "id": 30064771080,
+          "index": 1,
+          "kind": "CALL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg[1]",
+            "id": 30064771080,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "t.c",
+      "id": 30064771079,
+      "line": 3,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[0].a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771082
+            ]
+          },
+          "id": 30064771082,
+          "index": 0,
+          "kind": "CALL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[0].a",
+            "id": 111669149719,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313222
+            ]
+          },
+          "id": 90194313222,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[0].a=1",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "t.c",
+      "id": 30064771081,
+      "line": 3,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "E[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476744
+            ]
+          },
+          "id": 68719476744,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "E[1]",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "E[1]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313220
+            ]
+          },
+          "id": 90194313220,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "t.c",
+      "id": 30064771080,
+      "line": 3,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "E[1]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[0]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771083
+            ]
+          },
+          "id": 30064771083,
+          "index": 0,
+          "kind": "CALL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[0]",
+            "id": 111669149718,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574848
+            ]
+          },
+          "id": 55834574848,
+          "index": 1,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 3,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "a",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[0].a",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "t.c",
+      "id": 30064771082,
+      "line": 3,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476745
+            ]
+          },
+          "id": 68719476745,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 3,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313221
+            ]
+          },
+          "id": 90194313221,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 3,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[0]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "t.c",
+      "id": 30064771083,
+      "line": 3,
+      "method_full_name": "<operator>.indirectIndexAccess",
+      "name": "<operator>.indirectIndexAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476746
+            ]
+          },
+          "id": 68719476746,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "rg[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771085
+            ]
+          },
+          "id": 30064771085,
+          "index": 1,
+          "kind": "CALL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg[1]",
+            "id": 30064771085,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771084,
+      "line": 4,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476748
+            ]
+          },
+          "id": 68719476748,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313224
+            ]
+          },
+          "id": 90194313224,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "c=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771086,
+      "line": 4,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "E[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476747
+            ]
+          },
+          "id": 68719476747,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "E[1]",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "E[1]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313223
+            ]
+          },
+          "id": 90194313223,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771085,
+      "line": 4,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "E[1]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476749
+            ]
+          },
+          "id": 68719476749,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313225
+            ]
+          },
+          "id": 90194313225,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771087,
+      "line": 4,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476750
+            ]
+          },
+          "id": 68719476750,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "k",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476751
+            ]
+          },
+          "id": 68719476751,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "k",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "k",
+            "id": 111669149698,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i<k",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771088,
+      "line": 4,
+      "method_full_name": "<operator>.lessThan",
+      "name": "<operator>.lessThan",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476752
+            ]
+          },
+          "id": 68719476752,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i++",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771089,
+      "line": 4,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[c].a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771091
+            ]
+          },
+          "id": 30064771091,
+          "index": 0,
+          "kind": "CALL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[c].a",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313226
+            ]
+          },
+          "id": 90194313226,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c].a=1",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771090,
+      "line": 4,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476755
+            ]
+          },
+          "id": 68719476755,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "c++",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771093,
+      "line": 4,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[c]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771092
+            ]
+          },
+          "id": 30064771092,
+          "index": 0,
+          "kind": "CALL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[c]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574849
+            ]
+          },
+          "id": 55834574849,
+          "index": 1,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 4,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "a",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c].a",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771091,
+      "line": 4,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476753
+            ]
+          },
+          "id": 68719476753,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476754
+            ]
+          },
+          "id": 68719476754,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "t.c",
+      "id": 30064771092,
+      "line": 4,
+      "method_full_name": "<operator>.indirectIndexAccess",
+      "name": "<operator>.indirectIndexAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "rg[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771095
+            ]
+          },
+          "id": 30064771095,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg[1]",
+            "id": 30064771095,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771094,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313229
+            ]
+          },
+          "id": 90194313229,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "c=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771102,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "E[1]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476757
+            ]
+          },
+          "id": 68719476757,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "E[1]",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "E[1]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313227
+            ]
+          },
+          "id": 90194313227,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[1]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771095,
+      "line": 5,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "E[1]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "k",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476758
+            ]
+          },
+          "id": 68719476758,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "k",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "k",
+            "id": 111669149699,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "(int)(sizeof(rg)/sizeof(rg[0]))",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771097
+            ]
+          },
+          "id": 30064771097,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "sizeof(rg)/sizeof(rg[0])",
+            "id": 30064771098,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "k > (int)(sizeof(rg)/sizeof(rg[0]))",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771096,
+      "line": 5,
+      "method_full_name": "<operator>.greaterThan",
+      "name": "<operator>.greaterThan",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476762
+            ]
+          },
+          "id": 68719476762,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313230
+            ]
+          },
+          "id": 90194313230,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i=0",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771103,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476763
+            ]
+          },
+          "id": 68719476763,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "k",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476764
+            ]
+          },
+          "id": 68719476764,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "k",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "k",
+            "id": 111669149699,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i<k",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771104,
+      "line": 5,
+      "method_full_name": "<operator>.lessThan",
+      "name": "<operator>.lessThan",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "i",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476765
+            ]
+          },
+          "id": 68719476765,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "i",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "i",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "i++",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771105,
+      "line": 5,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "int",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              176093659136
+            ]
+          },
+          "id": 176093659136,
+          "index": 0,
+          "kind": "TYPE_REF",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "int",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "sizeof(rg)/sizeof(rg[0])",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771098
+            ]
+          },
+          "id": 30064771098,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(rg)/sizeof(rg[0])",
+            "id": 30064771098,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "(int)(sizeof(rg)/sizeof(rg[0]))",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771097,
+      "line": 5,
+      "method_full_name": "<operator>.cast",
+      "name": "<operator>.cast",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "int"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[c].a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771107
+            ]
+          },
+          "id": 30064771107,
+          "index": 0,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[c].a",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313231
+            ]
+          },
+          "id": 90194313231,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c].a=1",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771106,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476768
+            ]
+          },
+          "id": 68719476768,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "c++",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771109,
+      "line": 5,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "sizeof(rg)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771099
+            ]
+          },
+          "id": 30064771099,
+          "index": 0,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(rg)",
+            "id": 30064771099,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "sizeof(rg[0])",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771100
+            ]
+          },
+          "id": 30064771100,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(rg[0])",
+            "id": 30064771100,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(rg)/sizeof(rg[0])",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771098,
+      "line": 5,
+      "method_full_name": "<operator>.division",
+      "name": "<operator>.division",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[c]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771108
+            ]
+          },
+          "id": 30064771108,
+          "index": 0,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[c]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574850
+            ]
+          },
+          "id": 55834574850,
+          "index": 1,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 5,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "a",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c].a",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771107,
+      "line": 5,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(rg)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771099,
+      "line": 5,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg[0]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771101
+            ]
+          },
+          "id": 30064771101,
+          "index": 0,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "rg[0]",
+            "id": 111669149720,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(rg[0])",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771100,
+      "line": 5,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476766
+            ]
+          },
+          "id": 68719476766,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "c",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476767
+            ]
+          },
+          "id": 68719476767,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "c",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "c",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[c]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771108,
+      "line": 5,
+      "method_full_name": "<operator>.indirectIndexAccess",
+      "name": "<operator>.indirectIndexAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "rg",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476760
+            ]
+          },
+          "id": 68719476760,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "rg",
+          "type_full_name": "E[1]",
+          "value_ref": {
+            "code": "rg",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313228
+            ]
+          },
+          "id": 90194313228,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "0",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "rg[0]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "t.c",
+      "id": 30064771101,
+      "line": 5,
+      "method_full_name": "<operator>.indirectIndexAccess",
+      "name": "<operator>.indirectIndexAccess",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    }
+  ],
+  "cfg_edges": [
+    {
+      "function_id": 107374182400,
+      "node_id": 107374182401,
+      "successor_id": 68719476736
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 107374182402,
+      "successor_id": 68719476743
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 107374182403,
+      "successor_id": 68719476746
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 107374182404,
+      "successor_id": 68719476756
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 176093659137,
+      "successor_id": 120259084288
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 120259084288,
+      "successor_id": 120259084289
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 120259084289,
+      "successor_id": 120259084290
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 120259084290,
+      "successor_id": 120259084291
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771072,
+      "successor_id": 68719476738
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476736,
+      "successor_id": 68719476737
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771073,
+      "successor_id": 30064771072
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771074,
+      "successor_id": 68719476739
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771075,
+      "successor_id": 68719476741
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771076,
+      "successor_id": 68719476739
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771077,
+      "successor_id": 68719476740
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476737,
+      "successor_id": 90194313216
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 90194313216,
+      "successor_id": 30064771073
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476738,
+      "successor_id": 90194313217
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 90194313217,
+      "successor_id": 30064771074
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476739,
+      "successor_id": 90194313218
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 90194313218,
+      "successor_id": 30064771075
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476740,
+      "successor_id": 30064771076
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 30064771078,
+      "successor_id": 90194313219
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 90194313219,
+      "successor_id": 30064771077
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476741,
+      "successor_id": 68719476742
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 68719476742,
+      "successor_id": 30064771078
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771079,
+      "successor_id": 68719476745
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476743,
+      "successor_id": 68719476744
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771080,
+      "successor_id": 30064771079
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771082,
+      "successor_id": 90194313222
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313222,
+      "successor_id": 30064771081
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476744,
+      "successor_id": 90194313220
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313220,
+      "successor_id": 30064771080
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771083,
+      "successor_id": 55834574848
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 55834574848,
+      "successor_id": 30064771082
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476745,
+      "successor_id": 90194313221
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313221,
+      "successor_id": 30064771083
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771084,
+      "successor_id": 68719476748
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771086,
+      "successor_id": 68719476749
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476746,
+      "successor_id": 68719476747
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771085,
+      "successor_id": 30064771084
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476748,
+      "successor_id": 90194313224
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313224,
+      "successor_id": 30064771086
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771087,
+      "successor_id": 68719476750
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771088,
+      "successor_id": 68719476753
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771089,
+      "successor_id": 68719476750
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476747,
+      "successor_id": 90194313223
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313223,
+      "successor_id": 30064771085
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476749,
+      "successor_id": 90194313225
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313225,
+      "successor_id": 30064771087
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476750,
+      "successor_id": 68719476751
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476751,
+      "successor_id": 30064771088
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476752,
+      "successor_id": 30064771089
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771090,
+      "successor_id": 68719476755
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771093,
+      "successor_id": 68719476752
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771091,
+      "successor_id": 90194313226
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313226,
+      "successor_id": 30064771090
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476755,
+      "successor_id": 30064771093
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771092,
+      "successor_id": 55834574849
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 55834574849,
+      "successor_id": 30064771091
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476753,
+      "successor_id": 68719476754
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476754,
+      "successor_id": 30064771092
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771094,
+      "successor_id": 68719476758
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771102,
+      "successor_id": 68719476762
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476756,
+      "successor_id": 68719476757
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771095,
+      "successor_id": 30064771094
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771096,
+      "successor_id": 141733920768
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771096,
+      "successor_id": 68719476761
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476761,
+      "successor_id": 90194313229
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313229,
+      "successor_id": 30064771102
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771103,
+      "successor_id": 68719476763
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771104,
+      "successor_id": 68719476766
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771105,
+      "successor_id": 68719476763
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476757,
+      "successor_id": 90194313227
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313227,
+      "successor_id": 30064771095
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476758,
+      "successor_id": 176093659136
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771097,
+      "successor_id": 30064771096
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476762,
+      "successor_id": 90194313230
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313230,
+      "successor_id": 30064771103
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476763,
+      "successor_id": 68719476764
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476764,
+      "successor_id": 30064771104
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476765,
+      "successor_id": 30064771105
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771106,
+      "successor_id": 68719476768
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771109,
+      "successor_id": 68719476765
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 176093659136,
+      "successor_id": 68719476759
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771098,
+      "successor_id": 30064771097
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771107,
+      "successor_id": 90194313231
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313231,
+      "successor_id": 30064771106
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476768,
+      "successor_id": 30064771109
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771099,
+      "successor_id": 68719476760
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771100,
+      "successor_id": 30064771098
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771108,
+      "successor_id": 55834574850
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 55834574850,
+      "successor_id": 30064771107
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476759,
+      "successor_id": 30064771099
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771101,
+      "successor_id": 30064771100
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476766,
+      "successor_id": 68719476767
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476767,
+      "successor_id": 30064771108
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476760,
+      "successor_id": 90194313228
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313228,
+      "successor_id": 30064771101
+    }
+  ],
+  "cpp_memory": {
+    "ambiguous_indirect_writes": 0,
+    "compound_assignments": 0,
+    "exact_deref_reads": 0,
+    "exact_field_accesses": 1,
+    "exact_index_accesses": 2,
+    "exact_indirect_writes": 0,
+    "exact_pointer_param_writes": 0,
+    "pointer_bindings": 0,
+    "reaching_def_facts": 0,
+    "synthetic_locations": 3,
+    "unknown_index_accesses": 0,
+    "unresolved_pointer_param_writes": 0
+  },
+  "cpp_memory_locations": [
+    {
+      "base_id": 94489280514,
+      "id": 111669149718,
+      "kind": "INDEX",
+      "method_id": 107374182402,
+      "name": "rg[0]",
+      "selector": "0"
+    },
+    {
+      "base_id": 111669149718,
+      "id": 111669149719,
+      "kind": "FIELD",
+      "method_id": 107374182402,
+      "name": "rg[0].a",
+      "selector": "a"
+    },
+    {
+      "base_id": 94489280518,
+      "id": 111669149720,
+      "kind": "INDEX",
+      "method_id": 107374182404,
+      "name": "rg[0]",
+      "selector": "0"
+    }
+  ],
+  "frontend": "joern-c2cpg",
+  "frontend_counters": {
+    "exported_calls": 38,
+    "exported_functions": 16,
+    "exported_identifiers": 66,
+    "exported_locals": 9,
+    "exported_returns": 1,
+    "exported_type_decls": 12,
+    "exported_value_returns": 0,
+    "exported_void_returns": 1
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "t.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "t.c",
+      "full_name": "t.c:<global>",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 1,
+      "line_end": 5,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "t.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "t.c",
+      "full_name": "safe_loop",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 2,
+      "line_end": 2,
+      "name": "safe_loop",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149696,
+          "index": 0,
+          "line": 2,
+          "method_id": 107374182401,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "void(void)"
+    },
+    {
+      "ast_parent_full_name": "t.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "t.c",
+      "full_name": "safe_const",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 3,
+      "line_end": 3,
+      "name": "safe_const",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149697,
+          "index": 0,
+          "line": 3,
+          "method_id": 107374182402,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "void(void)"
+    },
+    {
+      "ast_parent_full_name": "t.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "t.c",
+      "full_name": "bad_unbounded",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 4,
+      "line_end": 4,
+      "name": "bad_unbounded",
+      "parameters": [
+        {
+          "code": "int k",
+          "id": 111669149698,
+          "index": 0,
+          "line": 4,
+          "method_id": 107374182403,
+          "name": "k",
+          "type_full_name": "int"
+        }
+      ],
+      "signature": "void(int)"
+    },
+    {
+      "ast_parent_full_name": "t.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "t.c",
+      "full_name": "guarded",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 5,
+      "line_end": 5,
+      "name": "guarded",
+      "parameters": [
+        {
+          "code": "int k",
+          "id": 111669149699,
+          "index": 0,
+          "line": 5,
+          "method_id": 107374182404,
+          "name": "k",
+          "type_full_name": "int"
+        }
+      ],
+      "signature": "void(int)"
+    },
+    {
+      "ast_parent_full_name": "<includes>:<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<includes>",
+      "full_name": "<includes>:<global>",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 1,
+      "line_end": 0,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182406,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149700,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182406,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149701,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182406,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.alloc",
+      "id": 107374182407,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.alloc",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149702,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182407,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149703,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182407,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.lessThan",
+      "id": 107374182408,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.lessThan",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149704,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182408,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149705,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182408,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.postIncrement",
+      "id": 107374182409,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.postIncrement",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149706,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182409,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.indirectIndexAccess",
+      "id": 107374182410,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.indirectIndexAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149707,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149708,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182411,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149709,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149710,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.greaterThan",
+      "id": 107374182412,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.greaterThan",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149711,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149712,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.cast",
+      "id": 107374182413,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.cast",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149713,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149714,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.division",
+      "id": 107374182414,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.division",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149715,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149716,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.sizeOf",
+      "id": 107374182415,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.sizeOf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149717,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "buf",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "buf",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "int[8]",
+      "id": 68719476737,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "int[8]",
+      "ref_target_ids": [],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "i",
+      "id": 68719476738,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476739,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476740,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "buf",
+      "id": 68719476741,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "buf",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "i",
+      "id": 68719476742,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476743,
+      "line": 3,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476744,
+      "line": 3,
+      "method_id": 107374182400,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476745,
+      "line": 3,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476746,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476747,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476748,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476749,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476750,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "k",
+      "id": 68719476751,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "k",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476752,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476753,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476754,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "c",
+      "id": 68719476755,
+      "line": 4,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476756,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476757,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "k",
+      "id": 68719476758,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "k",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476759,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476760,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476761,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476762,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476763,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "k",
+      "id": 68719476764,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "k",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476765,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476766,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476767,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "c",
+      "id": 68719476768,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "buf",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "buf",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "int[8]",
+      "id": 68719476737,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "int[8]",
+      "ref_target_ids": [],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "i",
+      "id": 68719476738,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476739,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476740,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "buf",
+      "id": 68719476741,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "buf",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "i",
+      "id": 68719476742,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476743,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476744,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476745,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476746,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476747,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476748,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476749,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476750,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "k",
+      "id": 68719476751,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "k",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476752,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "i",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476753,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476754,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "c",
+      "id": 68719476755,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "c",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476756,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "E[1]",
+      "id": 68719476757,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "E[1]",
+      "ref_target_ids": [],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "k",
+      "id": 68719476758,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "k",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476759,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "rg",
+      "id": 68719476760,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476761,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476762,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476763,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "k",
+      "id": 68719476764,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "k",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "i",
+      "id": 68719476765,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "i",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg",
+      "id": 68719476766,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "rg",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "c",
+      "id": 68719476767,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "c",
+      "id": 68719476768,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "c",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "int"
+    }
+  ],
+  "locals": [
+    {
+      "code": "int buf[8]",
+      "id": 94489280512,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "buf",
+      "type_full_name": "int[8]"
+    },
+    {
+      "code": "struct E rg[1]",
+      "id": 94489280514,
+      "line": 3,
+      "method_id": 107374182402,
+      "name": "rg",
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "struct E rg[1]",
+      "id": 94489280515,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "rg",
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "int c",
+      "id": 94489280516,
+      "line": 4,
+      "method_id": 107374182403,
+      "name": "c",
+      "type_full_name": "int"
+    },
+    {
+      "code": "struct E rg[1]",
+      "id": 94489280518,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "rg",
+      "type_full_name": "E[1]"
+    },
+    {
+      "code": "int c",
+      "id": 94489280519,
+      "line": 5,
+      "method_id": 107374182404,
+      "name": "c",
+      "type_full_name": "int"
+    },
+    {
+      "code": "rg[0]",
+      "id": 111669149718,
+      "line": 0,
+      "method_id": 107374182402,
+      "name": "rg[0]",
+      "synthetic_memory_location": true,
+      "type_full_name": "<derived-memory-location>"
+    },
+    {
+      "code": "rg[0].a",
+      "id": 111669149719,
+      "line": 0,
+      "method_id": 107374182402,
+      "name": "rg[0].a",
+      "synthetic_memory_location": true,
+      "type_full_name": "<derived-memory-location>"
+    },
+    {
+      "code": "rg[0]",
+      "id": 111669149720,
+      "line": 0,
+      "method_id": 107374182404,
+      "name": "rg[0]",
+      "synthetic_memory_location": true,
+      "type_full_name": "<derived-memory-location>"
+    }
+  ],
+  "members": [
+    {
+      "code": "a",
+      "id": 98784247808,
+      "line": 1,
+      "name": "a",
+      "type_decl_id": 167503724544,
+      "type_full_name": "long"
+    },
+    {
+      "code": "b",
+      "id": 98784247809,
+      "line": 1,
+      "name": "b",
+      "type_decl_id": 167503724544,
+      "type_full_name": "long"
+    }
+  ],
+  "metadata": [
+    {
+      "language": "NEWC",
+      "root": "/home/claude/work/idxctl/t.c",
+      "version": "4.0.608"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 1,
+      "method_id": 107374182400,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 2,
+      "method_id": 107374182401,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 3,
+      "method_id": 107374182402,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 4,
+      "method_id": 107374182403,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 5,
+      "method_id": 107374182404,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 1,
+      "method_id": 107374182405,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 0,
+      "method_id": 107374182406,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 0,
+      "method_id": 107374182407,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 0,
+      "method_id": 107374182408,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051593,
+      "line": 0,
+      "method_id": 107374182409,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051594,
+      "line": 0,
+      "method_id": 107374182410,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051595,
+      "line": 0,
+      "method_id": 107374182411,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051596,
+      "line": 0,
+      "method_id": 107374182412,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051597,
+      "line": 0,
+      "method_id": 107374182413,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051598,
+      "line": 0,
+      "method_id": 107374182414,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051599,
+      "line": 0,
+      "method_id": 107374182415,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "t.c",
+      "full_name": "E",
+      "id": 167503724544,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "E"
+    },
+    {
+      "file": "t.c",
+      "full_name": "safe_loop",
+      "id": 167503724545,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 2,
+      "name": "safe_loop"
+    },
+    {
+      "file": "t.c",
+      "full_name": "safe_const",
+      "id": 167503724546,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 3,
+      "name": "safe_const"
+    },
+    {
+      "file": "t.c",
+      "full_name": "bad_unbounded",
+      "id": 167503724547,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 4,
+      "name": "bad_unbounded"
+    },
+    {
+      "file": "t.c",
+      "full_name": "guarded",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 5,
+      "name": "guarded"
+    },
+    {
+      "file": "t.c",
+      "full_name": "t.c:<global>",
+      "id": 167503724549,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "<global>"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "ANY",
+      "id": 167503724550,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "E[1]",
+      "id": 167503724551,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "E[1]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "int",
+      "id": 167503724552,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "int"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "int[8]",
+      "id": 167503724553,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "int[8]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "long",
+      "id": 167503724554,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "long"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "void",
+      "id": 167503724555,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "void"
+    }
+  ],
+  "void_returns": [
+    {
+      "code": "return;",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_VOID_TERMINATOR",
+        "source_node_ids": [
+          141733920768
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 141733920768,
+      "is_void": true,
+      "line": 5,
+      "value_ref": {
+        "code": "return;",
+        "id": -1,
+        "kind": "VOID"
+      }
+    }
+  ]
+}

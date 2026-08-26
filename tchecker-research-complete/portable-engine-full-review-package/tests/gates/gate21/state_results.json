@@ -1,0 +1,109 @@
+{
+  "objectDestructureExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectDestructureExact.source"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": []
+  },
+  "objectDestructureRename": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectDestructureRename.source"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": []
+  },
+  "objectDestructureDifferent": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": []
+  },
+  "objectDestructureOverwrite": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": []
+  },
+  "arrayDestructureExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:arrayDestructureExact.source"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": []
+  },
+  "arrayDestructureDifferent": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": []
+  },
+  "computedDestructure": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:computedDestructure.source",
+      "STATE_UNKNOWN:PARAMOBJ:computedDestructure.box[*]"
+    ],
+    "paramPositions": [
+      2
+    ],
+    "trace": []
+  },
+  "objectRest": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:objectRest.source",
+      "STATE_UNKNOWN:REST:box"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": [
+      {
+        "kind": "OBJECT_REST",
+        "resolution": "AMBIGUOUS"
+      }
+    ]
+  },
+  "arrayRest": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "PARAM:arrayRest.source",
+      "STATE_UNKNOWN:REST:arr"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": [
+      {
+        "kind": "ARRAY_REST",
+        "resolution": "AMBIGUOUS"
+      }
+    ]
+  },
+  "distinctReceiver": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": []
+  }
+}

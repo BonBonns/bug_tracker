@@ -1,0 +1,14 @@
+PASS @Query() named `body`   -> HTTP_QUERY   (not BODY)
+PASS @Body()  named `query`  -> HTTP_BODY    (not QUERY)
+PASS @Param() named `headers`-> HTTP_PARAM   (not HEADERS)
+PASS @Headers() named `param`-> HTTP_HEADERS (not PARAM)
+PASS undecorated sibling parameter gets NOTHING
+PASS three families on one method bind independently
+PASS origin_key is ALWAYS UNKNOWN (never parsed from annotation code)
+PASS every fact is NESTJS_PARAMETER_DECORATOR evidence and established
+PASS undecorated class of identical shape yields NOTHING
+PASS undecorated method in a decorated class yields NOTHING
+PASS derived local consumes the boundary fact, not a fresh decorator fact
+PASS no derived entry claims NESTJS_PARAMETER_DECORATOR evidence
+PASS R26-FIXTURE-INTEGRITY: assertion keys unique in this fixture
+JS_PROV_R21=13/13

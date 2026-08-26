@@ -1,0 +1,10 @@
+PASS R29 profiled direct receiver establishes a registration
+PASS R29 DECISIVE NEGATIVE: non-profiled concrete type (FakeRouter) yields nothing
+PASS R29 object-literal receiver yields nothing
+PASS R29 ANY / globalThis receiver yields nothing
+PASS R29 exactly one registration in this fixture
+PASS R29 evidence labelled DIRECT_RECEIVER_TYPE, distinct from the parameter path
+PASS R29 framework identity comes from the closed profile, not a name
+PASS R29 methodFullName / resolved callee never used as evidence (JS-PROV-R07)
+PASS R26-FIXTURE-INTEGRITY: assertion keys unique
+JS_PROV_R29=9/9

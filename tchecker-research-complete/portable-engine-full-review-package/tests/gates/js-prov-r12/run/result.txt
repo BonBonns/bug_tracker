@@ -1,0 +1,29 @@
+PASS POSITIVE whole-object write establishes .email read (prefix/ancestor)
+PASS POSITIVE origin family carried as HTTP_BODY
+PASS NEG-7 SIBLINGS: .user write must NOT establish .email read
+PASS POSITIVE ancestor: .user write establishes .user.id read
+PASS NEG-3 AFTER_NEXT writer establishes nothing downstream
+PASS NEG-3 AFTER_NEXT recorded as an abstention
+PASS NEG-4 conditional writer yields MAY, never MUST
+PASS NEG-5 stub callback (42 as any) establishes nothing
+PASS NEG-5 stub recorded as an abstention
+PASS NEG-6 wrapper-returned validate(schema) DOES join (R11 hop wired)
+PASS NEG-2 route A write does not reach route B reader
+PASS NEG-2 same property path on separate routes keeps distinct origins
+PASS NEG-1 unregistered object never joins
+PASS ORDER: reader positioned BEFORE writer establishes nothing
+PASS R19 every flow carries origin evidence fields
+PASS R19 established-origin writes propagate origin_family to the reader
+PASS R19 distinct routes keep DISTINCT origins after propagation
+PASS R19 no flow claims output established without an established writer origin
+PASS R19 a transform-fed flow never reports origin_family as a DERIVED family
+PASS R19 transform-fed flows never set output_origin_established
+PASS R19 OVERWRITE: .user read uses the MORE SPECIFIC .user writer
+PASS R19 OVERWRITE: broad whole-object writer is SHADOWED for the .user read
+PASS R19 OVERWRITE: .email read DOES inherit the whole-object writer (no specific writer)
+PASS R19 transform-fed whole-object writer is TRANSFORM_INPUT_ONLY with BOTH inputs
+PASS R19 TWO AXES: MUST state-flow coexists with TRANSFORM_INPUT_ONLY origin
+PASS R19 TWO AXES: MUST never upgrades origin to ESTABLISHED
+PASS R19 conditional writer keeps MAY on the state-flow axis
+PASS R19 every flow carries both axes explicitly
+JS_PROV_R12=28/28

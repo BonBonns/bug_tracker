@@ -1,0 +1,372 @@
+{
+  "mayAliasWrite": {
+    "origins": [
+      "PARAM:mayAliasWrite.source",
+      "STATE_UNKNOWN:ALLOC:mayAliasWrite:12.value"
+    ],
+    "resolution": "AMBIGUOUS",
+    "trace": [
+      {
+        "kind": "JOIN",
+        "line": 15,
+        "aliases": {
+          "a": [
+            "ALLOC:mayAliasWrite:12"
+          ],
+          "b": [
+            "ALLOC:mayAliasWrite:13"
+          ],
+          "x": [
+            "ALLOC:mayAliasWrite:12",
+            "ALLOC:mayAliasWrite:13"
+          ]
+        }
+      },
+      {
+        "kind": "METHOD",
+        "line": 16,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:mayAliasWrite:12",
+          "ALLOC:mayAliasWrite:13"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasWrite:12",
+          "ALLOC:mayAliasWrite:13"
+        ],
+        "value": [
+          "PARAM:mayAliasWrite.source"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "METHOD",
+        "line": 17,
+        "method": "readValue",
+        "receivers": [
+          "ALLOC:mayAliasWrite:12"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "READ",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasWrite:12"
+        ],
+        "value": [
+          "PARAM:mayAliasWrite.source",
+          "STATE_UNKNOWN:ALLOC:mayAliasWrite:12.value"
+        ],
+        "resolution": "EXACT"
+      }
+    ]
+  },
+  "sameAliasBothBranches": {
+    "origins": [
+      "PARAM:sameAliasBothBranches.source"
+    ],
+    "resolution": "EXACT",
+    "trace": [
+      {
+        "kind": "JOIN",
+        "line": 24,
+        "aliases": {
+          "a": [
+            "ALLOC:sameAliasBothBranches:22"
+          ],
+          "x": [
+            "ALLOC:sameAliasBothBranches:22"
+          ]
+        }
+      },
+      {
+        "kind": "METHOD",
+        "line": 25,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:sameAliasBothBranches:22"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:sameAliasBothBranches:22"
+        ],
+        "value": [
+          "PARAM:sameAliasBothBranches.source"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "METHOD",
+        "line": 26,
+        "method": "readValue",
+        "receivers": [
+          "ALLOC:sameAliasBothBranches:22"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "READ",
+        "property": "value",
+        "receivers": [
+          "ALLOC:sameAliasBothBranches:22"
+        ],
+        "value": [
+          "PARAM:sameAliasBothBranches.source"
+        ],
+        "resolution": "EXACT"
+      }
+    ]
+  },
+  "mayAliasDifferentField": {
+    "origins": [
+      "STATE_UNKNOWN:ALLOC:mayAliasDifferentField:31.value"
+    ],
+    "resolution": "UNKNOWN",
+    "trace": [
+      {
+        "kind": "JOIN",
+        "line": 34,
+        "aliases": {
+          "a": [
+            "ALLOC:mayAliasDifferentField:31"
+          ],
+          "b": [
+            "ALLOC:mayAliasDifferentField:32"
+          ],
+          "x": [
+            "ALLOC:mayAliasDifferentField:31",
+            "ALLOC:mayAliasDifferentField:32"
+          ]
+        }
+      },
+      {
+        "kind": "METHOD",
+        "line": 35,
+        "method": "setOther",
+        "receivers": [
+          "ALLOC:mayAliasDifferentField:31",
+          "ALLOC:mayAliasDifferentField:32"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "WRITE",
+        "property": "other",
+        "receivers": [
+          "ALLOC:mayAliasDifferentField:31",
+          "ALLOC:mayAliasDifferentField:32"
+        ],
+        "value": [
+          "PARAM:mayAliasDifferentField.source"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "METHOD",
+        "line": 36,
+        "method": "readValue",
+        "receivers": [
+          "ALLOC:mayAliasDifferentField:31"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "READ",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasDifferentField:31"
+        ],
+        "value": [
+          "STATE_UNKNOWN:ALLOC:mayAliasDifferentField:31.value"
+        ],
+        "resolution": "EXACT"
+      }
+    ]
+  },
+  "mayAliasOverwrite": {
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:mayAliasOverwrite.source"
+    ],
+    "resolution": "AMBIGUOUS",
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 44,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42"
+        ],
+        "value": [
+          "PARAM:mayAliasOverwrite.source"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "JOIN",
+        "line": 46,
+        "aliases": {
+          "a": [
+            "ALLOC:mayAliasOverwrite:42"
+          ],
+          "b": [
+            "ALLOC:mayAliasOverwrite:43"
+          ],
+          "x": [
+            "ALLOC:mayAliasOverwrite:42",
+            "ALLOC:mayAliasOverwrite:43"
+          ]
+        }
+      },
+      {
+        "kind": "METHOD",
+        "line": 47,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42",
+          "ALLOC:mayAliasOverwrite:43"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42",
+          "ALLOC:mayAliasOverwrite:43"
+        ],
+        "value": [
+          "CONST:\"CONST\""
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "METHOD",
+        "line": 48,
+        "method": "readValue",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "READ",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasOverwrite:42"
+        ],
+        "value": [
+          "CONST:\"CONST\"",
+          "PARAM:mayAliasOverwrite.source"
+        ],
+        "resolution": "EXACT"
+      }
+    ]
+  },
+  "mayAliasRead": {
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:mayAliasRead.source"
+    ],
+    "resolution": "AMBIGUOUS",
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 55,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:mayAliasRead:53"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasRead:53"
+        ],
+        "value": [
+          "PARAM:mayAliasRead.source"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "METHOD",
+        "line": 56,
+        "method": "setValue",
+        "receivers": [
+          "ALLOC:mayAliasRead:54"
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "WRITE",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasRead:54"
+        ],
+        "value": [
+          "CONST:\"CONST\""
+        ],
+        "resolution": "EXACT"
+      },
+      {
+        "kind": "JOIN",
+        "line": 58,
+        "aliases": {
+          "a": [
+            "ALLOC:mayAliasRead:53"
+          ],
+          "b": [
+            "ALLOC:mayAliasRead:54"
+          ],
+          "x": [
+            "ALLOC:mayAliasRead:53",
+            "ALLOC:mayAliasRead:54"
+          ]
+        }
+      },
+      {
+        "kind": "METHOD",
+        "line": 59,
+        "method": "readValue",
+        "receivers": [
+          "ALLOC:mayAliasRead:53",
+          "ALLOC:mayAliasRead:54"
+        ],
+        "resolution": "AMBIGUOUS"
+      },
+      {
+        "kind": "READ",
+        "property": "value",
+        "receivers": [
+          "ALLOC:mayAliasRead:53",
+          "ALLOC:mayAliasRead:54"
+        ],
+        "value": [
+          "CONST:\"CONST\"",
+          "PARAM:mayAliasRead.source"
+        ],
+        "resolution": "AMBIGUOUS"
+      }
+    ]
+  }
+}

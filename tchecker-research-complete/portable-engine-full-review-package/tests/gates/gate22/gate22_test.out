@@ -1,0 +1,11 @@
+PASS object spread exact
+PASS object override after kills source
+PASS object spread after property restores source
+PASS later spread object wins constant
+PASS later spread object wins source
+PASS dynamic write copied as ambiguous
+PASS array spread exact
+PASS array spread prefix shifts index
+PASS array spread suffix preserves index
+PASS distinct receiver spread isolated
+GATE22=10/10

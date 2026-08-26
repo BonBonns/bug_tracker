@@ -1,0 +1,119 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182409,
+      "inner_binding": "A",
+      "inner_local_id": 94489280529,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280527,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280529,
+          34359738368,
+          94489280527
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182408,
+      "inner_binding": "A",
+      "inner_local_id": 94489280531,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280527,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280531,
+          34359738369,
+          94489280527
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "load",
+      "inner_local_id": 94489280540,
+      "outer_function": 107374182401,
+      "outer_binding": "load",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280540,
+          34359738370,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "store",
+      "inner_local_id": 94489280541,
+      "outer_function": 107374182401,
+      "outer_binding": "store",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280512,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280541,
+          34359738371,
+          94489280512
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "load",
+      "inner_local_id": 94489280542,
+      "outer_function": 107374182401,
+      "outer_binding": "load",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280542,
+          34359738372,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "store",
+      "inner_local_id": 94489280543,
+      "outer_function": 107374182401,
+      "outer_binding": "store",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280512,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280543,
+          34359738373,
+          94489280512
+        ]
+      }
+    }
+  ]
+}

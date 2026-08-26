@@ -1,0 +1,81 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "load",
+      "inner_local_id": 94489280524,
+      "outer_function": 107374182401,
+      "outer_binding": "load",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280524,
+          34359738368,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "store",
+      "inner_local_id": 94489280525,
+      "outer_function": 107374182401,
+      "outer_binding": "store",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280512,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280525,
+          34359738369,
+          94489280512
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "load",
+      "inner_local_id": 94489280526,
+      "outer_function": 107374182401,
+      "outer_binding": "load",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280526,
+          34359738370,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "store",
+      "inner_local_id": 94489280527,
+      "outer_function": 107374182401,
+      "outer_binding": "store",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280512,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280527,
+          34359738371,
+          94489280512
+        ]
+      }
+    }
+  ]
+}

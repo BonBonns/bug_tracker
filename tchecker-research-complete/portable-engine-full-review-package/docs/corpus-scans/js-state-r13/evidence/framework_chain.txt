@@ -1,0 +1,44 @@
+=== LINK 1: import/require identity ===
+  require args=this,"express" -> assigned in: const express = require('express')
+  IMPORT code=express = require('express')
+  IMPORT code=require('express')
+=== LINK 2/3: route registration call sites ===
+  call name=use mfn=prov.js::program:use recv=[use] code=use(x)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(req.body.username)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(req.params.id)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(req.headers.cookie)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(req.cookies.sid)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(process.env.SECRET)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(process.argv[2])
+  call name=use mfn=prov.js::program:use recv=[use] code=use(req.body.username)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(body.username)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(body.username)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(res.someProperty)
+  call name=use mfn=prov.js::program:use recv=[use] code=use(request.query.id)
+  call name=Router mfn=express:Router recv=[express.Router] code=express.Router()
+  call name=post mfn=express:<returnValue>:post recv=[app.post] code=app.post("/x", (req, res) => {\n  use(req.body.username);\n})
+  call name=post mfn=express:<returnValue>:post recv=[app.post] code=app.post("/t3", ({ body }, res) => {\n  use(body.username);\n})
+  call name=post mfn=express:<returnValue>:post recv=[app.post] code=app.post("/t4", (req, res) => {\n  const body = req.body;\n  use(body.
+  call name=post mfn=express:<returnValue>:post recv=[app.post] code=app.post("/t5", (req, res) => {\n  use(res.someProperty);\n})
+  call name=use mfn=prov.js::program:use recv=[use] code=use(x.body.username)
+  call name=post mfn=express:<returnValue>:post recv=[app.post] code=app.post("/t7", handler)
+  call name=get mfn=express:Router:<returnValue>:get recv=[router.get] code=router.get("/t8", function (request, response) {\n  use(request.query.
+=== LINK 4: callback identity (METHOD_REF args to registration) ===
+  post arg0 label=IDENTIFIER code=app
+  post arg1 label=LITERAL code="/x"
+  post arg2 label=METHOD_REF code=<lambda>0  METHOD_REF-> prov.js::program:<lambda>0
+  post arg0 label=IDENTIFIER code=app
+  post arg1 label=LITERAL code="/t3"
+  post arg2 label=METHOD_REF code=<lambda>1  METHOD_REF-> prov.js::program:<lambda>1
+  post arg0 label=IDENTIFIER code=app
+  post arg1 label=LITERAL code="/t4"
+  post arg2 label=METHOD_REF code=<lambda>2  METHOD_REF-> prov.js::program:<lambda>2
+  post arg0 label=IDENTIFIER code=app
+  post arg1 label=LITERAL code="/t5"
+  post arg2 label=METHOD_REF code=<lambda>3  METHOD_REF-> prov.js::program:<lambda>3
+  post arg0 label=IDENTIFIER code=app
+  post arg1 label=LITERAL code="/t7"
+  post arg2 label=IDENTIFIER code=handler
+  get arg0 label=IDENTIFIER code=router
+  get arg1 label=LITERAL code="/t8"
+  get arg2 label=METHOD_REF code=<lambda>4  METHOD_REF-> prov.js::program:<lambda>4

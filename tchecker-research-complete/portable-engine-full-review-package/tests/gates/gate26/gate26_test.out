@@ -1,0 +1,11 @@
+PASS identity -> ProvenanceSummary[resolution=EXACT, provenPositions=[0], mayPositions=[], unknown=false]
+PASS constant -> ProvenanceSummary[resolution=EXACT, provenPositions=[], mayPositions=[], unknown=false]
+PASS argument_parameter_return -> ProvenanceSummary[resolution=EXACT, provenPositions=[0], mayPositions=[], unknown=false]
+PASS two_hop_argument_mapping -> ProvenanceSummary[resolution=EXACT, provenPositions=[1], mayPositions=[], unknown=false]
+PASS callee_drops_argument -> ProvenanceSummary[resolution=EXACT, provenPositions=[], mayPositions=[], unknown=false]
+PASS ambiguous_divergent -> ProvenanceSummary[resolution=AMBIGUOUS, provenPositions=[], mayPositions=[0], unknown=false]
+PASS ambiguous_shared_dependency -> ProvenanceSummary[resolution=AMBIGUOUS, provenPositions=[0], mayPositions=[], unknown=false]
+PASS unresolved_stays_unknown -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], unknown=true]
+PASS heuristic_never_hardens -> ProvenanceSummary[resolution=HEURISTIC, provenPositions=[], mayPositions=[0], unknown=false]
+PASS weakest_resolution_survives_wrapper -> ProvenanceSummary[resolution=AMBIGUOUS, provenPositions=[], mayPositions=[0], unknown=false]
+GATE26=10/10

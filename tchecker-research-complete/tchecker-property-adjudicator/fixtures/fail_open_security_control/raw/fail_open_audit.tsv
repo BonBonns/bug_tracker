@@ -1,0 +1,11 @@
+negative-different-handlers.js	10	30064771075	checkAccess	<lambda>0		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+negative-different-handlers.js	10	30064771078	checkAccess	parseRecords	denyOnError	EXCLUDED_DISTINCT_HANDLER	fulfillment and rejection handler syntax differs
+negative-nonsecurity.js	2	30064771088	renderCacheValue	<lambda>0		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+negative-nonsecurity.js	2	30064771091	renderCacheValue	String	String	EXCLUDED_NON_SECURITY_CONTEXT	no bounded security-decision context was recognized
+negative-one-handler.js	2	30064771099	checkAccess	<lambda>0		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+negative-rethrow.js	6	30064771108	checkAccess	<lambda>1		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+negative-rethrow.js	6	30064771111	checkAccess	parseRecords	<lambda>0	EXCLUDED_DISTINCT_HANDLER	fulfillment and rejection handler syntax differs
+negative-sibling-name-collision.js	4	30064771124	checkAccess	<lambda>2		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+negative-sibling-name-collision.js	4	30064771127	checkAccess	parser	parserCopy	EXCLUDED_DISTINCT_HANDLER	fulfillment and rejection handler syntax differs
+positive-same-handler.js	10	30064771138	checkAccess	<lambda>0		EXCLUDED_NO_REJECTION_HANDLER	call has no explicit rejection continuation
+positive-same-handler.js	10	30064771141	checkAccess	parseRecords	parseRecords	CANDIDATE_OPEN	same handler syntax serves fulfillment and rejection in a security-decision context

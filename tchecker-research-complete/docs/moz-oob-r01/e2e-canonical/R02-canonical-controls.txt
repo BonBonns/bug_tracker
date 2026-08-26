@@ -1,0 +1,15 @@
+OOB-ADJ-R02 — canonical controls via scan_repo public entry point (needs JOERN_HOME)
+TRUST-ESTABLISHING HINT-LOADING PATH (channel, not content):
+  scan_repo main(): --oob-hints (advisory/UNTRUSTED)  --oob-trusted-attestations (TRUSTED)
+   -> oob_review(advisory_path, trusted_path)
+   -> adjudicate_oob.load_channels(): advisory_path => UNTRUSTED_CHANNEL (any 'source' STRIPPED &
+      overwritten); trusted_path => CURATED_ATTESTATION_CHANNEL
+   -> adjudicate(advisory_hints, trusted_attestations)
+   -> disposition(pid, advisory, trusted): trust == membership in the TRUSTED map only; the hint's
+      own 'source' is never consulted. Operator selects the flag at invocation; the model cannot.
+RESULTS:
+  C1 forged source=CURATED via --oob-hints        -> packets=1 (advisory; label ignored)
+  C2 same payload via --oob-trusted-attestations  -> packets=0 (suppressed)
+  C3 reuse --work: vuln then patched              -> 1 then 0 on disk (no stale packet)
+  C4 fault-injected producer                      -> scan exit=1, NO report (fail-loud, not zero)
+  (baseline) vuln -> 1 packet ; patched -> 0 packet

@@ -1,0 +1,15 @@
+PASS Gate16 identity hard summary
+PASS Gate16 constantize hard summary
+PASS Gate16 MAY survives identity
+PASS Gate16 UNKNOWN survives identity
+PASS Gate16 constant wrapper kills MAY
+PASS Gate16 conditional MAY stays ambiguous
+PASS Gate16 exact conditional stays hard only
+PASS concat preserves one MAY operand
+PASS concat unions two MAY operands
+PASS concat preserves UNKNOWN
+PASS template preserves MAY
+PASS template unions two MAY operands
+PASS plain binary exact params remain hard only
+PASS unrelated binary does not inherit MAY
+GATE17=14/14

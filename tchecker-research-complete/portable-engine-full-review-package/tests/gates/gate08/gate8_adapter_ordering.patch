@@ -1,0 +1,24 @@
+--- /mnt/data/js-gate7-return-receiver/tsclass2csv.js	2026-08-15 09:37:28.121905900 +0000
++++ /mnt/data/gate8_provenance/tsclass2csv.js	2026-08-15 09:49:00.956971362 +0000
+@@ -172,7 +172,20 @@
+ 
+   // Same input-contract rules established in Gate 2.
+   const structural=rels.filter(r=>r.type!=='PARENT_OF'&&r.type!=='FILE_OF');
+-  const astEdges=rels.filter(r=>r.type==='PARENT_OF').reverse();
++  // The legacy CSV interpreter requires a child's subtree to be wired before the
++  // parent->child relation is consumed. A global reverse achieves child-first but
++  // also reverses siblings, corrupting parameter/argument positions. Emit AST
++  // relations in post-order while preserving childnum order instead.
++  const rawAst=rels.filter(r=>r.type==='PARENT_OF');
++  const byParent=new Map(), childIds=new Set();
++  for(const e of rawAst){ if(!byParent.has(e.start)) byParent.set(e.start,[]); byParent.get(e.start).push(e); childIds.add(e.end); }
++  const astEdges=[];
++  function emitPost(parentId){
++    const es=(byParent.get(parentId)||[]).slice().sort((a,b)=>(nodes[a.end]?.childnum??0)-(nodes[b.end]?.childnum??0));
++    for(const e of es){ emitPost(e.end); astEdges.push(e); }
++  }
++  const roots=[...byParent.keys()].filter(x=>!childIds.has(x)).sort((a,b)=>a-b);
++  for(const r of roots) emitPost(r);
+   rels.length=0; rels.push(...structural,...astEdges,{start:fnode,end:T.fid,type:'FILE_OF'});
+   return {nodes,rels};
+ }

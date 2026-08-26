@@ -1,0 +1,71 @@
+controllers/articles-controller.js			BLOCK	module.exports = {   async bySlug(slug, ctx, next) {     ctx.assert(slug, 404)      const 		
+controllers/articles-controller.js	bySlug	controllers/articles-controller.js::program:bySlug	METHOD_REF	_tmp_3.bySlug = bySlug		
+controllers/articles-controller.js	get	controllers/articles-controller.js::program:get	METHOD_REF	_tmp_3.get = get		
+controllers/articles-controller.js	getOne	controllers/articles-controller.js::program:getOne	METHOD_REF	_tmp_3.getOne = getOne		
+controllers/articles-controller.js	post	controllers/articles-controller.js::program:post	METHOD_REF	_tmp_3.post = post		
+controllers/articles-controller.js	put	controllers/articles-controller.js::program:put	METHOD_REF	_tmp_3.put = put		
+controllers/articles-controller.js	del	controllers/articles-controller.js::program:del	METHOD_REF	_tmp_3.del = del		
+controllers/articles-controller.js	feed		BLOCK	_tmp_3.feed = {     async get(ctx) {       const { user } = ctx.state       const { offset		
+controllers/articles-controller.js	favorite		BLOCK	_tmp_3.favorite = {     async post(ctx) {       const { article } = ctx.params        if (		
+controllers/articles-controller.js	comments	{ byComment(comment: ANY, ctx: ANY, next: ANY): Promise<any>; get(ctx: ANY): Promise<void>	IDENTIFIER	_tmp_3.comments = comments		
+controllers/comments-controller.js			BLOCK	module.exports = {   async byComment(comment, ctx, next) {     ctx.assert(comment, 404)   		
+controllers/comments-controller.js	byComment	controllers/comments-controller.js::program:byComment	METHOD_REF	_tmp_2.byComment = byComment		
+controllers/comments-controller.js	get	controllers/comments-controller.js::program:get	METHOD_REF	_tmp_2.get = get		
+controllers/comments-controller.js	post	controllers/comments-controller.js::program:post	METHOD_REF	_tmp_2.post = post		
+controllers/comments-controller.js	del	controllers/comments-controller.js::program:del	METHOD_REF	_tmp_2.del = del		
+controllers/index.js			BLOCK	module.exports = {   users,   tags,   profiles,   articles, }		
+controllers/index.js	users	{ get(ctx: ANY): Promise<void>; post(ctx: ANY): Promise<void>; put(ctx: ANY): Promise<void	IDENTIFIER	_tmp_0.users = users		
+controllers/index.js	tags	{ get(ctx: ANY): Promise<void>; }	IDENTIFIER	_tmp_0.tags = tags		
+controllers/index.js	profiles	{ byUsername(username: ANY, ctx: ANY, next: ANY): Promise<void>; get(ctx: ANY): Promise<vo	IDENTIFIER	_tmp_0.profiles = profiles		
+controllers/index.js	articles	{ bySlug(slug: ANY, ctx: ANY, next: ANY): Promise<void>; get(ctx: ANY): Promise<void>; get	IDENTIFIER	_tmp_0.articles = articles		
+controllers/profiles-controller.js			BLOCK	module.exports = {   async byUsername(username, ctx, next) {     ctx.assert(username, 404)		
+controllers/profiles-controller.js	byUsername	controllers/profiles-controller.js::program:byUsername	METHOD_REF	_tmp_2.byUsername = byUsername		
+controllers/profiles-controller.js	get	controllers/profiles-controller.js::program:get	METHOD_REF	_tmp_2.get = get		
+controllers/profiles-controller.js	follow		BLOCK	_tmp_2.follow = {     async post(ctx) {       const { profile } = ctx.params       const {		
+controllers/tags-controller.js			BLOCK	module.exports = {   async get(ctx) {     const tags = await db("tags").pluck("name")     		
+controllers/tags-controller.js	get	controllers/tags-controller.js::program:get	METHOD_REF	_tmp_0.get = get		
+controllers/users-controller.js			BLOCK	module.exports = {   async get(ctx) {     const user = generateJWTforUser(ctx.state.user) 		
+controllers/users-controller.js	get	controllers/users-controller.js::program:get	METHOD_REF	_tmp_2.get = get		
+controllers/users-controller.js	post	controllers/users-controller.js::program:post	METHOD_REF	_tmp_2.post = post		
+controllers/users-controller.js	put	controllers/users-controller.js::program:put	METHOD_REF	_tmp_2.put = put		
+controllers/users-controller.js	login	controllers/users-controller.js::program:login	METHOD_REF	_tmp_2.login = login		
+lib/app.js		koa	IDENTIFIER	module.exports = app		
+lib/db.js		knex:<returnValue>	IDENTIFIER	module.exports = db		
+lib/errors.js			BLOCK	module.exports = {   AuthenticationError,   AuthorizationError,   NotFoundError,   Validat		
+lib/errors.js	AuthenticationError	lib/errors.js::program:AuthenticationError	IDENTIFIER	_tmp_1.AuthenticationError = AuthenticationError		
+lib/errors.js	AuthorizationError	lib/errors.js::program:AuthorizationError	IDENTIFIER	_tmp_1.AuthorizationError = AuthorizationError		
+lib/errors.js	NotFoundError	lib/errors.js::program:NotFoundError	IDENTIFIER	_tmp_1.NotFoundError = NotFoundError		
+lib/errors.js	ValidationError	yup	IDENTIFIER	_tmp_1.ValidationError = ValidationError		
+lib/errors.js	ServerError	lib/errors.js::program:ServerError	IDENTIFIER	_tmp_1.ServerError = ServerError		
+lib/logger.js		pino:<returnValue>	IDENTIFIER	module.exports = logger		
+lib/logger.js	serializers	{ req: (req: ANY) => ANY; res: ANY; err: ANY; error: ANY; user: (user: ANY) => { id: ANY; 	IDENTIFIER	module.exports.serializers = serializers		
+lib/relations-map.js	relationsMaps	__ecma.Array	IDENTIFIER	exports.relationsMaps = relationsMaps		
+lib/relations-map.js	userFields	__ecma.Array	IDENTIFIER	exports.userFields = userFields		
+lib/relations-map.js	articleFields	__ecma.Array	IDENTIFIER	exports.articleFields = articleFields		
+lib/relations-map.js	commentFields	__ecma.Array	IDENTIFIER	exports.commentFields = commentFields		
+lib/server.js		lib/server.js::program:createServerAndListen	METHOD_REF	module.exports = async function createServerAndListen(app, port, host) {   const server = 		
+lib/utils.js	generateJWTforUser	lib/utils.js::program:generateJWTforUser	IDENTIFIER	exports.generateJWTforUser = generateJWTforUser		
+lib/utils.js	getSelect	lib/utils.js::program:getSelect	IDENTIFIER	exports.getSelect = getSelect		
+middleware/auth-required-middleware.js		middleware/auth-required-middleware.js::program:<lambda>0	METHOD_REF	module.exports = function(ctx, next) {   ctx.assert(ctx.state.user, new AuthenticationErro		
+middleware/camelize-middleware.js		middleware/camelize-middleware.js::program:<lambda>0	METHOD_REF	module.exports = async function(ctx, next) {   await next()   if (ctx.body && _.isObjectLi		
+middleware/error-middleware.js		middleware/error-middleware.js::program:<lambda>2	METHOD_REF	module.exports = async (ctx, next) => {   try {     await next()     ctx.assert(ctx.respon		
+middleware/jwt-middleware.js			CALL	module.exports = koaJwt({   getToken(ctx, opts) {     const { authorization } = ctx.header		
+middleware/pager-middleware.js		middleware/pager-middleware.js::program:<lambda>0	METHOD_REF	module.exports = (ctx, next) => {   if (ctx.method !== "GET") {     return next()   }    c		
+middleware/user-middleware.js		middleware/user-middleware.js::program:<lambda>0	METHOD_REF	module.exports = async (ctx, next) => {   if (has(ctx, "state.jwt.sub.id")) {     ctx.stat		
+migrations/20170422213822_init.js	up	migrations/20170422213822_init.js::program:up	METHOD_REF	exports.up = function(knex) {   return knex.schema      .createTable("users", function(tab		
+migrations/20170422213822_init.js	down	migrations/20170422213822_init.js::program:down	METHOD_REF	exports.down = function(knex) {   return knex.schema     .dropTableIfExists("users")     .		
+routes/articles-router.js			CALL	module.exports = router.routes()		
+routes/index.js		koa-router	IDENTIFIER	module.exports = router		
+routes/profiles-router.js			CALL	module.exports = router.routes()		
+routes/tags-router.js			CALL	module.exports = router.routes()		
+routes/users-router.js			CALL	module.exports = router.routes()		
+schemas/article-schema.js		ANY	IDENTIFIER	module.exports = articleSchema		
+schemas/comment-schema.js		ANY	IDENTIFIER	module.exports = commentSchema		
+schemas/index.js		schemas/index.js::program:<lambda>0	METHOD_REF	module.exports = function(app) {   app.schemas = {     user,     article,     comment,    		
+schemas/tag-schema.js		ANY	IDENTIFIER	module.exports = tagSchema		
+schemas/time-stamp-schema.js		ANY	IDENTIFIER	module.exports = timeStampsSchema		
+schemas/user-schema.js		ANY	IDENTIFIER	module.exports = userSchema		
+seeds/01-users.js	getUsers	seeds/01-users.js::program:getUsers	IDENTIFIER	exports.getUsers = getUsers		
+seeds/01-users.js	seed	seeds/01-users.js::program:seed	METHOD_REF	exports.seed = async function(knex) {   if (process.env.NODE_ENV === "production") {     a		
+seeds/02-articles.js	getArticles	seeds/02-articles.js::program:getArticles	IDENTIFIER	exports.getArticles = getArticles		
+seeds/02-articles.js	seed	seeds/02-articles.js::program:seed	METHOD_REF	exports.seed = async function(knex) {   const users = getUsers()    if (process.env.NODE_E		

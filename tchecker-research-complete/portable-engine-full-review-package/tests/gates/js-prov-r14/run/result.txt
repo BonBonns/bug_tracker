@@ -1,0 +1,12 @@
+PASS ANCHOR-1 m1 default export resolves to `other`
+PASS ANCHOR-1 m1 NEVER resolves to `validate` (decisive negative)
+PASS ANCHOR-1 m1 returned function is other's lambda, not validate's
+PASS ANCHOR-2 m2 resolves to its OWN module
+PASS ANCHOR-2 m4 resolves to its OWN module
+PASS ANCHOR-2 m2 and m4 do NOT collapse onto one identity
+PASS object-literal export abstains rather than guessing
+PASS frontend callee is never consulted (evidence is require+export)
+PASS every fact carries its target file and exported member
+PASS R26-FIXTURE-INTEGRITY: assertion keys (call ids) unique
+PASS R28: code-string lookups are unambiguous in this fixture (ambiguous ones resolve to None, never to an arbitrary record)
+JS_PROV_R14=11/11

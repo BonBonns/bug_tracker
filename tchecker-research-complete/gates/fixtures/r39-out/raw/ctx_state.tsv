@@ -1,0 +1,181 @@
+controllers/articles-controller.js::program:bySlug:<lambda>0	READ	tag		35	-1	false
+controllers/articles-controller.js::program:bySlug:<lambda>1	READ	name		37	-1	false
+controllers/articles-controller.js::program:get	WRITE	body	{ articles, articlesCount }	175	-1	false
+controllers/articles-controller.js::program:get	READ	state		88	-1	false
+controllers/articles-controller.js::program:get	READ	query		89	-1	false
+controllers/articles-controller.js::program:get:<lambda>4:<lambda>5	READ	name		166	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	WRITE	favorited	Boolean(a.favorited)	165	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	WRITE	tagList	a.tagList.map(t => t.name)	166	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	WRITE	author.following	Boolean(a.author.following)	167	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	READ	author.id		168	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	READ	favorited		165	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	READ	author.following		167	-1	false
+controllers/articles-controller.js::program:get:<lambda>4	READ	tagList		166	-1	false
+controllers/articles-controller.js::program:getOne	WRITE	body	{ article: ctx.params.article }	179	-1	false
+controllers/articles-controller.js::program:getOne	READ	params.article		179	-1	false
+controllers/articles-controller.js::program:post	READ	state.user.id		189	-1	false
+controllers/articles-controller.js::program:post	WRITE	body	{ article }	249	-1	false
+controllers/articles-controller.js::program:post	READ	request		183	-1	false
+controllers/articles-controller.js::program:post	READ	state.user		246	-1	false
+controllers/articles-controller.js::program:post	READ	assert		208	-1	true
+controllers/articles-controller.js::program:post	READ	app.schemas.article		191	-1	false
+controllers/articles-controller.js::program:post	READ	assert		225	-1	true
+controllers/articles-controller.js::program:post:<lambda>8	READ	name		234	-1	false
+controllers/articles-controller.js::program:post:<lambda>9	READ	id		238	-1	false
+controllers/articles-controller.js::program:put	READ	assert		255	-1	false
+controllers/articles-controller.js::program:put	READ	params.author		362	-1	false
+controllers/articles-controller.js::program:put	WRITE	body	{ article: newArticle }	364	-1	false
+controllers/articles-controller.js::program:put	READ	params		253	-1	false
+controllers/articles-controller.js::program:put	READ	state.user.id		256	-1	false
+controllers/articles-controller.js::program:put	READ	request		261	-1	false
+controllers/articles-controller.js::program:put	READ	assert		293	-1	true
+controllers/articles-controller.js::program:put	READ	app.schemas.article		267	-1	false
+controllers/articles-controller.js::program:put	READ	assert		340	-1	true
+controllers/articles-controller.js::program:put:<lambda>12	READ	name		350	-1	false
+controllers/articles-controller.js::program:put:<lambda>13	READ	id		354	-1	false
+controllers/articles-controller.js::program:del	READ	assert		370	-1	false
+controllers/articles-controller.js::program:del	WRITE	body	{}	390	-1	false
+controllers/articles-controller.js::program:del	READ	params		368	-1	false
+controllers/articles-controller.js::program:del	READ	state.user.id		371	-1	false
+controllers/articles-controller.js::program:del	READ	state.user.id		379	-1	false
+controllers/articles-controller.js::program:get	WRITE	body	{ articles, articlesCount }	443	-1	false
+controllers/articles-controller.js::program:get	READ	state		395	-1	false
+controllers/articles-controller.js::program:get	READ	query		396	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15:<lambda>16	READ	name		434	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	WRITE	favorited	Boolean(a.favorited)	433	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	WRITE	tagList	a.tagList.map(t => t.name)	434	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	WRITE	author.following	true	435	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	READ	author.id		436	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	READ	favorited		433	-1	false
+controllers/articles-controller.js::program:get1:<lambda>15	READ	tagList		434	-1	false
+controllers/articles-controller.js::program:post	WRITE	body	{ article: ctx.params.article }	470	-1	false
+controllers/articles-controller.js::program:post	READ	params		449	-1	false
+controllers/articles-controller.js::program:post	WRITE	body	{ article: ctx.params.article }	452	-1	true
+controllers/articles-controller.js::program:post	READ	params.article		470	-1	false
+controllers/articles-controller.js::program:post	READ	params.article		452	-1	true
+controllers/articles-controller.js::program:post	READ	state.user.id		459	-1	false
+controllers/articles-controller.js::program:del	WRITE	body	{ article: ctx.params.article }	493	-1	false
+controllers/articles-controller.js::program:del	READ	params		474	-1	false
+controllers/articles-controller.js::program:del	WRITE	body	{ article: ctx.params.article }	477	-1	true
+controllers/articles-controller.js::program:del	READ	params.article		493	-1	false
+controllers/articles-controller.js::program:del	READ	params.article		477	-1	true
+controllers/articles-controller.js::program:del	READ	state.user.id		484	-1	false
+controllers/comments-controller.js::program:get	WRITE	body	{ comments }	54	-1	false
+controllers/comments-controller.js::program:get	READ	state		29	-1	false
+controllers/comments-controller.js::program:get	READ	params		30	-1	false
+controllers/comments-controller.js::program:get:<lambda>1	READ	author.id		49	-1	false
+controllers/comments-controller.js::program:get:<lambda>1	WRITE	author.following	Boolean(c.author.following)	50	-1	false
+controllers/comments-controller.js::program:get:<lambda>1	READ	author.following		50	-1	false
+controllers/comments-controller.js::program:post	WRITE	body	{ comment }	75	-1	false
+controllers/comments-controller.js::program:post	READ	request		58	-1	false
+controllers/comments-controller.js::program:post	READ	state		59	-1	false
+controllers/comments-controller.js::program:post	READ	params		60	-1	false
+controllers/comments-controller.js::program:post	READ	app.schemas.comment		69	-1	false
+controllers/comments-controller.js::program:del	WRITE	body	{}	85	-1	false
+controllers/comments-controller.js::program:del	READ	params		79	-1	false
+controllers/profiles-controller.js::program:get	WRITE	body	{ profile }	45	-1	false
+controllers/profiles-controller.js::program:get	READ	params		44	-1	false
+controllers/profiles-controller.js::program:post	WRITE	body	{ profile }	77	-1	false
+controllers/profiles-controller.js::program:post	READ	params		50	-1	false
+controllers/profiles-controller.js::program:post	READ	state		51	-1	false
+controllers/profiles-controller.js::program:post	WRITE	body	{ profile }	54	-1	true
+controllers/profiles-controller.js::program:post	READ	assert		68	-1	true
+controllers/profiles-controller.js::program:del	WRITE	body	{ profile }	95	-1	false
+controllers/profiles-controller.js::program:del	READ	params		81	-1	false
+controllers/profiles-controller.js::program:del	READ	state		82	-1	false
+controllers/profiles-controller.js::program:del	WRITE	body	{ profile }	85	-1	true
+controllers/tags-controller.js::program:get	WRITE	body	{ tags }	7	-1	false
+controllers/users-controller.js::program:get	WRITE	body	{ user }	13	-1	false
+controllers/users-controller.js::program:get	READ	state.user		11	-1	false
+controllers/users-controller.js::program:post	WRITE	body	{ user: _.omit(user, ["password"]) }	31	-1	false
+controllers/users-controller.js::program:post	READ	request		17	-1	false
+controllers/users-controller.js::program:post	READ	app.schemas.user		23	-1	false
+controllers/users-controller.js::program:put	WRITE	body	{ user: _.omit(user, ["password"]) }	58	-1	false
+controllers/users-controller.js::program:put	READ	request		35	-1	false
+controllers/users-controller.js::program:put	READ	state.user		43	-1	false
+controllers/users-controller.js::program:put	READ	app.schemas.user		44	-1	false
+controllers/users-controller.js::program:login	READ	assert		64	-1	false
+controllers/users-controller.js::program:login	READ	assert		74	-1	false
+controllers/users-controller.js::program:login	READ	assert		82	-1	false
+controllers/users-controller.js::program:login	WRITE	body	{ user: _.omit(user, ["password"]) }	90	-1	false
+controllers/users-controller.js::program:login	READ	request		62	-1	false
+lib/logger.js::program:user	READ	_id		15	-1	false
+lib/server.js::program:createServerAndListen	READ	callback		7	-1	false
+middleware/auth-required-middleware.js::program:<lambda>0	READ	assert		4	5	false
+middleware/auth-required-middleware.js::program:<lambda>0	READ	state.user		4	5	false
+middleware/camelize-middleware.js::program:<lambda>0	READ	body		6	5	true
+middleware/camelize-middleware.js::program:<lambda>0	READ	body		6	5	true
+middleware/camelize-middleware.js::program:<lambda>0	WRITE	body	humps.camelizeKeys(ctx.body)	7	5	true
+middleware/camelize-middleware.js::program:<lambda>0	READ	body		7	5	true
+middleware/error-middleware.js::program:formatValidationError	READ	path		69	-1	true
+middleware/error-middleware.js::program:formatValidationError	READ	inner		72	-1	true
+middleware/error-middleware.js::program:formatValidationError	READ	inner.length		72	-1	true
+middleware/error-middleware.js::program:formatValidationError	READ	path		70	-1	true
+middleware/error-middleware.js::program:formatValidationError	READ	message		70	-1	true
+middleware/error-middleware.js::program:formatValidationError	READ	inner		73	-1	true
+middleware/error-middleware.js::program:<lambda>2	READ	assert		7	6	true
+middleware/error-middleware.js::program:<lambda>2	READ	response.body		7	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	type	"application/json"	9	6	true
+middleware/error-middleware.js::program:<lambda>2	READ	response.body		19	6	true
+middleware/error-middleware.js::program:<lambda>2	READ	response.status		7	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	response.body	{ errors: {} }	20	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	body.errors	formatValidationError(err)	27	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	status	_.defaultTo(status, 422)	28	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	status	_.defaultTo(status, 500)	61	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	status	_.defaultTo(status, 422)	43	6	true
+middleware/error-middleware.js::program:<lambda>2	WRITE	status	_.defaultTo(status, 422)	56	6	true
+middleware/error-middleware.js::program:<lambda>2	READ	body.errors		55	6	true
+middleware/error-middleware.js::program:<lambda>2	READ	body.errors		39	6	true
+middleware/jwt-middleware.js::program:getToken	READ	header		6	-1	false
+middleware/pager-middleware.js::program:<lambda>0	WRITE	query	qs.parse(ctx.querystring)	10	7	false
+middleware/pager-middleware.js::program:<lambda>0	READ	method		6	7	true
+middleware/pager-middleware.js::program:<lambda>0	READ	querystring		10	7	false
+middleware/user-middleware.js::program:<lambda>0	WRITE	state.user	await db("users")       .first(         "id",         "email",         "username",         "image",         "bio",      	6	19	true
+middleware/user-middleware.js::program:<lambda>0	READ	state.jwt.sub.id		16	19	true
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	timestamps		21	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	string		18	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	text		19	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	string		20	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	string		10	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	string		14	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>1	READ	uuid		5	-1	false
+migrations/20170422213822_init.js::program:up	READ	schema		2	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	timestamps		46	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	string		34	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	text		35	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	string		36	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	string		30	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	integer		37	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	uuid		25	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>2	READ	uuid		41	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>3	READ	timestamps		66	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>3	READ	text		55	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>3	READ	uuid		50	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>3	READ	uuid		56	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>3	READ	uuid		61	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>4	READ	timestamps		85	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>4	READ	uuid		70	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>4	READ	uuid		75	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>4	READ	uuid		80	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>5	READ	unique		104	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>5	READ	timestamps		105	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>5	READ	uuid		89	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>5	READ	uuid		94	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>5	READ	uuid		99	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>6	READ	timestamps		118	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>6	READ	string		114	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>6	READ	uuid		109	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>7	READ	unique		137	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>7	READ	timestamps		138	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>7	READ	uuid		122	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>7	READ	uuid		127	-1	false
+migrations/20170422213822_init.js::program:<lambda>0:<lambda>7	READ	uuid		132	-1	false
+migrations/20170422213822_init.js::program:down	READ	schema		143	-1	false
+schemas/index.js::program:<lambda>0	WRITE	schemas	{     user,     article,     comment,     tag,   }	7	-1	false
+seeds/01-users.js::program:getUsers:<lambda>0	READ	id		27	-1	false
+seeds/01-users.js::program:getUsers:<lambda>0	READ	name		29	-1	false
+seeds/01-users.js::program:getUsers:<lambda>0	READ	email		28	-1	false
+seeds/01-users.js::program:getUsers:<lambda>0	READ	name		28	-1	false
+seeds/01-users.js::program:<lambda>1:<lambda>2	READ	email		44	-1	false
+seeds/01-users.js::program:<lambda>1:<lambda>2	READ	name		44	-1	false
+seeds/02-articles.js::program:<lambda>2:<lambda>3	READ	id		37	-1	false

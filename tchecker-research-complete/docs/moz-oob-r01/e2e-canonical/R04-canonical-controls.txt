@@ -1,0 +1,21 @@
+OOB-ADJ-R04 — trusted-identity / content-binding (identity derived by runtime, not caller labels)
+DERIVATION (trusted runtime only; no CLI/packet/hint field can set these):
+  content_sha256   = full SHA-256 of the ACTUAL scanned file bytes (working tree; covers
+                     uncommitted/untracked/dirty edits). scan_repo._scanned_content_map() hashes the
+                     exact bytes fed to the frontend. A commit id is NOT used. Unverified -> FAIL CLOSED.
+  analyzer_identity= full SHA-256 over component files on disk: producer + adjudicator + config +
+                     frontend normalizer + frontend exporter. No manual version string.
+  fingerprint      = full 64-hex sha-256 over canonical JSON (fixed names/types, sorted, compact, ascii)
+                     of {analyzer_identity, content_sha256, file, candidate_class, subclass, array,
+                     elem_count, index_expr, function, line, function_span}.
+CANONICAL RESULTS (scan_repo):
+  C1 baseline vuln -> fpA=5bb7d91f... ; content_sha256 == real file hash ff20559c...; attestation(fpA) suppresses
+  C2 DIRTY WORKTREE: append a comment far from the write; candidate fields identical
+     (line=298, array=rgExtension, index=cExtensions) but content bytes differ (ff20559c->e47e6d33)
+     -> fpB=19ab1795... != fpA -> stale attestation does NOT suppress (packets=1). Commit-id binding
+     would have wrongly suppressed; content-digest binding catches the working-tree edit.
+  C3 no CLI flag can select analyzer/content/repo identity (repo_rev is informational only).
+HERMETIC gate gate_oob_r04_identity.py=20/20: full-hash; each field (incl. content_sha256,
+  analyzer_identity, function, function_span) re-fingerprints; changing a component file changes
+  analyzer_identity; unverified content FAILS CLOSED; caller-declared identity fields stripped;
+  fabricated-fingerprint attestation rejected (suppression recomputes from facts, never echoes).

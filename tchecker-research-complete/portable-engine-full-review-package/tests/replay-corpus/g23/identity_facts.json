@@ -1,0 +1,713 @@
+{
+ "schema": "portable-identity-facts/0.2",
+ "bindings": [
+  {
+   "function_id": 107374182401,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771072"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771072
+    ]
+   }
+  },
+  {
+   "function_id": 107374182401,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149698"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureAlias",
+   "identities": [
+    "ALLOC@30064771114"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771114
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureDirect",
+   "identities": [
+    "ALLOC@30064771102"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771102
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureLocalShadowsOuter",
+   "identities": [
+    "ALLOC@30064771129"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771129
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureMutation",
+   "identities": [
+    "ALLOC@30064771117"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771117
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureMutationToSource",
+   "identities": [
+    "ALLOC@30064771120"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771120
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureParam",
+   "identities": [
+    "ALLOC@30064771105"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771105
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureShadow",
+   "identities": [
+    "ALLOC@30064771108"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771108
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureTwoCaptures",
+   "identities": [
+    "ALLOC@30064771126"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771126
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "closureUnrelated",
+   "identities": [
+    "ALLOC@30064771111"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771111
+    ]
+   }
+  },
+  {
+   "function_id": 107374182402,
+   "binding": "nestedClosure",
+   "identities": [
+    "ALLOC@30064771123"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771123
+    ]
+   }
+  },
+  {
+   "function_id": 107374182403,
+   "binding": "x",
+   "identities": [
+    "PARAM@111669149700"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182404,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771074"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771074
+    ]
+   }
+  },
+  {
+   "function_id": 107374182404,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149702"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182405,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149704"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182406,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771076"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771076
+    ]
+   }
+  },
+  {
+   "function_id": 107374182406,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149706"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182408,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771078"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771078
+    ]
+   }
+  },
+  {
+   "function_id": 107374182408,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149709"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182410,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771081"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771081
+    ]
+   }
+  },
+  {
+   "function_id": 107374182410,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149712"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182410,
+   "binding": "x",
+   "identities": [
+    "PARAM@111669149712"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182412,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771084"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771084
+    ]
+   }
+  },
+  {
+   "function_id": 107374182412,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149715"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182412,
+   "binding": "x",
+   "identities": [
+    "ALLOC@30064771085",
+    "PARAM@111669149715"
+   ],
+   "must": false,
+   "resolution": "AMBIGUOUS",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771085
+    ]
+   }
+  },
+  {
+   "function_id": 107374182414,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771088"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771088
+    ]
+   }
+  },
+  {
+   "function_id": 107374182414,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149718"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182414,
+   "binding": "x",
+   "identities": [
+    "ALLOC@30064771087",
+    "PARAM@111669149718"
+   ],
+   "must": false,
+   "resolution": "AMBIGUOUS",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771087
+    ]
+   }
+  },
+  {
+   "function_id": 107374182417,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771091"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771091
+    ]
+   }
+  },
+  {
+   "function_id": 107374182417,
+   "binding": "g",
+   "identities": [
+    "ALLOC@30064771092"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771092
+    ]
+   }
+  },
+  {
+   "function_id": 107374182417,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149722"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182419,
+   "binding": "a",
+   "identities": [
+    "PARAM@111669149725"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182419,
+   "binding": "b",
+   "identities": [
+    "PARAM@111669149726"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182419,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771096"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771096
+    ]
+   }
+  },
+  {
+   "function_id": 107374182420,
+   "binding": "x",
+   "identities": [
+    "ALLOC@30064771098"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771098
+    ]
+   }
+  },
+  {
+   "function_id": 107374182421,
+   "binding": "f",
+   "identities": [
+    "ALLOC@30064771100"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": [
+     30064771100
+    ]
+   }
+  },
+  {
+   "function_id": 107374182421,
+   "binding": "source",
+   "identities": [
+    "PARAM@111669149729"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182421,
+   "binding": "x",
+   "identities": [
+    "PARAM@111669149729"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182422,
+   "binding": "p1",
+   "identities": [
+    "PARAM@111669149731"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182422,
+   "binding": "p2",
+   "identities": [
+    "PARAM@111669149732"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182423,
+   "binding": "p1",
+   "identities": [
+    "PARAM@111669149733"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182423,
+   "binding": "p2",
+   "identities": [
+    "PARAM@111669149734"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182424,
+   "binding": "p1",
+   "identities": [
+    "PARAM@111669149735"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182424,
+   "binding": "p2",
+   "identities": [
+    "PARAM@111669149736"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182425,
+   "binding": "p0",
+   "identities": [
+    "PARAM@111669149737"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  },
+  {
+   "function_id": 107374182425,
+   "binding": "p1",
+   "identities": [
+    "PARAM@111669149738"
+   ],
+   "must": true,
+   "resolution": "EXACT",
+   "derivation": {
+    "origin": "DATAFLOW_DERIVED",
+    "rule": "DEF_UNION_IDENTITY_PARAM",
+    "source_node_ids": []
+   }
+  }
+ ]
+}

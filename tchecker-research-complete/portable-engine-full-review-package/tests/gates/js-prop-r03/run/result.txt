@@ -1,0 +1,17 @@
+PASS schema 0.4 makes canonical location mandatory
+PASS nested positive root is the input PARAMETER
+PASS nested positive receiver path is literal profile
+PASS separate read/write AST nodes have different raw receiver ids
+PASS same-path read/write canonical receiver locations are equal
+PASS parent overwrite is represented as root + profile key
+PASS same property path on distinct bindings keeps distinct roots
+PASS dynamic receiver selector remains explicit and non-propagatable
+PASS end-to-end nestedPositive => ('AMBIGUOUS', [], [0])
+PASS end-to-end samePathOverwrite => ('EXACT', [1], [])
+PASS end-to-end parentOverwrite => ('UNRESOLVED', [], [])
+PASS end-to-end distinctRoot => ('AMBIGUOUS', [], [0])
+PASS end-to-end dynamicPath => ('UNRESOLVED', [], [])
+PASS end-to-end siblingWrite => ('UNRESOLVED', [], [])
+PASS end-to-end localPositive => ('AMBIGUOUS', [], [0])
+PASS end-to-end childThenParent => ('UNRESOLVED', [], [])
+JS_PROP_R03=16/16

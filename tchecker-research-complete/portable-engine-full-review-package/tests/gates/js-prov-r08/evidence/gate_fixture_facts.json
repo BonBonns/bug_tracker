@@ -1,0 +1,302 @@
+{
+  "schema": "portable-observed-parameter-type-facts/0.1",
+  "note": "Propagated observations are evidence about types VISIBLE AT CALLSITES, never a claim about the concrete runtime type. declared_type is retained separately and is never overwritten. Only evidence_state=CLOSED_SINGLE may support an exclusive dispatch claim.",
+  "facts": [
+    {
+      "callee_method_id": 107374182403,
+      "callee_method_name": "installReal",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149701,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771107
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771107,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182404,
+      "callee_method_name": "installFake",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149703,
+      "declared_type": "ANY",
+      "observed_types": [
+        "gate.js::program:FakeRouter"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771112
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771112,
+          "arg": "fakeRouter",
+          "raw_type": "gate.js::program:FakeRouter",
+          "canonical": "gate.js::program:FakeRouter",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182405,
+      "callee_method_name": "installBoth",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149705,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router",
+        "gate.js::program:FakeRouter"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CONFLICT",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771113,
+        30064771114
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771113,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771114,
+          "arg": "fakeRouter",
+          "raw_type": "gate.js::program:FakeRouter",
+          "canonical": "gate.js::program:FakeRouter",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182406,
+      "callee_method_name": "installOpen",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149707,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router",
+        "JSON.parse"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CONFLICT",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771117,
+        30064771118
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771117,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771118,
+          "arg": "opaque",
+          "raw_type": "JSON.parse:<returnValue>",
+          "canonical": "JSON.parse",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182409,
+      "callee_method_name": "installCanon",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149712,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771120
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771120,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064771121,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182410,
+      "callee_method_name": "installOpenTrue",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149714,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": true,
+      "evidence_state": "OPEN_SINGLE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771123,
+        30064771087
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771123,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771087,
+          "arg": "x",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182411,
+      "callee_method_name": "passThrough",
+      "parameter_index": 1,
+      "parameter_name": "x",
+      "parameter_value_id": 111669149716,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771124
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771124,
+          "arg": "realRouter",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182414,
+      "callee_method_name": "get",
+      "parameter_index": 2,
+      "parameter_name": "cb",
+      "parameter_value_id": 111669149722,
+      "declared_type": "ANY",
+      "observed_types": [
+        "gate.js::program:fakeHandler",
+        "gate.js::program:realHandler"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CONFLICT",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771072,
+        30064771074,
+        30064771076,
+        30064771078,
+        30064771083,
+        30064771085
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771072,
+          "arg": "realHandler",
+          "raw_type": "gate.js::program:realHandler",
+          "canonical": "gate.js::program:realHandler",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771074,
+          "arg": "fakeHandler",
+          "raw_type": "gate.js::program:fakeHandler",
+          "canonical": "gate.js::program:fakeHandler",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771076,
+          "arg": "realHandler",
+          "raw_type": "gate.js::program:realHandler",
+          "canonical": "gate.js::program:realHandler",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771078,
+          "arg": "realHandler",
+          "raw_type": "gate.js::program:realHandler",
+          "canonical": "gate.js::program:realHandler",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771083,
+          "arg": "realHandler",
+          "raw_type": "gate.js::program:realHandler",
+          "canonical": "gate.js::program:realHandler",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771085,
+          "arg": "realHandler",
+          "raw_type": "gate.js::program:realHandler",
+          "canonical": "gate.js::program:realHandler",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    }
+  ]
+}

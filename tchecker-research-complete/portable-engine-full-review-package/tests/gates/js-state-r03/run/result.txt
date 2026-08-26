@@ -1,0 +1,393 @@
+PASS case2_transformBeforeGuard classified SENSITIVE
+PASS case4b_nullSentinelErasedByCoercion classified SENSITIVE
+PASS case8_bitwiseCoercionBeforeGuard classified SENSITIVE
+PASS case9_unaryPlusBeforeGuard classified SENSITIVE
+PASS case10_stringCoercionBeforeGuard classified UNKNOWN (not proven safe, just unmatched)
+PASS case11_booleanCoercionBeforeGuard classified UNKNOWN (not proven safe, just unmatched)
+PASS case12_parseIntCoercionBeforeGuard classified UNKNOWN (not proven safe, just unmatched)
+PASS case13_sinkOnlyInGuardTrueBranch classified UNKNOWN (not proven safe, just unmatched)
+PASS case14_reassignedBeforeSink classified UNKNOWN (not proven safe, just unmatched)
+PASS case7_erasedButNoSensitiveSink classified UNKNOWN (not proven safe, just unmatched)
+PASS case2_transformBeforeGuard sink match is authenticate/AUTHENTICATION
+PASS case4b_nullSentinelErasedByCoercion sink match is authenticate/AUTHENTICATION
+PASS case8_bitwiseCoercionBeforeGuard sink match is authenticate/AUTHENTICATION
+PASS case9_unaryPlusBeforeGuard sink match is authenticate/AUTHENTICATION
+PASS case10_stringCoercionBeforeGuard has zero sink_matches (unrelatedSink correctly unmatched)
+PASS case10_stringCoercionBeforeGuard still records the reaching call for audit (reaching_calls nonempty)
+PASS case11_booleanCoercionBeforeGuard has zero sink_matches (unrelatedSink correctly unmatched)
+PASS case11_booleanCoercionBeforeGuard still records the reaching call for audit (reaching_calls nonempty)
+PASS case12_parseIntCoercionBeforeGuard has zero sink_matches (unrelatedSink correctly unmatched)
+PASS case12_parseIntCoercionBeforeGuard still records the reaching call for audit (reaching_calls nonempty)
+PASS case7_erasedButNoSensitiveSink has zero sink_matches (unrelatedSink correctly unmatched)
+PASS case7_erasedButNoSensitiveSink still records the reaching call for audit (reaching_calls nonempty)
+PASS case13 has zero sink_matches
+PASS case13 has zero reaching_calls (the only candidate was excluded)
+PASS case13's authenticate() call is recorded in excluded_then_branch_calls
+PASS case14 has zero sink_matches
+PASS case14 has zero reaching_calls (the only candidate was excluded)
+PASS case14's authenticate() call is recorded in excluded_reassigned_calls
+PASS case14's authenticate() call is NOT in excluded_then_branch_calls (different exclusion reason)
+PASS no fact uses a value other than SENSITIVE/UNKNOWN for security_sensitive_use
+JS_STATE_R03=30/30
+
+--- emitted facts (full dump, for audit) ---
+{
+  "schema": "portable-failure-state-erasure-with-sink-reachability/0.3",
+  "note": "security_sensitive_use=UNKNOWN means no profile entry matched on the continue path with no intervening reassignment -- NOT a proof of safety. excluded_then_branch_calls lists calls that reach the guarded local structurally but only run when the guard's condition was true. excluded_reassigned_calls lists calls that reach the same LOCAL id but only after a later assignment to it (by line-number approximation, not true CFG ordering), so the value actually reaching them is not provably the erased one. Neither exclusion list is credited toward SENSITIVE.",
+  "facts": [
+    {
+      "method_id": 107374182405,
+      "method_name": "case2_transformBeforeGuard",
+      "control_structure_id": 47244640257,
+      "condition_id": 30064771096,
+      "condition_code": "id2 instanceof Error",
+      "guard_identifier_id": 68719476766,
+      "guard_local_id": 94489280523,
+      "transformation_call_id": 30064771095,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r2)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640257,
+          30064771096,
+          68719476766,
+          94489280523,
+          30064771095
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771097,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771097,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE"
+    },
+    {
+      "method_id": 107374182408,
+      "method_name": "case4b_nullSentinelErasedByCoercion",
+      "control_structure_id": 47244640260,
+      "condition_id": 30064771113,
+      "condition_code": "id4b === null",
+      "guard_identifier_id": 68719476795,
+      "guard_local_id": 94489280531,
+      "transformation_call_id": 30064771112,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r4b)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640260,
+          30064771113,
+          68719476795,
+          94489280531,
+          30064771112
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771114,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771114,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE"
+    },
+    {
+      "method_id": 107374182412,
+      "method_name": "case7_erasedButNoSensitiveSink",
+      "control_structure_id": 47244640263,
+      "condition_id": 30064771132,
+      "condition_code": "id7 instanceof Error",
+      "guard_identifier_id": 68719476831,
+      "guard_local_id": 94489280541,
+      "transformation_call_id": 30064771131,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r7)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640263,
+          30064771132,
+          68719476831,
+          94489280541,
+          30064771131
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771133,
+          "callee_name": "unrelatedSink"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    },
+    {
+      "method_id": 107374182413,
+      "method_name": "case8_bitwiseCoercionBeforeGuard",
+      "control_structure_id": 47244640264,
+      "condition_id": 30064771140,
+      "condition_code": "id8 instanceof Error",
+      "guard_identifier_id": 68719476842,
+      "guard_local_id": 94489280544,
+      "transformation_call_id": 30064771137,
+      "transformation_name": "<operator>.or",
+      "transformation_code": "(r8 as unknown as number) | 0",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "BINARY_BITWISE_COERCION_OPERATOR",
+        "source_node_ids": [
+          47244640264,
+          30064771140,
+          68719476842,
+          94489280544,
+          30064771137
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771141,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771141,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE"
+    },
+    {
+      "method_id": 107374182414,
+      "method_name": "case9_unaryPlusBeforeGuard",
+      "control_structure_id": 47244640265,
+      "condition_id": 30064771148,
+      "condition_code": "id9 instanceof Error",
+      "guard_identifier_id": 68719476853,
+      "guard_local_id": 94489280547,
+      "transformation_call_id": 30064771145,
+      "transformation_name": "<operator>.plus",
+      "transformation_code": "+(r9 as unknown as number)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "UNARY_COERCION_OPERATOR",
+        "source_node_ids": [
+          47244640265,
+          30064771148,
+          68719476853,
+          94489280547,
+          30064771145
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771149,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771149,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE"
+    },
+    {
+      "method_id": 107374182415,
+      "method_name": "case10_stringCoercionBeforeGuard",
+      "control_structure_id": 47244640266,
+      "condition_id": 30064771154,
+      "condition_code": "id10 instanceof Error",
+      "guard_identifier_id": 68719476864,
+      "guard_local_id": 94489280550,
+      "transformation_call_id": 30064771153,
+      "transformation_name": "String",
+      "transformation_code": "String(r10)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640266,
+          30064771154,
+          68719476864,
+          94489280550,
+          30064771153
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771155,
+          "callee_name": "unrelatedSink"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    },
+    {
+      "method_id": 107374182416,
+      "method_name": "case11_booleanCoercionBeforeGuard",
+      "control_structure_id": 47244640267,
+      "condition_id": 30064771160,
+      "condition_code": "id11 instanceof Error",
+      "guard_identifier_id": 68719476875,
+      "guard_local_id": 94489280553,
+      "transformation_call_id": 30064771159,
+      "transformation_name": "Boolean",
+      "transformation_code": "Boolean(r11)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640267,
+          30064771160,
+          68719476875,
+          94489280553,
+          30064771159
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771161,
+          "callee_name": "unrelatedSink"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    },
+    {
+      "method_id": 107374182417,
+      "method_name": "case12_parseIntCoercionBeforeGuard",
+      "control_structure_id": 47244640268,
+      "condition_id": 30064771168,
+      "condition_code": "id12 instanceof Error",
+      "guard_identifier_id": 68719476886,
+      "guard_local_id": 94489280556,
+      "transformation_call_id": 30064771165,
+      "transformation_name": "parseInt",
+      "transformation_code": "parseInt(r12 as unknown as string, 10)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640268,
+          30064771168,
+          68719476886,
+          94489280556,
+          30064771165
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771169,
+          "callee_name": "unrelatedSink"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    },
+    {
+      "method_id": 107374182418,
+      "method_name": "case13_sinkOnlyInGuardTrueBranch",
+      "control_structure_id": 47244640269,
+      "condition_id": 30064771174,
+      "condition_code": "id13 instanceof Error",
+      "guard_identifier_id": 68719476897,
+      "guard_local_id": 94489280559,
+      "transformation_call_id": 30064771173,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r13)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640269,
+          30064771174,
+          68719476897,
+          94489280559,
+          30064771173
+        ]
+      },
+      "reaching_calls": [],
+      "excluded_then_branch_calls": [
+        {
+          "call_id": 30064771175,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    },
+    {
+      "method_id": 107374182419,
+      "method_name": "case14_reassignedBeforeSink",
+      "control_structure_id": 47244640270,
+      "condition_id": 30064771181,
+      "condition_code": "id14 instanceof Error",
+      "guard_identifier_id": 68719476908,
+      "guard_local_id": 94489280562,
+      "transformation_call_id": 30064771180,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r14)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640270,
+          30064771181,
+          68719476908,
+          94489280562,
+          30064771180
+        ]
+      },
+      "reaching_calls": [],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [
+        {
+          "call_id": 30064771183,
+          "callee_name": "authenticate"
+        }
+      ],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN"
+    }
+  ]
+}

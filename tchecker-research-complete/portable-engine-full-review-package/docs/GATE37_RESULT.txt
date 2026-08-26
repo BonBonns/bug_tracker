@@ -1,0 +1,22 @@
+PASS indexed_function_lookup_semantics
+PASS indexed_call_lookup_semantics
+PASS indexed_local_lookup_semantics
+PASS indexed_returns_group_semantics
+PASS indexed_calls_group_semantics
+PASS indexed_assignment_group_semantics
+PASS provenance_identical_after_indexing
+PASS duplicate_ids_rejected
+PASS program_graph_defensive_copy
+PASS function_fact_defensive_copy
+PASS call_fact_defensive_copy
+MEASURE linear_list_reads=2000000 index_build_reads=20000 indexed_lookup_list_reads=0
+PASS linear_scan_cost_is_measured
+PASS index_build_is_single_scan
+PASS indexed_lookup_avoids_backing_list_scan
+GATE37=14/14
+ANALYSIS_STATUS=COMPLETE
+PASS NO_LINKED_LIST
+PASS NO_BOXED_LONG_IDENTITY_COMPARE
+PASS NO_BOXED_INTEGER_IDENTITY_COMPARE
+PASS NO_LEGACY_AST_DEPENDENCY
+AUDITED_JAVA_FILES=63

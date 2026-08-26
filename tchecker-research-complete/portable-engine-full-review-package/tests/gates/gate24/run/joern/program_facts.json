@@ -1,0 +1,683 @@
+{
+  "calls": [
+    {
+      "arguments": [
+        {
+          "call_id": 30064771073,
+          "code": "helper",
+          "id": 68719476740,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "helper",
+          "type_full_name": "gate24.ts::program:helper"
+        },
+        {
+          "call_id": 30064771073,
+          "code": "helper",
+          "id": 120259084288,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 1,
+          "name": "",
+          "type_full_name": "gate24.ts::program:helper"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function helper = function helper(value: string): string {\n  return value;\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771073,
+      "line": 1,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771074,
+          "code": "exports.helper",
+          "id": 30064771075,
+          "index": 1,
+          "kind": "CALL",
+          "line": 1,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771074,
+          "code": "helper",
+          "id": 68719476742,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "helper",
+          "type_full_name": "gate24.ts::program:helper"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "exports.helper = helper",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771074,
+      "line": 1,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771076,
+          "code": "main",
+          "id": 68719476743,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "main",
+          "type_full_name": "gate24.ts::program:main"
+        },
+        {
+          "call_id": 30064771076,
+          "code": "main",
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 5,
+          "name": "",
+          "type_full_name": "gate24.ts::program:main"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function main = function main(input: string): string {\n  return helper(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771076,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771077,
+          "code": "exports.main",
+          "id": 30064771078,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771077,
+          "code": "main",
+          "id": 68719476745,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "main",
+          "type_full_name": "gate24.ts::program:main"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "exports.main = main",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771077,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771075,
+          "code": "exports",
+          "id": 68719476741,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "exports",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771075,
+          "code": "helper",
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 1,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "exports.helper",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771075,
+      "line": 1,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771078,
+          "code": "exports",
+          "id": 68719476744,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "exports",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771078,
+          "code": "main",
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 5,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "exports.main",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate24.ts",
+      "id": 30064771078,
+      "line": 5,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771072,
+          "code": "this",
+          "id": 68719476738,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "this",
+          "type_full_name": "gate24.ts::program"
+        },
+        {
+          "call_id": 30064771072,
+          "code": "input",
+          "id": 68719476739,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "input",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate24.ts::program:helper"
+      ],
+      "candidate_target_ids": [
+        107374182400
+      ],
+      "canonical_targets": [
+        "gate24.ts::program:helper"
+      ],
+      "code": "helper(input)",
+      "concrete_targets": [
+        "gate24.ts::program:helper"
+      ],
+      "corrected_targets": [
+        "gate24.ts::program:helper"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate24.ts",
+      "id": 30064771072,
+      "line": 6,
+      "method_full_name": "gate24.ts::program:helper",
+      "name": "helper",
+      "receiver_owner_match": true,
+      "receiver_type": "gate24.ts::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "__ecma.String"
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate24.ts",
+      "full_name": "gate24.ts::program:helper",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 1,
+      "line_end": 3,
+      "name": "helper",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149696,
+          "index": 0,
+          "line": 1,
+          "method_id": 107374182400,
+          "name": "this",
+          "type_full_name": "gate24.ts::program"
+        },
+        {
+          "code": "value: string",
+          "id": 111669149697,
+          "index": 1,
+          "line": 1,
+          "method_id": 107374182400,
+          "name": "value",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "gate24.ts::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "gate24.ts",
+      "full_name": "gate24.ts::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 8,
+      "name": ":program",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149700,
+          "index": 0,
+          "line": 1,
+          "method_id": 107374182401,
+          "name": "this",
+          "type_full_name": "gate24.ts::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate24.ts",
+      "full_name": "gate24.ts::program:main",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 5,
+      "line_end": 7,
+      "name": "main",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149698,
+          "index": 0,
+          "line": 5,
+          "method_id": 107374182402,
+          "name": "this",
+          "type_full_name": "gate24.ts::program"
+        },
+        {
+          "code": "input: string",
+          "id": 111669149699,
+          "index": 1,
+          "line": 5,
+          "method_id": 107374182402,
+          "name": "input",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182403,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149701,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182403,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149702,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182403,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182404,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149703,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182404,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149704,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182404,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "value",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182400,
+      "name": "value",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "value",
+      "id": 68719476736,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "value",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "helper",
+      "id": 68719476737,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "helper",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "gate24.ts::program:helper"
+    },
+    {
+      "code": "this",
+      "id": 68719476738,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "gate24.ts::program"
+    },
+    {
+      "code": "input",
+      "id": 68719476739,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "helper",
+      "id": 68719476740,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "helper",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "gate24.ts::program:helper"
+    },
+    {
+      "code": "exports",
+      "id": 68719476741,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "exports",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "helper",
+      "id": 68719476742,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "helper",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "gate24.ts::program:helper"
+    },
+    {
+      "code": "main",
+      "id": 68719476743,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "main",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "gate24.ts::program:main"
+    },
+    {
+      "code": "exports",
+      "id": 68719476744,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "exports",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "main",
+      "id": 68719476745,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "main",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "gate24.ts::program:main"
+    },
+    {
+      "code": "helper",
+      "id": 68719476737,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "helper",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "gate24.ts::program:helper"
+    },
+    {
+      "code": "this",
+      "id": 68719476738,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "this",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "gate24.ts::program"
+    },
+    {
+      "code": "input",
+      "id": 68719476739,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "input",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "__ecma.String"
+    }
+  ],
+  "locals": [],
+  "members": [],
+  "metadata": {
+    "cpg_version": "4.0.608",
+    "language": "JSSRC",
+    "root": "/home/user/work/tchecker-research-complete/portable-engine-full-review-package/tests/gates/gate24/run/src"
+  },
+  "method_returns": [],
+  "returns": [
+    {
+      "code": "return value",
+      "id": 141733920768,
+      "line": 2,
+      "method_id": 107374182400,
+      "returned_value_ids": [
+        68719476736
+      ]
+    },
+    {
+      "code": "return value",
+      "id": 141733920768,
+      "line": 2,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        68719476736
+      ]
+    },
+    {
+      "code": "return helper(input)",
+      "id": 141733920769,
+      "line": 6,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771072
+      ]
+    },
+    {
+      "code": "return helper(input)",
+      "id": 141733920769,
+      "line": 6,
+      "method_id": 107374182402,
+      "returned_value_ids": [
+        30064771072
+      ]
+    }
+  ],
+  "schema": "portable-program-facts/0.2",
+  "type_decls": []
+}

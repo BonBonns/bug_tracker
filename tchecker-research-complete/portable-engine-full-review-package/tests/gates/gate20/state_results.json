@@ -1,0 +1,368 @@
+{
+  "objectStaticExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectStaticExact.source"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectStaticExact.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:objectStaticExact.source"
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:objectStaticExact.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:objectStaticExact.source"
+        ]
+      }
+    ]
+  },
+  "objectStaticDifferent": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectStaticDifferent.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:objectStaticDifferent.source"
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectStaticDifferent.box",
+        "key": "S:other",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:objectStaticDifferent.box",
+        "key": "S:other",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ]
+  },
+  "objectStaticOverwrite": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectStaticOverwrite.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:objectStaticOverwrite.source"
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectStaticOverwrite.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:objectStaticOverwrite.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ]
+  },
+  "objectDynamicWrite": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"BASE\"",
+      "PARAM:objectDynamicWrite.source"
+    ],
+    "paramPositions": [
+      2
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectDynamicWrite.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"BASE\""
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectDynamicWrite.box",
+        "key": "DYNAMIC:key",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "PARAM:objectDynamicWrite.source"
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:objectDynamicWrite.box",
+        "key": "S:fixed",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "CONST:\"BASE\"",
+          "PARAM:objectDynamicWrite.source"
+        ]
+      }
+    ]
+  },
+  "objectDynamicRead": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:objectDynamicRead.source",
+      "STATE_UNKNOWN:PARAMOBJ:objectDynamicRead.box[*]"
+    ],
+    "paramPositions": [
+      2
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectDynamicRead.box",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:objectDynamicRead.source"
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:objectDynamicRead.box",
+        "key": "S:other",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:objectDynamicRead.box",
+        "key": "DYNAMIC:key",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "CONST:\"CONST\"",
+          "PARAM:objectDynamicRead.source",
+          "STATE_UNKNOWN:PARAMOBJ:objectDynamicRead.box[*]"
+        ]
+      }
+    ]
+  },
+  "arrayStaticExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:arrayStaticExact.source"
+    ],
+    "paramPositions": [
+      1
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayStaticExact.arr",
+        "key": "N:0",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:arrayStaticExact.source"
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:arrayStaticExact.arr",
+        "key": "N:0",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:arrayStaticExact.source"
+        ]
+      }
+    ]
+  },
+  "arrayStaticDifferent": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": [],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayStaticDifferent.arr",
+        "key": "N:0",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:arrayStaticDifferent.source"
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayStaticDifferent.arr",
+        "key": "N:1",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:arrayStaticDifferent.arr",
+        "key": "N:1",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ]
+  },
+  "arrayDynamicWrite": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"BASE\"",
+      "PARAM:arrayDynamicWrite.source"
+    ],
+    "paramPositions": [
+      2
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayDynamicWrite.arr",
+        "key": "N:0",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"BASE\""
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayDynamicWrite.arr",
+        "key": "DYNAMIC:i",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "PARAM:arrayDynamicWrite.source"
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:arrayDynamicWrite.arr",
+        "key": "N:0",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "CONST:\"BASE\"",
+          "PARAM:arrayDynamicWrite.source"
+        ]
+      }
+    ]
+  },
+  "arrayDynamicRead": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:arrayDynamicRead.source",
+      "STATE_UNKNOWN:PARAMOBJ:arrayDynamicRead.arr[*]"
+    ],
+    "paramPositions": [
+      2
+    ],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayDynamicRead.arr",
+        "key": "N:0",
+        "resolution": "EXACT",
+        "value": [
+          "PARAM:arrayDynamicRead.source"
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:arrayDynamicRead.arr",
+        "key": "N:1",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:arrayDynamicRead.arr",
+        "key": "DYNAMIC:i",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "CONST:\"CONST\"",
+          "PARAM:arrayDynamicRead.source",
+          "STATE_UNKNOWN:PARAMOBJ:arrayDynamicRead.arr[*]"
+        ]
+      }
+    ]
+  },
+  "differentReceiver": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"BASE\""
+    ],
+    "paramPositions": [],
+    "trace": [
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:differentReceiver.a",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"BASE\""
+        ]
+      },
+      {
+        "kind": "WRITE",
+        "receiver": "PARAMOBJ:differentReceiver.b",
+        "key": "DYNAMIC:key",
+        "resolution": "AMBIGUOUS",
+        "value": [
+          "PARAM:differentReceiver.source"
+        ]
+      },
+      {
+        "kind": "READ",
+        "receiver": "PARAMOBJ:differentReceiver.a",
+        "key": "S:fixed",
+        "resolution": "EXACT",
+        "value": [
+          "CONST:\"BASE\""
+        ]
+      }
+    ]
+  }
+}

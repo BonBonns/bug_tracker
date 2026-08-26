@@ -1,0 +1,35 @@
+{
+ "schema": "portable-source-facts/0.1",
+ "source_origins": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "JS_FILE_INPUT_SOURCE",
+    "source_node_ids": [
+     30064771073
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771073,
+   "location": "readFileSync",
+   "origin_kind": "FILE_INPUT",
+   "target_kind": "LOCAL",
+   "target_local_id": 94489280513
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "JS_FILE_INPUT_SOURCE",
+    "source_node_ids": [
+     30064771080
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771080,
+   "location": "readFileSync",
+   "origin_kind": "FILE_INPUT",
+   "target_kind": "LOCAL",
+   "target_local_id": 94489280516
+  }
+ ]
+}

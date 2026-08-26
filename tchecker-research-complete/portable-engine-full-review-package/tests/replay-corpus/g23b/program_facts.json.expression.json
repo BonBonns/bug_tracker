@@ -1,0 +1,414 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771075,
+     30064771076,
+     30064771082
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771075,
+   "operands": [
+    {
+     "code": "ts.isCallExpression(n)&&ts.isIdentifier(n.expression)",
+     "id": 30064771076,
+     "kind": "CALL"
+    },
+    {
+     "code": "bindings.has(n.expression.text)",
+     "id": 30064771082,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalAnd",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771076,
+     30064771077,
+     30064771079
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771076,
+   "operands": [
+    {
+     "code": "ts.isCallExpression(n)",
+     "id": 30064771077,
+     "kind": "CALL"
+    },
+    {
+     "code": "ts.isIdentifier(n.expression)",
+     "id": 30064771079,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalAnd",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771087,
+     30064771088,
+     30064771091
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771087,
+   "operands": [
+    {
+     "code": "callsByLine.get(line(n))",
+     "id": 30064771088,
+     "kind": "CALL"
+    },
+    {
+     "code": "__ecma.Array.factory()",
+     "id": 30064771091,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771095,
+     90194313216,
+     30064771096,
+     90194313218,
+     30064771097,
+     90194313219
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771095,
+   "operands": [
+    {
+     "code": "ids[0]",
+     "id": 30064771096,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "bindings.get(n.expression.text)",
+     "id": 30064771097,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.formatString",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771151,
+     30064771152,
+     30064771156
+    ]
+   },
+   "function_id": 107374182401,
+   "id": 30064771151,
+   "operands": [
+    {
+     "code": "!ts.isIdentifier(d.name)",
+     "id": 30064771152,
+     "kind": "CALL"
+    },
+    {
+     "code": "!d.initializer",
+     "id": 30064771156,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771158,
+     30064771159,
+     30064771162
+    ]
+   },
+   "function_id": 107374182401,
+   "id": 30064771158,
+   "operands": [
+    {
+     "code": "ts.isArrowFunction(d.initializer)",
+     "id": 30064771159,
+     "kind": "CALL"
+    },
+    {
+     "code": "ts.isFunctionExpression(d.initializer)",
+     "id": 30064771162,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771166,
+     30064771167,
+     30064771171
+    ]
+   },
+   "function_id": 107374182401,
+   "id": 30064771166,
+   "operands": [
+    {
+     "code": "closuresByLine.get(line(d.initializer))",
+     "id": 30064771167,
+     "kind": "CALL"
+    },
+    {
+     "code": "__ecma.Array.factory()",
+     "id": 30064771171,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771339,
+     30064771340,
+     30064771342
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771339,
+   "operands": [
+    {
+     "code": "out.join('\\n')",
+     "id": 30064771340,
+     "kind": "CALL"
+    },
+    {
+     "code": "out.length ? \"\n\" : \"\"",
+     "id": 30064771342,
+     "kind": "CALL"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771350,
+     30064771351,
+     90194313249
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771350,
+   "operands": [
+    {
+     "code": "JSON.stringify(manifest,null,2)",
+     "id": 30064771351,
+     "kind": "CALL"
+    },
+    {
+     "code": "\"\n\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771342,
+     30064771343,
+     90194313244,
+     90194313245
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771342,
+   "operands": [
+    {
+     "code": "\"\n\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    },
+    {
+     "code": "\"\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.conditional",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771291,
+     30064771292,
+     90194313239
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771291,
+   "operands": [
+    {
+     "code": "n.type",
+     "id": 30064771292,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "\"AST_CLOSURE\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.equals",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771306,
+     30064771307,
+     90194313241
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771306,
+   "operands": [
+    {
+     "code": "n.type",
+     "id": 30064771307,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "\"AST_CALL\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.equals",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771289,
+     30064771290,
+     90194313238
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771289,
+   "operands": [
+    {
+     "code": "n[\"lineno:int\"]",
+     "id": 30064771290,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "0",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771211,
+     30064771212,
+     90194313226
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771211,
+   "operands": [
+    {
+     "code": "r[i]",
+     "id": 30064771212,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "\"\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.logicalOr",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771216,
+     30064771217,
+     90194313227
+    ]
+   },
+   "function_id": 107374182407,
+   "id": 30064771216,
+   "operands": [
+    {
+     "code": "sf.getLineAndCharacterOfPosition(n.getStart(sf)).line",
+     "id": 30064771217,
+     "kind": "STATE_READ"
+    },
+    {
+     "code": "1",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

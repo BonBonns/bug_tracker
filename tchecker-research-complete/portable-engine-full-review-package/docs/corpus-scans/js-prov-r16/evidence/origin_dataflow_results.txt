@@ -1,0 +1,15 @@
+=== a3 = {...body, ...query}: spread children (composition) ===
+  RHS label=BLOCK
+     SPREAD src=_tmp_2,ctx.request.body
+     SPREAD src=_tmp_2,ctx.query
+  RHS label=CALL
+  RHS label=IDENTIFIER
+  RHS label=METHOD_REF
+=== a4 = {k:1, ...body} ===
+     SPREAD src=_tmp_3,ctx.request.body
+=== destructuring BLOCK internals: const {value} = r ===
+     <operator>.assignment | _tmp_5 = r
+     <operator>.assignment | value = _tmp_5.value
+     <operator>.fieldAccess | _tmp_5.value
+=== opaque call r = schema.validate(a3): args + callee ===
+  mfn=<unknownFullName> callees=0 args=schema,a3

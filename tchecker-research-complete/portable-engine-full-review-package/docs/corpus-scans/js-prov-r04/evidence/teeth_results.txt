@@ -1,0 +1,79 @@
+=== CALLSITES: callee resolution + arg types + callee param decl types ===
+  r7_c  callees=[prop.ts::program:r7_c]
+      ARGS   0:this:prop.ts::program 1:y:ANY
+      PARAMS 0:this:prop.ts::program 1:z:ANY
+  r7_b  callees=[prop.ts::program:r7_b]
+      ARGS   0:this:prop.ts::program 1:x:prop:ts::program:Base
+      PARAMS 0:this:prop.ts::program 1:y:ANY
+  r8_self  callees=[prop.ts::program:r8_self]
+      ARGS   0:this:prop.ts::program 1:x:prop:ts::program:Base
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r8_m2  callees=[prop.ts::program:r8_m2]
+      ARGS   0:this:prop.ts::program 1:x:prop:ts::program:Base
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r8_m1  callees=[prop.ts::program:r8_m1]
+      ARGS   0:this:prop.ts::program 1:x:prop:ts::program:Base
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r1_register  callees=[prop.ts::program:r1_register]
+      ARGS   0:this:prop.ts::program 1:r1:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:router:ANY
+  r2_register  callees=[prop.ts::program:r2_register]
+      ARGS   0:this:prop.ts::program 1:r2a:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:router:ANY
+  r2_register  callees=[prop.ts::program:r2_register]
+      ARGS   0:this:prop.ts::program 1:r2b:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:router:ANY
+  r2_register  callees=[prop.ts::program:r2_register]
+      ARGS   0:this:prop.ts::program 1:r2c:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:router:ANY
+  r3_register  callees=[prop.ts::program:r3_register]
+      ARGS   0:this:prop.ts::program 1:r3a:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r3_register  callees=[prop.ts::program:r3_register]
+      ARGS   0:this:prop.ts::program 1:r3b:prop.ts::program:Db:<init>
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r4_register  callees=[prop.ts::program:r4_register]
+      ARGS   0:this:prop.ts::program 1:r4a:prop.ts::program:Router:<init>
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r4_register  callees=[prop.ts::program:r4_register]
+      ARGS   0:this:prop.ts::program 1:anyVal:ANY
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r4_register  callees=[prop.ts::program:r4_register]
+      ARGS   0:this:prop.ts::program 1:unk:ANY
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r4_register  callees=[prop.ts::program:r4_register]
+      ARGS   0:this:prop.ts::program 1:null:__ecma.Null
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r5_two  callees=[prop.ts::program:r5_two]
+      ARGS   0:this:prop.ts::program 1:r5r:prop.ts::program:Router:<init> 2:r5d:prop.ts::program:Db:<init>
+      PARAMS 0:this:prop.ts::program 1:a:ANY 2:b:ANY
+  r6_exact  callees=[prop.ts::program:r6_exact]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r7_a  callees=[prop.ts::program:r7_a]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r8_self  callees=[prop.ts::program:r8_self]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r8_m1  callees=[prop.ts::program:r8_m1]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router
+      PARAMS 0:this:prop.ts::program 1:x:ANY
+  r9_declared  callees=[prop.ts::program:r9_declared]
+      ARGS   0:this:prop.ts::program 1:r9d:prop.ts::program:Derived
+      PARAMS 0:this:prop.ts::program 1:x:prop.ts::program:Base:<init>
+  r5c_default  callees=[prop.ts::program:r5c_default]
+      ARGS   0:this:prop.ts::program 1:makeRouter() as :ANY
+      PARAMS 0:this:prop.ts::program 1:a:__ecma.Number
+  r5c_rest  callees=[prop.ts::program:r5c_rest]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router
+      PARAMS 0:this:prop.ts::program 1:args:__ecma.Array
+  r5c_mixed  callees=[prop.ts::program:r5c_mixed]
+      ARGS   0:this:prop.ts::program 1:makeRouter():Router 2:makeDb():Db
+      PARAMS 0:this:prop.ts::program 1:a:ANY 2:b:__ecma.Number
+  r6b_reg  callees=[prop.ts::program:r6b_reg]
+      ARGS   0:this:prop.ts::program 1:<lambda>0:prop.ts::program:<lambda>0
+      PARAMS 0:this:prop.ts::program 1:cb:ANY
+  r6b_reg  callees=[prop.ts::program:r6b_reg]
+      ARGS   0:this:prop.ts::program 1:r6b_handler:prop.ts::program:r6b_handler
+      PARAMS 0:this:prop.ts::program 1:cb:ANY

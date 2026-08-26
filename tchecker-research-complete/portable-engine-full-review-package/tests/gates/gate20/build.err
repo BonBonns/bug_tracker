@@ -1,0 +1,11 @@
+/mnt/data/wptc-work/wp-tchecker/engine/tchecker/detector/jpanlib/src/main/java/outputModules/csv/CSVWriterImpl.java:40: warning: [removal] Long(long) in Long has been deprecated and marked for removal
+		nodeWriter.write((new Long(lastNodeId)).toString());
+		                  ^
+/mnt/data/wptc-work/wp-tchecker/engine/tchecker/detector/joern-php/src/main/java/cg/PruneCG.java:388: warning: [removal] Long(long) in Long has been deprecated and marked for removal
+		Long index=new Long(0);
+		           ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /mnt/data/wptc-work/wp-tchecker/engine/tchecker/detector/joern-php/src/main/java/tools/php/ast2cpg/StaticAnalysis.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+2 warnings

@@ -1,0 +1,2 @@
+cpexec-benign/index.js	cpexec-benign/index.js::program:build	3	execSync	false	execSync("node-gyp rebuild")
+cpexec-mal/run.js	cpexec-mal/run.js::program	3	exec	false	exec("echo installed")

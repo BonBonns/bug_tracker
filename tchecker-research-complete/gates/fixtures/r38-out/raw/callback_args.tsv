@@ -1,0 +1,17 @@
+30064771111	use	1	IDENTIFIER	userMiddleware	(ctx: ANY, next: ANY) => Promise<void>	(ctx: ANY, next: ANY) => Promise<void>	68719476782
+30064771113	use	1	IDENTIFIER	auditMiddleware	(ctx: ANY, next: ANY) => Promise<void>	(ctx: ANY, next: ANY) => Promise<void>	68719476785
+30064771115	use	1	CALL	articlesRouter.routes()		ANY	30064771117
+30064771119	use	1	CALL	tagsRouter.routes()		ANY	30064771121
+30064771123	use	1	CALL	multiRouter.routes()		ANY	30064771125
+30064771127	use	1	IDENTIFIER	lateMiddleware	(ctx: ANY, next: ANY) => Promise<void>	(ctx: ANY, next: ANY) => Promise<void>	68719476800
+30064771174	get	1	LITERAL	"/articles/:id"			90194313230
+30064771174	get	2	CALL	ctrl.get		ANY	30064771176
+30064771210	get	1	LITERAL	"/multi-a"			90194313232
+30064771210	get	2	IDENTIFIER	exportedHandler	routes/multi-router.js::program:exportedHandler	routes/multi-router.js::program:exportedHandler	68719476878
+30064771212	get	1	LITERAL	"/multi-b"			90194313233
+30064771212	get	2	IDENTIFIER	unexportedHandler	routes/multi-router.js::program:unexportedHandler	routes/multi-router.js::program:unexportedHandler	68719476881
+30064771230	get	1	LITERAL	"/orphan"			90194313235
+30064771230	get	2	IDENTIFIER	orphanHandler	routes/orphan-router.js::program:orphanHandler	routes/orphan-router.js::program:orphanHandler	68719476901
+30064771262	post	1	LITERAL	"/tags"			90194313237
+30064771262	post	2	IDENTIFIER	tagWriter	routes/tags-router.js::program:tagWriter	routes/tags-router.js::program:tagWriter	68719476930
+30064771262	post	3	IDENTIFIER	tagHandler	routes/tags-router.js::program:tagHandler	routes/tags-router.js::program:tagHandler	68719476931

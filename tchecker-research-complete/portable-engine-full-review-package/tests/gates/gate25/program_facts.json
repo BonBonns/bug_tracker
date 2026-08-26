@@ -1,0 +1,14 @@
+{
+  "schema":"portable-program-facts/0.2",
+  "frontend":"synthetic-gate25",
+  "metadata":{},
+  "type_decls":[],"members":[],"method_returns":[],"locals":[],"identifiers":[],"returns":[],
+  "functions":[
+    {"id":10,"name":"process","full_name":"A.process","signature":"(string):string","file":"fixture.ts","line":1,"line_end":3,"is_external":false,"parameters":[]},
+    {"id":20,"name":"process","full_name":"B.process","signature":"(string):string","file":"fixture.ts","line":5,"line_end":7,"is_external":false,"parameters":[]},
+    {"id":30,"name":"exact","full_name":"exact","signature":"(A,string):string","file":"fixture.ts","line":9,"line_end":11,"is_external":false,"parameters":[]}
+  ],
+  "calls":[
+    {"id":31,"enclosing_function_id":30,"name":"process","method_full_name":"A.process","dispatch_type":"DYNAMIC_DISPATCH","type_full_name":"string","code":"obj.process(x)","file":"fixture.ts","line":10,"candidate_target_ids":[10],"candidate_target_full_names":["A.process"],"resolution":"EXACT","arguments":[]}
+  ]
+}

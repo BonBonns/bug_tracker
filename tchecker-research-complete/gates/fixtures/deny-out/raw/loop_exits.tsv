@@ -1,0 +1,6 @@
+lib/denylist-escaped.js	lib/denylist-escaped.js::program	12	RETURN	13	if (new RegExp(`\\.(${escapeRe(ext)})$`, "i").test(filename)) return { ext, valid: true };	false	false	true
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:checkFiletype	12	RETURN	13	if (new RegExp(`\\.(${escapeRe(ext)})$`, "i").test(filename)) return { ext, valid: true };	false	false	true
+lib/denylist-normalized.js	lib/denylist-normalized.js::program	14	RETURN	15	if (new RegExp(`\\.(${ext})$`, "i").test(filename)) return { ext, valid: true };	false	false	true
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:checkFiletype	14	RETURN	15	if (new RegExp(`\\.(${ext})$`, "i").test(filename)) return { ext, valid: true };	false	false	true
+lib/denylist-vuln.js	lib/denylist-vuln.js::program	19	RETURN	21	if (re.test(filename)) return { ext, mime, valid: true };	false	true	true
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:checkFiletype	19	RETURN	21	if (re.test(filename)) return { ext, mime, valid: true };	false	true	true

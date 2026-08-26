@@ -1,0 +1,13 @@
+=== Object.create argument (can null-prototype be PROVEN?) ===
+  create arg1 label=LITERAL code=null type=__ecma.Null
+=== KEY provenance: is the index key a PARAM, module const, or literal? ===
+  t1_constantOwnKey key=LITERAL "alice"
+  t2_constantProtoKey key=LITERAL "__proto__"
+  t3_attackerKey key=input REF->[LOCAL:LOCAL]
+  t4_nullPrototypeBase key=LITERAL "alice"
+  t4_nullPrototypeBase key=input REF->[LOCAL:LOCAL]
+  t5_hasOwnPropertyGate key=input REF->[LOCAL:LOCAL]
+  t6_objectHasOwnGate key=input REF->[LOCAL:LOCAL]
+  t8_uncontrolledUnknownKey key=k REF->[METHOD_PARAMETER_IN:METHOD_PARAMETER_IN]
+  t9_cveReplay key=username REF->[METHOD_PARAMETER_IN:METHOD_PARAMETER_IN]
+  t9_cveReplay key=username REF->[METHOD_PARAMETER_IN:METHOD_PARAMETER_IN]

@@ -1,0 +1,28 @@
+x5: 0
+EVID mayAliasWrite ProvenanceEvidence: function=69 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID sameAliasBothBranches ProvenanceEvidence: function=115 status=PROVEN resolution=EXACT positions=[1] hard_source=true
+EVID mayAliasDifferentField ProvenanceEvidence: function=154 status=UNKNOWN resolution=UNKNOWN positions=[] hard_source=false
+EVID mayAliasOverwrite ProvenanceEvidence: function=200 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID mayAliasRead ProvenanceEvidence: function=252 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMay ProvenanceEvidence: function=304 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMay2 ProvenanceEvidence: function=328 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapExact ProvenanceEvidence: function=352 status=PROVEN resolution=EXACT positions=[1] hard_source=true
+EVID wrapUnknown ProvenanceEvidence: function=376 status=UNKNOWN resolution=UNKNOWN positions=[] hard_source=false
+EVID wrapMayLocal ProvenanceEvidence: function=400 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMayLocal2 ProvenanceEvidence: function=429 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapUnknownLocal ProvenanceEvidence: function=463 status=UNKNOWN resolution=UNKNOWN positions=[] hard_source=false
+EVID identity ProvenanceEvidence: function=558 status=PROVEN resolution=EXACT positions=[0] hard_source=true
+EVID wrapMayThroughIdentity ProvenanceEvidence: function=585 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMayThroughIdentity2 ProvenanceEvidence: function=618 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapUnknownThroughIdentity ProvenanceEvidence: function=656 status=UNKNOWN resolution=UNKNOWN positions=[] hard_source=false
+EVID wrapMayConditional ProvenanceEvidence: function=722 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID conditionalExactOnly ProvenanceEvidence: function=755 status=PROVEN resolution=EXACT positions=[1] hard_source=true
+EVID wrapMayConcat ProvenanceEvidence: function=777 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMayConcatTwo ProvenanceEvidence: function=808 status=MAY resolution=AMBIGUOUS positions=[1, 3] hard_source=false
+EVID wrapUnknownConcat ProvenanceEvidence: function=859 status=UNKNOWN resolution=UNKNOWN positions=[] hard_source=false
+EVID wrapMayTemplate ProvenanceEvidence: function=890 status=MAY resolution=AMBIGUOUS positions=[1] hard_source=false
+EVID wrapMayTemplateTwo ProvenanceEvidence: function=923 status=MAY resolution=AMBIGUOUS positions=[1, 3] hard_source=false
+EVID concatExactOnly ProvenanceEvidence: function=980 status=PROVEN resolution=EXACT positions=[0, 1] hard_source=true
+EVID binaryUnrelated ProvenanceEvidence: function=1001 status=NONE resolution=NONE positions=[] hard_source=false
+REPORT_MUTATED_HARD=false
+REPORT_MUTATED_MAY=false

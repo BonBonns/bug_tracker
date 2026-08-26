@@ -1,0 +1,9 @@
+CAPTURE_FACTS chains=2
+IDENTITY_FACTS bindings=22
+STATE_FACTS writes=0 reads=3 derivation={FIELD_ACCESS_READ=3}
+LOADED frontend=joern-jssrc2cpg functions=9 calls=15 returns=1
+SUMMARY reader resolution=HEURISTIC proven=[] may=[] unknown=false completeness=COMPLETE
+EVIDENCE reader identity=VALUE_SPECIFIC origin=NONE resolution=HEURISTIC completeness=COMPLETE
+SUMMARY sink resolution=EXACT proven=[] may=[] unknown=false completeness=COMPLETE
+EVIDENCE sink identity=FUNCTION_LEVEL origin=NONE resolution=EXACT completeness=COMPLETE
+ANALYSIS_STATUS=COMPLETE

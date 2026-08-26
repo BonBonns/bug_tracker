@@ -1,0 +1,67 @@
+=== L1: is the Router constructor identity present? ===
+  require('@koa/router')
+  ASSIGN const Router = require('@koa/router')
+  ASSIGN const router = new Router()
+=== L2: the 'router' LOCAL in the DEFINING module ===
+  LOCAL router type=@koa/router file=<iterator>
+  LOCAL router type=@koa/router file=<iterator>
+  LOCAL router type=@koa/router file=<iterator>
+=== L3: register(router) call sites -> argument binding ===
+  register mfn=resources/account/sign-up/index.js::program:<lambda>0 file=resources/account/public.js
+      arg0 IDENT _tmp_1 type=resources/account/sign-up/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/sign-in/index.js::program:<lambda>0 file=resources/account/public.js
+      arg0 IDENT _tmp_2 type=resources/account/sign-in/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/sign-out/index.js::program:<lambda>1 file=resources/account/public.js
+      arg0 IDENT _tmp_3 type=resources/account/sign-out/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/verify-email/index.js::program:<lambda>1 file=resources/account/public.js
+      arg0 IDENT _tmp_4 type=resources/account/verify-email/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/forgot-password/index.js::program:<lambda>1 file=resources/account/public.js
+      arg0 IDENT _tmp_5 type=resources/account/forgot-password/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/reset-password/index.js::program:<lambda>1 file=resources/account/public.js
+      arg0 IDENT _tmp_6 type=resources/account/reset-password/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/verify-reset-token/index.js::program:<lambda>0 file=resources/account/public.js
+      arg0 IDENT _tmp_7 type=resources/account/verify-reset-token/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/account/resend-email/index.js::program:<lambda>1 file=resources/account/public.js
+      arg0 IDENT _tmp_8 type=resources/account/resend-email/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/health/get/index.js::program:<lambda>1 file=resources/health/public.js
+      arg0 IDENT _tmp_1 type=resources/health/get/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/user/get-current/index.js::program:<lambda>0 file=resources/user/index.js
+      arg0 IDENT _tmp_1 type=resources/user/get-current/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/user/update-current/index.js::program:<lambda>1 file=resources/user/index.js
+      arg0 IDENT _tmp_2 type=resources/user/update-current/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/user/upload-avatar/index.js::program:<lambda>2 file=resources/user/index.js
+      arg0 IDENT _tmp_3 type=resources/user/upload-avatar/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/user/remove-avatar/index.js::program:<lambda>2 file=resources/user/index.js
+      arg0 IDENT _tmp_4 type=resources/user/remove-avatar/index.js::program
+      arg1 IDENT router type=@koa/router
+  register mfn=resources/user/list/index.js::program:<lambda>0 file=resources/user/index.js
+      arg0 IDENT _tmp_5 type=resources/user/list/index.js::program
+      arg1 IDENT router type=@koa/router
+=== L4: the RECEIVING module's exported register fn + its param ===
+=== L5: exports/imports graph availability ===
+  IMPORT Koa = require('koa')
+  IMPORT http = require('http')
+  IMPORT config = require('config')
+  IMPORT logger = require('logger')
+  IMPORT cors = require('@koa/cors')
+  IMPORT helmet = require('koa-helmet')
+  EXPORT module.exports = {  DATABASE_DOCUMENTS: {    USERS: 'users',
+  EXPORT module.exports = app
+  EXPORT module.exports = config
+  EXPORT module.exports = require('./environment')
+  EXPORT module.exports = db
+  EXPORT module.exports = emitter
+  EXPORT module.exports = createConsoleLogger()
+  EXPORT module.exports = multer({ storage })

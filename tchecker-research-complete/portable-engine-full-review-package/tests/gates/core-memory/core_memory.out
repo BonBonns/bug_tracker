@@ -1,0 +1,6 @@
+PASS declared location cross-validates and value flows EXACT proven={0}
+PASS location without a corresponding local is REFUSED at graph construction
+PASS location claiming a different function is REFUSED
+PASS memory-location record invariants enforced
+PASS points-to must<=>singleton and MAY-cannot-be-EXACT enforced
+CORE_MEMORY=5/5

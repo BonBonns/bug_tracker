@@ -1,0 +1,52 @@
+30064771084	get	config:get	bin/server.js::program:main	config	config			1
+30064771087	get	config:get	bin/server.js::program:main	config	config			1
+30064771485	all	Promise.all	controllers/articles-controller.js::program:get					1
+30064771572	get	lodash:get	controllers/articles-controller.js::program:post	_	lodash			3
+30064771583	all	Promise.all	controllers/articles-controller.js::program:post					1
+30064771775	get	lodash:get	controllers/articles-controller.js::program:put	_	lodash			3
+30064771903	all	Promise.all	controllers/articles-controller.js::program:put					1
+30064771982	all	Promise.all	controllers/articles-controller.js::program:del					1
+30064772079	all	Promise.all	controllers/articles-controller.js::program:get					1
+30064772175	all	Promise.all	controllers/articles-controller.js::program:post					1
+30064772233	all	Promise.all	controllers/articles-controller.js::program:del					1
+30064773004	get	config:get	lib/app.js::program	config	config			1
+30064773020	use	koa:use	lib/app.js::program	app	koa			1
+30064773023	use	koa:use	lib/app.js::program	app	koa			1
+30064773028	use	koa:use	lib/app.js::program	app	koa			1
+30064773031	use	koa:use	lib/app.js::program	app	koa			1
+30064773034	use	koa:use	lib/app.js::program	app	koa			1
+30064773069	use	koa:use	lib/app.js::program	app	koa			1
+30064773071	use	koa:use	lib/app.js::program	app	koa			1
+30064773073	use	koa:use	lib/app.js::program	app	koa			1
+30064773075	use	koa:use	lib/app.js::program	app	koa			1
+30064773084	use	koa:use	lib/app.js::program	app	koa			1
+30064773086	use	koa:use	lib/app.js::program	app	koa			1
+30064773088	use	koa:use	lib/app.js::program	app	koa			1
+30064773092	use	koa:use	lib/app.js::program	app	koa			1
+30064773249	get	config:get	lib/logger.js::program	config	config			1
+30064773261	get	config:get	lib/logger.js::program	config	config			1
+30064773265	get	config:get	lib/logger.js::program	config	config			1
+30064773269	get	config:get	lib/logger.js::program	config	config			1
+30064773488	get	config:get	lib/utils.js::program:generateJWTforUser	config	config			1
+30064773718	get	config:get	middleware/jwt-middleware.js::program	config	config			1
+30064774164	get	koa-router:get	routes/articles-router.js::program	router	koa-router			2
+30064774167	post	koa-router:post	routes/articles-router.js::program	router	koa-router			3
+30064774170	get	koa-router:get	routes/articles-router.js::program	router	koa-router			3
+30064774174	get	koa-router:get	routes/articles-router.js::program	router	koa-router			2
+30064774177	put	koa-router:put	routes/articles-router.js::program	router	koa-router			3
+30064774183	post	koa-router:post	routes/articles-router.js::program	router	koa-router			3
+30064774191	get	koa-router:get	routes/articles-router.js::program	router	koa-router			2
+30064774195	post	koa-router:post	routes/articles-router.js::program	router	koa-router			3
+30064774225	use	koa-router:use	routes/index.js::program	api	koa-router			1
+30064774227	use	koa-router:use	routes/index.js::program	api	koa-router			1
+30064774229	use	koa-router:use	routes/index.js::program	api	koa-router			1
+30064774231	use	koa-router:use	routes/index.js::program	api	koa-router			1
+30064774233	use	koa-router:use	routes/index.js::program	router	koa-router			2
+30064774253	get	koa-router:get	routes/profiles-router.js::program	router	koa-router			2
+30064774256	post	koa-router:post	routes/profiles-router.js::program	router	koa-router			3
+30064774277	get	koa-router:get	routes/tags-router.js::program	router	koa-router			2
+30064774295	post	koa-router:post	routes/users-router.js::program	router	koa-router			2
+30064774298	post	koa-router:post	routes/users-router.js::program	router	koa-router			2
+30064774301	get	koa-router:get	routes/users-router.js::program	router	koa-router			3
+30064774304	put	koa-router:put	routes/users-router.js::program	router	koa-router			3
+30064774978	all	Promise.all	seeds/02-articles.js::program:seed					1

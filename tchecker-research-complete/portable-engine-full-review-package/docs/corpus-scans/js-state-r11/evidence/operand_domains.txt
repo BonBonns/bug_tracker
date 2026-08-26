@@ -1,0 +1,21 @@
+### caseA_explicitDifferent | a == b
+    arg1 label=IDENTIFIER code=a STATIC=__ecma.Number HINTS=[] PRODUCER=[const a = 1]
+    arg2 label=IDENTIFIER code=b STATIC=__ecma.String HINTS=[] PRODUCER=[const b = "1"]
+### caseB_sameDomain | c == d
+    arg1 label=IDENTIFIER code=c STATIC=__ecma.String HINTS=[] PRODUCER=[const c = "x"]
+    arg2 label=IDENTIFIER code=d STATIC=__ecma.String HINTS=[] PRODUCER=[const d = "x"]
+### caseC_nullishIdiom | value == null
+    arg1 label=IDENTIFIER code=value STATIC=string | __ecma.Null | ANY HINTS=[] PRODUCER=[]
+    arg2 label=LITERAL code=null STATIC=__ecma.Null HINTS=[] PRODUCER=[]
+### caseD_anyVsExplicit | unknownValue == "secret"
+    arg1 label=IDENTIFIER code=unknownValue STATIC=ANY HINTS=[] PRODUCER=[]
+    arg2 label=LITERAL code="secret" STATIC=__ecma.String HINTS=[] PRODUCER=[]
+### caseE_bothAny | x == y
+    arg1 label=IDENTIFIER code=x STATIC=ANY HINTS=[] PRODUCER=[]
+    arg2 label=IDENTIFIER code=y STATIC=ANY HINTS=[] PRODUCER=[]
+### caseF_cveShape | users[name] == password
+    arg1 label=CALL code=users[name] STATIC=ANY HINTS=[] PRODUCER=[]
+    arg2 label=IDENTIFIER code=password STATIC=ANY HINTS=[] PRODUCER=[const password = request.body.password]
+### caseG_explicitConvStrict | String(a) === b
+    arg1 label=CALL code=String(a) STATIC=ANY HINTS=[String] PRODUCER=[]
+    arg2 label=IDENTIFIER code=b STATIC=__ecma.String HINTS=[] PRODUCER=[]

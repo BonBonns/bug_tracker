@@ -1,0 +1,81 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182405,
+      "inner_binding": "A",
+      "inner_local_id": 94489280541,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280539,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280541,
+          34359738368,
+          94489280539
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "A",
+      "inner_local_id": 94489280543,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280539,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280543,
+          34359738369,
+          94489280539
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "A",
+      "inner_local_id": 94489280546,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280539,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280546,
+          34359738370,
+          94489280539
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182402,
+      "inner_binding": "A",
+      "inner_local_id": 94489280548,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280539,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280548,
+          34359738371,
+          94489280539
+        ]
+      }
+    }
+  ]
+}

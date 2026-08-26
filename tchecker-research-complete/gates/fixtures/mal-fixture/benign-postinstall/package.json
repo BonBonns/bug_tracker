@@ -1,0 +1,7 @@
+{
+  "name": "left-pad-native",
+  "version": "1.4.2",
+  "description": "native addon",
+  "main": "index.js",
+  "scripts": { "postinstall": "node build.js" }
+}

@@ -1,0 +1,80 @@
+30064771084	get	1	LITERAL	"server.host"			90194313218
+30064771087	get	1	LITERAL	"server.port"			90194313219
+30064771485	all	1	BLOCK	[articlesQuery, countQuery]			25769803819
+30064771572	get	1	IDENTIFIER	article	ctx:request:<returnValue>:<member>(request):<member>(body):<member>(article)	ctx:request:<returnValue>:<member>(request):<member>(body):<member>(article)	68719477193
+30064771572	get	2	LITERAL	"title"			90194313332
+30064771572	get	3	LITERAL	""			90194313333
+30064771583	all	1	CALL	article.tagList           .map(t => ({ id: uuid(), name: t }))           .map(t => ctx.app.schemas.tag.validate(t, opts)		ANY	30064771584
+30064771775	get	1	IDENTIFIER	newArticle	Object.assign:<returnValue>	Object.assign:<returnValue>	68719477369
+30064771775	get	2	LITERAL	"title"			90194313365
+30064771775	get	3	LITERAL	""			90194313366
+30064771903	all	1	CALL	newArticle.tagList             .map(t => ({ id: uuid(), name: t }))             .map(t => ctx.app.schemas.tag.validate(t		ANY	30064771904
+30064771982	all	1	BLOCK	[       db("favorites")         .del()         .where({ user: ctx.state.user.id, article: article.id }),        db("arti			25769803886
+30064772079	all	1	BLOCK	[         db("articles")           .select(             ...getSelect("articles", "article", articleFields),             			25769803896
+30064772175	all	1	BLOCK	[         db("favorites").insert({           id: uuid(),           user: ctx.state.user.id,           article: article.i			25769803910
+30064772233	all	1	BLOCK	[         db("favorites")           .del()           .where({ user: ctx.state.user.id, article: article.id }),         d			25769803918
+30064773004	get	1	LITERAL	"secret"			90194313570
+30064773020	use	1	CALL	responseTime()		ANY	30064773022
+30064773023	use	1	CALL	xRequestId({ inject: true }, app)		ANY	30064773025
+30064773028	use	1	CALL	logger()		ANY	30064773030
+30064773031	use	1	CALL	helmet()		ANY	30064773033
+30064773034	use	1	CALL	cors({     origin: "*",     exposeHeaders: ["Authorization"],     credentials: true,     allowMethods: ["GET", "PUT", "P		ANY	30064773036
+30064773069	use	1	IDENTIFIER	camelizeMiddleware	(ctx: ANY, next: ANY) => Promise<void>	(ctx: ANY, next: ANY) => Promise<void>	68719478586
+30064773071	use	1	IDENTIFIER	error	(ctx: ANY, next: ANY) => Promise<void>	(ctx: ANY, next: ANY) => Promise<void>	68719478589
+30064773073	use	1	IDENTIFIER	jwt	middleware/jwt-middleware.js::program	middleware/jwt-middleware.js::program	68719478592
+30064773075	use	1	CALL	bodyParser({     enableTypes: ["json"],   })		ANY	30064773077
+30064773084	use	1	IDENTIFIER	userMiddleware	(ctx: ANY, next: ANY) => Promise<any>	(ctx: ANY, next: ANY) => Promise<any>	68719478605
+30064773086	use	1	IDENTIFIER	pagerMiddleware	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719478608
+30064773088	use	1	CALL	routes.routes()		ANY	30064773090
+30064773092	use	1	CALL	routes.allowedMethods()		ANY	30064773094
+30064773249	get	1	LITERAL	"env.logLevel"			90194313617
+30064773261	get	1	LITERAL	"env.environment"			90194313618
+30064773265	get	1	LITERAL	"env.version"			90194313619
+30064773269	get	1	LITERAL	"env.name"			90194313620
+30064773488	get	1	LITERAL	"secret"			90194313670
+30064773718	get	1	LITERAL	"secret"			90194313723
+30064774164	get	1	LITERAL	"/articles"			90194313834
+30064774164	get	2	CALL	ctrl.get		ANY	30064774166
+30064774167	post	1	LITERAL	"/articles"			90194313835
+30064774167	post	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479553
+30064774167	post	3	CALL	ctrl.post		ANY	30064774169
+30064774170	get	1	LITERAL	"/articles/feed"			90194313836
+30064774170	get	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479557
+30064774170	get	3	CALL	ctrl.feed.get		ANY	30064774172
+30064774174	get	1	LITERAL	"/articles/:slug"			90194313837
+30064774174	get	2	CALL	ctrl.getOne		ANY	30064774176
+30064774177	put	1	LITERAL	"/articles/:slug"			90194313838
+30064774177	put	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479564
+30064774177	put	3	CALL	ctrl.put		ANY	30064774179
+30064774183	post	1	LITERAL	"/articles/:slug/favorite"			90194313840
+30064774183	post	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479572
+30064774183	post	3	CALL	ctrl.favorite.post		ANY	30064774185
+30064774191	get	1	LITERAL	"/articles/:slug/comments"			90194313842
+30064774191	get	2	CALL	ctrl.comments.get		ANY	30064774193
+30064774195	post	1	LITERAL	"/articles/:slug/comments"			90194313843
+30064774195	post	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479583
+30064774195	post	3	CALL	ctrl.comments.post		ANY	30064774197
+30064774225	use	1	IDENTIFIER	users	ANY	ANY	68719479619
+30064774227	use	1	IDENTIFIER	articles	ANY	ANY	68719479622
+30064774229	use	1	IDENTIFIER	profiles	ANY	ANY	68719479625
+30064774231	use	1	IDENTIFIER	tags	ANY	ANY	68719479628
+30064774233	use	1	LITERAL	"/api"			90194313850
+30064774233	use	2	CALL	api.routes()		ANY	30064774235
+30064774253	get	1	LITERAL	"/profiles/:username"			90194313855
+30064774253	get	2	CALL	ctrl.get		ANY	30064774255
+30064774256	post	1	LITERAL	"/profiles/:username/follow"			90194313856
+30064774256	post	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479657
+30064774256	post	3	CALL	ctrl.follow.post		ANY	30064774258
+30064774277	get	1	LITERAL	"/tags"			90194313860
+30064774277	get	2	CALL	ctrl.get		ANY	30064774279
+30064774295	post	1	LITERAL	"/users/login"			90194313864
+30064774295	post	2	CALL	ctrl.login		ANY	30064774297
+30064774298	post	1	LITERAL	"/users"			90194313865
+30064774298	post	2	CALL	ctrl.post		ANY	30064774300
+30064774301	get	1	LITERAL	"/user"			90194313866
+30064774301	get	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479705
+30064774301	get	3	CALL	ctrl.get		ANY	30064774303
+30064774304	put	1	LITERAL	"/user"			90194313867
+30064774304	put	2	IDENTIFIER	auth	(ctx: ANY, next: ANY) => ANY	(ctx: ANY, next: ANY) => ANY	68719479709
+30064774304	put	3	CALL	ctrl.put		ANY	30064774306
+30064774978	all	1	CALL	getArticles(users).map(a => knex("articles").insert(a))		ANY	30064774979

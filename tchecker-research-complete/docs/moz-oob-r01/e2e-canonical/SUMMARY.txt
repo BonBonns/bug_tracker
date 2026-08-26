@@ -1,0 +1,8 @@
+CANONICAL ENTRY-POINT (scan_repo.py TARGET) — end-to-end, clean dirs, no manual scripts/moves
+  VULN    dir -> {'candidates': 1, 'out_dir': '/tmp/e2e/vwork/oob_review', 'packets': 1}
+  PATCHED dir -> {'candidates': 0, 'out_dir': '/tmp/e2e/pwork/oob_review', 'packets': 0}
+  packet: candidate_class=OOB_WRITE, deterministic_status=UNKNOWN, no 'VULNERABLE'.
+TRUST MATRIX (--oob-hints, all SAFE/HIGH):
+  source=LLM              -> packets=1 (CANDIDATE_OPEN, ADVISORY_ONLY_UNTRUSTED_SOURCE)
+  no source               -> packets=1 (CANDIDATE_OPEN)
+  source=CURATED_ATTESTATION -> packets=0 (RESOLVED_SAFE_BY_ACCEPTED_HINT)

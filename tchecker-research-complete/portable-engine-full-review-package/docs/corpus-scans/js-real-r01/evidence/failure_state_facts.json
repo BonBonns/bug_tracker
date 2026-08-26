@@ -1,0 +1,28 @@
+{
+  "schema": "portable-failure-state-erasure-candidate-facts/0.1",
+  "facts": [
+    {
+      "method_id": 107374182737,
+      "method_name": "<lambda>13",
+      "control_structure_id": 47244640650,
+      "condition_id": 30064779160,
+      "condition_code": "seen.has(key)",
+      "guard_identifier_id": 68719484584,
+      "guard_local_id": 94489282881,
+      "transformation_call_id": 30064779157,
+      "transformation_name": "<operator>.formatString",
+      "transformation_code": "<operator>.formatString(\"\", bounce.email, \":\", bounce.createdAt, \"\")",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "TEMPLATE_STRING_COERCION",
+        "source_node_ids": [
+          47244640650,
+          30064779160,
+          68719484584,
+          94489282881,
+          30064779157
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+=== REGISTRATION + HANDLER IDENTITY ===
+  post    mfn=express:<returnValue>:post                     lit="/e1"
+      arg0 IDENT app type=express:<returnValue>
+      arg2 METHOD_REF -> fw.js::program:<lambda>0
+  get     mfn=express:Router:<returnValue>:get               lit="/e2"
+      arg0 IDENT router type=express:Router:<returnValue>
+      arg2 METHOD_REF -> fw.js::program:<lambda>1
+  post    mfn=fastify:post                                   lit="/f1"
+      arg0 IDENT fastify type=fastify
+      arg2 METHOD_REF -> fw.js::program:<lambda>2
+  use     mfn=koa:use                                        lit=
+      arg0 IDENT koaApp type=koa
+      arg1 METHOD_REF -> fw.js::program:<lambda>3
+  route   mfn=@hapi/hapi:server:<returnValue>:route          lit=
+      arg0 IDENT hapiServer type=@hapi/hapi:server:<returnValue>
+  post    mfn={ post: (p: ANY, cb: ANY) => ANY; }:post       lit="/n1"
+      arg0 IDENT notFramework type={ post: (p: ANY, cb: ANY) => ANY; }
+      arg2 METHOD_REF -> fw.js::program:<lambda>7
+  <operator>.fieldAccess mfn=<operator>.fieldAccess                         lit=
+      arg1 IDENT notFramework type={ post: (p: ANY, cb: ANY) => ANY; }
+      arg2 FIELD_IDENTIFIER post
+  post    mfn=express:<returnValue>:post                     lit="/wrongparam"
+      arg0 IDENT app type=express:<returnValue>
+      arg2 METHOD_REF -> fw.js::program:<lambda>8
+  post    mfn=express:Router:<returnValue>:post              lit="/w1"
+      arg0 IDENT router type=express:Router:<returnValue>
+      arg2 IDENT namedHandler type=fw.js::program:namedHandler
+  post    mfn=express:Router:<returnValue>:post              lit="/w2"
+      arg0 IDENT router type=express:Router:<returnValue>
+      arg2 IDENT mw type=fw.js::program:mw
+      arg3 IDENT namedHandler type=fw.js::program:namedHandler
+  post    mfn=express:Router:<returnValue>:post              lit="/w3"
+      arg0 IDENT router type=express:Router:<returnValue>
+      arg2 IDENT reexported type=ANY
+  post    mfn=express:<returnValue>:post                     lit="/d1"
+      arg0 IDENT app type=express:<returnValue>
+      arg2 METHOD_REF -> fw.js::program:<lambda>9
+=== HAPI route object / SERVERLESS export ===
+  route args=hapiServer ;; { method: 'POST', path: '/h1', handler: (request, h) => { us
+  exports.handler = async (event, context) => { use(event.body); use(eve
+=== HANDLER PARAM ROLES ===
+  fake             fw.js::program:fake                      params=0:this,1:req,2:res
+  fakeFastify      fw.js::program:fakeFastify               params=0:this,1:request,2:reply
+  ordinaryHelper   fw.js::program:ordinaryHelper            params=0:this,1:obj
+  namedHandler     fw.js::program:namedHandler              params=0:this,1:req,2:res
+  mw               fw.js::program:mw                        params=0:this,1:req,2:res,3:next
+  nonHttp          fw.js::program:nonHttp                   params=0:this
+  <lambda>0        fw.js::program:<lambda>0                 params=0:this,1:req,2:res
+  <lambda>1        fw.js::program:<lambda>1                 params=0:this,1:req,2:res
+  <lambda>2        fw.js::program:<lambda>2                 params=0:this,1:request,2:reply
+  <lambda>3        fw.js::program:<lambda>3                 params=0:this,1:ctx,2:next
+  <lambda>7        fw.js::program:<lambda>7                 params=0:this,1:req,2:res
+  <lambda>8        fw.js::program:<lambda>8                 params=0:this,1:req,2:res
+  <lambda>9        fw.js::program:<lambda>9                 params=0:this,1:req,2:res

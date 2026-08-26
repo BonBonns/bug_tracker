@@ -1,0 +1,321 @@
+{
+  "topState": {
+    "origins": [
+      "PARAM:topState.source"
+    ],
+    "trace": [
+      {
+        "kind": "CALL",
+        "line": 22,
+        "target": "store"
+      },
+      {
+        "kind": "METHOD",
+        "line": 14,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:topState.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:topState.h.worker.value",
+        "value": [
+          "PARAM:topState.source"
+        ]
+      },
+      {
+        "kind": "CALL",
+        "line": 23,
+        "target": "load"
+      },
+      {
+        "kind": "METHOD",
+        "line": 18,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:topState.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:topState.h.worker.value",
+        "value": [
+          "PARAM:topState.source"
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:topState.h.worker.value": [
+        "PARAM:topState.source"
+      ]
+    }
+  },
+  "topConstantOverwrite": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "trace": [
+      {
+        "kind": "CALL",
+        "line": 27,
+        "target": "store"
+      },
+      {
+        "kind": "METHOD",
+        "line": 14,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:topConstantOverwrite.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:topConstantOverwrite.h.worker.value",
+        "value": [
+          "PARAM:topConstantOverwrite.source"
+        ]
+      },
+      {
+        "kind": "CALL",
+        "line": 28,
+        "target": "store"
+      },
+      {
+        "kind": "METHOD",
+        "line": 14,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:topConstantOverwrite.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:topConstantOverwrite.h.worker.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "CALL",
+        "line": 29,
+        "target": "load"
+      },
+      {
+        "kind": "METHOD",
+        "line": 18,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:topConstantOverwrite.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:topConstantOverwrite.h.worker.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:topConstantOverwrite.h.worker.value": [
+        "CONST:\"CONST\""
+      ]
+    }
+  },
+  "directState": {
+    "origins": [
+      "PARAM:directState.source"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 33,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:directState.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:directState.h.worker.value",
+        "value": [
+          "PARAM:directState.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 34,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:directState.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:directState.h.worker.value",
+        "value": [
+          "PARAM:directState.source"
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:directState.h.worker.value": [
+        "PARAM:directState.source"
+      ]
+    }
+  },
+  "directConstant": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 38,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:directConstant.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:directConstant.h.worker.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 39,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:directConstant.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:directConstant.h.worker.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:directConstant.h.worker.value": [
+        "CONST:\"CONST\""
+      ]
+    }
+  },
+  "differentField": {
+    "origins": [
+      "STATE_UNKNOWN:PARAMOBJ:differentField.h.worker.value"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 43,
+        "target": "A.setOther",
+        "receiver": "PARAMOBJ:differentField.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setOther",
+        "state": "PARAMOBJ:differentField.h.worker.other",
+        "value": [
+          "PARAM:differentField.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 44,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:differentField.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:differentField.h.worker.value",
+        "value": [
+          "STATE_UNKNOWN:PARAMOBJ:differentField.h.worker.value"
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:differentField.h.worker.other": [
+        "PARAM:differentField.source"
+      ]
+    }
+  },
+  "twoObjects": {
+    "origins": [
+      "STATE_UNKNOWN:ALLOC:twoObjects:49:A.value"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 50,
+        "target": "A.setValue",
+        "receiver": "ALLOC:twoObjects:48:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:twoObjects:48:A.value",
+        "value": [
+          "PARAM:twoObjects.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 51,
+        "target": "A.readValue",
+        "receiver": "ALLOC:twoObjects:49:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:twoObjects:49:A.value",
+        "value": [
+          "STATE_UNKNOWN:ALLOC:twoObjects:49:A.value"
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:twoObjects:48:A.value": [
+        "PARAM:twoObjects.source"
+      ]
+    }
+  },
+  "sameObject": {
+    "origins": [
+      "PARAM:sameObject.source"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 56,
+        "target": "A.setValue",
+        "receiver": "ALLOC:sameObject:55:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:sameObject:55:A.value",
+        "value": [
+          "PARAM:sameObject.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 57,
+        "target": "A.readValue",
+        "receiver": "ALLOC:sameObject:55:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:sameObject:55:A.value",
+        "value": [
+          "PARAM:sameObject.source"
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:sameObject:55:A.value": [
+        "PARAM:sameObject.source"
+      ]
+    }
+  }
+}

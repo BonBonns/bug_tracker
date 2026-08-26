@@ -1,0 +1,19 @@
+PASS body-only spread -> {HTTP_BODY}, established
+PASS query-only spread -> {HTTP_QUERY}
+PASS body+query spread -> BOTH origins as a SET
+PASS literal member does not dilute the set
+PASS unrelated spread invents no HTTP origin
+PASS opaque transform NEVER becomes DERIVED_FROM_*
+PASS opaque transform carries INPUT origins as a set
+PASS sibling destructure carries the same transform inputs
+PASS value-preserving wrapper is NOT distinguished from opaque (T9==T8 shape)
+PASS wrapper input origins preserved
+PASS established-origin paths are NOT downgraded to transform-input evidence
+PASS open-world flag present on every classification
+PASS R18 inline {...body,...query} -> both transform inputs
+PASS R18 inline literal-only -> no HTTP input origin
+PASS R18 inline unrelated spread -> no HTTP origin invented
+PASS R18 identical inline objects at different callsites stay distinct nodes
+PASS R18 spread inside a NESTED call is NOT harvested as the outer argument
+PASS R18 opaque-transform gate intact: no inline case establishes output
+JS_PROV_R17=18/18

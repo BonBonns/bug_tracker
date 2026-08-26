@@ -1,0 +1,88 @@
+{
+  "objectSpreadExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectSpreadExact.source"
+    ],
+    "paramPositions": [
+      1
+    ]
+  },
+  "objectSpreadOverrideAfter": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  },
+  "objectSpreadOverrideBefore": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectSpreadOverrideBefore.source"
+    ],
+    "paramPositions": [
+      1
+    ]
+  },
+  "objectSpreadLaterObjectWins": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  },
+  "objectSpreadEarlierObjectLoses": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:objectSpreadEarlierObjectLoses.source"
+    ],
+    "paramPositions": [
+      2
+    ]
+  },
+  "objectSpreadDynamicWrite": {
+    "resolution": "AMBIGUOUS",
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:objectSpreadDynamicWrite.source",
+      "STATE_UNKNOWN:SPREAD:PARAMOBJ:objectSpreadDynamicWrite.a[*]"
+    ],
+    "paramPositions": [
+      2
+    ]
+  },
+  "arraySpreadExact": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:arraySpreadExact.source"
+    ],
+    "paramPositions": [
+      1
+    ]
+  },
+  "arraySpreadPrefix": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:arraySpreadPrefix.source"
+    ],
+    "paramPositions": [
+      1
+    ]
+  },
+  "arraySpreadSuffix": {
+    "resolution": "EXACT",
+    "origins": [
+      "PARAM:arraySpreadSuffix.source"
+    ],
+    "paramPositions": [
+      1
+    ]
+  },
+  "distinctReceiverSpread": {
+    "resolution": "EXACT",
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  }
+}

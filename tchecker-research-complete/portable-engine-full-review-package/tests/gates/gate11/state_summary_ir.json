@@ -1,0 +1,47 @@
+{
+  "schema": "STATE_SUMMARY_IR_V1",
+  "identity_rule": "receiver identity + property path",
+  "merge_rule": "do not merge distinct allocation sites or distinct property names",
+  "overwrite_rule": "later exact write replaces prior exact state value",
+  "summaries": {
+    "A.setValue": {
+      "writes": [
+        {
+          "state": "THIS.value",
+          "value": "PARAM0"
+        }
+      ],
+      "returns": null
+    },
+    "A.setOther": {
+      "writes": [
+        {
+          "state": "THIS.other",
+          "value": "PARAM0"
+        }
+      ],
+      "returns": null
+    },
+    "A.readValue": {
+      "writes": [],
+      "returns": "STATE(THIS.value)"
+    },
+    "A.readOther": {
+      "writes": [],
+      "returns": "STATE(THIS.other)"
+    },
+    "store": {
+      "writes": [
+        {
+          "state": "PARAM0.worker.value",
+          "value": "PARAM1"
+        }
+      ],
+      "returns": null
+    },
+    "load": {
+      "writes": [],
+      "returns": "STATE(PARAM0.worker.value)"
+    }
+  }
+}

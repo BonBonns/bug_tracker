@@ -1,0 +1,1032 @@
+app.constants.js::program	0	this	app.constants.js::program	app.constants.js::program
+app.js::program	0	this	app.js::program	app.js::program
+app.js::program:<lambda>0	0	this	app.js::program	app.js::program
+app.js::program:<lambda>0	1	reason	ANY	
+app.js::program:<lambda>0	2	p	ANY	
+app.js::program:<lambda>1	0	this	app.js::program	app.js::program
+config/environment/index.js::program	0	this	config/environment/index.js::program	config/environment/index.js::program
+config/index.js::program	0	this	config/index.js::program	config/index.js::program
+db.js::program	0	this	db.js::program	db.js::program
+ioEmitter.js::program	0	this	ioEmitter.js::program	ioEmitter.js::program
+ioEmitter.js::program:<lambda>0	0	this	ioEmitter.js::program	ioEmitter.js::program
+ioEmitter.js::program:<lambda>0	1	err	ANY	
+logger.js::program	0	this	logger.js::program	logger.js::program
+logger.js::program:<lambda>0:<lambda>1	0	this	logger.js::program	logger.js::program
+logger.js::program:<lambda>0:<lambda>1	1	msg	ANY	
+logger.js::program:createConsoleLogger	0	this	logger.js::program	logger.js::program
+middlewares/upload-file.middleware.js::program	0	this	middlewares/upload-file.middleware.js::program	middlewares/upload-file.middleware.js::program
+middlewares/validate.middleware.js::program:formatError:<lambda>0	0	this	middlewares/validate.middleware.js::program	middlewares/validate.middleware.js::program
+middlewares/validate.middleware.js::program:formatError:<lambda>0	1	error	ANY	
+middlewares/validate.middleware.js::program:formatError	0	this	middlewares/validate.middleware.js::program	middlewares/validate.middleware.js::program
+middlewares/validate.middleware.js::program:formatError	1	joiError	ANY	
+middlewares/validate.middleware.js::program	0	this	middlewares/validate.middleware.js::program	middlewares/validate.middleware.js::program
+middlewares/validate.middleware.js::program:validate:<lambda>1	0	this	middlewares/validate.middleware.js::program	middlewares/validate.middleware.js::program
+middlewares/validate.middleware.js::program:validate:<lambda>1	1	ctx	ANY	
+middlewares/validate.middleware.js::program:validate:<lambda>1	2	next	ANY	
+middlewares/validate.middleware.js::program:validate	0	this	middlewares/validate.middleware.js::program	middlewares/validate.middleware.js::program
+middlewares/validate.middleware.js::program:validate	1	schema	ANY	
+migrations/migration.js::program	0	this	migrations/migration.js::program	migrations/migration.js::program
+migrations/migration.js::program:Migration:<init>	0	this	migrations/migration.js::program:Migration	migrations/migration.js::program:Migration
+migrations/migration.js::program:Migration:<init>	1	version	ANY	
+migrations/migration.js::program:Migration:<init>	2	description	ANY	
+migrations/migration.schema.js::program	0	this	migrations/migration.schema.js::program	migrations/migration.schema.js::program
+migrations/migration.schema.js::program:<lambda>0	0	this	migrations/migration.schema.js::program	migrations/migration.schema.js::program
+migrations/migration.schema.js::program:<lambda>0	1	obj	ANY	
+migrations/migration.service.js::program	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>0:<lambda>1:<lambda>2	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>0:<lambda>1:<lambda>2	1	err	ANY	
+migrations/migration.service.js::program:<lambda>0:<lambda>1:<lambda>2	2	files	ANY	
+migrations/migration.service.js::program:<lambda>0:<lambda>1	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>0:<lambda>1	1	resolve	(value: ANY) => ANY	
+migrations/migration.service.js::program:<lambda>0:<lambda>1	2	reject	(reason?: ANY) => ANY	
+migrations/migration.service.js::program:getMigrationNames	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>3:<lambda>4	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>3:<lambda>4	1	doc	ANY	
+migrations/migration.service.js::program:<lambda>3	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>5:<lambda>6:<lambda>7	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>5:<lambda>6:<lambda>7	1	name	ANY	
+migrations/migration.service.js::program:<lambda>5:<lambda>6	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>5:<lambda>6	1	names	ANY	
+migrations/migration.service.js::program:<lambda>5	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>5:<lambda>8	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>5:<lambda>8	1	err	ANY	
+migrations/migration.service.js::program:<lambda>9	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>9	1	version	ANY	
+migrations/migration.service.js::program:<lambda>10:<lambda>11:<lambda	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>10:<lambda>11:<lambda	1	c	ANY	
+migrations/migration.service.js::program:<lambda>10:<lambda>11:<lambda	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>10:<lambda>11	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>10:<lambda>11	1	init	ANY	
+migrations/migration.service.js::program:<lambda>10:<lambda>11	2	chunk	ANY	
+migrations/migration.service.js::program:<lambda>10	0	this	migrations/migration.service.js::program	migrations/migration.service.js::program
+migrations/migration.service.js::program:<lambda>10	1	documents	__ecma.Array	
+migrations/migration.service.js::program:<lambda>10	2	limit	ANY	
+migrations/migration.service.js::program:<lambda>10	3	operator	ANY	
+migrations/migrations-log/migration-log.schema.js::program	0	this	migrations/migrations-log/migration-log.schema.js::program	migrations/migrations-log/migration-log.schema.js::program
+migrations/migrations-log/migration-log.schema.js::program:<lambda>0	0	this	migrations/migrations-log/migration-log.schema.js::program	migrations/migrations-log/migration-log.schema.js::program
+migrations/migrations-log/migration-log.schema.js::program:<lambda>0	1	obj	ANY	
+migrations/migrations-log/migration-log.service.js::program	0	this	migrations/migrations-log/migration-log.service.js::program	migrations/migrations-log/migration-log.service.js::program
+migrations/migrations-log/migration-log.service.js::program:<lambda>0	0	this	migrations/migrations-log/migration-log.service.js::program	migrations/migrations-log/migration-log.service.js::program
+migrations/migrations-log/migration-log.service.js::program:<lambda>0	1	_id	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>0	2	startTime	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>0	3	migrationVersion	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>1	0	this	migrations/migrations-log/migration-log.service.js::program	migrations/migrations-log/migration-log.service.js::program
+migrations/migrations-log/migration-log.service.js::program:<lambda>1	1	_id	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>1	2	finishTime	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>1	3	err	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>2	0	this	migrations/migrations-log/migration-log.service.js::program	migrations/migrations-log/migration-log.service.js::program
+migrations/migrations-log/migration-log.service.js::program:<lambda>2	1	_id	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>2	2	finishTime	ANY	
+migrations/migrations-log/migration-log.service.js::program:<lambda>2	3	duration	ANY	
+migrations/migrations/1.js::program	0	this	migrations/migrations/1.js::program	migrations/migrations/1.js::program
+migrations/migrations/1.js::program:<lambda>0	0	this	migrations/migrations/1.js::program	migrations/migrations/1.js::program
+migrations/migrator.js::program	0	this	migrations/migrator.js::program	migrations/migrator.js::program
+migrations/migrator.js::program:<lambda>0:<lambda>1	0	this	migrations/migrator.js::program	migrations/migrator.js::program
+migrations/migrator.js::program:<lambda>0:<lambda>1	1	migration	ANY	
+migrations/migrator.js::program:run	0	this	migrations/migrator.js::program	migrations/migrator.js::program
+migrations/migrator.js::program:run	1	migrations	ANY	
+migrations/migrator.js::program:run	2	curVersion	ANY	
+migrations/migrator.js::program:<lambda>0:<lambda>2	0	this	migrations/migrator.js::program	migrations/migrator.js::program
+migrations/migrator.js::program:<lambda>0:<lambda>2	1	a	ANY	
+migrations/migrator.js::program:<lambda>0:<lambda>2	2	b	ANY	
+migrations/migrator.js::program:<lambda>3	0	this	migrations/migrator.js::program	migrations/migrator.js::program
+migrator.js::program	0	this	migrator.js::program	migrator.js::program
+resources/account/forgot-password/index.js::program:validator	0	this	resources/account/forgot-password/index.js::program	resources/account/forgot-password/index.js::program
+resources/account/forgot-password/index.js::program:validator	1	ctx	ANY	
+resources/account/forgot-password/index.js::program:validator	2	next	ANY	
+resources/account/forgot-password/index.js::program	0	this	resources/account/forgot-password/index.js::program	resources/account/forgot-password/index.js::program
+resources/account/forgot-password/index.js::program:handler:<lambda>0	0	this	resources/account/forgot-password/index.js::program	resources/account/forgot-password/index.js::program
+resources/account/forgot-password/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/account/forgot-password/index.js::program:handler	0	this	resources/account/forgot-password/index.js::program	resources/account/forgot-password/index.js::program
+resources/account/forgot-password/index.js::program:handler	1	ctx	ANY	
+resources/account/forgot-password/index.js::program:<lambda>1	0	this	resources/account/forgot-password/index.js::program	resources/account/forgot-password/index.js::program
+resources/account/forgot-password/index.js::program:<lambda>1	1	router	ANY	
+resources/account/public.js::program	0	this	resources/account/public.js::program	resources/account/public.js::program
+resources/account/resend-email/index.js::program:validator	0	this	resources/account/resend-email/index.js::program	resources/account/resend-email/index.js::program
+resources/account/resend-email/index.js::program:validator	1	ctx	ANY	
+resources/account/resend-email/index.js::program:validator	2	next	ANY	
+resources/account/resend-email/index.js::program	0	this	resources/account/resend-email/index.js::program	resources/account/resend-email/index.js::program
+resources/account/resend-email/index.js::program:handler:<lambda>0	0	this	resources/account/resend-email/index.js::program	resources/account/resend-email/index.js::program
+resources/account/resend-email/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/account/resend-email/index.js::program:handler	0	this	resources/account/resend-email/index.js::program	resources/account/resend-email/index.js::program
+resources/account/resend-email/index.js::program:handler	1	ctx	ANY	
+resources/account/resend-email/index.js::program:<lambda>1	0	this	resources/account/resend-email/index.js::program	resources/account/resend-email/index.js::program
+resources/account/resend-email/index.js::program:<lambda>1	1	router	ANY	
+resources/account/reset-password/index.js::program:validator	0	this	resources/account/reset-password/index.js::program	resources/account/reset-password/index.js::program
+resources/account/reset-password/index.js::program:validator	1	ctx	ANY	
+resources/account/reset-password/index.js::program:validator	2	next	ANY	
+resources/account/reset-password/index.js::program	0	this	resources/account/reset-password/index.js::program	resources/account/reset-password/index.js::program
+resources/account/reset-password/index.js::program:handler:<lambda>0	0	this	resources/account/reset-password/index.js::program	resources/account/reset-password/index.js::program
+resources/account/reset-password/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/account/reset-password/index.js::program:handler	0	this	resources/account/reset-password/index.js::program	resources/account/reset-password/index.js::program
+resources/account/reset-password/index.js::program:handler	1	ctx	ANY	
+resources/account/reset-password/index.js::program:<lambda>1	0	this	resources/account/reset-password/index.js::program	resources/account/reset-password/index.js::program
+resources/account/reset-password/index.js::program:<lambda>1	1	router	ANY	
+resources/account/sign-in/index.js::program:validator	0	this	resources/account/sign-in/index.js::program	resources/account/sign-in/index.js::program
+resources/account/sign-in/index.js::program:validator	1	ctx	ANY	
+resources/account/sign-in/index.js::program:validator	2	next	ANY	
+resources/account/sign-in/index.js::program	0	this	resources/account/sign-in/index.js::program	resources/account/sign-in/index.js::program
+resources/account/sign-in/index.js::program:handler	0	this	resources/account/sign-in/index.js::program	resources/account/sign-in/index.js::program
+resources/account/sign-in/index.js::program:handler	1	ctx	ANY	
+resources/account/sign-in/index.js::program:<lambda>0	0	this	resources/account/sign-in/index.js::program	resources/account/sign-in/index.js::program
+resources/account/sign-in/index.js::program:<lambda>0	1	router	ANY	
+resources/account/sign-out/index.js::program	0	this	resources/account/sign-out/index.js::program	resources/account/sign-out/index.js::program
+resources/account/sign-out/index.js::program:handler	0	this	resources/account/sign-out/index.js::program	resources/account/sign-out/index.js::program
+resources/account/sign-out/index.js::program:handler	1	ctx	ANY	
+resources/account/sign-out/index.js::program:<lambda>1	0	this	resources/account/sign-out/index.js::program	resources/account/sign-out/index.js::program
+resources/account/sign-out/index.js::program:<lambda>1	1	router	ANY	
+resources/account/sign-up/index.js::program:validator	0	this	resources/account/sign-up/index.js::program	resources/account/sign-up/index.js::program
+resources/account/sign-up/index.js::program:validator	1	ctx	ANY	
+resources/account/sign-up/index.js::program:validator	2	next	ANY	
+resources/account/sign-up/index.js::program	0	this	resources/account/sign-up/index.js::program	resources/account/sign-up/index.js::program
+resources/account/sign-up/index.js::program:handler	0	this	resources/account/sign-up/index.js::program	resources/account/sign-up/index.js::program
+resources/account/sign-up/index.js::program:handler	1	ctx	ANY	
+resources/account/sign-up/index.js::program:<lambda>0	0	this	resources/account/sign-up/index.js::program	resources/account/sign-up/index.js::program
+resources/account/sign-up/index.js::program:<lambda>0	1	router	ANY	
+resources/account/verify-email/index.js::program:validator	0	this	resources/account/verify-email/index.js::program	resources/account/verify-email/index.js::program
+resources/account/verify-email/index.js::program:validator	1	ctx	ANY	
+resources/account/verify-email/index.js::program:validator	2	next	ANY	
+resources/account/verify-email/index.js::program	0	this	resources/account/verify-email/index.js::program	resources/account/verify-email/index.js::program
+resources/account/verify-email/index.js::program:handler:<lambda>0	0	this	resources/account/verify-email/index.js::program	resources/account/verify-email/index.js::program
+resources/account/verify-email/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/account/verify-email/index.js::program:handler	0	this	resources/account/verify-email/index.js::program	resources/account/verify-email/index.js::program
+resources/account/verify-email/index.js::program:handler	1	ctx	ANY	
+resources/account/verify-email/index.js::program:<lambda>1	0	this	resources/account/verify-email/index.js::program	resources/account/verify-email/index.js::program
+resources/account/verify-email/index.js::program:<lambda>1	1	router	ANY	
+resources/account/verify-reset-token/index.js::program:validator	0	this	resources/account/verify-reset-token/index.js::program	resources/account/verify-reset-token/index.js::program
+resources/account/verify-reset-token/index.js::program:validator	1	ctx	ANY	
+resources/account/verify-reset-token/index.js::program	0	this	resources/account/verify-reset-token/index.js::program	resources/account/verify-reset-token/index.js::program
+resources/account/verify-reset-token/index.js::program:<lambda>0	0	this	resources/account/verify-reset-token/index.js::program	resources/account/verify-reset-token/index.js::program
+resources/account/verify-reset-token/index.js::program:<lambda>0	1	router	ANY	
+resources/health/get/index.js::program:handler	0	this	resources/health/get/index.js::program	resources/health/get/index.js::program
+resources/health/get/index.js::program:handler	1	ctx	ANY	
+resources/health/get/index.js::program	0	this	resources/health/get/index.js::program	resources/health/get/index.js::program
+resources/health/get/index.js::program:<lambda>1	0	this	resources/health/get/index.js::program	resources/health/get/index.js::program
+resources/health/get/index.js::program:<lambda>1	1	router	ANY	
+resources/health/public.js::program	0	this	resources/health/public.js::program	resources/health/public.js::program
+resources/token/token.schema.js::program	0	this	resources/token/token.schema.js::program	resources/token/token.schema.js::program
+resources/token/token.schema.js::program:<lambda>0	0	this	resources/token/token.schema.js::program	resources/token/token.schema.js::program
+resources/token/token.schema.js::program:<lambda>0	1	obj	ANY	
+resources/token/token.service.js::program	0	this	resources/token/token.service.js::program	resources/token/token.service.js::program
+resources/token/token.service.js::program:createToken	0	this	resources/token/token.service.js::program	resources/token/token.service.js::program
+resources/token/token.service.js::program:createToken	1	userId	ANY	
+resources/token/token.service.js::program:createToken	2	type	ANY	
+resources/token/token.service.js::program:<lambda>1	0	this	resources/token/token.service.js::program	resources/token/token.service.js::program
+resources/token/token.service.js::program:<lambda>1	1	param1_0	resources/token/token.service.js::program:<lambda>1:<anon-class>0	
+resources/token/token.service.js::program:<lambda>2	0	this	resources/token/token.service.js::program	resources/token/token.service.js::program
+resources/token/token.service.js::program:<lambda>2	1	token	ANY	
+resources/token/token.service.js::program:<lambda>3	0	this	resources/token/token.service.js::program	resources/token/token.service.js::program
+resources/token/token.service.js::program:<lambda>3	1	accessToken	ANY	
+resources/user/get-current/index.js::program:handler	0	this	resources/user/get-current/index.js::program	resources/user/get-current/index.js::program
+resources/user/get-current/index.js::program:handler	1	ctx	ANY	
+resources/user/get-current/index.js::program	0	this	resources/user/get-current/index.js::program	resources/user/get-current/index.js::program
+resources/user/get-current/index.js::program:<lambda>0	0	this	resources/user/get-current/index.js::program	resources/user/get-current/index.js::program
+resources/user/get-current/index.js::program:<lambda>0	1	router	ANY	
+resources/user/index.js::program	0	this	resources/user/index.js::program	resources/user/index.js::program
+resources/user/list/index.js::program:handler	0	this	resources/user/list/index.js::program	resources/user/list/index.js::program
+resources/user/list/index.js::program:handler	1	ctx	ANY	
+resources/user/list/index.js::program	0	this	resources/user/list/index.js::program	resources/user/list/index.js::program
+resources/user/list/index.js::program:<lambda>0	0	this	resources/user/list/index.js::program	resources/user/list/index.js::program
+resources/user/list/index.js::program:<lambda>0	1	router	ANY	
+resources/user/remove-avatar/index.js::program:validator	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:validator	1	ctx	ANY	
+resources/user/remove-avatar/index.js::program:validator	2	next	ANY	
+resources/user/remove-avatar/index.js::program	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:handler:<lambda>0	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/user/remove-avatar/index.js::program:handler	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:handler	1	ctx	ANY	
+resources/user/remove-avatar/index.js::program:getFileKey	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:getFileKey	1	url	ANY	
+resources/user/remove-avatar/index.js::program:<lambda>2	0	this	resources/user/remove-avatar/index.js::program	resources/user/remove-avatar/index.js::program
+resources/user/remove-avatar/index.js::program:<lambda>2	1	router	ANY	
+resources/user/update-current/index.js::program:validator	0	this	resources/user/update-current/index.js::program	resources/user/update-current/index.js::program
+resources/user/update-current/index.js::program:validator	1	ctx	ANY	
+resources/user/update-current/index.js::program:validator	2	next	ANY	
+resources/user/update-current/index.js::program	0	this	resources/user/update-current/index.js::program	resources/user/update-current/index.js::program
+resources/user/update-current/index.js::program:handler:<lambda>0	0	this	resources/user/update-current/index.js::program	resources/user/update-current/index.js::program
+resources/user/update-current/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/user/update-current/index.js::program:handler	0	this	resources/user/update-current/index.js::program	resources/user/update-current/index.js::program
+resources/user/update-current/index.js::program:handler	1	ctx	ANY	
+resources/user/update-current/index.js::program:<lambda>1	0	this	resources/user/update-current/index.js::program	resources/user/update-current/index.js::program
+resources/user/update-current/index.js::program:<lambda>1	1	router	ANY	
+resources/user/upload-avatar/index.js::program:validator	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:validator	1	ctx	ANY	
+resources/user/upload-avatar/index.js::program:validator	2	next	ANY	
+resources/user/upload-avatar/index.js::program	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:handler:<lambda>0	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:handler:<lambda>0	1	old	ANY	
+resources/user/upload-avatar/index.js::program:handler	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:handler	1	ctx	ANY	
+resources/user/upload-avatar/index.js::program:getFileKey	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:getFileKey	1	url	ANY	
+resources/user/upload-avatar/index.js::program:<lambda>2	0	this	resources/user/upload-avatar/index.js::program	resources/user/upload-avatar/index.js::program
+resources/user/upload-avatar/index.js::program:<lambda>2	1	router	ANY	
+resources/user/user.handler.js::program	0	this	resources/user/user.handler.js::program	resources/user/user.handler.js::program
+resources/user/user.handler.js::program:<lambda>0	0	this	resources/user/user.handler.js::program	resources/user/user.handler.js::program
+resources/user/user.handler.js::program:<lambda>0	1	param1_0	resources/user/user.handler.js::program:<lambda>0:<anon-class>0	
+resources/user/user.schema.js::program	0	this	resources/user/user.schema.js::program	resources/user/user.schema.js::program
+resources/user/user.schema.js::program:<lambda>0	0	this	resources/user/user.schema.js::program	resources/user/user.schema.js::program
+resources/user/user.schema.js::program:<lambda>0	1	obj	ANY	
+resources/user/user.service.js::program	0	this	resources/user/user.service.js::program	resources/user/user.service.js::program
+resources/user/user.service.js::program:<lambda>0	0	this	resources/user/user.service.js::program	resources/user/user.service.js::program
+resources/user/user.service.js::program:<lambda>0	1	_id	ANY	
+resources/user/user.service.js::program:<lambda>1	0	this	resources/user/user.service.js::program	resources/user/user.service.js::program
+resources/user/user.service.js::program:<lambda>1	1	user	ANY	
+routes/authenticated.js::program	0	this	routes/authenticated.js::program	routes/authenticated.js::program
+routes/authenticated.js::program:<lambda>0	0	this	routes/authenticated.js::program	routes/authenticated.js::program
+routes/authenticated.js::program:<lambda>0	1	app	ANY	
+routes/index.js::program	0	this	routes/index.js::program	routes/index.js::program
+routes/index.js::program:defineRoutes	0	this	routes/index.js::program	routes/index.js::program
+routes/index.js::program:defineRoutes	1	app	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	1	key	__ecma.String	
+routes/middlewares/attach-custom-errors.middleware.js::program:formatE	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:formatE	1	customError	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	1	message	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:attachC	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:attachC	1	ctx	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:attachC	2	next	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	1	condition	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	2	message	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	1	errors	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	0	this	routes/middlewares/attach-custom-errors.middleware.js::program	routes/middlewares/attach-custom-errors.middleware.js::program
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	1	condition	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:<lambda	2	errors	ANY	
+routes/middlewares/auth.middleware.js::program:auth	0	this	routes/middlewares/auth.middleware.js::program	routes/middlewares/auth.middleware.js::program
+routes/middlewares/auth.middleware.js::program:auth	1	ctx	ANY	
+routes/middlewares/auth.middleware.js::program:auth	2	next	ANY	
+routes/middlewares/auth.middleware.js::program	0	this	routes/middlewares/auth.middleware.js::program	routes/middlewares/auth.middleware.js::program
+routes/middlewares/extract-tokens.middleware.js::program	0	this	routes/middlewares/extract-tokens.middleware.js::program	routes/middlewares/extract-tokens.middleware.js::program
+routes/middlewares/extract-tokens.middleware.js::program:storeTokenToS	0	this	routes/middlewares/extract-tokens.middleware.js::program	routes/middlewares/extract-tokens.middleware.js::program
+routes/middlewares/extract-tokens.middleware.js::program:storeTokenToS	1	ctx	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:storeTokenToS	2	next	ANY	
+routes/middlewares/route-error-handler.middleware.js::program	0	this	routes/middlewares/route-error-handler.middleware.js::program	routes/middlewares/route-error-handler.middleware.js::program
+routes/middlewares/route-error-handler.middleware.js::program:routeErr	0	this	routes/middlewares/route-error-handler.middleware.js::program	routes/middlewares/route-error-handler.middleware.js::program
+routes/middlewares/route-error-handler.middleware.js::program:routeErr	1	ctx	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:routeErr	2	next	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program	0	this	routes/middlewares/try-to-attach-user.middleware.js::program	routes/middlewares/try-to-attach-user.middleware.js::program
+routes/middlewares/try-to-attach-user.middleware.js::program:tryToAtta	0	this	routes/middlewares/try-to-attach-user.middleware.js::program	routes/middlewares/try-to-attach-user.middleware.js::program
+routes/middlewares/try-to-attach-user.middleware.js::program:tryToAtta	1	ctx	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:tryToAtta	2	next	ANY	
+routes/public.js::program	0	this	routes/public.js::program	routes/public.js::program
+routes/public.js::program:<lambda>0	0	this	routes/public.js::program	routes/public.js::program
+routes/public.js::program:<lambda>0	1	app	ANY	
+scheduler.js::program	0	this	scheduler.js::program	scheduler.js::program
+scheduler/cron/index.js::program	0	this	scheduler/cron/index.js::program	scheduler/cron/index.js::program
+scheduler/cron/index.js::program:<lambda>0	0	this	scheduler/cron/index.js::program	scheduler/cron/index.js::program
+scheduler/handlers/action.example.handler.js::program	0	this	scheduler/handlers/action.example.handler.js::program	scheduler/handlers/action.example.handler.js::program
+scheduler/handlers/action.example.handler.js::program:<lambda>0	0	this	scheduler/handlers/action.example.handler.js::program	scheduler/handlers/action.example.handler.js::program
+security.util.js::program	0	this	security.util.js::program	security.util.js::program
+security.util.js::program:generateSecureToken	0	this	security.util.js::program	security.util.js::program
+security.util.js::program:generateSecureToken	1	tokenLength	__ecma.Number	
+security.util.js::program:getHash	0	this	security.util.js::program	security.util.js::program
+security.util.js::program:getHash	1	text	__ecma.String	
+security.util.js::program:compareTextWithHash	0	this	security.util.js::program	security.util.js::program
+security.util.js::program:compareTextWithHash	1	text	__ecma.String	
+security.util.js::program:compareTextWithHash	2	hash	__ecma.String	
+services/auth/auth.helper.js::program	0	this	services/auth/auth.helper.js::program	services/auth/auth.helper.js::program
+services/auth/auth.helper.js::program:setTokenCookies	0	this	services/auth/auth.helper.js::program	services/auth/auth.helper.js::program
+services/auth/auth.helper.js::program:setTokenCookies	1	param1_0	services/auth/auth.helper.js::program:<lambda>0:<anon-class>0	
+services/auth/auth.helper.js::program:unsetTokenCookies	0	this	services/auth/auth.helper.js::program	services/auth/auth.helper.js::program
+services/auth/auth.helper.js::program:unsetTokenCookies	1	ctx	ANY	
+services/auth/auth.service.js::program	0	this	services/auth/auth.service.js::program	services/auth/auth.service.js::program
+services/auth/auth.service.js::program:setTokens	0	this	services/auth/auth.service.js::program	services/auth/auth.service.js::program
+services/auth/auth.service.js::program:setTokens	1	ctx	ANY	
+services/auth/auth.service.js::program:setTokens	2	userId	ANY	
+services/auth/auth.service.js::program:unsetTokens	0	this	services/auth/auth.service.js::program	services/auth/auth.service.js::program
+services/auth/auth.service.js::program:unsetTokens	1	ctx	ANY	
+services/cloud-storage/cloud-storage.service.js::program:upload	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:upload	1	fileName	ANY	
+services/cloud-storage/cloud-storage.service.js::program:upload	2	file	ANY	
+services/cloud-storage/cloud-storage.service.js::program	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:uploadPublic	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:uploadPublic	1	fileName	ANY	
+services/cloud-storage/cloud-storage.service.js::program:uploadPublic	2	file	ANY	
+services/cloud-storage/cloud-storage.service.js::program:getSignedDown	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:getSignedDown	1	fileName	ANY	
+services/cloud-storage/cloud-storage.service.js::program:getObject	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:getObject	1	fileName	ANY	
+services/cloud-storage/cloud-storage.service.js::program:copyObject	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:copyObject	1	filePath	ANY	
+services/cloud-storage/cloud-storage.service.js::program:copyObject	2	copyFilePath	ANY	
+services/cloud-storage/cloud-storage.service.js::program:deleteObject	0	this	services/cloud-storage/cloud-storage.service.js::program	services/cloud-storage/cloud-storage.service.js::program
+services/cloud-storage/cloud-storage.service.js::program:deleteObject	1	fileName	ANY	
+services/email/email.helper.js::program	0	this	services/email/email.helper.js::program	services/email/email.helper.js::program
+services/email/email.helper.js::program:render	0	this	services/email/email.helper.js::program	services/email/email.helper.js::program
+services/email/email.helper.js::program:render	1	templatePath	ANY	
+services/email/email.helper.js::program:render	2	templateParams	ANY	
+services/email/email.helper.js::program:MailService:<init>	0	this	services/email/email.helper.js::program:MailService	services/email/email.helper.js::program:MailService
+services/email/email.helper.js::program:MailService:<init>	1	param1_0	services/email/email.helper.js::program:MailService:<init>:<anon-class	
+services/email/email.helper.js::program:MailService:sendTemplate	0	this	services/email/email.helper.js::program:MailService	services/email/email.helper.js::program:MailService
+services/email/email.helper.js::program:MailService:sendTemplate	1	param1_1	services/email/email.helper.js::program:MailService:sendTemplate:<anon	
+services/email/email.helper.js::program:MailService:sendSendgridTempla	0	this	services/email/email.helper.js::program:MailService	services/email/email.helper.js::program:MailService
+services/email/email.helper.js::program:MailService:sendSendgridTempla	1	param1_2	services/email/email.helper.js::program:MailService:sendSendgridTempla	
+services/email/email.service.js::program	0	this	services/email/email.service.js::program	services/email/email.service.js::program
+services/email/email.service.js::program:sendSignUpWelcome	0	this	services/email/email.service.js::program	services/email/email.service.js::program
+services/email/email.service.js::program:sendSignUpWelcome	1	to	ANY	
+services/email/email.service.js::program:sendSignUpWelcome	2	dynamicTemplateData	ANY	
+services/email/email.service.js::program:sendForgotPassword	0	this	services/email/email.service.js::program	services/email/email.service.js::program
+services/email/email.service.js::program:sendForgotPassword	1	to	ANY	
+services/email/email.service.js::program:sendForgotPassword	2	dynamicTemplateData	ANY	
+services/socket/socket.helper.js::program:getCookie	0	this	services/socket/socket.helper.js::program	services/socket/socket.helper.js::program
+services/socket/socket.helper.js::program:getCookie	1	cookieString	ANY	
+services/socket/socket.helper.js::program:getCookie	2	name	ANY	
+services/socket/socket.helper.js::program	0	this	services/socket/socket.helper.js::program	services/socket/socket.helper.js::program
+services/socket/socket.helper.js::program:checkAccessToRoom	0	this	services/socket/socket.helper.js::program	services/socket/socket.helper.js::program
+services/socket/socket.helper.js::program:checkAccessToRoom	1	roomId	ANY	
+services/socket/socket.helper.js::program:checkAccessToRoom	2	data	ANY	
+services/socket/socket.service.js::program	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:<lambda>0:<lambda>1	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:<lambda>0:<lambda>1	1	socket	ANY	
+services/socket/socket.service.js::program:<lambda>0:<lambda>1	2	next	ANY	
+services/socket/socket.service.js::program:socketService	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:socketService	1	server	ANY	
+services/socket/socket.service.js::program:<lambda>0:<lambda>2:<lambda	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:<lambda>0:<lambda>2:<lambda	1	roomId	ANY	
+services/socket/socket.service.js::program:<lambda>0:<lambda>2	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:<lambda>0:<lambda>2	1	client	ANY	
+services/socket/socket.service.js::program:<lambda>0:<lambda>2:<lambda	0	this	services/socket/socket.service.js::program	services/socket/socket.service.js::program
+services/socket/socket.service.js::program:<lambda>0:<lambda>2:<lambda	1	roomId	ANY	
+<operator>.assignment	1	p1	ANY	
+<operator>.assignment	2	p2	ANY	
+<operator>.fieldAccess	1	p1	ANY	
+<operator>.fieldAccess	2	p2	ANY	
+<operator>.formatString	1	p1	ANY	
+<operator>.formatString	2	p2	ANY	
+<operator>.formatString	3	p3	ANY	
+<operator>.formatString	4	p4	ANY	
+<operator>.formatString	5	p5	ANY	
+<operator>.formatString	6	p6	ANY	
+<operator>.formatString	7	p7	ANY	
+<operator>.alloc	0	p0	ANY	
+__ecma.Array.factory	0	p0	ANY	
+<operator>.logicalOr	1	p1	ANY	
+<operator>.logicalOr	2	p2	ANY	
+<operator>.equals	1	p1	ANY	
+<operator>.equals	2	p2	ANY	
+<operator>.spread	1	p1	ANY	
+<operator>.spread	2	p2	ANY	
+JSON.stringify	1	p1	ANY	
+<operator>.conditional	1	p1	ANY	
+<operator>.conditional	2	p2	ANY	
+<operator>.conditional	3	p3	ANY	
+<operator>.indexAccess	1	p1	ANY	
+<operator>.indexAccess	2	p2	ANY	
+<operator>.await	1	p1	ANY	
+<operator>.logicalNot	1	p1	ANY	
+Promise.all	1	p1	ANY	
+<operator>.void	0	p0	ANY	
+Promise.resolve	0	p0	ANY	
+<operator>.greaterThan	1	p1	ANY	
+<operator>.greaterThan	2	p2	ANY	
+<operator>.subtraction	1	p1	ANY	
+<operator>.subtraction	2	p2	ANY	
+<operator>.iterator	1	p1	ANY	
+<operator>.not	1	p1	ANY	
+<operator>.logicalAnd	1	p1	ANY	
+<operator>.logicalAnd	2	p2	ANY	
+<operator>.minus	1	p1	ANY	
+Object.keys	1	p1	ANY	
+<operator>.addition	1	p1	ANY	
+<operator>.addition	2	p2	ANY	
+<operator>.multiplication	1	p1	ANY	
+<operator>.multiplication	2	p2	ANY	
+encodeURI	1	p1	ANY	
+app.js::program:require	1	p0	ANY	
+app.js::program:require	2	p1	ANY	
+app.js::program:require	3	p2	ANY	
+logger:error	1	p0	ANY	
+logger:error	2	p1	ANY	
+logger:error	3	p2	ANY	
+logger:error	4	p3	ANY	
+logger:error	5	p4	ANY	
+logger:error	6	p5	ANY	
+logger:warn	1	p0	ANY	
+logger:warn	2	p1	ANY	
+logger:warn	3	p2	ANY	
+app-module-path:addPath	1	p0	ANY	
+app-module-path:addPath	2	p1	ANY	
+app-module-path:addPath	3	p2	ANY	
+koa	1	p0	ANY	
+koa	2	p1	ANY	
+koa:use	1	p0	ANY	
+koa:use	2	p1	ANY	
+koa:use	3	p2	ANY	
+@koa/cors	1	p0	ANY	
+@koa/cors	2	p1	ANY	
+@koa/cors	3	p2	ANY	
+koa-helmet	1	p0	ANY	
+koa-helmet	2	p1	ANY	
+koa-qs	1	p0	ANY	
+koa-qs	2	p1	ANY	
+koa-qs	3	p2	ANY	
+koa-bodyparser	1	p0	ANY	
+koa-bodyparser	2	p1	ANY	
+koa-bodyparser	3	p2	ANY	
+__ecma.Array:	1	p0	ANY	
+__ecma.Array:	2	p1	ANY	
+__ecma.Array:	3	p2	ANY	
+koa-logger	1	p0	ANY	
+koa-logger	2	p1	ANY	
+routes	1	p0	ANY	
+routes	2	p1	ANY	
+routes	3	p2	ANY	
+http:createServer	1	p0	ANY	
+http:createServer	2	p1	ANY	
+http:createServer	3	p2	ANY	
+koa:callback	1	p0	ANY	
+koa:callback	2	p1	ANY	
+app.js::program:require('services/socket/socket.service')	1	p0	ANY	
+app.js::program:require('services/socket/socket.service')	2	p1	ANY	
+app.js::program:require('services/socket/socket.service')	3	p2	ANY	
+http:createServer:<returnValue>:listen	1	p0	ANY	
+http:createServer:<returnValue>:listen	2	p1	ANY	
+http:createServer:<returnValue>:listen	3	p2	ANY	
+http:createServer:<returnValue>:listen	4	p3	ANY	
+config/environment/index.js::program:require	1	p0	ANY	
+config/environment/index.js::program:require	2	p1	ANY	
+config/environment/index.js::program:require	3	p2	ANY	
+config/index.js::program:require	1	p0	ANY	
+config/index.js::program:require	2	p1	ANY	
+config/index.js::program:require	3	p2	ANY	
+db.js::program:require	1	p0	ANY	
+db.js::program:require	2	p1	ANY	
+db.js::program:require	3	p2	ANY	
+@paralect/node-mongo:connect	1	p0	ANY	
+@paralect/node-mongo:connect	2	p1	ANY	
+@paralect/node-mongo:connect	3	p2	ANY	
+ioEmitter.js::program:require	1	p0	ANY	
+ioEmitter.js::program:require	2	p1	ANY	
+ioEmitter.js::program:require	3	p2	ANY	
+redis:createClient	1	p0	ANY	
+redis:createClient	2	p1	ANY	
+redis:createClient	3	p2	ANY	
+ioEmitter.js::program:require('socket.io-emitter')	1	p0	ANY	
+ioEmitter.js::program:require('socket.io-emitter')	2	p1	ANY	
+ioEmitter.js::program:require('socket.io-emitter')	3	p2	ANY	
+socket.io-emitter:<member>(redis):on	1	p0	ANY	
+socket.io-emitter:<member>(redis):on	2	p1	ANY	
+socket.io-emitter:<member>(redis):on	3	p2	ANY	
+socket.io-emitter:<member>(redis):on	4	p3	ANY	
+ioEmitter.js::program:require('socket.io-emitter'):<returnValue>:<memb	1	p0	ANY	
+ioEmitter.js::program:require('socket.io-emitter'):<returnValue>:<memb	2	p1	ANY	
+ioEmitter.js::program:require('socket.io-emitter'):<returnValue>:<memb	3	p2	ANY	
+ioEmitter.js::program:require('socket.io-emitter'):<returnValue>:<memb	4	p3	ANY	
+logger.js::program:require	1	p0	ANY	
+logger.js::program:require	2	p1	ANY	
+logger.js::program:require	3	p2	ANY	
+winston:<member>(createLogger):<init>	1	p0	ANY	
+winston:<member>(createLogger):<init>	2	p1	ANY	
+winston:<member>(createLogger):<init>	3	p2	ANY	
+winston:<member>(format):combine	1	p0	ANY	
+winston:<member>(format):combine	2	p1	ANY	
+winston:<member>(format):combine	3	p2	ANY	
+winston:<member>(format):combine	4	p3	ANY	
+winston:<member>(format):timestamp	1	p0	ANY	
+winston:<member>(format):timestamp	2	p1	ANY	
+winston:<member>(format):timestamp	3	p2	ANY	
+winston:<member>(format):printf	1	p0	ANY	
+winston:<member>(format):printf	2	p1	ANY	
+winston:<member>(format):printf	3	p2	ANY	
+winston:<member>(format):json	1	p0	ANY	
+winston:<member>(format):json	2	p1	ANY	
+winston:<member>(createLogger):debug	1	p0	ANY	
+winston:<member>(createLogger):debug	2	p1	ANY	
+winston:<member>(createLogger):debug	3	p2	ANY	
+winston:<member>(format):colorize	1	p0	ANY	
+winston:<member>(format):colorize	2	p1	ANY	
+middlewares/upload-file.middleware.js::program:require	1	p0	ANY	
+middlewares/upload-file.middleware.js::program:require	2	p1	ANY	
+middlewares/upload-file.middleware.js::program:require	3	p2	ANY	
+@koa/multer:memoryStorage	1	p0	ANY	
+@koa/multer:memoryStorage	2	p1	ANY	
+@koa/multer	1	p0	ANY	
+@koa/multer	2	p1	ANY	
+@koa/multer	3	p2	ANY	
+error:path:<returnValue>:<member>(path):join	1	p0	ANY	
+error:path:<returnValue>:<member>(path):join	2	p1	ANY	
+error:path:<returnValue>:<member>(path):join	3	p2	ANY	
+__ecma.Object:<indexAccess>:push	1	p0	ANY	
+__ecma.Object:<indexAccess>:push	2	p1	ANY	
+__ecma.Object:<indexAccess>:push	3	p2	ANY	
+joiError:details:<returnValue>:<member>(details):forEach	1	p0	ANY	
+joiError:details:<returnValue>:<member>(details):forEach	2	p1	ANY	
+joiError:details:<returnValue>:<member>(details):forEach	3	p2	ANY	
+middlewares/validate.middleware.js::program:next	1	p0	ANY	
+middlewares/validate.middleware.js::program:next	2	p1	ANY	
+migrations/migration.schema.js::program:require	1	p0	ANY	
+migrations/migration.schema.js::program:require	2	p1	ANY	
+migrations/migration.schema.js::program:require	3	p2	ANY	
+joi:object:<returnValue>:validate	1	p0	ANY	
+joi:object:<returnValue>:validate	2	p1	ANY	
+joi:object:<returnValue>:validate	3	p2	ANY	
+joi:object:<returnValue>:validate	4	p3	ANY	
+joi:object	1	p0	ANY	
+joi:object	2	p1	ANY	
+joi:object	3	p2	ANY	
+joi:string	1	p0	ANY	
+joi:string	2	p1	ANY	
+joi:date	1	p0	ANY	
+joi:date	2	p1	ANY	
+joi:number:<returnValue>:required	1	p0	ANY	
+joi:number:<returnValue>:required	2	p1	ANY	
+joi:number	1	p0	ANY	
+joi:number	2	p1	ANY	
+migrations/migration.service.js::program:require	1	p0	ANY	
+migrations/migration.service.js::program:require	2	p1	ANY	
+migrations/migration.service.js::program:require	3	p2	ANY	
+migrations/migration.service.js::program:reject	1	p0	ANY	
+migrations/migration.service.js::program:reject	2	p1	ANY	
+migrations/migration.service.js::program:reject	3	p2	ANY	
+migrations/migration.service.js::program:resolve	1	p0	ANY	
+migrations/migration.service.js::program:resolve	2	p1	ANY	
+migrations/migration.service.js::program:resolve	3	p2	ANY	
+fs:readdir	1	p0	ANY	
+fs:readdir	2	p1	ANY	
+fs:readdir	3	p2	ANY	
+fs:readdir	4	p3	ANY	
+db:createService:<returnValue>:findOne:<returnValue>:then	1	p0	ANY	
+db:createService:<returnValue>:findOne:<returnValue>:then	2	p1	ANY	
+db:createService:<returnValue>:findOne:<returnValue>:then	3	p2	ANY	
+db:createService:<returnValue>:findOne	1	p0	ANY	
+db:createService:<returnValue>:findOne	2	p1	ANY	
+db:createService:<returnValue>:findOne	3	p2	ANY	
+path:join	1	p0	ANY	
+path:join	2	p1	ANY	
+path:join	3	p2	ANY	
+path:join	4	p3	ANY	
+Promise<any>:then:<returnValue>:catch	1	p0	ANY	
+Promise<any>:then:<returnValue>:catch	2	p1	ANY	
+Promise<any>:then:<returnValue>:catch	3	p2	ANY	
+Promise<any>:then	1	p0	ANY	
+Promise<any>:then	2	p1	ANY	
+Promise<any>:then	3	p2	ANY	
+db:createService:<returnValue>:<member>(atomic):findOneAndUpdate	1	p0	ANY	
+db:createService:<returnValue>:<member>(atomic):findOneAndUpdate	2	p1	ANY	
+db:createService:<returnValue>:<member>(atomic):findOneAndUpdate	3	p2	ANY	
+db:createService:<returnValue>:<member>(atomic):findOneAndUpdate	4	p3	ANY	
+db:createService:<returnValue>:<member>(atomic):findOneAndUpdate	5	p4	ANY	
+migrations/migration.service.js::program:operator	1	p0	ANY	
+migrations/migration.service.js::program:operator	2	p1	ANY	
+migrations/migration.service.js::program:operator	3	p2	ANY	
+lodash:chunk	1	p0	ANY	
+lodash:chunk	2	p1	ANY	
+lodash:chunk	3	p2	ANY	
+lodash:chunk	4	p3	ANY	
+lodash:chunk:<returnValue>:reduce	1	p0	ANY	
+lodash:chunk:<returnValue>:reduce	2	p1	ANY	
+lodash:chunk:<returnValue>:reduce	3	p2	ANY	
+lodash:chunk:<returnValue>:reduce	4	p3	ANY	
+db:createService	1	p0	ANY	
+db:createService	2	p1	ANY	
+db:createService	3	p2	ANY	
+db:createService	4	p3	ANY	
+migrations/migrations-log/migration-log.schema.js::program:require	1	p0	ANY	
+migrations/migrations-log/migration-log.schema.js::program:require	2	p1	ANY	
+migrations/migrations-log/migration-log.schema.js::program:require	3	p2	ANY	
+joi:date:<returnValue>:required	1	p0	ANY	
+joi:date:<returnValue>:required	2	p1	ANY	
+joi:string:<returnValue>:required	1	p0	ANY	
+joi:string:<returnValue>:required	2	p1	ANY	
+migrations/migrations-log/migration-log.service.js::program:require	1	p0	ANY	
+migrations/migrations-log/migration-log.service.js::program:require	2	p1	ANY	
+migrations/migrations-log/migration-log.service.js::program:require	3	p2	ANY	
+db:createService:<returnValue>:<member>(atomic):update	1	p0	ANY	
+db:createService:<returnValue>:<member>(atomic):update	2	p1	ANY	
+db:createService:<returnValue>:<member>(atomic):update	3	p2	ANY	
+db:createService:<returnValue>:<member>(atomic):update	4	p3	ANY	
+migrations/migrations/1.js::program:require	1	p0	ANY	
+migrations/migrations/1.js::program:require	2	p1	ANY	
+migrations/migrations/1.js::program:require	3	p2	ANY	
+migrations/migration	1	p0	ANY	
+migrations/migration	2	p1	ANY	
+migrations/migration	3	p2	ANY	
+migrations/migration	4	p3	ANY	
+migrations/migrator.js::program:require	1	p0	ANY	
+migrations/migrator.js::program:require	2	p1	ANY	
+migrations/migrator.js::program:require	3	p2	ANY	
+logger:info	1	p0	ANY	
+logger:info	2	p1	ANY	
+logger:info	3	p2	ANY	
+_result_0:value:<returnValue>:<member>(value):migrate	1	p0	ANY	
+_result_0:value:<returnValue>:<member>(value):migrate	2	p1	ANY	
+moment:duration:<returnValue>:format	1	p0	ANY	
+moment:duration:<returnValue>:format	2	p1	ANY	
+moment:duration:<returnValue>:format	3	p2	ANY	
+moment:duration	1	p0	ANY	
+moment:duration	2	p1	ANY	
+moment:duration	3	p2	ANY	
+migrator.js::program:require	1	p0	ANY	
+migrator.js::program:require	2	p1	ANY	
+migrator.js::program:require	3	p2	ANY	
+migrations/migrator:exec	1	p0	ANY	
+migrations/migrator:exec	2	p1	ANY	
+resources/user/user.service:findOne	1	p0	ANY	
+resources/user/user.service:findOne	2	p1	ANY	
+resources/user/user.service:findOne	3	p2	ANY	
+resources/account/forgot-password/index.js::program:next	1	p0	ANY	
+resources/account/forgot-password/index.js::program:next	2	p1	ANY	
+security.util:generateSecureToken	1	p0	ANY	
+security.util:generateSecureToken	2	p1	ANY	
+resources/user/user.service:updateOne	1	p0	ANY	
+resources/user/user.service:updateOne	2	p1	ANY	
+resources/user/user.service:updateOne	3	p2	ANY	
+resources/user/user.service:updateOne	4	p3	ANY	
+services/email/email.service:sendForgotPassword	1	p0	ANY	
+services/email/email.service:sendForgotPassword	2	p1	ANY	
+services/email/email.service:sendForgotPassword	3	p2	ANY	
+services/email/email.service:sendForgotPassword	4	p3	ANY	
+resources/account/forgot-password/index.js::program:require	1	p0	ANY	
+resources/account/forgot-password/index.js::program:require	2	p1	ANY	
+resources/account/forgot-password/index.js::program:require	3	p2	ANY	
+middlewares/validate.middleware	1	p0	ANY	
+middlewares/validate.middleware	2	p1	ANY	
+middlewares/validate.middleware	3	p2	ANY	
+joi:string:<returnValue>:email	1	p0	ANY	
+joi:string:<returnValue>:email	2	p1	ANY	
+resources/account/public.js::program:require	1	p0	ANY	
+resources/account/public.js::program:require	2	p1	ANY	
+resources/account/public.js::program:require	3	p2	ANY	
+@koa/router	1	p0	ANY	
+@koa/router	2	p1	ANY	
+@koa/router:routes	1	p0	ANY	
+@koa/router:routes	2	p1	ANY	
+resources/account/resend-email/index.js::program:next	1	p0	ANY	
+resources/account/resend-email/index.js::program:next	2	p1	ANY	
+resources/account/resend-email/index.js::program:require	1	p0	ANY	
+resources/account/resend-email/index.js::program:require	2	p1	ANY	
+resources/account/resend-email/index.js::program:require	3	p2	ANY	
+resources/account/reset-password/index.js::program:next	1	p0	ANY	
+resources/account/reset-password/index.js::program:next	2	p1	ANY	
+security.util:getHash	1	p0	ANY	
+security.util:getHash	2	p1	ANY	
+security.util:getHash	3	p2	ANY	
+resources/account/reset-password/index.js::program:require	1	p0	ANY	
+resources/account/reset-password/index.js::program:require	2	p1	ANY	
+resources/account/reset-password/index.js::program:require	3	p2	ANY	
+joi:string:<returnValue>:trim	1	p0	ANY	
+joi:string:<returnValue>:trim	2	p1	ANY	
+security.util:compareTextWithHash	1	p0	ANY	
+security.util:compareTextWithHash	2	p1	ANY	
+security.util:compareTextWithHash	3	p2	ANY	
+security.util:compareTextWithHash	4	p3	ANY	
+resources/account/sign-in/index.js::program:next	1	p0	ANY	
+resources/account/sign-in/index.js::program:next	2	p1	ANY	
+resources/user/user.service:updateLastRequest	1	p0	ANY	
+resources/user/user.service:updateLastRequest	2	p1	ANY	
+resources/user/user.service:updateLastRequest	3	p2	ANY	
+services/auth/auth.service:setTokens	1	p0	ANY	
+services/auth/auth.service:setTokens	2	p1	ANY	
+services/auth/auth.service:setTokens	3	p2	ANY	
+services/auth/auth.service:setTokens	4	p3	ANY	
+resources/user/user.service:getPublic	1	p0	ANY	
+resources/user/user.service:getPublic	2	p1	ANY	
+resources/user/user.service:getPublic	3	p2	ANY	
+resources/account/sign-in/index.js::program:require	1	p0	ANY	
+resources/account/sign-in/index.js::program:require	2	p1	ANY	
+resources/account/sign-in/index.js::program:require	3	p2	ANY	
+resources/account/sign-out/index.js::program:require	1	p0	ANY	
+resources/account/sign-out/index.js::program:require	2	p1	ANY	
+resources/account/sign-out/index.js::program:require	3	p2	ANY	
+services/auth/auth.service:unsetTokens	1	p0	ANY	
+services/auth/auth.service:unsetTokens	2	p1	ANY	
+services/auth/auth.service:unsetTokens	3	p2	ANY	
+resources/user/user.service:exists	1	p0	ANY	
+resources/user/user.service:exists	2	p1	ANY	
+resources/user/user.service:exists	3	p2	ANY	
+resources/account/sign-up/index.js::program:next	1	p0	ANY	
+resources/account/sign-up/index.js::program:next	2	p1	ANY	
+resources/user/user.service:create	1	p0	ANY	
+resources/user/user.service:create	2	p1	ANY	
+resources/user/user.service:create	3	p2	ANY	
+services/email/email.service:sendSignUpWelcome	1	p0	ANY	
+services/email/email.service:sendSignUpWelcome	2	p1	ANY	
+services/email/email.service:sendSignUpWelcome	3	p2	ANY	
+services/email/email.service:sendSignUpWelcome	4	p3	ANY	
+resources/account/sign-up/index.js::program:require	1	p0	ANY	
+resources/account/sign-up/index.js::program:require	2	p1	ANY	
+resources/account/sign-up/index.js::program:require	3	p2	ANY	
+resources/account/verify-email/index.js::program:next	1	p0	ANY	
+resources/account/verify-email/index.js::program:next	2	p1	ANY	
+resources/account/verify-email/index.js::program:require	1	p0	ANY	
+resources/account/verify-email/index.js::program:require	2	p1	ANY	
+resources/account/verify-email/index.js::program:require	3	p2	ANY	
+resources/account/verify-reset-token/index.js::program:require	1	p0	ANY	
+resources/account/verify-reset-token/index.js::program:require	2	p1	ANY	
+resources/account/verify-reset-token/index.js::program:require	3	p2	ANY	
+resources/health/public.js::program:require	1	p0	ANY	
+resources/health/public.js::program:require	2	p1	ANY	
+resources/health/public.js::program:require	3	p2	ANY	
+resources/token/token.schema.js::program:require	1	p0	ANY	
+resources/token/token.schema.js::program:require	2	p1	ANY	
+resources/token/token.schema.js::program:require	3	p2	ANY	
+joi:string:<returnValue>:valid	1	p0	ANY	
+joi:string:<returnValue>:valid	2	p1	ANY	
+joi:string:<returnValue>:valid	3	p2	ANY	
+resources/token/token.service.js::program:require	1	p0	ANY	
+resources/token/token.service.js::program:require	2	p1	ANY	
+resources/token/token.service.js::program:require	3	p2	ANY	
+db:createService:<returnValue>:create	1	p0	ANY	
+db:createService:<returnValue>:create	2	p1	ANY	
+db:createService:<returnValue>:create	3	p2	ANY	
+db:createService:<returnValue>:remove	1	p0	ANY	
+db:createService:<returnValue>:remove	2	p1	ANY	
+db:createService:<returnValue>:remove	3	p2	ANY	
+resources/user/get-current/index.js::program:require	1	p0	ANY	
+resources/user/get-current/index.js::program:require	2	p1	ANY	
+resources/user/get-current/index.js::program:require	3	p2	ANY	
+resources/user/index.js::program:require	1	p0	ANY	
+resources/user/index.js::program:require	2	p1	ANY	
+resources/user/index.js::program:require	3	p2	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	1	p0	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	2	p1	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	3	p2	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	1	p0	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	2	p1	ANY	
+ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searc	3	p2	ANY	
+resources/user/user.service:find	1	p0	ANY	
+resources/user/user.service:find	2	p1	ANY	
+resources/user/user.service:find	3	p2	ANY	
+resources/user/user.service:find	4	p3	ANY	
+resources/user/list/index.js::program:require	1	p0	ANY	
+resources/user/list/index.js::program:require	2	p1	ANY	
+resources/user/list/index.js::program:require	3	p2	ANY	
+joi:number:<returnValue>:default	1	p0	ANY	
+joi:number:<returnValue>:default	2	p1	ANY	
+joi:number:<returnValue>:default	3	p2	ANY	
+joi:object:<returnValue>:keys	1	p0	ANY	
+joi:object:<returnValue>:keys	2	p1	ANY	
+joi:object:<returnValue>:keys	3	p2	ANY	
+joi:string:<returnValue>:allow	1	p0	ANY	
+joi:string:<returnValue>:allow	2	p1	ANY	
+joi:string:<returnValue>:allow	3	p2	ANY	
+joi:string:<returnValue>:allow	4	p3	ANY	
+resources/user/remove-avatar/index.js::program:next	1	p0	ANY	
+resources/user/remove-avatar/index.js::program:next	2	p1	ANY	
+services/cloud-storage/cloud-storage.service:deleteObject	1	p0	ANY	
+services/cloud-storage/cloud-storage.service:deleteObject	2	p1	ANY	
+services/cloud-storage/cloud-storage.service:deleteObject	3	p2	ANY	
+resources/user/remove-avatar/index.js::program:require	1	p0	ANY	
+resources/user/remove-avatar/index.js::program:require	2	p1	ANY	
+resources/user/remove-avatar/index.js::program:require	3	p2	ANY	
+resources/user/update-current/index.js::program:next	1	p0	ANY	
+resources/user/update-current/index.js::program:next	2	p1	ANY	
+resources/user/update-current/index.js::program:require	1	p0	ANY	
+resources/user/update-current/index.js::program:require	2	p1	ANY	
+resources/user/update-current/index.js::program:require	3	p2	ANY	
+resources/user/upload-avatar/index.js::program:next	1	p0	ANY	
+resources/user/upload-avatar/index.js::program:next	2	p1	ANY	
+DateConstructor:now	1	p0	ANY	
+DateConstructor:now	2	p1	ANY	
+services/cloud-storage/cloud-storage.service:uploadPublic	1	p0	ANY	
+services/cloud-storage/cloud-storage.service:uploadPublic	2	p1	ANY	
+services/cloud-storage/cloud-storage.service:uploadPublic	3	p2	ANY	
+services/cloud-storage/cloud-storage.service:uploadPublic	4	p3	ANY	
+resources/user/upload-avatar/index.js::program:require	1	p0	ANY	
+resources/user/upload-avatar/index.js::program:require	2	p1	ANY	
+resources/user/upload-avatar/index.js::program:require	3	p2	ANY	
+middlewares/upload-file.middleware:single	1	p0	ANY	
+middlewares/upload-file.middleware:single	2	p1	ANY	
+middlewares/upload-file.middleware:single	3	p2	ANY	
+resources/user/user.handler.js::program:require	1	p0	ANY	
+resources/user/user.handler.js::program:require	2	p1	ANY	
+resources/user/user.handler.js::program:require	3	p2	ANY	
+ioEmitter:to:<returnValue>:emit	1	p0	ANY	
+ioEmitter:to:<returnValue>:emit	2	p1	ANY	
+ioEmitter:to:<returnValue>:emit	3	p2	ANY	
+ioEmitter:to:<returnValue>:emit	4	p3	ANY	
+ioEmitter:to	1	p0	ANY	
+ioEmitter:to	2	p1	ANY	
+ioEmitter:to	3	p2	ANY	
+resources/user/user.service:on	1	p0	ANY	
+resources/user/user.service:on	2	p1	ANY	
+resources/user/user.service:on	3	p2	ANY	
+resources/user/user.service:on	4	p3	ANY	
+resources/user/user.schema.js::program:require	1	p0	ANY	
+resources/user/user.schema.js::program:require	2	p1	ANY	
+resources/user/user.schema.js::program:require	3	p2	ANY	
+joi:boolean:<returnValue>:default	1	p0	ANY	
+joi:boolean:<returnValue>:default	2	p1	ANY	
+joi:boolean:<returnValue>:default	3	p2	ANY	
+joi:boolean	1	p0	ANY	
+joi:boolean	2	p1	ANY	
+resources/user/user.service.js::program:require	1	p0	ANY	
+resources/user/user.service.js::program:require	2	p1	ANY	
+resources/user/user.service.js::program:require	3	p2	ANY	
+__ecma.Date:<operator>.new	1	p0	ANY	
+__ecma.Date:<operator>.new	2	p1	ANY	
+lodash:omit	1	p0	ANY	
+lodash:omit	2	p1	ANY	
+lodash:omit	3	p2	ANY	
+lodash:omit	4	p3	ANY	
+routes/authenticated.js::program:require	1	p0	ANY	
+routes/authenticated.js::program:require	2	p1	ANY	
+routes/authenticated.js::program:require	3	p2	ANY	
+koa-mount	1	p0	ANY	
+koa-mount	2	p1	ANY	
+koa-mount	3	p2	ANY	
+koa-mount	4	p3	ANY	
+routes/index.js::program:require	1	p0	ANY	
+routes/index.js::program:require	2	p1	ANY	
+routes/index.js::program:require	3	p2	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:require	1	p0	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:require	2	p1	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:require	3	p2	ANY	
+lodash:isArray	1	p0	ANY	
+lodash:isArray	2	p1	ANY	
+lodash:isArray	3	p2	ANY	
+Object.keys:<returnValue>:forEach	1	p0	ANY	
+Object.keys:<returnValue>:forEach	2	p1	ANY	
+Object.keys:<returnValue>:forEach	3	p2	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:next	1	p0	ANY	
+routes/middlewares/attach-custom-errors.middleware.js::program:next	2	p1	ANY	
+routes/middlewares/auth.middleware.js::program:next	1	p0	ANY	
+routes/middlewares/auth.middleware.js::program:next	2	p1	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:require	1	p0	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:require	2	p1	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:require	3	p2	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):get	1	p0	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):get	2	p1	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):get	3	p2	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	1	p0	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	2	p1	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	1	p0	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	2	p1	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	3	p2	ANY	
+ctx:headers:<returnValue>:<member>(headers):<member>(authorization):re	4	p3	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:next	1	p0	ANY	
+routes/middlewares/extract-tokens.middleware.js::program:next	2	p1	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:require	1	p0	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:require	2	p1	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:require	3	p2	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:next	1	p0	ANY	
+routes/middlewares/route-error-handler.middleware.js::program:next	2	p1	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:require	1	p0	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:require	2	p1	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:require	3	p2	ANY	
+resources/token/token.service:getUserDataByToken	1	p0	ANY	
+resources/token/token.service:getUserDataByToken	2	p1	ANY	
+resources/token/token.service:getUserDataByToken	3	p2	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:next	1	p0	ANY	
+routes/middlewares/try-to-attach-user.middleware.js::program:next	2	p1	ANY	
+routes/public.js::program:require	1	p0	ANY	
+routes/public.js::program:require	2	p1	ANY	
+routes/public.js::program:require	3	p2	ANY	
+scheduler.js::program:require	1	p0	ANY	
+scheduler.js::program:require	2	p1	ANY	
+scheduler.js::program:require	3	p2	ANY	
+scheduler/cron/index.js::program:require	1	p0	ANY	
+scheduler/cron/index.js::program:require	2	p1	ANY	
+scheduler/cron/index.js::program:require	3	p2	ANY	
+events:emit	1	p0	ANY	
+events:emit	2	p1	ANY	
+events:emit	3	p2	ANY	
+events	1	p0	ANY	
+events	2	p1	ANY	
+node-schedule:scheduleJob	1	p0	ANY	
+node-schedule:scheduleJob	2	p1	ANY	
+node-schedule:scheduleJob	3	p2	ANY	
+node-schedule:scheduleJob	4	p3	ANY	
+scheduler/handlers/action.example.handler.js::program:require	1	p0	ANY	
+scheduler/handlers/action.example.handler.js::program:require	2	p1	ANY	
+scheduler/handlers/action.example.handler.js::program:require	3	p2	ANY	
+scheduler/cron:on	1	p0	ANY	
+scheduler/cron:on	2	p1	ANY	
+scheduler/cron:on	3	p2	ANY	
+scheduler/cron:on	4	p3	ANY	
+security.util.js::program:require	1	p0	ANY	
+security.util.js::program:require	2	p1	ANY	
+security.util.js::program:require	3	p2	ANY	
+security.util.js::program:randomBytes	1	p0	ANY	
+security.util.js::program:randomBytes	2	p1	ANY	
+security.util.js::program:randomBytes	3	p2	ANY	
+security.util.js::program:bcryptHash	1	p0	ANY	
+security.util.js::program:bcryptHash	2	p1	ANY	
+security.util.js::program:bcryptHash	3	p2	ANY	
+security.util.js::program:bcryptHash	4	p3	ANY	
+security.util.js::program:compare	1	p0	ANY	
+security.util.js::program:compare	2	p1	ANY	
+security.util.js::program:compare	3	p2	ANY	
+security.util.js::program:compare	4	p3	ANY	
+util:promisify	1	p0	ANY	
+util:promisify	2	p1	ANY	
+util:promisify	3	p2	ANY	
+util:promisify	4	p3	ANY	
+services/auth/auth.helper.js::program:require	1	p0	ANY	
+services/auth/auth.helper.js::program:require	2	p1	ANY	
+services/auth/auth.helper.js::program:require	3	p2	ANY	
+url:parse	1	p0	ANY	
+url:parse	2	p1	ANY	
+url:parse	3	p2	ANY	
+psl:parse	1	p0	ANY	
+psl:parse	2	p1	ANY	
+psl:parse	3	p2	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):set	1	p0	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):set	2	p1	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):set	3	p2	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):set	4	p3	ANY	
+ctx:cookies:<returnValue>:<member>(cookies):set	5	p4	ANY	
+services/auth/auth.service.js::program:require	1	p0	ANY	
+services/auth/auth.service.js::program:require	2	p1	ANY	
+services/auth/auth.service.js::program:require	3	p2	ANY	
+resources/token/token.service:createAuthTokens	1	p0	ANY	
+resources/token/token.service:createAuthTokens	2	p1	ANY	
+resources/token/token.service:createAuthTokens	3	p2	ANY	
+resources/token/token.service:removeAuthTokens	1	p0	ANY	
+resources/token/token.service:removeAuthTokens	2	p1	ANY	
+resources/token/token.service:removeAuthTokens	3	p2	ANY	
+resources/token/token.service:removeAuthTokens	4	p3	ANY	
+aws-sdk:<member>(S3):upload	1	p0	ANY	
+aws-sdk:<member>(S3):upload	2	p1	ANY	
+aws-sdk:<member>(S3):upload	3	p2	ANY	
+aws-sdk:<member>(S3):upload:<returnValue>:promise	1	p0	ANY	
+aws-sdk:<member>(S3):upload:<returnValue>:promise	2	p1	ANY	
+aws-sdk:<member>(S3):getSignedUrl	1	p0	ANY	
+aws-sdk:<member>(S3):getSignedUrl	2	p1	ANY	
+aws-sdk:<member>(S3):getSignedUrl	3	p2	ANY	
+aws-sdk:<member>(S3):getSignedUrl	4	p3	ANY	
+aws-sdk:<member>(S3):getObject:<returnValue>:promise	1	p0	ANY	
+aws-sdk:<member>(S3):getObject:<returnValue>:promise	2	p1	ANY	
+aws-sdk:<member>(S3):getObject	1	p0	ANY	
+aws-sdk:<member>(S3):getObject	2	p1	ANY	
+aws-sdk:<member>(S3):getObject	3	p2	ANY	
+aws-sdk:<member>(S3):copyObject:<returnValue>:promise	1	p0	ANY	
+aws-sdk:<member>(S3):copyObject:<returnValue>:promise	2	p1	ANY	
+aws-sdk:<member>(S3):copyObject	1	p0	ANY	
+aws-sdk:<member>(S3):copyObject	2	p1	ANY	
+aws-sdk:<member>(S3):copyObject	3	p2	ANY	
+aws-sdk:<member>(S3):deleteObject:<returnValue>:promise	1	p0	ANY	
+aws-sdk:<member>(S3):deleteObject:<returnValue>:promise	2	p1	ANY	
+aws-sdk:<member>(S3):deleteObject	1	p0	ANY	
+aws-sdk:<member>(S3):deleteObject	2	p1	ANY	
+aws-sdk:<member>(S3):deleteObject	3	p2	ANY	
+services/cloud-storage/cloud-storage.service.js::program:require	1	p0	ANY	
+services/cloud-storage/cloud-storage.service.js::program:require	2	p1	ANY	
+services/cloud-storage/cloud-storage.service.js::program:require	3	p2	ANY	
+aws-sdk:<member>(S3):<init>	1	p0	ANY	
+aws-sdk:<member>(S3):<init>	2	p1	ANY	
+aws-sdk:<member>(S3):<init>	3	p2	ANY	
+services/email/email.helper.js::program:require	1	p0	ANY	
+services/email/email.helper.js::program:require	2	p1	ANY	
+services/email/email.helper.js::program:require	3	p2	ANY	
+fs:<member>(promises):readFile	1	p0	ANY	
+fs:<member>(promises):readFile	2	p1	ANY	
+fs:<member>(promises):readFile	3	p2	ANY	
+handlebars:compile	1	p0	ANY	
+handlebars:compile	2	p1	ANY	
+handlebars:compile	3	p2	ANY	
+services/email/email.helper.js::program:compiledHtml	1	p0	ANY	
+services/email/email.helper.js::program:compiledHtml	2	p1	ANY	
+services/email/email.helper.js::program:compiledHtml	3	p2	ANY	
+@sendgrid/mail:setApiKey	1	p0	ANY	
+@sendgrid/mail:setApiKey	2	p1	ANY	
+@sendgrid/mail:setApiKey	3	p2	ANY	
+@sendgrid/mail:send	1	p0	ANY	
+@sendgrid/mail:send	2	p1	ANY	
+@sendgrid/mail:send	3	p2	ANY	
+services/email/email.service.js::program:require	1	p0	ANY	
+services/email/email.service.js::program:require	2	p1	ANY	
+services/email/email.service.js::program:require	3	p2	ANY	
+path	1	p0	ANY	
+path	2	p1	ANY	
+path	3	p2	ANY	
+path	4	p3	ANY	
+__ecma.String:split	1	p0	ANY	
+__ecma.String:split	2	p1	ANY	
+__ecma.String:split	3	p2	ANY	
+__ecma.Array:pop:<returnValue>:split	1	p0	ANY	
+__ecma.Array:pop:<returnValue>:split	2	p1	ANY	
+__ecma.Array:pop:<returnValue>:split	3	p2	ANY	
+__ecma.String:split:<returnValue>:pop:<returnValue>:split	1	p0	ANY	
+__ecma.String:split:<returnValue>:pop:<returnValue>:split	2	p1	ANY	
+__ecma.String:split:<returnValue>:pop:<returnValue>:split	3	p2	ANY	
+__ecma.Array:pop	1	p0	ANY	
+__ecma.Array:pop	2	p1	ANY	
+__ecma.String:split:<returnValue>:pop	1	p0	ANY	
+__ecma.String:split:<returnValue>:pop	2	p1	ANY	
+services/socket/socket.service.js::program:require	1	p0	ANY	
+services/socket/socket.service.js::program:require	2	p1	ANY	
+services/socket/socket.service.js::program:require	3	p2	ANY	
+services/socket/socket.service.js::program:next	1	p0	ANY	
+services/socket/socket.service.js::program:next	2	p1	ANY	
+socket.io	1	p0	ANY	
+socket.io	2	p1	ANY	
+socket.io	3	p2	ANY	
+socket.io:<returnValue>:adapter	1	p0	ANY	
+socket.io:<returnValue>:adapter	2	p1	ANY	
+socket.io:<returnValue>:adapter	3	p2	ANY	
+socket.io-redis	1	p0	ANY	
+socket.io-redis	2	p1	ANY	
+socket.io-redis	3	p2	ANY	
+socket.io:<returnValue>:use	1	p0	ANY	
+socket.io:<returnValue>:use	2	p1	ANY	
+socket.io:<returnValue>:use	3	p2	ANY	
+socket.io:<returnValue>:on	1	p0	ANY	
+socket.io:<returnValue>:on	2	p1	ANY	
+socket.io:<returnValue>:on	3	p2	ANY	
+socket.io:<returnValue>:on	4	p3	ANY	

@@ -1,0 +1,11 @@
+PASS helper method exists
+PASS main method exists
+PASS helper has value param
+PASS main has input param
+PASS main contains helper call
+PASS helper call has one demonstrated target
+PASS helper call targets helper
+PASS helper call resolution EXACT
+PASS helper argument includes input
+PASS no security layer in frontend facts
+GATE24=10/10

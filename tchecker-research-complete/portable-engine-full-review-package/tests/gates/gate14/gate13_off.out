@@ -1,0 +1,39 @@
+x5: 0
+ROOTS=10
+CALL 102 -> [21]
+CALL 110 -> [57]
+CALL 141 -> [21]
+CALL 149 -> [57]
+CALL 187 -> [39]
+CALL 195 -> [57]
+CALL 229 -> [21]
+CALL 240 -> [21]
+CALL 247 -> [57]
+CALL 281 -> [21]
+CALL 288 -> [21]
+CALL 299 -> [57]
+RET 69 mayAliasWrite params=[cond, source] positions=[]
+RET 115 sameAliasBothBranches params=[cond, source] positions=[]
+RET 154 mayAliasDifferentField params=[cond, source] positions=[]
+RET 200 mayAliasOverwrite params=[cond, source] positions=[]
+RET 252 mayAliasRead params=[cond, source] positions=[]
+DDG_RELS
+DDG 25 -> 32 var=v
+DDG 43 -> 50 var=v
+DDG 77 -> 102 var=source
+DDG 84 -> 109 var=a
+DDG 98 -> 102 var=x
+DDG 123 -> 141 var=source
+DDG 130 -> 148 var=a
+DDG 137 -> 141 var=x
+DDG 162 -> 187 var=source
+DDG 169 -> 194 var=a
+DDG 183 -> 187 var=x
+DDG 208 -> 229 var=source
+DDG 215 -> 229 var=a
+DDG 215 -> 246 var=a
+DDG 236 -> 240 var=x
+DDG 260 -> 281 var=source
+DDG 267 -> 281 var=a
+DDG 274 -> 288 var=b
+DDG 294 -> 298 var=x

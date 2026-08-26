@@ -1,0 +1,260 @@
+{
+ "cmp_capacities": [
+  {
+   "call_id": 30064771076,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182400,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280512
+  },
+  {
+   "call_id": 30064771076,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182400,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280513
+  },
+  {
+   "call_id": 30064771081,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771081
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182402,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280514
+  },
+  {
+   "call_id": 30064771081,
+   "capacity_bytes": 8,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771081
+    ]
+   },
+   "elem_count": 8,
+   "elem_type": "char",
+   "function_id": 107374182402,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280515
+  },
+  {
+   "call_id": 30064771086,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771086
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182403,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280516
+  },
+  {
+   "call_id": 30064771086,
+   "capacity_bytes": 8,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771086
+    ]
+   },
+   "elem_count": 8,
+   "elem_type": "char",
+   "function_id": 107374182403,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280517
+  },
+  {
+   "call_id": 30064771091,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771091
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182404,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280518
+  },
+  {
+   "call_id": 30064771091,
+   "capacity_bytes": 8,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771091
+    ]
+   },
+   "elem_count": 8,
+   "elem_type": "char",
+   "function_id": 107374182404,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280519
+  },
+  {
+   "call_id": 30064771097,
+   "capacity_bytes": 16,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "elem_count": 16,
+   "elem_type": "char",
+   "function_id": 107374182405,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280520
+  },
+  {
+   "call_id": 30064771097,
+   "capacity_bytes": 16,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "elem_count": 16,
+   "elem_type": "char",
+   "function_id": 107374182405,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280521
+  },
+  {
+   "call_id": 30064771102,
+   "capacity_bytes": 64,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771102
+    ]
+   },
+   "elem_count": 64,
+   "elem_type": "char",
+   "function_id": 107374182406,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280522
+  },
+  {
+   "call_id": 30064771102,
+   "capacity_bytes": 4,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771102
+    ]
+   },
+   "elem_count": 4,
+   "elem_type": "char",
+   "function_id": 107374182406,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280523
+  },
+  {
+   "call_id": 30064771107,
+   "capacity_bytes": 32,
+   "cmp_side": "READ_CMP_A",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771107
+    ]
+   },
+   "elem_count": 32,
+   "elem_type": "char",
+   "function_id": 107374182407,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280524
+  },
+  {
+   "call_id": 30064771107,
+   "capacity_bytes": 16,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771107
+    ]
+   },
+   "elem_count": 16,
+   "elem_type": "char",
+   "function_id": 107374182407,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280525
+  },
+  {
+   "call_id": 30064771110,
+   "capacity_bytes": 8,
+   "cmp_side": "READ_CMP_B",
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_FIXED_ARRAY_CAPACITY",
+    "source_node_ids": [
+     30064771110
+    ]
+   },
+   "elem_count": 8,
+   "elem_type": "char",
+   "function_id": 107374182408,
+   "resolution": "EXACT_STORAGE_IDENTITY",
+   "storage_value_id": 94489280526
+  }
+ ],
+ "schema": "portable-cmp-capacity-facts/0.1"
+}

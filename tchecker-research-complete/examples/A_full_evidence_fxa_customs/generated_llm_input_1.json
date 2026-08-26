@@ -1,0 +1,94 @@
+{
+  "schema": "tchecker-llm-packet/1.0",
+  "round": 1,
+  "finding_id": "serialize-dos:fxa/packages/fxa-auth-server/lib/customs.js#sink30064771145",
+  "property_id": "o0.xf0.bounds_serialized_size",
+  "alternative": {
+    "origin": {
+      "origin_family": "HTTP_BODY",
+      "source_node_id": "30064771225",
+      "source_code": "request.payload",
+      "source_line": 130,
+      "source_containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+      "source_containing_function": "c1/customs.js::program:CustomsClient:check",
+      "established_by": "STATIC_PROVENANCE"
+    },
+    "steps": [
+      {
+        "path_order": 0,
+        "node_id": "30064771223",
+        "node_kind": "CALL",
+        "callee_name": "sanitizePayload",
+        "path_membership": "ESTABLISHED",
+        "static_definition_identity": null,
+        "static_definition_identity_status": "UNKNOWN",
+        "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+        "trace_callee_identity_status": "ESTABLISHED",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "callsite_code": "this.sanitizePayload(request.payload)",
+        "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+        "containing_function": "c1/customs.js::program:CustomsClient:check",
+        "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+      },
+      {
+        "path_order": 1,
+        "node_id": "30064771209",
+        "node_kind": "CALL",
+        "callee_name": "sanitizePayload",
+        "path_membership": "ESTABLISHED",
+        "static_definition_identity": null,
+        "static_definition_identity_status": "UNKNOWN",
+        "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+        "trace_callee_identity_status": "ESTABLISHED",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+        "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+        "containing_function": "c1/customs.js::program:CustomsClient:check",
+        "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+      },
+      {
+        "path_order": 2,
+        "node_id": "30064771206",
+        "node_kind": "CALL",
+        "callee_name": "makeRequest",
+        "path_membership": "ESTABLISHED",
+        "static_definition_identity": null,
+        "static_definition_identity_status": "UNKNOWN",
+        "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+        "trace_callee_identity_status": "ESTABLISHED",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "callsite_code": null,
+        "containing_statement": null,
+        "containing_function": null,
+        "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+      }
+    ],
+    "sink": {
+      "node_id": "30064771145",
+      "line": 75,
+      "kind": "JSON.stringify",
+      "sink_model": "DIRECT_SERIALIZATION",
+      "class": "serialize-dos",
+      "downstream_primitive": "JSON.stringify",
+      "expression": "JSON.stringify(requestData)",
+      "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+      "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+    },
+    "qualification": "ESTABLISHED_DATAFLOW",
+    "necessity": "MAY_NOT_MUST"
+  },
+  "PRIOR_SEMANTIC_HINTS_ADVISORY": [],
+  "unresolved_subject": {
+    "call_node_id": "30064771223",
+    "path_order": "0",
+    "deterministic_status": "UNKNOWN"
+  },
+  "QUESTION": "The transform `sanitizePayload` was not resolved by the static definition resolver, but an exact callee body was established by trace-backed identity and is given as the definition_body on this alternative's step at path_order 0 (provenance TRACE_BACKED_EXACT_CALLEE); answer the property about THAT implementation. Does the on-path call `sanitizePayload` at path position 0 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?",
+  "answer_contract": {
+    "proposed_value": "SAFE | UNSAFE | UNKNOWN",
+    "confidence": "LOW | MEDIUM | HIGH",
+    "source_must_be": "LLM",
+    "rationale": "string",
+    "note": "This is a semantic HINT over unresolved semantics, not a fact."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "tchecker-llm-packet/1.0",
+  "round": 1,
+  "finding_id": "oob-index-write:c_cpp#L298:rgExtension",
+  "property_id": "oob-index-1.index_within_capacity",
+  "candidate_class": "OOB_WRITE",
+  "deterministic_status": "UNKNOWN",
+  "candidate_evidence": {
+    "established_shape": "INDEXED_STORE_INTO_FIXED_CAPACITY_ARRAY",
+    "capacity_status": "EXACT_SYNTACTIC_ELEM_COUNT",
+    "capacity_elem_count": 1,
+    "index_bound_status": "UNESTABLISHED",
+    "subclass": "INDEX_STORE",
+    "limitation": "The array capacity is known; no bound index<capacity is established on all paths. No vulnerability, triggerability, or attacker control is established by this shape."
+  },
+  "alternative": {
+    "origin": {
+      "origin_family": "UNBOUNDED_ARRAY_INDEX",
+      "index_expr": "cExtensions",
+      "array": "rgExtension",
+      "capacity_elem_count": 1,
+      "source_line": 298,
+      "established_by": "SYNTACTIC_FIXED_ARRAY_CAPACITY_AND_INDEXED_STORE"
+    },
+    "steps": [
+      {
+        "path_order": 0,
+        "node_kind": "INDEXED_STORE",
+        "write_expr": "rgExtension[cExtensions]",
+        "capacity_elem_count": 1,
+        "path_membership": "CANDIDATE_SHAPE",
+        "definition_status": "UNKNOWN",
+        "note": "This is a semantic HINT over a heuristic candidate, not a fact."
+      }
+    ]
+  },
+  "PRIOR_SEMANTIC_HINTS_ADVISORY": [],
+  "unresolved_subject": {
+    "deterministic_status": "UNKNOWN",
+    "node_kind": "INDEX_EXPRESSION",
+    "index_expr": "cExtensions"
+  },
+  "QUESTION": "Static analysis found an indexed write `rgExtension[cExtensions]` into a fixed-size array of 1 element(s), with NO established guarantee that `cExtensions` stays < 1 on every path reaching this write. Based ONLY on the supplied code, is `cExtensions` guaranteed to stay within [0, 1-1] on all paths to this write (SAFE), can it reach or exceed 1 (UNSAFE), or is the evidence insufficient (UNKNOWN)? Do not assume a caller validates the index; answer only about this write.",
+  "answer_contract": {
+    "source_must_be": "LLM",
+    "proposed_value": "SAFE | UNSAFE | UNKNOWN",
+    "confidence": "LOW | MEDIUM | HIGH",
+    "rationale": "string",
+    "note": "This is a semantic HINT over a heuristic candidate, not a fact.",
+    "value_meanings": {
+      "SAFE": "the index is guaranteed within [0, capacity-1] on all supplied paths",
+      "UNSAFE": "the index can reach or exceed the capacity on some supplied path",
+      "UNKNOWN": "the supplied evidence is insufficient"
+    }
+  }
+}

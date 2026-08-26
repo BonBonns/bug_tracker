@@ -1,0 +1,1554 @@
+{
+  "schema": "portable-module-export-identity/0.1",
+  "note": "Derived from require() specifier + export assignment only. The frontend's methodFullName/callee is deliberately NOT consulted: JS-PROV-R13 measured it fabricating a same-file callee across require boundaries.",
+  "facts": [
+    {
+      "call_id": 30064771155,
+      "code": "routes(app)",
+      "importing_file": "app.js",
+      "specifier": "routes",
+      "target_file": "routes/index.js",
+      "exported_member": "<default>",
+      "exported_method": "(app: ANY) => ANY",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771796,
+      "code": "securityUtil.generateSecureToken()",
+      "importing_file": "resources/account/forgot-password/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "generateSecureToken",
+      "exported_method": "security.util.js::program:generateSecureToken",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771805,
+      "code": "emailService.sendForgotPassword(     user.email,     {       firstName: user.firstName,   ",
+      "importing_file": "resources/account/forgot-password/index.js",
+      "specifier": "services/email/email.service",
+      "target_file": "services/email/email.service.js",
+      "exported_member": "sendForgotPassword",
+      "exported_method": "services/email/email.service.js::program:sendForgotPassword",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771826,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/forgot-password/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771872,
+      "code": "require('./sign-up').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./sign-up",
+      "target_file": "resources/account/sign-up/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/sign-up/index.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771876,
+      "code": "require('./sign-in').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./sign-in",
+      "target_file": "resources/account/sign-in/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/sign-in/index.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771880,
+      "code": "require('./sign-out').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./sign-out",
+      "target_file": "resources/account/sign-out/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/sign-out/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771884,
+      "code": "require('./verify-email').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./verify-email",
+      "target_file": "resources/account/verify-email/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/verify-email/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771888,
+      "code": "require('./forgot-password').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./forgot-password",
+      "target_file": "resources/account/forgot-password/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/forgot-password/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771892,
+      "code": "require('./reset-password').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./reset-password",
+      "target_file": "resources/account/reset-password/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/reset-password/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771896,
+      "code": "require('./verify-reset-token').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./verify-reset-token",
+      "target_file": "resources/account/verify-reset-token/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/verify-reset-token/index.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771900,
+      "code": "require('./resend-email').register(router)",
+      "importing_file": "resources/account/public.js",
+      "specifier": "./resend-email",
+      "target_file": "resources/account/resend-email/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/account/resend-email/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771935,
+      "code": "securityUtil.generateSecureToken()",
+      "importing_file": "resources/account/resend-email/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "generateSecureToken",
+      "exported_method": "security.util.js::program:generateSecureToken",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771950,
+      "code": "emailService.sendForgotPassword({       email: user.email,       resetPasswordToken,     }",
+      "importing_file": "resources/account/resend-email/index.js",
+      "specifier": "services/email/email.service",
+      "target_file": "services/email/email.service.js",
+      "exported_member": "sendForgotPassword",
+      "exported_method": "services/email/email.service.js::program:sendForgotPassword",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064771966,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/resend-email/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772036,
+      "code": "securityUtil.getHash(password)",
+      "importing_file": "resources/account/reset-password/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "getHash",
+      "exported_method": "security.util.js::program:getHash",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772052,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/reset-password/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772124,
+      "code": "securityUtil.compareTextWithHash(password, user.passwordHash)",
+      "importing_file": "resources/account/sign-in/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "compareTextWithHash",
+      "exported_method": "security.util.js::program:compareTextWithHash",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772156,
+      "code": "authService.setTokens(ctx, user._id)",
+      "importing_file": "resources/account/sign-in/index.js",
+      "specifier": "services/auth/auth.service",
+      "target_file": "services/auth/auth.service.js",
+      "exported_member": "setTokens",
+      "exported_method": "services/auth/auth.service.js::program:setTokens",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772170,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/sign-in/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772238,
+      "code": "authService.unsetTokens(ctx)",
+      "importing_file": "resources/account/sign-out/index.js",
+      "specifier": "services/auth/auth.service",
+      "target_file": "services/auth/auth.service.js",
+      "exported_member": "unsetTokens",
+      "exported_method": "services/auth/auth.service.js::program:unsetTokens",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772283,
+      "code": "securityUtil.getHash(password)",
+      "importing_file": "resources/account/sign-up/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "getHash",
+      "exported_method": "security.util.js::program:getHash",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772287,
+      "code": "securityUtil.generateSecureToken()",
+      "importing_file": "resources/account/sign-up/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "generateSecureToken",
+      "exported_method": "security.util.js::program:generateSecureToken",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772312,
+      "code": "emailService.sendSignUpWelcome(     user.email,     {       verifyEmailUrl: `${config.apiU",
+      "importing_file": "resources/account/sign-up/index.js",
+      "specifier": "services/email/email.service",
+      "target_file": "services/email/email.service.js",
+      "exported_member": "sendSignUpWelcome",
+      "exported_method": "services/email/email.service.js::program:sendSignUpWelcome",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772333,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/sign-up/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772475,
+      "code": "authService.setTokens(ctx, userId)",
+      "importing_file": "resources/account/verify-email/index.js",
+      "specifier": "services/auth/auth.service",
+      "target_file": "services/auth/auth.service.js",
+      "exported_member": "setTokens",
+      "exported_method": "services/auth/auth.service.js::program:setTokens",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772487,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/verify-email/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772541,
+      "code": "validate(schema)",
+      "importing_file": "resources/account/verify-reset-token/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772595,
+      "code": "require('./get').register(router)",
+      "importing_file": "resources/health/public.js",
+      "specifier": "./get",
+      "target_file": "resources/health/get/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/health/get/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772661,
+      "code": "securityUtil.generateSecureToken(TOKEN_SECURITY_LENGTH)",
+      "importing_file": "resources/token/token.service.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "generateSecureToken",
+      "exported_method": "security.util.js::program:generateSecureToken",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772746,
+      "code": "require('./get-current').register(router)",
+      "importing_file": "resources/user/index.js",
+      "specifier": "./get-current",
+      "target_file": "resources/user/get-current/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/user/get-current/index.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772750,
+      "code": "require('./update-current').register(router)",
+      "importing_file": "resources/user/index.js",
+      "specifier": "./update-current",
+      "target_file": "resources/user/update-current/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/user/update-current/index.js::program:<lambda>1",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772754,
+      "code": "require('./upload-avatar').register(router)",
+      "importing_file": "resources/user/index.js",
+      "specifier": "./upload-avatar",
+      "target_file": "resources/user/upload-avatar/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/user/upload-avatar/index.js::program:<lambda>2",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772758,
+      "code": "require('./remove-avatar').register(router)",
+      "importing_file": "resources/user/index.js",
+      "specifier": "./remove-avatar",
+      "target_file": "resources/user/remove-avatar/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/user/remove-avatar/index.js::program:<lambda>2",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772762,
+      "code": "require('./list').register(router)",
+      "importing_file": "resources/user/index.js",
+      "specifier": "./list",
+      "target_file": "resources/user/list/index.js",
+      "exported_member": "register",
+      "exported_method": "resources/user/list/index.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772844,
+      "code": "validate(schema)",
+      "importing_file": "resources/user/list/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772964,
+      "code": "securityUtil.compareTextWithHash(password, user.passwordHash)",
+      "importing_file": "resources/user/update-current/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "compareTextWithHash",
+      "exported_method": "security.util.js::program:compareTextWithHash",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064772987,
+      "code": "securityUtil.getHash(password)",
+      "importing_file": "resources/user/update-current/index.js",
+      "specifier": "security.util",
+      "target_file": "security.util.js",
+      "exported_member": "getHash",
+      "exported_method": "security.util.js::program:getHash",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773006,
+      "code": "validate(schema)",
+      "importing_file": "resources/user/update-current/index.js",
+      "specifier": "middlewares/validate.middleware",
+      "target_file": "middlewares/validate.middleware.js",
+      "exported_member": "<default>",
+      "exported_method": "middlewares/validate.middleware.js::program:validate",
+      "returned_function": "middlewares/validate.middleware.js::program:validate:<lambda>1",
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773295,
+      "code": "publicRoutes(app)",
+      "importing_file": "routes/index.js",
+      "specifier": "./public",
+      "target_file": "routes/public.js",
+      "exported_member": "<default>",
+      "exported_method": "routes/public.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773298,
+      "code": "authenticatedRoutes(app)",
+      "importing_file": "routes/index.js",
+      "specifier": "./authenticated",
+      "target_file": "routes/authenticated.js",
+      "exported_member": "<default>",
+      "exported_method": "routes/authenticated.js::program:<lambda>0",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773599,
+      "code": "cookieHelper.setTokenCookies(options)",
+      "importing_file": "services/auth/auth.service.js",
+      "specifier": "./auth.helper",
+      "target_file": "services/auth/auth.helper.js",
+      "exported_member": "setTokenCookies",
+      "exported_method": "services/auth/auth.helper.js::program:setTokenCookies",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773608,
+      "code": "cookieHelper.unsetTokenCookies(ctx)",
+      "importing_file": "services/auth/auth.service.js",
+      "specifier": "./auth.helper",
+      "target_file": "services/auth/auth.helper.js",
+      "exported_member": "unsetTokenCookies",
+      "exported_method": "services/auth/auth.helper.js::program:unsetTokenCookies",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773901,
+      "code": "socketHelper.getCookie(socket.handshake.headers.cookie, COOKIES.ACCESS_TOKEN)",
+      "importing_file": "services/socket/socket.service.js",
+      "specifier": "./socket.helper",
+      "target_file": "services/socket/socket.helper.js",
+      "exported_member": "getCookie",
+      "exported_method": "services/socket/socket.helper.js::program:getCookie",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "call_id": 30064773928,
+      "code": "socketHelper.checkAccessToRoom(roomId, { userId })",
+      "importing_file": "services/socket/socket.service.js",
+      "specifier": "./socket.helper",
+      "target_file": "services/socket/socket.helper.js",
+      "exported_member": "checkAccessToRoom",
+      "exported_method": "services/socket/socket.helper.js::program:checkAccessToRoom",
+      "returned_function": null,
+      "identity_evidence": "REQUIRE_BINDING+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    }
+  ],
+  "abstentions": [
+    {
+      "call_id": 30064771100,
+      "code": "logger.error('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason)",
+      "target": "logger.js",
+      "member": "error",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771102,
+      "code": "logger.warn(`Api server listening on ${config.port}, in ${process.env.NODE_ENV} mode and $",
+      "target": "logger.js",
+      "member": "warn",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771110,
+      "code": "require('app-module-path').addPath(__dirname)",
+      "spec": "app-module-path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771132,
+      "code": "cors({ credentials: true })",
+      "spec": "@koa/cors",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771137,
+      "code": "helmet()",
+      "spec": "koa-helmet",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771138,
+      "code": "qs(app)",
+      "spec": "koa-qs",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771141,
+      "code": "bodyParser({ enableTypes: ['json', 'form', 'text'] })",
+      "spec": "koa-bodyparser",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771154,
+      "code": "requestLogger()",
+      "spec": "koa-logger",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771157,
+      "code": "http.createServer(app.callback())",
+      "spec": "http",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771193,
+      "code": "require('@paralect/node-mongo').connect(config.mongoUri)",
+      "spec": "@paralect/node-mongo",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771204,
+      "code": "require('redis').createClient({   host: config.redis.host,   port: config.redis.port,   pa",
+      "spec": "redis",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771206,
+      "code": "logger.error(`Error publishing to sockets: ${err}`)",
+      "target": "logger.js",
+      "member": "error",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771305,
+      "code": "multer.memoryStorage()",
+      "spec": "@koa/multer",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771309,
+      "code": "multer({ storage })",
+      "spec": "@koa/multer",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771380,
+      "code": "Joi.object({   _id: Joi.string(),   createdOn: Joi.date(),   updatedOn: Joi.date(),   vers",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771384,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771388,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771392,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771399,
+      "code": "Joi.number()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771410,
+      "code": "fs.readdir(migrationsPath, (err, files) => {     if (err) {       reject(err);       retur",
+      "spec": "fs",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771425,
+      "code": "path.join(migrationsPath, name)",
+      "spec": "path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771467,
+      "code": "_.chunk(documents, limit)",
+      "spec": "lodash",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771478,
+      "code": "db.createService('__migrationVersion', { validate: validateSchema })",
+      "target": "db.js",
+      "member": "createService",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771483,
+      "code": "path.join(__dirname, 'migrations')",
+      "spec": "path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771504,
+      "code": "Joi.object({   _id: Joi.string(),   createdOn: Joi.date(),   updatedOn: Joi.date(),   star",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771508,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771512,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771516,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771523,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771527,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771534,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771538,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771542,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771546,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771553,
+      "code": "Joi.number()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771614,
+      "code": "db.createService('__migrationLog', { validate: validateSchema })",
+      "target": "db.js",
+      "member": "createService",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771656,
+      "code": "logger.info(`No new migrations found, stopping the process.       Current database version",
+      "target": "logger.js",
+      "member": "info",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771666,
+      "code": "migrationService.generateId()",
+      "target": "migrations/migration.service.js",
+      "member": "generateId",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771673,
+      "code": "migrationLogService.startMigrationLog(migrationLogId, startTime, migration.version)",
+      "target": "migrations/migrations-log/migration-log.service.js",
+      "member": "startMigrationLog",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771676,
+      "code": "logger.info(`Migration #${migration.version} is running: ${migration.description}`)",
+      "target": "logger.js",
+      "member": "info",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771687,
+      "code": "migrationService.setNewMigrationVersion(migration.version)",
+      "target": "migrations/migration.service.js",
+      "member": "setNewMigrationVersion",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771698,
+      "code": "moment.duration(finishTime - startTime)",
+      "spec": "moment",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771702,
+      "code": "migrationLogService.finishMigrationLog(migrationLogId, finishTime, duration)",
+      "target": "migrations/migrations-log/migration-log.service.js",
+      "member": "finishMigrationLog",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771704,
+      "code": "logger.info(`Database has been updated to the version #${migration.version}`)",
+      "target": "logger.js",
+      "member": "info",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771708,
+      "code": "logger.info(`Time of migration #${migration.version}: ${duration}`)",
+      "target": "logger.js",
+      "member": "info",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771712,
+      "code": "logger.info(`All migrations has been finished, stopping the process.       Current databas",
+      "target": "logger.js",
+      "member": "info",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771715,
+      "code": "logger.error(`Failed to update migration to version ${migration.version}`)",
+      "target": "logger.js",
+      "member": "error",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771719,
+      "code": "logger.error(err)",
+      "target": "logger.js",
+      "member": "error",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771722,
+      "code": "migrationLogService.failMigrationLog(migrationLogId, new Date(), err)",
+      "target": "migrations/migrations-log/migration-log.service.js",
+      "member": "failMigrationLog",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771734,
+      "code": "migrationService.getMigrations()",
+      "target": "migrations/migration.service.js",
+      "member": "getMigrations",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771738,
+      "code": "migrationService.getCurrentMigrationVersion()",
+      "target": "migrations/migration.service.js",
+      "member": "getCurrentMigrationVersion",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771760,
+      "code": "require('app-module-path').addPath(__dirname)",
+      "spec": "app-module-path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771765,
+      "code": "migrator.exec()",
+      "target": "migrations/migrator.js",
+      "member": "exec",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771769,
+      "code": "userService.findOne({ email: ctx.validatedData.email })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771799,
+      "code": "userService.updateOne(       { _id: user._id },       (old) => ({ ...old, resetPasswordTok",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771836,
+      "code": "Joi.object({   email: Joi.string()     .email()     .trim()     .lowercase()     .required",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771855,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771914,
+      "code": "userService.findOne({ email })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771943,
+      "code": "userService.updateOne(       { _id: user._id },       (old) => ({ ...old, resetPasswordTok",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064771975,
+      "code": "Joi.object({   email: Joi.string()     .email()     .trim()     .lowercase()     .required",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064771994,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772011,
+      "code": "userService.findOne({ resetPasswordToken: token })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772039,
+      "code": "userService.updateOne(     { _id: user._id },     (old) => ({ ...old, passwordHash, resetP",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772060,
+      "code": "Joi.object({   token: Joi.string()     .required()     .messages({       'any.required': '",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772070,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772093,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772114,
+      "code": "userService.findOne({ email })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772151,
+      "code": "userService.updateLastRequest(user._id)",
+      "target": "resources/user/user.service.js",
+      "member": "updateLastRequest",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772161,
+      "code": "userService.getPublic(user)",
+      "target": "resources/user/user.service.js",
+      "member": "getPublic",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772179,
+      "code": "Joi.object({   email: Joi.string()     .email()     .trim()     .lowercase()     .required",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772198,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772223,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772255,
+      "code": "userService.exists({ email })",
+      "target": "resources/user/user.service.js",
+      "member": "exists",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772295,
+      "code": "userService.create({     firstName,     lastName,     email,     passwordHash: hash.toStri",
+      "target": "resources/user/user.service.js",
+      "member": "create",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772343,
+      "code": "Joi.object({   firstName: Joi.string()     .trim()     .required()     .messages({       '",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772356,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772373,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772396,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772421,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772436,
+      "code": "userService.findOne({ signupToken: ctx.validatedData.token })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772465,
+      "code": "userService.updateOne(       { _id: userId },       (old) => ({ ...old, isEmailVerified: t",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772471,
+      "code": "userService.updateLastRequest(userId)",
+      "target": "resources/user/user.service.js",
+      "member": "updateLastRequest",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772496,
+      "code": "Joi.object({   token: Joi.string()     .required()     .messages({       'any.required': '",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772506,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772523,
+      "code": "userService.findOne({ resetPasswordToken: token })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772548,
+      "code": "Joi.object({   email: Joi.string()     .required()     .messages({       'any.required': '",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772558,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772572,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772614,
+      "code": "Joi.object({   _id: Joi.string(),   createdOn: Joi.date(),   updatedOn: Joi.date(),   type",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772618,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772622,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772626,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772636,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772644,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772651,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772711,
+      "code": "db.createService(DATABASE_DOCUMENTS.TOKENS, { validate: validateSchema })",
+      "target": "db.js",
+      "member": "createService",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772727,
+      "code": "userService.getPublic(ctx.state.user)",
+      "target": "resources/user/user.service.js",
+      "member": "getPublic",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772798,
+      "code": "userService.find(     {       $or: [         { firstName: { $regex: regExp } },         { ",
+      "target": "resources/user/user.service.js",
+      "member": "find",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772850,
+      "code": "Joi.object({   page: Joi.number().default(1),   perPage: Joi.number().default(10),   sort:",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772857,
+      "code": "Joi.number()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772864,
+      "code": "Joi.number()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772874,
+      "code": "Joi.object({})",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772878,
+      "code": "Joi.number()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772891,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064772920,
+      "code": "cloudStorageService.deleteObject(getFileKey(user.avatarUrl))",
+      "target": "services/cloud-storage/cloud-storage.service.js",
+      "member": "deleteObject",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772926,
+      "code": "userService.updateOne(       { _id: user._id },       (old) => ({         ...old,         ",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772991,
+      "code": "userService.updateOne(     { _id: user._id },     (old) => ({       ...old,       password",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064772998,
+      "code": "userService.getPublic(updatedUser)",
+      "target": "resources/user/user.service.js",
+      "member": "getPublic",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773014,
+      "code": "Joi.object({   password: Joi.string()     .trim()     .min(6)     .max(50)     .messages({",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773030,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773066,
+      "code": "cloudStorageService.deleteObject(getFileKey(user.avatarUrl))",
+      "target": "services/cloud-storage/cloud-storage.service.js",
+      "member": "deleteObject",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773078,
+      "code": "cloudStorageService.uploadPublic(`avatars/${fileName}`, file)",
+      "target": "services/cloud-storage/cloud-storage.service.js",
+      "member": "uploadPublic",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773085,
+      "code": "userService.updateOne(     { _id: user._id },     (old) => ({       ...old,       avatarUr",
+      "target": "resources/user/user.service.js",
+      "member": "updateOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773092,
+      "code": "userService.getPublic(updatedUser)",
+      "target": "resources/user/user.service.js",
+      "member": "getPublic",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773107,
+      "code": "uploadMiddleware.single('file')",
+      "target": "middlewares/upload-file.middleware.js",
+      "member": "single",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773129,
+      "code": "ioEmitter.to(roomId)",
+      "target": "ioEmitter.js",
+      "member": "to",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773133,
+      "code": "userService.on('updated', ({ doc }) => {   const roomId = `user-${doc._id}`;   ioEmitter.t",
+      "target": "resources/user/user.service.js",
+      "member": "on",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773142,
+      "code": "Joi.object({   _id: Joi.string(),   createdOn: Joi.date(),   updatedOn: Joi.date(),   firs",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773146,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773150,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773154,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773161,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773168,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773178,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773185,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773192,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773199,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773206,
+      "code": "Joi.boolean()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773210,
+      "code": "Joi.date()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773217,
+      "code": "Joi.string()",
+      "spec": "joi",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773243,
+      "code": "_.omit(user, privateFields)",
+      "spec": "lodash",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773250,
+      "code": "db.createService(constants.DATABASE_DOCUMENTS.USERS, { validate: validateSchema })",
+      "target": "db.js",
+      "member": "createService",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773275,
+      "code": "mount('/users', userResource)",
+      "spec": "koa-mount",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773313,
+      "code": "_.isArray(customError[key])",
+      "spec": "lodash",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773410,
+      "code": "logger.error(errors)",
+      "target": "logger.js",
+      "member": "error",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773436,
+      "code": "tokenService.getUserDataByToken(ctx.state.accessToken)",
+      "target": "resources/token/token.service.js",
+      "member": "getUserDataByToken",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773441,
+      "code": "userService.updateLastRequest(userData.userId)",
+      "target": "resources/user/user.service.js",
+      "member": "updateLastRequest",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773448,
+      "code": "userService.findOne({ _id: userData.userId })",
+      "target": "resources/user/user.service.js",
+      "member": "findOne",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773464,
+      "code": "mount('/account', accountResource)",
+      "spec": "koa-mount",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773467,
+      "code": "mount('/health', healthResource)",
+      "spec": "koa-mount",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773473,
+      "code": "require('app-module-path').addPath(__dirname)",
+      "spec": "app-module-path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773489,
+      "code": "schedule.scheduleJob('* * * * *', () => {   eventEmitter.emit('cron:every-minute'); })",
+      "spec": "node-schedule",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773495,
+      "code": "cron.on('cron:every-minute', async () => { })",
+      "target": "scheduler/cron/index.js",
+      "member": "on",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773515,
+      "code": "util.promisify(crypto.randomBytes, crypto)",
+      "spec": "util",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773519,
+      "code": "util.promisify(bcrypt.hash, bcrypt)",
+      "spec": "util",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773523,
+      "code": "util.promisify(bcrypt.compare, bcrypt)",
+      "spec": "util",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773541,
+      "code": "url.parse(config.webUrl)",
+      "spec": "url",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773545,
+      "code": "psl.parse(parsedUrl.hostname)",
+      "spec": "psl",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773591,
+      "code": "tokenService.createAuthTokens({ userId })",
+      "target": "resources/token/token.service.js",
+      "member": "createAuthTokens",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773602,
+      "code": "tokenService.removeAuthTokens(ctx.state.accessToken, ctx.state.refreshToken)",
+      "target": "resources/token/token.service.js",
+      "member": "removeAuthTokens",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773737,
+      "code": "handlebars.compile(template.toString())",
+      "spec": "handlebars",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773754,
+      "code": "sendgrid.setApiKey(apiKey)",
+      "spec": "@sendgrid/mail",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773767,
+      "code": "path.join(this.templatesDir, template)",
+      "spec": "path",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773773,
+      "code": "sendgrid.send({       to,       from: this.from,       subject,       html,     })",
+      "spec": "@sendgrid/mail",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773794,
+      "code": "sendgrid.send({       to,       from: this.from,       subject,       templateId,       dy",
+      "spec": "@sendgrid/mail",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773909,
+      "code": "tokenService.getUserDataByToken(accessToken)",
+      "target": "resources/token/token.service.js",
+      "member": "getUserDataByToken",
+      "reason": "NO_MATCHING_EXPORT_MEMBER"
+    },
+    {
+      "call_id": 30064773941,
+      "code": "socketIo(server)",
+      "spec": "socket.io",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    },
+    {
+      "call_id": 30064773944,
+      "code": "redisAdapter({     host: config.redis.host,     port: config.redis.port,     password: con",
+      "spec": "socket.io-redis",
+      "reason": "TARGET_FILE_HAS_NO_EXPORT_ASSIGNMENT"
+    }
+  ]
+}

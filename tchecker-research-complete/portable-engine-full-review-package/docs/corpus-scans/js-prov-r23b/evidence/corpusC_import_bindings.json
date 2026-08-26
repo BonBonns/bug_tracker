@@ -1,0 +1,2071 @@
+{
+  "schema": "portable-import-binding-identity/0.1",
+  "note": "An import establishes member identity ONLY when its imported entity matches an independently established export identity in the resolved target module. Default imports are NOT establishable by this route (measured: cpg.imports reports the local alias as the member, not `default`).",
+  "import_bindings_observed": 220,
+  "identities_established": 63,
+  "facts": [
+    {
+      "importing_file": "app.module.ts",
+      "specifier": "./app.controller",
+      "target_file": "app.controller.ts",
+      "imported_member": "AppController",
+      "local_binding": "AppController",
+      "exported_method": "app.controller.ts::program:AppController",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "app.module.ts",
+      "specifier": "./article/article.module",
+      "target_file": "article/article.module.ts",
+      "imported_member": "ArticleModule",
+      "local_binding": "ArticleModule",
+      "exported_method": "article/article.module.ts::program:ArticleModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "app.module.ts",
+      "specifier": "./user/user.module",
+      "target_file": "user/user.module.ts",
+      "imported_member": "UserModule",
+      "local_binding": "UserModule",
+      "exported_method": "user/user.module.ts::program:UserModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "app.module.ts",
+      "specifier": "./profile/profile.module",
+      "target_file": "profile/profile.module.ts",
+      "imported_member": "ProfileModule",
+      "local_binding": "ProfileModule",
+      "exported_method": "profile/profile.module.ts::program:ProfileModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "app.module.ts",
+      "specifier": "./tag/tag.module",
+      "target_file": "tag/tag.module.ts",
+      "imported_member": "TagModule",
+      "local_binding": "TagModule",
+      "exported_method": "tag/tag.module.ts::program:TagModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.controller.ts",
+      "specifier": "./article.service",
+      "target_file": "article/article.service.ts",
+      "imported_member": "ArticleService",
+      "local_binding": "ArticleService",
+      "exported_method": "article/article.service.ts::program:ArticleService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.controller.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "ArticlesRO",
+      "local_binding": "ArticlesRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.controller.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "ArticleRO",
+      "local_binding": "ArticleRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.controller.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "CommentsRO",
+      "local_binding": "CommentsRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.controller.ts",
+      "specifier": "../user/user.decorator",
+      "target_file": "user/user.decorator.ts",
+      "imported_member": "User",
+      "local_binding": "User",
+      "exported_method": "@nestjs/common:createParamDecorator:<returnValue>",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.entity.ts",
+      "specifier": "../user/user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.entity.ts",
+      "specifier": "./comment.entity",
+      "target_file": "article/comment.entity.ts",
+      "imported_member": "Comment",
+      "local_binding": "Comment",
+      "exported_method": "article/comment.entity.ts::program:Comment",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.interface.ts",
+      "specifier": "../user/user.interface",
+      "target_file": "user/user.interface.ts",
+      "imported_member": "UserData",
+      "local_binding": "UserData",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.interface.ts",
+      "specifier": "./article.entity",
+      "target_file": "article/article.entity.ts",
+      "imported_member": "ArticleEntity",
+      "local_binding": "ArticleEntity",
+      "exported_method": "article/article.entity.ts::program:ArticleEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "./article.controller",
+      "target_file": "article/article.controller.ts",
+      "imported_member": "ArticleController",
+      "local_binding": "ArticleController",
+      "exported_method": "article/article.controller.ts::program:ArticleController",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "./article.entity",
+      "target_file": "article/article.entity.ts",
+      "imported_member": "ArticleEntity",
+      "local_binding": "ArticleEntity",
+      "exported_method": "article/article.entity.ts::program:ArticleEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "./comment.entity",
+      "target_file": "article/comment.entity.ts",
+      "imported_member": "Comment",
+      "local_binding": "Comment",
+      "exported_method": "article/comment.entity.ts::program:Comment",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "../user/user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "../profile/follows.entity",
+      "target_file": "profile/follows.entity.ts",
+      "imported_member": "FollowsEntity",
+      "local_binding": "FollowsEntity",
+      "exported_method": "profile/follows.entity.ts::program:FollowsEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "./article.service",
+      "target_file": "article/article.service.ts",
+      "imported_member": "ArticleService",
+      "local_binding": "ArticleService",
+      "exported_method": "article/article.service.ts::program:ArticleService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "../user/auth.middleware",
+      "target_file": "user/auth.middleware.ts",
+      "imported_member": "AuthMiddleware",
+      "local_binding": "AuthMiddleware",
+      "exported_method": "user/auth.middleware.ts::program:AuthMiddleware",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.module.ts",
+      "specifier": "../user/user.module",
+      "target_file": "user/user.module.ts",
+      "imported_member": "UserModule",
+      "local_binding": "UserModule",
+      "exported_method": "user/user.module.ts::program:UserModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "./article.entity",
+      "target_file": "article/article.entity.ts",
+      "imported_member": "ArticleEntity",
+      "local_binding": "ArticleEntity",
+      "exported_method": "article/article.entity.ts::program:ArticleEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "./comment.entity",
+      "target_file": "article/comment.entity.ts",
+      "imported_member": "Comment",
+      "local_binding": "Comment",
+      "exported_method": "article/comment.entity.ts::program:Comment",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "../user/user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "../profile/follows.entity",
+      "target_file": "profile/follows.entity.ts",
+      "imported_member": "FollowsEntity",
+      "local_binding": "FollowsEntity",
+      "exported_method": "profile/follows.entity.ts::program:FollowsEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "ArticleRO",
+      "local_binding": "ArticleRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "ArticlesRO",
+      "local_binding": "ArticlesRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/article.service.ts",
+      "specifier": "./article.interface",
+      "target_file": "article/article.interface.ts",
+      "imported_member": "CommentsRO",
+      "local_binding": "CommentsRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "article/comment.entity.ts",
+      "specifier": "./article.entity",
+      "target_file": "article/article.entity.ts",
+      "imported_member": "ArticleEntity",
+      "local_binding": "ArticleEntity",
+      "exported_method": "article/article.entity.ts::program:ArticleEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "main.ts",
+      "specifier": "./app.module",
+      "target_file": "app.module.ts",
+      "imported_member": "ApplicationModule",
+      "local_binding": "ApplicationModule",
+      "exported_method": "app.module.ts::program:ApplicationModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.controller.ts",
+      "specifier": "./profile.service",
+      "target_file": "profile/profile.service.ts",
+      "imported_member": "ProfileService",
+      "local_binding": "ProfileService",
+      "exported_method": "profile/profile.service.ts::program:ProfileService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.controller.ts",
+      "specifier": "./profile.interface",
+      "target_file": "profile/profile.interface.ts",
+      "imported_member": "ProfileRO",
+      "local_binding": "ProfileRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.controller.ts",
+      "specifier": "../user/user.decorator",
+      "target_file": "user/user.decorator.ts",
+      "imported_member": "User",
+      "local_binding": "User",
+      "exported_method": "@nestjs/common:createParamDecorator:<returnValue>",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "./profile.controller",
+      "target_file": "profile/profile.controller.ts",
+      "imported_member": "ProfileController",
+      "local_binding": "ProfileController",
+      "exported_method": "profile/profile.controller.ts::program:ProfileController",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "./profile.service",
+      "target_file": "profile/profile.service.ts",
+      "imported_member": "ProfileService",
+      "local_binding": "ProfileService",
+      "exported_method": "profile/profile.service.ts::program:ProfileService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "../user/user.module",
+      "target_file": "user/user.module.ts",
+      "imported_member": "UserModule",
+      "local_binding": "UserModule",
+      "exported_method": "user/user.module.ts::program:UserModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "../user/user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "./follows.entity",
+      "target_file": "profile/follows.entity.ts",
+      "imported_member": "FollowsEntity",
+      "local_binding": "FollowsEntity",
+      "exported_method": "profile/follows.entity.ts::program:FollowsEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.module.ts",
+      "specifier": "../user/auth.middleware",
+      "target_file": "user/auth.middleware.ts",
+      "imported_member": "AuthMiddleware",
+      "local_binding": "AuthMiddleware",
+      "exported_method": "user/auth.middleware.ts::program:AuthMiddleware",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.service.ts",
+      "specifier": "../user/user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.service.ts",
+      "specifier": "./profile.interface",
+      "target_file": "profile/profile.interface.ts",
+      "imported_member": "ProfileRO",
+      "local_binding": "ProfileRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.service.ts",
+      "specifier": "./profile.interface",
+      "target_file": "profile/profile.interface.ts",
+      "imported_member": "ProfileData",
+      "local_binding": "ProfileData",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "profile/profile.service.ts",
+      "specifier": "./follows.entity",
+      "target_file": "profile/follows.entity.ts",
+      "imported_member": "FollowsEntity",
+      "local_binding": "FollowsEntity",
+      "exported_method": "profile/follows.entity.ts::program:FollowsEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.controller.ts",
+      "specifier": "./tag.entity",
+      "target_file": "tag/tag.entity.ts",
+      "imported_member": "TagEntity",
+      "local_binding": "TagEntity",
+      "exported_method": "tag/tag.entity.ts::program:TagEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.controller.ts",
+      "specifier": "./tag.service",
+      "target_file": "tag/tag.service.ts",
+      "imported_member": "TagService",
+      "local_binding": "TagService",
+      "exported_method": "tag/tag.service.ts::program:TagService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.module.ts",
+      "specifier": "../user/user.module",
+      "target_file": "user/user.module.ts",
+      "imported_member": "UserModule",
+      "local_binding": "UserModule",
+      "exported_method": "user/user.module.ts::program:UserModule",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.module.ts",
+      "specifier": "./tag.service",
+      "target_file": "tag/tag.service.ts",
+      "imported_member": "TagService",
+      "local_binding": "TagService",
+      "exported_method": "tag/tag.service.ts::program:TagService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.module.ts",
+      "specifier": "./tag.entity",
+      "target_file": "tag/tag.entity.ts",
+      "imported_member": "TagEntity",
+      "local_binding": "TagEntity",
+      "exported_method": "tag/tag.entity.ts::program:TagEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.module.ts",
+      "specifier": "./tag.controller",
+      "target_file": "tag/tag.controller.ts",
+      "imported_member": "TagController",
+      "local_binding": "TagController",
+      "exported_method": "tag/tag.controller.ts::program:TagController",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "tag/tag.service.ts",
+      "specifier": "./tag.entity",
+      "target_file": "tag/tag.entity.ts",
+      "imported_member": "TagEntity",
+      "local_binding": "TagEntity",
+      "exported_method": "tag/tag.entity.ts::program:TagEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/auth.middleware.ts",
+      "specifier": "./user.service",
+      "target_file": "user/user.service.ts",
+      "imported_member": "UserService",
+      "local_binding": "UserService",
+      "exported_method": "user/user.service.ts::program:UserService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.controller.ts",
+      "specifier": "./user.service",
+      "target_file": "user/user.service.ts",
+      "imported_member": "UserService",
+      "local_binding": "UserService",
+      "exported_method": "user/user.service.ts::program:UserService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.controller.ts",
+      "specifier": "./user.interface",
+      "target_file": "user/user.interface.ts",
+      "imported_member": "UserRO",
+      "local_binding": "UserRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.controller.ts",
+      "specifier": "./user.decorator",
+      "target_file": "user/user.decorator.ts",
+      "imported_member": "User",
+      "local_binding": "User",
+      "exported_method": "@nestjs/common:createParamDecorator:<returnValue>",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.controller.ts",
+      "specifier": "../shared/pipes/validation.pipe",
+      "target_file": "shared/pipes/validation.pipe.ts",
+      "imported_member": "ValidationPipe",
+      "local_binding": "ValidationPipe",
+      "exported_method": "shared/pipes/validation.pipe.ts::program:ValidationPipe",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.entity.ts",
+      "specifier": "../article/article.entity",
+      "target_file": "article/article.entity.ts",
+      "imported_member": "ArticleEntity",
+      "local_binding": "ArticleEntity",
+      "exported_method": "article/article.entity.ts::program:ArticleEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.module.ts",
+      "specifier": "./user.controller",
+      "target_file": "user/user.controller.ts",
+      "imported_member": "UserController",
+      "local_binding": "UserController",
+      "exported_method": "user/user.controller.ts::program:UserController",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.module.ts",
+      "specifier": "./user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.module.ts",
+      "specifier": "./user.service",
+      "target_file": "user/user.service.ts",
+      "imported_member": "UserService",
+      "local_binding": "UserService",
+      "exported_method": "user/user.service.ts::program:UserService",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.module.ts",
+      "specifier": "./auth.middleware",
+      "target_file": "user/auth.middleware.ts",
+      "imported_member": "AuthMiddleware",
+      "local_binding": "AuthMiddleware",
+      "exported_method": "user/auth.middleware.ts::program:AuthMiddleware",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.service.ts",
+      "specifier": "./user.entity",
+      "target_file": "user/user.entity.ts",
+      "imported_member": "UserEntity",
+      "local_binding": "UserEntity",
+      "exported_method": "user/user.entity.ts::program:UserEntity",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    },
+    {
+      "importing_file": "user/user.service.ts",
+      "specifier": "./user.interface",
+      "target_file": "user/user.interface.ts",
+      "imported_member": "UserRO",
+      "local_binding": "UserRO",
+      "exported_method": "ANY",
+      "identity_evidence": "IMPORT_NODE+EXPORT_ASSIGNMENT",
+      "resolution": "ESTABLISHED"
+    }
+  ],
+  "abstentions": [
+    {
+      "file": "app.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Get",
+      "local": "Get",
+      "code": "import { Get, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "app.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Controller",
+      "local": "Controller",
+      "code": "import { Get, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "app.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "Module",
+      "local": "Module",
+      "code": "import { Module } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "app.module.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "TypeOrmModule",
+      "local": "TypeOrmModule",
+      "code": "import { TypeOrmModule } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "app.module.ts",
+      "specifier": "typeorm",
+      "member": "Connection",
+      "local": "Connection",
+      "code": "import { Connection } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Get",
+      "local": "Get",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Post",
+      "local": "Post",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Body",
+      "local": "Body",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Put",
+      "local": "Put",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Delete",
+      "local": "Delete",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Query",
+      "local": "Query",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Param",
+      "local": "Param",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Controller",
+      "local": "Controller",
+      "code": "import {Get, Post, Body, Put, Delete, Query, Param, Controller} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "express",
+      "member": "Request",
+      "local": "Request",
+      "code": "import { Request } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "./dto",
+      "member": "CreateArticleDto",
+      "local": "CreateArticleDto",
+      "code": "import { CreateArticleDto, CreateCommentDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "article/dto/index.ts"
+      }
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "./dto",
+      "member": "CreateCommentDto",
+      "local": "CreateCommentDto",
+      "code": "import { CreateArticleDto, CreateCommentDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "article/dto/index.ts"
+      }
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiBearerAuth",
+      "local": "ApiBearerAuth",
+      "code": "import {   ApiBearerAuth,   ApiResponse,   ApiOperation, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiResponse",
+      "local": "ApiResponse",
+      "code": "import {   ApiBearerAuth,   ApiResponse,   ApiOperation, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiOperation",
+      "local": "ApiOperation",
+      "code": "import {   ApiBearerAuth,   ApiResponse,   ApiOperation, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiTags",
+      "local": "ApiTags",
+      "code": "import {   ApiBearerAuth,   ApiResponse,   ApiOperation, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "Entity",
+      "local": "Entity",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "PrimaryGeneratedColumn",
+      "local": "PrimaryGeneratedColumn",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "Column",
+      "local": "Column",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "OneToOne",
+      "local": "OneToOne",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "ManyToOne",
+      "local": "ManyToOne",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "OneToMany",
+      "local": "OneToMany",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "JoinColumn",
+      "local": "JoinColumn",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "AfterUpdate",
+      "local": "AfterUpdate",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.entity.ts",
+      "specifier": "typeorm",
+      "member": "BeforeUpdate",
+      "local": "BeforeUpdate",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany, JoinColum",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "MiddlewareConsumer",
+      "local": "MiddlewareConsumer",
+      "code": "import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "Module",
+      "local": "Module",
+      "code": "import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "NestModule",
+      "local": "NestModule",
+      "code": "import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "RequestMethod",
+      "local": "RequestMethod",
+      "code": "import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.module.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "TypeOrmModule",
+      "local": "TypeOrmModule",
+      "code": "import { TypeOrmModule } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import { Injectable } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "InjectRepository",
+      "local": "InjectRepository",
+      "code": "import { InjectRepository } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "typeorm",
+      "member": "Repository",
+      "local": "Repository",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "typeorm",
+      "member": "getRepository",
+      "local": "getRepository",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "typeorm",
+      "member": "DeleteResult",
+      "local": "DeleteResult",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "./dto",
+      "member": "CreateArticleDto",
+      "local": "CreateArticleDto",
+      "code": "import { CreateArticleDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "article/dto/index.ts"
+      }
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "slug",
+      "member": "",
+      "local": "slug",
+      "code": "slug = require('slug')",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/comment.entity.ts",
+      "specifier": "typeorm",
+      "member": "Entity",
+      "local": "Entity",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/comment.entity.ts",
+      "specifier": "typeorm",
+      "member": "PrimaryGeneratedColumn",
+      "local": "PrimaryGeneratedColumn",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/comment.entity.ts",
+      "specifier": "typeorm",
+      "member": "Column",
+      "local": "Column",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/comment.entity.ts",
+      "specifier": "typeorm",
+      "member": "ManyToOne",
+      "local": "ManyToOne",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "main.ts",
+      "specifier": "@nestjs/core",
+      "member": "NestFactory",
+      "local": "NestFactory",
+      "code": "import { NestFactory } from '@nestjs/core'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "main.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "SwaggerModule",
+      "local": "SwaggerModule",
+      "code": "import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "main.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "DocumentBuilder",
+      "local": "DocumentBuilder",
+      "code": "import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/follows.entity.ts",
+      "specifier": "typeorm",
+      "member": "Entity",
+      "local": "Entity",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from \"typeorm\"",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/follows.entity.ts",
+      "specifier": "typeorm",
+      "member": "PrimaryGeneratedColumn",
+      "local": "PrimaryGeneratedColumn",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from \"typeorm\"",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/follows.entity.ts",
+      "specifier": "typeorm",
+      "member": "Column",
+      "local": "Column",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from \"typeorm\"",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Get",
+      "local": "Get",
+      "code": "import { Get, Post, Delete, Param, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Post",
+      "local": "Post",
+      "code": "import { Get, Post, Delete, Param, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Delete",
+      "local": "Delete",
+      "code": "import { Get, Post, Delete, Param, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Param",
+      "local": "Param",
+      "code": "import { Get, Post, Delete, Param, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Controller",
+      "local": "Controller",
+      "code": "import { Get, Post, Delete, Param, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "express",
+      "member": "Request",
+      "local": "Request",
+      "code": "import { Request } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiBearerAuth",
+      "local": "ApiBearerAuth",
+      "code": "import {   ApiBearerAuth, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiTags",
+      "local": "ApiTags",
+      "code": "import {   ApiBearerAuth, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "MiddlewareConsumer",
+      "local": "MiddlewareConsumer",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "Module",
+      "local": "Module",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "NestModule",
+      "local": "NestModule",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "RequestMethod",
+      "local": "RequestMethod",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.module.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "TypeOrmModule",
+      "local": "TypeOrmModule",
+      "code": "import { TypeOrmModule } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "HttpStatus",
+      "local": "HttpStatus",
+      "code": "import { HttpStatus, Injectable} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import { HttpStatus, Injectable} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "InjectRepository",
+      "local": "InjectRepository",
+      "code": "import { InjectRepository } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "typeorm",
+      "member": "Repository",
+      "local": "Repository",
+      "code": "import { Repository } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "typeorm/common/DeepPartial",
+      "member": "DeepPartial",
+      "local": "DeepPartial",
+      "code": "import { DeepPartial } from 'typeorm/common/DeepPartial'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "profile/profile.service.ts",
+      "specifier": "@nestjs/common/exceptions/http.exception",
+      "member": "HttpException",
+      "local": "HttpException",
+      "code": "import {HttpException} from \"@nestjs/common/exceptions/http.exception\"",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/base.controller.ts",
+      "specifier": "../config",
+      "member": "SECRET",
+      "local": "SECRET",
+      "code": "import { SECRET } from '../config'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/base.controller.ts",
+      "specifier": "jsonwebtoken",
+      "member": "jwt",
+      "local": "jwt",
+      "code": "import * as jwt from 'jsonwebtoken'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common",
+      "member": "PipeTransform",
+      "local": "PipeTransform",
+      "code": "import {PipeTransform, ArgumentMetadata, BadRequestException, HttpStatus, Injectable} from",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common",
+      "member": "ArgumentMetadata",
+      "local": "ArgumentMetadata",
+      "code": "import {PipeTransform, ArgumentMetadata, BadRequestException, HttpStatus, Injectable} from",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common",
+      "member": "BadRequestException",
+      "local": "BadRequestException",
+      "code": "import {PipeTransform, ArgumentMetadata, BadRequestException, HttpStatus, Injectable} from",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common",
+      "member": "HttpStatus",
+      "local": "HttpStatus",
+      "code": "import {PipeTransform, ArgumentMetadata, BadRequestException, HttpStatus, Injectable} from",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import {PipeTransform, ArgumentMetadata, BadRequestException, HttpStatus, Injectable} from",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "class-validator",
+      "member": "validate",
+      "local": "validate",
+      "code": "import { validate } from 'class-validator'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "class-transformer",
+      "member": "plainToClass",
+      "local": "plainToClass",
+      "code": "import { plainToClass } from 'class-transformer'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "shared/pipes/validation.pipe.ts",
+      "specifier": "@nestjs/common/exceptions/http.exception",
+      "member": "HttpException",
+      "local": "HttpException",
+      "code": "import { HttpException } from '@nestjs/common/exceptions/http.exception'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Get",
+      "local": "Get",
+      "code": "import {Get, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Controller",
+      "local": "Controller",
+      "code": "import {Get, Controller } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiBearerAuth",
+      "local": "ApiBearerAuth",
+      "code": "import {   ApiBearerAuth, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiTags",
+      "local": "ApiTags",
+      "code": "import {   ApiBearerAuth, ApiTags, } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.entity.ts",
+      "specifier": "typeorm",
+      "member": "Entity",
+      "local": "Entity",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.entity.ts",
+      "specifier": "typeorm",
+      "member": "PrimaryGeneratedColumn",
+      "local": "PrimaryGeneratedColumn",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.entity.ts",
+      "specifier": "typeorm",
+      "member": "Column",
+      "local": "Column",
+      "code": "import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "MiddlewareConsumer",
+      "local": "MiddlewareConsumer",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "Module",
+      "local": "Module",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "NestModule",
+      "local": "NestModule",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "RequestMethod",
+      "local": "RequestMethod",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.module.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "TypeOrmModule",
+      "local": "TypeOrmModule",
+      "code": "import { TypeOrmModule } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import { Injectable} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.service.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "InjectRepository",
+      "local": "InjectRepository",
+      "code": "import { InjectRepository } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "tag/tag.service.ts",
+      "specifier": "typeorm",
+      "member": "Repository",
+      "local": "Repository",
+      "code": "import { Repository } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "@nestjs/common/exceptions/http.exception",
+      "member": "HttpException",
+      "local": "HttpException",
+      "code": "import { HttpException } from '@nestjs/common/exceptions/http.exception'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "@nestjs/common",
+      "member": "NestMiddleware",
+      "local": "NestMiddleware",
+      "code": "import { NestMiddleware, HttpStatus, Injectable } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "@nestjs/common",
+      "member": "HttpStatus",
+      "local": "HttpStatus",
+      "code": "import { NestMiddleware, HttpStatus, Injectable } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import { NestMiddleware, HttpStatus, Injectable } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "passport-jwt",
+      "member": "ExtractJwt",
+      "local": "ExtractJwt",
+      "code": "import { ExtractJwt, Strategy } from 'passport-jwt'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "passport-jwt",
+      "member": "Strategy",
+      "local": "Strategy",
+      "code": "import { ExtractJwt, Strategy } from 'passport-jwt'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "express",
+      "member": "Request",
+      "local": "Request",
+      "code": "import { Request, Response, NextFunction } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "express",
+      "member": "Response",
+      "local": "Response",
+      "code": "import { Request, Response, NextFunction } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "express",
+      "member": "NextFunction",
+      "local": "NextFunction",
+      "code": "import { Request, Response, NextFunction } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "jsonwebtoken",
+      "member": "jwt",
+      "local": "jwt",
+      "code": "import * as jwt from 'jsonwebtoken'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/auth.middleware.ts",
+      "specifier": "../config",
+      "member": "SECRET",
+      "local": "SECRET",
+      "code": "import { SECRET } from '../config'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/dto/create-user.dto.ts",
+      "specifier": "class-validator",
+      "member": "IsNotEmpty",
+      "local": "IsNotEmpty",
+      "code": "import { IsNotEmpty } from 'class-validator'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/dto/login-user.dto.ts",
+      "specifier": "class-validator",
+      "member": "IsNotEmpty",
+      "local": "IsNotEmpty",
+      "code": "import { IsNotEmpty } from 'class-validator'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Get",
+      "local": "Get",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Post",
+      "local": "Post",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Body",
+      "local": "Body",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Put",
+      "local": "Put",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Delete",
+      "local": "Delete",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Param",
+      "local": "Param",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "Controller",
+      "local": "Controller",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common",
+      "member": "UsePipes",
+      "local": "UsePipes",
+      "code": "import { Get, Post, Body, Put, Delete, Param, Controller, UsePipes } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "express",
+      "member": "Request",
+      "local": "Request",
+      "code": "import { Request } from 'express'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "./dto",
+      "member": "CreateUserDto",
+      "local": "CreateUserDto",
+      "code": "import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "./dto",
+      "member": "UpdateUserDto",
+      "local": "UpdateUserDto",
+      "code": "import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "./dto",
+      "member": "LoginUserDto",
+      "local": "LoginUserDto",
+      "code": "import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/common/exceptions/http.exception",
+      "member": "HttpException",
+      "local": "HttpException",
+      "code": "import { HttpException } from '@nestjs/common/exceptions/http.exception'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiBearerAuth",
+      "local": "ApiBearerAuth",
+      "code": "import {   ApiBearerAuth, ApiTags } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.controller.ts",
+      "specifier": "@nestjs/swagger",
+      "member": "ApiTags",
+      "local": "ApiTags",
+      "code": "import {   ApiBearerAuth, ApiTags } from '@nestjs/swagger'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.decorator.ts",
+      "specifier": "@nestjs/common",
+      "member": "createParamDecorator",
+      "local": "createParamDecorator",
+      "code": "import { createParamDecorator, ExecutionContext } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.decorator.ts",
+      "specifier": "@nestjs/common",
+      "member": "ExecutionContext",
+      "local": "ExecutionContext",
+      "code": "import { createParamDecorator, ExecutionContext } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.decorator.ts",
+      "specifier": "../config",
+      "member": "SECRET",
+      "local": "SECRET",
+      "code": "import { SECRET } from '../config'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.decorator.ts",
+      "specifier": "jsonwebtoken",
+      "member": "jwt",
+      "local": "jwt",
+      "code": "import * as jwt from 'jsonwebtoken'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "Entity",
+      "local": "Entity",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "PrimaryGeneratedColumn",
+      "local": "PrimaryGeneratedColumn",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "Column",
+      "local": "Column",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "BeforeInsert",
+      "local": "BeforeInsert",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "JoinTable",
+      "local": "JoinTable",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "ManyToMany",
+      "local": "ManyToMany",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "typeorm",
+      "member": "OneToMany",
+      "local": "OneToMany",
+      "code": "import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, JoinTable, ManyToMany, OneTo",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "class-validator",
+      "member": "IsEmail",
+      "local": "IsEmail",
+      "code": "import { IsEmail } from 'class-validator'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.entity.ts",
+      "specifier": "argon2",
+      "member": "argon2",
+      "local": "argon2",
+      "code": "import * as argon2 from 'argon2'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "MiddlewareConsumer",
+      "local": "MiddlewareConsumer",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "Module",
+      "local": "Module",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "NestModule",
+      "local": "NestModule",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.module.ts",
+      "specifier": "@nestjs/common",
+      "member": "RequestMethod",
+      "local": "RequestMethod",
+      "code": "import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.module.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "TypeOrmModule",
+      "local": "TypeOrmModule",
+      "code": "import { TypeOrmModule } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "Injectable",
+      "local": "Injectable",
+      "code": "import { Injectable } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "@nestjs/typeorm",
+      "member": "InjectRepository",
+      "local": "InjectRepository",
+      "code": "import { InjectRepository } from '@nestjs/typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "typeorm",
+      "member": "Repository",
+      "local": "Repository",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "typeorm",
+      "member": "getRepository",
+      "local": "getRepository",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "typeorm",
+      "member": "DeleteResult",
+      "local": "DeleteResult",
+      "code": "import { Repository, getRepository, DeleteResult } from 'typeorm'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "./dto",
+      "member": "CreateUserDto",
+      "local": "CreateUserDto",
+      "code": "import {CreateUserDto, LoginUserDto, UpdateUserDto} from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "./dto",
+      "member": "LoginUserDto",
+      "local": "LoginUserDto",
+      "code": "import {CreateUserDto, LoginUserDto, UpdateUserDto} from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "./dto",
+      "member": "UpdateUserDto",
+      "local": "UpdateUserDto",
+      "code": "import {CreateUserDto, LoginUserDto, UpdateUserDto} from './dto'",
+      "reason": "EXPORT_MEMBER_NOT_A_RESOLVABLE_DECLARATION",
+      "detail": {
+        "target": "user/dto/index.ts"
+      }
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "../config",
+      "member": "SECRET",
+      "local": "SECRET",
+      "code": "import { SECRET } from '../config'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "class-validator",
+      "member": "validate",
+      "local": "validate",
+      "code": "import { validate } from 'class-validator'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "@nestjs/common/exceptions/http.exception",
+      "member": "HttpException",
+      "local": "HttpException",
+      "code": "import { HttpException } from '@nestjs/common/exceptions/http.exception'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "@nestjs/common",
+      "member": "HttpStatus",
+      "local": "HttpStatus",
+      "code": "import { HttpStatus } from '@nestjs/common'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "argon2",
+      "member": "argon2",
+      "local": "argon2",
+      "code": "import * as argon2 from 'argon2'",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "jsonwebtoken",
+      "member": "",
+      "local": "jwt",
+      "code": "jwt = require('jsonwebtoken')",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "article/article.service.ts",
+      "specifier": "slug",
+      "member": "",
+      "local": "slug",
+      "code": "require('slug')",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    },
+    {
+      "file": "user/user.service.ts",
+      "specifier": "jsonwebtoken",
+      "member": "",
+      "local": "jwt",
+      "code": "require('jsonwebtoken')",
+      "reason": "UNRESOLVED_MODULE_OR_NO_EXPORT_ASSIGNMENTS",
+      "detail": null
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+PASS proven link overrides an unproven heuristic guess -> flow EXACT proven={0}
+PASS frontend EXACT wins over a conflicting link (constant target, no positions)
+PASS non-EXACT link applies nothing
+PASS link to an absent callee applies nothing
+PASS EXACT-needs-callee and derivation-required enforced by the record
+CORE_CROSSLANG=5/5

@@ -1,0 +1,72 @@
+{
+  "schema": "tchecker-llm-packet/1.0",
+  "round": 1,
+  "finding_id": "fail-open-security-control:positive-same-handler.js#then30064771141",
+  "property_id": "fail-open-1.fails_closed_on_dependency_error",
+  "candidate_class": "FAIL_OPEN_SECURITY_CONTROL",
+  "deterministic_status": "UNKNOWN",
+  "candidate_evidence": {
+    "established_shape": "SYNTACTICALLY_IDENTICAL_FULFILLMENT_AND_REJECTION_HANDLERS",
+    "handler_identity_status": "ESTABLISHED_BY_EXACT_REF",
+    "security_context_status": "HEURISTIC",
+    "limitation": "No vulnerability, permissive default, or developer intent is established by this shape."
+  },
+  "alternative": {
+    "origin": {
+      "origin_family": "EXTERNAL_DEPENDENCY_REJECTION",
+      "source_node_id": "68719476815",
+      "source_code": "parseRecords",
+      "source_line": 10,
+      "source_containing_statement": "cache.get(userId)     .then(parseRecords, parseRecords)",
+      "source_containing_function": "positive-same-handler.js::program:checkAccess",
+      "established_by": "EXACT_CALL_ARGUMENT_POSITION"
+    },
+    "steps": [
+      {
+        "path_order": 0,
+        "node_id": "68719476815",
+        "node_kind": "REJECTION_CONTINUATION",
+        "callee_name": "parseRecords",
+        "path_membership": "CANDIDATE_SHAPE",
+        "callsite_code": "parseRecords",
+        "containing_statement": "cache.get(userId)     .then(parseRecords, parseRecords)",
+        "containing_function": "positive-same-handler.js::program:checkAccess",
+        "definition_status": "ESTABLISHED_BY_EXACT_REF",
+        "definition_identity": "positive-same-handler.js::program:parseRecords",
+        "definition_body": "function parseRecords(value) {   return value || {}; }"
+      }
+    ],
+    "sink": {
+      "node_id": "30064771141",
+      "line": 10,
+      "kind": "Promise.then",
+      "sink_model": "SECURITY_DECISION_ON_DEPENDENCY_RESULT",
+      "class": "fail-open-security-control",
+      "downstream_primitive": "enclosing security decision",
+      "expression": "cache.get(userId)     .then(parseRecords, parseRecords)",
+      "containing_statement": "function checkAccess(cache, userId) {   return cache.get(userId)     .then(parseRecords, parseRecords)     .then((records) => isAllowed(records)); }",
+      "containing_function": "positive-same-handler.js::program:checkAccess"
+    },
+    "qualification": "CANDIDATE_SHAPE",
+    "necessity": "UNKNOWN"
+  },
+  "PRIOR_SEMANTIC_HINTS_ADVISORY": [],
+  "unresolved_subject": {
+    "node_id": "68719476815",
+    "node_kind": "REJECTION_CONTINUATION",
+    "deterministic_status": "UNKNOWN"
+  },
+  "QUESTION": "Static analysis found the same handler syntax (`parseRecords`) in both the fulfillment and rejection positions of this Promise.then call inside `checkAccess`. The surrounding method has bounded security-decision indicators, but this is only a candidate shape. Based ONLY on the supplied code, does the rejection continuation fail closed so a dependency error cannot make the security decision more permissive? Return SAFE only when the error path blocks, rejects, rethrows, or otherwise cannot grant/bypass the control; return UNSAFE when the error path can yield a permissive default that reaches the decision; return UNKNOWN when the evidence is insufficient. Do not infer semantics from handler or method names.",
+  "answer_contract": {
+    "proposed_value": "SAFE | UNSAFE | UNKNOWN",
+    "confidence": "LOW | MEDIUM | HIGH",
+    "source_must_be": "LLM",
+    "rationale": "string",
+    "value_meanings": {
+      "SAFE": "the supplied rejection path fails closed",
+      "UNSAFE": "the supplied rejection path can make the control more permissive",
+      "UNKNOWN": "the supplied evidence is insufficient"
+    },
+    "note": "This is a semantic HINT over a heuristic candidate, not a fact."
+  }
+}

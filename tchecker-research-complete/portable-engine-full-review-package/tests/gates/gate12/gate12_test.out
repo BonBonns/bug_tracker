@@ -1,0 +1,8 @@
+PASS aliasSame on/off= ([1], [0]) expected= ([1], [0])
+PASS aliasAllocation on/off= ([0], []) expected= ([0], [])
+PASS aliasOverwrite on/off= ([], []) expected= ([], [])
+PASS aliasDistinct on/off= ([], []) expected= ([], [])
+PASS aliasDifferentField on/off= ([], []) expected= ([], [])
+PASS aliasDifferentParams on/off= ([0], [0]) expected= ([0], [0])
+PASS aliasDifferentParams_no_source_crossflow on= [0]
+GATE12=7/7

@@ -1,0 +1,54 @@
+x5: 0
+ROOTS=16
+CALL 108 -> [21]
+CALL 130 -> [57]
+CALL 153 -> [92]
+CALL 162 -> [117]
+CALL 184 -> [92]
+CALL 192 -> [92]
+CALL 200 -> [117]
+CALL 222 -> [21]
+CALL 232 -> [57]
+CALL 255 -> [21]
+CALL 264 -> [57]
+CALL 287 -> [39]
+CALL 297 -> [57]
+CALL 329 -> [21]
+CALL 337 -> [57]
+CALL 360 -> [21]
+CALL 368 -> [57]
+RET 117 load params=[h] positions=[0]
+RET 137 topState params=[h, source] positions=[1]
+RET 168 topConstantOverwrite params=[h, source] positions=[]
+RET 206 directState params=[h, source] positions=[1]
+RET 239 directConstant params=[h, source] positions=[]
+RET 271 differentField params=[h, source] positions=[0]
+RET 304 twoObjects params=[source] positions=[]
+RET 342 sameObject params=[source] positions=[0]
+DDG_RELS
+DDG 25 -> 32 var=v
+DDG 43 -> 50 var=v
+DDG 96 -> 108 var=h
+DDG 101 -> 108 var=input
+DDG 121 -> 129 var=h
+DDG 141 -> 153 var=h
+DDG 141 -> 161 var=h
+DDG 146 -> 153 var=source
+DDG 172 -> 184 var=h
+DDG 172 -> 192 var=h
+DDG 172 -> 199 var=h
+DDG 177 -> 184 var=source
+DDG 210 -> 222 var=h
+DDG 210 -> 231 var=h
+DDG 215 -> 222 var=source
+DDG 243 -> 255 var=h
+DDG 243 -> 263 var=h
+DDG 275 -> 287 var=h
+DDG 275 -> 296 var=h
+DDG 280 -> 287 var=source
+DDG 308 -> 329 var=source
+DDG 315 -> 329 var=a
+DDG 322 -> 336 var=b
+DDG 346 -> 360 var=source
+DDG 353 -> 360 var=a
+DDG 353 -> 367 var=a

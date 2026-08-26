@@ -1,0 +1,14 @@
+#!/bin/bash
+# scan_pkg.sh <src_dir> <out_dir> — build CPG + run all 6 exporters. Diagnosable per-package.
+export JOERN_HOME=/home/claude/work/joern-cli
+SRC="$1"; OUT="$2"
+mkdir -p "$OUT/raw"
+if ! $JOERN_HOME/jssrc2cpg.sh "$SRC" --output "$OUT/cpg.bin" >"$OUT/build.log" 2>&1; then
+  echo "BUILD_FAILED $SRC (see $OUT/build.log)"; tail -3 "$OUT/build.log"; exit 1
+fi
+[ -s "$OUT/cpg.bin" ] || { echo "NO_CPG $SRC"; tail -3 "$OUT/build.log"; exit 1; }
+$JOERN_HOME/joern --script portable-engine-full-review-package/frontends/javascript-typescript/joern-ts/module_export_identity.sc --param cpgFile="$OUT/cpg.bin" --param outDir="$OUT/raw" >/dev/null 2>&1
+for sc in export_guard_facts export_loop_facts export_denylist_facts export_mal_facts export_globalmut_facts export_serialize_facts; do
+  $JOERN_HOME/joern --script $sc.sc --param cpgFile="$OUT/cpg.bin" --param outDir="$OUT/raw" >/dev/null 2>&1
+done
+echo "OK $(basename $OUT) cpg=$(du -h "$OUT/cpg.bin"|cut -f1)"

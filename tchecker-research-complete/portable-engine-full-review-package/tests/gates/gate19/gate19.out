@@ -1,0 +1,86 @@
+x5: 0
+PATH_BEGIN wrapMay
+ProvenancePath: function=304 name=wrapMay status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=319 resolution=AMBIGUOUS detail=[null]
+  STEP CALL node=320 resolution=EXACT detail=[mayAliasWrite]
+  STEP CALLEE_MAY_RETURN node=69 resolution=AMBIGUOUS detail=[mayAliasWrite]
+  STEP PARAM node=326 resolution=EXACT detail=[source]
+HARD_PROJECTION=false
+PATH_END wrapMay
+PATH_BEGIN wrapMay2
+ProvenancePath: function=328 name=wrapMay2 status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=343 resolution=AMBIGUOUS detail=[null]
+  STEP CALL node=344 resolution=EXACT detail=[wrapMay]
+  STEP CALLEE_MAY_RETURN node=304 resolution=AMBIGUOUS detail=[wrapMay]
+  STEP PARAM node=350 resolution=EXACT detail=[source]
+HARD_PROJECTION=false
+PATH_END wrapMay2
+PATH_BEGIN wrapMayLocal
+ProvenancePath: function=400 name=wrapMayLocal status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=426 resolution=AMBIGUOUS detail=[null]
+  STEP LOCAL_ASSIGN node=427 resolution=EXACT detail=[y]
+  STEP CALL node=418 resolution=EXACT detail=[mayAliasWrite]
+  STEP CALLEE_MAY_RETURN node=69 resolution=AMBIGUOUS detail=[mayAliasWrite]
+  STEP PARAM node=424 resolution=EXACT detail=[source]
+HARD_PROJECTION=false
+PATH_END wrapMayLocal
+PATH_BEGIN identity
+ProvenancePath: function=558 name=identity status=PROVEN path_resolution=EXACT positions=[0] hard_source_eligible=true
+  STEP RETURN node=569 resolution=EXACT detail=[null]
+  STEP PARAM node=570 resolution=EXACT detail=[x]
+HARD_PROJECTION=true
+PATH_END identity
+PATH_BEGIN wrapMayThroughIdentity
+ProvenancePath: function=585 name=wrapMayThroughIdentity status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=611 resolution=AMBIGUOUS detail=[null]
+  STEP CALL node=612 resolution=EXACT detail=[identity]
+  STEP CALLEE_PROVEN_RETURN node=558 resolution=EXACT detail=[identity]
+  STEP LOCAL_ASSIGN node=616 resolution=EXACT detail=[y]
+  STEP CALL node=603 resolution=EXACT detail=[mayAliasWrite]
+  STEP CALLEE_MAY_RETURN node=69 resolution=AMBIGUOUS detail=[mayAliasWrite]
+  STEP PARAM node=609 resolution=EXACT detail=[source]
+HARD_PROJECTION=false
+PATH_END wrapMayThroughIdentity
+PATH_BEGIN wrapMayConditional
+ProvenancePath: function=722 name=wrapMayConditional status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=748 resolution=AMBIGUOUS detail=[null]
+  STEP CONDITIONAL node=749 resolution=AMBIGUOUS detail=[branch join]
+  STEP LOCAL_ASSIGN node=752 resolution=EXACT detail=[y]
+  STEP CALL node=740 resolution=EXACT detail=[mayAliasWrite]
+  STEP CALLEE_MAY_RETURN node=69 resolution=AMBIGUOUS detail=[mayAliasWrite]
+  STEP PARAM node=746 resolution=EXACT detail=[source]
+  STEP VALUE node=754 resolution=EXACT detail=[CONST]
+HARD_PROJECTION=false
+PATH_END wrapMayConditional
+PATH_BEGIN wrapMayConcat
+ProvenancePath: function=777 name=wrapMayConcat status=MAY path_resolution=AMBIGUOUS positions=[1] hard_source_eligible=false
+  STEP RETURN node=803 resolution=AMBIGUOUS detail=[null]
+  STEP BINARY node=804 resolution=EXACT detail=[binary]
+  STEP VALUE node=805 resolution=EXACT detail=[prefix:]
+  STEP LOCAL_ASSIGN node=806 resolution=EXACT detail=[y]
+  STEP CALL node=795 resolution=EXACT detail=[mayAliasWrite]
+  STEP CALLEE_MAY_RETURN node=69 resolution=AMBIGUOUS detail=[mayAliasWrite]
+  STEP PARAM node=801 resolution=EXACT detail=[source]
+HARD_PROJECTION=false
+PATH_END wrapMayConcat
+PATH_BEGIN wrapUnknownConcat
+ProvenancePath: function=859 name=wrapUnknownConcat status=UNKNOWN path_resolution=UNKNOWN positions=[] hard_source_eligible=false
+  STEP RETURN node=885 resolution=UNKNOWN detail=[null]
+  STEP BINARY node=886 resolution=EXACT detail=[binary]
+  STEP VALUE node=887 resolution=EXACT detail=[prefix:]
+  STEP LOCAL_ASSIGN node=888 resolution=EXACT detail=[y]
+  STEP CALL node=877 resolution=EXACT detail=[mayAliasDifferentField]
+  STEP CALLEE_MAY_RETURN node=154 resolution=UNKNOWN detail=[mayAliasDifferentField]
+HARD_PROJECTION=false
+PATH_END wrapUnknownConcat
+PATH_BEGIN concatExactOnly
+ProvenancePath: function=980 name=concatExactOnly status=PROVEN path_resolution=EXACT positions=[0, 1] hard_source_eligible=true
+  STEP RETURN node=995 resolution=EXACT detail=[null]
+  STEP BINARY node=996 resolution=EXACT detail=[binary]
+  STEP PARAM node=997 resolution=EXACT detail=[prefix]
+  STEP PARAM node=999 resolution=EXACT detail=[source]
+HARD_PROJECTION=true
+PATH_END concatExactOnly
+PATH_REPORT_MUTATED_HARD=false
+PATH_REPORT_MUTATED_MAY=false
+PATH_REPORT_MUTATED_VUL_SOURCES=false

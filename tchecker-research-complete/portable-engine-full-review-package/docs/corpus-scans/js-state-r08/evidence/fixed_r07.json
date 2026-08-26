@@ -1,0 +1,6 @@
+{
+  "schema": "portable-js-state-r07-candidates/0.1",
+  "note": "r07_emit=true means ALL FIVE preconditions held: ERASES (R02), guard-shape (closed set, SIGNAL A), return-contract ESTABLISHED (positive evidence only, SIGNAL B), guard-subject=transformed-value (guaranteed by R02 construction), and sink reachability under R04/R05 rules resulting in SENSITIVE. r07_return_contract=UNKNOWN is NOT treated as safe and is NOT sufficient to emit -- it is recorded, not suppressed.",
+  "all_facts": [],
+  "candidates": []
+}

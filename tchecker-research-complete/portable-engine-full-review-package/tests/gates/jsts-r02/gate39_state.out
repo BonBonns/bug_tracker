@@ -1,0 +1,12 @@
+PASS objectStaticExact: neutral state fact reproduces prototype (EXACT,[1]) - got (EXACT,[1])
+PASS objectStaticDifferent: neutral state fact reproduces prototype (EXACT,[]) - got (EXACT,[])
+PASS objectStaticOverwrite: neutral state fact reproduces prototype (EXACT,[]) - got (EXACT,[])
+PASS objectDynamicWrite: neutral state fact reproduces prototype (AMBIGUOUS,[2]) - got (AMBIGUOUS,[2])
+PASS objectDynamicRead: neutral state fact reproduces prototype (AMBIGUOUS,[2]) - got (AMBIGUOUS,[2])
+PASS arrayStaticExact: neutral state fact reproduces prototype (EXACT,[1]) - got (EXACT,[1])
+PASS arrayStaticDifferent: neutral state fact reproduces prototype (EXACT,[]) - got (EXACT,[])
+PASS arrayDynamicWrite: neutral state fact reproduces prototype (AMBIGUOUS,[2]) - got (AMBIGUOUS,[2])
+PASS arrayDynamicRead: neutral state fact reproduces prototype (AMBIGUOUS,[2]) - got (AMBIGUOUS,[2])
+PASS differentReceiver: neutral state fact reproduces prototype (EXACT,[]) - got (EXACT,[])
+PASS coverage: all prototype functions resolved from real facts - 10/10
+GATE39_STATE=11/11

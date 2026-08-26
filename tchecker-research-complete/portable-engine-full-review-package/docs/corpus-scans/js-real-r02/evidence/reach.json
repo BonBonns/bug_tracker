@@ -1,0 +1,5 @@
+{
+  "schema": "portable-failure-state-erasure-with-sink-reachability/0.3",
+  "note": "security_sensitive_use=UNKNOWN means no profile entry matched on the continue path with no intervening reassignment -- NOT a proof of safety. excluded_then_branch_calls lists calls that reach the guarded local structurally but only run when the guard's condition was true. excluded_reassigned_calls lists calls that reach the same LOCAL id but only after a later assignment to it (by line-number approximation, not true CFG ordering), so the value actually reaching them is not provably the erased one. Neither exclusion list is credited toward SENSITIVE.",
+  "facts": []
+}

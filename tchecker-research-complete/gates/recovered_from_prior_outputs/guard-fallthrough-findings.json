@@ -1,0 +1,66 @@
+{
+  "schema": "guard-fallthrough-verdict/0.1",
+  "note": "CANDIDATE, never VULNERABLE. Flags a bare guard call to a CONDITIONAL terminator with a sink reachable afterwards -- the JS/TS shape of the Pods pods_error() access-control bypass. Callee identity comes from require bindings, never the frontend's same-file guess.",
+  "findings": [
+    {
+      "file": "handlers/admin-ajax.js",
+      "method": "handlers/admin-ajax.js::program:adminAjax",
+      "guard_call": "denyRequest",
+      "line": 9,
+      "callee_resolved": "lib/guard-lib.js::program:denyRequest",
+      "callee_resolution": "DESTRUCTURED_IMPORT",
+      "terminator_verdict": "CONDITIONAL",
+      "is_bare": true,
+      "is_returned": false,
+      "sink_after_line": 18,
+      "verdict": "CANDIDATE_GUARD_FALLTHROUGH"
+    },
+    {
+      "file": "handlers/admin-ajax.js",
+      "method": "handlers/admin-ajax.js::program:adminAjax",
+      "guard_call": "denyRequest",
+      "line": 14,
+      "callee_resolved": "lib/guard-lib.js::program:denyRequest",
+      "callee_resolution": "DESTRUCTURED_IMPORT",
+      "terminator_verdict": "CONDITIONAL",
+      "is_bare": true,
+      "is_returned": false,
+      "sink_after_line": 18,
+      "verdict": "CANDIDATE_GUARD_FALLTHROUGH"
+    },
+    {
+      "file": "handlers/safe-always.js",
+      "method": "handlers/safe-always.js::program:safeAlways",
+      "guard_call": "denyAlways",
+      "line": 6,
+      "callee_resolved": "lib/guard-lib.js::program:denyAlways",
+      "callee_resolution": "DESTRUCTURED_IMPORT",
+      "terminator_verdict": "ALWAYS",
+      "is_bare": true,
+      "is_returned": false,
+      "sink_after_line": 8,
+      "verdict": "SAFE_ALWAYS_TERMINATES"
+    },
+    {
+      "file": "handlers/safe-return.js",
+      "method": "handlers/safe-return.js::program:safeReturn",
+      "guard_call": "denyRequest",
+      "line": 7,
+      "callee_resolved": "lib/guard-lib.js::program:denyRequest",
+      "callee_resolution": "DESTRUCTURED_IMPORT",
+      "terminator_verdict": "CONDITIONAL",
+      "is_bare": false,
+      "is_returned": true,
+      "sink_after_line": 9,
+      "verdict": "SAFE_RETURNED"
+    },
+    {
+      "file": "lib/guard-lib.js",
+      "method": "lib/guard-lib.js::program:denyRequest",
+      "guard_call": "error",
+      "line": 6,
+      "verdict": "ABSTAIN_CALLEE_UNRESOLVED",
+      "reason": "UNRESOLVED"
+    }
+  ]
+}

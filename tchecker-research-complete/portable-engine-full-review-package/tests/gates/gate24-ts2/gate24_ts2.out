@@ -1,0 +1,19 @@
+PASS exact: resolution EXACT after artifact dedup - ('EXACT', ['01_exact_parameter.ts::program:A:process'])
+PASS exact: single concrete target is A:process - ['01_exact_parameter.ts::program:A:process']
+PASS unionCall: not EXACT (union stub cannot harden) - ('AMBIGUOUS', 8)
+PASS unionCall: AMBIGUOUS over expanded implementations - AMBIGUOUS
+PASS unionCall: includes 02 A.process and 02 B.process - ['01_exact_parameter.ts::program:A:process', '02_union_receiver.ts::program:A:process', '02_union_receiver.ts::program:B:process', '03_typed_property.ts::program:A:process', '04_return_receiver.ts::program:A:process', '05_interface_dispatch.ts::program:A:process', '05_interface_dispatch.ts::program:B:process', '07_generic_receiver.ts::program:A:process']
+PASS interfaceCall: not EXACT (interface member expands) - ('AMBIGUOUS', ['05_interface_dispatch.ts::program:A:process', '05_interface_dispatch.ts::program:B:process', '05_interface_dispatch.ts::program:Worker:process', '07_generic_receiver.ts::program:A:process', '07_generic_receiver.ts::program:Worker:process'])
+PASS interfaceCall: implementors include 05 A and 05 B - ['05_interface_dispatch.ts::program:A:process', '05_interface_dispatch.ts::program:B:process', '05_interface_dispatch.ts::program:Worker:process', '07_generic_receiver.ts::program:A:process', '07_generic_receiver.ts::program:Worker:process']
+PASS genericCall: T:process never EXACT - ('HEURISTIC', [])
+PASS genericCall: HEURISTIC (unmappable type-variable stub) - ('HEURISTIC', 'unmappable stub T:process')
+PASS baseCall: no <init>/spelling artifacts remain - ['06_inheritance.ts::program:Base:process']
+PASS baseCall: classification is EXACT or AMBIGUOUS over concrete methods - ('EXACT', ['06_inheritance.ts::program:Base:process'])
+PASS childCall: no <init>/spelling artifacts remain - ['06_inheritance.ts::program:Child:process']
+PASS childCall: classification is EXACT or AMBIGUOUS over concrete methods - ('EXACT', ['06_inheritance.ts::program:Child:process'])
+PASS anyCall: never EXACT - AMBIGUOUS
+PASS anyCall: AMBIGUOUS over multiple concrete methods - ('AMBIGUOUS', 12)
+PASS returnReceiver: EXACT only with receiver agreement, else HEURISTIC - ('HEURISTIC', ['04_return_receiver.ts::program:A:process'], "single target but receiver='A' vs owner='04_return_receiver.ts::program:A', stubs=0")
+PASS propertyCall: no <member> stub names in final targets 
+PASS propertyCall: not hardened to EXACT-to-stub - ('HEURISTIC', [])
+GATE24_TS2=18/18

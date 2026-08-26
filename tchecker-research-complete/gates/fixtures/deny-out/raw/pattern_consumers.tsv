@@ -1,0 +1,13 @@
+lib/denylist-escaped.js	lib/denylist-escaped.js::program	11	function checkFiletype = function checkFiletype(filename, mimes) {   for (const [ext] of Object.entries(mimes)) {     if (new RegExp(`\\.(${escapeRe(ext)})$`, "i").test(filename)) 	true
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:checkFiletype	13	new RegExp(`\\.(${escapeRe(ext)})$`, "i").test(filename)	true
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:checkFiletype	13	(_tmp_0 = new RegExp(`\\.(${escapeRe(ext)})$`, "i")).test	true
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:checkFiletype	13	(_tmp_0 = new RegExp(`\\.(${escapeRe(ext)})$`, "i"))	true
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:checkFiletype	13	new RegExp(`\\.(${escapeRe(ext)})$`, "i")	true
+lib/denylist-normalized.js	lib/denylist-normalized.js::program	13	function checkFiletype = function checkFiletype(filename, mimes) {   for (const [ext] of Object.entries(mimes)) {     if (new RegExp(`\\.(${ext})$`, "i").test(filename)) return { e	false
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:checkFiletype	15	new RegExp(`\\.(${ext})$`, "i").test(filename)	false
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:checkFiletype	15	(_tmp_1 = new RegExp(`\\.(${ext})$`, "i")).test	false
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:checkFiletype	15	(_tmp_1 = new RegExp(`\\.(${ext})$`, "i"))	false
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:checkFiletype	15	new RegExp(`\\.(${ext})$`, "i")	false
+lib/denylist-vuln.js	lib/denylist-vuln.js::program	18	function checkFiletype = function checkFiletype(filename, mimes) {   for (const [ext, mime] of Object.entries(mimes)) {     const re = new RegExp(`\\.(${ext})$`, "i");       // PAT	false
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:checkFiletype	20	const re = new RegExp(`\\.(${ext})$`, "i")	false
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:checkFiletype	20	new RegExp(`\\.(${ext})$`, "i")	false

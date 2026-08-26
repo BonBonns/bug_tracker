@@ -1,0 +1,36 @@
+=== ALL router.<verb> registrations in Koa corpus ===
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/forgot-password/index.js::program:validator) 4:ID(handler:resources/account/forgot-password/index.js::program:handler)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/resend-email/index.js::program:validator) 4:ID(handler:resources/account/resend-email/index.js::program:handler)
+  put mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/reset-password/index.js::program:validator) 4:ID(handler:resources/account/reset-password/index.js::program:handler)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/sign-in/index.js::program:validator) 4:ID(handler:resources/account/sign-in/index.js::program:handler)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:ID(handler:(ctx: ANY) => Promise<void>)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/sign-up/index.js::program:validator) 4:ID(handler:resources/account/sign-up/index.js::program:handler)
+  get mfn=ctx:cookies:<returnValue>:<member>(cookies):get recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/verify-email/index.js::program:validator) 4:ID(handler:resources/account/verify-email/index.js::program:handler)
+  get mfn=ctx:cookies:<returnValue>:<member>(cookies):get recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/account/verify-reset-token/index.js::program:validator)
+  get mfn=ctx:cookies:<returnValue>:<member>(cookies):get recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:ID(handler:(ctx: ANY) => ANY)
+  get mfn=ctx:cookies:<returnValue>:<member>(cookies):get recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:ID(handler:resources/user/get-current/index.js::program:handler)
+  get mfn=ctx:cookies:<returnValue>:<member>(cookies):get recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(handler:resources/user/list/index.js::program:handler)
+  delete mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:ID(validator:resources/user/remove-avatar/index.js::program:validator) 3:ID(handler:resources/user/remove-avatar/index.js::program:handler)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/user/update-current/index.js::program:validator) 4:ID(handler:resources/user/update-current/index.js::program:handler)
+  post mfn=<unknownFullName> recv=router:ANY args=0:ID(router:ANY) 1:LIT 2:CALL 3:ID(validator:resources/user/upload-avatar/index.js::program:validator) 4:ID(handler:resources/user/upload-avatar/index.js::program:handler)
+=== ctx property reads across corpus ===
+  ctx.request.body
+  ctx.request
+  ctx.query
+  ctx.throw
+  ctx.validatedData
+  ctx.validatedData.email
+  ctx.body
+  ctx.validatedData.user
+  ctx.assertClientError
+  ctx.validatedData.token
+  ctx.assertError
+  ctx.validatedData.userId
+  ctx.redirect
+  ctx.status
+  ctx.state.user
+  ctx.state
+  ctx.assert
+  ctx.throwError
+  ctx.throwClientError
+  ctx.cookies

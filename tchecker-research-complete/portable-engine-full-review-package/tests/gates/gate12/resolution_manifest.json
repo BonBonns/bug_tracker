@@ -1,0 +1,158 @@
+[
+  {
+    "line": 16,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local y has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 17,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 25,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local y has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 26,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 34,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local x has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 35,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local y has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 36,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 45,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local y has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 46,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local x has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 53,
+    "method": "setOther",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setOther"
+    ],
+    "basis": "local x has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 54,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 61,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local y has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 62,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local x has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  }
+]

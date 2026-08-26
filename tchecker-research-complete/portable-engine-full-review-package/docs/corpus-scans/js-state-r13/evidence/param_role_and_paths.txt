@@ -1,0 +1,27 @@
+=== LINK 5: callback parameter identity/role ===
+  fake (prov.js::program:fake)  params: idx0:this:prov.js::program  idx1:req:ANY  idx2:res:ANY
+  handler (prov.js::program:handler)  params: idx0:this:prov.js::program  idx1:req:ANY  idx2:res:ANY
+  <lambda>0 (prov.js::program:<lambda>0)  params: idx0:this:prov.js::program  idx1:req:ANY  idx2:res:ANY
+  <lambda>1 (prov.js::program:<lambda>1)  params: idx0:this:prov.js::program  idx1:param1_0:prov.js::program:<lambda>1:<anon-class>0  idx2:res:ANY
+  <lambda>2 (prov.js::program:<lambda>2)  params: idx0:this:prov.js::program  idx1:req:ANY  idx2:res:ANY
+  <lambda>3 (prov.js::program:<lambda>3)  params: idx0:this:prov.js::program  idx1:req:ANY  idx2:res:ANY
+  <lambda>4 (prov.js::program:<lambda>4)  params: idx0:this:prov.js::program  idx1:request:ANY  idx2:response:ANY
+=== LINK 6: property paths read inside each handler ===
+  fake: req.body.username | req.body
+  handler: req.body.username | req.body
+  otherFamilies: req.params.id | req.params | req.headers.cookie | req.headers | req.cookies.sid | req.cookies | process.env.SECRET | process.env | process.argv[2] | process.argv
+  <lambda>0: req.body.username | req.body
+  <lambda>1: param1_0.body | body.username
+  <lambda>2: req.body | body.username
+  <lambda>3: res.someProperty
+  <lambda>4: request.query.id | request.query
+=== T7: does IDENTIFIER 'handler' resolve to a METHOD? ===
+  handler ident type=prov.js::program:handler hints=[] REF->LOCAL
+=== T3 destructuring: how is ({body}, res) represented? ===
+  param idx0 name=this code=this
+  param idx1 name=param1_0 code={ body }
+  param idx2 name=res code=res
+    call <operator>.assignment code=body = param1_0.body
+    call <operator>.fieldAccess code=param1_0.body
+    call use code=use(body.username)
+    call <operator>.fieldAccess code=body.username

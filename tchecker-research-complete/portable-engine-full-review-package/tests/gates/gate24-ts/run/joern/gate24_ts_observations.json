@@ -1,0 +1,169 @@
+{
+  "anyCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "01_exact_parameter.ts::program:A:process",
+        "02_union_receiver.ts::program:A:process",
+        "02_union_receiver.ts::program:B:process",
+        "03_typed_property.ts::program:A:process",
+        "04_return_receiver.ts::program:A:process",
+        "05_interface_dispatch.ts::program:A:process",
+        "05_interface_dispatch.ts::program:B:process",
+        "05_interface_dispatch.ts::program:Worker:process",
+        "06_inheritance.ts::program:Base:process",
+        "06_inheritance.ts::program:Child:process",
+        "07_generic_receiver.ts::program:A:process",
+        "07_generic_receiver.ts::program:Worker:process"
+      ],
+      "code": "obj.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "AMBIGUOUS"
+    },
+    "parameter_types": {
+      "obj": "ANY",
+      "x": "__ecma.String"
+    }
+  },
+  "baseCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "06_inheritance.ts::program:Base:process"
+      ],
+      "code": "b.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "EXACT"
+    },
+    "parameter_types": {
+      "b": "06_inheritance.ts::program:Base:<init>",
+      "x": "__ecma.String"
+    }
+  },
+  "childCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "06_inheritance.ts::program:Child:process"
+      ],
+      "code": "c.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "EXACT"
+    },
+    "parameter_types": {
+      "c": "06_inheritance.ts::program:Child:<init>",
+      "x": "__ecma.String"
+    }
+  },
+  "exact": {
+    "call": {
+      "candidate_target_full_names": [
+        "01_exact_parameter.ts::program:A:process"
+      ],
+      "code": "obj.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "EXACT"
+    },
+    "parameter_types": {
+      "obj": "01_exact_parameter.ts::program:A:<init>",
+      "x": "__ecma.String"
+    }
+  },
+  "genericCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "T:process"
+      ],
+      "code": "w.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "T:process",
+      "name": "process",
+      "resolution": "HEURISTIC"
+    },
+    "parameter_types": {
+      "w": "T",
+      "x": "__ecma.String"
+    }
+  },
+  "interfaceCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "05_interface_dispatch.ts::program:A:process",
+        "05_interface_dispatch.ts::program:B:process",
+        "05_interface_dispatch.ts::program:Worker:process",
+        "07_generic_receiver.ts::program:A:process",
+        "07_generic_receiver.ts::program:Worker:process"
+      ],
+      "code": "w.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "Worker:process",
+      "name": "process",
+      "resolution": "AMBIGUOUS"
+    },
+    "parameter_types": {
+      "w": "Worker",
+      "x": "__ecma.String"
+    }
+  },
+  "propertyCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "03_typed_property.ts::program:Holder:<init>:<member>(worker):process",
+        "03_typed_property:ts::program:Holder:<member>(worker):process"
+      ],
+      "code": "h.worker.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "HEURISTIC"
+    },
+    "parameter_types": {
+      "h": "03_typed_property.ts::program:Holder:<init>",
+      "x": "__ecma.String"
+    }
+  },
+  "returnReceiver": {
+    "call": {
+      "candidate_target_full_names": [
+        "04_return_receiver.ts::program:A:process"
+      ],
+      "code": "getWorker(h).process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "resolution": "EXACT"
+    },
+    "parameter_types": {
+      "h": "04_return_receiver.ts::program:Holder:<init>",
+      "x": "__ecma.String"
+    }
+  },
+  "unionCall": {
+    "call": {
+      "candidate_target_full_names": [
+        "01_exact_parameter.ts::program:A:process",
+        "02_union_receiver.ts::program:A:process",
+        "02_union_receiver.ts::program:B:process",
+        "03_typed_property.ts::program:A:process",
+        "04_return_receiver.ts::program:A:process",
+        "05_interface_dispatch.ts::program:A:process",
+        "05_interface_dispatch.ts::program:B:process",
+        "07_generic_receiver.ts::program:A:process"
+      ],
+      "code": "obj.process(x)",
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "method_full_name": "A | B:process",
+      "name": "process",
+      "resolution": "AMBIGUOUS"
+    },
+    "parameter_types": {
+      "obj": "ANY",
+      "x": "__ecma.String"
+    }
+  }
+}

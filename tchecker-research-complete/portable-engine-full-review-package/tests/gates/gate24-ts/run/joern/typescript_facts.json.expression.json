@@ -1,0 +1,32 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771114,
+     90194313218,
+     68719476789
+    ]
+   },
+   "function_id": 107374182433,
+   "id": 30064771114,
+   "operands": [
+    {
+     "code": "\"child:\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    },
+    {
+     "code": "x",
+     "id": 111669149749,
+     "kind": "PARAMETER"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

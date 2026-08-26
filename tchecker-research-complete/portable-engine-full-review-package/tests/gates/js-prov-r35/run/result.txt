@@ -1,0 +1,12 @@
+PASS P1 `module.exports = { leaf }` with `leaf = require('./leaf')` links to ./leaf
+PASS N1 SHARED-NAME CONTROL: both leaf.js and other.js export `leafFn`
+PASS N1 the alias resolves via ./leaf and NEVER other.js
+PASS N1 leaf.js:leafFn and other.js:leafFn are genuinely DIFFERENT declarations
+PASS N2 selector-bearing local abstains (R33 guard holds)
+PASS N3 non-module member abstains
+PASS N4 plain-function member is NOT treated as a module alias
+PASS N4 plain-function member still resolves as an ordinary member
+PASS N5 module_exports.tsv schema unchanged (7 cols)
+PASS N5 alias lives in a SEPARATE file
+PASS N8 every alias target names a file that exists in the export table
+JS_PROV_R35=11/11

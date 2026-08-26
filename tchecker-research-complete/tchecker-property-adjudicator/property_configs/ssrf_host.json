@@ -1,0 +1,17 @@
+{
+  "property_name": "ATTACKER_CONTROL_OF_REQUEST_HOST",
+  "property_id_suffix": "controls_request_host",
+  "vulnerability_class": "ssrf",
+  "downstream_primitive": "fetch",
+  "direct_sink_kinds": ["fetch", "axios", "axios.get", "axios.post", "http.request", "https.request", "request", "got"],
+  "direct_sink_model": "DIRECT_NETWORK_CALL",
+  "indirect_sink_model": "WRAPPED_NETWORK_CALL",
+  "focused_question_template": "Does the on-path call `{callee_name}` at path position {order} (static definition identity {static_status}; trace callee identity {trace_status}) fix or restrict the HOST of the outbound request to a value the attacker cannot choose, or can attacker influence still determine the destination host? Path, query, and request body content are OUT OF SCOPE -- answer only about HOST control.",
+  "established_meaning": "modeled security property only (attacker controls the destination host of an outbound request; not a confirmed SSRF): reachability, network egress restrictions, allowlisting at the network layer, and actual internal-service impact are out of scope for this property",
+  "residual_vulnerability_questions": [
+    "network-layer egress restrictions (e.g. firewall/proxy rules)",
+    "reachability of the handler",
+    "presence of an internal service actually reachable at attacker-chosen hosts",
+    "redirect-following and DNS-resolution effects on effective destination (explicitly out of scope for v1 -- host SYNTAX control, not effective destination control)"
+  ]
+}

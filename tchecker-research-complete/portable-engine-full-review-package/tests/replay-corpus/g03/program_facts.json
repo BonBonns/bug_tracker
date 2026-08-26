@@ -1,0 +1,2797 @@
+{
+  "assignments": [
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771074,
+          94489280523,
+          25769803777
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771074,
+      "line": 8,
+      "target_local_id": 94489280523,
+      "value_ref": {
+        "code": "new A()",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771075,
+          94489280525,
+          30064771076
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771075,
+      "line": 8,
+      "target_local_id": 94489280525,
+      "value_ref": {
+        "code": ".alloc",
+        "id": 30064771076,
+        "kind": "CALL"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771088,
+          94489280512,
+          120259084288
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771088,
+      "line": 7,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "exact",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771089,
+          94489280514,
+          120259084289
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771089,
+      "line": 10,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "exactVar",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771090,
+          94489280517,
+          120259084290
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771090,
+      "line": 14,
+      "target_local_id": 94489280517,
+      "value_ref": {
+        "code": "ambiguous",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771091,
+          94489280518,
+          120259084291
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771091,
+      "line": 17,
+      "target_local_id": 94489280518,
+      "value_ref": {
+        "code": "unknown",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771092,
+          94489280519,
+          120259084292
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771092,
+      "line": 1,
+      "target_local_id": 94489280519,
+      "value_ref": {
+        "code": "constructor() {}",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771093,
+          94489280520,
+          120259084293
+        ]
+      },
+      "function_id": 107374182401,
+      "id": 30064771093,
+      "line": 4,
+      "target_local_id": 94489280520,
+      "value_ref": {
+        "code": "constructor() {}",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771078,
+          94489280515,
+          25769803780
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771078,
+      "line": 11,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "new A()",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "ASSIGNMENT_TO_LOCAL",
+        "source_node_ids": [
+          30064771079,
+          94489280522,
+          30064771080
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771079,
+      "line": 11,
+      "target_local_id": 94489280522,
+      "value_ref": {
+        "code": ".alloc",
+        "id": 30064771080,
+        "kind": "CALL"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "input",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476742
+            ]
+          },
+          "id": 68719476742,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "input",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "input",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate3.js::program:A:process"
+      ],
+      "candidate_target_ids": [
+        107374182406
+      ],
+      "canonical_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "code": "new A().process(input)",
+      "concrete_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "corrected_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771072,
+      "line": 8,
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "receiver_declared_type": "gate3.js::program:A",
+      "receiver_name": "_tmp_0",
+      "receiver_owner_match": true,
+      "receiver_type": "gate3.js::program:A",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "(_tmp_0 = new A())",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771074
+            ]
+          },
+          "id": 30064771074,
+          "index": 1,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "(_tmp_0 = new A())",
+            "id": 30064771074,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "process",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574848
+            ]
+          },
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 8,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "process",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_0 = new A()).process",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771073,
+      "line": 8,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_0",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "_tmp_0",
+          "type_full_name": "gate3.js::program:A",
+          "value_ref": {
+            "code": "_tmp_0",
+            "id": 94489280523,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "new A()",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              25769803777
+            ]
+          },
+          "id": 25769803777,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 8,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "new A()",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "(_tmp_0 = new A())",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771074,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "_tmp_1",
+          "type_full_name": "gate3.js::program:A",
+          "value_ref": {
+            "code": "_tmp_1",
+            "id": 94489280525,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": ".alloc",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771076
+            ]
+          },
+          "id": 30064771076,
+          "index": 2,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": ".alloc",
+            "id": 30064771076,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_1 = .alloc",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771075,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "new A()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771077,
+      "line": 8,
+      "method_full_name": "<unknownFullName>",
+      "name": "<operator>.new",
+      "receiver_declared_type": "gate3.js::program:A",
+      "receiver_name": "_tmp_1",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "UNRESOLVED",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": ".alloc",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "gate3.js",
+      "id": 30064771076,
+      "line": 8,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "exact",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476758
+            ]
+          },
+          "id": 68719476758,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "exact",
+          "type_full_name": "gate3.js::program:exact",
+          "value_ref": {
+            "code": "exact",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "exact",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084288
+            ]
+          },
+          "id": 120259084288,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 7,
+          "name": "",
+          "type_full_name": "gate3.js::program:exact",
+          "value_ref": {
+            "code": "exact",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function exact = function exact(input) {\n  return new A().process(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771088,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "exactVar",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "exactVar",
+          "type_full_name": "gate3.js::program:exactVar",
+          "value_ref": {
+            "code": "exactVar",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "exactVar",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084289
+            ]
+          },
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 10,
+          "name": "",
+          "type_full_name": "gate3.js::program:exactVar",
+          "value_ref": {
+            "code": "exactVar",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function exactVar = function exactVar(input) {\n  const a = new A();\n  return a.process(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771089,
+      "line": 10,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "ambiguous",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476760
+            ]
+          },
+          "id": 68719476760,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "ambiguous",
+          "type_full_name": "gate3.js::program:ambiguous",
+          "value_ref": {
+            "code": "ambiguous",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "ambiguous",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084290
+            ]
+          },
+          "id": 120259084290,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 14,
+          "name": "",
+          "type_full_name": "gate3.js::program:ambiguous",
+          "value_ref": {
+            "code": "ambiguous",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function ambiguous = function ambiguous(obj, input) {\n  return obj.process(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771090,
+      "line": 14,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "unknown",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 17,
+          "name": "unknown",
+          "type_full_name": "gate3.js::program:unknown",
+          "value_ref": {
+            "code": "unknown",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "unknown",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084291
+            ]
+          },
+          "id": 120259084291,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 17,
+          "name": "",
+          "type_full_name": "gate3.js::program:unknown",
+          "value_ref": {
+            "code": "unknown",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function unknown = function unknown(obj, input) {\n  return obj.missing(input);\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771091,
+      "line": 17,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "A",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476762
+            ]
+          },
+          "id": 68719476762,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 1,
+          "name": "A",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "A",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "constructor() {}",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084292
+            ]
+          },
+          "id": 120259084292,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 1,
+          "name": "",
+          "type_full_name": "gate3.js::program:A:<init>",
+          "value_ref": {
+            "code": "constructor() {}",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "A = gate3.js::program:A:<init>",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771092,
+      "line": 1,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "B",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476763
+            ]
+          },
+          "id": 68719476763,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 4,
+          "name": "B",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "B",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "constructor() {}",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084293
+            ]
+          },
+          "id": 120259084293,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 4,
+          "name": "",
+          "type_full_name": "gate3.js::program:B:<init>",
+          "value_ref": {
+            "code": "constructor() {}",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "B = gate3.js::program:B:<init>",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "gate3.js",
+      "id": 30064771093,
+      "line": 4,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476743
+            ]
+          },
+          "id": 68719476743,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "a",
+          "type_full_name": "gate3.js::program:A",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "new A()",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              25769803780
+            ]
+          },
+          "id": 25769803780,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 11,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "new A()",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const a = new A()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771078,
+      "line": 11,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "input",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476750
+            ]
+          },
+          "id": 68719476750,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "input",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "input",
+            "id": 111669149699,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate3.js::program:A:process"
+      ],
+      "candidate_target_ids": [
+        107374182406
+      ],
+      "canonical_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "code": "a.process(input)",
+      "concrete_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "corrected_targets": [
+        "gate3.js::program:A:process"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771082,
+      "line": 12,
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "receiver_declared_type": "gate3.js::program:A",
+      "receiver_name": "a",
+      "receiver_owner_match": true,
+      "receiver_type": "gate3.js::program:A",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "_tmp_2",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476744
+            ]
+          },
+          "id": 68719476744,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "_tmp_2",
+          "type_full_name": "gate3.js::program:A",
+          "value_ref": {
+            "code": "_tmp_2",
+            "id": 94489280522,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": ".alloc",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771080
+            ]
+          },
+          "id": 30064771080,
+          "index": 2,
+          "kind": "CALL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": ".alloc",
+            "id": 30064771080,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_2 = .alloc",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771079,
+      "line": 11,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "new A()",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771081,
+      "line": 11,
+      "method_full_name": "gate3.js::program:A:<init>",
+      "name": "<operator>.new",
+      "receiver_declared_type": "gate3.js::program:A",
+      "receiver_name": "_tmp_2",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "A"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476748
+            ]
+          },
+          "id": 68719476748,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "a",
+          "type_full_name": "gate3.js::program:A",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "process",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574849
+            ]
+          },
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 12,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "process",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "a.process",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771083,
+      "line": 12,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": ".alloc",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "gate3.js",
+      "id": 30064771080,
+      "line": 11,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "input",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476753
+            ]
+          },
+          "id": 68719476753,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "input",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "input",
+            "id": 111669149702,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [
+        "gate3.js::program:A:process",
+        "gate3.js::program:B:process"
+      ],
+      "candidate_target_ids": [
+        107374182406,
+        107374182408
+      ],
+      "canonical_targets": [
+        "gate3.js::program:A:process",
+        "gate3.js::program:B:process"
+      ],
+      "code": "obj.process(input)",
+      "concrete_targets": [
+        "gate3.js::program:A:process",
+        "gate3.js::program:B:process"
+      ],
+      "corrected_targets": [
+        "gate3.js::program:A:process",
+        "gate3.js::program:B:process"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "gate3.js",
+      "id": 30064771084,
+      "line": 15,
+      "method_full_name": "<unknownFullName>",
+      "name": "process",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "obj",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "AMBIGUOUS",
+      "resolution_corrected": "AMBIGUOUS",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "obj",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476751
+            ]
+          },
+          "id": 68719476751,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "obj",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "obj",
+            "id": 111669149701,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "process",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574850
+            ]
+          },
+          "id": 55834574850,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 15,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "process",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "obj.process",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "gate3.js",
+      "id": 30064771085,
+      "line": 15,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "input",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 18,
+          "name": "input",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "input",
+            "id": 111669149705,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "obj.missing(input)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "gate3.js",
+      "id": 30064771086,
+      "line": 18,
+      "method_full_name": "<unknownFullName>",
+      "name": "missing",
+      "receiver_declared_type": "ANY",
+      "receiver_name": "obj",
+      "receiver_owner_match": false,
+      "receiver_type": "ANY",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "UNRESOLVED",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "obj",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476754
+            ]
+          },
+          "id": 68719476754,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 18,
+          "name": "obj",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "obj",
+            "id": 111669149704,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "missing",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              55834574851
+            ]
+          },
+          "id": 55834574851,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 18,
+          "name": "",
+          "type_full_name": "",
+          "value_ref": {
+            "code": "missing",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "obj.missing",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "gate3.js",
+      "id": 30064771087,
+      "line": 18,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "frontend_counters": {
+    "exported_calls": 22,
+    "exported_functions": 12,
+    "exported_identifiers": 50,
+    "exported_locals": 14,
+    "exported_returns": 6,
+    "exported_type_decls": 15
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:exact",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 7,
+      "line_end": 9,
+      "name": "exact",
+      "parameters": [
+        {
+          "code": "input",
+          "id": 111669149697,
+          "index": 0,
+          "line": 7,
+          "method_id": 107374182400,
+          "name": "input",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "gate3.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 20,
+      "name": ":program",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:exactVar",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 10,
+      "line_end": 13,
+      "name": "exactVar",
+      "parameters": [
+        {
+          "code": "input",
+          "id": 111669149699,
+          "index": 0,
+          "line": 10,
+          "method_id": 107374182402,
+          "name": "input",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:ambiguous",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 14,
+      "line_end": 16,
+      "name": "ambiguous",
+      "parameters": [
+        {
+          "code": "obj",
+          "id": 111669149701,
+          "index": 0,
+          "line": 14,
+          "method_id": 107374182403,
+          "name": "obj",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "input",
+          "id": 111669149702,
+          "index": 1,
+          "line": 14,
+          "method_id": 107374182403,
+          "name": "input",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:unknown",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 17,
+      "line_end": 19,
+      "name": "unknown",
+      "parameters": [
+        {
+          "code": "obj",
+          "id": 111669149704,
+          "index": 0,
+          "line": 17,
+          "method_id": 107374182404,
+          "name": "obj",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "input",
+          "id": 111669149705,
+          "index": 1,
+          "line": 17,
+          "method_id": 107374182404,
+          "name": "input",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:A:<init>",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 1,
+      "line_end": 3,
+      "name": "<init>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:A:process",
+      "id": 107374182406,
+      "is_external": false,
+      "line": 2,
+      "line_end": 2,
+      "name": "process",
+      "parameters": [
+        {
+          "code": "x",
+          "id": 111669149708,
+          "index": 0,
+          "line": 2,
+          "method_id": 107374182406,
+          "name": "x",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:B:<init>",
+      "id": 107374182407,
+      "is_external": false,
+      "line": 4,
+      "line_end": 6,
+      "name": "<init>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:B:process",
+      "id": 107374182408,
+      "is_external": false,
+      "line": 5,
+      "line_end": 5,
+      "name": "process",
+      "parameters": [
+        {
+          "code": "x",
+          "id": 111669149711,
+          "index": 0,
+          "line": 5,
+          "method_id": 107374182408,
+          "name": "x",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.alloc",
+      "id": 107374182409,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.alloc",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149713,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182409,
+          "name": "p0",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182410,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149714,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149715,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182411,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149716,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149717,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "_tmp_0",
+      "id": 68719476736,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476737,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 68719476738,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "A",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476739,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476740,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476741,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "input",
+      "id": 68719476742,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "input",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476736,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476737,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 68719476738,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "A",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476739,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476740,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476741,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "input",
+      "id": 68719476742,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "a",
+      "id": 68719476743,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476744,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 68719476745,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "A",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476746,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476747,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "a",
+      "id": 68719476748,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "a",
+      "id": 68719476749,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "input",
+      "id": 68719476750,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476751,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476752,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476753,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476754,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476755,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476756,
+      "line": 18,
+      "method_id": 107374182401,
+      "name": "input",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "x",
+      "id": 68719476757,
+      "line": 2,
+      "method_id": 107374182401,
+      "name": "x",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "exact",
+      "id": 68719476758,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "exact",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "gate3.js::program:exact"
+    },
+    {
+      "code": "exactVar",
+      "id": 68719476759,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "exactVar",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "gate3.js::program:exactVar"
+    },
+    {
+      "code": "ambiguous",
+      "id": 68719476760,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "ambiguous",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "gate3.js::program:ambiguous"
+    },
+    {
+      "code": "unknown",
+      "id": 68719476761,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "unknown",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "gate3.js::program:unknown"
+    },
+    {
+      "code": "A",
+      "id": 68719476762,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "A",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "B",
+      "id": 68719476763,
+      "line": 4,
+      "method_id": 107374182401,
+      "name": "B",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "a",
+      "id": 68719476743,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476744,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "_tmp_2",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 68719476745,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "A",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476746,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476747,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "a",
+      "id": 68719476748,
+      "line": 12,
+      "method_id": 107374182402,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "a",
+      "id": 68719476749,
+      "line": 12,
+      "method_id": 107374182402,
+      "name": "a",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "input",
+      "id": 68719476750,
+      "line": 12,
+      "method_id": 107374182402,
+      "name": "input",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476751,
+      "line": 15,
+      "method_id": 107374182403,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476752,
+      "line": 15,
+      "method_id": 107374182403,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476753,
+      "line": 15,
+      "method_id": 107374182403,
+      "name": "input",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476754,
+      "line": 18,
+      "method_id": 107374182404,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "obj",
+      "id": 68719476755,
+      "line": 18,
+      "method_id": 107374182404,
+      "name": "obj",
+      "ref_target_ids": [
+        111669149704
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "input",
+      "id": 68719476756,
+      "line": 18,
+      "method_id": 107374182404,
+      "name": "input",
+      "ref_target_ids": [
+        111669149705
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "x",
+      "id": 68719476757,
+      "line": 2,
+      "method_id": 107374182406,
+      "name": "x",
+      "ref_target_ids": [
+        111669149708
+      ],
+      "type_full_name": "ANY"
+    }
+  ],
+  "locals": [
+    {
+      "code": "_tmp_0",
+      "id": 94489280523,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_0",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 94489280524,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "A",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 94489280525,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_1",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 94489280513,
+      "line": 8,
+      "method_id": 107374182400,
+      "name": "_tmp_1",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "exact",
+      "id": 94489280512,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "exact",
+      "type_full_name": "gate3.js::program:exact"
+    },
+    {
+      "code": "exactVar",
+      "id": 94489280514,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "exactVar",
+      "type_full_name": "gate3.js::program:exactVar"
+    },
+    {
+      "code": "ambiguous",
+      "id": 94489280517,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "ambiguous",
+      "type_full_name": "gate3.js::program:ambiguous"
+    },
+    {
+      "code": "unknown",
+      "id": 94489280518,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "unknown",
+      "type_full_name": "gate3.js::program:unknown"
+    },
+    {
+      "code": "A",
+      "id": 94489280519,
+      "line": 1,
+      "method_id": 107374182401,
+      "name": "A",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "B",
+      "id": 94489280520,
+      "line": 4,
+      "method_id": 107374182401,
+      "name": "B",
+      "type_full_name": "gate3.js::program:B"
+    },
+    {
+      "code": "a",
+      "id": 94489280515,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "a",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "A",
+      "id": 94489280521,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "A",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 94489280522,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "_tmp_2",
+      "type_full_name": "gate3.js::program:A"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 94489280516,
+      "line": 11,
+      "method_id": 107374182402,
+      "name": "_tmp_2",
+      "type_full_name": "gate3.js::program:A"
+    }
+  ],
+  "members": [
+    {
+      "code": "process(x) { return x; }",
+      "id": 98784247808,
+      "line": 2,
+      "name": "process",
+      "type_decl_id": 167503724548,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "process(x) { return \"CONST\"; }",
+      "id": 98784247809,
+      "line": 5,
+      "name": "process",
+      "type_decl_id": 167503724551,
+      "type_full_name": "__ecma.String"
+    }
+  ],
+  "metadata": [
+    {
+      "language": "JSSRC",
+      "root": "/tmp/replay/g03/src",
+      "version": "0.1"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 7,
+      "method_id": 107374182400,
+      "type_full_name": "gate3.js::program:A:<init>:process:<returnValue>"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 1,
+      "method_id": 107374182401,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 10,
+      "method_id": 107374182402,
+      "type_full_name": "gate3.js::program:A:<init>:process:<returnValue>"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 14,
+      "method_id": 107374182403,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 17,
+      "method_id": 107374182404,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 1,
+      "method_id": 107374182405,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 2,
+      "method_id": 107374182406,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 4,
+      "method_id": 107374182407,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 5,
+      "method_id": 107374182408,
+      "type_full_name": "__ecma.String"
+    },
+    {
+      "code": "RET",
+      "id": 124554051593,
+      "line": 0,
+      "method_id": 107374182409,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051594,
+      "line": 0,
+      "method_id": 107374182410,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051595,
+      "line": 0,
+      "method_id": 107374182411,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [
+    {
+      "code": "return new A().process(input)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920768,
+          30064771072
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 141733920768,
+      "line": 8,
+      "value_ref": {
+        "code": "return new A().process(input)",
+        "id": 30064771072,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return a.process(input)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920769,
+          30064771082
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 141733920769,
+      "line": 12,
+      "value_ref": {
+        "code": "return a.process(input)",
+        "id": 30064771082,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return obj.process(input)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920770,
+          30064771084
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 141733920770,
+      "line": 15,
+      "value_ref": {
+        "code": "return obj.process(input)",
+        "id": 30064771084,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return obj.missing(input)",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920771,
+          30064771086
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 141733920771,
+      "line": 18,
+      "value_ref": {
+        "code": "return obj.missing(input)",
+        "id": 30064771086,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return x",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920772,
+          68719476757
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 141733920772,
+      "line": 2,
+      "value_ref": {
+        "code": "x",
+        "id": 111669149708,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "code": "return \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920773,
+          90194313216
+        ]
+      },
+      "function_id": 107374182408,
+      "id": 141733920773,
+      "line": 5,
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    }
+  ],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:exact",
+      "id": 167503724544,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 7,
+      "name": "exact"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:exactVar",
+      "id": 167503724545,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 10,
+      "name": "exactVar"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:ambiguous",
+      "id": 167503724546,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 14,
+      "name": "ambiguous"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:unknown",
+      "id": 167503724547,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 17,
+      "name": "unknown"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:A",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "A"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:A:<init>",
+      "id": 167503724549,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 1,
+      "name": "<init>"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:A:process",
+      "id": 167503724550,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 2,
+      "name": "process"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:B",
+      "id": 167503724551,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 4,
+      "name": "B"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:B:<init>",
+      "id": 167503724552,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 4,
+      "name": "<init>"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program:B:process",
+      "id": 167503724553,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 5,
+      "name": "process"
+    },
+    {
+      "file": "gate3.js",
+      "full_name": "gate3.js::program",
+      "id": 167503724554,
+      "inherits_from": [
+        "ANY"
+      ],
+      "is_external": false,
+      "line": 1,
+      "name": ":program"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "A",
+      "id": 167503724555,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "A"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "ANY",
+      "id": 167503724556,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "B",
+      "id": 167503724557,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "B"
+    },
+    {
+      "file": "<unknown>",
+      "full_name": "__ecma.String",
+      "id": 167503724558,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "String"
+    }
+  ]
+}

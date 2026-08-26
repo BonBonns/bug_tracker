@@ -1,0 +1,168 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771072
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771072,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate8:ts::program:UnionHolder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771073
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771073,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate8:ts::program:UnionHolder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149699,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771074
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771074,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate8:ts::program:UnionHolder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149701,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_0 = getWorker(h)).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771076
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771076,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_0 = getWorker(h))",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_0 = getWorker(h))",
+        "id": 30064771077,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_1 = getUnionWorker(h)).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771080
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771080,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_1 = getUnionWorker(h))",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_1 = getUnionWorker(h))",
+        "id": 30064771081,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_2 = getUnknownWorker(h)).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771084
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771084,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_2 = getUnknownWorker(h))",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_2 = getUnknownWorker(h))",
+        "id": 30064771085,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": []
+}

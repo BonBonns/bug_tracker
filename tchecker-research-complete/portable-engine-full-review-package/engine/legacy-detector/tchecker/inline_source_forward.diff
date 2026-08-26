@@ -1,0 +1,164 @@
+--- /tmp/PHPCGFactory.bak	2026-07-04 00:37:02.533619136 +0000
++++ /home/claude/work/tchecker_v8/pkg/engine/tchecker/detector/joern-php/src/main/java/cg/PHPCGFactory.java	2026-07-04 03:40:09.537839492 +0000
+@@ -4896,7 +4896,7 @@
+ 		"esc_html__","esc_attr__","esc_html_e","esc_attr_e","esc_html_x","esc_attr_x",
+ 		"wp_kses","wp_kses_post","wp_kses_data","tag_escape","sanitize_key"));
+ 
+-	private static boolean isXssOutputEscaper( String nm ) {
++	public static boolean isXssOutputEscaper( String nm ) {
+ 		return nm != null && ( htmlEscapers.contains(nm) || PHPCSVEdgeInterpreter.xssSanitizers.contains(nm) );
+ 	}
+ 
+@@ -5257,6 +5257,10 @@
+ 	// call2mtd (so the dataflow enters them) and record the call site in callableArgOffset (so the
+ 	// dataflow maps arg[i+1] -> param[i], skipping the leading callable argument).
+ 	public static Set<Long> callableArgOffset = new HashSet<Long>();
++	// call_user_func_array('fn', array($a,$b)): the real args are the ELEMENTS of arg[1]'s array
++	// literal (element[i] -> param[i]), not positional trailing args. Tracked separately so the
++	// arg-forwarding unpacks the array instead of applying the +1 positional shift.
++	public static Set<Long> cufaArrayArg = new HashSet<Long>();
+ 
+ 	// Collect class names constructed anywhere in an expression: a direct  new X()  or one buried as an
+ 	// argument to a wrapper call, e.g.  apply_filters('hook', new X())  /  new X($args). Used as a
+@@ -5273,12 +5277,116 @@
+ 		}
+ 	}
+ 
++
++	// RECALL: inline request source used directly as a call argument (e.g. f($_GET['x']) or
++	// call_user_func('f',$_GET['x'])). Both inline-source mechanisms in the taint pass gate on the
++	// source sitting inside a SINK statement, so a source passed to a NON-sink callee is dropped and
++	// the callee reads as untainted. Forward it: for each call with a resolved user-function target
++	// and an inline-source argument, seed the corresponding callee PARAMETER as a source
++	// (sources + hookParamSourceNodes = "tainted by fiat", the mechanism hook params already use), so
++	// the existing interprocedural analysis carries it from the param through the callee to its sinks.
++
++	// Export the resolved interprocedural call graph (call2mtd: callsite -> target function nodes)
++	// so the adjudicator can walk the SAME edges the analyzer resolved — including call_user_func[_array],
++	// variable-function, and method dispatch that a source-text regex can't follow. Emits caller-function
++	// node -> target-function node pairs; the adjudicator maps nodes to bodies via nodes.csv.
++	private static void dumpCallGraph() {
++		if( System.getenv("WP_DUMP_CALLGRAPH") == null ) return;
++		try {
++			java.io.PrintWriter w = new java.io.PrintWriter(new java.io.FileWriter("callgraph.csv"));
++			int edges = 0;
++			for( Long callsite : call2mtd.keySet() ) {
++				ASTNode cs = ASTUnderConstruction.idToNode.get(callsite);
++				if( cs == null ) continue;
++				Long caller = cs.getFuncId();
++				if( caller == null ) continue;
++				java.util.List<Long> tgts = call2mtd.get(callsite);
++				if( tgts == null ) continue;
++				for( Long t : tgts ) { w.println(caller + "\t" + t); edges++; }
++			}
++			w.close();
++			System.err.println("CALLGRAPH dumped " + edges + " resolved edge(s) to callgraph.csv");
++		} catch( Exception e ) { System.err.println("CALLGRAPH dump failed: " + e); }
++	}
++
++	private static boolean subtreeHasSourceIn(Long nid, java.util.Set<Long> srcSet, int depth) {
++		if( nid == null || depth > 60 ) return false;
++		if( srcSet.contains(nid) ) return true;
++		java.util.HashMap<Integer,Long> kids = PHPCSVEdgeInterpreter.parent2child.get(nid);
++		if( kids != null ) for( Long c : kids.values() ) if( subtreeHasSourceIn(c, srcSet, depth+1) ) return true;
++		return false;
++	}
++
++	private static void forwardInlineSourceArgs() {
++		if( System.getenv("WP_NO_INLINEFWD") != null ) return;   // engine-only baseline (metric separation)
++		java.util.Set<Long> origSources = new java.util.HashSet<Long>(PHPCSVEdgeInterpreter.sources);
++		// target function id -> param NAMES whose uses carry a forwarded inline source
++		java.util.HashMap<Long, java.util.Set<String>> seedParams = new java.util.HashMap<Long, java.util.Set<String>>();
++		for( CallExpressionBase fc : functionCalls ) {
++			java.util.List<Long> tgts = call2mtd.get(fc.getNodeId());
++			if( tgts == null || tgts.isEmpty() ) continue;
++			ArgumentList al = fc.getArgumentList();
++			if( al == null ) continue;
++			// map each callee param index to the caller arg expression feeding it:
++			//   call_user_func_array('f', array(a,b)) -> element[i] -> param[i]
++			//   call_user_func('f', a, b) / f(a, b)   -> arg[i-coff] -> param[i]
++			java.util.List<Expression> byParam = new java.util.ArrayList<Expression>();
++			if( cufaArrayArg.contains(fc.getNodeId()) ) {
++				if( al.size() < 2 || !(al.getArgument(1) instanceof ArrayExpression) ) continue;
++				ArrayExpression ae = (ArrayExpression)al.getArgument(1);
++				for( int j = 0; j < ae.size(); j++ ) byParam.add(ae.getArrayElement(j).getValue());
++			} else {
++				int coff = callableArgOffset.contains(fc.getNodeId()) ? 1 : 0;
++				for( int i = 0; i < al.size(); i++ ) {
++					int pidx = i - coff;
++					if( pidx < 0 ) continue;
++					while( byParam.size() <= pidx ) byParam.add(null);
++					byParam.set(pidx, al.getArgument(i));
++				}
++			}
++			for( int pidx = 0; pidx < byParam.size(); pidx++ ) {
++				Expression arg = byParam.get(pidx);
++				if( arg == null || !subtreeHasSourceIn(arg.getNodeId(), origSources, 0) ) continue;
++				for( Long t : tgts ) {
++					ASTNode fn = ASTUnderConstruction.idToNode.get(t);
++					if( !(fn instanceof FunctionDef) ) continue;
++					ParameterList pl = ((FunctionDef)fn).getParameterList();
++					if( pl == null || pl.size() <= pidx ) continue;
++					String pname = ((Parameter)pl.getParameter(pidx)).getName();
++					if( pname == null ) continue;
++					java.util.Set<String> s = seedParams.get(t);
++					if( s == null ) { s = new java.util.HashSet<String>(); seedParams.put(t, s); }
++					s.add(pname);
++				}
++			}
++		}
++		if( seedParams.isEmpty() ) return;
++		// seed the USES of those params (dataflow reads Variable uses, not the param decl) — mirrors
++		// seedHookParamAsSource, so the seeded-by-fiat param taint reaches the callee's sinks.
++		int seeded = 0;
++		for( ASTNode node : ASTUnderConstruction.idToNode.values() ) {
++			if( !(node instanceof Variable) ) continue;
++			Long f = node.getFuncId();
++			if( f == null ) continue;
++			java.util.Set<String> names = seedParams.get(f);
++			if( names == null ) continue;
++			Expression ne = ((Variable)node).getNameExpression();
++			if( ne != null && names.contains(ne.getEscapedCodeStr()) ) {
++				if( PHPCSVEdgeInterpreter.sources.add(node.getNodeId()) ) seeded++;
++				hookParamSourceNodes.add(node.getNodeId());
++			}
++		}
++		if( seeded > 0 ) System.err.println("INLINEFWD seeded "+seeded+" callee param-use(s) from inline-source args");
++	}
++
+ 	private static void resolveCallableDispatch() {
+ 		java.util.HashMap<Long,java.util.List<Long>> methodsByClass = null;   // built lazily (dynamic-method case)
+ 		java.util.HashMap<String,Set<String>> recvFallback = null;           // built lazily (receiver-name -> class names)
+ 		java.util.HashMap<String,Set<String>> recvByClass = null;            // built lazily (class::receiver-name -> class names)
+ 		for( CallExpressionBase fc : functionCalls ) {
+-			if( !"call_user_func".equals(callTargetName(fc)) ) continue;
++			String cufName = callTargetName(fc);
++			boolean isCufa = "call_user_func_array".equals(cufName);
++			if( !"call_user_func".equals(cufName) && !isCufa ) continue;
+ 			ArgumentList al = fc.getArgumentList();
+ 			if( al == null || al.size() < 1 ) continue;
+ 			Expression cb = al.getArgument(0);
+@@ -5402,10 +5510,11 @@
+ 				if( !(allMtd.contains(t) || allStaticMtd.contains(t) || allFunc.contains(t)) ) continue;
+ 				if( ex == null || !ex.contains(t) ) call2mtd.add(fc.getNodeId(), t);   // add only missing edges
+ 			}
+-			callableArgOffset.add(fc.getNodeId());   // arg[0] is the callable -> shift arg/param mapping by one
++			if( isCufa ) cufaArrayArg.add(fc.getNodeId());       // args are array-wrapped in arg[1]
++			else callableArgOffset.add(fc.getNodeId());          // arg[0] is the callable -> shift by one
+ 		}
+-		if( !callableArgOffset.isEmpty() )
+-			System.err.println("WPCALLABLE resolved "+callableArgOffset.size()+" call_user_func dispatch site(s)");
++		if( !callableArgOffset.isEmpty() || !cufaArrayArg.isEmpty() )
++			System.err.println("WPCALLABLE resolved "+(callableArgOffset.size()+cufaArrayArg.size())+" call_user_func[_array] dispatch site(s)");
+ 	}
+ 
+ 	public static CG newInstance() {
+@@ -5438,6 +5547,8 @@
+ 		demoteAllUnquotedEscSql();
+ 		createNonStaticMethodCallEdges(cg);
+ 		resolveCallableDispatch();   // model call_user_func / array-callable dispatch (recall fix)
++		forwardInlineSourceArgs();   // seed callee params from inline-source call args (recall fix)
++		dumpCallGraph();             // export resolved call2mtd for the adjudicator (node-accurate chain)
+ 		// Resolve setting-getter wrappers to their backing stored key BEFORE the XSS suppressor runs, so
+ 		// an output of a wrapper (e.g. echo get_close_text()) is credited as a stored read and kept as a
+ 		// sink. Runs after call-edge creation so wrapper-of-wrapper chains resolve. Inert unless stored-

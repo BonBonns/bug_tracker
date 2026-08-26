@@ -1,0 +1,15 @@
+PASS adapter emits AST_DIM
+PASS object static exact
+PASS object different key isolated
+PASS object constant overwrite kills source
+PASS dynamic object write is MAY not hard
+PASS dynamic object read is MAY not hard
+PASS array static exact
+PASS array different index isolated
+PASS dynamic array write is MAY not hard
+PASS dynamic array read is MAY not hard
+PASS dynamic key on distinct receiver does not cross-taint
+PASS legacy baseline is coarser on static different key
+PASS legacy baseline is coarser on constant overwrite
+PASS legacy baseline hardens dynamic read
+GATE20=14/14

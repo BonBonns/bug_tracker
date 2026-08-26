@@ -1,0 +1,9 @@
+controllers/articles-controller.js	get	controllers/articles-controller.js::program:get	METHOD_REF	exports.get = async function getArticle(ctx) {   const u = ctx.state.user;      // must jo		
+lib/app.js		koa	IDENTIFIER	module.exports = app		
+lib/audit-middleware.js		lib/audit-middleware.js::program:auditMiddleware	METHOD_REF	module.exports = async function auditMiddleware(ctx, next) {   ctx.state.audit = "on";    		
+lib/late-middleware.js		lib/late-middleware.js::program:lateMiddleware	METHOD_REF	module.exports = async function lateMiddleware(ctx, next) {   ctx.state.late = "registered		
+lib/user-middleware.js		lib/user-middleware.js::program:userMiddleware	METHOD_REF	module.exports = async function userMiddleware(ctx, next) {   if (has(ctx, "state.jwt.sub.		
+routes/articles-router.js		koa-router	IDENTIFIER	module.exports = router		
+routes/multi-router.js		koa-router	IDENTIFIER	module.exports = routerA		
+routes/orphan-router.js		koa-router	IDENTIFIER	module.exports = router		
+routes/tags-router.js		koa-router	IDENTIFIER	module.exports = router		

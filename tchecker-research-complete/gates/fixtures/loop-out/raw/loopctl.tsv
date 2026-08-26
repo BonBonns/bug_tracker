@@ -1,0 +1,12 @@
+fields/upload-process.js::program:processField	6	CONTINUE	47244640258	8	ENCLOSING	-	false	
+fields/upload-validation-safe.js::program:validationSafe	5	CONTINUE	47244640261	7	ENCLOSING	-	false	
+fields/upload-validation.js::program:validation	12	RETURN	141733920770	15	ENCLOSING	-	false	return
+fields/upload-validation.js::program:validation	12	RETURN	141733920771	20	ENCLOSING	-	false	return
+fields/upload-validation.js::program:validation	12	RETURN	141733920772	24	ENCLOSING	-	false	return
+fields/upload-process.js::program	16	RETURN	141733920768	16	CALLBACK	<operator>.assignment	true	return "/var/www/uploads/forms"
+fields/upload-validation.js::program	3	RETURN	141733920769	9	CALLBACK	<operator>.assignment	false	return
+fields/upload-validation.js::program	3	RETURN	141733920770	15	CALLBACK	<operator>.assignment	false	return
+fields/upload-validation.js::program	3	RETURN	141733920771	20	CALLBACK	<operator>.assignment	false	return
+fields/upload-validation.js::program	3	RETURN	141733920772	24	CALLBACK	<operator>.assignment	false	return
+lib/helpers.js::program	3	RETURN	141733920773	5	CALLBACK	<operator>.assignment	true	return (field.allowed || ["jpg", "png", "pdf"]).includes(ext
+lib/helpers.js::program	7	RETURN	141733920774	7	CALLBACK	<operator>.assignment	true	return file.size <= (field.maxSize || 1e6)

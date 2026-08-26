@@ -1,0 +1,396 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [],
+  "state_writes": [
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771103000,
+      "code": "exports.closureDirect = closureDirect",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771103,
+          30064771104,
+          30064771104,
+          68719476793
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureDirect"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureDirect",
+        "type": "gate23.ts::program:closureDirect"
+      },
+      "value_ref": {
+        "code": "closureDirect",
+        "id": 94489280512,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771106000,
+      "code": "exports.closureParam = closureParam",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771106,
+          30064771107,
+          30064771107,
+          68719476796
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureParam"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureParam",
+        "type": "gate23.ts::program:closureParam"
+      },
+      "value_ref": {
+        "code": "closureParam",
+        "id": 94489280514,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771109000,
+      "code": "exports.closureShadow = closureShadow",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771109,
+          30064771110,
+          30064771110,
+          68719476799
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureShadow"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureShadow",
+        "type": "gate23.ts::program:closureShadow"
+      },
+      "value_ref": {
+        "code": "closureShadow",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771112000,
+      "code": "exports.closureUnrelated = closureUnrelated",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771112,
+          30064771113,
+          30064771113,
+          68719476802
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureUnrelated"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureUnrelated",
+        "type": "gate23.ts::program:closureUnrelated"
+      },
+      "value_ref": {
+        "code": "closureUnrelated",
+        "id": 94489280518,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771115000,
+      "code": "exports.closureAlias = closureAlias",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771115,
+          30064771116,
+          30064771116,
+          68719476805
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureAlias"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureAlias",
+        "type": "gate23.ts::program:closureAlias"
+      },
+      "value_ref": {
+        "code": "closureAlias",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771118000,
+      "code": "exports.closureMutation = closureMutation",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771118,
+          30064771119,
+          30064771119,
+          68719476808
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureMutation"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureMutation",
+        "type": "gate23.ts::program:closureMutation"
+      },
+      "value_ref": {
+        "code": "closureMutation",
+        "id": 94489280523,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771121000,
+      "code": "exports.closureMutationToSource = closureMutationToSource",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771121,
+          30064771122,
+          30064771122,
+          68719476811
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureMutationToSource"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureMutationToSource",
+        "type": "gate23.ts::program:closureMutationToSource"
+      },
+      "value_ref": {
+        "code": "closureMutationToSource",
+        "id": 94489280526,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771124000,
+      "code": "exports.nestedClosure = nestedClosure",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771124,
+          30064771125,
+          30064771125,
+          68719476814
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "nestedClosure"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "nestedClosure",
+        "type": "gate23.ts::program:nestedClosure"
+      },
+      "value_ref": {
+        "code": "nestedClosure",
+        "id": 94489280529,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771127000,
+      "code": "exports.closureTwoCaptures = closureTwoCaptures",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771127,
+          30064771128,
+          30064771128,
+          68719476817
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureTwoCaptures"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureTwoCaptures",
+        "type": "gate23.ts::program:closureTwoCaptures"
+      },
+      "value_ref": {
+        "code": "closureTwoCaptures",
+        "id": 94489280532,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771130000,
+      "code": "exports.closureLocalShadowsOuter = closureLocalShadowsOuter",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771130,
+          30064771131,
+          30064771131,
+          68719476820
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "closureLocalShadowsOuter"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "closureLocalShadowsOuter",
+        "type": "gate23.ts::program:closureLocalShadowsOuter"
+      },
+      "value_ref": {
+        "code": "closureLocalShadowsOuter",
+        "id": 94489280534,
+        "kind": "LOCAL"
+      }
+    }
+  ]
+}

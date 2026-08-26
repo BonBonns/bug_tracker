@@ -1,0 +1,256 @@
+{
+  "aliasSame": {
+    "origins": [
+      "PARAM:aliasSame.source"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 16,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:aliasSame.h.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:aliasSame.h.worker.value",
+        "value": [
+          "PARAM:aliasSame.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 17,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:aliasSame.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:aliasSame.h.worker.value",
+        "value": [
+          "PARAM:aliasSame.source"
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:aliasSame.h.worker.value": [
+        "PARAM:aliasSame.source"
+      ]
+    }
+  },
+  "aliasAllocation": {
+    "origins": [
+      "PARAM:aliasAllocation.source"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 25,
+        "target": "A.setValue",
+        "receiver": "ALLOC:aliasAllocation:22:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:aliasAllocation:22:A.value",
+        "value": [
+          "PARAM:aliasAllocation.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 26,
+        "target": "A.readValue",
+        "receiver": "ALLOC:aliasAllocation:22:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:aliasAllocation:22:A.value",
+        "value": [
+          "PARAM:aliasAllocation.source"
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:aliasAllocation:22:A.value": [
+        "PARAM:aliasAllocation.source"
+      ]
+    }
+  },
+  "aliasOverwrite": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 34,
+        "target": "A.setValue",
+        "receiver": "ALLOC:aliasOverwrite:31:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:aliasOverwrite:31:A.value",
+        "value": [
+          "PARAM:aliasOverwrite.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 35,
+        "target": "A.setValue",
+        "receiver": "ALLOC:aliasOverwrite:31:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:aliasOverwrite:31:A.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 36,
+        "target": "A.readValue",
+        "receiver": "ALLOC:aliasOverwrite:31:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:aliasOverwrite:31:A.value",
+        "value": [
+          "CONST:\"CONST\""
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:aliasOverwrite:31:A.value": [
+        "CONST:\"CONST\""
+      ]
+    }
+  },
+  "aliasDistinct": {
+    "origins": [
+      "STATE_UNKNOWN:ALLOC:aliasDistinct:41:A.value"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 45,
+        "target": "A.setValue",
+        "receiver": "ALLOC:aliasDistinct:42:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "ALLOC:aliasDistinct:42:A.value",
+        "value": [
+          "PARAM:aliasDistinct.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 46,
+        "target": "A.readValue",
+        "receiver": "ALLOC:aliasDistinct:41:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:aliasDistinct:41:A.value",
+        "value": [
+          "STATE_UNKNOWN:ALLOC:aliasDistinct:41:A.value"
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:aliasDistinct:42:A.value": [
+        "PARAM:aliasDistinct.source"
+      ]
+    }
+  },
+  "aliasDifferentField": {
+    "origins": [
+      "STATE_UNKNOWN:ALLOC:aliasDifferentField:51:A.value"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 53,
+        "target": "A.setOther",
+        "receiver": "ALLOC:aliasDifferentField:51:A"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setOther",
+        "state": "ALLOC:aliasDifferentField:51:A.other",
+        "value": [
+          "PARAM:aliasDifferentField.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 54,
+        "target": "A.readValue",
+        "receiver": "ALLOC:aliasDifferentField:51:A"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "ALLOC:aliasDifferentField:51:A.value",
+        "value": [
+          "STATE_UNKNOWN:ALLOC:aliasDifferentField:51:A.value"
+        ]
+      }
+    ],
+    "finalState": {
+      "ALLOC:aliasDifferentField:51:A.other": [
+        "PARAM:aliasDifferentField.source"
+      ]
+    }
+  },
+  "aliasDifferentParams": {
+    "origins": [
+      "STATE_UNKNOWN:PARAMOBJ:aliasDifferentParams.h.worker.value"
+    ],
+    "trace": [
+      {
+        "kind": "METHOD",
+        "line": 61,
+        "target": "A.setValue",
+        "receiver": "PARAMOBJ:aliasDifferentParams.other.worker"
+      },
+      {
+        "kind": "WRITE",
+        "target": "A.setValue",
+        "state": "PARAMOBJ:aliasDifferentParams.other.worker.value",
+        "value": [
+          "PARAM:aliasDifferentParams.source"
+        ]
+      },
+      {
+        "kind": "METHOD",
+        "line": 62,
+        "target": "A.readValue",
+        "receiver": "PARAMOBJ:aliasDifferentParams.h.worker"
+      },
+      {
+        "kind": "READ_RETURN",
+        "target": "A.readValue",
+        "state": "PARAMOBJ:aliasDifferentParams.h.worker.value",
+        "value": [
+          "STATE_UNKNOWN:PARAMOBJ:aliasDifferentParams.h.worker.value"
+        ]
+      }
+    ],
+    "finalState": {
+      "PARAMOBJ:aliasDifferentParams.other.worker.value": [
+        "PARAM:aliasDifferentParams.source"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+=== NESTJS ===
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  IMPORT import { Controller, Post, Body, Query, Param, Headers } from '@nestjs/common'
+  method=nest.ts::program:UsersController:login params=0:this:nest.ts::program:UsersController, 1:body:ANY, 2:q:__ecma.String, 3:id:__ecma.String, 4:h:__ecma.String
+  annotations=Post
+    param this annotations=[] code=this
+    param body annotations=[Body] code=body: any
+    param q annotations=[Query] code=q: string
+    param id annotations=[Param] code=id: string
+    param h annotations=[Headers] code=h: string
+  class annotations=Controller
+  class annotations=

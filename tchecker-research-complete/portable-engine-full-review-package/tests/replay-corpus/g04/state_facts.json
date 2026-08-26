@@ -1,0 +1,114 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "obj.process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771073,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "obj",
+        "type": "gate4:ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "obj",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "obj.process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771075
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771075,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "obj",
+        "type": "gate4:ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "obj",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "obj.process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771077
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771077,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "obj",
+        "type": "gate4:ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "obj",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "obj.missing",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771079
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771079,
+      "key": {
+        "kind": "LITERAL",
+        "value": "missing"
+      },
+      "receiver": {
+        "name": "obj",
+        "type": "gate4:ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "obj",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": []
+}

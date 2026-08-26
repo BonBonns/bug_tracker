@@ -1,0 +1,77 @@
+=== CORPUS-B: ctx.validatedData reads and their handlers ===
+  READ  middlewares/validate.middleware.js::program:validate:<lamb  ctx.validatedData
+  READ  resources/account/forgot-password/index.js::program:handle  ctx.validatedData
+  READ  resources/account/forgot-password/index.js::program:valida  ctx.validatedData.email
+  READ  resources/account/forgot-password/index.js::program:valida  ctx.validatedData
+  READ  resources/account/forgot-password/index.js::program:valida  ctx.validatedData.user
+  READ  resources/account/resend-email/index.js::program:handler  ctx.validatedData
+  READ  resources/account/resend-email/index.js::program:validator  ctx.validatedData
+  READ  resources/account/resend-email/index.js::program:validator  ctx.validatedData.user
+  READ  resources/account/reset-password/index.js::program:handler  ctx.validatedData
+  READ  resources/account/reset-password/index.js::program:validat  ctx.validatedData
+  READ  resources/account/reset-password/index.js::program:validat  ctx.validatedData.user
+  READ  resources/account/sign-in/index.js::program:handler  ctx.validatedData
+  READ  resources/account/sign-in/index.js::program:validator  ctx.validatedData
+  READ  resources/account/sign-in/index.js::program:validator  ctx.validatedData.user
+  READ  resources/account/sign-up/index.js::program:handler  ctx.validatedData
+  READ  resources/account/sign-up/index.js::program:validator  ctx.validatedData
+  READ  resources/account/verify-email/index.js::program:handler  ctx.validatedData
+  READ  resources/account/verify-email/index.js::program:validator  ctx.validatedData.token
+  READ  resources/account/verify-email/index.js::program:validator  ctx.validatedData
+  READ  resources/account/verify-email/index.js::program:validator  ctx.validatedData.userId
+  READ  resources/account/verify-reset-token/index.js::program:val  ctx.validatedData
+  READ  resources/user/list/index.js::program:handler  ctx.validatedData
+  READ  resources/user/update-current/index.js::program:handler  ctx.validatedData
+  READ  resources/user/update-current/index.js::program:validator  ctx.validatedData
+=== CORPUS-B: writes to ctx.validatedData (any) ===
+  WRITE middlewares/validate.middleware.js::program:validate:<lamb  ctx.validatedData = value
+  WRITE middlewares/validate.middleware.js::program  function validate = function validate(schema) {   return asy
+  WRITE resources/account/forgot-password/index.js::program:valida  const user = await userService.findOne({ email: ctx.validate
+  WRITE resources/account/forgot-password/index.js::program:valida  _tmp_0.email = ctx.validatedData.email
+  WRITE resources/account/forgot-password/index.js::program:valida  ctx.validatedData.user = user
+  WRITE resources/account/forgot-password/index.js::program:handle  _tmp_2 = ctx.validatedData
+  WRITE resources/account/forgot-password/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/forgot-password/index.js::program  function handler = async function handler(ctx) {   const { u
+  WRITE resources/account/resend-email/index.js::program:validator  _tmp_0 = ctx.validatedData
+  WRITE resources/account/resend-email/index.js::program:validator  ctx.validatedData.user = user
+  WRITE resources/account/resend-email/index.js::program:handler  _tmp_3 = ctx.validatedData
+  WRITE resources/account/resend-email/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/resend-email/index.js::program  function handler = async function handler(ctx) {   const { u
+  WRITE resources/account/reset-password/index.js::program:validat  _tmp_0 = ctx.validatedData
+  WRITE resources/account/reset-password/index.js::program:validat  ctx.validatedData.user = user
+  WRITE resources/account/reset-password/index.js::program:handler  _tmp_3 = ctx.validatedData
+  WRITE resources/account/reset-password/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/reset-password/index.js::program  function handler = async function handler(ctx) {   const { u
+  WRITE resources/account/sign-in/index.js::program:validator  _tmp_0 = ctx.validatedData
+  WRITE resources/account/sign-in/index.js::program:validator  ctx.validatedData.user = user
+  WRITE resources/account/sign-in/index.js::program:handler  _tmp_5 = ctx.validatedData
+  WRITE resources/account/sign-in/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/sign-in/index.js::program  function handler = async function handler(ctx) {   const { u
+  WRITE resources/account/sign-up/index.js::program:validator  _tmp_0 = ctx.validatedData
+  WRITE resources/account/sign-up/index.js::program:handler  _tmp_3 = ctx.validatedData
+  WRITE resources/account/sign-up/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/sign-up/index.js::program  function handler = async function handler(ctx) {   const {  
+  WRITE resources/account/verify-email/index.js::program:validator  const user = await userService.findOne({ signupToken: ctx.va
+  WRITE resources/account/verify-email/index.js::program:validator  _tmp_0.signupToken = ctx.validatedData.token
+  WRITE resources/account/verify-email/index.js::program:validator  ctx.validatedData.userId = user._id
+  WRITE resources/account/verify-email/index.js::program:handler  _tmp_1 = ctx.validatedData
+  WRITE resources/account/verify-email/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/account/verify-email/index.js::program  function handler = async function handler(ctx) {   const { u
+  WRITE resources/account/verify-reset-token/index.js::program:val  _tmp_0 = ctx.validatedData
+  WRITE resources/account/verify-reset-token/index.js::program  function validator = async function validator(ctx) {   const
+  WRITE resources/user/list/index.js::program:handler  _tmp_0 = ctx.validatedData
+  WRITE resources/user/list/index.js::program  function handler = async function handler(ctx) {   const {  
+  WRITE resources/user/update-current/index.js::program:validator  _tmp_1 = ctx.validatedData
+  WRITE resources/user/update-current/index.js::program:handler  _tmp_4 = ctx.validatedData
+  WRITE resources/user/update-current/index.js::program  function validator = async function validator(ctx, next) {  
+  WRITE resources/user/update-current/index.js::program  function handler = async function handler(ctx) {   const { u
+=== CORPUS-B: validate middleware wrapper return chain ===
+  method=middlewares/validate.middleware.js::program:formatError:<lambda>0 params=this,error
+  method=middlewares/validate.middleware.js::program:formatError params=this,joiError
+    RETURN children=IDENTIFIER:errors
+  method=middlewares/validate.middleware.js::program params=this
+    RETURN children=IDENTIFIER:errors
+    RETURN children=METHOD_REF:middlewares/validate.middleware.js::program:validate:<lambda>1
+  method=middlewares/validate.middleware.js::program:validate:<lambda>1 params=this,ctx,next
+  method=middlewares/validate.middleware.js::program:validate params=this,schema
+    RETURN children=METHOD_REF:middlewares/validate.middleware.js::program:validate:<lambda>1

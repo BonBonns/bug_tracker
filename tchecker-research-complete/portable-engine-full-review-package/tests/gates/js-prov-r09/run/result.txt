@@ -1,0 +1,13 @@
+PASS t2 REAL router: registration ESTABLISHED
+PASS t2 framework identity is @koa/router
+PASS t2 identity evidence is RECEIVER_DOMAIN_EVIDENCE (never methodFullName)
+PASS GATE-1: t3 FAKE router produces NO registration
+PASS t3 abstains as NOT_A_PROFILED_FRAMEWORK
+PASS conflicting-receiver callsites produce NO registration
+PASS conflicting-receiver abstains as AMBIGUOUS_ACROSS_CALLSITES
+PASS ANY-contaminated receiver produces NO registration
+PASS ANY-contaminated abstains as DOMAIN_NOT_ESTABLISHED
+PASS exactly ONE registration in the fixture
+PASS recognition survives a WRONG cpg receiver type (disagreement recorded)
+PASS R26-FIXTURE-INTEGRITY: assertion keys unique in this fixture
+JS_PROV_R09=12/12

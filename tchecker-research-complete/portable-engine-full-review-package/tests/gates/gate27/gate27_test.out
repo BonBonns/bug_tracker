@@ -1,0 +1,14 @@
+PASS local_assignment_alias_chain -> ProvenanceSummary[resolution=EXACT, provenPositions=[0], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=false, completeness=COMPLETE, truncations=[]]
+PASS semantic_return_through_local -> ProvenanceSummary[resolution=EXACT, provenPositions=[0], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=false, completeness=COMPLETE, truncations=[]]
+PASS return_relevance_only -> ProvenanceSummary[resolution=EXACT, provenPositions=[1], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=false, completeness=COMPLETE, truncations=[]]
+PASS multiple_local_defs_may_never_guess -> ProvenanceSummary[resolution=AMBIGUOUS, provenPositions=[], mayPositions=[0], provenOrigins=[], mayOrigins=[], unknown=false, completeness=COMPLETE, truncations=[]]
+PASS missing_local_def_unknown -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=true, completeness=UNKNOWN, truncations=[]]
+PASS depth_greater_than_legacy_9_is_supported -> ProvenanceSummary[resolution=EXACT, provenPositions=[0], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=false, completeness=COMPLETE, truncations=[]]
+PASS depth_limit_is_visible_partial -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=true, completeness=PARTIAL, truncations=[TruncationEvent[kind=DEPTH_BUDGET, functionId=1010, depth=10, workConsumed=20, detail=summarize function]]]
+PASS depth_truncation_not_no_flow -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=true, completeness=PARTIAL, truncations=[TruncationEvent[kind=DEPTH_BUDGET, functionId=1010, depth=10, workConsumed=20, detail=summarize function]]]
+PASS work_budget_is_visible_partial -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=true, completeness=PARTIAL, truncations=[TruncationEvent[kind=WORK_BUDGET, functionId=1004, depth=4, workConsumed=9, detail=summarize function]]]
+PASS unknown_not_no_flow -> ProvenanceSummary[resolution=UNRESOLVED, provenPositions=[], mayPositions=[], provenOrigins=[], mayOrigins=[], unknown=true, completeness=UNKNOWN, truncations=[]]
+PASS default_budget_no_truncation -> []
+PASS core_has_no_language_ast_dependency -> [private final portable.graph.ProgramGraph portable.provenance.PortableProvenanceEngine.graph, private final portable.provenance.AnalysisBudget portable.provenance.PortableProvenanceEngine.budget, private final java.util.Map portable.provenance.PortableProvenanceEngine.memo, private final java.util.Set portable.provenance.PortableProvenanceEngine.active, private portable.provenance.PortableProvenanceEngine$AnalysisSession portable.provenance.PortableProvenanceEngine.session]
+GATE27=12/12
+ANALYSIS_STATUS=COMPLETE

@@ -1,0 +1,347 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182407,
+      "inner_binding": "sf",
+      "inner_local_id": 94489280566,
+      "outer_function": 107374182402,
+      "outer_binding": "sf",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280532,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280566,
+          34359738368,
+          94489280532
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182405,
+      "inner_binding": "r",
+      "inner_local_id": 94489280567,
+      "outer_function": 107374182406,
+      "outer_binding": "r",
+      "outer_kind": "PARAMETER",
+      "outer_node_id": 111669149709,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280567,
+          34359738369,
+          111669149709
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182406,
+      "inner_binding": "hdr",
+      "inner_local_id": 94489280569,
+      "outer_function": 107374182402,
+      "outer_binding": "hdr",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280534,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280569,
+          34359738370,
+          94489280534
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "st",
+      "inner_local_id": 94489280575,
+      "outer_function": 107374182402,
+      "outer_binding": "st",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280555,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280575,
+          34359738371,
+          94489280555
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "line",
+      "inner_local_id": 94489280577,
+      "outer_function": 107374182402,
+      "outer_binding": "line",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280539,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280577,
+          34359738372,
+          94489280539
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "manifest",
+      "inner_local_id": 94489280578,
+      "outer_function": 107374182402,
+      "outer_binding": "manifest",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280549,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280578,
+          34359738373,
+          94489280549
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "closuresByLine",
+      "inner_local_id": 94489280579,
+      "outer_function": 107374182402,
+      "outer_binding": "closuresByLine",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280579,
+          34359738374,
+          94489280540
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "ts",
+      "inner_local_id": 94489280580,
+      "outer_function": 107374182402,
+      "outer_binding": "ts",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280526,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280580,
+          34359738375,
+          94489280526
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "walk",
+      "inner_local_id": 94489280583,
+      "outer_function": 107374182401,
+      "outer_binding": "walk",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280518,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280583,
+          34359738376,
+          94489280518
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "ts",
+      "inner_local_id": 94489280584,
+      "outer_function": 107374182401,
+      "outer_binding": "ts",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280580,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280584,
+          34359738377,
+          94489280580
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "line",
+      "inner_local_id": 94489280585,
+      "outer_function": 107374182401,
+      "outer_binding": "line",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280577,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280585,
+          34359738378,
+          94489280577
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "bindings",
+      "inner_local_id": 94489280586,
+      "outer_function": 107374182401,
+      "outer_binding": "bindings",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280586,
+          34359738379,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "manifest",
+      "inner_local_id": 94489280587,
+      "outer_function": 107374182401,
+      "outer_binding": "manifest",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280578,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280587,
+          34359738380,
+          94489280578
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "out",
+      "inner_local_id": 94489280588,
+      "outer_function": 107374182401,
+      "outer_binding": "out",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280589,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280588,
+          34359738381,
+          94489280589
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "out",
+      "inner_local_id": 94489280589,
+      "outer_function": 107374182402,
+      "outer_binding": "out",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280548,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280589,
+          34359738382,
+          94489280548
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "callsByLine",
+      "inner_local_id": 94489280590,
+      "outer_function": 107374182401,
+      "outer_binding": "callsByLine",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280591,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280590,
+          34359738383,
+          94489280591
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "callsByLine",
+      "inner_local_id": 94489280591,
+      "outer_function": 107374182402,
+      "outer_binding": "callsByLine",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280542,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280591,
+          34359738384,
+          94489280542
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182401,
+      "inner_binding": "Map",
+      "inner_local_id": 94489280594,
+      "outer_function": 107374182402,
+      "outer_binding": "Map",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280563,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280594,
+          34359738385,
+          94489280563
+        ]
+      }
+    }
+  ]
+}

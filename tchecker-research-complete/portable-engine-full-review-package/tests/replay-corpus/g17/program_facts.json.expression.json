@@ -1,0 +1,226 @@
+{
+ "expressions": [
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771174,
+     68719476925,
+     68719476926,
+     90194313221
+    ]
+   },
+   "function_id": 107374182421,
+   "id": 30064771174,
+   "operands": [
+    {
+     "code": "y",
+     "id": 94489280568,
+     "kind": "LOCAL"
+    },
+    {
+     "code": "\"CONST\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.conditional",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771175,
+     68719476927,
+     68719476928,
+     90194313222
+    ]
+   },
+   "function_id": 107374182422,
+   "id": 30064771175,
+   "operands": [
+    {
+     "code": "source",
+     "id": 111669149759,
+     "kind": "PARAMETER"
+    },
+    {
+     "code": "\"CONST\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.conditional",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771178,
+     90194313223,
+     68719476934
+    ]
+   },
+   "function_id": 107374182423,
+   "id": 30064771178,
+   "operands": [
+    {
+     "code": "\"prefix:\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    },
+    {
+     "code": "y",
+     "id": 94489280571,
+     "kind": "LOCAL"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771183,
+     68719476945,
+     68719476946
+    ]
+   },
+   "function_id": 107374182424,
+   "id": 30064771183,
+   "operands": [
+    {
+     "code": "a",
+     "id": 94489280573,
+     "kind": "LOCAL"
+    },
+    {
+     "code": "b",
+     "id": 94489280574,
+     "kind": "LOCAL"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771186,
+     90194313224,
+     68719476952
+    ]
+   },
+   "function_id": 107374182425,
+   "id": 30064771186,
+   "operands": [
+    {
+     "code": "\"prefix:\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    },
+    {
+     "code": "y",
+     "id": 94489280576,
+     "kind": "LOCAL"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771194,
+     90194313227,
+     68719476969,
+     90194313228,
+     68719476970,
+     90194313229
+    ]
+   },
+   "function_id": 107374182427,
+   "id": 30064771194,
+   "operands": [
+    {
+     "code": "a",
+     "id": 94489280580,
+     "kind": "LOCAL"
+    },
+    {
+     "code": "b",
+     "id": 94489280581,
+     "kind": "LOCAL"
+    }
+   ],
+   "operator": "<operator>.formatString",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771195,
+     68719476971,
+     68719476972
+    ]
+   },
+   "function_id": 107374182428,
+   "id": 30064771195,
+   "operands": [
+    {
+     "code": "prefix",
+     "id": 111669149780,
+     "kind": "PARAMETER"
+    },
+    {
+     "code": "source",
+     "id": 111669149781,
+     "kind": "PARAMETER"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  },
+  {
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "JSTS_EXPRESSION_OPERANDS",
+    "source_node_ids": [
+     30064771198,
+     90194313230,
+     90194313231
+    ]
+   },
+   "function_id": 107374182429,
+   "id": 30064771198,
+   "operands": [
+    {
+     "code": "\"left\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    },
+    {
+     "code": "\"right\"",
+     "id": -1,
+     "kind": "CONSTANT"
+    }
+   ],
+   "operator": "<operator>.addition",
+   "resolution": "AMBIGUOUS"
+  }
+ ],
+ "schema": "portable-expression-facts/0.1"
+}

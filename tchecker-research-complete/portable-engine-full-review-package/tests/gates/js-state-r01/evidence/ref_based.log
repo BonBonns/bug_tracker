@@ -1,0 +1,184 @@
+executing ref_based_guard_subject.sc with params=Map(cpgFile -> run/cpg.bin.zip, outDir -> run/joern/characterize)
+Creating project `cpg.bin.zip2` for CPG at `run/cpg.bin.zip`
+Creating working copy of CPG to be safe
+Loading base CPG from: /home/claude/fable-engine-runnable/portable-engine-full-review-package/tests/gates/js-state-r01/workspace/cpg.bin.zip2/cpg.bin.tmp
+[INFO ] initialising from existing storage (/home/claude/fable-engine-runnable/portable-engine-full-review-package/tests/gates/js-state-r01/workspace/cpg.bin.zip2/cpg.bin.tmp)
+Adding default overlays to base CPG
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.FileCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.base.FileCreationPass completed in 72 ms (74% on mutations). 45 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.NamespaceCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.NamespaceCreator completed in 34 ms (62% on mutations). 2 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeDeclStubCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeDeclStubCreator completed in 28 ms (37% on mutations). 10 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodStubCreator
+[INFO ] Inconsistent/erroneous callInfo on calls to method fullname <operator>.alloc (we have 1 many variants)
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodStubCreator completed in 91 ms (16% on mutations). 125 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ParameterIndexCompatPass
+[INFO ] Pass io.joern.x2cpg.passes.base.ParameterIndexCompatPass completed in 7 ms (63% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodDecoratorPass
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodDecoratorPass completed in 28 ms (41% on mutations). 159 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.AstLinkerPass
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182421
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182422
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182423
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182424
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182425
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182426
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182427
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182428
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182429
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182430
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182431
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182432
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182433
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182434
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182435
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724567
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724568
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724569
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724570
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724571
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724572
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724573
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724574
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724575
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724576
+[INFO ] Pass io.joern.x2cpg.passes.base.AstLinkerPass completed in 26 ms (31% on mutations). 20 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ContainsEdgePass
+[INFO ] Pass io.joern.x2cpg.passes.base.ContainsEdgePass completed in 28 ms (78% on mutations). 443 + 0 changes committed from 70 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeRefPass
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeRefPass completed in 12 ms (76% on mutations). 33 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeEvalPass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=EVAL_TYPE, srcNodeType=LITERAL, srcNodeId=90194313223, dstNodeType=TYPE, dstFullName=__ecma.Null
+[INFO ] Could not create edge. Destination lookup failed. edgeType=EVAL_TYPE, srcNodeType=LITERAL, srcNodeId=90194313224, dstNodeType=TYPE, dstFullName=__ecma.Null
+[INFO ] Could not create edge. Destination lookup failed. edgeType=EVAL_TYPE, srcNodeType=LITERAL, srcNodeId=90194313225, dstNodeType=TYPE, dstFullName=__ecma.Null
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeEvalPass completed in 30 ms (41% on mutations). 603 + 0 changes committed from 7 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 17 ms (55% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.CfgCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.CfgCreationPass completed in 284 ms (3% on mutations). 399 + 0 changes committed from 36 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass completed in 49 ms (19% on mutations). 766 + 0 changes committed from 36 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass completed in 17 ms (18% on mutations). 109 + 0 changes committed from 36 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 3 ms (89% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.TypeHierarchyPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.TypeHierarchyPass completed in 8 ms (75% on mutations). 21 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.AliasLinkerPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.AliasLinkerPass completed in 2 ms (51% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771078, dstNodeType=MEMBER, dstFullName=ANY.ok
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771080, dstNodeType=MEMBER, dstFullName=ANY.value
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771082, dstNodeType=MEMBER, dstFullName=ANY.ok
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771084, dstNodeType=MEMBER, dstFullName=ANY.reason
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771101, dstNodeType=MEMBER, dstFullName=ANY.ok
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771103, dstNodeType=MEMBER, dstFullName=ANY.value
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass completed in 22 ms (4% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 3 ms (93% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.MethodRefLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.MethodRefLinker completed in 2 ms (61% on mutations). 17 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.StaticCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.StaticCallLinker completed in 9 ms (79% on mutations). 86 + 0 changes committed from 2 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.DynamicCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.DynamicCallLinker completed in 15 ms (32% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (82% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:identity in state_erasure.ts
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:authenticate in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:identity: 2
+[INFO ] Number of definitions for state_erasure.ts::program:authenticate: 2
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case5_preservingTransform in state_erasure.ts
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:unrelatedSink in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:unrelatedSink: 2
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:externalNormalize in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:externalNormalize: 2
+[INFO ] Calculating reaching definitions for: <operator>.conditional in <empty>
+[INFO ] Number of definitions for state_erasure.ts::program:case5_preservingTransform: 21
+[INFO ] Number of definitions for <operator>.conditional: 3
+[INFO ] Calculating reaching definitions for: <operator>.assignment in <empty>
+[INFO ] Number of definitions for <operator>.assignment: 2
+[INFO ] Calculating reaching definitions for: <operator>.alloc in <empty>
+[INFO ] Number of definitions for <operator>.alloc: 1
+[INFO ] Calculating reaching definitions for: <operator>.fieldAccess in <empty>
+[INFO ] Number of definitions for <operator>.fieldAccess: 2
+[INFO ] Calculating reaching definitions for: <operator>.instanceOf in <empty>
+[INFO ] Number of definitions for <operator>.instanceOf: 2
+[INFO ] Calculating reaching definitions for: Number in <empty>
+[INFO ] Number of definitions for Number: 1
+[INFO ] Calculating reaching definitions for: <operator>.logicalNot in <empty>
+[INFO ] Number of definitions for <operator>.logicalNot: 1
+[INFO ] Calculating reaching definitions for: <operator>.equals in <empty>
+[INFO ] Number of definitions for <operator>.equals: 2
+[INFO ] Calculating reaching definitions for: <operator>.cast in <empty>
+[INFO ] Number of definitions for <operator>.cast: 2
+[INFO ] Calculating reaching definitions for: <operator>.lessThan in <empty>
+[INFO ] Number of definitions for <operator>.lessThan: 2
+[INFO ] Calculating reaching definitions for: <operator>.or in <empty>
+[INFO ] Number of definitions for <operator>.or: 2
+[INFO ] Calculating reaching definitions for: <operator>.plus in <empty>
+[INFO ] Number of definitions for <operator>.plus: 1
+[INFO ] Calculating reaching definitions for: String in <empty>
+[INFO ] Number of definitions for String: 1
+[INFO ] Calculating reaching definitions for: Boolean in <empty>
+[INFO ] Number of definitions for Boolean: 1
+[INFO ] Calculating reaching definitions for: parseInt in <empty>
+[INFO ] Number of definitions for parseInt: 2
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:create in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:create: 10
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case6_unknownTransformAbstain in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case6_unknownTransformAbstain: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program: 35
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case7_erasedButNoSensitiveSink in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case7_erasedButNoSensitiveSink: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case8_bitwiseCoercionBeforeGuard in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case8_bitwiseCoercionBeforeGuard: 22
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case9_unaryPlusBeforeGuard in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case9_unaryPlusBeforeGuard: 22
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case10_stringCoercionBeforeGuard in state_erasure.ts
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:createD in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:createD: 12
+[INFO ] Number of definitions for state_erasure.ts::program:case10_stringCoercionBeforeGuard: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case11_booleanCoercionBeforeGuard in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case11_booleanCoercionBeforeGuard: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:createN in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:createN: 4
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case1_safeGuardBeforeTransform in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case1_safeGuardBeforeTransform: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case12_parseIntCoercionBeforeGuard in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case12_parseIntCoercionBeforeGuard: 22
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case2_transformBeforeGuard in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case2_transformBeforeGuard: 18
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case3_discriminatedUnionSafe in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case3_discriminatedUnionSafe: 15
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case4_nullSentinelSafe in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case4_nullSentinelSafe: 12
+[INFO ] Calculating reaching definitions for: state_erasure.ts::program:case4b_nullSentinelErasedByCoercion in state_erasure.ts
+[INFO ] Number of definitions for state_erasure.ts::program:case4b_nullSentinelErasedByCoercion: 17
+[INFO ] Pass io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass completed in 340 ms (3% on mutations). 973 + 0 changes committed from 36 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 2 ms (88% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass completed in 7 ms (4% on mutations). 0 + 0 changes committed from 0 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass completed in 17 ms (2% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass completed in 1 ms (57% on mutations). 0 + 0 changes committed from 0 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 275 ms (4% on mutations). 467 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 95 ms (8% on mutations). 329 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker completed in 35 ms (36% on mutations). 113 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker completed in 8 ms (4% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.NaiveCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.NaiveCallLinker completed in 9 ms (4% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] writing to storage at `/home/claude/fable-engine-runnable/portable-engine-full-review-package/tests/gates/js-state-r01/workspace/cpg.bin.zip2/cpg.bin.tmp`
+[INFO ] closed graph at /home/claude/fable-engine-runnable/portable-engine-full-review-package/tests/gates/js-state-r01/workspace/cpg.bin.zip2/cpg.bin.tmp
+closing/saving project `cpg.bin.zip2`

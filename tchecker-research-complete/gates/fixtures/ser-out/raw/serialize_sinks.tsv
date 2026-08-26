@@ -1,0 +1,7 @@
+ser-guarded/error-formatter.js	ser-guarded/error-formatter.js::program:genericErrorMessage	9	JSON.stringify	propertyValue	true	false	false
+ser-hapi/error-formatter.js	ser-hapi/error-formatter.js::program:failAction	4	JSON.stringify	offending	true	false	false
+ser-hashandler/error-formatter.js	ser-hashandler/error-formatter.js::program:genericErrorMessage	4	JSON.stringify	propertyValue	true	false	false
+ser-literal/error-formatter.js	ser-literal/error-formatter.js::program:handler	6	JSON.stringify	{ uid, emailHash: hash(email) }	true	false	true
+ser-nonattacker/error-formatter.js	ser-nonattacker/error-formatter.js::program:bootMessage	3	JSON.stringify	BUILD_INFO	false	false	false
+ser-trycatch/error-formatter.js	ser-trycatch/error-formatter.js::program:genericErrorMessage	6	JSON.stringify	propertyValue	true	true	false
+ser-vuln/error-formatter.js	ser-vuln/error-formatter.js::program:genericErrorMessage	6	JSON.stringify	propertyValue	true	false	false

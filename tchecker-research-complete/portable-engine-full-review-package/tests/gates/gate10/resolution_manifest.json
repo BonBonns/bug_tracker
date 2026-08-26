@@ -1,0 +1,146 @@
+[
+  {
+    "line": 14,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 18,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 33,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 34,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 38,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 39,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 43,
+    "method": "setOther",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setOther"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 44,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 50,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 51,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local b has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 56,
+    "method": "setValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.setValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 57,
+    "method": "readValue",
+    "resolution": "EXACT",
+    "targets": [
+      "A.readValue"
+    ],
+    "basis": "local a has known type",
+    "receiverTypes": [
+      "A"
+    ]
+  }
+]

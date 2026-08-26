@@ -1,0 +1,43 @@
+=== ANNOTATION PROVENANCE (NestJS) ===
+CONTROLLER_CLASSES_RECOGNIZED=7
+  HANDLER AppController.health verb=Get params=
+  HANDLER AppController.index verb=Get params=
+  HANDLER AuthController.register verb=Post params=1:registerUserDto[Body]
+  HANDLER AuthController.login verb=Post params=1:req[Req] 2:response[Res] 3:userLoginDto[Body]
+  HANDLER AuthController.refresh verb=Post params=1:req[Req] 2:response[Res]
+  HANDLER AuthController.activateAccount verb=Get params=1:token[Query]
+  HANDLER AuthController.forgotPassword verb=Put params=1:forgetPasswordDto[Body]
+  HANDLER AuthController.resetPassword verb=Put params=1:resetPasswordDto[Body]
+  HANDLER AuthController.profile verb=Get params=1:user[GetUser]
+  HANDLER AuthController.updateProfile verb=Put params=1:user[GetUser] 2:file[UploadedFile] 3:updateUserDto[Body]
+  HANDLER AuthController.changePassword verb=Put params=1:user[GetUser] 2:changePasswordDto[Body]
+  HANDLER AuthController.findAll verb=Get params=1:userSearchFilterDto[Query]
+  HANDLER AuthController.create verb=Post params=1:createUserDto[Body]
+  HANDLER AuthController.update verb=Put params=1:id[Param] 2:updateUserDto[Body]
+  HANDLER AuthController.findOne verb=Get params=1:id[Param]
+  HANDLER AuthController.logOut verb=Post params=1:req[Req] 2:response[Res]
+  HANDLER AuthController.getRefreshToken verb=Get params=1:filter[Query] 2:user[GetUser]
+  HANDLER AuthController.revokeToken verb=Put params=1:id[Param] 2:user[GetUser]
+  HANDLER DashboardController.userStat verb=Get params=
+  HANDLER DashboardController.osStat verb=Get params=
+  HANDLER DashboardController.browserStat verb=Get params=
+  HANDLER EmailTemplateController.create verb=Post params=1:createEmailTemplateDto[Body]
+  HANDLER EmailTemplateController.findAll verb=Get params=1:filter[Query]
+  HANDLER EmailTemplateController.findOne verb=Get params=1:id[Param]
+  HANDLER EmailTemplateController.update verb=Put params=1:id[Param] 2:updateEmailTemplateDto[Body]
+  HANDLER EmailTemplateController.remove verb=Delete params=1:id[Param]
+  HANDLER PermissionsController.create verb=Post params=1:createPermissionDto[Body]
+  HANDLER PermissionsController.findAll verb=Get params=1:permissionFilterDto[Query]
+  HANDLER PermissionsController.findOne verb=Get params=1:id[Param]
+  HANDLER PermissionsController.update verb=Put params=1:id[Param] 2:updatePermissionDto[Body]
+  HANDLER PermissionsController.remove verb=Delete params=1:id[Param]
+  HANDLER PermissionsController.syncPermission verb=Post params=
+  HANDLER RolesController.create verb=Post params=1:createRoleDto[Body]
+  HANDLER RolesController.findAll verb=Get params=1:roleFilterDto[Query]
+  HANDLER RolesController.findOne verb=Get params=1:id[Param]
+  HANDLER RolesController.update verb=Put params=1:id[Param] 2:updateRoleDto[Body]
+  HANDLER RolesController.remove verb=Delete params=1:id[Param]
+  HANDLER TwofaController.authenticate verb=Post params=1:req[Req] 2:response[Res] 3:user[GetUser] 4:twofaCodeDto[Body]
+  HANDLER TwofaController.toggleTwoFa verb=Put params=1:twofaStatusUpdateDto[Body] 2:user[GetUser]
+HANDLERS_RECOGNIZED=33 HANDLERS_PARTIAL=6
+BODY=16 QUERY=6 PARAM=12 HEADERS=0

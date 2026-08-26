@@ -1,0 +1,15 @@
+{
+  "schema": "fail-open-candidate-evidence/1.0",
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "finding_id": "fail-open-security-control:positive-same-handler.js#then30064771141",
+      "property_id": "fail-open-1.fails_closed_on_dependency_error",
+      "candidate_class": "FAIL_OPEN_SECURITY_CONTROL",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "disposition": "CANDIDATE_OPEN"
+    }
+  ]
+}

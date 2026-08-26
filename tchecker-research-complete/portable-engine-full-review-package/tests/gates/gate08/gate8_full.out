@@ -1,0 +1,36 @@
+x5: 0
+ROOTS=16
+CALL 136 -> [13]
+CALL 137 -> [69]
+CALL 165 -> [86]
+CALL 192 -> [103]
+CALL 219 -> [119]
+CALL 244 -> [119]
+CALL 268 -> [147]
+RET 13 process params=[x] positions=[0]
+RET 34 process params=[x] positions=[]
+RET 69 getWorker params=[h] positions=[0]
+RET 86 getUnionWorker params=[h] positions=[0]
+RET 103 getUnknownWorker params=[h] positions=[0]
+RET 119 runExact params=[h, input] positions=[1]
+RET 147 runAmbiguous params=[h, input] positions=[0, 1]
+RET 175 runUnknown params=[h, input] positions=[0, 1]
+RET 202 topExact params=[h, source] positions=[1]
+RET 227 topConstant params=[h, source] positions=[]
+RET 251 topAmbiguous params=[h, source] positions=[0, 1]
+DDG_RELS
+DDG 17 -> 24 var=x
+DDG 73 -> 81 var=h
+DDG 90 -> 98 var=h
+DDG 107 -> 114 var=h
+DDG 123 -> 135 var=h
+DDG 128 -> 135 var=input
+DDG 151 -> 163 var=h
+DDG 156 -> 163 var=input
+DDG 179 -> 190 var=h
+DDG 183 -> 190 var=input
+DDG 206 -> 218 var=h
+DDG 211 -> 218 var=source
+DDG 231 -> 243 var=h
+DDG 255 -> 267 var=h
+DDG 260 -> 267 var=source

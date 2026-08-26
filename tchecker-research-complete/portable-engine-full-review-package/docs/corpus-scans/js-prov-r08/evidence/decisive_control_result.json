@@ -1,0 +1,124 @@
+{
+  "schema": "portable-observed-parameter-types/0.1",
+  "note": "CALLSITE_PROPAGATED evidence about types VISIBLE AT CALLSITES. NOT a recovery of concrete runtime types. observed_types is a SET; unconstrained_callsite=True means the domain is NOT established regardless of set contents. declared_type is carried alongside and is never replaced.",
+  "facts": [
+    {
+      "callee_method_id": 107374182406,
+      "callee_full_name": "t.ts::program:installAny",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771080,
+        30064771110
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182403,
+      "callee_full_name": "t.ts::program:installReal",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771102
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182404,
+      "callee_full_name": "t.ts::program:installFake",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "t.ts::program:FakeRouter"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771107
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182405,
+      "callee_full_name": "t.ts::program:installBoth",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router",
+        "t.ts::program:FakeRouter"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771108,
+        30064771109
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182407,
+      "callee_full_name": "t.ts::program:outer",
+      "parameter_index": 1,
+      "parameter_name": "untyped",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771111
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    }
+  ],
+  "abstentions": [
+    {
+      "call_id": 30064771085,
+      "callee_full_name": "t.ts::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771112,
+      "callee_full_name": "t.ts::program:installCast",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771114,
+      "callee_full_name": "t.ts::program:installDeclared",
+      "parameter_index": 1,
+      "reason": "G4_DECLARED_TYPE_PRESENT",
+      "arg_type": "t.ts::program:FakeRouter"
+    },
+    {
+      "call_id": 30064771115,
+      "callee_full_name": "t.ts::program:installRest",
+      "parameter_index": 1,
+      "reason": "G4_DECLARED_TYPE_PRESENT",
+      "arg_type": "@koa/router"
+    }
+  ]
+}

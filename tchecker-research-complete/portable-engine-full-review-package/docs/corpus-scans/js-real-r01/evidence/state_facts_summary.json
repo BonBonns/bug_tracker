@@ -1,0 +1,340 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads_count": 15505,
+  "state_writes_count": 6398,
+  "note": "Full per-fact dump omitted from the archive (17MB, not central to JS-STATE findings). Regenerate with: python3 frontends/javascript-typescript/joern-ts/state_facts.py <raw-facts-dir>",
+  "sample_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_0.bufferEqualsConstantTime",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771103
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771103,
+      "key": {
+        "kind": "LITERAL",
+        "value": "bufferEqualsConstantTime"
+      },
+      "receiver": {
+        "name": "_tmp_0",
+        "type": "@fxa/shared/crypto"
+      },
+      "receiver_ref": {
+        "code": "_tmp_0",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "module.exports",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771106
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771106,
+      "key": {
+        "kind": "LITERAL",
+        "value": "exports"
+      },
+      "receiver": {
+        "name": "module",
+        "type": "{ exports: import(\"/home/claude/js-real-r01/corpus_src/crypto/butil.js\"); }"
+      },
+      "receiver_ref": {
+        "code": "module",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "module.exports",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771110
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771110,
+      "key": {
+        "kind": "LITERAL",
+        "value": "exports"
+      },
+      "receiver": {
+        "name": "module",
+        "type": "{ exports: import(\"/home/claude/js-real-r01/corpus_src/crypto/butil.js\"); }"
+      },
+      "receiver_ref": {
+        "code": "module",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "module.exports",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771113
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771113,
+      "key": {
+        "kind": "LITERAL",
+        "value": "exports"
+      },
+      "receiver": {
+        "name": "module",
+        "type": "{ exports: import(\"/home/claude/js-real-r01/corpus_src/crypto/butil.js\"); }"
+      },
+      "receiver_ref": {
+        "code": "module",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "buffer1.length",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771081
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771081,
+      "key": {
+        "kind": "LITERAL",
+        "value": "length"
+      },
+      "receiver": {
+        "name": "buffer1",
+        "type": "Buffer.from:<returnValue>"
+      },
+      "receiver_ref": {
+        "code": "buffer1",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "sample_writes": [
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771104000,
+      "code": "module.exports.ONES = Buffer.from(\n  'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',\n  'hex'\n)",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771104,
+          30064771105,
+          30064771105,
+          30064771107
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "ONES"
+      },
+      "receiver": {
+        "name": "module.exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "module.exports",
+        "id": 30064771106,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "Buffer.from(\n  'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',\n  'hex'\n)",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "Buffer.from(\n  'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',\n  'hex'\n)",
+        "id": 30064771107,
+        "kind": "CALL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771108000,
+      "code": "module.exports.buffersAreEqual = function buffersAreEqual(buffer1, buffer2) {\n  return bufferEqualsConstantTime(\n    Buffer.from(buffer1, 'hex'),\n    Buffer.from(buffer2, 'hex')\n  );\n}",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771108,
+          30064771109,
+          30064771109,
+          120259084288
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "buffersAreEqual"
+      },
+      "receiver": {
+        "name": "module.exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "module.exports",
+        "id": 30064771110,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "buffersAreEqual",
+        "type": "crypto/butil.js::program:buffersAreEqual"
+      },
+      "value_ref": {
+        "code": "buffersAreEqual",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771111000,
+      "code": "module.exports.xorBuffers = function xorBuffers(buffer1, buffer2) {\n  buffer1 = Buffer.from(buffer1, 'hex');\n  buffer2 = Buffer.from(buffer2, 'hex');\n  if (buffer1.length !== buffer2.length) {\n    throw new Error(\n      'XOR buffers must be same length (%d != %d)',\n      buffer1.length,\n      buffer2.length\n    );\n  }\n  const result = Buffer.alloc(buffer1.length);\n  for (let i = 0; i < buffer1.length; i++) {\n    result[i] = buffer1[i] ^ buffer2[i];\n  }\n  return result;\n}",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771111,
+          30064771112,
+          30064771112,
+          120259084289
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "xorBuffers"
+      },
+      "receiver": {
+        "name": "module.exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "module.exports",
+        "id": 30064771113,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "xorBuffers",
+        "type": "crypto/butil.js::program:xorBuffers"
+      },
+      "value_ref": {
+        "code": "xorBuffers",
+        "id": -1,
+        "kind": "UNKNOWN"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771096000,
+      "code": "result[i] = buffer1[i] ^ buffer2[i]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771096,
+          30064771097,
+          30064771097,
+          30064771098
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "i"
+      },
+      "receiver": {
+        "name": "result",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "result",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "buffer1[i] ^ buffer2[i]",
+        "type": "ANY"
+      },
+      "value_ref": {
+        "code": "buffer1[i] ^ buffer2[i]",
+        "id": 30064771098,
+        "kind": "CALL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771139000,
+      "code": "hkdf.KW = KW",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771139,
+          30064771140,
+          30064771140,
+          68719476814
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "KW"
+      },
+      "receiver": {
+        "name": "hkdf",
+        "type": "crypto/hkdf.js::program:hkdf"
+      },
+      "receiver_ref": {
+        "code": "hkdf",
+        "id": 94489280526,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "KW",
+        "type": "crypto/hkdf.js::program:KW"
+      },
+      "value_ref": {
+        "code": "KW",
+        "id": 94489280525,
+        "kind": "LOCAL"
+      }
+    }
+  ]
+}

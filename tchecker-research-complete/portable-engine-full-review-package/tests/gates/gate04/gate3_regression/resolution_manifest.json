@@ -1,0 +1,37 @@
+[
+  {
+    "line": 8,
+    "method": "process",
+    "resolution": "EXACT",
+    "targets": [
+      "A.process"
+    ],
+    "basis": "direct new-expression receiver"
+  },
+  {
+    "line": 12,
+    "method": "process",
+    "resolution": "EXACT",
+    "targets": [
+      "A.process"
+    ],
+    "basis": "local a has known type"
+  },
+  {
+    "line": 15,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "untyped/dynamic receiver with multiple in-scope implementations"
+  },
+  {
+    "line": 18,
+    "method": "missing",
+    "resolution": "UNRESOLVED",
+    "targets": [],
+    "basis": "receiver type not known"
+  }
+]

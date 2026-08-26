@@ -1,0 +1,15 @@
+OOB-ADJ-R03 — candidate-binding audit via scan_repo public entry point
+PID CONSTRUCTION: property_id = "oob-index:{fingerprint}.index_within_capacity"
+  fingerprint = sha256({analyzer_version, repo_rev, file, candidate_class, subclass, array,
+                        elem_count, index_expr, line})[:24]
+  A trusted attestation is keyed by this fingerprint -> binds to the EXACT reviewed candidate.
+CANONICAL RESULTS:
+  C1 scan vuln            -> fingerprint 72b54db8...  packets=1
+  C2 trusted attestation for that fingerprint -> packets=0 (suppressed)
+  C3 one-line code change -> fingerprint a16cf1af... (changed) -> SAME attestation packets=1
+                             (stale attestation no longer binds)
+  C4 adjudicator fault after a successful run -> scan exit=1 AND prior report REMOVED
+                             (not left apparently current)
+HERMETIC gate gate_oob_r03_binding.py=15/15 also proves each field
+  (analyzer_version/repo_rev/file/class/array/elem_count/index_expr/line) re-fingerprints,
+  ambiguous duplicates are never suppressed, and declared-fact mismatch is rejected.

@@ -1,0 +1,1357 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_0.fixed",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771076
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771076,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_0",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_0",
+        "id": 94489280514,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_1.fixed",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771081
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771081,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_1",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_1",
+        "id": 94489280518,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_2.other",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771088
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771088,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "_tmp_2",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_2",
+        "id": 94489280522,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_3.fixed",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771095
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771095,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_3",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_3",
+        "id": 94489280526,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "_tmp_4[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771100
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771100,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "_tmp_4",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_4",
+        "id": 94489280530,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "_tmp_5[1]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771107
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771107,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "_tmp_5",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_5",
+        "id": 94489280534,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_6.key",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771114
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771114,
+      "key": {
+        "kind": "LITERAL",
+        "value": "key"
+      },
+      "receiver": {
+        "name": "_tmp_6",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_6",
+        "id": 94489280538,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_7.fixed",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771121
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771121,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_7",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_7",
+        "id": 94489280542,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "_tmp_8[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771129
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771129,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "_tmp_8",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_8",
+        "id": 94489280546,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "_tmp_8[1]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771131
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771131,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "_tmp_8",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_8",
+        "id": 94489280546,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_9.fixed",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771138
+        ]
+      },
+      "function_id": 107374182410,
+      "index_call_id": 30064771138,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_9",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "_tmp_9",
+        "id": 94489280550,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": [
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771072000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771072,
+          30064771073,
+          30064771073,
+          68719476737
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149698,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771140000,
+      "code": "exports.objectDestructureExact = objectDestructureExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771140,
+          30064771141,
+          30064771141,
+          68719476829
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDestructureExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDestructureExact",
+        "type": "gate21.ts::program:objectDestructureExact"
+      },
+      "value_ref": {
+        "code": "objectDestructureExact",
+        "id": 94489280512,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771143000,
+      "code": "exports.objectDestructureRename = objectDestructureRename",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771143,
+          30064771144,
+          30064771144,
+          68719476832
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDestructureRename"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDestructureRename",
+        "type": "gate21.ts::program:objectDestructureRename"
+      },
+      "value_ref": {
+        "code": "objectDestructureRename",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771146000,
+      "code": "exports.objectDestructureDifferent = objectDestructureDifferent",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771146,
+          30064771147,
+          30064771147,
+          68719476835
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDestructureDifferent"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDestructureDifferent",
+        "type": "gate21.ts::program:objectDestructureDifferent"
+      },
+      "value_ref": {
+        "code": "objectDestructureDifferent",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771149000,
+      "code": "exports.objectDestructureOverwrite = objectDestructureOverwrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771149,
+          30064771150,
+          30064771150,
+          68719476838
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectDestructureOverwrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectDestructureOverwrite",
+        "type": "gate21.ts::program:objectDestructureOverwrite"
+      },
+      "value_ref": {
+        "code": "objectDestructureOverwrite",
+        "id": 94489280524,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771152000,
+      "code": "exports.arrayDestructureExact = arrayDestructureExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771152,
+          30064771153,
+          30064771153,
+          68719476841
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayDestructureExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayDestructureExact",
+        "type": "gate21.ts::program:arrayDestructureExact"
+      },
+      "value_ref": {
+        "code": "arrayDestructureExact",
+        "id": 94489280528,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771155000,
+      "code": "exports.arrayDestructureDifferent = arrayDestructureDifferent",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771155,
+          30064771156,
+          30064771156,
+          68719476844
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayDestructureDifferent"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayDestructureDifferent",
+        "type": "gate21.ts::program:arrayDestructureDifferent"
+      },
+      "value_ref": {
+        "code": "arrayDestructureDifferent",
+        "id": 94489280532,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771158000,
+      "code": "exports.computedDestructure = computedDestructure",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771158,
+          30064771159,
+          30064771159,
+          68719476847
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "computedDestructure"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "computedDestructure",
+        "type": "gate21.ts::program:computedDestructure"
+      },
+      "value_ref": {
+        "code": "computedDestructure",
+        "id": 94489280536,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771161000,
+      "code": "exports.objectRest = objectRest",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771161,
+          30064771162,
+          30064771162,
+          68719476850
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectRest"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectRest",
+        "type": "gate21.ts::program:objectRest"
+      },
+      "value_ref": {
+        "code": "objectRest",
+        "id": 94489280540,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771164000,
+      "code": "exports.arrayRest = arrayRest",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771164,
+          30064771165,
+          30064771165,
+          68719476853
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arrayRest"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arrayRest",
+        "type": "gate21.ts::program:arrayRest"
+      },
+      "value_ref": {
+        "code": "arrayRest",
+        "id": 94489280544,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771167000,
+      "code": "exports.distinctReceiver = distinctReceiver",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771167,
+          30064771168,
+          30064771168,
+          68719476856
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "distinctReceiver"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "distinctReceiver",
+        "type": "gate21.ts::program:distinctReceiver"
+      },
+      "value_ref": {
+        "code": "distinctReceiver",
+        "id": 94489280548,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771077000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771077,
+          30064771078,
+          30064771078,
+          68719476745
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149701,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771082000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771082,
+          30064771083,
+          30064771083,
+          68719476753
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149704,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771084000,
+      "code": "box[\"other\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771084,
+          30064771085,
+          30064771085,
+          90194313220
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771089000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771089,
+          30064771090,
+          30064771090,
+          68719476762
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149707,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771091000,
+      "code": "box[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771091,
+          30064771092,
+          30064771092,
+          90194313223
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771096000,
+      "code": "arr[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771096,
+          30064771097,
+          30064771097,
+          68719476771
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149709,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149710,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771101000,
+      "code": "arr[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771101,
+          30064771102,
+          30064771102,
+          68719476779
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149713,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771103000,
+      "code": "arr[1] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771103,
+          30064771104,
+          30064771104,
+          90194313228
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771108000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771108,
+          30064771109,
+          30064771109,
+          68719476788
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149715,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149717,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771110000,
+      "code": "box[\"other\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771110,
+          30064771111,
+          30064771111,
+          90194313232
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149715,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771115000,
+      "code": "box[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771115,
+          30064771116,
+          30064771116,
+          68719476797
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149719,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149720,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771117000,
+      "code": "box[\"other\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771117,
+          30064771118,
+          30064771118,
+          90194313235
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "box",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "box",
+        "id": 111669149719,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771123000,
+      "code": "arr[0] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771123,
+          30064771124,
+          30064771124,
+          90194313237
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149722,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771125000,
+      "code": "arr[1] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771125,
+          30064771126,
+          30064771126,
+          68719476809
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "arr",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "arr",
+        "id": 111669149722,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149723,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771132000,
+      "code": "a[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771132,
+          30064771133,
+          30064771133,
+          90194313242
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149725,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771134000,
+      "code": "b[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771134,
+          30064771135,
+          30064771135,
+          68719476820
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 111669149726,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149727,
+        "kind": "PARAMETER"
+      }
+    }
+  ]
+}

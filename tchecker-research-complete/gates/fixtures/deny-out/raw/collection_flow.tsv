@@ -1,0 +1,11 @@
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:allowedEscaped	toLowerCase	includes	NESTED
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:handleUpload	allowedEscaped	checkFiletype	NESTED
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:handleUpload	allowedEscaped	checkFiletype	SAME_METHOD
+lib/denylist-exact-consumer.js	lib/denylist-exact-consumer.js::program:allowedExact	toLowerCase	includes	NESTED
+lib/denylist-exact-consumer.js	lib/denylist-exact-consumer.js::program:handleUpload	allowedExact	checkFiletypeExact	NESTED
+lib/denylist-exact-consumer.js	lib/denylist-exact-consumer.js::program:handleUpload	allowedExact	checkFiletypeExact	SAME_METHOD
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:allowedNormalized	stripMeta	includes	NESTED
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:handleUpload	allowedNormalized	checkFiletype	NESTED
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:handleUpload	allowedNormalized	checkFiletype	SAME_METHOD
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:allowedMimeTypes	toLowerCase	includes	NESTED
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:handleUpload	allowedMimeTypes	checkFiletype	SAME_METHOD

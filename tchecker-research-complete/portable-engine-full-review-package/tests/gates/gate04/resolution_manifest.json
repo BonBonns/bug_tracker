@@ -1,0 +1,38 @@
+[
+  {
+    "line": 10,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "untyped/dynamic receiver with multiple in-scope implementations"
+  },
+  {
+    "line": 15,
+    "method": "process",
+    "resolution": "EXACT",
+    "targets": [
+      "A.process"
+    ],
+    "basis": "TypeScript parameter annotation on obj"
+  },
+  {
+    "line": 20,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "TypeScript parameter annotation on obj"
+  },
+  {
+    "line": 25,
+    "method": "missing",
+    "resolution": "UNRESOLVED",
+    "targets": [],
+    "basis": "TypeScript parameter annotation on obj"
+  }
+]

@@ -1,0 +1,100 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182405,
+      "inner_binding": "A",
+      "inner_local_id": 94489280541,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280541,
+          34359738368,
+          94489280540
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "A",
+      "inner_local_id": 94489280544,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280544,
+          34359738369,
+          94489280540
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182403,
+      "inner_binding": "A",
+      "inner_local_id": 94489280547,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280547,
+          34359738370,
+          94489280540
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182402,
+      "inner_binding": "A",
+      "inner_local_id": 94489280550,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280550,
+          34359738371,
+          94489280540
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "A",
+      "inner_local_id": 94489280552,
+      "outer_function": 107374182401,
+      "outer_binding": "A",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280540,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280552,
+          34359738372,
+          94489280540
+        ]
+      }
+    }
+  ]
+}

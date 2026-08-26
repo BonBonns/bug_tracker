@@ -1,0 +1,26 @@
+benign-osinfo/index.js	benign-osinfo/index.js::program	3	HOSTNAME	<operator>.formatString("host=", os.hostname(), " platform=", process.platform, " node=", process.version, "")
+benign-osinfo/index.js	benign-osinfo/index.js::program	3	PLATFORM	process.platform
+benign-osinfo/index.js	benign-osinfo/index.js::program	3	NODE_VERSION	process.version
+benign-osinfo/index.js	benign-osinfo/index.js::program	2	HOSTNAME	module.exports = function report() {   return `host=${os.hostname()} platform=${process.platform} node=${process.version}`; }
+benign-osinfo/index.js	benign-osinfo/index.js::program:report	3	HOSTNAME	<operator>.formatString("host=", os.hostname(), " platform=", process.platform, " node=", process.version, "")
+benign-osinfo/index.js	benign-osinfo/index.js::program:report	3	PLATFORM	process.platform
+benign-osinfo/index.js	benign-osinfo/index.js::program:report	3	NODE_VERSION	process.version
+launder-benign/index.js	launder-benign/index.js::program:gather	2	HOSTNAME	_tmp_0.host = os.hostname()
+launder-benign/index.js	launder-benign/index.js::program:gather	2	PLATFORM	_tmp_0.plat = process.platform
+launder-benign/index.js	launder-benign/index.js::program	2	HOSTNAME	_tmp_0.host = os.hostname()
+launder-benign/index.js	launder-benign/index.js::program	2	PLATFORM	_tmp_0.plat = process.platform
+launder-mal/collect.js	launder-mal/collect.js::program:gather	5	HOSTNAME	_tmp_0.host = os.hostname()
+launder-mal/collect.js	launder-mal/collect.js::program:gather	5	USERNAME	_tmp_0.user = os.userInfo().username
+launder-mal/collect.js	launder-mal/collect.js::program:gather	5	PLATFORM	_tmp_0.plat = process.platform
+launder-mal/collect.js	launder-mal/collect.js::program	5	HOSTNAME	_tmp_0.host = os.hostname()
+launder-mal/collect.js	launder-mal/collect.js::program	5	USERNAME	_tmp_0.user = os.userInfo().username
+launder-mal/collect.js	launder-mal/collect.js::program	5	PLATFORM	_tmp_0.plat = process.platform
+launder-mal/collect.js	launder-mal/collect.js::program	4	HOSTNAME	function gather = function gather() {                            // helper harvests identifiers   return { host: os.hostname(), user: os.userInfo().username, plat: process.platform }; }
+mal-pkg/dc.js	mal-pkg/dc.js::program	5	HOSTNAME	const info = {   host: os.hostname(),   user: os.userInfo().username,   cwd: process.cwd(),   platform: process.platform,   node: process.version,   ci: process.env.CI,   ua: process.env.npm_config_us
+mal-pkg/dc.js	mal-pkg/dc.js::program	6	HOSTNAME	_tmp_0.host = os.hostname()
+mal-pkg/dc.js	mal-pkg/dc.js::program	7	USERNAME	_tmp_0.user = os.userInfo().username
+mal-pkg/dc.js	mal-pkg/dc.js::program	8	CWD	_tmp_0.cwd = process.cwd()
+mal-pkg/dc.js	mal-pkg/dc.js::program	9	PLATFORM	_tmp_0.platform = process.platform
+mal-pkg/dc.js	mal-pkg/dc.js::program	10	NODE_VERSION	_tmp_0.node = process.version
+mal-pkg/dc.js	mal-pkg/dc.js::program	11	ENV	_tmp_0.ci = process.env.CI
+mal-pkg/dc.js	mal-pkg/dc.js::program	12	ENV	_tmp_0.ua = process.env.npm_config_user_agent

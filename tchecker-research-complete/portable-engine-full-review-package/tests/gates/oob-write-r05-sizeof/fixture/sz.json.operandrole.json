@@ -1,0 +1,173 @@
+{
+ "operand_roles": [
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771074
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771074,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771074
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771074,
+   "operand_index": 1,
+   "role": "EXTENT"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771076,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771076,
+   "operand_index": 1,
+   "role": "EXTENT"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771082
+    ]
+   },
+   "function_id": 107374182403,
+   "id": 30064771082,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771082
+    ]
+   },
+   "function_id": 107374182403,
+   "id": 30064771082,
+   "operand_index": 1,
+   "role": "EXTENT"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771087
+    ]
+   },
+   "function_id": 107374182404,
+   "id": 30064771087,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771087
+    ]
+   },
+   "function_id": 107374182404,
+   "id": 30064771087,
+   "operand_index": 1,
+   "role": "EXTENT"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771092
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771092,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771092
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771092,
+   "operand_index": 1,
+   "role": "EXTENT"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "function_id": 107374182406,
+   "id": 30064771097,
+   "operand_index": 0,
+   "role": "WRITE_DEST"
+  },
+  {
+   "call": "snprintf",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "function_id": 107374182406,
+   "id": 30064771097,
+   "operand_index": 1,
+   "role": "EXTENT"
+  }
+ ],
+ "schema": "portable-operand-role-facts/0.1"
+}

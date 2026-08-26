@@ -1,0 +1,49 @@
+[
+  {
+    "line": 18,
+    "method": "process",
+    "resolution": "EXACT",
+    "targets": [
+      "A.process"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  },
+  {
+    "line": 22,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "receiver h type not known; property worker type not known; multiple in-scope implementations",
+    "receiverTypes": []
+  },
+  {
+    "line": 26,
+    "method": "process",
+    "resolution": "AMBIGUOUS",
+    "targets": [
+      "A.process",
+      "B.process"
+    ],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on UnionHolder",
+    "receiverTypes": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "line": 30,
+    "method": "missing",
+    "resolution": "UNRESOLVED",
+    "targets": [],
+    "basis": "TypeScript parameter annotation on h; property worker annotation on Holder",
+    "receiverTypes": [
+      "A"
+    ]
+  }
+]

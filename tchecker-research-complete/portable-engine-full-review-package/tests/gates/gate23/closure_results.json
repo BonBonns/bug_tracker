@@ -1,0 +1,76 @@
+{
+  "closureDirect": {
+    "origins": [
+      "PARAM:closureDirect.source"
+    ],
+    "paramPositions": [
+      0
+    ]
+  },
+  "closureParam": {
+    "origins": [
+      "PARAM:closureParam.source"
+    ],
+    "paramPositions": [
+      0
+    ]
+  },
+  "closureShadow": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  },
+  "closureUnrelated": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  },
+  "closureAlias": {
+    "origins": [
+      "PARAM:closureAlias.source"
+    ],
+    "paramPositions": [
+      0
+    ]
+  },
+  "closureMutation": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  },
+  "closureMutationToSource": {
+    "origins": [
+      "PARAM:closureMutationToSource.source"
+    ],
+    "paramPositions": [
+      0
+    ]
+  },
+  "nestedClosure": {
+    "origins": [
+      "PARAM:nestedClosure.source"
+    ],
+    "paramPositions": [
+      0
+    ]
+  },
+  "closureTwoCaptures": {
+    "origins": [
+      "PARAM:closureTwoCaptures.a",
+      "PARAM:closureTwoCaptures.b"
+    ],
+    "paramPositions": [
+      0,
+      1
+    ]
+  },
+  "closureLocalShadowsOuter": {
+    "origins": [
+      "CONST:\"CONST\""
+    ],
+    "paramPositions": []
+  }
+}

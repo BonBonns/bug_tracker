@@ -1,0 +1,3398 @@
+{
+  "assignments": [
+    {
+      "cfg_anchor": 30064771072,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771072,
+          68719476736,
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771072,
+      "line": 5,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "dst[64]",
+        "id": 30064771073,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771078,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771078,
+          68719476744,
+          30064771079
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771078,
+      "line": 7,
+      "target_local_id": 94489280513,
+      "value_ref": {
+        "code": "dst[32]",
+        "id": 30064771079,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771080,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771080,
+          68719476746,
+          30064771081
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771080,
+      "line": 7,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "other[128]",
+        "id": 30064771081,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771085,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771085,
+          68719476752,
+          30064771086
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771085,
+      "line": 8,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "malloc(4)",
+        "id": 30064771086,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771090,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771090,
+          68719476757,
+          30064771091
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 30064771090,
+      "line": 9,
+      "target_local_id": 94489280516,
+      "value_ref": {
+        "code": "dst[32]",
+        "id": 30064771091,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771095,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771095,
+          68719476762,
+          30064771096
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 30064771095,
+      "line": 10,
+      "target_local_id": 94489280517,
+      "value_ref": {
+        "code": "dst[32]",
+        "id": 30064771096,
+        "kind": "CALL"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "dst",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "dst[64]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771073
+            ]
+          },
+          "id": 30064771073,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "dst[64]",
+            "id": 30064771073,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[64]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "sztest.c",
+      "id": 30064771072,
+      "line": 5,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476738
+            ]
+          },
+          "id": 68719476738,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "dst",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(dst)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771075
+            ]
+          },
+          "id": 30064771075,
+          "index": 1,
+          "kind": "CALL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(dst)",
+            "id": 30064771075,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313217
+            ]
+          },
+          "id": 90194313217,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476740
+            ]
+          },
+          "id": 68719476740,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149696,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(dst, sizeof(dst), \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "sztest.c",
+      "id": 30064771074,
+      "line": 5,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[64]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "char[64]",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "char[64]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "64",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313216
+            ]
+          },
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 5,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "64",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[64]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "sztest.c",
+      "id": 30064771073,
+      "line": 5,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[64]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476739
+            ]
+          },
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 5,
+          "name": "dst",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(dst)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "sztest.c",
+      "id": 30064771075,
+      "line": 5,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "256",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313230
+            ]
+          },
+          "id": 90194313230,
+          "index": 0,
+          "kind": "LITERAL",
+          "line": 4,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "256",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "gbuf[256]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "sztest.c",
+      "id": 30064771098,
+      "line": 4,
+      "method_full_name": "<operator>.arrayInitializer",
+      "name": "<operator>.arrayInitializer",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "<global> gbuf",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476741
+            ]
+          },
+          "id": 68719476741,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "gbuf",
+          "type_full_name": "char[256]",
+          "value_ref": {
+            "code": "<global> gbuf",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(gbuf)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771077
+            ]
+          },
+          "id": 30064771077,
+          "index": 1,
+          "kind": "CALL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(gbuf)",
+            "id": 30064771077,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313218
+            ]
+          },
+          "id": 90194313218,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476743
+            ]
+          },
+          "id": 68719476743,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149697,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(gbuf, sizeof(gbuf), \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "sztest.c",
+      "id": 30064771076,
+      "line": 6,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "<global> gbuf",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476742
+            ]
+          },
+          "id": 68719476742,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "gbuf",
+          "type_full_name": "char[256]",
+          "value_ref": {
+            "code": "<global> gbuf",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(gbuf)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "sztest.c",
+      "id": 30064771077,
+      "line": 6,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476744
+            ]
+          },
+          "id": 68719476744,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "dst[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771079
+            ]
+          },
+          "id": 30064771079,
+          "index": 1,
+          "kind": "CALL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst[32]",
+            "id": 30064771079,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771078,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "other",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476746
+            ]
+          },
+          "id": 68719476746,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "other",
+          "type_full_name": "char[128]",
+          "value_ref": {
+            "code": "other",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "other[128]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771081
+            ]
+          },
+          "id": 30064771081,
+          "index": 1,
+          "kind": "CALL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "char[128]",
+          "value_ref": {
+            "code": "other[128]",
+            "id": 30064771081,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "other[128]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771080,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476748
+            ]
+          },
+          "id": 68719476748,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(other)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771083
+            ]
+          },
+          "id": 30064771083,
+          "index": 1,
+          "kind": "CALL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(other)",
+            "id": 30064771083,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313221
+            ]
+          },
+          "id": 90194313221,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476750
+            ]
+          },
+          "id": 68719476750,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149698,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(dst, sizeof(other), \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771082,
+      "line": 7,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "void",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              176093659136
+            ]
+          },
+          "id": 176093659136,
+          "index": 0,
+          "kind": "TYPE_REF",
+          "line": 7,
+          "name": "",
+          "type_full_name": "void",
+          "value_ref": {
+            "code": "void",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "other",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476751
+            ]
+          },
+          "id": 68719476751,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "other",
+          "type_full_name": "char[128]",
+          "value_ref": {
+            "code": "other",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "(void)other",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771084,
+      "line": 7,
+      "method_full_name": "<operator>.cast",
+      "name": "<operator>.cast",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476745
+            ]
+          },
+          "id": 68719476745,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313219
+            ]
+          },
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771079,
+      "line": 7,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[128]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476747
+            ]
+          },
+          "id": 68719476747,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "char[128]",
+          "type_full_name": "char[128]",
+          "value_ref": {
+            "code": "char[128]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "128",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313220
+            ]
+          },
+          "id": 90194313220,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "128",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "other[128]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771081,
+      "line": 7,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[128]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "other",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476749
+            ]
+          },
+          "id": 68719476749,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "other",
+          "type_full_name": "char[128]",
+          "value_ref": {
+            "code": "other",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(other)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "sztest.c",
+      "id": 30064771083,
+      "line": 7,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476752
+            ]
+          },
+          "id": 68719476752,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "p",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "p",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "malloc(4)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771086
+            ]
+          },
+          "id": 30064771086,
+          "index": 1,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "malloc(4)",
+            "id": 30064771086,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "* p = malloc(4)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "sztest.c",
+      "id": 30064771085,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476753
+            ]
+          },
+          "id": 68719476753,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "p",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "p",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(p)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771088
+            ]
+          },
+          "id": 30064771088,
+          "index": 1,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(p)",
+            "id": 30064771088,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313223
+            ]
+          },
+          "id": 90194313223,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476755
+            ]
+          },
+          "id": 68719476755,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149699,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(p, sizeof(p), \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "sztest.c",
+      "id": 30064771087,
+      "line": 8,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "p",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "p",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "free(p)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "sztest.c",
+      "id": 30064771089,
+      "line": 8,
+      "method_full_name": "free",
+      "name": "free",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "4",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313222
+            ]
+          },
+          "id": 90194313222,
+          "index": 0,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "4",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "malloc(4)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "sztest.c",
+      "id": 30064771086,
+      "line": 8,
+      "method_full_name": "malloc",
+      "name": "malloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476754
+            ]
+          },
+          "id": 68719476754,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "p",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "p",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(p)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "sztest.c",
+      "id": 30064771088,
+      "line": 8,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476757
+            ]
+          },
+          "id": 68719476757,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "dst[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771091
+            ]
+          },
+          "id": 30064771091,
+          "index": 1,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst[32]",
+            "id": 30064771091,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "sztest.c",
+      "id": 30064771090,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(dst)+1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771093
+            ]
+          },
+          "id": 30064771093,
+          "index": 1,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(dst)+1",
+            "id": 30064771093,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313226
+            ]
+          },
+          "id": 90194313226,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(dst, sizeof(dst)+1, \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "sztest.c",
+      "id": 30064771092,
+      "line": 9,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476758
+            ]
+          },
+          "id": 68719476758,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313224
+            ]
+          },
+          "id": 90194313224,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "sztest.c",
+      "id": 30064771091,
+      "line": 9,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "sizeof(dst)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771094
+            ]
+          },
+          "id": 30064771094,
+          "index": 0,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(dst)",
+            "id": 30064771094,
+            "kind": "CALL"
+          }
+        },
+        {
+          "code": "1",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313225
+            ]
+          },
+          "id": 90194313225,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "1",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(dst)+1",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "sztest.c",
+      "id": 30064771093,
+      "line": 9,
+      "method_full_name": "<operator>.addition",
+      "name": "<operator>.addition",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476760
+            ]
+          },
+          "id": 68719476760,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(dst)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "sztest.c",
+      "id": 30064771094,
+      "line": 9,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476762
+            ]
+          },
+          "id": 68719476762,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "dst[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771096
+            ]
+          },
+          "id": 30064771096,
+          "index": 1,
+          "kind": "CALL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst[32]",
+            "id": 30064771096,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "sztest.c",
+      "id": 30064771095,
+      "line": 10,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "dst",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476764
+            ]
+          },
+          "id": 68719476764,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "dst",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "dst",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "n",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476765
+            ]
+          },
+          "id": 68719476765,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "n",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "n",
+            "id": 111669149702,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "\"%s\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313228
+            ]
+          },
+          "id": 90194313228,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "\"%s\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        },
+        {
+          "code": "s",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476766
+            ]
+          },
+          "id": 68719476766,
+          "index": 3,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "s",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "s",
+            "id": 111669149701,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "snprintf(dst, n, \"%s\", s)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "sztest.c",
+      "id": 30064771097,
+      "line": 10,
+      "method_full_name": "snprintf",
+      "name": "snprintf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476763
+            ]
+          },
+          "id": 68719476763,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313227
+            ]
+          },
+          "id": 90194313227,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "dst[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "sztest.c",
+      "id": 30064771096,
+      "line": 10,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    }
+  ],
+  "cpp_memory": {
+    "ambiguous_indirect_writes": 0,
+    "compound_assignments": 0,
+    "exact_deref_reads": 0,
+    "exact_field_accesses": 0,
+    "exact_index_accesses": 0,
+    "exact_indirect_writes": 0,
+    "exact_pointer_param_writes": 0,
+    "pointer_bindings": 0,
+    "reaching_def_facts": 0,
+    "synthetic_locations": 0,
+    "unknown_index_accesses": 0,
+    "unresolved_pointer_param_writes": 0
+  },
+  "cpp_memory_locations": [],
+  "frontend": "joern-c2cpg",
+  "frontend_counters": {
+    "exported_calls": 27,
+    "exported_functions": 18,
+    "exported_identifiers": 62,
+    "exported_locals": 8,
+    "exported_returns": 1,
+    "exported_type_decls": 17
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "safe_local",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 5,
+      "line_end": 5,
+      "name": "safe_local",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149696,
+          "index": 0,
+          "line": 5,
+          "method_id": 107374182400,
+          "name": "s",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "void(char*)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "sztest.c:<global>",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 11,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "safe_global",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 6,
+      "line_end": 6,
+      "name": "safe_global",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149697,
+          "index": 0,
+          "line": 6,
+          "method_id": 107374182402,
+          "name": "s",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "void(char*)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "wrong_buffer",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 7,
+      "line_end": 7,
+      "name": "wrong_buffer",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149698,
+          "index": 0,
+          "line": 7,
+          "method_id": 107374182403,
+          "name": "s",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "void(char*)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "pointer_sizeof",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 8,
+      "line_end": 8,
+      "name": "pointer_sizeof",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149699,
+          "index": 0,
+          "line": 8,
+          "method_id": 107374182404,
+          "name": "s",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "void(char*)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "sizeof_plus_one",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 9,
+      "line_end": 9,
+      "name": "sizeof_plus_one",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149700,
+          "index": 0,
+          "line": 9,
+          "method_id": 107374182405,
+          "name": "s",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "void(char*)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "variable_extent",
+      "id": 107374182406,
+      "is_external": false,
+      "line": 10,
+      "line_end": 10,
+      "name": "variable_extent",
+      "parameters": [
+        {
+          "code": "const char* s",
+          "id": 111669149701,
+          "index": 0,
+          "line": 10,
+          "method_id": 107374182406,
+          "name": "s",
+          "type_full_name": "char*"
+        },
+        {
+          "code": "int n",
+          "id": 111669149702,
+          "index": 1,
+          "line": 10,
+          "method_id": 107374182406,
+          "name": "n",
+          "type_full_name": "int"
+        }
+      ],
+      "signature": "void(char*,int)"
+    },
+    {
+      "ast_parent_full_name": "sztest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "sztest.c",
+      "full_name": "main",
+      "id": 107374182407,
+      "is_external": false,
+      "line": 11,
+      "line_end": 11,
+      "name": "main",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149703,
+          "index": 0,
+          "line": 11,
+          "method_id": 107374182407,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "<includes>:<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<includes>",
+      "full_name": "<includes>:<global>",
+      "id": 107374182408,
+      "is_external": false,
+      "line": 1,
+      "line_end": 0,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "malloc",
+      "id": 107374182409,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "malloc",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149704,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182409,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.alloc",
+      "id": 107374182410,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.alloc",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149705,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149706,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182410,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.cast",
+      "id": 107374182411,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.cast",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149707,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149708,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.sizeOf",
+      "id": 107374182412,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.sizeOf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149709,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.arrayInitializer",
+      "id": 107374182413,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.arrayInitializer",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149710,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "free",
+      "id": 107374182414,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "free",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149711,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182415,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149712,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149713,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.addition",
+      "id": 107374182416,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.addition",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149714,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182416,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149715,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182416,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "snprintf",
+      "id": 107374182417,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "snprintf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149716,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182417,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149717,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182417,
+          "name": "p2",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p3",
+          "id": 111669149718,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182417,
+          "name": "p3",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p4",
+          "id": 111669149719,
+          "index": 3,
+          "line": 0,
+          "method_id": 107374182417,
+          "name": "p4",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "dst",
+      "id": 68719476736,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "char[64]",
+      "id": 68719476737,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "char[64]",
+      "ref_target_ids": [],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476738,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476739,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "s",
+      "id": 68719476740,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "s",
+      "ref_target_ids": [
+        111669149696
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476736,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "char[64]",
+      "id": 68719476737,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "char[64]",
+      "ref_target_ids": [],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476738,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476739,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "s",
+      "id": 68719476740,
+      "line": 5,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149696
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "<global> gbuf",
+      "id": 68719476741,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "gbuf",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "<global> gbuf",
+      "id": 68719476742,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "gbuf",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "s",
+      "id": 68719476743,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476744,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476745,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "other",
+      "id": 68719476746,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "char[128]",
+      "id": 68719476747,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "char[128]",
+      "ref_target_ids": [],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476748,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "other",
+      "id": 68719476749,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "s",
+      "id": 68719476750,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "other",
+      "id": 68719476751,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "p",
+      "id": 68719476752,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476753,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476754,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "s",
+      "id": 68719476755,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476756,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476757,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476758,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476759,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476760,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "s",
+      "id": 68719476761,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476762,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476763,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476764,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "n",
+      "id": 68719476765,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "s",
+      "id": 68719476766,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "s",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "<global> gbuf",
+      "id": 68719476741,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "gbuf",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "<global> gbuf",
+      "id": 68719476742,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "gbuf",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "s",
+      "id": 68719476743,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "s",
+      "ref_target_ids": [
+        111669149697
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476744,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476745,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "other",
+      "id": 68719476746,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "char[128]",
+      "id": 68719476747,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "char[128]",
+      "ref_target_ids": [],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476748,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "other",
+      "id": 68719476749,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "s",
+      "id": 68719476750,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "s",
+      "ref_target_ids": [
+        111669149698
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "other",
+      "id": 68719476751,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "other",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "p",
+      "id": 68719476752,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476753,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476754,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "s",
+      "id": 68719476755,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "s",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "p",
+      "id": 68719476756,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "p",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476757,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476758,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476759,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476760,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "s",
+      "id": 68719476761,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "s",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "dst",
+      "id": 68719476762,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476763,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "dst",
+      "id": 68719476764,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "dst",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "n",
+      "id": 68719476765,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "n",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "s",
+      "id": 68719476766,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "s",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "char*"
+    }
+  ],
+  "locals": [
+    {
+      "code": "char dst[64]",
+      "id": 94489280512,
+      "line": 5,
+      "method_id": 107374182400,
+      "name": "dst",
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "static char gbuf[256]",
+      "id": 94489280518,
+      "line": 4,
+      "method_id": 107374182401,
+      "name": "gbuf",
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "<global> gbuf",
+      "id": 94489280519,
+      "line": 6,
+      "method_id": 107374182402,
+      "name": "gbuf",
+      "type_full_name": "char[256]"
+    },
+    {
+      "code": "char dst[32]",
+      "id": 94489280513,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "dst",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char other[128]",
+      "id": 94489280514,
+      "line": 7,
+      "method_id": 107374182403,
+      "name": "other",
+      "type_full_name": "char[128]"
+    },
+    {
+      "code": "char * p",
+      "id": 94489280515,
+      "line": 8,
+      "method_id": 107374182404,
+      "name": "p",
+      "type_full_name": "char*"
+    },
+    {
+      "code": "char dst[32]",
+      "id": 94489280516,
+      "line": 9,
+      "method_id": 107374182405,
+      "name": "dst",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char dst[32]",
+      "id": 94489280517,
+      "line": 10,
+      "method_id": 107374182406,
+      "name": "dst",
+      "type_full_name": "char[32]"
+    }
+  ],
+  "members": [],
+  "metadata": [
+    {
+      "language": "NEWC",
+      "root": "/tmp/sz_scan/src",
+      "version": "0.1"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 5,
+      "method_id": 107374182400,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 1,
+      "method_id": 107374182401,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 6,
+      "method_id": 107374182402,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 7,
+      "method_id": 107374182403,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 8,
+      "method_id": 107374182404,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 9,
+      "method_id": 107374182405,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 10,
+      "method_id": 107374182406,
+      "type_full_name": "void"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 11,
+      "method_id": 107374182407,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 1,
+      "method_id": 107374182408,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051593,
+      "line": 0,
+      "method_id": 107374182409,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051594,
+      "line": 0,
+      "method_id": 107374182410,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051595,
+      "line": 0,
+      "method_id": 107374182411,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051596,
+      "line": 0,
+      "method_id": 107374182412,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051597,
+      "line": 0,
+      "method_id": 107374182413,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051598,
+      "line": 0,
+      "method_id": 107374182414,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051599,
+      "line": 0,
+      "method_id": 107374182415,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051600,
+      "line": 0,
+      "method_id": 107374182416,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051601,
+      "line": 0,
+      "method_id": 107374182417,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [
+    {
+      "code": "return 0;",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920768,
+          90194313229
+        ]
+      },
+      "function_id": 107374182407,
+      "id": 141733920768,
+      "line": 11,
+      "value_ref": {
+        "code": "0",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    }
+  ],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "sztest.c",
+      "full_name": "safe_local",
+      "id": 167503724544,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 5,
+      "name": "safe_local"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "safe_global",
+      "id": 167503724545,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 6,
+      "name": "safe_global"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "wrong_buffer",
+      "id": 167503724546,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 7,
+      "name": "wrong_buffer"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "pointer_sizeof",
+      "id": 167503724547,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 8,
+      "name": "pointer_sizeof"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "sizeof_plus_one",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 9,
+      "name": "sizeof_plus_one"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "variable_extent",
+      "id": 167503724549,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 10,
+      "name": "variable_extent"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "main",
+      "id": 167503724550,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 11,
+      "name": "main"
+    },
+    {
+      "file": "sztest.c",
+      "full_name": "sztest.c:<global>",
+      "id": 167503724551,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "<global>"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "ANY",
+      "id": 167503724552,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char",
+      "id": 167503724553,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char*",
+      "id": 167503724554,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char*"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[128]",
+      "id": 167503724555,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[128]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[256]",
+      "id": 167503724556,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[256]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[32]",
+      "id": 167503724557,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[32]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[64]",
+      "id": 167503724558,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[64]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "int",
+      "id": 167503724559,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "int"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "void",
+      "id": 167503724560,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "void"
+    }
+  ]
+}

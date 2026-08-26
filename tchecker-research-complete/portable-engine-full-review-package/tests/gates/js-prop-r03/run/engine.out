@@ -1,0 +1,19 @@
+STATE_FACTS writes=14 reads=20 derivation={ASSIGNMENT_TO_FIELD_ACCESS=14, FIELD_ACCESS_READ=19, INDEX_ACCESS_READ=1}
+LOADED frontend=joern-jssrc2cpg functions=12 calls=57 returns=8
+SUMMARY nestedPositive resolution=AMBIGUOUS proven=[] may=[0] unknown=false completeness=COMPLETE
+EVIDENCE nestedPositive identity=VALUE_SPECIFIC origin=POSSIBLE resolution=AMBIGUOUS completeness=COMPLETE
+SUMMARY samePathOverwrite resolution=EXACT proven=[1] may=[] unknown=false completeness=COMPLETE
+EVIDENCE samePathOverwrite identity=VALUE_SPECIFIC origin=ESTABLISHED resolution=EXACT completeness=COMPLETE
+SUMMARY parentOverwrite resolution=UNRESOLVED proven=[] may=[] unknown=true completeness=UNKNOWN
+EVIDENCE parentOverwrite identity=VALUE_SPECIFIC origin=NOT_ESTABLISHED resolution=UNRESOLVED completeness=UNKNOWN
+SUMMARY distinctRoot resolution=AMBIGUOUS proven=[] may=[0] unknown=false completeness=COMPLETE
+EVIDENCE distinctRoot identity=VALUE_SPECIFIC origin=POSSIBLE resolution=AMBIGUOUS completeness=COMPLETE
+SUMMARY dynamicPath resolution=UNRESOLVED proven=[] may=[] unknown=true completeness=UNKNOWN
+EVIDENCE dynamicPath identity=VALUE_SPECIFIC origin=NOT_ESTABLISHED resolution=UNRESOLVED completeness=UNKNOWN
+SUMMARY siblingWrite resolution=UNRESOLVED proven=[] may=[] unknown=true completeness=UNKNOWN
+EVIDENCE siblingWrite identity=VALUE_SPECIFIC origin=NOT_ESTABLISHED resolution=UNRESOLVED completeness=UNKNOWN
+SUMMARY localPositive resolution=AMBIGUOUS proven=[] may=[0] unknown=false completeness=COMPLETE
+EVIDENCE localPositive identity=VALUE_SPECIFIC origin=POSSIBLE resolution=AMBIGUOUS completeness=COMPLETE
+SUMMARY childThenParent resolution=UNRESOLVED proven=[] may=[] unknown=true completeness=UNKNOWN
+EVIDENCE childThenParent identity=VALUE_SPECIFIC origin=NOT_ESTABLISHED resolution=UNRESOLVED completeness=UNKNOWN
+ANALYSIS_STATUS=COMPLETE

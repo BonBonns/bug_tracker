@@ -1,0 +1,39 @@
+PASS mayAliasWrite_preserves_may_flow - {'origins': ['PARAM:mayAliasWrite.source', 'STATE_UNKNOWN:ALLOC:mayAliasWrite:12.value'], 'resolution': 'AMBIGUOUS', 'trace': [{'kind': 'JOIN', 'line': 15, 'aliases': {'a': ['ALLOC:mayAliasWrite:12'], 'b': ['ALLOC:mayAliasWrite:13'], 'x': ['ALLOC:mayAliasWrite:12', 'ALLOC:mayAliasWrite:13']}}, {'kind': 'METHOD', 'line': 16, 'method': 'setValue', 'receivers': ['ALLOC:mayAliasWrite:12', 'ALLOC:mayAliasWrite:13'], 'resolution': 'AMBIGUOUS'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:mayAliasWrite:12', 'ALLOC:mayAliasWrite:13'], 'value': ['PARAM:mayAliasWrite.source'], 'resolution': 'AMBIGUOUS'}, {'kind': 'METHOD', 'line': 17, 'method': 'readValue', 'receivers': ['ALLOC:mayAliasWrite:12'], 'resolution': 'EXACT'}, {'kind': 'READ', 'property': 'value', 'receivers': ['ALLOC:mayAliasWrite:12'], 'value': ['PARAM:mayAliasWrite.source', 'STATE_UNKNOWN:ALLOC:mayAliasWrite:12.value'], 'resolution': 'EXACT'}]}
+PASS sameAliasBothBranches_collapses_exact - {'origins': ['PARAM:sameAliasBothBranches.source'], 'resolution': 'EXACT', 'trace': [{'kind': 'JOIN', 'line': 24, 'aliases': {'a': ['ALLOC:sameAliasBothBranches:22'], 'x': ['ALLOC:sameAliasBothBranches:22']}}, {'kind': 'METHOD', 'line': 25, 'method': 'setValue', 'receivers': ['ALLOC:sameAliasBothBranches:22'], 'resolution': 'EXACT'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:sameAliasBothBranches:22'], 'value': ['PARAM:sameAliasBothBranches.source'], 'resolution': 'EXACT'}, {'kind': 'METHOD', 'line': 26, 'method': 'readValue', 'receivers': ['ALLOC:sameAliasBothBranches:22'], 'resolution': 'EXACT'}, {'kind': 'READ', 'property': 'value', 'receivers': ['ALLOC:sameAliasBothBranches:22'], 'value': ['PARAM:sameAliasBothBranches.source'], 'resolution': 'EXACT'}]}
+PASS differentField_no_crossflow - {'origins': ['STATE_UNKNOWN:ALLOC:mayAliasDifferentField:31.value'], 'resolution': 'UNKNOWN', 'trace': [{'kind': 'JOIN', 'line': 34, 'aliases': {'a': ['ALLOC:mayAliasDifferentField:31'], 'b': ['ALLOC:mayAliasDifferentField:32'], 'x': ['ALLOC:mayAliasDifferentField:31', 'ALLOC:mayAliasDifferentField:32']}}, {'kind': 'METHOD', 'line': 35, 'method': 'setOther', 'receivers': ['ALLOC:mayAliasDifferentField:31', 'ALLOC:mayAliasDifferentField:32'], 'resolution': 'AMBIGUOUS'}, {'kind': 'WRITE', 'property': 'other', 'receivers': ['ALLOC:mayAliasDifferentField:31', 'ALLOC:mayAliasDifferentField:32'], 'value': ['PARAM:mayAliasDifferentField.source'], 'resolution': 'AMBIGUOUS'}, {'kind': 'METHOD', 'line': 36, 'method': 'readValue', 'receivers': ['ALLOC:mayAliasDifferentField:31'], 'resolution': 'EXACT'}, {'kind': 'READ', 'property': 'value', 'receivers': ['ALLOC:mayAliasDifferentField:31'], 'value': ['STATE_UNKNOWN:ALLOC:mayAliasDifferentField:31.value'], 'resolution': 'EXACT'}]}
+PASS conditional_overwrite_preserves_both - {'origins': ['CONST:"CONST"', 'PARAM:mayAliasOverwrite.source'], 'resolution': 'AMBIGUOUS', 'trace': [{'kind': 'METHOD', 'line': 44, 'method': 'setValue', 'receivers': ['ALLOC:mayAliasOverwrite:42'], 'resolution': 'EXACT'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:mayAliasOverwrite:42'], 'value': ['PARAM:mayAliasOverwrite.source'], 'resolution': 'EXACT'}, {'kind': 'JOIN', 'line': 46, 'aliases': {'a': ['ALLOC:mayAliasOverwrite:42'], 'b': ['ALLOC:mayAliasOverwrite:43'], 'x': ['ALLOC:mayAliasOverwrite:42', 'ALLOC:mayAliasOverwrite:43']}}, {'kind': 'METHOD', 'line': 47, 'method': 'setValue', 'receivers': ['ALLOC:mayAliasOverwrite:42', 'ALLOC:mayAliasOverwrite:43'], 'resolution': 'AMBIGUOUS'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:mayAliasOverwrite:42', 'ALLOC:mayAliasOverwrite:43'], 'value': ['CONST:"CONST"'], 'resolution': 'AMBIGUOUS'}, {'kind': 'METHOD', 'line': 48, 'method': 'readValue', 'receivers': ['ALLOC:mayAliasOverwrite:42'], 'resolution': 'EXACT'}, {'kind': 'READ', 'property': 'value', 'receivers': ['ALLOC:mayAliasOverwrite:42'], 'value': ['CONST:"CONST"', 'PARAM:mayAliasOverwrite.source'], 'resolution': 'EXACT'}]}
+PASS mayAliasRead_union - {'origins': ['CONST:"CONST"', 'PARAM:mayAliasRead.source'], 'resolution': 'AMBIGUOUS', 'trace': [{'kind': 'METHOD', 'line': 55, 'method': 'setValue', 'receivers': ['ALLOC:mayAliasRead:53'], 'resolution': 'EXACT'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:mayAliasRead:53'], 'value': ['PARAM:mayAliasRead.source'], 'resolution': 'EXACT'}, {'kind': 'METHOD', 'line': 56, 'method': 'setValue', 'receivers': ['ALLOC:mayAliasRead:54'], 'resolution': 'EXACT'}, {'kind': 'WRITE', 'property': 'value', 'receivers': ['ALLOC:mayAliasRead:54'], 'value': ['CONST:"CONST"'], 'resolution': 'EXACT'}, {'kind': 'JOIN', 'line': 58, 'aliases': {'a': ['ALLOC:mayAliasRead:53'], 'b': ['ALLOC:mayAliasRead:54'], 'x': ['ALLOC:mayAliasRead:53', 'ALLOC:mayAliasRead:54']}}, {'kind': 'METHOD', 'line': 59, 'method': 'readValue', 'receivers': ['ALLOC:mayAliasRead:53', 'ALLOC:mayAliasRead:54'], 'resolution': 'AMBIGUOUS'}, {'kind': 'READ', 'property': 'value', 'receivers': ['ALLOC:mayAliasRead:53', 'ALLOC:mayAliasRead:54'], 'value': ['CONST:"CONST"', 'PARAM:mayAliasRead.source'], 'resolution': 'AMBIGUOUS'}]}
+PASS bridge_only_exact - ['115\tCOMPLETE\t1']
+PASS real_engine_exact_summary_consumed - ([], [1])
+PASS nonexact_not_hardened - {'mayAliasWrite': ([], []), 'mayAliasDifferentField': ([], []), 'mayAliasOverwrite': ([], []), 'mayAliasRead': ([], [])}
+PASS engine_loaded_one_complete - @
+@@
+9 1 87
+9 2 94
+9 3 133
+9 4 172
+9 5 179
+9 6 218
+9 7 225
+9 8 270
+9 9 277
+@@@
+@@@@
+12 1 102
+12 2 110
+12 3 141
+12 4 149
+12 5 187
+12 6 195
+12 7 229
+12 8 240
+12 9 247
+12 10 281
+12 11 288
+12 12 299
+FRONTEND_STATE_RETURN loaded=1 rejected=0 complete=1
+@@@@@
+WPRESTSRC added 0 REST request sources (0 method-name matches skipped: receiver was not the REST callback's own first parameter)
+Maximum: 1 1
+
+GATE13=9/9

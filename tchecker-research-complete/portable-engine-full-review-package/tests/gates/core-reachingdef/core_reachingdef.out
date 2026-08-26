@@ -1,0 +1,8 @@
+PASS 1. straight-line overwrite narrows to the surviving def
+PASS 2. branch merge retains both reaching defs
+PASS 3. loop-carried (no fact emitted) stays conservative: MAY over all defs
+PASS 4. compound: both contributions share the statement anchor and survive
+PASS 5. CFG filtering never removes the PRIOR_VALUE contribution while its statement reaches
+PASS 6. utf8PrevCharLen shape stays unknown=true after narrowing
+PASS 7. no EXACT/COMPLETE appears solely from reaching-def filtering
+CORE_REACHINGDEF=7/7

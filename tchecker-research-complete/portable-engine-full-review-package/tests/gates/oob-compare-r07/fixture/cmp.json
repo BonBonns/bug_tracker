@@ -1,0 +1,5505 @@
+{
+  "assignments": [
+    {
+      "cfg_anchor": 30064771072,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771072,
+          68719476736,
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771072,
+      "line": 6,
+      "target_local_id": 94489280512,
+      "value_ref": {
+        "code": "a[32]",
+        "id": 30064771073,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771074,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771074,
+          68719476738,
+          30064771075
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 30064771074,
+      "line": 6,
+      "target_local_id": 94489280513,
+      "value_ref": {
+        "code": "b[32]",
+        "id": 30064771075,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771077,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771077,
+          68719476742,
+          30064771078
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771077,
+      "line": 7,
+      "target_local_id": 94489280514,
+      "value_ref": {
+        "code": "a[32]",
+        "id": 30064771078,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771079,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771079,
+          68719476744,
+          30064771080
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 30064771079,
+      "line": 7,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "b[8]",
+        "id": 30064771080,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771082,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771082,
+          68719476748,
+          30064771083
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771082,
+      "line": 8,
+      "target_local_id": 94489280516,
+      "value_ref": {
+        "code": "a[32]",
+        "id": 30064771083,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771084,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771084,
+          68719476750,
+          30064771085
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 30064771084,
+      "line": 8,
+      "target_local_id": 94489280517,
+      "value_ref": {
+        "code": "b[8]",
+        "id": 30064771085,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771087,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771087,
+          68719476754,
+          30064771088
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771087,
+      "line": 9,
+      "target_local_id": 94489280518,
+      "value_ref": {
+        "code": "a[32]",
+        "id": 30064771088,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771089,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771089,
+          68719476756,
+          30064771090
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771089,
+      "line": 9,
+      "target_local_id": 94489280519,
+      "value_ref": {
+        "code": "b[8]",
+        "id": 30064771090,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771093,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771093,
+          68719476761,
+          30064771094
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 30064771093,
+      "line": 10,
+      "target_local_id": 94489280520,
+      "value_ref": {
+        "code": "a[16]",
+        "id": 30064771094,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771095,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771095,
+          68719476763,
+          30064771096
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 30064771095,
+      "line": 10,
+      "target_local_id": 94489280521,
+      "value_ref": {
+        "code": "b[16]",
+        "id": 30064771096,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771098,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771098,
+          68719476767,
+          30064771099
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 30064771098,
+      "line": 11,
+      "target_local_id": 94489280522,
+      "value_ref": {
+        "code": "a[64]",
+        "id": 30064771099,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771100,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771100,
+          68719476769,
+          30064771101
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 30064771100,
+      "line": 11,
+      "target_local_id": 94489280523,
+      "value_ref": {
+        "code": "b[4]",
+        "id": 30064771101,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771103,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771103,
+          68719476773,
+          30064771104
+        ]
+      },
+      "function_id": 107374182407,
+      "id": 30064771103,
+      "line": 12,
+      "target_local_id": 94489280524,
+      "value_ref": {
+        "code": "a[32]",
+        "id": 30064771104,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771105,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771105,
+          68719476775,
+          30064771106
+        ]
+      },
+      "function_id": 107374182407,
+      "id": 30064771105,
+      "line": 12,
+      "target_local_id": 94489280525,
+      "value_ref": {
+        "code": "b[16]",
+        "id": 30064771106,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771108,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771108,
+          68719476780,
+          30064771109
+        ]
+      },
+      "function_id": 107374182408,
+      "id": 30064771108,
+      "line": 13,
+      "target_local_id": 94489280526,
+      "value_ref": {
+        "code": "b[8]",
+        "id": 30064771109,
+        "kind": "CALL"
+      }
+    }
+  ],
+  "calls": [
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476736
+            ]
+          },
+          "id": 68719476736,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771073
+            ]
+          },
+          "id": 30064771073,
+          "index": 1,
+          "kind": "CALL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a[32]",
+            "id": 30064771073,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "cmptest.c",
+      "id": 30064771072,
+      "line": 6,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476738
+            ]
+          },
+          "id": 68719476738,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "b",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771075
+            ]
+          },
+          "id": 30064771075,
+          "index": 1,
+          "kind": "CALL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "b[32]",
+            "id": 30064771075,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "cmptest.c",
+      "id": 30064771074,
+      "line": 6,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476737
+            ]
+          },
+          "id": 68719476737,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313216
+            ]
+          },
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "cmptest.c",
+      "id": 30064771073,
+      "line": 6,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476739
+            ]
+          },
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313217
+            ]
+          },
+          "id": 90194313217,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "cmptest.c",
+      "id": 30064771075,
+      "line": 6,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476740
+            ]
+          },
+          "id": 68719476740,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280512,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476741
+            ]
+          },
+          "id": 68719476741,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 6,
+          "name": "b",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280513,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313218
+            ]
+          },
+          "id": 90194313218,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 6,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(a, b, 32)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "cmptest.c",
+      "id": 30064771076,
+      "line": 6,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476742
+            ]
+          },
+          "id": 68719476742,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771078
+            ]
+          },
+          "id": 30064771078,
+          "index": 1,
+          "kind": "CALL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a[32]",
+            "id": 30064771078,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "cmptest.c",
+      "id": 30064771077,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476744
+            ]
+          },
+          "id": 68719476744,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771080
+            ]
+          },
+          "id": 30064771080,
+          "index": 1,
+          "kind": "CALL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b[8]",
+            "id": 30064771080,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "cmptest.c",
+      "id": 30064771079,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476743
+            ]
+          },
+          "id": 68719476743,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313219
+            ]
+          },
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "cmptest.c",
+      "id": 30064771078,
+      "line": 7,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476745
+            ]
+          },
+          "id": 68719476745,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "char[8]",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "char[8]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313220
+            ]
+          },
+          "id": 90194313220,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "cmptest.c",
+      "id": 30064771080,
+      "line": 7,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[8]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476746
+            ]
+          },
+          "id": 68719476746,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280514,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476747
+            ]
+          },
+          "id": 68719476747,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313221
+            ]
+          },
+          "id": 90194313221,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(a, b, 8)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "cmptest.c",
+      "id": 30064771081,
+      "line": 7,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476748
+            ]
+          },
+          "id": 68719476748,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771083
+            ]
+          },
+          "id": 30064771083,
+          "index": 1,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a[32]",
+            "id": 30064771083,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "cmptest.c",
+      "id": 30064771082,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476750
+            ]
+          },
+          "id": 68719476750,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771085
+            ]
+          },
+          "id": 30064771085,
+          "index": 1,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b[8]",
+            "id": 30064771085,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "cmptest.c",
+      "id": 30064771084,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476749
+            ]
+          },
+          "id": 68719476749,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313222
+            ]
+          },
+          "id": 90194313222,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "cmptest.c",
+      "id": 30064771083,
+      "line": 8,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476751
+            ]
+          },
+          "id": 68719476751,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "char[8]",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "char[8]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313223
+            ]
+          },
+          "id": 90194313223,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "cmptest.c",
+      "id": 30064771085,
+      "line": 8,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[8]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476752
+            ]
+          },
+          "id": 68719476752,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280516,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476753
+            ]
+          },
+          "id": 68719476753,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280517,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313224
+            ]
+          },
+          "id": 90194313224,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(a, b, 32)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "cmptest.c",
+      "id": 30064771086,
+      "line": 8,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476754
+            ]
+          },
+          "id": 68719476754,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771088
+            ]
+          },
+          "id": 30064771088,
+          "index": 1,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a[32]",
+            "id": 30064771088,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771087,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771090
+            ]
+          },
+          "id": 30064771090,
+          "index": 1,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b[8]",
+            "id": 30064771090,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771089,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476755
+            ]
+          },
+          "id": 68719476755,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313225
+            ]
+          },
+          "id": 90194313225,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771088,
+      "line": 9,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476757
+            ]
+          },
+          "id": 68719476757,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "char[8]",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "char[8]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313226
+            ]
+          },
+          "id": 90194313226,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771090,
+      "line": 9,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[8]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476758
+            ]
+          },
+          "id": 68719476758,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280519,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "sizeof(a)",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771092
+            ]
+          },
+          "id": 30064771092,
+          "index": 2,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "ANY",
+          "value_ref": {
+            "code": "sizeof(a)",
+            "id": 30064771092,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(a, b, sizeof(a))",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771091,
+      "line": 9,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476760
+            ]
+          },
+          "id": 68719476760,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280518,
+            "kind": "LOCAL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "sizeof(a)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "cmptest.c",
+      "id": 30064771092,
+      "line": 9,
+      "method_full_name": "<operator>.sizeOf",
+      "name": "<operator>.sizeOf",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "a",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771094
+            ]
+          },
+          "id": 30064771094,
+          "index": 1,
+          "kind": "CALL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "a[16]",
+            "id": 30064771094,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "cmptest.c",
+      "id": 30064771093,
+      "line": 10,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476763
+            ]
+          },
+          "id": 68719476763,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "b",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280521,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771096
+            ]
+          },
+          "id": 30064771096,
+          "index": 1,
+          "kind": "CALL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b[16]",
+            "id": 30064771096,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "cmptest.c",
+      "id": 30064771095,
+      "line": 10,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476762
+            ]
+          },
+          "id": 68719476762,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "char[16]",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "char[16]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "16",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313227
+            ]
+          },
+          "id": 90194313227,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "16",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "cmptest.c",
+      "id": 30064771094,
+      "line": 10,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[16]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476764
+            ]
+          },
+          "id": 68719476764,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "char[16]",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "char[16]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "16",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313228
+            ]
+          },
+          "id": 90194313228,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "16",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "cmptest.c",
+      "id": 30064771096,
+      "line": 10,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[16]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476765
+            ]
+          },
+          "id": 68719476765,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "a",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280520,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476766
+            ]
+          },
+          "id": 68719476766,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "b",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280521,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "16",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313229
+            ]
+          },
+          "id": 90194313229,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "16",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "strncmp(a, b, 16)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "cmptest.c",
+      "id": 30064771097,
+      "line": 10,
+      "method_full_name": "strncmp",
+      "name": "strncmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476767
+            ]
+          },
+          "id": 68719476767,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "a",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280522,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[64]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771099
+            ]
+          },
+          "id": 30064771099,
+          "index": 1,
+          "kind": "CALL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "a[64]",
+            "id": 30064771099,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[64]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "cmptest.c",
+      "id": 30064771098,
+      "line": 11,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476769
+            ]
+          },
+          "id": 68719476769,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "b",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280523,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[4]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771101
+            ]
+          },
+          "id": 30064771101,
+          "index": 1,
+          "kind": "CALL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "b[4]",
+            "id": 30064771101,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[4]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "cmptest.c",
+      "id": 30064771100,
+      "line": 11,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[64]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476768
+            ]
+          },
+          "id": 68719476768,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "char[64]",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "char[64]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "64",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313230
+            ]
+          },
+          "id": 90194313230,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "64",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[64]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "cmptest.c",
+      "id": 30064771099,
+      "line": 11,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[64]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[4]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476770
+            ]
+          },
+          "id": 68719476770,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "char[4]",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "char[4]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "4",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313231
+            ]
+          },
+          "id": 90194313231,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "4",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[4]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "cmptest.c",
+      "id": 30064771101,
+      "line": 11,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[4]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476771
+            ]
+          },
+          "id": 68719476771,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "a",
+          "type_full_name": "char[64]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280522,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476772
+            ]
+          },
+          "id": 68719476772,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 11,
+          "name": "b",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280523,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "64",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313232
+            ]
+          },
+          "id": 90194313232,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 11,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "64",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "strncmp(a, b, 64)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182406,
+      "file": "cmptest.c",
+      "id": 30064771102,
+      "line": 11,
+      "method_full_name": "strncmp",
+      "name": "strncmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476773
+            ]
+          },
+          "id": 68719476773,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280524,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "a[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771104
+            ]
+          },
+          "id": 30064771104,
+          "index": 1,
+          "kind": "CALL",
+          "line": 12,
+          "name": "",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a[32]",
+            "id": 30064771104,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "cmptest.c",
+      "id": 30064771103,
+      "line": 12,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476775
+            ]
+          },
+          "id": 68719476775,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "b",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280525,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771106
+            ]
+          },
+          "id": 30064771106,
+          "index": 1,
+          "kind": "CALL",
+          "line": 12,
+          "name": "",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b[16]",
+            "id": 30064771106,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "cmptest.c",
+      "id": 30064771105,
+      "line": 12,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[32]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476774
+            ]
+          },
+          "id": 68719476774,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "char[32]",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "char[32]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "32",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313233
+            ]
+          },
+          "id": 90194313233,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 12,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "32",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "a[32]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "cmptest.c",
+      "id": 30064771104,
+      "line": 12,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[32]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[16]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476776
+            ]
+          },
+          "id": 68719476776,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "char[16]",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "char[16]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "16",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313234
+            ]
+          },
+          "id": 90194313234,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 12,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "16",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[16]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "cmptest.c",
+      "id": 30064771106,
+      "line": 12,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[16]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "a",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476777
+            ]
+          },
+          "id": 68719476777,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "a",
+          "type_full_name": "char[32]",
+          "value_ref": {
+            "code": "a",
+            "id": 94489280524,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476778
+            ]
+          },
+          "id": 68719476778,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "b",
+          "type_full_name": "char[16]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280525,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "n",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476779
+            ]
+          },
+          "id": 68719476779,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 12,
+          "name": "n",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "n",
+            "id": 111669149702,
+            "kind": "PARAMETER"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(a, b, n)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "cmptest.c",
+      "id": 30064771107,
+      "line": 12,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476780
+            ]
+          },
+          "id": 68719476780,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280526,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "b[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771109
+            ]
+          },
+          "id": 30064771109,
+          "index": 1,
+          "kind": "CALL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b[8]",
+            "id": 30064771109,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "cmptest.c",
+      "id": 30064771108,
+      "line": 13,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [
+        {
+          "code": "char[8]",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476781
+            ]
+          },
+          "id": 68719476781,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "char[8]",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "char[8]",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313235
+            ]
+          },
+          "id": 90194313235,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "b[8]",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "cmptest.c",
+      "id": 30064771109,
+      "line": 13,
+      "method_full_name": "<operator>.alloc",
+      "name": "<operator>.alloc",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "char[8]"
+    },
+    {
+      "arguments": [
+        {
+          "code": "p",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476782
+            ]
+          },
+          "id": 68719476782,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "p",
+          "type_full_name": "char*",
+          "value_ref": {
+            "code": "p",
+            "id": 111669149703,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "b",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476783
+            ]
+          },
+          "id": 68719476783,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "b",
+          "type_full_name": "char[8]",
+          "value_ref": {
+            "code": "b",
+            "id": 94489280526,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "8",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313236
+            ]
+          },
+          "id": 90194313236,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "8",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "memcmp(p, b, 8)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "cmptest.c",
+      "id": 30064771110,
+      "line": 13,
+      "method_full_name": "memcmp",
+      "name": "memcmp",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    }
+  ],
+  "cfg_edges": [
+    {
+      "function_id": 107374182400,
+      "node_id": 30064771072,
+      "successor_id": 68719476738
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 30064771074,
+      "successor_id": 68719476740
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476736,
+      "successor_id": 68719476737
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 30064771073,
+      "successor_id": 30064771072
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476738,
+      "successor_id": 68719476739
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 30064771075,
+      "successor_id": 30064771074
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 30064771076,
+      "successor_id": 141733920768
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476737,
+      "successor_id": 90194313216
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 90194313216,
+      "successor_id": 30064771073
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476739,
+      "successor_id": 90194313217
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 90194313217,
+      "successor_id": 30064771075
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476740,
+      "successor_id": 68719476741
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 68719476741,
+      "successor_id": 90194313218
+    },
+    {
+      "function_id": 107374182400,
+      "node_id": 90194313218,
+      "successor_id": 30064771076
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182400,
+      "successor_id": 68719476736
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182402,
+      "successor_id": 68719476742
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182403,
+      "successor_id": 68719476748
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182404,
+      "successor_id": 68719476754
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182405,
+      "successor_id": 68719476761
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182406,
+      "successor_id": 68719476767
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182407,
+      "successor_id": 68719476773
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182408,
+      "successor_id": 68719476780
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 107374182409,
+      "successor_id": 90194313237
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084288,
+      "successor_id": 120259084289
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084289,
+      "successor_id": 120259084290
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084290,
+      "successor_id": 120259084291
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084291,
+      "successor_id": 120259084292
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084292,
+      "successor_id": 120259084293
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084293,
+      "successor_id": 120259084294
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084294,
+      "successor_id": 120259084295
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084295,
+      "successor_id": 120259084296
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771077,
+      "successor_id": 68719476744
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771079,
+      "successor_id": 68719476746
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476742,
+      "successor_id": 68719476743
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771078,
+      "successor_id": 30064771077
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476744,
+      "successor_id": 68719476745
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771080,
+      "successor_id": 30064771079
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 30064771081,
+      "successor_id": 141733920769
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476743,
+      "successor_id": 90194313219
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313219,
+      "successor_id": 30064771078
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476745,
+      "successor_id": 90194313220
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313220,
+      "successor_id": 30064771080
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476746,
+      "successor_id": 68719476747
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 68719476747,
+      "successor_id": 90194313221
+    },
+    {
+      "function_id": 107374182402,
+      "node_id": 90194313221,
+      "successor_id": 30064771081
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771082,
+      "successor_id": 68719476750
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771084,
+      "successor_id": 68719476752
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476748,
+      "successor_id": 68719476749
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771083,
+      "successor_id": 30064771082
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476750,
+      "successor_id": 68719476751
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771085,
+      "successor_id": 30064771084
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 30064771086,
+      "successor_id": 141733920770
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476749,
+      "successor_id": 90194313222
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313222,
+      "successor_id": 30064771083
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476751,
+      "successor_id": 90194313223
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313223,
+      "successor_id": 30064771085
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476752,
+      "successor_id": 68719476753
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 68719476753,
+      "successor_id": 90194313224
+    },
+    {
+      "function_id": 107374182403,
+      "node_id": 90194313224,
+      "successor_id": 30064771086
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771087,
+      "successor_id": 68719476756
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771089,
+      "successor_id": 68719476758
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476754,
+      "successor_id": 68719476755
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771088,
+      "successor_id": 30064771087
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476756,
+      "successor_id": 68719476757
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771090,
+      "successor_id": 30064771089
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771091,
+      "successor_id": 141733920771
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476755,
+      "successor_id": 90194313225
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313225,
+      "successor_id": 30064771088
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476757,
+      "successor_id": 90194313226
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 90194313226,
+      "successor_id": 30064771090
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476758,
+      "successor_id": 68719476759
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476759,
+      "successor_id": 68719476760
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 30064771092,
+      "successor_id": 30064771091
+    },
+    {
+      "function_id": 107374182404,
+      "node_id": 68719476760,
+      "successor_id": 30064771092
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771093,
+      "successor_id": 68719476763
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771095,
+      "successor_id": 68719476765
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476761,
+      "successor_id": 68719476762
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771094,
+      "successor_id": 30064771093
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476763,
+      "successor_id": 68719476764
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771096,
+      "successor_id": 30064771095
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771097,
+      "successor_id": 141733920772
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476762,
+      "successor_id": 90194313227
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313227,
+      "successor_id": 30064771094
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476764,
+      "successor_id": 90194313228
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313228,
+      "successor_id": 30064771096
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476765,
+      "successor_id": 68719476766
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476766,
+      "successor_id": 90194313229
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313229,
+      "successor_id": 30064771097
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771098,
+      "successor_id": 68719476769
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771100,
+      "successor_id": 68719476771
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476767,
+      "successor_id": 68719476768
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771099,
+      "successor_id": 30064771098
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476769,
+      "successor_id": 68719476770
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771101,
+      "successor_id": 30064771100
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771102,
+      "successor_id": 141733920773
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476768,
+      "successor_id": 90194313230
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 90194313230,
+      "successor_id": 30064771099
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476770,
+      "successor_id": 90194313231
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 90194313231,
+      "successor_id": 30064771101
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476771,
+      "successor_id": 68719476772
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476772,
+      "successor_id": 90194313232
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 90194313232,
+      "successor_id": 30064771102
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 30064771103,
+      "successor_id": 68719476775
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 30064771105,
+      "successor_id": 68719476777
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476773,
+      "successor_id": 68719476774
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 30064771104,
+      "successor_id": 30064771103
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476775,
+      "successor_id": 68719476776
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 30064771106,
+      "successor_id": 30064771105
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 30064771107,
+      "successor_id": 141733920774
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476774,
+      "successor_id": 90194313233
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 90194313233,
+      "successor_id": 30064771104
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476776,
+      "successor_id": 90194313234
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 90194313234,
+      "successor_id": 30064771106
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476777,
+      "successor_id": 68719476778
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476778,
+      "successor_id": 68719476779
+    },
+    {
+      "function_id": 107374182407,
+      "node_id": 68719476779,
+      "successor_id": 30064771107
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 30064771108,
+      "successor_id": 68719476782
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 68719476780,
+      "successor_id": 68719476781
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 30064771109,
+      "successor_id": 30064771108
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 30064771110,
+      "successor_id": 141733920775
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 68719476781,
+      "successor_id": 90194313235
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 90194313235,
+      "successor_id": 30064771109
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 68719476782,
+      "successor_id": 68719476783
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 68719476783,
+      "successor_id": 90194313236
+    },
+    {
+      "function_id": 107374182408,
+      "node_id": 90194313236,
+      "successor_id": 30064771110
+    },
+    {
+      "function_id": 107374182409,
+      "node_id": 90194313237,
+      "successor_id": 141733920776
+    }
+  ],
+  "cpp_memory": {
+    "ambiguous_indirect_writes": 0,
+    "compound_assignments": 0,
+    "exact_deref_reads": 0,
+    "exact_field_accesses": 0,
+    "exact_index_accesses": 0,
+    "exact_indirect_writes": 0,
+    "exact_pointer_param_writes": 0,
+    "pointer_bindings": 0,
+    "reaching_def_facts": 0,
+    "synthetic_locations": 0,
+    "unknown_index_accesses": 0,
+    "unresolved_pointer_param_writes": 0
+  },
+  "cpp_memory_locations": [],
+  "frontend": "joern-c2cpg",
+  "frontend_counters": {
+    "exported_calls": 39,
+    "exported_functions": 16,
+    "exported_identifiers": 96,
+    "exported_locals": 15,
+    "exported_returns": 9,
+    "exported_type_decls": 19
+  },
+  "functions": [
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "safe_both",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 6,
+      "line_end": 6,
+      "name": "safe_both",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149696,
+          "index": 0,
+          "line": 6,
+          "method_id": 107374182400,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "cmptest.c:<global>",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 14,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "safe_min",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 7,
+      "line_end": 7,
+      "name": "safe_min",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149697,
+          "index": 0,
+          "line": 7,
+          "method_id": 107374182402,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "unsafe_on_b",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 8,
+      "line_end": 8,
+      "name": "unsafe_on_b",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149698,
+          "index": 0,
+          "line": 8,
+          "method_id": 107374182403,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "unsafe_sizeof_a",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 9,
+      "line_end": 9,
+      "name": "unsafe_sizeof_a",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149699,
+          "index": 0,
+          "line": 9,
+          "method_id": 107374182404,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "safe_strncmp",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 10,
+      "line_end": 10,
+      "name": "safe_strncmp",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149700,
+          "index": 0,
+          "line": 10,
+          "method_id": 107374182405,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "unsafe_strncmp_b",
+      "id": 107374182406,
+      "is_external": false,
+      "line": 11,
+      "line_end": 11,
+      "name": "unsafe_strncmp_b",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149701,
+          "index": 0,
+          "line": 11,
+          "method_id": 107374182406,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "variable_n",
+      "id": 107374182407,
+      "is_external": false,
+      "line": 12,
+      "line_end": 12,
+      "name": "variable_n",
+      "parameters": [
+        {
+          "code": "int n",
+          "id": 111669149702,
+          "index": 0,
+          "line": 12,
+          "method_id": 107374182407,
+          "name": "n",
+          "type_full_name": "int"
+        }
+      ],
+      "signature": "int(int)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "ptr_operand",
+      "id": 107374182408,
+      "is_external": false,
+      "line": 13,
+      "line_end": 13,
+      "name": "ptr_operand",
+      "parameters": [
+        {
+          "code": "char* p",
+          "id": 111669149703,
+          "index": 0,
+          "line": 13,
+          "method_id": 107374182408,
+          "name": "p",
+          "type_full_name": "char*"
+        }
+      ],
+      "signature": "int(char*)"
+    },
+    {
+      "ast_parent_full_name": "cmptest.c:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "cmptest.c",
+      "full_name": "main",
+      "id": 107374182409,
+      "is_external": false,
+      "line": 14,
+      "line_end": 14,
+      "name": "main",
+      "parameters": [
+        {
+          "code": "void",
+          "id": 111669149704,
+          "index": 0,
+          "line": 14,
+          "method_id": 107374182409,
+          "name": "",
+          "type_full_name": "void"
+        }
+      ],
+      "signature": "int(void)"
+    },
+    {
+      "ast_parent_full_name": "<includes>:<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<includes>",
+      "full_name": "<includes>:<global>",
+      "id": 107374182410,
+      "is_external": false,
+      "line": 1,
+      "line_end": 0,
+      "name": "<global>",
+      "parameters": [],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "strncmp",
+      "id": 107374182411,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "strncmp",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149705,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149706,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p2",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p3",
+          "id": 111669149707,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182411,
+          "name": "p3",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.alloc",
+      "id": 107374182412,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.alloc",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149708,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149709,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182412,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "memcmp",
+      "id": 107374182413,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "memcmp",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149710,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149711,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p2",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p3",
+          "id": 111669149712,
+          "index": 2,
+          "line": 0,
+          "method_id": 107374182413,
+          "name": "p3",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.sizeOf",
+      "id": 107374182414,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.sizeOf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149713,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182415,
+      "is_external": true,
+      "line": 0,
+      "line_end": 0,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149714,
+          "index": 0,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149715,
+          "index": 1,
+          "line": 0,
+          "method_id": 107374182415,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "a",
+      "id": 68719476736,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "a",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476737,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476738,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "b",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476739,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476740,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "a",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476741,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "b",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476736,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476737,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476738,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476739,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476740,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476741,
+      "line": 6,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476742,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476743,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476744,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476745,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476746,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476747,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476748,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476749,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476750,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476751,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476752,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476753,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476754,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476755,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476756,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476757,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476758,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476759,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476760,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476761,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476762,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "b",
+      "id": 68719476763,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476764,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476765,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "b",
+      "id": 68719476766,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476767,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "char[64]",
+      "id": 68719476768,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "char[64]",
+      "ref_target_ids": [],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "b",
+      "id": 68719476769,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "char[4]",
+      "id": 68719476770,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "char[4]",
+      "ref_target_ids": [],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "a",
+      "id": 68719476771,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "b",
+      "id": 68719476772,
+      "line": 11,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "a",
+      "id": 68719476773,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476774,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476775,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476776,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476777,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "a",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476778,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "n",
+      "id": 68719476779,
+      "line": 12,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "b",
+      "id": 68719476780,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476781,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "p",
+      "id": 68719476782,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "p",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "b",
+      "id": 68719476783,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "b",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476742,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "a",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476743,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476744,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "b",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476745,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476746,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "a",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476747,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "b",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476748,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "a",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476749,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476750,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "b",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476751,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476752,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "a",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476753,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "b",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476754,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476755,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476756,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "b",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476757,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476758,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476759,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "b",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "a",
+      "id": 68719476760,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "a",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "a",
+      "id": 68719476761,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "a",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476762,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "b",
+      "id": 68719476763,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "b",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476764,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476765,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "a",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "b",
+      "id": 68719476766,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "b",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476767,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "a",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "char[64]",
+      "id": 68719476768,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "char[64]",
+      "ref_target_ids": [],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "b",
+      "id": 68719476769,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "b",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "char[4]",
+      "id": 68719476770,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "char[4]",
+      "ref_target_ids": [],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "a",
+      "id": 68719476771,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "a",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "b",
+      "id": 68719476772,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "b",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "a",
+      "id": 68719476773,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "a",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char[32]",
+      "id": 68719476774,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "char[32]",
+      "ref_target_ids": [],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476775,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "b",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char[16]",
+      "id": 68719476776,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "char[16]",
+      "ref_target_ids": [],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "a",
+      "id": 68719476777,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "a",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "b",
+      "id": 68719476778,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "b",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "n",
+      "id": 68719476779,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "n",
+      "ref_target_ids": [
+        111669149702
+      ],
+      "type_full_name": "int"
+    },
+    {
+      "code": "b",
+      "id": 68719476780,
+      "line": 13,
+      "method_id": 107374182408,
+      "name": "b",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char[8]",
+      "id": 68719476781,
+      "line": 13,
+      "method_id": 107374182408,
+      "name": "char[8]",
+      "ref_target_ids": [],
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "p",
+      "id": 68719476782,
+      "line": 13,
+      "method_id": 107374182408,
+      "name": "p",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "char*"
+    },
+    {
+      "code": "b",
+      "id": 68719476783,
+      "line": 13,
+      "method_id": 107374182408,
+      "name": "b",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "char[8]"
+    }
+  ],
+  "locals": [
+    {
+      "code": "char a[32]",
+      "id": 94489280512,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "a",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char b[32]",
+      "id": 94489280513,
+      "line": 6,
+      "method_id": 107374182400,
+      "name": "b",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char a[32]",
+      "id": 94489280514,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "a",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char b[8]",
+      "id": 94489280515,
+      "line": 7,
+      "method_id": 107374182402,
+      "name": "b",
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char a[32]",
+      "id": 94489280516,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "a",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char b[8]",
+      "id": 94489280517,
+      "line": 8,
+      "method_id": 107374182403,
+      "name": "b",
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char a[32]",
+      "id": 94489280518,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "a",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char b[8]",
+      "id": 94489280519,
+      "line": 9,
+      "method_id": 107374182404,
+      "name": "b",
+      "type_full_name": "char[8]"
+    },
+    {
+      "code": "char a[16]",
+      "id": 94489280520,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "a",
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char b[16]",
+      "id": 94489280521,
+      "line": 10,
+      "method_id": 107374182405,
+      "name": "b",
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char a[64]",
+      "id": 94489280522,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "a",
+      "type_full_name": "char[64]"
+    },
+    {
+      "code": "char b[4]",
+      "id": 94489280523,
+      "line": 11,
+      "method_id": 107374182406,
+      "name": "b",
+      "type_full_name": "char[4]"
+    },
+    {
+      "code": "char a[32]",
+      "id": 94489280524,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "a",
+      "type_full_name": "char[32]"
+    },
+    {
+      "code": "char b[16]",
+      "id": 94489280525,
+      "line": 12,
+      "method_id": 107374182407,
+      "name": "b",
+      "type_full_name": "char[16]"
+    },
+    {
+      "code": "char b[8]",
+      "id": 94489280526,
+      "line": 13,
+      "method_id": 107374182408,
+      "name": "b",
+      "type_full_name": "char[8]"
+    }
+  ],
+  "members": [],
+  "metadata": [
+    {
+      "language": "NEWC",
+      "root": "/tmp/cmp_scan/src",
+      "version": "0.1"
+    }
+  ],
+  "method_returns": [
+    {
+      "code": "RET",
+      "id": 124554051584,
+      "line": 6,
+      "method_id": 107374182400,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051593,
+      "line": 1,
+      "method_id": 107374182401,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051585,
+      "line": 7,
+      "method_id": 107374182402,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051586,
+      "line": 8,
+      "method_id": 107374182403,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051587,
+      "line": 9,
+      "method_id": 107374182404,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051588,
+      "line": 10,
+      "method_id": 107374182405,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 11,
+      "method_id": 107374182406,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051590,
+      "line": 12,
+      "method_id": 107374182407,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051591,
+      "line": 13,
+      "method_id": 107374182408,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051592,
+      "line": 14,
+      "method_id": 107374182409,
+      "type_full_name": "int"
+    },
+    {
+      "code": "RET",
+      "id": 124554051594,
+      "line": 1,
+      "method_id": 107374182410,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051595,
+      "line": 0,
+      "method_id": 107374182411,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051596,
+      "line": 0,
+      "method_id": 107374182412,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051597,
+      "line": 0,
+      "method_id": 107374182413,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051598,
+      "line": 0,
+      "method_id": 107374182414,
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051599,
+      "line": 0,
+      "method_id": 107374182415,
+      "type_full_name": "ANY"
+    }
+  ],
+  "returns": [
+    {
+      "code": "return memcmp(a, b, 32);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920768,
+          30064771076
+        ]
+      },
+      "function_id": 107374182400,
+      "id": 141733920768,
+      "is_void": false,
+      "line": 6,
+      "value_ref": {
+        "code": "return memcmp(a, b, 32);",
+        "id": 30064771076,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return memcmp(a, b, 8);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920769,
+          30064771081
+        ]
+      },
+      "function_id": 107374182402,
+      "id": 141733920769,
+      "is_void": false,
+      "line": 7,
+      "value_ref": {
+        "code": "return memcmp(a, b, 8);",
+        "id": 30064771081,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return memcmp(a, b, 32);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920770,
+          30064771086
+        ]
+      },
+      "function_id": 107374182403,
+      "id": 141733920770,
+      "is_void": false,
+      "line": 8,
+      "value_ref": {
+        "code": "return memcmp(a, b, 32);",
+        "id": 30064771086,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return memcmp(a, b, sizeof(a));",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920771,
+          30064771091
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 141733920771,
+      "is_void": false,
+      "line": 9,
+      "value_ref": {
+        "code": "return memcmp(a, b, sizeof(a));",
+        "id": 30064771091,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return strncmp(a, b, 16);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920772,
+          30064771097
+        ]
+      },
+      "function_id": 107374182405,
+      "id": 141733920772,
+      "is_void": false,
+      "line": 10,
+      "value_ref": {
+        "code": "return strncmp(a, b, 16);",
+        "id": 30064771097,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return strncmp(a, b, 64);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920773,
+          30064771102
+        ]
+      },
+      "function_id": 107374182406,
+      "id": 141733920773,
+      "is_void": false,
+      "line": 11,
+      "value_ref": {
+        "code": "return strncmp(a, b, 64);",
+        "id": 30064771102,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return memcmp(a, b, n);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920774,
+          30064771107
+        ]
+      },
+      "function_id": 107374182407,
+      "id": 141733920774,
+      "is_void": false,
+      "line": 12,
+      "value_ref": {
+        "code": "return memcmp(a, b, n);",
+        "id": 30064771107,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return memcmp(p, b, 8);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920775,
+          30064771110
+        ]
+      },
+      "function_id": 107374182408,
+      "id": 141733920775,
+      "is_void": false,
+      "line": 13,
+      "value_ref": {
+        "code": "return memcmp(p, b, 8);",
+        "id": 30064771110,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return 0;",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920776,
+          90194313237
+        ]
+      },
+      "function_id": 107374182409,
+      "id": 141733920776,
+      "is_void": false,
+      "line": 14,
+      "value_ref": {
+        "code": "0",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    }
+  ],
+  "schema": "portable-program-facts/0.3",
+  "type_decls": [
+    {
+      "file": "cmptest.c",
+      "full_name": "safe_both",
+      "id": 167503724544,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 6,
+      "name": "safe_both"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "safe_min",
+      "id": 167503724545,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 7,
+      "name": "safe_min"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "unsafe_on_b",
+      "id": 167503724546,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 8,
+      "name": "unsafe_on_b"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "unsafe_sizeof_a",
+      "id": 167503724547,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 9,
+      "name": "unsafe_sizeof_a"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "safe_strncmp",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 10,
+      "name": "safe_strncmp"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "unsafe_strncmp_b",
+      "id": 167503724549,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 11,
+      "name": "unsafe_strncmp_b"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "variable_n",
+      "id": 167503724550,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 12,
+      "name": "variable_n"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "ptr_operand",
+      "id": 167503724551,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 13,
+      "name": "ptr_operand"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "main",
+      "id": 167503724552,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 14,
+      "name": "main"
+    },
+    {
+      "file": "cmptest.c",
+      "full_name": "cmptest.c:<global>",
+      "id": 167503724553,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 1,
+      "name": "<global>"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "ANY",
+      "id": 167503724554,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "ANY"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char*",
+      "id": 167503724555,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char*"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[16]",
+      "id": 167503724556,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[16]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[32]",
+      "id": 167503724557,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[32]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[4]",
+      "id": 167503724558,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[4]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[64]",
+      "id": 167503724559,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[64]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "char[8]",
+      "id": 167503724560,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "char[8]"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "int",
+      "id": 167503724561,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "int"
+    },
+    {
+      "file": "<includes>",
+      "full_name": "void",
+      "id": 167503724562,
+      "inherits_from": [],
+      "is_external": true,
+      "line": 0,
+      "name": "void"
+    }
+  ]
+}

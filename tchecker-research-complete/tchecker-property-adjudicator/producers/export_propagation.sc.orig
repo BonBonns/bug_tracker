@@ -1,0 +1,93 @@
+// JS-PROV-PROP — production relation-preservation producer.
+//
+// Preserves the source -> transform(s) -> sink relationship that the analyzer's
+// OWN dataflow engine (OSS dataflow / DDG, reachableByFlows) establishes. This is
+// NOT the proof shim: no lexical code-string walk, no single-file assumption.
+//
+//   * relation established by data-dependence (reachableByFlows), not string match
+//   * every node carries a STABLE CPG node id; code is display-only, never identity
+//   * transform order is taken from the established flow
+//   * interprocedural only where the dataflow engine resolves the hop; unresolved
+//     hops are simply absent from the flow -> we ABSTAIN, never bridge
+//   * every emitted relation carries provenance (the mechanism that established it)
+//   * transform IDENTITY resolution is deferred to a join with the existing R-series
+//     identity facts (require_bindings/import_bindings) -- this producer emits the
+//     callee node id + name and does not re-derive identity (no logic duplication)
+//
+// Emits propagation_relations.tsv (one row per established or abstained sink):
+//   sink_node, sink_line, status(ESTABLISHED|ABSTAINED), source_node, source_line,
+//   source_code, transform_chain (order:callNode:callee ; ...), qualification,
+//   provenance
+//
+// Gated: only the sink nodes handed in (here: JSON.stringify calls) are analyzed.
+import io.shiftleft.semanticcpg.language._
+import io.joern.dataflowengineoss.language._
+import io.joern.dataflowengineoss.queryengine.EngineContext
+import io.shiftleft.codepropertygraph.generated.nodes
+
+@main def exec(cpgFile: String, outDir: String) = {
+  importCpg(cpgFile); new java.io.File(outDir).mkdirs()
+  implicit val ec: EngineContext = EngineContext()
+  def cl(s: String) = Option(s).getOrElse("").replace("\n", " ").replace("\t", " ").take(80)
+  def ln(n: nodes.StoredNode) = n match {
+    case c: nodes.CfgNode => c.lineNumber.map(_.toString).getOrElse("")
+    case _ => ""
+  }
+  val w = new java.io.PrintWriter(new java.io.File(s"$outDir/propagation_relations.tsv"), "UTF-8")
+
+  // request-shaped source seed. NOTE: this endpoint is provisional — the SourceFact
+  // hierarchy milestone replaces it with the provenance-engine origin. The RELATION
+  // being productionized here (transform chain + order + identity join) is dataflow-
+  // based regardless of how the source endpoint is chosen.
+  def srcs = cpg.call.name("<operator>.fieldAccess")
+    .filter(_.code.matches("""(?s).*\breq(uest)?\.(body|payload|query|params)\b.*"""))
+
+  // gated sink set: JSON.stringify argument (the serialize class)
+  def sinkArgs = cpg.call.name("stringify").argument.argumentIndex(1)
+
+  try {
+    // map each sink-arg node to the stringify call that owns it (for reporting)
+    val sinkCallByArg = cpg.call.name("stringify").l.flatMap { c =>
+      c.argument.argumentIndex(1).l.map(a => a.id -> c)
+    }.toMap
+
+    val flows = sinkArgs.reachableByFlows(srcs).l
+    // group flows by their terminal (sink-arg) node id
+    val bySink = flows.groupBy(p => p.elements.last.id)
+
+    // every gated sink: ESTABLISHED if a flow exists, else ABSTAINED
+    sinkArgs.l.foreach { snkArg =>
+      val sinkCall = sinkCallByArg.get(snkArg.id)
+      val sinkNode = sinkCall.map(_.id).getOrElse(snkArg.id)
+      val sinkLine = sinkCall.map(c => ln(c)).getOrElse(ln(snkArg))
+      bySink.get(snkArg.id) match {
+        case Some(ps) =>
+          // one row PER DISTINCT ORIGIN root (multi reaching defs stay separate,
+          // not merged); if several flows share a root, keep the shortest.
+          ps.groupBy(_.elements.head.id).foreach { case (_, group) =>
+            val p = group.minBy(_.elements.size)
+            val els = p.elements
+            val source = els.head
+            val transforms = els.collect { case c: nodes.Call => c }.filter { c =>
+              !c.name.startsWith("<operator>") && c.name != "stringify" &&
+              c.id != source.id
+            }.zipWithIndex.map { case (c, i) => s"$i:${c.id}:${cl(c.name)}" }
+            w.println(Seq(
+              sinkNode.toString, sinkLine, "ESTABLISHED",
+              source.id.toString, ln(source), cl(source.code),
+              transforms.mkString(" ; "),
+              "ESTABLISHED_DATAFLOW(may; not proven necessary)",
+              "oss_dataflow.reachableByFlows(DDG); identity via R14/R23b join"
+            ).mkString("\t"))
+          }
+        case None =>
+          w.println(Seq(
+            sinkNode.toString, sinkLine, "ABSTAINED",
+            "", "", "", "", "UNRESOLVED",
+            "no data-dependence flow from a request source established (no bridge)"
+          ).mkString("\t"))
+      }
+    }
+  } finally w.close()
+  println(s"PROP_RELATIONS_COMPLETE: $outDir")
+}

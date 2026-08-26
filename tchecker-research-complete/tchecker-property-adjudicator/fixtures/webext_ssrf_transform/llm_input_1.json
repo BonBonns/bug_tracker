@@ -1,0 +1,78 @@
+{
+  "schema": "tchecker-llm-packet/1.0",
+  "round": 1,
+  "finding_id": "ssrf:external-message-rewrite-fetch.js#sink30064771073",
+  "property_id": "xf0.controls_request_host",
+  "alternative": {
+    "origin": {
+      "origin_family": "WEBEXT_EXTERNAL_MESSAGE_INPUT",
+      "source_node_id": "30064771075",
+      "source_code": "message.url",
+      "source_line": 6,
+      "source_containing_statement": "return fetch(rewriteTarget(message.url))",
+      "source_containing_function": "external-message-rewrite-fetch.js::program:<lambda>0",
+      "established_by": "STATIC_PROVENANCE"
+    },
+    "steps": [
+      {
+        "path_order": 0,
+        "node_id": "30064771074",
+        "node_kind": "CALL",
+        "callee_name": "rewriteTarget",
+        "path_membership": "ESTABLISHED",
+        "static_definition_identity": null,
+        "static_definition_identity_status": "UNKNOWN",
+        "trace_callee_identity": null,
+        "trace_callee_identity_status": "NOT_ESTABLISHED",
+        "definition_status": "UNKNOWN",
+        "callsite_code": "rewriteTarget(message.url)",
+        "containing_statement": "return fetch(rewriteTarget(message.url))",
+        "containing_function": "external-message-rewrite-fetch.js::program:<lambda>0",
+        "definition_body": null
+      },
+      {
+        "path_order": 1,
+        "node_id": "30064771072",
+        "node_kind": "CALL",
+        "callee_name": "normalizeDestination",
+        "path_membership": "ESTABLISHED",
+        "static_definition_identity": null,
+        "static_definition_identity_status": "UNKNOWN",
+        "trace_callee_identity": null,
+        "trace_callee_identity_status": "NOT_ESTABLISHED",
+        "definition_status": "UNKNOWN",
+        "callsite_code": "normalizeDestination(value)",
+        "containing_statement": "return normalizeDestination(value)",
+        "containing_function": "external-message-rewrite-fetch.js::program:rewriteTarget",
+        "definition_body": null
+      }
+    ],
+    "sink": {
+      "node_id": "30064771073",
+      "line": 6,
+      "kind": "fetch",
+      "sink_model": "DIRECT_NETWORK_CALL",
+      "class": "ssrf",
+      "downstream_primitive": "fetch",
+      "expression": "fetch(rewriteTarget(message.url))",
+      "containing_statement": "return fetch(rewriteTarget(message.url))",
+      "containing_function": "external-message-rewrite-fetch.js::program:<lambda>0"
+    },
+    "qualification": "ESTABLISHED_DATAFLOW",
+    "necessity": "MAY_NOT_MUST"
+  },
+  "PRIOR_SEMANTIC_HINTS_ADVISORY": [],
+  "unresolved_subject": {
+    "call_node_id": "30064771074",
+    "path_order": "0",
+    "deterministic_status": "UNKNOWN"
+  },
+  "QUESTION": "The implementation of `rewriteTarget` (step at path_order 0) was not statically resolved and no trace-backed body is available. Based ONLY on the supplied evidence, determine whether the property can be established. Return UNKNOWN if the evidence is insufficient; do NOT infer behavior from the function name. Does the on-path call `rewriteTarget` at path position 0 (static definition identity UNKNOWN; trace callee identity NOT_ESTABLISHED) fix or restrict the HOST of the outbound request to a value the attacker cannot choose, or can attacker influence still determine the destination host? Path, query, and request body content are OUT OF SCOPE -- answer only about HOST control.",
+  "answer_contract": {
+    "proposed_value": "SAFE | UNSAFE | UNKNOWN",
+    "confidence": "LOW | MEDIUM | HIGH",
+    "source_must_be": "LLM",
+    "rationale": "string",
+    "note": "This is a semantic HINT over unresolved semantics, not a fact."
+  }
+}

@@ -1,0 +1,11 @@
+x5: 0
+RET 6 objectStaticExact params=[box, source] positions=[0, 1]
+RET 34 objectStaticDifferent params=[box, source] positions=[0, 1]
+RET 68 objectStaticOverwrite params=[box, source] positions=[0, 1]
+RET 102 objectDynamicWrite params=[box, key, source] positions=[0, 2]
+RET 141 objectDynamicRead params=[box, key, source] positions=[0, 1, 2]
+RET 180 arrayStaticExact params=[arr, source] positions=[0, 1]
+RET 207 arrayStaticDifferent params=[arr, source] positions=[0, 1]
+RET 240 arrayDynamicWrite params=[arr, i, source] positions=[0, 2]
+RET 278 arrayDynamicRead params=[arr, i, source] positions=[0, 1, 2]
+RET 316 differentReceiver params=[a, b, key, source] positions=[0]

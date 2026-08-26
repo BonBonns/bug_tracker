@@ -1,0 +1,270 @@
+{
+ "sides": [
+  {
+   "abstained": 5,
+   "abstention_taxonomy": {
+    "EXTERNAL_OR_UNRESOLVED_CALL:IsUserVerifyingPlatformAuthenticatorAvailableInternal": 1,
+    "LOCAL_ONLY_OUTPARAM_OR_UNMODELED_WRITES": 2,
+    "OPERATOR:greaterEqualsThan": 1,
+    "OPERATOR:logicalAnd": 1
+   },
+   "cpp_memory": {
+    "ambiguous_indirect_writes": 0,
+    "compound_assignments": 0,
+    "exact_deref_reads": 0,
+    "exact_field_accesses": 20,
+    "exact_index_accesses": 1,
+    "exact_indirect_writes": 0,
+    "exact_pointer_param_writes": 0,
+    "pointer_bindings": 3,
+    "reaching_def_facts": 13,
+    "synthetic_locations": 21,
+    "unknown_index_accesses": 0,
+    "unresolved_pointer_param_writes": 0
+   },
+   "functions_analyzed": 16,
+   "label": "c_cpp",
+   "oob_review": {
+    "candidates": 0,
+    "out_dir": "/tmp/e2e/pwork/oob_review",
+    "packets": 0
+   },
+   "proven_flows": 0,
+   "rows": [
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.WinWebAuthnManager:void()",
+     "function": "WinWebAuthnManager",
+     "function_id": 107374182400,
+     "line": 50,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.~WinWebAuthnManager:ANY()",
+     "function": "~WinWebAuthnManager",
+     "function_id": 107374182401,
+     "line": 102,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.Initialize:void()",
+     "function": "Initialize",
+     "function_id": 107374182402,
+     "line": 110,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "abstention": "LOCAL_ONLY_OUTPARAM_OR_UNMODELED_WRITES",
+     "completeness": "UNKNOWN",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.Get:WinWebAuthnManager()",
+     "function": "Get",
+     "function_id": 107374182403,
+     "line": 118,
+     "may": [],
+     "proven": [],
+     "resolution": "UNRESOLVED",
+     "unknown": true
+    },
+    {
+     "abstention": "LOCAL_ONLY_OUTPARAM_OR_UNMODELED_WRITES",
+     "completeness": "UNKNOWN",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.GetWebAuthNApiVersion:uint32_t()",
+     "function": "GetWebAuthNApiVersion",
+     "function_id": 107374182404,
+     "line": 123,
+     "may": [],
+     "proven": [],
+     "resolution": "UNRESOLVED",
+     "unknown": true
+    },
+    {
+     "abstention": "OPERATOR:greaterEqualsThan",
+     "completeness": "UNKNOWN",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.AreWebAuthNApisAvailable:bool()",
+     "function": "AreWebAuthNApisAvailable",
+     "function_id": 107374182405,
+     "line": 128,
+     "may": [],
+     "proven": [],
+     "resolution": "UNRESOLVED",
+     "unknown": true
+    },
+    {
+     "abstention": "OPERATOR:logicalAnd",
+     "completeness": "UNKNOWN",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.IsUserVerifyingPlatformAuthenticatorAvailableInternal:bool()",
+     "function": "IsUserVerifyingPlatformAuthenticatorAvailableInternal",
+     "function_id": 107374182406,
+     "line": 133,
+     "may": [],
+     "proven": [],
+     "resolution": "UNRESOLVED",
+     "unknown": true
+    },
+    {
+     "abstention": "EXTERNAL_OR_UNRESOLVED_CALL:IsUserVerifyingPlatformAuthenticatorAvailableInternal",
+     "completeness": "UNKNOWN",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.IsUserVerifyingPlatformAuthenticatorAvailable:bool()",
+     "function": "IsUserVerifyingPlatformAuthenticatorAvailable",
+     "function_id": 107374182407,
+     "line": 140,
+     "may": [],
+     "proven": [],
+     "resolution": "UNRESOLVED",
+     "unknown": true
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.AbortTransaction:void(uint64_t&,nsresult&)",
+     "function": "AbortTransaction",
+     "function_id": 107374182408,
+     "line": 148,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.MaybeClearTransaction:void(PWebAuthnTransactionParent*)",
+     "function": "MaybeClearTransaction",
+     "function_id": 107374182409,
+     "line": 154,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.ClearTransaction:void()",
+     "function": "ClearTransaction",
+     "function_id": 107374182410,
+     "line": 163,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.Register:void(PWebAuthnTransactionParent*,uint64_t&,WebAuthnMakeCredentialInfo&)",
+     "function": "Register",
+     "function_id": 107374182411,
+     "line": 165,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.MaybeAbortRegister:void(uint64_t&,nsresult&)",
+     "function": "MaybeAbortRegister",
+     "function_id": 107374182412,
+     "line": 529,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.Sign:void(PWebAuthnTransactionParent*,uint64_t&,WebAuthnGetAssertionInfo&)",
+     "function": "Sign",
+     "function_id": 107374182413,
+     "line": 534,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.MaybeAbortSign:void(uint64_t&,nsresult&)",
+     "function": "MaybeAbortSign",
+     "function_id": 107374182414,
+     "line": 747,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    },
+    {
+     "completeness": "COMPLETE",
+     "file": "WinWebAuthnManager.cpp",
+     "full_name": "WinWebAuthnManager.Cancel:void(PWebAuthnTransactionParent*,Tainted&)",
+     "function": "Cancel",
+     "function_id": 107374182415,
+     "line": 752,
+     "may": [],
+     "proven": [],
+     "resolution": "EXACT",
+     "unknown": false
+    }
+   ],
+   "source_selection": {
+    "groups": {
+     "headers": {
+      "cap": 20,
+      "discovered": 0,
+      "eligible": 0,
+      "excluded_by_directory_policy": 0,
+      "extensions": [
+       ".h",
+       ".hh",
+       ".hpp"
+      ],
+      "omitted_by_cap": 0,
+      "selected": 0,
+      "selected_paths": []
+     },
+     "implementations": {
+      "cap": 40,
+      "discovered": 1,
+      "eligible": 1,
+      "excluded_by_directory_policy": 0,
+      "extensions": [
+       ".c",
+       ".cc",
+       ".cpp",
+       ".cxx"
+      ],
+      "omitted_by_cap": 0,
+      "selected": 1,
+      "selected_paths": [
+       "WinWebAuthnManager.cpp"
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "target": "/tmp/e2e/patched"
+}

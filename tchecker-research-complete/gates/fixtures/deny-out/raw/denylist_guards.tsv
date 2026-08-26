@@ -1,0 +1,4 @@
+lib/denylist-escaped.js	lib/denylist-escaped.js::program:allowedEscaped	6	EXACT	DANGEROUS.includes(key.toLowerCase())	false
+lib/denylist-exact-consumer.js	lib/denylist-exact-consumer.js::program:allowedExact	5	EXACT	DANGEROUS.includes(key.toLowerCase())	false
+lib/denylist-normalized.js	lib/denylist-normalized.js::program:allowedNormalized	6	NORMALIZED	DANGEROUS.includes(stripMeta(key))	true
+lib/denylist-vuln.js	lib/denylist-vuln.js::program:allowedMimeTypes	8	EXACT	DANGEROUS.includes(key.toLowerCase())	false

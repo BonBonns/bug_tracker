@@ -1,0 +1,230 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate9.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			44	"./gate9.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate9.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate9.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_CLASS		1		0	2			11	A	
+7	AST	NULL		1		0	2					
+8	AST	NULL		1		1	2					
+9	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	1		2	2			11	"A"	
+10	Artificial	CFG_FUNC_ENTRY		1		0	9				"A"	
+11	Artificial	CFG_FUNC_EXIT		1		0	9				"A"	
+12	AST	AST_STMT_LIST		1		0	9					
+13	AST	AST_PROP_DECL	MODIFIER_PUBLIC	2		0	9	A				
+14	AST	AST_PROP_ELEM		2		0	9	A				
+15	AST	string		2	"value"	0	9	A				
+16	AST	NULL		2		1	9	A				
+17	AST	AST_METHOD		4		1	9	A		6	setValue	
+18	Artificial	CFG_FUNC_ENTRY		4		0	17				setValue	
+19	Artificial	CFG_FUNC_EXIT		4		0	17				setValue	
+20	AST	AST_PARAM_LIST		4		0	17	A				
+21	AST	AST_PARAM		4		0	17	A			v	
+22	AST	NULL		4		0	17	A				
+23	AST	string		4	"v"	1	17	A				
+24	AST	NULL		4		2	17	A				
+25	AST	NULL		4		1	17	A				
+26	AST	AST_STMT_LIST		4		2	17	A				
+27	AST	NULL		4		3	17	A				
+28	AST	AST_ASSIGN		5		0	17	A				
+29	AST	AST_PROP		5		0	17	A				
+30	AST	AST_VAR		5		0	17	A			this	
+31	AST	string		5	"this"	0	17	A				
+32	AST	string		5	"value"	1	17	A				
+33	AST	AST_VAR		5		1	17	A			v	
+34	AST	string		5	"v"	0	17	A				
+35	AST	AST_METHOD		8		2	9	A		10	readValue	
+36	Artificial	CFG_FUNC_ENTRY		8		0	35				readValue	
+37	Artificial	CFG_FUNC_EXIT		8		0	35				readValue	
+38	AST	AST_PARAM_LIST		8		0	35	A				
+39	AST	NULL		8		1	35	A				
+40	AST	AST_STMT_LIST		8		2	35	A				
+41	AST	NULL		8		3	35	A				
+42	AST	AST_RETURN		9		0	35	A				
+43	AST	AST_PROP		9		0	35	A				
+44	AST	AST_VAR		9		0	35	A			this	
+45	AST	string		9	"this"	0	35	A				
+46	AST	string		9	"value"	1	35	A				
+47	AST	AST_CLASS		13		1	2			15	Holder	
+48	AST	NULL		13		0	2					
+49	AST	NULL		13		1	2					
+50	AST	AST_TOPLEVEL	TOPLEVEL_CLASS	13		2	2			15	"Holder"	
+51	Artificial	CFG_FUNC_ENTRY		13		0	50				"Holder"	
+52	Artificial	CFG_FUNC_EXIT		13		0	50				"Holder"	
+53	AST	AST_STMT_LIST		13		0	50					
+54	AST	AST_PROP_DECL	MODIFIER_PUBLIC	14		0	50	Holder				
+55	AST	AST_PROP_ELEM		14		0	50	Holder				
+56	AST	string		14	"worker"	0	50	Holder				
+57	AST	NULL		14		1	50	Holder				
+58	AST	AST_FUNC_DECL		17		2	2			19	store	
+59	Artificial	CFG_FUNC_ENTRY		17		0	58				store	
+60	Artificial	CFG_FUNC_EXIT		17		0	58				store	
+61	AST	AST_PARAM_LIST		17		0	58					
+62	AST	AST_PARAM		17		0	58				h	
+63	AST	AST_NAME		17		0	58				Holder	
+64	AST	string		17	"Holder"	0	58					
+65	AST	string		17	"h"	1	58					
+66	AST	NULL		17		2	58					
+67	AST	AST_PARAM		17		1	58				input	
+68	AST	NULL		17		0	58					
+69	AST	string		17	"input"	1	58					
+70	AST	NULL		17		2	58					
+71	AST	NULL		17		1	58					
+72	AST	AST_STMT_LIST		17		2	58					
+73	AST	NULL		17		3	58					
+74	AST	AST_METHOD_CALL		18		0	58					
+75	AST	AST_PROP		18		0	58					
+76	AST	AST_VAR		18		0	58				h	
+77	AST	string		18	"h"	0	58					
+78	AST	string		18	"worker"	1	58					
+79	AST	string		18	"setValue"	1	58					
+80	AST	AST_ARG_LIST		18		2	58					
+81	AST	AST_VAR		18		0	58				input	
+82	AST	string		18	"input"	0	58					
+83	AST	AST_FUNC_DECL		21		3	2			23	load	
+84	Artificial	CFG_FUNC_ENTRY		21		0	83				load	
+85	Artificial	CFG_FUNC_EXIT		21		0	83				load	
+86	AST	AST_PARAM_LIST		21		0	83					
+87	AST	AST_PARAM		21		0	83				h	
+88	AST	AST_NAME		21		0	83				Holder	
+89	AST	string		21	"Holder"	0	83					
+90	AST	string		21	"h"	1	83					
+91	AST	NULL		21		2	83					
+92	AST	NULL		21		1	83					
+93	AST	AST_STMT_LIST		21		2	83					
+94	AST	NULL		21		3	83					
+95	AST	AST_RETURN		22		0	83					
+96	AST	AST_METHOD_CALL		22		0	83					
+97	AST	AST_PROP		22		0	83					
+98	AST	AST_VAR		22		0	83				h	
+99	AST	string		22	"h"	0	83					
+100	AST	string		22	"worker"	1	83					
+101	AST	string		22	"readValue"	1	83					
+102	AST	AST_ARG_LIST		0		2	83					
+103	AST	AST_FUNC_DECL		25		4	2			28	topState	
+104	Artificial	CFG_FUNC_ENTRY		25		0	103				topState	
+105	Artificial	CFG_FUNC_EXIT		25		0	103				topState	
+106	AST	AST_PARAM_LIST		25		0	103					
+107	AST	AST_PARAM		25		0	103				h	
+108	AST	AST_NAME		25		0	103				Holder	
+109	AST	string		25	"Holder"	0	103					
+110	AST	string		25	"h"	1	103					
+111	AST	NULL		25		2	103					
+112	AST	AST_PARAM		25		1	103				source	
+113	AST	NULL		25		0	103					
+114	AST	string		25	"source"	1	103					
+115	AST	NULL		25		2	103					
+116	AST	NULL		25		1	103					
+117	AST	AST_STMT_LIST		25		2	103					
+118	AST	NULL		25		3	103					
+119	AST	AST_CALL		26		0	103					
+120	AST	AST_NAME		26		0	103				store	
+121	AST	string		26	"store"	0	103					
+122	AST	AST_ARG_LIST		26		1	103					
+123	AST	AST_VAR		26		0	103				h	
+124	AST	string		26	"h"	0	103					
+125	AST	AST_VAR		26		1	103				source	
+126	AST	string		26	"source"	0	103					
+127	AST	AST_RETURN		27		1	103					
+128	AST	AST_CALL		27		0	103					
+129	AST	AST_NAME		27		0	103				load	
+130	AST	string		27	"load"	0	103					
+131	AST	AST_ARG_LIST		27		1	103					
+132	AST	AST_VAR		27		0	103				h	
+133	AST	string		27	"h"	0	103					
+134	AST	AST_FUNC_DECL		30		5	2			33	topConstant	
+135	Artificial	CFG_FUNC_ENTRY		30		0	134				topConstant	
+136	Artificial	CFG_FUNC_EXIT		30		0	134				topConstant	
+137	AST	AST_PARAM_LIST		30		0	134					
+138	AST	AST_PARAM		30		0	134				h	
+139	AST	AST_NAME		30		0	134				Holder	
+140	AST	string		30	"Holder"	0	134					
+141	AST	string		30	"h"	1	134					
+142	AST	NULL		30		2	134					
+143	AST	AST_PARAM		30		1	134				source	
+144	AST	NULL		30		0	134					
+145	AST	string		30	"source"	1	134					
+146	AST	NULL		30		2	134					
+147	AST	NULL		30		1	134					
+148	AST	AST_STMT_LIST		30		2	134					
+149	AST	NULL		30		3	134					
+150	AST	AST_CALL		31		0	134					
+151	AST	AST_NAME		31		0	134				store	
+152	AST	string		31	"store"	0	134					
+153	AST	AST_ARG_LIST		31		1	134					
+154	AST	AST_VAR		31		0	134				h	
+155	AST	string		31	"h"	0	134					
+156	AST	string		31	"CONST"	1	134					
+157	AST	AST_RETURN		32		1	134					
+158	AST	AST_CALL		32		0	134					
+159	AST	AST_NAME		32		0	134				load	
+160	AST	string		32	"load"	0	134					
+161	AST	AST_ARG_LIST		32		1	134					
+162	AST	AST_VAR		32		0	134				h	
+163	AST	string		32	"h"	0	134					
+164	AST	AST_FUNC_DECL		35		6	2			38	directState	
+165	Artificial	CFG_FUNC_ENTRY		35		0	164				directState	
+166	Artificial	CFG_FUNC_EXIT		35		0	164				directState	
+167	AST	AST_PARAM_LIST		35		0	164					
+168	AST	AST_PARAM		35		0	164				h	
+169	AST	AST_NAME		35		0	164				Holder	
+170	AST	string		35	"Holder"	0	164					
+171	AST	string		35	"h"	1	164					
+172	AST	NULL		35		2	164					
+173	AST	AST_PARAM		35		1	164				source	
+174	AST	NULL		35		0	164					
+175	AST	string		35	"source"	1	164					
+176	AST	NULL		35		2	164					
+177	AST	NULL		35		1	164					
+178	AST	AST_STMT_LIST		35		2	164					
+179	AST	NULL		35		3	164					
+180	AST	AST_METHOD_CALL		36		0	164					
+181	AST	AST_PROP		36		0	164					
+182	AST	AST_VAR		36		0	164				h	
+183	AST	string		36	"h"	0	164					
+184	AST	string		36	"worker"	1	164					
+185	AST	string		36	"setValue"	1	164					
+186	AST	AST_ARG_LIST		36		2	164					
+187	AST	AST_VAR		36		0	164				source	
+188	AST	string		36	"source"	0	164					
+189	AST	AST_RETURN		37		1	164					
+190	AST	AST_METHOD_CALL		37		0	164					
+191	AST	AST_PROP		37		0	164					
+192	AST	AST_VAR		37		0	164				h	
+193	AST	string		37	"h"	0	164					
+194	AST	string		37	"worker"	1	164					
+195	AST	string		37	"readValue"	1	164					
+196	AST	AST_ARG_LIST		0		2	164					
+197	AST	AST_FUNC_DECL		40		7	2			43	directConstant	
+198	Artificial	CFG_FUNC_ENTRY		40		0	197				directConstant	
+199	Artificial	CFG_FUNC_EXIT		40		0	197				directConstant	
+200	AST	AST_PARAM_LIST		40		0	197					
+201	AST	AST_PARAM		40		0	197				h	
+202	AST	AST_NAME		40		0	197				Holder	
+203	AST	string		40	"Holder"	0	197					
+204	AST	string		40	"h"	1	197					
+205	AST	NULL		40		2	197					
+206	AST	AST_PARAM		40		1	197				source	
+207	AST	NULL		40		0	197					
+208	AST	string		40	"source"	1	197					
+209	AST	NULL		40		2	197					
+210	AST	NULL		40		1	197					
+211	AST	AST_STMT_LIST		40		2	197					
+212	AST	NULL		40		3	197					
+213	AST	AST_METHOD_CALL		41		0	197					
+214	AST	AST_PROP		41		0	197					
+215	AST	AST_VAR		41		0	197				h	
+216	AST	string		41	"h"	0	197					
+217	AST	string		41	"worker"	1	197					
+218	AST	string		41	"setValue"	1	197					
+219	AST	AST_ARG_LIST		41		2	197					
+220	AST	string		41	"CONST"	0	197					
+221	AST	AST_RETURN		42		1	197					
+222	AST	AST_METHOD_CALL		42		0	197					
+223	AST	AST_PROP		42		0	197					
+224	AST	AST_VAR		42		0	197				h	
+225	AST	string		42	"h"	0	197					
+226	AST	string		42	"worker"	1	197					
+227	AST	string		42	"readValue"	1	197					
+228	AST	AST_ARG_LIST		0		2	197					

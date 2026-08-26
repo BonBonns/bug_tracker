@@ -1,0 +1,7 @@
+PASS must-alias write -> strong update, EXACT proven={1}
+PASS may-alias write -> weak, POSSIBLE_UNBOUNDED may={1}, unknown=true (unset stays possible)
+PASS distinct identity -> no cross-flow, abstain
+PASS unknown writer identity -> its effect is not applied; read abstains
+PASS identity tokens do not leak into provenance origins
+PASS must<=>singleton and MAY-cannot-be-EXACT enforced by the record
+CORE_S02=6/6

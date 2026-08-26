@@ -1,0 +1,34 @@
+PASS import { f }        -> establishes local -> exported f
+PASS import { f as g }   -> establishes g -> exported f (source member, not alias)
+PASS default import      -> ABSTAINS (member is the local alias, not `default`)
+PASS namespace import    -> ABSTAINS; never fabricates a member named `ns`
+PASS re-export dependency -> RESOLVES via the R26 chain hop (was: ABSTAINS)
+PASS every established fact names its target file and source member
+PASS evidence always starts IMPORT_NODE+EXPORT_ASSIGNMENT (never the lowered require form)
+PASS observed and established counts reported separately
+PASS no established member is absent from its target module's exports
+PASS R26 re-export chain resolves to the terminal declaration
+PASS R26 the full chain is recorded, not just the endpoint
+PASS R26 chain-derived facts carry a distinct evidence label
+PASS R26 depth bound recorded on the fact
+PASS R26 re-export of a MISSING member abstains
+PASS R26 TRUE non-terminating cycle abstains via the cycle guard
+PASS R26 terminating mutual re-export still resolves (not over-blocked)
+PASS R26 export * still abstains (no member identity to chain to)
+PASS R25 established ESM bindings reach the L1 consumer
+PASS R25 DECISIVE NEGATIVE: no ABSTAINED binding moves downstream
+PASS R25 every downstream move has an ESTABLISHED R23b record
+PASS R25 namespace import never reaches the consumer
+PASS R25 default import never reaches the consumer
+PASS R25 re-export reaches the consumer ONLY because R26 established it
+PASS R25 every ESM-evidenced L1 fact is traceable to its enabling binding
+PASS R25 CommonJS evidence label is never used for an ESM-derived fact
+PASS R26 single-hop re-export resolves to the real declaration
+PASS R26 CHAINED re-export (top->mid->base) resolves transitively
+PASS R26 chain is recorded on the fact for traceability
+PASS R26 re-export of a member the target does NOT export ABSTAINS
+PASS R26 CYCLE terminates and abstains (never loops)
+PASS R26 no established fact lacks a resolvable declaration
+PASS R26-SET-DISJOINTNESS: ESTABLISHED n ABSTAINED = {}
+PASS R26-FIXTURE-INTEGRITY: every gate key names exactly one binding record
+JS_PROV_R23B=33/33

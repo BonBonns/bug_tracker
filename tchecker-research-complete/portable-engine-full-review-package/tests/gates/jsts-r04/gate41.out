@@ -1,0 +1,12 @@
+PASS closureDirect: ('EXACT', [0]) - got ('EXACT', [0])
+PASS closureParam: ('EXACT', [0]) - got ('EXACT', [0])
+PASS closureShadow: ('EXACT', []) - got ('EXACT', [])
+PASS closureUnrelated: ('EXACT', []) - got ('EXACT', [])
+PASS closureAlias: ('EXACT', [0]) - got ('EXACT', [0])
+PASS closureTwoCaptures: ('EXACT', [0, 1]) - got ('EXACT', [0, 1])
+PASS nestedClosure: ('EXACT', [0]) - got ('EXACT', [0])
+PASS closureLocalShadowsOuter: ('EXACT', []) - got ('EXACT', [])
+PASS closureMutation: ('MAY', [0]) - got ('MAY', [0])
+PASS closureMutationToSource: ('MAY', [0]) - got ('MAY', [0])
+PASS non_hardening: mutation cases never EXACT 
+GATE41_CLOSURE=11/11

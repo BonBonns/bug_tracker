@@ -1,0 +1,7 @@
+PASS targeted tab.url is MAY, never fabricated EXACT
+PASS ordinary callback alternative remains parameter position 0
+PASS tab URL origin survives without message/file/network collapse
+PASS sibling tab.id gets no tab-URL origin
+PASS definite same-slot overwrite kills the tab-URL origin
+PASS loader consumes explicit STATE_READ target kind
+CORE_S06=6/6

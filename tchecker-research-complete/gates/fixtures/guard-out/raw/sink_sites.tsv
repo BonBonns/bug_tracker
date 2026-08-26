@@ -1,0 +1,3 @@
+handlers/admin-ajax.js	handlers/admin-ajax.js::program:adminAjax	DB_WRITE	db("users").update({ password: ctx.request.body.password })	18
+handlers/safe-always.js	handlers/safe-always.js::program:safeAlways	DB_WRITE	db("users").update({ role: "x" })	8
+handlers/safe-return.js	handlers/safe-return.js::program:safeReturn	DB_WRITE	db("users").update({ role: "x" })	9

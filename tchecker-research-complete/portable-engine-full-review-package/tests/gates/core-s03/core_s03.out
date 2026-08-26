@@ -1,0 +1,6 @@
+PASS direct param capture -> EXACT proven={0}
+PASS captured multi-def local -> AMBIGUOUS may={0}, never hardened
+PASS capture chain ending outside the caller -> abstain
+PASS two-hop transitive capture -> EXACT proven={0}
+PASS EXACT capture requires a concrete outer node (record validation)
+CORE_S03=5/5

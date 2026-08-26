@@ -1,0 +1,39 @@
+=== ESM EXPORT-SIDE representation ===
+  app.ts%-14s | var viaReexport = require("./reexport").fDecl | RHS=CALL require("./reexport").fDecl
+  danger.ts%-14s | exports["default"] = <lambda>1 | RHS=IDENT <lambda>1 type=danger.ts::program:<lambda>1
+  danger.ts%-14s | exports.dup = dup | RHS=IDENT dup type=danger.ts::program:dup
+  lib.ts%-14s | exports.fDecl = fDecl | RHS=IDENT fDecl type=lib.ts::program:fDecl
+  lib.ts%-14s | exports.fConst = fConst | RHS=IDENT fConst type=(a: ANY) => ANY
+  lib.ts%-14s | exports.fLater = fLater | RHS=IDENT fLater type=lib.ts::program:fLater
+  lib.ts%-14s | exports.fRenamed = fOrig | RHS=IDENT fOrig type=lib.ts::program:fOrig
+  lib.ts%-14s | exports["default"] = fDef | RHS=IDENT fDef type=lib.ts::program:fDef
+  lib2.ts%-14s | exports["default"] = fInlineDefault | RHS=IDENT fInlineDefault type=lib2.ts::program:fInlineDefault
+  lib2.ts%-14s | exports.fReExported = fReExported | RHS=IDENT fReExported type=(a: ANY) => ANY
+  reexport.ts%-14s | exports.fDecl = _lib.fDecl | RHS=CALL _lib.fDecl
+  reexport.ts%-14s | exports.lib2 = _lib2 | RHS=IDENT _lib2 type=ANY
+=== IMPORT nodes ===
+  import { fDecl } from './lib'  explicit=false  entity=./lib:fDecl  as=fDecl
+  import { fConst as fAliased } from './lib'  explicit=false  entity=./lib:fConst  as=fAliased
+  import fDefault from './lib'  explicit=false  entity=./lib:fDefault  as=fDefault
+  import * as ns from './lib'  explicit=false  entity=./lib:ns  as=ns
+  import { fDecl as viaReexport } from './reexport'  explicit=false  entity=./reexport:fDecl  as=viaReexport
+=== how ESM imports LOWER (app.ts assignments) ===
+  const dyn = await import('./lib')
+  const un = await import('./does-not-exist')
+  var fDecl = require("./lib").fDecl
+  var fAliased = require("./lib").fConst
+  var fDefault = require("./lib")
+  var ns = require("./lib")
+  var viaReexport = require("./reexport").fDecl
+  function go = async function go() {   use(fDecl(1)); use(fAl
+=== require() calls: is inAssignment the binding? (R14's assumption) ===
+  require("./lib")  inAssignment=[var fDecl = require("./lib").fDecl]
+  require("./lib")  inAssignment=[var fAliased = require("./lib").fConst]
+  require("./lib")  inAssignment=[var fDefault = require("./lib")]
+  require("./lib")  inAssignment=[var ns = require("./lib")]
+  require("./reexport")  inAssignment=[var viaReexport = require("./reexport").fDecl]
+=== dynamic import() representation ===
+  <operator>.assignment | const dyn = await import('./lib')
+  <operator>.await | await import('./lib')
+  import | import('./lib')
+  <operator>.assignment | const un = await import('./does-not-exist')

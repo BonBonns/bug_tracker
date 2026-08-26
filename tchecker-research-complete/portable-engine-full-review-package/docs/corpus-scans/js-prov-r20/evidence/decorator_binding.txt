@@ -1,0 +1,14 @@
+=== DECORATOR -> PARAMETER BINDING (names deliberately misleading) ===
+  CLASS TController annotations=[Controller]
+    a1%-4s verb=Post  idx1:body->[Query]
+    a2%-4s verb=Post  idx1:query->[Body]
+    a3%-4s verb=Get  idx1:headers->[Param]
+    a4%-4s verb=Get  idx1:param->[Headers]
+    a5%-4s verb=Post  idx1:banana->[Body]
+    a6%-4s verb=Get  idx1:orange->[Query]
+    a7%-4s verb=Post  idx1:body->[Body]  idx2:unrelated->[NONE]
+    a8%-4s verb=Post  idx1:id->[Param]  idx2:b->[Body]  idx3:q->[Query]
+    a9%-4s verb=Post  idx1:b->[Body]
+    UNDECORATED methods: helper
+=== UNDECORATED CLASS control ===
+  NotAController classAnn=[] methods=<init>:ann=0,a1:ann=0

@@ -1,0 +1,5 @@
+{
+  "schema": "llm-input-verdict/0.1",
+  "note": "CANDIDATE, never VULNERABLE. Flags model output flowing into a code/command/HTML/SQL sink (LLM02 insecure output handling) and request data flowing into the system instruction position (LLM01 prompt injection). Validation (try/catch) or a static system prompt de-escalates.",
+  "findings": []
+}

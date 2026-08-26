@@ -1,0 +1,29 @@
+[build] compiling detector -> /mnt/data/g28work/portable-engine-gate27-correctness-contract/engine/legacy-detector/tchecker/out
+[build] done. classes in /mnt/data/g28work/portable-engine-gate27-correctness-contract/engine/legacy-detector/tchecker/out
+PASS model_closureDirect got=[0] expected=[0]
+PASS model_closureParam got=[0] expected=[0]
+PASS model_closureShadow got=[] expected=[]
+PASS model_closureUnrelated got=[] expected=[]
+PASS model_closureAlias got=[0] expected=[0]
+PASS model_closureMutation got=[] expected=[]
+PASS model_closureMutationToSource got=[0] expected=[0]
+PASS model_nestedClosure got=[0] expected=[0]
+PASS model_closureTwoCaptures got=[0, 1] expected=[0, 1]
+PASS model_closureLocalShadowsOuter got=[] expected=[]
+PASS adapter_has_closures closures=11
+PASS capture_sets [('source',), (), (), (), ('x',), ('x',), ('x',), ('source',), ('source',), ('a', 'b'), ()]
+PASS engine_complete_call_bridge 
+PASS closure_summary_loaded 
+PASS ten_exact_local_closure_calls calls=10
+PASS engine_gate_on_expected {'closureDirect': [0], 'closureParam': [0], 'closureShadow': [], 'closureUnrelated': [], 'closureAlias': [0], 'closureMutation': [], 'closureMutationToSource': [0], 'nestedClosure': [0], 'closureTwoCaptures': [0, 1], 'closureLocalShadowsOuter': []}
+PASS off_misses_closureDirect off=[] on=[0]
+PASS off_misses_closureAlias off=[] on=[0]
+PASS off_misses_closureMutationToSource off=[] on=[0]
+PASS off_misses_nestedClosure off=[] on=[0]
+PASS off_misses_closureTwoCaptures off=[] on=[0, 1]
+PASS control_closureShadow off=[] on=[]
+PASS control_closureUnrelated off=[] on=[]
+PASS control_closureMutation off=[] on=[]
+PASS control_closureLocalShadowsOuter off=[] on=[]
+GATE23=25/25
+CANONICAL_ENGINE_GATE23=PASS

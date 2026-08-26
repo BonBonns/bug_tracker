@@ -1,0 +1,35 @@
+{
+  "property_name": "INDEX_WITHIN_FIXED_ARRAY_CAPACITY",
+  "property_id_suffix": "index_within_capacity",
+  "vulnerability_class": "oob_write",
+  "downstream_primitive": "indexed_store",
+  "candidate_class": "OOB_WRITE",
+  "candidate_subclass": "INDEX_STORE",
+  "focused_question_template": "Static analysis found an indexed write `{array}[{index_expr}]` into a fixed-size array of {elem_count} element(s), with NO established guarantee that `{index_expr}` stays < {elem_count} on every path reaching this write. Based ONLY on the supplied code, is `{index_expr}` guaranteed to stay within [0, {elem_count}-1] on all paths to this write (SAFE), can it reach or exceed {elem_count} (UNSAFE), or is the evidence insufficient (UNKNOWN)? Do not assume a caller validates the index; answer only about this write.",
+  "established_meaning": "modeled candidate shape only (an indexed store into a fixed-capacity array whose index bound is not statically established; NOT a confirmed OOB write): triggerability, reachability, and caller-side validation are out of scope for this property",
+  "attestation_binding": {
+    "property_id_construction": "property_id = 'oob-index:{fingerprint}.index_within_capacity'. The fingerprint is sha256 over a canonical record of {analyzer_version, repo_rev, file, candidate_class, subclass, array, elem_count, index_expr, line}. A trusted attestation is keyed by this fingerprint, so it binds to the EXACT reviewed candidate.",
+    "invalidation": "changing the code (index_expr/line), capacity (elem_count), array, file, candidate class, repository revision, or the analyzer/config version re-fingerprints the candidate; an attestation minted for the old fingerprint no longer matches and cannot suppress.",
+    "duplicate_and_mismatch": "two candidates sharing a fingerprint are AMBIGUOUS and are never suppressed; a trusted attestation whose optional declared_facts do not match the candidate is REJECTED (packet emitted).",
+    "identity_derivation_R04": {
+      "content_identity": "full SHA-256 of the ACTUAL scanned file bytes (working tree; covers uncommitted/untracked/dirty-worktree). Supplied by the trusted scanner from the exact bytes fed to the frontend. A commit id is NOT used. If a candidate's file content is unverified, the adjudicator FAILS CLOSED (never suppresses).",
+      "analyzer_identity": "full SHA-256 over analyzer component files on disk (producer + adjudicator + config + frontend normalizer/exporter). No manually maintained version string.",
+      "hash": "the FULL 256-bit sha-256 (64 hex) is used for the trust decision; no prefix truncation.",
+      "serialization": "explicit canonical JSON: fixed field names + types, sort_keys, compact separators, ascii.",
+      "bound_context": "analyzer_identity, content_sha256, file, candidate_class, subclass, array, elem_count, index_expr, function, line, function_span.",
+      "no_caller_selection": "analyzer/content/repo identity are derived by trusted runtime only; there is no CLI/packet/hint field to set them, and any such key inside a hint is stripped.",
+      "recompute_not_echo": "suppression is decided on a fingerprint RECOMPUTED from producer facts + trusted digests; a fingerprint echoed in a packet/hint is never trusted."
+    }
+  },
+  "hint_acceptance": {
+    "trust_model": "CHANNEL_NOT_CONTENT",
+    "trust_establishing_path": "the loader (adjudicate_oob.load_channels) assigns trust by WHICH channel/flag loaded the hint: --oob-trusted-attestations => CURATED_ATTESTATION_CHANNEL (may suppress); --oob-hints => UNTRUSTED_CHANNEL (advisory only). Any source/trust key inside a hint is stripped and OVERWRITTEN to the channel identity.",
+    "rule": "A SAFE hint SUPPRESSES a deterministic candidate ONLY when it arrives through the trusted curated-attestation channel AND confidence==HIGH AND proposed_value==SAFE. Hints from the advisory (untrusted) channel \u2014 including a model-generated answer that falsely declares source=CURATED_ATTESTATION \u2014 are ADVISORY ONLY and MUST NOT erase the candidate; the review packet is still emitted."
+  },
+  "residual_vulnerability_questions": [
+    "reachability of the enclosing function with an attacker-influenced index",
+    "caller-side validation of the index or of an upstream length/count",
+    "whether the index can actually exceed the capacity under any input",
+    "interprocedural bounds established outside this translation unit"
+  ]
+}

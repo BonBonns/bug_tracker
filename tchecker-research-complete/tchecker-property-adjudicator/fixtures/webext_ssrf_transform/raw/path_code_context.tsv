@@ -1,0 +1,4 @@
+30064771075	SOURCE	message.url	return fetch(rewriteTarget(message.url))	external-message-rewrite-fetch.js::program:<lambda>0
+30064771073	SINK	fetch(rewriteTarget(message.url))	return fetch(rewriteTarget(message.url))	external-message-rewrite-fetch.js::program:<lambda>0
+30064771074	STEP	rewriteTarget(message.url)	return fetch(rewriteTarget(message.url))	external-message-rewrite-fetch.js::program:<lambda>0
+30064771072	STEP	normalizeDestination(value)	return normalizeDestination(value)	external-message-rewrite-fetch.js::program:rewriteTarget

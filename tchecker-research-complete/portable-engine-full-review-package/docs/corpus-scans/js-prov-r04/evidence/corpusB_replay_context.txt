@@ -1,0 +1,13 @@
+=== CALLEE-SIDE: the register lambda's parameter type ===
+  resources/account/sign-in/index.js::program:<lambda>0
+      param0 this type=resources/account/sign-in/index.js::program hints=[resources/account/sign-in/index.js::program]
+      param1 router type=ANY hints=[]
+      REG post mfn=<unknownFullName> recv_type=ANY
+  resources/account/sign-up/index.js::program:<lambda>0
+      param0 this type=resources/account/sign-up/index.js::program hints=[resources/account/sign-up/index.js::program]
+      param1 router type=ANY hints=[]
+      REG post mfn=<unknownFullName> recv_type=ANY
+=== IS THE CALL EDGE RESOLVED? (caller -> callee) ===
+  register callee(s)=resources/account/sign-up/index.js::program:<lambda>0  argType=@koa/router
+  register callee(s)=resources/account/sign-in/index.js::program:<lambda>0  argType=@koa/router
+  register callee(s)=resources/account/sign-out/index.js::program:<lambda>1  argType=@koa/router

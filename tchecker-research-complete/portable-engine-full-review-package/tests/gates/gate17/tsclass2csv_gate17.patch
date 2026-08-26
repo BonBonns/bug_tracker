@@ -1,0 +1,39 @@
+--- /mnt/data/js_gate16_continue/js-gate16-expression-may/tsclass2csv.js	2026-08-15 10:59:23.000000000 +0000
++++ /mnt/data/js-gate17-multivalue/tsclass2csv.js	2026-08-15 11:01:07.699832119 +0000
+@@ -149,7 +149,35 @@
+       emitExpr(expr.right,a,funcid,1,defs,classname);
+       return a;
+     }
+-    if(ts.isStringLiteral(expr)||ts.isNumericLiteral(expr)) { const s=mkNode('string',{code:JSON.stringify(expr.text),childnum,funcid,lineno:line(expr),classname}); parent(parentNode,s); return s; }
++    if(ts.isStringLiteral(expr)||ts.isNumericLiteral(expr)||ts.isNoSubstitutionTemplateLiteral(expr)) { const s=mkNode('string',{code:JSON.stringify(expr.text),childnum,funcid,lineno:line(expr),classname}); parent(parentNode,s); return s; }
++    if(ts.isBinaryExpression(expr)) {
++      const opMap = new Map([
++        [ts.SyntaxKind.PlusToken,'BINARY_ADD'], [ts.SyntaxKind.MinusToken,'BINARY_SUB'],
++        [ts.SyntaxKind.AsteriskToken,'BINARY_MUL'], [ts.SyntaxKind.SlashToken,'BINARY_DIV'],
++        [ts.SyntaxKind.PercentToken,'BINARY_MOD'], [ts.SyntaxKind.EqualsEqualsEqualsToken,'BINARY_IS_IDENTICAL'],
++        [ts.SyntaxKind.ExclamationEqualsEqualsToken,'BINARY_IS_NOT_IDENTICAL'],
++        [ts.SyntaxKind.AmpersandAmpersandToken,'BINARY_BOOL_AND'], [ts.SyntaxKind.BarBarToken,'BINARY_BOOL_OR']
++      ]);
++      const flag=opMap.get(expr.operatorToken.kind) || 'BINARY_ADD';
++      const b=mkNode('AST_BINARY_OP',{flags:flag,childnum,funcid,lineno:line(expr),classname}); parent(parentNode,b);
++      emitExpr(expr.left,b,funcid,0,defs,classname);
++      emitExpr(expr.right,b,funcid,1,defs,classname);
++      return b;
++    }
++    if(ts.isTemplateExpression(expr)) {
++      const pieces=[{kind:'text',text:expr.head.text,node:expr.head}];
++      for(const sp of expr.templateSpans) { pieces.push({kind:'expr',node:sp.expression}); pieces.push({kind:'text',text:sp.literal.text,node:sp.literal}); }
++      function emitPiece(piece,p,cn) {
++        if(piece.kind==='expr') return emitExpr(piece.node,p,funcid,cn,defs,classname);
++        const q=mkNode('string',{code:JSON.stringify(piece.text),childnum:cn,funcid,lineno:line(piece.node),classname}); parent(p,q); return q;
++      }
++      function emitConcat(lo,hi,p,cn) {
++        if(lo===hi) return emitPiece(pieces[lo],p,cn);
++        const b=mkNode('AST_BINARY_OP',{flags:'BINARY_CONCAT',childnum:cn,funcid,lineno:line(expr),classname}); parent(p,b);
++        emitConcat(lo,hi-1,b,0); emitPiece(pieces[hi],b,1); return b;
++      }
++      return emitConcat(0,pieces.length-1,parentNode,childnum);
++    }
+     if(ts.isConditionalExpression(expr)) {
+       const c=mkNode('AST_CONDITIONAL',{childnum,funcid,lineno:line(expr),classname}); parent(parentNode,c);
+       emitExpr(expr.condition,c,funcid,0,defs,classname);

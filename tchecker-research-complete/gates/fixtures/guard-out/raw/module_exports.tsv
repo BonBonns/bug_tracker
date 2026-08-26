@@ -1,0 +1,7 @@
+handlers/admin-ajax.js		handlers/admin-ajax.js::program:adminAjax	METHOD_REF	module.exports = async function adminAjax(ctx) {   const method = ctx.request.body.method;		
+handlers/safe-always.js		handlers/safe-always.js::program:safeAlways	METHOD_REF	module.exports = async function safeAlways(ctx) {   if (!ctx.state.user) {     denyAlways(		
+handlers/safe-return.js		handlers/safe-return.js::program:safeReturn	METHOD_REF	module.exports = async function safeReturn(ctx) {   const method = ctx.request.body.method		
+lib/db.js			CALL	module.exports = require("knex")({ client: "pg" })		
+lib/guard-lib.js			BLOCK	module.exports = { denyRequest, denyAlways }		
+lib/guard-lib.js	denyRequest	lib/guard-lib.js::program:denyRequest	IDENTIFIER	_tmp_0.denyRequest = denyRequest		
+lib/guard-lib.js	denyAlways	lib/guard-lib.js::program:denyAlways	IDENTIFIER	_tmp_0.denyAlways = denyAlways		

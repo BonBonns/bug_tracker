@@ -1,0 +1,436 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "x.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771083
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771083,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "x",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "x",
+        "id": 94489280517,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.readValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771085
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771085,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "x.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771093
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771093,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "x",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "x",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.readValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771095
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771095,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "x.setOther",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771107
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771107,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setOther"
+      },
+      "receiver": {
+        "name": "x",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "x",
+        "id": 94489280527,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.readValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771109
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771109,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280523,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771119
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771119,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280529,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "x.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771123
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771123,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "x",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "x",
+        "id": 94489280533,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.readValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771125
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771125,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280529,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "a.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771135
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771135,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 94489280535,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "b.setValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771137
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771137,
+      "key": {
+        "kind": "LITERAL",
+        "value": "setValue"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 94489280537,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "x.readValue",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771141
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771141,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readValue"
+      },
+      "receiver": {
+        "name": "x",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "x",
+        "id": 94489280539,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "this.value",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771163
+        ]
+      },
+      "function_id": 107374182418,
+      "index_call_id": 30064771163,
+      "key": {
+        "kind": "LITERAL",
+        "value": "value"
+      },
+      "receiver": {
+        "name": "this",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "this",
+        "id": 107374182418,
+        "kind": "SELF"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": [
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771159000,
+      "code": "this.value = v",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771159,
+          30064771160,
+          30064771160,
+          68719476886
+        ]
+      },
+      "function_id": 107374182416,
+      "key": {
+        "kind": "LITERAL",
+        "value": "value"
+      },
+      "receiver": {
+        "name": "this",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "this",
+        "id": 107374182416,
+        "kind": "SELF"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "v",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "v",
+        "id": 111669149740,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771161000,
+      "code": "this.other = v",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771161,
+          30064771162,
+          30064771162,
+          68719476888
+        ]
+      },
+      "function_id": 107374182417,
+      "key": {
+        "kind": "LITERAL",
+        "value": "other"
+      },
+      "receiver": {
+        "name": "this",
+        "type": "gate15.ts::program:A"
+      },
+      "receiver_ref": {
+        "code": "this",
+        "id": 107374182417,
+        "kind": "SELF"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "v",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "v",
+        "id": 111669149742,
+        "kind": "PARAMETER"
+      }
+    }
+  ]
+}

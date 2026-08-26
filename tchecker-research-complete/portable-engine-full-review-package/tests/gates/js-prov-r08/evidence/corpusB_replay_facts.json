@@ -1,0 +1,2588 @@
+{
+  "schema": "portable-observed-parameter-type-facts/0.1",
+  "note": "Propagated observations are evidence about types VISIBLE AT CALLSITES, never a claim about the concrete runtime type. declared_type is retained separately and is never overwritten. Only evidence_state=CLOSED_SINGLE may support an exclusive dispatch claim.",
+  "facts": [
+    {
+      "callee_method_id": 107374182414,
+      "callee_method_name": "formatError",
+      "parameter_index": 1,
+      "parameter_name": "joiError",
+      "parameter_value_id": 111669149716,
+      "declared_type": "ANY",
+      "observed_types": [
+        "_tmp_7:error:<returnValue>:<member>(error)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771357
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771357,
+          "arg": "error",
+          "raw_type": "_tmp_7:error:<returnValue>:<member>(error)",
+          "canonical": "_tmp_7:error:<returnValue>:<member>(error)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182447,
+      "callee_method_name": "run",
+      "parameter_index": 1,
+      "parameter_name": "migrations",
+      "parameter_value_id": 111669149784,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771745
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771745,
+          "arg": "migrations",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182447,
+      "callee_method_name": "run",
+      "parameter_index": 2,
+      "parameter_name": "curVersion",
+      "parameter_value_id": 111669149785,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771745
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771745,
+          "arg": "currentVersion",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182455,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149797,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771888
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771888,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182461,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149808,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771900
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771900,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182466,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149818,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771892
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771892,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182470,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149826,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771876
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771876,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182473,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149831,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771880
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771880,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182477,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149839,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771872
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771872,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182482,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149849,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771884
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771884,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182485,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149854,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771896
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771896,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182488,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149859,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772595
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772595,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182493,
+      "callee_method_name": "createToken",
+      "parameter_index": 1,
+      "parameter_name": "userId",
+      "parameter_value_id": 111669149866,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064772675
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772675,
+          "arg": "userId",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182499,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149878,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772746
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772746,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182503,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149884,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772762
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772762,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182509,
+      "callee_method_name": "<lambda>2",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149896,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772758
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772758,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182514,
+      "callee_method_name": "<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149906,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772750
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772750,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182520,
+      "callee_method_name": "<lambda>2",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "parameter_value_id": 111669149918,
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772754
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772754,
+          "arg": "router",
+          "raw_type": "@koa/router",
+          "canonical": "@koa/router",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182529,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "app",
+      "parameter_value_id": 111669149932,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773298
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773298,
+          "arg": "app",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182534,
+      "callee_method_name": "formatError",
+      "parameter_index": 1,
+      "parameter_name": "customError",
+      "parameter_value_id": 111669149940,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Object"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773339,
+        30064773344
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773339,
+          "arg": "errors",
+          "raw_type": "__ecma.Object",
+          "canonical": "__ecma.Object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773344,
+          "arg": "errors",
+          "raw_type": "__ecma.Object",
+          "canonical": "__ecma.Object",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182549,
+      "callee_method_name": "<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "app",
+      "parameter_value_id": 111669149972,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773295
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773295,
+          "arg": "app",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182561,
+      "callee_method_name": "unsetTokenCookies",
+      "parameter_index": 1,
+      "parameter_name": "ctx",
+      "parameter_value_id": 111669149990,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773608
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773608,
+          "arg": "ctx",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182573,
+      "callee_method_name": "render",
+      "parameter_index": 1,
+      "parameter_name": "templatePath",
+      "parameter_value_id": 111669150015,
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773772
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773772,
+          "arg": "templatePath",
+          "raw_type": "path:join:<returnValue>",
+          "canonical": "path:join",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182573,
+      "callee_method_name": "render",
+      "parameter_index": 2,
+      "parameter_name": "templateParams",
+      "parameter_value_id": 111669150016,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773772
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773772,
+          "arg": "dynamicTemplateData",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182582,
+      "callee_method_name": "checkAccessToRoom",
+      "parameter_index": 1,
+      "parameter_name": "roomId",
+      "parameter_value_id": 111669150035,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773928
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773928,
+          "arg": "roomId",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182611,
+      "callee_method_name": "keys",
+      "parameter_index": 1,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150089,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773326
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773326,
+          "arg": "customError",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182616,
+      "callee_method_name": "error",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150098,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771719,
+        30064773410
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771719,
+          "arg": "err",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064773410,
+          "arg": "errors",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064771100,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771206,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064771715,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182616,
+      "callee_method_name": "error",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150099,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771100
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771100,
+          "arg": "p",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182616,
+      "callee_method_name": "error",
+      "parameter_index": 4,
+      "parameter_name": "p3",
+      "parameter_value_id": 111669150101,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771100
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771100,
+          "arg": "reason",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182618,
+      "callee_method_name": "addPath",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150107,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771110,
+        30064771760,
+        30064773473
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771110,
+          "arg": "__dirname",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064771760,
+          "arg": "__dirname",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064773473,
+          "arg": "__dirname",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182623,
+      "callee_method_name": "koa-qs",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150120,
+      "declared_type": "ANY",
+      "observed_types": [
+        "koa"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771138
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771138,
+          "arg": "app",
+          "raw_type": "koa",
+          "canonical": "koa",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182625,
+      "callee_method_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150126,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064772698
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772698,
+          "arg": "accessToken",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064771146,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771148,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771150,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771282,
+          "reason": "ARG_NOT_IDENTIFIER:BLOCK"
+        },
+        {
+          "call_id": 30064771732,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064771736,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064771941,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064771948,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772149,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772154,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772281,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772285,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772463,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772469,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772473,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772804,
+          "reason": "ARG_NOT_IDENTIFIER:BLOCK"
+        },
+        {
+          "call_id": 30064772810,
+          "reason": "ARG_NOT_IDENTIFIER:BLOCK"
+        },
+        {
+          "call_id": 30064772816,
+          "reason": "ARG_NOT_IDENTIFIER:BLOCK"
+        },
+        {
+          "call_id": 30064772918,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772924,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064773261,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064773263,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064773265,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064773319,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182627,
+      "callee_method_name": "routes",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150131,
+      "declared_type": "ANY",
+      "observed_types": [
+        "koa"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771155
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771155,
+          "arg": "app",
+          "raw_type": "koa",
+          "canonical": "koa",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182630,
+      "callee_method_name": "require('services/socket/socket.service')",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150139,
+      "declared_type": "ANY",
+      "observed_types": [
+        "http:createServer"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771161
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771161,
+          "arg": "server",
+          "raw_type": "http:createServer:<returnValue>",
+          "canonical": "http:createServer",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182638,
+      "callee_method_name": "require('socket.io-emitter')",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150164,
+      "declared_type": "ANY",
+      "observed_types": [
+        "redis"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771205
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771205,
+          "arg": "client",
+          "raw_type": "redis",
+          "canonical": "redis",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182657,
+      "callee_method_name": "validate",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150220,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771374,
+        30064771498,
+        30064772605,
+        30064773136
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771374,
+          "arg": "obj",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064771498,
+          "arg": "obj",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064772605,
+          "arg": "obj",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064773136,
+          "arg": "obj",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182663,
+      "callee_method_name": "require",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150235,
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771427
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771427,
+          "arg": "migrationPath",
+          "raw_type": "path:join:<returnValue>",
+          "canonical": "path:join",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064771403,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771404,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771405,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771406,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064771407,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182664,
+      "callee_method_name": "reject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150238,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771408
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771408,
+          "arg": "err",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182665,
+      "callee_method_name": "resolve",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150241,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771409
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771409,
+          "arg": "files",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182666,
+      "callee_method_name": "readdir",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150244,
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771410
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771410,
+          "arg": "migrationsPath",
+          "raw_type": "path:join:<returnValue>",
+          "canonical": "path:join",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182669,
+      "callee_method_name": "join",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150254,
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join"
+      ],
+      "unconstrained_callsite": true,
+      "evidence_state": "OPEN_SINGLE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771483,
+        30064771425
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771483,
+          "arg": "__dirname",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064771425,
+          "arg": "migrationsPath",
+          "raw_type": "path:join:<returnValue>",
+          "canonical": "path:join",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064773767,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182669,
+      "callee_method_name": "join",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150255,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771425,
+        30064773767
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771425,
+          "arg": "name",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064773767,
+          "arg": "template",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064771483,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182673,
+      "callee_method_name": "operator",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150269,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771455
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771455,
+          "arg": "c",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182674,
+      "callee_method_name": "chunk",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150272,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Array"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771467
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771467,
+          "arg": "documents",
+          "raw_type": "__ecma.Array",
+          "canonical": "__ecma.Array",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182674,
+      "callee_method_name": "chunk",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150273,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064771467
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771467,
+          "arg": "limit",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182693,
+      "callee_method_name": "generateSecureToken",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150329,
+      "declared_type": "ANY",
+      "observed_types": [
+        "app.constants"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772661
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772661,
+          "arg": "TOKEN_SECURITY_LENGTH",
+          "raw_type": "app.constants",
+          "canonical": "app.constants",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182697,
+      "callee_method_name": "middlewares/validate.middleware",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150342,
+      "declared_type": "ANY",
+      "observed_types": [
+        "joi:object"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064771826,
+        30064771966,
+        30064772052,
+        30064772170,
+        30064772333,
+        30064772487,
+        30064772541,
+        30064772844,
+        30064773006
+      ],
+      "derivation": [
+        {
+          "call_id": 30064771826,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064771966,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772052,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772170,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772333,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772487,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772541,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772844,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773006,
+          "arg": "schema",
+          "raw_type": "joi:object:<returnValue>",
+          "canonical": "joi:object",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182705,
+      "callee_method_name": "getHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150361,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772036,
+        30064772283,
+        30064772987
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772036,
+          "arg": "password",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772283,
+          "arg": "password",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772987,
+          "arg": "password",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182708,
+      "callee_method_name": "compareTextWithHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150369,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772124,
+        30064772964
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772124,
+          "arg": "password",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772964,
+          "arg": "password",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182710,
+      "callee_method_name": "updateLastRequest",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150375,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772471
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772471,
+          "arg": "userId",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064772151,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064773441,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182711,
+      "callee_method_name": "setTokens",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150378,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064772156,
+        30064772475
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772156,
+          "arg": "ctx",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064772475,
+          "arg": "ctx",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182711,
+      "callee_method_name": "setTokens",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150379,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772475
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772475,
+          "arg": "userId",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064772156,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182712,
+      "callee_method_name": "getPublic",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150382,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(user)"
+      ],
+      "unconstrained_callsite": true,
+      "evidence_state": "OPEN_SINGLE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064772161,
+        30064772998,
+        30064773092
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772161,
+          "arg": "user",
+          "raw_type": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(user)",
+          "canonical": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(user)",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064772998,
+          "arg": "updatedUser",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        },
+        {
+          "call_id": 30064773092,
+          "arg": "updatedUser",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064772727,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182715,
+      "callee_method_name": "unsetTokens",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150391,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064772238
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772238,
+          "arg": "ctx",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182746,
+      "callee_method_name": "uploadPublic",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150482,
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:request:<returnValue>:<member>(request):<member>(file)"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773078
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773078,
+          "arg": "file",
+          "raw_type": "ctx:request:<returnValue>:<member>(request):<member>(file)",
+          "canonical": "ctx:request:<returnValue>:<member>(request):<member>(file)",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182750,
+      "callee_method_name": "emit",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150495,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773126
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773126,
+          "arg": "doc",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182751,
+      "callee_method_name": "to",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150498,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773129
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773129,
+          "arg": "roomId",
+          "raw_type": "__ecma.String",
+          "canonical": "__ecma.String",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182758,
+      "callee_method_name": "omit",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150518,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773243
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773243,
+          "arg": "user",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182758,
+      "callee_method_name": "omit",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150519,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Array"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773243
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773243,
+          "arg": "privateFields",
+          "raw_type": "__ecma.Array",
+          "canonical": "__ecma.Array",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182760,
+      "callee_method_name": "koa-mount",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150526,
+      "declared_type": "ANY",
+      "observed_types": [
+        "resources/account/public",
+        "resources/health/public",
+        "resources/user"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CONFLICT",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773275,
+        30064773464,
+        30064773467
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773275,
+          "arg": "userResource",
+          "raw_type": "resources/user",
+          "canonical": "resources/user",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773464,
+          "arg": "accountResource",
+          "raw_type": "resources/account/public",
+          "canonical": "resources/account/public",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773467,
+          "arg": "healthResource",
+          "raw_type": "resources/health/public",
+          "canonical": "resources/health/public",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182768,
+      "callee_method_name": "get",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150548,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773372
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773372,
+          "arg": "ACCESS_TOKEN",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064772485,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064772539,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064772583,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064772732,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        },
+        {
+          "call_id": 30064772842,
+          "reason": "ARG_NOT_IDENTIFIER:LITERAL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182768,
+      "callee_method_name": "get",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150549,
+      "declared_type": "ANY",
+      "observed_types": [
+        "(ctx: ANY) => ANY"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064772583
+      ],
+      "derivation": [
+        {
+          "call_id": 30064772583,
+          "arg": "handler",
+          "raw_type": "(ctx: ANY) => ANY",
+          "canonical": "(ctx: ANY) => ANY",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064772485,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772539,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        },
+        {
+          "call_id": 30064772732,
+          "reason": "AMBIGUOUS_SHORT_NAME:handler"
+        },
+        {
+          "call_id": 30064772842,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182775,
+      "callee_method_name": "getUserDataByToken",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150567,
+      "declared_type": "ANY",
+      "observed_types": [
+        "string | __ecma.Null | ANY"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773909
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773909,
+          "arg": "accessToken",
+          "raw_type": "string | __ecma.Null | ANY",
+          "canonical": "string | __ecma.Null | ANY",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [
+        {
+          "call_id": 30064773436,
+          "reason": "ARG_NOT_IDENTIFIER:CALL"
+        }
+      ],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182786,
+      "callee_method_name": "randomBytes",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150600,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Number"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773506
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773506,
+          "arg": "tokenLength",
+          "raw_type": "__ecma.Number",
+          "canonical": "__ecma.Number",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182787,
+      "callee_method_name": "bcryptHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150603,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773509
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773509,
+          "arg": "text",
+          "raw_type": "__ecma.String",
+          "canonical": "__ecma.String",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182788,
+      "callee_method_name": "compare",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150607,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773510
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773510,
+          "arg": "text",
+          "raw_type": "__ecma.String",
+          "canonical": "__ecma.String",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182788,
+      "callee_method_name": "compare",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150608,
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773510
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773510,
+          "arg": "hash",
+          "raw_type": "__ecma.String",
+          "canonical": "__ecma.String",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182789,
+      "callee_method_name": "promisify",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150612,
+      "declared_type": "ANY",
+      "observed_types": [
+        "bcryptjs",
+        "crypto"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CONFLICT",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773515,
+        30064773519,
+        30064773523
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773515,
+          "arg": "crypto",
+          "raw_type": "crypto",
+          "canonical": "crypto",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773519,
+          "arg": "bcrypt",
+          "raw_type": "bcryptjs",
+          "canonical": "bcryptjs",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773523,
+          "arg": "bcrypt",
+          "raw_type": "bcryptjs",
+          "canonical": "bcryptjs",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182793,
+      "callee_method_name": "set",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150625,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773550
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773550,
+          "arg": "accessToken",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182797,
+      "callee_method_name": "upload",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150639,
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773632,
+        30064773650
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773632,
+          "arg": "uploadParameters",
+          "raw_type": "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }",
+          "canonical": "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }",
+          "effect": "OBSERVES_TYPE"
+        },
+        {
+          "call_id": 30064773650,
+          "arg": "uploadParameters",
+          "raw_type": "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }",
+          "canonical": "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182799,
+      "callee_method_name": "getSignedUrl",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "parameter_value_id": 111669150645,
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; Expires: __ecma.Number; }"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773659
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773659,
+          "arg": "params",
+          "raw_type": "{ Bucket: ANY; Key: ANY; Expires: __ecma.Number; }",
+          "canonical": "{ Bucket: ANY; Key: ANY; Expires: __ecma.Number; }",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182801,
+      "callee_method_name": "getObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150650,
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773669
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773669,
+          "arg": "downloadParameters",
+          "raw_type": "{ Bucket: ANY; Key: ANY; }",
+          "canonical": "{ Bucket: ANY; Key: ANY; }",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182803,
+      "callee_method_name": "copyObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150655,
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773683
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773683,
+          "arg": "parameters",
+          "raw_type": "{ Bucket: ANY; Key: ANY; }",
+          "canonical": "{ Bucket: ANY; Key: ANY; }",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182805,
+      "callee_method_name": "deleteObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150660,
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773693
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773693,
+          "arg": "parameters",
+          "raw_type": "{ Bucket: ANY; Key: ANY; }",
+          "canonical": "{ Bucket: ANY; Key: ANY; }",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182809,
+      "callee_method_name": "readFile",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150672,
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join"
+      ],
+      "unconstrained_callsite": false,
+      "evidence_state": "CLOSED_SINGLE",
+      "usable_as_exclusive_dispatch_proof": true,
+      "source_call_ids": [
+        30064773734
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773734,
+          "arg": "templatePath",
+          "raw_type": "path:join:<returnValue>",
+          "canonical": "path:join",
+          "effect": "OBSERVES_TYPE"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182811,
+      "callee_method_name": "compiledHtml",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150678,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773741
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773741,
+          "arg": "templateParams",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182812,
+      "callee_method_name": "setApiKey",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150681,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773754
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773754,
+          "arg": "apiKey",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182815,
+      "callee_method_name": "path",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150690,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773854
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773854,
+          "arg": "__dirname",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    },
+    {
+      "callee_method_id": 107374182823,
+      "callee_method_name": "socket.io",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "parameter_value_id": 111669150712,
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "evidence_state": "NO_EVIDENCE",
+      "usable_as_exclusive_dispatch_proof": false,
+      "source_call_ids": [
+        30064773941
+      ],
+      "derivation": [
+        {
+          "call_id": 30064773941,
+          "arg": "server",
+          "raw_type": "ANY",
+          "canonical": null,
+          "effect": "OPENS_WORLD"
+        }
+      ],
+      "skipped_callsites": [],
+      "resolution": "CALLSITE_PROPAGATED"
+    }
+  ]
+}

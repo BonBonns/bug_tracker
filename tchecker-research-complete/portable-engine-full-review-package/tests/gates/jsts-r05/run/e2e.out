@@ -1,0 +1,11 @@
+STATE_FACTS writes=4 reads=0 derivation={ASSIGNMENT_TO_FIELD_ACCESS=4}
+LOADED frontend=joern-jssrc2cpg functions=7 calls=14 returns=4
+SUMMARY helper resolution=EXACT proven=[0] may=[] unknown=false completeness=COMPLETE
+EVIDENCE helper identity=VALUE_SPECIFIC origin=ESTABLISHED resolution=EXACT completeness=COMPLETE
+SUMMARY main resolution=EXACT proven=[0] may=[] unknown=false completeness=COMPLETE
+EVIDENCE main identity=VALUE_SPECIFIC origin=ESTABLISHED resolution=EXACT completeness=COMPLETE
+SUMMARY constant resolution=EXACT proven=[] may=[] unknown=false completeness=COMPLETE
+EVIDENCE constant identity=VALUE_SPECIFIC origin=NONE resolution=EXACT completeness=COMPLETE
+SUMMARY passthrough resolution=EXACT proven=[1] may=[] unknown=false completeness=COMPLETE
+EVIDENCE passthrough identity=VALUE_SPECIFIC origin=ESTABLISHED resolution=EXACT completeness=COMPLETE
+ANALYSIS_STATUS=COMPLETE

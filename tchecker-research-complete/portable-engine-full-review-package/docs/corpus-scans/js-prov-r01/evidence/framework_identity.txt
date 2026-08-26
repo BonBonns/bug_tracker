@@ -1,0 +1,8 @@
+=== FRAMEWORK OBJECT IDENTITY (type recovery on the receiver) ===
+  app            type=express:<returnValue>
+  router         type=express:Router:<returnValue>
+  fastify        type=fastify
+  koaApp         type=koa
+  hapiServer     type=@hapi/hapi:server:<returnValue>
+  notFramework   type={ post: (p: ANY, cb: ANY) => ANY; }
+=== REGISTRATION CALLS: methodFullName provenance ===

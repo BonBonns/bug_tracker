@@ -1,0 +1,51 @@
+=== CALLSITE ARG TYPES + CALLEE PARAM TYPES ===
+  f1      L9    ARG[viaNew => main.ts::program:Router]  PARAM[1:ANY]
+  f1      L9    ARG[viaFn => main.ts::program:Router:<init> /hints=main.ts::program:Router|Router|main:ts::program:Router]  PARAM[1:ANY]
+  f2      L13   ARG[foreign => main.ts::program:Router]  PARAM[1:ANY]
+  f4      L19   ARG[cb as any => ANY /hints=<operator>.cast|ConcreteA|ANY]  PARAM[1:ANY]
+  f4      L19   ARG[cb as unknown => ANY /hints=<operator>.cast|ConcreteA|ANY]  PARAM[1:ANY]
+  f4      L19   ARG[cb as unknown as Concr => ANY /hints=<operator>.cast|ConcreteA|ANY]  PARAM[1:ANY]
+  f6      L23   ARG[viaNew => main.ts::program:Router]  PARAM[1:ANY]
+  f6      L23   ARG[new Widget() => BLOCK]  PARAM[1:ANY]
+  idg     L27   ARG[viaNew => main.ts::program:Router]  PARAM[1:T]
+  f7      L29   ARG[viaNew => main.ts::program:Router]  PARAM[1:T]
+  f8      L37   ARG[new RealRouter() => BLOCK]  PARAM[1:HandlerLike]
+  f8      L37   ARG[structural => ANY /hints=main.ts::program:HandlerLike|HandlerLike]  PARAM[1:HandlerLike]
+  f9      L44   ARG[viaIndex => main.ts::program:Router /hints=main.ts::program:Router|Router|{ [x: __ecma.String]: Router; }:<indexAccess>]  PARAM[1:ANY]
+  f9      L44   ARG[viaField => (p: __ecma.String) => ANY]  PARAM[1:ANY]
+  fAlias  L49   ARG[viaNew => main.ts::program:Router]  PARAM[1:RouterAlias]
+=== TYPE_DECL IDENTITIES (is there a structural id beyond the string?) ===
+  name=Router       id=167503724555   fullName=main.ts::program:Router                        ext=false file=main.ts
+  name=ConcreteA    id=167503724558   fullName=main.ts::program:ConcreteA                     ext=false file=main.ts
+  name=ConcreteB    id=167503724560   fullName=main.ts::program:ConcreteB                     ext=false file=main.ts
+  name=HandlerLike  id=167503724563   fullName=main.ts::program:HandlerLike                   ext=false file=main.ts
+  name=RealRouter   id=167503724565   fullName=main.ts::program:RealRouter                    ext=false file=main.ts
+  name=RouterAlias  id=167503724569   fullName=main.ts::program:RouterAlias                   ext=false file=main.ts
+  name=Router       id=167503724570   fullName=mod/other.ts::program:Router                   ext=false file=mod/other.ts
+  name=Widget       id=167503724572   fullName=mod/other.ts::program:Widget                   ext=false file=mod/other.ts
+  name=ConcreteA    id=167503724576   fullName=ConcreteA                                      ext=true file=<unknown>
+  name=ConcreteB    id=167503724577   fullName=ConcreteB                                      ext=true file=<unknown>
+  name=HandlerLike  id=167503724578   fullName=HandlerLike                                    ext=true file=<unknown>
+  name=RealRouter   id=167503724579   fullName=RealRouter                                     ext=true file=<unknown>
+  name=Router       id=167503724581   fullName=Router                                         ext=true file=<unknown>
+  name=RouterAlias  id=167503724582   fullName=RouterAlias                                    ext=true file=<unknown>
+  name=Widget       id=167503724584   fullName=Widget                                         ext=true file=<unknown>
+=== TYPE nodes referenced (fullName -> TYPE_DECL link) ===
+  TYPE ConcreteA                    full=ConcreteA                                      decl=167503724576:<unknown>
+  TYPE ConcreteB                    full=ConcreteB                                      decl=167503724577:<unknown>
+  TYPE HandlerLike                  full=HandlerLike                                    decl=167503724578:<unknown>
+  TYPE RealRouter                   full=RealRouter                                     decl=167503724579:<unknown>
+  TYPE Record<string,Router>        full=Record<string,Router>                          decl=167503724580:<unknown>
+  TYPE Router                       full=Router                                         decl=167503724581:<unknown>
+  TYPE RouterAlias                  full=RouterAlias                                    decl=167503724582:<unknown>
+  TYPE Widget                       full=Widget                                         decl=167503724584:<unknown>
+  TYPE Widget | Router              full=Widget | Router                                decl=167503724585:<unknown>
+  TYPE ConcreteA                    full=main.ts::program:ConcreteA                     decl=167503724558:main.ts
+  TYPE ConcreteB                    full=main.ts::program:ConcreteB                     decl=167503724560:main.ts
+  TYPE HandlerLike                  full=main.ts::program:HandlerLike                   decl=167503724563:main.ts
+  TYPE RealRouter                   full=main.ts::program:RealRouter                    decl=167503724565:main.ts
+  TYPE Router                       full=main.ts::program:Router                        decl=167503724555:main.ts
+  TYPE RouterAlias                  full=main.ts::program:RouterAlias                   decl=167503724569:main.ts
+  TYPE makeRouter                   full=main.ts::program:makeRouter                    decl=167503724557:main.ts
+  TYPE Router                       full=mod/other.ts::program:Router                   decl=167503724570:mod/other.ts
+  TYPE Widget                       full=mod/other.ts::program:Widget                   decl=167503724572:mod/other.ts

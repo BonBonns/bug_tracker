@@ -1,0 +1,11 @@
+  'value == "admin"'                 gap=' == '                   -> '=='     exp='=='   OK
+  'value === "admin"'                gap=' === '                  -> '==='    exp='==='  OK
+  'value != "admin"'                 gap=' != '                   -> '!='     exp='!='   OK
+  'value !== "admin"'                gap=' !== '                  -> '!=='    exp='!=='  OK
+  'a == b === c'                     gap=' === '                  -> '==='    exp='==='  OK
+  'a == b'                           gap=' == '                   -> '=='     exp='=='   OK
+  '"a == b" === value'               gap=' === '                  -> '==='    exp='==='  OK
+  'a /* == */ === b'                 gap=' /* == */ === '         -> '==='    exp='==='  OK
+  'a\\n      ===\\n      b'          gap='\n      ===\n      '    -> '==='    exp='==='  OK
+  'd! === b'                         gap=' === '                  -> '==='    exp='==='  OK
+R10 ACCEPTANCE: 10/10

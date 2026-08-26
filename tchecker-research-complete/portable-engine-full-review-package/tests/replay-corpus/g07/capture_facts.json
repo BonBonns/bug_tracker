@@ -1,0 +1,62 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182406,
+      "inner_binding": "getUnknownWorker",
+      "inner_local_id": 94489280523,
+      "outer_function": 107374182401,
+      "outer_binding": "getUnknownWorker",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280514,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280523,
+          34359738368,
+          94489280514
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182405,
+      "inner_binding": "getUnionWorker",
+      "inner_local_id": 94489280525,
+      "outer_function": 107374182401,
+      "outer_binding": "getUnionWorker",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280513,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280525,
+          34359738369,
+          94489280513
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182404,
+      "inner_binding": "getWorker",
+      "inner_local_id": 94489280527,
+      "outer_function": 107374182401,
+      "outer_binding": "getWorker",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280512,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280527,
+          34359738370,
+          94489280512
+        ]
+      }
+    }
+  ]
+}

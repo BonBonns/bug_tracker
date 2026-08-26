@@ -1,0 +1,10 @@
+=== app.post('/auth', ...) registration ===
+  name=post mfn=express:express:<returnValue>:post lit="/auth"
+    arg0 label=IDENTIFIER ident=app type=express:express:<returnValue>
+    arg1 label=LITERAL code="/auth"
+    arg2 label=METHOD_REF METHOD_REF -> index.mjs::program:<lambda>4
+=== that handler's params + username assignment ===
+  handler=index.mjs::program:<lambda>4
+  params=idx0:this:index.mjs::program  idx1:req:ANY  idx2:res:ANY
+    ASSIGN let username = req.body.username
+    ASSIGN req.session.username = username

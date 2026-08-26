@@ -1,0 +1,9 @@
+PASS T1 selector recovered for `require('./outer').inner`
+PASS T1 bare `require('./outer')` has NO selector recorded
+PASS T2a SHARED-NAME CONTROL: ctrl never resolves against outer.js
+PASS T2a no fact binds ctrl at all (abstains, never fabricates)
+PASS T4 unresolved selection (`.nope`) abstains, no module fallback
+PASS T5 require_bindings.tsv schema UNCHANGED (4 columns)
+PASS R33 selector lives in a SEPARATE file, not a new column
+PASS T6 no fact points at a module the local does not denote
+JS_PROV_R33=8/8

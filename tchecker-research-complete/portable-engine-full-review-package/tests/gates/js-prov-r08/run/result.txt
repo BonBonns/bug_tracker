@@ -1,0 +1,14 @@
+PASS t2 REAL router: establishes @koa/router
+PASS t3 FAKE router: does NOT gain @koa/router
+PASS t3 FAKE router: observes its own concrete type instead
+PASS conflicting callsites -> SET of both (never last-wins)
+PASS ANY callsite -> unconstrained_callsite TRUE
+PASS ANY callsite -> domain NOT established despite a concrete observation
+PASS cast-erased argument abstains (G2/G3)
+PASS stronger declared param type abstains (G4)
+PASS rest parameter abstains
+PASS every fact carries declared_type alongside (never replaced)
+PASS every fact resolution is CALLSITE_PROPAGATED
+PASS no operator intrinsic became a propagation target (G7)
+PASS R26-FIXTURE-INTEGRITY: assertion keys unique in this fixture
+JS_PROV_R08=13/13

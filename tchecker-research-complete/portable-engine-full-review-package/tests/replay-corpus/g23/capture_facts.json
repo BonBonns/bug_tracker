@@ -1,0 +1,157 @@
+{
+  "schema": "portable-capture-facts/0.2",
+  "captures": [
+    {
+      "inner_function": 107374182418,
+      "inner_binding": "b",
+      "inner_local_id": 94489280538,
+      "outer_function": 107374182419,
+      "outer_binding": "b",
+      "outer_kind": "PARAMETER",
+      "outer_node_id": 111669149726,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280538,
+          34359738368,
+          111669149726
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182418,
+      "inner_binding": "a",
+      "inner_local_id": 94489280539,
+      "outer_function": 107374182419,
+      "outer_binding": "a",
+      "outer_kind": "PARAMETER",
+      "outer_node_id": 111669149725,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280539,
+          34359738369,
+          111669149725
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182415,
+      "inner_binding": "source",
+      "inner_local_id": 94489280540,
+      "outer_function": 107374182416,
+      "outer_binding": "source",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280541,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280540,
+          34359738370,
+          94489280541
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182416,
+      "inner_binding": "source",
+      "inner_local_id": 94489280541,
+      "outer_function": 107374182417,
+      "outer_binding": "source",
+      "outer_kind": "PARAMETER",
+      "outer_node_id": 111669149722,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280541,
+          34359738371,
+          111669149722
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182413,
+      "inner_binding": "x",
+      "inner_local_id": 94489280542,
+      "outer_function": 107374182414,
+      "outer_binding": "x",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280527,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280542,
+          34359738372,
+          94489280527
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182411,
+      "inner_binding": "x",
+      "inner_local_id": 94489280543,
+      "outer_function": 107374182412,
+      "outer_binding": "x",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280524,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280543,
+          34359738373,
+          94489280524
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182409,
+      "inner_binding": "x",
+      "inner_local_id": 94489280544,
+      "outer_function": 107374182410,
+      "outer_binding": "x",
+      "outer_kind": "LOCAL",
+      "outer_node_id": 94489280521,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280544,
+          34359738374,
+          94489280521
+        ]
+      }
+    },
+    {
+      "inner_function": 107374182400,
+      "inner_binding": "source",
+      "inner_local_id": 94489280545,
+      "outer_function": 107374182401,
+      "outer_binding": "source",
+      "outer_kind": "PARAMETER",
+      "outer_node_id": 111669149698,
+      "resolution": "EXACT",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "CLOSURE_BINDING_REF",
+        "source_node_ids": [
+          94489280545,
+          34359738375,
+          111669149698
+        ]
+      }
+    }
+  ]
+}

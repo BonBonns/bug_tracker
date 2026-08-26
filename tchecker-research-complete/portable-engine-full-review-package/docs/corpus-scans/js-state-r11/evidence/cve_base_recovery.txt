@@ -1,0 +1,9 @@
+=== caseF: index-access base evidence ===
+indexAccess code=users[name] typeFullName=ANY
+    base/idx arg1 code=users -> { [x: __ecma.String]: __ecma.String; } hints=[]
+    base/idx arg2 code=name -> __ecma.String hints=[]
+=== 'users' LOCAL declaration + its assignment ===
+LOCAL users typeFullName={ [x: __ecma.String]: __ecma.String; } code=users
+LOCAL users typeFullName={ [x: __ecma.String]: __ecma.String; } code=users
+=== TYPE_DECL for Record/users ===
+=== members of any object-literal type backing users ===

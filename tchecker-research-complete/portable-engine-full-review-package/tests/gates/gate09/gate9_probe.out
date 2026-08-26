@@ -1,0 +1,32 @@
+x5: 0
+ROOTS=11
+CALL 74 -> [17]
+CALL 96 -> [35]
+CALL 119 -> [58]
+CALL 128 -> [83]
+CALL 150 -> [58]
+CALL 158 -> [83]
+CALL 180 -> [17]
+CALL 190 -> [35]
+CALL 213 -> [17]
+CALL 222 -> [35]
+RET 83 load params=[h] positions=[0]
+RET 103 topState params=[h, source] positions=[0]
+RET 134 topConstant params=[h, source] positions=[0]
+RET 164 directState params=[h, source] positions=[0]
+RET 197 directConstant params=[h, source] positions=[0]
+DDG_RELS
+DDG 21 -> 28 var=v
+DDG 62 -> 74 var=h
+DDG 67 -> 74 var=input
+DDG 87 -> 95 var=h
+DDG 107 -> 119 var=h
+DDG 107 -> 127 var=h
+DDG 112 -> 119 var=source
+DDG 138 -> 150 var=h
+DDG 138 -> 157 var=h
+DDG 168 -> 180 var=h
+DDG 168 -> 189 var=h
+DDG 173 -> 180 var=source
+DDG 201 -> 213 var=h
+DDG 201 -> 221 var=h

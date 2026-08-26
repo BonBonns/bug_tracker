@@ -1,0 +1,87 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "fs.readFileSync",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771078
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771078,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readFileSync"
+      },
+      "receiver": {
+        "name": "fs",
+        "type": "fs"
+      },
+      "receiver_ref": {
+        "code": "fs",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "fs.readFileSync",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771074
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771074,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readFileSync"
+      },
+      "receiver": {
+        "name": "fs",
+        "type": "fs"
+      },
+      "receiver_ref": {
+        "code": "fs",
+        "id": 94489280520,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "fs.readFileSync",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771081
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771081,
+      "key": {
+        "kind": "LITERAL",
+        "value": "readFileSync"
+      },
+      "receiver": {
+        "name": "fs",
+        "type": "fs"
+      },
+      "receiver_ref": {
+        "code": "fs",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": []
+}

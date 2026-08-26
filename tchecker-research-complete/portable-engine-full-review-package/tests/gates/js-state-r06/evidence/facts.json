@@ -1,0 +1,97 @@
+{
+  "schema": "portable-failure-state-erasure-candidate-facts/0.1",
+  "facts": [
+    {
+      "method_id": 107374182402,
+      "method_name": "truePositive_unionReturnInstanceofGuard",
+      "control_structure_id": 47244640256,
+      "condition_id": 30064771080,
+      "condition_code": "id instanceof Error",
+      "guard_identifier_id": 68719476747,
+      "guard_local_id": 94489280516,
+      "transformation_call_id": 30064771079,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640256,
+          30064771080,
+          68719476747,
+          94489280516,
+          30064771079
+        ]
+      }
+    },
+    {
+      "method_id": 107374182403,
+      "method_name": "<lambda>0",
+      "control_structure_id": 47244640257,
+      "condition_id": 30064771086,
+      "condition_code": "seen.has(key)",
+      "guard_identifier_id": 68719476757,
+      "guard_local_id": 94489280522,
+      "transformation_call_id": 30064771083,
+      "transformation_name": "<operator>.formatString",
+      "transformation_code": "<operator>.formatString(\"\", record.id, \":\", record.label, \"\")",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "TEMPLATE_STRING_COERCION",
+        "source_node_ids": [
+          47244640257,
+          30064771086,
+          68719476757,
+          94489280522,
+          30064771083
+        ]
+      }
+    },
+    {
+      "method_id": 107374182405,
+      "method_name": "isolation_guardShapeOnlyNoReturnContract",
+      "control_structure_id": 47244640258,
+      "condition_id": 30064771105,
+      "condition_code": "y instanceof Error",
+      "guard_identifier_id": 68719476780,
+      "guard_local_id": 94489280525,
+      "transformation_call_id": 30064771104,
+      "transformation_name": "Number",
+      "transformation_code": "Number(x)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640258,
+          30064771105,
+          68719476780,
+          94489280525,
+          30064771104
+        ]
+      }
+    },
+    {
+      "method_id": 107374182406,
+      "method_name": "isolation_returnContractOnlyNonComparisonGuard",
+      "control_structure_id": 47244640259,
+      "condition_id": 30064771115,
+      "condition_code": "seenKeys.has(key)",
+      "guard_identifier_id": 68719476798,
+      "guard_local_id": 94489280530,
+      "transformation_call_id": 30064771114,
+      "transformation_name": "String",
+      "transformation_code": "String(r)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640259,
+          30064771115,
+          68719476798,
+          94489280530,
+          30064771114
+        ]
+      }
+    }
+  ]
+}

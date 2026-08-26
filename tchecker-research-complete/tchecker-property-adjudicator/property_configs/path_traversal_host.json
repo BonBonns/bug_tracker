@@ -1,0 +1,17 @@
+{
+  "property_name": "ATTACKER_CONTROL_OF_FILESYSTEM_LOCATION",
+  "property_id_suffix": "controls_filesystem_location",
+  "vulnerability_class": "path-traversal",
+  "downstream_primitive": "fs.readFile",
+  "direct_sink_kinds": ["fs.readFile", "fs.readFileSync", "fs.writeFile", "fs.writeFileSync", "fs.createReadStream", "fs.createWriteStream", "fs.unlink", "fs.unlinkSync", "fs.open", "fs.openSync", "fs.stat", "fs.existsSync", "res.sendFile", "res.download"],
+  "direct_sink_model": "DIRECT_FILESYSTEM_ACCESS",
+  "indirect_sink_model": "WRAPPED_FILESYSTEM_ACCESS",
+  "focused_question_template": "Does the on-path call `{callee_name}` at path position {order} (static definition identity {static_status}; trace callee identity {trace_status}) restrict the resolved filesystem LOCATION to a value the attacker cannot choose, or can attacker influence still determine which file or directory is accessed? Note: a fixed base argument to path.join()/path.resolve() alone does NOT provide containment against '..' traversal -- only an explicit resolve-then-verify-containment check (or equivalent) does.",
+  "established_meaning": "modeled security property only (attacker controls the resolved filesystem location; not a confirmed path-traversal vulnerability): file permissions, symlink behavior, and actual sensitive-file presence at the resolved location are out of scope for this property",
+  "residual_vulnerability_questions": [
+    "filesystem permissions at the resolved location",
+    "reachability of the handler",
+    "presence of a sensitive file actually accessible via attacker-chosen paths",
+    "symlink-following and null-byte-injection effects on effective location (explicitly out of scope for v1 -- syntactic/resolved-path control, not filesystem-level effective access)"
+  ]
+}

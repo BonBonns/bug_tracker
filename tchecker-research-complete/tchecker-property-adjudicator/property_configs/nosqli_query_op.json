@@ -1,0 +1,16 @@
+{
+  "property_name": "ATTACKER_CONTROL_OF_QUERY_OPERATOR_STRUCTURE",
+  "property_id_suffix": "controls_query_operator_structure",
+  "vulnerability_class": "nosql-injection",
+  "downstream_primitive": "mongo.findOne",
+  "direct_sink_kinds": ["findOne", "find", "updateOne", "updateMany", "deleteOne", "deleteMany", "countDocuments", "findOneAndUpdate", "findOneAndDelete", "findOneAndReplace", "replaceOne"],
+  "direct_sink_model": "DIRECT_QUERY_EXECUTION",
+  "indirect_sink_model": "WRAPPED_QUERY_EXECUTION",
+  "focused_question_template": "Does attacker-controlled input reach the query field '{callee_name}' without being constrained to a primitive (non-object) type, enabling MongoDB operator injection ($ne, $regex, $where, $gt)?",
+  "established_meaning": "modeled security property only (attacker controls the query field's TYPE, not just its value); actual exploitability depends on whether the specific field/operator combination produces an observable effect (auth bypass, data leak, blind-oracle) -- not evaluated by this property",
+  "residual_vulnerability_questions": [
+    "whether Mongoose schema-level type coercion happens upstream of this code (a real, separate mitigating factor not modeled here)",
+    "whether the specific query field, if successfully injected, produces an observable effect",
+    "reachability of the handler from unauthenticated actors specifically"
+  ]
+}

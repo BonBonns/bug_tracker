@@ -1,0 +1,11 @@
+PASS MAY exposed distinctly
+PASS multi-input MAY preserved
+PASS UNKNOWN exposed distinctly
+PASS exact evidence remains hard
+PASS exact multi-input remains hard
+PASS unrelated value remains NONE
+PASS MAY never labeled hard source
+PASS UNKNOWN never labeled hard source
+PASS reporter does not mutate hard propagation
+PASS reporter does not mutate uncertain propagation
+GATE18=10/10

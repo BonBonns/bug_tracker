@@ -1,0 +1,12 @@
+PASS onCreated tab.url read recognized
+PASS onUpdated changeInfo.url and tab.url reads recognized
+PASS tab id, cookieStoreId, change status, and callback tabId remain separate
+PASS nested foo.url is not flattened into tab.url
+PASS ordinary runtime messages do not become tab URL sources
+PASS test, prefix-collision, and aliased namespaces do not match
+PASS exactly-defined named handler is supported
+PASS multiply-defined handler local abstains
+PASS facts target individual state reads, not entire parameters
+PASS tab URL origin kind is distinct and derivation is auditable
+PASS only the four intended controlled reads are emitted
+JS_SOURCE_R03_CONTROLS=11/11

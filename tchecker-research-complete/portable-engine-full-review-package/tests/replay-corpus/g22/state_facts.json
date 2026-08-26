@@ -1,0 +1,1944 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771076
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771076,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771083
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771083,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771090
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771090,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771098
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771098,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280522,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771106
+        ]
+      },
+      "function_id": 107374182405,
+      "index_call_id": 30064771106,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280525,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771113
+        ]
+      },
+      "function_id": 107374182406,
+      "index_call_id": 30064771113,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280528,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771122
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771122,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280531,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_6.push",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771120
+        ]
+      },
+      "function_id": 107374182407,
+      "index_call_id": 30064771120,
+      "key": {
+        "kind": "LITERAL",
+        "value": "push"
+      },
+      "receiver": {
+        "name": "_tmp_6",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_6",
+        "id": 94489280544,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[1]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771133
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771133,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280534,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_7.push",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771129
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771129,
+      "key": {
+        "kind": "LITERAL",
+        "value": "push"
+      },
+      "receiver": {
+        "name": "_tmp_7",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_7",
+        "id": 94489280543,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_7.push",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771131
+        ]
+      },
+      "function_id": 107374182408,
+      "index_call_id": 30064771131,
+      "key": {
+        "kind": "LITERAL",
+        "value": "push"
+      },
+      "receiver": {
+        "name": "_tmp_7",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_7",
+        "id": 94489280543,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[0]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771144
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771144,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280537,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_8.push",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771140
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771140,
+      "key": {
+        "kind": "LITERAL",
+        "value": "push"
+      },
+      "receiver": {
+        "name": "_tmp_8",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_8",
+        "id": 94489280542,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "_tmp_8.push",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771143
+        ]
+      },
+      "function_id": 107374182409,
+      "index_call_id": 30064771143,
+      "key": {
+        "kind": "LITERAL",
+        "value": "push"
+      },
+      "receiver": {
+        "name": "_tmp_8",
+        "type": "__ecma.Array"
+      },
+      "receiver_ref": {
+        "code": "_tmp_8",
+        "id": 94489280542,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "INDEX",
+      "code": "copy[\"fixed\"]",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "INDEX_ACCESS_READ",
+        "source_node_ids": [
+          30064771151
+        ]
+      },
+      "function_id": 107374182410,
+      "index_call_id": 30064771151,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "copy",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280540,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": [
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771072000,
+      "code": "a[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771072,
+          30064771073,
+          30064771073,
+          68719476737
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149698,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771153000,
+      "code": "exports.objectSpreadExact = objectSpreadExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771153,
+          30064771154,
+          30064771154,
+          68719476829
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadExact",
+        "type": "gate22.ts::program:objectSpreadExact"
+      },
+      "value_ref": {
+        "code": "objectSpreadExact",
+        "id": 94489280512,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771156000,
+      "code": "exports.objectSpreadOverrideAfter = objectSpreadOverrideAfter",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771156,
+          30064771157,
+          30064771157,
+          68719476832
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadOverrideAfter"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadOverrideAfter",
+        "type": "gate22.ts::program:objectSpreadOverrideAfter"
+      },
+      "value_ref": {
+        "code": "objectSpreadOverrideAfter",
+        "id": 94489280515,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771159000,
+      "code": "exports.objectSpreadOverrideBefore = objectSpreadOverrideBefore",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771159,
+          30064771160,
+          30064771160,
+          68719476835
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadOverrideBefore"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadOverrideBefore",
+        "type": "gate22.ts::program:objectSpreadOverrideBefore"
+      },
+      "value_ref": {
+        "code": "objectSpreadOverrideBefore",
+        "id": 94489280518,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771162000,
+      "code": "exports.objectSpreadLaterObjectWins = objectSpreadLaterObjectWins",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771162,
+          30064771163,
+          30064771163,
+          68719476838
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadLaterObjectWins"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadLaterObjectWins",
+        "type": "gate22.ts::program:objectSpreadLaterObjectWins"
+      },
+      "value_ref": {
+        "code": "objectSpreadLaterObjectWins",
+        "id": 94489280521,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771165000,
+      "code": "exports.objectSpreadEarlierObjectLoses = objectSpreadEarlierObjectLoses",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771165,
+          30064771166,
+          30064771166,
+          68719476841
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadEarlierObjectLoses"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadEarlierObjectLoses",
+        "type": "gate22.ts::program:objectSpreadEarlierObjectLoses"
+      },
+      "value_ref": {
+        "code": "objectSpreadEarlierObjectLoses",
+        "id": 94489280524,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771168000,
+      "code": "exports.objectSpreadDynamicWrite = objectSpreadDynamicWrite",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771168,
+          30064771169,
+          30064771169,
+          68719476844
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "objectSpreadDynamicWrite"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "objectSpreadDynamicWrite",
+        "type": "gate22.ts::program:objectSpreadDynamicWrite"
+      },
+      "value_ref": {
+        "code": "objectSpreadDynamicWrite",
+        "id": 94489280527,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771171000,
+      "code": "exports.arraySpreadExact = arraySpreadExact",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771171,
+          30064771172,
+          30064771172,
+          68719476847
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arraySpreadExact"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arraySpreadExact",
+        "type": "gate22.ts::program:arraySpreadExact"
+      },
+      "value_ref": {
+        "code": "arraySpreadExact",
+        "id": 94489280530,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771174000,
+      "code": "exports.arraySpreadPrefix = arraySpreadPrefix",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771174,
+          30064771175,
+          30064771175,
+          68719476850
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arraySpreadPrefix"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arraySpreadPrefix",
+        "type": "gate22.ts::program:arraySpreadPrefix"
+      },
+      "value_ref": {
+        "code": "arraySpreadPrefix",
+        "id": 94489280533,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771177000,
+      "code": "exports.arraySpreadSuffix = arraySpreadSuffix",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771177,
+          30064771178,
+          30064771178,
+          68719476853
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "arraySpreadSuffix"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "arraySpreadSuffix",
+        "type": "gate22.ts::program:arraySpreadSuffix"
+      },
+      "value_ref": {
+        "code": "arraySpreadSuffix",
+        "id": 94489280536,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771180000,
+      "code": "exports.distinctReceiverSpread = distinctReceiverSpread",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771180,
+          30064771181,
+          30064771181,
+          68719476856
+        ]
+      },
+      "function_id": 107374182401,
+      "key": {
+        "kind": "LITERAL",
+        "value": "distinctReceiverSpread"
+      },
+      "receiver": {
+        "name": "exports",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "exports",
+        "id": -1,
+        "kind": "UNKNOWN"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "distinctReceiverSpread",
+        "type": "gate22.ts::program:distinctReceiverSpread"
+      },
+      "value_ref": {
+        "code": "distinctReceiverSpread",
+        "id": 94489280539,
+        "kind": "LOCAL"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771077000,
+      "code": "a[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771077,
+          30064771078,
+          30064771078,
+          68719476744
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149701,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771081000,
+      "code": "_tmp_1.fixed = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771081,
+          30064771082,
+          30064771082,
+          90194313219
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_1",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771084000,
+      "code": "a[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771084,
+          30064771085,
+          30064771085,
+          68719476752
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149704,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "FIELD",
+      "assignment_call_id": 30064771087000,
+      "code": "_tmp_2.fixed = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_FIELD_ACCESS",
+        "source_node_ids": [
+          30064771087,
+          30064771088,
+          30064771088,
+          90194313222
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "_tmp_2",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771091000,
+      "code": "a[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771091,
+          30064771092,
+          30064771092,
+          68719476760
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149708,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771093000,
+      "code": "b[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771093,
+          30064771094,
+          30064771094,
+          90194313226
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 111669149707,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771099000,
+      "code": "a[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771099,
+          30064771100,
+          30064771100,
+          90194313229
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149710,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771101000,
+      "code": "b[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771101,
+          30064771102,
+          30064771102,
+          68719476771
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 111669149711,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771107000,
+      "code": "a[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771107,
+          30064771108,
+          30064771108,
+          90194313233
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149714,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771109000,
+      "code": "a[key] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771109,
+          30064771110,
+          30064771110,
+          68719476782
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149714,
+        "kind": "PARAMETER"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149716,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771114000,
+      "code": "a[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771114,
+          30064771115,
+          30064771115,
+          68719476789
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149718,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149719,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771123000,
+      "code": "a[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771123,
+          30064771124,
+          30064771124,
+          68719476798
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149721,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149722,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771134000,
+      "code": "a[0] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771134,
+          30064771135,
+          30064771135,
+          68719476809
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149724,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149725,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771145000,
+      "code": "a[\"fixed\"] = \"CONST\"",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771145,
+          30064771146,
+          30064771146,
+          90194313244
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "a",
+        "id": 111669149727,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771147000,
+      "code": "b[\"fixed\"] = source",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ASSIGNMENT_TO_INDEX_ACCESS",
+        "source_node_ids": [
+          30064771147,
+          30064771148,
+          30064771148,
+          68719476821
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "b",
+        "id": 111669149728,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149729,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771075001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771075,
+          30064771072
+        ]
+      },
+      "function_id": 107374182400,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280513,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149698,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771080001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771080,
+          30064771077
+        ]
+      },
+      "function_id": 107374182402,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280516,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149701,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771089001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771089,
+          30064771084
+        ]
+      },
+      "function_id": 107374182403,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280519,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149704,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771096001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771096,
+          30064771091
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280522,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149708,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771097001,
+      "code": "spread:...b",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771097,
+          30064771093
+        ]
+      },
+      "function_id": 107374182404,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280522,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771104001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771104,
+          30064771099
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280525,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771105001,
+      "code": "spread:...b",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771105,
+          30064771101
+        ]
+      },
+      "function_id": 107374182405,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "b",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280525,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149712,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771112001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771112,
+          30064771107
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280528,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771112002,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771112,
+          30064771109
+        ]
+      },
+      "function_id": 107374182406,
+      "key": {
+        "kind": "DYNAMIC",
+        "ref": "key"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280528,
+        "kind": "LOCAL"
+      },
+      "resolution": "AMBIGUOUS",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149716,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771121001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771121,
+          30064771114
+        ]
+      },
+      "function_id": 107374182407,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280531,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149719,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771128000,
+      "code": "push-element",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "ARRAY_LITERAL_ELEMENT",
+        "source_node_ids": [
+          30064771128,
+          90194313238
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "",
+        "type": ""
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280534,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771132001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771132,
+          30064771123
+        ]
+      },
+      "function_id": 107374182408,
+      "key": {
+        "kind": "LITERAL",
+        "value": "1"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280534,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149722,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771141001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771141,
+          30064771134
+        ]
+      },
+      "function_id": 107374182409,
+      "key": {
+        "kind": "LITERAL",
+        "value": "0"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280537,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "source",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "source",
+        "id": 111669149725,
+        "kind": "PARAMETER"
+      }
+    },
+    {
+      "accessor": "INDEX",
+      "assignment_call_id": 30064771150001,
+      "code": "spread:...a",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "SPREAD_EXPANSION",
+        "source_node_ids": [
+          30064771150,
+          30064771145
+        ]
+      },
+      "function_id": 107374182410,
+      "key": {
+        "kind": "LITERAL",
+        "value": "fixed"
+      },
+      "receiver": {
+        "name": "a",
+        "type": "Record<string,string>"
+      },
+      "receiver_ref": {
+        "code": "copy",
+        "id": 94489280540,
+        "kind": "LOCAL"
+      },
+      "resolution": "EXACT",
+      "value": {
+        "name": "\"CONST\"",
+        "type": "__ecma.String"
+      },
+      "value_ref": {
+        "code": "\"CONST\"",
+        "id": -1,
+        "kind": "CONSTANT"
+      }
+    }
+  ]
+}

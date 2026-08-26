@@ -1,0 +1,8 @@
+PASS registered callback source is MAY, never fabricated EXACT
+PASS ordinary caller parameter alternative is retained
+PASS WebExtension origin kind survives without FILE_INPUT collapse
+PASS class separation: unregistered parameter remains ordinary exact input
+PASS loader consumes explicit PARAMETER target kind
+PASS loader rejects source facts missing target class
+PASS unknown origin kinds fail closed instead of collapsing to FILE_INPUT
+CORE_S05=7/7

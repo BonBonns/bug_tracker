@@ -1,0 +1,45 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"test.js"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			4	"./test.js"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2					
+4	Artificial	CFG_FUNC_EXIT		1		0	2					
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_FUNC_DECL		1		0	2			1	sink_f	
+7	Artificial	CFG_FUNC_ENTRY		1		0	6					
+8	Artificial	CFG_FUNC_EXIT		1		0	6					
+9	AST	AST_PARAM_LIST		1		0	6					
+10	AST	AST_PARAM		1		0	6				y	
+11	AST	string		1	"y"	1	6					
+12	AST	AST_STMT_LIST		1		2	6					
+13	AST	AST_RETURN		1		0	6					
+14	AST	AST_VAR		1		0	6				y	
+15	AST	string		1	"y"	0	6					
+16	AST	AST_FUNC_DECL		2		1	2			2	middle_f	
+17	Artificial	CFG_FUNC_ENTRY		2		0	16					
+18	Artificial	CFG_FUNC_EXIT		2		0	16					
+19	AST	AST_PARAM_LIST		2		0	16					
+20	AST	AST_PARAM		2		0	16				x	
+21	AST	string		2	"x"	1	16					
+22	AST	AST_STMT_LIST		2		2	16					
+23	AST	AST_RETURN		2		0	16					
+24	AST	AST_CALL		2		0	16					
+25	AST	AST_NAME		2		0	16				sink_f	
+26	AST	string		2	"sink_f"	0	16					
+27	AST	AST_ARG_LIST		2		1	16					
+28	AST	AST_VAR		2		0	16				x	
+29	AST	string		2	"x"	0	16					
+30	AST	AST_FUNC_DECL		3		2	2			3	main	
+31	Artificial	CFG_FUNC_ENTRY		3		0	30					
+32	Artificial	CFG_FUNC_EXIT		3		0	30					
+33	AST	AST_PARAM_LIST		3		0	30					
+34	AST	AST_PARAM		3		0	30				input	
+35	AST	string		3	"input"	1	30					
+36	AST	AST_STMT_LIST		3		2	30					
+37	AST	AST_RETURN		3		0	30					
+38	AST	AST_CALL		3		0	30					
+39	AST	AST_NAME		3		0	30				middle_f	
+40	AST	string		3	"middle_f"	0	30					
+41	AST	AST_ARG_LIST		3		1	30					
+42	AST	AST_VAR		3		0	30				input	
+43	AST	string		3	"input"	0	30					

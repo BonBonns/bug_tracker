@@ -1,0 +1,363 @@
+PASS exactly 5 total facts produced (no fixture drift)
+PASS truePositive_unionReturnInstanceofGuard present
+PASS truePositive_unionReturnInstanceofGuard r07_emit == True
+PASS truePositive_unionReturnInstanceofGuard guard_shape_established == True
+PASS truePositive_unionReturnInstanceofGuard return_contract == ESTABLISHED
+PASS truePositive_unionReturnInstanceofGuard guard_subject_is_transformed_value recorded True
+PASS <lambda>0 present
+PASS <lambda>0 r07_emit == False
+PASS <lambda>0 guard_shape_established == False
+PASS <lambda>0 return_contract == UNKNOWN
+PASS <lambda>0 guard_subject_is_transformed_value recorded True
+PASS isolation_guardShapeOnlyNoReturnContract present
+PASS isolation_guardShapeOnlyNoReturnContract r07_emit == False
+PASS isolation_guardShapeOnlyNoReturnContract guard_shape_established == True
+PASS isolation_guardShapeOnlyNoReturnContract return_contract == UNKNOWN
+PASS isolation_guardShapeOnlyNoReturnContract guard_subject_is_transformed_value recorded True
+PASS isolation_returnContractOnlyNonComparisonGuard present
+PASS isolation_returnContractOnlyNonComparisonGuard r07_emit == False
+PASS isolation_returnContractOnlyNonComparisonGuard guard_shape_established == False
+PASS isolation_returnContractOnlyNonComparisonGuard return_contract == ESTABLISHED
+PASS isolation_returnContractOnlyNonComparisonGuard guard_subject_is_transformed_value recorded True
+PASS nullNumber_survivesMalformedReturnType present
+PASS nullNumber_survivesMalformedReturnType r07_emit == True
+PASS nullNumber_survivesMalformedReturnType guard_shape_established == True
+PASS nullNumber_survivesMalformedReturnType return_contract == ESTABLISHED
+PASS nullNumber_survivesMalformedReturnType guard_subject_is_transformed_value recorded True
+PASS exactly 2 candidates emitted (truePositive + nullNumber)
+PASS emitted candidates are exactly the expected two, nothing else
+PASS FxA-shaped false positive: FAILURE GUARD not established
+PASS FxA-shaped false positive: RETURN CONTRACT not established (UNKNOWN, not proven-safe)
+PASS FxA-shaped false positive: excluded overall
+JS_STATE_R07=31/31
+
+--- full fact dump (for audit) ---
+{
+  "schema": "portable-js-state-r07-candidates/0.1",
+  "note": "r07_emit=true means ALL FIVE preconditions held: ERASES (R02), guard-shape (closed set, SIGNAL A), return-contract ESTABLISHED (positive evidence only, SIGNAL B), guard-subject=transformed-value (guaranteed by R02 construction), and sink reachability under R04/R05 rules resulting in SENSITIVE. r07_return_contract=UNKNOWN is NOT treated as safe and is NOT sufficient to emit -- it is recorded, not suppressed.",
+  "all_facts": [
+    {
+      "method_id": 107374182402,
+      "method_name": "truePositive_unionReturnInstanceofGuard",
+      "control_structure_id": 47244640256,
+      "condition_id": 30064771080,
+      "condition_code": "id instanceof Error",
+      "guard_identifier_id": 68719476747,
+      "guard_local_id": 94489280516,
+      "transformation_call_id": 30064771079,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640256,
+          30064771080,
+          68719476747,
+          94489280516,
+          30064771079
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771081,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771081,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "<operator>.instanceOf",
+      "r07_guard_shape_established": true,
+      "r07_return_contract": "ESTABLISHED",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": true
+    },
+    {
+      "method_id": 107374182403,
+      "method_name": "<lambda>0",
+      "control_structure_id": 47244640257,
+      "condition_id": 30064771086,
+      "condition_code": "seen.has(key)",
+      "guard_identifier_id": 68719476757,
+      "guard_local_id": 94489280522,
+      "transformation_call_id": 30064771083,
+      "transformation_name": "<operator>.formatString",
+      "transformation_code": "<operator>.formatString(\"\", record.id, \":\", record.label, \"\")",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "TEMPLATE_STRING_COERCION",
+        "source_node_ids": [
+          47244640257,
+          30064771086,
+          68719476757,
+          94489280522,
+          30064771083
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771086,
+          "callee_name": "has"
+        },
+        {
+          "call_id": 30064771088,
+          "callee_name": "add"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN",
+      "r07_guard_operator": "has",
+      "r07_guard_shape_established": false,
+      "r07_return_contract": "UNKNOWN",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": false,
+      "r07_emit": false
+    },
+    {
+      "method_id": 107374182405,
+      "method_name": "isolation_guardShapeOnlyNoReturnContract",
+      "control_structure_id": 47244640258,
+      "condition_id": 30064771105,
+      "condition_code": "y instanceof Error",
+      "guard_identifier_id": 68719476780,
+      "guard_local_id": 94489280525,
+      "transformation_call_id": 30064771104,
+      "transformation_name": "Number",
+      "transformation_code": "Number(x)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640258,
+          30064771105,
+          68719476780,
+          94489280525,
+          30064771104
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771106,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771106,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "<operator>.instanceOf",
+      "r07_guard_shape_established": true,
+      "r07_return_contract": "UNKNOWN",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": false
+    },
+    {
+      "method_id": 107374182406,
+      "method_name": "isolation_returnContractOnlyNonComparisonGuard",
+      "control_structure_id": 47244640259,
+      "condition_id": 30064771115,
+      "condition_code": "seenKeys.has(key)",
+      "guard_identifier_id": 68719476798,
+      "guard_local_id": 94489280530,
+      "transformation_call_id": 30064771114,
+      "transformation_name": "String",
+      "transformation_code": "String(r)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640259,
+          30064771115,
+          68719476798,
+          94489280530,
+          30064771114
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771115,
+          "callee_name": "has"
+        },
+        {
+          "call_id": 30064771117,
+          "callee_name": "add"
+        },
+        {
+          "call_id": 30064771119,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771119,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "has",
+      "r07_guard_shape_established": false,
+      "r07_return_contract": "ESTABLISHED",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": false
+    },
+    {
+      "method_id": 107374182408,
+      "method_name": "nullNumber_survivesMalformedReturnType",
+      "control_structure_id": 47244640260,
+      "condition_id": 30064771127,
+      "condition_code": "id5 === null",
+      "guard_identifier_id": 68719476812,
+      "guard_local_id": 94489280534,
+      "transformation_call_id": 30064771126,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r5)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640260,
+          30064771127,
+          68719476812,
+          94489280534,
+          30064771126
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771128,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771128,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "<operator>.equals",
+      "r07_guard_shape_established": true,
+      "r07_return_contract": "ESTABLISHED",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": true
+    }
+  ],
+  "candidates": [
+    {
+      "method_id": 107374182402,
+      "method_name": "truePositive_unionReturnInstanceofGuard",
+      "control_structure_id": 47244640256,
+      "condition_id": 30064771080,
+      "condition_code": "id instanceof Error",
+      "guard_identifier_id": 68719476747,
+      "guard_local_id": 94489280516,
+      "transformation_call_id": 30064771079,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640256,
+          30064771080,
+          68719476747,
+          94489280516,
+          30064771079
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771081,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771081,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "<operator>.instanceOf",
+      "r07_guard_shape_established": true,
+      "r07_return_contract": "ESTABLISHED",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": true
+    },
+    {
+      "method_id": 107374182408,
+      "method_name": "nullNumber_survivesMalformedReturnType",
+      "control_structure_id": 47244640260,
+      "condition_id": 30064771127,
+      "condition_code": "id5 === null",
+      "guard_identifier_id": 68719476812,
+      "guard_local_id": 94489280534,
+      "transformation_call_id": 30064771126,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r5)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640260,
+          30064771127,
+          68719476812,
+          94489280534,
+          30064771126
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064771128,
+          "callee_name": "authenticate"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [
+        {
+          "call_id": 30064771128,
+          "callee_name": "authenticate",
+          "category": "AUTHENTICATION"
+        }
+      ],
+      "security_sensitive_use": "SENSITIVE",
+      "r07_guard_operator": "<operator>.equals",
+      "r07_guard_shape_established": true,
+      "r07_return_contract": "ESTABLISHED",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": true,
+      "r07_emit": true
+    }
+  ]
+}

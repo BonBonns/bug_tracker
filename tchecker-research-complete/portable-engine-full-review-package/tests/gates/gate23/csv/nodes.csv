@@ -1,0 +1,377 @@
+id:int	labels:label	type	flags:string_array	lineno:int	code	childnum:int	funcid:int	classname	namespace	endlineno:int	name	doccomment
+0	Filesystem	Directory		0		0	0				"."	
+1	Filesystem	File		0		0	0				"gate23.ts"	
+2	AST	AST_TOPLEVEL	TOPLEVEL_FILE	1		0	0			60	"./gate23.ts"	
+3	Artificial	CFG_FUNC_ENTRY		1		0	2				"./gate23.ts"	
+4	Artificial	CFG_FUNC_EXIT		1		0	2				"./gate23.ts"	
+5	AST	AST_STMT_LIST		1		0	2					
+6	AST	AST_FUNC_DECL		1		0	2			4	closureDirect	
+7	Artificial	CFG_FUNC_ENTRY		1		0	6				closureDirect	
+8	Artificial	CFG_FUNC_EXIT		1		0	6				closureDirect	
+9	AST	AST_PARAM_LIST		1		0	6					
+10	AST	AST_PARAM		1		0	6				source	
+11	AST	NULL		1		0	6					
+12	AST	string		1	"source"	1	6					
+13	AST	NULL		1		2	6					
+14	AST	NULL		1		1	6					
+15	AST	AST_STMT_LIST		1		2	6					
+16	AST	NULL		1		3	6					
+17	AST	AST_ASSIGN		2		0	6					
+18	AST	AST_VAR		2		0	6				f	
+19	AST	string		2	"f"	0	6					
+20	AST	AST_CLOSURE		2		1	6			2	{closure@2}	
+21	Artificial	CFG_FUNC_ENTRY		2		0	20				{closure@2}	
+22	Artificial	CFG_FUNC_EXIT		2		0	20				{closure@2}	
+23	AST	AST_PARAM_LIST		2		0	20					
+24	AST	AST_CLOSURE_USES		2		1	20					
+25	AST	AST_CLOSURE_VAR		2		0	20					
+26	AST	string		2	"source"	0	20					
+27	AST	AST_STMT_LIST		2		2	20					
+28	AST	AST_RETURN		2		0	20					
+29	AST	AST_VAR		2		0	20				source	
+30	AST	string		2	"source"	0	20					
+31	AST	NULL		2		3	20					
+32	AST	AST_RETURN		3		1	6					
+33	AST	AST_CALL		3		0	6					
+34	AST	AST_NAME		3		0	6				f	
+35	AST	string		3	"f"	0	6					
+36	AST	AST_ARG_LIST		0		1	6					
+37	AST	AST_FUNC_DECL		6		1	2			9	closureParam	
+38	Artificial	CFG_FUNC_ENTRY		6		0	37				closureParam	
+39	Artificial	CFG_FUNC_EXIT		6		0	37				closureParam	
+40	AST	AST_PARAM_LIST		6		0	37					
+41	AST	AST_PARAM		6		0	37				source	
+42	AST	NULL		6		0	37					
+43	AST	string		6	"source"	1	37					
+44	AST	NULL		6		2	37					
+45	AST	NULL		6		1	37					
+46	AST	AST_STMT_LIST		6		2	37					
+47	AST	NULL		6		3	37					
+48	AST	AST_ASSIGN		7		0	37					
+49	AST	AST_VAR		7		0	37				f	
+50	AST	string		7	"f"	0	37					
+51	AST	AST_CLOSURE		7		1	37			7	{closure@7}	
+52	Artificial	CFG_FUNC_ENTRY		7		0	51				{closure@7}	
+53	Artificial	CFG_FUNC_EXIT		7		0	51				{closure@7}	
+54	AST	AST_PARAM_LIST		7		0	51					
+55	AST	AST_PARAM		7		0	51				x	
+56	AST	NULL		7		0	51					
+57	AST	string		7	"x"	1	51					
+58	AST	NULL		7		2	51					
+59	AST	NULL		7		1	51					
+60	AST	AST_STMT_LIST		7		2	51					
+61	AST	AST_RETURN		7		0	51					
+62	AST	AST_VAR		7		0	51				x	
+63	AST	string		7	"x"	0	51					
+64	AST	NULL		7		3	51					
+65	AST	AST_RETURN		8		1	37					
+66	AST	AST_CALL		8		0	37					
+67	AST	AST_NAME		8		0	37				f	
+68	AST	string		8	"f"	0	37					
+69	AST	AST_ARG_LIST		8		1	37					
+70	AST	AST_VAR		8		0	37				source	
+71	AST	string		8	"source"	0	37					
+72	AST	AST_FUNC_DECL		11		2	2			14	closureShadow	
+73	Artificial	CFG_FUNC_ENTRY		11		0	72				closureShadow	
+74	Artificial	CFG_FUNC_EXIT		11		0	72				closureShadow	
+75	AST	AST_PARAM_LIST		11		0	72					
+76	AST	AST_PARAM		11		0	72				source	
+77	AST	NULL		11		0	72					
+78	AST	string		11	"source"	1	72					
+79	AST	NULL		11		2	72					
+80	AST	NULL		11		1	72					
+81	AST	AST_STMT_LIST		11		2	72					
+82	AST	NULL		11		3	72					
+83	AST	AST_ASSIGN		12		0	72					
+84	AST	AST_VAR		12		0	72				f	
+85	AST	string		12	"f"	0	72					
+86	AST	AST_CLOSURE		12		1	72			12	{closure@12}	
+87	Artificial	CFG_FUNC_ENTRY		12		0	86				{closure@12}	
+88	Artificial	CFG_FUNC_EXIT		12		0	86				{closure@12}	
+89	AST	AST_PARAM_LIST		12		0	86					
+90	AST	AST_PARAM		12		0	86				source	
+91	AST	NULL		12		0	86					
+92	AST	string		12	"source"	1	86					
+93	AST	NULL		12		2	86					
+94	AST	NULL		12		1	86					
+95	AST	AST_STMT_LIST		12		2	86					
+96	AST	AST_RETURN		12		0	86					
+97	AST	AST_VAR		12		0	86				source	
+98	AST	string		12	"source"	0	86					
+99	AST	NULL		12		3	86					
+100	AST	AST_RETURN		13		1	72					
+101	AST	AST_CALL		13		0	72					
+102	AST	AST_NAME		13		0	72				f	
+103	AST	string		13	"f"	0	72					
+104	AST	AST_ARG_LIST		13		1	72					
+105	AST	string		13	"CONST"	0	72					
+106	AST	AST_FUNC_DECL		16		3	2			19	closureUnrelated	
+107	Artificial	CFG_FUNC_ENTRY		16		0	106				closureUnrelated	
+108	Artificial	CFG_FUNC_EXIT		16		0	106				closureUnrelated	
+109	AST	AST_PARAM_LIST		16		0	106					
+110	AST	AST_PARAM		16		0	106				source	
+111	AST	NULL		16		0	106					
+112	AST	string		16	"source"	1	106					
+113	AST	NULL		16		2	106					
+114	AST	NULL		16		1	106					
+115	AST	AST_STMT_LIST		16		2	106					
+116	AST	NULL		16		3	106					
+117	AST	AST_ASSIGN		17		0	106					
+118	AST	AST_VAR		17		0	106				f	
+119	AST	string		17	"f"	0	106					
+120	AST	AST_CLOSURE		17		1	106			17	{closure@17}	
+121	Artificial	CFG_FUNC_ENTRY		17		0	120				{closure@17}	
+122	Artificial	CFG_FUNC_EXIT		17		0	120				{closure@17}	
+123	AST	AST_PARAM_LIST		17		0	120					
+124	AST	NULL		17		1	120					
+125	AST	AST_STMT_LIST		17		2	120					
+126	AST	AST_RETURN		17		0	120					
+127	AST	string		17	"CONST"	0	120					
+128	AST	NULL		17		3	120					
+129	AST	AST_RETURN		18		1	106					
+130	AST	AST_CALL		18		0	106					
+131	AST	AST_NAME		18		0	106				f	
+132	AST	string		18	"f"	0	106					
+133	AST	AST_ARG_LIST		0		1	106					
+134	AST	AST_FUNC_DECL		21		4	2			25	closureAlias	
+135	Artificial	CFG_FUNC_ENTRY		21		0	134				closureAlias	
+136	Artificial	CFG_FUNC_EXIT		21		0	134				closureAlias	
+137	AST	AST_PARAM_LIST		21		0	134					
+138	AST	AST_PARAM		21		0	134				source	
+139	AST	NULL		21		0	134					
+140	AST	string		21	"source"	1	134					
+141	AST	NULL		21		2	134					
+142	AST	NULL		21		1	134					
+143	AST	AST_STMT_LIST		21		2	134					
+144	AST	NULL		21		3	134					
+145	AST	AST_ASSIGN		22		0	134					
+146	AST	AST_VAR		22		0	134				x	
+147	AST	string		22	"x"	0	134					
+148	AST	AST_VAR		22		1	134				source	
+149	AST	string		22	"source"	0	134					
+150	AST	AST_ASSIGN		23		1	134					
+151	AST	AST_VAR		23		0	134				f	
+152	AST	string		23	"f"	0	134					
+153	AST	AST_CLOSURE		23		1	134			23	{closure@23}	
+154	Artificial	CFG_FUNC_ENTRY		23		0	153				{closure@23}	
+155	Artificial	CFG_FUNC_EXIT		23		0	153				{closure@23}	
+156	AST	AST_PARAM_LIST		23		0	153					
+157	AST	AST_CLOSURE_USES		23		1	153					
+158	AST	AST_CLOSURE_VAR		23		0	153					
+159	AST	string		23	"x"	0	153					
+160	AST	AST_STMT_LIST		23		2	153					
+161	AST	AST_RETURN		23		0	153					
+162	AST	AST_VAR		23		0	153				x	
+163	AST	string		23	"x"	0	153					
+164	AST	NULL		23		3	153					
+165	AST	AST_RETURN		24		2	134					
+166	AST	AST_CALL		24		0	134					
+167	AST	AST_NAME		24		0	134				f	
+168	AST	string		24	"f"	0	134					
+169	AST	AST_ARG_LIST		0		1	134					
+170	AST	AST_FUNC_DECL		27		5	2			32	closureMutation	
+171	Artificial	CFG_FUNC_ENTRY		27		0	170				closureMutation	
+172	Artificial	CFG_FUNC_EXIT		27		0	170				closureMutation	
+173	AST	AST_PARAM_LIST		27		0	170					
+174	AST	AST_PARAM		27		0	170				source	
+175	AST	NULL		27		0	170					
+176	AST	string		27	"source"	1	170					
+177	AST	NULL		27		2	170					
+178	AST	NULL		27		1	170					
+179	AST	AST_STMT_LIST		27		2	170					
+180	AST	NULL		27		3	170					
+181	AST	AST_ASSIGN		28		0	170					
+182	AST	AST_VAR		28		0	170				x	
+183	AST	string		28	"x"	0	170					
+184	AST	AST_VAR		28		1	170				source	
+185	AST	string		28	"source"	0	170					
+186	AST	AST_ASSIGN		29		1	170					
+187	AST	AST_VAR		29		0	170				f	
+188	AST	string		29	"f"	0	170					
+189	AST	AST_CLOSURE		29		1	170			29	{closure@29}	
+190	Artificial	CFG_FUNC_ENTRY		29		0	189				{closure@29}	
+191	Artificial	CFG_FUNC_EXIT		29		0	189				{closure@29}	
+192	AST	AST_PARAM_LIST		29		0	189					
+193	AST	AST_CLOSURE_USES		29		1	189					
+194	AST	AST_CLOSURE_VAR		29		0	189					
+195	AST	string		29	"x"	0	189					
+196	AST	AST_STMT_LIST		29		2	189					
+197	AST	AST_RETURN		29		0	189					
+198	AST	AST_VAR		29		0	189				x	
+199	AST	string		29	"x"	0	189					
+200	AST	NULL		29		3	189					
+201	AST	AST_ASSIGN		30		2	170					
+202	AST	AST_VAR		30		0	170				x	
+203	AST	string		30	"x"	0	170					
+204	AST	string		30	"CONST"	1	170					
+205	AST	AST_RETURN		31		3	170					
+206	AST	AST_CALL		31		0	170					
+207	AST	AST_NAME		31		0	170				f	
+208	AST	string		31	"f"	0	170					
+209	AST	AST_ARG_LIST		0		1	170					
+210	AST	AST_FUNC_DECL		34		6	2			39	closureMutationToSource	
+211	Artificial	CFG_FUNC_ENTRY		34		0	210				closureMutationToSource	
+212	Artificial	CFG_FUNC_EXIT		34		0	210				closureMutationToSource	
+213	AST	AST_PARAM_LIST		34		0	210					
+214	AST	AST_PARAM		34		0	210				source	
+215	AST	NULL		34		0	210					
+216	AST	string		34	"source"	1	210					
+217	AST	NULL		34		2	210					
+218	AST	NULL		34		1	210					
+219	AST	AST_STMT_LIST		34		2	210					
+220	AST	NULL		34		3	210					
+221	AST	AST_ASSIGN		35		0	210					
+222	AST	AST_VAR		35		0	210				x	
+223	AST	string		35	"x"	0	210					
+224	AST	string		35	"CONST"	1	210					
+225	AST	AST_ASSIGN		36		1	210					
+226	AST	AST_VAR		36		0	210				f	
+227	AST	string		36	"f"	0	210					
+228	AST	AST_CLOSURE		36		1	210			36	{closure@36}	
+229	Artificial	CFG_FUNC_ENTRY		36		0	228				{closure@36}	
+230	Artificial	CFG_FUNC_EXIT		36		0	228				{closure@36}	
+231	AST	AST_PARAM_LIST		36		0	228					
+232	AST	AST_CLOSURE_USES		36		1	228					
+233	AST	AST_CLOSURE_VAR		36		0	228					
+234	AST	string		36	"x"	0	228					
+235	AST	AST_STMT_LIST		36		2	228					
+236	AST	AST_RETURN		36		0	228					
+237	AST	AST_VAR		36		0	228				x	
+238	AST	string		36	"x"	0	228					
+239	AST	NULL		36		3	228					
+240	AST	AST_ASSIGN		37		2	210					
+241	AST	AST_VAR		37		0	210				x	
+242	AST	string		37	"x"	0	210					
+243	AST	AST_VAR		37		1	210				source	
+244	AST	string		37	"source"	0	210					
+245	AST	AST_RETURN		38		3	210					
+246	AST	AST_CALL		38		0	210					
+247	AST	AST_NAME		38		0	210				f	
+248	AST	string		38	"f"	0	210					
+249	AST	AST_ARG_LIST		0		1	210					
+250	AST	AST_FUNC_DECL		41		7	2			45	nestedClosure	
+251	Artificial	CFG_FUNC_ENTRY		41		0	250				nestedClosure	
+252	Artificial	CFG_FUNC_EXIT		41		0	250				nestedClosure	
+253	AST	AST_PARAM_LIST		41		0	250					
+254	AST	AST_PARAM		41		0	250				source	
+255	AST	NULL		41		0	250					
+256	AST	string		41	"source"	1	250					
+257	AST	NULL		41		2	250					
+258	AST	NULL		41		1	250					
+259	AST	AST_STMT_LIST		41		2	250					
+260	AST	NULL		41		3	250					
+261	AST	AST_ASSIGN		42		0	250					
+262	AST	AST_VAR		42		0	250				f	
+263	AST	string		42	"f"	0	250					
+264	AST	AST_CLOSURE		42		1	250			42	{closure@42}	
+265	Artificial	CFG_FUNC_ENTRY		42		0	264				{closure@42}	
+266	Artificial	CFG_FUNC_EXIT		42		0	264				{closure@42}	
+267	AST	AST_PARAM_LIST		42		0	264					
+268	AST	AST_CLOSURE_USES		42		1	264					
+269	AST	AST_CLOSURE_VAR		42		0	264					
+270	AST	string		42	"source"	0	264					
+271	AST	AST_STMT_LIST		42		2	264					
+272	AST	AST_RETURN		42		0	264					
+273	AST	AST_CLOSURE		42		0	264			42	{closure@42}	
+274	Artificial	CFG_FUNC_ENTRY		42		0	273				{closure@42}	
+275	Artificial	CFG_FUNC_EXIT		42		0	273				{closure@42}	
+276	AST	AST_PARAM_LIST		42		0	273					
+277	AST	AST_CLOSURE_USES		42		1	273					
+278	AST	AST_CLOSURE_VAR		42		0	273					
+279	AST	string		42	"source"	0	273					
+280	AST	AST_STMT_LIST		42		2	273					
+281	AST	AST_RETURN		42		0	273					
+282	AST	AST_VAR		42		0	273				source	
+283	AST	string		42	"source"	0	273					
+284	AST	NULL		42		3	273					
+285	AST	NULL		42		3	264					
+286	AST	AST_ASSIGN		43		1	250					
+287	AST	AST_VAR		43		0	250				g	
+288	AST	string		43	"g"	0	250					
+289	AST	AST_CALL		43		1	250					
+290	AST	AST_NAME		43		0	250				f	
+291	AST	string		43	"f"	0	250					
+292	AST	AST_ARG_LIST		0		1	250					
+293	AST	AST_RETURN		44		2	250					
+294	AST	AST_CALL		44		0	250					
+295	AST	AST_NAME		44		0	250				g	
+296	AST	string		44	"g"	0	250					
+297	AST	AST_ARG_LIST		0		1	250					
+298	AST	AST_FUNC_DECL		47		8	2			50	closureTwoCaptures	
+299	Artificial	CFG_FUNC_ENTRY		47		0	298				closureTwoCaptures	
+300	Artificial	CFG_FUNC_EXIT		47		0	298				closureTwoCaptures	
+301	AST	AST_PARAM_LIST		47		0	298					
+302	AST	AST_PARAM		47		0	298				a	
+303	AST	NULL		47		0	298					
+304	AST	string		47	"a"	1	298					
+305	AST	NULL		47		2	298					
+306	AST	AST_PARAM		47		1	298				b	
+307	AST	NULL		47		0	298					
+308	AST	string		47	"b"	1	298					
+309	AST	NULL		47		2	298					
+310	AST	NULL		47		1	298					
+311	AST	AST_STMT_LIST		47		2	298					
+312	AST	NULL		47		3	298					
+313	AST	AST_ASSIGN		48		0	298					
+314	AST	AST_VAR		48		0	298				f	
+315	AST	string		48	"f"	0	298					
+316	AST	AST_CLOSURE		48		1	298			48	{closure@48}	
+317	Artificial	CFG_FUNC_ENTRY		48		0	316				{closure@48}	
+318	Artificial	CFG_FUNC_EXIT		48		0	316				{closure@48}	
+319	AST	AST_PARAM_LIST		48		0	316					
+320	AST	AST_CLOSURE_USES		48		1	316					
+321	AST	AST_CLOSURE_VAR		48		0	316					
+322	AST	string		48	"a"	0	316					
+323	AST	AST_CLOSURE_VAR		48		1	316					
+324	AST	string		48	"b"	0	316					
+325	AST	AST_STMT_LIST		48		2	316					
+326	AST	AST_RETURN		48		0	316					
+327	AST	AST_BINARY_OP	BINARY_ADD	48		0	316					
+328	AST	AST_VAR		48		0	316				a	
+329	AST	string		48	"a"	0	316					
+330	AST	AST_VAR		48		1	316				b	
+331	AST	string		48	"b"	0	316					
+332	AST	NULL		48		3	316					
+333	AST	AST_RETURN		49		1	298					
+334	AST	AST_CALL		49		0	298					
+335	AST	AST_NAME		49		0	298				f	
+336	AST	string		49	"f"	0	298					
+337	AST	AST_ARG_LIST		0		1	298					
+338	AST	AST_FUNC_DECL		52		9	2			59	closureLocalShadowsOuter	
+339	Artificial	CFG_FUNC_ENTRY		52		0	338				closureLocalShadowsOuter	
+340	Artificial	CFG_FUNC_EXIT		52		0	338				closureLocalShadowsOuter	
+341	AST	AST_PARAM_LIST		52		0	338					
+342	AST	AST_PARAM		52		0	338				source	
+343	AST	NULL		52		0	338					
+344	AST	string		52	"source"	1	338					
+345	AST	NULL		52		2	338					
+346	AST	NULL		52		1	338					
+347	AST	AST_STMT_LIST		52		2	338					
+348	AST	NULL		52		3	338					
+349	AST	AST_ASSIGN		53		0	338					
+350	AST	AST_VAR		53		0	338				x	
+351	AST	string		53	"x"	0	338					
+352	AST	AST_VAR		53		1	338				source	
+353	AST	string		53	"source"	0	338					
+354	AST	AST_ASSIGN		54		1	338					
+355	AST	AST_VAR		54		0	338				f	
+356	AST	string		54	"f"	0	338					
+357	AST	AST_CLOSURE		54		1	338			57	{closure@54}	
+358	Artificial	CFG_FUNC_ENTRY		54		0	357				{closure@54}	
+359	Artificial	CFG_FUNC_EXIT		54		0	357				{closure@54}	
+360	AST	AST_PARAM_LIST		54		0	357					
+361	AST	NULL		54		1	357					
+362	AST	AST_STMT_LIST		54		2	357					
+363	AST	AST_ASSIGN		55		0	357					
+364	AST	AST_VAR		55		0	357				x	
+365	AST	string		55	"x"	0	357					
+366	AST	string		55	"CONST"	1	357					
+367	AST	AST_RETURN		56		1	357					
+368	AST	AST_VAR		56		0	357				x	
+369	AST	string		56	"x"	0	357					
+370	AST	NULL		54		3	357					
+371	AST	AST_RETURN		58		2	338					
+372	AST	AST_CALL		58		0	338					
+373	AST	AST_NAME		58		0	338				f	
+374	AST	string		58	"f"	0	338					
+375	AST	AST_ARG_LIST		0		1	338					

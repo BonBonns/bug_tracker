@@ -1,0 +1,139 @@
+{
+  "schema": "portable-context-state-flow/0.1",
+  "note": "Property-path granular. A write establishes a read only if the writer path is a PREFIX of the reader path; siblings never join. Scoped to a single established registration; context identity is positional (parameter index 1), never by name. AFTER_NEXT writes never establish downstream availability. Conditional writes yield MAY, never MUST.",
+  "flows": [],
+  "abstentions": [
+    {
+      "registration": 30064771824,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064771824,
+      "writer": "resources/account/forgot-password/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064771964,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064771964,
+      "writer": "resources/account/resend-email/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772050,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772050,
+      "writer": "resources/account/reset-password/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772168,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772168,
+      "writer": "resources/account/sign-in/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772242,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "(ctx: ANY) => Promise<void>"
+    },
+    {
+      "registration": 30064772331,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772331,
+      "writer": "resources/account/sign-up/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772485,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772539,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772583,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "(ctx: ANY) => ANY"
+    },
+    {
+      "registration": 30064772732,
+      "writer": "resources/user/get-current/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772842,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064772842,
+      "writer": "resources/user/list/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064772943,
+      "writer": "resources/user/remove-avatar/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064773004,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/validate.middleware"
+    },
+    {
+      "registration": 30064773004,
+      "writer": "resources/user/update-current/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    },
+    {
+      "registration": 30064773105,
+      "writer_arg": 2,
+      "reason": "WRITER_IDENTITY_UNKNOWN_OR_STUB",
+      "resolved": "middlewares/upload-file.middleware:single"
+    },
+    {
+      "registration": 30064773105,
+      "writer": "resources/user/upload-avatar/index.js::program:handler",
+      "path": "body",
+      "reason": "WRITE_NO_NEXT_NOT_AVAILABLE_DOWNSTREAM"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "STATE_ALIAS_IR_V1",
+  "identity_rule": "receiver identity + property path",
+  "alias_rule": "assigning one object reference to another local copies the receiver identity; it does not create a fresh heap object",
+  "allocation_rule": "distinct new-expression sites remain distinct receiver identities",
+  "field_rule": "distinct property paths remain distinct even when the receiver aliases",
+  "overwrite_rule": "a later exact write through any alias replaces the prior exact state value for that receiver/property identity",
+  "unknown_rule": "when receiver aliasing is not proven, do not merge receiver identities and do not emit a COMPLETE return summary"
+}

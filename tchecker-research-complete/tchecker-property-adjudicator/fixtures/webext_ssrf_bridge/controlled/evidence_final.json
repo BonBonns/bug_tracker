@@ -1,0 +1,21 @@
+{
+  "schema": "canonical-evidence-set/js-ts/1.1",
+  "finding_id": "ssrf:variant-tab-url-fetch.js#sink30064771110",
+  "sink": {
+    "node_id": "30064771110",
+    "kind": "fetch",
+    "sink_model": "DIRECT_NETWORK_CALL",
+    "class": "ssrf",
+    "downstream_primitive": "fetch"
+  },
+  "deterministic_coverage": "SEMANTICALLY_CLOSED",
+  "disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+  "security_property": "ATTACKER_CONTROL_OF_REQUEST_HOST",
+  "property_outcome": "ESTABLISHED",
+  "origin": {
+    "origin_family": "WEBEXT_TAB_URL_INPUT",
+    "source_node_id": "30064771111",
+    "source_code": "tab.url"
+  },
+  "semantically_unresolved__SEMANTICALLY_UNRESOLVED": []
+}

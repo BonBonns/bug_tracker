@@ -1,0 +1,4292 @@
+{
+  "schema": "portable-observed-parameter-types/0.1",
+  "note": "CALLSITE_PROPAGATED evidence about types VISIBLE AT CALLSITES. NOT a recovery of concrete runtime types. observed_types is a SET; unconstrained_callsite=True means the domain is NOT established regardless of set contents. declared_type is carried alongside and is never replaced.",
+  "facts": [
+    {
+      "callee_method_id": 107374182616,
+      "callee_full_name": "logger:error",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771719,
+        30064773410
+      ],
+      "abstained_call_ids": [
+        30064771100,
+        30064771206,
+        30064771715
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182616,
+      "callee_full_name": "logger:error",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771100
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182616,
+      "callee_full_name": "logger:error",
+      "parameter_index": 4,
+      "parameter_name": "p3",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771100
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182618,
+      "callee_full_name": "app-module-path:addPath",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771110,
+        30064771760,
+        30064773473
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182623,
+      "callee_full_name": "koa-qs",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "koa"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771138
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182625,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772698
+      ],
+      "abstained_call_ids": [
+        30064771146,
+        30064771148,
+        30064771150,
+        30064771282,
+        30064771732,
+        30064771736,
+        30064771941,
+        30064771948,
+        30064772149,
+        30064772154,
+        30064772281,
+        30064772285,
+        30064772463,
+        30064772469,
+        30064772473,
+        30064772804,
+        30064772810,
+        30064772816,
+        30064772918,
+        30064772924,
+        30064773261,
+        30064773263,
+        30064773265,
+        30064773319
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182627,
+      "callee_full_name": "routes",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "koa"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771155
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182630,
+      "callee_full_name": "app.js::program:require('services/socket/socket.service')",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "http:createServer:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771161
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182638,
+      "callee_full_name": "ioEmitter.js::program:require('socket.io-emitter')",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "redis"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771205
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182414,
+      "callee_full_name": "middlewares/validate.middleware.js::program:formatError",
+      "parameter_index": 1,
+      "parameter_name": "joiError",
+      "declared_type": "ANY",
+      "observed_types": [
+        "_tmp_7:error:<returnValue>:<member>(error)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771357
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182657,
+      "callee_full_name": "joi:object:<returnValue>:validate",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771374,
+        30064771498,
+        30064772605,
+        30064773136
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182663,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771427
+      ],
+      "abstained_call_ids": [
+        30064771403,
+        30064771404,
+        30064771405,
+        30064771406,
+        30064771407
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182664,
+      "callee_full_name": "migrations/migration.service.js::program:reject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771408
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182665,
+      "callee_full_name": "migrations/migration.service.js::program:resolve",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771409
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182666,
+      "callee_full_name": "fs:readdir",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771410
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182757,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772795
+      ],
+      "abstained_call_ids": [
+        30064771414,
+        30064773563,
+        30064773848,
+        30064773921
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182669,
+      "callee_full_name": "path:join",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join:<returnValue>"
+      ],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771425,
+        30064771483
+      ],
+      "abstained_call_ids": [
+        30064773767
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182669,
+      "callee_full_name": "path:join",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771425,
+        30064773767
+      ],
+      "abstained_call_ids": [
+        30064771483
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182673,
+      "callee_full_name": "migrations/migration.service.js::program:operator",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771455
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182674,
+      "callee_full_name": "lodash:chunk",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Array"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771467
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182674,
+      "callee_full_name": "lodash:chunk",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771467
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182447,
+      "callee_full_name": "migrations/migrator.js::program:run",
+      "parameter_index": 1,
+      "parameter_name": "migrations",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771745
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182447,
+      "callee_full_name": "migrations/migrator.js::program:run",
+      "parameter_index": 2,
+      "parameter_name": "curVersion",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064771745
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182697,
+      "callee_full_name": "middlewares/validate.middleware",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "joi:object:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771826,
+        30064771966,
+        30064772052,
+        30064772170,
+        30064772333,
+        30064772487,
+        30064772541,
+        30064772844,
+        30064773006
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182477,
+      "callee_full_name": "resources/account/sign-up/index.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771872
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182470,
+      "callee_full_name": "resources/account/sign-in/index.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771876
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182473,
+      "callee_full_name": "resources/account/sign-out/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771880
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182482,
+      "callee_full_name": "resources/account/verify-email/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771884
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182455,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771888
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182466,
+      "callee_full_name": "resources/account/reset-password/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771892
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182485,
+      "callee_full_name": "resources/account/verify-reset-token/index.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771896
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182461,
+      "callee_full_name": "resources/account/resend-email/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064771900
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182705,
+      "callee_full_name": "security.util:getHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772036,
+        30064772283,
+        30064772987
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182708,
+      "callee_full_name": "security.util:compareTextWithHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(password)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772124,
+        30064772964
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182710,
+      "callee_full_name": "resources/user/user.service:updateLastRequest",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772471
+      ],
+      "abstained_call_ids": [
+        30064772151,
+        30064773441
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182711,
+      "callee_full_name": "services/auth/auth.service:setTokens",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772156,
+        30064772475
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182711,
+      "callee_full_name": "services/auth/auth.service:setTokens",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(userId)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772475
+      ],
+      "abstained_call_ids": [
+        30064772156
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182712,
+      "callee_full_name": "resources/user/user.service:getPublic",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(user)"
+      ],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772161,
+        30064772998,
+        30064773092
+      ],
+      "abstained_call_ids": [
+        30064772727
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182715,
+      "callee_full_name": "services/auth/auth.service:unsetTokens",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772238
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182768,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773372
+      ],
+      "abstained_call_ids": [
+        30064772485,
+        30064772539,
+        30064772583,
+        30064772732,
+        30064772842
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182768,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "(ctx: ANY) => ANY"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772583
+      ],
+      "abstained_call_ids": [
+        30064772485,
+        30064772539,
+        30064772732,
+        30064772842
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182488,
+      "callee_full_name": "resources/health/get/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772595
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182693,
+      "callee_full_name": "security.util:generateSecureToken",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "app.constants"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772661
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182493,
+      "callee_full_name": "resources/token/token.service.js::program:createToken",
+      "parameter_index": 1,
+      "parameter_name": "userId",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064772675
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182499,
+      "callee_full_name": "resources/user/get-current/index.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772746
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182514,
+      "callee_full_name": "resources/user/update-current/index.js::program:<lambda>1",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772750
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182520,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:<lambda>2",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772754
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182509,
+      "callee_full_name": "resources/user/remove-avatar/index.js::program:<lambda>2",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772758
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182503,
+      "callee_full_name": "resources/user/list/index.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "router",
+      "declared_type": "ANY",
+      "observed_types": [
+        "@koa/router"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064772762
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182746,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service:uploadPublic",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "ctx:request:<returnValue>:<member>(request):<member>(file)"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773078
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182750,
+      "callee_full_name": "ioEmitter:to:<returnValue>:emit",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773126
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182751,
+      "callee_full_name": "ioEmitter:to",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773129
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182758,
+      "callee_full_name": "lodash:omit",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773243
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182758,
+      "callee_full_name": "lodash:omit",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Array"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773243
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182760,
+      "callee_full_name": "koa-mount",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "resources/account/public",
+        "resources/health/public",
+        "resources/user"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773275,
+        30064773464,
+        30064773467
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182549,
+      "callee_full_name": "routes/public.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "app",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773295
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182529,
+      "callee_full_name": "routes/authenticated.js::program:<lambda>0",
+      "parameter_index": 1,
+      "parameter_name": "app",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773298
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182611,
+      "callee_full_name": "Object.keys",
+      "parameter_index": 1,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773326
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182534,
+      "callee_full_name": "routes/middlewares/attach-custom-errors.middleware.js::program:formatError",
+      "parameter_index": 1,
+      "parameter_name": "customError",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Object"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773339,
+        30064773344
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182775,
+      "callee_full_name": "resources/token/token.service:getUserDataByToken",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "string | __ecma.Null | ANY"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773909
+      ],
+      "abstained_call_ids": [
+        30064773436
+      ],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182786,
+      "callee_full_name": "security.util.js::program:randomBytes",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.Number"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773506
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182787,
+      "callee_full_name": "security.util.js::program:bcryptHash",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773509
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182788,
+      "callee_full_name": "security.util.js::program:compare",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773510
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182788,
+      "callee_full_name": "security.util.js::program:compare",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "__ecma.String"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773510
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182789,
+      "callee_full_name": "util:promisify",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "bcryptjs",
+        "crypto"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773515,
+        30064773519,
+        30064773523
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182793,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):set",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773550
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182561,
+      "callee_full_name": "services/auth/auth.helper.js::program:unsetTokenCookies",
+      "parameter_index": 1,
+      "parameter_name": "ctx",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773608
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182797,
+      "callee_full_name": "aws-sdk:<member>(S3):upload",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; ContentType: ANY; Body: ANY; Key: ANY; ACL: __ecma.String; }"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773632,
+        30064773650
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182799,
+      "callee_full_name": "aws-sdk:<member>(S3):getSignedUrl",
+      "parameter_index": 2,
+      "parameter_name": "p1",
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; Expires: __ecma.Number; }"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773659
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182801,
+      "callee_full_name": "aws-sdk:<member>(S3):getObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773669
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182803,
+      "callee_full_name": "aws-sdk:<member>(S3):copyObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773683
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182805,
+      "callee_full_name": "aws-sdk:<member>(S3):deleteObject",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "{ Bucket: ANY; Key: ANY; }"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773693
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182809,
+      "callee_full_name": "fs:<member>(promises):readFile",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773734
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182811,
+      "callee_full_name": "services/email/email.helper.js::program:compiledHtml",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773741
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182812,
+      "callee_full_name": "@sendgrid/mail:setApiKey",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773754
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182573,
+      "callee_full_name": "services/email/email.helper.js::program:render",
+      "parameter_index": 1,
+      "parameter_name": "templatePath",
+      "declared_type": "ANY",
+      "observed_types": [
+        "path:join:<returnValue>"
+      ],
+      "unconstrained_callsite": false,
+      "source_call_ids": [
+        30064773772
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": true
+    },
+    {
+      "callee_method_id": 107374182573,
+      "callee_full_name": "services/email/email.helper.js::program:render",
+      "parameter_index": 2,
+      "parameter_name": "templateParams",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773772
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182815,
+      "callee_full_name": "path",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773854
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182582,
+      "callee_full_name": "services/socket/socket.helper.js::program:checkAccessToRoom",
+      "parameter_index": 1,
+      "parameter_name": "roomId",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773928
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    },
+    {
+      "callee_method_id": 107374182823,
+      "callee_full_name": "socket.io",
+      "parameter_index": 1,
+      "parameter_name": "p0",
+      "declared_type": "ANY",
+      "observed_types": [],
+      "unconstrained_callsite": true,
+      "source_call_ids": [
+        30064773941
+      ],
+      "abstained_call_ids": [],
+      "resolution": "CALLSITE_PROPAGATED",
+      "domain_established": false
+    }
+  ],
+  "abstentions": [
+    {
+      "call_id": 30064771090,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771091,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771092,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771093,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771094,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771095,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771096,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771097,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771098,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771099,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771100,
+      "callee_full_name": "logger:error",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771100,
+      "callee_full_name": "logger:error",
+      "parameter_index": 3,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771102,
+      "callee_full_name": "logger:warn",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771113,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771130,
+      "callee_full_name": "koa:use",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771132,
+      "callee_full_name": "@koa/cors",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771135,
+      "callee_full_name": "koa:use",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771139,
+      "callee_full_name": "koa:use",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771141,
+      "callee_full_name": "koa-bodyparser",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771146,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771148,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771150,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771152,
+      "callee_full_name": "koa:use",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771157,
+      "callee_full_name": "http:createServer",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771162,
+      "callee_full_name": "app.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771163,
+      "callee_full_name": "http:createServer:<returnValue>:listen",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771163,
+      "callee_full_name": "http:createServer:<returnValue>:listen",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771168,
+      "callee_full_name": "config/environment/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771191,
+      "callee_full_name": "config/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771192,
+      "callee_full_name": "db.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771193,
+      "callee_full_name": "@paralect/node-mongo:connect",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771198,
+      "callee_full_name": "db.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771202,
+      "callee_full_name": "ioEmitter.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771203,
+      "callee_full_name": "ioEmitter.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771204,
+      "callee_full_name": "redis:createClient",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771206,
+      "callee_full_name": "logger:error",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771214,
+      "callee_full_name": "ioEmitter.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771228,
+      "callee_full_name": "ioEmitter.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771235,
+      "callee_full_name": "logger.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771236,
+      "callee_full_name": "logger.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771237,
+      "callee_full_name": "winston:<member>(format):colorize",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771237,
+      "callee_full_name": "winston:<member>(format):colorize",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771243,
+      "callee_full_name": "JSON.stringify",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771248,
+      "callee_full_name": "winston:<member>(createLogger):<init>",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771258,
+      "callee_full_name": "winston:<member>(format):combine",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771258,
+      "callee_full_name": "winston:<member>(format):combine",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771262,
+      "callee_full_name": "winston:<member>(format):timestamp",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771270,
+      "callee_full_name": "winston:<member>(format):printf",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771282,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771289,
+      "callee_full_name": "winston:<member>(createLogger):debug",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771302,
+      "callee_full_name": "middlewares/upload-file.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771309,
+      "callee_full_name": "@koa/multer",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771313,
+      "callee_full_name": "error:path:<returnValue>:<member>(path):join",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771322,
+      "callee_full_name": "__ecma.Object:<indexAccess>:push",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771328,
+      "callee_full_name": "joiError:details:<returnValue>:<member>(details):forEach",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771373,
+      "callee_full_name": "migrations/migration.schema.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771374,
+      "callee_full_name": "joi:object:<returnValue>:validate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771380,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771403,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771404,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771405,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771406,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771407,
+      "callee_full_name": "migrations/migration.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771410,
+      "callee_full_name": "fs:readdir",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771414,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771417,
+      "callee_full_name": "db:createService:<returnValue>:findOne:<returnValue>:then",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771420,
+      "callee_full_name": "db:createService:<returnValue>:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771432,
+      "callee_full_name": "Promise<any>:then:<returnValue>:catch",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771435,
+      "callee_full_name": "Promise<any>:then",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771439,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771439,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771439,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 3,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771456,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771469,
+      "callee_full_name": "lodash:chunk:<returnValue>:reduce",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771469,
+      "callee_full_name": "lodash:chunk:<returnValue>:reduce",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771478,
+      "callee_full_name": "db:createService",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771478,
+      "callee_full_name": "db:createService",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771483,
+      "callee_full_name": "path:join",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771497,
+      "callee_full_name": "migrations/migrations-log/migration-log.schema.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771498,
+      "callee_full_name": "joi:object:<returnValue>:validate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771504,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771557,
+      "callee_full_name": "migrations/migrations-log/migration-log.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771558,
+      "callee_full_name": "migrations/migrations-log/migration-log.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771559,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771559,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771559,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):findOneAndUpdate",
+      "parameter_index": 3,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771579,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771579,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771597,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771597,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771614,
+      "callee_full_name": "db:createService",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771614,
+      "callee_full_name": "db:createService",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771626,
+      "callee_full_name": "migrations/migrations/1.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771631,
+      "callee_full_name": "migrations/migration",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Number"
+    },
+    {
+      "call_id": 30064771631,
+      "callee_full_name": "migrations/migration",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771636,
+      "callee_full_name": "migrations/migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771637,
+      "callee_full_name": "migrations/migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771638,
+      "callee_full_name": "migrations/migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771639,
+      "callee_full_name": "migrations/migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771656,
+      "callee_full_name": "logger:info",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771676,
+      "callee_full_name": "logger:info",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771695,
+      "callee_full_name": "moment:duration:<returnValue>:format",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771698,
+      "callee_full_name": "moment:duration",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771704,
+      "callee_full_name": "logger:info",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771708,
+      "callee_full_name": "logger:info",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771712,
+      "callee_full_name": "logger:info",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771715,
+      "callee_full_name": "logger:error",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771729,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771732,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771736,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771748,
+      "callee_full_name": "migrations/migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771759,
+      "callee_full_name": "migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771763,
+      "callee_full_name": "migrator.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771769,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771799,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771799,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771805,
+      "callee_full_name": "services/email/email.service:sendForgotPassword",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771805,
+      "callee_full_name": "services/email/email.service:sendForgotPassword",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771818,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771819,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771820,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771821,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771822,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771823,
+      "callee_full_name": "resources/account/forgot-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771836,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771866,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771875,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771879,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771883,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771887,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771891,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771895,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771899,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771903,
+      "callee_full_name": "resources/account/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771914,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771938,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771941,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771943,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771943,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771948,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064771950,
+      "callee_full_name": "services/email/email.service:sendForgotPassword",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064771959,
+      "callee_full_name": "resources/account/resend-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771960,
+      "callee_full_name": "resources/account/resend-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771961,
+      "callee_full_name": "resources/account/resend-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771962,
+      "callee_full_name": "resources/account/resend-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771963,
+      "callee_full_name": "resources/account/resend-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064771975,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772011,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772039,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772039,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772046,
+      "callee_full_name": "resources/account/reset-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772047,
+      "callee_full_name": "resources/account/reset-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772048,
+      "callee_full_name": "resources/account/reset-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772049,
+      "callee_full_name": "resources/account/reset-password/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772060,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772114,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772124,
+      "callee_full_name": "security.util:compareTextWithHash",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772146,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772149,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772151,
+      "callee_full_name": "resources/user/user.service:updateLastRequest",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772154,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772156,
+      "callee_full_name": "services/auth/auth.service:setTokens",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772163,
+      "callee_full_name": "resources/account/sign-in/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772164,
+      "callee_full_name": "resources/account/sign-in/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772165,
+      "callee_full_name": "resources/account/sign-in/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772166,
+      "callee_full_name": "resources/account/sign-in/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772167,
+      "callee_full_name": "resources/account/sign-in/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772179,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772236,
+      "callee_full_name": "resources/account/sign-out/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772255,
+      "callee_full_name": "resources/user/user.service:exists",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772278,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772281,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772285,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772295,
+      "callee_full_name": "resources/user/user.service:create",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772312,
+      "callee_full_name": "services/email/email.service:sendSignUpWelcome",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772312,
+      "callee_full_name": "services/email/email.service:sendSignUpWelcome",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772325,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772326,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772327,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772328,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772329,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772330,
+      "callee_full_name": "resources/account/sign-up/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772343,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772436,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772460,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772463,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772465,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772465,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772469,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772473,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772480,
+      "callee_full_name": "resources/account/verify-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772481,
+      "callee_full_name": "resources/account/verify-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772482,
+      "callee_full_name": "resources/account/verify-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772483,
+      "callee_full_name": "resources/account/verify-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772484,
+      "callee_full_name": "resources/account/verify-email/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772485,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772485,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772485,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 3,
+      "reason": "G6_AMBIGUOUS_SHORT_NAME(validator)",
+      "arg_type": "resources/account/verify-email/index.js::program:validator"
+    },
+    {
+      "call_id": 30064772496,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772523,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772535,
+      "callee_full_name": "resources/account/verify-reset-token/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772536,
+      "callee_full_name": "resources/account/verify-reset-token/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772537,
+      "callee_full_name": "resources/account/verify-reset-token/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772538,
+      "callee_full_name": "resources/account/verify-reset-token/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772539,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772539,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772539,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 3,
+      "reason": "G6_AMBIGUOUS_SHORT_NAME(validator)",
+      "arg_type": "resources/account/verify-reset-token/index.js::program:validator"
+    },
+    {
+      "call_id": 30064772548,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772583,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772589,
+      "callee_full_name": "resources/health/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772598,
+      "callee_full_name": "resources/health/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772603,
+      "callee_full_name": "resources/token/token.schema.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772604,
+      "callee_full_name": "resources/token/token.schema.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772605,
+      "callee_full_name": "joi:object:<returnValue>:validate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772614,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772633,
+      "callee_full_name": "joi:string:<returnValue>:valid",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772655,
+      "callee_full_name": "resources/token/token.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772656,
+      "callee_full_name": "resources/token/token.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772657,
+      "callee_full_name": "resources/token/token.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772658,
+      "callee_full_name": "resources/token/token.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772663,
+      "callee_full_name": "db:createService:<returnValue>:create",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772675,
+      "callee_full_name": "resources/token/token.service.js::program:createToken",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772682,
+      "callee_full_name": "db:createService:<returnValue>:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772690,
+      "callee_full_name": "db:createService:<returnValue>:remove",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772711,
+      "callee_full_name": "db:createService",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772711,
+      "callee_full_name": "db:createService",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772727,
+      "callee_full_name": "resources/user/user.service:getPublic",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772731,
+      "callee_full_name": "resources/user/get-current/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772732,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772732,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 2,
+      "reason": "G6_AMBIGUOUS_SHORT_NAME(handler)",
+      "arg_type": "resources/user/get-current/index.js::program:handler"
+    },
+    {
+      "call_id": 30064772739,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772741,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772749,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772753,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772757,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772761,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772765,
+      "callee_full_name": "resources/user/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772787,
+      "callee_full_name": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searchValue):split:<returnValue>:join",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772790,
+      "callee_full_name": "ctx:validatedData:<returnValue>:<member>(validatedData):<member>(searchValue):split",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772795,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772798,
+      "callee_full_name": "resources/user/user.service:find",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772798,
+      "callee_full_name": "resources/user/user.service:find",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772804,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772810,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772816,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772839,
+      "callee_full_name": "resources/user/list/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772840,
+      "callee_full_name": "resources/user/list/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772841,
+      "callee_full_name": "resources/user/list/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772842,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772842,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772842,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):get",
+      "parameter_index": 3,
+      "reason": "G6_AMBIGUOUS_SHORT_NAME(handler)",
+      "arg_type": "resources/user/list/index.js::program:handler"
+    },
+    {
+      "call_id": 30064772850,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772854,
+      "callee_full_name": "joi:number:<returnValue>:default",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Number"
+    },
+    {
+      "call_id": 30064772861,
+      "callee_full_name": "joi:number:<returnValue>:default",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Number"
+    },
+    {
+      "call_id": 30064772871,
+      "callee_full_name": "joi:object:<returnValue>:keys",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772874,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772888,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Null"
+    },
+    {
+      "call_id": 30064772888,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772915,
+      "callee_full_name": "Promise.all",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772918,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772920,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service:deleteObject",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772922,
+      "callee_full_name": "resources/user/remove-avatar/index.js::program:getFileKey",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772924,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772926,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772926,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772933,
+      "callee_full_name": "resources/user/remove-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772934,
+      "callee_full_name": "resources/user/remove-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772935,
+      "callee_full_name": "resources/user/remove-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772936,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772936,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064772964,
+      "callee_full_name": "security.util:compareTextWithHash",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064772991,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064772991,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773000,
+      "callee_full_name": "resources/user/update-current/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773001,
+      "callee_full_name": "resources/user/update-current/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773002,
+      "callee_full_name": "resources/user/update-current/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773003,
+      "callee_full_name": "resources/user/update-current/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773014,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773066,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service:deleteObject",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773068,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:getFileKey",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773078,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service:uploadPublic",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773085,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773085,
+      "callee_full_name": "resources/user/user.service:updateOne",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773094,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773095,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773096,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773097,
+      "callee_full_name": "resources/user/upload-avatar/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773098,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773098,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773107,
+      "callee_full_name": "middlewares/upload-file.middleware:single",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773119,
+      "callee_full_name": "resources/user/user.handler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773120,
+      "callee_full_name": "resources/user/user.handler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773126,
+      "callee_full_name": "ioEmitter:to:<returnValue>:emit",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773133,
+      "callee_full_name": "resources/user/user.service:on",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773133,
+      "callee_full_name": "resources/user/user.service:on",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773135,
+      "callee_full_name": "resources/user/user.schema.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773136,
+      "callee_full_name": "joi:object:<returnValue>:validate",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773142,
+      "callee_full_name": "joi:object",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773182,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Null"
+    },
+    {
+      "call_id": 30064773189,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Null"
+    },
+    {
+      "call_id": 30064773196,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Null"
+    },
+    {
+      "call_id": 30064773203,
+      "callee_full_name": "joi:boolean:<returnValue>:default",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Boolean"
+    },
+    {
+      "call_id": 30064773214,
+      "callee_full_name": "joi:string:<returnValue>:allow",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Null"
+    },
+    {
+      "call_id": 30064773221,
+      "callee_full_name": "resources/user/user.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773222,
+      "callee_full_name": "resources/user/user.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773223,
+      "callee_full_name": "resources/user/user.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773224,
+      "callee_full_name": "resources/user/user.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773225,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773225,
+      "callee_full_name": "db:createService:<returnValue>:<member>(atomic):update",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773250,
+      "callee_full_name": "db:createService",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773250,
+      "callee_full_name": "db:createService",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773261,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773263,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773265,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773271,
+      "callee_full_name": "routes/authenticated.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773272,
+      "callee_full_name": "routes/authenticated.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773275,
+      "callee_full_name": "koa-mount",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773280,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773281,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773282,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773283,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773284,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773285,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773286,
+      "callee_full_name": "routes/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773309,
+      "callee_full_name": "routes/middlewares/attach-custom-errors.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773313,
+      "callee_full_name": "lodash:isArray",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773319,
+      "callee_full_name": "__ecma.Array:",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773323,
+      "callee_full_name": "Object.keys:<returnValue>:forEach",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773370,
+      "callee_full_name": "routes/middlewares/extract-tokens.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773386,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773386,
+      "callee_full_name": "ctx:headers:<returnValue>:<member>(headers):<member>(authorization):replace",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773399,
+      "callee_full_name": "routes/middlewares/route-error-handler.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773430,
+      "callee_full_name": "routes/middlewares/try-to-attach-user.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773431,
+      "callee_full_name": "routes/middlewares/try-to-attach-user.middleware.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773436,
+      "callee_full_name": "resources/token/token.service:getUserDataByToken",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773441,
+      "callee_full_name": "resources/user/user.service:updateLastRequest",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773448,
+      "callee_full_name": "resources/user/user.service:findOne",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773459,
+      "callee_full_name": "routes/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773460,
+      "callee_full_name": "routes/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773461,
+      "callee_full_name": "routes/public.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773464,
+      "callee_full_name": "koa-mount",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773467,
+      "callee_full_name": "koa-mount",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773476,
+      "callee_full_name": "scheduler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773477,
+      "callee_full_name": "scheduler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773478,
+      "callee_full_name": "scheduler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773479,
+      "callee_full_name": "scheduler/cron/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773480,
+      "callee_full_name": "scheduler/cron/index.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773481,
+      "callee_full_name": "events:emit",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773489,
+      "callee_full_name": "node-schedule:scheduleJob",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773489,
+      "callee_full_name": "node-schedule:scheduleJob",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773493,
+      "callee_full_name": "scheduler/handlers/action.example.handler.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773495,
+      "callee_full_name": "scheduler/cron:on",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773495,
+      "callee_full_name": "scheduler/cron:on",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773497,
+      "callee_full_name": "security.util.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773498,
+      "callee_full_name": "security.util.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773499,
+      "callee_full_name": "security.util.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773509,
+      "callee_full_name": "security.util.js::program:bcryptHash",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.Number"
+    },
+    {
+      "call_id": 30064773515,
+      "callee_full_name": "util:promisify",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773519,
+      "callee_full_name": "util:promisify",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773523,
+      "callee_full_name": "util:promisify",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773532,
+      "callee_full_name": "services/auth/auth.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773533,
+      "callee_full_name": "services/auth/auth.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773534,
+      "callee_full_name": "services/auth/auth.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773535,
+      "callee_full_name": "services/auth/auth.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773541,
+      "callee_full_name": "url:parse",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773545,
+      "callee_full_name": "psl:parse",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773550,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):set",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773550,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):set",
+      "parameter_index": 3,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773563,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773572,
+      "callee_full_name": "ctx:cookies:<returnValue>:<member>(cookies):set",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773587,
+      "callee_full_name": "services/auth/auth.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773588,
+      "callee_full_name": "services/auth/auth.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773591,
+      "callee_full_name": "resources/token/token.service:createAuthTokens",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773599,
+      "callee_full_name": "services/auth/auth.helper.js::program:setTokenCookies",
+      "parameter_index": 1,
+      "reason": "G4_DECLARED_TYPE_PRESENT",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773602,
+      "callee_full_name": "resources/token/token.service:removeAuthTokens",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773602,
+      "callee_full_name": "resources/token/token.service:removeAuthTokens",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773659,
+      "callee_full_name": "aws-sdk:<member>(S3):getSignedUrl",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773676,
+      "callee_full_name": "encodeURI",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773695,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773696,
+      "callee_full_name": "services/cloud-storage/cloud-storage.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773708,
+      "callee_full_name": "aws-sdk:<member>(S3):<init>",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773728,
+      "callee_full_name": "services/email/email.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773729,
+      "callee_full_name": "services/email/email.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773730,
+      "callee_full_name": "services/email/email.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773731,
+      "callee_full_name": "services/email/email.helper.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773737,
+      "callee_full_name": "handlebars:compile",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773767,
+      "callee_full_name": "path:join",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773773,
+      "callee_full_name": "@sendgrid/mail:send",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773794,
+      "callee_full_name": "@sendgrid/mail:send",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773817,
+      "callee_full_name": "services/email/email.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773818,
+      "callee_full_name": "services/email/email.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773819,
+      "callee_full_name": "services/email/email.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773820,
+      "callee_full_name": "services/email/email.helper.js::program:MailService:sendTemplate",
+      "parameter_index": 1,
+      "reason": "G4_DECLARED_TYPE_PRESENT",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773830,
+      "callee_full_name": "services/email/email.helper.js::program:MailService:sendSendgridTemplate",
+      "parameter_index": 1,
+      "reason": "G4_DECLARED_TYPE_PRESENT",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773848,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773854,
+      "callee_full_name": "path",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773868,
+      "callee_full_name": "__ecma.String:split",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773894,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773895,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773896,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773897,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773898,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773899,
+      "callee_full_name": "services/socket/socket.service.js::program:require",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773901,
+      "callee_full_name": "services/socket/socket.helper.js::program:getCookie",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773901,
+      "callee_full_name": "services/socket/socket.helper.js::program:getCookie",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773918,
+      "callee_full_name": "services/socket/socket.service.js::program:next",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773921,
+      "callee_full_name": "__ecma.Date:<operator>.new",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773928,
+      "callee_full_name": "services/socket/socket.helper.js::program:checkAccessToRoom",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773942,
+      "callee_full_name": "socket.io:<returnValue>:adapter",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(CALL)",
+      "arg_type": "ANY"
+    },
+    {
+      "call_id": 30064773944,
+      "callee_full_name": "socket.io-redis",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(BLOCK)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773957,
+      "callee_full_name": "socket.io:<returnValue>:use",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    },
+    {
+      "call_id": 30064773959,
+      "callee_full_name": "socket.io:<returnValue>:on",
+      "parameter_index": 1,
+      "reason": "G2_ARG_NOT_IDENTIFIER(LITERAL)",
+      "arg_type": "__ecma.String"
+    },
+    {
+      "call_id": 30064773959,
+      "callee_full_name": "socket.io:<returnValue>:on",
+      "parameter_index": 2,
+      "reason": "G2_ARG_NOT_IDENTIFIER(METHOD_REF)",
+      "arg_type": ""
+    }
+  ]
+}

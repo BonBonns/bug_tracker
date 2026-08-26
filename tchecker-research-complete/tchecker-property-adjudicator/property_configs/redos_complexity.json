@@ -1,0 +1,16 @@
+{
+  "property_name": "ATTACKER_CONTROLLED_REGEX_COMPLEXITY",
+  "property_id_suffix": "controls_regex_complexity",
+  "vulnerability_class": "redos",
+  "downstream_primitive": "regex.exec",
+  "direct_sink_kinds": ["test", "exec", "match", "matchAll", "search", "replace", "replaceAll"],
+  "direct_sink_model": "DIRECT_REGEX_EXECUTION",
+  "indirect_sink_model": "WRAPPED_REGEX_EXECUTION",
+  "focused_question_template": "Does attacker-controlled input reach the matched-against string of a regex whose pattern (`{callee_name}`) has a structurally confirmed catastrophic-backtracking-prone shape (nested quantifier, or an alternation branch with a quantified portion followed by more content)? Note: this classification is a structural heuristic, not a formal proof of worst-case complexity -- verified against empirically-measured real cases, not assumed from pattern shape alone.",
+  "established_meaning": "modeled security property only (attacker input reaches a structurally-dangerous regex); actual exploitability depends on any length limits, rate limits, or other constraints on the input before it reaches this code path -- not evaluated by this property",
+  "residual_vulnerability_questions": [
+    "input length limits enforced upstream of this code path (e.g. RocketChat's Message_MaxAllowedSize closed the practical severity of the autotranslate.ts finding at default settings)",
+    "whether the regex engine in use has any mitigations (e.g. V8's linear-time fallback for simple patterns, RE2-style engines) not modeled by this property",
+    "reachability of the handler from unauthenticated or low-privilege actors specifically"
+  ]
+}

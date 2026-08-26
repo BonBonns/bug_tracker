@@ -1,0 +1,18 @@
+=== Q8: write position vs next() -- STRUCTURAL (block child order) ===
+  <lambda>0: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.validatedData = ctx.request.body
+  producer: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.validatedData = ctx.request.body
+  afterWriter: nextOrder=1
+      WRITE order=2 AFTER_NEXT  ctx.afterData = ctx.request.body
+  condWriter: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  if (condition) { ctx.condData = ctx.re
+      COND_WRITE(in control structure) order=1 BEFORE_NEXT  ctx.condData = ctx.request.body
+  bodyWriter: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.vBody = ctx.request.body
+  queryWriter: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.vQuery = ctx.query
+  constWriter: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.vConst = "literal"
+  derivedWriter: nextOrder=2
+      WRITE order=1 BEFORE_NEXT  ctx.vDerived = normalize(ctx.request.b

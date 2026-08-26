@@ -1,0 +1,8 @@
+  "/t1"    get   recv=direct:@koa/router                 mfn=@koa/router:get                          callees=1[@koa/router:get]
+  "/t2"    get   recv=router:ANY                         mfn=<unknownFullName>                        callees=5[t.js::program:FakeRouter:get,t.js::program:get,@koa/router:get,{ get(p: ANY, cb: ANY): ANY; post(p: ANY, cb: ANY): ANY; }:get,globalThis:<member>(whatever):get]
+  "/t3"    get   recv=router:ANY                         mfn=<unknownFullName>                        callees=5[t.js::program:FakeRouter:get,t.js::program:get,@koa/router:get,{ get(p: ANY, cb: ANY): ANY; post(p: ANY, cb: ANY): ANY; }:get,globalThis:<member>(whatever):get]
+  "/t4"    get   recv=fr:t.js::program:FakeRouter        mfn=<unknownFullName>                        callees=1[t.js::program:FakeRouter:get]
+  "/t5"    get   recv=objLit:{ get(p: ANY, cb: ANY): ANY; post(p: ANY, cb: ANY): ANY; } mfn={ get(p: ANY, cb: ANY): ANY; post(p: ANY, cb: ANY): ANY; }:get callees=1[{ get(p: ANY, cb: ANY): ANY; post(p: ANY, cb: ANY): ANY; }:get]
+  "/t7"    post  recv=direct:@koa/router                 mfn=@koa/router:post                         callees=1[@koa/router:post]
+  "/t8"    post  recv=direct:@koa/router                 mfn=@koa/router:post                         callees=1[@koa/router:post]
+  "/t9"    get   recv=dyn:globalThis:<member>(whatever)  mfn=globalThis:<member>(whatever):get        callees=1[globalThis:<member>(whatever):get]

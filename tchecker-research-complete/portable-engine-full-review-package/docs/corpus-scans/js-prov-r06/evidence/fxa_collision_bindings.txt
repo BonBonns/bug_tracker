@@ -1,0 +1,53 @@
+=== TYPE_DECLs for collision names ===
+  ScopeSetLike       id=167503724585   full=oauth/account-activity.ts::program:ScopeSetLike            ext=false  file=oauth/account-activity.ts
+  ScopeSetLike       id=167503724860   full=oauth/vpn-in-desktop-dau-bandaid.ts::program:ScopeSetLike  ext=false  file=oauth/vpn-in-desktop-dau-bandaid.ts
+  Customs            id=167503725206   full=routes/mfa.ts::program:Customs                             ext=false  file=routes/mfa.ts
+  DB                 id=167503725213   full=routes/mfa.ts::program:DB                                  ext=false  file=routes/mfa.ts
+  Customs            id=167503725317   full=routes/passkeys.ts::program:Customs                        ext=false  file=routes/passkeys.ts
+  DB                 id=167503725319   full=routes/passkeys.ts::program:DB                             ext=false  file=routes/passkeys.ts
+  OtpRedisAdapter    id=167503725355   full=routes/password.ts::program:OtpRedisAdapter                ext=false  file=routes/password.ts
+  OtpRedisAdapter    id=167503725395   full=routes/passwordless.ts::program:OtpRedisAdapter            ext=false  file=routes/passwordless.ts
+  Customs            id=167503725447   full=routes/recovery-phone.ts::program:Customs                  ext=false  file=routes/recovery-phone.ts
+  Customs            id=167503725918   full=Customs                                                    ext=true   file=<unknown>
+  DB                 id=167503725919   full=DB                                                         ext=true   file=<unknown>
+  OtpRedisAdapter    id=167503725974   full=OtpRedisAdapter                                            ext=true   file=<unknown>
+  ScopeSetLike       id=167503726059   full=ScopeSetLike                                               ext=true   file=<unknown>
+=== identifiers/params typed to a collision name: which decl did they bind? ===
+  PARAM this           type=oauth/account-activity.ts::program:ScopeSetLike    inMethodFile=oauth/account-activity.ts
+  PARAM this           type=oauth/account-activity.ts::program:ScopeSetLike    inMethodFile=oauth/account-activity.ts
+  PARAM this           type=oauth/vpn-in-desktop-dau-bandaid.ts::program:ScopeSetLike inMethodFile=oauth/vpn-in-desktop-dau-bandaid.ts
+  PARAM this           type=oauth/vpn-in-desktop-dau-bandaid.ts::program:ScopeSetLike inMethodFile=oauth/vpn-in-desktop-dau-bandaid.ts
+  PARAM db             type=../db:DB                                           inMethodFile=routes/account.ts
+  PARAM this           type=routes/mfa.ts::program:Customs                     inMethodFile=routes/mfa.ts
+  PARAM this           type=routes/mfa.ts::program:DB                          inMethodFile=routes/mfa.ts
+  PARAM this           type=routes/mfa.ts::program:DB                          inMethodFile=routes/mfa.ts
+  PARAM db             type=DB                                                 inMethodFile=routes/mfa.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/mfa.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/mfa.ts
+  PARAM this           type=routes/passkeys.ts::program:Customs                inMethodFile=routes/passkeys.ts
+  PARAM this           type=routes/passkeys.ts::program:DB                     inMethodFile=routes/passkeys.ts
+  PARAM this           type=routes/passkeys.ts::program:DB                     inMethodFile=routes/passkeys.ts
+  PARAM this           type=routes/passkeys.ts::program:DB                     inMethodFile=routes/passkeys.ts
+  PARAM this           type=routes/passkeys.ts::program:DB                     inMethodFile=routes/passkeys.ts
+  PARAM db             type=DB                                                 inMethodFile=routes/passkeys.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/passkeys.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/passkeys.ts
+  PARAM db             type=DB                                                 inMethodFile=routes/passkeys.ts
+  PARAM this           type=routes/password.ts::program:OtpRedisAdapter        inMethodFile=routes/password.ts
+  PARAM this           type=routes/password.ts::program:OtpRedisAdapter        inMethodFile=routes/password.ts
+  PARAM this           type=routes/password.ts::program:OtpRedisAdapter        inMethodFile=routes/password.ts
+  PARAM this           type=routes/password.ts::program:OtpRedisAdapter        inMethodFile=routes/password.ts
+  PARAM this           type=routes/passwordless.ts::program:OtpRedisAdapter    inMethodFile=routes/passwordless.ts
+  PARAM this           type=routes/passwordless.ts::program:OtpRedisAdapter    inMethodFile=routes/passwordless.ts
+  PARAM this           type=routes/passwordless.ts::program:OtpRedisAdapter    inMethodFile=routes/passwordless.ts
+  PARAM this           type=routes/passwordless.ts::program:OtpRedisAdapter    inMethodFile=routes/passwordless.ts
+  PARAM db             type=../db:DB                                           inMethodFile=routes/passwordless.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/recovery-phone.ts
+  PARAM customs        type=Customs                                            inMethodFile=routes/recovery-phone.ts
+  PARAM db             type=../../db:DB                                        inMethodFile=routes/utils/account.ts
+=== malformed full names (colon where dot belongs: ':ts::' ) ===
+  malformed occurrences on identifiers = 15
+    routes/utils/otp:ts::program:OtpUtils
+    routes/utils/otp:ts::program:OtpUtils:verifyOtpCode:<returnValue>
+    routes/utils/otp:ts::program:OtpUtils:verifyOtpCode:<returnValue>:<member>(valid)
+    routes/utils/otp:ts::program:OtpUtils:verifyOtpCode:<returnValue>:<member>(delta)

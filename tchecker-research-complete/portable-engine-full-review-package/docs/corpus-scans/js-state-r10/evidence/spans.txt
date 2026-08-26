@@ -1,0 +1,10 @@
+CASE|6|6|31|value|6|40|value == "admin"
+CASE|7|7|31|value|7|41|value === "admin"
+CASE|8|8|31|value|8|40|value != "admin"
+CASE|9|9|31|value|9|41|value !== "admin"
+CASE|10|10|31|a == b|10|42|a == b === c
+CASE|10|10|31|a|10|36|a == b
+CASE|11|11|31|"a == b"|11|44|"a == b" === value
+CASE|12|12|31|a|12|46|a /* == */ === b
+CASE|14|14|6|a|16|6|a\n      ===\n      b
+CASE|19|19|30|d!|19|37|d! === b

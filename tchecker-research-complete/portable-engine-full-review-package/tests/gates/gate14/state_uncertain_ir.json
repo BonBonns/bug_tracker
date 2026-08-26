@@ -1,0 +1,58 @@
+[
+  {
+    "function": "mayAliasWrite",
+    "functionNodeId": 69,
+    "resolution": "AMBIGUOUS",
+    "positions": [
+      1
+    ],
+    "origins": [
+      "PARAM:mayAliasWrite.source",
+      "STATE_UNKNOWN:ALLOC:mayAliasWrite:12.value"
+    ]
+  },
+  {
+    "function": "sameAliasBothBranches",
+    "functionNodeId": 115,
+    "resolution": "EXACT",
+    "positions": [
+      1
+    ],
+    "origins": [
+      "PARAM:sameAliasBothBranches.source"
+    ]
+  },
+  {
+    "function": "mayAliasDifferentField",
+    "functionNodeId": 154,
+    "resolution": "UNKNOWN",
+    "positions": [],
+    "origins": [
+      "STATE_UNKNOWN:ALLOC:mayAliasDifferentField:31.value"
+    ]
+  },
+  {
+    "function": "mayAliasOverwrite",
+    "functionNodeId": 200,
+    "resolution": "AMBIGUOUS",
+    "positions": [
+      1
+    ],
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:mayAliasOverwrite.source"
+    ]
+  },
+  {
+    "function": "mayAliasRead",
+    "functionNodeId": 252,
+    "resolution": "AMBIGUOUS",
+    "positions": [
+      1
+    ],
+    "origins": [
+      "CONST:\"CONST\"",
+      "PARAM:mayAliasRead.source"
+    ]
+  }
+]

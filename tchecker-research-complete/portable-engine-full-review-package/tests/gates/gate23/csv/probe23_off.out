@@ -1,0 +1,33 @@
+x5: 0
+ROOTS=22
+CALL 33 -> [20]
+CALL 66 -> [51]
+CALL 101 -> [86]
+CALL 130 -> [120]
+CALL 166 -> [153]
+CALL 206 -> [189]
+CALL 246 -> [228]
+CALL 289 -> [264]
+CALL 334 -> [316]
+CALL 372 -> [357]
+RET 6 closureDirect params=[source] positions=[]
+RET 37 closureParam params=[source] positions=[0]
+RET 51 {closure@7} params=[x] positions=[0]
+RET 72 closureShadow params=[source] positions=[]
+RET 86 {closure@12} params=[source] positions=[0]
+RET 106 closureUnrelated params=[source] positions=[]
+RET 134 closureAlias params=[source] positions=[]
+RET 170 closureMutation params=[source] positions=[]
+RET 210 closureMutationToSource params=[source] positions=[]
+RET 250 nestedClosure params=[source] positions=[]
+RET 298 closureTwoCaptures params=[a, b] positions=[]
+RET 338 closureLocalShadowsOuter params=[source] positions=[]
+DDG_RELS
+DDG 41 -> 65 var=source
+DDG 55 -> 61 var=x
+DDG 90 -> 96 var=source
+DDG 138 -> 145 var=source
+DDG 174 -> 181 var=source
+DDG 214 -> 240 var=source
+DDG 342 -> 349 var=source
+DDG 363 -> 367 var=x

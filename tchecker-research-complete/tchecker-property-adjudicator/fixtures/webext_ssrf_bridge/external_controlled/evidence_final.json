@@ -1,0 +1,21 @@
+{
+  "schema": "canonical-evidence-set/js-ts/1.1",
+  "finding_id": "ssrf:positive-external-fetch.js#sink30064771082",
+  "sink": {
+    "node_id": "30064771082",
+    "kind": "fetch",
+    "sink_model": "DIRECT_NETWORK_CALL",
+    "class": "ssrf",
+    "downstream_primitive": "fetch"
+  },
+  "deterministic_coverage": "SEMANTICALLY_CLOSED",
+  "disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+  "security_property": "ATTACKER_CONTROL_OF_REQUEST_HOST",
+  "property_outcome": "ESTABLISHED",
+  "origin": {
+    "origin_family": "WEBEXT_EXTERNAL_MESSAGE_INPUT",
+    "source_node_id": "30064771083",
+    "source_code": "message.url"
+  },
+  "semantically_unresolved__SEMANTICALLY_UNRESOLVED": []
+}

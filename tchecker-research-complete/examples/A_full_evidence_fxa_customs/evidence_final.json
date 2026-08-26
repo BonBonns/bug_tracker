@@ -1,0 +1,1529 @@
+{
+  "schema": "canonical-evidence-set/js-ts/1.1",
+  "finding_id": "serialize-dos:fxa/packages/fxa-auth-server/lib/customs.js#sink30064771145",
+  "note": "JS/TS candidate on real CPG + production fact producers",
+  "sink": {
+    "node_id": "30064771145",
+    "line": 75,
+    "kind": "JSON.stringify",
+    "sink_model": "DIRECT_SERIALIZATION",
+    "class": "serialize-dos",
+    "downstream_primitive": "JSON.stringify"
+  },
+  "deterministic_coverage": "SEMANTICALLY_OPEN",
+  "disposition": "CANDIDATE_OPEN",
+  "value_preservation": "OPEN",
+  "security_property": "ATTACKER_CONTROL_OF_SERIALIZED_SIZE_OR_STRUCTURE",
+  "property_outcome": "OPEN",
+  "property_vs_vulnerability": null,
+  "structural__ESTABLISHED_BY_STATIC_ANALYSIS": {
+    "origin": {
+      "origin_family": "HTTP_BODY",
+      "source_node_id": "30064771225",
+      "established_by": "STATIC_PROVENANCE",
+      "qualification": "ESTABLISHED_DATAFLOW(may; not proven necessary)"
+    },
+    "n_alternatives": 4,
+    "n_open_alternatives": 4,
+    "transform_chain": [
+      {
+        "order": 0,
+        "call_node": "30064771223",
+        "alternative_origin": "30064771225",
+        "callee_name": "sanitizePayload",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 1,
+        "call_node": "30064771209",
+        "alternative_origin": "30064771225",
+        "callee_name": "sanitizePayload",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 2,
+        "call_node": "30064771206",
+        "alternative_origin": "30064771225",
+        "callee_name": "makeRequest",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 0,
+        "call_node": "30064771249",
+        "alternative_origin": "30064772713",
+        "callee_name": "sanitizePayload",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 1,
+        "call_node": "30064771246",
+        "alternative_origin": "30064772713",
+        "callee_name": "makeRequest",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 0,
+        "call_node": "30064771209",
+        "alternative_origin": "30064771228",
+        "callee_name": "sanitizePayload",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 1,
+        "call_node": "30064771206",
+        "alternative_origin": "30064771228",
+        "callee_name": "makeRequest",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 0,
+        "call_node": "30064771209",
+        "alternative_origin": "30064771231",
+        "callee_name": "sanitizePayload",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      },
+      {
+        "order": 1,
+        "call_node": "30064771206",
+        "alternative_origin": "30064771231",
+        "callee_name": "makeRequest",
+        "callee_name_status": "ESTABLISHED",
+        "semantic_identity": null,
+        "semantic_identity_status": "UNKNOWN",
+        "definition_status": "ESTABLISHED_BY_TRACE",
+        "established_by": null
+      }
+    ]
+  },
+  "source_to_sink_paths": [
+    {
+      "origin": {
+        "origin_family": "HTTP_BODY",
+        "source_node_id": "30064771225",
+        "source_code": "request.payload",
+        "source_line": 130,
+        "source_containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+        "source_containing_function": "c1/customs.js::program:CustomsClient:check",
+        "established_by": "STATIC_PROVENANCE"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "node_id": "30064771223",
+          "node_kind": "CALL",
+          "callee_name": "sanitizePayload",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": "this.sanitizePayload(request.payload)",
+          "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "node_id": "30064771209",
+          "node_kind": "CALL",
+          "callee_name": "sanitizePayload",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 2,
+          "node_id": "30064771206",
+          "node_kind": "CALL",
+          "callee_name": "makeRequest",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "line": 75,
+        "kind": "JSON.stringify",
+        "sink_model": "DIRECT_SERIALIZATION",
+        "class": "serialize-dos",
+        "downstream_primitive": "JSON.stringify"
+      },
+      "qualification": "ESTABLISHED_DATAFLOW",
+      "necessity": "MAY_NOT_MUST"
+    },
+    {
+      "origin": {
+        "origin_family": "HTTP_BODY",
+        "source_node_id": "30064772713",
+        "source_code": "request.payload",
+        "source_line": 980,
+        "source_containing_statement": "_tmp_132 = request.payload",
+        "source_containing_function": "c2/emails.js::program:<lambda>3:handler",
+        "established_by": "STATIC_PROVENANCE"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "node_id": "30064771249",
+          "node_kind": "CALL",
+          "callee_name": "sanitizePayload",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": "this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_statement": "...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "node_id": "30064771246",
+          "node_kind": "CALL",
+          "callee_name": "makeRequest",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "line": 75,
+        "kind": "JSON.stringify",
+        "sink_model": "DIRECT_SERIALIZATION",
+        "class": "serialize-dos",
+        "downstream_primitive": "JSON.stringify"
+      },
+      "qualification": "ESTABLISHED_DATAFLOW",
+      "necessity": "MAY_NOT_MUST"
+    },
+    {
+      "origin": {
+        "origin_family": "HTTP_QUERY",
+        "source_node_id": "30064771228",
+        "source_code": "request.query",
+        "source_line": 134,
+        "source_containing_statement": "_tmp_16.query = request.query",
+        "source_containing_function": "c1/customs.js::program:CustomsClient:check",
+        "established_by": "STATIC_PROVENANCE"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "node_id": "30064771209",
+          "node_kind": "CALL",
+          "callee_name": "sanitizePayload",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "node_id": "30064771206",
+          "node_kind": "CALL",
+          "callee_name": "makeRequest",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "line": 75,
+        "kind": "JSON.stringify",
+        "sink_model": "DIRECT_SERIALIZATION",
+        "class": "serialize-dos",
+        "downstream_primitive": "JSON.stringify"
+      },
+      "qualification": "ESTABLISHED_DATAFLOW",
+      "necessity": "MAY_NOT_MUST"
+    },
+    {
+      "origin": {
+        "origin_family": "HTTP_HEADERS",
+        "source_node_id": "30064771231",
+        "source_code": "request.headers",
+        "source_line": 135,
+        "source_containing_statement": null,
+        "source_containing_function": null,
+        "established_by": "STATIC_PROVENANCE"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "node_id": "30064771209",
+          "node_kind": "CALL",
+          "callee_name": "sanitizePayload",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "node_id": "30064771206",
+          "node_kind": "CALL",
+          "callee_name": "makeRequest",
+          "path_membership": "ESTABLISHED",
+          "static_definition_identity": null,
+          "static_definition_identity_status": "UNKNOWN",
+          "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+          "trace_callee_identity_status": "ESTABLISHED",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "line": 75,
+        "kind": "JSON.stringify",
+        "sink_model": "DIRECT_SERIALIZATION",
+        "class": "serialize-dos",
+        "downstream_primitive": "JSON.stringify"
+      },
+      "qualification": "ESTABLISHED_DATAFLOW",
+      "necessity": "MAY_NOT_MUST"
+    }
+  ],
+  "path_code_context": [
+    {
+      "origin_source_node_id": "30064771225",
+      "source": {
+        "node_id": "30064771225",
+        "expression": "request.payload",
+        "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+        "containing_function": "c1/customs.js::program:CustomsClient:check"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "call_node_id": "30064771223",
+          "callsite_code": "this.sanitizePayload(request.payload)",
+          "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "callee_name": "sanitizePayload",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "call_node_id": "30064771209",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "callee_name": "sanitizePayload",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 2,
+          "call_node_id": "30064771206",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "callee_name": "makeRequest",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "expression": "JSON.stringify(requestData)",
+        "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+        "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+      }
+    },
+    {
+      "origin_source_node_id": "30064772713",
+      "source": {
+        "node_id": "30064772713",
+        "expression": "request.payload",
+        "containing_statement": "_tmp_132 = request.payload",
+        "containing_function": "c2/emails.js::program:<lambda>3:handler"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "call_node_id": "30064771249",
+          "callsite_code": "this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_statement": "...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated",
+          "callee_name": "sanitizePayload",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "call_node_id": "30064771246",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "callee_name": "makeRequest",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "expression": "JSON.stringify(requestData)",
+        "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+        "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+      }
+    },
+    {
+      "origin_source_node_id": "30064771228",
+      "source": {
+        "node_id": "30064771228",
+        "expression": "request.query",
+        "containing_statement": "_tmp_16.query = request.query",
+        "containing_function": "c1/customs.js::program:CustomsClient:check"
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "call_node_id": "30064771209",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "callee_name": "sanitizePayload",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "call_node_id": "30064771206",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "callee_name": "makeRequest",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "expression": "JSON.stringify(requestData)",
+        "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+        "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+      }
+    },
+    {
+      "origin_source_node_id": "30064771231",
+      "source": {
+        "node_id": "30064771231",
+        "expression": null,
+        "containing_statement": null,
+        "containing_function": null
+      },
+      "steps": [
+        {
+          "path_order": 0,
+          "call_node_id": "30064771209",
+          "callsite_code": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone num",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is additional user related data (ie phone ",
+          "containing_function": "c1/customs.js::program:CustomsClient:check",
+          "callee_name": "sanitizePayload",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+        },
+        {
+          "path_order": 1,
+          "call_node_id": "30064771206",
+          "callsite_code": null,
+          "containing_statement": null,
+          "containing_function": null,
+          "callee_name": "makeRequest",
+          "definition_status": "ESTABLISHED_BY_TRACE",
+          "definition_body": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+        }
+      ],
+      "sink": {
+        "node_id": "30064771145",
+        "expression": "JSON.stringify(requestData)",
+        "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+        "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+      }
+    }
+  ],
+  "path_flow_context": [
+    {
+      "origin_source_node_id": "30064771225",
+      "transitions": [
+        {
+          "seq": 0,
+          "from_node_id": "30064771225",
+          "to_node_id": "111669149735",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "request.payload",
+          "to_expression": "payload",
+          "containing_statement": "payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 1,
+          "from_node_id": "111669149735",
+          "to_node_id": "68719476976",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "if (!payload) {       return;     }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 2,
+          "from_node_id": "68719476976",
+          "to_node_id": "68719476979",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 3,
+          "from_node_id": "68719476979",
+          "to_node_id": "68719476978",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "_tmp_21",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 4,
+          "from_node_id": "68719476978",
+          "to_node_id": "25769803822",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_21",
+          "to_expression": "{ ...payload }",
+          "containing_statement": "const clonePayload = { ...payload }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 6,
+          "from_node_id": "68719476977",
+          "to_node_id": "68719476992",
+          "relation_kind": "ALIAS",
+          "from_expression": "clonePayload",
+          "to_expression": "clonePayload",
+          "containing_statement": "return clonePayload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 8,
+          "from_node_id": "141733920780",
+          "to_node_id": "124554051595",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "return clonePayload",
+          "to_expression": "RET",
+          "containing_statement": "RET",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 9,
+          "from_node_id": "124554051595",
+          "to_node_id": "30064771223",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "RET",
+          "to_expression": "this.sanitizePayload(request.payload)",
+          "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 10,
+          "from_node_id": "30064771223",
+          "to_node_id": "30064771222",
+          "relation_kind": "PROPERTY_READ",
+          "from_expression": "this.sanitizePayload(request.payload)",
+          "to_expression": "_tmp_16.payload",
+          "containing_statement": "_tmp_16.payload = this.sanitizePayload(request.payload)",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 11,
+          "from_node_id": "30064771222",
+          "to_node_id": "25769803808",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_16.payload",
+          "to_expression": "{         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is add",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 12,
+          "from_node_id": "25769803808",
+          "to_node_id": "111669149735",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is add",
+          "to_expression": "payload",
+          "containing_statement": "payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 13,
+          "from_node_id": "111669149735",
+          "to_node_id": "68719476976",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "if (!payload) {       return;     }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 14,
+          "from_node_id": "68719476976",
+          "to_node_id": "68719476979",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 15,
+          "from_node_id": "68719476979",
+          "to_node_id": "68719476978",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "_tmp_21",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 16,
+          "from_node_id": "68719476978",
+          "to_node_id": "25769803822",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_21",
+          "to_expression": "{ ...payload }",
+          "containing_statement": "const clonePayload = { ...payload }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 18,
+          "from_node_id": "68719476977",
+          "to_node_id": "68719476992",
+          "relation_kind": "ALIAS",
+          "from_expression": "clonePayload",
+          "to_expression": "clonePayload",
+          "containing_statement": "return clonePayload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 20,
+          "from_node_id": "141733920780",
+          "to_node_id": "124554051595",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "return clonePayload",
+          "to_expression": "RET",
+          "containing_statement": "RET",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 21,
+          "from_node_id": "124554051595",
+          "to_node_id": "30064771209",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "RET",
+          "to_expression": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payloa",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 22,
+          "from_node_id": "30064771209",
+          "to_node_id": "68719476861",
+          "relation_kind": "CALL_RESULT_TO_LOCAL",
+          "from_expression": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payloa",
+          "to_expression": "_tmp_15",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 23,
+          "from_node_id": "68719476861",
+          "to_node_id": "25769803807",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_15",
+          "to_expression": "{       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,        ",
+          "containing_statement": "const result = await this.makeRequest('/check', {       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.norma",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 24,
+          "from_node_id": "25769803807",
+          "to_node_id": "111669149709",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,        ",
+          "to_expression": "requestData",
+          "containing_statement": "requestData",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 25,
+          "from_node_id": "111669149709",
+          "to_node_id": "68719476796",
+          "relation_kind": "ALIAS",
+          "from_expression": "requestData",
+          "to_expression": "requestData",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 26,
+          "from_node_id": "68719476796",
+          "to_node_id": "30064771145",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "requestData",
+          "to_expression": "JSON.stringify(requestData)",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        }
+      ],
+      "transitions_status": "ESTABLISHED",
+      "note": null
+    },
+    {
+      "origin_source_node_id": "30064772713",
+      "transitions": [
+        {
+          "seq": 0,
+          "from_node_id": "30064772713",
+          "to_node_id": "68719478333",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "request.payload",
+          "to_expression": "_tmp_132",
+          "containing_statement": "_tmp_132 = request.payload",
+          "containing_function": "c2/emails.js::program:<lambda>3:handler"
+        },
+        {
+          "seq": 1,
+          "from_node_id": "68719478333",
+          "to_node_id": "30064772717",
+          "relation_kind": "PROPERTY_READ",
+          "from_expression": "_tmp_132",
+          "to_expression": "_tmp_132.uid",
+          "containing_statement": "uid = _tmp_132.uid",
+          "containing_function": "c2/emails.js::program:<lambda>3:handler"
+        },
+        {
+          "seq": 3,
+          "from_node_id": "68719478337",
+          "to_node_id": "68719478345",
+          "relation_kind": "ALIAS",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "const account = await db.account(uid)",
+          "containing_function": "c2/emails.js::program:<lambda>3:handler"
+        },
+        {
+          "seq": 4,
+          "from_node_id": "68719478345",
+          "to_node_id": "68719478349",
+          "relation_kind": "ALIAS",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "await customs.checkAuthenticated(           request,           uid,           account.email,           'recoveryEmailVerifyCode'         )",
+          "containing_function": "c2/emails.js::program:<lambda>3:handler"
+        },
+        {
+          "seq": 5,
+          "from_node_id": "68719478349",
+          "to_node_id": "111669149716",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "uid",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 6,
+          "from_node_id": "111669149716",
+          "to_node_id": "68719476895",
+          "relation_kind": "ALIAS",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "const opts = toOpts(request?.app?.clientAddress, email, uid)",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 7,
+          "from_node_id": "68719476895",
+          "to_node_id": "111669149700",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "uid",
+          "containing_function": "c1/customs.js::program:toOpts"
+        },
+        {
+          "seq": 8,
+          "from_node_id": "111669149700",
+          "to_node_id": "68719476755",
+          "relation_kind": "ALIAS",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "opts.uid = uid",
+          "containing_function": "c1/customs.js::program:toOpts"
+        },
+        {
+          "seq": 9,
+          "from_node_id": "68719476755",
+          "to_node_id": "115964116996",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "uid",
+          "containing_function": "c1/customs.js::program:toOpts"
+        },
+        {
+          "seq": 10,
+          "from_node_id": "115964116996",
+          "to_node_id": "68719476895",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "const opts = toOpts(request?.app?.clientAddress, email, uid)",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 11,
+          "from_node_id": "68719476895",
+          "to_node_id": "68719476915",
+          "relation_kind": "ALIAS",
+          "from_expression": "uid",
+          "to_expression": "uid",
+          "containing_statement": "_tmp_18.uid = uid",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 12,
+          "from_node_id": "68719476915",
+          "to_node_id": "30064771258",
+          "relation_kind": "PROPERTY_READ",
+          "from_expression": "uid",
+          "to_expression": "_tmp_18.uid",
+          "containing_statement": "_tmp_18.uid = uid",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 13,
+          "from_node_id": "30064771258",
+          "to_node_id": "25769803812",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_18.uid",
+          "to_expression": "{         action,         ip: request.app.clientAddress,         uid,       }",
+          "containing_statement": "...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 14,
+          "from_node_id": "25769803812",
+          "to_node_id": "111669149735",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{         action,         ip: request.app.clientAddress,         uid,       }",
+          "to_expression": "payload",
+          "containing_statement": "payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 15,
+          "from_node_id": "111669149735",
+          "to_node_id": "68719476976",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "if (!payload) {       return;     }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 16,
+          "from_node_id": "68719476976",
+          "to_node_id": "68719476979",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 17,
+          "from_node_id": "68719476979",
+          "to_node_id": "68719476978",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "_tmp_21",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 18,
+          "from_node_id": "68719476978",
+          "to_node_id": "25769803822",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_21",
+          "to_expression": "{ ...payload }",
+          "containing_statement": "const clonePayload = { ...payload }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 20,
+          "from_node_id": "68719476977",
+          "to_node_id": "68719476992",
+          "relation_kind": "ALIAS",
+          "from_expression": "clonePayload",
+          "to_expression": "clonePayload",
+          "containing_statement": "return clonePayload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 22,
+          "from_node_id": "141733920780",
+          "to_node_id": "124554051595",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "return clonePayload",
+          "to_expression": "RET",
+          "containing_statement": "RET",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 23,
+          "from_node_id": "124554051595",
+          "to_node_id": "30064771249",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "RET",
+          "to_expression": "this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_statement": "...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 24,
+          "from_node_id": "30064771249",
+          "to_node_id": "68719476907",
+          "relation_kind": "CALL_RESULT_TO_LOCAL",
+          "from_expression": "this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "to_expression": "_tmp_17",
+          "containing_statement": "...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       })",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 25,
+          "from_node_id": "68719476907",
+          "to_node_id": "25769803811",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_17",
+          "to_expression": "{       ...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       }),     }",
+          "containing_statement": "const result = await this.makeRequest('/checkAuthenticated', {       ...this.sanitizePayload({         action,         ip: request.app.clientAddress,         ui",
+          "containing_function": "c1/customs.js::program:CustomsClient:checkAuthenticated"
+        },
+        {
+          "seq": 26,
+          "from_node_id": "25769803811",
+          "to_node_id": "111669149709",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{       ...this.sanitizePayload({         action,         ip: request.app.clientAddress,         uid,       }),     }",
+          "to_expression": "requestData",
+          "containing_statement": "requestData",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 27,
+          "from_node_id": "111669149709",
+          "to_node_id": "68719476796",
+          "relation_kind": "ALIAS",
+          "from_expression": "requestData",
+          "to_expression": "requestData",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 28,
+          "from_node_id": "68719476796",
+          "to_node_id": "30064771145",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "requestData",
+          "to_expression": "JSON.stringify(requestData)",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        }
+      ],
+      "transitions_status": "ESTABLISHED",
+      "note": null
+    },
+    {
+      "origin_source_node_id": "30064771228",
+      "transitions": [
+        {
+          "seq": 0,
+          "from_node_id": "30064771228",
+          "to_node_id": "30064771227",
+          "relation_kind": "PROPERTY_READ",
+          "from_expression": "request.query",
+          "to_expression": "_tmp_16.query",
+          "containing_statement": "_tmp_16.query = request.query",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 1,
+          "from_node_id": "30064771227",
+          "to_node_id": "25769803808",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_16.query",
+          "to_expression": "{         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is add",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 2,
+          "from_node_id": "25769803808",
+          "to_node_id": "111669149735",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payload in this case is add",
+          "to_expression": "payload",
+          "containing_statement": "payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 3,
+          "from_node_id": "111669149735",
+          "to_node_id": "68719476976",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "if (!payload) {       return;     }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 4,
+          "from_node_id": "68719476976",
+          "to_node_id": "68719476979",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "payload",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 5,
+          "from_node_id": "68719476979",
+          "to_node_id": "68719476978",
+          "relation_kind": "ALIAS",
+          "from_expression": "payload",
+          "to_expression": "_tmp_21",
+          "containing_statement": "...payload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 6,
+          "from_node_id": "68719476978",
+          "to_node_id": "25769803822",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_21",
+          "to_expression": "{ ...payload }",
+          "containing_statement": "const clonePayload = { ...payload }",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 8,
+          "from_node_id": "68719476977",
+          "to_node_id": "68719476992",
+          "relation_kind": "ALIAS",
+          "from_expression": "clonePayload",
+          "to_expression": "clonePayload",
+          "containing_statement": "return clonePayload",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 10,
+          "from_node_id": "141733920780",
+          "to_node_id": "124554051595",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "return clonePayload",
+          "to_expression": "RET",
+          "containing_statement": "RET",
+          "containing_function": "c1/customs.js::program:CustomsClient:sanitizePayload"
+        },
+        {
+          "seq": 11,
+          "from_node_id": "124554051595",
+          "to_node_id": "30064771209",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "RET",
+          "to_expression": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payloa",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 12,
+          "from_node_id": "30064771209",
+          "to_node_id": "68719476861",
+          "relation_kind": "CALL_RESULT_TO_LOCAL",
+          "from_expression": "this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Payloa",
+          "to_expression": "_tmp_15",
+          "containing_statement": "...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,          // Pay",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 13,
+          "from_node_id": "68719476861",
+          "to_node_id": "25769803807",
+          "relation_kind": "UNKNOWN",
+          "from_expression": "_tmp_15",
+          "to_expression": "{       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,        ",
+          "containing_statement": "const result = await this.makeRequest('/check', {       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.norma",
+          "containing_function": "c1/customs.js::program:CustomsClient:check"
+        },
+        {
+          "seq": 14,
+          "from_node_id": "25769803807",
+          "to_node_id": "111669149709",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "{       ...this.sanitizePayload({         ip: request.app.clientAddress,         email: emailNormalization.normalizeEmailAliases(email),         action,        ",
+          "to_expression": "requestData",
+          "containing_statement": "requestData",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 15,
+          "from_node_id": "111669149709",
+          "to_node_id": "68719476796",
+          "relation_kind": "ALIAS",
+          "from_expression": "requestData",
+          "to_expression": "requestData",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        },
+        {
+          "seq": 16,
+          "from_node_id": "68719476796",
+          "to_node_id": "30064771145",
+          "relation_kind": "ARGUMENT_TO_PARAMETER",
+          "from_expression": "requestData",
+          "to_expression": "JSON.stringify(requestData)",
+          "containing_statement": "_tmp_8.body = JSON.stringify(requestData)",
+          "containing_function": "c1/customs.js::program:CustomsClient:makeRequest"
+        }
+      ],
+      "transitions_status": "ESTABLISHED",
+      "note": null
+    },
+    {
+      "origin_source_node_id": "30064771231",
+      "transitions": [],
+      "transitions_status": "NOT_PRODUCED",
+      "note": "optional flow-context enrichment not produced for this run; path membership is asserted in SOURCE_TO_SINK_PATHS"
+    }
+  ],
+  "semantically_unresolved__SEMANTICALLY_UNRESOLVED": [
+    {
+      "property_id": "o0.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "subject_call_node": "30064771223",
+      "callee_name": "sanitizePayload",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `sanitizePayload` at path position 0 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o0.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "subject_call_node": "30064771209",
+      "callee_name": "sanitizePayload",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `sanitizePayload` at path position 1 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o0.xf2.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "subject_call_node": "30064771206",
+      "callee_name": "makeRequest",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `makeRequest` at path position 2 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o1.xf0.bounds_serialized_size",
+      "alternative_origin": "30064772713",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "subject_call_node": "30064771249",
+      "callee_name": "sanitizePayload",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `sanitizePayload` at path position 0 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o1.xf1.bounds_serialized_size",
+      "alternative_origin": "30064772713",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "subject_call_node": "30064771246",
+      "callee_name": "makeRequest",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `makeRequest` at path position 1 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o2.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771228",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "subject_call_node": "30064771209",
+      "callee_name": "sanitizePayload",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `sanitizePayload` at path position 0 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o2.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771228",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "subject_call_node": "30064771206",
+      "callee_name": "makeRequest",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `makeRequest` at path position 1 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o3.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771231",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "subject_call_node": "30064771209",
+      "callee_name": "sanitizePayload",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `sanitizePayload` at path position 0 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    },
+    {
+      "property_id": "o3.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771231",
+      "subject_transform": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "subject_call_node": "30064771206",
+      "callee_name": "makeRequest",
+      "callee_name_status": "ESTABLISHED",
+      "semantic_identity": null,
+      "semantic_identity_status": "UNKNOWN",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "deterministic_status": "UNKNOWN",
+      "semantic_hint": null,
+      "adjudication_use": null,
+      "focused_question": "Does the on-path call `makeRequest` at path position 1 (static definition identity UNKNOWN; trace callee identity ESTABLISHED) bound the serialized size of the value, or can attacker influence remain effectively unbounded?"
+    }
+  ],
+  "not_applicable__NOT_APPLICABLE": [
+    {
+      "field": "control_effect",
+      "reason": "no iteration/validation-control governs this sink"
+    },
+    {
+      "field": "matcher_kind / domain_containment",
+      "reason": "no denylist/predicate comparison"
+    },
+    {
+      "field": "aliasing_scope",
+      "reason": "no shared-object mutation"
+    },
+    {
+      "field": "guard_disposition",
+      "reason": "no control-flow guard dominates this sink"
+    }
+  ],
+  "relevant_code__RELEVANT_CODE": [
+    {
+      "ref": "o0.origin.source",
+      "alternative_origin": "30064771225",
+      "line": 130,
+      "code": "request.payload",
+      "node_id": "30064771225",
+      "provenance": "propagation_relations (fact layer)"
+    },
+    {
+      "ref": "o0.xf0.def",
+      "for_property": "o0.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+    },
+    {
+      "ref": "o0.xf1.def",
+      "for_property": "o0.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+    },
+    {
+      "ref": "o0.xf2.def",
+      "for_property": "o0.xf2.bounds_serialized_size",
+      "alternative_origin": "30064771225",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+    },
+    {
+      "ref": "o1.origin.source",
+      "alternative_origin": "30064772713",
+      "line": 980,
+      "code": "request.payload",
+      "node_id": "30064772713",
+      "provenance": "propagation_relations (fact layer)"
+    },
+    {
+      "ref": "o1.xf0.def",
+      "for_property": "o1.xf0.bounds_serialized_size",
+      "alternative_origin": "30064772713",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+    },
+    {
+      "ref": "o1.xf1.def",
+      "for_property": "o1.xf1.bounds_serialized_size",
+      "alternative_origin": "30064772713",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+    },
+    {
+      "ref": "o2.origin.source",
+      "alternative_origin": "30064771228",
+      "line": 134,
+      "code": "request.query",
+      "node_id": "30064771228",
+      "provenance": "propagation_relations (fact layer)"
+    },
+    {
+      "ref": "o2.xf0.def",
+      "for_property": "o2.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771228",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+    },
+    {
+      "ref": "o2.xf1.def",
+      "for_property": "o2.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771228",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+    },
+    {
+      "ref": "o3.origin.source",
+      "alternative_origin": "30064771231",
+      "line": 135,
+      "code": "request.headers",
+      "node_id": "30064771231",
+      "provenance": "propagation_relations (fact layer)"
+    },
+    {
+      "ref": "o3.xf0.def",
+      "for_property": "o3.xf0.bounds_serialized_size",
+      "alternative_origin": "30064771231",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:sanitizePayload",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "sanitizePayload(payload) {\n    if (!payload) {\n      return;\n    }\n\n    const clonePayload = { ...payload };\n    const fieldsToOmit = ['authPW', 'oldAuthPW', 'paymentToken'];\n    fieldsToOmit.forEach((name) => delete clonePayload[name]);\n\n    return clonePayload;\n  }"
+    },
+    {
+      "ref": "o3.xf1.def",
+      "for_property": "o3.xf1.bounds_serialized_size",
+      "alternative_origin": "30064771231",
+      "static_definition_identity": null,
+      "static_definition_identity_status": "UNKNOWN",
+      "trace_callee_identity": "TRACE:c1/customs.js::program:CustomsClient:makeRequest",
+      "trace_callee_identity_status": "ESTABLISHED",
+      "definition_status": "ESTABLISHED_BY_TRACE",
+      "definition_node_id": null,
+      "file": null,
+      "line": null,
+      "provenance": "TRACE_BACKED_EXACT_CALLEE",
+      "code": "async makeRequest(endpoint, requestData) {\n    if (!this.url) {\n      return;\n    }\n\n    const method = endpoint.replaceAll('/', '');\n    const startTime = performance.now();\n\n    try {\n      const response = await fetch(`${this.url}${endpoint}`, {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify(requestData),\n        signal: AbortSignal.timeout(this.timeoutMs),\n      });\n\n      // fetch does not reject on non-2xx; surface it so the catch below fails\n      // closed via backendServiceFailure rather than treating it a"
+    },
+    {
+      "ref": "sink",
+      "line": 75,
+      "node_id": "30064771145",
+      "kind": "JSON.stringify",
+      "sink_model": "DIRECT_SERIALIZATION",
+      "downstream_primitive": "JSON.stringify"
+    }
+  ]
+}

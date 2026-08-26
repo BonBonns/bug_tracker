@@ -1,0 +1,61 @@
+{
+  "core/provenance/PHPCGFactory.java": "b2b2bffdc8cc0efc701d6e769a08f3dafd9ae960812f70dc632a324c25bf51f6",
+  "core/provenance/StaticAnalysis.java": "f45e631e18e594398617aeb5952fa9caab2c9765577b67c190982d6466fecaa3",
+  "cumulative_executable": "20/20",
+  "frontends/javascript-typescript/ts2legacycsv.js": "336347233fc6515fe0a1b33e0ceface6363903c899e51ca09d0630fed837cf4b",
+  "gate26_status": "PASS 10/10",
+  "gate27": {
+    "features": [
+      "semantic local flow",
+      "explicit completeness",
+      "visible work/depth truncation",
+      "return relevance"
+    ],
+    "name": "portable core correctness contract",
+    "status": "PASS",
+    "tests": "12/12"
+  },
+  "gate28": {
+    "name": "portable persistence/state channel",
+    "status": "PASS",
+    "tests": "12/12"
+  },
+  "gate29": {
+    "dimensions": [
+      "identity_precision",
+      "origin_status",
+      "resolution",
+      "completeness"
+    ],
+    "name": "typed evidence / abstention contract",
+    "schema": "portable-evidence/0.1",
+    "security_verdict_in_contract": false,
+    "status": "PASS",
+    "tests": "15/15"
+  },
+  "gate30": {
+    "adequacy": [
+      "GUARANTEED",
+      "CONDITIONAL",
+      "INADEQUATE",
+      "UNKNOWN"
+    ],
+    "name": "class/context-aware transformation effects",
+    "relation": "operation x effect_class x use_context -> adequacy",
+    "security_specific": false,
+    "status": "PASS",
+    "tests": "13/13"
+  },
+  "latest_gate": 30,
+  "neutral_provenance_core": "core/provenance-neutral/src/main/java/portable/provenance/PortableProvenanceEngine.java",
+  "real_joern_frontend": {
+    "gate": 24,
+    "legacy_ts2legacycsv_role": "prototype_regression_oracle",
+    "path": "frontends/javascript-typescript/joern",
+    "production_first_layer": true,
+    "status": "READY_NOT_RUN"
+  },
+  "regressions": 0,
+  "transformation_effects": "core/effects/src/main/java/portable/effects/TransformationRegistry.java",
+  "typed_evidence": "core/evidence/src/main/java/portable/evidence/ProvenanceEvidence.java"
+}

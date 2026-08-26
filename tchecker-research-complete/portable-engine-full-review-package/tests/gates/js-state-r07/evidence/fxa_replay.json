@@ -1,0 +1,50 @@
+{
+  "schema": "portable-js-state-r07-candidates/0.1",
+  "note": "r07_emit=true means ALL FIVE preconditions held: ERASES (R02), guard-shape (closed set, SIGNAL A), return-contract ESTABLISHED (positive evidence only, SIGNAL B), guard-subject=transformed-value (guaranteed by R02 construction), and sink reachability under R04/R05 rules resulting in SENSITIVE. r07_return_contract=UNKNOWN is NOT treated as safe and is NOT sufficient to emit -- it is recorded, not suppressed.",
+  "all_facts": [
+    {
+      "method_id": 107374182737,
+      "method_name": "<lambda>13",
+      "control_structure_id": 47244640650,
+      "condition_id": 30064779160,
+      "condition_code": "seen.has(key)",
+      "guard_identifier_id": 68719484584,
+      "guard_local_id": 94489282881,
+      "transformation_call_id": 30064779157,
+      "transformation_name": "<operator>.formatString",
+      "transformation_code": "<operator>.formatString(\"\", bounce.email, \":\", bounce.createdAt, \"\")",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "TEMPLATE_STRING_COERCION",
+        "source_node_ids": [
+          47244640650,
+          30064779160,
+          68719484584,
+          94489282881,
+          30064779157
+        ]
+      },
+      "reaching_calls": [
+        {
+          "call_id": 30064779160,
+          "callee_name": "has"
+        },
+        {
+          "call_id": 30064779162,
+          "callee_name": "add"
+        }
+      ],
+      "excluded_then_branch_calls": [],
+      "excluded_reassigned_calls": [],
+      "sink_matches": [],
+      "security_sensitive_use": "UNKNOWN",
+      "r07_guard_operator": "has",
+      "r07_guard_shape_established": false,
+      "r07_return_contract": "UNKNOWN",
+      "r07_guard_subject_is_transformed_value": true,
+      "r07_sink_reachable": false,
+      "r07_emit": false
+    }
+  ],
+  "candidates": []
+}

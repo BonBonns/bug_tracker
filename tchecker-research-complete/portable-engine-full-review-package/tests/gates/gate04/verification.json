@@ -1,0 +1,46 @@
+{
+  "method_calls": [
+    {
+      "id": 63,
+      "line": 10,
+      "funcid": 47
+    },
+    {
+      "id": 87,
+      "line": 15,
+      "funcid": 70
+    },
+    {
+      "id": 110,
+      "line": 20,
+      "funcid": 94
+    },
+    {
+      "id": 134,
+      "line": 25,
+      "funcid": 117
+    }
+  ],
+  "methods": [
+    {
+      "id": 13,
+      "line": 2,
+      "class": "A",
+      "name": "process"
+    },
+    {
+      "id": 34,
+      "line": 5,
+      "class": "B",
+      "name": "process"
+    }
+  ],
+  "call2mtd_edges": [
+    {
+      "call": 87,
+      "targets": [
+        13
+      ]
+    }
+  ]
+}

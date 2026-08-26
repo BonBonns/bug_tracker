@@ -1,0 +1,54 @@
+x5: 0
+ROOTS=13
+CALL 120 -> [21]
+CALL 128 -> [57]
+CALL 163 -> [21]
+CALL 171 -> [57]
+CALL 204 -> [21]
+CALL 211 -> [21]
+CALL 218 -> [57]
+CALL 258 -> [21]
+CALL 266 -> [57]
+CALL 294 -> [39]
+CALL 302 -> [57]
+CALL 342 -> [21]
+CALL 350 -> [57]
+RET 92 aliasSame params=[h, source] positions=[1]
+RET 135 aliasAllocation params=[source] positions=[0]
+RET 176 aliasOverwrite params=[source] positions=[]
+RET 223 aliasDistinct params=[source] positions=[]
+RET 271 aliasDifferentField params=[source] positions=[]
+RET 307 aliasDifferentParams params=[h, other, source] positions=[0]
+DDG_RELS
+DDG 25 -> 32 var=v
+DDG 43 -> 50 var=v
+DDG 96 -> 108 var=h
+DDG 96 -> 127 var=h
+DDG 101 -> 120 var=source
+DDG 108 -> 115 var=x
+DDG 115 -> 120 var=y
+DDG 139 -> 163 var=source
+DDG 146 -> 153 var=a
+DDG 146 -> 170 var=a
+DDG 153 -> 158 var=x
+DDG 158 -> 163 var=y
+DDG 180 -> 204 var=source
+DDG 187 -> 194 var=a
+DDG 187 -> 217 var=a
+DDG 194 -> 199 var=x
+DDG 194 -> 204 var=x
+DDG 199 -> 211 var=y
+DDG 227 -> 258 var=source
+DDG 234 -> 248 var=a
+DDG 241 -> 253 var=b
+DDG 248 -> 265 var=x
+DDG 253 -> 258 var=y
+DDG 275 -> 294 var=source
+DDG 282 -> 289 var=a
+DDG 282 -> 301 var=a
+DDG 289 -> 294 var=x
+DDG 311 -> 328 var=h
+DDG 316 -> 335 var=other
+DDG 321 -> 342 var=source
+DDG 328 -> 349 var=x
+DDG 335 -> 342 var=y

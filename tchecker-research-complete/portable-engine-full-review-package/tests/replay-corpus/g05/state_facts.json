@@ -1,0 +1,222 @@
+{
+  "schema": "portable-state-facts/0.3",
+  "state_reads": [
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_0 = h.worker).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771073
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771073,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_0 = h.worker)",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_0 = h.worker)",
+        "id": 30064771074,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771075
+        ]
+      },
+      "function_id": 107374182400,
+      "index_call_id": 30064771075,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate5:ts::program:Holder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149697,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_1 = h.worker).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771077
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771077,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_1 = h.worker)",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_1 = h.worker)",
+        "id": 30064771078,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771079
+        ]
+      },
+      "function_id": 107374182402,
+      "index_call_id": 30064771079,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate5:ts::program:Holder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149700,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_2 = h.worker).process",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771081
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771081,
+      "key": {
+        "kind": "LITERAL",
+        "value": "process"
+      },
+      "receiver": {
+        "name": "(_tmp_2 = h.worker)",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_2 = h.worker)",
+        "id": 30064771082,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771083
+        ]
+      },
+      "function_id": 107374182403,
+      "index_call_id": 30064771083,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate5:ts::program:Holder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149703,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "(_tmp_3 = h.worker).missing",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771085
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771085,
+      "key": {
+        "kind": "LITERAL",
+        "value": "missing"
+      },
+      "receiver": {
+        "name": "(_tmp_3 = h.worker)",
+        "type": "ANY"
+      },
+      "receiver_ref": {
+        "code": "(_tmp_3 = h.worker)",
+        "id": 30064771086,
+        "kind": "CALL"
+      },
+      "resolution": "EXACT"
+    },
+    {
+      "accessor": "FIELD",
+      "code": "h.worker",
+      "derivation": {
+        "origin": "FRONTEND_COMPOSED",
+        "rule": "FIELD_ACCESS_READ",
+        "source_node_ids": [
+          30064771087
+        ]
+      },
+      "function_id": 107374182404,
+      "index_call_id": 30064771087,
+      "key": {
+        "kind": "LITERAL",
+        "value": "worker"
+      },
+      "receiver": {
+        "name": "h",
+        "type": "gate5:ts::program:Holder"
+      },
+      "receiver_ref": {
+        "code": "h",
+        "id": 111669149706,
+        "kind": "PARAMETER"
+      },
+      "resolution": "EXACT"
+    }
+  ],
+  "state_writes": []
+}

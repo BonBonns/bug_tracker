@@ -1,0 +1,8 @@
+PASS later exact overwrite kills, later dynamic pollutes -> AMBIGUOUS may={2}
+PASS strong write + receiver pollution -> AMBIGUOUS resolution, common dep proven={2}
+PASS distinct receiver, unpolluted slot -> EXACT proven={2} (no cross-flow from box's dynamic write)
+PASS never-written slot -> abstain (UNRESOLVED, no positions)
+PASS dynamic read -> AMBIGUOUS MAY over all receiver writes, nothing proven
+PASS DYNAMIC-key write cannot claim EXACT (record validation)
+PASS FactDerivation preserved through graph (audit visibility)
+CORE_S01=7/7

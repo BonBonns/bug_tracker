@@ -1,0 +1,10 @@
+handlers/admin-ajax.js	handlers/admin-ajax.js::program	NEVER	throwCS=false throwCalls=0 valueReturns=0
+handlers/admin-ajax.js	handlers/admin-ajax.js::program:adminAjax	NEVER	throwCS=false throwCalls=0 valueReturns=0
+handlers/safe-always.js	handlers/safe-always.js::program	NEVER	throwCS=false throwCalls=0 valueReturns=0
+handlers/safe-always.js	handlers/safe-always.js::program:safeAlways	NEVER	throwCS=false throwCalls=0 valueReturns=0
+handlers/safe-return.js	handlers/safe-return.js::program	NEVER	throwCS=false throwCalls=0 valueReturns=1
+handlers/safe-return.js	handlers/safe-return.js::program:safeReturn	NEVER	throwCS=false throwCalls=0 valueReturns=1
+lib/db.js	lib/db.js::program	NEVER	throwCS=false throwCalls=0 valueReturns=0
+lib/guard-lib.js	lib/guard-lib.js::program:denyRequest	CONDITIONAL	throwCS=false throwCalls=2 valueReturns=1
+lib/guard-lib.js	lib/guard-lib.js::program	CONDITIONAL	throwCS=false throwCalls=2 valueReturns=1
+lib/guard-lib.js	lib/guard-lib.js::program:denyAlways	ALWAYS	throwCS=false throwCalls=2 valueReturns=0

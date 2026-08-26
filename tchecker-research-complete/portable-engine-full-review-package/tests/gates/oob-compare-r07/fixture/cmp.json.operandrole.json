@@ -1,0 +1,341 @@
+{
+ "operand_roles": [
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771076,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771076,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771076
+    ]
+   },
+   "function_id": 107374182400,
+   "id": 30064771076,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771081
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771081,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771081
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771081,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771081
+    ]
+   },
+   "function_id": 107374182402,
+   "id": 30064771081,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771086
+    ]
+   },
+   "function_id": 107374182403,
+   "id": 30064771086,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771086
+    ]
+   },
+   "function_id": 107374182403,
+   "id": 30064771086,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771086
+    ]
+   },
+   "function_id": 107374182403,
+   "id": 30064771086,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771091
+    ]
+   },
+   "function_id": 107374182404,
+   "id": 30064771091,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771091
+    ]
+   },
+   "function_id": 107374182404,
+   "id": 30064771091,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771091
+    ]
+   },
+   "function_id": 107374182404,
+   "id": 30064771091,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771097,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771097,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771097
+    ]
+   },
+   "function_id": 107374182405,
+   "id": 30064771097,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771102
+    ]
+   },
+   "function_id": 107374182406,
+   "id": 30064771102,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771102
+    ]
+   },
+   "function_id": 107374182406,
+   "id": 30064771102,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "strncmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771102
+    ]
+   },
+   "function_id": 107374182406,
+   "id": 30064771102,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771107
+    ]
+   },
+   "function_id": 107374182407,
+   "id": 30064771107,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771107
+    ]
+   },
+   "function_id": 107374182407,
+   "id": 30064771107,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771107
+    ]
+   },
+   "function_id": 107374182407,
+   "id": 30064771107,
+   "operand_index": 2,
+   "role": "EXTENT"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771110
+    ]
+   },
+   "function_id": 107374182408,
+   "id": 30064771110,
+   "operand_index": 0,
+   "role": "READ_CMP_A"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771110
+    ]
+   },
+   "function_id": 107374182408,
+   "id": 30064771110,
+   "operand_index": 1,
+   "role": "READ_CMP_B"
+  },
+  {
+   "call": "memcmp",
+   "derivation": {
+    "origin": "FRONTEND_CURATED",
+    "rule": "CPP_OPERAND_ROLE",
+    "source_node_ids": [
+     30064771110
+    ]
+   },
+   "function_id": 107374182408,
+   "id": 30064771110,
+   "operand_index": 2,
+   "role": "EXTENT"
+  }
+ ],
+ "schema": "portable-operand-role-facts/0.1"
+}

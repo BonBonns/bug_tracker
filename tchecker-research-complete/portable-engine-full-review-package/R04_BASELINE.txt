@@ -1,0 +1,11 @@
+BASELINE HISTORY — every result must cite the hash it was produced under.
+
+eb8ae88b7af01c33   R04 baseline (SOURCE-R02 chain, STATUS-R03, PARAM-R02,
+                   MERGE-R01, BUILD-R03).  canonical 31/31, REGRESSIONS 0.
+                   Used for: R04, PROPERTY-EVAL-R01, sink-provenance demo.
+
+1e80bf15739f343c   TS-EXT-R01 baseline. Adds ONE change: KeySelector accepts an
+                   empty-string LITERAL key (legal JS obj[""]) while still
+                   rejecting a MISSING key. Guarded by KEYSELECTOR_CONTROLS 5/5,
+                   wired into GUARD-R01. canonical 31/31, REGRESSIONS 0.
+                   Not a provenance change: it restores valid-language coverage.

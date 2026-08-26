@@ -1,0 +1,14 @@
+PASS positive: input.profile.url with no writes -> AMBIGUOUS MAY input
+PASS contamination: same canonical path overwrite kills input provenance
+PASS positive write: same canonical path resolves replacement source exactly
+PASS contamination: parent-path overwrite blocks descendant propagation
+PASS contamination: dynamic parent write may replace path, so abstain
+PASS negative: same path on distinct root never cross-contaminates
+PASS negative: dynamic receiver path remains unresolved
+PASS class separation: SELF-rooted nested property remains unresolved
+PASS positive: single-definition LOCAL root preserves MAY input
+PASS negative ceiling: written receiver with only sibling slot remains unresolved
+PASS ordering ceiling: child write plus parent replacement remains unresolved
+PASS loader compatibility: state facts 0.3 retains direct-receiver semantics
+PASS loader strictness: state facts 0.4 reject missing canonical location
+CORE_S04=13/13

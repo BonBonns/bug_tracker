@@ -1,0 +1,19 @@
+{
+  "gate": 5,
+  "topic": "typescript_typed_property_receiver",
+  "frontend": {
+    "typed_property": "EXACT:A.process",
+    "untyped_property": "AMBIGUOUS:A.process|B.process",
+    "union_property": "AMBIGUOUS:A.process|B.process",
+    "missing_method": "UNRESOLVED"
+  },
+  "engine": {
+    "analysis_completed": true,
+    "roots": 11,
+    "call2mtd_edges": 0,
+    "typed_property_exact_edge": false,
+    "false_exact_edges": 0,
+    "diagnosis": "AST_PROP receiver identity remains -1::worker; arbitrary typed-variable property class is not recovered"
+  },
+  "status": "FRONTEND_PASS_ENGINE_BOUNDARY_IDENTIFIED"
+}

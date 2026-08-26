@@ -1,0 +1,8 @@
+=== PART C: registration-call discriminator vs declared-interface lookalike ===
+  post mfn=express:express:<returnValue>:post                       recv=app:express:express:<returnValue>
+  post mfn=<unknownFullName>                                        recv=notFramework:ANY
+  post mfn=<unknownFullName>                                        recv=nf2:disc.ts::program:FakeRouter
+=== D: structural identity routes for the receivers ===
+  app            type=express:express:<returnValue>              -> TYPE_DECL[]
+  notFramework   type=ANY                                        -> TYPE_DECL[167503724556:ANY:ext=true]
+  nf2            type=disc.ts::program:FakeRouter                -> TYPE_DECL[167503724552:disc.ts::program:FakeRouter:ext=false]

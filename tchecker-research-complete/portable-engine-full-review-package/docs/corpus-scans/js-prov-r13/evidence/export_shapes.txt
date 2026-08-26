@@ -1,0 +1,16 @@
+=== EXPORT ASSIGNMENTS ===
+  m1.js%s | module.exports = other | RHS=IDENT other type=m1.js::program:other
+  m2.js%s | exports.validate = validate | RHS=IDENT validate type=m2.js::program:validate
+  m3.js%s | module.exports = { validate, other } | RHS=BLOCK { validate, other }
+  m4.js%s | module.exports.validate = validate | RHS=IDENT validate type=m4.js::program:validate
+=== require() BINDINGS ===
+  app.js require('./m1') -> assigned: const m1 = require('./m1') typeFullName=ANY
+  app.js require('./m2') -> assigned: const m2 = require('./m2') typeFullName=ANY
+  app.js require('./m3') -> assigned: const m3 = require('./m3') typeFullName=ANY
+  app.js require('./m4') -> assigned: const m4 = require('./m4') typeFullName=ANY
+  app.js require('@koa/router') -> assigned: const Router = require('@koa/router') typeFullName=ANY
+=== CALLBACK-POSITION CALLS m*(1) / m*.validate(1) ===
+  m1(1) name=m1 mfn=app.js::program:m1 callees=[app.js::program:m1]
+  m2.validate(1) name=validate mfn=app.js::program:validate callees=[app.js::program:validate]
+  m3.validate(1) name=validate mfn=app.js::program:validate callees=[app.js::program:validate]
+  m4.validate(1) name=validate mfn=app.js::program:validate callees=[app.js::program:validate]

@@ -1,0 +1,24 @@
+{
+  "schema": "portable-library-summary/0.1",
+  "note": "Curated external-library semantics. Default (unlisted) = OPAQUE.",
+  "summaries": [
+    { "name": "sqlite3_column_blob",  "returns": "DATABASE_INPUT",
+      "evidence": "SQLite C API: returns a pointer to externally-stored BLOB bytes for the current row; length is NOT implied and must be read via sqlite3_column_bytes.",
+      "motivating_case": "simdissdk SQLiteDataBaseReadUtil.cpp:336,344 — provenance died here in SECURITY-R03" },
+    { "name": "sqlite3_column_text",   "returns": "DATABASE_INPUT" },
+    { "name": "sqlite3_column_text16", "returns": "DATABASE_INPUT" },
+    { "name": "sqlite3_column_bytes",  "returns": "DATABASE_INPUT",
+      "evidence": "returns the byte length of the current-row blob/text; database-derived integer, security-relevant as a bound." },
+
+    { "name": "fread",   "returns": "FILE_INPUT" },
+    { "name": "fgets",   "returns": "FILE_INPUT" },
+    { "name": "read",    "returns": "FILE_INPUT" },
+    { "name": "recv",    "returns": "NETWORK_INPUT" },
+
+    { "name": "execa",   "returns": "OPAQUE",
+      "note": "npm child_process wrapper; argument 0 is a command sink, not a provenance source. Listed for documentation; no return-provenance claimed." },
+    { "name": "strdup",  "returns": "VALUE_PRESERVING", "preserves_arg": 0 },
+    { "name": "malloc",  "returns": "FRESH_ALLOCATION" },
+    { "name": "calloc",  "returns": "FRESH_ALLOCATION" }
+  ]
+}

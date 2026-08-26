@@ -1,0 +1,266 @@
+PASS case10_stringCoercionBeforeGuard flagged as candidate
+PASS case11_booleanCoercionBeforeGuard flagged as candidate
+PASS case12_parseIntCoercionBeforeGuard flagged as candidate
+PASS case13_sinkOnlyInGuardTrueBranch flagged as candidate
+PASS case14_reassignedBeforeSink flagged as candidate
+PASS case2_transformBeforeGuard flagged as candidate
+PASS case4b_nullSentinelErasedByCoercion flagged as candidate
+PASS case7_erasedButNoSensitiveSink flagged as candidate
+PASS case8_bitwiseCoercionBeforeGuard flagged as candidate
+PASS case9_unaryPlusBeforeGuard flagged as candidate
+PASS case1_safeGuardBeforeTransform NOT flagged (correct abstention/silence)
+PASS case3_discriminatedUnionSafe NOT flagged (correct abstention/silence)
+PASS case4_nullSentinelSafe NOT flagged (correct abstention/silence)
+PASS case5_preservingTransform NOT flagged (correct abstention/silence)
+PASS case6_unknownTransformAbstain NOT flagged (correct abstention/silence)
+PASS case10_stringCoercionBeforeGuard has exactly one candidate fact
+PASS case11_booleanCoercionBeforeGuard has exactly one candidate fact
+PASS case12_parseIntCoercionBeforeGuard has exactly one candidate fact
+PASS case13_sinkOnlyInGuardTrueBranch has exactly one candidate fact
+PASS case14_reassignedBeforeSink has exactly one candidate fact
+PASS case2_transformBeforeGuard has exactly one candidate fact
+PASS case4b_nullSentinelErasedByCoercion has exactly one candidate fact
+PASS case7_erasedButNoSensitiveSink has exactly one candidate fact
+PASS case8_bitwiseCoercionBeforeGuard has exactly one candidate fact
+PASS case9_unaryPlusBeforeGuard has exactly one candidate fact
+PASS no fact carries a security/vulnerability verdict field
+PASS every fact has resolution=ERASES
+PASS total fact count equals expected flagged-case count
+JS_STATE_R02=28/28
+
+--- emitted facts (full dump, for audit) ---
+{
+  "schema": "portable-failure-state-erasure-candidate-facts/0.1",
+  "facts": [
+    {
+      "method_id": 107374182405,
+      "method_name": "case2_transformBeforeGuard",
+      "control_structure_id": 47244640257,
+      "condition_id": 30064771096,
+      "condition_code": "id2 instanceof Error",
+      "guard_identifier_id": 68719476766,
+      "guard_local_id": 94489280523,
+      "transformation_call_id": 30064771095,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r2)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640257,
+          30064771096,
+          68719476766,
+          94489280523,
+          30064771095
+        ]
+      }
+    },
+    {
+      "method_id": 107374182408,
+      "method_name": "case4b_nullSentinelErasedByCoercion",
+      "control_structure_id": 47244640260,
+      "condition_id": 30064771113,
+      "condition_code": "id4b === null",
+      "guard_identifier_id": 68719476795,
+      "guard_local_id": 94489280531,
+      "transformation_call_id": 30064771112,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r4b)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640260,
+          30064771113,
+          68719476795,
+          94489280531,
+          30064771112
+        ]
+      }
+    },
+    {
+      "method_id": 107374182412,
+      "method_name": "case7_erasedButNoSensitiveSink",
+      "control_structure_id": 47244640263,
+      "condition_id": 30064771132,
+      "condition_code": "id7 instanceof Error",
+      "guard_identifier_id": 68719476831,
+      "guard_local_id": 94489280541,
+      "transformation_call_id": 30064771131,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r7)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640263,
+          30064771132,
+          68719476831,
+          94489280541,
+          30064771131
+        ]
+      }
+    },
+    {
+      "method_id": 107374182413,
+      "method_name": "case8_bitwiseCoercionBeforeGuard",
+      "control_structure_id": 47244640264,
+      "condition_id": 30064771140,
+      "condition_code": "id8 instanceof Error",
+      "guard_identifier_id": 68719476842,
+      "guard_local_id": 94489280544,
+      "transformation_call_id": 30064771137,
+      "transformation_name": "<operator>.or",
+      "transformation_code": "(r8 as unknown as number) | 0",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "BINARY_BITWISE_COERCION_OPERATOR",
+        "source_node_ids": [
+          47244640264,
+          30064771140,
+          68719476842,
+          94489280544,
+          30064771137
+        ]
+      }
+    },
+    {
+      "method_id": 107374182414,
+      "method_name": "case9_unaryPlusBeforeGuard",
+      "control_structure_id": 47244640265,
+      "condition_id": 30064771148,
+      "condition_code": "id9 instanceof Error",
+      "guard_identifier_id": 68719476853,
+      "guard_local_id": 94489280547,
+      "transformation_call_id": 30064771145,
+      "transformation_name": "<operator>.plus",
+      "transformation_code": "+(r9 as unknown as number)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "UNARY_COERCION_OPERATOR",
+        "source_node_ids": [
+          47244640265,
+          30064771148,
+          68719476853,
+          94489280547,
+          30064771145
+        ]
+      }
+    },
+    {
+      "method_id": 107374182415,
+      "method_name": "case10_stringCoercionBeforeGuard",
+      "control_structure_id": 47244640266,
+      "condition_id": 30064771154,
+      "condition_code": "id10 instanceof Error",
+      "guard_identifier_id": 68719476864,
+      "guard_local_id": 94489280550,
+      "transformation_call_id": 30064771153,
+      "transformation_name": "String",
+      "transformation_code": "String(r10)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640266,
+          30064771154,
+          68719476864,
+          94489280550,
+          30064771153
+        ]
+      }
+    },
+    {
+      "method_id": 107374182416,
+      "method_name": "case11_booleanCoercionBeforeGuard",
+      "control_structure_id": 47244640267,
+      "condition_id": 30064771160,
+      "condition_code": "id11 instanceof Error",
+      "guard_identifier_id": 68719476875,
+      "guard_local_id": 94489280553,
+      "transformation_call_id": 30064771159,
+      "transformation_name": "Boolean",
+      "transformation_code": "Boolean(r11)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640267,
+          30064771160,
+          68719476875,
+          94489280553,
+          30064771159
+        ]
+      }
+    },
+    {
+      "method_id": 107374182417,
+      "method_name": "case12_parseIntCoercionBeforeGuard",
+      "control_structure_id": 47244640268,
+      "condition_id": 30064771168,
+      "condition_code": "id12 instanceof Error",
+      "guard_identifier_id": 68719476886,
+      "guard_local_id": 94489280556,
+      "transformation_call_id": 30064771165,
+      "transformation_name": "parseInt",
+      "transformation_code": "parseInt(r12 as unknown as string, 10)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640268,
+          30064771168,
+          68719476886,
+          94489280556,
+          30064771165
+        ]
+      }
+    },
+    {
+      "method_id": 107374182418,
+      "method_name": "case13_sinkOnlyInGuardTrueBranch",
+      "control_structure_id": 47244640269,
+      "condition_id": 30064771174,
+      "condition_code": "id13 instanceof Error",
+      "guard_identifier_id": 68719476897,
+      "guard_local_id": 94489280559,
+      "transformation_call_id": 30064771173,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r13)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640269,
+          30064771174,
+          68719476897,
+          94489280559,
+          30064771173
+        ]
+      }
+    },
+    {
+      "method_id": 107374182419,
+      "method_name": "case14_reassignedBeforeSink",
+      "control_structure_id": 47244640270,
+      "condition_id": 30064771181,
+      "condition_code": "id14 instanceof Error",
+      "guard_identifier_id": 68719476908,
+      "guard_local_id": 94489280562,
+      "transformation_call_id": 30064771180,
+      "transformation_name": "Number",
+      "transformation_code": "Number(r14)",
+      "resolution": "ERASES",
+      "derivation": {
+        "rule": "GLOBAL_BUILTIN_COERCION",
+        "source_node_ids": [
+          47244640270,
+          30064771181,
+          68719476908,
+          94489280562,
+          30064771180
+        ]
+      }
+    }
+  ]
+}

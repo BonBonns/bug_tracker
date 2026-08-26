@@ -1,0 +1,20 @@
+controllers/articles-controller.js::program:get	READ	state.user		2	-1	false
+controllers/articles-controller.js::program:get	READ	state.late		3	-1	false
+controllers/articles-controller.js::program:get	READ	state.tag		4	-1	false
+controllers/articles-controller.js::program:get	WRITE	body	{ u, l, t }	5	-1	false
+lib/audit-middleware.js::program:auditMiddleware	WRITE	state.audit	"on"	2	3	false
+lib/late-middleware.js::program:lateMiddleware	WRITE	state.late	"registered-after-mount"	2	3	false
+lib/user-middleware.js::program:userMiddleware	WRITE	state.user	ctx.state.jwt.sub	6	8	true
+lib/user-middleware.js::program:userMiddleware	READ	state.jwt.sub		6	8	true
+routes/multi-router.js::program:exportedHandler	READ	state.user		9	-1	false
+routes/multi-router.js::program:exportedHandler	READ	state.audit		10	-1	false
+routes/multi-router.js::program:exportedHandler	WRITE	body	{ u, a }	11	-1	false
+routes/multi-router.js::program:unexportedHandler	READ	state.user		14	-1	false
+routes/multi-router.js::program:unexportedHandler	WRITE	body	{ u }	15	-1	false
+routes/orphan-router.js::program:orphanHandler	READ	state.user		4	-1	false
+routes/orphan-router.js::program:orphanHandler	WRITE	body	{ u }	5	-1	false
+routes/tags-router.js::program:tagWriter	WRITE	state.tag	ctx.request.body.tag	5	6	false
+routes/tags-router.js::program:tagWriter	READ	request.body.tag		5	6	false
+routes/tags-router.js::program:tagHandler	READ	state.user		9	-1	false
+routes/tags-router.js::program:tagHandler	READ	state.tag		10	-1	false
+routes/tags-router.js::program:tagHandler	WRITE	body	{ u, t }	11	-1	false

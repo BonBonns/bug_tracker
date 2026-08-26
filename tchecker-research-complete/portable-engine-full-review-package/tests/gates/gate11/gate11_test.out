@@ -1,0 +1,8 @@
+PASS topState on/off= ([1], [0]) expected= ([1], [0])
+PASS topConstantOverwrite on/off= ([], [0]) expected= ([], [0])
+PASS directState on/off= ([1], [0]) expected= ([1], [0])
+PASS directConstant on/off= ([], [0]) expected= ([], [0])
+PASS sameObject on/off= ([0], []) expected= ([0], [])
+PASS differentField on/off= ([0], [0]) expected= ([0], [0])
+PASS twoObjects on/off= ([], []) expected= ([], [])
+GATE11=7/7
