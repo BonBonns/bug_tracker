@@ -1,0 +1,15 @@
+- The destination `bp` is an alias of `block`, which is allocated as exactly
+  `modulusLen` bytes (`block = PORT_Alloc(modulusLen)`), and the alias is taken
+  before any pointer arithmetic. The destination's capacity is `modulusLen` bytes.
+- The highlighted operation copies `data->len` bytes into `bp`
+  (`PORT_Memcpy(bp, data->data, data->len)`).
+- The caller `rsa_FormatBlock` performs the comparison
+  `data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))` as a real runtime
+  branch (not an assertion). That branch dominates and controls the call to
+  `rsa_FormatOneBlock`: the branch taken when the condition is true returns from
+  the caller immediately, with no path to the call, so the call is reached only
+  when the condition is false.
+- The caller-side expressions in that comparison map by argument position to the
+  exact parameters used for the highlighted write inside the callee.
+- Both compared values (`data->len` and the `modulusLen`-derived threshold)
+  resolve to unsigned integer types.

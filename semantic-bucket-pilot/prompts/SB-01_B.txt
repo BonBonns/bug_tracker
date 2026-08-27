@@ -1,0 +1,97 @@
+CASE ID: SB-01
+
+HIGHLIGHTED OPERATION: PORT_Memcpy(bp, data->data, data->len) inside rsa_FormatOneBlock
+
+CODE:
+
+```c
+static unsigned char *
+rsa_FormatOneBlock(unsigned modulusLen,
+                   RSA_BlockType blockType,
+                   SECItem *data)
+{
+    unsigned char *block;
+    unsigned char *bp;
+    unsigned int padLen;
+    int i, j;
+    SECStatus rv;
+
+    block = (unsigned char *)PORT_Alloc(modulusLen);
+    if (block == NULL)
+        return NULL;
+
+    bp = block;
+
+    *bp++ = RSA_BLOCK_FIRST_OCTET;
+    *bp++ = (unsigned char)blockType;
+
+    switch (blockType) {
+
+        case RSA_BlockPrivate: /* preferred method */
+            /*
+             * 0x00 || BT || Pad || 0x00 || ActualData
+             *   1      1   padLen    1      data->len
+             */
+            padLen = modulusLen - data->len - 3;
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);   /* <<< HIGHLIGHTED OPERATION */
+            break;
+
+        default:
+            PORT_Free(block);
+            return NULL;
+    }
+
+    return block;
+}
+
+static SECStatus
+rsa_FormatBlock(SECItem *result,
+                unsigned modulusLen,
+                RSA_BlockType blockType,
+                SECItem *data)
+{
+    switch (blockType) {
+        case RSA_BlockPrivate:
+            if (data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))) {
+                return SECFailure;
+            }
+            result->data = rsa_FormatOneBlock(modulusLen, blockType, data);
+            if (result->data == NULL) {
+                result->len = 0;
+                return SECFailure;
+            }
+            result->len = modulusLen;
+            break;
+        default:
+            return SECFailure;
+    }
+    return SECSuccess;
+}
+```
+
+TChecker identified the highlighted operation and established the facts listed below, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+
+ESTABLISHED FACTS (from TChecker's deterministic analysis):
+
+- The destination `bp` is an alias of `block`, which is allocated as exactly
+  `modulusLen` bytes (`block = PORT_Alloc(modulusLen)`), and the alias is taken
+  before any pointer arithmetic. The destination's capacity is `modulusLen` bytes.
+- The highlighted operation copies `data->len` bytes into `bp`
+  (`PORT_Memcpy(bp, data->data, data->len)`).
+- The caller `rsa_FormatBlock` performs the comparison
+  `data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))` as a real runtime
+  branch (not an assertion). That branch dominates and controls the call to
+  `rsa_FormatOneBlock`: the branch taken when the condition is true returns from
+  the caller immediately, with no path to the call, so the call is reached only
+  when the condition is false.
+- The caller-side expressions in that comparison map by argument position to the
+  exact parameters used for the highlighted write inside the callee.
+- Both compared values (`data->len` and the `modulusLen`-derived threshold)
+  resolve to unsigned integer types.

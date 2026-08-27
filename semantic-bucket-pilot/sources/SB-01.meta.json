@@ -1,0 +1,8 @@
+{
+  "case_id": "SB-01",
+  "bucket": "relationship_unresolved",
+  "routable": true,
+  "highlighted_operation": "PORT_Memcpy(bp, data->data, data->len) inside rsa_FormatOneBlock",
+  "uncertainty_category": "relationship unresolved",
+  "focused_question": "Does the caller's condition establish that the write length is no greater than the allocated capacity?"
+}

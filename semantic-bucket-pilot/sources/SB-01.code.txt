@@ -1,8 +1,3 @@
-CASE ID: SB-01
-
-CODE:
-
-```c
 static unsigned char *
 rsa_FormatOneBlock(unsigned modulusLen,
                    RSA_BlockType blockType,
@@ -38,7 +33,7 @@ rsa_FormatOneBlock(unsigned modulusLen,
             PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
             bp += padLen;
             *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
-            PORT_Memcpy(bp, data->data, data->len);
+            PORT_Memcpy(bp, data->data, data->len);   /* <<< HIGHLIGHTED OPERATION */
             break;
 
         default:
@@ -72,12 +67,3 @@ rsa_FormatBlock(SECItem *result,
     }
     return SECSuccess;
 }
-```
-
-QUESTION:
-
-Does the caller's length check in `rsa_FormatBlock`, together with everything
-else visible here, PROVE that the write inside `rsa_FormatOneBlock` (the
-`PORT_Memcpy(bp, data->data, data->len)` call) cannot exceed the destination
-buffer's capacity? Answer established, contradicted, or unresolved, and say
-exactly what would be needed to resolve it if it is not already resolved.

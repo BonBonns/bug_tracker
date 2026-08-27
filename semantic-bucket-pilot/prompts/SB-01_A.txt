@@ -1,0 +1,79 @@
+CASE ID: SB-01
+
+HIGHLIGHTED OPERATION: PORT_Memcpy(bp, data->data, data->len) inside rsa_FormatOneBlock
+
+CODE:
+
+```c
+static unsigned char *
+rsa_FormatOneBlock(unsigned modulusLen,
+                   RSA_BlockType blockType,
+                   SECItem *data)
+{
+    unsigned char *block;
+    unsigned char *bp;
+    unsigned int padLen;
+    int i, j;
+    SECStatus rv;
+
+    block = (unsigned char *)PORT_Alloc(modulusLen);
+    if (block == NULL)
+        return NULL;
+
+    bp = block;
+
+    *bp++ = RSA_BLOCK_FIRST_OCTET;
+    *bp++ = (unsigned char)blockType;
+
+    switch (blockType) {
+
+        case RSA_BlockPrivate: /* preferred method */
+            /*
+             * 0x00 || BT || Pad || 0x00 || ActualData
+             *   1      1   padLen    1      data->len
+             */
+            padLen = modulusLen - data->len - 3;
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);   /* <<< HIGHLIGHTED OPERATION */
+            break;
+
+        default:
+            PORT_Free(block);
+            return NULL;
+    }
+
+    return block;
+}
+
+static SECStatus
+rsa_FormatBlock(SECItem *result,
+                unsigned modulusLen,
+                RSA_BlockType blockType,
+                SECItem *data)
+{
+    switch (blockType) {
+        case RSA_BlockPrivate:
+            if (data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))) {
+                return SECFailure;
+            }
+            result->data = rsa_FormatOneBlock(modulusLen, blockType, data);
+            if (result->data == NULL) {
+                result->len = 0;
+                return SECFailure;
+            }
+            result->len = modulusLen;
+            break;
+        default:
+            return SECFailure;
+    }
+    return SECSuccess;
+}
+```
+
+TChecker flagged the highlighted operation for review. Based on the code, classify the highlighted operation as safe, vulnerable, or unknown, and explain your reasoning.
