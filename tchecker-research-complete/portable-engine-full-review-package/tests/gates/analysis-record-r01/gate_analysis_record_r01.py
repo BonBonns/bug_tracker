@@ -124,20 +124,70 @@ cw = _load("oob_cursor_write_verdict")
 cw_fix = str(H.parent / "oob-cursor-r01" / "fixtures" / (
     [p.name for p in (H.parent / "oob-cursor-r01" / "fixtures").glob("*.json")][0]))
 cw_recs = cw.analyze_operations(cw_fix)
+cw_open = [r for r in cw_recs if r["analysis_status"] == "open_candidate"]
 ck("cursor producer emits open candidates as write_count_bound_not_established",
-   len(cw_recs) >= 1 and all(r["reason_code"] == "write_count_bound_not_established"
+   len(cw_open) >= 1 and all(r["reason_code"] == "write_count_bound_not_established"
                              and r["recommended_route"] == "semantic_relationship_review"
-                             for r in cw_recs))
+                             for r in cw_open))
 ck("cursor records pass v1 schema validation", all(ar.validate_record(r) for r in cw_recs))
 
 ipm = _load("oob_interprocedural_verdict")
 ip_fix = str(H.parent / "oob-interproc-r01" / "fixtures" / (
     [p.name for p in (H.parent / "oob-interproc-r01" / "fixtures").glob("*.json")][0]))
 ip_recs = ipm.analyze_operations(ip_fix)
+ip_open = [r for r in ip_recs if r["analysis_status"] == "open_candidate"]
 ck("interproc producer emits open candidates as capacity_relation_not_established",
-   len(ip_recs) >= 1 and all(r["reason_code"] == "capacity_relation_not_established"
-                             for r in ip_recs))
+   len(ip_open) >= 1 and all(r["reason_code"] == "capacity_relation_not_established"
+                             for r in ip_open))
 ck("interproc records pass v1 schema validation", all(ar.validate_record(r) for r in ip_recs))
+
+def _accounting_ok(recs, emit_open):
+    from collections import Counter
+    sc = Counter(r["analysis_status"] for r in recs)
+    total = sc["deterministic_complete"] + sc["open_candidate"] + sc["abstained"] + sc.get("rerouted", 0)
+    return total == len(recs) and sc["open_candidate"] == emit_open
+
+# --- CURSOR accounting + new reasons (dedicated synthetic controls) ----------
+cwfix = str(H / "fixtures" / "cursor_accounting.program.json")
+cw_recs = cw.analyze_operations(cwfix)
+cw_by = {r["function"]: r for r in cw_recs}
+CW_EXPECT = {
+    "ident_multi_alias":        ("destination_identity_ambiguous", "identity_ambiguous", "abstained"),
+    "ident_unresolved":         ("destination_identity_ambiguous", "identity_ambiguous", "abstained"),
+    "cap_missing_symbolic":     ("required_evidence_absent", "insufficient_evidence", "abstained"),
+    "cap_missing_single_alias": ("required_evidence_absent", "insufficient_evidence", "abstained"),
+    "count_open":               ("write_count_bound_not_established", "relationship_unresolved", "open_candidate"),
+}
+for f, (reason, bucket, status) in CW_EXPECT.items():
+    r = cw_by.get(f)
+    ck(f"cursor {f} -> {reason}", r is not None and r["reason_code"] == reason
+       and r.get("uncertainty_bucket") == bucket and r["analysis_status"] == status)
+ck("cursor bounded_guarded -> deterministic_complete (negative control, no bucket)",
+   cw_by.get("bounded_guarded", {}).get("analysis_status") == "deterministic_complete"
+   and cw_by.get("bounded_guarded", {}).get("uncertainty_bucket") is None)
+ck("cursor identity_ambiguous is emitted (real emitter now exists) and specific",
+   sum(1 for r in cw_recs if r["reason_code"] == "destination_identity_ambiguous") == 2)
+ck("cursor accounting equality holds (recognized = det+open+abstained+rerouted)",
+   _accounting_ok(cw_recs, len(cw.emit_candidates(cwfix))))
+ck("cursor records all valid v1", all(ar.validate_record(r) for r in cw_recs))
+
+# --- INTERPROC accounting + conflicting_reaching_allocations -----------------
+ip_recs2 = ipm.analyze_operations(ip_fix)
+ip_by = {r["function"]: r for r in ip_recs2}
+ck("interproc helper_conflict -> conflicting_reaching_allocations / conflicting_definitions",
+   ip_by.get("helper_conflict", {}).get("reason_code") == "conflicting_reaching_allocations"
+   and ip_by.get("helper_conflict", {}).get("uncertainty_bucket") == "conflicting_definitions")
+ck("interproc unresolved-target/missing-binding -> required_evidence_absent (NOT conflicting)",
+   ip_by.get("helper_unresolved_target", {}).get("reason_code") == "required_evidence_absent"
+   and ip_by.get("helper_field", {}).get("reason_code") == "required_evidence_absent")
+ck("interproc accounting equality holds",
+   _accounting_ok(ip_recs2, len(ipm.emit_candidates(ip_fix))))
+
+# --- determinism: identical output across repeated runs ----------------------
+import json as _json
+def _sig(rs): return _json.dumps([{k: r[k] for k in sorted(r)} for r in rs], sort_keys=True)
+ck("cursor analyze_operations deterministic", _sig(cw.analyze_operations(cwfix)) == _sig(cw_recs))
+ck("interproc analyze_operations deterministic", _sig(ipm.analyze_operations(ip_fix)) == _sig(ip_recs2))
 
 print(f"ANALYSIS_RECORD_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)

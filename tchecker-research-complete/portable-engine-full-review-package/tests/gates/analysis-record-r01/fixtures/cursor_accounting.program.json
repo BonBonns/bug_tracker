@@ -1,0 +1,165 @@
+{
+  "schema": "tchecker-cpp-facts/cursor-accounting",
+  "functions": [
+    {
+      "id": 993000000001,
+      "full_name": "ident_multi_alias",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 993000000005,
+      "full_name": "ident_unresolved",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 993000000007,
+      "full_name": "cap_missing_symbolic",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 993000000010,
+      "full_name": "cap_missing_single_alias",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 993000000013,
+      "full_name": "count_open",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 993000000016,
+      "full_name": "bounded_guarded",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    }
+  ],
+  "locals": [
+    {
+      "method_id": 993000000013,
+      "name": "buf",
+      "type_full_name": "char[64]"
+    },
+    {
+      "method_id": 993000000016,
+      "name": "buf",
+      "type_full_name": "char[64]"
+    }
+  ],
+  "calls": [
+    {
+      "id": 993000000002,
+      "name": "<operator>.assignment",
+      "code": "p = q",
+      "enclosing_function_id": 993000000001,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000003,
+      "name": "<operator>.assignment",
+      "code": "p = r",
+      "enclosing_function_id": 993000000001,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000004,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000001,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000006,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000005,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000008,
+      "name": "<operator>.assignment",
+      "code": "p = malloc(n)",
+      "enclosing_function_id": 993000000007,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000009,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000007,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000011,
+      "name": "<operator>.assignment",
+      "code": "p = q",
+      "enclosing_function_id": 993000000010,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000012,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000010,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000014,
+      "name": "<operator>.assignment",
+      "code": "p = buf",
+      "enclosing_function_id": 993000000013,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000015,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000013,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000017,
+      "name": "<operator>.assignment",
+      "code": "p = buf",
+      "enclosing_function_id": 993000000016,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000018,
+      "name": "<operator>.greaterThan",
+      "code": "n > sizeof(buf)",
+      "enclosing_function_id": 993000000016,
+      "file": "cc.c",
+      "line": 5
+    },
+    {
+      "id": 993000000019,
+      "name": "<operator>.assignment",
+      "code": "*p++ = c",
+      "enclosing_function_id": 993000000016,
+      "file": "cc.c",
+      "line": 5
+    }
+  ]
+}

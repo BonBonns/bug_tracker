@@ -291,32 +291,148 @@ def emit_candidates(prefix):
     return cand
 
 
+def _derive_state(d):
+    """Recompute this producer's capacity / alias / advance-evidence / guard
+    tables. Self-contained (does NOT touch the frozen emit_candidates verdict
+    logic); used only by analyze_operations for full per-operation accounting."""
+    calls = d.get('calls', []); locals_ = d.get('locals', [])
+    arr_count = {}
+    for l in locals_:
+        n = _byte_array_elem_count(l.get('type_full_name'))
+        if n is not None:
+            arr_count[(l.get('method_id'), l.get('name'))] = n
+    assign_calls = [c for c in calls if c.get('name') == '<operator>.assignment']
+    symbolic_alloc = {}   # (fn, ptr) -> True if assigned from an alloc that didn't fold
+    for c in assign_calls:
+        fn = c.get('enclosing_function_id'); m = ALLOC_RE.match(c.get('code') or '')
+        if not m:
+            continue
+        ptr = m.group(1); n = _eval_const_int_expr(m.group(3))
+        if n is not None:
+            arr_count[(fn, ptr)] = n
+        else:
+            symbolic_alloc[(fn, ptr)] = True
+    assert_codes = [(c.get('code') or '') for c in calls
+                    if c.get('name') in ASSERT_NAMES
+                    or (c.get('code', '').split('(')[0].strip() in ASSERT_NAMES)]
+    def _in_assert(code):
+        cc = (code or '').strip()
+        return bool(cc) and any(cc in ac for ac in assert_codes)
+    guarded_arrays_by_fn = {}
+    for c in calls:
+        if c.get('name') not in CMP:
+            continue
+        code = c.get('code') or ''
+        if _in_assert(code):
+            continue
+        fn = c.get('enclosing_function_id')
+        for (mid, name) in arr_count:
+            if mid == fn and ('sizeof(%s)' % name) in code:
+                guarded_arrays_by_fn.setdefault(fn, set()).add(name)
+    # alias chains (fixed point)
+    alias_ptr_to_base = {}; raw_aliases = []; alias_rhs_by_ptr = {}
+    for c in assign_calls:
+        m = ALIAS_RE.match(c.get('code') or '')
+        if not m or m.group(1) == m.group(2):
+            continue
+        fn = c.get('enclosing_function_id')
+        raw_aliases.append((fn, m.group(1), m.group(2)))
+        alias_rhs_by_ptr.setdefault((fn, m.group(1)), set()).add(m.group(2))
+    for _ in range(4):
+        changed = False
+        for fn, lhs, rhs in raw_aliases:
+            base = rhs if (fn, rhs) in arr_count else alias_ptr_to_base.get((fn, rhs))
+            if base is not None and alias_ptr_to_base.get((fn, lhs)) != base:
+                alias_ptr_to_base[(fn, lhs)] = base; changed = True
+        if not changed:
+            break
+    # advance evidence
+    advanced_by_fn = {}
+    for c in assign_calls:
+        m = INCR_WRITE_RE.match(c.get('code') or '')
+        if m:
+            advanced_by_fn.setdefault(c.get('enclosing_function_id'), set()).add(m.group(1))
+    for c in calls:
+        if c.get('name') == '<operator>.assignmentPlus':
+            m = COMPOUND_PLUS_RE.match(c.get('code') or '')
+            fn = c.get('enclosing_function_id')
+            if m and ((fn, m.group(1)) in alias_ptr_to_base or (fn, m.group(1)) in arr_count):
+                advanced_by_fn.setdefault(fn, set()).add(m.group(1))
+        elif c.get('name') in ('<operator>.postIncrement', '<operator>.preIncrement'):
+            m = POSTINCR_RE.match(c.get('code') or '') or PREINCR_RE.match(c.get('code') or '')
+            if m:
+                advanced_by_fn.setdefault(c.get('enclosing_function_id'), set()).add(m.group(1))
+    return dict(arr_count=arr_count, symbolic_alloc=symbolic_alloc, assign_calls=assign_calls,
+                guarded_arrays_by_fn=guarded_arrays_by_fn, alias_ptr_to_base=alias_ptr_to_base,
+                alias_rhs_by_ptr=alias_rhs_by_ptr, advanced_by_fn=advanced_by_fn)
+
+
 def analyze_operations(prefix):
-    """Emit v1 analysis records for this producer's OPEN candidates. A cursor
-    candidate is an unbounded pointer-increment write into a fixed-capacity base:
-    the unresolved property is that the NUMBER of writes is not bounded by the
-    capacity -- reason `write_count_bound_not_established` (relationship_unresolved,
-    semantic_relationship_review). Abstention-reason emission (e.g.
-    destination_identity_ambiguous for an unresolved alias chain) is a documented
-    future extension; only explicit open-candidate reasons are emitted here, never
-    a candidate-presence fallback."""
+    """Emit EXACTLY ONE v1 analysis record per RECOGNIZED cursor operation --
+    accounting equality: recognized = deterministic_complete + open_candidate +
+    abstained. A recognized cursor operation is a pointer-dereference write
+    (`*p=x` / `*(p+n)=x` / `*p++=x`) whose pointer has ADVANCE EVIDENCE (the fused
+    `*p++` shape is its own advance evidence). Classification:
+      - base resolved to a known capacity, sizeof-guarded  -> deterministic_complete
+      - base resolved to a known capacity, unguarded       -> open_candidate
+        (write_count_bound_not_established)
+      - base NOT resolved: MULTIPLE distinct alias targets, or NONE at all
+        (unresolved which object)                          -> abstained
+        (destination_identity_ambiguous)
+      - base NOT resolved: identity established (single alias, or a symbolic
+        allocation) but capacity unknown                   -> abstained
+        (required_evidence_absent)"""
     import hashlib
     from analysis_record import (bucket_for_reason, route_for_reason,
                                  property_for_reason, llm_eligible_for_reason)
-    reason = 'write_count_bound_not_established'
+    d = json.load(open(prefix))
+    func_by_id = {f.get('id'): f for f in d.get('functions', [])}
+    st = _derive_state(d)
     recs = []
-    for c in emit_candidates(prefix):
-        rid = 'cand_' + hashlib.sha256(
-            f"{c.get('function_id')}|{c.get('base')}|{c.get('line')}".encode()).hexdigest()[:16]
-        recs.append({
-            'candidate_id': rid, 'recognized_operation': 'cursor_write',
-            'file': c.get('file'), 'function': c.get('function'), 'line': c.get('line'),
-            'dest': c.get('base'), 'width_expr': None, 'analysis_status': 'open_candidate',
-            'reason_code': reason, 'all_reason_codes': [reason],
-            'uncertainty_bucket': bucket_for_reason(reason),
-            'recommended_route': route_for_reason(reason),
-            'unresolved_property': property_for_reason(reason),
-            'llm_eligible': llm_eligible_for_reason(reason)})
+    seen = set()
+    for c in st['assign_calls']:
+        fn = c.get('enclosing_function_id'); code = c.get('code') or ''
+        m = INCR_WRITE_RE.match(code); shape = 'FUSED_INCREMENT'
+        if not m:
+            m = OFFSET_DEREF_WRITE_RE.match(code); shape = 'OFFSET_DEREF'
+        if not m:
+            m = DEREF_WRITE_RE.match(code); shape = 'PLAIN_DEREF'
+        if not m:
+            continue
+        ptr = m.group(1)
+        # recognized cursor op iff it advances (fused is its own advance evidence)
+        if shape != 'FUSED_INCREMENT' and ptr not in st['advanced_by_fn'].get(fn, set()):
+            continue
+        key = (fn, ptr, shape, c.get('line'))
+        if key in seen:
+            continue
+        seen.add(key)
+        fname = (func_by_id.get(fn) or {}).get('full_name')
+        opid = 'op_' + hashlib.sha256(
+            f"cursor|{fn}|{ptr}|{shape}|{c.get('line')}".encode()).hexdigest()[:16]
+        rec = {'operation_id': opid, 'recognized_operation': 'cursor_write',
+               'file': c.get('file'), 'function': fname, 'line': c.get('line'),
+               'dest': ptr, 'width_expr': None}
+        base = ptr if (fn, ptr) in st['arr_count'] else st['alias_ptr_to_base'].get((fn, ptr))
+        if base is not None:
+            if base in st['guarded_arrays_by_fn'].get(fn, set()):
+                rec.update({'analysis_status': 'deterministic_complete',
+                            'primary_reason_code': None, 'reason_code': None})
+                recs.append(rec); continue
+            reasons = ['write_count_bound_not_established']; status = 'open_candidate'
+        else:
+            rhs = st['alias_rhs_by_ptr'].get((fn, ptr), set())
+            if len(rhs) >= 2 or (len(rhs) == 0 and (fn, ptr) not in st['symbolic_alloc']):
+                reasons = ['destination_identity_ambiguous']; status = 'abstained'
+            else:
+                reasons = ['required_evidence_absent']; status = 'abstained'
+        primary = reasons[0]
+        rec.update({'analysis_status': status, 'primary_reason_code': primary, 'reason_code': primary,
+                    'all_reason_codes': reasons, 'uncertainty_bucket': bucket_for_reason(primary),
+                    'recommended_route': route_for_reason(primary),
+                    'unresolved_property': property_for_reason(primary),
+                    'llm_eligible': llm_eligible_for_reason(primary)})
+        recs.append(rec)
     return recs
 
 

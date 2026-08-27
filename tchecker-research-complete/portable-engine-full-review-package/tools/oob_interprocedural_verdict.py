@@ -247,33 +247,157 @@ def emit_candidates(prefix):
     return cand
 
 
+def _derive_state(d):
+    """Recompute this producer's capacity/propagation/guard tables and its
+    contract-driven operation list. Self-contained (does NOT touch the frozen
+    emit_candidates verdict logic); used only by analyze_operations for full
+    per-operation accounting. Mirrors emit_candidates lines-for-lines so the
+    classification matches the producer's own decisions exactly."""
+    calls = d.get('calls', []); locals_ = d.get('locals', []); functions = d.get('functions', [])
+    arr_count = {}
+    for l in locals_:
+        n = _byte_array_elem_count(l.get('type_full_name'))
+        if n is not None:
+            arr_count[(l.get('method_id'), l.get('name'))] = n
+    for c in (cc for cc in calls if cc.get('name') == '<operator>.assignment'):
+        fn = c.get('enclosing_function_id'); m = ALLOC_RE.match(c.get('code') or '')
+        if m:
+            n = _eval_const_int_expr(m.group(3))
+            if n is not None:
+                arr_count[(fn, m.group(1))] = n
+    params_by_fn = {}
+    for f in functions:
+        for p in f.get('parameters', []):
+            params_by_fn.setdefault(f.get('id'), {})[p.get('index')] = p.get('name')
+    propagated = {}; conflicted = set()
+    for c in calls:
+        if c.get('resolution') != 'EXACT':
+            continue
+        targets = c.get('candidate_target_ids') or []
+        if len(targets) != 1:
+            continue
+        callee_fn = targets[0]; caller_fn = c.get('enclosing_function_id')
+        pmap = params_by_fn.get(callee_fn)
+        if not pmap:
+            continue
+        for a in c.get('arguments', []):
+            arg = (a.get('code') or '').strip()
+            if not re.fullmatch(r'[A-Za-z_]\w*', arg):
+                continue
+            if (caller_fn, arg) not in arr_count:
+                continue
+            N = arr_count[(caller_fn, arg)]; pn = pmap.get(a.get('index'))
+            if pn is None:
+                continue
+            key = (callee_fn, pn)
+            if key in conflicted:
+                continue
+            if key in propagated and propagated[key] != N:
+                conflicted.add(key); propagated.pop(key, None); continue
+            propagated[key] = N
+    effective = dict(arr_count); capacity_origin = {}
+    for (fn, name), N in propagated.items():
+        if (fn, name) not in effective:
+            effective[(fn, name)] = N; capacity_origin[(fn, name)] = N
+    assert_codes = [(c.get('code') or '') for c in calls
+                    if c.get('name') in ASSERT_NAMES
+                    or (c.get('code', '').split('(')[0].strip() in ASSERT_NAMES)]
+    def _in_assert(code):
+        cc = (code or '').strip()
+        return bool(cc) and any(cc in ac for ac in assert_codes)
+    guarded_by_fn = {}; bounded_len_by_fn = {}
+    for c in calls:
+        if c.get('name') not in CMP:
+            continue
+        code = c.get('code') or ''
+        if _in_assert(code):
+            continue
+        fn = c.get('enclosing_function_id')
+        for (mid, name) in effective:
+            if mid == fn and ('sizeof(%s)' % name) in code:
+                guarded_by_fn.setdefault(fn, set()).add(name)
+        if c.get('name') in ('<operator>.lessThan', '<operator>.lessEqualsThan'):
+            mlt = re.match(r'^\s*(' + NAME_CHAIN + r')\s*<=?', code)
+            if mlt:
+                bounded_len_by_fn.setdefault(fn, set()).add(mlt.group(1))
+    ops = []
+    for c in calls:
+        callee = c.get('method_full_name') or c.get('name')
+        contract = CALLEE_CONTRACTS.get(callee)
+        if contract is None:
+            continue
+        args = sorted(c.get('arguments', []), key=lambda a: a.get('index', 0))
+        da, wa = contract['dest_arg'], contract['width_arg']
+        if da >= len(args) or wa >= len(args):
+            continue
+        ops.append({'call_id': c.get('id'), 'function_id': c.get('enclosing_function_id'),
+                    'file': c.get('file'), 'line': c.get('line'),
+                    'dest_code': (args[da].get('code') or '').strip(),
+                    'width_code': (args[wa].get('code') or '').strip()})
+    param_names_by_fn = {fn: set(m.values()) for fn, m in params_by_fn.items()}
+    return dict(effective=effective, capacity_origin=capacity_origin, conflicted=conflicted,
+                guarded_by_fn=guarded_by_fn, bounded_len_by_fn=bounded_len_by_fn,
+                ops=ops, param_names_by_fn=param_names_by_fn)
+
+
 def analyze_operations(prefix):
-    """Emit v1 analysis records for this producer's OPEN candidates. An
-    interprocedural candidate is a write whose capacity was propagated across a
-    single call hop but whose write LENGTH is not proven within it: reason
-    `capacity_relation_not_established` (relationship_unresolved,
-    semantic_relationship_review). Abstention-reason emission (conflicting
-    propagations -> conflicting_reaching_allocations; unresolved call target ->
-    required_evidence_absent) is a documented future extension; only explicit
-    open-candidate reasons are emitted here, never a candidate-presence fallback."""
+    """Emit EXACTLY ONE v1 analysis record per RECOGNIZED interprocedural
+    operation -- accounting equality: recognized = deterministic_complete +
+    open_candidate + abstained (+ rerouted). This producer's recognized boundary
+    is a contract-driven write whose destination is a bare identifier that is a
+    PARAMETER of the enclosing function (propagation is the applicable capacity
+    mechanism exactly for parameters).
+
+    Classification (mirrors emit_candidates):
+      - capacity propagated (single) + write bounded (literal fits / sizeof guard
+        / len bounded) -> deterministic_complete
+      - capacity propagated (single) + not bounded -> open_candidate
+        (capacity_relation_not_established)
+      - the parameter's capacity CONFLICTED across call sites -> abstained
+        (conflicting_reaching_allocations). Used ONLY for genuine incompatible
+        propagation, never for an unresolved target/missing binding.
+      - otherwise (no capacity reached this parameter, no conflict) -> abstained
+        (required_evidence_absent) -- a missing-evidence condition, not a conflict."""
     import hashlib
     from analysis_record import (bucket_for_reason, route_for_reason,
                                  property_for_reason, llm_eligible_for_reason)
-    reason = 'capacity_relation_not_established'
+    d = json.load(open(prefix))
+    func_by_id = {f.get('id'): f for f in d.get('functions', [])}
+    st = _derive_state(d)
     recs = []
-    for c in emit_candidates(prefix):
-        rid = 'cand_' + hashlib.sha256(
-            f"{c.get('function_id')}|{c.get('dest')}|{c.get('line')}".encode()).hexdigest()[:16]
-        recs.append({
-            'candidate_id': rid, 'recognized_operation': 'buffer_write',
-            'file': c.get('file'), 'function': c.get('function'), 'line': c.get('line'),
-            'dest': c.get('dest'), 'width_expr': c.get('width_expr'),
-            'analysis_status': 'open_candidate',
-            'reason_code': reason, 'all_reason_codes': [reason],
-            'uncertainty_bucket': bucket_for_reason(reason),
-            'recommended_route': route_for_reason(reason),
-            'unresolved_property': property_for_reason(reason),
-            'llm_eligible': llm_eligible_for_reason(reason)})
+    for op in st['ops']:
+        fn = op['function_id']; dest = op['dest_code']; length = op['width_code']
+        if not re.fullmatch(r'[A-Za-z_]\w*', dest):
+            continue   # non-bare destination: not this producer's recognized shape
+        if dest not in st['param_names_by_fn'].get(fn, set()):
+            continue   # not a parameter: purely-local capacity is call_sink's job
+        fname = (func_by_id.get(fn) or {}).get('full_name')
+        opid = 'op_' + hashlib.sha256(
+            f"interproc|{fn}|{dest}|{op['line']}|{op['call_id']}".encode()).hexdigest()[:16]
+        rec = {'operation_id': opid, 'recognized_operation': 'buffer_write',
+               'file': op['file'], 'function': fname, 'line': op['line'],
+               'dest': dest, 'width_expr': length}
+        if (fn, dest) in st['capacity_origin']:
+            N = st['effective'][(fn, dest)]
+            bounded = ((re.fullmatch(r'\d+', length) and int(length) <= N)
+                       or dest in st['guarded_by_fn'].get(fn, set())
+                       or (re.fullmatch(NAME_CHAIN, length) and length in st['bounded_len_by_fn'].get(fn, set())))
+            if bounded:
+                rec.update({'analysis_status': 'deterministic_complete', 'primary_reason_code': None,
+                            'reason_code': None})
+                recs.append(rec); continue
+            reasons = ['capacity_relation_not_established']; status = 'open_candidate'
+        elif (fn, dest) in st['conflicted']:
+            reasons = ['conflicting_reaching_allocations']; status = 'abstained'
+        else:
+            reasons = ['required_evidence_absent']; status = 'abstained'
+        primary = reasons[0]
+        rec.update({'analysis_status': status, 'primary_reason_code': primary, 'reason_code': primary,
+                    'all_reason_codes': reasons, 'uncertainty_bucket': bucket_for_reason(primary),
+                    'recommended_route': route_for_reason(primary),
+                    'unresolved_property': property_for_reason(primary),
+                    'llm_eligible': llm_eligible_for_reason(primary)})
+        recs.append(rec)
     return recs
 
 
