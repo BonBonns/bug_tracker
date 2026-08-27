@@ -14,13 +14,41 @@ kind of "representation variant" that should be added before inventing a new
 property class.
 
 SCOPE (MVP) -- what this pass does NOT yet do, by design (abstain rather than guess):
-  - `dest` must be a BARE fixed-size local array name (`T dest[N]`), matched the
-    same syntactic way as oob_index_write_verdict.py's `_elem_count`, and scoped
-    per-function via (method_id, name) from the start (that producer originally
-    got this wrong via bare-name keying -- fixed after being caught scanning real
-    mozilla/nss code; see its module history). Pointer-typed, heap-allocated, or
-    offset-adjusted destinations (`dest + off`, `obj->field`, the result of
-    `malloc(...)`/`PORT_Alloc(...)`) are OUT OF SCOPE and abstained on.
+  - `dest` must be a BARE fixed-size local array name (`T dest[N]`) OR, as of the
+    pointer-offset extension below, `arr + offset_expr` where `arr` is itself a bare
+    fixed-size local array name -- matched the same syntactic way as
+    oob_index_write_verdict.py's `_elem_count`, and scoped per-function via
+    (method_id, name) from the start (that producer originally got this wrong via
+    bare-name keying -- fixed after being caught scanning real mozilla/nss code; see
+    its module history). Heap-allocated destinations (the result of
+    `malloc(...)`/`PORT_Alloc(...)`) and offsets into a STRUCT/UNION FIELD
+    (`obj->field + off`) remain OUT OF SCOPE and abstained on -- this extension only
+    covers a fixed local array plus an offset, not a pointer of unknown capacity plus
+    an offset.
+
+  POINTER-OFFSET-DESTINATION EXTENSION -- motivated by two REAL, disclosed bugs found
+  during round-3 paired CVE validation, not hypotheticals: NSS CVE-2016-1950
+  (`PORT_Memcpy(item->data + item->len, buf, len)`, a heap pointer plus an
+  ACCUMULATED offset) and NSS bug 1577953/CVE-2019-11759
+  (`HMAC_Finish(hmac, key_block + ((bi - 1) * hashLen), &len, hashLen)`, a local array
+  plus a COMPUTED offset, through a non-memcpy sink). Neither is fully covered by this
+  extension: the first needs a heap pointer's capacity (unknown here, out of scope)
+  and loop-accumulated-offset tracking (temporal, not attempted); the second needs a
+  non-memcpy sink recognized (COPY_FUNCS is a fixed allowlist) and its array's
+  capacity resolved (blocked separately by unresolved macro names in its size
+  expression, not this extension's own limitation). What THIS extension buys: the
+  narrower, honestly-scoped slice of the same underlying property -- a fixed local
+  array's capacity is known, and a `memcpy`-family call writes `len` bytes starting
+  `offset` bytes into it, where neither `offset` nor `len` is provably bounded. It
+  does NOT attempt to compute `N - offset` as a tighter remaining-capacity bound (that
+  would require evaluating `offset_expr`, which may be an arbitrary runtime
+  expression); it treats ANY visible `arr+offset` write into a byte-array with no
+  guard mentioning that array's capacity as a CANDIDATE, same suppression rules as the
+  bare-destination case. This can NOT currently discriminate "offset is small, len is
+  small, definitely still in bounds" from "offset+len exceeds capacity" -- it is
+  strictly a widening of WHERE this pass looks (offset-adjusted destinations, not just
+  bare ones), not a new soundness capability for THIS shape. Still abstain-by-default
+  everywhere else (heap pointers, struct fields, macro-unresolved capacities).
   - The full allocation-size-vs-copy-size chain --
         size_t bytes = count * elementSize;
         T *p = malloc(bytes);
@@ -177,19 +205,43 @@ def emit_candidates(prefix):
         dest_code = (args[0].get('code') or '').strip()
         len_code = (args[2].get('code') or '').strip()
         fn = c.get('enclosing_function_id')
-        # dest must be a BARE fixed-array local name in this function -- pointer,
-        # offset (`dest + off`), and field (`obj->field`) destinations are out of
-        # scope for this MVP (see module docstring); abstain rather than guess.
+        # dest must be a BARE fixed-array local name, OR `arr + offset_expr` where
+        # arr is one -- a pointer, a struct/union field (`obj->field[+off]`), and a
+        # field-plus-offset (`obj->field + off`) all remain out of scope; abstain
+        # rather than guess (see module docstring's pointer-offset extension note).
+        offset_shape = False
+        base = dest_code
+        offset_expr = None
         if not re.fullmatch(r'[A-Za-z_]\w*', dest_code):
+            m_off = re.match(r'^([A-Za-z_]\w*)\s*\+\s*(.+)$', dest_code)
+            if not m_off:
+                continue
+            base, offset_expr = m_off.group(1), m_off.group(2).strip()
+            if not offset_expr:
+                continue
+            offset_shape = True
+        if (fn, base) not in arr_count:
             continue
-        if (fn, dest_code) not in arr_count:
+        N = arr_count[(fn, base)]
+        # BOTH offset and length are literal integers -> pure arithmetic, provably
+        # safe or unsafe, no guess involved (e.g. real NSS pkcs11c.c's DES2->DES3 key
+        # extension: `memcpy(newdeskey, src, 16); memcpy(newdeskey + 16, newdeskey,
+        # 8);` on a 24-byte newdeskey -- 16+8 == 24, exactly fits, a legitimate idiom
+        # this pass initially false-positived on before this check was added, caught
+        # by manually verifying a real candidate this pass produced, not hypothetical).
+        if offset_shape and re.fullmatch(r'\d+', offset_expr) and re.fullmatch(r'\d+', len_code):
+            if int(offset_expr) + int(len_code) <= N:
+                continue
+        # constant length, provably in bounds -> safe. Only valid for the BARE
+        # destination case: with an offset, the true remaining capacity is N minus
+        # whatever `offset_expr` evaluates to at runtime, which this pass does not
+        # attempt to compute -- so this fast path is skipped entirely when
+        # offset_shape, per the module docstring (widen WHERE we look, not what we
+        # can prove safe for this new shape).
+        if not offset_shape and re.fullmatch(r'\d+', len_code) and int(len_code) <= N:
             continue
-        N = arr_count[(fn, dest_code)]
-        # constant length, provably in bounds -> safe
-        if re.fullmatch(r'\d+', len_code) and int(len_code) <= N:
-            continue
-        # capacity guard on this exact destination -> suppress
-        if dest_code in guarded_arrays_by_fn.get(fn, set()):
+        # capacity guard on this exact base array -> suppress
+        if base in guarded_arrays_by_fn.get(fn, set()):
             continue
         # length expression has a direct non-assert upper bound `len < K` -> suppress
         if re.fullmatch(NAME_CHAIN, len_code) and len_code in bounded_len_by_fn.get(fn, set()):
@@ -201,11 +253,14 @@ def emit_candidates(prefix):
         _fn = func_by_id.get(fn) or {}
         cand.append({'verdict': 'CANDIDATE', 'class': 'OOB_WRITE', 'subclass': 'COPY_LENGTH',
                      'callee': (c.get('method_full_name') or c.get('name')),
-                     'dest': dest_code, 'elem_count': N, 'len_expr': len_code,
+                     'dest': dest_code, 'array_base': base, 'offset_shape': offset_shape,
+                     'elem_count': N, 'len_expr': len_code,
                      'file': c.get('file'), 'function': _fn.get('full_name'),
                      'function_line': _fn.get('line'), 'function_line_end': _fn.get('line_end'),
                      'function_id': fn, 'line': c.get('line'),
-                     'derivation': {'rule': 'CPP_FIXED_ARRAY_COPY_LENGTH_UNBOUNDED',
+                     'derivation': {'rule': ('CPP_FIXED_ARRAY_OFFSET_COPY_LENGTH_UNBOUNDED'
+                                              if offset_shape else
+                                              'CPP_FIXED_ARRAY_COPY_LENGTH_UNBOUNDED'),
                                     'capacity_source': 'SYNTACTIC_BYTE_ELEM_COUNT'}})
     return cand
 

@@ -70,6 +70,36 @@
    "line_end": 24,
    "is_external": false,
    "parameters": []
+  },
+  {
+   "id": 910000000008,
+   "name": "offset_unguarded",
+   "full_name": "offset_unguarded",
+   "file": "cl.c",
+   "line": 25,
+   "line_end": 28,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000009,
+   "name": "offset_guarded",
+   "full_name": "offset_guarded",
+   "file": "cl.c",
+   "line": 29,
+   "line_end": 33,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 910000000010,
+   "name": "offset_literal_safe_exact_fit",
+   "full_name": "offset_literal_safe_exact_fit",
+   "file": "cl.c",
+   "line": 34,
+   "line_end": 37,
+   "is_external": false,
+   "parameters": []
   }
  ],
  "locals": [
@@ -120,6 +150,30 @@
    "method_id": 910000000007,
    "code": "char buf[16]",
    "line": 22
+  },
+  {
+   "id": 910000000107,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000008,
+   "code": "char buf[16]",
+   "line": 26
+  },
+  {
+   "id": 910000000108,
+   "name": "buf",
+   "type_full_name": "char[16]",
+   "method_id": 910000000009,
+   "code": "char buf[16]",
+   "line": 30
+  },
+  {
+   "id": 910000000109,
+   "name": "key",
+   "type_full_name": "char[24]",
+   "method_id": 910000000010,
+   "code": "char key[24]",
+   "line": 35
   }
  ],
  "calls": [
@@ -305,6 +359,83 @@
     {
      "index": 2,
      "code": "io.iov_len"
+    }
+   ]
+  },
+  {
+   "id": 910000000270,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf + off, src, len)",
+   "enclosing_function_id": 910000000008,
+   "file": "cl.c",
+   "line": 27,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf + off"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000280,
+   "name": "<operator>.greaterThan",
+   "code": "off + len > sizeof(buf)",
+   "enclosing_function_id": 910000000009,
+   "file": "cl.c",
+   "line": 31
+  },
+  {
+   "id": 910000000281,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(buf + off, src, len)",
+   "enclosing_function_id": 910000000009,
+   "file": "cl.c",
+   "line": 32,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "buf + off"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 910000000290,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(key + 16, key, 8)",
+   "enclosing_function_id": 910000000010,
+   "file": "cl.c",
+   "line": 36,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "key + 16"
+    },
+    {
+     "index": 1,
+     "code": "key"
+    },
+    {
+     "index": 2,
+     "code": "8"
     }
    ]
   }
