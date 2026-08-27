@@ -33,6 +33,7 @@ run_py "OOB-CURSOR-R01 (cursor-write OOB producer)"      "$PE/tests/gates/oob-cu
 run_py "OOB-CALLSINK-R01 (contract-driven call-sink OOB producer)" "$PE/tests/gates/oob-callsink-r01" gate_oob_callsink_r01.py
 run_py "OOB-INTERPROC-R01 (single-hop interprocedural capacity propagation)" "$PE/tests/gates/oob-interproc-r01" gate_oob_interproc_r01.py
 run_py "OOB-RUNTIMECAP-R01 (allocation-extent runtime capacity tracking)" "$PE/tests/gates/oob-runtimecap-r01" gate_oob_runtimecap_r01.py
+run_py "OOB-RUNTIMECAP-CFG-R01 (CFG-sensitive per-sink free invalidation)" "$PE/tests/gates/oob-runtimecap-cfg-r01" gate_oob_runtimecap_cfg_r01.py
 run_py "OOB-ADJ-R01/R02 (staging + channel trust)"       "$PE/tests/gates/oob-adj-r01"  gate_oob_adjudication.py
 run_py "OOB-ADJ-R03 (candidate-binding fingerprint)"     "$PE/tests/gates/oob-adj-r01"  gate_oob_r03_binding.py
 run_py "OOB-ADJ-R04 (trusted-identity / content binding)" "$PE/tests/gates/oob-adj-r01" gate_oob_r04_identity.py

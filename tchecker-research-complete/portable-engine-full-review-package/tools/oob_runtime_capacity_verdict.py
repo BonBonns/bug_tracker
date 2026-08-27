@@ -21,11 +21,20 @@ runtime-capacity analog of the same "does a real (non-assert) check exist relati
 the write bound to the destination's actual capacity" question every producer in
 this family asks, just keyed on a symbolic expression instead of `sizeof(arr)`.
 
+FREE HANDLING is CFG-SENSITIVE and PER-SINK (`allocation_extent.capacity_status_at_sink`),
+not whole-function: a free only disqualifies a capacity at a specific write when
+that free is proven, by dominance over this repo's own `cfg_edges` facts, to
+execute on EVERY path between the allocation and that write. A free confined to an
+error branch that returns before reaching the write does not disqualify it; a
+conditional free that rejoins before the write yields AMBIGUOUS (not confidently
+usable, but not confidently invalid either) rather than silently abstaining on the
+whole function the way an earlier version of this module did.
+
 Never emits VULNERABLE; only CANDIDATE. If in doubt, SUPPRESS or ABSTAIN.
 """
 import json, re, sys
 from callee_contracts import CALLEE_CONTRACTS
-from allocation_extent import compute_allocation_extents
+from allocation_extent import compute_allocation_extents, compute_free_sites, build_cfg_index, capacity_status_at_sink
 
 ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'NS_ABORT_IF_FALSE',
                 'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert')
@@ -42,6 +51,8 @@ def emit_candidates(prefix):
     func_by_id = {f.get('id'): f for f in functions}
 
     extents = compute_allocation_extents(d)
+    free_sites = compute_free_sites(d)
+    cfg_index = build_cfg_index(d)
     if not extents:
         return []
 
@@ -130,6 +141,14 @@ def emit_candidates(prefix):
             continue   # no runtime-capacity fact for this pointer -- abstain
         if extent['establishment_status'] != 'ESTABLISHED':
             continue
+        free_ids = free_sites.get((fn, dest_code), [])
+        sink_status = capacity_status_at_sink(cfg_index, fn, extent['allocation_site'],
+                                              free_ids, op['call_id'])
+        if sink_status != 'ESTABLISHED':
+            continue   # INVALID (a free provably precedes this write) or AMBIGUOUS
+                       # (a free MIGHT precede it on some path) or UNKNOWN (no CFG
+                       # data to reason with) -- none of these let this pass
+                       # confidently use the capacity at THIS specific write
         N = extent.get('extent_in_bytes')
         size_expr = extent['size_expression']
         # provably safe by pure arithmetic, no guess involved
@@ -140,34 +159,38 @@ def emit_candidates(prefix):
             # The write width is the EXACT SAME expression as the capacity (or its
             # one-hop scalar expansion) -- e.g. `tmpOutput = PORT_Alloc(inputLen);
             # PORT_Memcpy(tmpOutput, in, inputLen);` -- allocated and copied are
-            # textually identical -- safe by construction, no guess involved.
-            # Found as a real false positive testing against NSS rsapkcs.c before
-            # this check existed.
+            # textually identical -- safe by construction, no guess involved. No
+            # arithmetic is being reasoned about here at all (it's x <= x), so this
+            # is sound regardless of overflow, sign, or units. Found as a real
+            # false positive testing against NSS rsapkcs.c before this check
+            # existed.
             if len_code == expr:
                 safe = True
                 break
-            # The write width is exactly ONE ADDEND of a pure `a + b + ...`
-            # capacity expression (e.g. `buffer_len = SharedSecret->len + 4 +
-            # SharedInfoLen; buffer = PORT_Alloc(buffer_len); PORT_Memcpy(buffer,
-            # SharedSecret->data, SharedSecret->len);` -- the width IS one of the
-            # terms the capacity was DEFINED as a sum of, one hop back through
-            # buffer_len's own scalar definition). Safe by construction PROVIDED
-            # the expression is a pure top-level addition chain (no subtraction,
-            # which could make another term negative and invalidate the "sum >=
-            # any one term" property) -- deliberately restricted to `+`-only
-            # splits. Found as a second real false positive testing against NSS
-            # pkcs11c.c before this check existed.
-            # `->` (pointer member access) contains a literal hyphen but is not
-            # subtraction -- strip it before checking, or every struct-field
-            # term (e.g. `SharedSecret->len`) would wrongly look like it might
-            # involve subtraction. Caught testing this exact real shape.
-            if '-' not in expr.replace('->', ''):
-                terms = {t.strip() for t in expr.split('+')}
-                if len_code in terms:
-                    safe = True
-                    break
         if safe:
             continue
+        # REMOVED (soundness bug, caught before shipping further): an earlier
+        # version of this check treated the write width as safe whenever it was
+        # exactly ONE ADDEND of a pure `a + b + ...` capacity expression (e.g.
+        # `buffer_len = SharedSecret->len + 4 + SharedInfoLen; PORT_Memcpy(buffer,
+        # ..., SharedSecret->len)`). That is NOT generally safe in C: unsigned
+        # `x + y` can WRAP to a value SMALLER than `x` (if `y` is large enough,
+        # attacker-influenced, or itself computed from unchecked input), which
+        # means `capacity = x + y; memcpy(p, src, x)` can allocate the wrapped
+        # (small) capacity and then copy `x` bytes -- exactly the overflow shape
+        # this producer exists to catch. Concretely: `SharedInfoLen` here is a
+        # caller-supplied `CK_ULONG` with no bound check before the addition --
+        # this pass has no way to rule out `SharedSecret->len + 4 + SharedInfoLen`
+        # wrapping. "Checking only for subtraction does not establish addition
+        # safety" -- proving one addend fits within a sum requires (a) every
+        # OTHER addend is nonnegative, (b) the sum cannot overflow/wrap, (c)
+        # compatible units, none of which this pass establishes. Without that
+        # evidence the verdict must remain a CANDIDATE, not silently safe.
+        # No replacement rule is added in its place: an addend-of-a-sum is
+        # UNRESOLVED-to-safety by default now, which in this pass's vocabulary
+        # means it falls through to CANDIDATE below, same as any other unproven
+        # write -- exactly the "if in doubt, flag, never assume safe" posture
+        # every other producer in this family already follows.
         # a real (non-assert) guard directly relates the width to this capacity
         pair = frozenset((len_code, size_expr))
         if pair in guarded_pairs_by_fn.get(fn, set()):

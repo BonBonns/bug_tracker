@@ -57,18 +57,46 @@ Preserved through, and ONLY through, these VERIFIED operations:
 Conservative handling, exactly as specified:
   - `realloc(p, n)` REPLACES p's previous extent fact entirely (a fresh
     `size_expression = n`), not merged with it.
-  - `free(p)` INVALIDATES p's extent for the rest of ITS function -- implemented at
-    the same whole-function granularity already used throughout this producer
-    family (if `free(p)`/`PORT_Free(p)` appears ANYWHERE in the function, no extent
-    is ever established for `p` in that function; this is coarser than true
-    control-flow-ordering, deliberately conservative, matches the family's
-    documented dominance-unaware guard-crediting precedent).
+  - `free(p)` invalidates p's extent -- CFG-SENSITIVE, per-sink (see
+    `capacity_status_at_sink` below), not whole-function. An EARLIER version of
+    this module invalidated `p` for its ENTIRE function whenever `free(p)`
+    appeared anywhere in it, which is sound (never wrongly credits a freed
+    buffer) but was shown to cost real coverage: NSS CVE-2019-17006's
+    `rsa_FormatOneBlock` frees `block` on FOUR early-return error paths, all of
+    which return before ever reaching the real write -- whole-function
+    invalidation suppressed a legitimate candidate for that reason alone, not a
+    guard/capacity gap. Replaced with dominance-based reasoning over this
+    repo's own `cfg_edges` facts (see `capacity_status_at_sink`): a free only
+    invalidates a capacity at a SPECIFIC write when that free is GUARANTEED to
+    execute between the allocation and that write on every control-flow path
+    (dominance-based, not source-line order -- a `goto` that reorders text
+    doesn't change graph reachability). A free that's only POSSIBLE on some
+    paths to the write (a conditional free that rejoins before the write)
+    yields AMBIGUOUS, not ESTABLISHED -- this pass does not confidently credit
+    a capacity that might already be freed, but also does not attempt to flag
+    the possible use-after-free itself (a different property, explicitly out
+    of scope this session, per the original strategic redirect deferring UAF
+    work as "too large an architectural lift").
   - Two DIFFERENT direct allocations to the SAME (function, pointer) name with
     DIFFERENT size expressions -> AMBIGUOUS, no fact established for that key.
   - An allocator call not in `allocator_contracts.ALLOCATOR_CONTRACTS` establishes
     nothing at all -- unknown/custom allocators remain UNRESOLVED structurally
     (the lookup returns nothing), never guessed at via a declarative contract this
     module doesn't have.
+
+ADDITIVE-EXPRESSION SAFETY -- NOT handled by this module at all (moved here from a
+prior, INCORRECT version): whether a write width that is one ADDEND of a capacity's
+`a + b + ...` defining sum is "safe" is a question this module deliberately does
+NOT answer, because it is NOT generally true in C. Unsigned `x + y` can WRAP to a
+value SMALLER than `x` (if `y` is large, attacker-influenced, or otherwise
+unbounded), so `capacity = x + y; memcpy(p, src, x)` is not safe without INDEPENDENT
+evidence that (a) every other addend is nonnegative, (b) the sum cannot
+overflow/wrap, and (c) all terms use compatible units -- none of which this module
+establishes. `oob_runtime_capacity_verdict.py` (the consumer) only ever treats an
+EXACT textual match between a write width and a capacity expression as automatically
+safe (x <= x, no arithmetic involved at all); an earlier version additionally
+credited "one addend of a pure-addition sum" as safe, which was unsound (caught
+before it shipped further -- see that module's own history) and has been removed.
 """
 import re
 from allocator_contracts import ALLOCATOR_CONTRACTS, FREE_FUNCS
@@ -95,11 +123,143 @@ def _fact(site, ptr, size_expr, elem_w, extent, provenance, status):
             'establishment_status': status, 'offset_expression': None}
 
 
+def compute_free_sites(d):
+    """Returns {(function_id, pointer_name): [free_call_id, ...]} -- every
+    free/PORT_Free call site per (function, pointer), WITHOUT judging relevance to
+    any particular write yet. Consumed by `capacity_status_at_sink` for CFG-aware,
+    per-sink reasoning instead of blanket whole-function invalidation."""
+    sites = {}
+    for c in d.get('calls', []):
+        if c.get('name') in FREE_FUNCS or (c.get('method_full_name') in FREE_FUNCS):
+            args = c.get('arguments', [])
+            if args:
+                pname = (args[0].get('code') or '').strip()
+                if re.fullmatch(r'[A-Za-z_]\w*', pname):
+                    sites.setdefault((c.get('enclosing_function_id'), pname), []).append(c.get('id'))
+    return sites
+
+
+def build_cfg_index(d):
+    """Returns {function_id: {'succ': {node: {succs}}, 'preds': {node: {preds}},
+    'nodes': {node,...}, 'entries': {node,...}, 'dom': {node: {dominators}}}} from
+    this repo's `cfg_edges` facts. `dom[n]` is the set of nodes that dominate `n`
+    (every path from an entry to `n` passes through each of them), computed by
+    standard iterative dataflow to a fixed point -- correct for cyclic/irreducible
+    graphs, not just simple ones; a `goto` is just another edge in this graph, so
+    reordering source text has no effect on the result. Bounded iteration count as
+    a hard safety cap, same posture as the reaching-def worklist elsewhere in this
+    codebase's normalizer."""
+    per_fn = {}
+    for e in d.get('cfg_edges', []):
+        fn = e.get('function_id')
+        a, b = e.get('node_id'), e.get('successor_id')
+        if a is None or b is None:
+            continue
+        g = per_fn.setdefault(fn, {'succ': {}, 'preds': {}, 'nodes': set()})
+        g['succ'].setdefault(a, set()).add(b)
+        g['preds'].setdefault(b, set()).add(a)
+        g['nodes'].add(a)
+        g['nodes'].add(b)
+
+    for fn, g in per_fn.items():
+        nodes = g['nodes']
+        entries = {n for n in nodes if not g['preds'].get(n)}
+        g['entries'] = entries
+        dom = {n: (set(nodes) if n not in entries else {n}) for n in nodes}
+        guard = 0
+        changed = True
+        while changed and guard < 100000:
+            guard += 1
+            changed = False
+            for n in nodes:
+                if n in entries:
+                    continue
+                ps = g['preds'].get(n)
+                if not ps:
+                    continue
+                new_dom = None
+                for p in ps:
+                    pd = dom.get(p, nodes)
+                    new_dom = set(pd) if new_dom is None else (new_dom & pd)
+                new_dom = (new_dom or set()) | {n}
+                if new_dom != dom[n]:
+                    dom[n] = new_dom
+                    changed = True
+        g['dom'] = dom
+    return per_fn
+
+
+def _reachable_from(succ, start):
+    seen, stack = set(), [start]
+    while stack:
+        n = stack.pop()
+        if n in seen:
+            continue
+        seen.add(n)
+        for s in succ.get(n, ()):
+            if s not in seen:
+                stack.append(s)
+    return seen
+
+
+def capacity_status_at_sink(cfg_index, fn, alloc_site, free_ids, sink_id):
+    """The CFG-sensitive replacement for whole-function free invalidation.
+    Returns 'ESTABLISHED' | 'INVALID' | 'AMBIGUOUS' | 'UNKNOWN' (the last only when
+    this function's CFG data is missing/insufficient to reason at all -- treated by
+    the caller the same as INVALID: fail closed, never credit a capacity this
+    module can't actually verify).
+
+    For each free in `free_ids`:
+      - free DOMINATES sink AND alloc DOMINATES free  => that free is guaranteed to
+        execute, in order, between the allocation and this specific write on EVERY
+        path => INVALID (the capacity cannot be trusted at this sink at all).
+      - free is reachable from alloc, and sink is reachable from free (a possible
+        alloc -> free -> sink path exists) but the dominance condition above does
+        NOT hold (so some OTHER path also reaches sink without the free, e.g. a
+        conditional free that rejoins before the write) => AMBIGUOUS.
+      - otherwise (the free lies on no alloc->sink path at all -- e.g. an
+        error-branch free that returns before ever reaching this write, or a free
+        occurring textually/structurally AFTER this sink) => irrelevant to this
+        sink, no effect.
+    INVALID from any one free wins over AMBIGUOUS from another; AMBIGUOUS wins over
+    a clean ESTABLISHED. If `alloc_site` belongs to a DIFFERENT function than `fn`
+    (the extent was propagated across a call edge -- see
+    oob_interprocedural_verdict.py's single-hop mechanism), the callee's own
+    function ENTRY stands in for "the allocation point": a parameter's value is
+    available from entry onward, so entry dominance is the correct question."""
+    if not free_ids:
+        return 'ESTABLISHED'
+    g = cfg_index.get(fn)
+    if not g or sink_id not in g['nodes']:
+        return 'UNKNOWN'
+    dom, succ, nodes = g['dom'], g['succ'], g['nodes']
+    if alloc_site in nodes:
+        alloc_node = alloc_site
+    elif g['entries']:
+        alloc_node = next(iter(g['entries']))   # propagated extent -- use entry
+    else:
+        return 'UNKNOWN'
+    alloc_reach = _reachable_from(succ, alloc_node)
+    status = 'ESTABLISHED'
+    for free_id in free_ids:
+        if free_id not in nodes:
+            continue   # this free isn't even in this function's CFG -- irrelevant
+        sink_dom = dom.get(sink_id, set())
+        free_dom = dom.get(free_id, set())
+        if free_id in sink_dom and alloc_node in free_dom:
+            return 'INVALID'   # guaranteed on every path -- no need to check more
+        if free_id in alloc_reach and sink_id in _reachable_from(succ, free_id):
+            status = 'AMBIGUOUS'   # possible on some path; keep checking others
+    return status
+
+
 def compute_allocation_extents(d):
     """Returns {(function_id, pointer_name): AllocationExtentFact} for every pointer
-    this module can establish a fact for, across the whole file. AMBIGUOUS/freed
-    keys are simply absent (never returned), same "abstain rather than guess"
-    posture as everywhere else in this producer family."""
+    this module can establish a fact for, across the whole file -- WITHOUT free
+    reasoning, which is now CFG-sensitive and per-sink (see
+    `capacity_status_at_sink`), not a property of the extent fact itself. AMBIGUOUS
+    (conflicting direct allocations) keys are simply absent (never returned), same
+    "abstain rather than guess" posture as everywhere else in this family."""
     calls = d.get('calls', [])
     functions = d.get('functions', [])
     assign_calls = [c for c in calls if c.get('name') == '<operator>.assignment']
@@ -107,15 +267,6 @@ def compute_allocation_extents(d):
     # --- direct allocations -------------------------------------------------
     direct = {}       # (fn, ptr) -> fact
     conflicted = set()
-    freed = set()      # (fn, ptr) with a free() call anywhere in the function
-
-    for c in calls:
-        if c.get('name') in FREE_FUNCS or (c.get('method_full_name') in FREE_FUNCS):
-            args = c.get('arguments', [])
-            if args:
-                pname = (args[0].get('code') or '').strip()
-                if re.fullmatch(r'[A-Za-z_]\w*', pname):
-                    freed.add((c.get('enclosing_function_id'), pname))
 
     for c in assign_calls:
         m = ALIAS_RE.match(c.get('code') or '')
@@ -182,10 +333,6 @@ def compute_allocation_extents(d):
             continue
         direct[key] = fact
 
-    for key in list(direct):
-        if key in freed:
-            direct.pop(key)   # free() anywhere in the function invalidates it
-
     # --- alias propagation (fixed point, bounded hops) -----------------------
     extents = dict(direct)
     offset_of = {}   # (fn, ptr) -> (base_key, offset_expr) for pointer-plus-offset
@@ -204,8 +351,6 @@ def compute_allocation_extents(d):
     for _ in range(4):
         changed = False
         for kind, fn, lhs, rhs, extra in raw_assigns:
-            if (fn, lhs) in freed:
-                continue
             if kind == 'alias':
                 src = extents.get((fn, rhs))
                 if src is None:

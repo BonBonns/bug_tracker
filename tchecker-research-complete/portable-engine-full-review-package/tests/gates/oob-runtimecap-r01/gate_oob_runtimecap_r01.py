@@ -22,9 +22,10 @@ def ck(name, cond):
 c = orc.emit_candidates(str(H / "fixtures" / "controls.program.json"))
 by_fn = {x['function_id']: x for x in c}
 
-ck("exactly 6 candidates (literal-malloc, symbolic-malloc, calloc-literal, alias, "
-   "offset, interproc -- the two safe-exact/safe-additive cases correctly excluded)",
-   len(c) == 6)
+ck("exactly 10 candidates (literal-malloc, symbolic-malloc, calloc-literal, alias, "
+   "offset, interproc, plus the 4 additive-safety controls below -- only the "
+   "exact-match case is excluded)",
+   len(c) == 10)
 
 ck("vuln_literal_malloc FLAGGED, capacity=64 (literal malloc)",
    970000000001 in by_fn and by_fn[970000000001]['extent_in_bytes'] == 64)
@@ -77,14 +78,39 @@ ck("safe_exact_match suppressed (capacity expression == width expression, "
    "textually identical -- no guess needed)",
    970000000014 not in by_fn)
 
-# Real second false positive found testing against NSS pkcs11c.c: the capacity
-# variable buffer_len is itself DEFINED as `SharedSecret->len + 4 +
-# SharedInfoLen`, and the write width is exactly the first addend. Also caught,
-# while fixing this, a related bug: the `->` in `SharedSecret->len` was
-# tripping the "contains a minus, might be subtraction" guard.
-ck("safe_additive_term suppressed (buffer_len = SharedSecret->len + 4 + "
-   "SharedInfoLen; the write uses SharedSecret->len, one addend of that sum)",
-   970000000015 not in by_fn)
+# SOUNDNESS CORRECTION (found post-hoc by external review, not by this session's
+# own testing): an earlier version of this producer treated "the write width is
+# one ADDEND of a `+`-only capacity sum" as automatically safe. That is NOT
+# generally sound in C -- unsigned `x + y` can WRAP to something SMALLER than
+# `x` (if `y` is large/attacker-influenced/unchecked), so `capacity = x + y;
+# memcpy(p, src, x)` is exactly the shape this producer exists to catch, not a
+# safe pattern. The additive-term rule has been REMOVED entirely (see the
+# module's own comment at the removal site); only an EXACT-expression match
+# remains an automatic safety rule, since that involves no arithmetic
+# reasoning at all (x <= x, trivially true regardless of overflow/sign/units).
+# The four cases below are the corrected control matrix: all must now FLAG,
+# not silently suppress.
+
+ck("vuln_additive_no_overflow_proof FLAGGED (buffer_len = SharedSecret->len + 4 "
+   "+ SharedInfoLen, an UNCHECKED caller-supplied length; the write uses "
+   "SharedSecret->len -- one addend of an unproven sum is NOT safe, no "
+   "nonnegativity/overflow evidence exists for this pass to use)",
+   970000000015 in by_fn)
+
+ck("vuln_wraparound_shape FLAGGED (cap = SIZE_MAX + 2, then copy(p, SIZE_MAX) -- "
+   "the additive-term rule this replaces would have WRONGLY suppressed this "
+   "exact wraparound shape, since SIZE_MAX is textually 'one addend' of "
+   "'SIZE_MAX + 2'; this is the concrete case proving the old rule unsound)",
+   970000000016 in by_fn)
+
+ck("vuln_unknown_sum FLAGGED (cap = x + y; copy(p, x) -- both symbolic, no "
+   "evidence either addend is safe)",
+   970000000017 in by_fn)
+
+ck("vuln_signed_negative_term FLAGGED (cap = x + adjustment; copy(p, x) -- "
+   "adjustment is a signed int and could be negative, making the sum smaller "
+   "than x)",
+   970000000018 in by_fn)
 
 print(f"OOB_RUNTIMECAP_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)

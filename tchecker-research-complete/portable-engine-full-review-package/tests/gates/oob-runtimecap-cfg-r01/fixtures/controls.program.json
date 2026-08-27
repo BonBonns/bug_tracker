@@ -1,0 +1,74 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {"id": 980000000001, "name": "established_write_then_free", "full_name": "established_write_then_free", "file": "cfg.c", "line": 1, "line_end": 4, "is_external": false, "parameters": []},
+  {"id": 980000000002, "name": "invalid_free_then_write", "full_name": "invalid_free_then_write", "file": "cfg.c", "line": 5, "line_end": 8, "is_external": false, "parameters": []},
+  {"id": 980000000003, "name": "established_error_branch_free_return", "full_name": "established_error_branch_free_return", "file": "cfg.c", "line": 9, "line_end": 16, "is_external": false, "parameters": []},
+  {"id": 980000000004, "name": "ambiguous_conditional_free_joined_write", "full_name": "ambiguous_conditional_free_joined_write", "file": "cfg.c", "line": 17, "line_end": 24, "is_external": false, "parameters": []},
+  {"id": 980000000005, "name": "established_misleading_goto_order", "full_name": "established_misleading_goto_order", "file": "cfg.c", "line": 25, "line_end": 28, "is_external": false, "parameters": []}
+ ],
+ "locals": [],
+ "calls": [
+  {"id": 980000010002, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 980000000001, "file": "cfg.c", "line": 2},
+  {"id": 980000010003, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 980000000001, "file": "cfg.c", "line": 3,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 980000010004, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 980000000001, "file": "cfg.c", "line": 4,
+   "arguments": [{"index": 0, "code": "p"}]},
+
+  {"id": 980000020002, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 980000000002, "file": "cfg.c", "line": 6},
+  {"id": 980000020003, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 980000000002, "file": "cfg.c", "line": 7,
+   "arguments": [{"index": 0, "code": "p"}]},
+  {"id": 980000020004, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 980000000002, "file": "cfg.c", "line": 8,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 980000030002, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 980000000003, "file": "cfg.c", "line": 10},
+  {"id": 980000030003, "name": "<operator>.equals", "code": "err == 1", "enclosing_function_id": 980000000003, "file": "cfg.c", "line": 11},
+  {"id": 980000030005, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 980000000003, "file": "cfg.c", "line": 12,
+   "arguments": [{"index": 0, "code": "p"}]},
+  {"id": 980000030008, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 980000000003, "file": "cfg.c", "line": 15,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 980000040002, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 980000000004, "file": "cfg.c", "line": 18},
+  {"id": 980000040003, "name": "<operator>.equals", "code": "cond == 1", "enclosing_function_id": 980000000004, "file": "cfg.c", "line": 19},
+  {"id": 980000040005, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 980000000004, "file": "cfg.c", "line": 20,
+   "arguments": [{"index": 0, "code": "p"}]},
+  {"id": 980000040008, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 980000000004, "file": "cfg.c", "line": 23,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 980000050002, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 980000000005, "file": "cfg.c", "line": 26},
+  {"id": 980000050003, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 980000000005, "file": "cfg.c", "line": 26,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 980000059999, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 980000000005, "file": "cfg.c", "line": 27,
+   "arguments": [{"index": 0, "code": "p"}]}
+ ],
+ "cfg_edges": [
+  {"function_id": 980000000001, "node_id": 980000010001, "successor_id": 980000010002},
+  {"function_id": 980000000001, "node_id": 980000010002, "successor_id": 980000010003},
+  {"function_id": 980000000001, "node_id": 980000010003, "successor_id": 980000010004},
+
+  {"function_id": 980000000002, "node_id": 980000020001, "successor_id": 980000020002},
+  {"function_id": 980000000002, "node_id": 980000020002, "successor_id": 980000020003},
+  {"function_id": 980000000002, "node_id": 980000020003, "successor_id": 980000020004},
+
+  {"function_id": 980000000003, "node_id": 980000030001, "successor_id": 980000030002},
+  {"function_id": 980000000003, "node_id": 980000030002, "successor_id": 980000030003},
+  {"function_id": 980000000003, "node_id": 980000030003, "successor_id": 980000030004},
+  {"function_id": 980000000003, "node_id": 980000030003, "successor_id": 980000030007},
+  {"function_id": 980000000003, "node_id": 980000030004, "successor_id": 980000030005},
+  {"function_id": 980000000003, "node_id": 980000030005, "successor_id": 980000030006},
+  {"function_id": 980000000003, "node_id": 980000030007, "successor_id": 980000030008},
+
+  {"function_id": 980000000004, "node_id": 980000040001, "successor_id": 980000040002},
+  {"function_id": 980000000004, "node_id": 980000040002, "successor_id": 980000040003},
+  {"function_id": 980000000004, "node_id": 980000040003, "successor_id": 980000040004},
+  {"function_id": 980000000004, "node_id": 980000040003, "successor_id": 980000040006},
+  {"function_id": 980000000004, "node_id": 980000040004, "successor_id": 980000040005},
+  {"function_id": 980000000004, "node_id": 980000040005, "successor_id": 980000040007},
+  {"function_id": 980000000004, "node_id": 980000040006, "successor_id": 980000040007},
+  {"function_id": 980000000004, "node_id": 980000040007, "successor_id": 980000040008},
+
+  {"function_id": 980000000005, "node_id": 980000050001, "successor_id": 980000050002},
+  {"function_id": 980000000005, "node_id": 980000050002, "successor_id": 980000050003},
+  {"function_id": 980000000005, "node_id": 980000050003, "successor_id": 980000059999}
+ ]
+}
