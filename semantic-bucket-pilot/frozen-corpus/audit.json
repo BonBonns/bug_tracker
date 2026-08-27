@@ -1,0 +1,156 @@
+{
+  "by_bucket": {
+    "None": 2,
+    "conflicting_definitions": 16,
+    "external_contract_unknown": 2,
+    "identity_ambiguous": 4,
+    "insufficient_evidence": 85,
+    "relationship_unresolved": 42
+  },
+  "by_cve": {
+    "CVE-2016-1950": 8,
+    "CVE-2019-11745": 44,
+    "CVE-2019-11759": 44,
+    "CVE-2019-17006": 22,
+    "CVE-2021-43527": 3,
+    "Debian #768369": 30
+  },
+  "by_llm_eligible": {
+    "False": 105,
+    "None": 2,
+    "True": 44
+  },
+  "by_primary_reason": {
+    "capacity_relation_not_established": 12,
+    "conflicting_reaching_allocations": 16,
+    "destination_identity_ambiguous": 4,
+    "required_evidence_absent": 85,
+    "unknown_allocator_contract": 2,
+    "write_count_bound_not_established": 30
+  },
+  "by_producer_canonical": {
+    "oob_cursor_write_verdict": 42,
+    "oob_interprocedural_verdict": 4,
+    "oob_runtime_capacity_verdict": 105
+  },
+  "by_route": {
+    "None": 2,
+    "additional_evidence_required": 105,
+    "semantic_contract_review": 2,
+    "semantic_relationship_review": 42
+  },
+  "by_side_vuln_patched": {
+    "patched": 75,
+    "vuln": 76
+  },
+  "by_source_label": {
+    "cve-2016-1950/patched": 4,
+    "cve-2016-1950/vuln": 4,
+    "cve-2019-11745/patched": 22,
+    "cve-2019-11745/vuln": 22,
+    "cve-2019-11759/patched": 22,
+    "cve-2019-11759/vuln": 22,
+    "cve-2019-17006/patched": 11,
+    "cve-2019-17006/vuln": 11,
+    "cve-2021-43527/patched": 1,
+    "cve-2021-43527/vuln": 2,
+    "mjpg-cve-huff/patched": 15,
+    "mjpg-cve-huff/vuln": 15
+  },
+  "by_status": {
+    "abstained": 107,
+    "deterministic_complete": 2,
+    "open_candidate": 42
+  },
+  "dedup": {
+    "conflict_examples": [
+      {
+        "function": "nsc_pbe_key_gen",
+        "line": 3949,
+        "op": "op_0dbe1a0d20235b79",
+        "source": "cve-2019-11745/patched",
+        "verdicts": [
+          {
+            "analysis_status": "open_candidate",
+            "primary_reason_code": "capacity_relation_not_established",
+            "producer": "oob_interprocedural_verdict",
+            "uncertainty_bucket": "relationship_unresolved"
+          },
+          {
+            "analysis_status": "abstained",
+            "primary_reason_code": "required_evidence_absent",
+            "producer": "oob_runtime_capacity_verdict",
+            "uncertainty_bucket": "insufficient_evidence"
+          }
+        ]
+      },
+      {
+        "function": "nsc_pbe_key_gen",
+        "line": 3949,
+        "op": "op_7bc246e520225828",
+        "source": "cve-2019-11745/vuln",
+        "verdicts": [
+          {
+            "analysis_status": "open_candidate",
+            "primary_reason_code": "capacity_relation_not_established",
+            "producer": "oob_interprocedural_verdict",
+            "uncertainty_bucket": "relationship_unresolved"
+          },
+          {
+            "analysis_status": "abstained",
+            "primary_reason_code": "required_evidence_absent",
+            "producer": "oob_runtime_capacity_verdict",
+            "uncertainty_bucket": "insufficient_evidence"
+          }
+        ]
+      },
+      {
+        "function": "nsc_pbe_key_gen",
+        "line": 3864,
+        "op": "op_b3a27523d22cce39",
+        "source": "cve-2019-11759/patched",
+        "verdicts": [
+          {
+            "analysis_status": "open_candidate",
+            "primary_reason_code": "capacity_relation_not_established",
+            "producer": "oob_interprocedural_verdict",
+            "uncertainty_bucket": "relationship_unresolved"
+          },
+          {
+            "analysis_status": "abstained",
+            "primary_reason_code": "required_evidence_absent",
+            "producer": "oob_runtime_capacity_verdict",
+            "uncertainty_bucket": "insufficient_evidence"
+          }
+        ]
+      },
+      {
+        "function": "nsc_pbe_key_gen",
+        "line": 3864,
+        "op": "op_2b3ee24f658391c9",
+        "source": "cve-2019-11759/vuln",
+        "verdicts": [
+          {
+            "analysis_status": "open_candidate",
+            "primary_reason_code": "capacity_relation_not_established",
+            "producer": "oob_interprocedural_verdict",
+            "uncertainty_bucket": "relationship_unresolved"
+          },
+          {
+            "analysis_status": "abstained",
+            "primary_reason_code": "required_evidence_absent",
+            "producer": "oob_runtime_capacity_verdict",
+            "uncertainty_bucket": "insufficient_evidence"
+          }
+        ]
+      }
+    ],
+    "conflicts": 4,
+    "distinct_operations": 151,
+    "merged_away": 41,
+    "raw_records": 192
+  },
+  "n_distinct_operations": 151,
+  "n_raw_records": 192,
+  "universe": "distinct_operations (one canonical record per physical op)"
+}

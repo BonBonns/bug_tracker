@@ -1,0 +1,301 @@
+{
+  "builder_sha256": "74443a3674417b207cef3022286af1f08c7d7eea9f143ce76ddda0208738269f",
+  "counts": {
+    "all_records": 192,
+    "cross_producer_merged": 41,
+    "dedup_conflicts": 4,
+    "distinct_operations": 151,
+    "llm_eligible": 44
+  },
+  "coverage_note": "Only the three reason-emitting producers carry the full accounting + reason layer and contribute analysis records; the other producers emit warning candidates but no accounting records and are out of this corpus by design, not dropped.",
+  "inputs": [
+    {
+      "anchor_commit": "0bf553163",
+      "bug": "NSS bug 1539788",
+      "cve": "CVE-2019-17006",
+      "label": "cve-2019-17006/vuln",
+      "path": "/tmp/cve-2019-17006/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "abstained": 4
+        },
+        "oob_interprocedural_verdict": {
+          "abstained": 3
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 4,
+          "deterministic_complete": 1,
+          "open_candidate": 2
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "0bf553163^",
+      "sha256": "2a42d095153fec3301d16bd9becebc7fcfcb6f011b8d09a24509cb29b138e80b",
+      "side": "vuln",
+      "source_file": "lib/freebl/rsapkcs.c"
+    },
+    {
+      "anchor_commit": "0bf553163",
+      "bug": "NSS bug 1539788",
+      "cve": "CVE-2019-17006",
+      "label": "cve-2019-17006/patched",
+      "path": "/tmp/cve-2019-17006/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "abstained": 4
+        },
+        "oob_interprocedural_verdict": {
+          "abstained": 3
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 4,
+          "deterministic_complete": 1,
+          "open_candidate": 2
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "0bf553163",
+      "sha256": "f1e092a47827cb27879006b03b287944032b05ac3dbdecc2b0ff023f9cd53918",
+      "side": "patched",
+      "source_file": "lib/freebl/rsapkcs.c"
+    },
+    {
+      "anchor_commit": "a06aeb25",
+      "bug": "mozjpeg Huffman local buffer overrun",
+      "cve": "Debian #768369",
+      "label": "mjpg-cve-huff/vuln",
+      "path": "/tmp/mjpg-cve-huff/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "open_candidate": 15
+        },
+        "oob_interprocedural_verdict": {},
+        "oob_runtime_capacity_verdict": {}
+      },
+      "repo": "github.com/mozilla/mozjpeg",
+      "revision": "a06aeb25^",
+      "sha256": "d0abea4a87684342cd1bcb7da5d08d68de37e2a84e4316db9a7723ac1b1aa638",
+      "side": "vuln",
+      "source_file": "jchuff.c"
+    },
+    {
+      "anchor_commit": "a06aeb25",
+      "bug": "mozjpeg Huffman local buffer overrun",
+      "cve": "Debian #768369",
+      "label": "mjpg-cve-huff/patched",
+      "path": "/tmp/mjpg-cve-huff/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "open_candidate": 15
+        },
+        "oob_interprocedural_verdict": {},
+        "oob_runtime_capacity_verdict": {}
+      },
+      "repo": "github.com/mozilla/mozjpeg",
+      "revision": "a06aeb25",
+      "sha256": "6fcde43e70d21581306fff53c59cf73f44f963fee504396a7b3606e57a6d4e82",
+      "side": "patched",
+      "source_file": "jchuff.c"
+    },
+    {
+      "anchor_commit": "0271ef66e",
+      "bug": "NSS bug 1586176",
+      "cve": "CVE-2019-11745",
+      "label": "cve-2019-11745/vuln",
+      "path": "/tmp/cve-2019-11745/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 7,
+          "open_candidate": 1
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 21,
+          "open_candidate": 1
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "0271ef66e^",
+      "sha256": "8d85b82bf4df27934a14c0c3f7bce919e3c119fff56a60304249e21100471c04",
+      "side": "vuln",
+      "source_file": "lib/softoken/pkcs11c.c"
+    },
+    {
+      "anchor_commit": "0271ef66e",
+      "bug": "NSS bug 1586176",
+      "cve": "CVE-2019-11745",
+      "label": "cve-2019-11745/patched",
+      "path": "/tmp/cve-2019-11745/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 7,
+          "open_candidate": 1
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 21,
+          "open_candidate": 1
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "0271ef66e",
+      "sha256": "9e0c525dd0e802d15249b8ee67d28412fb639cd7ea9189aef8092f1f23328c75",
+      "side": "patched",
+      "source_file": "lib/softoken/pkcs11c.c"
+    },
+    {
+      "anchor_commit": "994c45e80",
+      "bug": "NSS bug 1245528",
+      "cve": "CVE-2016-1950",
+      "label": "cve-2016-1950/vuln",
+      "path": "/tmp/cve-2016-1950/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "abstained": 2
+        },
+        "oob_interprocedural_verdict": {},
+        "oob_runtime_capacity_verdict": {
+          "abstained": 2
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "994c45e80^",
+      "sha256": "758f8792983f8e3e6d3a79983969d866cba8934924de8cf01c0b2f9f7a5aae1f",
+      "side": "vuln",
+      "source_file": "lib/util/secasn1d.c"
+    },
+    {
+      "anchor_commit": "994c45e80",
+      "bug": "NSS bug 1245528",
+      "cve": "CVE-2016-1950",
+      "label": "cve-2016-1950/patched",
+      "path": "/tmp/cve-2016-1950/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {
+          "abstained": 2
+        },
+        "oob_interprocedural_verdict": {},
+        "oob_runtime_capacity_verdict": {
+          "abstained": 2
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "994c45e80",
+      "sha256": "b53495c4b4423a94b05d0820117d66367737ec121d316cc94f9e4899e68a9ef5",
+      "side": "patched",
+      "source_file": "lib/util/secasn1d.c"
+    },
+    {
+      "anchor_commit": "73a449016",
+      "bug": "NSS bug 1737470",
+      "cve": "CVE-2021-43527",
+      "label": "cve-2021-43527/vuln",
+      "path": "/tmp/cve-2021-43527/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 2
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 2
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "73a449016^",
+      "sha256": "697fbbf1f447276c7655f499a4a847df7dd9a487e110229c715c472311062ae4",
+      "side": "vuln",
+      "source_file": "lib/cryptohi/secvfy.c"
+    },
+    {
+      "anchor_commit": "73a449016",
+      "bug": "NSS bug 1737470",
+      "cve": "CVE-2021-43527",
+      "label": "cve-2021-43527/patched",
+      "path": "/tmp/cve-2021-43527/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 1
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 1
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "73a449016",
+      "sha256": "98a728792b044bd8788a0adb3f9d5e5a9b316fcf4a59a4b611ae8b488976f1dd",
+      "side": "patched",
+      "source_file": "lib/cryptohi/secvfy.c"
+    },
+    {
+      "anchor_commit": "deb6103d0",
+      "bug": "NSS bug 1577953",
+      "cve": "CVE-2019-11759",
+      "label": "cve-2019-11759/vuln",
+      "path": "/tmp/cve-2019-11759/vuln/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 7,
+          "open_candidate": 1
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 21,
+          "open_candidate": 1
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "deb6103d0^",
+      "sha256": "1150682cc3b296b5cc0c7db1ea52c94f52a1722733b7b4ebfd702ada977d2134",
+      "side": "vuln",
+      "source_file": "lib/softoken/pkcs11c.c"
+    },
+    {
+      "anchor_commit": "deb6103d0",
+      "bug": "NSS bug 1577953",
+      "cve": "CVE-2019-11759",
+      "label": "cve-2019-11759/patched",
+      "path": "/tmp/cve-2019-11759/patched/scan/work/cpp.json",
+      "producers": {
+        "oob_cursor_write_verdict": {},
+        "oob_interprocedural_verdict": {
+          "abstained": 7,
+          "open_candidate": 1
+        },
+        "oob_runtime_capacity_verdict": {
+          "abstained": 21,
+          "open_candidate": 1
+        }
+      },
+      "repo": "github.com/mozilla/nss",
+      "revision": "deb6103d0",
+      "sha256": "b74e0a0cdc8dac63bce9e1b2f3f4540d81a9168356aa397df9fd26ab574fff1d",
+      "side": "patched",
+      "source_file": "lib/softoken/pkcs11c.c"
+    }
+  ],
+  "missing_inputs": [],
+  "producer_sha256": {
+    "oob_cursor_write_verdict": "d418f7fc5f1508f30a3452245cc51ff8b7666212d230cc3949dc4de9b33c6177",
+    "oob_interprocedural_verdict": "ad57bc707922b9470be4d04693c2f1e6cab440cfca3c0a4e1c5d34212ae4f9d4",
+    "oob_runtime_capacity_verdict": "da91b64fd28a5cc20103ddb87a0b7e83524533c08d98a90db548219a8680fde9"
+  },
+  "reason_emitting_producers": [
+    "oob_runtime_capacity_verdict",
+    "oob_cursor_write_verdict",
+    "oob_interprocedural_verdict"
+  ],
+  "scanner_commit": "b704aab26e3b7872d21350816ac9d60aaf0e4d3f",
+  "schema": {
+    "analysis_record_sha256": "45d5056838b436e0adbe415605ec23b9e2a6d60976107e5b8889447bb4367d8a",
+    "analysis_record_version": "1",
+    "facts_schema": "portable-program-facts/0.3"
+  },
+  "toolchain": {
+    "facts_schema": "portable-program-facts/0.3",
+    "frontend": "joern-c2cpg",
+    "frontend_version": "4.0.608",
+    "note": "Fact files carry frontend version + schema but NOT the source repo revision (report.json repo_rev_informational == 'UNVERSIONED'); source revisions come from moz-scan-paired-cve-validation-round1.md and are recorded per input below. To regenerate an input: git clone the repo, check out the anchor commit (patched) or its parent (vuln), then run scan_pkg.sh over the checkout with joern-c2cpg 4.0.608.",
+    "scan_pipeline": "tchecker-research-complete/gates/scan_pkg.sh"
+  }
+}
