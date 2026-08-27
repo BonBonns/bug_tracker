@@ -1,0 +1,160 @@
+{
+  "by_condition": {
+    "A": {
+      "committed_wrong": 2,
+      "correct": 3
+    },
+    "B": {
+      "committed_wrong": 3,
+      "correct": 2
+    },
+    "C": {
+      "abstain": 2,
+      "committed_wrong": 1,
+      "correct": 2
+    }
+  },
+  "development_only": true,
+  "missing_blind_ids": [],
+  "n_missing": 0,
+  "n_responses": 15,
+  "note": "Mechanics validation only. Five development cases; NOT an accuracy result and excluded from all confirmatory statistics.",
+  "parse_ok": 15,
+  "rows": [
+    {
+      "blind_id": "rev_696e4eded408",
+      "case": "mjpg_encode_vuln",
+      "classification": "safe",
+      "condition": "A",
+      "ground_truth": "vulnerable",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_1630345d8136",
+      "case": "mjpg_encode_vuln",
+      "classification": "safe",
+      "condition": "B",
+      "ground_truth": "vulnerable",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_d0f125e96e8b",
+      "case": "mjpg_encode_vuln",
+      "classification": "unknown",
+      "condition": "C",
+      "ground_truth": "vulnerable",
+      "outcome": "abstain",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_531d39ab01b3",
+      "case": "nsc_pbe_unresolved",
+      "classification": "unknown",
+      "condition": "A",
+      "ground_truth": "unresolved",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_ab6267e67467",
+      "case": "nsc_pbe_unresolved",
+      "classification": "vulnerable",
+      "condition": "B",
+      "ground_truth": "unresolved",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_e68629f17b35",
+      "case": "nsc_pbe_unresolved",
+      "classification": "unknown",
+      "condition": "C",
+      "ground_truth": "unresolved",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_a95857c2da3d",
+      "case": "rsa_patched",
+      "classification": "safe",
+      "condition": "A",
+      "ground_truth": "safe",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_8e82f03d1622",
+      "case": "rsa_patched",
+      "classification": "safe",
+      "condition": "B",
+      "ground_truth": "safe",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_b2be11759236",
+      "case": "rsa_patched",
+      "classification": "unknown",
+      "condition": "C",
+      "ground_truth": "safe",
+      "outcome": "abstain",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_d3ba7ac240b0",
+      "case": "rsa_vuln",
+      "classification": "safe",
+      "condition": "A",
+      "ground_truth": "vulnerable",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_d64f1df88fb7",
+      "case": "rsa_vuln",
+      "classification": "safe",
+      "condition": "B",
+      "ground_truth": "vulnerable",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_4e9fb3391cdd",
+      "case": "rsa_vuln",
+      "classification": "safe",
+      "condition": "C",
+      "ground_truth": "vulnerable",
+      "outcome": "committed_wrong",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_1e15794dd514",
+      "case": "sftk_kdf_safe",
+      "classification": "safe",
+      "condition": "A",
+      "ground_truth": "safe",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_98081f611d1a",
+      "case": "sftk_kdf_safe",
+      "classification": "safe",
+      "condition": "B",
+      "ground_truth": "safe",
+      "outcome": "correct",
+      "parse_error": null
+    },
+    {
+      "blind_id": "rev_0c200c8024bd",
+      "case": "sftk_kdf_safe",
+      "classification": "safe",
+      "condition": "C",
+      "ground_truth": "safe",
+      "outcome": "correct",
+      "parse_error": null
+    }
+  ]
+}

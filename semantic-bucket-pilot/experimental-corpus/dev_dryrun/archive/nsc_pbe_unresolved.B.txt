@@ -1,0 +1,61 @@
+```c
+// pkcs11c.c (function begins at line 3917)
+nsc_pbe_key_gen(NSSPKCS5PBEParameter *pkcs5_pbe, CK_MECHANISM_PTR pMechanism,
+                void *buf, CK_ULONG *key_length, PRBool faulty3DES)
+{
+    SECItem *pbe_key = NULL, iv, pwitem;
+    CK_PBE_PARAMS *pbe_params = NULL;
+    CK_PKCS5_PBKD2_PARAMS *pbkd2_params = NULL;
+
+    *key_length = 0;
+    iv.data = NULL;
+    iv.len = 0;
+
+    if (pMechanism->mechanism == CKM_PKCS5_PBKD2) {
+        if (BAD_PARAM_CAST(pMechanism, sizeof(CK_PKCS5_PBKD2_PARAMS))) {
+            return CKR_MECHANISM_PARAM_INVALID;
+        }
+        pbkd2_params = (CK_PKCS5_PBKD2_PARAMS *)pMechanism->pParameter;
+        pwitem.data = (unsigned char *)pbkd2_params->pPassword;
+        /* was this a typo in the PKCS #11 spec? */
+        pwitem.len = *pbkd2_params->ulPasswordLen;
+    } else {
+        if (BAD_PARAM_CAST(pMechanism, sizeof(CK_PBE_PARAMS))) {
+            return CKR_MECHANISM_PARAM_INVALID;
+        }
+        pbe_params = (CK_PBE_PARAMS *)pMechanism->pParameter;
+        pwitem.data = (unsigned char *)pbe_params->pPassword;
+        pwitem.len = pbe_params->ulPasswordLen;
+    }
+    pbe_key = nsspkcs5_ComputeKeyAndIV(pkcs5_pbe, &pwitem, &iv, faulty3DES);
+    if (pbe_key == NULL) {
+        return CKR_HOST_MEMORY;
+    }
+
+    PORT_Memcpy(buf, pbe_key->data, pbe_key->len);
+    *key_length = pbe_key->len;
+    SECITEM_ZfreeItem(pbe_key, PR_TRUE);
+    pbe_key = NULL;
+
+    if (iv.data) {
+        if (pbe_params && pbe_params->pInitVector != NULL) {
+            PORT_Memcpy(pbe_params->pInitVector, iv.data, iv.len);
+        }
+        PORT_Free(iv.data);
+    }
+
+    return CKR_OK;
+}
+```
+
+Highlighted operation: a write through `buf` in `nsc_pbe_key_gen` (buffer-write the analyzer could not prove in-bounds), at pkcs11c.c:3949.
+
+Established facts (from static analysis):
+  - destination: buf
+  - destination capacity: 256 bytes (resolved)
+  - write length: pbe_key->len
+  - write performed by: memcpy (contract: ISO C standard library)
+  - located at pkcs11c.c:3949 in nsc_pbe_key_gen
+
+TChecker identified the highlighted operation and established the facts listed above, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+Respond ONLY with a JSON object of the form {"classification": "safe|vulnerable|unknown", "reasoning": "..."}.

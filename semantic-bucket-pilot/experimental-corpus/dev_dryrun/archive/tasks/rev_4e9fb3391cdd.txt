@@ -1,0 +1,130 @@
+```c
+// rsapkcs.c (function begins at line 112)
+rsa_FormatOneBlock(unsigned modulusLen,
+                   RSA_BlockType blockType,
+                   SECItem *data)
+{
+    unsigned char *block;
+    unsigned char *bp;
+    int padLen;
+    int i, j;
+    SECStatus rv;
+
+    block = (unsigned char *)PORT_Alloc(modulusLen);
+    if (block == NULL)
+        return NULL;
+
+    bp = block;
+
+    /*
+     * All RSA blocks start with two octets:
+     *  0x00 || BlockType
+     */
+    *bp++ = RSA_BLOCK_FIRST_OCTET;
+    *bp++ = (unsigned char)blockType;
+
+    switch (blockType) {
+
+        /*
+       * Blocks intended for private-key operation.
+       */
+        case RSA_BlockPrivate: /* preferred method */
+            /*
+         * 0x00 || BT || Pad || 0x00 || ActualData
+         *   1      1   padLen    1      data->len
+         * Pad is either all 0x00 or all 0xff bytes, depending on blockType.
+         */
+            padLen = modulusLen - data->len - 3;
+            PORT_Assert(padLen >= RSA_BLOCK_MIN_PAD_LEN);
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);
+            break;
+
+        /*
+         * Blocks intended for public-key operation.
+         */
+        case RSA_BlockPublic:
+            /*
+             * 0x00 || BT || Pad || 0x00 || ActualData
+             *   1      1   padLen    1      data->len
+             * Pad is all non-zero random bytes.
+             *
+             * Build the block left to right.
+             * Fill the entire block from Pad to the end with random bytes.
+             * Use the bytes after Pad as a supply of extra random bytes from
+             * which to find replacements for the zero bytes in Pad.
+             * If we need more than that, refill the bytes after Pad with
+             * new random bytes as necessary.
+             */
+            padLen = modulusLen - (data->len + 3);
+            PORT_Assert(padLen >= RSA_BLOCK_MIN_PAD_LEN);
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            j = modulusLen - 2;
+            rv = RNG_GenerateGlobalRandomBytes(bp, j);
+            if (rv == SECSuccess) {
+                for (i = 0; i < padLen;) {
+                    unsigned char repl;
+                    /* Pad with non-zero random data. */
+                    if (bp[i] != RSA_BLOCK_AFTER_PAD_OCTET) {
+                        ++i;
+                        continue;
+                    }
+                    if (j <= padLen) {
+                        rv = RNG_GenerateGlobalRandomBytes(bp + padLen,
+                                                           modulusLen - (2 + padLen));
+                        if (rv != SECSuccess)
+                            break;
+                        j = modulusLen - 2;
+                    }
+                    do {
+                        repl = bp[--j];
+                    } while (repl == RSA_BLOCK_AFTER_PAD_OCTET && j > padLen);
+                    if (repl != RSA_BLOCK_AFTER_PAD_OCTET) {
+                        bp[i++] = repl;
+                    }
+                }
+            }
+            if (rv != SECSuccess) {
+                PORT_Free(block);
+                PORT_SetError(SEC_ERROR_LIBRARY_FAILURE);
+                return NULL;
+            }
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);
+            break;
+
+        default:
+            PORT_Assert(0);
+            PORT_Free(block);
+            return NULL;
+    }
+
+    return block;
+}
+```
+
+Highlighted operation: a write through `bp` in `rsa_FormatOneBlock` (buffer-write the analyzer could not prove in-bounds), at rsapkcs.c:155.
+
+Established facts (from static analysis):
+  - destination: bp
+  - destination capacity: modulusLen (symbolic, not a literal)
+  - write length: data->len
+  - capacity provenance: inherited via alias of block
+  - write performed by: memcpy (contract: ISO C standard library)
+  - located at rsapkcs.c:155 in rsa_FormatOneBlock
+
+Uncertainty category: relationship unresolved
+Focused question: Does the code guarantee that the number of bytes written by the highlighted operation is no greater than the destination buffer's allocated capacity?
+
+TChecker identified the highlighted operation and established the facts listed above, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+Respond ONLY with a JSON object of the form {"classification": "safe|vulnerable|unknown", "reasoning": "..."}.

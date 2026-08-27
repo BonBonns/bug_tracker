@@ -1,0 +1,92 @@
+```c
+// pkcs11c.c (function begins at line 6529)
+sftk_compute_ANSI_X9_63_kdf(CK_BYTE **key, CK_ULONG key_len, SECItem *SharedSecret,
+                            CK_BYTE_PTR SharedInfo, CK_ULONG SharedInfoLen,
+                            SECStatus Hash(unsigned char *, const unsigned char *, PRUint32),
+                            CK_ULONG HashLen)
+{
+    unsigned char *buffer = NULL, *output_buffer = NULL;
+    PRUint32 buffer_len, max_counter, i;
+    SECStatus rv;
+    CK_RV crv;
+
+    /* Check that key_len isn't too long.  The maximum key length could be
+     * greatly increased if the code below did not limit the 4-byte counter
+     * to a maximum value of 255. */
+    if (key_len > 254 * HashLen)
+        return CKR_ARGUMENTS_BAD;
+
+    if (SharedInfo == NULL)
+        SharedInfoLen = 0;
+
+    buffer_len = SharedSecret->len + 4 + SharedInfoLen;
+    buffer = (CK_BYTE *)PORT_Alloc(buffer_len);
+    if (buffer == NULL) {
+        crv = CKR_HOST_MEMORY;
+        goto loser;
+    }
+
+    max_counter = key_len / HashLen;
+    if (key_len > max_counter * HashLen)
+        max_counter++;
+
+    output_buffer = (CK_BYTE *)PORT_Alloc(max_counter * HashLen);
+    if (output_buffer == NULL) {
+        crv = CKR_HOST_MEMORY;
+        goto loser;
+    }
+
+    /* Populate buffer with SharedSecret || Counter || [SharedInfo]
+     * where Counter is 0x00000001 */
+    PORT_Memcpy(buffer, SharedSecret->data, SharedSecret->len);
+    buffer[SharedSecret->len] = 0;
+    buffer[SharedSecret->len + 1] = 0;
+    buffer[SharedSecret->len + 2] = 0;
+    buffer[SharedSecret->len + 3] = 1;
+    if (SharedInfo) {
+        PORT_Memcpy(&buffer[SharedSecret->len + 4], SharedInfo, SharedInfoLen);
+    }
+
+    for (i = 0; i < max_counter; i++) {
+        rv = Hash(&output_buffer[i * HashLen], buffer, buffer_len);
+        if (rv != SECSuccess) {
+            /* 'Hash' should not fail. */
+            crv = CKR_FUNCTION_FAILED;
+            goto loser;
+        }
+
+        /* Increment counter (assumes max_counter < 255) */
+        buffer[SharedSecret->len + 3]++;
+    }
+
+    PORT_ZFree(buffer, buffer_len);
+    if (key_len < max_counter * HashLen) {
+        PORT_Memset(output_buffer + key_len, 0, max_counter * HashLen - key_len);
+    }
+    *key = output_buffer;
+
+    return CKR_OK;
+
+loser:
+    if (buffer) {
+        PORT_ZFree(buffer, buffer_len);
+    }
+    if (output_buffer) {
+        PORT_ZFree(output_buffer, max_counter * HashLen);
+    }
+    return crv;
+}
+```
+
+Highlighted operation: a write through `buffer` in `sftk_compute_ANSI_X9_63_kdf` (buffer-write the analyzer could not prove in-bounds), at pkcs11c.c:6567.
+
+Established facts (from static analysis):
+  - destination: buffer
+  - destination capacity: buffer_len (symbolic, not a literal)
+  - write length: SharedSecret->len
+  - capacity provenance: from a direct allocation in this function
+  - write performed by: memcpy (contract: ISO C standard library)
+  - located at pkcs11c.c:6567 in sftk_compute_ANSI_X9_63_kdf
+
+TChecker identified the highlighted operation and established the facts listed above, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+Respond ONLY with a JSON object of the form {"classification": "safe|vulnerable|unknown", "reasoning": "..."}.

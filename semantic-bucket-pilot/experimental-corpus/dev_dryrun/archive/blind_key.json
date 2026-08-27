@@ -1,0 +1,77 @@
+{
+  "rev_0c200c8024bd": {
+    "case": "sftk_kdf_safe",
+    "condition": "C",
+    "ground_truth": "safe"
+  },
+  "rev_1630345d8136": {
+    "case": "mjpg_encode_vuln",
+    "condition": "B",
+    "ground_truth": "vulnerable"
+  },
+  "rev_1e15794dd514": {
+    "case": "sftk_kdf_safe",
+    "condition": "A",
+    "ground_truth": "safe"
+  },
+  "rev_4e9fb3391cdd": {
+    "case": "rsa_vuln",
+    "condition": "C",
+    "ground_truth": "vulnerable"
+  },
+  "rev_531d39ab01b3": {
+    "case": "nsc_pbe_unresolved",
+    "condition": "A",
+    "ground_truth": "unresolved"
+  },
+  "rev_696e4eded408": {
+    "case": "mjpg_encode_vuln",
+    "condition": "A",
+    "ground_truth": "vulnerable"
+  },
+  "rev_8e82f03d1622": {
+    "case": "rsa_patched",
+    "condition": "B",
+    "ground_truth": "safe"
+  },
+  "rev_98081f611d1a": {
+    "case": "sftk_kdf_safe",
+    "condition": "B",
+    "ground_truth": "safe"
+  },
+  "rev_a95857c2da3d": {
+    "case": "rsa_patched",
+    "condition": "A",
+    "ground_truth": "safe"
+  },
+  "rev_ab6267e67467": {
+    "case": "nsc_pbe_unresolved",
+    "condition": "B",
+    "ground_truth": "unresolved"
+  },
+  "rev_b2be11759236": {
+    "case": "rsa_patched",
+    "condition": "C",
+    "ground_truth": "safe"
+  },
+  "rev_d0f125e96e8b": {
+    "case": "mjpg_encode_vuln",
+    "condition": "C",
+    "ground_truth": "vulnerable"
+  },
+  "rev_d3ba7ac240b0": {
+    "case": "rsa_vuln",
+    "condition": "A",
+    "ground_truth": "vulnerable"
+  },
+  "rev_d64f1df88fb7": {
+    "case": "rsa_vuln",
+    "condition": "B",
+    "ground_truth": "vulnerable"
+  },
+  "rev_e68629f17b35": {
+    "case": "nsc_pbe_unresolved",
+    "condition": "C",
+    "ground_truth": "unresolved"
+  }
+}

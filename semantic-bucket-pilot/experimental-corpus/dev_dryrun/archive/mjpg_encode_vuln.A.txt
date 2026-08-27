@@ -1,0 +1,116 @@
+```c
+// jchuff.c (function begins at line 469)
+encode_one_block (working_state * state, JCOEFPTR block, int last_dc_val,
+                  c_derived_tbl *dctbl, c_derived_tbl *actbl)
+{
+  int temp, temp2, temp3;
+  int nbits;
+  int r, code, size;
+  JOCTET _buffer[BUFSIZE], *buffer;
+  size_t put_buffer;  int put_bits;
+  int code_0xf0 = actbl->ehufco[0xf0], size_0xf0 = actbl->ehufsi[0xf0];
+  size_t bytes, bytestocopy;  int localbuf = 0;
+
+  put_buffer = state->cur.put_buffer;
+  put_bits = state->cur.put_bits;
+  LOAD_BUFFER()
+
+  /* Encode the DC coefficient difference per section F.1.2.1 */
+
+  temp = temp2 = block[0] - last_dc_val;
+
+ /* This is a well-known technique for obtaining the absolute value without a
+  * branch.  It is derived from an assembly language technique presented in
+  * "How to Optimize for the Pentium Processors", Copyright (c) 1996, 1997 by
+  * Agner Fog.
+  */
+  temp3 = temp >> (CHAR_BIT * sizeof(int) - 1);
+  temp ^= temp3;
+  temp -= temp3;
+
+  /* For a negative input, want temp2 = bitwise complement of abs(input) */
+  /* This code assumes we are on a two's complement machine */
+  temp2 += temp3;
+
+  /* Find the number of bits needed for the magnitude of the coefficient */
+  nbits = JPEG_NBITS(temp);
+
+  /* Emit the Huffman-coded symbol for the number of bits */
+  code = dctbl->ehufco[nbits];
+  size = dctbl->ehufsi[nbits];
+  PUT_BITS(code, size)
+  CHECKBUF15()
+
+  /* Mask off any extra bits in code */
+  temp2 &= (((INT32) 1)<<nbits) - 1;
+
+  /* Emit that number of bits of the value, if positive, */
+  /* or the complement of its magnitude, if negative. */
+  PUT_BITS(temp2, nbits)
+  CHECKBUF15()
+
+  /* Encode the AC coefficients per section F.1.2.2 */
+
+  r = 0;                        /* r = run length of zeros */
+
+/* Manually unroll the k loop to eliminate the counter variable.  This
+ * improves performance greatly on systems with a limited number of
+ * registers (such as x86.)
+ */
+#define kloop(jpeg_natural_order_of_k) {  \
+  if ((temp = block[jpeg_natural_order_of_k]) == 0) { \
+    r++; \
+  } else { \
+    temp2 = temp; \
+    /* Branch-less absolute value, bitwise complement, etc., same as above */ \
+    temp3 = temp >> (CHAR_BIT * sizeof(int) - 1); \
+    temp ^= temp3; \
+    temp -= temp3; \
+    temp2 += temp3; \
+    nbits = JPEG_NBITS_NONZERO(temp); \
+    /* if run length > 15, must emit special run-length-16 codes (0xF0) */ \
+    while (r > 15) { \
+      EMIT_BITS(code_0xf0, size_0xf0) \
+      r -= 16; \
+    } \
+    /* Emit Huffman symbol for run length / number of bits */ \
+    temp3 = (r << 4) + nbits;  \
+    code = actbl->ehufco[temp3]; \
+    size = actbl->ehufsi[temp3]; \
+    EMIT_CODE(code, size) \
+    r = 0;  \
+  } \
+}
+
+  /* One iteration for each value in jpeg_natural_order[] */
+  kloop(1);   kloop(8);   kloop(16);  kloop(9);   kloop(2);   kloop(3);
+  kloop(10);  kloop(17);  kloop(24);  kloop(32);  kloop(25);  kloop(18);
+  kloop(11);  kloop(4);   kloop(5);   kloop(12);  kloop(19);  kloop(26);
+  kloop(33);  kloop(40);  kloop(48);  kloop(41);  kloop(34);  kloop(27);
+  kloop(20);  kloop(13);  kloop(6);   kloop(7);   kloop(14);  kloop(21);
+  kloop(28);  kloop(35);  kloop(42);  kloop(49);  kloop(56);  kloop(57);
+  kloop(50);  kloop(43);  kloop(36);  kloop(29);  kloop(22);  kloop(15);
+  kloop(23);  kloop(30);  kloop(37);  kloop(44);  kloop(51);  kloop(58);
+  kloop(59);  kloop(52);  kloop(45);  kloop(38);  kloop(31);  kloop(39);
+  kloop(46);  kloop(53);  kloop(60);  kloop(61);  kloop(54);  kloop(47);
+  kloop(55);  kloop(62);  kloop(63);
+
+  /* If the last coef(s) were zero, emit an end-of-block code */
+  if (r > 0) {
+    code = actbl->ehufco[0];
+    size = actbl->ehufsi[0];
+    EMIT_BITS(code, size)
+  }
+
+  state->cur.put_buffer = put_buffer;
+  state->cur.put_bits = put_bits;
+  STORE_BUFFER()
+
+  return TRUE;
+}
+```
+
+Highlighted operation: a write through `buffer` in `encode_one_block` (buffer-write the analyzer could not prove in-bounds), at jchuff.c:508.
+
+Classify this operation as safe, vulnerable, or unknown, and explain your reasoning.
+Respond ONLY with a JSON object of the form {"classification": "safe|vulnerable|unknown", "reasoning": "..."}.
