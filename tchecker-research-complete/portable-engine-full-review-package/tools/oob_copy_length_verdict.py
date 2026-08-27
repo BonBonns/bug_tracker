@@ -74,17 +74,36 @@ BYTE_ELEM_TYPES = {'char', 'unsigned char', 'signed char', 'uint8_t', 'PRUint8',
                     'BYTE', 'u_char', 'uint8'}
 
 
+def _eval_const_int_expr(expr):
+    """Fold a simple constant-arithmetic array-size expression to an int, e.g. the
+    common macro-expanded shape `(64*2)+8` (mozjpeg's `JOCTET _buffer[BUFSIZE]` with
+    `#define BUFSIZE (DCTSIZE2*2)+8` -- confirmed on REAL code: without this, the
+    array is invisible to this producer, since a bare-\\d+-only regex simply doesn't
+    match). Restricted to digits/whitespace/+-*/() BEFORE ever calling eval, so this
+    can't become a code-injection surface via attacker-controlled source text.
+    Returns None (abstain) on anything not cleanly a small non-negative constant
+    expression."""
+    e = (expr or '').strip()
+    if not e or not re.fullmatch(r'[\d\s+\-*/()]+', e):
+        return None
+    try:
+        v = eval(e, {'__builtins__': {}}, {})
+    except Exception:
+        return None
+    return v if isinstance(v, int) and v >= 0 else None
+
+
 def _byte_array_elem_count(type_full_name):
     """Element count N for a fixed-size array local, but ONLY when the element type
     is one byte wide (so N elements == N bytes, the unit a copy length is in).
     Anything else returns None -- abstain, don't guess at a unit conversion."""
-    m = re.match(r'^\s*([A-Za-z_][\w ]*?)\s*\[\s*(\d+)\s*\]\s*$', type_full_name or '')
+    m = re.match(r'^\s*([A-Za-z_][\w ]*?)\s*\[\s*([\d\s+\-*/()]+)\s*\]\s*$', type_full_name or '')
     if not m:
         return None
     elem_type = m.group(1).strip()
     if elem_type not in BYTE_ELEM_TYPES:
         return None
-    return int(m.group(2))
+    return _eval_const_int_expr(m.group(2))
 
 
 def emit_candidates(prefix):

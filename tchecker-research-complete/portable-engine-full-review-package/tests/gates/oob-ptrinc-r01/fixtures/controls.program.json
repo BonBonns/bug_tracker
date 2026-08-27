@@ -1,0 +1,187 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {
+   "id": 920000000001,
+   "name": "vuln_unbounded",
+   "full_name": "vuln_unbounded",
+   "file": "pi.c",
+   "line": 1,
+   "line_end": 4,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 920000000002,
+   "name": "guarded_sizeof",
+   "full_name": "guarded_sizeof",
+   "file": "pi.c",
+   "line": 5,
+   "line_end": 9,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 920000000003,
+   "name": "out_of_scope_no_alias",
+   "full_name": "out_of_scope_no_alias",
+   "file": "pi.c",
+   "line": 10,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 920000000004,
+   "name": "out_of_scope_int_array",
+   "full_name": "out_of_scope_int_array",
+   "file": "pi.c",
+   "line": 13,
+   "line_end": 16,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 920000000005,
+   "name": "asserted_only_still_flags",
+   "full_name": "asserted_only_still_flags",
+   "file": "pi.c",
+   "line": 17,
+   "line_end": 21,
+   "is_external": false,
+   "parameters": []
+  }
+ ],
+ "locals": [
+  {
+   "id": 920000000101,
+   "name": "_buffer",
+   "type_full_name": "JOCTET[8]",
+   "method_id": 920000000001,
+   "code": "JOCTET _buffer[8]",
+   "line": 2
+  },
+  {
+   "id": 920000000102,
+   "name": "_buffer",
+   "type_full_name": "JOCTET[8]",
+   "method_id": 920000000002,
+   "code": "JOCTET _buffer[8]",
+   "line": 6
+  },
+  {
+   "id": 920000000104,
+   "name": "_buffer",
+   "type_full_name": "int[8]",
+   "method_id": 920000000004,
+   "code": "int _buffer[8]",
+   "line": 14
+  },
+  {
+   "id": 920000000105,
+   "name": "_buffer",
+   "type_full_name": "JOCTET[8]",
+   "method_id": 920000000005,
+   "code": "JOCTET _buffer[8]",
+   "line": 18
+  }
+ ],
+ "calls": [
+  {
+   "id": 920000000201,
+   "name": "<operator>.assignment",
+   "code": "buffer = _buffer",
+   "enclosing_function_id": 920000000001,
+   "file": "pi.c",
+   "line": 3
+  },
+  {
+   "id": 920000000202,
+   "name": "<operator>.assignment",
+   "code": "*buffer++ = c",
+   "enclosing_function_id": 920000000001,
+   "file": "pi.c",
+   "line": 3
+  },
+  {
+   "id": 920000000210,
+   "name": "<operator>.assignment",
+   "code": "buffer = _buffer",
+   "enclosing_function_id": 920000000002,
+   "file": "pi.c",
+   "line": 7
+  },
+  {
+   "id": 920000000211,
+   "name": "<operator>.greaterThan",
+   "code": "n > sizeof(_buffer)",
+   "enclosing_function_id": 920000000002,
+   "file": "pi.c",
+   "line": 7
+  },
+  {
+   "id": 920000000212,
+   "name": "<operator>.assignment",
+   "code": "*buffer++ = c",
+   "enclosing_function_id": 920000000002,
+   "file": "pi.c",
+   "line": 8
+  },
+  {
+   "id": 920000000220,
+   "name": "<operator>.assignment",
+   "code": "*buffer++ = c",
+   "enclosing_function_id": 920000000003,
+   "file": "pi.c",
+   "line": 11
+  },
+  {
+   "id": 920000000230,
+   "name": "<operator>.assignment",
+   "code": "buffer = _buffer",
+   "enclosing_function_id": 920000000004,
+   "file": "pi.c",
+   "line": 15
+  },
+  {
+   "id": 920000000231,
+   "name": "<operator>.assignment",
+   "code": "*buffer++ = c",
+   "enclosing_function_id": 920000000004,
+   "file": "pi.c",
+   "line": 15
+  },
+  {
+   "id": 920000000240,
+   "name": "<operator>.assignment",
+   "code": "buffer = _buffer",
+   "enclosing_function_id": 920000000005,
+   "file": "pi.c",
+   "line": 19
+  },
+  {
+   "id": 920000000241,
+   "name": "MOZ_ASSERT",
+   "code": "MOZ_ASSERT(n < sizeof(_buffer))",
+   "enclosing_function_id": 920000000005,
+   "file": "pi.c",
+   "line": 19
+  },
+  {
+   "id": 920000000242,
+   "name": "<operator>.lessThan",
+   "code": "n < sizeof(_buffer)",
+   "enclosing_function_id": 920000000005,
+   "file": "pi.c",
+   "line": 19
+  },
+  {
+   "id": 920000000243,
+   "name": "<operator>.assignment",
+   "code": "*buffer++ = c",
+   "enclosing_function_id": 920000000005,
+   "file": "pi.c",
+   "line": 20
+  }
+ ]
+}

@@ -20,9 +20,27 @@ ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'N
 CMP = ('<operator>.lessThan', '<operator>.lessEqualsThan', '<operator>.greaterThan',
        '<operator>.greaterEqualsThan')
 
+def _eval_const_int_expr(expr):
+    """Fold a simple constant-arithmetic array-size expression to an int, e.g. the
+    common macro-expanded shape `(64*2)+8` (mozjpeg's `JOCTET _buffer[BUFSIZE]` with
+    `#define BUFSIZE (DCTSIZE2*2)+8` -- confirmed on REAL code: without this, the
+    array is invisible to every producer that keys capacity off type_full_name,
+    since a bare-\\d+-only regex simply doesn't match). Restricted to
+    digits/whitespace/+-*/() BEFORE ever calling eval, so this can't become a
+    code-injection surface via attacker-controlled source text. Returns None
+    (abstain) on anything not cleanly a small non-negative constant expression."""
+    e = (expr or '').strip()
+    if not e or not re.fullmatch(r'[\d\s+\-*/()]+', e):
+        return None
+    try:
+        v = eval(e, {'__builtins__': {}}, {})
+    except Exception:
+        return None
+    return v if isinstance(v, int) and v >= 0 else None
+
 def _elem_count(type_full_name):
-    m = re.match(r'^\s*[A-Za-z_][\w :<>*&]*?\[\s*(\d+)\s*\]\s*$', type_full_name or '')
-    return int(m.group(1)) if m else None
+    m = re.match(r'^\s*[A-Za-z_][\w :<>*&]*?\[\s*([\d\s+\-*/()]+)\s*\]\s*$', type_full_name or '')
+    return _eval_const_int_expr(m.group(1)) if m else None
 
 def emit_candidates(prefix):
     d = json.load(open(prefix))
