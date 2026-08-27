@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
-"""OOB_WRITE (CURSOR) candidate producer -- generalizes oob_pointer_increment_verdict.py's
+"""FROZEN as of round 5 (moz-scan-paired-cve-validation-round1.md). Anchored by
+tests/gates/moz-canon-r01, a canonical vulnerable/patched gate against real,
+freshly-fetched mozjpeg source pinning this module's exact behavior on the one CVE it
+was built for. Do not expand this module's write-sink vocabulary, alias-chaining, or
+capacity resolution further without: (1) first re-running moz-canon-r01 to confirm
+the change doesn't alter its pinned evidence (candidate count, recorded capacities,
+structural shape) without an intentional, documented reason, and (2) recording the
+change in that gate's evidence rather than silently drifting it. Sink generalization
+beyond dereference syntax (call-argument sinks, e.g. HMAC_Finish) belongs in
+oob_call_sink_verdict.py instead, per callee_contracts.py's independently-verified-
+contract model -- NOT as an addition to this module's regex vocabulary.
+
+OOB_WRITE (CURSOR) candidate producer -- generalizes oob_pointer_increment_verdict.py's
 single fused `*ptr++ = x` pattern into a genuine CURSOR abstraction, per the expansion
 order below (steps 1-5; step 6, cross-function/TU capacity propagation, is
 deliberately NOT attempted here -- see module end).

@@ -1,0 +1,46 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {"id": 940000000001, "name": "vuln_memcpy_unbounded", "full_name": "vuln_memcpy_unbounded", "file": "cs.c", "line": 1, "line_end": 3, "is_external": false, "parameters": []},
+  {"id": 940000000002, "name": "vuln_hmacfinish_unbounded", "full_name": "vuln_hmacfinish_unbounded", "file": "cs.c", "line": 4, "line_end": 6, "is_external": false, "parameters": []},
+  {"id": 940000000003, "name": "guarded_sizeof", "full_name": "guarded_sizeof", "file": "cs.c", "line": 7, "line_end": 10, "is_external": false, "parameters": []},
+  {"id": 940000000004, "name": "unknown_callee_abstain", "full_name": "unknown_callee_abstain", "file": "cs.c", "line": 11, "line_end": 13, "is_external": false, "parameters": []},
+  {"id": 940000000005, "name": "offset_literal_safe", "full_name": "offset_literal_safe", "file": "cs.c", "line": 14, "line_end": 16, "is_external": false, "parameters": []},
+  {"id": 940000000006, "name": "portmemset_unbounded", "full_name": "portmemset_unbounded", "file": "cs.c", "line": 17, "line_end": 19, "is_external": false, "parameters": []}
+ ],
+ "locals": [
+  {"id": 940000000101, "name": "buf", "type_full_name": "char[16]", "method_id": 940000000001, "code": "char buf[16]", "line": 2},
+  {"id": 940000000102, "name": "buf", "type_full_name": "char[24]", "method_id": 940000000002, "code": "char buf[24]", "line": 5},
+  {"id": 940000000103, "name": "buf", "type_full_name": "char[16]", "method_id": 940000000003, "code": "char buf[16]", "line": 8},
+  {"id": 940000000104, "name": "buf", "type_full_name": "char[16]", "method_id": 940000000004, "code": "char buf[16]", "line": 12},
+  {"id": 940000000105, "name": "buf", "type_full_name": "char[24]", "method_id": 940000000005, "code": "char buf[24]", "line": 15},
+  {"id": 940000000106, "name": "buf", "type_full_name": "char[16]", "method_id": 940000000006, "code": "char buf[16]", "line": 18}
+ ],
+ "calls": [
+  {"id": 940000000201, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 940000000001, "file": "cs.c", "line": 2,
+   "arguments": [{"index": 0, "code": "buf"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 940000000210, "name": "HMAC_Finish", "method_full_name": "HMAC_Finish", "code": "HMAC_Finish(hmac, buf + off, &len, hashLen)",
+   "enclosing_function_id": 940000000002, "file": "cs.c", "line": 5,
+   "arguments": [{"index": 0, "code": "hmac"}, {"index": 1, "code": "buf + off"}, {"index": 2, "code": "&len"}, {"index": 3, "code": "hashLen"}]},
+
+  {"id": 940000000220, "name": "<operator>.greaterThan", "code": "len > sizeof(buf)",
+   "enclosing_function_id": 940000000003, "file": "cs.c", "line": 9},
+  {"id": 940000000221, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(buf, src, len)",
+   "enclosing_function_id": 940000000003, "file": "cs.c", "line": 9,
+   "arguments": [{"index": 0, "code": "buf"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 940000000230, "name": "some_random_write_fn", "method_full_name": "some_random_write_fn", "code": "some_random_write_fn(buf, src, len)",
+   "enclosing_function_id": 940000000004, "file": "cs.c", "line": 12,
+   "arguments": [{"index": 0, "code": "buf"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 940000000240, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(buf + 16, src, 8)",
+   "enclosing_function_id": 940000000005, "file": "cs.c", "line": 15,
+   "arguments": [{"index": 0, "code": "buf + 16"}, {"index": 1, "code": "src"}, {"index": 2, "code": "8"}]},
+
+  {"id": 940000000250, "name": "PORT_Memset", "method_full_name": "PORT_Memset", "code": "PORT_Memset(buf, 0, len)",
+   "enclosing_function_id": 940000000006, "file": "cs.c", "line": 18,
+   "arguments": [{"index": 0, "code": "buf"}, {"index": 1, "code": "0"}, {"index": 2, "code": "len"}]}
+ ]
+}

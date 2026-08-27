@@ -30,6 +30,7 @@ run_py "OOB-INDEX-R01 (index-store OOB producer)"        "$PE/tests/gates/oob-in
 run_py "OOB-COPYLEN-R01 (memcpy-length OOB producer)"    "$PE/tests/gates/oob-copylen-r01" gate_oob_copylen_r01.py
 run_py "OOB-PTRINC-R01 (pointer-increment OOB producer)" "$PE/tests/gates/oob-ptrinc-r01" gate_oob_ptrinc_r01.py
 run_py "OOB-CURSOR-R01 (cursor-write OOB producer)"      "$PE/tests/gates/oob-cursor-r01" gate_oob_cursor_r01.py
+run_py "OOB-CALLSINK-R01 (contract-driven call-sink OOB producer)" "$PE/tests/gates/oob-callsink-r01" gate_oob_callsink_r01.py
 run_py "OOB-ADJ-R01/R02 (staging + channel trust)"       "$PE/tests/gates/oob-adj-r01"  gate_oob_adjudication.py
 run_py "OOB-ADJ-R03 (candidate-binding fingerprint)"     "$PE/tests/gates/oob-adj-r01"  gate_oob_r03_binding.py
 run_py "OOB-ADJ-R04 (trusted-identity / content binding)" "$PE/tests/gates/oob-adj-r01" gate_oob_r04_identity.py
@@ -58,7 +59,7 @@ echo "######################################################################"
 if [ -n "${JOERN_HOME:-}" ] && [ -x "$JOERN_HOME/c2cpg.sh" ]; then
   echo "JOERN_HOME=$JOERN_HOME  (found; running fresh-build gates)"
   export C2CPG_HEAP="${C2CPG_HEAP:-2g}"
-  for gd in cpp-r06 cpp-param-r01 poly-r01 guard-r01 cpp-perf-r01; do
+  for gd in cpp-r06 cpp-param-r01 poly-r01 guard-r01 cpp-perf-r01 moz-canon-r01; do
     d="$PE/tests/gates/$gd"
     if [ -f "$d/run.sh" ]; then
       echo "-- $gd (fresh CPG) --"; (cd "$d" && bash run.sh >/tmp/$gd.log 2>&1 && echo "PASS  $gd" && PASS=$((PASS+1))) || { echo "FAIL  $gd (see /tmp/$gd.log)"; FAIL=$((FAIL+1)); }
