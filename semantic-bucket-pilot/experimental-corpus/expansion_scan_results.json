@@ -1,0 +1,2258 @@
+{
+  "E1": {
+    "sides": {
+      "patched": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "blobDir",
+            "function": "dbs_mkBlobDirName",
+            "line": 470,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "nickname",
+            "function": "lg_SetCertAttribute",
+            "line": 1533,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "nickname",
+            "function": "lg_SetPrivateKeyAttribute",
+            "line": 1586,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "tmp_name",
+            "function": "lg_searchSMime",
+            "line": 600,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "label",
+            "function": "lg_getString",
+            "line": 184,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "copy",
+            "function": "pkcs11_copyNickname",
+            "line": 336,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "copy",
+            "function": "pkcs11_copyStaticData",
+            "line": 372,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "commonName",
+            "function": "lgdb_DecodeData",
+            "line": 374,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "dllName",
+            "function": "lgdb_DecodeData",
+            "line": 386,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "parameters",
+            "function": "lgdb_DecodeData",
+            "line": 400,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullPathName",
+            "function": "sftkdb_LoadFromPath",
+            "line": 110,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "last",
+            "function": "nsspkcs5_PBKDF2_F",
+            "line": 365,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "last",
+            "function": "nsspkcs5_PBKDF2_F",
+            "line": 375,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buffer",
+            "function": "sftk_compute_ANSI_X9_63_kdf",
+            "line": 8302,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "newNickname",
+            "function": "sftkdb_resolveConflicts",
+            "line": 1235,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "newNickname",
+            "function": "sftkdb_resolveConflicts",
+            "line": 1210,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf",
+            "function": "sftkdb_incrementCKAID",
+            "line": 1971,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "prf_final",
+            "line": 412,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "prf_final",
+            "line": 430,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newInKey",
+            "function": "sftk_ike_prf",
+            "line": 516,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "sftk_TLSPRFHashUpdate",
+            "line": 50,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "nsc_pbe_key_gen",
+            "line": 4794,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "outKeyBytes",
+            "function": "sftk_HKDF",
+            "line": 8647,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "k2",
+            "function": "sftk_aes_xcbc_new_keys",
+            "line": 1163,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "k3",
+            "function": "sftk_aes_xcbc_new_keys",
+            "line": 1164,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 173,
+          "deterministic_complete": 7,
+          "open_candidate": 17
+        }
+      },
+      "vuln": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "blobDir",
+            "function": "dbs_mkBlobDirName",
+            "line": 470,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "nickname",
+            "function": "lg_SetCertAttribute",
+            "line": 1533,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "nickname",
+            "function": "lg_SetPrivateKeyAttribute",
+            "line": 1586,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "tmp_name",
+            "function": "lg_searchSMime",
+            "line": 600,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "label",
+            "function": "lg_getString",
+            "line": 184,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "copy",
+            "function": "pkcs11_copyNickname",
+            "line": 336,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "copy",
+            "function": "pkcs11_copyStaticData",
+            "line": 372,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "commonName",
+            "function": "lgdb_DecodeData",
+            "line": 374,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "dllName",
+            "function": "lgdb_DecodeData",
+            "line": 386,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "parameters",
+            "function": "lgdb_DecodeData",
+            "line": 400,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullPathName",
+            "function": "sftkdb_LoadFromPath",
+            "line": 110,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "last",
+            "function": "nsspkcs5_PBKDF2_F",
+            "line": 365,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "last",
+            "function": "nsspkcs5_PBKDF2_F",
+            "line": 375,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buffer",
+            "function": "sftk_compute_ANSI_X9_63_kdf",
+            "line": 8269,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "newNickname",
+            "function": "sftkdb_resolveConflicts",
+            "line": 1235,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "newNickname",
+            "function": "sftkdb_resolveConflicts",
+            "line": 1210,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf",
+            "function": "sftkdb_incrementCKAID",
+            "line": 1971,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "prf_final",
+            "line": 412,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "prf_final",
+            "line": 430,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newInKey",
+            "function": "sftk_ike_prf",
+            "line": 516,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "sftk_TLSPRFHashUpdate",
+            "line": 50,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "nsc_pbe_key_gen",
+            "line": 4761,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "outKeyBytes",
+            "function": "sftk_HKDF",
+            "line": 8614,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "k2",
+            "function": "sftk_aes_xcbc_new_keys",
+            "line": 1163,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "k3",
+            "function": "sftk_aes_xcbc_new_keys",
+            "line": 1164,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 173,
+          "deterministic_complete": 7,
+          "open_candidate": 17
+        }
+      }
+    },
+    "src": "pkcs11c.c",
+    "title": "Bug 1869493 AES Keywrap"
+  },
+  "E2": {
+    "sides": {
+      "patched": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "AESKeyWrap_Winv",
+            "line": 410,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "AESKeyWrap_EncryptKWP",
+            "line": 524,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "cx",
+            "function": "HMAC_Destroy",
+            "line": 34,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "BLAKE2B_Resurrect",
+            "line": 414,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 295,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 299,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bytes",
+            "function": "PRNGTEST_Instantiate<duplicate>0",
+            "line": 795,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ghash",
+            "function": "GCM_CreateContext",
+            "line": 607,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullName",
+            "function": "loader_LoadLibInReferenceDir",
+            "line": 97,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD2_Resurrect<duplicate>0",
+            "line": 261,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD5_Resurrect<duplicate>0",
+            "line": 584,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "px",
+            "function": "s_mpv_mul_d<duplicate>1",
+            "line": 56,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "powers",
+            "function": "mp_exptmod_safe_i",
+            "line": 1014,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 165,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 168,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 226,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "em",
+            "function": "emsa_pss_encode",
+            "line": 1288,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA256_Resurrect<duplicate>0",
+            "line": 666,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA512_Resurrect<duplicate>0",
+            "line": 1494,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "SHA1_Resurrect<duplicate>0",
+            "line": 578,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "mkCheckFileName",
+            "line": 253,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf1",
+            "function": "Hacl_Streaming_Keccak_copy",
+            "line": 191,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ivOut",
+            "function": "AESKeyWrap_Winv",
+            "line": 414,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "result",
+            "function": "CMAC_Finish",
+            "line": 298,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "hmac_computed",
+            "function": "freebl_fips_HMAC",
+            "line": 647,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 396,
+          "deterministic_complete": 4,
+          "open_candidate": 20
+        }
+      },
+      "vuln": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "AESKeyWrap_Winv",
+            "line": 410,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "AESKeyWrap_EncryptKWP",
+            "line": 524,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "cx",
+            "function": "HMAC_Destroy",
+            "line": 34,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "BLAKE2B_Resurrect",
+            "line": 414,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 295,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 299,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bytes",
+            "function": "PRNGTEST_Instantiate<duplicate>0",
+            "line": 795,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ghash",
+            "function": "GCM_CreateContext",
+            "line": 607,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullName",
+            "function": "loader_LoadLibInReferenceDir",
+            "line": 97,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD2_Resurrect<duplicate>0",
+            "line": 261,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD5_Resurrect<duplicate>0",
+            "line": 584,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "px",
+            "function": "s_mpv_mul_d<duplicate>1",
+            "line": 56,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "powers",
+            "function": "mp_exptmod_safe_i",
+            "line": 1014,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 165,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 168,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 226,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1044,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1025,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "em",
+            "function": "emsa_pss_encode",
+            "line": 1287,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA256_Resurrect<duplicate>0",
+            "line": 666,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA512_Resurrect<duplicate>0",
+            "line": 1494,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "SHA1_Resurrect<duplicate>0",
+            "line": 578,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "mkCheckFileName",
+            "line": 253,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf1",
+            "function": "Hacl_Streaming_Keccak_copy",
+            "line": 191,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ivOut",
+            "function": "AESKeyWrap_Winv",
+            "line": 414,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "result",
+            "function": "CMAC_Finish",
+            "line": 298,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "hmac_computed",
+            "function": "freebl_fips_HMAC",
+            "line": 647,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1044,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1025,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 396,
+          "deterministic_complete": 4,
+          "open_candidate": 20
+        }
+      }
+    },
+    "src": "rsapkcs.c",
+    "title": "Bug 1835425 RSA input heap overflow"
+  },
+  "E3": {
+    "sides": {
+      "patched": {
+        "llm_eligible": [],
+        "status": {
+          "abstained": 2
+        }
+      },
+      "vuln": {
+        "llm_eligible": [],
+        "status": {
+          "abstained": 2
+        }
+      }
+    },
+    "src": "utf8.c",
+    "title": "Bug 1396616 nssUTF8_Length overrun"
+  },
+  "E4": {
+    "sides": {
+      "patched": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "AESKeyWrap_Winv",
+            "line": 410,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "AESKeyWrap_EncryptKWP",
+            "line": 524,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "cx",
+            "function": "HMAC_Destroy",
+            "line": 34,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "BLAKE2B_Resurrect",
+            "line": 414,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 296,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 300,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bytes",
+            "function": "PRNGTEST_Instantiate<duplicate>0",
+            "line": 797,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullName",
+            "function": "loader_LoadLibInReferenceDir",
+            "line": 97,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD2_Resurrect<duplicate>0",
+            "line": 261,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD5_Resurrect<duplicate>0",
+            "line": 584,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "px",
+            "function": "s_mpv_mul_d<duplicate>1",
+            "line": 56,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "powers",
+            "function": "mp_exptmod_safe_i",
+            "line": 1021,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 165,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 168,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 226,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA256_Resurrect<duplicate>0",
+            "line": 666,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA512_Resurrect<duplicate>0",
+            "line": 1494,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "SHA1_Resurrect<duplicate>0",
+            "line": 578,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "mkCheckFileName",
+            "line": 253,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf1",
+            "function": "Hacl_Streaming_Keccak_copy",
+            "line": 189,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ivOut",
+            "function": "AESKeyWrap_Winv",
+            "line": 414,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "result",
+            "function": "CMAC_Finish",
+            "line": 298,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "hmac_computed",
+            "function": "freebl_fips_HMAC",
+            "line": 643,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_constant_time_ops_compare_ciphertexts_select_shared_secret_in_constant_time",
+            "line": 97,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d4",
+            "line": 237,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d3",
+            "line": 377,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "core_result_unwrap_41_33",
+            "line": 457,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d2",
+            "line": 522,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d1",
+            "line": 543,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d0",
+            "line": 580,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d",
+            "line": 601,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "core_result_unwrap_41_0e",
+            "line": 706,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_uncompressed_ring_element_3c",
+            "line": 2519,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a31",
+            "line": 2556,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_671",
+            "line": 2586,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_72",
+            "line": 2709,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_7d",
+            "line": 3935,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_d1",
+            "line": 4011,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_11_ef0",
+            "line": 4552,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_ring_element_u_2e0",
+            "line": 4568,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b1",
+            "line": 4821,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_93",
+            "line": 4842,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_message_d4",
+            "line": 5411,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b1",
+            "line": 5462,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_121",
+            "line": 5492,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a30",
+            "line": 5693,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_670",
+            "line": 5723,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_4d",
+            "line": 5846,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_19",
+            "line": 6590,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_6c",
+            "line": 6666,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_10_88",
+            "line": 6931,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_ring_element_u_2e",
+            "line": 6947,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b0",
+            "line": 7082,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_32",
+            "line": 7103,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b0",
+            "line": 7391,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_120",
+            "line": 7421,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a3",
+            "line": 7607,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_67",
+            "line": 7637,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_b0",
+            "line": 7760,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_5d",
+            "line": 8492,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_9f",
+            "line": 8568,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b",
+            "line": 8892,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_c5",
+            "line": 8913,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b",
+            "line": 9156,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_12",
+            "line": 9186,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 894,
+          "deterministic_complete": 1,
+          "open_candidate": 61
+        }
+      },
+      "vuln": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "AESKeyWrap_Winv",
+            "line": 410,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "newBuf",
+            "function": "AESKeyWrap_EncryptKWP",
+            "line": 524,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "cx",
+            "function": "HMAC_Destroy",
+            "line": 34,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "BLAKE2B_Resurrect",
+            "line": 414,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 296,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "noise",
+            "function": "prng_reseed",
+            "line": 300,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bytes",
+            "function": "PRNGTEST_Instantiate<duplicate>0",
+            "line": 797,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "fullName",
+            "function": "loader_LoadLibInReferenceDir",
+            "line": 97,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD2_Resurrect<duplicate>0",
+            "line": 261,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "MD5_Resurrect<duplicate>0",
+            "line": 584,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "px",
+            "function": "s_mpv_mul_d<duplicate>1",
+            "line": 56,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "powers",
+            "function": "mp_exptmod_safe_i",
+            "line": 1021,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 165,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 168,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "bp",
+            "function": "rsa_FormatOneBlock",
+            "line": 226,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA256_Resurrect<duplicate>0",
+            "line": 666,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "ctx",
+            "function": "SHA512_Resurrect<duplicate>0",
+            "line": 1494,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cx",
+            "function": "SHA1_Resurrect<duplicate>0",
+            "line": 578,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "mkCheckFileName",
+            "line": 253,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "buf1",
+            "function": "Hacl_Streaming_Keccak_copy",
+            "line": 189,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ivOut",
+            "function": "AESKeyWrap_Winv",
+            "line": 414,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "result",
+            "function": "CMAC_Finish",
+            "line": 298,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "hmac_computed",
+            "function": "freebl_fips_HMAC",
+            "line": 643,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1045,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "output",
+            "function": "rsa_HMACPrf",
+            "line": 1026,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_constant_time_ops_compare_ciphertexts_select_shared_secret_in_constant_time",
+            "line": 97,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d4",
+            "line": 237,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d3",
+            "line": 377,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "core_result_unwrap_41_33",
+            "line": 457,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d2",
+            "line": 522,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d1",
+            "line": 543,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d0",
+            "line": 580,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "libcrux_ml_kem_utils_into_padded_array_6d",
+            "line": 601,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "core_result_unwrap_41_0e",
+            "line": 706,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_uncompressed_ring_element_3c",
+            "line": 2519,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a31",
+            "line": 2556,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_671",
+            "line": 2586,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_72",
+            "line": 2709,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_7d",
+            "line": 3935,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_d1",
+            "line": 4011,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_11_ef0",
+            "line": 4552,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_ring_element_u_2e0",
+            "line": 4568,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b1",
+            "line": 4821,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_93",
+            "line": 4842,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_message_d4",
+            "line": 5411,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b1",
+            "line": 5462,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_121",
+            "line": 5492,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a30",
+            "line": 5693,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_670",
+            "line": 5723,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_4d",
+            "line": 5846,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_19",
+            "line": 6590,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_6c",
+            "line": 6666,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_10_88",
+            "line": 6931,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "compress_then_serialize_ring_element_u_2e",
+            "line": 6947,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b0",
+            "line": 7082,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_32",
+            "line": 7103,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b0",
+            "line": 7391,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_120",
+            "line": 7421,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_secret_key_a3",
+            "line": 7607,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_public_key_67",
+            "line": 7637,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "cpa_keygen_seed_d8_b0",
+            "line": 7760,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "serialize_kem_secret_key_5d",
+            "line": 8492,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "entropy_preprocess_d8_9f",
+            "line": 8568,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "encrypt_7b",
+            "line": 8892,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "kdf_d8_c5",
+            "line": 8913,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_unpacked_6b",
+            "line": 9156,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "ret",
+            "function": "decrypt_12",
+            "line": 9186,
+            "producer": "interprocedural",
+            "reason": "capacity_relation_not_established"
+          }
+        ],
+        "status": {
+          "abstained": 894,
+          "deterministic_complete": 1,
+          "open_candidate": 61
+        }
+      }
+    },
+    "src": "rsapkcs.c",
+    "title": "Bug 2026311 RSA_EMSAEncodePSS"
+  },
+  "E5": {
+    "sides": {
+      "patched": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "AppendStr",
+            "line": 585,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "encodedAVA",
+            "function": "AppendAVA",
+            "line": 1051,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "rawEmailAddr",
+            "function": "CERT_GetCertificateEmailAddress",
+            "line": 1351,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "pBuf",
+            "function": "cert_GetCertificateEmailAddresses",
+            "line": 1509,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "data",
+            "function": "CERT_DecodeDERCertificate",
+            "line": 752,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cn",
+            "function": "cert_GetDNSPatternsFromGeneralNames",
+            "line": 1665,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "retstring",
+            "function": "CERT_FindNSStringExtension",
+            "line": 92,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "stringbuf",
+            "function": "stringFromUserNotice",
+            "line": 473,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "retstr",
+            "function": "stringFromUserNotice",
+            "line": 514,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cp",
+            "function": "SetupAVAType",
+            "line": 110,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cp",
+            "function": "SetupAVAValue",
+            "line": 163,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          }
+        ],
+        "status": {
+          "abstained": 43,
+          "open_candidate": 5
+        }
+      },
+      "vuln": {
+        "llm_eligible": [
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "buf",
+            "function": "AppendStr",
+            "line": 585,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "encodedAVA",
+            "function": "AppendAVA",
+            "line": 1051,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "rawEmailAddr",
+            "function": "CERT_GetCertificateEmailAddress",
+            "line": 1351,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "pBuf",
+            "function": "cert_GetCertificateEmailAddresses",
+            "line": 1509,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "data",
+            "function": "CERT_DecodeDERCertificate",
+            "line": 752,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cn",
+            "function": "cert_GetDNSPatternsFromGeneralNames",
+            "line": 1665,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "retstring",
+            "function": "CERT_FindNSStringExtension",
+            "line": 92,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "stringbuf",
+            "function": "stringFromUserNotice",
+            "line": 473,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "relationship_unresolved",
+            "dest": "retstr",
+            "function": "stringFromUserNotice",
+            "line": 514,
+            "producer": "runtime",
+            "reason": "capacity_relation_not_established"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cp",
+            "function": "SetupAVAType",
+            "line": 109,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          },
+          {
+            "bucket": "external_contract_unknown",
+            "dest": "cp",
+            "function": "SetupAVAValue",
+            "line": 162,
+            "producer": "runtime",
+            "reason": "unknown_allocator_contract"
+          }
+        ],
+        "status": {
+          "abstained": 43,
+          "open_candidate": 5
+        }
+      }
+    },
+    "src": "secname.c",
+    "title": "Bug 2028954 CERT_DecodeAVAValue"
+  }
+}
