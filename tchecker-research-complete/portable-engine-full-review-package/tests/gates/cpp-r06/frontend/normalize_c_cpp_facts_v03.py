@@ -927,6 +927,15 @@ def main():
                     _IN[_n]=_newin; _OUT[_n]=_newout
                     for _sx in _succ.get(_n,()):
                         if _sx in _nodes: _wl.append(_sx)
+            if _guard >= 200000:
+                # The loop exited on the guard, not on an empty worklist -- this
+                # function's reaching-def fixpoint did NOT converge within the cap.
+                # Surfaced so a caller (e.g. a performance gate) can grep stderr for
+                # this exact marker rather than inferring non-convergence from wall
+                # time alone. Pre-normalizer-fix, real code (mozjpeg jchuff.c) hit
+                # this cap; the O(n^2) fixes below are what keep it from recurring.
+                print(f"WARN REACHDEF_WORKLIST_CAP_HIT function_id={_m['id']} "
+                      f"guard={_guard} nodes={len(_nodes)}", file=sys.stderr)
             for _r in _rets:
                 _lid=_r['value_ref']['id']
                 _cands=_defs_of.get(_lid,set())

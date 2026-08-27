@@ -57,7 +57,7 @@ echo "######################################################################"
 if [ -n "${JOERN_HOME:-}" ] && [ -x "$JOERN_HOME/c2cpg.sh" ]; then
   echo "JOERN_HOME=$JOERN_HOME  (found; running fresh-build gates)"
   export C2CPG_HEAP="${C2CPG_HEAP:-2g}"
-  for gd in cpp-r06 cpp-param-r01 poly-r01 guard-r01; do
+  for gd in cpp-r06 cpp-param-r01 poly-r01 guard-r01 cpp-perf-r01; do
     d="$PE/tests/gates/$gd"
     if [ -f "$d/run.sh" ]; then
       echo "-- $gd (fresh CPG) --"; (cd "$d" && bash run.sh >/tmp/$gd.log 2>&1 && echo "PASS  $gd" && PASS=$((PASS+1))) || { echo "FAIL  $gd (see /tmp/$gd.log)"; FAIL=$((FAIL+1)); }
