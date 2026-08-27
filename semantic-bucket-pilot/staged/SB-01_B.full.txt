@@ -1,0 +1,148 @@
+You are reviewing a single, self-contained C code excerpt for a memory-safety
+question. You are not connected to any tool, search engine, file system, or
+external repository, and you must not attempt to use one even if one appears
+available to you — answer using only the text given to you in this message.
+Do not guess at information that isn't in front of you (macro values, header
+contents, caller behavior, or anything else not shown) — if something is
+needed and not shown, say so explicitly rather than assuming a plausible
+value.
+
+You will be given: some C source code, and a focused question about one
+specific safety property of that code. You may also be given a block of
+"TChecker evidence" — facts a separate, deterministic static-analysis tool
+established about this same code, its unresolved-evidence category, and
+provenance for those facts. If no such block is given, you have only the
+code and the question.
+
+Respond with ONLY a single JSON object, no other text before or after it,
+matching exactly this shape:
+
+{
+  "conclusion": "safe | vulnerable | unresolved",
+  "relationship_answer": "established | contradicted | unresolved",
+  "evidence_used": [],
+  "unsupported_assumptions": [],
+  "confidence": "high | medium | low"
+}
+
+- "conclusion": your overall judgment of whether the code shown has a real
+  memory-safety problem ("vulnerable"), is provably free of the one this
+  question asks about ("safe"), or cannot be determined from what's shown
+  ("unresolved").
+- "relationship_answer": your answer to the SPECIFIC focused question asked,
+  independent of your overall conclusion.
+- "evidence_used": a short list of the specific facts (from the code, and
+  from any TChecker evidence given) that your answer actually rests on.
+- "unsupported_assumptions": a short list of anything you noticed you would
+  otherwise have been tempted to assume without proof, and explicitly did NOT
+  rely on. Empty list if none. Do not omit this out of confidence — if your
+  conclusion required assuming something you couldn't verify from what's
+  shown, name it here rather than silently rely on it.
+- "confidence": your own confidence in this specific answer.
+
+This analysis is advisory only. If TChecker evidence says a candidate exists,
+your answer must never be used to automatically suppress it — you are one
+additional, independent opinion, not a final authority. Answer honestly: an
+"unresolved" answer, clearly reasoned, is a correct and useful answer in its
+own right — it is not a worse answer than a confident guess.
+
+
+---
+
+CASE ID: SB-01
+
+HIGHLIGHTED OPERATION: PORT_Memcpy(bp, data->data, data->len) inside rsa_FormatOneBlock
+
+CODE:
+
+```c
+static unsigned char *
+rsa_FormatOneBlock(unsigned modulusLen,
+                   RSA_BlockType blockType,
+                   SECItem *data)
+{
+    unsigned char *block;
+    unsigned char *bp;
+    unsigned int padLen;
+    int i, j;
+    SECStatus rv;
+
+    block = (unsigned char *)PORT_Alloc(modulusLen);
+    if (block == NULL)
+        return NULL;
+
+    bp = block;
+
+    *bp++ = RSA_BLOCK_FIRST_OCTET;
+    *bp++ = (unsigned char)blockType;
+
+    switch (blockType) {
+
+        case RSA_BlockPrivate: /* preferred method */
+            /*
+             * 0x00 || BT || Pad || 0x00 || ActualData
+             *   1      1   padLen    1      data->len
+             */
+            padLen = modulusLen - data->len - 3;
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);   /* <<< HIGHLIGHTED OPERATION */
+            break;
+
+        default:
+            PORT_Free(block);
+            return NULL;
+    }
+
+    return block;
+}
+
+static SECStatus
+rsa_FormatBlock(SECItem *result,
+                unsigned modulusLen,
+                RSA_BlockType blockType,
+                SECItem *data)
+{
+    switch (blockType) {
+        case RSA_BlockPrivate:
+            if (data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))) {
+                return SECFailure;
+            }
+            result->data = rsa_FormatOneBlock(modulusLen, blockType, data);
+            if (result->data == NULL) {
+                result->len = 0;
+                return SECFailure;
+            }
+            result->len = modulusLen;
+            break;
+        default:
+            return SECFailure;
+    }
+    return SECSuccess;
+}
+```
+
+TChecker identified the highlighted operation and established the facts listed below, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+
+ESTABLISHED FACTS (from TChecker's deterministic analysis):
+
+- The destination `bp` is an alias of `block`, which is allocated as exactly
+  `modulusLen` bytes (`block = PORT_Alloc(modulusLen)`), and the alias is taken
+  before any pointer arithmetic. The destination's capacity is `modulusLen` bytes.
+- The highlighted operation copies `data->len` bytes into `bp`
+  (`PORT_Memcpy(bp, data->data, data->len)`).
+- The caller `rsa_FormatBlock` performs the comparison
+  `data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))` as a real runtime
+  branch (not an assertion). That branch dominates and controls the call to
+  `rsa_FormatOneBlock`: the branch taken when the condition is true returns from
+  the caller immediately, with no path to the call, so the call is reached only
+  when the condition is false.
+- The caller-side expressions in that comparison map by argument position to the
+  exact parameters used for the highlighted write inside the callee.
+- Both compared values (`data->len` and the `modulusLen`-derived threshold)
+  resolve to unsigned integer types.

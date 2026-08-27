@@ -1,0 +1,118 @@
+You are reviewing a single, self-contained C code excerpt for a memory-safety
+question. You are not connected to any tool, search engine, file system, or
+external repository, and you must not attempt to use one even if one appears
+available to you — answer using only the text given to you in this message.
+Do not guess at information that isn't in front of you (macro values, header
+contents, caller behavior, or anything else not shown) — if something is
+needed and not shown, say so explicitly rather than assuming a plausible
+value.
+
+You will be given: some C source code, and a focused question about one
+specific safety property of that code. You may also be given a block of
+"TChecker evidence" — facts a separate, deterministic static-analysis tool
+established about this same code, its unresolved-evidence category, and
+provenance for those facts. If no such block is given, you have only the
+code and the question.
+
+Respond with ONLY a single JSON object, no other text before or after it,
+matching exactly this shape:
+
+{
+  "conclusion": "safe | vulnerable | unresolved",
+  "relationship_answer": "established | contradicted | unresolved",
+  "evidence_used": [],
+  "unsupported_assumptions": [],
+  "confidence": "high | medium | low"
+}
+
+- "conclusion": your overall judgment of whether the code shown has a real
+  memory-safety problem ("vulnerable"), is provably free of the one this
+  question asks about ("safe"), or cannot be determined from what's shown
+  ("unresolved").
+- "relationship_answer": your answer to the SPECIFIC focused question asked,
+  independent of your overall conclusion.
+- "evidence_used": a short list of the specific facts (from the code, and
+  from any TChecker evidence given) that your answer actually rests on.
+- "unsupported_assumptions": a short list of anything you noticed you would
+  otherwise have been tempted to assume without proof, and explicitly did NOT
+  rely on. Empty list if none. Do not omit this out of confidence — if your
+  conclusion required assuming something you couldn't verify from what's
+  shown, name it here rather than silently rely on it.
+- "confidence": your own confidence in this specific answer.
+
+This analysis is advisory only. If TChecker evidence says a candidate exists,
+your answer must never be used to automatically suppress it — you are one
+additional, independent opinion, not a final authority. Answer honestly: an
+"unresolved" answer, clearly reasoned, is a correct and useful answer in its
+own right — it is not a worse answer than a confident guess.
+
+
+---
+
+CASE ID: SB-02
+
+HIGHLIGHTED OPERATION: the byte store *buffer++ = c in EMIT_BYTE, executed from flush_bits
+
+CODE:
+
+```c
+#define EMIT_BYTE() { \
+  JOCTET c; \
+  put_bits -= 8; \
+  c = (JOCTET)GETJOCTET(put_buffer >> put_bits); \
+  *buffer++ = c;   /* <<< HIGHLIGHTED OPERATION */ \
+  if (c == 0xFF)  /* need to stuff a zero byte? */ \
+    *buffer++ = 0; \
+ }
+
+#define PUT_BITS(code, size) { \
+  put_bits += size; \
+  put_buffer = (put_buffer << size) | code; \
+}
+
+#define CHECKBUF15() { \
+  if (put_bits > 15) { \
+    EMIT_BYTE() \
+    EMIT_BYTE() \
+  } \
+}
+
+#define EMIT_BITS(code, size) { \
+  PUT_BITS(code, size) \
+  CHECKBUF15() \
+}
+
+#define BUFSIZE (DCTSIZE2 * 4)
+
+LOCAL(boolean)
+flush_bits (working_state * state)
+{
+  JOCTET _buffer[BUFSIZE], *buffer;
+  size_t put_buffer;  int put_bits;
+  size_t bytes, bytestocopy;  int localbuf = 0;
+
+  put_buffer = state->cur.put_buffer;
+  put_bits = state->cur.put_bits;
+  if (state->free_in_buffer < BUFSIZE) {
+    localbuf = 1;
+    buffer = _buffer;
+  }
+  else buffer = state->next_output_byte;
+
+  /* fill any partial byte with ones */
+  PUT_BITS(0x7F, 7)
+  while (put_bits >= 8) EMIT_BYTE()
+
+  state->cur.put_buffer = 0;
+  state->cur.put_bits = 0;
+  /* ... copy-out of the local buffer omitted ... */
+  return TRUE;
+}
+
+/* encode_one_block, elsewhere in the same file, drives EMIT_BITS/EMIT_BYTE
+ * repeatedly per DCT block, with the number of bits emitted per call
+ * determined by variable-length Huffman codes looked up from coding tables,
+ * not a fixed count. */
+```
+
+TChecker flagged the highlighted operation for review. Based on the code, classify the highlighted operation as safe, vulnerable, or unknown, and explain your reasoning.
