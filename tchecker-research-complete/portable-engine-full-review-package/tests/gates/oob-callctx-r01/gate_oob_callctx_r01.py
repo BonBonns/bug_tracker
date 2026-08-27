@@ -10,6 +10,28 @@ requested control table:
   One guarded and one unguarded call site      -> Unguarded context remains
   Arguments in different names/positions       -> Formal mapping required (works)
   Signed/unsigned conversion changes meaning   -> Unresolved without range proof
+  PORT_Assert(len<=cap) dominates the call     -> Not credited (assertion, not
+                                                   controlled -- real macro name)
+  if(x){log();} dominates but every branch     -> Not credited (dominance without
+  still reaches the call                          control-dependence is never
+                                                   protection -- see below)
+  if(x){return ERR;} target()  (genuinely      -> Credited (a real rejecting
+  rejecting branch)                                branch exists)
+
+Controls 8-10 were added after review caught a real gap the original 7 never
+exercised: DOMINANCE ALONE IS NOT SUFFICIENT to credit a guard. `if (x) {
+log_error(); } target();` has its comparison dominate `target()` (nothing
+bypasses it structurally), yet BOTH of the comparison's own outcomes still
+reach `target()` -- the branch changes nothing about whether the call executes.
+Only a genuinely CONTROLLING branch -- one where at least one outcome does NOT
+reach the call at all (a rejecting `return`, or the call living only inside the
+"safe" branch) -- may be credited. Found by testing against real CVE-2019-17006
+facts, not by this gate; controls 1, 5 (guarded caller), and 6 were retrofitted
+with real branch structure (a terminal "reject" successor) for the same reason
+-- their ORIGINAL fixtures modeled the guard as a single straight-line
+predecessor of the call with no alternative branch at all, which happened to
+still get credited under the pre-fix, dominance-only logic for the wrong
+reason.
 
 Each control uses its OWN callee function, so candidates are independently
 attributable (test 5 deliberately shares one callee across two callers to test
@@ -33,7 +55,8 @@ for x in c:
 callee = {
     'guard_dominates': 991010000001, 'assert_only': 991020000001, 'guard_after_call': 991030000001,
     'conditional_branch': 991040000001, 'shared_callee': 991050000001, 'index_mapping': 991060000001,
-    'signedness_mismatch': 991070000001,
+    'signedness_mismatch': 991070000001, 'assert_only_port_assert': 991080000001,
+    'dominates_not_controls': 991090000001, 'rejecting_branch': 991100000001,
 }
 
 ck("guard_dominates SUPPRESSED (real runtime guard, dominates the single call site)",
@@ -66,6 +89,22 @@ ck("signedness_mismatch NOT suppressed (the guard's own two compared operands "
    "conversion could change the predicate's real meaning; UNRESOLVED without a "
    "range proof this module doesn't attempt)",
    callee['signedness_mismatch'] in by_fn)
+
+ck("assert_only_port_assert NOT suppressed (PORT_Assert -- the LITERAL macro "
+   "CVE-2019-17006's vulnerable revision uses -- dominates the call, but an "
+   "assertion never counts as enforcement regardless of macro name)",
+   callee['assert_only_port_assert'] in by_fn)
+
+ck("dominates_not_controls NOT suppressed (the comparison DOMINATES the call -- "
+   "nothing bypasses it structurally -- but BOTH of its own branches still reach "
+   "the call regardless of outcome, so it does not CONTROL whether the call "
+   "executes; dominance without control-dependence must never be credited)",
+   callee['dominates_not_controls'] in by_fn)
+
+ck("rejecting_branch SUPPRESSED (negative control: a GENUINELY rejecting branch "
+   "-- `if (x) { return ERR; } target();` -- has one outcome that does not reach "
+   "the call at all, so it DOES control it and may still be credited)",
+   callee['rejecting_branch'] not in by_fn)
 
 print(f"OOB_CALLCTX_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)

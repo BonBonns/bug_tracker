@@ -18,6 +18,20 @@ merged across call sites:
                                  qualifying candidate was found
       enforcement_kind       -- 'RUNTIME_BRANCH' | 'ASSERTION_ONLY' | 'NONE'
       dominates_call         -- True | False | None (None = no CFG data to decide)
+      controls_call          -- True | False | None -- REQUIRED IN ADDITION TO
+                                 dominates_call, not implied by it. A comparison
+                                 can dominate a call (execute on every path to it)
+                                 while having NO bearing on whether the call
+                                 actually happens: `if (x) { log_error(); }
+                                 target();` -- the comparison dominates `target()`
+                                 but BOTH of its outcomes still reach it, so
+                                 crediting it as protection would be wrong.
+                                 `controls_call` is True only when at least one of
+                                 the comparison's own CFG successor edges does NOT
+                                 reach the call at all -- a genuinely rejecting
+                                 branch (`if (x) { return ERR; }`) or a genuinely
+                                 gating one (the call lives only inside the "safe"
+                                 branch). None when there's no CFG data to decide.
       type_and_range_evidence -- descriptive list of resolved types for the two
                                  compared expressions -- ALWAYS recorded when
                                  resolvable, never silently dropped, even though it
@@ -41,18 +55,33 @@ FOR A GUARD TO BE CREDITED, ALL of the following must hold (checked in order):
      this specific call passes through the guard. Determined via this repo's own
      `cfg_edges` facts (dominator sets, same machinery as round 12's free
      invalidation), NEVER via source line order.
-  3. The guarded caller expressions map to the ACTUAL arguments passed at THIS
+  3. The guard also CONTROLS the call -- dominance alone is NOT sufficient. A
+     real bug found testing against the actual CVE-2019-17006 patched revision
+     (caught by review before being trusted, not by a synthetic fixture -- none
+     of round 13's original 7 exercised this shape): `if (x > y) { log(); }
+     target();` has its comparison DOMINATE `target()` (nothing bypasses it
+     structurally), yet BOTH of the comparison's own outcomes still reach
+     `target()` -- the branch changes nothing about whether the call executes,
+     so it must NOT be credited, even though the earlier, dominance-only version
+     of this module would have. `controls_call` requires that at least one of
+     the comparison's own CFG successor edges does NOT reach the call at all --
+     a genuinely rejecting branch (`if (x) { return ERR; } target();`) or the
+     call living only inside the "safe" branch (`if (x_is_safe) { target(); }`).
+     Checked via plain CFG reachability from each successor edge, not by trying
+     to label which edge is "true" vs "false" (the reachability test alone
+     already produces the correct answer regardless of the predicate's polarity).
+  4. The guarded caller expressions map to the ACTUAL arguments passed at THIS
      call site, matched by argument index to callee parameter index.
-  4. (checked by the CONSUMER, not this module) the callee parameter reaches the
+  5. (checked by the CONSUMER, not this module) the callee parameter reaches the
      write/size calculation this guard is meant to protect.
-  5. type_and_range_evidence is recorded for both compared expressions; if their
+  6. type_and_range_evidence is recorded for both compared expressions; if their
      resolved types have DIFFERENT signedness, this module cannot rule out that a
      C usual-arithmetic-conversion changes the predicate's real meaning (a signed
      value compared against an unsigned one is converted to unsigned first, which
      can turn a negative value into a huge one) -- establishment_status becomes
      UNRESOLVED rather than CREDITED, "unresolved without range proof" this module
      does not attempt to construct.
-  6. Every fact is tied to ITS OWN call site -- multiple call sites into the same
+  7. Every fact is tied to ITS OWN call site -- multiple call sites into the same
      callee are never merged into one function-wide conclusion. A consumer must
      query every call site reaching a callee and require ALL of them CREDITED
      before treating a callee-local write as protected; if even one call site is
@@ -60,9 +89,14 @@ FOR A GUARD TO BE CREDITED, ALL of the following must hold (checked in order):
 
 Classification for guard-vs-call ordering, reusing the same dominance +
 reachability primitives as round 12's free invalidation (guard "protects" a call
-exactly the way an allocation "reaches" a sink there):
-  - guard DOMINATES call                                    -> real check: CREDITED
+exactly the way an allocation "reaches" a sink there), PLUS the control-dependence
+check above:
+  - guard DOMINATES call AND CONTROLS it (a genuine rejecting/gating branch
+    exists)                                                -> real check: CREDITED
                                                                  assert only: NOT_CREDITED
+  - guard DOMINATES call but does NOT control it (every branch reaches the call
+    regardless)                                             -> NOT_CREDITED (fail
+    closed -- dominance without control-dependence is never protection)
   - guard does NOT dominate, but call IS reachable from guard -> AMBIGUOUS (only on
     one incoming branch -- the guard sometimes executes before the call, sometimes
     not, e.g. a conditional check that rejoins before the call)
@@ -168,6 +202,30 @@ def _signedness(type_str):
     return 'unsigned' if UNSIGNED_HINT_RE.search(type_str) else 'signed'
 
 
+def _controls_call(g, cmp_node, call_id):
+    """True iff `cmp_node` genuinely CONTROLS whether `call_id` executes -- at
+    least one of its own CFG successor edges does NOT reach the call at all.
+    Dominance is necessary but NOT sufficient for this: `if (x) { log(); }
+    target();` has its comparison dominate `target()` (nothing bypasses it),
+    but BOTH successors of the comparison still reach `target()`, so the branch
+    outcome has no bearing on whether it executes. A genuinely rejecting branch
+    (`if (x) { return ERR; } target();`) or a genuinely gating one (the call
+    lives only inside the branch taken when the condition is "safe") instead has
+    at least one successor edge from which the call is unreachable -- that is
+    what this checks, via plain forward reachability per successor edge (no
+    attempt to label which edge is "true" vs "false"; the reachability test
+    alone gives the right answer regardless of the predicate's polarity).
+    A comparison with fewer than 2 successors isn't a real branch point at all
+    (nothing to control anything with) and returns False."""
+    succs = g['succ'].get(cmp_node) or set()
+    if len(succs) < 2:
+        return False
+    for s in succs:
+        if call_id not in _reachable_from(g['succ'], s):
+            return True
+    return False
+
+
 def build_actual_to_formal_mapping(d, call, callee_fn):
     """{callee_param_name: caller_argument_expr}, matched strictly by index."""
     params = {}
@@ -196,7 +254,8 @@ def guard_status_for_call(d, cfg_index, call, expr_width, expr_cap, assert_codes
         'call_site_identity': call_id, 'caller_identity': caller_fn,
         'callee_identity': (call.get('candidate_target_ids') or [None])[0],
         'normalized_predicate': None, 'enforcement_kind': 'NONE',
-        'dominates_call': None, 'type_and_range_evidence': [], 'establishment_status': 'UNRESOLVED',
+        'dominates_call': None, 'controls_call': None,
+        'type_and_range_evidence': [], 'establishment_status': 'UNRESOLVED',
     }
     w_type = _resolve_expr_type(d, caller_fn, expr_width)
     c_type = _resolve_expr_type(d, caller_fn, expr_cap)
@@ -228,35 +287,54 @@ def guard_status_for_call(d, cfg_index, call, expr_width, expr_cap, assert_codes
             continue
         is_assert = _in_assert(c, assert_codes, assert_ids)
         dominates = None
+        controls = None
         if g and call_id in g['nodes'] and c.get('id') in g['nodes']:
             dominates = _dominates(g, c.get('id'), call_id)
-        candidates.append((c, is_assert, dominates))
+            if dominates:
+                controls = _controls_call(g, c.get('id'), call_id)
+        candidates.append((c, is_assert, dominates, controls))
 
     if not candidates:
         return fact   # UNRESOLVED -- no comparison in the caller mentions both
 
-    best = None   # prefer: real+dominating > assert+dominating > real+reachable(ambiguous) > other
-    for c, is_assert, dominates in candidates:
-        if dominates is True:
-            best = (c, is_assert, dominates)
+    # prefer: dominates+controls (genuine protection) > dominates-only (reported,
+    # but can never become CREDITED -- see _controls_call) > reachable/ambiguous > other
+    best = None
+    for c, is_assert, dominates, controls in candidates:
+        if dominates is True and controls is True:
+            best = (c, is_assert, dominates, controls)
             break
     if best is None:
-        for c, is_assert, dominates in candidates:
+        for c, is_assert, dominates, controls in candidates:
+            if dominates is True:
+                best = (c, is_assert, dominates, controls)
+                break
+    if best is None:
+        for c, is_assert, dominates, controls in candidates:
             if dominates is False and g:
                 reach = _reachable_from(g['succ'], c.get('id'))
                 if call_id in reach:
-                    best = (c, is_assert, 'ambiguous')
+                    best = (c, is_assert, 'ambiguous', None)
                     break
     if best is None:
         best = candidates[0]
 
-    c, is_assert, dom_state = best
+    c, is_assert, dom_state, controls = best
     fact['normalized_predicate'] = c.get('code')
     if dom_state is True:
         fact['dominates_call'] = True
+        fact['controls_call'] = controls
         if is_assert:
             fact['enforcement_kind'] = 'ASSERTION_ONLY'
             fact['establishment_status'] = 'NOT_CREDITED'
+        elif not controls:
+            fact['enforcement_kind'] = 'RUNTIME_BRANCH'
+            fact['establishment_status'] = 'NOT_CREDITED'   # dominates but does not
+            fact['type_and_range_evidence'].append(          # control the call -- see
+                "DOMINATES the call but does NOT CONTROL it -- every outgoing "  # _controls_call
+                "branch of this comparison still reaches the call, so its "
+                "outcome has no bearing on whether the call executes; fail "
+                "closed, dominance alone is never protection")
         elif signedness_mismatch:
             fact['enforcement_kind'] = 'RUNTIME_BRANCH'
             fact['establishment_status'] = 'UNRESOLVED'
