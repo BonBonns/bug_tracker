@@ -1,0 +1,564 @@
+{
+  "schema": "tchecker-cpp-facts/analysis-record-controls",
+  "functions": [
+    {
+      "id": 992000000001,
+      "full_name": "conflict_two_mallocs",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000005,
+      "full_name": "conflict_malloc_calloc",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000009,
+      "full_name": "conflict_three_sizes",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000013,
+      "full_name": "unknown_alloc_custom",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000016,
+      "full_name": "unknown_alloc_vendor",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000019,
+      "full_name": "unknown_alloc_pool",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000022,
+      "full_name": "sym_calloc_count",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000025,
+      "full_name": "sym_calloc_width",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000028,
+      "full_name": "sym_calloc_both",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000031,
+      "full_name": "rel_symbolic_malloc",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000034,
+      "full_name": "rel_literal_malloc",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000037,
+      "full_name": "rel_port_alloc",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000040,
+      "full_name": "det_exact_match",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    },
+    {
+      "id": 992000000043,
+      "full_name": "det_literal_fits",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 9
+    }
+  ],
+  "locals": [],
+  "calls": [
+    {
+      "id": 992000000002,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(8)",
+      "enclosing_function_id": 992000000001,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000003,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(32)",
+      "enclosing_function_id": 992000000001,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000004,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 100)",
+      "enclosing_function_id": 992000000001,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "100"
+        }
+      ]
+    },
+    {
+      "id": 992000000006,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(16)",
+      "enclosing_function_id": 992000000005,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000007,
+      "name": "<operator>.assignment",
+      "code": "dst = calloc(4, 8)",
+      "enclosing_function_id": 992000000005,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000008,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 200)",
+      "enclosing_function_id": 992000000005,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "200"
+        }
+      ]
+    },
+    {
+      "id": 992000000010,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(8)",
+      "enclosing_function_id": 992000000009,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000011,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(24)",
+      "enclosing_function_id": 992000000009,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000012,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 50)",
+      "enclosing_function_id": 992000000009,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "50"
+        }
+      ]
+    },
+    {
+      "id": 992000000014,
+      "name": "<operator>.assignment",
+      "code": "dst = my_custom_alloc(n)",
+      "enclosing_function_id": 992000000013,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000015,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 50)",
+      "enclosing_function_id": 992000000013,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "50"
+        }
+      ]
+    },
+    {
+      "id": 992000000017,
+      "name": "<operator>.assignment",
+      "code": "dst = vendor_get_buffer(sz)",
+      "enclosing_function_id": 992000000016,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000018,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 50)",
+      "enclosing_function_id": 992000000016,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "50"
+        }
+      ]
+    },
+    {
+      "id": 992000000020,
+      "name": "<operator>.assignment",
+      "code": "dst = pool_acquire(k)",
+      "enclosing_function_id": 992000000019,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000021,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 50)",
+      "enclosing_function_id": 992000000019,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "50"
+        }
+      ]
+    },
+    {
+      "id": 992000000023,
+      "name": "<operator>.assignment",
+      "code": "dst = calloc(count, 8)",
+      "enclosing_function_id": 992000000022,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000024,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 40)",
+      "enclosing_function_id": 992000000022,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "40"
+        }
+      ]
+    },
+    {
+      "id": 992000000026,
+      "name": "<operator>.assignment",
+      "code": "dst = calloc(4, w)",
+      "enclosing_function_id": 992000000025,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000027,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 40)",
+      "enclosing_function_id": 992000000025,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "40"
+        }
+      ]
+    },
+    {
+      "id": 992000000029,
+      "name": "<operator>.assignment",
+      "code": "dst = calloc(a, b)",
+      "enclosing_function_id": 992000000028,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000030,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 40)",
+      "enclosing_function_id": 992000000028,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "40"
+        }
+      ]
+    },
+    {
+      "id": 992000000032,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(cap)",
+      "enclosing_function_id": 992000000031,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000033,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, len)",
+      "enclosing_function_id": 992000000031,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "len"
+        }
+      ]
+    },
+    {
+      "id": 992000000035,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(64)",
+      "enclosing_function_id": 992000000034,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000036,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, n)",
+      "enclosing_function_id": 992000000034,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "n"
+        }
+      ]
+    },
+    {
+      "id": 992000000038,
+      "name": "<operator>.assignment",
+      "code": "dst = PORT_Alloc(sz)",
+      "enclosing_function_id": 992000000037,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000039,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, wlen)",
+      "enclosing_function_id": 992000000037,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "wlen"
+        }
+      ]
+    },
+    {
+      "id": 992000000041,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(inlen)",
+      "enclosing_function_id": 992000000040,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000042,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, inlen)",
+      "enclosing_function_id": 992000000040,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "inlen"
+        }
+      ]
+    },
+    {
+      "id": 992000000044,
+      "name": "<operator>.assignment",
+      "code": "dst = malloc(64)",
+      "enclosing_function_id": 992000000043,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 992000000045,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(dst, src, 16)",
+      "enclosing_function_id": 992000000043,
+      "file": "cc.c",
+      "line": 5,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "dst"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "16"
+        }
+      ]
+    }
+  ]
+}

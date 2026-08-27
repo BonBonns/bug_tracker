@@ -56,14 +56,15 @@ as-is rather than presented as support the data does not provide.
 
 ## Two concrete problems to fix before the real experiment
 
-1. **Inclusion criteria must select cases where B is INSUFFICIENT but C
-   resolves.** A case only tests the bucket contribution if condition B (facts +
-   generic "unresolved") does *not* already reach the verified answer. Add to
-   the frozen criteria: *a candidate qualifies for the A/B/C accuracy set only
-   if a pre-registered condition-B check leaves the answer wrong or unresolved,
-   so the focused question has something to add.* (Applying this now would
-   exclude all three dry-run cases from the accuracy set — SB-07 because A
-   already solves it, SB-01/SB-02 because B already solves them.)
+1. ~~Inclusion criteria must select cases where B is INSUFFICIENT but C
+   resolves.~~ **RETRACTED (biases the experiment).** Selecting cases because
+   condition B previously failed conditions the corpus on the outcome under
+   test and inflates any apparent C benefit. Cases must instead be selected
+   BEFORE any model calls, using only scanner state, assigned bucket, verified
+   ground truth, and diversity — never by first running B (or A/C) and keeping
+   the ones where a condition failed. The observation that B already resolved
+   all three dry-run cases stays a useful *descriptive* finding about these
+   particular cases; it must NOT become a selection filter.
 
 2. **`relationship_answer` semantics are under-specified for "does X hold?"
    questions.** SB-02's focused question ("does anything bound the write count to
@@ -92,9 +93,13 @@ prose) so any C effect is not attributable to length.
 - **Mechanics: GO.** Prompt generation, isolation, schema, archival, quarantine,
   routing eval, and rubric all work end to end.
 - **Accuracy pilot: NOT YET.** Do not run or report an A/B/C accuracy result
-  until: (a) fresh cases meeting the *B-insufficient* criterion above are
-  sourced (target ≥9: 3 safe / 3 vulnerable / 3 unresolved, multiple
-  functions/repos), (b) the `relationship_answer` trichotomy is pinned down and
-  the rubric updated, (c) a token-matched B variant exists, and (d) the final
+  until: (a) fresh cases are sourced by scanner state / assigned bucket /
+  verified ground truth / diversity BEFORE any model calls (never by testing a
+  condition first) — target ≥9: 3 safe / 3 vulnerable / 3 unresolved, multiple
+  functions/repos; (b) the `relationship_answer` trichotomy is pinned down and
+  the rubric updated; (c) a token-matched B variant exists; (d) the automatic
+  reason→bucket layer is implemented for the producers the corpus draws on (so
+  no case's bucket rides on the candidate-presence fallback); and (e) the final
   run uses fixed-model isolated calls with randomized condition order and full
-  archival.
+  archival, every prompt reproducible from the frozen scanner artifact +
+  candidate fingerprint.

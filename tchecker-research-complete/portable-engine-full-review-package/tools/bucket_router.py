@@ -174,10 +174,34 @@ def derive_record(cand):
     }
 
 
+# Producers that emit an explicit reason-code layer (analyze_operations). For
+# these, the bucket is TRANSLATED from the producer's reason code, not inferred
+# from candidate presence. Others still fall back to candidate-presence and are
+# flagged reason_source="fallback_candidate_presence" -- honestly marking that
+# their reason layer is not yet implemented.
+REASON_EMITTING_PRODUCERS = ("oob_runtime_capacity_verdict",)
+
+
 def route_factfile(prefix, producers=PRODUCERS):
     """Run the frozen producers on a fact file and auto-emit a bucket record for
-    every candidate. Returns a list of records."""
+    every candidate. Where a producer emits explicit reason codes
+    (REASON_EMITTING_PRODUCERS), the bucket + route come from the reason code via
+    analysis_record.REASON_TO_BUCKET; otherwise the record is flagged as a
+    candidate-presence fallback (reason layer pending for that producer)."""
     sys.path.insert(0, __file__.rsplit("/", 1)[0])
+
+    # Index open-candidate reason records by (function, line) so the enriched,
+    # generator-facing candidate record can carry the producer's real reason.
+    reason_by_loc = {}
+    for name in REASON_EMITTING_PRODUCERS:
+        try:
+            mod = importlib.import_module(name)
+        except Exception:
+            continue
+        for r in getattr(mod, "analyze_operations")(prefix):
+            if r.get("analysis_status") == "open_candidate":
+                reason_by_loc[(r.get("function"), r.get("line"))] = r
+
     records = []
     for name in producers:
         try:
@@ -185,7 +209,18 @@ def route_factfile(prefix, producers=PRODUCERS):
         except Exception:
             continue
         for cand in mod.emit_candidates(prefix):
-            records.append(derive_record(cand))
+            rec = derive_record(cand)
+            rr = reason_by_loc.get((cand.get("function"), cand.get("line")))
+            if rr is not None:
+                # bucket TRANSLATED from the producer's explicit reason code
+                rec["reason_code"] = rr["reason_code"]
+                rec["uncertainty_bucket"] = rr["uncertainty_bucket"]
+                rec["recommended_route"] = rr["recommended_route"]
+                rec["reason_source"] = "producer_reason_code"
+            else:
+                rec["reason_code"] = None
+                rec["reason_source"] = "fallback_candidate_presence"
+            records.append(rec)
     return records
 
 

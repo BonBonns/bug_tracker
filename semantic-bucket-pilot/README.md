@@ -141,6 +141,68 @@ hash (where preserved), exclusion reason, whether it was viewed before
 exclusion, and that it was never scored. Future invalid runs must be MOVED there
 at the moment of invalidation.
 
+## Two bucket families (must not be mixed)
+
+The taxonomy (`tools/analysis_record.py`) separates:
+
+- **Candidate-review buckets** — assigned when TChecker RECOGNIZED an operation
+  and produced an analysis record (open candidate or recognized-but-abstained):
+  `relationship_unresolved`, `external_contract_unknown`, `identity_ambiguous`,
+  `conflicting_definitions`, `insufficient_evidence`. These are scan-time
+  derivable from the producer's own reason code and decide whether/how a case
+  reaches the LLM. **These are the A/B/C-relevant buckets.**
+- **Coverage-gap categories** — assigned when a KNOWN-POSITIVE case produced no
+  candidate: `operation_not_recognized`, `frontend_fact_missing`,
+  `unsupported_representation`, `propagation_not_modeled`,
+  `required_fact_not_produced`. TChecker generally cannot self-assign these
+  during a scan (it may not know it missed anything; telling "the fact doesn't
+  exist" from "the frontend failed to export it" needs an external
+  known-positive oracle). **These belong to the scanner-coverage evaluation,
+  never the A/B/C evaluation.**
+
+## Reason-emission layer (buckets from causes, not from candidate presence)
+
+The earlier router assigned `relationship_unresolved` to any open candidate —
+tautological, and unable to distinguish causes. Producers now emit an explicit
+machine-derived **reason code** per recognized operation, and the router
+TRANSLATES reason → bucket (`analysis_record.REASON_TO_BUCKET`); it does not
+infer a bucket from candidate presence/absence.
+
+`oob_runtime_capacity_verdict.analyze_operations()` emits records like:
+
+```
+{ "analysis_status": "open_candidate", "recognized_operation": "buffer_write",
+  "unresolved_property": "write_length_within_capacity",
+  "reason_code": "capacity_relation_not_established",
+  "uncertainty_bucket": "relationship_unresolved",
+  "recommended_route": "llm_semantic_review" }
+```
+
+and for recognized operations that abstain, e.g.
+`reason_code: "conflicting_allocations" → conflicting_definitions →
+additional_evidence_required`.
+
+**Validated (`tests/gates/analysis-record-r01`, 21/21):** the runtime-capacity
+producer assigns **four distinct candidate-review buckets** with **≥3
+independently-constructed examples each** — relationship_unresolved,
+external_contract_unknown, conflicting_definitions, insufficient_evidence —
+each from an explicit reason code, schema-checked for reason↔bucket↔route
+consistency, and corroborated on the independent runtimecap fixture. This is
+real bucket-distinction evidence, not the earlier "3/3 all relationship_unresolved"
+smoke test.
+
+**Maturity, stated honestly:** the reason layer is implemented for the
+runtime-capacity producer only. Candidates from other producers (cursor,
+interprocedural, …) still fall back to candidate-presence and are flagged
+`reason_source: "fallback_candidate_presence"`. In the current pilot that means
+**SB-01's bucket is reason-derived; SB-02 and SB-07 are still fallback.** Before
+the final experiment, every producer the corpus draws on must have its reason
+layer implemented so no case's bucket rides on the fallback.
+
+`identity_ambiguous` is defined in the taxonomy but not yet EMITTED by any
+instrumented producer (it is the interprocedural/alias producer's territory) —
+so it is not among the four "implemented" buckets validated above.
+
 ## Automatic bucket assignment (the piece that makes C a real test)
 
 The bucket, unresolved property, and route shown in Condition C MUST be emitted
@@ -189,10 +251,15 @@ human-verified, and honestly out of scope for the automatic layer for now.
 - [ ] **Frozen scanner version** — soundness logic is still changing; no freeze
       yet. No scanner or bucket rule may change after the experimental prompts
       are generated.
+- [ ] **Reason layer implemented for every producer the corpus draws on**, so
+      no case's bucket rides on the candidate-presence fallback. Current: only
+      the runtime-capacity producer; SB-02 (cursor) and SB-07 (interproc) are
+      still fallback.
 - [ ] **≥9 genuine routable candidates**, balanced among final safe /
-      vulnerable / legitimately-unresolved outcomes, meeting the frozen
-      inclusion criteria (including the B-insufficiency criterion from the dry
-      run). Current: 3, all unresolved/safe.
+      vulnerable / legitimately-unresolved outcomes, selected BEFORE any model
+      calls by scanner state / bucket / verified ground truth / diversity —
+      never by testing condition B (or A/C) first (that biases the experiment).
+      Current: 3, all unresolved/safe.
 - [ ] **B and C generated from `sources_auto/`** (machine-derived), with a
       token-matched B variant.
 - [ ] **`relationship_answer` trichotomy pinned** (dry-run calibration fix).

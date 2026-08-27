@@ -43,11 +43,14 @@ collapsed into one function-wide verdict.
 
 Never emits VULNERABLE; only CANDIDATE. If in doubt, SUPPRESS or ABSTAIN.
 """
-import json, re, sys
+import hashlib, json, re, sys
 from callee_contracts import CALLEE_CONTRACTS
-from allocation_extent import compute_allocation_extents, compute_free_sites, build_cfg_index, capacity_status_at_sink
+from allocator_contracts import ALLOCATOR_CONTRACTS
+from allocation_extent import (compute_allocation_extents, compute_free_sites, build_cfg_index,
+                               capacity_status_at_sink, _eval_const_int_expr)
 from call_context_guard import (build_actual_to_formal_mapping, guard_status_for_call,
                                  find_call_sites, _collect_assert_arg_ids)
+from analysis_record import bucket_for_reason, route_for_bucket
 
 
 def _map_expr_to_caller_space(expr, callee_fn, call_sites, d):
@@ -273,6 +276,131 @@ def emit_candidates(prefix):
                      'derivation': {'rule': 'CPP_RUNTIME_ALLOCATION_CAPACITY_UNBOUNDED',
                                     'capacity_source': 'ALLOCATION_EXTENT_FACT'}})
     return cand
+
+
+def _diagnose_capacity(d, fn, dest):
+    """Explicit reason_code for WHY `dest`'s capacity could not be established in
+    `fn`, derived from this producer's own allocation-parsing signals (NOT
+    inferred from mere candidate absence). Mirrors compute_allocation_extents's
+    direct-allocation parsing so the reason matches what actually stopped the
+    fact from being established:
+      - two different reaching allocation sizes -> conflicting_allocations
+      - a product (calloc-shaped) allocation with a symbolic factor
+        -> multiplication_overflow_not_ruled_out
+      - the pointer is assigned from a call to a function with no allocator
+        contract -> unknown_allocator
+      - otherwise a symbolic/unresolvable size -> symbolic_size_unresolved
+    Returns a reason_code string (never None; symbolic_size_unresolved is the
+    catch-all)."""
+    sizes = set()
+    saw_symbolic_product = False
+    saw_unknown_allocator = False
+    saw_known_alloc = False
+    for c in d.get('calls', []):
+        if c.get('name') != '<operator>.assignment' or c.get('enclosing_function_id') != fn:
+            continue
+        m = re.match(r'^\s*([A-Za-z_]\w*)\s*=\s*(?:\([^()]*\)\s*)?([A-Za-z_]\w*)\s*\(\s*(.*?)\s*\)\s*$',
+                     c.get('code') or '')
+        if not m or m.group(1) != dest:
+            continue
+        func_name, argtext = m.group(2), m.group(3)
+        contract = ALLOCATOR_CONTRACTS.get(func_name)
+        if contract is None:
+            saw_unknown_allocator = True
+            continue
+        saw_known_alloc = True
+        args = [a.strip() for a in argtext.split(',')] if argtext else []
+        if contract['kind'] == 'product':
+            cn = _eval_const_int_expr(args[contract['count_arg']]) if contract['count_arg'] < len(args) else None
+            wn = _eval_const_int_expr(args[contract['width_arg']]) if contract['width_arg'] < len(args) else None
+            if cn is None or wn is None:
+                saw_symbolic_product = True
+            else:
+                sizes.add(('lit', cn * wn))
+        else:  # simple / realloc
+            if contract['size_arg'] < len(args):
+                se = args[contract['size_arg']]
+                sizes.add(('expr', se))
+    if len({s for s in sizes}) >= 2:
+        return 'conflicting_allocations'
+    if saw_symbolic_product:
+        return 'multiplication_overflow_not_ruled_out'
+    if saw_unknown_allocator and not saw_known_alloc:
+        return 'unknown_allocator'
+    return 'symbolic_size_unresolved'
+
+
+def _record_id(fn, dest, line):
+    return 'cand_' + hashlib.sha256(f'{fn}|{dest}|{line}'.encode()).hexdigest()[:16]
+
+
+def analyze_operations(prefix):
+    """Emit one ANALYSIS RECORD per recognized buffer-write operation, with an
+    EXPLICIT machine-derived reason_code and (for recognized-but-open/abstained
+    cases) the candidate-review bucket + route. This is the reason-emission layer
+    the automatic bucket experiment requires: the bucket comes from the reason
+    code, not from the mere presence/absence of a candidate.
+
+    Open-candidate determination is delegated to the frozen emit_candidates (no
+    duplication of the guard/safety logic); this function only adds the abstention
+    diagnosis and the deterministic-complete classification for recognized ops
+    that did not become candidates."""
+    d = json.load(open(prefix))
+    func_by_id = {f.get('id'): f for f in d.get('functions', [])}
+    extents = compute_allocation_extents(d)
+    free_sites = compute_free_sites(d)
+    cfg_index = build_cfg_index(d)
+
+    # recognized buffer-write operations (same contract-driven extraction)
+    ops = []
+    for c in d.get('calls', []):
+        callee = c.get('method_full_name') or c.get('name')
+        contract = CALLEE_CONTRACTS.get(callee)
+        if contract is None:
+            continue
+        args = sorted(c.get('arguments', []), key=lambda a: a.get('index', 0))
+        da, wa = contract['dest_arg'], contract['width_arg']
+        if da >= len(args) or wa >= len(args):
+            continue
+        ops.append({'call_id': c.get('id'), 'function_id': c.get('enclosing_function_id'),
+                    'file': c.get('file'), 'line': c.get('line'),
+                    'dest_code': (args[da].get('code') or '').strip(),
+                    'width_code': (args[wa].get('code') or '').strip()})
+
+    open_keys = {(x['function_id'], x['dest'], x['width_expr'], x['line'])
+                 for x in emit_candidates(prefix)}
+
+    records = []
+    for op in ops:
+        fn, dest, width, line = op['function_id'], op['dest_code'], op['width_code'], op['line']
+        fname = (func_by_id.get(fn) or {}).get('full_name')
+        base = {'candidate_id': _record_id(fn, dest, line), 'recognized_operation': 'buffer_write',
+                'file': op['file'], 'function': fname, 'line': line,
+                'dest': dest, 'width_expr': width}
+        if not re.fullmatch(r'[A-Za-z_]\w*', dest):
+            continue   # non-bare-identifier destination: out of this producer's scope
+        if (fn, dest, width, line) in open_keys:
+            base.update({'analysis_status': 'open_candidate',
+                         'reason_code': 'capacity_relation_not_established'})
+        else:
+            extent = extents.get((fn, dest))
+            if extent is None or extent.get('establishment_status') != 'ESTABLISHED':
+                base.update({'analysis_status': 'abstained',
+                             'reason_code': _diagnose_capacity(d, fn, dest)})
+            else:
+                sink = capacity_status_at_sink(cfg_index, fn, extent['allocation_site'],
+                                               free_sites.get((fn, dest), []), op['call_id'])
+                if sink != 'ESTABLISHED':
+                    base.update({'analysis_status': 'abstained',
+                                 'reason_code': 'capacity_invalidated_by_free'})
+                else:
+                    base.update({'analysis_status': 'deterministic_complete', 'reason_code': None})
+        if base['analysis_status'] != 'deterministic_complete':
+            bucket = bucket_for_reason(base['reason_code'])
+            base['uncertainty_bucket'] = bucket
+            base['recommended_route'] = route_for_bucket(bucket)
+        records.append(base)
+    return records
 
 
 if __name__ == '__main__':

@@ -35,6 +35,7 @@ run_py "OOB-INTERPROC-R01 (single-hop interprocedural capacity propagation)" "$P
 run_py "OOB-RUNTIMECAP-R01 (allocation-extent runtime capacity tracking)" "$PE/tests/gates/oob-runtimecap-r01" gate_oob_runtimecap_r01.py
 run_py "OOB-RUNTIMECAP-CFG-R01 (CFG-sensitive per-sink free invalidation)" "$PE/tests/gates/oob-runtimecap-cfg-r01" gate_oob_runtimecap_cfg_r01.py
 run_py "OOB-CALLCTX-R01 (call-context guard propagation)" "$PE/tests/gates/oob-callctx-r01" gate_oob_callctx_r01.py
+run_py "ANALYSIS-RECORD-R01 (automatic reason-code -> bucket assignment, heterogeneous)" "$PE/tests/gates/analysis-record-r01" gate_analysis_record_r01.py
 run_py "OOB-ADJ-R01/R02 (staging + channel trust)"       "$PE/tests/gates/oob-adj-r01"  gate_oob_adjudication.py
 run_py "OOB-ADJ-R03 (candidate-binding fingerprint)"     "$PE/tests/gates/oob-adj-r01"  gate_oob_r03_binding.py
 run_py "OOB-ADJ-R04 (trusted-identity / content binding)" "$PE/tests/gates/oob-adj-r01" gate_oob_r04_identity.py
