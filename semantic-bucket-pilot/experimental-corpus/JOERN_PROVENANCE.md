@@ -39,3 +39,12 @@ python3 \
 
 So new disclosed-CVE source can be fetched and scanned here. The scanner and
 bucket schema stay frozen (v1); only new fact INPUTS are added.
+
+## Pipeline reproduction validated
+
+Re-scanned an EXISTING cached CVE checkout (cve-2016-1950/vuln) with this Joern
+install and ran the frozen producers on the regenerated facts. Result: IDENTICAL
+to the cached corpus — same status counts (abstained 4) and the same single
+llm-eligible candidate (`sec_asn1d_add_to_subitems/copy` →
+`unknown_allocator_contract`). So newly-generated facts are frozen-compatible;
+scanning new CVEs with this toolchain is sound.
