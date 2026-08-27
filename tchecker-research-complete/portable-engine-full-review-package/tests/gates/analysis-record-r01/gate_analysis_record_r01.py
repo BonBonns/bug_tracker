@@ -114,5 +114,30 @@ ck("free after the write -> open candidate (capacity relation)",
 ck("all cfg-fixture records pass schema validation",
    all(ar.validate_record(r) for r in cfg_recs.values()))
 
+# CROSS-PRODUCER v1 emission: cursor and interprocedural producers emit explicit
+# v1 reasons for their open candidates (no candidate-presence fallback).
+def _load(modname):
+    s = importlib.util.spec_from_file_location(modname, TOOLS / f"{modname}.py")
+    m = importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
+
+cw = _load("oob_cursor_write_verdict")
+cw_fix = str(H.parent / "oob-cursor-r01" / "fixtures" / (
+    [p.name for p in (H.parent / "oob-cursor-r01" / "fixtures").glob("*.json")][0]))
+cw_recs = cw.analyze_operations(cw_fix)
+ck("cursor producer emits open candidates as write_count_bound_not_established",
+   len(cw_recs) >= 1 and all(r["reason_code"] == "write_count_bound_not_established"
+                             and r["recommended_route"] == "semantic_relationship_review"
+                             for r in cw_recs))
+ck("cursor records pass v1 schema validation", all(ar.validate_record(r) for r in cw_recs))
+
+ipm = _load("oob_interprocedural_verdict")
+ip_fix = str(H.parent / "oob-interproc-r01" / "fixtures" / (
+    [p.name for p in (H.parent / "oob-interproc-r01" / "fixtures").glob("*.json")][0]))
+ip_recs = ipm.analyze_operations(ip_fix)
+ck("interproc producer emits open candidates as capacity_relation_not_established",
+   len(ip_recs) >= 1 and all(r["reason_code"] == "capacity_relation_not_established"
+                             for r in ip_recs))
+ck("interproc records pass v1 schema validation", all(ar.validate_record(r) for r in ip_recs))
+
 print(f"ANALYSIS_RECORD_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)

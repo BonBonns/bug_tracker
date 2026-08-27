@@ -291,6 +291,35 @@ def emit_candidates(prefix):
     return cand
 
 
+def analyze_operations(prefix):
+    """Emit v1 analysis records for this producer's OPEN candidates. A cursor
+    candidate is an unbounded pointer-increment write into a fixed-capacity base:
+    the unresolved property is that the NUMBER of writes is not bounded by the
+    capacity -- reason `write_count_bound_not_established` (relationship_unresolved,
+    semantic_relationship_review). Abstention-reason emission (e.g.
+    destination_identity_ambiguous for an unresolved alias chain) is a documented
+    future extension; only explicit open-candidate reasons are emitted here, never
+    a candidate-presence fallback."""
+    import hashlib
+    from analysis_record import (bucket_for_reason, route_for_reason,
+                                 property_for_reason, llm_eligible_for_reason)
+    reason = 'write_count_bound_not_established'
+    recs = []
+    for c in emit_candidates(prefix):
+        rid = 'cand_' + hashlib.sha256(
+            f"{c.get('function_id')}|{c.get('base')}|{c.get('line')}".encode()).hexdigest()[:16]
+        recs.append({
+            'candidate_id': rid, 'recognized_operation': 'cursor_write',
+            'file': c.get('file'), 'function': c.get('function'), 'line': c.get('line'),
+            'dest': c.get('base'), 'width_expr': None, 'analysis_status': 'open_candidate',
+            'reason_code': reason, 'all_reason_codes': [reason],
+            'uncertainty_bucket': bucket_for_reason(reason),
+            'recommended_route': route_for_reason(reason),
+            'unresolved_property': property_for_reason(reason),
+            'llm_eligible': llm_eligible_for_reason(reason)})
+    return recs
+
+
 if __name__ == '__main__':
     for p in sys.argv[1:]:
         c = emit_candidates(p)

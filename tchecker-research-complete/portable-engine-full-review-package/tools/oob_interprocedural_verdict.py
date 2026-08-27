@@ -247,6 +247,36 @@ def emit_candidates(prefix):
     return cand
 
 
+def analyze_operations(prefix):
+    """Emit v1 analysis records for this producer's OPEN candidates. An
+    interprocedural candidate is a write whose capacity was propagated across a
+    single call hop but whose write LENGTH is not proven within it: reason
+    `capacity_relation_not_established` (relationship_unresolved,
+    semantic_relationship_review). Abstention-reason emission (conflicting
+    propagations -> conflicting_reaching_allocations; unresolved call target ->
+    required_evidence_absent) is a documented future extension; only explicit
+    open-candidate reasons are emitted here, never a candidate-presence fallback."""
+    import hashlib
+    from analysis_record import (bucket_for_reason, route_for_reason,
+                                 property_for_reason, llm_eligible_for_reason)
+    reason = 'capacity_relation_not_established'
+    recs = []
+    for c in emit_candidates(prefix):
+        rid = 'cand_' + hashlib.sha256(
+            f"{c.get('function_id')}|{c.get('dest')}|{c.get('line')}".encode()).hexdigest()[:16]
+        recs.append({
+            'candidate_id': rid, 'recognized_operation': 'buffer_write',
+            'file': c.get('file'), 'function': c.get('function'), 'line': c.get('line'),
+            'dest': c.get('dest'), 'width_expr': c.get('width_expr'),
+            'analysis_status': 'open_candidate',
+            'reason_code': reason, 'all_reason_codes': [reason],
+            'uncertainty_bucket': bucket_for_reason(reason),
+            'recommended_route': route_for_reason(reason),
+            'unresolved_property': property_for_reason(reason),
+            'llm_eligible': llm_eligible_for_reason(reason)})
+    return recs
+
+
 if __name__ == '__main__':
     for p in sys.argv[1:]:
         c = emit_candidates(p)

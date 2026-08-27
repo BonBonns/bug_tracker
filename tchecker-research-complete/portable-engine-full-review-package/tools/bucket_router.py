@@ -179,7 +179,9 @@ def derive_record(cand):
 # from candidate presence. Others still fall back to candidate-presence and are
 # flagged reason_source="fallback_candidate_presence" -- honestly marking that
 # their reason layer is not yet implemented.
-REASON_EMITTING_PRODUCERS = ("oob_runtime_capacity_verdict",)
+REASON_EMITTING_PRODUCERS = ("oob_runtime_capacity_verdict",
+                             "oob_cursor_write_verdict",
+                             "oob_interprocedural_verdict")
 
 
 def route_factfile(prefix, producers=PRODUCERS):

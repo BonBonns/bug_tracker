@@ -204,14 +204,21 @@ may-reach→relationship_unresolved, after-write→open_candidate) on the indepe
 runtimecap-cfg fixture; and reason↔bucket↔route schema consistency on every
 record. Real bucket-distinction evidence, not a same-label smoke test.
 
-**Maturity, stated honestly.** The reason layer is implemented for the
-runtime-capacity producer only. Candidates from other producers (cursor,
-interprocedural) fall back to candidate-presence, flagged
-`reason_source: "fallback_candidate_presence"`, and the generator now **REJECTS**
-any record whose `reason_source != "explicit_producer_reason"` from the A/B/C
-corpus. In the current pilot that means **only SB-01 is corpus-eligible; SB-02
-and SB-07 are rejected** until the cursor and interprocedural producers get their
-reason layers.
+**Maturity, stated honestly.** The reason layer's OPEN-CANDIDATE emission is now
+implemented for three producers — runtime-capacity, cursor
+(`write_count_bound_not_established`), and interprocedural
+(`capacity_relation_not_established`). All three pilot cases now carry an explicit
+producer reason (`reason_source: "explicit_producer_reason"`) and are
+corpus-eligible: **SB-01, SB-02, SB-07 → 3/3 agreement, zero fallback.** The
+generator REJECTS any record whose `reason_source != "explicit_producer_reason"`.
+
+Still incomplete (before the COMPLETE scanner is frozen): the ABSTENTION-reason
+emission for cursor/interprocedural (e.g. cursor's unresolved-alias →
+`destination_identity_ambiguous`, interproc's conflicting propagations →
+`conflicting_reaching_allocations`) is a documented future extension — those
+producers currently emit explicit reasons only for their open candidates.
+`identity_ambiguous` therefore still has no real emitter, so it remains
+untested and unmanufactured.
 
 `identity_ambiguous` is defined but NOT yet emitted by any instrumented producer;
 it will be added only when a producer genuinely detects that condition — examples
@@ -269,10 +276,9 @@ human-verified, and honestly out of scope for the automatic layer for now.
 - [ ] **Frozen scanner version** — soundness logic is still changing; no freeze
       yet. No scanner or bucket rule may change after the experimental prompts
       are generated.
-- [ ] **Reason layer implemented for every producer the corpus draws on**, so
-      no case's bucket rides on the candidate-presence fallback. Current: only
-      the runtime-capacity producer; SB-02 (cursor) and SB-07 (interproc) are
-      still fallback.
+- [x] **Open-candidate reason emission for every producer the corpus draws on**
+      (runtime-capacity, cursor, interproc); all 3 pilot cases explicit, 3/3, no
+      fallback. Abstention-reason emission for cursor/interproc still pending.
 - [ ] **≥9 genuine routable candidates**, balanced among final safe /
       vulnerable / legitimately-unresolved outcomes, selected BEFORE any model
       calls by scanner state / bucket / verified ground truth / diversity —
