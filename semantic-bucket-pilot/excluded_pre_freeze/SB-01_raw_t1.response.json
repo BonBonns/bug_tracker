@@ -1,0 +1,18 @@
+{
+  "_quarantine": "EXCLUDED pre-freeze. Not a valid observation. Recovered verbatim from the session transcript for auditability. See MANIFEST.json.",
+  "_old_condition": "raw (2-condition design, superseded)",
+  "conclusion": "vulnerable",
+  "relationship_answer": "contradicted",
+  "evidence_used": [
+    "rsa_FormatBlock's guard is `if (data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))) return SECFailure;` where modulusLen is `unsigned` and the subtraction is done in unsigned arithmetic with no prior check that modulusLen >= 3 + RSA_BLOCK_MIN_PAD_LEN",
+    "If modulusLen < 3 + RSA_BLOCK_MIN_PAD_LEN, `modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN)` wraps around to a huge unsigned value, making the caller's check pass (fail to reject) almost any data->len",
+    "rsa_FormatOneBlock recomputes `padLen = modulusLen - data->len - 3` (also unsigned) and only rejects it via `if (padLen < RSA_BLOCK_MIN_PAD_LEN)`, which does not catch a wrapped-around (huge) padLen",
+    "block is allocated as exactly PORT_Alloc(modulusLen) bytes; when no underflow occurs the total bytes written (2 + padLen + 1 + data->len) algebraically equals modulusLen, so the memcpy is exactly in-bounds only in that non-underflow case",
+    "For modulusLen in {0,1,...,3+RSA_BLOCK_MIN_PAD_LEN-1} (a range not excluded by anything in the shown signatures or checks), both the caller's and callee's guards are defeated by unsigned wraparound, so PORT_Memset and then PORT_Memcpy write far past the modulusLen-sized allocation"
+  ],
+  "unsupported_assumptions": [
+    "The exact numeric value of RSA_BLOCK_MIN_PAD_LEN is not shown (only that it is used as a lower-bound comparison constant)",
+    "Whether any real caller of rsa_FormatBlock can/does actually pass a modulusLen small enough to trigger the underflow (e.g., whether modulusLen is validated elsewhere to always be a realistic RSA key size) is not shown and was not relied upon — the counterexample only uses the function signatures and control flow given"
+  ],
+  "confidence": "medium"
+}

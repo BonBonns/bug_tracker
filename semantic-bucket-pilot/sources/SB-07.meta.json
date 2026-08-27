@@ -1,0 +1,8 @@
+{
+  "case_id": "SB-07",
+  "scanner_uncertainty_category": "relationship unresolved",
+  "routable": true,
+  "highlighted_operation": "PORT_Memcpy(buf, pbe_key->data, pbe_key->len) inside nsc_pbe_key_gen",
+  "uncertainty_category": "relationship unresolved",
+  "focused_question": "Do the guarded value `key_length` and the write's actual length `pbe_key->len` refer to the same value across the call chain, establishing that the write cannot exceed the buffer's capacity?"
+}

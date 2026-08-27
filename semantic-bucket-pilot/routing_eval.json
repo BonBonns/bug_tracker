@@ -1,0 +1,123 @@
+{
+  "description": "Routing evaluation for the semantic-bucket pilot. Tests whether TChecker's deterministic buckets lead to the APPROPRIATE downstream action, independent of (and prior to) any LLM review. No model calls are involved. For each case we record what the frozen scanner actually did (candidate present? evidence present? bucket assigned? route taken?) versus the human-verified correct route. This is a SEPARATE thesis evaluation from the A/B/C accuracy pilot: A/B/C measures whether bucket-guided review improves the LLM's answer FOR CASES ROUTED TO THE LLM; this measures whether the routing decision itself is correct.",
+  "route_enum": [
+    "DETERMINISTIC_COMPLETE",
+    "LLM_SEMANTIC_REVIEW",
+    "ANALYZER_OR_FRONTEND_REPAIR",
+    "ADDITIONAL_EVIDENCE_REQUIRED",
+    "ABSTAIN"
+  ],
+  "route_correct_when": "actual_route == human_verified_route. For a no-candidate case, actual_route is ABSTAIN-by-omission (the scanner never surfaced anything); a mismatch there is the intended FINDING (a detection/capability gap), not a routing bug — the scanner cannot route a candidate it did not emit.",
+  "cases": [
+    {
+      "case_id": "SB-01",
+      "role": "abc_dryrun_mechanics",
+      "scanner_candidate_present": true,
+      "required_evidence_present": true,
+      "assigned_bucket": "relationship_unresolved",
+      "human_verified_bucket": "relationship_unresolved",
+      "expected_route": "LLM_SEMANTIC_REVIEW",
+      "actual_route": "LLM_SEMANTIC_REVIEW",
+      "human_verified_route": "LLM_SEMANTIC_REVIEW",
+      "route_correct": true,
+      "notes": "Frozen RUNTIME_CAPACITY producer emits the candidate; guard left uncredited (compound capacity expression + unresolved macro), a genuine relationship-unresolved. Correctly routed to semantic review. The review's own verified answer is 'unresolved/insufficient' at snippet level — a correct abstention, not a routing error."
+    },
+    {
+      "case_id": "SB-02",
+      "role": "abc_dryrun_mechanics",
+      "scanner_candidate_present": true,
+      "required_evidence_present": true,
+      "assigned_bucket": "relationship_unresolved",
+      "human_verified_bucket": "relationship_unresolved",
+      "expected_route": "LLM_SEMANTIC_REVIEW",
+      "actual_route": "LLM_SEMANTIC_REVIEW",
+      "human_verified_route": "LLM_SEMANTIC_REVIEW",
+      "route_correct": true,
+      "notes": "Frozen CURSOR producer emits the candidate; capacity known (256), write-count-vs-capacity relationship unbounded by any guard. Correctly routed. Verified review answer is likely 'unresolved/insufficient' (worst-case Huffman bound not derivable from the snippet) — a legitimate routable case whose honest outcome is abstention."
+    },
+    {
+      "case_id": "SB-07",
+      "role": "abc_dryrun_mechanics",
+      "scanner_candidate_present": true,
+      "required_evidence_present": true,
+      "assigned_bucket": "relationship_unresolved",
+      "human_verified_bucket": "relationship_unresolved",
+      "expected_route": "LLM_SEMANTIC_REVIEW",
+      "actual_route": "LLM_SEMANTIC_REVIEW",
+      "human_verified_route": "LLM_SEMANTIC_REVIEW",
+      "route_correct": true,
+      "notes": "Frozen COPY_LENGTH producer emits the candidate (guard checks key_length, write uses pbe_key->len — a name mismatch it cannot resolve). Correctly routed. SCANNER STATE = relationship unresolved; VERIFIED GROUND TRUTH = safe (the two are separate fields: the cross-function equality key_length == pbe_param->keyLen == pbe_key->len holds, provable from the code shown but not by the scanner's guard-matching)."
+    },
+    {
+      "case_id": "SB-03",
+      "role": "routing_eval_only",
+      "scanner_candidate_present": false,
+      "required_evidence_present": false,
+      "assigned_bucket": "producer_evidence_missing",
+      "human_verified_bucket": "producer_evidence_missing",
+      "expected_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "actual_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "human_verified_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "route_correct": true,
+      "notes": "The union's `buffer` member was never exported by the frontend (confirmed against real extracted facts). Correctly NOT routed to the LLM: the sound fix is upstream (frontend/producer), and leaning on an LLM to paper over a frontend bug that affects EVERY anonymous-union case is the wrong architectural choice, even though an LLM reading the raw source might sometimes recover it."
+    },
+    {
+      "case_id": "SB-04",
+      "role": "routing_eval_only",
+      "scanner_candidate_present": false,
+      "required_evidence_present": false,
+      "assigned_bucket": "producer_evidence_missing",
+      "human_verified_bucket": "producer_evidence_missing",
+      "expected_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "actual_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "human_verified_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "route_correct": true,
+      "notes": "Array capacity NUM_MIXERS*SFTK_MAX_MAC_LENGTH never folded to a literal (macro folding failed; full preprocessing blocked by a missing header). No numeric capacity fact exported. Correctly routed to producer/analyzer repair, not the LLM."
+    },
+    {
+      "case_id": "SB-05",
+      "role": "detection_capability_eval",
+      "scanner_candidate_present": false,
+      "required_evidence_present": true,
+      "assigned_bucket": null,
+      "human_verified_bucket": "analysis_capability_missing",
+      "expected_route": "ABSTAIN",
+      "actual_route": "ABSTAIN",
+      "human_verified_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "route_correct": false,
+      "notes": "DETECTION GAP (intended finding): the scanner emitted no candidate because it has no model for a runtime-configured buffer capacity nor for cross-iteration index-validation invariants. Facts ARE visible; the analysis capability is absent. Not eligible for A/B/C (no real candidate). The mismatch (abstained where a capability is needed) is exactly what this eval is meant to surface."
+    },
+    {
+      "case_id": "SB-06",
+      "role": "detection_capability_eval",
+      "scanner_candidate_present": false,
+      "required_evidence_present": true,
+      "assigned_bucket": null,
+      "human_verified_bucket": "analysis_capability_missing",
+      "expected_route": "ABSTAIN",
+      "actual_route": "ABSTAIN",
+      "human_verified_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "route_correct": false,
+      "notes": "DETECTION GAP: write via a struct-stored function pointer (no resolvable target) + a 'wrong already-computed variable used as the bound' provenance question. Two capabilities absent; no candidate emitted. Not A/B/C-eligible."
+    },
+    {
+      "case_id": "SB-08",
+      "role": "detection_capability_eval",
+      "scanner_candidate_present": false,
+      "required_evidence_present": true,
+      "assigned_bucket": null,
+      "human_verified_bucket": "analysis_capability_missing",
+      "expected_route": "ABSTAIN",
+      "actual_route": "ABSTAIN",
+      "human_verified_route": "ANALYZER_OR_FRONTEND_REPAIR",
+      "route_correct": false,
+      "notes": "DETECTION GAP: pointer-offset destination + accumulation of a running offset across repeated calls, with no overflow check. Unmodeled by the producer family; no candidate emitted on either revision. Ground truth (vulnerable) is CVE-confirmed, but the scanner never surfaced it — a capability limit, honestly recorded, not hidden."
+    }
+  ],
+  "summary": {
+    "routed_to_llm_correctly": ["SB-01", "SB-02", "SB-07"],
+    "routed_to_repair_correctly": ["SB-03", "SB-04"],
+    "detection_capability_gaps": ["SB-05", "SB-06", "SB-08"],
+    "interpretation": "The buckets that carry a real candidate route to the correct action in every case (3/3 to LLM review, 2/2 to producer repair). The three no-candidate cases are detection/capability gaps, not routing errors: the scanner cannot route what it never detected. This cleanly separates the bucket-routing contribution from the A/B/C accuracy question and from raw detection coverage."
+  }
+}

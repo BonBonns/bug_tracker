@@ -1,0 +1,10 @@
+- The destination `_buffer` is a fixed-size local array whose element count
+  `BUFSIZE` folds to the compile-time constant 256 bytes; TChecker resolves that
+  capacity.
+- The highlighted operation writes one byte through the auto-incremented pointer
+  `buffer` (`*buffer++ = c`), where `buffer` was aliased to `_buffer` earlier in
+  the function.
+- The number of times this write executes is governed at runtime by
+  variable-length Huffman codes read from coding tables (see the note on
+  `encode_one_block`); no comparison in this function bounds that count against
+  the buffer's capacity before the writes occur.

@@ -16,5 +16,26 @@
     ],
     "confidence": "high"
   },
-  "verification_notes": "Verified via a direct diff of the real fix: the sole change is at the padded-data HMAC/cipher call, changing the length argument from `context->blockSize` to `maxout` (the function's own already-declared real output capacity, correctly used in the function's SECOND, unconditional call a few lines later). Both values are locally declared, both are plausible-looking unsigned integers, and nothing in the syntax marks one as wrong -- recognizing the bug requires tracing WHICH value the call's real output-buffer-size parameter should hold (data-flow provenance back to the caller's actual declared capacity) versus which value merely happens to be sitting in scope with a similar-sounding role. This is ANALYSIS_CAPABILITY_MISSING for two independently disqualifying reasons, both confirmed against the real exported facts this session: (a) the call itself is made through a struct-stored function pointer (`context->update`), which this analysis pipeline's own extracted facts record with a generic 'indirect call' marker carrying no resolvable target identity at all -- there is no contract table entry to even attempt matching; (b) even with a resolved target, the underlying bug is not 'a bound is missing' (every producer built so far checks for exactly that) but 'the wrong ALREADY-COMPUTED, already-in-scope variable was used in a bound's position' -- a provenance/taint question this producer family does not attempt, distinct in kind from every other capability gap in this corpus."
+  "verification_notes": "Verified via a direct diff of the real fix: the sole change is at the padded-data HMAC/cipher call, changing the length argument from `context->blockSize` to `maxout` (the function's own already-declared real output capacity, correctly used in the function's SECOND, unconditional call a few lines later). Both values are locally declared, both are plausible-looking unsigned integers, and nothing in the syntax marks one as wrong -- recognizing the bug requires tracing WHICH value the call's real output-buffer-size parameter should hold (data-flow provenance back to the caller's actual declared capacity) versus which value merely happens to be sitting in scope with a similar-sounding role. This is ANALYSIS_CAPABILITY_MISSING for two independently disqualifying reasons, both confirmed against the real exported facts this session: (a) the call itself is made through a struct-stored function pointer (`context->update`), which this analysis pipeline's own extracted facts record with a generic 'indirect call' marker carrying no resolvable target identity at all -- there is no contract table entry to even attempt matching; (b) even with a resolved target, the underlying bug is not 'a bound is missing' (every producer built so far checks for exactly that) but 'the wrong ALREADY-COMPUTED, already-in-scope variable was used in a bound's position' -- a provenance/taint question this producer family does not attempt, distinct in kind from every other capability gap in this corpus.",
+  "verified_ground_truth": {
+    "conclusion": "vulnerable",
+    "relationship_answer": "contradicted",
+    "evidence_used": [
+      "the function declares its own real output-buffer capacity in a local variable at the top, derived from the caller-supplied output-length pointer",
+      "that capacity variable is used correctly a few lines later, in the SECOND call through the same function pointer",
+      "but in the FIRST call through that function pointer (the padded-data branch), a completely different value -- the cipher's fixed block size, not the actual output buffer's capacity -- is passed in the exact argument position that the function pointer's contract documents as the output buffer size"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that because a value passed as a length argument LOOKS like a plausible size (it is a real, meaningful quantity elsewhere in the same function), it must be the CORRECT quantity for this specific argument position"
+    ],
+    "confidence": "high"
+  },
+  "role": "detection_capability_eval",
+  "scanner_state": {
+    "candidate_present": false,
+    "assigned_uncertainty_category": null,
+    "routable": false,
+    "human_verified_bucket": "analysis_capability_missing",
+    "note": "No candidate emitted (indirect call, no contract). NOT A/B/C-eligible."
+  }
 }

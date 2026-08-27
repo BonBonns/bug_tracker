@@ -1,0 +1,56 @@
+{
+  "policy": "Any model output produced under a prompt that was later superseded, or under any non-frozen condition, is QUARANTINED here and excluded from all scoring via this manifest. It is never silently discarded. Future invalid runs must be MOVED here (not deleted), with an entry added below, at the moment they are invalidated.",
+  "excluded_runs": [
+    {
+      "run_id": "SB-01_raw_t1",
+      "recovered_file": "SB-01_raw_t1.response.json",
+      "condition_old": "raw (2-condition design)",
+      "count": 1,
+      "old_prompt_hash": "not preserved (the 2-condition prompt file and its archived run record were deleted before this quarantine policy existed; the prompt was the obsolete raw = code + focused-question design, since replaced by frozen condition A)",
+      "exclusion_reason": "prompt superseded: the 2-condition raw/structured design was replaced by the frozen 3-condition A/B/C design. The 'raw' condition's question wording differs from frozen condition A, so this output does not correspond to any frozen prompt.",
+      "viewed_before_exclusion": true,
+      "viewed_note": "This output was returned to the operator by the Agent tool (visible in the session transcript) BEFORE the redesign. It was excluded solely because its prompt was superseded, NOT because of its content or answer. It was never scored by the rubric, and the decision to exclude did not depend on whether its answer was correct.",
+      "scored": false
+    },
+    {
+      "run_id": "SB-01_structured_t1",
+      "recovered_file": "SB-01_structured_t1.response.json",
+      "condition_old": "structured (2-condition design)",
+      "count": 1,
+      "old_prompt_hash": "not preserved (see above; prompt was the obsolete structured = code + facts + inline focused-question design, since split into frozen conditions B and C)",
+      "exclusion_reason": "prompt superseded: the old 'structured' condition combined established facts AND the focused question in one block; the frozen design separates these into B (facts + generic unresolved) and C (facts + typed bucket + focused question). This output corresponds to neither frozen prompt exactly.",
+      "viewed_before_exclusion": true,
+      "viewed_note": "Returned inline by the Agent tool and visible in the transcript before the redesign. Excluded for prompt supersession only, never scored.",
+      "scored": false
+    },
+    {
+      "run_id": "SB-02_raw_t1_bg",
+      "recovered_file": null,
+      "condition_old": "raw (2-condition design)",
+      "count": 1,
+      "old_prompt_hash": "not preserved",
+      "exclusion_reason": "prompt superseded (same as SB-01_raw). Launched as a background agent under the old design.",
+      "viewed_before_exclusion": false,
+      "viewed_note": "This background agent completed but its output was NEVER read or archived by the operator; it is genuinely unviewed. Output not recovered (not captured at completion time).",
+      "scored": false
+    },
+    {
+      "run_id": "SB-02_structured_t1_bg",
+      "recovered_file": null,
+      "condition_old": "structured (2-condition design)",
+      "count": 1,
+      "old_prompt_hash": "not preserved",
+      "exclusion_reason": "prompt superseded (same as SB-01_structured). Launched as a background agent under the old design.",
+      "viewed_before_exclusion": false,
+      "viewed_note": "Background agent; output never read or archived; genuinely unviewed; not recovered.",
+      "scored": false
+    }
+  ],
+  "totals": {
+    "excluded_run_count": 4,
+    "recovered": 2,
+    "unrecovered": 2,
+    "scored": 0
+  },
+  "integrity_note": "Two of the four excluded outputs were incidentally visible in the session transcript before exclusion; this is recorded truthfully rather than claimed as blind exclusion. Exclusion was driven entirely by prompt supersession (a structural property of the prompt), not by the outputs' answers, and no excluded output was ever run through the scoring rubric. These outputs, and the debugging-only Agent-tool mechanism that produced them, are not final thesis observations."
+}

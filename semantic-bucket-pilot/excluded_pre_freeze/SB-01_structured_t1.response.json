@@ -1,0 +1,20 @@
+{
+  "_quarantine": "EXCLUDED pre-freeze. Not a valid observation. Recovered verbatim from the session transcript for auditability. See MANIFEST.json.",
+  "_old_condition": "structured (2-condition design, superseded)",
+  "conclusion": "unresolved",
+  "relationship_answer": "unresolved",
+  "evidence_used": [
+    "block = PORT_Alloc(modulusLen) establishes destination capacity as exactly modulusLen bytes, with bp aliasing block",
+    "Total bytes written by rsa_FormatOneBlock in the RSA_BlockPrivate path sum to 2 + padLen + 1 + data->len, and padLen is computed as modulusLen - data->len - 3, so the write total equals modulusLen only if that arithmetic does not underflow",
+    "rsa_FormatOneBlock's own guard 'if (padLen < RSA_BLOCK_MIN_PAD_LEN)' fails to catch an underflow of 'modulusLen - data->len - 3' in unsigned arithmetic, because an underflowed padLen wraps to a very large value that is not less than RSA_BLOCK_MIN_PAD_LEN",
+    "rsa_FormatBlock's guard 'data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))' dominates and controls the call, but its own subtraction 'modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN)' is itself unsigned arithmetic that can underflow if modulusLen is small, which would make the guard's comparison spuriously false and let an unsafe call through",
+    "RSA_BLOCK_MIN_PAD_LEN's numeric value is not shown in this excerpt",
+    "No lower bound on modulusLen (e.g. a minimum key size enforced elsewhere) is shown in this excerpt"
+  ],
+  "unsupported_assumptions": [
+    "That RSA_BLOCK_MIN_PAD_LEN has any particular small value (e.g. 8) — not shown in the excerpt",
+    "That modulusLen is guaranteed by some caller not shown here to be at least 3 + RSA_BLOCK_MIN_PAD_LEN (e.g. via a minimum RSA key size check) — not shown in the excerpt",
+    "That callers of rsa_FormatBlock always supply a modulusLen large enough for the guard subtraction to avoid underflow"
+  ],
+  "confidence": "high"
+}

@@ -25,5 +25,27 @@
     "3. Even granting the constant's value, the subtraction `modulusLen - (adjustment)` is unsigned arithmetic: if the adjustment ever exceeds modulusLen, the subtraction wraps to a huge value and the guard's rejecting branch stops triggering when it should -- proving this requires a lower bound on modulusLen that is NOT established anywhere in the code shown here.",
     "4. The guarded caller-side value and the value actually used for the write inside the callee must be confirmed to be the SAME value, mapped correctly through the call -- in this case they are (argument position 0 and the data pointer both map straightforwardly), which is the one sub-question that IS resolved here."
   ],
-  "verification_notes": "Verified against the real patched-revision source: RSA_BLOCK_MIN_PAD_LEN is #define'd as 8 elsewhere in the same codebase (lib/freebl/rsapkcs.c line 20 in the full checkout), so the constant is in fact small and positive -- but that resolved value is NOT present in any fact this analysis pass has access to (the raw comparison node's own text keeps the macro name unexpanded), and even knowing it is 8, proving the subtraction can't underflow still requires a lower bound on modulusLen from elsewhere in the codebase (RSA key-size validation on key import/generation), which this case's code does not show. Ground truth is therefore honestly 'unresolved' at the level of what this code snippet alone can prove -- not 'safe' by real-world plausibility and not 'vulnerable' without a concrete underflow scenario. Do not let ground truth or scoring silently substitute 'the name suggests a small positive number' for a proof -- that is exactly the unsupported-arithmetic-assumption class this project's own detector work identified and removed."
+  "verification_notes": "Verified against the real patched-revision source: RSA_BLOCK_MIN_PAD_LEN is #define'd as 8 elsewhere in the same codebase (lib/freebl/rsapkcs.c line 20 in the full checkout), so the constant is in fact small and positive -- but that resolved value is NOT present in any fact this analysis pass has access to (the raw comparison node's own text keeps the macro name unexpanded), and even knowing it is 8, proving the subtraction can't underflow still requires a lower bound on modulusLen from elsewhere in the codebase (RSA key-size validation on key import/generation), which this case's code does not show. Ground truth is therefore honestly 'unresolved' at the level of what this code snippet alone can prove -- not 'safe' by real-world plausibility and not 'vulnerable' without a concrete underflow scenario. Do not let ground truth or scoring silently substitute 'the name suggests a small positive number' for a proof -- that is exactly the unsupported-arithmetic-assumption class this project's own detector work identified and removed.",
+  "verified_ground_truth": {
+    "conclusion": "unresolved",
+    "relationship_answer": "unresolved",
+    "evidence_used": [
+      "block = PORT_Alloc(modulusLen) establishes the destination's capacity as exactly modulusLen bytes",
+      "the caller-side comparison dominates the call to the function that performs the write, and is a genuine runtime branch (not an assertion)",
+      "the guarded value (data->len) and the compared threshold (modulusLen, adjusted) map by argument position to the exact parameters used inside the write",
+      "both compared quantities are unsigned types, so no signed/unsigned conversion changes the comparison's meaning"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that the named constant subtracted from modulusLen is small/positive just because of what its name suggests, without a resolved numeric value",
+      "that modulusLen is 'obviously' large enough in practice (real RSA keys are hundreds of bytes) is a fact about typical usage, not a proof available from this code -- it requires tracing every code path that can reach this function back to wherever a key's modulus size is validated or rejected, which is not shown here",
+      "that unsigned subtraction of two values already shown non-negative individually cannot underflow -- it can, if the subtrahend exceeds the minuend, and that has not been ruled out here"
+    ],
+    "confidence": "high"
+  },
+  "role": "abc_dryrun_mechanics",
+  "scanner_state": {
+    "candidate_present": true,
+    "assigned_uncertainty_category": "relationship_unresolved",
+    "routable": true
+  }
 }

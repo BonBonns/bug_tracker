@@ -1,44 +1,44 @@
 #!/usr/bin/env python3
-"""Scoring rubric for the semantic-evidence bucket pilot. Scores ONE archived
-response against its case's ground truth, on the six dimensions requested:
+"""Scoring rubric for the semantic-bucket pilot (A/B/C design).
 
-  1. correct_conclusion       -- response.conclusion == ground_truth.conclusion
-  2. correct_relationship     -- response.relationship_answer ==
-                                  ground_truth.relationship_answer
-  3. appropriate_abstention   -- ONLY scored when ground truth itself is
-                                  "unresolved": did the response also say
-                                  "unresolved" (correct abstention) rather than
-                                  confidently guessing safe/vulnerable?
-  4. unsupported_assumption_flags -- HEURISTIC, keyword-based: does the
-                                  response's OWN conclusion/relationship_answer
-                                  line up with one of the case's known
-                                  unsupported-assumption traps, WITHOUT the
-                                  response's own "unsupported_assumptions"
-                                  field naming that it noticed and avoided it?
-                                  This dimension is explicitly NOT fully
-                                  automatable -- see NOTE below. It flags
-                                  candidates for human review; it does not
-                                  replace one.
-  5. contradicts_deterministic_evidence -- structured condition only: does the
-                                  response's conclusion silently override or
-                                  dismiss a live TChecker candidate ("NONE" is
-                                  not live; an actual CANDIDATE/flagged write
-                                  is) without engaging with why?
-  6. evidence_overlap         -- informative only: fraction of the ground
-                                  truth's evidence_used items the response's
-                                  own evidence_used list appears to reference
-                                  (substring/keyword heuristic, not semantic
-                                  matching -- also NOT a substitute for human
-                                  review, just a fast triage signal).
+Conditions:
+  A = code + highlighted operation
+  B = A + established facts + generic "unresolved" status
+  C = B + typed uncertainty category + focused question
 
-NOTE on automation honesty: dimensions 4 and 6 use crude keyword/substring
-heuristics because this pilot has no semantic-similarity model available to
-it. They are cheap triage signals for a human scorer, not a certified
-automatic score -- this script's own README/report must say so plainly, and
-must not present heuristic hits/misses as the final word on "unsupported
-assumption" or "correct evidence use" without a human pass, particularly for
-the dry run, whose whole point is to find out whether this rubric actually
-works before it is trusted at scale.
+PRIMARY comparison is B vs C (does typed bucketing + a focused question beat a
+generic UNKNOWN, holding code/candidate/facts constant?). A is the general
+baseline. Only cases whose scanner_state.candidate_present is true AND routable
+belong here; non-routable / no-candidate cases live in routing_eval.json, not
+in this accuracy comparison.
+
+Scored against `verified_ground_truth` (the independently established final
+answer), which is a SEPARATE field from scanner_state (the scanner's own
+uncertainty). A case can have scanner_state = relationship_unresolved and
+verified_ground_truth = safe (e.g. SB-07) — the reviewer's job is to reach the
+verified answer; the scanner's uncertainty is the starting point, not the key.
+
+Dimensions (per the design):
+  1. correct_conclusion        response.conclusion == verified.conclusion
+  2. correct_relationship      response.relationship_answer == verified.relationship_answer
+  3. appropriate_abstention    only when verified.conclusion == "unresolved":
+                               did the response also abstain rather than guess?
+  4. unsupported_assumption    HEURISTIC keyword flag (NOT fully automatable —
+                               triage signal for a human scorer, never the final
+                               word); flags a response that reached a wrong
+                               confident conclusion by echoing a known trap
+                               without naming it in its own unsupported_assumptions.
+  5. contradicts_deterministic did the response assert a confident safe/vulnerable
+                               verdict while the deterministic layer marked the
+                               relationship UNRESOLVED, without engaging that
+                               uncertainty? (informational; being confidently
+                               RIGHT, as in SB-07 -> safe, is not a contradiction)
+  6. evidence_overlap          informational keyword overlap with verified evidence.
+
+NOTE: dimensions 4 and 6 use crude keyword heuristics because no
+semantic-similarity model is available here. They are triage signals for a
+human scorer, not certified automatic scores. The dry run's whole purpose is to
+check whether this rubric is usable before it is trusted at scale.
 """
 import json
 import re
@@ -48,10 +48,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus"
 RUNS = ROOT / "runs"
+CONDITIONS = ("A", "B", "C")
 
 
-def load_ground_truth(case_id):
+def load_case(case_id):
     return json.loads((CORPUS / f"{case_id}.json").read_text())
+
+
+def verified(case):
+    return case.get("verified_ground_truth") or case.get("ground_truth")
 
 
 def _norm(s):
@@ -59,136 +64,119 @@ def _norm(s):
 
 
 def _keyword_hit(needle, haystack_list):
-    """Loose containment check: does any string in haystack_list share a
-    meaningful word-overlap with needle? Deliberately crude -- see NOTE."""
     needle_words = set(re.findall(r"[a-z0-9_]{4,}", _norm(needle)))
     if not needle_words:
         return False
     for h in haystack_list or []:
-        h_words = set(re.findall(r"[a-z0-9_]{4,}", _norm(h)))
-        if len(needle_words & h_words) >= 2:
+        if len(needle_words & set(re.findall(r"[a-z0-9_]{4,}", _norm(h)))) >= 2:
             return True
     return False
 
 
-def score_response(case_id, condition, response, has_live_candidate=None):
-    """`response` is the parsed JSON object the model returned (already
-    validated against the required schema by the caller). `has_live_candidate`
-    overrides case detection of a live deterministic candidate; if None,
-    inferred from the case's structured-evidence text (only meaningful for
-    condition == 'structured')."""
-    gt = load_ground_truth(case_id)
-    g = gt["ground_truth"]
+def score_response(case_id, condition, response):
+    case = load_case(case_id)
+    v = verified(case)
+    scanner_unresolved = (case.get("scanner_state", {}) or {}).get(
+        "assigned_uncertainty_category") == "relationship_unresolved"
 
-    result = {
-        "case_id": case_id,
-        "condition": condition,
-        "bucket": gt["bucket"],
-        "correct_conclusion": _norm(response.get("conclusion")) == _norm(g["conclusion"]),
-        "correct_relationship": _norm(response.get("relationship_answer")) == _norm(g["relationship_answer"]),
+    r = {
+        "case_id": case_id, "condition": condition, "role": case.get("role"),
+        "scanner_category": (case.get("scanner_state", {}) or {}).get("assigned_uncertainty_category"),
+        "verified_conclusion": _norm(v["conclusion"]),
+        "correct_conclusion": _norm(response.get("conclusion")) == _norm(v["conclusion"]),
+        "correct_relationship": _norm(response.get("relationship_answer")) == _norm(v["relationship_answer"]),
         "appropriate_abstention": None,
         "unsupported_assumption_flag": False,
-        "unsupported_assumption_detail": None,
-        "contradicts_deterministic_evidence": None,
+        "contradicts_deterministic": None,
         "evidence_overlap_fraction": None,
         "notes": [],
     }
 
-    if _norm(g["conclusion"]) == "unresolved":
-        result["appropriate_abstention"] = _norm(response.get("conclusion")) == "unresolved"
+    if _norm(v["conclusion"]) == "unresolved":
+        r["appropriate_abstention"] = _norm(response.get("conclusion")) == "unresolved"
 
-    # Dimension 4 (heuristic, see module docstring)
-    traps = g.get("unsupported_assumptions_that_must_not_be_made") or g.get(
-        "unsupported_assumptions_that_must_not_be_used_to_dismiss_this") or []
-    resp_conclusion_text = _norm(response.get("conclusion"))
-    resp_named_assumptions = response.get("unsupported_assumptions") or []
-    if traps and resp_conclusion_text in ("safe",) and _norm(g["conclusion"]) != "safe":
-        # Model concluded "safe" where ground truth did not -- check whether
-        # any known trap phrase is echoed in its own evidence_used without
-        # being named as an assumption it declined to rely on.
+    traps = (v.get("unsupported_assumptions_that_must_not_be_made")
+             or v.get("unsupported_assumptions_that_must_not_be_used_to_dismiss_this") or [])
+    if traps and _norm(response.get("conclusion")) != _norm(v["conclusion"]) \
+            and _norm(response.get("conclusion")) in ("safe", "vulnerable"):
+        named = response.get("unsupported_assumptions") or []
         for trap in traps:
-            if _keyword_hit(trap, response.get("evidence_used") or []) and not _keyword_hit(
-                    trap, resp_named_assumptions):
-                result["unsupported_assumption_flag"] = True
-                result["unsupported_assumption_detail"] = trap
+            if _keyword_hit(trap, response.get("evidence_used") or []) and not _keyword_hit(trap, named):
+                r["unsupported_assumption_flag"] = True
                 break
-        if not result["unsupported_assumption_flag"]:
-            result["notes"].append(
-                "conclusion diverges from ground truth toward 'safe' but no known trap phrase "
-                "matched by keyword heuristic -- flag for human review anyway, heuristic misses are expected")
-            result["unsupported_assumption_flag"] = "REVIEW"
+        else:
+            r["unsupported_assumption_flag"] = "REVIEW"
+            r["notes"].append("wrong confident conclusion; no known trap matched by heuristic — human review")
 
-    # Dimension 5: only meaningful for structured condition
-    if condition == "structured":
-        if has_live_candidate is None:
-            has_live_candidate = "Deterministic candidate: NONE" not in _find_prompt_text(case_id, condition)
-        if has_live_candidate:
-            result["contradicts_deterministic_evidence"] = _norm(response.get("conclusion")) == "safe"
+    if scanner_unresolved:
+        # A confident safe/vulnerable that matches the verified answer is fine.
+        # A confident verdict that does NOT match, on a scanner-unresolved case,
+        # is a contradiction of the deterministic uncertainty worth flagging.
+        r["contradicts_deterministic"] = (
+            _norm(response.get("conclusion")) in ("safe", "vulnerable")
+            and _norm(response.get("conclusion")) != _norm(v["conclusion"])
+        )
 
-    # Dimension 6: informative overlap, not a pass/fail
-    gt_evidence = g.get("evidence_used") or []
-    resp_evidence = response.get("evidence_used") or []
-    if gt_evidence:
-        hits = sum(1 for e in gt_evidence if _keyword_hit(e, resp_evidence))
-        result["evidence_overlap_fraction"] = round(hits / len(gt_evidence), 2)
-
-    return result
-
-
-def _find_prompt_text(case_id, condition):
-    p = ROOT / "prompts" / f"{case_id}_{condition}.txt"
-    return p.read_text() if p.exists() else ""
+    gt_ev = v.get("evidence_used") or []
+    if gt_ev:
+        hits = sum(1 for e in gt_ev if _keyword_hit(e, response.get("evidence_used") or []))
+        r["evidence_overlap_fraction"] = round(hits / len(gt_ev), 2)
+    return r
 
 
 def score_all_runs():
-    """Scans runs/*.json (archived call records: prompt, response, model,
-    timestamp, hash) and scores every one found. Returns a list of score dicts
-    plus an aggregate summary by bucket x condition."""
     results = []
     for run_file in sorted(RUNS.glob("*.json")):
         run = json.loads(run_file.read_text())
-        try:
-            response = json.loads(run["response_text"])
-        except (KeyError, json.JSONDecodeError) as e:
-            results.append({
-                "case_id": run.get("case_id"), "condition": run.get("condition"),
-                "trial": run.get("trial"), "PARSE_ERROR": str(e),
-            })
+        if run.get("condition") not in CONDITIONS:
             continue
-        r = score_response(run["case_id"], run["condition"], response)
-        r["trial"] = run.get("trial")
-        r["run_file"] = run_file.name
-        results.append(r)
+        try:
+            resp = json.loads(run["response_text"])
+        except (KeyError, json.JSONDecodeError) as e:
+            results.append({"case_id": run.get("case_id"), "condition": run.get("condition"),
+                            "trial": run.get("trial"), "PARSE_ERROR": str(e), "run_file": run_file.name})
+            continue
+        s = score_response(run["case_id"], run["condition"], resp)
+        s["trial"] = run.get("trial"); s["run_file"] = run_file.name
+        results.append(s)
     return results
 
 
 def summarize(results):
     from collections import defaultdict
-    buckets = defaultdict(lambda: defaultdict(list))
+    by_cond = defaultdict(list)
     for r in results:
         if "PARSE_ERROR" in r:
             continue
-        buckets[r["bucket"]][r["condition"]].append(r)
+        by_cond[r["condition"]].append(r)
+    out = {}
+    for cond in CONDITIONS:
+        rs = by_cond.get(cond, [])
+        n = len(rs)
+        if not n:
+            continue
+        out[cond] = {
+            "n": n,
+            "conclusion_accuracy": round(sum(x["correct_conclusion"] for x in rs) / n, 2),
+            "relationship_accuracy": round(sum(x["correct_relationship"] for x in rs) / n, 2),
+            "abstention_correct": _rate([x["appropriate_abstention"] for x in rs]),
+            "unsupported_assumption_flags": sum(1 for x in rs if x["unsupported_assumption_flag"] is True),
+            "contradicts_deterministic": sum(1 for x in rs if x["contradicts_deterministic"] is True),
+        }
+    if "B" in out and "C" in out:
+        out["PRIMARY_B_vs_C"] = {
+            "conclusion_accuracy_delta": round(out["C"]["conclusion_accuracy"] - out["B"]["conclusion_accuracy"], 2),
+            "relationship_accuracy_delta": round(out["C"]["relationship_accuracy"] - out["B"]["relationship_accuracy"], 2),
+            "note": "positive delta = bucket-guided review (C) beats generic-unknown (B), the load-bearing result",
+        }
+    return out
 
-    summary = {}
-    for bucket, by_cond in buckets.items():
-        summary[bucket] = {}
-        for cond, rs in by_cond.items():
-            n = len(rs)
-            summary[bucket][cond] = {
-                "n": n,
-                "conclusion_accuracy": round(sum(x["correct_conclusion"] for x in rs) / n, 2) if n else None,
-                "relationship_accuracy": round(sum(x["correct_relationship"] for x in rs) / n, 2) if n else None,
-                "abstention_correct_rate": (
-                    round(sum(1 for x in rs if x["appropriate_abstention"]) /
-                          max(1, sum(1 for x in rs if x["appropriate_abstention"] is not None)), 2)
-                    if any(x["appropriate_abstention"] is not None for x in rs) else None
-                ),
-                "unsupported_assumption_flags": sum(1 for x in rs if x["unsupported_assumption_flag"]),
-            }
-    return summary
+
+def _rate(vals):
+    scored = [v for v in vals if v is not None]
+    return round(sum(1 for v in scored if v) / len(scored), 2) if scored else None
 
 
 if __name__ == "__main__":
-    results = score_all_runs()
-    print(json.dumps({"results": results, "summary": summarize(results)}, indent=2))
+    res = score_all_runs()
+    print(json.dumps({"results": res, "summary": summarize(res)}, indent=2))

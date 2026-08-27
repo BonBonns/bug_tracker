@@ -1,0 +1,85 @@
+CASE ID: SB-02
+
+HIGHLIGHTED OPERATION: the byte store *buffer++ = c in EMIT_BYTE, executed from flush_bits
+
+CODE:
+
+```c
+#define EMIT_BYTE() { \
+  JOCTET c; \
+  put_bits -= 8; \
+  c = (JOCTET)GETJOCTET(put_buffer >> put_bits); \
+  *buffer++ = c;   /* <<< HIGHLIGHTED OPERATION */ \
+  if (c == 0xFF)  /* need to stuff a zero byte? */ \
+    *buffer++ = 0; \
+ }
+
+#define PUT_BITS(code, size) { \
+  put_bits += size; \
+  put_buffer = (put_buffer << size) | code; \
+}
+
+#define CHECKBUF15() { \
+  if (put_bits > 15) { \
+    EMIT_BYTE() \
+    EMIT_BYTE() \
+  } \
+}
+
+#define EMIT_BITS(code, size) { \
+  PUT_BITS(code, size) \
+  CHECKBUF15() \
+}
+
+#define BUFSIZE (DCTSIZE2 * 4)
+
+LOCAL(boolean)
+flush_bits (working_state * state)
+{
+  JOCTET _buffer[BUFSIZE], *buffer;
+  size_t put_buffer;  int put_bits;
+  size_t bytes, bytestocopy;  int localbuf = 0;
+
+  put_buffer = state->cur.put_buffer;
+  put_bits = state->cur.put_bits;
+  if (state->free_in_buffer < BUFSIZE) {
+    localbuf = 1;
+    buffer = _buffer;
+  }
+  else buffer = state->next_output_byte;
+
+  /* fill any partial byte with ones */
+  PUT_BITS(0x7F, 7)
+  while (put_bits >= 8) EMIT_BYTE()
+
+  state->cur.put_buffer = 0;
+  state->cur.put_bits = 0;
+  /* ... copy-out of the local buffer omitted ... */
+  return TRUE;
+}
+
+/* encode_one_block, elsewhere in the same file, drives EMIT_BITS/EMIT_BYTE
+ * repeatedly per DCT block, with the number of bits emitted per call
+ * determined by variable-length Huffman codes looked up from coding tables,
+ * not a fixed count. */
+```
+
+TChecker identified the highlighted operation and established the facts listed below, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+
+ESTABLISHED FACTS (from TChecker's deterministic analysis):
+
+- The destination `_buffer` is a fixed-size local array whose element count
+  `BUFSIZE` folds to the compile-time constant 256 bytes; TChecker resolves that
+  capacity.
+- The highlighted operation writes one byte through the auto-incremented pointer
+  `buffer` (`*buffer++ = c`), where `buffer` was aliased to `_buffer` earlier in
+  the function.
+- The number of times this write executes is governed at runtime by
+  variable-length Huffman codes read from coding tables (see the note on
+  `encode_one_block`); no comparison in this function bounds that count against
+  the buffer's capacity before the writes occur.
+
+Uncertainty category: relationship unresolved
+
+Focused question:
+Does anything shown bound the number of bytes written into the buffer to no more than its capacity?

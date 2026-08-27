@@ -90,8 +90,9 @@ def build(case_id):
     # facts block must appear byte-identical in both.
     assert c.startswith(b), f"{case_id}: C is not a strict superset of B"
     assert facts in b and facts in c, f"{case_id}: facts field missing/edited"
+    bucket = meta.get("scanner_uncertainty_category") or meta.get("bucket")
     return {"case_id": case_id, "A_bytes": len(a), "B_bytes": len(b), "C_bytes": len(c),
-            "facts_bytes": len(facts), "bucket": meta["bucket"], "routable": meta["routable"]}
+            "facts_bytes": len(facts), "bucket": bucket, "routable": meta["routable"]}
 
 
 def main(argv):

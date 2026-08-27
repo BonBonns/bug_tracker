@@ -1,0 +1,10 @@
+- The highlighted operation copies `pbe_key->len` bytes into the fixed local
+  buffer `buf`.
+- The nearest guard on the path to this write, `sizeof(buf) < key_length`,
+  compares `buf`'s size against `key_length` — a syntactically different
+  expression than the write's length `pbe_key->len`. TChecker's guard-matching
+  does not treat two differently-named expressions as the same value.
+- `buf`'s capacity is its fixed compile-time size.
+- `pbe_key` is the return value of `nsspkcs5_ComputeKeyAndIV`, reached across two
+  call boundaries from the guarded function; its `->len` field's origin is not
+  resolved by TChecker's guard-matching.

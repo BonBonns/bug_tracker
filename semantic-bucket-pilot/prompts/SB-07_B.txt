@@ -1,0 +1,109 @@
+CASE ID: SB-07
+
+HIGHLIGHTED OPERATION: PORT_Memcpy(buf, pbe_key->data, pbe_key->len) inside nsc_pbe_key_gen
+
+CODE:
+
+```c
+/* in the caller: */
+    switch (pMechanism->mechanism) {
+        case CKM_PKCS5_PBKD2:
+        case CKM_PBE_MD5_DES_CBC:
+            key_gen_type = nsc_pbe;
+            crv = nsc_SetupPBEKeyGen(pMechanism, &pbe_param, &key_type, &key_length);
+            break;
+        /* ... other mechanism cases omitted ... */
+    }
+
+    /* make sure we aren't going to overflow the buffer */
+    if (sizeof(buf) < key_length) {
+        crv = CKR_TEMPLATE_INCONSISTENT;
+    }
+
+    if (crv != CKR_OK) {
+        goto loser;
+    }
+
+    switch (key_gen_type) {
+        case nsc_pbe:
+            crv = nsc_pbe_key_gen(pbe_param, pMechanism, buf, &key_length,
+                                  faultyPBE3DES);
+            nsspkcs5_DestroyPBEParameter(pbe_param);
+            break;
+        /* ... other key_gen_type cases omitted ... */
+    }
+
+/* nsc_SetupPBEKeyGen, called above: */
+static CK_RV
+nsc_SetupPBEKeyGen(CK_MECHANISM_PTR pMechanism, NSSPKCS5PBEParameter **pbe,
+                   CK_KEY_TYPE *key_type, CK_ULONG *key_length)
+{
+    NSSPKCS5PBEParameter *params = NULL;
+    /* ... OID lookup, param parsing omitted ... */
+    params = nsspkcs5_NewParam(iteration, hashType, &salt, keyLen, ivLen);
+    /* ... */
+    *pbe = params;
+    *key_length = params->keyLen;
+    return CKR_OK;
+}
+
+/* nsc_pbe_key_gen, called above with the SAME pbe_param object: */
+static CK_RV
+nsc_pbe_key_gen(NSSPKCS5PBEParameter *pkcs5_pbe, CK_MECHANISM_PTR pMechanism,
+                void *buf, CK_ULONG *key_length, PRBool faulty3DES)
+{
+    SECItem *pbe_key = NULL, iv, pwitem;
+    /* ... password extraction from pMechanism omitted ... */
+
+    pbe_key = nsspkcs5_ComputeKeyAndIV(pkcs5_pbe, &pwitem, &iv, faulty3DES);
+    if (pbe_key == NULL) {
+        return CKR_HOST_MEMORY;
+    }
+
+    PORT_Memcpy(buf, pbe_key->data, pbe_key->len);   /* <<< HIGHLIGHTED OPERATION */
+    *key_length = pbe_key->len;
+    SECITEM_ZfreeItem(pbe_key, PR_TRUE);
+    pbe_key = NULL;
+    return CKR_OK;
+}
+
+/* nsspkcs5_ComputeKeyAndIV, called above, in a different file: */
+SECItem *
+nsspkcs5_ComputeKeyAndIV(NSSPKCS5PBEParameter *pbe_param, SECItem *pwitem,
+                         SECItem *iv, PRBool faultyPBE3DES)
+{
+    SECItem *key = NULL;
+    /* ... hash object setup, iteration-count checks omitted ... */
+    key = SECITEM_AllocItem(NULL, NULL, pbe_param->keyLen);
+    if (key == NULL) {
+        return NULL;
+    }
+    /* ... key material computed and written into key->data ... */
+    return key;
+}
+
+/* SECITEM_AllocItem, a shared utility used throughout this codebase: */
+SECItem *
+SECITEM_AllocItem(PLArenaPool *arena, SECItem *item, unsigned int len)
+{
+    SECItem *result = NULL;
+    /* ... allocates result if item was NULL, allocates result->data of size len ... */
+    result->len = len;
+    return result;
+}
+```
+
+TChecker identified the highlighted operation and established the facts listed below, but the result remains unresolved. Based on the code and these facts, classify the operation as safe, vulnerable, or unknown, and explain your reasoning.
+
+ESTABLISHED FACTS (from TChecker's deterministic analysis):
+
+- The highlighted operation copies `pbe_key->len` bytes into the fixed local
+  buffer `buf`.
+- The nearest guard on the path to this write, `sizeof(buf) < key_length`,
+  compares `buf`'s size against `key_length` — a syntactically different
+  expression than the write's length `pbe_key->len`. TChecker's guard-matching
+  does not treat two differently-named expressions as the same value.
+- `buf`'s capacity is its fixed compile-time size.
+- `pbe_key` is the return value of `nsspkcs5_ComputeKeyAndIV`, reached across two
+  call boundaries from the guarded function; its `->len` field's origin is not
+  resolved by TChecker's guard-matching.

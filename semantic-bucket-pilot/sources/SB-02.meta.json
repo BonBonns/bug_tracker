@@ -1,0 +1,8 @@
+{
+  "case_id": "SB-02",
+  "scanner_uncertainty_category": "relationship unresolved",
+  "routable": true,
+  "highlighted_operation": "the byte store *buffer++ = c in EMIT_BYTE, executed from flush_bits",
+  "uncertainty_category": "relationship unresolved",
+  "focused_question": "Does anything shown bound the number of bytes written into the buffer to no more than its capacity?"
+}
