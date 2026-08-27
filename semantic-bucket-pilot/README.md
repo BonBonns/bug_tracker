@@ -141,6 +141,65 @@ hash (where preserved), exclusion reason, whether it was viewed before
 exclusion, and that it was never scored. Future invalid runs must be MOVED there
 at the moment of invalidation.
 
+## Automatic bucket assignment (the piece that makes C a real test)
+
+The bucket, unresolved property, and route shown in Condition C MUST be emitted
+by the scanner from its own candidate signals — not written by a person. If a
+human decides why TChecker is uncertain and types the category into C, the
+experiment tests whether a human hint helps, not whether the bucket method
+works. `tools/bucket_router.py` (in the TChecker package) removes the human from
+that step: it consumes the frozen producers' candidate output and emits
+
+```
+{ candidate_id, established_facts, unresolved_property,
+  uncertainty_bucket, recommended_route }
+```
+
+`uncertainty_bucket` is derived structurally (any emitted candidate is a
+`relationship_unresolved` by the family's abstain-never-VULNERABLE posture);
+`unresolved_property` is keyed on the candidate's subclass (width-bound vs
+count-bound vs index-bound); the Condition-C focused question is rendered by a
+FIXED template on `unresolved_property` (generic on purpose — a case-specific
+question would smuggle human insight into the condition under test).
+
+`build_auto_buckets.py` runs this over the real cached fact files for the three
+candidate cases and writes machine-derived `auto_buckets/<id>.record.json` and
+`sources_auto/<id>.{facts.txt,meta.json}`. **Validation: the auto-emitted bucket
+agrees with the independently-verified bucket ground truth 3/3** (SB-01, SB-02,
+SB-07). The human supplies only the fact file + function to locate the candidate
+and the ground truth for the agreement check — never the bucket fed into C.
+
+This exposed that the earlier hand-written C facts/questions were richer and
+case-specific — i.e. they DID carry human insight. The final experiment must
+generate B and C from `sources_auto/` (machine-derived), not the hand-written
+`sources/`.
+
+No-candidate buckets (`producer_evidence_missing`, `analysis_capability_missing`)
+are NOT auto-classified yet: with no candidate there is nothing to route to the
+LLM, and distinguishing "an absent fact" from "an unmodeled shape" needs the
+producers to log why they emitted nothing. Those stay in the routing evaluation,
+human-verified, and honestly out of scope for the automatic layer for now.
+
+## Readiness gates for the FINAL A/B/C experiment (not yet met)
+
+- [x] Automatic bucket layer emits candidate + facts + bucket + unresolved
+      property + route from one scanner pass (`bucket_router.py`).
+- [x] Automatic buckets agree with verified bucket ground truth (3/3 on the
+      candidate cases).
+- [ ] **Frozen scanner version** — soundness logic is still changing; no freeze
+      yet. No scanner or bucket rule may change after the experimental prompts
+      are generated.
+- [ ] **≥9 genuine routable candidates**, balanced among final safe /
+      vulnerable / legitimately-unresolved outcomes, meeting the frozen
+      inclusion criteria (including the B-insufficiency criterion from the dry
+      run). Current: 3, all unresolved/safe.
+- [ ] **B and C generated from `sources_auto/`** (machine-derived), with a
+      token-matched B variant.
+- [ ] **`relationship_answer` trichotomy pinned** (dry-run calibration fix).
+- [ ] **Final isolated-call harness** (fixed model+version, randomized order,
+      full archival) — every prompt reproducible from the frozen scanner
+      artifact + candidate fingerprint.
+
 ## Files
 
 - `sources/<id>.{code.txt,facts.txt,meta.json}` — per-case inputs.

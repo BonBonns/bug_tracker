@@ -1,0 +1,16 @@
+{
+  "candidate_id": "cand_d00d594e4a7ae28e",
+  "subclass": "CURSOR",
+  "file": "jchuff.c",
+  "function": "flush_bits",
+  "line": 465,
+  "established_facts": [
+    "destination: _buffer",
+    "destination capacity: 256 bytes (resolved)",
+    "write shape: FUSED_INCREMENT through pointer buffer",
+    "located at jchuff.c:465 in flush_bits"
+  ],
+  "unresolved_property": "write_count_within_capacity",
+  "uncertainty_bucket": "relationship_unresolved",
+  "recommended_route": "llm_semantic_review"
+}

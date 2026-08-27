@@ -1,0 +1,11 @@
+{
+  "case_id": "SB-01",
+  "scanner_uncertainty_category": "relationship_unresolved",
+  "routable": true,
+  "highlighted_operation": "the RUNTIME_CAPACITY write at rsapkcs.c:156 in rsa_FormatOneBlock",
+  "uncertainty_category": "relationship unresolved",
+  "focused_question": "Does the code guarantee that the number of bytes written by the highlighted operation is no greater than the destination buffer's allocated capacity?",
+  "auto_candidate_id": "cand_c6d9861a7306f7d9",
+  "auto_unresolved_property": "write_length_within_capacity",
+  "auto_recommended_route": "llm_semantic_review"
+}

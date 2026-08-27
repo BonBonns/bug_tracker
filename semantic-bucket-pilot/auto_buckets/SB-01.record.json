@@ -1,0 +1,18 @@
+{
+  "candidate_id": "cand_c6d9861a7306f7d9",
+  "subclass": "RUNTIME_CAPACITY",
+  "file": "rsapkcs.c",
+  "function": "rsa_FormatOneBlock",
+  "line": 156,
+  "established_facts": [
+    "destination: bp",
+    "destination capacity: modulusLen (symbolic, not a literal)",
+    "write length: data->len",
+    "capacity provenance: inherited via alias of block",
+    "write performed by: memcpy (contract: ISO C standard library)",
+    "located at rsapkcs.c:156 in rsa_FormatOneBlock"
+  ],
+  "unresolved_property": "write_length_within_capacity",
+  "uncertainty_bucket": "relationship_unresolved",
+  "recommended_route": "llm_semantic_review"
+}

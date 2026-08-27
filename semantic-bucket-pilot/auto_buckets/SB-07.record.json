@@ -1,0 +1,17 @@
+{
+  "candidate_id": "cand_ce90145ec1ba4f44",
+  "subclass": "INTERPROCEDURAL",
+  "file": "pkcs11c.c",
+  "function": "nsc_pbe_key_gen",
+  "line": 3949,
+  "established_facts": [
+    "destination: buf",
+    "destination capacity: 256 bytes (resolved)",
+    "write length: pbe_key->len",
+    "write performed by: memcpy (contract: ISO C standard library)",
+    "located at pkcs11c.c:3949 in nsc_pbe_key_gen"
+  ],
+  "unresolved_property": "write_length_within_capacity",
+  "uncertainty_bucket": "relationship_unresolved",
+  "recommended_route": "llm_semantic_review"
+}

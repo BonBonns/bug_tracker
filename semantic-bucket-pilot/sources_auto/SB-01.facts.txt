@@ -1,0 +1,6 @@
+- destination: bp
+- destination capacity: modulusLen (symbolic, not a literal)
+- write length: data->len
+- capacity provenance: inherited via alias of block
+- write performed by: memcpy (contract: ISO C standard library)
+- located at rsapkcs.c:156 in rsa_FormatOneBlock

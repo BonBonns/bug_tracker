@@ -1,0 +1,4 @@
+- destination: _buffer
+- destination capacity: 256 bytes (resolved)
+- write shape: FUSED_INCREMENT through pointer buffer
+- located at jchuff.c:465 in flush_bits

@@ -1,0 +1,11 @@
+{
+  "case_id": "SB-07",
+  "scanner_uncertainty_category": "relationship_unresolved",
+  "routable": true,
+  "highlighted_operation": "the INTERPROCEDURAL write at pkcs11c.c:3949 in nsc_pbe_key_gen",
+  "uncertainty_category": "relationship unresolved",
+  "focused_question": "Does the code guarantee that the number of bytes written by the highlighted operation is no greater than the destination buffer's allocated capacity?",
+  "auto_candidate_id": "cand_ce90145ec1ba4f44",
+  "auto_unresolved_property": "write_length_within_capacity",
+  "auto_recommended_route": "llm_semantic_review"
+}

@@ -1,0 +1,5 @@
+- destination: buf
+- destination capacity: 256 bytes (resolved)
+- write length: pbe_key->len
+- write performed by: memcpy (contract: ISO C standard library)
+- located at pkcs11c.c:3949 in nsc_pbe_key_gen

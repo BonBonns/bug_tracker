@@ -46,7 +46,7 @@
       "actual_route": "LLM_SEMANTIC_REVIEW",
       "human_verified_route": "LLM_SEMANTIC_REVIEW",
       "route_correct": true,
-      "notes": "Frozen COPY_LENGTH producer emits the candidate (guard checks key_length, write uses pbe_key->len — a name mismatch it cannot resolve). Correctly routed. SCANNER STATE = relationship unresolved; VERIFIED GROUND TRUTH = safe (the two are separate fields: the cross-function equality key_length == pbe_param->keyLen == pbe_key->len holds, provable from the code shown but not by the scanner's guard-matching)."
+      "notes": "Frozen INTERPROCEDURAL producer emits the candidate (verified empirically via tools/bucket_router.py: subclass INTERPROCEDURAL, memcpy(buf,..,pbe_key->len), capacity 256 propagated single-hop; the write length pbe_key->len is not proven <= 256). Correctly routed. SCANNER STATE = relationship unresolved; VERIFIED GROUND TRUTH = safe (separate fields: the cross-function equality key_length == pbe_param->keyLen == pbe_key->len holds, provable from the code shown but not by the scanner's guard-matching). Corrects an earlier note that misattributed this to the COPY_LENGTH producer."
     },
     {
       "case_id": "SB-03",
