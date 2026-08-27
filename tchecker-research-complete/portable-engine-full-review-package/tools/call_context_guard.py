@@ -202,6 +202,118 @@ def _signedness(type_str):
     return 'unsigned' if UNSIGNED_HINT_RE.search(type_str) else 'signed'
 
 
+NEG_OP = {
+    '<operator>.lessThan': '<operator>.greaterEqualsThan',
+    '<operator>.lessEqualsThan': '<operator>.greaterThan',
+    '<operator>.greaterThan': '<operator>.lessEqualsThan',
+    '<operator>.greaterEqualsThan': '<operator>.lessThan',
+}
+OP_SYMBOL = {
+    '<operator>.lessThan': '<', '<operator>.lessEqualsThan': '<=',
+    '<operator>.greaterThan': '>', '<operator>.greaterEqualsThan': '>=',
+}
+
+
+def _is_terminal_chain(g, start):
+    """True iff `start` and every node reachable from it forms a SIMPLE,
+    non-branching chain that ends in a genuine dead end (a node with zero
+    outgoing edges) -- the CFG shape of `{ cleanup(); ...; return ERR; }`, no
+    matter how many straight-line statements precede the return. False for a
+    cycle, or for ANY node along the way that branches again (2+ successors) --
+    deliberately conservative: a reject arm complex enough to branch further is
+    NOT confidently classified as "this path never continues normal execution",
+    so callers must not guess and must fall back to NOT establishing polarity."""
+    seen = set()
+    n = start
+    limit = len(g['nodes']) + 5
+    steps = 0
+    while True:
+        if n in seen:
+            return False
+        seen.add(n)
+        succs = g['succ'].get(n) or set()
+        if not succs:
+            return True
+        if len(succs) != 1:
+            return False
+        n = next(iter(succs))
+        steps += 1
+        if steps > limit:
+            return False
+
+
+def _branch_polarity(g, cmp_node, call_id):
+    """Determines whether reaching `call_id` PROVES the NEGATION of `cmp_node`'s
+    own predicate held, using only CFG structure -- never source line order or
+    edge ordering (this repo's `cfg_edges` carry no true/false label at all).
+
+    Returns 'NEGATED' when this is soundly provable: `cmp_node` has exactly 2
+    successors, exactly one of them reaches the call (`_controls_call`'s
+    condition), and the OTHER (non-reaching) successor is a genuine terminal
+    chain (`_is_terminal_chain`) -- the `if (P) { return ERR; } target();` shape.
+    By C `if` semantics, a body consisting SOLELY of straight-line code ending in
+    a hard return is entered exactly when P is true and NOTHING ELSE reaches
+    that arm -- so reaching the call at all proves P did NOT hold, i.e. the
+    NEGATION of the predicate as literally written.
+
+    Returns None when polarity cannot be soundly established this way (fewer/more
+    than 2 successors, ambiguous reaching set, or the non-reaching arm does NOT
+    dead-end -- e.g. `if (P) { target(); }` with the call nested inside the
+    consequent instead: the reject arm there just continues normal execution
+    elsewhere, so this method can't distinguish which side is "true" without
+    guessing, and a real bug -- crediting a guard whose predicate's stated
+    direction was actually the OPPOSITE of what protects the call, e.g.
+    `if (length <= capacity) { return; } target(length);`, where the call is
+    only reached when length > capacity -- proves dominance/control-dependence
+    ALONE is not enough; only a PROVEN negation, never an assumed one, may be
+    credited). Callers must NOT_CREDIT rather than guess when this returns None."""
+    succs = list(g['succ'].get(cmp_node) or ())
+    if len(succs) != 2:
+        return None
+    reach = {s: _reachable_from(g['succ'], s) for s in succs}
+    reaching = [s for s in succs if call_id in reach[s]]
+    nonreaching = [s for s in succs if call_id not in reach[s]]
+    if len(reaching) != 1 or len(nonreaching) != 1:
+        return None
+    if not _is_terminal_chain(g, nonreaching[0]):
+        return None
+    return 'NEGATED'
+
+
+def _split_predicate(code, op_name):
+    """Splits a comparison's own `code` at its operator into (lhs, rhs) text,
+    using the OPERATOR ALREADY KNOWN from `op_name` (never guessed from text) to
+    pick the exact symbol -- avoids the `<` vs `<=` substring-ambiguity trap.
+    Returns None if the expected symbol isn't found (unexpected code shape)."""
+    sym = OP_SYMBOL.get(op_name)
+    if not sym or sym not in (code or ''):
+        return None
+    idx = code.index(sym)
+    return code[:idx].strip(), code[idx + len(sym):].strip()
+
+
+def _entails_safe_bare(op_name, lhs, rhs, expr_width, expr_cap):
+    """Sound ONLY for an EXACT two-BARE-operand comparison (`lhs`/`rhs`, after
+    whitespace stripping, equal EXACTLY `expr_width` or `expr_cap` -- no
+    compound arithmetic on either side). Returns True (the relation `lhs op_name
+    rhs` PROVES `width <= cap`), False (it does not), or None when the shape
+    isn't a bare two-operand match at all -- e.g. a real guard found on NSS
+    rsapkcs.c compares width against `(cap - SOME_MACRO)`, a compound RHS. This
+    is DELIBERATELY not extended to reason about such adjustments: proving
+    `cap - X <= cap` requires proving `X >= 0`, which is exactly the same class
+    of unproven-arithmetic assumption round 12's additive-term soundness fix
+    already rejected for capacity expressions ("checking only for subtraction
+    does not establish addition safety... without that evidence the verdict
+    should remain unresolved") -- the same discipline applies here: an
+    un-provable adjustment must fall through to NOT_CREDITED, never be assumed
+    safe by the adjustment's name or apparent intent."""
+    if lhs == expr_width and rhs == expr_cap:
+        return op_name in ('<operator>.lessThan', '<operator>.lessEqualsThan')
+    if lhs == expr_cap and rhs == expr_width:
+        return op_name in ('<operator>.greaterThan', '<operator>.greaterEqualsThan')
+    return None
+
+
 def _controls_call(g, cmp_node, call_id):
     """True iff `cmp_node` genuinely CONTROLS whether `call_id` executes -- at
     least one of its own CFG successor edges does NOT reach the call at all.
@@ -335,12 +447,43 @@ def guard_status_for_call(d, cfg_index, call, expr_width, expr_cap, assert_codes
                 "branch of this comparison still reaches the call, so its "
                 "outcome has no bearing on whether the call executes; fail "
                 "closed, dominance alone is never protection")
-        elif signedness_mismatch:
-            fact['enforcement_kind'] = 'RUNTIME_BRANCH'
-            fact['establishment_status'] = 'UNRESOLVED'
         else:
             fact['enforcement_kind'] = 'RUNTIME_BRANCH'
-            fact['establishment_status'] = 'CREDITED'
+            # controls_call proves SOME branch determines whether the call
+            # executes -- it does NOT by itself prove the REACHING branch is the
+            # SAFE one. `if (length <= capacity) { return; } target(length);`
+            # controls the call exactly as much as the real, correct guard does,
+            # yet the call is reached precisely when length > capacity (unsafe).
+            # Branch polarity must be established from CFG structure, never
+            # assumed from the predicate's surface wording.
+            polarity = _branch_polarity(g, c.get('id'), call_id)
+            if polarity != 'NEGATED':
+                fact['establishment_status'] = 'NOT_CREDITED'
+                fact['type_and_range_evidence'].append(
+                    "CONTROLS the call but branch POLARITY could not be proven "
+                    "from CFG structure (the non-reaching arm is not a clean, "
+                    "provably-terminal reject chain) -- which branch is 'safe' "
+                    "is unknown, so this guard is not credited rather than "
+                    "guessed at")
+            else:
+                split = _split_predicate(c.get('code'), c.get('name'))
+                entails = (_entails_safe_bare(NEG_OP[c.get('name')], split[0], split[1],
+                                               expr_width, expr_cap) if split else None)
+                if entails is not True:
+                    fact['establishment_status'] = 'NOT_CREDITED'
+                    fact['type_and_range_evidence'].append(
+                        "reaching the call proves the NEGATION of "
+                        f"'{c.get('code')}', but that negated relation does not "
+                        "PROVABLY entail width<=capacity -- either the predicate "
+                        "isn't a bare two-operand comparison of exactly these two "
+                        "expressions (e.g. one side has an unproven arithmetic "
+                        "adjustment, same unproven-arithmetic concern round 12's "
+                        "additive-term fix already rejected), or its direction is "
+                        "simply the wrong way around; not credited either way")
+                elif signedness_mismatch:
+                    fact['establishment_status'] = 'UNRESOLVED'
+                else:
+                    fact['establishment_status'] = 'CREDITED'
     elif dom_state == 'ambiguous':
         fact['dominates_call'] = False
         fact['enforcement_kind'] = 'ASSERTION_ONLY' if is_assert else 'RUNTIME_BRANCH'

@@ -490,6 +490,54 @@
       "line_end": 12,
       "is_external": false,
       "parameters": []
+    },
+    {
+      "id": 991110000001,
+      "name": "callee_991110000000",
+      "full_name": "callee_991110000000",
+      "file": "cc.c",
+      "line": 1,
+      "line_end": 3,
+      "is_external": false,
+      "parameters": [
+        {
+          "index": 0,
+          "name": "capacity",
+          "code": "unsigned capacity",
+          "type_full_name": "unsigned",
+          "id": 991110000900,
+          "method_id": 991110000001,
+          "line": 1
+        },
+        {
+          "index": 1,
+          "name": "src",
+          "code": "char *src",
+          "type_full_name": "char*",
+          "id": 991110000901,
+          "method_id": 991110000001,
+          "line": 1
+        },
+        {
+          "index": 2,
+          "name": "length",
+          "code": "unsigned length",
+          "type_full_name": "unsigned",
+          "id": 991110000902,
+          "method_id": 991110000001,
+          "line": 1
+        }
+      ]
+    },
+    {
+      "id": 991110000002,
+      "name": "caller_reversed_polarity",
+      "full_name": "caller_reversed_polarity",
+      "file": "cc.c",
+      "line": 5,
+      "line_end": 12,
+      "is_external": false,
+      "parameters": []
     }
   ],
   "locals": [
@@ -1236,6 +1284,72 @@
           "code": "length"
         }
       ]
+    },
+    {
+      "id": 991110000010,
+      "name": "<operator>.assignment",
+      "code": "p = malloc(capacity)",
+      "enclosing_function_id": 991110000001,
+      "file": "cc.c",
+      "line": 2
+    },
+    {
+      "id": 991110000011,
+      "name": "memcpy",
+      "method_full_name": "memcpy",
+      "code": "memcpy(p, src, length)",
+      "enclosing_function_id": 991110000001,
+      "file": "cc.c",
+      "line": 2,
+      "arguments": [
+        {
+          "index": 0,
+          "code": "p"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "length"
+        }
+      ]
+    },
+    {
+      "id": 991110000012,
+      "name": "<operator>.lessEqualsThan",
+      "code": "length <= capacity",
+      "enclosing_function_id": 991110000002,
+      "file": "cc.c",
+      "line": 9
+    },
+    {
+      "id": 991110000013,
+      "name": "callee_991110000000",
+      "method_full_name": "callee_991110000000",
+      "code": "callee_991110000000(capacity, src, length)",
+      "enclosing_function_id": 991110000002,
+      "file": "cc.c",
+      "line": 11,
+      "resolution": "EXACT",
+      "candidate_target_ids": [
+        991110000001
+      ],
+      "arguments": [
+        {
+          "index": 0,
+          "code": "capacity"
+        },
+        {
+          "index": 1,
+          "code": "src"
+        },
+        {
+          "index": 2,
+          "code": "length"
+        }
+      ]
     }
   ],
   "cfg_edges": [
@@ -1468,6 +1582,21 @@
       "function_id": 991100000002,
       "node_id": 991100000012,
       "successor_id": 991100000013
+    },
+    {
+      "function_id": 991110000002,
+      "node_id": 991110000200,
+      "successor_id": 991110000012
+    },
+    {
+      "function_id": 991110000002,
+      "node_id": 991110000012,
+      "successor_id": 991110000091
+    },
+    {
+      "function_id": 991110000002,
+      "node_id": 991110000012,
+      "successor_id": 991110000013
     }
   ]
 }

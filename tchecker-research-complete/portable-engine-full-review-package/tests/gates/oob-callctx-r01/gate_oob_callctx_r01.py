@@ -57,6 +57,7 @@ callee = {
     'conditional_branch': 991040000001, 'shared_callee': 991050000001, 'index_mapping': 991060000001,
     'signedness_mismatch': 991070000001, 'assert_only_port_assert': 991080000001,
     'dominates_not_controls': 991090000001, 'rejecting_branch': 991100000001,
+    'reversed_polarity': 991110000001,
 }
 
 ck("guard_dominates SUPPRESSED (real runtime guard, dominates the single call site)",
@@ -105,6 +106,14 @@ ck("rejecting_branch SUPPRESSED (negative control: a GENUINELY rejecting branch 
    "-- `if (x) { return ERR; } target();` -- has one outcome that does not reach "
    "the call at all, so it DOES control it and may still be credited)",
    callee['rejecting_branch'] not in by_fn)
+
+ck("reversed_polarity NOT suppressed (`if (length <= capacity) { return; } "
+   "target(length);` -- a GENUINE rejecting branch exists (controls_call=True, "
+   "same as rejecting_branch), but the predicate checked is the SAFE-looking "
+   "one, so the call is reached exactly when it's UNSAFE (length > capacity); "
+   "controls_call alone cannot tell these two controls apart -- only proving "
+   "branch polarity AND that the negated predicate entails width<=capacity can)",
+   callee['reversed_polarity'] in by_fn)
 
 print(f"OOB_CALLCTX_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)
