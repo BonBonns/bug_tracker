@@ -1,0 +1,97 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {"id": 970000000001, "name": "vuln_literal_malloc", "full_name": "vuln_literal_malloc", "file": "rc.c", "line": 1, "line_end": 3, "is_external": false, "parameters": []},
+  {"id": 970000000002, "name": "vuln_symbolic_malloc", "full_name": "vuln_symbolic_malloc", "file": "rc.c", "line": 4, "line_end": 6, "is_external": false,
+   "parameters": [{"index": 0, "name": "n", "code": "int n", "type_full_name": "int", "id": 970000900002, "method_id": 970000000002, "line": 4}]},
+  {"id": 970000000003, "name": "guarded_symbolic", "full_name": "guarded_symbolic", "file": "rc.c", "line": 7, "line_end": 10, "is_external": false,
+   "parameters": [{"index": 0, "name": "n", "code": "int n", "type_full_name": "int", "id": 970000900003, "method_id": 970000000003, "line": 7}]},
+  {"id": 970000000004, "name": "vuln_calloc_literal", "full_name": "vuln_calloc_literal", "file": "rc.c", "line": 11, "line_end": 13, "is_external": false, "parameters": []},
+  {"id": 970000000005, "name": "abstain_calloc_symbolic", "full_name": "abstain_calloc_symbolic", "file": "rc.c", "line": 14, "line_end": 16, "is_external": false,
+   "parameters": [{"index": 0, "name": "count", "code": "int count", "type_full_name": "int", "id": 970000900005, "method_id": 970000000005, "line": 14}]},
+  {"id": 970000000006, "name": "vuln_realloc_replaces", "full_name": "vuln_realloc_replaces", "file": "rc.c", "line": 17, "line_end": 20, "is_external": false, "parameters": []},
+  {"id": 970000000007, "name": "abstain_freed", "full_name": "abstain_freed", "file": "rc.c", "line": 21, "line_end": 24, "is_external": false, "parameters": []},
+  {"id": 970000000008, "name": "abstain_conflict", "full_name": "abstain_conflict", "file": "rc.c", "line": 25, "line_end": 28, "is_external": false, "parameters": []},
+  {"id": 970000000009, "name": "vuln_alias", "full_name": "vuln_alias", "file": "rc.c", "line": 29, "line_end": 32, "is_external": false, "parameters": []},
+  {"id": 970000000010, "name": "vuln_offset", "full_name": "vuln_offset", "file": "rc.c", "line": 33, "line_end": 36, "is_external": false, "parameters": []},
+  {"id": 970000000011, "name": "caller_interproc", "full_name": "caller_interproc", "file": "rc.c", "line": 37, "line_end": 39, "is_external": false, "parameters": []},
+  {"id": 970000000012, "name": "helper_interproc", "full_name": "helper_interproc", "file": "rc.c", "line": 40, "line_end": 42, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 970000900012, "method_id": 970000000012, "line": 40},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 970000900013, "method_id": 970000000012, "line": 40},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 970000900014, "method_id": 970000000012, "line": 40}]},
+  {"id": 970000000013, "name": "abstain_unknown_allocator", "full_name": "abstain_unknown_allocator", "file": "rc.c", "line": 43, "line_end": 45, "is_external": false, "parameters": []},
+  {"id": 970000000014, "name": "safe_exact_match", "full_name": "safe_exact_match", "file": "rc.c", "line": 46, "line_end": 48, "is_external": false,
+   "parameters": [{"index": 0, "name": "inputLen", "code": "int inputLen", "type_full_name": "int", "id": 970000900015, "method_id": 970000000014, "line": 46}]},
+  {"id": 970000000015, "name": "safe_additive_term", "full_name": "safe_additive_term", "file": "rc.c", "line": 49, "line_end": 52, "is_external": false, "parameters": []}
+ ],
+ "locals": [],
+ "calls": [
+  {"id": 970000000101, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 970000000001, "file": "rc.c", "line": 2},
+  {"id": 970000000102, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000001, "file": "rc.c", "line": 2,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000201, "name": "<operator>.assignment", "code": "p = malloc(n)", "enclosing_function_id": 970000000002, "file": "rc.c", "line": 5},
+  {"id": 970000000202, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000002, "file": "rc.c", "line": 5,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000301, "name": "<operator>.assignment", "code": "p = malloc(n)", "enclosing_function_id": 970000000003, "file": "rc.c", "line": 8},
+  {"id": 970000000302, "name": "<operator>.greaterThan", "code": "len > n", "enclosing_function_id": 970000000003, "file": "rc.c", "line": 9},
+  {"id": 970000000303, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000003, "file": "rc.c", "line": 9,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000401, "name": "<operator>.assignment", "code": "p = calloc(4, 16)", "enclosing_function_id": 970000000004, "file": "rc.c", "line": 12},
+  {"id": 970000000402, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000004, "file": "rc.c", "line": 12,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000501, "name": "<operator>.assignment", "code": "p = calloc(count, 16)", "enclosing_function_id": 970000000005, "file": "rc.c", "line": 15},
+  {"id": 970000000502, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000005, "file": "rc.c", "line": 15,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000601, "name": "<operator>.assignment", "code": "p = malloc(8)", "enclosing_function_id": 970000000006, "file": "rc.c", "line": 18},
+  {"id": 970000000602, "name": "<operator>.assignment", "code": "p = realloc(p, 64)", "enclosing_function_id": 970000000006, "file": "rc.c", "line": 18},
+  {"id": 970000000603, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, 50)", "enclosing_function_id": 970000000006, "file": "rc.c", "line": 19,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "50"}]},
+
+  {"id": 970000000701, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 970000000007, "file": "rc.c", "line": 22},
+  {"id": 970000000702, "name": "free", "method_full_name": "free", "code": "free(p)", "enclosing_function_id": 970000000007, "file": "rc.c", "line": 22,
+   "arguments": [{"index": 0, "code": "p"}]},
+  {"id": 970000000703, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000007, "file": "rc.c", "line": 23,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000801, "name": "<operator>.assignment", "code": "p = malloc(8)", "enclosing_function_id": 970000000008, "file": "rc.c", "line": 26},
+  {"id": 970000000802, "name": "<operator>.assignment", "code": "p = malloc(16)", "enclosing_function_id": 970000000008, "file": "rc.c", "line": 27},
+  {"id": 970000000803, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000008, "file": "rc.c", "line": 27,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000000901, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 970000000009, "file": "rc.c", "line": 30},
+  {"id": 970000000902, "name": "<operator>.assignment", "code": "q = p", "enclosing_function_id": 970000000009, "file": "rc.c", "line": 30},
+  {"id": 970000000903, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(q, src, len)", "enclosing_function_id": 970000000009, "file": "rc.c", "line": 31,
+   "arguments": [{"index": 0, "code": "q"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000001001, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 970000000010, "file": "rc.c", "line": 34},
+  {"id": 970000001002, "name": "<operator>.assignment", "code": "q = p + 16", "enclosing_function_id": 970000000010, "file": "rc.c", "line": 34},
+  {"id": 970000001003, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(q, src, 100)", "enclosing_function_id": 970000000010, "file": "rc.c", "line": 35,
+   "arguments": [{"index": 0, "code": "q"}, {"index": 1, "code": "src"}, {"index": 2, "code": "100"}]},
+
+  {"id": 970000001101, "name": "<operator>.assignment", "code": "p = malloc(64)", "enclosing_function_id": 970000000011, "file": "rc.c", "line": 38},
+  {"id": 970000001102, "name": "helper_interproc", "method_full_name": "helper_interproc", "code": "helper_interproc(p, src, len)",
+   "enclosing_function_id": 970000000011, "file": "rc.c", "line": 38, "resolution": "EXACT", "candidate_target_ids": [970000000012],
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 970000001103, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)", "enclosing_function_id": 970000000012, "file": "rc.c", "line": 41,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]},
+
+  {"id": 970000001301, "name": "<operator>.assignment", "code": "p = my_custom_alloc(64)", "enclosing_function_id": 970000000013, "file": "rc.c", "line": 44,
+   "arguments": []},
+  {"id": 970000001302, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(p, src, len)", "enclosing_function_id": 970000000013, "file": "rc.c", "line": 44,
+   "arguments": [{"index": 0, "code": "p"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+
+  {"id": 970000001401, "name": "<operator>.assignment", "code": "tmpOutput = PORT_Alloc(inputLen)", "enclosing_function_id": 970000000014, "file": "rc.c", "line": 47},
+  {"id": 970000001402, "name": "PORT_Memcpy", "method_full_name": "PORT_Memcpy", "code": "PORT_Memcpy(tmpOutput, in, inputLen)", "enclosing_function_id": 970000000014, "file": "rc.c", "line": 47,
+   "arguments": [{"index": 0, "code": "tmpOutput"}, {"index": 1, "code": "in"}, {"index": 2, "code": "inputLen"}]},
+
+  {"id": 970000001501, "name": "<operator>.assignment", "code": "buffer_len = SharedSecret->len + 4 + SharedInfoLen", "enclosing_function_id": 970000000015, "file": "rc.c", "line": 50},
+  {"id": 970000001502, "name": "<operator>.assignment", "code": "buffer = PORT_Alloc(buffer_len)", "enclosing_function_id": 970000000015, "file": "rc.c", "line": 51},
+  {"id": 970000001503, "name": "PORT_Memcpy", "method_full_name": "PORT_Memcpy", "code": "PORT_Memcpy(buffer, SharedSecret->data, SharedSecret->len)", "enclosing_function_id": 970000000015, "file": "rc.c", "line": 51,
+   "arguments": [{"index": 0, "code": "buffer"}, {"index": 1, "code": "SharedSecret->data"}, {"index": 2, "code": "SharedSecret->len"}]}
+ ]
+}
