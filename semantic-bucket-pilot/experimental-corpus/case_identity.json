@@ -1,0 +1,136 @@
+[
+  {
+    "dest": "buffer",
+    "function": "encode_one_block",
+    "n_frozen_records": 28,
+    "n_write_lines": 28,
+    "patched_body_sha": "206adce27791",
+    "reason": "write_count_bound_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "mjpg-cve-huff"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "206adce27791",
+    "vuln_patched_differential": false
+  },
+  {
+    "dest": "buffer",
+    "function": "flush_bits",
+    "n_frozen_records": 2,
+    "n_write_lines": 2,
+    "patched_body_sha": "24f37e3fa68a",
+    "reason": "write_count_bound_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "mjpg-cve-huff"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "24f37e3fa68a",
+    "vuln_patched_differential": false
+  },
+  {
+    "dest": "buf",
+    "function": "nsc_pbe_key_gen",
+    "n_frozen_records": 2,
+    "n_write_lines": 2,
+    "patched_body_sha": "2b4f1d1683dc",
+    "reason": "capacity_relation_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "cve-2019-11745"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "2b4f1d1683dc",
+    "vuln_patched_differential": false
+  },
+  {
+    "dest": "buf",
+    "function": "nsc_pbe_key_gen",
+    "n_frozen_records": 2,
+    "n_write_lines": 2,
+    "patched_body_sha": "e22871072072",
+    "reason": "capacity_relation_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "cve-2019-11759"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "e22871072072",
+    "vuln_patched_differential": false
+  },
+  {
+    "dest": "bp",
+    "function": "rsa_FormatOneBlock",
+    "n_frozen_records": 4,
+    "n_write_lines": 4,
+    "patched_body_sha": "2a9d46cd3514",
+    "reason": "capacity_relation_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "cve-2019-17006"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "f1ab3a778fd5",
+    "vuln_patched_differential": true
+  },
+  {
+    "dest": "copy",
+    "function": "sec_asn1d_add_to_subitems",
+    "n_frozen_records": 2,
+    "n_write_lines": 2,
+    "patched_body_sha": "96a362d2d829",
+    "reason": "unknown_allocator_contract",
+    "recommended_route": "semantic_contract_review",
+    "seen_in_cves": [
+      "cve-2016-1950"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "external_contract_unknown",
+    "vuln_body_sha": "96a362d2d829",
+    "vuln_patched_differential": false
+  },
+  {
+    "dest": "buffer",
+    "function": "sftk_compute_ANSI_X9_63_kdf",
+    "n_frozen_records": 4,
+    "n_write_lines": 4,
+    "patched_body_sha": "3f51a8c7ca22",
+    "reason": "capacity_relation_not_established",
+    "recommended_route": "semantic_relationship_review",
+    "seen_in_cves": [
+      "cve-2019-11745",
+      "cve-2019-11759"
+    ],
+    "sides_present": [
+      "patched",
+      "vuln"
+    ],
+    "uncertainty_bucket": "relationship_unresolved",
+    "vuln_body_sha": "3f51a8c7ca22",
+    "vuln_patched_differential": false
+  }
+]

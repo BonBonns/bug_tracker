@@ -1,0 +1,104 @@
+{
+  "_meta": {
+    "what": "Independent ground-truth labels for the 7 distinct llm-eligible experimental cases, established by reading real disclosed source. SEPARATE from scanner state: scanner_emitted_bucket is what TChecker produced; verified_* is human analysis of the real program and MUST be independently reviewed before any accuracy claim.",
+    "authoring": "Hand-verified against the cached vulnerable/patched source (Claude analysis). NOT machine-derived. Treat as a reviewable claim, not settled truth.",
+    "outcome_values": ["vulnerable", "safe", "unresolved_needs_context"],
+    "differential_note": "case_identity.py flags a vuln!=patched differential by function-body TEXT. For the mozjpeg cases the fix is in the BUFSIZE macro the identical body references, so the effective capacity differs though the text does not -- marked effective_capacity_differential here.",
+    "boundary": "No experimental condition (A/B/C) was consulted in establishing these labels. Condition B was NOT run first."
+  },
+  "cases": [
+    {
+      "case_id": "rsa_FormatOneBlock/bp",
+      "cve": "CVE-2019-17006", "function": "rsa_FormatOneBlock", "dest": "bp",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "capacity_relation_not_established",
+      "text_differential": true, "effective_capacity_differential": true,
+      "verified_outcome_vuln": "vulnerable",
+      "verified_outcome_patched": "safe",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "block = PORT_Alloc(modulusLen); bp = block; a series of *bp++ writes fill padLen padding bytes. VULN declares `int padLen`; the disclosed fix (this exact function) changes it to `unsigned int padLen` and tightens the length handling so the pad/data cannot exceed modulusLen. This is the disclosed CVE-2019-17006 site.",
+      "evidence_relative_answer": "With only local facts the write-vs-capacity relation is genuinely unresolved (bp bound depends on padLen/data->len vs modulusLen). Ground truth differs by revision; the scanner is correctly uncertain in BOTH.",
+      "independent": true
+    },
+    {
+      "case_id": "encode_one_block/buffer",
+      "cve": "Debian #768369 (mozjpeg)", "function": "encode_one_block", "dest": "buffer",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "write_count_bound_not_established",
+      "text_differential": false, "effective_capacity_differential": true,
+      "verified_outcome_vuln": "vulnerable",
+      "verified_outcome_patched": "safe",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "JOCTET _buffer[BUFSIZE] is a local array written through a cursor by the Huffman coder. VULN BUFSIZE=(DCTSIZE2*2)+8=136; the disclosed fix (Debian #768369) doubles it to (DCTSIZE2*4)=256. The function source text is identical across revisions; only the referenced macro (hence the array's real capacity) changes.",
+      "evidence_relative_answer": "The count-vs-capacity relation is unresolved without evaluating BUFSIZE. Vulnerable in the 136-byte build, safe in the 256-byte build.",
+      "independent": true
+    },
+    {
+      "case_id": "flush_bits/buffer",
+      "cve": "Debian #768369 (mozjpeg)", "function": "flush_bits", "dest": "buffer",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "write_count_bound_not_established",
+      "text_differential": false, "effective_capacity_differential": true,
+      "verified_outcome_vuln": "vulnerable",
+      "verified_outcome_patched": "safe",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "Same _buffer[BUFSIZE] mechanism as encode_one_block, in the same file, fixed by the same BUFSIZE change. NOT an independent bug from encode_one_block -- same CVE, same buffer, same fix.",
+      "evidence_relative_answer": "Same as encode_one_block; counts as the SAME underlying defect, not a second independent vulnerable case.",
+      "independent": false,
+      "shares_defect_with": "encode_one_block/buffer"
+    },
+    {
+      "case_id": "sftk_compute_ANSI_X9_63_kdf/buffer",
+      "cve": "incidental (in CVE-2019-11745/11759 file, unchanged by both)", "function": "sftk_compute_ANSI_X9_63_kdf", "dest": "buffer",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "capacity_relation_not_established",
+      "text_differential": false, "effective_capacity_differential": false,
+      "verified_outcome_vuln": "safe",
+      "verified_outcome_patched": "safe",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "buffer_len = SharedSecret->len + 4 + SharedInfoLen; buffer = PORT_Alloc(buffer_len). The destination is allocated locally to exactly fit what is written into it, guarded by `key_len > 254*HashLen` rejection. Writes are bounded by buffer_len.",
+      "evidence_relative_answer": "Locally provable-safe by construction (alloc sized to content); the scanner abstains only because it does not relate the symbolic buffer_len alloc to the write extent. Same in both revisions (incidental candidate).",
+      "independent": true
+    },
+    {
+      "case_id": "nsc_pbe_key_gen/buf@11745",
+      "cve": "incidental (CVE-2019-11745 file, unchanged)", "function": "nsc_pbe_key_gen", "dest": "buf",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "capacity_relation_not_established",
+      "text_differential": false, "effective_capacity_differential": false,
+      "verified_outcome_vuln": "unresolved_needs_context",
+      "verified_outcome_patched": "unresolved_needs_context",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "buf is an out-parameter (void *buf); the PBE key bytes are copied into it. The capacity of buf is the CALLER's responsibility and is not visible in this function. Safe-or-not depends on caller-provided sizing not traced here.",
+      "evidence_relative_answer": "Genuinely unresolved without interprocedural caller evidence -- matches the scanner's capacity_relation_not_established. Unchanged across the CVE revisions.",
+      "independent": true
+    },
+    {
+      "case_id": "nsc_pbe_key_gen/buf@11759",
+      "cve": "incidental (CVE-2019-11759 file, unchanged)", "function": "nsc_pbe_key_gen", "dest": "buf",
+      "scanner_emitted_bucket": "relationship_unresolved",
+      "scanner_reason": "capacity_relation_not_established",
+      "text_differential": false, "effective_capacity_differential": false,
+      "verified_outcome_vuln": "unresolved_needs_context",
+      "verified_outcome_patched": "unresolved_needs_context",
+      "verified_bucket": "relationship_unresolved",
+      "evidence": "Same function as nsc_pbe_key_gen/buf@11745 but a slightly different revision of the body (46 vs 40 lines); same out-parameter structure. NEARLY the same case -- weakly independent.",
+      "evidence_relative_answer": "Same reasoning as the 11745 copy. Should NOT be counted as a fully independent case from it.",
+      "independent": false,
+      "shares_defect_with": "nsc_pbe_key_gen/buf@11745"
+    },
+    {
+      "case_id": "sec_asn1d_add_to_subitems/copy",
+      "cve": "incidental (CVE-2016-1950 file, unchanged at this site)", "function": "sec_asn1d_add_to_subitems", "dest": "copy",
+      "scanner_emitted_bucket": "external_contract_unknown",
+      "scanner_reason": "unknown_allocator_contract",
+      "text_differential": false, "effective_capacity_differential": false,
+      "verified_outcome_vuln": "safe",
+      "verified_outcome_patched": "safe",
+      "verified_bucket": "external_contract_unknown",
+      "evidence": "copy = sec_asn1d_alloc(pool, len); PORT_Memcpy(copy, data, len). sec_asn1d_alloc returns a block of exactly `len` usable bytes (it is a thin arena wrapper), so the memcpy of `len` bytes is in bounds. Establishing that requires reading the allocator's contract -- exactly what the scanner routed to contract review.",
+      "evidence_relative_answer": "Safe once the sec_asn1d_alloc contract (returns >= len) is established -- a contract-review task, correctly routed. Unchanged across revisions.",
+      "independent": true
+    }
+  ]
+}
