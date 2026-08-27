@@ -29,6 +29,7 @@ hr; echo "OOB analysis + candidate-to-review-packet pipeline (our work):"
 run_py "OOB-INDEX-R01 (index-store OOB producer)"        "$PE/tests/gates/oob-index-r01" gate_oob_index_r01.py
 run_py "OOB-COPYLEN-R01 (memcpy-length OOB producer)"    "$PE/tests/gates/oob-copylen-r01" gate_oob_copylen_r01.py
 run_py "OOB-PTRINC-R01 (pointer-increment OOB producer)" "$PE/tests/gates/oob-ptrinc-r01" gate_oob_ptrinc_r01.py
+run_py "OOB-CURSOR-R01 (cursor-write OOB producer)"      "$PE/tests/gates/oob-cursor-r01" gate_oob_cursor_r01.py
 run_py "OOB-ADJ-R01/R02 (staging + channel trust)"       "$PE/tests/gates/oob-adj-r01"  gate_oob_adjudication.py
 run_py "OOB-ADJ-R03 (candidate-binding fingerprint)"     "$PE/tests/gates/oob-adj-r01"  gate_oob_r03_binding.py
 run_py "OOB-ADJ-R04 (trusted-identity / content binding)" "$PE/tests/gates/oob-adj-r01" gate_oob_r04_identity.py
