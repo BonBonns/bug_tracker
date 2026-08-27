@@ -376,7 +376,9 @@ def analyze_operations(prefix):
     for op in ops:
         fn, dest, width, line = op['function_id'], op['dest_code'], op['width_code'], op['line']
         fname = (func_by_id.get(fn) or {}).get('full_name')
-        base = {'candidate_id': _record_id(fn, dest, line), 'recognized_operation': 'buffer_write',
+        _oid = _record_id(fn, dest, line)
+        base = {'candidate_id': _oid, 'operation_id': _oid,
+                'recognized_operation': 'buffer_write',
                 'file': op['file'], 'function': fname, 'line': line,
                 'dest': dest, 'width_expr': width}
         if not re.fullmatch(r'[A-Za-z_]\w*', dest):
@@ -416,14 +418,17 @@ def analyze_operations(prefix):
             base['reason_code'] = None
         elif status == 'rerouted':
             d0 = REASON_DEFINITIONS['free_dominates_sink']
-            base.update({'reason_code': 'free_dominates_sink', 'all_reason_codes': reasons,
+            base.update({'reason_code': 'free_dominates_sink',
+                         'primary_reason_code': 'free_dominates_sink',
+                         'all_reason_codes': reasons,
                          'uncertainty_bucket': None, 'recommended_route': d0['route'],
                          'candidate_class': d0['candidate_class'], 'llm_eligible': False,
                          'established_facts': ['allocation dominates free', 'free dominates sink',
                                                'destination identity established']})
         else:
             primary = primary_reason(reasons)
-            base.update({'reason_code': primary, 'all_reason_codes': reasons,
+            base.update({'reason_code': primary, 'primary_reason_code': primary,
+                         'all_reason_codes': reasons,
                          'uncertainty_bucket': bucket_for_reason(primary),
                          'recommended_route': route_for_reason(primary),
                          'unresolved_property': property_for_reason(primary),
