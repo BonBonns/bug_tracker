@@ -31,6 +31,7 @@ run_py "OOB-COPYLEN-R01 (memcpy-length OOB producer)"    "$PE/tests/gates/oob-co
 run_py "OOB-PTRINC-R01 (pointer-increment OOB producer)" "$PE/tests/gates/oob-ptrinc-r01" gate_oob_ptrinc_r01.py
 run_py "OOB-CURSOR-R01 (cursor-write OOB producer)"      "$PE/tests/gates/oob-cursor-r01" gate_oob_cursor_r01.py
 run_py "OOB-CALLSINK-R01 (contract-driven call-sink OOB producer)" "$PE/tests/gates/oob-callsink-r01" gate_oob_callsink_r01.py
+run_py "OOB-INTERPROC-R01 (single-hop interprocedural capacity propagation)" "$PE/tests/gates/oob-interproc-r01" gate_oob_interproc_r01.py
 run_py "OOB-ADJ-R01/R02 (staging + channel trust)"       "$PE/tests/gates/oob-adj-r01"  gate_oob_adjudication.py
 run_py "OOB-ADJ-R03 (candidate-binding fingerprint)"     "$PE/tests/gates/oob-adj-r01"  gate_oob_r03_binding.py
 run_py "OOB-ADJ-R04 (trusted-identity / content binding)" "$PE/tests/gates/oob-adj-r01" gate_oob_r04_identity.py

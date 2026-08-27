@@ -1,0 +1,83 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {"id": 950000000001, "name": "caller_single", "full_name": "caller_single", "file": "ip.c", "line": 1, "line_end": 3, "is_external": false, "parameters": []},
+  {"id": 950000000002, "name": "helper_unbounded", "full_name": "helper_unbounded", "file": "ip.c", "line": 4, "line_end": 6, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 950000000902, "method_id": 950000000002, "line": 4},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 950000000903, "method_id": 950000000002, "line": 4},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 950000000904, "method_id": 950000000002, "line": 4}]},
+
+  {"id": 950000000003, "name": "caller_conflict_a", "full_name": "caller_conflict_a", "file": "ip.c", "line": 7, "line_end": 9, "is_external": false, "parameters": []},
+  {"id": 950000000004, "name": "caller_conflict_b", "full_name": "caller_conflict_b", "file": "ip.c", "line": 10, "line_end": 12, "is_external": false, "parameters": []},
+  {"id": 950000000005, "name": "helper_conflict", "full_name": "helper_conflict", "file": "ip.c", "line": 13, "line_end": 15, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 950000000905, "method_id": 950000000005, "line": 13},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 950000000906, "method_id": 950000000005, "line": 13},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 950000000907, "method_id": 950000000005, "line": 13}]},
+
+  {"id": 950000000006, "name": "caller_field_arg", "full_name": "caller_field_arg", "file": "ip.c", "line": 16, "line_end": 18, "is_external": false, "parameters": []},
+  {"id": 950000000007, "name": "helper_field", "full_name": "helper_field", "file": "ip.c", "line": 19, "line_end": 21, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 950000000908, "method_id": 950000000007, "line": 19},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 950000000909, "method_id": 950000000007, "line": 19},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 950000000910, "method_id": 950000000007, "line": 19}]},
+
+  {"id": 950000000008, "name": "caller_guarded", "full_name": "caller_guarded", "file": "ip.c", "line": 22, "line_end": 24, "is_external": false, "parameters": []},
+  {"id": 950000000009, "name": "helper_guarded", "full_name": "helper_guarded", "file": "ip.c", "line": 25, "line_end": 28, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 950000000911, "method_id": 950000000009, "line": 25},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 950000000912, "method_id": 950000000009, "line": 25},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 950000000913, "method_id": 950000000009, "line": 25}]},
+
+  {"id": 950000000010, "name": "caller_unresolved", "full_name": "caller_unresolved", "file": "ip.c", "line": 29, "line_end": 31, "is_external": false, "parameters": []},
+  {"id": 950000000011, "name": "helper_unresolved_target", "full_name": "helper_unresolved_target", "file": "ip.c", "line": 32, "line_end": 34, "is_external": false,
+   "parameters": [{"index": 0, "name": "dest", "code": "char *dest", "type_full_name": "char*", "id": 950000000914, "method_id": 950000000011, "line": 32},
+                   {"index": 1, "name": "src2", "code": "char *src2", "type_full_name": "char*", "id": 950000000915, "method_id": 950000000011, "line": 32},
+                   {"index": 2, "name": "len2", "code": "int len2", "type_full_name": "int", "id": 950000000916, "method_id": 950000000011, "line": 32}]}
+ ],
+ "locals": [
+  {"id": 950000000101, "name": "buf", "type_full_name": "char[16]", "method_id": 950000000001, "code": "char buf[16]", "line": 2},
+  {"id": 950000000103, "name": "buf2", "type_full_name": "char[8]", "method_id": 950000000003, "code": "char buf2[8]", "line": 8},
+  {"id": 950000000104, "name": "buf3", "type_full_name": "char[32]", "method_id": 950000000004, "code": "char buf3[32]", "line": 11},
+  {"id": 950000000108, "name": "buf5", "type_full_name": "char[16]", "method_id": 950000000008, "code": "char buf5[16]", "line": 23},
+  {"id": 950000000110, "name": "buf6", "type_full_name": "char[16]", "method_id": 950000000010, "code": "char buf6[16]", "line": 30}
+ ],
+ "calls": [
+  {"id": 950000000201, "name": "helper_unbounded", "method_full_name": "helper_unbounded", "code": "helper_unbounded(buf, src, len)",
+   "enclosing_function_id": 950000000001, "file": "ip.c", "line": 2, "resolution": "EXACT", "candidate_target_ids": [950000000002],
+   "arguments": [{"index": 0, "code": "buf"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000202, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)",
+   "enclosing_function_id": 950000000002, "file": "ip.c", "line": 5,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]},
+
+  {"id": 950000000203, "name": "helper_conflict", "method_full_name": "helper_conflict", "code": "helper_conflict(buf2, src, len)",
+   "enclosing_function_id": 950000000003, "file": "ip.c", "line": 8, "resolution": "EXACT", "candidate_target_ids": [950000000005],
+   "arguments": [{"index": 0, "code": "buf2"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000204, "name": "helper_conflict", "method_full_name": "helper_conflict", "code": "helper_conflict(buf3, src, len)",
+   "enclosing_function_id": 950000000004, "file": "ip.c", "line": 11, "resolution": "EXACT", "candidate_target_ids": [950000000005],
+   "arguments": [{"index": 0, "code": "buf3"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000205, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)",
+   "enclosing_function_id": 950000000005, "file": "ip.c", "line": 14,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]},
+
+  {"id": 950000000206, "name": "helper_field", "method_full_name": "helper_field", "code": "helper_field(obj->field, src, len)",
+   "enclosing_function_id": 950000000006, "file": "ip.c", "line": 17, "resolution": "EXACT", "candidate_target_ids": [950000000007],
+   "arguments": [{"index": 0, "code": "obj->field"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000207, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)",
+   "enclosing_function_id": 950000000007, "file": "ip.c", "line": 20,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]},
+
+  {"id": 950000000208, "name": "helper_guarded", "method_full_name": "helper_guarded", "code": "helper_guarded(buf5, src, len)",
+   "enclosing_function_id": 950000000008, "file": "ip.c", "line": 23, "resolution": "EXACT", "candidate_target_ids": [950000000009],
+   "arguments": [{"index": 0, "code": "buf5"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000209, "name": "<operator>.greaterThan", "code": "n > sizeof(dest)",
+   "enclosing_function_id": 950000000009, "file": "ip.c", "line": 26},
+  {"id": 950000000210, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)",
+   "enclosing_function_id": 950000000009, "file": "ip.c", "line": 27,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]},
+
+  {"id": 950000000211, "name": "helper_unresolved_target", "method_full_name": "helper_unresolved_target", "code": "helper_unresolved_target(buf6, src, len)",
+   "enclosing_function_id": 950000000010, "file": "ip.c", "line": 30, "resolution": "UNRESOLVED", "candidate_target_ids": [950000000011],
+   "arguments": [{"index": 0, "code": "buf6"}, {"index": 1, "code": "src"}, {"index": 2, "code": "len"}]},
+  {"id": 950000000212, "name": "memcpy", "method_full_name": "memcpy", "code": "memcpy(dest, src2, len2)",
+   "enclosing_function_id": 950000000011, "file": "ip.c", "line": 33,
+   "arguments": [{"index": 0, "code": "dest"}, {"index": 1, "code": "src2"}, {"index": 2, "code": "len2"}]}
+ ]
+}
