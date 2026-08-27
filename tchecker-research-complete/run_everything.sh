@@ -10,7 +10,7 @@
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 PE="$ROOT/portable-engine-full-review-package"
 ADJ="$ROOT/tchecker-property-adjudicator"
-PASS=0; FAIL=0; SKIP=0; KNOWN=0
+PASS=0; FAIL=0; SKIP=0; KNOWN=0; BLOCKED=0
 hr(){ printf '%s\n' "----------------------------------------------------------------------"; }
 run_py(){ # name  dir  script...
   local name="$1"; shift; local dir="$1"; shift
@@ -63,7 +63,21 @@ if [ -n "${JOERN_HOME:-}" ] && [ -x "$JOERN_HOME/c2cpg.sh" ]; then
   for gd in cpp-r06 cpp-param-r01 poly-r01 guard-r01 cpp-perf-r01 moz-canon-r01; do
     d="$PE/tests/gates/$gd"
     if [ -f "$d/run.sh" ]; then
-      echo "-- $gd (fresh CPG) --"; (cd "$d" && bash run.sh >/tmp/$gd.log 2>&1 && echo "PASS  $gd" && PASS=$((PASS+1))) || { echo "FAIL  $gd (see /tmp/$gd.log)"; FAIL=$((FAIL+1)); }
+      echo "-- $gd (fresh CPG) --"
+      out="$(cd "$d" && bash run.sh 2>&1)"; rc=$?
+      echo "$out" > "/tmp/$gd.log"
+      if [ $rc -eq 0 ]; then
+        echo "PASS  $gd"; PASS=$((PASS+1))
+      elif echo "$out" | grep -qiE "BLOCKED.*MISSING_FIXTURES|MISSING_FIXTURES.*BLOCKED|fixtures absent"; then
+        # Self-reported BLOCKED (a pre-existing, documented fixture gap -- see
+        # NOT_SELF_CONTAINED.md), not a genuine regression. Counted separately so
+        # the summary never silently folds a real FAIL into a passing-looking count,
+        # and never overstates a known gap as a failure either.
+        echo "BLOCKED  $gd (pre-existing fixture gap, not a regression -- see /tmp/$gd.log)"
+        BLOCKED=$((BLOCKED+1))
+      else
+        echo "FAIL  $gd (see /tmp/$gd.log)"; FAIL=$((FAIL+1))
+      fi
     fi
   done
   echo "-- OOB canonical end-to-end controls (scan_repo public entry point) --"
@@ -78,7 +92,7 @@ else
 fi
 
 echo
-hr; echo "SUMMARY (counted hermetic gates):  PASS=$PASS  FAIL=$FAIL  KNOWN_ABSENT_FIXTURE=$KNOWN  LAYER2_SKIPPED=$SKIP"
+hr; echo "SUMMARY (counted hermetic gates):  PASS=$PASS  FAIL=$FAIL  BLOCKED=$BLOCKED  KNOWN_ABSENT_FIXTURE=$KNOWN  LAYER2_SKIPPED=$SKIP"
 echo "  OUR WORK (OOB pipeline: INDEX-R01, ADJ-R01/R02/R03/R04) is fully self-contained and included in PASS."
 echo "  KNOWN_ABSENT are PRE-EXISTING snapshot gaps in the original package (documented in NOT_SELF_CONTAINED.md),"
 echo "  not regressions from this work; they fail loud by design. The portable-engine/verify layers above may"
