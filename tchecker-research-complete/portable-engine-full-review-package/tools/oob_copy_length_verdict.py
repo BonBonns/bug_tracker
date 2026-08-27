@@ -93,7 +93,7 @@ between the guard and the copy, which this text-pattern pass does not do.
 import json, re, sys
 
 ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'NS_ABORT_IF_FALSE',
-                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert')
+                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert', 'PR_ASSERT')
 CMP = ('<operator>.lessThan', '<operator>.lessEqualsThan', '<operator>.greaterThan',
        '<operator>.greaterEqualsThan')
 # (dest, src, len) argument order, all byte-count length semantics.

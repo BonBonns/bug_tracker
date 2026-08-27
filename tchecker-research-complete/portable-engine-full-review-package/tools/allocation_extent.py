@@ -139,16 +139,120 @@ def compute_free_sites(d):
     return sites
 
 
+_VROOT = object()   # sentinel virtual predecessor of every entry -- never a real node id
+
+
+def _compute_idom(nodes, preds, succ, entries):
+    """Immediate-dominator map via the standard Cooper/Harvey/Kennedy iterative
+    algorithm (reverse-postorder + idom-chain intersection), NOT the naive
+    fixed-point-over-explicit-ancestor-sets this replaced. The naive version
+    recomputed a full O(nodes)-sized dominator SET for every node on every sweep --
+    fine on the small synthetic gate fixtures, but a real bug found against real
+    NSS code: one dispatcher function has 4,585 CFG nodes, and the old approach's
+    100,000-iteration cap times an O(nodes) set-intersection per node per sweep
+    made it effectively hang (still running after 90s on a single function).
+    idom chains are typically only as deep as the loop-nesting depth, so answering
+    "does A dominate B" by walking B's idom chain (see `_dominates`) is O(depth),
+    not O(nodes) -- this is what actually fixes the blowup, not just a bigger cap.
+
+    A virtual root feeding every entry node reproduces the OLD semantics exactly
+    for multiple/disconnected entries (e.g. unreachable handler code): each entry's
+    only idom is the virtual root, so it dominates nothing outside itself, same as
+    the old dom[entry] == {entry}."""
+    idom = {_VROOT: _VROOT}
+    if not nodes:
+        return idom
+
+    order = []
+    visited = {_VROOT}
+    def _dfs(start):
+        stack = [(start, iter(succ.get(start, ())))]
+        visited.add(start)
+        while stack:
+            node, it = stack[-1]
+            advanced = False
+            for s in it:
+                if s not in visited:
+                    visited.add(s)
+                    stack.append((s, iter(succ.get(s, ()))))
+                    advanced = True
+                    break
+            if not advanced:
+                order.append(node)
+                stack.pop()
+    for e in entries:
+        if e not in visited:
+            _dfs(e)
+    for n in nodes:              # any node unreached from a declared entry
+        if n not in visited:     # (shouldn't normally happen) -- still index it
+            _dfs(n)
+    order.reverse()   # reverse postorder
+    rpo_index = {n: i for i, n in enumerate(order)}
+    rpo_index[_VROOT] = -1
+
+    def _intersect(a, b):
+        ia, ib = rpo_index[a], rpo_index[b]
+        while a != b:
+            while ia > ib:
+                a = idom[a]
+                ia = rpo_index[a]
+            while ib > ia:
+                b = idom[b]
+                ib = rpo_index[b]
+        return a
+
+    for e in entries:
+        idom[e] = _VROOT
+    changed = True
+    guard = 0
+    max_guard = len(order) + 50   # real code converges in a handful of sweeps;
+    while changed and guard < max_guard:   # this bound is a safety cap, not the mechanism
+        guard += 1
+        changed = False
+        for n in order:
+            if n in entries:
+                continue
+            new_idom = None
+            for p in preds.get(n, ()):
+                if p not in idom:
+                    continue   # predecessor not processed yet this sweep
+                new_idom = p if new_idom is None else _intersect(new_idom, p)
+            if new_idom is None:
+                continue
+            if idom.get(n) != new_idom:
+                idom[n] = new_idom
+                changed = True
+    return idom
+
+
+def _dominates(g, a, b):
+    """True iff node `a` dominates node `b` in this function's CFG (`a == b`
+    counts). Walks the idom CHAIN from `b` upward -- O(chain depth) -- rather than
+    testing membership in a materialized ancestor set; see `_compute_idom` for why
+    that distinction is the actual fix for a real hang on a large real function."""
+    idom = g.get('idom') or {}
+    nodes = g['nodes']
+    n = b
+    steps = 0
+    limit = len(nodes) + 5
+    while True:
+        if n == a:
+            return True
+        nxt = idom.get(n)
+        if nxt is None or nxt is _VROOT or nxt == n or nxt not in nodes:
+            return False
+        n = nxt
+        steps += 1
+        if steps > limit:
+            return False   # safety cap; should be unreachable for a real idom chain
+
+
 def build_cfg_index(d):
     """Returns {function_id: {'succ': {node: {succs}}, 'preds': {node: {preds}},
-    'nodes': {node,...}, 'entries': {node,...}, 'dom': {node: {dominators}}}} from
-    this repo's `cfg_edges` facts. `dom[n]` is the set of nodes that dominate `n`
-    (every path from an entry to `n` passes through each of them), computed by
-    standard iterative dataflow to a fixed point -- correct for cyclic/irreducible
-    graphs, not just simple ones; a `goto` is just another edge in this graph, so
-    reordering source text has no effect on the result. Bounded iteration count as
-    a hard safety cap, same posture as the reaching-def worklist elsewhere in this
-    codebase's normalizer."""
+    'nodes': {node,...}, 'entries': {node,...}, 'idom': {node: immediate_dominator}}}
+    from this repo's `cfg_edges` facts. Dominance queries go through `_dominates(g,
+    a, b)`, not direct dict/set indexing into `idom` -- a `goto` is just another
+    edge in this graph, so reordering source text has no effect on the result."""
     per_fn = {}
     for e in d.get('cfg_edges', []):
         fn = e.get('function_id')
@@ -165,27 +269,7 @@ def build_cfg_index(d):
         nodes = g['nodes']
         entries = {n for n in nodes if not g['preds'].get(n)}
         g['entries'] = entries
-        dom = {n: (set(nodes) if n not in entries else {n}) for n in nodes}
-        guard = 0
-        changed = True
-        while changed and guard < 100000:
-            guard += 1
-            changed = False
-            for n in nodes:
-                if n in entries:
-                    continue
-                ps = g['preds'].get(n)
-                if not ps:
-                    continue
-                new_dom = None
-                for p in ps:
-                    pd = dom.get(p, nodes)
-                    new_dom = set(pd) if new_dom is None else (new_dom & pd)
-                new_dom = (new_dom or set()) | {n}
-                if new_dom != dom[n]:
-                    dom[n] = new_dom
-                    changed = True
-        g['dom'] = dom
+        g['idom'] = _compute_idom(nodes, g['preds'], g['succ'], entries)
     return per_fn
 
 
@@ -232,7 +316,7 @@ def capacity_status_at_sink(cfg_index, fn, alloc_site, free_ids, sink_id):
     g = cfg_index.get(fn)
     if not g or sink_id not in g['nodes']:
         return 'UNKNOWN'
-    dom, succ, nodes = g['dom'], g['succ'], g['nodes']
+    succ, nodes = g['succ'], g['nodes']
     if alloc_site in nodes:
         alloc_node = alloc_site
     elif g['entries']:
@@ -244,9 +328,7 @@ def capacity_status_at_sink(cfg_index, fn, alloc_site, free_ids, sink_id):
     for free_id in free_ids:
         if free_id not in nodes:
             continue   # this free isn't even in this function's CFG -- irrelevant
-        sink_dom = dom.get(sink_id, set())
-        free_dom = dom.get(free_id, set())
-        if free_id in sink_dom and alloc_node in free_dom:
+        if _dominates(g, free_id, sink_id) and _dominates(g, alloc_node, free_id):
             return 'INVALID'   # guaranteed on every path -- no need to check more
         if free_id in alloc_reach and sink_id in _reachable_from(succ, free_id):
             status = 'AMBIGUOUS'   # possible on some path; keep checking others

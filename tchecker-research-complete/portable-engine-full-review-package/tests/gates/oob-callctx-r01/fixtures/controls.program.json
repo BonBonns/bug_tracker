@@ -1,0 +1,1038 @@
+{
+ "schema": "portable-c-cpp-facts/0.1",
+ "functions": [
+  {
+   "id": 991010000001,
+   "name": "callee_991010000000",
+   "full_name": "callee_991010000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991010000900,
+     "method_id": 991010000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991010000901,
+     "method_id": 991010000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991010000902,
+     "method_id": 991010000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991010000002,
+   "name": "caller_guard_dominates",
+   "full_name": "caller_guard_dominates",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991020000001,
+   "name": "callee_991020000000",
+   "full_name": "callee_991020000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991020000900,
+     "method_id": 991020000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991020000901,
+     "method_id": 991020000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991020000902,
+     "method_id": 991020000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991020000002,
+   "name": "caller_assert_only",
+   "full_name": "caller_assert_only",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991030000001,
+   "name": "callee_991030000000",
+   "full_name": "callee_991030000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991030000900,
+     "method_id": 991030000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991030000901,
+     "method_id": 991030000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991030000902,
+     "method_id": 991030000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991030000002,
+   "name": "caller_guard_after_call",
+   "full_name": "caller_guard_after_call",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991040000001,
+   "name": "callee_991040000000",
+   "full_name": "callee_991040000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991040000900,
+     "method_id": 991040000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991040000901,
+     "method_id": 991040000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991040000902,
+     "method_id": 991040000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991040000002,
+   "name": "caller_conditional_guard",
+   "full_name": "caller_conditional_guard",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 14,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991050000001,
+   "name": "callee_991050000000",
+   "full_name": "callee_991050000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991050000900,
+     "method_id": 991050000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991050000901,
+     "method_id": 991050000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991050000902,
+     "method_id": 991050000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991050000002,
+   "name": "caller5_guarded",
+   "full_name": "caller5_guarded",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 10,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991050000003,
+   "name": "caller5_unguarded",
+   "full_name": "caller5_unguarded",
+   "file": "cc.c",
+   "line": 11,
+   "line_end": 14,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991060000001,
+   "name": "callee_991060000000",
+   "full_name": "callee_991060000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "limit",
+     "code": "unsigned limit",
+     "type_full_name": "unsigned",
+     "id": 991060000900,
+     "method_id": 991060000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "source",
+     "code": "char *source",
+     "type_full_name": "char*",
+     "id": 991060000901,
+     "method_id": 991060000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "qty",
+     "code": "unsigned qty",
+     "type_full_name": "unsigned",
+     "id": 991060000902,
+     "method_id": 991060000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991060000002,
+   "name": "caller_index_mapping",
+   "full_name": "caller_index_mapping",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  },
+  {
+   "id": 991070000001,
+   "name": "callee_991070000000",
+   "full_name": "callee_991070000000",
+   "file": "cc.c",
+   "line": 1,
+   "line_end": 3,
+   "is_external": false,
+   "parameters": [
+    {
+     "index": 0,
+     "name": "cap",
+     "code": "unsigned cap",
+     "type_full_name": "unsigned",
+     "id": 991070000900,
+     "method_id": 991070000001,
+     "line": 1
+    },
+    {
+     "index": 1,
+     "name": "src",
+     "code": "char *src",
+     "type_full_name": "char*",
+     "id": 991070000901,
+     "method_id": 991070000001,
+     "line": 1
+    },
+    {
+     "index": 2,
+     "name": "len",
+     "code": "unsigned len",
+     "type_full_name": "unsigned",
+     "id": 991070000902,
+     "method_id": 991070000001,
+     "line": 1
+    }
+   ]
+  },
+  {
+   "id": 991070000002,
+   "name": "caller_signedness_mismatch",
+   "full_name": "caller_signedness_mismatch",
+   "file": "cc.c",
+   "line": 5,
+   "line_end": 12,
+   "is_external": false,
+   "parameters": []
+  }
+ ],
+ "locals": [
+  {
+   "id": 991070000300,
+   "name": "signedLen",
+   "type_full_name": "int",
+   "method_id": 991070000002,
+   "code": "int signedLen",
+   "line": 6
+  },
+  {
+   "id": 991070000301,
+   "name": "capU",
+   "type_full_name": "unsigned int",
+   "method_id": 991070000002,
+   "code": "unsigned int capU",
+   "line": 6
+  }
+ ],
+ "calls": [
+  {
+   "id": 991010000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991010000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991010000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991010000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991010000012,
+   "name": "<operator>.greaterThan",
+   "code": "len > cap",
+   "enclosing_function_id": 991010000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991010000013,
+   "name": "callee_991010000000",
+   "method_full_name": "callee_991010000000",
+   "code": "callee_991010000000(cap, src, len)",
+   "enclosing_function_id": 991010000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991010000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991020000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991020000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991020000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991020000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991020000012,
+   "name": "MOZ_ASSERT",
+   "code": "MOZ_ASSERT(len <= cap)",
+   "enclosing_function_id": 991020000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991020000013,
+   "name": "<operator>.lessEqualsThan",
+   "code": "len <= cap",
+   "enclosing_function_id": 991020000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991020000013,
+   "name": "callee_991020000000",
+   "method_full_name": "callee_991020000000",
+   "code": "callee_991020000000(cap, src, len)",
+   "enclosing_function_id": 991020000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991020000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991030000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991030000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991030000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991030000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991030000013,
+   "name": "callee_991030000000",
+   "method_full_name": "callee_991030000000",
+   "code": "callee_991030000000(cap, src, len)",
+   "enclosing_function_id": 991030000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991030000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991030000012,
+   "name": "<operator>.greaterThan",
+   "code": "len > cap",
+   "enclosing_function_id": 991030000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991040000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991040000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991040000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991040000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991040000020,
+   "name": "<operator>.equals",
+   "code": "flag == 1",
+   "enclosing_function_id": 991040000002,
+   "file": "cc.c",
+   "line": 8
+  },
+  {
+   "id": 991040000012,
+   "name": "<operator>.greaterThan",
+   "code": "len > cap",
+   "enclosing_function_id": 991040000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991040000013,
+   "name": "callee_991040000000",
+   "method_full_name": "callee_991040000000",
+   "code": "callee_991040000000(cap, src, len)",
+   "enclosing_function_id": 991040000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991040000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991050000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991050000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991050000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991050000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991050000012,
+   "name": "<operator>.greaterThan",
+   "code": "len > cap",
+   "enclosing_function_id": 991050000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991050000013,
+   "name": "callee_991050000000",
+   "method_full_name": "callee_991050000000",
+   "code": "callee_991050000000(cap, src, len)",
+   "enclosing_function_id": 991050000002,
+   "file": "cc.c",
+   "line": 6,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991050000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991050000023,
+   "name": "callee_991050000000",
+   "method_full_name": "callee_991050000000",
+   "code": "callee_991050000000(cap, src, len)",
+   "enclosing_function_id": 991050000003,
+   "file": "cc.c",
+   "line": 12,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991050000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "cap"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991060000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(limit)",
+   "enclosing_function_id": 991060000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991060000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, source, qty)",
+   "enclosing_function_id": 991060000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "source"
+    },
+    {
+     "index": 2,
+     "code": "qty"
+    }
+   ]
+  },
+  {
+   "id": 991060000012,
+   "name": "<operator>.greaterThan",
+   "code": "n > bound",
+   "enclosing_function_id": 991060000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991060000013,
+   "name": "callee_991060000000",
+   "method_full_name": "callee_991060000000",
+   "code": "callee_991060000000(bound, srcVar, n)",
+   "enclosing_function_id": 991060000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991060000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "bound"
+    },
+    {
+     "index": 1,
+     "code": "srcVar"
+    },
+    {
+     "index": 2,
+     "code": "n"
+    }
+   ]
+  },
+  {
+   "id": 991070000010,
+   "name": "<operator>.assignment",
+   "code": "p = malloc(cap)",
+   "enclosing_function_id": 991070000001,
+   "file": "cc.c",
+   "line": 2
+  },
+  {
+   "id": 991070000011,
+   "name": "memcpy",
+   "method_full_name": "memcpy",
+   "code": "memcpy(p, src, len)",
+   "enclosing_function_id": 991070000001,
+   "file": "cc.c",
+   "line": 2,
+   "arguments": [
+    {
+     "index": 0,
+     "code": "p"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "len"
+    }
+   ]
+  },
+  {
+   "id": 991070000012,
+   "name": "<operator>.greaterThan",
+   "code": "signedLen > capU",
+   "enclosing_function_id": 991070000002,
+   "file": "cc.c",
+   "line": 9
+  },
+  {
+   "id": 991070000013,
+   "name": "callee_991070000000",
+   "method_full_name": "callee_991070000000",
+   "code": "callee_991070000000(capU, src, signedLen)",
+   "enclosing_function_id": 991070000002,
+   "file": "cc.c",
+   "line": 10,
+   "resolution": "EXACT",
+   "candidate_target_ids": [
+    991070000001
+   ],
+   "arguments": [
+    {
+     "index": 0,
+     "code": "capU"
+    },
+    {
+     "index": 1,
+     "code": "src"
+    },
+    {
+     "index": 2,
+     "code": "signedLen"
+    }
+   ]
+  }
+ ],
+ "cfg_edges": [
+  {
+   "function_id": 991010000001,
+   "node_id": 991010000100,
+   "successor_id": 991010000010
+  },
+  {
+   "function_id": 991010000001,
+   "node_id": 991010000010,
+   "successor_id": 991010000011
+  },
+  {
+   "function_id": 991010000002,
+   "node_id": 991010000200,
+   "successor_id": 991010000012
+  },
+  {
+   "function_id": 991010000002,
+   "node_id": 991010000012,
+   "successor_id": 991010000013
+  },
+  {
+   "function_id": 991020000001,
+   "node_id": 991020000100,
+   "successor_id": 991020000010
+  },
+  {
+   "function_id": 991020000001,
+   "node_id": 991020000010,
+   "successor_id": 991020000011
+  },
+  {
+   "function_id": 991020000002,
+   "node_id": 991020000200,
+   "successor_id": 991020000012
+  },
+  {
+   "function_id": 991020000002,
+   "node_id": 991020000012,
+   "successor_id": 991020000013
+  },
+  {
+   "function_id": 991020000002,
+   "node_id": 991020000013,
+   "successor_id": 991020000013
+  },
+  {
+   "function_id": 991030000001,
+   "node_id": 991030000100,
+   "successor_id": 991030000010
+  },
+  {
+   "function_id": 991030000001,
+   "node_id": 991030000010,
+   "successor_id": 991030000011
+  },
+  {
+   "function_id": 991030000002,
+   "node_id": 991030000200,
+   "successor_id": 991030000013
+  },
+  {
+   "function_id": 991030000002,
+   "node_id": 991030000013,
+   "successor_id": 991030000012
+  },
+  {
+   "function_id": 991040000001,
+   "node_id": 991040000100,
+   "successor_id": 991040000010
+  },
+  {
+   "function_id": 991040000001,
+   "node_id": 991040000010,
+   "successor_id": 991040000011
+  },
+  {
+   "function_id": 991040000002,
+   "node_id": 991040000200,
+   "successor_id": 991040000020
+  },
+  {
+   "function_id": 991040000002,
+   "node_id": 991040000020,
+   "successor_id": 991040000012
+  },
+  {
+   "function_id": 991040000002,
+   "node_id": 991040000020,
+   "successor_id": 991040000013
+  },
+  {
+   "function_id": 991040000002,
+   "node_id": 991040000012,
+   "successor_id": 991040000013
+  },
+  {
+   "function_id": 991050000001,
+   "node_id": 991050000100,
+   "successor_id": 991050000010
+  },
+  {
+   "function_id": 991050000001,
+   "node_id": 991050000010,
+   "successor_id": 991050000011
+  },
+  {
+   "function_id": 991050000002,
+   "node_id": 991050000200,
+   "successor_id": 991050000012
+  },
+  {
+   "function_id": 991050000002,
+   "node_id": 991050000012,
+   "successor_id": 991050000013
+  },
+  {
+   "function_id": 991050000003,
+   "node_id": 991050000201,
+   "successor_id": 991050000023
+  },
+  {
+   "function_id": 991060000001,
+   "node_id": 991060000100,
+   "successor_id": 991060000010
+  },
+  {
+   "function_id": 991060000001,
+   "node_id": 991060000010,
+   "successor_id": 991060000011
+  },
+  {
+   "function_id": 991060000002,
+   "node_id": 991060000200,
+   "successor_id": 991060000012
+  },
+  {
+   "function_id": 991060000002,
+   "node_id": 991060000012,
+   "successor_id": 991060000013
+  },
+  {
+   "function_id": 991070000001,
+   "node_id": 991070000100,
+   "successor_id": 991070000010
+  },
+  {
+   "function_id": 991070000001,
+   "node_id": 991070000010,
+   "successor_id": 991070000011
+  },
+  {
+   "function_id": 991070000002,
+   "node_id": 991070000200,
+   "successor_id": 991070000012
+  },
+  {
+   "function_id": 991070000002,
+   "node_id": 991070000012,
+   "successor_id": 991070000013
+  }
+ ]
+}

@@ -30,14 +30,47 @@ conditional free that rejoins before the write yields AMBIGUOUS (not confidently
 usable, but not confidently invalid either) rather than silently abstaining on the
 whole function the way an earlier version of this module did.
 
+CALLER-CONTEXT GUARD SUPPRESSION (round 13): when a write's own function has no
+local guard, this module now ALSO checks whether EVERY statically-resolved call
+site reaching that function has a caller-side guard (real, call-dominating,
+type-consistent -- see call_context_guard.py) protecting the SAME
+width-vs-capacity relationship, mapped from the callee's expressions back into
+each caller's own argument expressions by argument INDEX (never by name-guessing
+or position order). Suppression requires ALL reaching call sites to be CREDITED;
+if even one is not (unguarded, assert-only, ambiguous, or the relationship can't
+be mapped/resolved), the candidate remains -- per-call-site evidence is never
+collapsed into one function-wide verdict.
+
 Never emits VULNERABLE; only CANDIDATE. If in doubt, SUPPRESS or ABSTAIN.
 """
 import json, re, sys
 from callee_contracts import CALLEE_CONTRACTS
 from allocation_extent import compute_allocation_extents, compute_free_sites, build_cfg_index, capacity_status_at_sink
+from call_context_guard import (build_actual_to_formal_mapping, guard_status_for_call,
+                                 find_call_sites, _collect_assert_arg_ids)
+
+
+def _map_expr_to_caller_space(expr, callee_fn, call_sites, d):
+    """For each call site in `call_sites`, map a CALLEE-space expression (a bare
+    parameter name, or one field-access hop off one, e.g. `data->len`) into that
+    site's own CALLER-space expression, by substituting the base identifier through
+    the actual-to-formal mapping (matched by argument INDEX, never by guessing).
+    Returns a list aligned with `call_sites`, with None at any position where the
+    expression's base isn't a recognized parameter of this callee, or isn't passed
+    at that particular site."""
+    m = re.match(r'^([A-Za-z_]\w*)((?:->|\.)[A-Za-z_]\w*)*$', expr or '')
+    if not m:
+        return [None] * len(call_sites)
+    base, rest = m.group(1), (expr[len(m.group(1)):] if m.group(1) else '')
+    out = []
+    for site in call_sites:
+        mapping = build_actual_to_formal_mapping(d, site, callee_fn)
+        caller_base = mapping.get(base)
+        out.append((caller_base + rest) if caller_base is not None else None)
+    return out
 
 ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'NS_ABORT_IF_FALSE',
-                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert')
+                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert', 'PR_ASSERT')
 CMP = ('<operator>.lessThan', '<operator>.lessEqualsThan', '<operator>.greaterThan',
        '<operator>.greaterEqualsThan')
 NAME_CHAIN = r'[A-Za-z_]\w*(?:(?:\.|->)[A-Za-z_]\w*)*'
@@ -59,9 +92,16 @@ def emit_candidates(prefix):
     assert_codes = [(c.get('code') or '') for c in calls
                      if c.get('name') in ASSERT_NAMES
                      or (c.get('code', '').split('(')[0].strip() in ASSERT_NAMES)]
+    # Identity-based, not text-based -- see call_context_guard._collect_assert_arg_ids
+    # for why a pure substring check on an assert macro's own rendered `code` is
+    # unsound (a real bug found on NSS rsapkcs.c: PR_ASSERT's inner-macro expansion
+    # diverges from the same comparison node's own unexpanded `code`).
+    assert_ids = _collect_assert_arg_ids(d)
 
-    def _in_assert(cmp_code):
-        cc = (cmp_code or '').strip()
+    def _in_assert(call):
+        if assert_ids and call.get('id') in assert_ids:
+            return True
+        cc = (call.get('code') or '').strip()
         return bool(cc) and any(cc in ac for ac in assert_codes)
 
     # guarded_pairs_by_fn[fn] = {frozenset({width_expr, cap_expr}), ...} -- a
@@ -72,7 +112,7 @@ def emit_candidates(prefix):
         if c.get('name') not in CMP:
             continue
         code = c.get('code') or ''
-        if _in_assert(code):
+        if _in_assert(c):
             continue
         m = CMP_PAIR_RE.match(code)
         if not m:
@@ -195,6 +235,29 @@ def emit_candidates(prefix):
         pair = frozenset((len_code, size_expr))
         if pair in guarded_pairs_by_fn.get(fn, set()):
             continue
+        # CALLER-CONTEXT GUARD SUPPRESSION (round 13): no local guard exists in
+        # THIS function -- check whether every statically-resolved call site
+        # reaching it has a caller-side guard protecting the SAME relationship,
+        # mapped into each caller's own argument expressions. Suppress only if
+        # call sites exist AND every single one is CREDITED; per-call-site
+        # evidence, never merged into one function-wide conclusion.
+        call_sites = find_call_sites(d, fn)
+        if call_sites:
+            w_caller = _map_expr_to_caller_space(len_code, fn, call_sites, d)
+            c_caller = _map_expr_to_caller_space(size_expr, fn, call_sites, d)
+            if w_caller is not None and c_caller is not None:
+                all_credited = True
+                for site, w_expr, c_expr in zip(call_sites, w_caller, c_caller):
+                    if w_expr is None or c_expr is None:
+                        all_credited = False
+                        break
+                    guard_fact = guard_status_for_call(d, cfg_index, site, w_expr, c_expr,
+                                                        assert_codes, assert_ids)
+                    if guard_fact['establishment_status'] != 'CREDITED':
+                        all_credited = False
+                        break
+                if all_credited:
+                    continue   # every reaching call site independently proves this bounded
         key = (fn, dest_code, len_code, op['call_id'])
         if key in seen:
             continue

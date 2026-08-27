@@ -56,7 +56,7 @@ Never emits VULNERABLE; only CANDIDATE.
 import json, re, sys
 
 ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'NS_ABORT_IF_FALSE',
-                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert')
+                'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert', 'PR_ASSERT')
 CMP = ('<operator>.lessThan', '<operator>.lessEqualsThan', '<operator>.greaterThan',
        '<operator>.greaterEqualsThan')
 BYTE_ELEM_TYPES = {'char', 'unsigned char', 'signed char', 'uint8_t', 'PRUint8', 'int8_t',
