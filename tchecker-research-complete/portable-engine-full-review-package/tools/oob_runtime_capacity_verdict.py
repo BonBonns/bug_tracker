@@ -50,7 +50,8 @@ from allocation_extent import (compute_allocation_extents, compute_free_sites, b
                                capacity_status_at_sink, _eval_const_int_expr)
 from call_context_guard import (build_actual_to_formal_mapping, guard_status_for_call,
                                  find_call_sites, _collect_assert_arg_ids)
-from analysis_record import bucket_for_reason, route_for_bucket
+from analysis_record import (primary_reason, bucket_for_reason, route_for_reason,
+                             property_for_reason, REASON_DEFINITIONS)
 
 
 def _map_expr_to_caller_space(expr, callee_fn, call_sites, d):
@@ -279,19 +280,20 @@ def emit_candidates(prefix):
 
 
 def _diagnose_capacity(d, fn, dest):
-    """Explicit reason_code for WHY `dest`'s capacity could not be established in
-    `fn`, derived from this producer's own allocation-parsing signals (NOT
-    inferred from mere candidate absence). Mirrors compute_allocation_extents's
-    direct-allocation parsing so the reason matches what actually stopped the
-    fact from being established:
-      - two different reaching allocation sizes -> conflicting_allocations
+    """ALL explicit reason codes for why `dest`'s capacity could not be
+    established in `fn`, derived from this producer's own allocation-parsing
+    signals (NOT inferred from candidate absence). Mirrors
+    compute_allocation_extents's direct-allocation parsing so the reasons match
+    what actually stopped the fact from being established. Returns a LIST (the
+    caller applies analysis_record.primary_reason precedence); the list uses the
+    frozen cross-producer reason codes:
+      - two different reaching allocation sizes -> conflicting_reaching_allocations
       - a product (calloc-shaped) allocation with a symbolic factor
-        -> multiplication_overflow_not_ruled_out
+        -> allocation_overflow_relation_unresolved (a specific arithmetic
+           relationship, NOT generic insufficiency)
       - the pointer is assigned from a call to a function with no allocator
-        contract -> unknown_allocator
-      - otherwise a symbolic/unresolvable size -> symbolic_size_unresolved
-    Returns a reason_code string (never None; symbolic_size_unresolved is the
-    catch-all)."""
+        contract -> unknown_allocator_contract
+      - none of the above recoverable -> required_evidence_absent (catch-all)"""
     sizes = set()
     saw_symbolic_product = False
     saw_unknown_allocator = False
@@ -319,15 +321,15 @@ def _diagnose_capacity(d, fn, dest):
                 sizes.add(('lit', cn * wn))
         else:  # simple / realloc
             if contract['size_arg'] < len(args):
-                se = args[contract['size_arg']]
-                sizes.add(('expr', se))
-    if len({s for s in sizes}) >= 2:
-        return 'conflicting_allocations'
+                sizes.add(('expr', args[contract['size_arg']]))
+    reasons = []
+    if len(sizes) >= 2:
+        reasons.append('conflicting_reaching_allocations')
     if saw_symbolic_product:
-        return 'multiplication_overflow_not_ruled_out'
+        reasons.append('allocation_overflow_relation_unresolved')
     if saw_unknown_allocator and not saw_known_alloc:
-        return 'unknown_allocator'
-    return 'symbolic_size_unresolved'
+        reasons.append('unknown_allocator_contract')
+    return reasons or ['required_evidence_absent']
 
 
 def _record_id(fn, dest, line):
@@ -379,26 +381,49 @@ def analyze_operations(prefix):
                 'dest': dest, 'width_expr': width}
         if not re.fullmatch(r'[A-Za-z_]\w*', dest):
             continue   # non-bare-identifier destination: out of this producer's scope
+
+        status = None
+        reasons = []
         if (fn, dest, width, line) in open_keys:
-            base.update({'analysis_status': 'open_candidate',
-                         'reason_code': 'capacity_relation_not_established'})
+            status = 'open_candidate'
+            reasons = ['capacity_relation_not_established']
         else:
             extent = extents.get((fn, dest))
             if extent is None or extent.get('establishment_status') != 'ESTABLISHED':
-                base.update({'analysis_status': 'abstained',
-                             'reason_code': _diagnose_capacity(d, fn, dest)})
+                status = 'abstained'
+                reasons = _diagnose_capacity(d, fn, dest)
             else:
                 sink = capacity_status_at_sink(cfg_index, fn, extent['allocation_site'],
                                                free_sites.get((fn, dest), []), op['call_id'])
-                if sink != 'ESTABLISHED':
-                    base.update({'analysis_status': 'abstained',
-                                 'reason_code': 'capacity_invalidated_by_free'})
-                else:
-                    base.update({'analysis_status': 'deterministic_complete', 'reason_code': None})
-        if base['analysis_status'] != 'deterministic_complete':
-            bucket = bucket_for_reason(base['reason_code'])
-            base['uncertainty_bucket'] = bucket
-            base['recommended_route'] = route_for_bucket(bucket)
+                if sink == 'INVALID':
+                    # allocation DEFINITELY freed before this write on every path:
+                    # a deterministic lifetime finding, NOT a capacity uncertainty.
+                    status = 'deterministic_finding'
+                    reasons = ['free_dominates_sink']
+                elif sink == 'AMBIGUOUS':
+                    status = 'abstained'
+                    reasons = ['free_may_reach_sink']
+                elif sink == 'UNKNOWN':
+                    status = 'abstained'
+                    reasons = ['required_evidence_absent']
+                else:  # ESTABLISHED, not an open candidate -> proven safe/guarded
+                    status = 'deterministic_complete'
+                    reasons = []
+
+        base['analysis_status'] = status
+        if status == 'deterministic_complete':
+            base['reason_code'] = None
+        elif status == 'deterministic_finding':
+            d0 = REASON_DEFINITIONS['free_dominates_sink']
+            base.update({'reason_code': 'free_dominates_sink', 'all_reason_codes': reasons,
+                         'uncertainty_bucket': None, 'recommended_route': d0['route'],
+                         'finding_class': d0['finding_class']})
+        else:
+            primary = primary_reason(reasons)
+            base.update({'reason_code': primary, 'all_reason_codes': reasons,
+                         'uncertainty_bucket': bucket_for_reason(primary),
+                         'recommended_route': route_for_reason(primary),
+                         'unresolved_property': property_for_reason(primary)})
         records.append(base)
     return records
 

@@ -168,40 +168,58 @@ machine-derived **reason code** per recognized operation, and the router
 TRANSLATES reason → bucket (`analysis_record.REASON_TO_BUCKET`); it does not
 infer a bucket from candidate presence/absence.
 
-`oob_runtime_capacity_verdict.analyze_operations()` emits records like:
+### Frozen decision table (`analysis_record.py`)
 
-```
-{ "analysis_status": "open_candidate", "recognized_operation": "buffer_write",
-  "unresolved_property": "write_length_within_capacity",
-  "reason_code": "capacity_relation_not_established",
-  "uncertainty_bucket": "relationship_unresolved",
-  "recommended_route": "llm_semantic_review" }
-```
+| reason_code | exact condition | bucket | route |
+|---|---|---|---|
+| `capacity_relation_not_established` | capacity & width known; width≤capacity unproven | relationship_unresolved | llm_semantic_review |
+| `allocation_overflow_relation_unresolved` | allocation expr known; no-overflow/operand range unproven | relationship_unresolved | llm_semantic_review (hint: llm_or_range_evidence) |
+| `unknown_allocator_contract` | allocator recognized but size semantics unknown | external_contract_unknown | llm_semantic_review (hint: contract_review) |
+| `conflicting_reaching_allocations` | same dest has multiple incompatible reaching allocations | conflicting_definitions | additional_evidence_required |
+| `destination_identity_ambiguous` | cannot establish which object is written | identity_ambiguous | additional_evidence_required |
+| `free_may_reach_sink` | lifetime differs across feasible paths | relationship_unresolved | llm_semantic_review (hint: focused_path_question) |
+| `free_dominates_sink` | allocation definitely freed before the op on every path | *(none)* — deterministic lifetime finding | separate_finding |
+| `required_evidence_absent` | no more specific recoverable property | insufficient_evidence | additional_evidence_required |
 
-and for recognized operations that abstain, e.g.
-`reason_code: "conflicting_allocations" → conflicting_definitions →
-additional_evidence_required`.
+Two corrections applied during the taxonomy review (before extending to other
+producers, since the schema is now a cross-producer interface): **multiplication
+overflow is a specific arithmetic relationship** (`allocation_overflow_relation_unresolved`
+→ relationship_unresolved), not generic insufficiency; and **`capacity_invalidated_by_free`
+was split** into free-dominates (deterministic lifetime finding), free-may-reach
+(relationship_unresolved), destination-identity-ambiguous (identity_ambiguous),
+and truly-unrecoverable (insufficient_evidence) — they no longer share one bucket
+merely because capacity can't be used.
 
-**Validated (`tests/gates/analysis-record-r01`, 21/21):** the runtime-capacity
-producer assigns **four distinct candidate-review buckets** with **≥3
-independently-constructed examples each** — relationship_unresolved,
-external_contract_unknown, conflicting_definitions, insufficient_evidence —
-each from an explicit reason code, schema-checked for reason↔bucket↔route
-consistency, and corroborated on the independent runtimecap fixture. This is
-real bucket-distinction evidence, not the earlier "3/3 all relationship_unresolved"
-smoke test.
+**Precedence.** A candidate can trip several prerequisites at once. Producers emit
+ALL detected reasons in `all_reason_codes`; the PRIMARY reason (which fixes the
+bucket) is the *earliest failed prerequisite* per a fixed `PRECEDENCE` order —
+never dict/iteration order. (identity → conflicting → unknown-allocator →
+free-dominates → free-may-reach → overflow → capacity → required-absent.)
 
-**Maturity, stated honestly:** the reason layer is implemented for the
+**Validated (`tests/gates/analysis-record-r01`, 30/30):** four candidate-review
+buckets with ≥3 independently-constructed examples each; `relationship_unresolved`
+reached by two distinct reason codes; the precedence tie-break (conflict beats
+overflow, both recorded); the free/lifetime split (dominates→deterministic_finding,
+may-reach→relationship_unresolved, after-write→open_candidate) on the independent
+runtimecap-cfg fixture; and reason↔bucket↔route schema consistency on every
+record. Real bucket-distinction evidence, not a same-label smoke test.
+
+**Maturity, stated honestly.** The reason layer is implemented for the
 runtime-capacity producer only. Candidates from other producers (cursor,
-interprocedural, …) still fall back to candidate-presence and are flagged
-`reason_source: "fallback_candidate_presence"`. In the current pilot that means
-**SB-01's bucket is reason-derived; SB-02 and SB-07 are still fallback.** Before
-the final experiment, every producer the corpus draws on must have its reason
-layer implemented so no case's bucket rides on the fallback.
+interprocedural) fall back to candidate-presence, flagged
+`reason_source: "fallback_candidate_presence"`, and the generator now **REJECTS**
+any record whose `reason_source != "explicit_producer_reason"` from the A/B/C
+corpus. In the current pilot that means **only SB-01 is corpus-eligible; SB-02
+and SB-07 are rejected** until the cursor and interprocedural producers get their
+reason layers.
 
-`identity_ambiguous` is defined in the taxonomy but not yet EMITTED by any
-instrumented producer (it is the interprocedural/alias producer's territory) —
-so it is not among the four "implemented" buckets validated above.
+`identity_ambiguous` is defined but NOT yet emitted by any instrumented producer;
+it will be added only when a producer genuinely detects that condition — examples
+are not manufactured to populate the category.
+
+**This gate proves the implementation follows the mapping; it does NOT yet prove
+the mapping is conceptually right or that these buckets occur in real code.**
+Real-corpus validation of the taxonomy comes after it is frozen.
 
 ## Automatic bucket assignment (the piece that makes C a real test)
 

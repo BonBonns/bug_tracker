@@ -50,6 +50,13 @@ def main():
             print(f"{cid}: NO auto candidate in {c['function']} -- FAIL")
             continue
         r = recs[0]
+        # GENERATOR GUARD: the final experiment must reject any record whose
+        # bucket did not come from an explicit producer reason code. A
+        # candidate-presence fallback is NOT eligible for the A/B/C corpus.
+        if r.get("reason_source") != "explicit_producer_reason":
+            print(f"{cid}: REJECTED for A/B/C -- reason_source={r.get('reason_source')} "
+                  f"(producer reason layer not implemented; not corpus-eligible)")
+            continue
         ok = r["uncertainty_bucket"] == c["verified_bucket"]
         agree += ok
 

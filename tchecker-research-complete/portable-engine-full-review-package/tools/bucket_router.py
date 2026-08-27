@@ -216,7 +216,7 @@ def route_factfile(prefix, producers=PRODUCERS):
                 rec["reason_code"] = rr["reason_code"]
                 rec["uncertainty_bucket"] = rr["uncertainty_bucket"]
                 rec["recommended_route"] = rr["recommended_route"]
-                rec["reason_source"] = "producer_reason_code"
+                rec["reason_source"] = "explicit_producer_reason"
             else:
                 rec["reason_code"] = None
                 rec["reason_source"] = "fallback_candidate_presence"

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""ANALYSIS-RECORD-R01 gate. Validates that TChecker's reason-emission layer
-assigns HETEROGENEOUS candidate-review buckets from EXPLICIT machine-derived
-reason codes -- not the tautological "candidate emitted -> relationship_unresolved".
+"""ANALYSIS-RECORD-R01 gate. Validates TChecker's reason-emission layer against
+the FROZEN decision table in analysis_record.py: recognized operations receive
+an explicit machine-derived reason_code, the router translates reason -> bucket
+(never candidate presence), the earliest-failed-prerequisite precedence picks the
+primary reason among several, and the free/lifetime cases split correctly.
 
-Each function below is an independently-constructed example of one implemented
-candidate-review bucket; the gate asserts the auto-assigned bucket + reason code
-per function, requires >=3 examples for every implemented bucket, and checks each
-record against the analysis_record schema (reason<->bucket<->route consistency).
-It also corroborates on the independently-built oob-runtimecap-r01 fixture that
-the same layer yields >=3 distinct candidate-review buckets there too."""
+Covers the four IMPLEMENTED candidate-review buckets with >=3 independently-
+constructed examples each, plus the deterministic lifetime finding and the two
+free-path outcomes (via the independent runtimecap-cfg fixture). identity_ambiguous
+is intentionally NOT tested: no instrumented producer detects it yet, and examples
+must not be manufactured to populate a category."""
 import sys, pathlib, importlib.util, collections
 H = pathlib.Path(__file__).resolve().parent
 TOOLS = H.parent.parent.parent / "tools"
@@ -25,54 +26,77 @@ FIX = str(H / "fixtures" / "controls.program.json")
 recs = rc.analyze_operations(FIX)
 by_fn = {r["function"]: r for r in recs}
 
+# (reason_code, bucket) expected per function
 EXPECT = {
-    "conflict_two_mallocs":   ("conflicting_definitions", "conflicting_allocations"),
-    "conflict_malloc_calloc": ("conflicting_definitions", "conflicting_allocations"),
-    "conflict_three_sizes":   ("conflicting_definitions", "conflicting_allocations"),
-    "unknown_alloc_custom":   ("external_contract_unknown", "unknown_allocator"),
-    "unknown_alloc_vendor":   ("external_contract_unknown", "unknown_allocator"),
-    "unknown_alloc_pool":     ("external_contract_unknown", "unknown_allocator"),
-    "sym_calloc_count":       ("insufficient_evidence", "multiplication_overflow_not_ruled_out"),
-    "sym_calloc_width":       ("insufficient_evidence", "multiplication_overflow_not_ruled_out"),
-    "sym_calloc_both":        ("insufficient_evidence", "multiplication_overflow_not_ruled_out"),
-    "rel_symbolic_malloc":    ("relationship_unresolved", "capacity_relation_not_established"),
-    "rel_literal_malloc":     ("relationship_unresolved", "capacity_relation_not_established"),
-    "rel_port_alloc":         ("relationship_unresolved", "capacity_relation_not_established"),
+    "rel_symbolic_malloc": ("capacity_relation_not_established", "relationship_unresolved"),
+    "rel_literal_malloc":  ("capacity_relation_not_established", "relationship_unresolved"),
+    "rel_port_alloc":      ("capacity_relation_not_established", "relationship_unresolved"),
+    "overflow_calloc_count": ("allocation_overflow_relation_unresolved", "relationship_unresolved"),
+    "overflow_calloc_width": ("allocation_overflow_relation_unresolved", "relationship_unresolved"),
+    "overflow_calloc_both":  ("allocation_overflow_relation_unresolved", "relationship_unresolved"),
+    "unknown_alloc_custom": ("unknown_allocator_contract", "external_contract_unknown"),
+    "unknown_alloc_vendor": ("unknown_allocator_contract", "external_contract_unknown"),
+    "unknown_alloc_pool":   ("unknown_allocator_contract", "external_contract_unknown"),
+    "conflict_two_mallocs":   ("conflicting_reaching_allocations", "conflicting_definitions"),
+    "conflict_malloc_calloc": ("conflicting_reaching_allocations", "conflicting_definitions"),
+    "conflict_three_sizes":   ("conflicting_reaching_allocations", "conflicting_definitions"),
+    "no_alloc_param":  ("required_evidence_absent", "insufficient_evidence"),
+    "no_alloc_global": ("required_evidence_absent", "insufficient_evidence"),
+    "no_alloc_extern": ("required_evidence_absent", "insufficient_evidence"),
 }
-for fn, (bucket, reason) in EXPECT.items():
+for fn, (reason, bucket) in EXPECT.items():
     r = by_fn.get(fn)
-    ck(f"{fn} -> {bucket} (reason {reason})",
-       r is not None and r.get("uncertainty_bucket") == bucket and r.get("reason_code") == reason
-       and r.get("analysis_status") in ("open_candidate", "abstained"))
+    ck(f"{fn} -> {reason} / {bucket}",
+       r is not None and r.get("reason_code") == reason and r.get("uncertainty_bucket") == bucket
+       and r.get("recommended_route") == ar.route_for_reason(reason))
 
 for fn in ("det_exact_match", "det_literal_fits"):
     r = by_fn.get(fn)
-    ck(f"{fn} -> deterministic_complete (no bucket, resolved safe)",
+    ck(f"{fn} -> deterministic_complete (proven safe, no bucket)",
        r is not None and r.get("analysis_status") == "deterministic_complete"
        and r.get("uncertainty_bucket") is None)
 
-# every record is schema-consistent (reason <-> bucket <-> route)
-ck("all records pass analysis_record.validate_record",
-   all(ar.validate_record(r) for r in recs))
+# PRECEDENCE: conflict + overflow both detected; primary is the earliest failed
+# prerequisite (conflicting), never iteration order.
+p = by_fn.get("precedence_conflict_over_overflow")
+ck("precedence: conflict beats overflow as primary reason",
+   p is not None and p.get("reason_code") == "conflicting_reaching_allocations")
+ck("precedence: all_reason_codes records BOTH detected reasons",
+   p is not None and set(p.get("all_reason_codes", [])) ==
+   {"conflicting_reaching_allocations", "allocation_overflow_relation_unresolved"})
 
-# >=3 examples for every implemented candidate-review bucket
+# relationship_unresolved is reached by TWO distinct reason codes (not one label)
+rel_reasons = {r["reason_code"] for r in recs if r.get("uncertainty_bucket") == "relationship_unresolved"}
+ck("relationship_unresolved spans >=2 distinct reason codes",
+   {"capacity_relation_not_established", "allocation_overflow_relation_unresolved"} <= rel_reasons)
+
+# >=3 independently-constructed examples per IMPLEMENTED candidate-review bucket
 counts = collections.Counter(r["uncertainty_bucket"] for r in recs if r.get("uncertainty_bucket"))
-IMPLEMENTED = ("relationship_unresolved", "external_contract_unknown",
-               "conflicting_definitions", "insufficient_evidence")
-for b in IMPLEMENTED:
-    ck(f"bucket {b} has >=3 independently-constructed examples", counts.get(b, 0) >= 3)
+for b in ("relationship_unresolved", "external_contract_unknown",
+          "conflicting_definitions", "insufficient_evidence"):
+    ck(f"bucket {b} has >=3 examples", counts.get(b, 0) >= 3)
 
-# the reason-emission layer is NOT the tautological rule: >=4 distinct buckets here
-distinct = set(counts)
-ck("emits >=4 DISTINCT candidate-review buckets (not just relationship_unresolved)",
-   len(distinct) >= 4)
+ck("emits >=4 DISTINCT candidate-review buckets", len(set(counts)) >= 4)
+ck("all supplementary records pass schema validation", all(ar.validate_record(r) for r in recs))
 
-# corroboration on the independently-built runtimecap fixture: >=3 distinct buckets
-rc_fix = str(H.parent / "oob-runtimecap-r01" / "fixtures" / "controls.program.json")
-rc_recs = rc.analyze_operations(rc_fix)
-rc_buckets = {r["uncertainty_bucket"] for r in rc_recs if r.get("uncertainty_bucket")}
-ck("runtimecap fixture also yields >=3 distinct candidate-review buckets",
-   len(rc_buckets) >= 3)
+# FREE / LIFETIME split, validated on the independent runtimecap-cfg fixture
+cfg_fix = str(H.parent / "oob-runtimecap-cfg-r01" / "fixtures" / "controls.program.json")
+cfg_recs = {r["function"]: r for r in rc.analyze_operations(cfg_fix)}
+r = cfg_recs.get("invalid_free_then_write")
+ck("free dominates sink -> deterministic_finding (lifetime), NOT a capacity bucket",
+   r is not None and r.get("analysis_status") == "deterministic_finding"
+   and r.get("reason_code") == "free_dominates_sink" and r.get("uncertainty_bucket") is None
+   and r.get("recommended_route") == "separate_finding")
+r = cfg_recs.get("ambiguous_conditional_free_joined_write")
+ck("free may reach sink (some paths) -> relationship_unresolved",
+   r is not None and r.get("reason_code") == "free_may_reach_sink"
+   and r.get("uncertainty_bucket") == "relationship_unresolved")
+r = cfg_recs.get("established_write_then_free")
+ck("free after the write -> open candidate (capacity relation)",
+   r is not None and r.get("analysis_status") == "open_candidate"
+   and r.get("reason_code") == "capacity_relation_not_established")
+ck("all cfg-fixture records pass schema validation",
+   all(ar.validate_record(r) for r in cfg_recs.values()))
 
 print(f"ANALYSIS_RECORD_R01={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)
