@@ -1,0 +1,20 @@
+{
+  "case_id": "SB-03",
+  "bucket": "producer_evidence_missing",
+  "internal_source_ref": "mozilla/nss, lib/cryptohi/secvfy.c, VFYContextStr anonymous union + decodeECorDSASignature, vulnerable (pre-CVE-2021-43527-fix) shape (NOT shown to model)",
+  "focused_question": "Is the write into the union-typed buffer, using the length shown, within the buffer's declared capacity? Answer established, contradicted, or unresolved, and state what fact -- if any -- a static-analysis tool would need to export from its parsed representation of this code to answer this deterministically.",
+  "ground_truth": {
+    "conclusion": "vulnerable",
+    "relationship_answer": "contradicted",
+    "evidence_used": [
+      "the union's own comment states its whole purpose is to guarantee enough space for the largest member, and explicitly warns not to take the size of the union member being written through -- take the union's own size, or another member's",
+      "the length used at the write site is derived from a signature-length computation that is not shown here to be bounded against the union's actual size before the write",
+      "the callee that performs the write receives only a bare pointer and a length -- it has no way to see the union or its true capacity at all"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that because ONE union member (the largest one) looks like it could plausibly hold any real signature, the write is therefore safe without checking the actual length value against the union's real size"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "Verified against real source: struct VFYContextStr's `union { unsigned char buffer[1]; ... dsasig[...]; ecdsasig[...]; rsasig[...]; } u;` is written via `cx->u.buffer` with a length (sigLen) computed from the public key and NOT independently re-checked against the union's real capacity before the vulnerable-revision write (the real fix, not shown to the model, added a bounds-checking helper before this exact call). This is a PRODUCER_EVIDENCE_MISSING case specifically because of what happens on the analysis-tool side, not the human-readable side: this session's real Joern-based extraction of this exact real file returns a `members` fact list for VFYContextStr's union that is MISSING the `buffer` member entirely (confirmed by directly querying the real exported fact data -- the union's member list comes back as pkcs1RSADigestInfoLen, pkcs1RSADigestInfo, wincx, hashcx, hashobj, encAlg, hasSignature; no `buffer` member at all, a known heuristic-parser limitation on anonymous unions). A HUMAN or LLM reviewer reading the source text directly can see the union and its comment perfectly well and should reach 'vulnerable' -- what makes this bucket-appropriate is that a DETERMINISTIC pass consuming the SAME frontend's exported facts cannot, because the fact it would need was never captured, independent of any reasoning logic built on top. The raw-code condition for this case therefore tests whether the LLM reaches the correct conclusion from the source alone; the structured condition explicitly states the producer-evidence-missing fact and asks whether the LLM can still reach a correct conclusion by reading the code directly rather than deferring to the tool's absence of a candidate."
+}

@@ -1,0 +1,77 @@
+CASE ID: SB-08
+
+CODE:
+
+```c
+static unsigned long
+sec_asn1d_parse_leaf (sec_asn1d_state *state,
+                      const char *buf, unsigned long len)
+{
+    SECItem *item;
+    unsigned long bufLen;
+
+    if (len == 0) {
+        state->top->status = needBytes;
+        return 0;
+    }
+
+    if (state->pending < len)
+        len = state->pending;
+
+    bufLen = len;
+
+    item = (SECItem *)(state->dest);
+    if (item != NULL && item->data != NULL) {
+        /* Strip leading zeroes when target is unsigned integer */
+        if (state->underlying_kind == SEC_ASN1_INTEGER &&
+            item->len == 0 &&
+            item->type == siUnsignedInteger)
+        {
+            while (len > 1 && buf[0] == 0) {
+                buf++;
+                len--;
+            }
+        }
+        PORT_Memcpy (item->data + item->len, buf, len);
+        item->len += len;
+    }
+    state->pending -= bufLen;
+    if (state->pending == 0)
+        state->place = afterEndOfContents;
+    return bufLen;
+}
+```
+
+This function is called once per chunk while decoding a single ASN.1 value
+that may be split across multiple constructed-encoding segments in the input
+DER; `item->data`'s backing allocation is sized (elsewhere) to fit the total
+value being decoded, computed from earlier parsing of the DER length fields.
+
+TCHECKER EVIDENCE:
+
+- Deterministic candidate: NONE. This pass produced 0 candidates for this
+  function, on both a pre-fix and a post-fix revision of this exact code (an
+  identical, honest abstention on both — not a missed detection specific to
+  one revision).
+- Unresolved-evidence category: ANALYSIS_CAPABILITY_MISSING, for two
+  independent reasons. (a) The destination is a pointer-offset expression
+  (`item->data + item->len`), not a bare array or bare pointer name — this
+  pass's capacity tracking currently only reasons about a bare destination
+  identifier. (b) Even setting that aside, the actual safety property here
+  is about ACCUMULATED STATE across repeated calls (`item->len` incremented
+  every call, reused as next call's offset, with no visible bound on call
+  count or running total) — this pass reasons about single-statement
+  capacity comparisons, and has no model for loop/call-count-accumulated
+  arithmetic or for detecting a missing overflow check on a repeatedly
+  incremented field.
+- Provenance: this is a NEGATIVE evidence report -- it names the two missing
+  capabilities precisely, rather than reporting "no signal" without
+  explanation.
+
+QUESTION:
+
+This function is called repeatedly (once per chunk) while decoding one
+value. Is the cumulative write across repeated calls proven to stay within
+`item->data`'s allocated capacity? Answer established, contradicted, or
+unresolved, and explain what could go wrong across repeated calls
+specifically, not just within one call.

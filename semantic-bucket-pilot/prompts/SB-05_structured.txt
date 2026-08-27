@@ -1,0 +1,105 @@
+CASE ID: SB-05
+
+CODE:
+
+```c
+typedef struct _bufhead {
+    struct _bufhead *prev;
+    struct _bufhead *next;
+    struct _bufhead *ovfl;
+    uint32 addr;
+    char *page;    /* Actual page data */
+    uint8 flags;
+} BUFHEAD;
+
+/* elsewhere, page buffers are allocated at runtime, sized to the hash
+ * table's configured page size (a per-table setting, not a compile-time
+ * constant), when a page is first read into memory. */
+
+extern int
+__split_page(HTAB *hashp, uint32 obucket, uint32 nbucket)
+{
+    register BUFHEAD *new_bufp, *old_bufp;
+    register uint16 *ino;
+    register char *np;
+    DBT key, val;
+    uint16 n, ndx;
+    int retval;
+    uint16 copyto, diff, moved;
+    size_t off;
+    char *op;
+
+    copyto = (uint16)hashp->BSIZE;
+    off = (uint16)hashp->BSIZE;
+    old_bufp = __get_buf(hashp, obucket, NULL, 0);
+    if (old_bufp == NULL)
+        return (-1);
+    new_bufp = __get_buf(hashp, nbucket, NULL, 0);
+    if (new_bufp == NULL)
+        return (-1);
+
+    old_bufp->flags |= (BUF_MOD | BUF_PIN);
+    new_bufp->flags |= (BUF_MOD | BUF_PIN);
+
+    ino = (uint16 *)(op = old_bufp->page);
+    np = new_bufp->page;
+
+    moved = 0;
+
+    for (n = 1, ndx = 1; n < ino[0]; n += 2) {
+        if (ino[n + 1] < REAL_KEY) {
+            retval = ugly_split(hashp, obucket, old_bufp, new_bufp,
+                                (int)copyto, (int)moved);
+            old_bufp->flags &= ~BUF_PIN;
+            new_bufp->flags &= ~BUF_PIN;
+            return (retval);
+        }
+        key.data = (uint8 *)op + ino[n];
+        key.size = off - ino[n];
+
+        if (__call_hash(hashp, (char *)key.data, key.size) == obucket) {
+            diff = copyto - off;
+            if (diff) {
+                copyto = ino[n + 1] + diff;
+                memmove(op + copyto, op + ino[n + 1],
+                        off - ino[n + 1]);
+                ino[ndx] = copyto + ino[n] - ino[n + 1];
+                ino[ndx + 1] = copyto;
+            } else
+                copyto = ino[n + 1];
+            ndx += 2;
+        }
+        off = ino[n + 1];
+    }
+    /* ... remainder omitted ... */
+}
+```
+
+TCHECKER EVIDENCE:
+
+- Deterministic candidate: NONE. This pass produced 0 candidates for this
+  function.
+- Unresolved-evidence category: ANALYSIS_CAPABILITY_MISSING. Every fact
+  needed IS exported and visible to this pass (the `char *page` declaration,
+  every `ino[...]` access, every offset computation) -- what's missing is
+  analytical machinery, not data: (a) this pass has no model for a buffer
+  whose real capacity is set by a runtime configuration value at a different
+  point in the program (the hash table's page size), rather than by a single
+  traceable allocation call with a literal or simply-propagated size
+  argument; (b) this pass has no model for validating self-consistency
+  invariants among VALUES READ FROM the same buffer being written into
+  (e.g. whether `ino[n]` and `ino[n+1]` and `off` maintain a required
+  ordering relationship) across loop iterations -- it can recognize a single
+  guarded comparison against a known capacity, but not an accumulating chain
+  of index arithmetic derived from data the buffer itself contains.
+- Provenance: this is a NEGATIVE evidence report -- it names the two missing
+  capabilities precisely, rather than reporting "no signal" without
+  explanation.
+
+QUESTION:
+
+Is it PROVEN that every index-array (`ino`) access and every offset-based
+access into `old_bufp->page` stays within that buffer's actual allocated
+capacity? Answer established, contradicted, or unresolved. If a
+static-analysis tool cannot answer this today, state precisely which
+capability it would need.

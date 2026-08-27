@@ -1,0 +1,113 @@
+CASE ID: SB-01
+
+CODE:
+
+```c
+static unsigned char *
+rsa_FormatOneBlock(unsigned modulusLen,
+                   RSA_BlockType blockType,
+                   SECItem *data)
+{
+    unsigned char *block;
+    unsigned char *bp;
+    unsigned int padLen;
+    int i, j;
+    SECStatus rv;
+
+    block = (unsigned char *)PORT_Alloc(modulusLen);
+    if (block == NULL)
+        return NULL;
+
+    bp = block;
+
+    *bp++ = RSA_BLOCK_FIRST_OCTET;
+    *bp++ = (unsigned char)blockType;
+
+    switch (blockType) {
+
+        case RSA_BlockPrivate: /* preferred method */
+            /*
+             * 0x00 || BT || Pad || 0x00 || ActualData
+             *   1      1   padLen    1      data->len
+             */
+            padLen = modulusLen - data->len - 3;
+            if (padLen < RSA_BLOCK_MIN_PAD_LEN) {
+                PORT_Free(block);
+                return NULL;
+            }
+            PORT_Memset(bp, RSA_BLOCK_PRIVATE_PAD_OCTET, padLen);
+            bp += padLen;
+            *bp++ = RSA_BLOCK_AFTER_PAD_OCTET;
+            PORT_Memcpy(bp, data->data, data->len);
+            break;
+
+        default:
+            PORT_Free(block);
+            return NULL;
+    }
+
+    return block;
+}
+
+static SECStatus
+rsa_FormatBlock(SECItem *result,
+                unsigned modulusLen,
+                RSA_BlockType blockType,
+                SECItem *data)
+{
+    switch (blockType) {
+        case RSA_BlockPrivate:
+            if (data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))) {
+                return SECFailure;
+            }
+            result->data = rsa_FormatOneBlock(modulusLen, blockType, data);
+            if (result->data == NULL) {
+                result->len = 0;
+                return SECFailure;
+            }
+            result->len = modulusLen;
+            break;
+        default:
+            return SECFailure;
+    }
+    return SECSuccess;
+}
+```
+
+TCHECKER EVIDENCE:
+
+- Deterministic candidate: OOB_WRITE, subclass RUNTIME_CAPACITY.
+  Destination `bp` in `rsa_FormatOneBlock`, capacity established as exactly
+  `modulusLen` bytes (via `block = PORT_Alloc(modulusLen)`, alias `bp = block`
+  before any pointer arithmetic). Write width: `data->len`, via
+  `PORT_Memcpy(bp, data->data, data->len)`.
+- Caller-context guard check: `rsa_FormatBlock`'s comparison
+  `data->len > (modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN))` is a real runtime
+  branch (not an assertion), DOMINATES the call to `rsa_FormatOneBlock`, and
+  CONTROLS it (proven from control-flow structure: the branch that takes this
+  condition as true terminates the function immediately with no further path
+  to the call; the call is reached only on the other branch). The guarded
+  caller-side expressions map by argument position to the exact parameters
+  used for the write inside the callee. Both compared values resolve to
+  unsigned types, so no signed/unsigned conversion changes this comparison's
+  meaning.
+- Unresolved-evidence category: RELATIONSHIP_UNRESOLVED. TChecker's own
+  deterministic pass could NOT resolve this candidate as safe, for a
+  precisely bounded reason: `RSA_BLOCK_MIN_PAD_LEN`'s numeric value is not
+  present in any fact this pass has access to (it appears only as an
+  unexpanded macro name in the comparison's own extracted text). Separately,
+  even granting a specific numeric value for it, proving the subtraction
+  `modulusLen - (3 + RSA_BLOCK_MIN_PAD_LEN)` cannot underflow (which would
+  defeat the guard) requires a lower bound on `modulusLen` that is not
+  established anywhere in the facts available to this pass.
+- Provenance: candidate and guard facts both derived directly from this
+  source (no propagation, no cross-file inference beyond the two functions
+  shown).
+
+QUESTION:
+
+Does the caller's length check in `rsa_FormatBlock`, together with everything
+else visible here, PROVE that the write inside `rsa_FormatOneBlock` (the
+`PORT_Memcpy(bp, data->data, data->len)` call) cannot exceed the destination
+buffer's capacity? Answer established, contradicted, or unresolved, and say
+exactly what would be needed to resolve it if it is not already resolved.

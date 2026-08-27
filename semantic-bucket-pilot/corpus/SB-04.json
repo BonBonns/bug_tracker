@@ -1,0 +1,20 @@
+{
+  "case_id": "SB-04",
+  "bucket": "producer_evidence_missing",
+  "internal_source_ref": "mozilla/nss, lib/softoken/pkcs11c.c, key-derivation local buffer sized by two macros, vulnerable (pre-CVE-2019-11759-fix) shape (NOT shown to model)",
+  "focused_question": "Can the write into the fixed local buffer exceed its declared capacity for some valid input? Answer established, contradicted, or unresolved, and state precisely what fact a static-analysis tool consuming a parsed/exported representation of this source would need in order to answer deterministically.",
+  "ground_truth": {
+    "conclusion": "vulnerable",
+    "relationship_answer": "contradicted",
+    "evidence_used": [
+      "the destination array's declared size is a product of two named constants, not a literal number",
+      "an earlier check compares a size to the raw array (via sizeof), but the actual number of bytes written is a ROUNDED-UP version of that same size, rounded up to a multiple of a runtime hash-length value",
+      "rounding up can push the actual write length past the array's capacity even when the pre-rounding size passed the earlier check"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that an existing sizeof-based guard earlier in the function is sufficient just because it exists, without checking whether the exact quantity it guards is the SAME quantity actually used for the write"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "Verified against real source and the real one-line fix (diffed directly): key_block is declared unsigned char key_block[NUM_MIXERS * SFTK_MAX_MAC_LENGTH], both NUM_MIXERS and SFTK_MAX_MAC_LENGTH being #define'd integer macros (9 and 64 respectively, confirmed in the real source). An earlier check compares keySize against sizeof(key_block), but the actual write count is `unsigned iterations = PR_ROUNDUP(keySize, hashLen) / hashLen`, and the loop writes `iterations * hashLen` bytes (= PR_ROUNDUP(keySize, hashLen) bytes) into key_block -- which can exceed sizeof(key_block) even when keySize itself passed the earlier check, because rounding UP to a multiple of the runtime hash length can push past the boundary. The real fix (not shown to the model) allocates extra heap space when the rounded size exceeds the fixed buffer. This is PRODUCER_EVIDENCE_MISSING because this session's real fact-extraction pipeline, run against this exact file, could not fold NUM_MIXERS*SFTK_MAX_MAC_LENGTH to a numeric literal (the frontend's constant-folding did not resolve these particular macros the way it resolved a similar case elsewhere), and separately, full C preprocessing to resolve them was attempted and concretely blocked by a missing header dependency (a real, logged failure, not assumed) -- so even the NUMERIC capacity of the destination array was never available as an exported fact, independent of the deeper rounding-mismatch reasoning question. A correct answer here requires noticing the rounding mismatch from the source text directly; the capacity's exact numeric value is not strictly necessary to see that iterations*hashLen is not the same quantity that was checked."
+}

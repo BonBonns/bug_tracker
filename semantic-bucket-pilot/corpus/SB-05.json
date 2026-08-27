@@ -1,0 +1,20 @@
+{
+  "case_id": "SB-05",
+  "bucket": "analysis_capability_missing",
+  "internal_source_ref": "mozilla/nss, lib/dbm/src/h_page.c __split_page + lib/dbm/include/hash.h BUFHEAD.page, vulnerable (pre-bug-1418780-fix) shape (NOT shown to model)",
+  "focused_question": "Is it PROVEN that every index-array access and every offset-based access into the page buffer stays within that buffer's actual allocated capacity? Answer established, contradicted, or unresolved. If a static-analysis tool cannot answer this today, state precisely which capability it would need.",
+  "ground_truth": {
+    "conclusion": "vulnerable",
+    "relationship_answer": "contradicted",
+    "evidence_used": [
+      "the page buffer's declared type is a bare character pointer, not a fixed-size array -- its real capacity is set at runtime, not at compile time",
+      "the code trusts an in-page index array (read from the same buffer) to contain well-formed, monotonically-consistent offsets without validating that trust before using those offsets to compute further reads and writes",
+      "the index values ultimately come from data that, in a real deployment, could be corrupted or adversarially crafted"
+    ],
+    "unsupported_assumptions_that_must_not_be_used_to_dismiss_this": [
+      "that because the buffer is 'just' a page of a well-formed database file, its contents can be assumed well-formed without an explicit validation step"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "Verified against real source: BUFHEAD's `page` field is declared `char *page; /* Actual page data */` (lib/dbm/include/hash.h) -- a runtime pointer whose actual capacity is the hash table's configured page size (BSIZE), not a compile-time array bound. The function reads a leading in-page index array (`ino`) and uses its entries, without validating them, to compute further offsets and sizes used in subsequent reads/writes/moves within the SAME page buffer. The real fix (not shown to the model, diffed directly against the actual patch) adds several explicit bounds checks on these index values before they are used (e.g. rejecting a non-positive leading count, rejecting an index array entry that is smaller than a later one where the code assumes it is larger, rejecting an offset comparison that assumes without checking which value is larger) -- i.e. the vulnerability is a missing self-consistency validation on attacker/corruption-reachable index data, compounded by the buffer's capacity being a runtime value TChecker's allocation-tracking currently cannot resolve either (this specific target remains unresolved by that capability too, confirmed empirically this session). This is ANALYSIS_CAPABILITY_MISSING rather than PRODUCER_EVIDENCE_MISSING: every fact needed (the pointer declaration, the index reads, the arithmetic) IS exported and visible -- what's missing is (a) a model for a runtime-configured buffer capacity not tied to any single allocation call this analysis can see, and (b) a model for validating self-consistency invariants across values read from the SAME buffer being written into, across loop iterations. Neither is a missing fact; both are missing analytical machinery."
+}

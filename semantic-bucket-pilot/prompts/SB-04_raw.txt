@@ -1,0 +1,63 @@
+CASE ID: SB-04
+
+CODE:
+
+```c
+#define NUM_MIXERS 9
+/* ... */
+    unsigned char key_block[NUM_MIXERS * SFTK_MAX_MAC_LENGTH];
+    /* ... */
+
+            if (keySize == 0 || keySize > sizeof key_block ||
+                /* other unrelated checks omitted */ 0) {
+                crv = CKR_TEMPLATE_INCONSISTENT;
+                break;
+            }
+            /* ... */
+
+            /* HKDF-Expand */
+            if (!params->bExpand) {
+                okm = prk;
+            } else {
+                /* T(1) = HMAC-Hash(prk, "" | info | 0x01)
+                 * T(n) = HMAC-Hash(prk, T(n-1) | info | n
+                 * key material = T(1) | ... | T(n)
+                 */
+                HMACContext *hmac;
+                CK_BYTE bi;
+                unsigned iterations = PR_ROUNDUP(keySize, hashLen) / hashLen;
+                hmac = HMAC_Create(rawHash, prk, prkLen, isFIPS);
+                if (hmac == NULL) {
+                    crv = CKR_HOST_MEMORY;
+                    break;
+                }
+                for (bi = 1; bi <= iterations; ++bi) {
+                    unsigned len;
+                    HMAC_Begin(hmac);
+                    if (bi > 1) {
+                        HMAC_Update(hmac, key_block + ((bi - 2) * hashLen), hashLen);
+                    }
+                    if (params->ulInfoLen != 0) {
+                        HMAC_Update(hmac, params->pInfo, params->ulInfoLen);
+                    }
+                    HMAC_Update(hmac, &bi, 1);
+                    HMAC_Finish(hmac, key_block + ((bi - 1) * hashLen), &len,
+                                hashLen);
+                    PORT_Assert(len == hashLen);
+                }
+                HMAC_Destroy(hmac, PR_TRUE);
+                okm = key_block;
+            }
+```
+
+(`SFTK_MAX_MAC_LENGTH` is a separately-defined constant, elsewhere in the same
+codebase; `hashLen` is a `HASH_ResultLen(...)`-derived runtime value picked
+based on which hash algorithm the caller selected.)
+
+QUESTION:
+
+Can the write into `key_block` (via the `HMAC_Finish` calls inside the loop)
+exceed `key_block`'s declared capacity for some valid, allowed input? Answer
+established, contradicted, or unresolved, and state precisely what fact a
+static-analysis tool consuming a parsed/exported representation of this
+source would need in order to answer deterministically.

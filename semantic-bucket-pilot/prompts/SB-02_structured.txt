@@ -1,0 +1,115 @@
+CASE ID: SB-02
+
+CODE:
+
+```c
+#define EMIT_BYTE() { \
+  JOCTET c; \
+  put_bits -= 8; \
+  c = (JOCTET)GETJOCTET(put_buffer >> put_bits); \
+  *buffer++ = c; \
+  if (c == 0xFF)  /* need to stuff a zero byte? */ \
+    *buffer++ = 0; \
+ }
+
+#define PUT_BITS(code, size) { \
+  put_bits += size; \
+  put_buffer = (put_buffer << size) | code; \
+}
+
+#define CHECKBUF15() { \
+  if (put_bits > 15) { \
+    EMIT_BYTE() \
+    EMIT_BYTE() \
+  } \
+}
+
+#define EMIT_BITS(code, size) { \
+  PUT_BITS(code, size) \
+  CHECKBUF15() \
+}
+
+#define BUFSIZE (DCTSIZE2 * 4)
+
+LOCAL(boolean)
+flush_bits (working_state * state)
+{
+  JOCTET _buffer[BUFSIZE], *buffer;
+  size_t put_buffer;  int put_bits;
+  size_t bytes, bytestocopy;  int localbuf = 0;
+
+  put_buffer = state->cur.put_buffer;
+  put_bits = state->cur.put_bits;
+  if (state->free_in_buffer < BUFSIZE) {
+    localbuf = 1;
+    buffer = _buffer;
+  }
+  else buffer = state->next_output_byte;
+
+  /* fill any partial byte with ones */
+  PUT_BITS(0x7F, 7)
+  while (put_bits >= 8) EMIT_BYTE()
+
+  state->cur.put_buffer = 0;
+  state->cur.put_bits = 0;
+
+  if (localbuf) {
+    bytes = buffer - _buffer;
+    buffer = _buffer;
+    while (bytes > 0) {
+      bytestocopy = MIN(bytes, state->free_in_buffer);
+      MEMCOPY(state->next_output_byte, buffer, bytestocopy);
+      state->next_output_byte += bytestocopy;
+      state->free_in_buffer -= bytestocopy;
+      buffer += bytestocopy;
+      bytes -= bytestocopy;
+      if (state->free_in_buffer == 0) {
+        if (! dump_buffer(state))
+          return FALSE;
+      }
+    }
+  }
+  else {
+    state->free_in_buffer -= (buffer - state->next_output_byte);
+    state->next_output_byte = buffer;
+  }
+  return TRUE;
+}
+
+/* encode_one_block, elsewhere in the same file, drives EMIT_BITS/EMIT_BYTE
+ * repeatedly per DCT block, with the number of bits emitted per call
+ * determined by variable-length Huffman codes looked up from coding tables,
+ * not a fixed count. */
+```
+
+TCHECKER EVIDENCE:
+
+- Deterministic candidate: OOB_WRITE, subclass CURSOR (a pointer-increment
+  write pattern, `*buffer++ = c`, into a local fixed-size array). Destination
+  `_buffer`, capacity resolved to a literal 256 bytes (`BUFSIZE` folds to a
+  pure constant-arithmetic expression this pass CAN evaluate, unlike SB-01's
+  macro). Confirmed present in an earlier revision of this same buffer at a
+  smaller literal capacity (136 bytes); the capacity delta between the two
+  revisions is faithfully recorded, but the candidate itself is NOT
+  suppressed by the larger capacity in either revision.
+- Unresolved-evidence category: RELATIONSHIP_UNRESOLVED. This pass has no
+  model of the Huffman bit-encoding math that determines the true worst-case
+  number of bytes `encode_one_block` can emit for one call (that would
+  require deriving a bound from the coding tables and the EMIT_BITS/EMIT_CODE
+  macro semantics, not from the buffer declaration or the write syntax). It
+  can state the buffer's exact declared capacity and that the write pattern
+  is unbounded BY SYNTAX (no local loop trip count), but it cannot derive
+  or rule out a specific worst-case byte count for this write pattern, at
+  either capacity value.
+- Provenance: capacity and candidate facts both derived directly from this
+  source; the "cannot exceed 256 bytes" question specifically requires
+  domain knowledge (Huffman code length bounds) outside what this pass's
+  facts capture.
+
+QUESTION:
+
+Given the fixed buffer size shown (`BUFSIZE`) and the write pattern that
+fills `_buffer` via `EMIT_BYTE`/`PUT_BITS`/`EMIT_BITS`, is it PROVEN that the
+write cannot exceed the buffer's capacity for any input? Answer established,
+contradicted, or unresolved, and say exactly what additional fact would
+resolve it.

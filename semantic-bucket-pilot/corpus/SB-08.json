@@ -1,0 +1,21 @@
+{
+  "case_id": "SB-08",
+  "bucket": "established_controls",
+  "ground_truth_label": "vulnerable",
+  "internal_source_ref": "mozilla/nss, lib/util/secasn1d.c sec_asn1d_parse_leaf, vulnerable (pre-CVE-2016-1950-fix) shape (NOT shown to model)",
+  "focused_question": "This function is called repeatedly (once per chunk) while decoding one value. Is the cumulative write across repeated calls proven to stay within the destination's allocated capacity? Answer established, contradicted, or unresolved, and explain what could go wrong across repeated calls specifically, not just within one call.",
+  "ground_truth": {
+    "conclusion": "vulnerable",
+    "relationship_answer": "contradicted",
+    "evidence_used": [
+      "the write's destination offset is a length field that is incremented after every call, and reused as the offset for the NEXT call -- state accumulated across iterations, not a single-shot bound",
+      "nothing shown bounds how many times this function can be invoked for one decoded value, nor bounds the sum of all the per-call lengths against the destination's real capacity",
+      "the length field's arithmetic (an addition, executed every call) has no visible overflow check"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that because each INDIVIDUAL call's length looks small or bounded, the ACCUMULATED total across many calls must also stay bounded -- repeated small increments can still overflow or exceed capacity in aggregate"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "Verified via direct diff of the real fix: sec_asn1d_parse_leaf does `PORT_Memcpy(item->data + item->len, buf, len); item->len += len;`, called once per constructed-encoding chunk while decoding one ASN.1 value; item->len accumulates across an attacker-controlled number of calls with no visible bound on the number of chunks or on the running total. The real fix (not shown to the model) adds an explicit `UINT_MAX - item->len < len` overflow check before the increment (and a parallel bits-vs-bytes-aware check for the BIT STRING case) -- confirming the real vulnerability is exactly the unbounded-accumulation overflow this case's focused question asks about. Included as the 'established controls / vulnerable' case because the ground truth (an integer-overflow-driven heap buffer overflow) is independently and unambiguously confirmed by Mozilla's own patch, regardless of what any current TChecker producer concludes about it (which, for the record, is 0 candidates on both revisions -- an honest abstention on a pointer-offset destination plus loop-accumulated arithmetic this producer family does not yet model, not a false negative this case is trying to hide)."
+}

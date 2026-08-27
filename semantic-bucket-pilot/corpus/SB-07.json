@@ -1,0 +1,22 @@
+{
+  "case_id": "SB-07",
+  "bucket": "established_controls",
+  "ground_truth_label": "safe",
+  "internal_source_ref": "mozilla/nss, lib/softoken/pkcs11c.c nsc_pbe_key_gen + nsc_SetupPBEKeyGen + lib/softoken/lowpbe.c nsspkcs5_ComputeKeyAndIV + lib/util/secitem.c SECITEM_AllocItem, real confirmed-false-positive shape from this session's own round-9 investigation (NOT shown to model)",
+  "focused_question": "The guard shown checks a variable with a DIFFERENT NAME than the one actually used as the write's length. Is the write nonetheless proven safe, proven unsafe, or is the relationship between the guarded variable and the write's actual length unresolved? Trace the values across every function shown and state your reasoning.",
+  "ground_truth": {
+    "conclusion": "safe",
+    "relationship_answer": "established",
+    "evidence_used": [
+      "the guard compares a caller-scope variable against a fixed-size output buffer before any key-generation function runs",
+      "that guarded variable is set, earlier in the same call chain, to a field read from a parameter object returned by a key-setup function",
+      "the write's actual length comes from a DIFFERENT object entirely -- one allocated by a helper function -- but that helper always allocates exactly the same size it was asked for, and the SAME parameter object's field value is what was asked for",
+      "chaining these: the guarded value, the allocation-request size, and the write's actual length are all the SAME value, by construction, not by coincidence"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that a guard checking a differently-named variable than the write's actual length is automatically insufficient just because the names differ -- the equality must be traced through the actual call chain, not assumed absent from naming alone"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "This is this session's own round-9 finding, independently re-verified against the real source directly for this pilot (not merely recalled): nsc_pbe_key_gen does `PORT_Memcpy(buf, pbe_key->data, pbe_key->len)`, guarded upstream in its caller by `sizeof(buf) < key_length` where `key_length` was set via `nsc_SetupPBEKeyGen` to `params->keyLen` (the same params object later passed unchanged into nsc_pbe_key_gen). `pbe_key` comes from `nsspkcs5_ComputeKeyAndIV`, which does `key = SECITEM_AllocItem(NULL, NULL, pbe_param->keyLen)`, and SECITEM_AllocItem unconditionally sets `result->len = len` as part of allocation (confirmed by reading its real implementation directly). So key_length == pbe_param->keyLen == pbe_key->len, all three the same value by construction across the whole chain -- a genuine, fully-traced-and-confirmed false positive, deliberately included as the 'established controls / safe' case precisely because its guard/write names differ, which is exactly the shape most likely to tempt an under-verified 'vulnerable' conclusion from surface pattern-matching alone."
+}

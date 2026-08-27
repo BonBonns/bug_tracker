@@ -1,0 +1,56 @@
+CASE ID: SB-08
+
+CODE:
+
+```c
+static unsigned long
+sec_asn1d_parse_leaf (sec_asn1d_state *state,
+                      const char *buf, unsigned long len)
+{
+    SECItem *item;
+    unsigned long bufLen;
+
+    if (len == 0) {
+        state->top->status = needBytes;
+        return 0;
+    }
+
+    if (state->pending < len)
+        len = state->pending;
+
+    bufLen = len;
+
+    item = (SECItem *)(state->dest);
+    if (item != NULL && item->data != NULL) {
+        /* Strip leading zeroes when target is unsigned integer */
+        if (state->underlying_kind == SEC_ASN1_INTEGER &&
+            item->len == 0 &&
+            item->type == siUnsignedInteger)
+        {
+            while (len > 1 && buf[0] == 0) {
+                buf++;
+                len--;
+            }
+        }
+        PORT_Memcpy (item->data + item->len, buf, len);
+        item->len += len;
+    }
+    state->pending -= bufLen;
+    if (state->pending == 0)
+        state->place = afterEndOfContents;
+    return bufLen;
+}
+```
+
+This function is called once per chunk while decoding a single ASN.1 value
+that may be split across multiple constructed-encoding segments in the input
+DER; `item->data`'s backing allocation is sized (elsewhere) to fit the total
+value being decoded, computed from earlier parsing of the DER length fields.
+
+QUESTION:
+
+This function is called repeatedly (once per chunk) while decoding one
+value. Is the cumulative write across repeated calls proven to stay within
+`item->data`'s allocated capacity? Answer established, contradicted, or
+unresolved, and explain what could go wrong across repeated calls
+specifically, not just within one call.

@@ -1,0 +1,21 @@
+{
+  "case_id": "SB-02",
+  "bucket": "relationship_unresolved",
+  "internal_source_ref": "mozilla/mozjpeg, jchuff.c, flush_bits/EMIT_BYTE/BUFSIZE, post-fix shape (BUFSIZE = DCTSIZE2*4) (NOT shown to model)",
+  "focused_question": "Given the fixed buffer size shown and the write pattern that fills it, is it PROVEN that the write cannot exceed the buffer's capacity for any input? Answer established, contradicted, or unresolved, and say exactly what additional fact would resolve it.",
+  "ground_truth": {
+    "conclusion": "unresolved",
+    "relationship_answer": "unresolved",
+    "evidence_used": [
+      "the destination is a fixed-size local array whose element count is a compile-time constant expression",
+      "the write is driven by a macro that increments the pointer by 1 or 2 bytes per invocation, with no explicit bound check inside the macro itself",
+      "the number of times the macro can fire is governed by a bit-accumulator variable and the sizes of variable-length codes fed into it, not by a simple loop counter with a fixed trip count"
+    ],
+    "unsupported_assumptions_that_must_not_be_made": [
+      "that a larger constant (vs. a smaller one seen in an earlier revision) is 'obviously enough' without deriving the actual worst-case number of bytes the encoder can emit for one call",
+      "that because a specific numeric capacity is now double an earlier one, the underlying worst-case bound (which is a property of the encoding algorithm's bit-length math, not of the buffer declaration) must also have merely doubled"
+    ],
+    "confidence": "high"
+  },
+  "verification_notes": "Verified against real source: the buffer is JOCTET _buffer[BUFSIZE] where BUFSIZE folds to a plain integer constant (unlike SB-01, the constant IS resolvable here -- this case is genuinely 'relationship unresolved', not 'producer evidence missing', because the blocking fact is not a missing macro value but an un-derived worst-case bound on how many bytes a Huffman-coded block's bit pattern can produce). The real upstream comment for this exact buffer (not shown to the model, since it explains the fix) states the worst case can approach double the unencoded block size. Proving the fixed capacity is sufficient requires deriving that worst-case bit-count bound from the Huffman coding tables and PUT_BITS/EMIT_BYTE macro semantics -- a piece of domain-specific combinatorial math, not something derivable from the buffer declaration or the write syntax alone. Ground truth is 'unresolved' both for TChecker (which has no model of this at all -- this exact case doubles as this session's own real, empirically-confirmed evidence that neither its cursor-write nor any other producer can prove or disprove this bound) and, honestly, for a human/LLM reviewer working from this snippet alone without deriving the combinatorics."
+}

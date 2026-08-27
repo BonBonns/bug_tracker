@@ -1,0 +1,106 @@
+CASE ID: SB-06
+
+CODE:
+
+```c
+CK_RV
+NSC_EncryptUpdate(CK_SESSION_HANDLE hSession,
+                  CK_BYTE_PTR pPart, CK_ULONG ulPartLen, CK_BYTE_PTR pEncryptedPart,
+                  CK_ULONG_PTR pulEncryptedPartLen)
+{
+    SFTKSessionContext *context;
+    unsigned int outlen, i;
+    unsigned int padoutlen = 0;
+    unsigned int maxout = *pulEncryptedPartLen;
+    CK_RV crv;
+    SECStatus rv;
+
+    /* ... session lookup omitted ... */
+
+    if (!pEncryptedPart) {
+        /* ... size-query path omitted ... */
+    }
+
+    /* do padding */
+    if (context->doPad) {
+        /* deal with previous buffered data */
+        if (context->padDataLength != 0) {
+            for (i = context->padDataLength;
+                 (ulPartLen != 0) && i < context->blockSize; i++) {
+                context->padBuf[i] = *pPart++;
+                ulPartLen--;
+                context->padDataLength++;
+            }
+            if (context->padDataLength != context->blockSize) {
+                *pulEncryptedPartLen = 0;
+                return CKR_OK;
+            }
+            /* encrypt the current padded data */
+            rv = (*context->update)(context->cipherInfo, pEncryptedPart,
+                                    &padoutlen, context->blockSize, context->padBuf,
+                                    context->blockSize);
+            if (rv != SECSuccess) {
+                return sftk_MapCryptError(PORT_GetError());
+            }
+            pEncryptedPart += padoutlen;
+            maxout -= padoutlen;
+        }
+        context->padDataLength = ulPartLen % context->blockSize;
+        if (context->padDataLength) {
+            PORT_Memcpy(context->padBuf,
+                        &pPart[ulPartLen - context->padDataLength],
+                        context->padDataLength);
+            ulPartLen -= context->padDataLength;
+        }
+        if (ulPartLen == 0) {
+            *pulEncryptedPartLen = padoutlen;
+            return CKR_OK;
+        }
+    }
+
+    /* NOTE: this assumes buf size in is >= buf size out! */
+    rv = (*context->update)(context->cipherInfo, pEncryptedPart,
+                            &outlen, maxout, pPart, ulPartLen);
+    if (rv != SECSuccess) {
+        return sftk_MapCryptError(PORT_GetError());
+    }
+    *pulEncryptedPartLen = (CK_ULONG)(outlen + padoutlen);
+    return CKR_OK;
+}
+```
+
+`context->update` is a function pointer, set elsewhere to one of several
+cipher-specific encrypt functions; its documented contract is
+`(input, output, &actual_output_len, output_buf_capacity, input, input_len)`.
+
+TCHECKER EVIDENCE:
+
+- Deterministic candidate: NONE. This pass produced 0 candidates for this
+  function, across every producer it currently has.
+- Unresolved-evidence category: ANALYSIS_CAPABILITY_MISSING, for two
+  independently disqualifying reasons. (a) The call is made through a
+  struct-stored function pointer (`context->update`); this pass's frontend
+  extraction records it with a generic "indirect call" marker carrying no
+  resolvable concrete target identity at all -- there is no contract entry
+  this pass could even attempt to match against, a more fundamental gap than
+  "unknown contract for a named function" (which it already correctly
+  abstains on). (b) Independent of (a): this pass's whole producer family
+  looks for an ABSENT or insufficient bound being passed as a length
+  argument. It has no model for "the correct-shaped bound WAS computed and
+  IS in scope (`maxout`, declared and correctly used later in this same
+  function), but a DIFFERENT, also-plausible-looking value from the same
+  struct was passed in this specific call instead" -- that is a data-flow
+  provenance / taint question (does this argument's value trace back to the
+  destination's real capacity, or to an unrelated field?), not a
+  guard-presence or capacity-resolution question.
+- Provenance: this is a NEGATIVE evidence report -- it names the two missing
+  capabilities precisely, rather than reporting "no signal" without
+  explanation.
+
+QUESTION:
+
+Is the length argument passed to `context->update` in the FIRST call (the
+padded-data branch) the caller's real, currently-available output-buffer
+capacity? Answer established, contradicted, or unresolved, and state what
+capability a deterministic static-analysis tool would need to answer this on
+its own.
