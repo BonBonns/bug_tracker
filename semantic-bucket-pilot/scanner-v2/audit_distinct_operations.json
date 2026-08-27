@@ -1,0 +1,41 @@
+{
+  "additional_evidence_by_reason": {
+    "conflicting_reaching_allocations": 16,
+    "destination_identity_ambiguous": 350,
+    "required_evidence_absent": 1882
+  },
+  "by_bucket": {
+    "None": 24,
+    "conflicting_definitions": 16,
+    "external_contract_unknown": 62,
+    "identity_ambiguous": 350,
+    "insufficient_evidence": 1882,
+    "relationship_unresolved": 198
+  },
+  "by_producer": {
+    "cursor": 382,
+    "interprocedural": 108,
+    "runtime": 2042
+  },
+  "by_reason": {
+    "None": 24,
+    "capacity_relation_not_established": 198,
+    "conflicting_reaching_allocations": 16,
+    "destination_identity_ambiguous": 350,
+    "required_evidence_absent": 1882,
+    "unknown_allocator_contract": 62
+  },
+  "by_route": {
+    "None": 24,
+    "additional_evidence_required": 2248,
+    "semantic_contract_review": 62,
+    "semantic_relationship_review": 198
+  },
+  "by_status": {
+    "abstained": 2310,
+    "deterministic_complete": 24,
+    "open_candidate": 198
+  },
+  "distinct_operations": 2532,
+  "raw_records": 3246
+}
