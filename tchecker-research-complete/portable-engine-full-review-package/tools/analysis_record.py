@@ -1,76 +1,57 @@
 #!/usr/bin/env python3
-"""Analysis-record taxonomy for TChecker's automatic bucket layer.
+"""Analysis-record taxonomy for TChecker's automatic bucket layer -- FROZEN v1.
 
-This schema is a CROSS-PRODUCER INTERFACE: every producer's reason-emission layer
-must speak it, so the reason codes, bucket mappings, routes, and precedence are
-defined ONCE here and frozen before producers are extended. Getting a mapping
-wrong here is expensive to unwind after it is baked into several producers.
+SCHEMA_VERSION "1" freezes: the reason codes, their exact conditions, the bucket
+mappings, the ROUTES (keyed on reason, not merely bucket), the llm_eligible flag,
+and the PRECEDENCE order. This is a cross-producer interface: producers emit v1
+reason codes; nothing here changes without a version bump. (Freezing the schema
+does NOT freeze the whole scanner -- producers are still being extended to emit
+these reasons; the full experimental scanner is frozen only once that is done.)
 
-TWO DISTINCT bucket families that must not be mixed:
+TWO bucket families, never mixed:
+1. CANDIDATE-REVIEW buckets -- TChecker recognized an operation and produced a
+   record; scan-time derivable; decide whether/how a case reaches a resolver.
+2. COVERAGE-GAP categories -- a KNOWN-POSITIVE produced no candidate; need an
+   external oracle; scanner-coverage eval only, never A/B/C (listed, not emitted).
 
-1. CANDIDATE-REVIEW buckets -- assigned when TChecker RECOGNIZED an operation and
-   produced an analysis record. Derivable at scan time from the producer's own
-   reason code; decide whether/how a case reaches an LLM. A/B/C-relevant.
-2. COVERAGE-GAP categories -- assigned when a KNOWN-POSITIVE case produced no
-   candidate. Need an external oracle; scanner-coverage evaluation only, never
-   A/B/C. Listed at the bottom, not emitted during an ordinary scan.
+ROUTE BY REASON, NOT ONLY BUCKET. Several reasons share `relationship_unresolved`
+but need different focused resolvers, so the route and unresolved_property are
+per-reason. The bucket names the broad cause; the reason + property name the task:
 
-DECISION TABLE (reason_code -> exact condition -> bucket -> route). The route is
-determined by the BUCKET (BUCKET_ROUTE); the per-reason `resolution_hint`
-records the finer "how could this be resolved" flavor from the review without
-fragmenting the top-level routing.
+  reason_code                              bucket                    route                       llm
+  capacity_relation_not_established        relationship_unresolved   semantic_relationship_review  y
+  write_count_bound_not_established        relationship_unresolved   semantic_relationship_review  y
+  allocation_overflow_relation_unresolved  relationship_unresolved   range_arithmetic_review       y
+  free_may_reach_sink                      relationship_unresolved   path_feasibility_review       y
+  unknown_allocator_contract               external_contract_unknown semantic_contract_review      y
+  conflicting_reaching_allocations         conflicting_definitions   additional_evidence_required  n
+  destination_identity_ambiguous           identity_ambiguous        additional_evidence_required  n
+  required_evidence_absent                 insufficient_evidence     additional_evidence_required  n
+  free_dominates_sink                      (none: rerouted)          lifetime_analysis             n
 
-  capacity_relation_not_established
-      capacity and width known; the inequality width<=capacity is unproven
-      -> relationship_unresolved   (llm_semantic_review)
-  allocation_overflow_relation_unresolved
-      allocation expression known (e.g. count*width); no-overflow / operand
-      range unproven -- a SPECIFIC arithmetic relationship, NOT generic
-      insufficiency
-      -> relationship_unresolved   (llm_semantic_review; hint: llm_or_range_evidence)
-  unknown_allocator_contract
-      allocator call recognized but its size semantics are unknown
-      -> external_contract_unknown (llm_semantic_review; hint: contract_review)
-  conflicting_reaching_allocations
-      the same destination has multiple incompatible reaching allocation defs
-      -> conflicting_definitions   (additional_evidence_required; hint: more_context_or_abstain)
-  destination_identity_ambiguous
-      cannot establish WHICH memory object the operation writes
-      -> identity_ambiguous        (additional_evidence_required; hint: identity_evidence_or_abstain)
-  free_may_reach_sink
-      lifetime state differs across feasible paths (free reaches the sink on
-      some paths but not others)
-      -> relationship_unresolved   (llm_semantic_review; hint: focused_path_question)
-  free_dominates_sink
-      the same allocation is DEFINITELY freed before the operation on every path
-      -> NOT a candidate-review bucket: a DETERMINISTIC lifetime finding
-         (analysis_status deterministic_finding, route separate_finding)
-  required_evidence_absent
-      no more specific recoverable property exists
-      -> insufficient_evidence     (additional_evidence_required; hint: abstain)
+semantic_contract_review is DISTINCT from a generic LLM review: the task is to
+ESTABLISH an allocator/callee contract from implementation, documentation, or
+supplied source -- not to guess what a function probably does. If no contract
+evidence is available, the correct result degrades to additional_evidence_required
+(a producer that can tell the two apart should emit unknown_allocator_contract vs
+required_evidence_absent accordingly).
 
-PRECEDENCE for multiple simultaneous reasons: a candidate can trip more than one
-prerequisite (e.g. unknown allocator AND ambiguous identity). Producers emit ALL
-detected reasons in `all_reason_codes`; the PRIMARY reason (which fixes the
-bucket) is the EARLIEST FAILED PREREQUISITE per PRECEDENCE below -- never
-whatever dict/iteration order happened to surface first. Ordering rationale: you
-cannot ask about capacity if you do not even know which object is written, or
-which allocation reaches it, or whether it is still live.
+free_dominates_sink is NOT a finished lifetime verdict: the capacity producer must
+not decide a different security property. It emits a HANDOFF (analysis_status
+"rerouted", candidate_class lifetime_use_after_invalidation, route
+lifetime_analysis) with the established facts; a dedicated lifetime producer /
+adjudicator confirms identity, no replacement definition, a feasible post-free
+path, and an actual dereference. Until that layer exists it is a deterministic
+lifetime CANDIDATE, not a finding.
+
+PRECEDENCE: producers emit ALL detected reasons in `all_reason_codes`; the PRIMARY
+reason (which fixes the bucket) is the EARLIEST FAILED PREREQUISITE below -- never
+dict/iteration order.
 """
 
-ANALYSIS_STATUSES = ("open_candidate", "abstained", "deterministic_complete",
-                     "deterministic_finding")
+SCHEMA_VERSION = "1"
 
-# bucket -> route (the A/B/C-relevant routing). llm buckets are the routable set.
-BUCKET_ROUTE = {
-    "relationship_unresolved": "llm_semantic_review",
-    "external_contract_unknown": "llm_semantic_review",
-    "conflicting_definitions": "additional_evidence_required",
-    "identity_ambiguous": "additional_evidence_required",
-    "insufficient_evidence": "additional_evidence_required",
-}
-LLM_ROUTABLE_BUCKETS = frozenset(
-    b for b, r in BUCKET_ROUTE.items() if r == "llm_semantic_review")
+ANALYSIS_STATUSES = ("open_candidate", "abstained", "deterministic_complete", "rerouted")
 
 # Coverage-gap categories (oracle-required; NOT scan-time, NOT A/B/C).
 COVERAGE_GAP_CATEGORIES = (
@@ -78,44 +59,50 @@ COVERAGE_GAP_CATEGORIES = (
     "propagation_not_modeled", "required_fact_not_produced",
 )
 
-# reason_code -> definition. `bucket` None means "not a candidate-review bucket"
-# (a deterministic finding routed separately).
+# reason_code -> frozen definition. `bucket` None => not a candidate-review bucket.
 REASON_DEFINITIONS = {
     "capacity_relation_not_established": {
-        "condition": "capacity and width known; width<=capacity unproven",
+        "condition": "capacity and write length known; width<=capacity unproven",
         "bucket": "relationship_unresolved", "unresolved_property": "write_length_within_capacity",
-        "resolution_hint": "llm_semantic_review"},
+        "route": "semantic_relationship_review", "llm_eligible": True},
+    "write_count_bound_not_established": {
+        "condition": "capacity known; number of writes not bounded <= capacity",
+        "bucket": "relationship_unresolved", "unresolved_property": "write_count_within_capacity",
+        "route": "semantic_relationship_review", "llm_eligible": True},
     "allocation_overflow_relation_unresolved": {
         "condition": "allocation expression known; no-overflow/operand range unproven",
         "bucket": "relationship_unresolved",
         "unresolved_property": "allocation_multiplication_does_not_overflow",
-        "resolution_hint": "llm_or_range_evidence"},
-    "unknown_allocator_contract": {
-        "condition": "allocator recognized but size semantics unknown",
-        "bucket": "external_contract_unknown", "unresolved_property": "allocator_size_semantics",
-        "resolution_hint": "contract_review"},
-    "conflicting_reaching_allocations": {
-        "condition": "same destination has multiple incompatible reaching allocations",
-        "bucket": "conflicting_definitions", "unresolved_property": "single_reaching_allocation",
-        "resolution_hint": "more_context_or_abstain"},
-    "destination_identity_ambiguous": {
-        "condition": "cannot establish which memory object is written",
-        "bucket": "identity_ambiguous", "unresolved_property": "destination_object_identity",
-        "resolution_hint": "identity_evidence_or_abstain"},
+        "route": "range_arithmetic_review", "llm_eligible": True},
     "free_may_reach_sink": {
         "condition": "lifetime state differs across feasible paths",
         "bucket": "relationship_unresolved", "unresolved_property": "capacity_valid_along_all_paths",
-        "resolution_hint": "focused_path_question"},
-    "free_dominates_sink": {
-        "condition": "same allocation definitely freed before the operation on every path",
-        "bucket": None, "unresolved_property": None, "resolution_hint": "separate_finding",
-        "analysis_status": "deterministic_finding", "finding_class": "lifetime_use_after_invalidation",
-        "route": "separate_finding"},
+        "route": "path_feasibility_review", "llm_eligible": True},
+    "unknown_allocator_contract": {
+        "condition": "allocator/callee recognized but its size semantics are unknown",
+        "bucket": "external_contract_unknown", "unresolved_property": "allocator_size_semantics",
+        "route": "semantic_contract_review", "llm_eligible": True},
+    "conflicting_reaching_allocations": {
+        "condition": "same destination has multiple incompatible reaching allocations",
+        "bucket": "conflicting_definitions", "unresolved_property": "single_reaching_allocation",
+        "route": "additional_evidence_required", "llm_eligible": False},
+    "destination_identity_ambiguous": {
+        "condition": "cannot establish which memory object is written",
+        "bucket": "identity_ambiguous", "unresolved_property": "destination_object_identity",
+        "route": "additional_evidence_required", "llm_eligible": False},
     "required_evidence_absent": {
         "condition": "no more specific recoverable property exists",
         "bucket": "insufficient_evidence", "unresolved_property": None,
-        "resolution_hint": "abstain"},
+        "route": "additional_evidence_required", "llm_eligible": False},
+    "free_dominates_sink": {
+        "condition": "allocation definitely freed before the operation on every path",
+        "bucket": None, "unresolved_property": None,
+        "route": "lifetime_analysis", "llm_eligible": False,
+        "analysis_status": "rerouted", "candidate_class": "lifetime_use_after_invalidation"},
 }
+
+CANDIDATE_REVIEW_BUCKETS = ("relationship_unresolved", "external_contract_unknown",
+                            "conflicting_definitions", "identity_ambiguous", "insufficient_evidence")
 
 # Earliest-failed-prerequisite ordering (index 0 = highest precedence).
 PRECEDENCE = (
@@ -126,57 +113,55 @@ PRECEDENCE = (
     "free_may_reach_sink",
     "allocation_overflow_relation_unresolved",
     "capacity_relation_not_established",
+    "write_count_bound_not_established",
     "required_evidence_absent",
 )
 _PREC_INDEX = {r: i for i, r in enumerate(PRECEDENCE)}
 
 
 def primary_reason(reason_codes):
-    """The bucket-fixing reason among several: the earliest failed prerequisite.
-    Deterministic -- never dependent on dict/iteration order."""
     rs = [r for r in reason_codes if r in _PREC_INDEX]
-    if not rs:
-        return None
-    return min(rs, key=lambda r: _PREC_INDEX[r])
+    return min(rs, key=lambda r: _PREC_INDEX[r]) if rs else None
 
 
-def bucket_for_reason(reason_code):
-    d = REASON_DEFINITIONS.get(reason_code)
+def bucket_for_reason(rc):
+    d = REASON_DEFINITIONS.get(rc)
     return d["bucket"] if d else None
 
 
-def route_for_reason(reason_code):
-    d = REASON_DEFINITIONS.get(reason_code) or {}
-    if d.get("route"):
-        return d["route"]                     # explicit (deterministic finding)
-    return BUCKET_ROUTE.get(d.get("bucket"))  # via bucket
+def route_for_reason(rc):
+    d = REASON_DEFINITIONS.get(rc)
+    return d["route"] if d else None
 
 
-def property_for_reason(reason_code):
-    d = REASON_DEFINITIONS.get(reason_code) or {}
+def property_for_reason(rc):
+    d = REASON_DEFINITIONS.get(rc) or {}
     return d.get("unresolved_property")
 
 
-def is_llm_routable(reason_code):
-    return bucket_for_reason(reason_code) in LLM_ROUTABLE_BUCKETS
+def llm_eligible_for_reason(rc):
+    d = REASON_DEFINITIONS.get(rc) or {}
+    return bool(d.get("llm_eligible"))
 
 
 def validate_record(rec):
-    """Schema/consistency check for one analysis record."""
     st = rec.get("analysis_status")
     assert st in ANALYSIS_STATUSES, f"bad status {st}"
     if st == "deterministic_complete":
         return True
-    if st == "deterministic_finding":
-        assert rec.get("reason_code") == "free_dominates_sink", rec
+    if st == "rerouted":
+        rc = rec.get("reason_code")
+        assert REASON_DEFINITIONS.get(rc, {}).get("analysis_status") == "rerouted", rec
         assert rec.get("uncertainty_bucket") is None, rec
-        assert rec.get("recommended_route") == "separate_finding", rec
+        assert rec.get("recommended_route") == route_for_reason(rc), rec
+        assert rec.get("candidate_class") == REASON_DEFINITIONS[rc]["candidate_class"], rec
+        assert rec.get("established_facts"), "rerouted handoff must carry established_facts"
         return True
     primary = rec.get("reason_code")
     assert primary in REASON_DEFINITIONS, f"unknown reason {primary}"
     assert bucket_for_reason(primary) == rec.get("uncertainty_bucket"), rec
     assert route_for_reason(primary) == rec.get("recommended_route"), rec
-    # if all_reason_codes present, primary must be the precedence-selected one
+    assert llm_eligible_for_reason(primary) == rec.get("llm_eligible"), rec
     allr = rec.get("all_reason_codes")
     if allr:
         assert primary_reason(allr) == primary, f"primary {primary} != precedence over {allr}"

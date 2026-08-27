@@ -70,6 +70,20 @@ rel_reasons = {r["reason_code"] for r in recs if r.get("uncertainty_bucket") == 
 ck("relationship_unresolved spans >=2 distinct reason codes",
    {"capacity_relation_not_established", "allocation_overflow_relation_unresolved"} <= rel_reasons)
 
+# ROUTE BY REASON: two reasons in the SAME bucket get DIFFERENT focused routes.
+ck("same bucket, different routes: capacity relation -> semantic_relationship_review",
+   ar.route_for_reason("capacity_relation_not_established") == "semantic_relationship_review")
+ck("same bucket, different routes: allocation overflow -> range_arithmetic_review",
+   ar.route_for_reason("allocation_overflow_relation_unresolved") == "range_arithmetic_review")
+ck("free may reach -> path_feasibility_review",
+   ar.route_for_reason("free_may_reach_sink") == "path_feasibility_review")
+ck("external contract -> distinct semantic_contract_review (NOT generic llm), llm_eligible",
+   ar.route_for_reason("unknown_allocator_contract") == "semantic_contract_review"
+   and ar.llm_eligible_for_reason("unknown_allocator_contract"))
+ck("abstain reasons are not llm_eligible",
+   not ar.llm_eligible_for_reason("conflicting_reaching_allocations")
+   and not ar.llm_eligible_for_reason("required_evidence_absent"))
+
 # >=3 independently-constructed examples per IMPLEMENTED candidate-review bucket
 counts = collections.Counter(r["uncertainty_bucket"] for r in recs if r.get("uncertainty_bucket"))
 for b in ("relationship_unresolved", "external_contract_unknown",
@@ -83,10 +97,12 @@ ck("all supplementary records pass schema validation", all(ar.validate_record(r)
 cfg_fix = str(H.parent / "oob-runtimecap-cfg-r01" / "fixtures" / "controls.program.json")
 cfg_recs = {r["function"]: r for r in rc.analyze_operations(cfg_fix)}
 r = cfg_recs.get("invalid_free_then_write")
-ck("free dominates sink -> deterministic_finding (lifetime), NOT a capacity bucket",
-   r is not None and r.get("analysis_status") == "deterministic_finding"
+ck("free dominates sink -> REROUTED handoff to lifetime_analysis (not a capacity verdict)",
+   r is not None and r.get("analysis_status") == "rerouted"
    and r.get("reason_code") == "free_dominates_sink" and r.get("uncertainty_bucket") is None
-   and r.get("recommended_route") == "separate_finding")
+   and r.get("recommended_route") == "lifetime_analysis"
+   and r.get("candidate_class") == "lifetime_use_after_invalidation"
+   and r.get("established_facts"))
 r = cfg_recs.get("ambiguous_conditional_free_joined_write")
 ck("free may reach sink (some paths) -> relationship_unresolved",
    r is not None and r.get("reason_code") == "free_may_reach_sink"

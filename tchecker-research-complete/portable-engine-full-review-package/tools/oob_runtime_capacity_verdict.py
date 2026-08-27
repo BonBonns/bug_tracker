@@ -51,7 +51,7 @@ from allocation_extent import (compute_allocation_extents, compute_free_sites, b
 from call_context_guard import (build_actual_to_formal_mapping, guard_status_for_call,
                                  find_call_sites, _collect_assert_arg_ids)
 from analysis_record import (primary_reason, bucket_for_reason, route_for_reason,
-                             property_for_reason, REASON_DEFINITIONS)
+                             property_for_reason, llm_eligible_for_reason, REASON_DEFINITIONS)
 
 
 def _map_expr_to_caller_space(expr, callee_fn, call_sites, d):
@@ -396,9 +396,10 @@ def analyze_operations(prefix):
                 sink = capacity_status_at_sink(cfg_index, fn, extent['allocation_site'],
                                                free_sites.get((fn, dest), []), op['call_id'])
                 if sink == 'INVALID':
-                    # allocation DEFINITELY freed before this write on every path:
-                    # a deterministic lifetime finding, NOT a capacity uncertainty.
-                    status = 'deterministic_finding'
+                    # allocation DEFINITELY freed before this write on every path.
+                    # NOT a capacity verdict and NOT this producer's to finalize:
+                    # emit a HANDOFF to a dedicated lifetime layer.
+                    status = 'rerouted'
                     reasons = ['free_dominates_sink']
                 elif sink == 'AMBIGUOUS':
                     status = 'abstained'
@@ -413,17 +414,20 @@ def analyze_operations(prefix):
         base['analysis_status'] = status
         if status == 'deterministic_complete':
             base['reason_code'] = None
-        elif status == 'deterministic_finding':
+        elif status == 'rerouted':
             d0 = REASON_DEFINITIONS['free_dominates_sink']
             base.update({'reason_code': 'free_dominates_sink', 'all_reason_codes': reasons,
                          'uncertainty_bucket': None, 'recommended_route': d0['route'],
-                         'finding_class': d0['finding_class']})
+                         'candidate_class': d0['candidate_class'], 'llm_eligible': False,
+                         'established_facts': ['allocation dominates free', 'free dominates sink',
+                                               'destination identity established']})
         else:
             primary = primary_reason(reasons)
             base.update({'reason_code': primary, 'all_reason_codes': reasons,
                          'uncertainty_bucket': bucket_for_reason(primary),
                          'recommended_route': route_for_reason(primary),
-                         'unresolved_property': property_for_reason(primary)})
+                         'unresolved_property': property_for_reason(primary),
+                         'llm_eligible': llm_eligible_for_reason(primary)})
         records.append(base)
     return records
 
