@@ -51,8 +51,20 @@ This is the honest empirical shape of the contribution:
    that the scanner more often needs evidence/repair than semantic review — is
    the primary result, with the A/B/C harness as validated, ready machinery.
 
-## Broader-sample population
+## Broader-sample population (whole-module expansion scans, 3246 records)
 
-See `routing_evaluation_result.json` for the whole-module expansion population
-(coarse, un-deduplicated) — it reinforces the abstention/evidence-dominated
-distribution above on a much larger record count.
+| meta-route | count | share |
+|------------|-------|-------|
+| ADDITIONAL_EVIDENCE_REQUIRED | 2954 | 91.0% |
+| LLM_SEMANTIC_REVIEW | 268 | 8.3% |
+| DETERMINISTIC_COMPLETE | 24 | 0.7% |
+
+On the much larger, un-curated whole-module population the LLM-review share is
+**even smaller — 8.3%** (vs 29.1% in the CVE-curated frozen corpus, which was
+selected around candidate-bearing functions and so over-represents the
+reviewable slice). The overwhelming majority — **91%** — routes to
+additional-evidence-required. This is the strongest form of the result: across
+thousands of real recognized operations, the frozen scanner's dominant need is
+evidence/analyzer repair, not semantic LLM review, and the bucket+route layer
+labels that split automatically. (Coarse, un-deduplicated population view; see
+`routing_evaluation_result.json`.)
