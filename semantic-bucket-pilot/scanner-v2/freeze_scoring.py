@@ -74,9 +74,14 @@ def synth_predictions(labels, rng):
                 p = g if correct else ("SAFE" if g == "VULNERABLE" else "VULNERABLE")
             row = {"instance_id": iid, "condition": cond, "prediction": p}
             if p in ("VULNERABLE", "SAFE"):
-                # A rests on unsupported assumptions more often than B (secondary metric)
+                # external adjudication (the ERROR metric): A rests on unsupported
+                # assumptions more often than B.
                 ua = {"A": 0.20, "B": 0.08, "C": 0.25}[cond]
-                row["unsupported_assumption"] = rng.random() < ua
+                ext = rng.random() < ua
+                row["external_unsupported_assumption"] = ext
+                # self-report (descriptive): the model under-reports its own
+                # unsupported assumptions (only ~40% of true ones are disclosed).
+                row["self_reported_unsupported"] = bool(ext and rng.random() < 0.4)
             rows.append(row)
     return rows
 
@@ -168,7 +173,8 @@ def main():
               f"[V={m['recall_vulnerable']:.2f} S={m['recall_safe']:.2f} U={m['recall_unresolved']:.2f}] | "
               f"resolvedFC={m['resolved_full_coverage_balanced_accuracy']:.3f} "
               f"selective={m['selective_balanced_accuracy']:.3f} cov={m['coverage']:.3f} "
-              f"unsupAssum={m['unsupported_assumption_rate']}")
+              f"extUnsup={m['external_unsupported_assumption_rate']} "
+              f"selfRep={m['self_reported_unsupported_rate']}")
     print(f"PRIMARY B-A (macro recall 3-class): {prim['point']:.4f} CI95={prim['ci95']} "
           f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")
     if "secondary_comparisons" in rep1:

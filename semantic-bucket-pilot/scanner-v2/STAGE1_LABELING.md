@@ -5,6 +5,18 @@ independently defines what happened. **Neither artifact rewrites the other.** La
 are never written back into the frozen instance manifest; they live in a separate
 sidecar and are frozen separately after review.
 
+## Labeling invariants (retained, frozen)
+
+1. **Ground truth belongs to each case instance** — one label per instance, not per
+   family.
+2. **Families are used only for the dev/confirmatory split and clustered inference**,
+   never for labeling.
+3. **Pre-patch and post-patch members of a family may legitimately have different
+   labels** (e.g. vulnerable pre-patch, safe post-patch). Disagreement within a
+   family is expected, not a defect.
+4. **Family definitions cannot change after labels are observed.** The site-aware
+   instance/family assignment is frozen at Stage 0; no re-clustering post-label.
+
 ## Artifacts
 
 | file | role | mutable? |

@@ -6,7 +6,9 @@ Inputs (all keyed by instance_id):
   --labels       <jsonl>  rows: instance_id, stage1_label in {VULNERABLE,SAFE,UNRESOLVED}
   --predictions  <jsonl>  rows: instance_id, condition, prediction in
                           {VULNERABLE,SAFE,ABSTAIN,PARSE_ERROR}   (missing -> ABSTAIN);
-                          optional boolean 'unsupported_assumption' per row.
+                          optional booleans: 'external_unsupported_assumption'
+                          (independent-adjudication ERROR metric) and
+                          'self_reported_unsupported' (model self-report, DESCRIPTIVE).
   --split        confirmatory (default) | dev
 
 Primary metric = three-class macro recall over {VULNERABLE, SAFE, UNRESOLVED}:
@@ -127,26 +129,34 @@ def condition_metrics(gt, preds_by_cond, ids, extra_by_cond=None):
             "parse_failure_rate": parse / n if n else float("nan"),
             # appropriate abstention on UNRESOLVED == recall_unresolved (kept explicit)
             "unresolved_appropriate_abstention": prim["recalls"].get("UNRESOLVED"),
-            # unsupported-assumption rate (optional; needs a flag in prediction rows)
-            "unsupported_assumption_rate": _unsupported_rate(extra_by_cond.get(cond), gt, ids),
+            # ERROR metric: unsupported assumptions per INDEPENDENT adjudication
+            # (a frozen external rubric over the response + ground-truth evidence),
+            # NOT the model's self-report. None until adjudication exists.
+            "external_unsupported_assumption_rate":
+                _flag_rate(extra_by_cond.get(cond), "external_unsupported_assumption"),
+            # DESCRIPTIVE only: the model's own self-report; unreliable as an error
+            # metric (a model making an unsupported assumption may fail to list it).
+            "self_reported_unsupported_rate":
+                _flag_rate(extra_by_cond.get(cond), "self_reported_unsupported"),
         }
     return out
 
 
-def _unsupported_rate(extra, gt, ids):
-    """Fraction of a condition's committed (VULNERABLE/SAFE) answers flagged as
-    resting on an unsupported assumption. Requires an 'unsupported_assumption'
-    boolean in the prediction rows; returns None if absent."""
+def _flag_rate(extra, field):
+    """Fraction of a condition's committed (VULNERABLE/SAFE) answers whose `field`
+    is truthy. Returns None if no row carries the field."""
     if not extra:
         return None
-    committed = flagged = 0
-    for i in ids:
-        e = extra.get(i)
-        if e is None:
+    committed = flagged = seen = 0
+    for e in extra.values():
+        if field not in e:
             continue
+        seen += 1
         if e.get("prediction") in ANSWERS:
             committed += 1
-            flagged += bool(e.get("unsupported_assumption"))
+            flagged += bool(e.get(field))
+    if seen == 0:
+        return None
     return flagged / committed if committed else None
 
 
@@ -217,10 +227,12 @@ def run(instances, labels, predictions, split):
     extra_by_cond = defaultdict(dict)
     for r in predictions:
         preds_by_cond[r["condition"]][r["instance_id"]] = r["prediction"]
-        if "unsupported_assumption" in r:
-            extra_by_cond[r["condition"]][r["instance_id"]] = {
-                "prediction": r["prediction"],
-                "unsupported_assumption": r["unsupported_assumption"]}
+        e = {"prediction": r["prediction"]}
+        for f in ("external_unsupported_assumption", "self_reported_unsupported"):
+            if f in r:
+                e[f] = r[f]
+        if len(e) > 1:
+            extra_by_cond[r["condition"]][r["instance_id"]] = e
     preds_by_cond = dict(preds_by_cond)
     extra_by_cond = dict(extra_by_cond)
 

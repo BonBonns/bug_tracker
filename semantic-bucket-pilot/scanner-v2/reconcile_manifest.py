@@ -9,12 +9,31 @@ artifacts; no labels involved. Writes PACKET_RECONCILIATION.md.
 """
 import json
 import os
+import re
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "study")
+EXP = "/tmp/expansion"
 
 REV = {"vuln": "pre_patch", "patched": "post_patch"}
+_FILES = {}
+
+
+def _src_stmt(op):
+    """Normalized source write statement for one operation (independent of the
+    builder), used to confirm collapsed groups share the SAME highlighted site."""
+    key = (op["source_label"], op["file"])
+    if key not in _FILES:
+        p = os.path.join(EXP, op["source_label"], "csrc", op["file"])
+        try:
+            _FILES[key] = open(p, errors="replace").read().splitlines()
+        except OSError:
+            _FILES[key] = None
+    lines = _FILES[key]
+    if not lines or not (1 <= op["line"] <= len(lines)):
+        return None
+    return re.sub(r"\s+", " ", lines[op["line"] - 1]).strip()
 
 
 def main():
@@ -39,15 +58,22 @@ def main():
     merged_records = sum(len(it["op_ids"]) - 1 for it in multi)
     assert merged_records == collapsed, "collapse accounting does not close"
 
-    # characterise every collapse; assert it never crosses pre/post
+    # characterise every collapse; assert it never crosses pre/post AND that every
+    # collapsed group is the SAME highlighted site (same dest + same normalized write
+    # statement), not merely the same function.
     cross_side = 0
     same_side_diff_scan = 0
     other = 0
+    diff_site = 0
     scan_pairs = Counter()
     for it in multi:
         members = [op_by_id[o] for o in it["op_ids"]]
         sides = {REV[m["source_label"].split("/")[1]] for m in members}
         scans = {m["source_label"].split("/")[0] for m in members}
+        dests = {m["dest"] for m in members}
+        stmts = {_src_stmt(m) for m in members}
+        if len(dests) > 1 or len(stmts) > 1:
+            diff_site += 1
         if len(sides) > 1:
             cross_side += 1
         elif len(scans) > 1:
@@ -56,6 +82,7 @@ def main():
         else:
             other += 1
     assert cross_side == 0, "a collapse merged pre-patch with post-patch (outcome-relevant!)"
+    assert diff_site == 0, "a collapse merged DIFFERENT highlighted sites (dest/stmt differ)"
 
     # size histogram of instances by #ops
     size_hist = dict(sorted(Counter(len(it["op_ids"]) for it in insts).items()))
@@ -81,10 +108,13 @@ Instance size histogram (ops per instance): {size_hist}.
 ## What the {collapsed} collapses are
 
 Under the frozen instance rule (`build_family_manifest.py`), operations collapse to
-one instance only when they are the **same source revision at the same site** —
-tested by the **enclosing-function source hash** — within one family and one
-revision side. In this corpus every collapse is an **E2/E4 duplicate scan of an
-identical revision**:
+one instance only when they share a **site-aware** key — `function_source_hash +
+highlighted-operation identity (normalized write statement + site ordinal) +
+destination declaration identity + revision side` — within one family. The function
+hash alone is insufficient (one function may hold several distinct writes), so the
+highlighted operation is part of the key and is **independently re-verified here**
+from source. In this corpus every collapse is an **E2/E4 duplicate scan of an
+identical revision at the identical site**:
 
 | collapse type | count |
 |---------------|------:|
@@ -96,10 +126,14 @@ Scan pairs among the collapses: {dict(scan_pairs)}.
 
 ## Confirmations
 
+- **No collapse merges different highlighted sites** (asserted 0): every collapsed
+  group shares the same destination and the same normalized write statement,
+  re-verified from source — not merely the same function.
 - **No collapse crosses pre-patch/post-patch** (asserted 0). Pre- and post-patch
   operations always remain separate instances, so no outcome-relevant merge occurs.
-- The collapse key is the **enclosing-function source hash**, computed from source
-  text — **no label or outcome information** is used (labels do not exist at Stage 0).
+- The collapse key is **site-aware** (function hash + highlighted operation + dest
+  declaration + revision), computed from source text — **no label or outcome
+  information** is used (labels do not exist at Stage 0).
 - The {collapsed} merged records are redundant duplicate-scan observations of the
   same code; dropping them from the labeling count removes duplication, not cases.
 
@@ -111,8 +145,9 @@ collapse; {n_inst} independent case instances remain for labeling.
     print(f"operations {n_ops}  instances {n_inst}  collapsed {collapsed}")
     print(f"multi-op instances {len(multi)}  merged records {merged_records}")
     print(f"same-side/diff-scan {same_side_diff_scan}  cross-side {cross_side}  other {other}")
+    print(f"different-highlighted-site collapses {diff_site} (must be 0)")
     print(f"scan pairs {dict(scan_pairs)}   size hist {size_hist}")
-    print("ALL CHECKS PASS: 498->438 fully explained; no pre/post merge; no label used.")
+    print("ALL CHECKS PASS: 498->438 fully explained; site-aware; no pre/post merge; no label used.")
 
 
 if __name__ == "__main__":

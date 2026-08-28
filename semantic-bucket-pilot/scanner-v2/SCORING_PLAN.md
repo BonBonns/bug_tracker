@@ -41,9 +41,13 @@ missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped
      it excludes `UNRESOLVED`, so it is *not* "full-population."
    - Secondary: **selective** balanced accuracy among *answered* resolved cases.
    - Secondary: **coverage** and **abstention rate**.
-   - Secondary: **unsupported-assumption rate** — fraction of a condition's
-     committed answers resting on an assumption unsupported by the packet evidence
-     (recorded per prediction row; requires an `unsupported_assumption` flag).
+   - Secondary: **external unsupported-assumption rate** — fraction of a condition's
+     committed answers that an **independent adjudicator**, applying the frozen
+     rubric in `UNSUPPORTED_ASSUMPTION_RUBRIC.md` over the response and the
+     ground-truth evidence, judges to rest on an assumption unsupported by the
+     evidence. This is the error metric. The model's **self-report** is recorded
+     separately as **descriptive only** and is NOT used as an error metric — a model
+     making an unsupported assumption may simply fail to list it.
    - Separate: **appropriate abstention** on ground-truth `UNRESOLVED` (= the
      per-class recall on `UNRESOLVED`).
    (A coverage-noninferiority-then-selective design was considered and rejected: it
@@ -80,10 +84,14 @@ macro average — undefined. Two guards:
   structure and assumed prevalences; reports the MDE at 80% power). If the real
   `UNRESOLVED` or `VULNERABLE` family count falls below 12 after labeling, the
   primary is reported descriptively.
-  *Result (`study/mde_simulation.json`, base recall 0.60):* the minimum detectable
-  B−A macro-recall gap at 80% power is ≈ **0.16** at moderate/rich prevalence
-  (V≈0.15–0.25) and ≈ **0.20** at a low vulnerable base rate (V≈0.08, ~19
-  vulnerable families). So effects below ~0.15 — and any effect if the vulnerable
+  *Result (`study/mde_simulation.json`):* **Under the frozen simulation
+  assumptions** (base per-class recall 0.60, family-clustered labels, improvements
+  simulated as a uniform per-class recall lift), the estimated 80%-power detectable
+  B−A macro-recall gap is **≈ 0.16–0.20** — ≈0.16 at moderate/rich prevalence
+  (V≈0.15–0.25), ≈0.20 at a low vulnerable base rate (V≈0.08, ~19 vulnerable
+  families). This is **not a universal MDE**: it depends on the assumed class
+  prevalence, the baseline accuracy, the within-family dependence, and how the
+  improvement is simulated. Effects below ~0.15 — and any effect if the vulnerable
   class is very rare — are underpowered and would be reported descriptively, not as
   a null.
 - **Degenerate-resample handling.** Past the gate, any resample missing a class is
@@ -95,8 +103,8 @@ macro average — undefined. Two guards:
 
 Per-class recalls (`VULNERABLE`/`SAFE`/`UNRESOLVED`), resolved-class full-coverage
 balanced accuracy, selective balanced accuracy (answered only), coverage, abstention
-rate, parse-failure rate, unsupported-assumption rate, and appropriate-abstention on
-`UNRESOLVED`.
+rate, parse-failure rate, **external** unsupported-assumption rate (error metric;
+self-report kept descriptive only), and appropriate-abstention on `UNRESOLVED`.
 
 ## Reporting order (fixed)
 

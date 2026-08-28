@@ -19,10 +19,13 @@ Instance size histogram (ops per instance): {1: 378, 2: 60}.
 ## What the 60 collapses are
 
 Under the frozen instance rule (`build_family_manifest.py`), operations collapse to
-one instance only when they are the **same source revision at the same site** —
-tested by the **enclosing-function source hash** — within one family and one
-revision side. In this corpus every collapse is an **E2/E4 duplicate scan of an
-identical revision**:
+one instance only when they share a **site-aware** key — `function_source_hash +
+highlighted-operation identity (normalized write statement + site ordinal) +
+destination declaration identity + revision side` — within one family. The function
+hash alone is insufficient (one function may hold several distinct writes), so the
+highlighted operation is part of the key and is **independently re-verified here**
+from source. In this corpus every collapse is an **E2/E4 duplicate scan of an
+identical revision at the identical site**:
 
 | collapse type | count |
 |---------------|------:|
@@ -34,10 +37,14 @@ Scan pairs among the collapses: {'E2+E4': 60}.
 
 ## Confirmations
 
+- **No collapse merges different highlighted sites** (asserted 0): every collapsed
+  group shares the same destination and the same normalized write statement,
+  re-verified from source — not merely the same function.
 - **No collapse crosses pre-patch/post-patch** (asserted 0). Pre- and post-patch
   operations always remain separate instances, so no outcome-relevant merge occurs.
-- The collapse key is the **enclosing-function source hash**, computed from source
-  text — **no label or outcome information** is used (labels do not exist at Stage 0).
+- The collapse key is **site-aware** (function hash + highlighted operation + dest
+  declaration + revision), computed from source text — **no label or outcome
+  information** is used (labels do not exist at Stage 0).
 - The 60 merged records are redundant duplicate-scan observations of the
   same code; dropping them from the labeling count removes duplication, not cases.
 

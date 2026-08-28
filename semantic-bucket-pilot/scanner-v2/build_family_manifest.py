@@ -223,15 +223,37 @@ def main():
             seen[m["source_label"]].add(m["line"])
         assert all(len(v) == 1 for v in seen.values()), "family over-merges distinct sites"
 
-    # ---- instances: collapse exact same-revision E2/E4 duplicates within family+side
+    # ---- instances: collapse exact same-revision E2/E4 duplicates within family+side.
+    # The collapse key is SITE-AWARE, not merely the enclosing function: a function
+    # can contain several distinct writes, so two ops collapse only when they share
+    #   function_source_hash + highlighted-operation identity (normalized write
+    #   statement + site ordinal) + destination declaration identity + revision side.
+    def norm_stmt(s):
+        return re.sub(r"\s+", " ", s or "").strip()
+
     inst_of = {}                       # op_id -> instance_id
     inst_members = defaultdict(list)   # instance_id -> [op...]
+    op_site = {}                       # op_id -> highlighted-site tuple (for the assertion)
     for fmid, members in fam_members.items():
         for m in members:
             fbsha = func_body_sha(m) or f"nobody:{m['line']}"
-            iid = "inst_" + hashlib.sha256(f"{fmid}|{side_of(m)}|{fbsha}".encode()).hexdigest()[:12]
+            ordinal = key_of[m["op_id"]][-1]
+            wstmt = norm_stmt(stmt_text(m))
+            decl_id = (m["dest"], m["element_type"], m["element_count"], m["capacity_expr"])
+            site = (norm_function(m["function"]), decl_id, ordinal, wstmt, side_of(m))
+            op_site[m["op_id"]] = site
+            key = f"{fmid}|{side_of(m)}|{fbsha}|{ordinal}|{m['dest']}|{wstmt}"
+            iid = "inst_" + hashlib.sha256(key.encode()).hexdigest()[:12]
             inst_of[m["op_id"]] = iid
             inst_members[iid].append(m)
+
+    # ASSERT: every collapsed group (instance holding >1 op) is the SAME highlighted
+    # operation -- same function, same destination declaration, same site ordinal,
+    # same normalized write statement, same revision side. Not merely same function.
+    for iid, members in inst_members.items():
+        sites = {op_site[m["op_id"]] for m in members}
+        assert len(sites) == 1, (
+            f"instance {iid} merges DIFFERENT highlighted operations: {sites}")
 
     # ---- family records + pairing verification + split
     fam_records = {}
@@ -270,6 +292,8 @@ def main():
             "collapsed_scans": sorted({scan_of(m) for m in members}),
             "file": rep["file"], "function": norm_function(rep["function"]),
             "dest": rep["dest"], "line_by_scan": {m["source_label"]: m["line"] for m in members},
+            "site_ordinal": key_of[rep["op_id"]][-1],
+            "highlighted_write_stmt": norm_stmt(stmt_text(rep)),
             "width_expr": rep["width_expr"], "capacity_expr": rep["capacity_expr"],
             "element_type": rep["element_type"], "element_count": rep["element_count"],
             "unresolved_property": rep["unresolved_property"],
