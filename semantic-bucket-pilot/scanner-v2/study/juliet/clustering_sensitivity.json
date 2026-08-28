@@ -1,0 +1,129 @@
+{
+  "clustering_note": "families computed on the DECIDABLE eligible set only; undecidable pairs (identical enclosing-function packet on both sides) are inter-procedural variants excluded as invalid tests.",
+  "clustering_sensitivity": {
+    "exact_program_family": {
+      "both_sided_families": 4,
+      "confirmatory_both_sided": 3,
+      "families": 128
+    },
+    "flow_topology_family": {
+      "both_sided_families": 16,
+      "confirmatory_both_sided": 8,
+      "families": 16
+    },
+    "generator_stratum": {
+      "both_sided_families": 4,
+      "confirmatory_both_sided": 3,
+      "families": 4
+    }
+  },
+  "flow_family_verification": [
+    {
+      "distinct_file_variants": 4,
+      "example_variants": [
+        "04",
+        "05",
+        "09",
+        "10"
+      ],
+      "family": "flow_1e0625714105b534",
+      "instances": 32
+    },
+    {
+      "distinct_file_variants": 4,
+      "example_variants": [
+        "06",
+        "07",
+        "13",
+        "14"
+      ],
+      "family": "flow_78624171d91b6c73",
+      "instances": 32
+    },
+    {
+      "distinct_file_variants": 2,
+      "example_variants": [
+        "21",
+        "22a"
+      ],
+      "family": "flow_76a1bf552adb134b",
+      "instances": 24
+    },
+    {
+      "distinct_file_variants": 2,
+      "example_variants": [
+        "08",
+        "11"
+      ],
+      "family": "flow_56807fe4b4bfeca9",
+      "instances": 16
+    },
+    {
+      "distinct_file_variants": 2,
+      "example_variants": [
+        "42",
+        "61a"
+      ],
+      "family": "flow_488df014aeb04810",
+      "instances": 16
+    },
+    {
+      "distinct_file_variants": 1,
+      "example_variants": [
+        "01"
+      ],
+      "family": "flow_d127d84d92f9a669",
+      "instances": 8
+    }
+  ],
+  "flow_topology_meets_gate": false,
+  "min_families_gate": 12,
+  "raw": {
+    "clean_after_leakage": 304,
+    "decidable_eligible": 208,
+    "decidable_safe": 108,
+    "decidable_vulnerable": 100,
+    "instances": 364,
+    "leakage_examples": [
+      [
+        "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_02.c",
+        "goodG2B1",
+        [
+          "fix"
+        ]
+      ],
+      [
+        "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_03.c",
+        "goodG2B1<duplicate>0",
+        [
+          "fix"
+        ]
+      ],
+      [
+        "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_04.c",
+        "goodG2B1<duplicate>1",
+        [
+          "fix"
+        ]
+      ],
+      [
+        "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_05.c",
+        "goodG2B1<duplicate>2",
+        [
+          "fix"
+        ]
+      ],
+      [
+        "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_06.c",
+        "goodG2B1<duplicate>3",
+        [
+          "fix"
+        ]
+      ]
+    ],
+    "leakage_failures": 60,
+    "safe": 212,
+    "undecidable_identical_packet": 96,
+    "vulnerable": 152
+  }
+}

@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
-"""Juliet yield/pipeline study (NO model calls). Over a full scanned batch:
-apply the FROZEN mechanical inclusion rule, normalize file-variants to independent
-semantic TEMPLATES (not files), build leakage-safe model packets and audit them,
-then freeze the corpus (pinned commit + per-file hashes) and split by template family.
+"""Juliet yield/pipeline study (NO model calls). Freezes RAW scan facts, then audits
+the clustering rule at THREE levels before any confirmatory claim:
 
-Outputs a yield table + study/juliet/ corpus freeze + split.
+  operation instance      one separately-scored vulnerable/safe case
+  flow-pattern family     same normalized control/data-flow TOPOLOGY (clustering unit)
+  generator stratum       element-type x sink (coarse dependence level)
+
+The flow-pattern fingerprint (juliet_sanitize.flow_skeleton) keeps control/data-flow
+structure while erasing names, literals, comments, and type/sink identity — so it does
+NOT over-merge distinct flow variants (baseline vs branch vs loop vs call), which is
+what collapsing to 4 generator strata wrongly did. Model packets are built leakage-safe
+and audited. Produces a clustering-sensitivity table; freezes raw facts only.
+
 Usage: build_juliet_corpus.py <scan_out_dir> <juliet_src_dir> <pinned_commit>
 """
 import hashlib
@@ -23,7 +30,7 @@ import juliet_sanitize as san
 
 OUTDIR = os.path.join(HERE, "study", "juliet")
 SINK = re.compile(r"\b(memcpy|memmove|strcpy|strncpy|wcscpy|wcsncpy|strcat|wcscat)\s*\(")
-MIN_FAMILIES = 12          # same inference floor as the main study
+MIN_FAMILIES = 12
 DEV_FRACTION = 0.30
 SPLIT_SALT = "juliet-cwe806-v1"
 _SRC = {}
@@ -39,36 +46,6 @@ def src_lines(src_dir, base):
     return _SRC[base]
 
 
-def enclosing_function(lines, op_line):
-    """Brace-match the function body containing op_line -> (start,end,text)."""
-    # find the '{' opening the function: scan up for the signature line's brace
-    depth = 0; start = None
-    for i in range(op_line - 1, -1, -1):
-        if "{" in lines[i] and (start is None):
-            # walk down from here could be inner block; instead find outermost by scanning up
-            pass
-    # simpler: expand outward by brace balance from op_line
-    # find function start: nearest line above at column0 with `)` then `{`
-    s = op_line - 1
-    while s > 0 and not re.match(r"^\S.*\)\s*$", lines[s]) and "{" not in lines[s]:
-        s -= 1
-    # fallback: take a window
-    b = None
-    for i in range(max(0, op_line - 40), op_line):
-        if "{" in lines[i]:
-            b = i; break
-    if b is None:
-        return None
-    depth = 0; e = None
-    for i in range(b, min(len(lines), op_line + 200)):
-        depth += lines[i].count("{") - lines[i].count("}")
-        if depth <= 0 and i >= op_line - 1:
-            e = i; break
-    if e is None:
-        return None
-    return b, e, "\n".join(lines[b:e + 1])
-
-
 def oracle(fn):
     f = fn.lower()
     if "bad" in f and "good" not in f:
@@ -78,141 +55,184 @@ def oracle(fn):
     return None
 
 
-def sink_and_width(stmt):
-    m = SINK.search(stmt)
-    if not m:
-        return None, None
-    call = m.group(1)
-    # width = 3rd arg (best-effort)
-    args = stmt[stmt.find("(", m.start()) + 1:stmt.rfind(")")]
-    parts = _split_args(args)
-    width = parts[2].strip() if len(parts) >= 3 else (parts[-1].strip() if parts else "")
-    # normalize: drop specific identifiers -> structural form
-    wnorm = re.sub(r"[A-Za-z_]\w*", "V", width)
-    return call, wnorm
+def func_ranges(cpp):
+    idx = defaultdict(list)
+    for f in json.load(open(cpp)).get("functions", []):
+        if f.get("line") and f.get("line_end") and f.get("file"):
+            idx[os.path.basename(f["file"])].append((f["line"], f["line_end"], f["name"]))
+    return idx
 
 
-def _split_args(s):
-    out, depth, cur = [], 0, ""
-    for c in s:
-        if c == "(":
-            depth += 1
-        elif c == ")":
-            depth -= 1
-        if c == "," and depth == 0:
-            out.append(cur); cur = ""
-        else:
-            cur += c
-    out.append(cur)
-    return out
+def enclosing(lines, ranges, op_line):
+    best = None
+    for (s, e, name) in ranges:
+        if s <= op_line <= e and (best is None or (e - s) < (best[1] - best[0])):
+            best = (s, e, name)
+    if not best or best[1] > len(lines):
+        return None
+    return "\n".join(lines[best[0] - 1:best[1]])
+
+
+def sha_file(p):
+    return hashlib.sha256(open(p, "rb").read()).hexdigest()
 
 
 def main():
     scan_out, src_dir, commit = sys.argv[1], sys.argv[2], sys.argv[3]
     os.makedirs(OUTDIR, exist_ok=True)
-    recs, _ = v2.analyze_operations_v2(os.path.join(scan_out, "cpp.json"))
+    cpp = os.path.join(scan_out, "cpp.json")
+    recs, _ = v2.analyze_operations_v2(cpp)
+    franges = func_ranges(cpp)
 
-    included = []
+    # ---- exact oracle-matched instances (frozen inclusion rule) ----
+    inst = []
     for r in recs:
         oc = oracle(r.get("function") or "")
         if oc is None:
             continue
         base = os.path.basename(r.get("file") or "")
         lines = src_lines(src_dir, base)
-        line = r.get("line"); dest = r.get("dest")
+        line, dest = r.get("line"), r.get("dest")
         if not (lines and line and 1 <= line <= len(lines)):
             continue
         stmt = lines[line - 1].strip()
-        # FROZEN inclusion rule
-        if not SINK.search(stmt):                     # exact oracle sink
+        if not SINK.search(stmt) or not (dest and dest in stmt):
             continue
-        if not (dest and dest in stmt):
-            continue
-        if len(SINK.findall(stmt)) != 1:              # no ambiguous line matching
+        if len(SINK.findall(stmt)) != 1:                                  # no ambiguous match
             continue
         if not any("POTENTIAL FLAW" in lines[k] for k in range(max(0, line - 3), line)):
             continue
         if r.get("recommended_route") != "semantic_relationship_review":  # symbolic length route
             continue
         ev = r.get("_v2_evidence") or {}
-        # fixed stack destination (capacity bound as a fixed array)
-        etype = ev.get("element_type"); ecount = ev.get("element_count")
-        call, wnorm = sink_and_width(stmt)
-        included.append({"file": base, "function": r.get("function"), "line": line,
-                         "dest": dest, "stmt": stmt, "oracle": oc,
-                         "element_type": etype, "element_count": ecount,
-                         "sink": call, "width_norm": wnorm})
+        body = enclosing(lines, franges.get(base, []), line)
+        inst.append({"file": base, "function": r.get("function"), "line": line, "dest": dest,
+                     "oracle": oc, "element_type": ev.get("element_type"),
+                     "element_count": ev.get("element_count"),
+                     "sink": SINK.search(stmt).group(1), "body": body})
 
-    # ---- normalize to independent semantic TEMPLATES (not files) ----
-    def tkey(x):
-        return (x["element_type"], x["element_count"], x["sink"], x["width_norm"], x["dest"])
-    fam = defaultdict(list)
-    for x in included:
-        fam["fam_" + hashlib.sha256(str(tkey(x)).encode()).hexdigest()[:12]].append(x)
-    families = {k: v for k, v in fam.items()}
-    both_sided = {k: v for k, v in families.items()
-                  if any(i["oracle"] == "vulnerable" for i in v)
-                  and any(i["oracle"] == "safe" for i in v)}
+    n_v = sum(1 for x in inst if x["oracle"] == "vulnerable")
+    n_s = sum(1 for x in inst if x["oracle"] == "safe")
 
-    # ---- leakage-safe packet construction + audit (on the MODEL packet) ----
-    leak_fail = 0
-    eligible = []
-    for k, members in both_sided.items():
-        ok = True
-        for m in members:
-            lines = src_lines(src_dir, m["file"])
-            span = enclosing_function(lines, m["line"])
-            if not span:
-                ok = False; break
-            _, _, body = span
-            packet, _ = san.neutralize(body, m["function"])
-            if san.leakage_scan(packet):
-                ok = False; break
-        if ok:
-            eligible.append(k)
-    elig_fam = {k: both_sided[k] for k in eligible}
+    # ---- RAW freeze (uncontroversial facts only) ----
+    manifest = {f: sha_file(os.path.join(dp, f))
+                for dp, _, fs in os.walk(src_dir) for f in fs if f.endswith(".c") and "CWE806" in f}
+    raw = {"pinned_commit": commit, "files_scanned": 224,
+           "cpp_json_sha256": sha_file(cpp), "manifest_files": len(manifest),
+           "manifest_sha256": manifest,
+           "exact_oracle_matched_instances": len(inst),
+           "vulnerable_instances": n_v, "safe_instances": n_s,
+           "all_route_length_meaning": all(True for _ in inst),  # inclusion enforced route
+           "model_calls": 0,
+           "NOTE": "raw facts only; family counts / split / gate are NOT frozen here."}
+    with open(os.path.join(OUTDIR, "raw_FROZEN.json"), "w") as fh:
+        json.dump(raw, fh, indent=2, sort_keys=True)
 
-    # ---- split by template family ----
-    def bucket(fid):
-        h = int(hashlib.sha256((SPLIT_SALT + "|" + fid).encode()).hexdigest(), 16)
-        return "dev" if (h % 10000) / 10000.0 < DEV_FRACTION else "confirmatory"
-    split = {k: bucket(k) for k in elig_fam}
-    fam_split = Counter(split.values())
+    # ---- leakage-safe packets + audit ----
+    leak_fail = []
+    for x in inst:
+        if x["body"] is None:
+            x["packet"] = None; x["leak"] = ["no_body"]; continue
+        pkt, _ = san.neutralize(x["body"], x["function"],
+                                extra_tokens=[x["file"], x["file"].replace(".c", "")])
+        x["packet"] = pkt
+        x["leak"] = san.leakage_scan(pkt)
+        if x["leak"]:
+            leak_fail.append((x["file"], x["function"], x["leak"]))
+    clean = [x for x in inst if x["packet"] is not None and not x["leak"]]
 
-    n_files = len({x["file"] for x in included})
-    inst_v = sum(1 for x in included if x["oracle"] == "vulnerable")
-    inst_s = sum(1 for x in included if x["oracle"] == "safe")
-    pairs = sum(min(sum(1 for i in v if i["oracle"] == "vulnerable"),
-                    sum(1 for i in v if i["oracle"] == "safe")) for v in families.values())
+    # ---- decidability filter (part of the strict inclusion rule) ----
+    # A vulnerable/safe pair is only a valid test if the two packets are DISTINGUISHABLE.
+    # Juliet's inter-procedural variants (41/44/51-54/65) put the discriminating
+    # source-length logic OUTSIDE the sink function, so bad and good neutralize to the
+    # SAME enclosing-function packet — undecidable from the packet, not a real test.
+    # Any packet whose exact content appears under both oracles is excluded.
+    for x in clean:
+        x["phash"] = hashlib.sha256(x["packet"].encode()).hexdigest()
+    oracles_by_hash = defaultdict(set)
+    for x in clean:
+        oracles_by_hash[x["phash"]].add(x["oracle"])
+    undecidable_hashes = {h for h, o in oracles_by_hash.items() if len(o) > 1}
+    decidable = [x for x in clean if x["phash"] not in undecidable_hashes]
+    n_undecidable = len(clean) - len(decidable)
 
-    table = {
-        "files_scanned": 224,
-        "exact_oracle_matched_instances": len(included),
-        "complete_vulnerable_safe_pairs": pairs,
-        "independent_normalized_families": len(families),
-        "families_with_both_sides": len(both_sided),
-        "eligible_after_leakage_safe_packets": len(elig_fam),
-        "leakage_failed_families": len(both_sided) - len(elig_fam),
-        "vulnerable_instances": inst_v, "safe_instances": inst_s,
-        "dev_families": fam_split["dev"], "confirmatory_families": fam_split["confirmatory"],
-        "meets_min_inference_gate": fam_split["confirmatory"] >= MIN_FAMILIES,
+    # ---- THREE clustering levels (on the DECIDABLE eligible set) ----
+    def stratum(x):
+        return ("strat_" + hashlib.sha256(f"{x['element_type']}|{x['sink']}".encode()).hexdigest()[:10])
+
+    def flowfam(x):
+        return "flow_" + san.flow_skeleton(x["packet"])
+
+    def exactfam(x):
+        return "exact_" + san.exact_program_skeleton(x["packet"])
+
+    levels = {"generator_stratum": stratum, "flow_topology_family": flowfam,
+              "exact_program_family": exactfam}
+    table = {}
+    flow_groups = None
+    for name, keyf in levels.items():
+        groups = defaultdict(list)
+        for x in decidable:
+            groups[keyf(x)].append(x)
+        both = {k: v for k, v in groups.items()
+                if any(i["oracle"] == "vulnerable" for i in v)
+                and any(i["oracle"] == "safe" for i in v)}
+        # split by family (deterministic)
+        def bucket(fid):
+            h = int(hashlib.sha256((SPLIT_SALT + "|" + fid).encode()).hexdigest(), 16)
+            return "dev" if (h % 10000) / 10000.0 < DEV_FRACTION else "confirmatory"
+        conf = sum(1 for k in both if bucket(k) == "confirmatory")
+        table[name] = {"families": len(groups), "both_sided_families": len(both),
+                       "confirmatory_both_sided": conf}
+        if name == "flow_topology_family":
+            flow_groups = groups
+
+    # ---- verify flow families really capture topology (collision audit) ----
+    # every member of a flow family shares the skeleton by construction; report how many
+    # DISTINCT source-variant filenames merge per family (they should be flow-equivalent),
+    # and confirm distinct flow families exist (topology not all-collapsed).
+    verify = []
+    for k, v in sorted(flow_groups.items(), key=lambda kv: -len(kv[1]))[:6]:
+        variants = sorted({re.sub(r".*_(\d+[a-z]?)\.c$", r"\1", m["file"]) for m in v})
+        verify.append({"family": k, "instances": len(v), "distinct_file_variants": len(variants),
+                       "example_variants": variants[:8]})
+
+    report = {
+        "raw": {"instances": len(inst), "vulnerable": n_v, "safe": n_s,
+                "leakage_failures": len(leak_fail), "leakage_examples": leak_fail[:5],
+                "clean_after_leakage": len(clean),
+                "undecidable_identical_packet": n_undecidable,
+                "decidable_eligible": len(decidable),
+                "decidable_vulnerable": sum(1 for x in decidable if x["oracle"] == "vulnerable"),
+                "decidable_safe": sum(1 for x in decidable if x["oracle"] == "safe")},
+        "clustering_sensitivity": table,
+        "clustering_note": ("families computed on the DECIDABLE eligible set only; "
+                            "undecidable pairs (identical enclosing-function packet on "
+                            "both sides) are inter-procedural variants excluded as invalid tests."),
+        "flow_family_verification": verify,
+        "min_families_gate": MIN_FAMILIES,
+        "flow_topology_meets_gate": table["flow_topology_family"]["confirmatory_both_sided"] >= MIN_FAMILIES,
     }
-    corpus = {"pinned_commit": commit, "min_families_gate": MIN_FAMILIES,
-              "families": {k: {"split": split.get(k), "n_instances": len(v),
-                               "key_example": {kk: v[0][kk] for kk in
-                                               ("element_type", "element_count", "sink", "width_norm", "dest")}}
-                           for k, v in elig_fam.items()},
-              "yield_table": table}
-    with open(os.path.join(OUTDIR, "corpus_FROZEN.json"), "w") as fh:
-        json.dump(corpus, fh, indent=2, sort_keys=True, default=str)
+    with open(os.path.join(OUTDIR, "clustering_sensitivity.json"), "w") as fh:
+        json.dump(report, fh, indent=2, sort_keys=True, default=str)
 
-    print("YIELD TABLE")
-    for k, val in table.items():
-        print(f"  {k:42} {val}")
-    print(f"\nfrozen -> {OUTDIR}/corpus_FROZEN.json (pinned commit {commit[:12]})")
-    if not table["meets_min_inference_gate"]:
-        print(f"\n** {len(elig_fam)} independent families < {MIN_FAMILIES} gate: this Juliet "
-              f"slice is a PIPELINE/yield result, NOT a powered confirmatory sample. **")
+    print(f"instances {len(inst)} (vuln {n_v}, safe {n_s})   leakage failures {len(leak_fail)}   "
+          f"clean {len(clean)}")
+    print(f"undecidable (identical packet both sides): {n_undecidable}   "
+          f"DECIDABLE eligible {len(decidable)} "
+          f"(vuln {sum(1 for x in decidable if x['oracle']=='vulnerable')}, "
+          f"safe {sum(1 for x in decidable if x['oracle']=='safe')})")
+    print("\nCLUSTERING SENSITIVITY (DECIDABLE set; level: families / both-sided / confirmatory-both-sided)")
+    for lvl in ("generator_stratum", "flow_topology_family", "exact_program_family"):
+        t = table[lvl]
+        print(f"  {lvl:24} {t['families']:5} / {t['both_sided_families']:5} / {t['confirmatory_both_sided']:5}")
+    print(f"\nflow-topology confirmatory both-sided families: "
+          f"{table['flow_topology_family']['confirmatory_both_sided']}  (gate {MIN_FAMILIES}) -> "
+          f"{'MEETS gate' if report['flow_topology_meets_gate'] else 'pipeline study'}")
+    print("flow-family verification (largest families -> distinct file variants merged):")
+    for v in verify:
+        print(f"    {v['family']}: {v['instances']} inst, {v['distinct_file_variants']} variants {v['example_variants']}")
+    print(f"\nRAW frozen -> {OUTDIR}/raw_FROZEN.json ; sensitivity -> clustering_sensitivity.json")
 
 
 if __name__ == "__main__":

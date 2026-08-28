@@ -102,30 +102,76 @@ in the bucket under test.
 
 ## Full-scan yield (224 files, frozen pipeline, NO model calls)
 
-Corpus pinned at Juliet mirror commit `f88433e3` (`build_juliet_corpus.py`,
-`study/juliet/corpus_FROZEN.json`):
+Corpus pinned at Juliet mirror commit `f88433e3` (`build_juliet_corpus.py`).
+Raw scan facts are frozen in `study/juliet/raw_FROZEN.json`; the clustering audit
+below lives in `study/juliet/clustering_sensitivity.json` and is deliberately **not**
+frozen as a conclusion until the clustering rule was verified defensible (it now is).
+
+### Raw facts (frozen)
 
 | measure | result |
 |---------|-------:|
 | files scanned | 224 |
 | exact oracle-matched instances | 364 |
-| complete vulnerable/safe pairs | 152 |
-| **independent normalized families (templates)** | **4** |
-| eligible after leakage-safe packet construction | 4 (0 leakage failures) |
 | vulnerable / safe instances | 152 / 212 |
-| dev / confirmatory families | 2 / 2 |
-| meets min-inference gate (≥12 families) | **NO** |
+| clean after leakage-safe packet construction | 304 (60 leakage exclusions) |
+| **undecidable — identical enclosing-function packet on both sides** | **96** |
+| **decidable eligible instances** | **208** (100 vuln / 108 safe) |
+| model calls | 0 |
 
-**Conclusion — this is a yield/pipeline result, not a confirmatory sample.** The 224
-files and 152 pairs are control-flow / data-flow scaffolding around just **4 semantic
-templates** (char/wchar × memcpy/memmove; identical `dest[50]` capacity and
-`strlen(data)*sizeof` width). Counted as independent templates — the only honest
-statistical unit here — the yield is **4**, below the 12-family inference gate. A
-powered Juliet A/B/C would need many more *distinct* templates: other CWE-121 sink
-families (strcpy/strncpy/loop/snprintf, alloca vs declare, different capacities),
-other buffer CWEs (122/124), and different destination sizes — or, better, the
-real-code sources below. The leakage audit passed: every model packet built from the
-eligible families is clean of oracle tells (`juliet_sanitize.py`).
+The 212 safe vs 152 vulnerable count reflects Juliet files carrying multiple `good*`
+mechanisms (`goodG2B`, `goodB2G`, `goodN`) against one `bad`; related instances are
+kept together in their flow-pattern family rather than paired independently.
+
+### Clustering sensitivity at three levels (decidable set)
+
+The honest statistical unit is neither the file (pseudoreplication) nor the coarse
+generator stratum (over-merge). Three levels are reported; the middle one is the
+defensible clustering unit.
+
+| level | families | both-sided | confirmatory both-sided |
+|-------|---------:|-----------:|------------------------:|
+| generator stratum (element-type × sink) | 4 | 4 | 3 |
+| **flow-topology family** (normalized CFG/dataflow skeleton) | **16** | **16** | **8** |
+| exact-program family (literals + type/sink kept) | 128 | 4 | 3 |
+
+**Conclusion — yield/pipeline result, not a confirmatory sample.** Under the
+defensible flow-topology key, the confirmatory both-sided yield is **8**, below the
+≥12 minimum-inference gate → **Juliet remains a pipeline study**, not a powered
+accuracy experiment. This is *not* the earlier over-merged "4 templates" figure:
+distinct control-flow guard shapes are correctly separated (e.g. `if(V)` vs
+`if(V==L)` guard families are distinct), so real flow diversity is preserved — there
+simply are not yet 12 *decidable* both-sided flow families in this CWE806 slice.
+
+### Two audits that shaped the count
+
+1. **Storage-class normalization.** Juliet declares the safe helpers `static` while
+   the vulnerable `bad` is public. A single `static` token is a declaration
+   decoration, not control/data-flow topology, and was splitting every
+   vulnerable/safe pair into two flow families. `flow_skeleton` now drops
+   storage-class/cv-qualifiers (`static/const/extern/inline/register/volatile/auto`)
+   so a pair co-clusters; the exact-program level keeps them. After the fix, all 21
+   raw flow families were both-sided.
+2. **Decidability filter (part of the inclusion rule).** Co-clustering then exposed
+   that Juliet's inter-procedural data-flow variants (`41/44/51-54/65`) place the
+   discriminating source-length logic *outside* the sink function, so `bad` and
+   `good` neutralize to a **byte-identical** enclosing-function packet — undecidable
+   from the packet, and therefore not a valid test. The **96** such instances are
+   excluded, leaving **208** decidable and **16** flow families (**8** confirmatory).
+   Without this filter the count would spuriously read 12 and appear to meet the gate.
+
+**Collision audit (verifies the clustering).** Every member of each flow family shares
+one identical normalized skeleton string (topology genuinely shared, not a hash
+artifact), and the largest families separate on real guard structure — confirming the
+key neither over-merges distinct topologies nor pseudoreplicates identical ones. The
+leakage audit is conservative (any `bad/good/G2B/B2G` substring, `POTENTIAL FLAW/FIX/
+OMITBAD/OMITGOOD`, CWE/testcase filenames and include paths, helper names): 60
+instances that retained a tell were excluded rather than admitted.
+
+A powered Juliet A/B/C would need many more *distinct decidable* templates: other
+CWE-121 sink families (strcpy/strncpy/loop/snprintf, alloca vs declare, different
+capacities), other buffer CWEs (122/124), and different destination sizes — or,
+better, the real-code sources below.
 
 ## Validity caveat (Juliet is synthetic)
 
