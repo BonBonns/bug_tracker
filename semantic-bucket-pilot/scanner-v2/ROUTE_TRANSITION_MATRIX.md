@@ -154,13 +154,17 @@ work.
 
 **This is a routing result, not an accuracy result.** It does not establish that
 the new routes are *correct*. Whether consuming this evidence improves
-vulnerability-adjudication accuracy remains **untested**: the 498 LLM-eligible
-operations need independent outcome labels — with enough genuine vulnerable cases
-— before an A/B/C accuracy comparison can be run. The defensible conclusion for
-now: v2 substantially reduced premature requests for additional evidence by
-consuming locally available capacity facts; the effect was broadly distributed
-across the evaluated corpus and not driven by the identified conflict groups;
-whether it also produces better security decisions is the next phase.
+vulnerability-adjudication accuracy remains **untested**, and answering it is a
+separate study with its own sampling and labeling design — not a matter of adding
+labels to these 498 operations and reading off accuracy. See
+`ACCURACY_STUDY_PROTOCOL.md` for the (open) next-study design; in particular,
+enriching for vulnerable cases yields a case-control sample and must be reported as
+balanced/macro accuracy or reweighted to the population, never as population
+prevalence. The defensible conclusion for now: v2 substantially reduced premature
+requests for additional evidence by consuming locally available capacity facts; the
+effect was broadly distributed across the evaluated corpus and not driven by the
+identified conflict groups; whether it also produces better security decisions is
+the next phase.
 
 Full matrix, per-operation changes, masked/conflict counts:
 `transition_matrix_v1_v2.json`.

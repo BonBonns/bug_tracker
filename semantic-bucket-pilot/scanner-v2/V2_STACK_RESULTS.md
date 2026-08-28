@@ -153,6 +153,7 @@ three-producer population, this capability lowers the `additional_evidence_requi
 share from 88.8% to 64.3% (see `ROUTE_TRANSITION_MATRIX.md`), broadly distributed
 across the evaluated corpus and not driven by the identified cross-producer conflict
 groups. It does **not** establish that the new routes are correct: whether consuming
-this evidence improves vulnerability-adjudication accuracy is **untested** and
-requires independent outcome labels for the 498 LLM-eligible operations — with
-enough genuine vulnerable cases — before an A/B/C comparison.
+this evidence improves vulnerability-adjudication accuracy is **untested**. That is a
+separate study with its own population definition, sampling, blinding, and dev/
+confirmatory split (see `ACCURACY_STUDY_PROTOCOL.md`) — not a matter of labeling
+these 498 operations and reading off accuracy.
