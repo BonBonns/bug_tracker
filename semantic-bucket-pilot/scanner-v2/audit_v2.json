@@ -1,0 +1,135 @@
+{
+  "additional_evidence_ranking": [
+    {
+      "distinct_operations": 1882,
+      "independent_case_families": 772,
+      "independent_functions": 525,
+      "reason": "required_evidence_absent",
+      "source_families": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5"
+      ]
+    },
+    {
+      "distinct_operations": 350,
+      "independent_case_families": 80,
+      "independent_functions": 79,
+      "reason": "destination_identity_ambiguous",
+      "source_families": [
+        "E1",
+        "E2",
+        "E4",
+        "E5"
+      ]
+    },
+    {
+      "distinct_operations": 16,
+      "independent_case_families": 3,
+      "independent_functions": 3,
+      "reason": "conflicting_reaching_allocations",
+      "source_families": [
+        "E1"
+      ]
+    }
+  ],
+  "conflicts": 124,
+  "distinct_by_reason": {
+    "capacity_relation_not_established": 198,
+    "conflicting_reaching_allocations": 16,
+    "destination_identity_ambiguous": 350,
+    "not_applicable_deterministic_complete": 24,
+    "required_evidence_absent": 1882,
+    "unknown_allocator_contract": 62
+  },
+  "distinct_by_route": {
+    "additional_evidence_required": 2248,
+    "deterministic_complete": 24,
+    "semantic_contract_review": 62,
+    "semantic_relationship_review": 198
+  },
+  "distinct_by_status": {
+    "abstained": 2310,
+    "deterministic_complete": 24,
+    "open_candidate": 198
+  },
+  "distinct_case_families": 983,
+  "distinct_operations": 2532,
+  "invariants": {
+    "all_verdicts_preserved": true,
+    "by_producer_sums_to_raw": true,
+    "conflicts_preserved": true,
+    "every_record_one_fingerprint": true,
+    "no_null_reason": true,
+    "no_null_reason_as_additional_evidence": true,
+    "raw_total_is_3246": true,
+    "reason_sums_to_distinct": true,
+    "route_sums_to_distinct": true,
+    "status_sums_to_distinct": true
+  },
+  "provenance": {
+    "audit_script_sha256": "01bccf84980504caf5c9c3cd3e0063a1fa50c6b365f339c46836b58faddbb0b3",
+    "canonical_fingerprint_from": "frozen-corpus/build_frozen_corpus.py:_fingerprint",
+    "inputs": [
+      {
+        "label": "E1/vuln",
+        "path": "/tmp/expansion/E1/vuln/cpp.json",
+        "sha256": "ca44e4ce7d51a787860ea441d7c18d18ef300264fd90f46eb44fdee4767b0640"
+      },
+      {
+        "label": "E1/patched",
+        "path": "/tmp/expansion/E1/patched/cpp.json",
+        "sha256": "e5e0520678d46e35d80659224ee80601a67f1397cb56413722998f5e1d47c308"
+      },
+      {
+        "label": "E2/vuln",
+        "path": "/tmp/expansion/E2/vuln/cpp.json",
+        "sha256": "62643f9fed0f9afe521f41e7ac2f64b2176506d1287a9adb07bab3e4767299c6"
+      },
+      {
+        "label": "E2/patched",
+        "path": "/tmp/expansion/E2/patched/cpp.json",
+        "sha256": "827e3588ace6d128d627048f077e9754b2d1bd10ada0e9c2ada877db53e60ffe"
+      },
+      {
+        "label": "E3/vuln",
+        "path": "/tmp/expansion/E3/vuln/cpp.json",
+        "sha256": "66d90f7b105c27a948a4b075e3cc17b5d293c30b4593e37c95d16bc027e81d87"
+      },
+      {
+        "label": "E3/patched",
+        "path": "/tmp/expansion/E3/patched/cpp.json",
+        "sha256": "ca880d1c221fea90902698b8204386b45563c88a089b5c732dafa2cb34900041"
+      },
+      {
+        "label": "E4/vuln",
+        "path": "/tmp/expansion/E4/vuln/cpp.json",
+        "sha256": "5af79d4eaa87a1269fa07df782b9388b099acbd17eb0b0b8ff1c91aaaac9bc06"
+      },
+      {
+        "label": "E4/patched",
+        "path": "/tmp/expansion/E4/patched/cpp.json",
+        "sha256": "b8945dba049258160b3484349602ed655f575278b222f35d2c4ee06d87ebbb3d"
+      },
+      {
+        "label": "E5/vuln",
+        "path": "/tmp/expansion/E5/vuln/cpp.json",
+        "sha256": "303c5db4095cd30421abf9fe6d0f431d33fcde974c54e54bb569bc18969e22ca"
+      },
+      {
+        "label": "E5/patched",
+        "path": "/tmp/expansion/E5/patched/cpp.json",
+        "sha256": "2db93c504af5653275b4f60de023e90061381472ce22523abdf7fd56cb40f1e2"
+      }
+    ],
+    "scanner_commit": "241c7be92bac96e9e783e0d52c4c70559cb7fa15"
+  },
+  "raw_by_producer": {
+    "cursor": 382,
+    "interprocedural": 690,
+    "runtime": 2174
+  },
+  "raw_records": 3246
+}
