@@ -35,18 +35,18 @@ LLM-review population.
 
 Separate the labeling unit from the clustering unit (see `STUDY_STAGE0.md`):
 
-- **Case instance** = one operation in one source revision (vuln OR patched). Ground
+- **Case instance** = one operation in one source revision (pre-patch OR post-patch). Ground
   truth and A/B/C responses are assigned here. Exact duplicates of the *same revision
-  + site* (E2/E4) collapse to one instance; **vulnerable and patched revisions stay
+  + site* (E2/E4) collapse to one instance; **pre-patch and post-patch revisions stay
   separate instances** — the write can be textually identical while the security
   meaning differs across revisions (the RSA case).
 - **Case family** = correlated instances of the same logical site across
-  vuln/patched and duplicate scans. Used **only** for the dev/confirmatory split and
-  statistical clustering. **Never split a family after seeing labels**; vuln/patched
+  pre-patch/post-patch and duplicate scans. Used **only** for the dev/confirmatory split and
+  statistical clustering. **Never split a family after seeing labels**; pre-patch/post-patch
   label disagreement is expected.
 
 Label and score **per instance**; compute uncertainty with **family-clustered** CIs
-(clustered bootstrap or mixed-effects). Verify vuln↔patched pairing with source
+(clustered bootstrap or mixed-effects). Verify pre-patch↔post-patch pairing with source
 anchors (an added/removed write shifts ordinals); exclude unverifiable groups from
 the confirmatory set rather than guessing. Treating the raw operations as independent
 would inflate n and understate variance.

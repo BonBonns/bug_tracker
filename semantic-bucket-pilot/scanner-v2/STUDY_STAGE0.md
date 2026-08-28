@@ -10,20 +10,28 @@ sample so the confirmatory experiment cannot be tuned into existence later.
 ## Two levels — instance (labeled) vs family (clustered)
 
 The unit that gets a ground-truth label and A/B/C responses is **not** the same as
-the unit used for statistical clustering. Conflating them was wrong: a vulnerable and
-a patched revision can share the same write statement while surrounding guards,
+the unit used for statistical clustering. Conflating them was wrong: a pre-patch and
+a post-patch revision can share the same write statement while surrounding guards,
 callers, or arithmetic differ — the RSA case is exactly that (textually similar sink,
 different security meaning across revisions).
 
-- **Case instance** — one operation in one source revision (vuln **or** patched).
-  Ground truth and A/B/C responses belong here. Exact duplicates of the *same
-  revision + site* across the E2/E4 scans collapse to one instance (verified by
-  enclosing-function source hash). **Vulnerable and patched revisions are always
-  separate instances**, even when textually identical.
+- **Case instance** — one operation in one source revision (**pre-patch** or
+  **post-patch**). Ground truth and A/B/C responses belong here. Exact duplicates of
+  the *same revision + site* across the E2/E4 scans collapse to one instance
+  (verified by enclosing-function source hash). **Pre-patch and post-patch revisions
+  are always separate instances**, even when textually identical.
+
+  **Revision side ≠ security class.** "Pre-patch / post-patch" name which repository
+  revision the file came from (the `vuln` / `patched` scan directories), *not* the
+  outcome. A pre-patch instance is **not** automatically `VULNERABLE` — the fix may
+  touch a different operation than this one — and a post-patch instance is not
+  automatically `SAFE`. The security class is a Stage-1 label established
+  independently (below). So the 219 / 219 and 166 / 166 counts are balanced **by
+  revision side, not by security class**.
 - **Case family** — correlated instances of the same logical site across
-  vulnerable/patched revisions and duplicate scans. Used **only** for the dev/
+  pre-patch/post-patch revisions and duplicate scans. Used **only** for the dev/
   confirmatory split and for statistical clustering. A family is **never split after
-  labels are seen**; label disagreement between vuln and patched members is expected,
+  labels are seen**; label disagreement between pre-patch and post-patch members is expected,
   not a defect.
 
 ## Counts
@@ -31,11 +39,11 @@ different security meaning across revisions).
 | level | count | notes |
 |-------|------:|-------|
 | operations | 498 | frozen fingerprints; = the transition-matrix semantic set (asserted) |
-| **case instances (labeled units)** | **438** | 219 vulnerable + 219 patched |
+| **case instances (labeled units)** | **438** | 219 pre-patch + 219 post-patch (revision side, not security class) |
 | **case families (clusters)** | **214** | over-merge check asserted 0 |
 
-Instances-per-family: **209 families → 2 instances** (one vuln, one patched; E2/E4
-collapsed as identical revisions), **5 families → 4 instances** (E2 and E4 are
+Instances-per-family: **209 families → 2 instances** (one pre-patch, one post-patch;
+E2/E4 collapsed as identical revisions), **5 families → 4 instances** (E2 and E4 are
 different revisions of that site, so they stay separate on one or both sides).
 209·2 + 5·4 = 438.
 
@@ -52,20 +60,20 @@ collapses copies but never merges distinct call sites (asserted). Sensitivity bo
 from the earlier keyings: content-only 177 (over-merges), content+line 235 (splits
 line-shifted pairs); the ordinal key's 214 sits between.
 
-## Vuln↔patched pairing is verified, not assumed
+## Pre-patch↔post-patch pairing is verified, not assumed
 
-"No over-merge" does not prove the vulnerable site was matched to the *correct*
-patched site — an added or removed write shifts every later ordinal. Each family's
+"No over-merge" does not prove the pre-patch site was matched to the *correct*
+post-patch site — an added or removed write shifts every later ordinal. Each family's
 pairing is checked with a source anchor:
 
 | pairing verdict | families | basis |
 |-----------------|---------:|-------|
 | unambiguous_single_write | 159 | only one same-content write per side → the pair is forced |
-| stmt_anchor_matched | 55 | multi-write site; ordinal-aligned vuln/patched **write statements match by source text** in every scan |
+| stmt_anchor_matched | 55 | multi-write site; ordinal-aligned pre-patch/post-patch **write statements match by source text** in every scan |
 | **unverified → excluded** | **0** | would be excluded from confirmatory rather than guessed |
 
 All 55 multi-write families (the only ones exposed to ordinal shift) were confirmed;
-none required exclusion. Every family has both a vulnerable and a patched side
+none required exclusion. Every family has both a pre-patch and a post-patch side
 present (checked). Any future family that cannot be verified is marked
 `excluded_unverified` and kept out of the confirmatory set.
 
@@ -75,7 +83,7 @@ present (checked). Any future family that cannot be verified is marked
 2. **Run and score A/B/C per instance.** Aggregate to uncertainty with
    **family-clustered** confidence intervals (clustered bootstrap or a mixed-effects
    model), so correlated instances do not inflate significance.
-3. **A family is never split after labels are seen.** Vuln/patched label disagreement
+3. **A family is never split after labels are seen.** Pre-patch/post-patch label disagreement
    within a family is expected.
 4. Whole families stay entirely within dev or confirmatory (no leakage).
 
@@ -87,7 +95,7 @@ Split **by family**, deterministically
 | | families (clusters) | instances (labeled units) |
 |--|--------------------:|--------------------------:|
 | development | 52 | 106 |
-| **confirmatory (held out)** | **162** | **332** (166 vuln + 166 patched) |
+| **confirmatory (held out)** | **162** | **332** (166 pre-patch + 166 post-patch, by revision side) |
 | excluded (unverified pairing) | 0 | 0 |
 
 Verified: no family and no instance shared between dev and confirmatory. Dev is for
@@ -98,14 +106,16 @@ split — the sample is immutable.
 ## Independent sample size and power
 
 - **Clusters** in the confirmatory set: **162 families**.
-- **Labeled units**: **332 instances** (166 vulnerable-revision + 166
-  patched-revision) — but these cluster within the 162 families, so the effective n
-  for significance is nearer the cluster count than 332.
+- **Labeled units**: **332 instances** (166 pre-patch + 166 post-patch by revision
+  side) — but these cluster within the 162 families, so the effective n for
+  significance is nearer the cluster count than 332.
 - The binding constraint is still unknown until blinded labeling: **how many
-  instances are genuinely vulnerable** (a patched-side instance is usually safe; a
-  vuln-side instance is only vulnerable if this specific operation carries the bug).
-  Many of these are safe capacity-bound crypto copies, so the genuinely-vulnerable
-  count is likely well below 166.
+  instances are genuinely `VULNERABLE`**. Revision side does not answer this — a
+  post-patch instance is usually but not always `SAFE`, and a pre-patch instance is
+  `VULNERABLE` only if *this* operation carries the bug (the patch may fix a
+  different operation). Many of these are capacity-bound crypto copies that are safe
+  on both sides, so the `VULNERABLE` count is likely far below the 166 pre-patch
+  instances.
 - Therefore, after labeling: report the class base rate first; report **balanced /
   macro accuracy and per-class results**, or reweight to prevalence, never raw
   accuracy over a class-enriched sample; and if the genuinely-vulnerable cluster
@@ -115,6 +125,29 @@ split — the sample is immutable.
 ## Not done here (by design)
 
 No LLM condition (A/B/C), no outcome label, no prompt. Stage 0 delivers only the
-frozen two-level sample and its independence + pairing audit. Next stage establishes
-ground truth per instance, independently and blinded to condition and to V1/V2
-routing, using the development set only for debugging.
+frozen two-level sample and its independence + pairing audit. Each instance in
+`study/instances.jsonl` carries empty `stage1_label` / `stage1_evidence_basis` slots
+to be filled in Stage 1.
+
+## Stage 1 — blinded security labeling (next; NOT an LLM run)
+
+Independent reviewers assign each of the **438 instances** one label:
+
+- `VULNERABLE` · `SAFE` · `UNRESOLVED`
+
+with an **evidence basis** recorded: destination capacity, write length, controlling
+guard, reachability, and whether the operation actually differs semantically across
+revisions. Rules:
+
+- Reviewers may use source and patch context, but must remain **blind to A/B/C
+  outputs** and to V1/V2 routing.
+- **Do not assume a pre-patch operation is `VULNERABLE`** just because it came from a
+  pre-patch revision — label the operation on its own evidence.
+- The labeler must **not** be the model whose A/B/C responses the study scores.
+- After labeling, report the **real class distribution** within the already-frozen
+  dev and confirmatory splits. **Do not rearrange families** to manufacture more
+  `VULNERABLE` cases.
+
+Only then: debug the A/B/C pipeline on the **106 development instances**, and run the
+frozen conditions **once** on the **332 confirmatory instances**, scoring per
+instance with family-clustered uncertainty.

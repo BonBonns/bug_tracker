@@ -119,7 +119,17 @@ def content_key(op):
 
 
 def side_of(op):
-    return op["source_label"].split("/")[1]      # vuln | patched
+    return op["source_label"].split("/")[1]      # repo layout token: vuln | patched
+
+
+# The repository side is NOT the security class. "vuln"/"patched" name which
+# revision the file came from; whether THIS operation is actually vulnerable or safe
+# is a Stage-1 label established independently. Report revision side as pre/post-patch.
+REV_NAME = {"vuln": "pre_patch", "patched": "post_patch"}
+
+
+def revision_name(op):
+    return REV_NAME[side_of(op)]
 
 
 def scan_of(op):
@@ -228,7 +238,7 @@ def main():
     for fmid, members in sorted(fam_members.items()):
         verdict, verified = verify_pairing(members, multiplicity)
         iids = sorted({inst_of[m["op_id"]] for m in members})
-        sides = sorted({side_of(m) for m in members})
+        sides = sorted({revision_name(m) for m in members})
         base = split_bucket(fmid)
         split = base if verified else "excluded_unverified"
         fam_records[fmid] = {
@@ -255,7 +265,7 @@ def main():
         inst_records[iid] = {
             "instance_id": iid,
             "family_id": fmid,
-            "revision_side": side_of(rep),
+            "revision_side": revision_name(rep),   # pre_patch | post_patch (repo side, NOT security class)
             "op_ids": sorted(m["op_id"] for m in members),
             "collapsed_scans": sorted({scan_of(m) for m in members}),
             "file": rep["file"], "function": norm_function(rep["function"]),
@@ -265,6 +275,11 @@ def main():
             "unresolved_property": rep["unresolved_property"],
             "write_stmt": stmt_text(rep),
             "split": fam_records[fmid]["split"],
+            # Stage-1 schema slots — established later by independent BLINDED reviewers.
+            # Empty here on purpose: no label may be assigned at Stage 0, and never by
+            # the model whose A/B/C output reviewers must stay blind to.
+            "stage1_label": None,            # VULNERABLE | SAFE | UNRESOLVED
+            "stage1_evidence_basis": None,   # capacity / write-length / guard / reachability / cross-revision-diff
         }
 
     # ---- write frozen artifacts
@@ -318,12 +333,13 @@ def main():
     print(f"case FAMILIES (clusters)       : {len(fam_records)}   [over-merge asserted 0]")
     print(f"  instances-per-family hist    : {fam_inst_hist}")
     print(f"  multi-write families         : {multi}")
-    print(f"case INSTANCES (label units)   : {len(inst_records)}   by side {dict(inst_by_side)}")
+    print(f"case INSTANCES (label units)   : {len(inst_records)}   by revision side {dict(inst_by_side)}")
+    print(f"  (revision side = repo layout, NOT security class; labels are Stage 1)")
     print(f"pairing verification           : {dict(Counter(f['pairing_verdict'] for f in fam_records.values()))}")
     print(f"\nsplit BY FAMILY (dev_fraction={DEV_FRACTION}):")
     print(f"  families     : {dict(fam_split)}")
     print(f"  instances    : {dict(inst_split)}")
-    print(f"  confirmatory instances by side : {dict(conf_inst_by_side)}")
+    print(f"  confirmatory instances by revision side : {dict(conf_inst_by_side)}")
     print(f"\nCLUSTERS (families) in confirmatory = {fam_split['confirmatory']}")
     print(f"LABELED UNITS (instances) in confirmatory = {inst_split['confirmatory']}")
     print(f"EXCLUDED unverified families = {fam_split['excluded_unverified']} "

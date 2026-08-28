@@ -1,20 +1,20 @@
 {
   "artifacts_sha256": {
-    "families.json": "0a1b4ad26eed555b5f5727188f4811730f1b0ad0a136942aeea4ab2839560c89",
-    "instances.jsonl": "ee2ecbf84a69b8eef63e7e202877c03904ecc1d261bd899b72830f37261f73aa",
+    "families.json": "a93bc52cc21bed5bf93878b8cced4859f3b219f2b7a6ad7b0c46eae9aeb2d3e6",
+    "instances.jsonl": "0973e1505c8fd18943d27b2fdc8d2f81024ebdcc4062d82212c0055da65fce22",
     "split.json": "043f4e31bc5451f8f3aed93c2dc773483bf83a03af7bce528e3e790648902540",
     "study_manifest.jsonl": "a86080a36c3100ab5a00165c7d052299c3213377a8fda7d90e71b5ef0f260a0f"
   },
   "confirmatory_instances_by_side": {
-    "patched": 166,
-    "vuln": 166
+    "post_patch": 166,
+    "pre_patch": 166
   },
   "families": 214,
   "families_multi_write": 55,
   "instances": 438,
   "instances_by_side": {
-    "patched": 219,
-    "vuln": 219
+    "post_patch": 219,
+    "pre_patch": 219
   },
   "operations": 498,
   "pairing": {
