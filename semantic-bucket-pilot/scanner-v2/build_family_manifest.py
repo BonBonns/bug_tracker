@@ -275,11 +275,10 @@ def main():
             "unresolved_property": rep["unresolved_property"],
             "write_stmt": stmt_text(rep),
             "split": fam_records[fmid]["split"],
-            # Stage-1 schema slots — established later by independent BLINDED reviewers.
-            # Empty here on purpose: no label may be assigned at Stage 0, and never by
-            # the model whose A/B/C output reviewers must stay blind to.
-            "stage1_label": None,            # VULNERABLE | SAFE | UNRESOLVED
-            "stage1_evidence_basis": None,   # capacity / write-length / guard / reachability / cross-revision-diff
+            # NO label field here. Stage-1 labels live in a SEPARATE sidecar
+            # (study/stage1_labels.jsonl), joined by instance_id, and are frozen
+            # separately after review. A frozen Stage-0 artifact is never mutated
+            # to carry Stage-1 results.
         }
 
     # ---- write frozen artifacts

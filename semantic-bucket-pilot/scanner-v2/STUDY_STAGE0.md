@@ -125,9 +125,11 @@ split — the sample is immutable.
 ## Not done here (by design)
 
 No LLM condition (A/B/C), no outcome label, no prompt. Stage 0 delivers only the
-frozen two-level sample and its independence + pairing audit. Each instance in
-`study/instances.jsonl` carries empty `stage1_label` / `stage1_evidence_basis` slots
-to be filled in Stage 1.
+frozen two-level sample and its independence + pairing audit. The instance manifest
+carries **no** label field — Stage-1 labels live in a separate sidecar
+(`study/stage1_labels.jsonl`), joined by `instance_id` and frozen separately, so a
+frozen Stage-0 artifact is never mutated to carry Stage-1 results (see
+`STAGE1_LABELING.md`).
 
 ## Stage 1 — blinded security labeling (next; NOT an LLM run)
 
