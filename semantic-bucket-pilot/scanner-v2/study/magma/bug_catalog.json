@@ -1,0 +1,935 @@
+{
+  "total_canaried": 116,
+  "eligible_dest_capacity_write": 11,
+  "fixed_capacity_subset": 3,
+  "catalog": [
+    {
+      "bug": "PNG001",
+      "target": "PNG",
+      "file": "pngrutil.c",
+      "canary": "row_factor_l == ((size_t)1 << (sizeof(png_uint_32) * 8))",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG002",
+      "target": "PNG",
+      "file": "png.c",
+      "canary": "(image->flags & PNG_IMAGE_FLAG_INVALID) != 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG003",
+      "target": "PNG",
+      "file": "pngrutil.c",
+      "canary": "num > max_palette_length",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG004",
+      "target": "PNG",
+      "file": "pngrutil.c",
+      "canary": "(row_width * pixel_depth) != (u_int64_t)row_width * pixel_depth",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG005",
+      "target": "PNG",
+      "file": "png.c",
+      "canary": "row_bytes_check < ((png_ptr->width + 7) & ~((png_uint_32)7))",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG006",
+      "target": "PNG",
+      "file": "png.c",
+      "canary": "MAGMA_AND(info_ptr->eXIf_buf != NULL, (mask & info_ptr->free_me & PNG_FREE_EXIF) == 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PNG007",
+      "target": "PNG",
+      "file": "pngrtran.c",
+      "canary": "png_ptr->palette == NULL",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND001",
+      "target": "SND",
+      "file": "src/paf.c",
+      "canary": "MAGMA_OR(paf_fmt.channels < 1, paf_fmt.channels > SF_MAX_CHANNELS)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND002",
+      "target": "SND",
+      "file": "src/sd2.c",
+      "canary": "rsrc.map_offset + 28 > rsrc.rsrc_len",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND004",
+      "target": "SND",
+      "file": "src/file_io.c",
+      "canary": "MAGMA_OR(bytes == 0, items == 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND005",
+      "target": "SND",
+      "file": "src/aiff.c",
+      "canary": "psf->sf.channels > (layout_tag & 0xffff)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND006",
+      "target": "SND",
+      "file": "src/flac.c",
+      "canary": "psf->sf.channels != (int) frame->header.channels",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND007",
+      "target": "SND",
+      "file": "src/flac.c",
+      "canary": "MAGMA_AND(psf->sf.channels > 0, psf->sf.samplerate != (int) metadata->data.stream_info.sample_rate)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND010",
+      "target": "SND",
+      "file": "src/common.c",
+      "canary": "psf->header.indx + 4 + (sf_count_t) size + (sf_count_t) (size & 1) > psf->header.len",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND012",
+      "target": "SND",
+      "file": "src/common.c",
+      "canary": "psf->header.indx + 4 + (sf_count_t) size + (sf_count_t) (size & 1) > psf->header.len",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND013",
+      "target": "SND",
+      "file": "src/common.c",
+      "canary": "psf->header.indx + 1 + (sf_count_t) size > psf->header.len",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND014",
+      "target": "SND",
+      "file": "src/alaw.c",
+      "canary": "!isfinite(ptr[i])",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND015",
+      "target": "SND",
+      "file": "src/alaw.c",
+      "canary": "ptr[i] == INT_MIN",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND016",
+      "target": "SND",
+      "file": "src/double64.c",
+      "canary": "psf->sf.channels > SF_MAX_CHANNELS",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND017",
+      "target": "SND",
+      "file": "src/wavlike.c",
+      "canary": "k >= psf->sf.channels",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND020",
+      "target": "SND",
+      "file": "src/wavlike.c",
+      "canary": "bit < 2",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND022",
+      "target": "SND",
+      "file": "src/ulaw.c",
+      "canary": "!isfinite(ptr[i])",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND023",
+      "target": "SND",
+      "file": "src/ulaw.c",
+      "canary": "ptr[i] == INT_MIN",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND024",
+      "target": "SND",
+      "file": "src/flac.c",
+      "canary": "MAGMA_AND(psf->sf.channels > 0, psf->sf.channels != (int) metadata->data.stream_info.channels)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SND025",
+      "target": "SND",
+      "file": "src/wav.c",
+      "canary": "psf->instrument->loop_count > ARRAY_LEN (psf->instrument->loops)",
+      "eligible": true,
+      "fixed_capacity": true
+    },
+    {
+      "bug": "TIF001",
+      "target": "TIF",
+      "file": "libtiff/tif_predict.c",
+      "canary": "(cc%stride)!=0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF002",
+      "target": "TIF",
+      "file": "libtiff/tif_pixarlog.c",
+      "canary": "(tmsize_t)sp->stream.avail_out > sp->tbuf_size",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF003",
+      "target": "TIF",
+      "file": "libtiff/tif_read.c",
+      "canary": "stripsperplane == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF004",
+      "target": "TIF",
+      "file": "libtiff/tif_ojpeg.c",
+      "canary": "sp->decoder_ok == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF005",
+      "target": "TIF",
+      "file": "libtiff/tif_luv.c",
+      "canary": "sp->encoder_state == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF006",
+      "target": "TIF",
+      "file": "libtiff/tif_pixarlog.c",
+      "canary": "(sp->state&PLSTATE_INIT) == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF007",
+      "target": "TIF",
+      "file": "libtiff/tif_dirread.c",
+      "canary": "nstrips > TIFFhowmany_32(td->td_imagelength, rowsperstrip)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF008",
+      "target": "TIF",
+      "file": "libtiff/tif_next.c",
+      "canary": "op_offset >= scanline",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF009",
+      "target": "TIF",
+      "file": "libtiff/tif_dirwrite.c",
+      "canary": "tif->tif_dir.td_transferfunction[2] == NULL",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF010",
+      "target": "TIF",
+      "file": "libtiff/tif_lzw.c",
+      "canary": "tp <= op",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF011",
+      "target": "TIF",
+      "file": "libtiff/tif_print.c",
+      "canary": "MAGMA_OR(i == sizeof(td->td_transferfunction) / sizeof(*td->td_transferfunction), i == (td->td_samplesperpixel - td->td_extrasamples))",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "TIF013",
+      "target": "TIF",
+      "file": "libtiff/tif_jbig.c",
+      "canary": "(tmsize_t)decodedSize > size",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML001",
+      "target": "XML",
+      "file": "valid.c",
+      "canary": "(size - len - xmlStrlen(content->prefix)) < (xmlStrlen(content->name) + 10)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML002",
+      "target": "XML",
+      "file": "valid.c",
+      "canary": "1",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML005",
+      "target": "XML",
+      "file": "xmlmemory.c",
+      "canary": "size > (MAX_SIZE_T - RESERVE_SIZE)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML006",
+      "target": "XML",
+      "file": "valid.c",
+      "canary": "size - strlen(buf) <= 2",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML007",
+      "target": "XML",
+      "file": "HTMLparser.c",
+      "canary": "avail != (in->end - in->cur)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML008",
+      "target": "XML",
+      "file": "parser.c",
+      "canary": "ctxt->instate == XML_PARSER_EOF",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML009",
+      "target": "XML",
+      "file": "parser.c",
+      "canary": "m_tmp < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML011",
+      "target": "XML",
+      "file": "xmlstring.c",
+      "canary": "size < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML012",
+      "target": "XML",
+      "file": "parser.c",
+      "canary": "(end - len) != (BASE_PTR + startPosition)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML013",
+      "target": "XML",
+      "file": "HTMLparser.c",
+      "canary": "q != (BASE_PTR+startPosition)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML014",
+      "target": "XML",
+      "file": "HTMLparser.c",
+      "canary": "in >= ctxt->input->end",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML015",
+      "target": "XML",
+      "file": "HTMLparser.c",
+      "canary": "ctxt->input->base != base",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML016",
+      "target": "XML",
+      "file": "xmlregexp.c",
+      "canary": "end < start",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "XML017",
+      "target": "XML",
+      "file": "parser.c",
+      "canary": "RAW != '>'",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "LUA001",
+      "target": "LUA",
+      "file": "ldebug.c",
+      "canary": "INT_MAX - nextra <= (n - 1)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "LUA002",
+      "target": "LUA",
+      "file": "ldebug.c",
+      "canary": "p->lineinfo == NULL",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "LUA003",
+      "target": "LUA",
+      "file": "liolib.c",
+      "canary": "!l_checkmodep(mode)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "LUA004",
+      "target": "LUA",
+      "file": "ldebug.c",
+      "canary": "pcRel(L->oldpc, p) < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL001",
+      "target": "SSL",
+      "file": "crypto/asn1/a_int.c",
+      "canary": "i == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL002",
+      "target": "SSL",
+      "file": "ssl/statem/statem.c",
+      "canary": "s->init_msg != (s->init_buf->data + msg_offset)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL003",
+      "target": "SSL",
+      "file": "crypto/asn1/a_d2i_fp.c",
+      "canary": "i <= 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL004",
+      "target": "SSL",
+      "file": "crypto/x509/x509_obj.c",
+      "canary": "num > (int)sizeof(ebcdic_buf)",
+      "eligible": true,
+      "fixed_capacity": true
+    },
+    {
+      "bug": "SSL006",
+      "target": "SSL",
+      "file": "crypto/evp/encode.c",
+      "canary": "INT_MAX - inl < ctx->num",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL007",
+      "target": "SSL",
+      "file": "crypto/mdc2/mdc2dgst.c",
+      "canary": "SIZE_MAX - len < i",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL011",
+      "target": "SSL",
+      "file": "crypto/pkcs7/pk7_doit.c",
+      "canary": "MAGMA_AND(data_body == NULL, in_bio == NULL)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL013",
+      "target": "SSL",
+      "file": "crypto/rsa/rsa_ameth.c",
+      "canary": "magma_int < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL014",
+      "target": "SSL",
+      "file": "crypto/asn1/a_type.c",
+      "canary": "a->type == V_ASN1_BOOLEAN",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL015",
+      "target": "SSL",
+      "file": "crypto/pkcs7/pk7_doit.c",
+      "canary": "MAGMA_OR(p7 == NULL, p7->d.ptr)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL016",
+      "target": "SSL",
+      "file": "crypto/bn/bn_gf2m.c",
+      "canary": "udp[0] == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL017",
+      "target": "SSL",
+      "file": "crypto/x509/x509_vfy.c",
+      "canary": "best_crl == NULL",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL018",
+      "target": "SSL",
+      "file": "ssl/statem/statem_dtls.c",
+      "canary": "msg_len > dtls1_max_handshake_message_len(s)",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SSL020",
+      "target": "SSL",
+      "file": "ssl/t1_lib.c",
+      "canary": "eticklen <= TLSEXT_KEYNAME_LENGTH + EVP_CIPHER_CTX_get_iv_length(ctx) + mlen",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP001",
+      "target": "PHP",
+      "file": "ext/phar/phar.c",
+      "canary": "memchr(pos + 1, '.', filename_len - (pos - filename) - 1) == NULL",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP002",
+      "target": "PHP",
+      "file": "ext/exif/exif.c",
+      "canary": "dir_offset > SIZE_MAX - 2",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP003",
+      "target": "PHP",
+      "file": "ext/exif/exif.c",
+      "canary": "MAGMA_AND((bool)data, ImageInfo->Thumbnail.size < 4)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP005",
+      "target": "PHP",
+      "file": "ext/iconv/iconv.c",
+      "canary": "str_left <= 1",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP006",
+      "target": "PHP",
+      "file": "ext/exif/exif.c",
+      "canary": "pos >= ImageInfo->Thumbnail.size",
+      "eligible": true,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP008",
+      "target": "PHP",
+      "file": "ext/standard/dns.c",
+      "canary": "dlen == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP011",
+      "target": "PHP",
+      "file": "ext/exif/exif.c",
+      "canary": "ptr_offset_overflows(info->offset_base, offset)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PHP012",
+      "target": "PHP",
+      "file": "ext/standard/http_fopen_wrapper.c",
+      "canary": "tmp_line_len < 1",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF001",
+      "target": "PDF",
+      "file": "poppler/SplashOutputDev.cc",
+      "canary": "MAGMA_OR(surface_width == 0, surface_height == 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF002",
+      "target": "PDF",
+      "file": "poppler/JPEG2000Stream.cc",
+      "canary": "oLen.getInt() < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF003",
+      "target": "PDF",
+      "file": "utils/HtmlOutputDev.cc",
+      "canary": "MAGMA_AND(colorMap->getColorSpace2() == nullptr, (size_t)colorMap->getNumPixelComps() > sizeof(zero))",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF004",
+      "target": "PDF",
+      "file": "splash/SplashXPathScanner.cc",
+      "canary": "MAGMA_OR(intersectionIndex < 0, (unsigned)intersectionIndex >= allIntersections.size())",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF005",
+      "target": "PDF",
+      "file": "poppler/JPEG2000Stream.cc",
+      "canary": "componentPixels != priv->npixels",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF007",
+      "target": "PDF",
+      "file": "poppler/Stream.cc",
+      "canary": "readChars < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF008",
+      "target": "PDF",
+      "file": "poppler/GfxState.cc",
+      "canary": "vertsPerRow <= 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF009",
+      "target": "PDF",
+      "file": "poppler/Parser.cc",
+      "canary": "length >= LLONG_MAX - pos - 5000",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF010",
+      "target": "PDF",
+      "file": "poppler/SplashOutputDev.cc",
+      "canary": "t3GlyphStack == nullptr",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF011",
+      "target": "PDF",
+      "file": "poppler/XRef.cc",
+      "canary": "i < 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF012",
+      "target": "PDF",
+      "file": "poppler/Parser.cc",
+      "canary": "pos > LLONG_MAX - length",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF013",
+      "target": "PDF",
+      "file": "poppler/FileSpec.cc",
+      "canary": "!fileSpec.isDict()",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF014",
+      "target": "PDF",
+      "file": "poppler/XRef.cc",
+      "canary": "i >= capacity",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF015",
+      "target": "PDF",
+      "file": "poppler/FileSpec.cc",
+      "canary": "!m_objStr.isStream()",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF016",
+      "target": "PDF",
+      "file": "poppler/Parser.cc",
+      "canary": "MAGMA_OR(num <=0, gen < 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF017",
+      "target": "PDF",
+      "file": "fofi/FoFiTrueType.cc",
+      "canary": "length > (int)sizeof(vheaTab)",
+      "eligible": true,
+      "fixed_capacity": true
+    },
+    {
+      "bug": "PDF018",
+      "target": "PDF",
+      "file": "poppler/Annot.cc",
+      "canary": "!path",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF019",
+      "target": "PDF",
+      "file": "poppler/JBIG2Stream.cc",
+      "canary": "MAGMA_OR(y + yy >= h, y + yy < 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF020",
+      "target": "PDF",
+      "file": "fofi/FoFiType1C.cc",
+      "canary": "val.pos == offset",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF021",
+      "target": "PDF",
+      "file": "poppler/Stream.cc",
+      "canary": "nComps <= 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "PDF022",
+      "target": "PDF",
+      "file": "poppler/GfxState.cc",
+      "canary": "MAGMA_AND(alt->getMode() == csDeviceGray, name->cmp(\"Black\") == 0)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL001",
+      "target": "SQL",
+      "file": "ext/fts5/fts5_hash.c",
+      "canary": "MAGMA_AND(pTerm != 0, pIter->nKey+1 < nTerm)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL002",
+      "target": "SQL",
+      "file": "src/select.c",
+      "canary": "pParse->nErr",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL003",
+      "target": "SQL",
+      "file": "src/select.c",
+      "canary": "(p->selFlags & SF_Distinct)!=0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL004",
+      "target": "SQL",
+      "file": "ext/misc/zipfile.c",
+      "canary": "(int)strlen(zPath) != nPath",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL005",
+      "target": "SQL",
+      "file": "ext/misc/zipfile.c",
+      "canary": "zPath == 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL006",
+      "target": "SQL",
+      "file": "src/select.c",
+      "canary": "p->pWin != 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL007",
+      "target": "SQL",
+      "file": "src/build.c",
+      "canary": "pSelect != 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL008",
+      "target": "SQL",
+      "file": "src/shell.c.in",
+      "canary": "azCol==0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL009",
+      "target": "SQL",
+      "file": "src/vdbemem.c",
+      "canary": "ExpandBlob(pVal)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL010",
+      "target": "SQL",
+      "file": "src/whereexpr.c",
+      "canary": "pTerm!=&pWC->a[idxTerm]",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL011",
+      "target": "SQL",
+      "file": "ext/rtree/rtree.c",
+      "canary": "pRtree->iNodeSize<(512-64)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL012",
+      "target": "SQL",
+      "file": "src/pragma.c",
+      "canary": "sqlite3VdbeGetOp(v,-1)->opcode!=OP_Column",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL013",
+      "target": "SQL",
+      "file": "src/where.c",
+      "canary": "pNew->nLSlot < (pNew->nLTerm+1)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL014",
+      "target": "SQL",
+      "file": "src/select.c",
+      "canary": "pParse->nErr != 0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL016",
+      "target": "SQL",
+      "file": "src/vdbe.c",
+      "canary": "(pIn3->flags & MEM_Dyn) != (flags3 & MEM_Dyn)",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL018",
+      "target": "SQL",
+      "file": "src/expr.c",
+      "canary": "dequote==0",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL019",
+      "target": "SQL",
+      "file": "src/printf.c",
+      "canary": "MAX(e2,0) + precision > (((int)-1)&0x7fffffff) - 15 - width",
+      "eligible": false,
+      "fixed_capacity": false
+    },
+    {
+      "bug": "SQL020",
+      "target": "SQL",
+      "file": "src/window.c",
+      "canary": "pDup->u.zToken !=0",
+      "eligible": false,
+      "fixed_capacity": false
+    }
+  ]
+}
