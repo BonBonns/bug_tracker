@@ -7,19 +7,29 @@ implementation is `scoring_harness.py`, frozen against synthetic labels
 
 ## Conditions
 
-Abstract arms (named concretely when the study starts):
+An evidence/interface ladder — each rung adds one thing:
 
-- **A** = unguided LLM review (baseline prompt, no bucket/evidence guidance).
-- **B** = bucket-/evidence-guided LLM review (the capability-effect condition).
-- **C** = optional deterministic/human or alternate baseline.
+- **A** = **code only** (less evidence; generic review).
+- **B** = code + the **established scanner facts**, **generic** review.
+- **C** = code + the **same established facts**, presented through the **bucket-guided
+  interface**: the typed uncertainty category **and** the focused question generated
+  from it. B and C hold **byte-identical** established facts.
 
 Each condition emits, per instance, one of: `VULNERABLE`, `SAFE`, `ABSTAIN`. A
 missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped).
 
 ## The eight rules (answers)
 
-1. **Primary comparison.** A single pre-registered comparison: **B − A** (does bucket
-   guidance improve the judgment). C-vs-A and B-vs-C are secondary/exploratory.
+1. **Primary comparison — `C − B`.** The capability-effect question — does the
+   bucket-guided review interface improve evidence-calibrated decisions **with the
+   evidence held constant** — is `C − B` (B and C share identical facts, so the
+   difference is presentation). **Interpretation limit:** C adds *both* the typed
+   category and the focused question, so `C − B` tests the **combined
+   routing-and-questioning interface**, not the bucket label alone — separating the
+   label from the question would need a fourth arm. Secondary: `B − A`
+   (value of the established facts under generic review) and `C − A` (facts +
+   interface vs code-only). No B−C difference may be attributed specifically to the
+   bucket *label*.
 2. **Point estimate & uncertainty.** Point estimate is **instance-weighted**;
    **uncertainty is family-clustered** (families are the resampling unit).
 3. **Primary population + fixed target.** **All independently-labeled instances** —
@@ -32,12 +42,22 @@ missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped
    condition-specific target would score them against different answers and make
    accuracy incomparable; one fixed reference target keeps them comparable and asks
    whether each *presentation* helps reach the conclusion the common evidence
-   supports. **B−C is especially clean** — B and C hold byte-identical facts, so the
-   difference isolates presentation. A model that guesses "vulnerable" without the
+   supports. **C−B is especially clean** — B and C hold byte-identical facts, so the
+   difference isolates presentation (the combined category-and-question interface,
+   not the bucket label alone). A model that guesses "vulnerable" without the
    reference evidence supporting it is marked **wrong** — the study tests calibrated
    reasoning from supplied evidence, not lucky guesses. `program_outcome` is reported
    separately (a scored × program cross-tab), never scored, so "unresolved" stays a
    property of the *available evidence*, not an inherent property of the program.
+   **Established facts are independently validated.** A scanner-emitted fact is not
+   ground truth merely because it is in the packet. Stage 1 records
+   `established_facts_valid ∈ {valid, invalid, unresolved}`. If a load-bearing fact
+   is **invalid**, the reference conclusion is **not** built by treating it as true:
+   the packet is marked invalid, **excluded from the A/B/C analysis**, and reported
+   **separately as an upstream evidence error**. If validity is **unresolved**, the
+   reference conclusion is normally `unresolved` unless it follows *without* that
+   fact. The harness drops `invalid` packets from the scored population and reports
+   their count and the fact-validity distribution.
 4. **Primary metric — three-class macro recall.** Ground truth ∈
    {`VULNERABLE`, `SAFE`, `UNRESOLVED`} (from `evidence_reference_conclusion`);
    prediction ∈ {`VULNERABLE`, `SAFE`, `ABSTAIN`(=predict UNRESOLVED)}; `PARSE_ERROR`
@@ -71,15 +91,15 @@ missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped
 7. **Parse failures / missing outputs.** Mapped to `PARSE_ERROR`/`ABSTAIN` and
    scored **incorrect** under the primary; never dropped. The parse-failure rate is
    reported separately as a data-quality metric.
-8. **Multiple comparisons.** The **primary (B−A) is a single test** — no correction
-   needed. Secondary comparisons (C−A, B−C) are corrected with **Holm–Bonferroni**
+8. **Multiple comparisons.** The **primary (C−B) is a single test** — no correction
+   needed. Secondary comparisons (B−A, C−A) are corrected with **Holm–Bonferroni**
    across the pre-registered secondary family.
 
 ## Canonical uncertainty procedure + rare-class rule
 
 **Cluster (family) bootstrap**, fixed seed `20260101`, **10,000** resamples:
 resample *families* (not instances) with replacement; within each resample recompute
-each condition's **three-class macro recall** and the **paired** difference B−A on
+each condition's **three-class macro recall** and the **paired** difference C−B (primary) on
 the same resampled families; the 95% CI is the **percentile interval** (2.5, 97.5).
 The effect is "significant" iff the 95% CI excludes 0. A **logistic mixed-effects
 model** (random intercept per family) is a pre-registered **secondary** robustness
@@ -94,14 +114,14 @@ macro average — undefined. Two guards:
   results are reported **descriptively** (point only, no CI) — the split is not
   rearranged and copies are not split to buy n. **This is a minimum-count floor, not
   demonstrated statistical power.** The achievable effect size is characterised by
-  `mde_simulation.py` (empirical power vs true B−A gap over the frozen family
+  `mde_simulation.py` (empirical power vs true C−B gap over the frozen family
   structure and assumed prevalences; reports the MDE at 80% power). If the real
   `UNRESOLVED` or `VULNERABLE` family count falls below 12 after labeling, the
   primary is reported descriptively.
   *Result (`study/mde_simulation.json`):* **Under the frozen simulation
   assumptions** (base per-class recall 0.60, family-clustered labels, improvements
   simulated as a uniform per-class recall lift), the estimated 80%-power detectable
-  B−A macro-recall gap is **≈ 0.16–0.20** — ≈0.16 at moderate/rich prevalence
+  C−B macro-recall gap is **≈ 0.16–0.20** — ≈0.16 at moderate/rich prevalence
   (V≈0.15–0.25), ≈0.20 at a low vulnerable base rate (V≈0.08, ~19 vulnerable
   families). This is **not a universal MDE**: it depends on the assumed class
   prevalence, the baseline accuracy, the within-family dependence, and how the
@@ -123,19 +143,20 @@ self-report kept descriptive only), and appropriate-abstention on `UNRESOLVED`.
 ## Reporting order (fixed)
 
 0. **Synthetic freeze numbers are harness-regression outputs, not findings.** The
-   B−A values in `study/scoring_freeze/` exist only to lock the code; they change
+   C−B (and other) values in `study/scoring_freeze/` exist only to lock the code; they change
    with the synthetic seed and instance ids and **must never appear in the results
    section**. Only the real Stage-2 run over real labels produces findings.
 1. Stage-1 class distribution of `evidence_reference_conclusion` (VULNERABLE / SAFE /
-   UNRESOLVED) in dev and confirmatory, **plus the `program_outcome` cross-tab** —
-   reported first, before any accuracy number.
+   UNRESOLVED) in dev and confirmatory, **plus the `program_outcome` cross-tab** and
+   the **fact-validity distribution + count of invalid packets excluded** (as an
+   upstream evidence-error report) — reported first, before any accuracy number.
 2. Confirmatory **minimum inference gate** (families-per-class vs
    `MIN_CLASS_FAMILIES` for all three classes) **without changing the split** —
    decides confirmatory vs descriptive.
 3. Per-condition metrics: primary three-class macro recall + per-class recalls,
    then secondary (resolved full-coverage, selective, coverage, abstention,
    parse-failure, unsupported-assumption).
-4. Primary B−A **three-class macro recall** difference + family-clustered 95% CI
+4. Primary C−B **three-class macro recall** difference + family-clustered 95% CI
    (with the degenerate-resample fraction).
 5. Secondary comparisons (C−A, B−C) with Holm.
 6. `UNRESOLVED` recall (appropriate-abstention) analysis per condition.

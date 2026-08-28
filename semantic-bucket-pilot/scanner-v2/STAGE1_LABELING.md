@@ -35,6 +35,7 @@ preserves three distinct answers:
 
     instance_id                   # joins to study/instances.jsonl (opaque)
     evidence_reference_conclusion # safe | vulnerable | unresolved   <-- SCORED by the primary
+    established_facts_valid        # valid | invalid | unresolved   (independent fact check)
     program_outcome               # safe | vulnerable | not_established  (reported SEPARATELY)
     relationship_answer           # established | contradicted | unresolved
     evidence_basis                # capacity / write_length / guard / reachability /
@@ -58,6 +59,12 @@ preserves three distinct answers:
   not a claim that the program's status is inherently undecidable.
 - `relationship_answer` records whether the length/capacity relationship was
   established, contradicted, or left unresolved by the reference evidence.
+- **`established_facts_valid` independently checks the packet's scanner facts.** A
+  scanner-emitted fact is not ground truth just because it is in the packet. If a
+  load-bearing fact is **invalid**, do **not** build the reference conclusion from
+  it — mark the packet invalid; the harness **excludes it from the A/B/C analysis**
+  and reports it as an upstream evidence error. If validity is **unresolved**, the
+  reference conclusion is normally `unresolved` unless it follows without that fact.
 
 The file does not exist yet — Stage 1 has not run. It is created during review and
 frozen (sha256 recorded) once labeling is complete.

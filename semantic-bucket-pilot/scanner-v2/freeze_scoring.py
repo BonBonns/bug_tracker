@@ -54,19 +54,25 @@ def synth_labels(instances, rng):
         else:
             prog = lc[psc]
             rel = "established" if rng.random() < 0.9 else "contradicted"
+        # independent fact validation (mostly valid; a few invalid/unresolved to
+        # exercise invalid-packet exclusion)
+        fv = rng.random()
+        efv = "invalid" if fv < 0.03 else ("unresolved" if fv < 0.06 else "valid")
         rows.append({"instance_id": r["instance_id"],
                      "evidence_reference_conclusion": lc[psc],  # SCORED (fixed neutral-reference target)
+                     "established_facts_valid": efv,           # valid | invalid | unresolved
                      "program_outcome": prog,                 # reported separately
                      "relationship_answer": rel})
     return rows
 
 
 def synth_predictions(labels, rng):
-    """Three conditions; B deliberately more accurate + better-calibrated than A;
-    C weakest. Includes abstentions and a few parse errors."""
-    acc = {"A": 0.66, "B": 0.82, "C": 0.58}
-    abst = {"A": 0.18, "B": 0.10, "C": 0.22}
-    parse = {"A": 0.03, "B": 0.01, "C": 0.02}
+    """Three conditions on the evidence/interface ladder: A (code only) < B (facts +
+    generic) < C (facts + bucket-guided interface). C is best and abstains more
+    appropriately, so the primary C-B > 0. Includes abstentions and parse errors."""
+    acc = {"A": 0.55, "B": 0.70, "C": 0.84}
+    abst = {"A": 0.20, "B": 0.12, "C": 0.08}
+    parse = {"A": 0.03, "B": 0.02, "C": 0.01}
     rows = []
     gt = {r["instance_id"]: H.scored_label(r) for r in labels}
     for cond in ("A", "B", "C"):
@@ -74,12 +80,11 @@ def synth_predictions(labels, rng):
             u = rng.random()
             if u < parse[cond]:
                 p = "PARSE_ERROR"
-            elif u < parse[cond] + abst[cond] + (0.25 if g == "UNRESOLVED" else 0):
-                # abstain more on truly-unresolved, and B abstains a bit more there
-                if g == "UNRESOLVED" and cond == "B" and rng.random() < 0.5:
-                    p = "ABSTAIN"
-                else:
-                    p = "ABSTAIN"
+            elif u < parse[cond] + abst[cond] + (0.30 if g == "UNRESOLVED" else 0):
+                # the bucket-guided interface (C) abstains a bit more appropriately
+                p = "ABSTAIN"
+                if g == "UNRESOLVED" and cond != "C" and rng.random() < 0.35:
+                    p = rng.choice(["VULNERABLE", "SAFE"])   # over-confident commit
             elif g == "UNRESOLVED":
                 p = rng.choice(["VULNERABLE", "SAFE"])   # over-confident commit
             else:
@@ -87,9 +92,9 @@ def synth_predictions(labels, rng):
                 p = g if correct else ("SAFE" if g == "VULNERABLE" else "VULNERABLE")
             row = {"instance_id": iid, "condition": cond, "prediction": p}
             if p in ("VULNERABLE", "SAFE"):
-                # external adjudication (the ERROR metric): A rests on unsupported
-                # assumptions more often than B.
-                ua = {"A": 0.20, "B": 0.08, "C": 0.25}[cond]
+                # external adjudication (the ERROR metric): the bucket-guided interface
+                # (C) rests on unsupported assumptions least; code-only (A) most.
+                ua = {"A": 0.25, "B": 0.15, "C": 0.07}[cond]
                 ext = rng.random() < ua
                 row["external_unsupported_assumption"] = ext
                 # self-report (descriptive): the model under-reports its own
@@ -149,7 +154,7 @@ def main():
     assert lz["selective_balanced_accuracy"] >= 0.99, "lazy should look great selectively"
     assert (lz["recall_vulnerable"] or 0) < 0.2 and (lz["recall_safe"] or 0) < 0.2, \
         "lazy resolved recalls should be low"
-    assert lz["primary_macro_recall_3class"] < rep1["per_condition"]["B"]["primary_macro_recall_3class"], \
+    assert lz["primary_macro_recall_3class"] < rep1["per_condition"]["C"]["primary_macro_recall_3class"], \
         "primary must penalise strategic abstention"
 
     # (2) OVERCONFIDENT: perfect on resolved, but NEVER abstains -> guesses on every
@@ -193,9 +198,13 @@ def main():
               f"extUnsup={m['external_unsupported_assumption_rate']} "
               f"selfRep={m['self_reported_unsupported_rate']}")
     print("scored field = evidence_reference_conclusion (ONE fixed neutral-reference target for A/B/C), NOT program_outcome")
+    print("primary comparison:", rep1["primary_comparison_is"])
+    print("invalid packets excluded:", rep1["invalid_packets_excluded"]["count"],
+          "| fact validity:", rep1["invalid_packets_excluded"]["fact_validity_distribution"])
     print("scored x program_outcome cross-tab:", rep1["program_outcome_crosstab_scored_x_program"])
-    print(f"[REGRESSION ONLY, not a finding] PRIMARY B-A: {prim['point']:.4f} CI95={prim['ci95']} "
-          f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")
+    print(f"[REGRESSION ONLY, not a finding] PRIMARY {prim['comparison']}: {prim['point']:.4f} "
+          f"CI95={prim['ci95']} inference={prim['inference']} "
+          f"degenerate_frac={prim['degenerate_resample_frac']:.4f}")
     if "secondary_comparisons" in rep1:
         for k, v in rep1["secondary_comparisons"].items():
             print(f"  secondary {k}: {v['point']:.3f} CI {v['ci95']} holm_p={v.get('holm_p')}")

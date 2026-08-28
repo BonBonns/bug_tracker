@@ -23,8 +23,13 @@ import json
 import random
 from collections import Counter, defaultdict
 
-PRIMARY = ("B", "A")          # B - A
-SECONDARY_COMPARISONS = [("C", "A"), ("B", "C")]
+# Arms: A = code-only baseline; B = established facts + generic review;
+#       C = established facts + bucket-guided category-and-question interface.
+# The capability-effect question (does the bucket-guided interface help, evidence
+# held constant) is C - B. B - C tests the COMBINED routing+questioning interface,
+# NOT the bucket label alone (separating the two would need a 4th arm).
+PRIMARY = ("C", "B")          # C - B  (bucket-guided interface effect)
+SECONDARY_COMPARISONS = [("B", "A"), ("C", "A")]  # established-facts effect; combined
 BOOT_SEED = 20260101
 BOOT_N = 10000
 CLASSES = ("VULNERABLE", "SAFE", "UNRESOLVED")
@@ -255,7 +260,15 @@ def run(instances, labels, predictions, split):
     preds_by_cond = dict(preds_by_cond)
     extra_by_cond = dict(extra_by_cond)
 
-    sel = [i for i, r in inst.items() if r["split"] == split]
+    # Independent fact validation: an instance whose packet rests on an INVALID
+    # established fact is excluded from the main A/B/C analysis and reported
+    # separately as an upstream evidence error (never scored as if the fact were
+    # true). 'unresolved' fact validity stays in (the reviewer sets the reference
+    # conclusion to unresolved unless the conclusion follows without that fact).
+    facts_valid = {r["instance_id"]: r.get("established_facts_valid", "valid") for r in labels}
+    split_all = [i for i, r in inst.items() if r["split"] == split]
+    invalid_packets = [i for i in split_all if facts_valid.get(i) == "invalid"]
+    sel = [i for i in split_all if facts_valid.get(i) != "invalid"]
     # families -> ALL three-class instance ids (the primary metric scores VULNERABLE,
     # SAFE and UNRESOLVED, so every labelled instance stays in the population).
     fam_ids_all = defaultdict(list)
@@ -288,6 +301,15 @@ def run(instances, labels, predictions, split):
                           "(ABSTAIN=UNRESOLVED prediction; PARSE_ERROR incorrect)",
         "primary_scores": "evidence_reference_conclusion (ONE fixed neutral-reference "
                           "target, identical for A/B/C), NOT program_outcome",
+        "primary_comparison_is": "C - B (bucket-guided interface effect, evidence held "
+                                 "constant; combined category+question, not label alone)",
+        "invalid_packets_excluded": {
+            "count": len(invalid_packets),
+            "note": ("packets whose established facts were independently judged INVALID; "
+                     "excluded from the A/B/C analysis and reported as upstream evidence "
+                     "errors, never scored as if the fact were true"),
+            "fact_validity_distribution": dict(Counter(facts_valid.get(i, "valid") for i in split_all)),
+        },
         "program_outcome_crosstab_scored_x_program": prog_crosstab,
         "class_distribution": dist,
         "population": {"instances": sum(len(v) for v in fam_ids_all.values()),

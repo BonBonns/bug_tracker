@@ -19,10 +19,10 @@ only** — never as the error metric.
   fixed `evidence_reference_conclusion`. A premise may be *supported* in B/C by an
   established scanner fact yet *unsupported* in A, which never received that fact. So
   each response is adjudicated against the **evidence actually supplied to its
-  condition** (A: code only; B/C: code + the established facts, in B's bucket form or
-  C's focused-question form), **not** the reference packet. The adjudicator is told
-  which evidence set the condition received, but stays **blind to the A/B/C
-  identity** and to any routing/bucket names.
+  condition** (A: code only; B: code + established facts, generic; C: code + the same
+  established facts via the bucket-guided category-and-question interface), **not**
+  the reference packet. The adjudicator is told which evidence set the condition
+  received, but stays **blind to the A/B/C identity** and to any routing/bucket names.
 - The adjudicator also sees the Stage-1 ground-truth evidence basis for the instance.
 
 ## Decision

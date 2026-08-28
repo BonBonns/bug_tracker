@@ -1,11 +1,12 @@
 # The frozen neutral reference packet
 
-A/B/C do **not** contain identical evidence: **A** sees code only, while **B** and
-**C** additionally receive the established scanner facts (B and C share byte-identical
-facts; they differ only in presentation — B's uncertainty bucket vs C's focused
-question). So a per-instance "packet-supported conclusion" would be ambiguous: it
-would silently correspond to one condition's packet, and scoring A/B/C against
-different targets would make their accuracies incomparable.
+A/B/C do **not** contain identical evidence: **A** sees code only; **B** and **C**
+additionally receive the established scanner facts. B and C share **byte-identical**
+facts and differ only in presentation — **B** presents them with generic review,
+**C** through the bucket-guided interface (typed category **and** focused question).
+So a per-instance "packet-supported conclusion" would be ambiguous: it would silently
+correspond to one condition's packet, and scoring A/B/C against different targets
+would make their accuracies incomparable.
 
 **Fix: one fixed reference target.** The primary scores every condition against a
 single `evidence_reference_conclusion` per instance, derived by the Stage-1
@@ -40,11 +41,25 @@ common evidence support?*
 - **Accuracy target: fixed across A/B/C.** All three are scored on
   `evidence_reference_conclusion`. The question each condition answers is whether its
   *presentation* helps the model reach the conclusion the common evidence supports.
-- **B-vs-C is especially clean:** B and C contain byte-identical established facts, so
-  a B−C difference isolates presentation (bucket vs focused question) with the
-  evidence held constant.
-- **A** has strictly less evidence (code only); an A−B/A−C gap conflates added
-  evidence with presentation, and is read accordingly.
+- **C−B is the primary and is especially clean:** B and C contain byte-identical
+  established facts, so the difference isolates presentation with the evidence held
+  constant. **But C adds both** the typed category **and** the focused question, so
+  `C − B` tests the **combined routing-and-questioning interface**, not the bucket
+  label alone. No B−C difference may be attributed specifically to the label;
+  separating label from question would need a fourth arm.
+- **A** has strictly less evidence (code only); `B − A` measures the value of the
+  established facts under generic review, and `C − A` the combined effect. Neither
+  isolates presentation.
+
+## Established facts are independently validated
+
+A scanner-emitted fact is not ground truth merely because it appears in the packet.
+Stage 1 records `established_facts_valid ∈ {valid, invalid, unresolved}`. If a
+load-bearing fact is **invalid**, the reference conclusion is **not** built by
+treating it as true — the packet is marked invalid, **excluded from the A/B/C
+analysis**, and reported separately as an upstream evidence error. If validity is
+**unresolved**, the reference conclusion is normally `unresolved` unless it follows
+without that fact.
 
 ## Condition-relative exception: unsupported-assumption adjudication
 
