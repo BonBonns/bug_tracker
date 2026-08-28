@@ -99,7 +99,7 @@ ck("10d. byte array literal bytes (k>N) -> proven_oversized",
 #     (structural: analyze_operations_v2 only augments abstained/required_evidence_absent;
 #     verified end-to-end by the v1-vs-v2 comparison. Here assert the guard exists.)
 import inspect
-src = inspect.getsource(v2.analyze_operations_v2)
+src = inspect.getsource(v2._analyze_both)   # augmentation core (shared by v2 and v1+v2)
 ck("11. heap/other records untouched (only abstained+required_evidence_absent augmented)",
    'required_evidence_absent' in src and 'out.append(r)   # heap / other -> unchanged' in src)
 

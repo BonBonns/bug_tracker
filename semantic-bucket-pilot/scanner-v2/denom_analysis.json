@@ -1,0 +1,26 @@
+{
+  "question": "Why 2,174 raw runtime records but 2,150 distinct operations in the comparison?",
+  "raw_runtime_records": 2174,
+  "distinct_by_frozen_fingerprint": 2150,
+  "missing": 24,
+  "cause": "within-scan fingerprint collisions (not cross-producer dedup, not filtering, not a failed join)",
+  "colliding_fingerprints": 12,
+  "extra_records_from_collisions": 24,
+  "all_collision_status_pairs": {"abstained->abstained": 24},
+  "route_conclusions_affected": 0,
+  "note": "Every collision is a single (file,function,line,dest) site emitting several raw runtime call records (a macro/repeat expansion). The frozen fingerprint (_source_label|file|function|line|dest) treats one physical destination-operation as one case, collapsing only duplicates. All are abstained in both v1 and v2, so no route conclusion changes.",
+  "collisions": [
+    {"fingerprint": "629da636a357d73c", "records": 4, "source": "E4/patched", "function": "sample_matrix_A_e71", "line": 3124, "dest": "copy_of_seed"},
+    {"fingerprint": "9745f8fbbd59c024", "records": 4, "source": "E4/patched", "function": "sample_matrix_A_e71", "line": 3124, "dest": "copy_of_seeds"},
+    {"fingerprint": "4db99a5260da9f71", "records": 2, "source": "E4/patched", "function": "sample_matrix_A_e70", "line": 6235, "dest": "copy_of_seed"},
+    {"fingerprint": "55d5197a0697409b", "records": 2, "source": "E4/patched", "function": "sample_matrix_A_e70", "line": 6235, "dest": "copy_of_seeds"},
+    {"fingerprint": "dffca02097db09d2", "records": 3, "source": "E4/patched", "function": "sample_matrix_A_e7", "line": 8149, "dest": "copy_of_seed"},
+    {"fingerprint": "4eb3e49e2e3350ea", "records": 3, "source": "E4/patched", "function": "sample_matrix_A_e7", "line": 8149, "dest": "copy_of_seeds"},
+    {"fingerprint": "d03ae4cb1c6bbae9", "records": 4, "source": "E4/vuln", "function": "sample_matrix_A_e71", "line": 3124, "dest": "copy_of_seed"},
+    {"fingerprint": "3ef43205d3873793", "records": 4, "source": "E4/vuln", "function": "sample_matrix_A_e71", "line": 3124, "dest": "copy_of_seeds"},
+    {"fingerprint": "27607e0058eed5cc", "records": 2, "source": "E4/vuln", "function": "sample_matrix_A_e70", "line": 6235, "dest": "copy_of_seed"},
+    {"fingerprint": "3c924e14d76c4a39", "records": 2, "source": "E4/vuln", "function": "sample_matrix_A_e70", "line": 6235, "dest": "copy_of_seeds"},
+    {"fingerprint": "0a4ff0883f9dc2ae", "records": 3, "source": "E4/vuln", "function": "sample_matrix_A_e7", "line": 8149, "dest": "copy_of_seed"},
+    {"fingerprint": "16f26c0d8bbd663e", "records": 3, "source": "E4/vuln", "function": "sample_matrix_A_e7", "line": 8149, "dest": "copy_of_seeds"}
+  ]
+}

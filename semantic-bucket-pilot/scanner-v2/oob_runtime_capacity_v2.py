@@ -115,27 +115,59 @@ def parse_width(width):
     return "symbolic", None, None
 
 
+# reason-specific routing for an unresolved relationship
+_COUNT_SIZEOF = re.compile(r"^\s*([A-Za-z_][\w.\->\[\] ]*?)\s*\*\s*sizeof\s*\(\s*([\w ]+?)\s*\)\s*$")
+
+
+def _relationship_route(width, T):
+    """Route an unresolved capacity relationship by WHAT is missing:
+      range_arithmetic_review  -- a numeric bound on a count is missing
+      semantic_relationship_review -- the code meaning of the length is unclear
+      additional_evidence_required -- no length expression at all (count-based)."""
+    if width is None:
+        return "additional_evidence_required", "numeric_count_bound", "no width expression (count-based)"
+    m = _COUNT_SIZEOF.match(str(width))
+    if m and m.group(2).strip() == T:
+        return ("range_arithmetic_review", "numeric_count_bound",
+                f"length is count*sizeof({T}); needs a numeric bound count<=N")
+    if m:  # count*sizeof(other) -- type meaning must be reconciled first
+        return ("semantic_relationship_review", "length_meaning",
+                f"length uses sizeof({m.group(2).strip()}) != element {T}; meaning unresolved")
+    return ("semantic_relationship_review", "length_meaning",
+            "length expression meaning unresolved")
+
+
 def compare(ext, width):
-    """Type-matched, offset-0 comparison. Offset is 0 by construction: the sink
-    resolved to a bare LOCAL array decl (an offset like `at+4` resolves to CALL
-    and never reaches here)."""
+    """Type-matched, offset-0 comparison of the WRITE LENGTH against the
+    DESTINATION capacity only. Offset is 0 by construction (sink resolved to a
+    bare LOCAL array decl). Returns (disposition, route, unresolved_property,
+    note). This establishes ONLY write_length_within_destination_capacity; it
+    says nothing about source length, pointer validity, or lifetime."""
     N, T = ext["element_count"], ext["element_type"]
     kind, k, wt = parse_width(width)
     if kind == "symbolic":
-        return "relationship_unresolved", "capacity bound; write count symbolic"
+        route, prop, note = _relationship_route(width, T)
+        return "relationship_unresolved", route, prop, "capacity bound; " + note
     if kind == "k_sizeof":
         if wt != T:
-            return "relationship_unresolved", f"sizeof({wt}) != element type {T} (not simplified)"
+            return ("relationship_unresolved", "semantic_relationship_review", "length_meaning",
+                    f"sizeof({wt}) != element type {T} (not simplified)")
         if k <= N:
-            return "deterministic_complete", f"{k}<={N} elems, offset 0, type-matched (sizeof cancels)"
-        return "proven_oversized", f"{k}>{N} elems into {T}[{N}] -- provable overflow"
+            return ("deterministic_complete", None, "write_length_within_destination_capacity",
+                    f"{k}<={N} elems, offset 0, type-matched (sizeof cancels)")
+        return ("proven_oversized", "range_arithmetic_review", "write_length_within_destination_capacity",
+                f"{k}>{N} elems into {T}[{N}] -- provable destination overflow")
     if kind == "literal_bytes":
         if T in BYTE_TYPES:      # sizeof(T) == 1 -> bytes == elements
             if k <= N:
-                return "deterministic_complete", f"{k} bytes <= {N} (byte array), offset 0"
-            return "proven_oversized", f"{k} bytes > {N} (byte array)"
-        return "relationship_unresolved", "literal byte count vs non-byte array (needs ABI size)"
-    return "relationship_unresolved", "capacity bound; comparison not established"
+                return ("deterministic_complete", None, "write_length_within_destination_capacity",
+                        f"{k} bytes <= {N} (byte array), offset 0")
+            return ("proven_oversized", "range_arithmetic_review", "write_length_within_destination_capacity",
+                    f"{k} bytes > {N} (byte array)")
+        return ("relationship_unresolved", "range_arithmetic_review", "numeric_count_bound",
+                "literal byte count vs non-byte array (needs ABI size)")
+    return ("relationship_unresolved", "semantic_relationship_review", "length_meaning",
+            "capacity bound; comparison not established")
 
 
 def _recognized_calls(d):
@@ -157,8 +189,21 @@ def _recognized_calls(d):
 
 
 def analyze_operations_v2(prefix):
+    _v1, out, transitions = _analyze_both(prefix)
+    return out, transitions
+
+
+def analyze_operations_v1_and_v2(prefix):
+    """Return (v1_runtime_records, v2_runtime_records, transitions) from a SINGLE
+    V1.analyze_operations pass — the runtime producer is the slow one, so callers
+    needing both populations (e.g. the transition matrix) must not run it twice."""
+    return _analyze_both(prefix)
+
+
+def _analyze_both(prefix):
     d = json.load(open(prefix))
     v1_records = [dict(r) for r in V1.analyze_operations(prefix)]
+    v1_frozen = [dict(r) for r in v1_records]
     stack_ext = compute_stack_fixed_array_extents(d)
     calls = _recognized_calls(d)
     fn_ids = {}
@@ -187,41 +232,50 @@ def analyze_operations_v2(prefix):
             r["_v2_note"] = f"no stack extent bound ({why if decl_id is None else 'decl not a fixed array'})"
             out.append(r)
             continue
-        disp, note = compare(ext, width)
+        disp, route, prop, note = compare(ext, width)
         before = {"status": r["analysis_status"], "reason": reason,
                   "route": r.get("recommended_route")}
         r2 = dict(r)
         r2["_v2_evidence"] = {"provenance": "stack_fixed_array", "decl_node": ext["decl_node"],
                               "element_type": ext["element_type"], "element_count": ext["element_count"],
-                              "capacity_expr": ext["capacity_expr"], "width": width, "note": note}
+                              "capacity_expr": ext["capacity_expr"], "width": width,
+                              "established_property": prop, "note": note}
         if disp == "deterministic_complete":
             for k in ("reason_code", "primary_reason_code", "all_reason_codes", "uncertainty_bucket",
                       "recommended_route", "unresolved_property", "llm_eligible"):
                 r2.pop(k, None)
+            # deterministic ONLY for the destination-capacity property; NOT a claim
+            # that the memcpy/operation is safe (source length, pointer validity,
+            # lifetime are separate, unaddressed properties).
             r2["analysis_status"] = "deterministic_complete"
             r2["capacity_basis"] = "stack_fixed_array"
             r2["establishment_status"] = "ESTABLISHED"
+            r2["established_property"] = "write_length_within_destination_capacity"
+            r2["unaddressed_properties"] = ["source_length_sufficiency", "pointer_validity", "lifetime"]
         elif disp == "relationship_unresolved":
             r2["analysis_status"] = "open_candidate"
             r2["reason_code"] = r2["primary_reason_code"] = "capacity_relation_not_established"
             r2["all_reason_codes"] = ["capacity_relation_not_established"]
             r2["uncertainty_bucket"] = "relationship_unresolved"
-            r2["recommended_route"] = "semantic_relationship_review"
-            r2["llm_eligible"] = True
+            r2["recommended_route"] = route
+            r2["unresolved_property"] = prop
+            r2["llm_eligible"] = (route == "semantic_relationship_review")
         elif disp == "proven_oversized":
             r2["analysis_status"] = "open_candidate"
             r2["reason_code"] = r2["primary_reason_code"] = "write_exceeds_stack_capacity"
             r2["all_reason_codes"] = ["write_exceeds_stack_capacity"]
             r2["uncertainty_bucket"] = "relationship_unresolved"
-            r2["recommended_route"] = "range_arithmetic_review"
-            r2["llm_eligible"] = True
+            r2["recommended_route"] = route
+            r2["llm_eligible"] = False
             r2["proven_oversized"] = True
         r2["_v2_disposition"] = disp
+        r2["_v2_route"] = route
         transitions.append({"function": r.get("function"), "line": r.get("line"), "dest": r.get("dest"),
                             "source": r.get("_source_label"), "from": before, "to_status": r2["analysis_status"],
-                            "disposition": disp, "evidence": r2["_v2_evidence"]})
+                            "disposition": disp, "route": route, "established_property": prop,
+                            "evidence": r2["_v2_evidence"]})
         out.append(r2)
-    return out, transitions
+    return v1_frozen, out, transitions
 
 
 if __name__ == "__main__":
