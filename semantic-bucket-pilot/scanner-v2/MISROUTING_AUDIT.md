@@ -1,3 +1,10 @@
+> **SUPERSEDED by `EVIDENCE_TRACE.md`.** This write-up stopped at L2 (the
+> capacity is in the normalized facts) and wrongly called the 544 cases
+> "misrouted." The level-3 check (did the producer BIND the capacity?) shows
+> 0 pure routing bugs: the dominant defect is a producer-consumer gap
+> (`compute_allocation_extents` never consumes stack fixed-array capacities).
+> Read `EVIDENCE_TRACE.md` for the corrected, validated split.
+
 # Misrouting audit — the largest group is misclassified, not missing evidence
 
 The review's hypothesis holds. Of the local-destination operations that v1
