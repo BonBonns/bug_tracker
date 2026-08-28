@@ -277,6 +277,60 @@ is better served by broadening to **other CWEs / genuinely different length-flow
 patterns** than by counting additional pass-through variants. Reported in
 `study/juliet/packet_expansion.json`.
 
+## Broadening to independent families — pre-registered multi-suite scan (`broaden_*.py`)
+
+Pre-registered **before** any yield (`PREREGISTER_BROADENING.md`, `predeclared_suites.py`):
+same fixed property (write length exceeds **destination** capacity, via a copy
+operation), scanned across every present in-scope suite — `CWE121` (stack) and `CWE122`
+(heap), which contain the nested `CWE805`/`CWE806` idioms; `CWE805`/`CWE787` have no
+top-level C dir here; `CWE124/126/127/680` excluded by property. Same 8-step pipeline,
+same seeds/gate, zero model calls.
+
+**Executed in full (did not stop at three):** 6,428 predeclared copy-idiom `.c` files
+scanned in 13 batches → **1,336 eligible** (exact copy sink, POTENTIAL-FLAW line,
+symbolic width, `semantic_relationship_review`, leakage-clean) → **1,032
+packet-identifiable**. Per suite: CWE121 416, CWE122 616 identifiable.
+
+**Clustering sensitivity (confirmatory both-sided families):**
+
+| clustering level | confirmatory | vs gate 12 |
+|------------------|-------------:|:----------:|
+| property signature (dest-capacity mechanism × write-length shape) — *property-faithful* | **2** | below |
+| guard-collapsed dataflow topology | 26 | (meets) |
+| full flow-topology (guards kept; pre-registered key) | 24 | (meets) |
+
+**The high counts are an artifact — honest verdict: 2 independent families, gate NOT
+met.** The raw flow-topology key reads 24, but an audit shows that is inflated by
+variation **superficial to the destination-capacity property**:
+
+- families with **byte-identical** capacity + length + sink lines split only by opaque
+  reachability guards (`if(V)` / `if(V())` / `if(V==L)`) — collapsing guards leaves the
+  count high (26), so guards are not even the main inflation;
+- the real driver is source-side variation that does not touch the property:
+  source-buffer allocation method (`declare` / `alloca` / `malloc`) and subtype label;
+- decisively, **CWE122 "heap" copy cases overflow a stack `dest[50]`** — the *source* is
+  heap-allocated, the destination capacity is the same stack-array reasoning — so CWE122
+  does not, in general, contribute a distinct destination mechanism.
+
+Under the **property-faithful** signature (which abstracts the bad/good discriminating
+values) there are only **2** independent both-sided reasoning patterns:
+
+1. `stack_array_dest | strlen(src)*sizeof` — the CWE806 baseline pattern (624 instances;
+   CWE121 **and** CWE122 stack-dest cases);
+2. `heap_malloc_dest | (strlen(src)+1)*sizeof` — a genuinely distinct destination-capacity
+   mechanism (156 instances, CWE122 with an actual heap destination).
+
+So broadening added **one** genuinely new capacity mechanism (heap-malloc destination)
+over the CWE806 baseline — **2 of 12**, not 12. This confirms the prior expectation that
+scanning more of the same property mostly yields copies of the same reasoning. Reaching
+12 genuinely independent families needs different **length-flow / capacity mechanisms**
+— loop-computed lengths, integer-arithmetic capacities, index writes, `snprintf`-family
+lengths — or real-world code (**Magma**), not more symbolic-`strlen` copy variants. The
+`length_meaning` A/B/C interface, even across all of Juliet's stack+heap copy suites,
+exposes essentially **one-to-two** independent length-vs-capacity reasoning patterns.
+Reported in `study/juliet/broaden_families.json`. The 56 CWE806 packet-insufficient
+cases remain a documented future coverage-extension population (not chased here).
+
 ## Validity caveat (Juliet is synthetic)
 
 Juliet cases are templated: `bad` uses a `BadSource`, `good` a `GoodSource`, in a

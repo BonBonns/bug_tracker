@@ -1,0 +1,609 @@
+{
+  "both_sided_family_provenance": {
+    "flow_02cc2b0026338ab": {
+      "bucket": "confirmatory",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_0faa56b4ca5b893": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_10d50f4f0b16da8": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_16f7256dae7e964": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_1a1c91abe514132": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_1ac74950beb3c6a": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_1d86638d2a4c406": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_1e0625714105b53": {
+      "bucket": "confirmatory",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_289f3beb708c973": {
+      "bucket": "dev",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_2ca489210d02c44": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_31628ea171af811": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_320b79a656ef1d0": {
+      "bucket": "dev",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_3aac723bb852c95": {
+      "bucket": "confirmatory",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_3ef3bc5afe731f3": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_3fa71b81c1affa0": {
+      "bucket": "confirmatory",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_4196f4f82ef77be": {
+      "bucket": "dev",
+      "n": 24,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_488df014aeb0481": {
+      "bucket": "confirmatory",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_4f7e48e2dae00c3": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_56807fe4b4bfeca": {
+      "bucket": "dev",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_5f400a140ef9f45": {
+      "bucket": "confirmatory",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_619b47f1d277e1c": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_665fc81bd3d53b9": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_6ac17065de5851b": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_73254f2719562fa": {
+      "bucket": "confirmatory",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_76a1bf552adb134": {
+      "bucket": "confirmatory",
+      "n": 24,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_78624171d91b6c7": {
+      "bucket": "dev",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_81505a3fc774115": {
+      "bucket": "dev",
+      "n": 16,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_874709dc98f7d10": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_8962220e3b9c9a1": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_9f20c28c8dc258e": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_a2754ddb228698b": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_b1b5ae679868027": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_b1ed05b45b4cd6e": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_b6b660df94dd5d9": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_c42572f9cec05f9": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_c6d63753e29c766": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_cd7953dc1f9f5df": {
+      "bucket": "dev",
+      "n": 32,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_cf8a40ee9aa58f3": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_d127d84d92f9a66": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_d7d3fa73106e49b": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_d8233ab2a818ec6": {
+      "bucket": "dev",
+      "n": 24,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_dd8c03d14a6bed6": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_e46f09887d8c3b5": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_e70b222a584a388": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_ec5bfa704fd65d7": {
+      "bucket": "dev",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_ef1a25d77d21a1e": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE121_Stack_Based_Buffer_Overflow"
+      ]
+    },
+    "flow_f832bd0cdf3357b": {
+      "bucket": "confirmatory",
+      "n": 8,
+      "sinks": [
+        "memcpy",
+        "memmove"
+      ],
+      "suites": [
+        "CWE122_Heap_Based_Buffer_Overflow"
+      ]
+    }
+  },
+  "clustering_sensitivity": {
+    "full_flow_topology (guards kept; pre-registered key)": {
+      "both_sided": 47,
+      "confirmatory_both_sided": 24,
+      "families": 136
+    },
+    "guard_collapsed_dataflow_topology": {
+      "both_sided": 35,
+      "confirmatory_both_sided": 26,
+      "families": 96
+    },
+    "property_signature (dest-capacity x length-shape; property-faithful)": {
+      "both_sided": 2,
+      "confirmatory_both_sided": 2,
+      "families": 4
+    }
+  },
+  "flow_topology_families": {
+    "CAVEAT": "raw flow-topology over-counts superficial variants for this property; see property_signature level and verdict.",
+    "both_sided_families": 47,
+    "confirmatory_both_sided": 24,
+    "gate": 12,
+    "meets_gate_raw_flow_topology": true,
+    "total_families": 136
+  },
+  "independent_reasoning_families (property-faithful, both-sided)": 2,
+  "meets_gate_property_faithful": false,
+  "model_calls": 0,
+  "packet_identifiable": 1032,
+  "packet_insufficient": 304,
+  "per_suite_eligible": {
+    "CWE121_Stack_Based_Buffer_Overflow": 608,
+    "CWE122_Heap_Based_Buffer_Overflow": 728
+  },
+  "per_suite_identifiable": {
+    "CWE121_Stack_Based_Buffer_Overflow": 416,
+    "CWE122_Heap_Based_Buffer_Overflow": 616
+  },
+  "pinned_commit": "f88433e3443648a17671398797a04ea1f8e1a274",
+  "pooled_eligible_instances": 1336,
+  "predeclared_absent": {
+    "CWE787_Out_of_bounds_Write": "no C directory in this mirror",
+    "CWE805_Buffer_Access_with_Incorrect_Length": "no top-level C dir; idiom nested under CWE121/CWE122"
+  },
+  "predeclared_suites_present": [
+    "CWE121_Stack_Based_Buffer_Overflow",
+    "CWE122_Heap_Based_Buffer_Overflow"
+  ],
+  "property_signatures": {
+    "heap_malloc_dest | (V(V)+V)*V(V)": {
+      "both_sided": true,
+      "n": 156,
+      "suites": {
+        "CWE122": 156
+      }
+    },
+    "heap_malloc_dest | V*V(V)": {
+      "both_sided": false,
+      "n": 228,
+      "suites": {
+        "CWE122": 228
+      }
+    },
+    "other_dest | V*V(V)": {
+      "both_sided": false,
+      "n": 24,
+      "suites": {
+        "CWE122": 24
+      }
+    },
+    "stack_array_dest | V(V)*V(V)": {
+      "both_sided": true,
+      "n": 624,
+      "suites": {
+        "CWE121": 416,
+        "CWE122": 208
+      }
+    }
+  },
+  "sufficiency": {
+    "fully_proved (cap+len+relation)": 243,
+    "note": "write_len intra-function; symbolic-source cases lack a concrete constant and are not counted fully-proved here.",
+    "relation_distribution": {
+      "exceeds": 240,
+      "within": 3
+    }
+  },
+  "verdict": "Broadening across the predeclared copy-idiom suites (CWE121 stack + CWE122 heap, incl. nested CWE805/806) scanned 6428 files -> 1336 eligible, 1032 packet-identifiable. Under the pre-registered flow-topology key the confirmatory count reads 24 (>= 12), BUT audit shows that is inflated by variation SUPERFICIAL to the destination-capacity property: opaque reachability guards, source-buffer allocation method (stack/alloca/malloc), and subtype labels. Families with byte-identical capacity+length+sink lines split only by guards; and CWE122 'heap' copy cases overflow a STACK dest, so they share the stack reasoning. Under the property-faithful key (dest-capacity mechanism x write-length shape) there are only 2 independent both-sided reasoning patterns: stack-array dest with symbolic strlen*sizeof, and heap-malloc dest with (strlen+1)*sizeof. So broadening added ONE genuinely new capacity mechanism (heap-malloc dest) over the CWE806 baseline pattern; it did NOT reach 12 independent families. Reaching 12 requires genuinely different length-flow / capacity mechanisms (loop-computed length, integer-arithmetic capacity, index writes) or real-world code (Magma), not more symbolic-strlen copy variants."
+}
