@@ -1,0 +1,55 @@
+{
+  "base_recall": 0.6,
+  "boot": 600,
+  "results": {
+    "low_vuln": {
+      "expected_families_by_class": {
+        "SAFE": 160,
+        "UNRESOLVED": 28,
+        "VULNERABLE": 19
+      },
+      "mde_80pct": 0.2,
+      "power_by_delta": {
+        "0.08": 0.3,
+        "0.12": 0.44,
+        "0.16": 0.76,
+        "0.2": 0.9
+      },
+      "prevalence_u": 0.08,
+      "prevalence_v": 0.08
+    },
+    "moderate": {
+      "expected_families_by_class": {
+        "SAFE": 154,
+        "UNRESOLVED": 32,
+        "VULNERABLE": 47
+      },
+      "mde_80pct": 0.16,
+      "power_by_delta": {
+        "0.08": 0.27,
+        "0.12": 0.64,
+        "0.16": 0.93,
+        "0.2": 0.98
+      },
+      "prevalence_u": 0.1,
+      "prevalence_v": 0.15
+    },
+    "rich": {
+      "expected_families_by_class": {
+        "SAFE": 134,
+        "UNRESOLVED": 47,
+        "VULNERABLE": 78
+      },
+      "mde_80pct": 0.16,
+      "power_by_delta": {
+        "0.08": 0.5,
+        "0.12": 0.73,
+        "0.16": 0.96,
+        "0.2": 1.0
+      },
+      "prevalence_u": 0.15,
+      "prevalence_v": 0.25
+    }
+  },
+  "trials": 100
+}

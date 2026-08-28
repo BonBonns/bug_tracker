@@ -1,23 +1,23 @@
 {
   "artifact_sha256": {
-    "expected_report.json": "474f69a99e19ef6d2f227eff250978b0990115676e335b9dda4fa17bda25e936",
+    "expected_report.json": "163eb69a925ca79d293c0957b946f7beaa85cc82f58f49d33df5db170ef8343b",
     "synthetic_labels.jsonl": "0a6d6f0ff1f3e3b00c3d4e7f7bc70df2460d7574885114bb8f5415708a702b05",
-    "synthetic_predictions.jsonl": "def74f248fbba841aaa4a578c5fa83f5f1d1f549fc09ee0ef9a5e7138ad88341"
+    "synthetic_predictions.jsonl": "216f70b928f03da0c87a06d07e6b68db593eec5417d5d53c05b1ed6d23f5c941"
   },
   "bootstrap": {
     "n": 10000,
     "seed": 20260101
   },
   "primary_ci95_synthetic": [
-    0.08712121212121215,
-    0.27037239868565177
+    0.11812157879573615,
+    0.3124763909125249
   ],
-  "primary_point_synthetic": 0.17766255605381165,
+  "primary_point_synthetic": 0.2146835214679655,
   "purpose": "freeze scoring_harness.py behaviour before real labels exist",
   "seed": 424242,
   "sha256": {
-    "SCORING_PLAN.md": "e1c4d51bc16d85aefcdbedda29352a69fe2f9b5363d0f4656d70e5c5492b111c",
-    "scoring_harness.py": "9cbf853356beb8d39b063d9cd9ef66f7699b1040ed18abff57644b84b3c4e306"
+    "SCORING_PLAN.md": "e1154beca4f8e8d280120007ab554d8fa0c90963e1f7023951715ebd2ebfb69c",
+    "scoring_harness.py": "12a2b1c79e63086b55a096cc3cfa3ad269809eb6baf7adf9d14520b6c99051fb"
   },
   "synthetic": true
 }

@@ -51,6 +51,13 @@ The 498 operations are **not** 498 independent observations, and 214 is **not** 
 sample size either — it is the number of correlation clusters. The labeled units are
 the **438 instances**; the clustering unit is the **214 families**.
 
+The 498→438 difference is reconciled exactly in `PACKET_RECONCILIATION.md`
+(`reconcile_manifest.py`): **60 records collapse**, all of them E2/E4 duplicate scans
+of an *identical revision at the same site* (60 instances each holding 2 ops; size
+histogram {1: 378, 2: 60}). The collapse key is the enclosing-function source hash —
+**no label or outcome information** — and **0 collapses cross pre-patch/post-patch**
+(asserted). So the 60 removed are redundant duplicate-scan observations, not cases.
+
 ## Family clustering key
 
 `content_key = (file, function[normalized], dest, element_type, element_count,

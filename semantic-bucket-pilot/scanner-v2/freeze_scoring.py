@@ -72,7 +72,12 @@ def synth_predictions(labels, rng):
             else:
                 correct = rng.random() < acc[cond]
                 p = g if correct else ("SAFE" if g == "VULNERABLE" else "VULNERABLE")
-            rows.append({"instance_id": iid, "condition": cond, "prediction": p})
+            row = {"instance_id": iid, "condition": cond, "prediction": p}
+            if p in ("VULNERABLE", "SAFE"):
+                # A rests on unsupported assumptions more often than B (secondary metric)
+                ua = {"A": 0.20, "B": 0.08, "C": 0.25}[cond]
+                row["unsupported_assumption"] = rng.random() < ua
+            rows.append(row)
     return rows
 
 
@@ -104,28 +109,40 @@ def main():
     # sanity: the harness must recover the built-in B>A synthetic effect
     prim = rep1["primary_comparison"]
     assert prim["point"] > 0, "synthetic B>A effect not recovered"
-    assert rep1["power_gate"]["passed"], "synthetic power gate should pass"
+    assert rep1["minimum_inference_gate"]["passed"], "synthetic inference gate should pass"
 
-    # anti-gaming regression: a LAZY condition that abstains on everything except a
-    # few easy correct answers must NOT win the primary. It gets ~perfect SELECTIVE
-    # accuracy but poor PRIMARY balanced accuracy (abstain=incorrect).
-    lazy = []
-    ans_budget = {"VULNERABLE": 4, "SAFE": 4}
-    for r in labels:
-        g = r["stage1_label"]
-        if g in ("VULNERABLE", "SAFE") and ans_budget.get(g, 0) > 0:
-            lazy.append({"instance_id": r["instance_id"], "condition": "LAZY", "prediction": g})
-            ans_budget[g] -= 1
-        else:
-            lazy.append({"instance_id": r["instance_id"], "condition": "LAZY", "prediction": "ABSTAIN"})
-    lz = H.condition_metrics({r["instance_id"]: r["stage1_label"] for r in labels},
-                             {"LAZY": {x["instance_id"]: x["prediction"] for x in lazy}},
-                             [r["instance_id"] for r in labels
-                              if r["stage1_label"] in ("VULNERABLE", "SAFE")])["LAZY"]
+    # ---- anti-gaming regression: BOTH failure modes must be penalised ----
+    G = {r["instance_id"]: r["stage1_label"] for r in labels}
+    allids = [r["instance_id"] for r in labels]
+
+    def metrics_for(fn):
+        preds = {i: fn(G[i]) for i in allids}
+        return H.condition_metrics(G, {"X": preds}, allids)["X"]
+
+    # (1) LAZY: abstain on all but a few easy resolved answers -> great SELECTIVE,
+    #     but low resolved recalls and a depressed three-class primary.
+    budget = {"VULNERABLE": [4], "SAFE": [4]}
+    def lazy(g):
+        if g in ("VULNERABLE", "SAFE") and budget[g][0] > 0:
+            budget[g][0] -= 1
+            return g
+        return "ABSTAIN"
+    lz = metrics_for(lazy)
     assert lz["selective_balanced_accuracy"] >= 0.99, "lazy should look great selectively"
-    assert lz["primary_balanced_accuracy"] < 0.3, "lazy must lose on the primary metric"
-    assert lz["primary_balanced_accuracy"] < rep1["per_condition"]["A"]["primary_balanced_accuracy"], \
-        "primary metric failed to penalise strategic abstention"
+    assert (lz["recall_vulnerable"] or 0) < 0.2 and (lz["recall_safe"] or 0) < 0.2, \
+        "lazy resolved recalls should be low"
+    assert lz["primary_macro_recall_3class"] < rep1["per_condition"]["B"]["primary_macro_recall_3class"], \
+        "primary must penalise strategic abstention"
+
+    # (2) OVERCONFIDENT: perfect on resolved, but NEVER abstains -> guesses on every
+    #     UNRESOLVED. recall_unresolved must be ~0 and the primary must fall below a
+    #     CALIBRATED twin that is identical on resolved but abstains on UNRESOLVED.
+    over = metrics_for(lambda g: "VULNERABLE" if g == "UNRESOLVED" else g)
+    cal = metrics_for(lambda g: "ABSTAIN" if g == "UNRESOLVED" else g)
+    assert (over["recall_unresolved"] or 0) < 0.01, "overconfident should never abstain on UNRESOLVED"
+    assert cal["primary_macro_recall_3class"] > over["primary_macro_recall_3class"], \
+        "primary must penalise committing on truly-unresolved cases"
+    assert cal["primary_macro_recall_3class"] >= 0.999, "calibrated-perfect should score ~1.0"
 
     frozen = {
         "purpose": "freeze scoring_harness.py behaviour before real labels exist",
@@ -141,17 +158,18 @@ def main():
         json.dump(frozen, fh, indent=2, sort_keys=True, default=str)
 
     print("synthetic class distribution (confirmatory):", rep1["class_distribution"])
-    print("binary population:", rep1["binary_population"])
-    print("power gate:", rep1["power_gate"]["passed"],
-          f"(vuln_families={rep1['power_gate']['vulnerable_families']}, "
-          f"safe_families={rep1['power_gate']['safe_families']}, "
-          f"min={rep1['power_gate']['min_pos_families']})")
+    print("population:", rep1["population"])
+    g = rep1["minimum_inference_gate"]
+    print(f"minimum inference gate: {g['passed']} (families_by_class={g['families_by_class']}, "
+          f"min={g['min_class_families']}; {g['kind']})")
     print("primary metric:", rep1["primary_metric"])
     for c, m in sorted(rep1["per_condition"].items()):
-        print(f"  {c}: PRIMARY balAcc(abstain=wrong)={m['primary_balanced_accuracy']:.3f} | "
+        print(f"  {c}: PRIMARY macroRecall3={m['primary_macro_recall_3class']:.3f} "
+              f"[V={m['recall_vulnerable']:.2f} S={m['recall_safe']:.2f} U={m['recall_unresolved']:.2f}] | "
+              f"resolvedFC={m['resolved_full_coverage_balanced_accuracy']:.3f} "
               f"selective={m['selective_balanced_accuracy']:.3f} cov={m['coverage']:.3f} "
-              f"abst={m['abstention_rate']:.3f} unresAppAbst={m['unresolved_appropriate_abstention']:.3f}")
-    print(f"PRIMARY B-A (abstain=wrong): {prim['point']:.4f} CI95={prim['ci95']} "
+              f"unsupAssum={m['unsupported_assumption_rate']}")
+    print(f"PRIMARY B-A (macro recall 3-class): {prim['point']:.4f} CI95={prim['ci95']} "
           f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")
     if "secondary_comparisons" in rep1:
         for k, v in rep1["secondary_comparisons"].items():

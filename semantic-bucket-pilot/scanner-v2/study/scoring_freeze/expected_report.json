@@ -1,60 +1,76 @@
 {
-  "binary_population": {
-    "families": 161,
-    "instances": 303,
-    "safe_families": 144,
-    "vulnerable_families": 68
-  },
   "class_distribution": {
     "SAFE": 223,
     "UNLABELED": 0,
     "UNRESOLVED": 29,
     "VULNERABLE": 80
   },
+  "minimum_inference_gate": {
+    "families_by_class": {
+      "SAFE": 144,
+      "UNRESOLVED": 28,
+      "VULNERABLE": 68
+    },
+    "kind": "minimum-count floor, NOT demonstrated power",
+    "min_class_families": 12,
+    "passed": true,
+    "rule": "confirmatory CI computed only if every class reaches MIN_CLASS_FAMILIES; otherwise DESCRIPTIVE point only. See mde_simulation.py for the achievable effect size."
+  },
   "per_condition": {
     "A": {
-      "abstention_rate": 0.1848184818481848,
-      "coverage": 0.8151815181518152,
-      "parse_failure_rate": 0.056105610561056105,
-      "primary_balanced_accuracy": 0.5713004484304933,
-      "primary_sensitivity": 0.6,
-      "primary_specificity": 0.5426008968609866,
-      "selective_balanced_accuracy": 0.7141238012205754,
-      "selective_sensitivity": 0.7741935483870968,
-      "selective_specificity": 0.654054054054054,
-      "unresolved_appropriate_abstention": 0.3793103448275862
+      "abstention_rate": 0.2079207920792079,
+      "coverage": 0.7920792079207921,
+      "parse_failure_rate": 0.0429042904290429,
+      "primary_macro_recall_3class": 0.4545132982835936,
+      "recall_safe": 0.515695067264574,
+      "recall_unresolved": 0.3103448275862069,
+      "recall_vulnerable": 0.5375,
+      "resolved_full_coverage_balanced_accuracy": 0.526597533632287,
+      "selective_balanced_accuracy": 0.6736880666727723,
+      "selective_sensitivity": 0.7049180327868853,
+      "selective_specificity": 0.6424581005586593,
+      "unresolved_appropriate_abstention": 0.3103448275862069,
+      "unsupported_assumption_rate": 0.16923076923076924
     },
     "B": {
-      "abstention_rate": 0.09570957095709572,
-      "coverage": 0.9042904290429042,
+      "abstention_rate": 0.0858085808580858,
+      "coverage": 0.9141914191419142,
       "parse_failure_rate": 0.0033003300330033004,
-      "primary_balanced_accuracy": 0.748963004484305,
-      "primary_sensitivity": 0.7625,
-      "primary_specificity": 0.7354260089686099,
-      "selective_balanced_accuracy": 0.829551705170517,
-      "selective_sensitivity": 0.8472222222222222,
-      "selective_specificity": 0.8118811881188119,
-      "unresolved_appropriate_abstention": 0.3103448275862069
+      "primary_macro_recall_3class": 0.6691968197515591,
+      "recall_safe": 0.7623318385650224,
+      "recall_unresolved": 0.4827586206896552,
+      "recall_vulnerable": 0.7625,
+      "resolved_full_coverage_balanced_accuracy": 0.7624159192825112,
+      "selective_balanced_accuracy": 0.8344748858447488,
+      "selective_sensitivity": 0.8356164383561644,
+      "selective_specificity": 0.8333333333333334,
+      "unresolved_appropriate_abstention": 0.4827586206896552,
+      "unsupported_assumption_rate": 0.08561643835616438
     },
     "C": {
-      "abstention_rate": 0.2706270627062706,
-      "coverage": 0.7293729372937293,
-      "parse_failure_rate": 0.0231023102310231,
-      "primary_balanced_accuracy": 0.4428251121076233,
-      "primary_sensitivity": 0.5,
-      "primary_specificity": 0.38565022421524664,
-      "selective_balanced_accuracy": 0.5863853503184713,
-      "selective_sensitivity": 0.625,
-      "selective_specificity": 0.5477707006369427,
-      "unresolved_appropriate_abstention": 0.5862068965517241
+      "abstention_rate": 0.22112211221122113,
+      "coverage": 0.7788778877887789,
+      "parse_failure_rate": 0.026402640264026403,
+      "primary_macro_recall_3class": 0.47622867377970207,
+      "recall_safe": 0.43946188340807174,
+      "recall_unresolved": 0.5517241379310345,
+      "recall_vulnerable": 0.4375,
+      "resolved_full_coverage_balanced_accuracy": 0.43848094170403584,
+      "selective_balanced_accuracy": 0.5638672599184279,
+      "selective_sensitivity": 0.5645161290322581,
+      "selective_specificity": 0.5632183908045977,
+      "unresolved_appropriate_abstention": 0.5517241379310345,
+      "unsupported_assumption_rate": 0.21285140562248997
     }
   },
-  "power_gate": {
-    "min_pos_families": 12,
-    "passed": true,
-    "rule": "confirmatory CI computed only if both classes reach MIN_POS_FAMILIES; otherwise DESCRIPTIVE point only",
-    "safe_families": 144,
-    "vulnerable_families": 68
+  "population": {
+    "families": 162,
+    "families_by_class": {
+      "SAFE": 144,
+      "UNRESOLVED": 28,
+      "VULNERABLE": 68
+    },
+    "instances": 332
   },
   "primary_comparison": {
     "bootstrap": {
@@ -63,43 +79,43 @@
       "unit": "family"
     },
     "ci95": [
-      0.08712121212121215,
-      0.27037239868565177
+      0.11812157879573615,
+      0.3124763909125249
     ],
     "comparison": "B - A",
     "degenerate_resample_frac": 0.0,
     "excludes_zero": true,
     "inference": "confirmatory",
-    "metric": "primary_balanced_accuracy",
-    "point": 0.17766255605381165
+    "metric": "primary_macro_recall_3class",
+    "point": 0.2146835214679655
   },
-  "primary_metric": "full-population balanced accuracy (ABSTAIN/PARSE=incorrect)",
+  "primary_metric": "three-class macro recall over {VULNERABLE, SAFE, UNRESOLVED} (ABSTAIN=UNRESOLVED prediction; PARSE_ERROR incorrect)",
   "secondary_comparisons": {
     "B - C": {
       "ci95": [
-        0.22305810397553527,
-        0.38906533575317603
+        0.09077154028766932,
+        0.3011159383252407
       ],
       "comparison": "B - C",
       "degenerate_resample_frac": 0.0,
       "excludes_zero": true,
       "holm_p": 0.0,
       "inference": "confirmatory",
-      "metric": "primary_balanced_accuracy",
-      "point": 0.30613789237668165
+      "metric": "primary_macro_recall_3class",
+      "point": 0.19296814597185702
     },
     "C - A": {
       "ci95": [
-        -0.22283298097251591,
-        -0.035376840254889075
+        -0.07234863164110783,
+        0.11123587717474176
       ],
       "comparison": "C - A",
       "degenerate_resample_frac": 0.0,
-      "excludes_zero": true,
-      "holm_p": 0.0074,
+      "excludes_zero": false,
+      "holm_p": 0.6597999999999999,
       "inference": "confirmatory",
-      "metric": "primary_balanced_accuracy",
-      "point": -0.12847533632287
+      "metric": "primary_macro_recall_3class",
+      "point": 0.02171537549610847
     }
   },
   "split": "confirmatory"
