@@ -61,11 +61,12 @@ required_evidence_absent`:
 **24.5 points, from 88.8% to 64.3%** — a real, bounded reduction of the frozen
 distribution, not a headline estimate.
 
-## Conflict sensitivity — the improvement is not an aggregation artifact
+## Conflict sensitivity — the change is not driven by the identified conflict groups
 
 The evidence-monotone canonical rule resolves cross-producer disagreements by
-keeping the most-evidence record. Could the 24.5-point drop be an artifact of that
-policy? No — the two are **completely disjoint**:
+keeping the most-evidence record. Is the 24.5-point drop driven by that policy
+acting on the disagreements it resolves? No — the changed operations and the
+identified conflict groups are **disjoint**:
 
 | | value |
 |--|------|
@@ -83,13 +84,17 @@ Every one of the 2,248 v1 additional-evidence operations lies outside the confli
 groups (conflict groups are ops multiple producers already carried past
 abstention), so excluding conflicts removes none of the changes and the drop
 persists — a **25.8-point** reduction on the conflict-free population. The
-aggregation policy touches none of the 620; the improvement is entirely on
-operations where the producers did not disagree.
+aggregation policy touches none of the 620; the change is entirely on operations
+where the producers did not disagree.
 
-## Generalization — 148 functions, 49 files, not a few big crypto routines
+This sensitivity test shows only that the effect is **not driven by the identified
+cross-producer conflict groups** — it is not a general proof that no aggregation
+choice could ever matter.
 
-Is the 24.5-point improvement broad or concentrated in a handful of large crypto
-functions? Broad:
+## Distribution across the evaluated corpus — 148 functions, 49 files
+
+Within the evaluated corpus, is the 24.5-point change broad or concentrated in a
+handful of large crypto functions? Broad:
 
 | | value |
 |--|------|
@@ -104,12 +109,15 @@ By case family: **E1 = 50, E2 = 204, E4 = 366.** E3 (UTF8) and E5 (AVA) contribu
 **0** — they have no stack-fixed-array write pattern, so the capability correctly
 does nothing there. Within the three crypto-heavy scans the effect is spread
 across 148 functions with no single function above ~6% and the top three under
-13%, so the reduction is a general integration improvement, not a few big
-functions inflating the headline.
+13%, so within this corpus the reduction is broadly distributed, not a few big
+functions inflating the headline. This is **distribution across the evaluated
+corpus**, not out-of-sample generalization — three internal case families cannot
+establish that the effect holds on unseen code.
 
 *(The `deterministic_complete` subset alone remains narrow — 54 ops, one comba
 pattern plus byte-array key/hash copies — as reported in `EVIDENCE_TRACE.md`. It
-is the full 620, dominated by the 566 relationship moves, that generalizes.)*
+is the full 620, dominated by the 566 relationship moves, that is broadly
+distributed across the corpus.)*
 
 ## Honesty checks
 
@@ -133,13 +141,26 @@ is the full 620, dominated by the 566 relationship moves, that generalizes.)*
 
 It shows how far the frozen v1 route distribution moves once the runtime producer
 consumes stack fixed-array capacity it already had in the normalized facts. It is
-measured over the expansion population, with cursor and interproc frozen, so the
-movement is attributable to that one capability. It does **not** claim any of the
-620 operations is safe: 54 establish the destination-capacity property only, and
-566 move to a reviewable route (relationship bound, count/relationship still to be
-resolved). The remaining 64.3% additional-evidence population is out of this
-capability's reach (normalizer loss, local pointers, name collisions, genuine
-multi-identity, heap) and remains future work.
+measured over the evaluated corpus, with cursor and interproc frozen, so the
+movement is attributable to that one capability, and — per the sensitivity test —
+is not driven by the identified cross-producer conflict groups.
+
+It does **not** claim any of the 620 operations is safe: 54 establish the
+destination-capacity property only, and 566 move to a reviewable route
+(relationship bound, count/relationship still to be resolved). The remaining 64.3%
+additional-evidence population is out of this capability's reach (normalizer loss,
+local pointers, name collisions, genuine multi-identity, heap) and remains future
+work.
+
+**This is a routing result, not an accuracy result.** It does not establish that
+the new routes are *correct*. Whether consuming this evidence improves
+vulnerability-adjudication accuracy remains **untested**: the 498 LLM-eligible
+operations need independent outcome labels — with enough genuine vulnerable cases
+— before an A/B/C accuracy comparison can be run. The defensible conclusion for
+now: v2 substantially reduced premature requests for additional evidence by
+consuming locally available capacity facts; the effect was broadly distributed
+across the evaluated corpus and not driven by the identified conflict groups;
+whether it also produces better security decisions is the next phase.
 
 Full matrix, per-operation changes, masked/conflict counts:
 `transition_matrix_v1_v2.json`.

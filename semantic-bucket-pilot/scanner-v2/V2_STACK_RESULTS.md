@@ -147,3 +147,12 @@ frozen v1 remains the untouched baseline.
 
 Out-of-reach classes (normalizer loss, local pointers, name collisions, genuine
 multi-identity, heap) are unchanged and remain future work.
+
+This is a **routing result, not an accuracy result.** Over the complete
+three-producer population, this capability lowers the `additional_evidence_required`
+share from 88.8% to 64.3% (see `ROUTE_TRANSITION_MATRIX.md`), broadly distributed
+across the evaluated corpus and not driven by the identified cross-producer conflict
+groups. It does **not** establish that the new routes are correct: whether consuming
+this evidence improves vulnerability-adjudication accuracy is **untested** and
+requires independent outcome labels for the 498 LLM-eligible operations — with
+enough genuine vulnerable cases — before an A/B/C comparison.
