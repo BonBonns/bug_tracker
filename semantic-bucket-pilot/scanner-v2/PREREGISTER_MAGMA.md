@@ -23,28 +23,56 @@ Example (TIF002, `libtiff/tif_pixarlog.c`): canary `(tmsize_t)sp->stream.avail_o
 sp->tbuf_size` — write length vs destination capacity, a real symbolic length↔capacity
 relation of the class the `length_meaning` A/B/C interface tests.
 
-## Inclusion rule (all must hold; frozen before usable-yield is claimed)
+## A canary match is a CANDIDATE, not an eligible case
 
-1. **Property**: the canary condition is a comparison of a length/index/offset/count term
-   against a capacity/size/bound term at a **write** (not a read overrun, integer-overflow
-   of a scalar, null/type/state check, or float validation).
-2. **Fetch pinned source**: `targets/<t>/fetch.sh` clones the upstream repo at its pinned
-   commit; the bug patch is applied.
-3. **Two variants per bug**: vulnerable = FIXES undefined; safe = FIXES defined. Both are
-   the same source at the same site.
-4. **Strip the oracle from the packet**: the `MAGMA_LOG("%MAGMA_BUG%", …)` canary states
-   the vulnerability condition verbatim and MUST be removed (as Juliet's `POTENTIAL FLAW`
-   is), along with `MAGMA_ENABLE_*` markers, before any packet is built. The safe/vuln
-   label comes only from which variant was compiled, tracked in metadata, never in the
-   packet.
-5. **Scanner highlight**: the frozen scanner (`c2cpg → export → normalize →
-   oob_runtime_capacity_v2`) must highlight the **write at the canary site** and bind a
-   destination capacity (stack array, heap extent, or a fixed `sizeof` buffer).
-6. **Route**: that operation routes to `semantic_relationship_review` (the length_meaning
-   bucket) — i.e. the length↔capacity relation is symbolic, not deterministically closed.
-7. **Both sides present and packet-identifiable**: vulnerable and safe packets are
-   distinguishable after oracle-stripping; capacity + write length are established (heap
-   extents read from the internal facts, `sizeof(T)` kept symbolic — no ABI byte size).
+A canary encodes a *trigger condition*; it need not correspond to a TChecker-supported
+destination write. Counting canary matches as eligible would overstate the yield. Every
+bug advances through the staged manifest below and is `eligible` only when ALL eight
+conditions hold. No yield is counted before this rule is frozen (it is, here).
+
+## Eligibility rule (all eight must hold; FROZEN)
+
+1. **Configurations**: the bug has a vulnerable AND a fixed configuration
+   (`MAGMA_ENABLE_FIXES` present in the patch); vulnerable = FIXES undefined, safe = FIXES
+   defined, same source at the same site.
+2. **Canary → write mapping**: the canary maps, edge by edge (canary condition → underlying
+   state → the actual write/index operation → destination), to a real
+   **destination-writing** operation — not merely a trigger predicate.
+3. **Property**: the relevant property is a **write extent or index exceeding destination
+   capacity** (not a read overrun, scalar integer-overflow, null/type/state check, or float
+   validation).
+4. **Scanner recognition**: TChecker recognizes that **exact** write/index operation
+   (standard sink, library copy alias, or index write) at the mapped site.
+5. **Evidence**: destination capacity AND write-length/index evidence are **established or
+   explicitly unresolved** (heap extents read from internal facts; `sizeof(T)` kept
+   symbolic — no ABI byte size assumed). An out-of-packet (propagated/caller) fact is NOT
+   packet-validated: include the caller allocation/provenance in the packet, or exclude the
+   case — never present it as if locally established.
+6. **Leakage-safe packet**: canary code, the `%MAGMA_BUG%` condition, bug IDs,
+   `MAGMA_ENABLE_*` fix macros, comments, and any outcome-revealing names are removed from
+   reviewer packets. The safe/vuln label comes only from which variant was compiled,
+   tracked in metadata.
+7. **Oracle-confirmed outcomes**: vulnerable and fixed outcomes are confirmed by Magma's
+   executable oracle (the canary fires on the vulnerable build, not on the fixed build).
+8. **Obligation clustering**: usable cases are clustered by the actual **source-to-capacity
+   proof obligation**, not by different-looking canary expressions (two canaries with
+   different syntax but the same obligation are one family; one canary syntax covering two
+   obligations is two).
+
+## Staged feasibility manifest (built BEFORE counting yields)
+
+One row per bug, advancing through explicit stages so gains/losses are visible and no
+successful-only subset is selected:
+
+`catalogued → property_candidate → source_available → write_mapped → pair_available →
+ scanner_recognized → packet_valid → eligible`
+
+Early stages (`catalogued … pair_available`) are determinable mechanically from the
+patches now; the later stages (`scanner_recognized`, `packet_valid`, `eligible`) are
+gated on the build-driven scanning integration (`MAGMA_FEASIBILITY.md`) and are marked
+`pending_build_integration` until real bodies parse — with a definite negative recorded
+where already known (e.g. a canary with no destination write, or a write the scanner
+cannot yet recognize). Artifact: `study/magma/feasibility_manifest.{json,csv}`.
 
 ## Reporting commitments
 

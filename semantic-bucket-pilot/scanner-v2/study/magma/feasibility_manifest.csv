@@ -1,0 +1,139 @@
+bug,target,file,property_candidate,source_available,write_mapped,write_kind,pair_available,scanner_recognized,packet_valid,eligible,canary
+PNG001,libpng,pngrutil.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,row_factor_l == ((size_t)1 << (sizeof(png_uint_32) * 8))
+PNG002,libpng,png.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(image->flags & PNG_IMAGE_FLAG_INVALID) != 0
+PNG003,libpng,pngrutil.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,num > max_palette_length
+PNG004,libpng,pngrutil.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(row_width * pixel_depth) != (u_int64_t)row_width * pixel_depth
+PNG005,libpng,png.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,row_bytes_check < ((png_ptr->width + 7) & ~((png_uint_32)7))
+PNG006,libpng,png.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_AND(info_ptr->eXIf_buf != NULL, (mask & info_ptr->free_me & PNG_FREE_EXIF) == 0)"
+PNG007,libpng,pngrtran.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,png_ptr->palette == NULL
+SND001,libsndfile,src/paf.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(paf_fmt.channels < 1, paf_fmt.channels > SF_MAX_CHANNELS)"
+SND002,libsndfile,src/sd2.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,rsrc.map_offset + 28 > rsrc.rsrc_len
+SND004,libsndfile,src/file_io.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(bytes == 0, items == 0)"
+SND005,libsndfile,src/aiff.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,psf->sf.channels > (layout_tag & 0xffff)
+SND006,libsndfile,src/flac.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,psf->sf.channels != (int) frame->header.channels
+SND007,libsndfile,src/flac.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_AND(psf->sf.channels > 0, psf->sf.samplerate != (int) metadata->data.stream_info.sample_rate)"
+SND010,libsndfile,src/common.c,True,True,yes,copy_sink,True,pending_build_integration,pending_build_integration,pending_build_integration,psf->header.indx + 4 + (sf_count_t) size + (sf_count_t) (size & 1) > psf->header.len
+SND012,libsndfile,src/common.c,True,True,yes,copy_sink,True,pending_build_integration,pending_build_integration,pending_build_integration,psf->header.indx + 4 + (sf_count_t) size + (sf_count_t) (size & 1) > psf->header.len
+SND013,libsndfile,src/common.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,psf->header.indx + 1 + (sf_count_t) size > psf->header.len
+SND014,libsndfile,src/alaw.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,!isfinite(ptr[i])
+SND015,libsndfile,src/alaw.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,ptr[i] == INT_MIN
+SND016,libsndfile,src/double64.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,psf->sf.channels > SF_MAX_CHANNELS
+SND017,libsndfile,src/wavlike.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,k >= psf->sf.channels
+SND020,libsndfile,src/wavlike.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,bit < 2
+SND022,libsndfile,src/ulaw.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,!isfinite(ptr[i])
+SND023,libsndfile,src/ulaw.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,ptr[i] == INT_MIN
+SND024,libsndfile,src/flac.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_AND(psf->sf.channels > 0, psf->sf.channels != (int) metadata->data.stream_info.channels)"
+SND025,libsndfile,src/wav.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,psf->instrument->loop_count > ARRAY_LEN (psf->instrument->loops)
+TIF001,libtiff,libtiff/tif_predict.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,(cc%stride)!=0
+TIF002,libtiff,libtiff/tif_pixarlog.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,(tmsize_t)sp->stream.avail_out > sp->tbuf_size
+TIF003,libtiff,libtiff/tif_read.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,stripsperplane == 0
+TIF004,libtiff,libtiff/tif_ojpeg.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,sp->decoder_ok == 0
+TIF005,libtiff,libtiff/tif_luv.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,sp->encoder_state == 0
+TIF006,libtiff,libtiff/tif_pixarlog.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(sp->state&PLSTATE_INIT) == 0
+TIF007,libtiff,libtiff/tif_dirread.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,"nstrips > TIFFhowmany_32(td->td_imagelength, rowsperstrip)"
+TIF008,libtiff,libtiff/tif_next.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,op_offset >= scanline
+TIF009,libtiff,libtiff/tif_dirwrite.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,tif->tif_dir.td_transferfunction[2] == NULL
+TIF010,libtiff,libtiff/tif_lzw.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,tp <= op
+TIF011,libtiff,libtiff/tif_print.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(i == sizeof(td->td_transferfunction) / sizeof(*td->td_transferfunction), i == (td->td_samplesperpixel - td->td_extrasamples))"
+TIF012,libtiff,libtiff/tif_dir.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,
+TIF013,libtiff,libtiff/tif_jbig.c,False,True,yes,wrapper_copy,True,no_not_capacity_write_property,no,no,(tmsize_t)decodedSize > size
+TIF014,libtiff,libtiff/tif_dirread.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+XML001,libxml2,valid.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,(size - len - xmlStrlen(content->prefix)) < (xmlStrlen(content->name) + 10)
+XML002,libxml2,valid.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,1
+XML003,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+XML004,libxml2,xzlib.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+XML005,libxml2,xmlmemory.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,size > (MAX_SIZE_T - RESERVE_SIZE)
+XML006,libxml2,valid.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,size - strlen(buf) <= 2
+XML007,libxml2,HTMLparser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,avail != (in->end - in->cur)
+XML008,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,ctxt->instate == XML_PARSER_EOF
+XML009,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,m_tmp < 0
+XML010,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+XML011,libxml2,xmlstring.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,size < 0
+XML012,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(end - len) != (BASE_PTR + startPosition)
+XML013,libxml2,HTMLparser.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,q != (BASE_PTR+startPosition)
+XML014,libxml2,HTMLparser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,in >= ctxt->input->end
+XML015,libxml2,HTMLparser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,ctxt->input->base != base
+XML016,libxml2,xmlregexp.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,end < start
+XML017,libxml2,parser.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,RAW != '>'
+LUA001,lua,ldebug.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,INT_MAX - nextra <= (n - 1)
+LUA002,lua,ldebug.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,p->lineinfo == NULL
+LUA003,lua,liolib.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,!l_checkmodep(mode)
+LUA004,lua,ldebug.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,"pcRel(L->oldpc, p) < 0"
+SSL001,openssl,crypto/asn1/a_int.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,i == 0
+SSL002,openssl,ssl/statem/statem.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,s->init_msg != (s->init_buf->data + msg_offset)
+SSL003,openssl,crypto/asn1/a_d2i_fp.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,i <= 0
+SSL004,openssl,crypto/x509/x509_obj.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,num > (int)sizeof(ebcdic_buf)
+SSL005,openssl,ssl/statem/extensions_srvr.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SSL006,openssl,crypto/evp/encode.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,INT_MAX - inl < ctx->num
+SSL007,openssl,crypto/mdc2/mdc2dgst.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,SIZE_MAX - len < i
+SSL008,openssl,ssl/statem/statem_clnt.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SSL009,openssl,crypto/x509/v3_addr.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SSL010,openssl,crypto/bn/bn_local.h,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SSL011,openssl,crypto/pkcs7/pk7_doit.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_AND(data_body == NULL, in_bio == NULL)"
+SSL012,openssl,crypto/x509/x509_req.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SSL013,openssl,crypto/rsa/rsa_ameth.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,magma_int < 0
+SSL014,openssl,crypto/asn1/a_type.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,a->type == V_ASN1_BOOLEAN
+SSL015,openssl,crypto/pkcs7/pk7_doit.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,"MAGMA_OR(p7 == NULL, p7->d.ptr)"
+SSL016,openssl,crypto/bn/bn_gf2m.c,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,udp[0] == 0
+SSL017,openssl,crypto/x509/x509_vfy.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,best_crl == NULL
+SSL018,openssl,ssl/statem/statem_dtls.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,msg_len > dtls1_max_handshake_message_len(s)
+SSL019,openssl,ssl/record/rec_layer_s3.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,
+SSL020,openssl,ssl/t1_lib.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,eticklen <= TLSEXT_KEYNAME_LENGTH + EVP_CIPHER_CTX_get_iv_length(ctx) + mlen
+PHP001,php,ext/phar/phar.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"memchr(pos + 1, '.', filename_len - (pos - filename) - 1) == NULL"
+PHP002,php,ext/exif/exif.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,dir_offset > SIZE_MAX - 2
+PHP003,php,ext/exif/exif.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_AND((bool)data, ImageInfo->Thumbnail.size < 4)"
+PHP004,php,ext/exif/exif.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,
+PHP005,php,ext/iconv/iconv.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,str_left <= 1
+PHP006,php,ext/exif/exif.c,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,pos >= ImageInfo->Thumbnail.size
+PHP007,php,ext/phar/phar.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PHP008,php,ext/standard/dns.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,dlen == 0
+PHP009,php,ext/exif/exif.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PHP010,php,ext/exif/exif.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PHP011,php,ext/exif/exif.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"ptr_offset_overflows(info->offset_base, offset)"
+PHP012,php,ext/standard/http_fopen_wrapper.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,tmp_line_len < 1
+PHP013,php,ext/intl/msgformat/msgformat_parse.c,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,
+PHP014,php,ext/intl/locale/locale_methods.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PHP015,php,ext/phar/phar.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PHP016,php,ext/phar/util.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PDF001,poppler,poppler/SplashOutputDev.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(surface_width == 0, surface_height == 0)"
+PDF002,poppler,poppler/JPEG2000Stream.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,oLen.getInt() < 0
+PDF003,poppler,utils/HtmlOutputDev.cc,False,True,yes,copy_sink,True,no_not_capacity_write_property,no,no,"MAGMA_AND(colorMap->getColorSpace2() == nullptr, (size_t)colorMap->getNumPixelComps() > sizeof(zero))"
+PDF004,poppler,splash/SplashXPathScanner.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(intersectionIndex < 0, (unsigned)intersectionIndex >= allIntersections.size())"
+PDF005,poppler,poppler/JPEG2000Stream.cc,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,componentPixels != priv->npixels
+PDF006,poppler,splash/Splash.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+PDF007,poppler,poppler/Stream.cc,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,readChars < 0
+PDF008,poppler,poppler/GfxState.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,vertsPerRow <= 0
+PDF009,poppler,poppler/Parser.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,length >= LLONG_MAX - pos - 5000
+PDF010,poppler,poppler/SplashOutputDev.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,t3GlyphStack == nullptr
+PDF011,poppler,poppler/XRef.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,i < 0
+PDF012,poppler,poppler/Parser.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pos > LLONG_MAX - length
+PDF013,poppler,poppler/FileSpec.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,!fileSpec.isDict()
+PDF014,poppler,poppler/XRef.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,i >= capacity
+PDF015,poppler,poppler/FileSpec.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,!m_objStr.isStream()
+PDF016,poppler,poppler/Parser.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(num <=0, gen < 0)"
+PDF017,poppler,fofi/FoFiTrueType.cc,True,True,needs_source,,True,pending_write_unmapped_needs_source,pending_build_integration,pending_build_integration,length > (int)sizeof(vheaTab)
+PDF018,poppler,poppler/Annot.cc,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,!path
+PDF019,poppler,poppler/JBIG2Stream.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAGMA_OR(y + yy >= h, y + yy < 0)"
+PDF020,poppler,fofi/FoFiType1C.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,val.pos == offset
+PDF021,poppler,poppler/Stream.cc,False,True,needs_source,,True,no_not_capacity_write_property,no,no,nComps <= 0
+PDF022,poppler,poppler/GfxState.cc,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,"MAGMA_AND(alt->getMode() == csDeviceGray, name->cmp(""Black"") == 0)"
+SQL001,sqlite3,ext/fts5/fts5_hash.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,"MAGMA_AND(pTerm != 0, pIter->nKey+1 < nTerm)"
+SQL002,sqlite3,src/select.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pParse->nErr
+SQL003,sqlite3,src/select.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(p->selFlags & SF_Distinct)!=0
+SQL004,sqlite3,ext/misc/zipfile.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(int)strlen(zPath) != nPath
+SQL005,sqlite3,ext/misc/zipfile.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,zPath == 0
+SQL006,sqlite3,src/select.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,p->pWin != 0
+SQL007,sqlite3,src/build.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pSelect != 0
+SQL008,sqlite3,src/shell.c.in,False,True,yes,array_index_write,True,no_not_capacity_write_property,no,no,azCol==0
+SQL009,sqlite3,src/vdbemem.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,ExpandBlob(pVal)
+SQL010,sqlite3,src/whereexpr.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pTerm!=&pWC->a[idxTerm]
+SQL011,sqlite3,ext/rtree/rtree.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,pRtree->iNodeSize<(512-64)
+SQL012,sqlite3,src/pragma.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"sqlite3VdbeGetOp(v,-1)->opcode!=OP_Column"
+SQL013,sqlite3,src/where.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pNew->nLSlot < (pNew->nLTerm+1)
+SQL014,sqlite3,src/select.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pParse->nErr != 0
+SQL015,sqlite3,src/resolve.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SQL016,sqlite3,src/vdbe.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,(pIn3->flags & MEM_Dyn) != (flags3 & MEM_Dyn)
+SQL017,sqlite3,src/expr.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,
+SQL018,sqlite3,src/expr.c,False,True,yes,pointer_deref_write,True,no_not_capacity_write_property,no,no,dequote==0
+SQL019,sqlite3,src/printf.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,"MAX(e2,0) + precision > (((int)-1)&0x7fffffff) - 15 - width"
+SQL020,sqlite3,src/window.c,False,True,needs_source,,True,no_not_capacity_write_property,no,no,pDup->u.zToken !=0
