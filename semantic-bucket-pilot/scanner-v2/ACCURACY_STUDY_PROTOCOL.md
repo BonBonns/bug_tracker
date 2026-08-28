@@ -4,6 +4,12 @@ Status: **not started.** This file records the design constraints for the accura
 study so the routing result does not silently imply it. The routing study
 (`ROUTE_TRANSITION_MATRIX.md`) is finished and answers a *different* question.
 
+**Scope note:** as the corpus froze, all 438 LLM-eligible cases are one bucket
+(`length_meaning`), so the executed A/B/C is a **single-bucket evaluation**, not a
+general bucket-guided-review test (`STUDY_SCOPE.md`). "Bucket-guided review" below
+refers to the general design question; the run tests the `length_meaning` bucket's
+focused interface only.
+
 ## The two questions are distinct
 
 - **Routing (done).** Given v1's abstentions, does consuming locally available

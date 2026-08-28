@@ -1,5 +1,10 @@
 # Stage 2 scoring plan — pre-registered BEFORE labels or model outputs exist
 
+**Scope: single-bucket (`length_meaning`) A/B/C evaluation.** All 438 LLM-eligible
+instances are the one bucket `length_meaning`, so `C − B` tests the focused
+length-relationship interface, not bucket selection or bucket-guided review in
+general (`STUDY_SCOPE.md`). Results must not be generalized to other buckets/routes.
+
 Frozen before any Stage-1 label or A/B/C output is visible, so no analysis decision
 is made after seeing the class distribution or the results. The canonical
 implementation is `scoring_harness.py`, frozen against synthetic labels

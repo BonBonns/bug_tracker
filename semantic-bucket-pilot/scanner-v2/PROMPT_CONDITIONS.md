@@ -1,4 +1,9 @@
-# A/B/C prompt conditions — token-matched, evidence-held-constant
+# A/B/C prompt conditions — length-matched, evidence-held-constant
+
+**Scope: single bucket `length_meaning`.** All 438 cases are one bucket, so `C − B`
+tests the focused length-relationship interface, not bucket selection
+(`STUDY_SCOPE.md`).
+
 
 `C − B` must isolate TChecker's bucket-guided **category-and-question interface**,
 not raw verbosity. If C adds a category and a focused question while B only says
@@ -68,16 +73,19 @@ Before any A/B/C model call, freeze and verify, using the **fixed model tokenize
 - **same code** (byte-identical across A/B/C) — hashed;
 - **byte-identical facts** (B vs C) — hashed;
 - **same response schema** (byte-identical across A/B/C) — hashed;
-- **comparable instruction-token count**: `|tokens(C_instruction) −
-  tokens(B_instruction)| ≤ TOLERANCE`, computed per instance (the category/question
-  text varies per instance) and reported as a distribution, with the **exact
-  tokenizer name/version, the per-instance token counts, and the tolerance** recorded
-  in `study/prompts_FROZEN.json`;
+- **comparable instruction length**: `|tokens(C_instruction) −
+  tokens(B_instruction)| ≤ TOLERANCE`, computed per instance and reported as a
+  distribution, with the **tokenizer name/version, per-instance counts, and
+  tolerance** recorded in `study/prompts_FROZEN.json`. Use the **fixed provider's
+  token-count facility or actual input-token metadata**. If authoritative counts are
+  unavailable, retain the declared proxy, report it transparently, and **also report
+  char/word counts** — do **not** call it exact tokenizer matching;
 - **only C** contains the category and the relationship question (A and B must not).
 
-If token matching is already implemented, that freeze documents the tokenizer, the
-counts, and the tolerance. If not (current state), the prompts are corrected until
-the tolerance holds under the fixed tokenizer, then re-frozen — before A/B/C calls.
+Current state: length-matched under a declared proxy (`authoritative=false`) — B = 69
+proxy tokens / 416 chars / 60 words; |C−B| token median 3 / max 5, char median 19 /
+max 42, word median 3 / max 4, 100% within the 12-token tolerance. The authoritative
+freeze must re-run with the fixed provider's tokenizer before A/B/C calls.
 
 ## Correct description of the comparison
 

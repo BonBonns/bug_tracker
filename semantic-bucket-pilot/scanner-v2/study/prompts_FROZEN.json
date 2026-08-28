@@ -1,18 +1,25 @@
 {
-  "abs_delta_stats": {
-    "max": 5,
-    "median": 3,
-    "p95": 5
+  "abs_delta_chars": {
+    "max": 42,
+    "median": 19,
+    "p95": 37
   },
-  "authoritative": false,
-  "b_instruction_tokens": 69,
-  "c_instruction_tokens": {
+  "abs_delta_tokens": {
     "max": 5,
     "median": 3,
     "min": 0,
     "p95": 5
   },
-  "fraction_within_tolerance": 1.0,
+  "abs_delta_words": {
+    "max": 4,
+    "median": 3,
+    "p95": 4
+  },
+  "authoritative": false,
+  "b_instruction_chars": 416,
+  "b_instruction_tokens": 69,
+  "b_instruction_words": 60,
+  "fraction_within_token_tolerance": 1.0,
   "hashes": {
     "B_instruction": "30672f7f61396dac",
     "C_template": "beb9ca1991872796",
@@ -24,9 +31,10 @@
     "byte-identical response schema across A/B/C",
     "only C contains the category and the relationship question"
   ],
-  "note": "NON-AUTHORITATIVE proxy \u2014 re-run with the fixed model tokenizer and re-freeze before any A/B/C model call.",
-  "passed": true,
-  "purpose": "token-match B (generic) vs C (bucket-guided) instructions",
+  "match_kind": "PROXY length matching (NOT exact tokenizer matching)",
+  "note": "NON-AUTHORITATIVE proxy tokens. Before Stage 2, use the fixed provider's token-count facility or actual input-token metadata; if authoritative counts remain unavailable, retain this proxy and report it transparently WITH the char/word counts below. Do NOT call it exact tokenizer matching. Re-freeze before any A/B/C call.",
+  "passed_proxy": true,
+  "purpose": "length-match B (generic) vs C (bucket-guided) instructions",
   "tokenizer": "heuristic:word+punct (NON-AUTHORITATIVE)",
   "tolerance_tokens": 12
 }

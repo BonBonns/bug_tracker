@@ -59,10 +59,14 @@ def resolve_tokenizer():
     return ("heuristic:word+punct (NON-AUTHORITATIVE)", lambda s: len(tokre.findall(s)), False)
 
 
+def _words(s):
+    return len(re.findall(r"\w+", s))
+
+
 def main():
     name, ntok, authoritative = resolve_tokenizer()
     insts = [json.loads(l) for l in open(os.path.join(OUT, "instances.jsonl"))]
-    b_n = ntok(B_INSTR)
+    b_n, b_ch, b_w = ntok(B_INSTR), len(B_INSTR), _words(B_INSTR)
     rows = []
     within = 0
     for it in insts:
@@ -72,9 +76,11 @@ def main():
         c_n = ntok(c_instr)
         d = abs(c_n - b_n)
         within += (d <= TOLERANCE)
-        rows.append({"instance_id": it["instance_id"], "b_tokens": b_n,
-                     "c_tokens": c_n, "abs_delta": d})
+        rows.append({"instance_id": it["instance_id"], "b_tokens": b_n, "c_tokens": c_n,
+                     "abs_delta": d, "c_chars": len(c_instr), "c_words": _words(c_instr)})
     deltas = sorted(r["abs_delta"] for r in rows)
+    char_d = sorted(abs(r["c_chars"] - b_ch) for r in rows)
+    word_d = sorted(abs(r["c_words"] - b_w) for r in rows)
     n = len(rows)
     med = deltas[n // 2]
     p95 = deltas[min(n - 1, int(0.95 * n))]
@@ -83,19 +89,27 @@ def main():
     import hashlib
     sha = lambda s: hashlib.sha256(s.encode()).hexdigest()[:16]
     frozen = {
-        "purpose": "token-match B (generic) vs C (bucket-guided) instructions",
+        "purpose": "length-match B (generic) vs C (bucket-guided) instructions",
+        "match_kind": ("exact tokenizer matching" if authoritative
+                       else "PROXY length matching (NOT exact tokenizer matching)"),
         "tokenizer": name,
         "authoritative": authoritative,
         "note": ("" if authoritative else
-                 "NON-AUTHORITATIVE proxy — re-run with the fixed model tokenizer and "
-                 "re-freeze before any A/B/C model call."),
+                 "NON-AUTHORITATIVE proxy tokens. Before Stage 2, use the fixed "
+                 "provider's token-count facility or actual input-token metadata; if "
+                 "authoritative counts remain unavailable, retain this proxy and "
+                 "report it transparently WITH the char/word counts below. Do NOT "
+                 "call it exact tokenizer matching. Re-freeze before any A/B/C call."),
         "tolerance_tokens": TOLERANCE,
         "b_instruction_tokens": b_n,
-        "c_instruction_tokens": {"median": med, "p95": p95,
-                                 "min": deltas[0], "max": deltas[-1]},
-        "abs_delta_stats": {"median": med, "p95": p95, "max": deltas[-1]},
-        "fraction_within_tolerance": round(frac_within, 4),
-        "passed": (frac_within >= 0.95),
+        "b_instruction_chars": b_ch, "b_instruction_words": b_w,
+        "abs_delta_tokens": {"median": med, "p95": p95, "min": deltas[0], "max": deltas[-1]},
+        "abs_delta_chars": {"median": char_d[n // 2], "p95": char_d[min(n - 1, int(0.95 * n))],
+                            "max": char_d[-1]},
+        "abs_delta_words": {"median": word_d[n // 2], "p95": word_d[min(n - 1, int(0.95 * n))],
+                            "max": word_d[-1]},
+        "fraction_within_token_tolerance": round(frac_within, 4),
+        "passed_proxy": (frac_within >= 0.95),
         "hashes": {"B_instruction": sha(B_INSTR), "C_template": sha(C_INSTR_TMPL),
                    "question_template": sha(QUESTION_TMPL)},
         "invariants_to_verify_before_calls": [
@@ -108,12 +122,14 @@ def main():
     with open(os.path.join(OUT, "prompts_FROZEN.json"), "w") as fh:
         json.dump(frozen, fh, indent=2, sort_keys=True)
 
-    print(f"tokenizer: {name}  authoritative={authoritative}")
-    print(f"B instruction tokens: {b_n}")
-    print(f"|C-B| abs delta: median {med}  p95 {p95}  max {deltas[-1]}  tol {TOLERANCE}")
-    print(f"within tolerance: {frac_within:.1%}  -> passed={frozen['passed']}")
+    print(f"tokenizer: {name}  authoritative={authoritative}  ({frozen['match_kind']})")
+    print(f"B instruction: tokens {b_n}  chars {b_ch}  words {b_w}")
+    print(f"|C-B| tokens: median {med} max {deltas[-1]} (tol {TOLERANCE}) | "
+          f"chars: median {char_d[n//2]} max {char_d[-1]} | words: median {word_d[n//2]} max {word_d[-1]}")
+    print(f"within token tolerance: {frac_within:.1%}  -> passed_proxy={frozen['passed_proxy']}")
     if not authoritative:
-        print("NON-AUTHORITATIVE: re-run with the fixed model tokenizer before A/B/C calls.")
+        print("NON-AUTHORITATIVE proxy — not exact tokenizer matching. Re-run with the "
+              "fixed provider's tokenizer/input-token metadata before A/B/C calls.")
 
 
 if __name__ == "__main__":
