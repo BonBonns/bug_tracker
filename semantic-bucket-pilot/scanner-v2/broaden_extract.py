@@ -14,11 +14,17 @@ import sys
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+TOOLS = os.path.abspath(os.path.join(HERE, "..", "..", "tchecker-research-complete",
+                                     "portable-engine-full-review-package", "tools"))
+sys.path.insert(0, TOOLS)
 sys.path.insert(0, HERE)
 import build_juliet_corpus as B
 import juliet_sanitize as san
 import juliet_packet_expansion as E
 import oob_runtime_capacity_v2 as v2
+import allocation_extent as AE
+
+_SINKS = {"memcpy", "memmove", "strcpy", "strncpy", "wcscpy", "wcsncpy", "strcat", "wcscat"}
 
 
 def intra_source_length(calls_in, fid, src_var):
@@ -41,6 +47,16 @@ def main():
     recs, _ = v2.analyze_operations_v2(cpp)
     franges = B.func_ranges(cpp)
     fns_by_id, callers_of, calls_in = E.build_indexes(cpp)
+    # capacity provenance (per producer): V1 heap direct-allocation extents + V2 stack
+    d = json.load(open(cpp))
+    heap_ext = AE.compute_allocation_extents(d)          # {(fn_id, ptr): fact}
+    sink_site = {}   # (basename, line) -> [(enclosing_fn_id, dest_name), ...] site-ordered
+    for c in d.get("calls", []):
+        if c.get("name") in _SINKS:
+            a0 = next((a for a in c.get("arguments", []) if a.get("index") == 0), None)
+            if a0:
+                sink_site.setdefault((os.path.basename(c.get("file") or ""), c.get("line")), []) \
+                    .append((c.get("enclosing_function_id"), a0.get("name")))
 
     out = []
     for r in recs:
@@ -84,10 +100,28 @@ def main():
             sv, _ = E.sink_source_operand(calls_in, fid, line)
             if sv:
                 wl = intra_source_length(calls_in, fid, sv)
+        # capacity PROVENANCE (query internal extents; element_count is only the stack
+        # field). Resolve this sink's (fn, dest) and its site ordinal on the line.
+        sites = sink_site.get((base, line), [])
+        fn_dest, ordinal = (None, None), 0
+        for i, (efid, dname) in enumerate(sites):
+            if dname and dname == dest:
+                fn_dest, ordinal = (efid, dname), i; break
+        heap_fact = heap_ext.get(fn_dest) if fn_dest[0] is not None else None
+        heap_est = bool(heap_fact and heap_fact.get("establishment_status") == "ESTABLISHED")
+        if cap is not None:
+            prov = "stack_fixed_array"
+        elif heap_est:
+            prov = "heap_direct_allocation"
+        else:
+            prov = "none"
         suite = base.split("__")[0] if "__" in base else base.split("_")[0]
         out.append({"file": base, "suite": suite, "oracle": oc, "line": line,
+                    "site_ordinal": ordinal, "dest": dest,
                     "sink": B.SINK.search(stmt).group(1),
                     "element_type": ev.get("element_type"), "capacity": cap,
+                    "capacity_provenance": prov,
+                    "heap_size_expr": (heap_fact or {}).get("size_expression") if heap_est else None,
                     "write_len": wl, "packet": pkt,
                     "phash": hashlib.sha256(pkt.encode()).hexdigest()})
 

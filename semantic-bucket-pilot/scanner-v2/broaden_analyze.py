@@ -64,38 +64,27 @@ def dataflow_skeleton(src):
     return hashlib.sha256(s.encode()).hexdigest()[:16]
 
 
-def property_signature(x):
-    """The reasoning unit FAITHFUL to the fixed property (write length vs destination
-    capacity), abstracting the bad/good discriminating VALUES: destination-capacity
-    mechanism x write-length expression shape. Two cases with the same relationship
-    structure share a signature regardless of guards, source-buffer allocation, subtype
-    label, char/wchar, or the specific 99-vs-49 length."""
-    pkt = x["packet"]
-    m = _SINK_RE.search(pkt)
-    dest = None
-    if m:
-        d = re.match(r".*?\(\s*([A-Za-z_]\w*)", pkt[m.start():])
-        dest = d.group(1) if d else None
-    if dest and re.search(rf"\b{re.escape(dest)}\s*=\s*\(?[^;]*\bmalloc", pkt):
-        dk = "heap_malloc_dest"
-    elif dest and re.search(rf"\b(?:char|wchar_t|int|short|long)\s+{re.escape(dest)}\s*\[", pkt):
-        dk = "stack_array_dest"
-    elif dest and re.search(rf"{re.escape(dest)}\s*=\s*\(?[^;]*\balloca", pkt):
-        dk = "alloca_dest"
-    else:
-        dk = "other_dest"
+def length_shape(pkt):
     lm = re.search(r"\b(?:memcpy|memmove|strcpy|strncpy|wcscpy|wcsncpy|strcat|wcscat)"
                    r"\s*\([^,]*,[^,]*,([^;]*)\)\s*;", pkt)
-    if lm:
-        s = lm.group(1)
-        s = re.sub(r"\b(?:strlen|wcslen)\b", "LENCALL", s)
-        s = re.sub(r"\bsizeof\b", "SIZEOF", s)
-        s = re.sub(r"\d+", "N", s)
-        s = re.sub(r"[A-Za-z_]\w*", "V", s)
-        ls = re.sub(r"\s+", "", s)
-    else:
-        ls = "implicit_strlen"
-    return dk + " | " + ls
+    if not lm:
+        return "implicit_strlen"
+    s = lm.group(1)
+    s = re.sub(r"\b(?:strlen|wcslen)\b", "LENCALL", s)
+    s = re.sub(r"\bsizeof\b", "SIZEOF", s)
+    s = re.sub(r"\d+", "N", s)
+    s = re.sub(r"[A-Za-z_]\w*", "V", s)
+    return re.sub(r"\s+", "", s)
+
+
+def property_signature(x):
+    """The reasoning unit FAITHFUL to the fixed property (write length vs destination
+    capacity): capacity PROVENANCE (per producer — V2 stack_fixed_array vs V1
+    heap_direct_allocation, queried from the internal extent facts, NOT the packet's
+    element_count field which only represents stack arrays) x write-length shape.
+    Abstracts guards, source-buffer allocation, subtype label, char/wchar and the
+    specific 99-vs-49 length."""
+    return x.get("capacity_provenance", "none") + " | " + length_shape(x["packet"])
 
 
 def families(items, keyf):
@@ -145,18 +134,25 @@ def main():
     # the scanner actually binds the destination capacity (element_count) for it — a
     # different decision structure, not merely a stack-vs-heap label. Heap-malloc
     # destinations here bind NO capacity, so they do not establish the capacity decision.
+    # A signature is a GENUINE capacity-establishing family only if it is both-sided AND
+    # the scanner ESTABLISHED the destination capacity for it (via either producer:
+    # V2 stack_fixed_array or V1 heap_direct_allocation extent). Capacity establishment
+    # is read from the internal extent facts, not the packet element_count field.
     ps_sigs = {}
     genuine = 0
+    genuine_provenances = set()
     for k, v in sorted(ps_g.items(), key=lambda kv: -len(kv[1])):
         both_sided = ("vulnerable" in {i["oracle"] for i in v}
                       and "safe" in {i["oracle"] for i in v})
-        cap_bound = sum(1 for i in v if isinstance(i.get("capacity"), int))
-        is_genuine = both_sided and cap_bound > 0
+        cap_est = sum(1 for i in v if i.get("capacity_provenance", "none") != "none")
+        provs = dict(Counter(i.get("capacity_provenance", "none") for i in v))
+        is_genuine = both_sided and cap_est > 0
         if is_genuine:
             genuine += 1
+            genuine_provenances.update(p for p in provs if p != "none")
         ps_sigs[k] = {"n": len(v), "suites": dict(Counter(i["suite"].split("_")[0] for i in v)),
-                      "both_sided": both_sided, "capacity_bound": cap_bound,
-                      "genuine_capacity_family": is_genuine}
+                      "both_sided": both_sided, "capacity_established": cap_est,
+                      "capacity_provenance": provs, "genuine_capacity_family": is_genuine}
 
     # per-suite eligibility
     suite_counts = Counter(x["suite"] for x in rows)
@@ -184,29 +180,31 @@ def main():
                                 "concrete constant and are not counted fully-proved here."},
         "clustering_sensitivity": sensitivity,
         "property_signatures": ps_sigs,
-        "genuine_capacity_families (both-sided AND capacity actually bound)": genuine,
+        "genuine_capacity_families (both-sided AND capacity established, internal extents)": genuine,
+        "genuine_capacity_provenances": sorted(genuine_provenances),
         "meets_gate_genuine": genuine >= P.MIN_FAMILIES,
         "verdict": (
             "Broadening across the predeclared copy-idiom suites (CWE121 stack + CWE122 "
             "heap, incl. nested CWE805/806) scanned 6428 files -> %d eligible, %d "
             "packet-identifiable. Under the pre-registered flow-topology key the "
-            "confirmatory count reads %d (>= 12), BUT that is inflated by variation "
-            "SUPERFICIAL to the destination-capacity property (opaque reachability guards, "
-            "source-buffer allocation method, subtype labels; families with byte-identical "
-            "capacity+length+sink lines split only by guards). Property-faithful, there "
-            "are 2 both-sided signatures, but a signature is a GENUINE capacity-establishing "
-            "family only if the scanner actually binds the destination capacity: stack-array "
-            "dests bind capacity 624/624, whereas heap-malloc dests bind it 0/384 — CWE122 "
-            "routes eligible only on its symbolic LENGTH and never establishes a heap "
-            "capacity DECISION, so it is a missing capacity decision, not a different one. "
-            "Genuine independent capacity-establishing families = %d (the stack-array + "
-            "symbolic-strlen pattern, i.e. the CWE806 baseline). Broadening added ZERO "
-            "genuine new families and does NOT approach the 12 gate. Reaching 12 requires "
-            "genuinely different capacity/length DECISION structures the scanner can "
-            "establish — bound heap capacity, integer-arithmetic capacity, loop-computed "
-            "length, index writes — or real-world code (Magma), not more symbolic-strlen "
-            "copy variants."
-            % (len(rows), len(identifiable), conf, genuine)),
+            "confirmatory count reads %d (>= 12), but that is inflated by variation "
+            "SUPERFICIAL to the property (opaque guards, source-buffer allocation, subtype "
+            "labels). Property-faithful, a signature is a GENUINE capacity-establishing "
+            "family only if the scanner ESTABLISHED the destination capacity -- read from "
+            "the INTERNAL extent facts, not the packet element_count field (element_count "
+            "is only the V2 stack-array representation). Capacity is established by TWO "
+            "producers with distinct provenance: V2 stack_fixed_array AND V1 "
+            "heap_direct_allocation. Heap capacity IS bound (element_count None on heap is "
+            "not no-capacity; the packet builder simply never exposed the heap field). "
+            "Genuine independent capacity-establishing families = %d, provenances %s: "
+            "(1) stack_fixed_array + symbolic strlen*sizeof (the CWE806 baseline), and "
+            "(2) heap_direct_allocation + (strlen+1)*sizeof (CWE122 -- a genuine SECOND "
+            "capacity-provenance family). So broadening added ONE genuine new "
+            "capacity-provenance family (heap); the count still does not approach 12. "
+            "Reaching 12 needs further distinct capacity/length decision structures "
+            "(integer-arithmetic capacity, loop-computed length, index writes) or "
+            "real-world code (Magma)."
+            % (len(rows), len(identifiable), conf, genuine, sorted(genuine_provenances))),
         "flow_topology_families": {
             "total_families": len(g),
             "both_sided_families": len(both),
@@ -235,15 +233,17 @@ def main():
     for lvl, t in sensitivity.items():
         mark = "MEETS" if t["confirmatory_both_sided"] >= P.MIN_FAMILIES else "below"
         print(f"  {t['confirmatory_both_sided']:3}  ({mark} 12)  {lvl}")
-    print(f"\nPROPERTY-FAITHFUL signatures (genuine = both-sided AND capacity bound):")
+    print(f"\nPROPERTY-FAITHFUL signatures (genuine = both-sided AND capacity established):")
     for k, meta in list(ps_sigs.items()):
         bs = "both-sided" if meta["both_sided"] else "one-sided "
         g = "GENUINE" if meta["genuine_capacity_family"] else "not-genuine"
-        print(f"  n={meta['n']:4}  [{bs}]  cap_bound={meta['capacity_bound']:4}/{meta['n']:<4}  "
-              f"[{g}]  {k[:52]:54} {meta['suites']}")
+        print(f"  n={meta['n']:4}  [{bs}]  cap_est={meta['capacity_established']:4}/{meta['n']:<4}  "
+              f"[{g}]  {k[:48]:50} {meta['suites']}")
     print(f"\nVERDICT: raw flow-topology reads {conf} (inflated by superficial variants). "
-          f"GENUINE capacity-establishing independent families = {genuine} (< 12): "
-          f"stack binds capacity, heap does not (0/384).")
+          f"GENUINE capacity-establishing independent families = {genuine} "
+          f"({'MEETS' if genuine>=P.MIN_FAMILIES else 'below'} 12), "
+          f"provenances {sorted(genuine_provenances)} — heap capacity IS established "
+          f"internally (element_count is only the stack field).")
     print(f"report -> {OUTDIR}/broaden_families.json")
 
 

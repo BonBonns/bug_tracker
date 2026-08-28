@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -36,9 +37,13 @@ _DUP = re.compile(r"\d*<duplicate>\d+$")
 
 
 def dump(cpp):
-    """key (basename, line) -> (comparison tuple, is_eligible, oracle)."""
+    """key (basename, line, dest, site_ordinal) -> (comparison tuple, is_eligible, oracle).
+    A bare (file, line) is NOT assumed unique — multiple sink calls can share a line — so
+    the key adds the highlighted destination and a per-(file,line,dest) site ordinal, and
+    we ASSERT no key is silently overwritten."""
     recs, _ = v2.analyze_operations_v2(cpp)
     out = {}
+    seen_ord = defaultdict(int)
     for r in recs:
         fn = r.get("function") or ""
         orc = B.oracle(fn)
@@ -53,7 +58,11 @@ def dump(cpp):
                ev.get("element_count"), ev.get("element_type"), r.get("dest"),
                r.get("unresolved_property"), r.get("uncertainty_bucket"))
         elig = r.get("recommended_route") == "semantic_relationship_review"
-        out[(base, r.get("line"))] = (tup, elig, orc)
+        stem = (base, r.get("line"), r.get("dest"))
+        key = stem + (seen_ord[stem],)
+        seen_ord[stem] += 1
+        assert key not in out, f"duplicate operation key {key} — key not unique"
+        out[key] = (tup, elig, orc)
     return out
 
 
@@ -92,7 +101,8 @@ def main():
     report = {
         "model_calls": 0,
         "control": "separate 500-file batches (batch5, batch6) vs combined 1000-file rescan",
-        "key": "(file, line) — stable under c2cpg <duplicate>N helper-name suffixes",
+        "key": "(file, line, dest, site_ordinal) — asserted unique; stable under c2cpg "
+               "<duplicate>N helper-name suffixes (which change only the function name)",
         "separate_ops": len(sep), "combined_ops": len(comb),
         "common_ops_compared": len(common),
         "eligible_ops_compared": elig_common,

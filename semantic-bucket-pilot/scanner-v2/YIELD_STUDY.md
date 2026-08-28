@@ -299,7 +299,8 @@ packet-identifiable**. Per suite: CWE121 416, CWE122 616 identifiable.
 | guard-collapsed dataflow topology | 26 | (meets) |
 | full flow-topology (guards kept; pre-registered key) | 24 | (meets) |
 
-**Honest verdict: 1 genuine family, gate NOT met.** The raw flow-topology key reads 24,
+**Honest verdict: 2 genuine capacity-provenance families, gate NOT met.** The raw
+flow-topology key reads 24,
 but that is inflated by variation **superficial to the destination-capacity property**:
 
 - families with **byte-identical** capacity + length + sink lines split only by opaque
@@ -307,33 +308,48 @@ but that is inflated by variation **superficial to the destination-capacity prop
   count high (26), so guards are not even the main inflation;
 - source-side variation that does not touch the property: source-buffer allocation
   method (`declare` / `alloca` / `malloc`) and subtype label;
-- **CWE122 "heap" copy cases mostly overflow a stack `dest[50]`** (the *source* is
-  heap-allocated, the destination is the same stack-array reasoning).
+- many CWE122 files overflow a stack `dest[50]` with a heap-allocated *source* — those
+  collapse into the stack family (same destination reasoning); but CWE122 files with a
+  genuine **heap destination** are a distinct family (see below), so CWE122 is not
+  uniformly a stack duplicate.
 
-The property-faithful key gives 2 both-sided signatures, but a signature is only a
-**genuine capacity-establishing family** if the scanner actually **binds the destination
-capacity** — a different *decision structure*, not merely a stack-vs-heap label:
+The property-faithful key gives both-sided signatures, but a signature is only a
+**genuine capacity-establishing family** if the scanner actually **established the
+destination capacity** — read from the **internal extent facts**, not the packet's
+`element_count` field (which is only the V2 **stack-array** representation; it is `None`
+on heap destinations *even when* the heap extent is established). Capacity is established
+by **two producers with distinct provenance**: V2 `stack_fixed_array` and V1
+`heap_direct_allocation` (`compute_allocation_extents()`, `ESTABLISHED`, provenance
+`direct_allocation`).
 
-| property signature | n | both-sided | capacity bound | genuine? |
-|--------------------|--:|:----------:|:--------------:|:--------:|
-| `stack_array_dest \| strlen(src)*sizeof` | 624 | yes | **624/624** | **yes** |
-| `heap_malloc_dest \| (strlen(src)+1)*sizeof` | 156 | yes | **0/156** | no |
-| `heap_malloc_dest \| N*sizeof` | 228 | no | 0/228 | no |
+| property signature (capacity provenance × length shape) | n | both-sided | capacity established | genuine? |
+|--------------------|--:|:----------:|:--------------------:|:--------:|
+| `stack_fixed_array \| strlen(src)*sizeof` | 624 | yes | **624/624** | **yes** |
+| `heap_direct_allocation \| (strlen(src)+1)*sizeof` | 156 | yes | **156/156** | **yes** |
+| `heap_direct_allocation \| strlen(src)*sizeof` | 252 | no (all vuln) | 252/252 | no |
 
-**Decisive finding: heap destinations bind no capacity (0/384).** CWE122 routes eligible
-only on its symbolic *length*; the scanner never establishes the heap destination's
-capacity, so there is no capacity-vs-length decision to make — a **missing** capacity
-decision, not a different one. So CWE122 does **not** count as a new independent family.
+**Correction — heap capacity IS bound.** An earlier draft read the packet's
+`element_count` and wrongly concluded "0/384 heap, CWE122 adds zero families." That field
+is the stack-array representation; the level-3 check against `compute_allocation_extents()`
+(`heap_extent_check.py`) finds **496 heap extents `ESTABLISHED`** (408 among identifiable
+dests) with `direct_allocation` provenance. The packet builder simply never exposed the
+heap capacity field — the capacity decision exists internally, in a different producer.
 
-**Genuine independent capacity-establishing families = 1** — the stack-array +
-symbolic-`strlen` pattern (the CWE806 baseline). Broadening across all of Juliet's
-stack+heap copy suites added **zero** genuine new families and does not approach the 12
-gate. This confirms the prior expectation that scanning more of the same property mostly
-yields copies of the same reasoning. Reaching 12 requires different capacity/length
-**decision structures the scanner can establish** — bound heap capacity, integer-arithmetic
-capacity, loop-computed length, index writes — or real-world code (**Magma**), not more
-symbolic-`strlen` copy variants. Reported in `study/juliet/broaden_families.json`. The 56
-CWE806 packet-insufficient cases remain a documented future population (not chased here).
+**Genuine independent capacity-establishing families = 2** —
+(1) `stack_fixed_array` + symbolic `strlen*sizeof` (the CWE806 baseline), and
+(2) `heap_direct_allocation` + `(strlen+1)*sizeof` (CWE122 — a genuine **second
+capacity-provenance** family, different producer and evidence). So broadening added
+**one** genuine new capacity-provenance family; the count (**2**) still does not approach
+the 12 gate. Reaching 12 requires further distinct capacity/length **decision structures
+the scanner can establish** — integer-arithmetic capacity, loop-computed length, index
+writes — or real-world code (**Magma**), not more symbolic-`strlen` copy variants.
+Reported in `study/juliet/broaden_families.json` and `study/juliet/heap_extent_check.json`.
+The 56 CWE806 packet-insufficient cases remain a documented future population (not chased).
+
+**Follow-up worth flagging:** the packet builder should expose the heap capacity field so
+downstream A/B/C packets carry the heap extent (`size_expression`, provenance) the way
+they carry `element_count` for stack — otherwise a reviewer/model sees a heap case with no
+stated capacity even though the scanner established one.
 
 ### Batch-invariance control (`batch_invariance.py`)
 
@@ -341,7 +357,9 @@ Because the scan ran in 500-file batches, we proved batching does not change sca
 results: two adjacent completed batches (batch5, batch6) scanned separately vs a combined
 **1000-file** rescan, comparing every oracle-bearing operation's candidate status, reason
 codes, route, capacity, write-length (`width_expr`), element type, dest, unresolved
-property, and uncertainty, keyed by `(file, line)`.
+property, and uncertainty. The key is `(file, line, dest, site_ordinal)` with an
+**asserted-unique** invariant — `(file, line)` alone is not assumed unique since multiple
+sink calls can share a line (here 0 collisions, assertion passes).
 
 - **All 749 operations byte-identical** (546 eligible), 0 diffs, 0 oracle mismatches, no
   membership change. **PASS.**

@@ -8,7 +8,7 @@
   "eligible_diff_examples": [],
   "eligible_diffs": 0,
   "eligible_ops_compared": 546,
-  "key": "(file, line) \u2014 stable under c2cpg <duplicate>N helper-name suffixes",
+  "key": "(file, line, dest, site_ordinal) \u2014 asserted unique; stable under c2cpg <duplicate>N helper-name suffixes (which change only the function name)",
   "model_calls": 0,
   "note": "compared fields: candidate status, reason codes, route, capacity (element_count), write-length (width_expr), element type, dest, unresolved property, uncertainty. The <duplicate>N function-name suffix is cosmetic (different N in a bigger CPG); it changes no compared field, preserves the bad/good oracle, and is erased by neutralization, so it cannot affect the flow-family analysis.",
   "ops_only_in_combined": 0,
