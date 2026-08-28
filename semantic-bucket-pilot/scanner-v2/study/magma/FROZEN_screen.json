@@ -1,0 +1,54 @@
+{
+  "FROZEN": true,
+  "artifacts": {
+    "PREREGISTER_MAGMA.md": "19b4c006455daef31d6226dbf12e05d19ada255f2e1e6157ccf153bb7bb63af4",
+    "bug_catalog.json": "122dec5a59ee7580804d5a17063533ca46e9415eacbd3fb12b135868a224d8fb",
+    "feasibility_manifest.json": "a66229dd5bf40a468f0ec08455217ad0908bc60612db4478980c894e50434759",
+    "magma_manifest.py": "f6558167e606eb7c001b5491efc92a0bedbbdd55f305a07281f59ec09d76607d",
+    "write_mapping.json": "eef714292a04f34c8c96cf5e6b4c279cb1f81a789ec4edaff65b8e004626faba"
+  },
+  "candidate_set_15": [
+    "PNG003",
+    "SND010",
+    "SND012",
+    "SND013",
+    "SND025",
+    "TIF002",
+    "TIF013",
+    "SSL004",
+    "SSL018",
+    "SSL020",
+    "PHP006",
+    "XML001",
+    "XML006",
+    "XML011",
+    "PDF017"
+  ],
+  "mapped_7": [
+    "SND010",
+    "SND012",
+    "SND013",
+    "SSL004",
+    "TIF013",
+    "PNG003",
+    "TIF002"
+  ],
+  "measurement_status": "scanner_recognized / packet_valid / eligible = NOT YET MEASURED (build-integration next). Frozen scanner will be run UNMODIFIED.",
+  "pipeline_feasibility_tier": {
+    "bugs": [
+      "SND010",
+      "SND012",
+      "SND013"
+    ],
+    "note": "standard memcpy; treated as ONE positioned-write topology family, a pipeline feasibility tier, NOT three independent families."
+  },
+  "property_screen_version": "v2_recall_audited (2026-08-28)",
+  "purpose": "Freeze the recall-audited property SCREEN and the 15-candidate / 7-mapped set BEFORE any scanner-recognition measurement, so recognition is not evaluated on a screen that keeps changing (and so no sink/write-model change is justified by these bugs).",
+  "recall_recovered": [
+    "TIF013",
+    "XML001",
+    "XML006",
+    "XML011(ambiguous)"
+  ],
+  "screen_frozen_rule": "The property SCREEN stops changing here. The frozen 8-point ELIGIBILITY rule (PREREGISTER_MAGMA.md) is separate and already frozen. No sink aliases or new write models may be added based on these bugs before the frozen scanner is measured on them (training-on-test-set prohibition)."
+}
