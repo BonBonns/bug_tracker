@@ -1,0 +1,49 @@
+{
+  "capacity_fact_missing": 0,
+  "capacity_fact_validated_against_source": 1008,
+  "capacity_provenance_families": 2,
+  "capacity_provenances": [
+    "heap_direct_allocation",
+    "stack_fixed_array"
+  ],
+  "independent_review_topologies": 2,
+  "independent_review_topologies_offset_abstracted": 1,
+  "model_calls": 0,
+  "note": "sizeof(T) preserved symbolically; unit relation (same_sizeof / write_sizeof_vs_cap_bytes) distinguishes 'strlen fits capacity' from CWE131 byte/element unit-mismatch obligations. Two counts are reported separately: scanner provenance vs reviewer proof obligation.",
+  "review_topologies_all": {
+    "CONST vs CAP_bytes [write_sizeof_vs_cap_bytes]": {
+      "vulnerable": 42
+    },
+    "CONST vs CAP_elems [same_sizeof]": {
+      "vulnerable": 210
+    },
+    "STRLEN vs CAP_elems [same_sizeof]": {
+      "safe": 324,
+      "vulnerable": 300
+    },
+    "STRLEN+OFF vs CAP_elems [same_sizeof]": {
+      "safe": 80,
+      "vulnerable": 76
+    }
+  },
+  "review_topologies_both_sided": {
+    "STRLEN vs CAP_elems [same_sizeof]": {
+      "safe": 324,
+      "vulnerable": 300
+    },
+    "STRLEN+OFF vs CAP_elems [same_sizeof]": {
+      "safe": 80,
+      "vulnerable": 76
+    }
+  },
+  "review_topologies_offset_abstracted_both_sided": {
+    "STRLEN vs CAP_elems [same_sizeof]": {
+      "safe": 404,
+      "vulnerable": 376
+    }
+  },
+  "sufficiency_with_capacity_present": {
+    "provable": 327,
+    "symbolic_capacity_or_length": 705
+  }
+}

@@ -346,10 +346,50 @@ writes — or real-world code (**Magma**), not more symbolic-`strlen` copy varia
 Reported in `study/juliet/broaden_families.json` and `study/juliet/heap_extent_check.json`.
 The 56 CWE806 packet-insufficient cases remain a documented future population (not chased).
 
-**Follow-up worth flagging:** the packet builder should expose the heap capacity field so
-downstream A/B/C packets carry the heap extent (`size_expression`, provenance) the way
-they carry `element_count` for stack — otherwise a reviewer/model sees a heap case with no
-stated capacity even though the scanner established one.
+### Two DIFFERENT family counts — provenance vs review topology (`review_topology.py`)
+
+Scanner evidence-provenance and reviewer proof-obligation are different questions and are
+reported separately:
+
+- **`capacity_provenance_families = 2`** — stack capacity from an array declaration
+  (`stack_fixed_array`, V2) vs heap capacity from a `malloc` extent
+  (`heap_direct_allocation`, V1). This is a scanner-evidence distinction.
+- **`independent_review_topologies = 2`** keeping the off-by-one, **= 1** when the `+1`
+  null-terminator is treated as the same reasoning. Both *both-sided* obligations reduce
+  to **"does `strlen(source)` fit within the known element capacity?"** — the heap family
+  differs only by a `+1` and by provenance (abstracted at the review level). So CWE122
+  does **not** add an independent reviewer reasoning family, even though it is a genuine
+  second scanner-provenance family.
+
+| proof obligation (sizeof(T) preserved) | vuln | safe | both-sided | for A/B/C |
+|----------------------------------------|-----:|-----:|:----------:|:---------:|
+| `STRLEN vs CAP_elems [same_sizeof]` (stack strlen-fits-capacity) | 300 | 324 | yes | usable |
+| `STRLEN+OFF vs CAP_elems [same_sizeof]` (heap, +1 off-by-one) | 76 | 80 | yes | usable |
+| `CONST vs CAP_elems [same_sizeof]` (concrete count) | 210 | 0 | no | one-sided |
+| `CONST vs CAP_bytes [write_sizeof_vs_cap_bytes]` (CWE131 byte/element **mismatch**) | 42 | 0 | no | one-sided |
+
+The genuinely *different* reasoning — the CWE131 **byte/element unit mismatch**
+(`malloc(10)` bytes vs `10*sizeof(int)`) — is present but **one-sided** (no safe
+counterpart survives inclusion), so it cannot yet serve as a both-sided A/B/C family.
+
+**Packet builder now exposes heap capacity.** `capacity_expr()` assembles the
+`established_capacity` fact for *both* producers — heap gets `size_expression`
+(e.g. `(10+1)*sizeof(wchar_t)`), `element_count` (coefficient only), `element_width`
+(`sizeof(T)` kept **symbolic** — no ABI byte size assumed), and provenance — so B and C
+would receive the heap capacity the way they receive `element_count` for stack. Validated
+**1008/1032** independently against the source (`malloc`/declaration re-parsed and matched);
+the rest are `alloca`/edge cases. Only after this exposure can CWE122 count toward an A/B/C
+sample — internally knowing the capacity is not enough if the packet omits it.
+
+### Heap denominator funnel (`reconcile_heap_funnel.py`) — no silent attrition
+
+- **496** established heap extents — eligible oracle ops (semantic route) whose
+  `(function, dest)` has an `ESTABLISHED` heap extent and no stack `element_count`.
+- **−72** residual-leakage drops (the conservative sanitizer rejects any packet that still
+  carries an oracle tell) → **424** extracted heap records. *All* of the 496→424 loss is
+  leakage; every other inclusion filter dropped 0 for heap.
+- **−16** packet-insufficient (byte-identical bad/good packet) → **408** packet-identifiable
+  heap destinations. Reported in `study/juliet/heap_funnel.json`.
 
 ### Batch-invariance control (`batch_invariance.py`)
 
