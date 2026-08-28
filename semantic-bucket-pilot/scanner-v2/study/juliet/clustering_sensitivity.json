@@ -1,5 +1,5 @@
 {
-  "clustering_note": "families computed on the DECIDABLE eligible set only; undecidable pairs (identical enclosing-function packet on both sides) are inter-procedural variants excluded as invalid tests.",
+  "clustering_note": "families computed on the PACKET-IDENTIFIABLE eligible set only; packet-insufficient pairs (identical enclosing-function packet on both sides) are RETAINED separately as a missing-context population, not discarded.",
   "clustering_sensitivity": {
     "exact_program_family": {
       "both_sided_families": 4,
@@ -78,11 +78,31 @@
   ],
   "flow_topology_meets_gate": false,
   "min_families_gate": 12,
+  "packet_insufficient_population": {
+    "correct_evidence_relative_response": "unresolved / additional_context_required",
+    "count": 96,
+    "diagnosis": "outcome not identifiable from the sink-function packet: vulnerable and safe versions produce a byte-identical packet; the decisive source-length path is in callers/other functions the packet omitted (interprocedural / path context).",
+    "fraction": 0.316,
+    "of_clean": 304,
+    "requires": "interprocedural / path-context packet expansion",
+    "source_variants": [
+      "41",
+      "44",
+      "45",
+      "51b",
+      "52c",
+      "53d",
+      "54e",
+      "63b",
+      "64b",
+      "65b",
+      "67b",
+      "68b"
+    ],
+    "used_for": "coverage-routing (missing-context) evaluation, NOT A/B/C accuracy"
+  },
   "raw": {
     "clean_after_leakage": 304,
-    "decidable_eligible": 208,
-    "decidable_safe": 108,
-    "decidable_vulnerable": 100,
     "instances": 364,
     "leakage_examples": [
       [
@@ -122,8 +142,15 @@
       ]
     ],
     "leakage_failures": 60,
+    "packet_identifiable_eligible": 208,
+    "packet_identifiable_safe": 108,
+    "packet_identifiable_vulnerable": 100,
+    "packet_insufficient": 96,
     "safe": 212,
-    "undecidable_identical_packet": 96,
     "vulnerable": 152
+  },
+  "two_questions": {
+    "abc_accuracy": "Can B or C reason better when the necessary evidence is present? -> use the 208 packet-identifiable instances.",
+    "coverage_routing": "Did TChecker include the necessary path evidence in the packet? -> 96/304 (31.6%) packet-insufficient."
   }
 }

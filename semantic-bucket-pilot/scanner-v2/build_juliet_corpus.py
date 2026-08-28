@@ -141,22 +141,30 @@ def main():
             leak_fail.append((x["file"], x["function"], x["leak"]))
     clean = [x for x in inst if x["packet"] is not None and not x["leak"]]
 
-    # ---- decidability filter (part of the strict inclusion rule) ----
-    # A vulnerable/safe pair is only a valid test if the two packets are DISTINGUISHABLE.
-    # Juliet's inter-procedural variants (41/44/51-54/65) put the discriminating
-    # source-length logic OUTSIDE the sink function, so bad and good neutralize to the
-    # SAME enclosing-function packet — undecidable from the packet, not a real test.
-    # Any packet whose exact content appears under both oracles is excluded.
+    # ---- packet-identifiability partition (NOT a discard) ----
+    # The programs are not inherently undecidable; their outcome is simply not
+    # IDENTIFIABLE from the current sink-function packet, because the vulnerable and
+    # safe versions neutralize to a byte-identical packet — the distinguishing evidence
+    # (reachable source length) lives in callers / other functions that the packet
+    # omitted. Juliet's inter-procedural variants (41/44/51-54/65) are exactly this.
+    # Two questions, two populations (no cherry-picking):
+    #   packet_identifiable  -> eligible for conditional A/B/C outcome accuracy
+    #                           (measures whether B/C reason better when evidence is present)
+    #   packet_insufficient  -> a separate coverage/routing failure population
+    #                           (measures whether TChecker put the path evidence in the
+    #                            packet; correct evidence-relative response is
+    #                            unresolved / additional-context-required)
     for x in clean:
         x["phash"] = hashlib.sha256(x["packet"].encode()).hexdigest()
     oracles_by_hash = defaultdict(set)
     for x in clean:
         oracles_by_hash[x["phash"]].add(x["oracle"])
-    undecidable_hashes = {h for h, o in oracles_by_hash.items() if len(o) > 1}
-    decidable = [x for x in clean if x["phash"] not in undecidable_hashes]
-    n_undecidable = len(clean) - len(decidable)
+    unidentifiable_hashes = {h for h, o in oracles_by_hash.items() if len(o) > 1}
+    packet_identifiable = [x for x in clean if x["phash"] not in unidentifiable_hashes]
+    packet_insufficient = [x for x in clean if x["phash"] in unidentifiable_hashes]
+    n_packet_insufficient = len(packet_insufficient)
 
-    # ---- THREE clustering levels (on the DECIDABLE eligible set) ----
+    # ---- THREE clustering levels (on the PACKET-IDENTIFIABLE eligible set) ----
     def stratum(x):
         return ("strat_" + hashlib.sha256(f"{x['element_type']}|{x['sink']}".encode()).hexdigest()[:10])
 
@@ -172,7 +180,7 @@ def main():
     flow_groups = None
     for name, keyf in levels.items():
         groups = defaultdict(list)
-        for x in decidable:
+        for x in packet_identifiable:
             groups[keyf(x)].append(x)
         both = {k: v for k, v in groups.items()
                 if any(i["oracle"] == "vulnerable" for i in v)
@@ -197,18 +205,43 @@ def main():
         verify.append({"family": k, "instances": len(v), "distinct_file_variants": len(variants),
                        "example_variants": variants[:8]})
 
+    n_identifiable = len(packet_identifiable)
+    frac_insufficient = round(n_packet_insufficient / len(clean), 3) if clean else 0.0
+    ins_variants = sorted({re.sub(r".*_(\d+[a-z]?)\.c$", r"\1", x["file"]) for x in packet_insufficient})
     report = {
         "raw": {"instances": len(inst), "vulnerable": n_v, "safe": n_s,
                 "leakage_failures": len(leak_fail), "leakage_examples": leak_fail[:5],
                 "clean_after_leakage": len(clean),
-                "undecidable_identical_packet": n_undecidable,
-                "decidable_eligible": len(decidable),
-                "decidable_vulnerable": sum(1 for x in decidable if x["oracle"] == "vulnerable"),
-                "decidable_safe": sum(1 for x in decidable if x["oracle"] == "safe")},
+                "packet_insufficient": n_packet_insufficient,
+                "packet_identifiable_eligible": n_identifiable,
+                "packet_identifiable_vulnerable": sum(1 for x in packet_identifiable if x["oracle"] == "vulnerable"),
+                "packet_identifiable_safe": sum(1 for x in packet_identifiable if x["oracle"] == "safe")},
+        # Coverage/routing failure population — RETAINED, not discarded.
+        "packet_insufficient_population": {
+            "count": n_packet_insufficient,
+            "of_clean": len(clean),
+            "fraction": frac_insufficient,
+            "source_variants": ins_variants,
+            "diagnosis": ("outcome not identifiable from the sink-function packet: "
+                          "vulnerable and safe versions produce a byte-identical packet; "
+                          "the decisive source-length path is in callers/other functions "
+                          "the packet omitted (interprocedural / path context)."),
+            "requires": "interprocedural / path-context packet expansion",
+            "correct_evidence_relative_response": "unresolved / additional_context_required",
+            "used_for": "coverage-routing (missing-context) evaluation, NOT A/B/C accuracy",
+        },
         "clustering_sensitivity": table,
-        "clustering_note": ("families computed on the DECIDABLE eligible set only; "
-                            "undecidable pairs (identical enclosing-function packet on "
-                            "both sides) are inter-procedural variants excluded as invalid tests."),
+        "clustering_note": ("families computed on the PACKET-IDENTIFIABLE eligible set "
+                            "only; packet-insufficient pairs (identical enclosing-function "
+                            "packet on both sides) are RETAINED separately as a "
+                            "missing-context population, not discarded."),
+        "two_questions": {
+            "abc_accuracy": ("Can B or C reason better when the necessary evidence is "
+                             "present? -> use the %d packet-identifiable instances." % n_identifiable),
+            "coverage_routing": ("Did TChecker include the necessary path evidence in the "
+                                 "packet? -> %d/%d (%.1f%%) packet-insufficient." %
+                                 (n_packet_insufficient, len(clean), 100 * frac_insufficient)),
+        },
         "flow_family_verification": verify,
         "min_families_gate": MIN_FAMILIES,
         "flow_topology_meets_gate": table["flow_topology_family"]["confirmatory_both_sided"] >= MIN_FAMILIES,
@@ -218,11 +251,12 @@ def main():
 
     print(f"instances {len(inst)} (vuln {n_v}, safe {n_s})   leakage failures {len(leak_fail)}   "
           f"clean {len(clean)}")
-    print(f"undecidable (identical packet both sides): {n_undecidable}   "
-          f"DECIDABLE eligible {len(decidable)} "
-          f"(vuln {sum(1 for x in decidable if x['oracle']=='vulnerable')}, "
-          f"safe {sum(1 for x in decidable if x['oracle']=='safe')})")
-    print("\nCLUSTERING SENSITIVITY (DECIDABLE set; level: families / both-sided / confirmatory-both-sided)")
+    print(f"packet-INSUFFICIENT (retained for missing-context eval): {n_packet_insufficient}"
+          f"/{len(clean)} ({100*frac_insufficient:.1f}%)   variants {ins_variants}")
+    print(f"packet-IDENTIFIABLE eligible (A/B/C accuracy): {n_identifiable} "
+          f"(vuln {sum(1 for x in packet_identifiable if x['oracle']=='vulnerable')}, "
+          f"safe {sum(1 for x in packet_identifiable if x['oracle']=='safe')})")
+    print("\nCLUSTERING SENSITIVITY (packet-identifiable set; families / both-sided / confirmatory-both-sided)")
     for lvl in ("generator_stratum", "flow_topology_family", "exact_program_family"):
         t = table[lvl]
         print(f"  {lvl:24} {t['families']:5} / {t['both_sided_families']:5} / {t['confirmatory_both_sided']:5}")
