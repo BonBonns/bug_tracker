@@ -104,6 +104,28 @@ def main():
     # sanity: the harness must recover the built-in B>A synthetic effect
     prim = rep1["primary_comparison"]
     assert prim["point"] > 0, "synthetic B>A effect not recovered"
+    assert rep1["power_gate"]["passed"], "synthetic power gate should pass"
+
+    # anti-gaming regression: a LAZY condition that abstains on everything except a
+    # few easy correct answers must NOT win the primary. It gets ~perfect SELECTIVE
+    # accuracy but poor PRIMARY balanced accuracy (abstain=incorrect).
+    lazy = []
+    ans_budget = {"VULNERABLE": 4, "SAFE": 4}
+    for r in labels:
+        g = r["stage1_label"]
+        if g in ("VULNERABLE", "SAFE") and ans_budget.get(g, 0) > 0:
+            lazy.append({"instance_id": r["instance_id"], "condition": "LAZY", "prediction": g})
+            ans_budget[g] -= 1
+        else:
+            lazy.append({"instance_id": r["instance_id"], "condition": "LAZY", "prediction": "ABSTAIN"})
+    lz = H.condition_metrics({r["instance_id"]: r["stage1_label"] for r in labels},
+                             {"LAZY": {x["instance_id"]: x["prediction"] for x in lazy}},
+                             [r["instance_id"] for r in labels
+                              if r["stage1_label"] in ("VULNERABLE", "SAFE")])["LAZY"]
+    assert lz["selective_balanced_accuracy"] >= 0.99, "lazy should look great selectively"
+    assert lz["primary_balanced_accuracy"] < 0.3, "lazy must lose on the primary metric"
+    assert lz["primary_balanced_accuracy"] < rep1["per_condition"]["A"]["primary_balanced_accuracy"], \
+        "primary metric failed to penalise strategic abstention"
 
     frozen = {
         "purpose": "freeze scoring_harness.py behaviour before real labels exist",
@@ -118,18 +140,22 @@ def main():
     with open(os.path.join(OUT, "FROZEN.json"), "w") as fh:
         json.dump(frozen, fh, indent=2, sort_keys=True, default=str)
 
-    from collections import Counter
     print("synthetic class distribution (confirmatory):", rep1["class_distribution"])
     print("binary population:", rep1["binary_population"])
+    print("power gate:", rep1["power_gate"]["passed"],
+          f"(vuln_families={rep1['power_gate']['vulnerable_families']}, "
+          f"safe_families={rep1['power_gate']['safe_families']}, "
+          f"min={rep1['power_gate']['min_pos_families']})")
+    print("primary metric:", rep1["primary_metric"])
     for c, m in sorted(rep1["per_condition"].items()):
-        print(f"  {c}: selBalAcc={m['selective_balanced_accuracy']:.3f} "
-              f"cov={m['coverage']:.3f} abst={m['abstention_rate']:.3f} "
-              f"sens={m['sensitivity']:.3f} spec={m['specificity']:.3f} "
-              f"unresAppAbst={m['unresolved_appropriate_abstention']:.3f}")
-    print("PRIMARY B-A:", prim["point"], "CI95", prim["ci95"], "excludes0", prim["excludes_zero"])
+        print(f"  {c}: PRIMARY balAcc(abstain=wrong)={m['primary_balanced_accuracy']:.3f} | "
+              f"selective={m['selective_balanced_accuracy']:.3f} cov={m['coverage']:.3f} "
+              f"abst={m['abstention_rate']:.3f} unresAppAbst={m['unresolved_appropriate_abstention']:.3f}")
+    print(f"PRIMARY B-A (abstain=wrong): {prim['point']:.4f} CI95={prim['ci95']} "
+          f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")
     if "secondary_comparisons" in rep1:
         for k, v in rep1["secondary_comparisons"].items():
-            print(f"  secondary {k}: {v['point']:.3f} CI {v['ci95']} holm_p={v['holm_p']:.4f}")
+            print(f"  secondary {k}: {v['point']:.3f} CI {v['ci95']} holm_p={v.get('holm_p')}")
     print("\nDETERMINISM: PASS   SYNTHETIC EFFECT RECOVERED: PASS")
     print(f"frozen -> {OUT}/FROZEN.json (sha256 of harness, plan, synthetic inputs, expected report)")
 
