@@ -1,0 +1,41 @@
+{
+  "baseline": {
+    "clean": 304,
+    "packet_identifiable": 208,
+    "packet_insufficient": 96
+  },
+  "expansion": {
+    "context_selection": "structure-only (call graph + param/arg indices); label never read",
+    "dropped_for_residual_leak": 0,
+    "insufficient_cases": 96,
+    "no_inbound_parameter (unexpandable here)": 46,
+    "recovered_identifiable": 40,
+    "recovered_variants": [
+      "41",
+      "51b",
+      "52c",
+      "53d",
+      "54e"
+    ],
+    "recovery_rate": 0.417
+  },
+  "flow_families": {
+    "after_expansion (identifiable + recovered)": {
+      "both_sided": 17,
+      "confirmatory_both_sided": 9,
+      "families": 17
+    },
+    "before_expansion (identifiable only)": {
+      "both_sided": 16,
+      "confirmatory_both_sided": 8,
+      "families": 16
+    },
+    "gate": 12,
+    "genuine_new_families_from_recovery": 1,
+    "meets_gate_after_expansion": false,
+    "note": "recovered cases are clustered on their expanded packets with inert pass-through forwarder frames excluded, so interprocedural DEPTH (variants 51/52/53/54 = one decision path with 1/2/3/4 forwarding hops) does not pseudo-replicate into distinct families. Counting forwarding depth would have spuriously read 12."
+  },
+  "interpretation": "Controlled packet expansion is a COVERAGE result: 40/96 (41.7%) of packet-insufficient cases become identifiable with minimal, structure-only caller context. It adds only 1 genuine flow-topology family, so the confirmatory both-sided count is 9 (< 12 gate): expansion improves coverage but does not by itself make Juliet a powered confirmatory sample. The 46 unexpandable cases route their source length through globals / pointers / structs (variants 44/45/63-68), beyond the minimal parameter-passing expander.",
+  "model_calls": 0,
+  "pinned_commit": "f88433e3443648a17671398797a04ea1f8e1a274"
+}
