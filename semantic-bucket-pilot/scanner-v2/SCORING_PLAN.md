@@ -24,10 +24,17 @@ missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped
    **uncertainty is family-clustered** (families are the resampling unit).
 3. **Primary population.** **All independently-labeled instances** —
    `VULNERABLE`, `SAFE`, **and** `UNRESOLVED` — in the **confirmatory** split only.
+   The scored ground-truth field is **`packet_supported_conclusion`** (the
+   evidence-relative decision), **not** `program_outcome` (the code's real status).
+   A model that correctly guesses "vulnerable" without sufficient packet evidence is
+   marked **wrong** here — the study tests calibrated reasoning from supplied
+   evidence, not lucky guesses. `program_outcome` is reported separately (a scored ×
+   program cross-tab), never scored, so "unresolved" stays a property of the
+   *available evidence*, not an inherent property of the program.
 4. **Primary metric — three-class macro recall.** Ground truth ∈
-   {`VULNERABLE`, `SAFE`, `UNRESOLVED`}; prediction ∈ {`VULNERABLE`, `SAFE`,
-   `ABSTAIN`(=predict UNRESOLVED)}; `PARSE_ERROR` is always incorrect. Score =
-   **average recall across all three classes**. This penalises **both** failure
+   {`VULNERABLE`, `SAFE`, `UNRESOLVED`} (from `packet_supported_conclusion`);
+   prediction ∈ {`VULNERABLE`, `SAFE`, `ABSTAIN`(=predict UNRESOLVED)}; `PARSE_ERROR`
+   is always incorrect. Score = **average recall across all three classes**. This penalises **both** failure
    modes: abstaining on resolved (`VULNERABLE`/`SAFE`) cases *and* committing on
    cases that should stay `UNRESOLVED`. A resolved-only, coverage-penalised metric
    (the previous primary) leaves the second hole open — a condition could guess on
@@ -108,8 +115,13 @@ self-report kept descriptive only), and appropriate-abstention on `UNRESOLVED`.
 
 ## Reporting order (fixed)
 
-1. Stage-1 class distribution (VULNERABLE / SAFE / UNRESOLVED) in dev and
-   confirmatory — reported first, before any accuracy number.
+0. **Synthetic freeze numbers are harness-regression outputs, not findings.** The
+   B−A values in `study/scoring_freeze/` exist only to lock the code; they change
+   with the synthetic seed and instance ids and **must never appear in the results
+   section**. Only the real Stage-2 run over real labels produces findings.
+1. Stage-1 class distribution of `packet_supported_conclusion` (VULNERABLE / SAFE /
+   UNRESOLVED) in dev and confirmatory, **plus the `program_outcome` cross-tab** —
+   reported first, before any accuracy number.
 2. Confirmatory **minimum inference gate** (families-per-class vs
    `MIN_CLASS_FAMILIES` for all three classes) **without changing the split** —
    decides confirmatory vs descriptive.

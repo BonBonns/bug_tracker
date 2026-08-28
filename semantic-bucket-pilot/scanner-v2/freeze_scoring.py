@@ -27,24 +27,37 @@ def sha(p):
 
 
 def synth_labels(instances, rng):
-    """Family-clustered synthetic labels (FAKE). Pre-patch side biased toward
-    VULNERABLE, post-patch toward SAFE, small UNRESOLVED fraction — only to exercise
-    the harness, not a claim about the data."""
+    """Family-clustered synthetic labels (FAKE) in the three-field Stage-1 schema.
+    The scored field is packet_supported_conclusion; program_outcome is separate and
+    sometimes diverges (e.g. program vulnerable but packet evidence unresolved) —
+    only to exercise the harness, not a claim about the data."""
     fam_risk = {}
     rows = []
+    lc = {"VULNERABLE": "vulnerable", "SAFE": "safe", "UNRESOLVED": "unresolved"}
     for r in instances:
         fam = r["family_id"]
         if fam not in fam_risk:
-            fam_risk[fam] = rng.random()          # latent site risk
+            fam_risk[fam] = rng.random()
         u = rng.random()
         if u < 0.08:
-            lab = "UNRESOLVED"
+            psc = "UNRESOLVED"
         else:
             base = fam_risk[fam]
             pre = r["revision_side"] == "pre_patch"
-            pv = base * (0.9 if pre else 0.25)     # pre-patch more likely vulnerable
-            lab = "VULNERABLE" if rng.random() < pv else "SAFE"
-        rows.append({"instance_id": r["instance_id"], "stage1_label": lab})
+            pv = base * (0.9 if pre else 0.25)
+            psc = "VULNERABLE" if rng.random() < pv else "SAFE"
+        # program_outcome: usually agrees, but when packet is unresolved the program
+        # may still be safe/vulnerable/not_established (evidence-relative divergence).
+        if psc == "UNRESOLVED":
+            prog = rng.choice(["safe", "vulnerable", "not_established"])
+            rel = "unresolved"
+        else:
+            prog = lc[psc]
+            rel = "established" if rng.random() < 0.9 else "contradicted"
+        rows.append({"instance_id": r["instance_id"],
+                     "packet_supported_conclusion": lc[psc],  # SCORED field
+                     "program_outcome": prog,                 # reported separately
+                     "relationship_answer": rel})
     return rows
 
 
@@ -55,7 +68,7 @@ def synth_predictions(labels, rng):
     abst = {"A": 0.18, "B": 0.10, "C": 0.22}
     parse = {"A": 0.03, "B": 0.01, "C": 0.02}
     rows = []
-    gt = {r["instance_id"]: r["stage1_label"] for r in labels}
+    gt = {r["instance_id"]: H.scored_label(r) for r in labels}
     for cond in ("A", "B", "C"):
         for iid, g in gt.items():
             u = rng.random()
@@ -117,7 +130,7 @@ def main():
     assert rep1["minimum_inference_gate"]["passed"], "synthetic inference gate should pass"
 
     # ---- anti-gaming regression: BOTH failure modes must be penalised ----
-    G = {r["instance_id"]: r["stage1_label"] for r in labels}
+    G = {r["instance_id"]: H.scored_label(r) for r in labels}
     allids = [r["instance_id"] for r in labels]
 
     def metrics_for(fn):
@@ -152,12 +165,16 @@ def main():
     frozen = {
         "purpose": "freeze scoring_harness.py behaviour before real labels exist",
         "synthetic": True,
+        "WARNING": ("synthetic B-A scores are HARNESS REGRESSION OUTPUTS, not an "
+                    "experimental finding. They vary with the synthetic seed, the "
+                    "instance ids, and the synthetic inputs, and MUST NEVER appear in "
+                    "the results section. Only the real Stage-2 run produces findings."),
         "seed": SEED, "bootstrap": {"seed": H.BOOT_SEED, "n": H.BOOT_N},
         "sha256": {f: sha(os.path.join(HERE, f)) for f in
                    ("scoring_harness.py", "SCORING_PLAN.md")},
         "artifact_sha256": {os.path.basename(p): sha(p) for p in (lab_p, prd_p, exp_p)},
-        "primary_point_synthetic": prim["point"],
-        "primary_ci95_synthetic": prim["ci95"],
+        "primary_point_synthetic_REGRESSION_ONLY": prim["point"],
+        "primary_ci95_synthetic_REGRESSION_ONLY": prim["ci95"],
     }
     with open(os.path.join(OUT, "FROZEN.json"), "w") as fh:
         json.dump(frozen, fh, indent=2, sort_keys=True, default=str)
@@ -175,12 +192,14 @@ def main():
               f"selective={m['selective_balanced_accuracy']:.3f} cov={m['coverage']:.3f} "
               f"extUnsup={m['external_unsupported_assumption_rate']} "
               f"selfRep={m['self_reported_unsupported_rate']}")
-    print(f"PRIMARY B-A (macro recall 3-class): {prim['point']:.4f} CI95={prim['ci95']} "
+    print("scored field = packet_supported_conclusion (evidence-relative), NOT program_outcome")
+    print("scored x program_outcome cross-tab:", rep1["program_outcome_crosstab_scored_x_program"])
+    print(f"[REGRESSION ONLY, not a finding] PRIMARY B-A: {prim['point']:.4f} CI95={prim['ci95']} "
           f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")
     if "secondary_comparisons" in rep1:
         for k, v in rep1["secondary_comparisons"].items():
             print(f"  secondary {k}: {v['point']:.3f} CI {v['ci95']} holm_p={v.get('holm_p')}")
-    print("\nDETERMINISM: PASS   SYNTHETIC EFFECT RECOVERED: PASS")
+    print("\nDETERMINISM: PASS   SYNTHETIC EFFECT RECOVERED: PASS   (synthetic numbers are NOT findings)")
     print(f"frozen -> {OUT}/FROZEN.json (sha256 of harness, plan, synthetic inputs, expected report)")
 
 

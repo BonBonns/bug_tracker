@@ -1,23 +1,24 @@
 {
+  "WARNING": "synthetic B-A scores are HARNESS REGRESSION OUTPUTS, not an experimental finding. They vary with the synthetic seed, the instance ids, and the synthetic inputs, and MUST NEVER appear in the results section. Only the real Stage-2 run produces findings.",
   "artifact_sha256": {
-    "expected_report.json": "5979d575334eed0de00f93564f3f3d0d3bbeccf51627decf4feb2832126d8590",
-    "synthetic_labels.jsonl": "d39d85ec976e8d01bb405655973698b39fc93019093e9986852be1b79a0962dd",
-    "synthetic_predictions.jsonl": "1f90fa47fb5fcf1084b29013268151ec607ec72e6d836685a9c8fdb2b3f8381a"
+    "expected_report.json": "794b8781caf4b376ce31ca4e0eb5132bafe407c3a9e3d0d03c41d29e4f1cf6e7",
+    "synthetic_labels.jsonl": "f76440595cef381d0455c79c081ca33c0951d82dbce274c9f6a91e3d92e0b7f4",
+    "synthetic_predictions.jsonl": "9360f82bf502e534440f54c7b556bbcfaf65ec7940158d8d5fe3fc01bc740557"
   },
   "bootstrap": {
     "n": 10000,
     "seed": 20260101
   },
-  "primary_ci95_synthetic": [
-    0.062082422013954086,
-    0.2616416040100251
+  "primary_ci95_synthetic_REGRESSION_ONLY": [
+    0.044124211547792336,
+    0.2226743626743627
   ],
-  "primary_point_synthetic": 0.16187718852090222,
+  "primary_point_synthetic_REGRESSION_ONLY": 0.13318570072761776,
   "purpose": "freeze scoring_harness.py behaviour before real labels exist",
   "seed": 424242,
   "sha256": {
-    "SCORING_PLAN.md": "7f8d255ee128425d85af5931533e3cffbf50cfa5780c538de28a33bd661c04f1",
-    "scoring_harness.py": "dd2a2a96c64f8688ccd6fb4c7f52fc96a1667dfbd0c10f8a6c3d3bae94184ac8"
+    "SCORING_PLAN.md": "65f64bcfffe3aa8da995b929bac88c8327e5d9e08c115d21e7006955a6afbd48",
+    "scoring_harness.py": "5fe874118bbe051bc918723e737be6b418569815d2be6b4d1c90548ca2226116"
   },
   "synthetic": true
 }

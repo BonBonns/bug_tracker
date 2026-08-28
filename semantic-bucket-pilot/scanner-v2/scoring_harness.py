@@ -21,7 +21,7 @@ Runs identically on synthetic and real data. Emits a report dict (stdout + JSON)
 import argparse
 import json
 import random
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 PRIMARY = ("B", "A")          # B - A
 SECONDARY_COMPARISONS = [("C", "A"), ("B", "C")]
@@ -220,9 +220,24 @@ def two_sided_p(frac_gt0):
     return min(1.0, 2 * min(frac_gt0, 1 - frac_gt0))
 
 
+_LMAP = {"safe": "SAFE", "vulnerable": "VULNERABLE", "unresolved": "UNRESOLVED",
+         "not_established": "UNRESOLVED"}
+
+
+def scored_label(r):
+    """The class the PRIMARY scores: the evidence-relative packet-supported
+    conclusion, NOT the program's real vulnerability status. Falls back to a legacy
+    `stage1_label`. Values normalise to {VULNERABLE, SAFE, UNRESOLVED}."""
+    v = r.get("packet_supported_conclusion", r.get("stage1_label"))
+    return _LMAP.get(str(v).lower(), v)
+
+
 def run(instances, labels, predictions, split):
     inst = {r["instance_id"]: r for r in instances}
-    gt = {r["instance_id"]: r["stage1_label"] for r in labels}
+    gt = {r["instance_id"]: scored_label(r) for r in labels}
+    # program_outcome is reported SEPARATELY and never scored by the primary.
+    prog = {r["instance_id"]: r.get("program_outcome") for r in labels
+            if r.get("program_outcome") is not None}
     preds_by_cond = defaultdict(dict)
     extra_by_cond = defaultdict(dict)
     for r in predictions:
@@ -255,10 +270,20 @@ def run(instances, labels, predictions, split):
 
     metrics = condition_metrics(gt, preds_by_cond, sel, extra_by_cond)
 
+    # program_outcome reported SEPARATELY (never scored): cross-tab vs the scored
+    # evidence-relative class, so "unresolved" is not mistaken for a program property.
+    prog_crosstab = defaultdict(lambda: Counter())
+    for i in sel:
+        if i in prog:
+            prog_crosstab[gt.get(i)][prog[i]] += 1
+    prog_crosstab = {k: dict(v) for k, v in prog_crosstab.items()}
+
     report = {
         "split": split,
         "primary_metric": "three-class macro recall over {VULNERABLE, SAFE, UNRESOLVED} "
                           "(ABSTAIN=UNRESOLVED prediction; PARSE_ERROR incorrect)",
+        "primary_scores": "packet_supported_conclusion (evidence-relative), NOT program_outcome",
+        "program_outcome_crosstab_scored_x_program": prog_crosstab,
         "class_distribution": dist,
         "population": {"instances": sum(len(v) for v in fam_ids_all.values()),
                        "families": len(fam_ids_all),

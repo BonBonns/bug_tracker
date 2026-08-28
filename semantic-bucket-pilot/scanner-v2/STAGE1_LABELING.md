@@ -29,15 +29,29 @@ Labels join to the manifest by `instance_id`.
 
 ## Sidecar schema (`study/stage1_labels.jsonl`)
 
-One row per case instance:
+The primary evaluates an **evidence-relative decision**, not the code's real
+vulnerability status, so every label record preserves three distinct answers:
 
-    instance_id          # joins to study/instances.jsonl (opaque; no revision encoding)
-    stage1_label         # VULNERABLE | SAFE | UNRESOLVED
-    evidence_basis       # which evidence drove it: capacity / write_length / guard /
-                         #   reachability / cross_revision_diff  (one or more)
-    reviewer_id          # who assigned it
-    reviewer_confidence  # high | medium | low
-    review_status        # primary | adjudicated | verified
+    instance_id                   # joins to study/instances.jsonl (opaque)
+    packet_supported_conclusion   # safe | vulnerable | unresolved   <-- SCORED by the primary
+    program_outcome               # safe | vulnerable | not_established  (reported SEPARATELY)
+    relationship_answer           # established | contradicted | unresolved
+    evidence_basis                # capacity / write_length / guard / reachability /
+                                  #   cross_revision_diff  (one or more)
+    reviewer_id                   # who assigned it
+    reviewer_confidence           # high | medium | low
+    review_status                 # primary | adjudicated | verified
+
+- **`packet_supported_conclusion` is what the primary three-class macro recall
+  scores.** A model that correctly guesses "vulnerable" *without sufficient packet
+  evidence* is marked **wrong** for this evidence-relative task (and may draw an
+  unsupported-assumption finding). This is intentional: the study evaluates
+  calibrated reasoning from supplied evidence, not lucky guesses.
+- **`program_outcome` is reported separately** (a scored × program cross-tab),
+  **never scored**. This keeps "unresolved" a property of the *available evidence*,
+  not a claim that the program's status is inherently undecidable.
+- `relationship_answer` records whether the length/capacity relationship was
+  established, contradicted, or left unresolved by the packet.
 
 The file does not exist yet — Stage 1 has not run. It is created during review and
 frozen (sha256 recorded) once labeling is complete.
