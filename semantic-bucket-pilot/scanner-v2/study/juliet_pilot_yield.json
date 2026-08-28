@@ -1,0 +1,117 @@
+{
+  "files_with_both_sides": 4,
+  "included_after_inclusion_rule": 8,
+  "included_safe": 4,
+  "included_vulnerable": 4,
+  "matched_vulnerable_safe_pairs": 4,
+  "route_distribution": {
+    "semantic_relationship_review": 8
+  },
+  "rows": [
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_01.c",
+      "flaw_marked": true,
+      "function": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_01_bad",
+      "included": true,
+      "line": 34,
+      "oracle": "vulnerable",
+      "route": "semantic_relationship_review",
+      "stmt": "memcpy(dest, data, strlen(data)*sizeof(char));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_01.c",
+      "flaw_marked": true,
+      "function": "goodG2B",
+      "included": true,
+      "line": 56,
+      "oracle": "safe",
+      "route": "semantic_relationship_review",
+      "stmt": "memcpy(dest, data, strlen(data)*sizeof(char));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memmove_01.c",
+      "flaw_marked": true,
+      "function": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memmove_01_bad",
+      "included": true,
+      "line": 34,
+      "oracle": "vulnerable",
+      "route": "semantic_relationship_review",
+      "stmt": "memmove(dest, data, strlen(data)*sizeof(char));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memmove_01.c",
+      "flaw_marked": true,
+      "function": "goodG2B<duplicate>0",
+      "included": true,
+      "line": 56,
+      "oracle": "safe",
+      "route": "semantic_relationship_review",
+      "stmt": "memmove(dest, data, strlen(data)*sizeof(char));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c",
+      "flaw_marked": true,
+      "function": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_bad",
+      "included": true,
+      "line": 34,
+      "oracle": "vulnerable",
+      "route": "semantic_relationship_review",
+      "stmt": "memcpy(dest, data, wcslen(data)*sizeof(wchar_t));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c",
+      "flaw_marked": true,
+      "function": "goodG2B<duplicate>1",
+      "included": true,
+      "line": 56,
+      "oracle": "safe",
+      "route": "semantic_relationship_review",
+      "stmt": "memcpy(dest, data, wcslen(data)*sizeof(wchar_t));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memmove_01.c",
+      "flaw_marked": true,
+      "function": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memmove_01_bad",
+      "included": true,
+      "line": 34,
+      "oracle": "vulnerable",
+      "route": "semantic_relationship_review",
+      "stmt": "memmove(dest, data, wcslen(data)*sizeof(wchar_t));"
+    },
+    {
+      "capacity_bound": true,
+      "dest": "dest",
+      "exact_sink": true,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memmove_01.c",
+      "flaw_marked": true,
+      "function": "goodG2B<duplicate>2",
+      "included": true,
+      "line": 56,
+      "oracle": "safe",
+      "route": "semantic_relationship_review",
+      "stmt": "memmove(dest, data, wcslen(data)*sizeof(wchar_t));"
+    }
+  ],
+  "scanned_operations_with_oracle": 8
+}
