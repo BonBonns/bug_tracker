@@ -7,9 +7,9 @@
   "expansion": {
     "context_selection": "structure-only (call graph + param/arg indices); label never read",
     "dropped_for_residual_leak": 0,
+    "fully_recovered (length+capacity+relation established)": 40,
     "insufficient_cases": 96,
     "no_inbound_parameter (unexpandable here)": 46,
-    "recovered_identifiable": 40,
     "recovered_variants": [
       "41",
       "51b",
@@ -17,10 +17,12 @@
       "53d",
       "54e"
     ],
-    "recovery_rate": 0.417
+    "recovery_rate": 0.417,
+    "structurally_distinguished": 40,
+    "structurally_distinguished_only (packets differ, bound not established)": 0
   },
   "flow_families": {
-    "after_expansion (identifiable + recovered)": {
+    "after_expansion (identifiable + fully_recovered)": {
       "both_sided": 17,
       "confirmatory_both_sided": 9,
       "families": 17
@@ -35,7 +37,58 @@
     "meets_gate_after_expansion": false,
     "note": "recovered cases are clustered on their expanded packets with inert pass-through forwarder frames excluded, so interprocedural DEPTH (variants 51/52/53/54 = one decision path with 1/2/3/4 forwarding hops) does not pseudo-replicate into distinct families. Counting forwarding depth would have spuriously read 12."
   },
-  "interpretation": "Controlled packet expansion is a COVERAGE result: 40/96 (41.7%) of packet-insufficient cases become identifiable with minimal, structure-only caller context. It adds only 1 genuine flow-topology family, so the confirmatory both-sided count is 9 (< 12 gate): expansion improves coverage but does not by itself make Juliet a powered confirmatory sample. The 46 unexpandable cases route their source length through globals / pointers / structs (variants 44/45/63-68), beyond the minimal parameter-passing expander.",
+  "interpretation": "Structure-driven caller expansion recovered SUFFICIENT length evidence for 40 of 96 previously packet-insufficient cases (41.7% coverage improvement), representing 1 independent interprocedural flow topology. 'Sufficient' means the added frame mechanically establishes concrete write-length AND capacity so their relationship decides the bound \u2014 not merely that the packets differ. Confirmatory both-sided flow families rise 8 -> 9 (< 12 gate): a real coverage gain, not a powered confirmatory sample. The remaining cases route their source length through globals / pointers / structs (variants 44/45/63-68) or fail the sufficiency check, beyond the minimal parameter-passing expander. Reaching 12 independent families is better served by other CWEs / genuinely different length-flow patterns than by more pass-through variants.",
   "model_calls": 0,
-  "pinned_commit": "f88433e3443648a17671398797a04ea1f8e1a274"
+  "pinned_commit": "f88433e3443648a17671398797a04ea1f8e1a274",
+  "sufficiency_check": "structurally distinguished = safe/vulnerable packets differ after expansion; fully recovered = the added caller frame mechanically establishes a concrete source write-length AND destination capacity, so their relationship (exceeds / within) decides the bound. All numbers extracted structure-only.",
+  "sufficiency_examples": [
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_41.c",
+      "length_established_in": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_41_bad",
+      "oracle": "vulnerable",
+      "relation": "exceeds",
+      "write_length": 99
+    },
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_41.c",
+      "length_established_in": "goodG2B",
+      "oracle": "safe",
+      "relation": "within",
+      "write_length": 49
+    },
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_51b.c",
+      "length_established_in": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_51_bad",
+      "oracle": "vulnerable",
+      "relation": "exceeds",
+      "write_length": 99
+    },
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_51b.c",
+      "length_established_in": "goodG2B",
+      "oracle": "safe",
+      "relation": "within",
+      "write_length": 49
+    },
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_52c.c",
+      "length_established_in": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_52_bad",
+      "oracle": "vulnerable",
+      "relation": "exceeds",
+      "write_length": 99
+    },
+    {
+      "capacity": 50,
+      "file": "CWE121_Stack_Based_Buffer_Overflow__CWE806_char_declare_memcpy_52c.c",
+      "length_established_in": "goodG2B",
+      "oracle": "safe",
+      "relation": "within",
+      "write_length": 49
+    }
+  ]
 }

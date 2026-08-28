@@ -176,8 +176,10 @@ flow families in this CWE806 slice.
 - 96 packet-insufficient cases retained for the missing-context evaluation.
 - 208 packet-identifiable cases eligible for conditional A/B/C accuracy.
 - Only 8 confirmatory, both-sided topology families remain, below the 12-family gate.
-- Controlled packet expansion (structure-only) recovers 40/96 (41.7%) of the
-  missing-context cases but adds just 1 genuine flow family → 9 confirmatory, still < 12.
+- Controlled packet expansion (structure-only) recovers *sufficient length evidence*
+  for 40/96 (41.7%) of the missing-context cases — all 40 establish write-length,
+  capacity, and their relationship — but this is 1 genuine flow family → 9 confirmatory,
+  still < 12.
 - Therefore Juliet is presently a pipeline and missing-context study, not a powered
   confirmatory accuracy study.
 
@@ -228,17 +230,31 @@ neutralization, its packet is no longer byte-identical to an opposite-oracle pac
 | measure | result |
 |---------|-------:|
 | packet-insufficient cases | 96 |
-| **recovered (identifiable after expansion)** | **40 (41.7%)** |
+| structurally distinguished (safe/vuln packets differ after expansion) | 40 |
+| **fully recovered (sufficiency-checked)** | **40 (41.7%)** |
+| structurally-distinguished-only (differ but bound not established) | 0 |
 | unexpandable by minimal parameter-passing expander | 56 (46 no inbound-parameter source, 10 no caller) |
 | model calls | 0 |
 
-**Coverage result.** Minimal, structure-only caller context recovers **41.7%** of the
-missing-context cases — the source-length `memset` that a sink-only packet omits
-(e.g. `memset(data,'A',100-1)` → overflow vs `memset(data,'A',50-1)` → safe) sits one
-call edge up, and expansion pulls exactly that frame. Recovered variants are Juliet's
-argument-passing data-flow cases (`41/51-54`). The **56** unexpandable cases route
-their source length through globals / pointers / structs (variants `44/45/63-68`),
-beyond a minimal parameter-passing expander — the natural target for a richer slice.
+**Sufficiency check — distinguishable is not the same as identifiable.** Expansion
+proving the safe and vulnerable packets are no longer identical is necessary but not
+sufficient; the added frame must actually *decide the bound*. For each of the 40, three
+quantities are extracted **structure-only** (no oracle): the destination **capacity**
+(V2 `element_count` = 50), the source **write length** (the concrete `memset` fill
+length traced up the caller chain — `100-1` = 99 vs `50-1` = 49, so
+`strlen(data)` = that length under the fill-then-null idiom), and their **relationship**
+(99 > 50 → *exceeds*; 49 < 50 → *within*). All **40/40** establish all three (0 remain
+merely structurally distinguished). That the *exceeds/within* verdict matches the known
+`bad`/`good` outcome is a cross-check, not a leak — selection and extraction never read
+the label.
+
+**Coverage result.** Minimal, structure-only caller context recovers **sufficient
+length evidence** for **41.7%** of the missing-context cases — the source-length
+`memset` a sink-only packet omits sits one call edge up, and expansion pulls exactly
+that frame. Recovered variants are Juliet's argument-passing data-flow cases
+(`41/51-54`). The **56** unexpandable cases route their source length through globals /
+pointers / structs (variants `44/45/63-68`), beyond a minimal parameter-passing
+expander — the natural target for a richer slice.
 
 **It does *not* by itself meet the 12-family gate.** Clustered honestly, recovery adds
 only **1** genuine flow-topology family (confirmatory both-sided **8 → 9**, still < 12).
@@ -251,10 +267,15 @@ path"), so forwarding depth does not split into distinct families. Counting dept
 topology would have spuriously met the gate — the same over-merge/pseudoreplication
 discipline applied one level up.
 
-**Net:** expansion is a genuine **coverage** improvement (41.7% of missing-context
-cases recovered with label-free structural selection) and a proof-of-concept that
-interprocedural evidence is the right lever; it does not convert this CWE806 slice into
-a powered confirmatory accuracy sample. Reported in `study/juliet/packet_expansion.json`.
+**Net (defensible result).** Structure-driven caller expansion recovered *sufficient*
+length evidence for **40 of 96** previously packet-insufficient cases — a **41.7%
+coverage improvement** — representing **one** independent interprocedural flow topology.
+It is a genuine coverage gain and a proof that interprocedural evidence is the right
+lever, but it does not convert this CWE806 slice into a powered confirmatory accuracy
+sample (confirmatory both-sided **8 → 9**, still < 12). Reaching 12 independent families
+is better served by broadening to **other CWEs / genuinely different length-flow
+patterns** than by counting additional pass-through variants. Reported in
+`study/juliet/packet_expansion.json`.
 
 ## Validity caveat (Juliet is synthetic)
 

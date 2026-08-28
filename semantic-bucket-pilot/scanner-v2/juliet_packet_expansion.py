@@ -130,6 +130,72 @@ def expand_context(sink_fn, source_var, fns_by_id, callers_of, src_dir, depth, s
     return bodies
 
 
+import ast
+
+
+def _safe_int_expr(code):
+    """Evaluate a constant integer arithmetic expression (e.g. '100-1') with no names
+    or calls. Returns int or None."""
+    if not code:
+        return None
+    try:
+        node = ast.parse(code.strip(), mode="eval").body
+    except SyntaxError:
+        return None
+    allowed_bin = (ast.Add, ast.Sub, ast.Mult, ast.FloorDiv, ast.Div, ast.Mod)
+
+    def ev(n):
+        if isinstance(n, ast.Constant) and isinstance(n.value, (int, float)):
+            return n.value
+        if isinstance(n, ast.BinOp) and isinstance(n.op, allowed_bin):
+            a, b = ev(n.left), ev(n.right)
+            if a is None or b is None:
+                return None
+            return {ast.Add: a + b, ast.Sub: a - b, ast.Mult: a * b,
+                    ast.FloorDiv: (a // b if b else None), ast.Div: (a / b if b else None),
+                    ast.Mod: (a % b if b else None)}[type(n.op)]
+        if isinstance(n, ast.UnaryOp) and isinstance(n.op, (ast.UAdd, ast.USub)):
+            v = ev(n.operand)
+            return None if v is None else (v if isinstance(n.op, ast.UAdd) else -v)
+        return None
+    v = ev(node)
+    return int(v) if isinstance(v, (int, float)) and float(v).is_integer() else None
+
+
+def trace_source_length(sink_fn, source_var, fns_by_id, callers_of, calls_in, depth, seen):
+    """Structure-only: walk the same caller chain and return (write_length_elements,
+    established_in_function) — the concrete fill length that a SET (memset/wmemset)
+    gives the traced source operand, so strlen/wcslen == that length under Juliet's
+    fill-then-null-terminate idiom. Reads no oracle/label; returns (None, None) if the
+    length is not a concrete constant in an added frame."""
+    idx = param_index(sink_fn, source_var)
+    if idx is None:
+        return None, None
+    for c in callers_of.get(sink_fn.get("full_name"), []):
+        caller = fns_by_id.get(c.get("enclosing_function_id"))
+        if not caller or caller["id"] in seen:
+            continue
+        seen.add(caller["id"])
+        passed = next((a for a in c.get("arguments", []) if a.get("index") == idx), None)
+        pv = passed.get("name") if passed else None
+        # a SET on the passed variable in this caller establishes the length
+        for sc in calls_in.get(caller["id"], []):
+            if sc.get("name") in san._SETS:
+                a0 = next((a for a in sc.get("arguments", []) if a.get("index") == 0), None)
+                a2 = next((a for a in sc.get("arguments", []) if a.get("index") == 2), None)
+                if a0 and a0.get("name") == pv and a2:
+                    L = _safe_int_expr(a2.get("code"))
+                    if L is not None:
+                        return L, caller.get("name")
+        # else forward up while the caller merely passes its own inbound parameter
+        if pv and passed and (passed.get("value_ref") or {}).get("kind") == "PARAMETER" and depth > 0:
+            L, where = trace_source_length(caller, pv, fns_by_id, callers_of,
+                                           calls_in, depth - 1, seen)
+            if L is not None:
+                return L, where
+    return None, None
+
+
 def neutralized_packet(bodies, funcname, files):
     joined = "\n".join(b for b in bodies if b)
     extra = []
@@ -185,8 +251,10 @@ def main():
                     and f.get("line_end") and f["line"] <= line <= f["line_end"] \
                     and f.get("name") == r.get("function"):
                 fid = f["id"]; break
+        ev = r.get("_v2_evidence") or {}
         inst.append({"file": base, "function": r.get("function"), "line": line,
-                     "oracle": oc, "baseline": pkt, "fid": fid})
+                     "oracle": oc, "baseline": pkt, "fid": fid,
+                     "capacity": ev.get("element_count"), "element_type": ev.get("element_type")})
 
     # ---- partition baseline into packet-identifiable / packet-insufficient ----
     obh = defaultdict(set)
@@ -242,6 +310,34 @@ def main():
     recovered = [x for x in insufficient
                  if x.get("expanded") and phash(x["expanded"]) not in unident2]
 
+    # ---- sufficiency check: does the added frame ESTABLISH length, capacity, relation? ----
+    # structurally distinguished (packets differ) is necessary but not sufficient; the
+    # difference must mechanically fix the bound. Extract, structure-only:
+    #   capacity   = destination element_count (V2 evidence)
+    #   write_len  = concrete source fill length from the added caller frame
+    #   relation   = write_len vs capacity  -> exceeds / within (bound decidable)
+    fully, struct_only = [], []
+    for x in recovered:
+        sink_fn = fns_by_id.get(x["fid"])
+        src_var, is_param = sink_source_operand(calls_in, x["fid"], x["line"])
+        wl, where = (None, None)
+        if sink_fn and src_var and is_param:
+            wl, where = trace_source_length(sink_fn, src_var, fns_by_id, callers_of,
+                                            calls_in, MAX_DEPTH, seen={x["fid"]})
+        cap = x.get("capacity")
+        cap_int = cap if isinstance(cap, int) else None
+        x["write_len"] = wl
+        x["cap"] = cap_int
+        x["length_established_in"] = where
+        if wl is not None and cap_int is not None:
+            x["relation"] = "exceeds" if wl > cap_int else ("within" if wl < cap_int else "boundary")
+            x["sufficient"] = True
+            fully.append(x)
+        else:
+            x["relation"] = None
+            x["sufficient"] = False
+            struct_only.append(x)
+
     # ---- families on the now-eligible set (baseline-identifiable + recovered) ----
     def clustered(items, keyf):
         g = defaultdict(list)
@@ -257,7 +353,7 @@ def main():
         return len(g), len(both), conf
 
     eligible_pkts = [(x["baseline"], x["oracle"]) for x in identifiable] + \
-                    [(x["expanded"], x["oracle"]) for x in recovered]
+                    [(x["expanded"], x["oracle"]) for x in fully]
     flow_before = clustered([(x["baseline"], x["oracle"]) for x in identifiable],
                             lambda p: "flow_" + san.flow_skeleton(p))
     flow_after = clustered(eligible_pkts, lambda p: "flow_" + san.flow_skeleton(p))
@@ -271,16 +367,29 @@ def main():
             "insufficient_cases": len(insufficient),
             "no_inbound_parameter (unexpandable here)": no_param,
             "dropped_for_residual_leak": leak_drop,
-            "recovered_identifiable": len(recovered),
-            "recovery_rate": round(len(recovered) / len(insufficient), 3) if insufficient else 0.0,
+            "structurally_distinguished": len(recovered),
+            "fully_recovered (length+capacity+relation established)": len(fully),
+            "structurally_distinguished_only (packets differ, bound not established)": len(struct_only),
+            "recovery_rate": round(len(fully) / len(insufficient), 3) if insufficient else 0.0,
             "recovered_variants": sorted({re.sub(r".*_(\d+[a-z]?)\.c$", r"\1", x["file"])
-                                          for x in recovered}),
+                                          for x in fully}),
         },
+        "sufficiency_examples": [
+            {"file": x["file"], "oracle": x["oracle"], "write_length": x["write_len"],
+             "capacity": x["cap"], "relation": x["relation"],
+             "length_established_in": x["length_established_in"]}
+            for x in sorted(fully, key=lambda z: z["file"])[:6]
+        ],
+        "sufficiency_check": (
+            "structurally distinguished = safe/vulnerable packets differ after expansion; "
+            "fully recovered = the added caller frame mechanically establishes a concrete "
+            "source write-length AND destination capacity, so their relationship "
+            "(exceeds / within) decides the bound. All numbers extracted structure-only."),
         "flow_families": {
             "before_expansion (identifiable only)":
                 {"families": flow_before[0], "both_sided": flow_before[1],
                  "confirmatory_both_sided": flow_before[2]},
-            "after_expansion (identifiable + recovered)":
+            "after_expansion (identifiable + fully_recovered)":
                 {"families": flow_after[0], "both_sided": flow_after[1],
                  "confirmatory_both_sided": flow_after[2]},
             "gate": B.MIN_FAMILIES,
@@ -293,30 +402,39 @@ def main():
                      "forwarding depth would have spuriously read 12."),
         },
         "interpretation": (
-            "Controlled packet expansion is a COVERAGE result: %d/%d (%.1f%%) of "
-            "packet-insufficient cases become identifiable with minimal, structure-only "
-            "caller context. It adds only %d genuine flow-topology family, so the "
-            "confirmatory both-sided count is %d (< %d gate): expansion improves "
-            "coverage but does not by itself make Juliet a powered confirmatory sample. "
-            "The %d unexpandable cases route their source length through globals / "
-            "pointers / structs (variants 44/45/63-68), beyond the minimal "
-            "parameter-passing expander."
-            % (len(recovered), len(insufficient),
-               100 * (len(recovered) / len(insufficient) if insufficient else 0),
-               flow_after[2] - flow_before[2], flow_after[2], B.MIN_FAMILIES, no_param)),
+            "Structure-driven caller expansion recovered SUFFICIENT length evidence for "
+            "%d of %d previously packet-insufficient cases (%.1f%% coverage improvement), "
+            "representing %d independent interprocedural flow topology. 'Sufficient' means "
+            "the added frame mechanically establishes concrete write-length AND capacity "
+            "so their relationship decides the bound — not merely that the packets differ. "
+            "Confirmatory both-sided flow families rise %d -> %d (< %d gate): a real "
+            "coverage gain, not a powered confirmatory sample. The remaining cases route "
+            "their source length through globals / pointers / structs (variants "
+            "44/45/63-68) or fail the sufficiency check, beyond the minimal "
+            "parameter-passing expander. Reaching 12 independent families is better served "
+            "by other CWEs / genuinely different length-flow patterns than by more "
+            "pass-through variants."
+            % (len(fully), len(insufficient),
+               100 * (len(fully) / len(insufficient) if insufficient else 0),
+               flow_after[2] - flow_before[2], flow_before[2], flow_after[2], B.MIN_FAMILIES)),
     }
     out = os.path.join(B.OUTDIR, "packet_expansion.json")
     with open(out, "w") as fh:
         json.dump(report, fh, indent=2, sort_keys=True, default=str)
 
     print(f"clean {len(inst)}  identifiable {len(identifiable)}  insufficient {len(insufficient)}")
-    print(f"expansion (structure-only): recovered {len(recovered)}/{len(insufficient)} "
-          f"({100*report['expansion']['recovery_rate']:.1f}%)   "
+    print(f"expansion (structure-only): structurally distinguished {len(recovered)}/{len(insufficient)}   "
           f"unexpandable(no inbound param) {no_param}   leak-dropped {leak_drop}")
-    print(f"recovered variants: {report['expansion']['recovered_variants']}")
+    print(f"sufficiency check: FULLY recovered {len(fully)}/{len(insufficient)} "
+          f"({100*report['expansion']['recovery_rate']:.1f}%)   "
+          f"structurally-distinguished-only {len(struct_only)}")
+    print(f"fully-recovered variants: {report['expansion']['recovered_variants']}")
+    for ex in report["sufficiency_examples"][:4]:
+        print(f"    [{ex['oracle'][:4]}] write_len {ex['write_length']} vs cap {ex['capacity']}"
+              f" -> {ex['relation']}  (length in {ex['length_established_in']})")
     print(f"\nflow-topology confirmatory both-sided families:")
-    print(f"  before expansion (identifiable only): {flow_before[2]}")
-    print(f"  after  expansion (+recovered)       : {flow_after[2]}   (gate {B.MIN_FAMILIES}) -> "
+    print(f"  before expansion (identifiable only)      : {flow_before[2]}")
+    print(f"  after  expansion (+fully recovered)       : {flow_after[2]}   (gate {B.MIN_FAMILIES}) -> "
           f"{'MEETS gate' if flow_after[2] >= B.MIN_FAMILIES else 'still below gate'}")
     print(f"\nreport -> {out}")
 
