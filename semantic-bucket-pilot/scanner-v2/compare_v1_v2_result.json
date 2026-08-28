@@ -1,0 +1,34 @@
+{
+  "additional_evidence_required": {
+    "reduced_by": 0,
+    "v1": 13,
+    "v2": 13
+  },
+  "changes": [],
+  "deterministically_resolved": {
+    "gained": 0,
+    "v1": 2,
+    "v2": 2
+  },
+  "distinct_operations": 21,
+  "inputs": 8,
+  "operations_changed": 0,
+  "ready_for_llm_review": {
+    "gained": 0,
+    "v1": 6,
+    "v2": 6
+  },
+  "soundness_violations": 0,
+  "v1_routes": {
+    "None": 2,
+    "additional_evidence_required": 13,
+    "semantic_contract_review": 2,
+    "semantic_relationship_review": 4
+  },
+  "v2_routes": {
+    "None": 2,
+    "additional_evidence_required": 13,
+    "semantic_contract_review": 2,
+    "semantic_relationship_review": 4
+  }
+}
