@@ -106,6 +106,7 @@ def main():
     # attach + validate capacity fact; re-run sufficiency with capacity PRESENT
     validated = 0
     fact_missing = 0
+    unvalidated_class = Counter()
     suff = Counter()
     topo = defaultdict(lambda: Counter())
     prov_families = set()
@@ -116,14 +117,24 @@ def main():
             continue
         prov_families.add(cap["provenance"])
         # validate the capacity fact against the source in the packet (independent parse)
+        ok = False
         if cap["provenance"] == "heap_direct_allocation":
             msrc = re.search(rf"{re.escape(x['dest'])}\s*=\s*\(?[^;]*\bmalloc\s*\(\s*([^;]*?)\s*\)\s*;",
                              x["packet"])
-            if msrc and msrc.group(1).replace(" ", "") == cap["size_expression"].replace(" ", ""):
-                validated += 1
+            ok = bool(msrc and msrc.group(1).replace(" ", "") == cap["size_expression"].replace(" ", ""))
         else:
-            if re.search(rf"\b{re.escape(x['dest'])}\s*\[\s*{cap['element_count']}\s*\]", x["packet"]):
-                validated += 1
+            ok = bool(re.search(rf"\b{re.escape(x['dest'])}\s*\[\s*{cap['element_count']}\s*\]", x["packet"]))
+        if ok:
+            validated += 1
+        else:
+            # classify the miss: allocation/declaration NOT in the sink packet because the
+            # capacity was established interprocedurally (propagated from a caller) -> an
+            # EXPECTED EXCLUSION from packet-local validation, not an invalid/unresolved fact.
+            has_alloc = bool(re.search(r"\b(malloc|calloc|realloc|alloca|ALLOCA)\b", x["packet"]))
+            if not has_alloc:
+                unvalidated_class["expected_exclusion_out_of_packet_propagated"] += 1
+            else:
+                unvalidated_class["unresolved_in_packet_mismatch"] += 1
         ob = obligation(x)
         if ob:
             topo[ob][x["oracle"]] += 1
@@ -158,6 +169,7 @@ def main():
         "review_topologies_both_sided": {k: dict(v) for k, v in both_topos.items()},
         "capacity_fact_validated_against_source": validated,
         "capacity_fact_missing": fact_missing,
+        "capacity_unvalidated_classification": dict(unvalidated_class),
         "sufficiency_with_capacity_present": dict(suff),
         "note": "sizeof(T) preserved symbolically; unit relation (same_sizeof / "
                 "write_sizeof_vs_cap_bytes) distinguishes 'strlen fits capacity' from "

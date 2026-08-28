@@ -391,6 +391,39 @@ sample — internally knowing the capacity is not enough if the packet omits it.
 - **−16** packet-insufficient (byte-identical bad/good packet) → **408** packet-identifiable
   heap destinations. Reported in `study/juliet/heap_funnel.json`.
 
+### Two pre-Magma audits
+
+**CWE131 safe-side attrition — legitimate one-sidedness (`cwe131_safeside_audit.py`).**
+The byte/element-mismatch obligation was one-sided (42 vuln, 0 safe); tracing every
+expected safe counterpart through the six stages (source → copy op → facts → producer
+status/reason → route → sanitizer/inclusion) shows the safe side is *resolved*, not lost:
+**72 safe cases route to `deterministic_complete`**. The safe fix allocates
+`malloc(10*sizeof(int))`, whose capacity expression **equals** the `10*sizeof(int)` write
+width, so the scanner proves no overflow and correctly never sends it for review; the bad
+side (`malloc(10)` bytes vs `10*sizeof(int)`) is `capacity_relation_not_established` and
+routes to `semantic_relationship_review`. This is **outcome #1 — the asymmetry is
+legitimate** (the scanner solves the safe cases), not a pipeline artifact. No inclusion
+criteria were loosened to manufacture balance. Reported in
+`study/juliet/cwe131_safeside_audit.json`.
+
+**24 / 1032 capacity validations that did not confirm — all expected exclusions.** Every
+one is `dest_is_parameter | no_alloc_in_packet`, vulnerable, `heap_direct_allocation`:
+interprocedural cases where the sink receives `data` as a parameter and the `malloc` is in
+the caller, so the extent was established by cross-function **propagation**
+(`propagated_call:` provenance) and the allocation is simply out-of-packet — nothing to
+validate packet-locally. **0 invalid, 0 unresolved, 24 expected exclusions.** (Exposing
+these to a reviewer would need the same packet expansion as the packet-insufficient
+population.) Recorded as `capacity_unvalidated_classification` in
+`study/juliet/review_topology.json`.
+
+### Juliet conclusion → Magma
+
+Juliet's many files collapse to roughly **one** independent reviewer question ("does
+`strlen(source)` fit within the known capacity"); its genuinely different obligation
+(byte/element mismatch) is legitimately one-sided. More Juliet variants are unlikely to
+add the missing topological diversity. The next source is **Magma** — real, oracle-backed
+bugs — for genuinely independent review topologies.
+
 ### Batch-invariance control (`batch_invariance.py`)
 
 Because the scan ran in 500-file batches, we proved batching does not change scanner

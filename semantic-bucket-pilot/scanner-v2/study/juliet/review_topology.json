@@ -6,6 +6,9 @@
     "heap_direct_allocation",
     "stack_fixed_array"
   ],
+  "capacity_unvalidated_classification": {
+    "expected_exclusion_out_of_packet_propagated": 24
+  },
   "independent_review_topologies": 2,
   "independent_review_topologies_offset_abstracted": 1,
   "model_calls": 0,

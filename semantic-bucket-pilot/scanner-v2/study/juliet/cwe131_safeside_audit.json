@@ -1,0 +1,136 @@
+{
+  "examples": {
+    "safe": [
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_01",
+        "heap_size": null,
+        "line": 49,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_02",
+        "heap_size": null,
+        "line": 60,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_02",
+        "heap_size": null,
+        "line": 78,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_03",
+        "heap_size": null,
+        "line": 60,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      }
+    ],
+    "vulnerable": [
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_01",
+        "heap_size": null,
+        "line": 30,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_02",
+        "heap_size": null,
+        "line": 33,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_03",
+        "heap_size": null,
+        "line": 33,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      },
+      {
+        "dest": "data",
+        "file": "CWE121_Stack_Based_Buffer_Overflow__CWE131_memcpy_04",
+        "heap_size": null,
+        "line": 40,
+        "reason": "unknown_allocator_contract",
+        "route": "semantic_contract_review",
+        "stack_ec": null,
+        "status": "abstained",
+        "width": "10*sizeof(int)"
+      }
+    ]
+  },
+  "model_calls": 0,
+  "reason_by_oracle": {
+    "safe": {
+      "deterministic_complete": 72,
+      "required_evidence_absent": 48,
+      "unknown_allocator_contract": 80
+    },
+    "vulnerable": {
+      "capacity_relation_not_established": 44,
+      "conflicting_reaching_allocations": 2,
+      "required_evidence_absent": 48,
+      "unknown_allocator_contract": 50
+    }
+  },
+  "route_by_oracle": {
+    "safe": {
+      "None": 72,
+      "additional_evidence_required": 48,
+      "semantic_contract_review": 80
+    },
+    "vulnerable": {
+      "additional_evidence_required": 50,
+      "semantic_contract_review": 50,
+      "semantic_relationship_review": 44
+    }
+  },
+  "stage_funnel": {
+    "safe": {
+      "0_source_op_seen": 200,
+      "2_copy_op_recognized": 200,
+      "3_capacity_and_length_facts": 72,
+      "stop_missing_facts": 128
+    },
+    "vulnerable": {
+      "0_source_op_seen": 144,
+      "2_copy_op_recognized": 144,
+      "3_capacity_and_length_facts": 44,
+      "stop_missing_facts": 100
+    }
+  }
+}
