@@ -29,11 +29,12 @@ Labels join to the manifest by `instance_id`.
 
 ## Sidecar schema (`study/stage1_labels.jsonl`)
 
-The primary evaluates an **evidence-relative decision**, not the code's real
-vulnerability status, so every label record preserves three distinct answers:
+The primary evaluates an **evidence-relative decision** against **one fixed neutral
+reference**, not the code's real vulnerability status, so every label record
+preserves three distinct answers:
 
     instance_id                   # joins to study/instances.jsonl (opaque)
-    packet_supported_conclusion   # safe | vulnerable | unresolved   <-- SCORED by the primary
+    evidence_reference_conclusion # safe | vulnerable | unresolved   <-- SCORED by the primary
     program_outcome               # safe | vulnerable | not_established  (reported SEPARATELY)
     relationship_answer           # established | contradicted | unresolved
     evidence_basis                # capacity / write_length / guard / reachability /
@@ -42,16 +43,21 @@ vulnerability status, so every label record preserves three distinct answers:
     reviewer_confidence           # high | medium | low
     review_status                 # primary | adjudicated | verified
 
-- **`packet_supported_conclusion` is what the primary three-class macro recall
-  scores.** A model that correctly guesses "vulnerable" *without sufficient packet
-  evidence* is marked **wrong** for this evidence-relative task (and may draw an
-  unsupported-assumption finding). This is intentional: the study evaluates
-  calibrated reasoning from supplied evidence, not lucky guesses.
+- **`evidence_reference_conclusion` is what the primary scores.** It is the
+  conclusion supported by the **fixed neutral reference packet** (`REFERENCE_PACKET.md`)
+  — the code shared by all conditions plus the established scanner facts shared by B
+  and C, with no uncertainty bucket, no focused C question, and no condition id. It
+  is **one target, identical for A, B and C**, so the conditions are scored against
+  the *same* answer and stay comparable. A/B/C differ in how that evidence is
+  *presented*, not in the target. A model that correctly guesses "vulnerable" without
+  the reference evidence supporting it is marked **wrong** here (and may draw a
+  condition-relative unsupported-assumption finding) — the study tests calibrated
+  reasoning from supplied evidence, not lucky guesses.
 - **`program_outcome` is reported separately** (a scored × program cross-tab),
   **never scored**. This keeps "unresolved" a property of the *available evidence*,
   not a claim that the program's status is inherently undecidable.
 - `relationship_answer` records whether the length/capacity relationship was
-  established, contradicted, or left unresolved by the packet.
+  established, contradicted, or left unresolved by the reference evidence.
 
 The file does not exist yet — Stage 1 has not run. It is created during review and
 frozen (sha256 recorded) once labeling is complete.

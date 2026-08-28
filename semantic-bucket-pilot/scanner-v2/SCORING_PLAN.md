@@ -22,17 +22,24 @@ missing output or a parse failure is mapped to `ABSTAIN` (never silently dropped
    guidance improve the judgment). C-vs-A and B-vs-C are secondary/exploratory.
 2. **Point estimate & uncertainty.** Point estimate is **instance-weighted**;
    **uncertainty is family-clustered** (families are the resampling unit).
-3. **Primary population.** **All independently-labeled instances** —
+3. **Primary population + fixed target.** **All independently-labeled instances** —
    `VULNERABLE`, `SAFE`, **and** `UNRESOLVED` — in the **confirmatory** split only.
-   The scored ground-truth field is **`packet_supported_conclusion`** (the
-   evidence-relative decision), **not** `program_outcome` (the code's real status).
-   A model that correctly guesses "vulnerable" without sufficient packet evidence is
-   marked **wrong** here — the study tests calibrated reasoning from supplied
-   evidence, not lucky guesses. `program_outcome` is reported separately (a scored ×
-   program cross-tab), never scored, so "unresolved" stays a property of the
-   *available evidence*, not an inherent property of the program.
+   The scored ground-truth field is **`evidence_reference_conclusion`**: the
+   conclusion supported by the **fixed neutral reference packet**
+   (`REFERENCE_PACKET.md` — shared code + the established scanner facts shared by B
+   and C; no bucket, no focused C question, no condition id). Because A/B/C receive
+   *different* packets (A: code only; B/C: code + established facts), a
+   condition-specific target would score them against different answers and make
+   accuracy incomparable; one fixed reference target keeps them comparable and asks
+   whether each *presentation* helps reach the conclusion the common evidence
+   supports. **B−C is especially clean** — B and C hold byte-identical facts, so the
+   difference isolates presentation. A model that guesses "vulnerable" without the
+   reference evidence supporting it is marked **wrong** — the study tests calibrated
+   reasoning from supplied evidence, not lucky guesses. `program_outcome` is reported
+   separately (a scored × program cross-tab), never scored, so "unresolved" stays a
+   property of the *available evidence*, not an inherent property of the program.
 4. **Primary metric — three-class macro recall.** Ground truth ∈
-   {`VULNERABLE`, `SAFE`, `UNRESOLVED`} (from `packet_supported_conclusion`);
+   {`VULNERABLE`, `SAFE`, `UNRESOLVED`} (from `evidence_reference_conclusion`);
    prediction ∈ {`VULNERABLE`, `SAFE`, `ABSTAIN`(=predict UNRESOLVED)}; `PARSE_ERROR`
    is always incorrect. Score = **average recall across all three classes**. This penalises **both** failure
    modes: abstaining on resolved (`VULNERABLE`/`SAFE`) cases *and* committing on
@@ -119,7 +126,7 @@ self-report kept descriptive only), and appropriate-abstention on `UNRESOLVED`.
    B−A values in `study/scoring_freeze/` exist only to lock the code; they change
    with the synthetic seed and instance ids and **must never appear in the results
    section**. Only the real Stage-2 run over real labels produces findings.
-1. Stage-1 class distribution of `packet_supported_conclusion` (VULNERABLE / SAFE /
+1. Stage-1 class distribution of `evidence_reference_conclusion` (VULNERABLE / SAFE /
    UNRESOLVED) in dev and confirmatory, **plus the `program_outcome` cross-tab** —
    reported first, before any accuracy number.
 2. Confirmatory **minimum inference gate** (families-per-class vs

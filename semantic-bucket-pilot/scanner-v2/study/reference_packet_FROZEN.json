@@ -1,0 +1,16 @@
+{
+  "contains": [
+    "shared code context",
+    "established scanner facts shared by B and C"
+  ],
+  "excludes": [
+    "uncertainty bucket",
+    "focused C question",
+    "condition identifier",
+    "routes/buckets/scanner conclusions/model output"
+  ],
+  "reference_packet_file": "study/stage1_labeling_packet.jsonl",
+  "role": "frozen neutral reference packet for evidence_reference_conclusion (fixed A/B/C target)",
+  "rows": 438,
+  "sha256": "b555325c93ce520b26ce754d296f5924686fd06eb2e1660bb2fce8969cb6e344"
+}

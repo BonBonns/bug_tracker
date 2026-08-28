@@ -28,7 +28,7 @@ def sha(p):
 
 def synth_labels(instances, rng):
     """Family-clustered synthetic labels (FAKE) in the three-field Stage-1 schema.
-    The scored field is packet_supported_conclusion; program_outcome is separate and
+    The scored field is evidence_reference_conclusion (fixed neutral-reference target);
     sometimes diverges (e.g. program vulnerable but packet evidence unresolved) —
     only to exercise the harness, not a claim about the data."""
     fam_risk = {}
@@ -55,7 +55,7 @@ def synth_labels(instances, rng):
             prog = lc[psc]
             rel = "established" if rng.random() < 0.9 else "contradicted"
         rows.append({"instance_id": r["instance_id"],
-                     "packet_supported_conclusion": lc[psc],  # SCORED field
+                     "evidence_reference_conclusion": lc[psc],  # SCORED (fixed neutral-reference target)
                      "program_outcome": prog,                 # reported separately
                      "relationship_answer": rel})
     return rows
@@ -192,7 +192,7 @@ def main():
               f"selective={m['selective_balanced_accuracy']:.3f} cov={m['coverage']:.3f} "
               f"extUnsup={m['external_unsupported_assumption_rate']} "
               f"selfRep={m['self_reported_unsupported_rate']}")
-    print("scored field = packet_supported_conclusion (evidence-relative), NOT program_outcome")
+    print("scored field = evidence_reference_conclusion (ONE fixed neutral-reference target for A/B/C), NOT program_outcome")
     print("scored x program_outcome cross-tab:", rep1["program_outcome_crosstab_scored_x_program"])
     print(f"[REGRESSION ONLY, not a finding] PRIMARY B-A: {prim['point']:.4f} CI95={prim['ci95']} "
           f"inference={prim['inference']} degenerate_frac={prim['degenerate_resample_frac']:.4f}")

@@ -93,7 +93,7 @@
     "point": 0.13318570072761776
   },
   "primary_metric": "three-class macro recall over {VULNERABLE, SAFE, UNRESOLVED} (ABSTAIN=UNRESOLVED prediction; PARSE_ERROR incorrect)",
-  "primary_scores": "packet_supported_conclusion (evidence-relative), NOT program_outcome",
+  "primary_scores": "evidence_reference_conclusion (ONE fixed neutral-reference target, identical for A/B/C), NOT program_outcome",
   "program_outcome_crosstab_scored_x_program": {
     "SAFE": {
       "safe": 218

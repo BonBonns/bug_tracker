@@ -15,10 +15,15 @@ only** — never as the error metric.
 
 - Adjudicate **only committed answers** (`VULNERABLE` or `SAFE`). `ABSTAIN` and
   parse failures are out of scope (they make no assertion to justify).
-- The adjudicator sees: the packet evidence for the instance (source, capacity,
-  write length, guards, reachability), the Stage-1 ground-truth label + evidence
-  basis, and the condition's response text — **blind to which condition (A/B/C)**
-  produced it and to any routing/bucket metadata.
+- **This metric is CONDITION-RELATIVE** — unlike the accuracy target, which is the
+  fixed `evidence_reference_conclusion`. A premise may be *supported* in B/C by an
+  established scanner fact yet *unsupported* in A, which never received that fact. So
+  each response is adjudicated against the **evidence actually supplied to its
+  condition** (A: code only; B/C: code + the established facts, in B's bucket form or
+  C's focused-question form), **not** the reference packet. The adjudicator is told
+  which evidence set the condition received, but stays **blind to the A/B/C
+  identity** and to any routing/bucket names.
+- The adjudicator also sees the Stage-1 ground-truth evidence basis for the instance.
 
 ## Decision
 

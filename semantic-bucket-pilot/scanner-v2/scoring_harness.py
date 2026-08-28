@@ -225,10 +225,14 @@ _LMAP = {"safe": "SAFE", "vulnerable": "VULNERABLE", "unresolved": "UNRESOLVED",
 
 
 def scored_label(r):
-    """The class the PRIMARY scores: the evidence-relative packet-supported
-    conclusion, NOT the program's real vulnerability status. Falls back to a legacy
-    `stage1_label`. Values normalise to {VULNERABLE, SAFE, UNRESOLVED}."""
-    v = r.get("packet_supported_conclusion", r.get("stage1_label"))
+    """The class the PRIMARY scores: `evidence_reference_conclusion` — the conclusion
+    supported by the FIXED neutral reference packet (shared code + the established
+    scanner facts shared by B and C; no bucket, no focused C question, no condition
+    id). It is ONE target identical for A, B and C, so the three conditions are
+    scored against the same answer and remain comparable. NOT the program's real
+    status. Accepts legacy field names. Normalises to {VULNERABLE, SAFE, UNRESOLVED}."""
+    v = r.get("evidence_reference_conclusion",
+              r.get("packet_supported_conclusion", r.get("stage1_label")))
     return _LMAP.get(str(v).lower(), v)
 
 
@@ -282,7 +286,8 @@ def run(instances, labels, predictions, split):
         "split": split,
         "primary_metric": "three-class macro recall over {VULNERABLE, SAFE, UNRESOLVED} "
                           "(ABSTAIN=UNRESOLVED prediction; PARSE_ERROR incorrect)",
-        "primary_scores": "packet_supported_conclusion (evidence-relative), NOT program_outcome",
+        "primary_scores": "evidence_reference_conclusion (ONE fixed neutral-reference "
+                          "target, identical for A/B/C), NOT program_outcome",
         "program_outcome_crosstab_scored_x_program": prog_crosstab,
         "class_distribution": dist,
         "population": {"instances": sum(len(v) for v in fam_ids_all.values()),
