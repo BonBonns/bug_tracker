@@ -295,41 +295,62 @@ packet-identifiable**. Per suite: CWE121 416, CWE122 616 identifiable.
 
 | clustering level | confirmatory | vs gate 12 |
 |------------------|-------------:|:----------:|
-| property signature (dest-capacity mechanism × write-length shape) — *property-faithful* | **2** | below |
+| property signature (dest-capacity mechanism × write-length shape) — *property-faithful* | 2 | below |
 | guard-collapsed dataflow topology | 26 | (meets) |
 | full flow-topology (guards kept; pre-registered key) | 24 | (meets) |
 
-**The high counts are an artifact — honest verdict: 2 independent families, gate NOT
-met.** The raw flow-topology key reads 24, but an audit shows that is inflated by
-variation **superficial to the destination-capacity property**:
+**Honest verdict: 1 genuine family, gate NOT met.** The raw flow-topology key reads 24,
+but that is inflated by variation **superficial to the destination-capacity property**:
 
 - families with **byte-identical** capacity + length + sink lines split only by opaque
   reachability guards (`if(V)` / `if(V())` / `if(V==L)`) — collapsing guards leaves the
   count high (26), so guards are not even the main inflation;
-- the real driver is source-side variation that does not touch the property:
-  source-buffer allocation method (`declare` / `alloca` / `malloc`) and subtype label;
-- decisively, **CWE122 "heap" copy cases overflow a stack `dest[50]`** — the *source* is
-  heap-allocated, the destination capacity is the same stack-array reasoning — so CWE122
-  does not, in general, contribute a distinct destination mechanism.
+- source-side variation that does not touch the property: source-buffer allocation
+  method (`declare` / `alloca` / `malloc`) and subtype label;
+- **CWE122 "heap" copy cases mostly overflow a stack `dest[50]`** (the *source* is
+  heap-allocated, the destination is the same stack-array reasoning).
 
-Under the **property-faithful** signature (which abstracts the bad/good discriminating
-values) there are only **2** independent both-sided reasoning patterns:
+The property-faithful key gives 2 both-sided signatures, but a signature is only a
+**genuine capacity-establishing family** if the scanner actually **binds the destination
+capacity** — a different *decision structure*, not merely a stack-vs-heap label:
 
-1. `stack_array_dest | strlen(src)*sizeof` — the CWE806 baseline pattern (624 instances;
-   CWE121 **and** CWE122 stack-dest cases);
-2. `heap_malloc_dest | (strlen(src)+1)*sizeof` — a genuinely distinct destination-capacity
-   mechanism (156 instances, CWE122 with an actual heap destination).
+| property signature | n | both-sided | capacity bound | genuine? |
+|--------------------|--:|:----------:|:--------------:|:--------:|
+| `stack_array_dest \| strlen(src)*sizeof` | 624 | yes | **624/624** | **yes** |
+| `heap_malloc_dest \| (strlen(src)+1)*sizeof` | 156 | yes | **0/156** | no |
+| `heap_malloc_dest \| N*sizeof` | 228 | no | 0/228 | no |
 
-So broadening added **one** genuinely new capacity mechanism (heap-malloc destination)
-over the CWE806 baseline — **2 of 12**, not 12. This confirms the prior expectation that
-scanning more of the same property mostly yields copies of the same reasoning. Reaching
-12 genuinely independent families needs different **length-flow / capacity mechanisms**
-— loop-computed lengths, integer-arithmetic capacities, index writes, `snprintf`-family
-lengths — or real-world code (**Magma**), not more symbolic-`strlen` copy variants. The
-`length_meaning` A/B/C interface, even across all of Juliet's stack+heap copy suites,
-exposes essentially **one-to-two** independent length-vs-capacity reasoning patterns.
-Reported in `study/juliet/broaden_families.json`. The 56 CWE806 packet-insufficient
-cases remain a documented future coverage-extension population (not chased here).
+**Decisive finding: heap destinations bind no capacity (0/384).** CWE122 routes eligible
+only on its symbolic *length*; the scanner never establishes the heap destination's
+capacity, so there is no capacity-vs-length decision to make — a **missing** capacity
+decision, not a different one. So CWE122 does **not** count as a new independent family.
+
+**Genuine independent capacity-establishing families = 1** — the stack-array +
+symbolic-`strlen` pattern (the CWE806 baseline). Broadening across all of Juliet's
+stack+heap copy suites added **zero** genuine new families and does not approach the 12
+gate. This confirms the prior expectation that scanning more of the same property mostly
+yields copies of the same reasoning. Reaching 12 requires different capacity/length
+**decision structures the scanner can establish** — bound heap capacity, integer-arithmetic
+capacity, loop-computed length, index writes — or real-world code (**Magma**), not more
+symbolic-`strlen` copy variants. Reported in `study/juliet/broaden_families.json`. The 56
+CWE806 packet-insufficient cases remain a documented future population (not chased here).
+
+### Batch-invariance control (`batch_invariance.py`)
+
+Because the scan ran in 500-file batches, we proved batching does not change scanner
+results: two adjacent completed batches (batch5, batch6) scanned separately vs a combined
+**1000-file** rescan, comparing every oracle-bearing operation's candidate status, reason
+codes, route, capacity, write-length (`width_expr`), element type, dest, unresolved
+property, and uncertainty, keyed by `(file, line)`.
+
+- **All 749 operations byte-identical** (546 eligible), 0 diffs, 0 oracle mismatches, no
+  membership change. **PASS.**
+- The only artifact of combining files is c2cpg's cosmetic `<duplicate>N` suffix on reused
+  helper names (`goodG2B`/`bad`/`printLine`), whose N differs in a larger CPG. It changes
+  no compared field, preserves the bad/good oracle, and is erased by neutralization — so
+  it cannot affect the flow-family analysis. Keyed on `(file, line)` it is invisible; the
+  arbitrary-batch-size split is therefore result-invariant and grouping by call-component
+  was not needed. Reported in `study/juliet/batch_invariance.json`.
 
 ## Validity caveat (Juliet is synthetic)
 

@@ -1,0 +1,19 @@
+{
+  "PASS_all_identical": true,
+  "PASS_eligible_identical": true,
+  "combined_ops": 749,
+  "common_ops_compared": 749,
+  "control": "separate 500-file batches (batch5, batch6) vs combined 1000-file rescan",
+  "diff_examples": [],
+  "eligible_diff_examples": [],
+  "eligible_diffs": 0,
+  "eligible_ops_compared": 546,
+  "key": "(file, line) \u2014 stable under c2cpg <duplicate>N helper-name suffixes",
+  "model_calls": 0,
+  "note": "compared fields: candidate status, reason codes, route, capacity (element_count), write-length (width_expr), element type, dest, unresolved property, uncertainty. The <duplicate>N function-name suffix is cosmetic (different N in a bigger CPG); it changes no compared field, preserves the bad/good oracle, and is erased by neutralization, so it cannot affect the flow-family analysis.",
+  "ops_only_in_combined": 0,
+  "ops_only_in_separate": 0,
+  "oracle_mismatches": 0,
+  "separate_ops": 749,
+  "total_diffs": 0
+}

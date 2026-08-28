@@ -141,10 +141,22 @@ def main():
         "full_flow_topology (guards kept; pre-registered key)":
             {"families": len(g), "both_sided": len(both), "confirmatory_both_sided": conf},
     }
-    ps_sigs = {k: {"n": len(v), "suites": dict(Counter(i["suite"].split("_")[0] for i in v)),
-                   "both_sided": ("vulnerable" in {i["oracle"] for i in v}
-                                  and "safe" in {i["oracle"] for i in v})}
-               for k, v in sorted(ps_g.items(), key=lambda kv: -len(kv[1]))}
+    # A signature is a GENUINE capacity-establishing family only if it is both-sided AND
+    # the scanner actually binds the destination capacity (element_count) for it — a
+    # different decision structure, not merely a stack-vs-heap label. Heap-malloc
+    # destinations here bind NO capacity, so they do not establish the capacity decision.
+    ps_sigs = {}
+    genuine = 0
+    for k, v in sorted(ps_g.items(), key=lambda kv: -len(kv[1])):
+        both_sided = ("vulnerable" in {i["oracle"] for i in v}
+                      and "safe" in {i["oracle"] for i in v})
+        cap_bound = sum(1 for i in v if isinstance(i.get("capacity"), int))
+        is_genuine = both_sided and cap_bound > 0
+        if is_genuine:
+            genuine += 1
+        ps_sigs[k] = {"n": len(v), "suites": dict(Counter(i["suite"].split("_")[0] for i in v)),
+                      "both_sided": both_sided, "capacity_bound": cap_bound,
+                      "genuine_capacity_family": is_genuine}
 
     # per-suite eligibility
     suite_counts = Counter(x["suite"] for x in rows)
@@ -172,27 +184,29 @@ def main():
                                 "concrete constant and are not counted fully-proved here."},
         "clustering_sensitivity": sensitivity,
         "property_signatures": ps_sigs,
-        "independent_reasoning_families (property-faithful, both-sided)": len(ps_both),
-        "meets_gate_property_faithful": ps_conf >= P.MIN_FAMILIES,
+        "genuine_capacity_families (both-sided AND capacity actually bound)": genuine,
+        "meets_gate_genuine": genuine >= P.MIN_FAMILIES,
         "verdict": (
             "Broadening across the predeclared copy-idiom suites (CWE121 stack + CWE122 "
             "heap, incl. nested CWE805/806) scanned 6428 files -> %d eligible, %d "
             "packet-identifiable. Under the pre-registered flow-topology key the "
-            "confirmatory count reads %d (>= 12), BUT audit shows that is inflated by "
-            "variation SUPERFICIAL to the destination-capacity property: opaque "
-            "reachability guards, source-buffer allocation method (stack/alloca/malloc), "
-            "and subtype labels. Families with byte-identical capacity+length+sink lines "
-            "split only by guards; and CWE122 'heap' copy cases overflow a STACK dest, so "
-            "they share the stack reasoning. Under the property-faithful key (dest-capacity "
-            "mechanism x write-length shape) there are only %d independent both-sided "
-            "reasoning patterns: stack-array dest with symbolic strlen*sizeof, and "
-            "heap-malloc dest with (strlen+1)*sizeof. So broadening added ONE genuinely "
-            "new capacity mechanism (heap-malloc dest) over the CWE806 baseline pattern; "
-            "it did NOT reach 12 independent families. Reaching 12 requires genuinely "
-            "different length-flow / capacity mechanisms (loop-computed length, "
-            "integer-arithmetic capacity, index writes) or real-world code (Magma), not "
-            "more symbolic-strlen copy variants."
-            % (len(rows), len(identifiable), conf, len(ps_both))),
+            "confirmatory count reads %d (>= 12), BUT that is inflated by variation "
+            "SUPERFICIAL to the destination-capacity property (opaque reachability guards, "
+            "source-buffer allocation method, subtype labels; families with byte-identical "
+            "capacity+length+sink lines split only by guards). Property-faithful, there "
+            "are 2 both-sided signatures, but a signature is a GENUINE capacity-establishing "
+            "family only if the scanner actually binds the destination capacity: stack-array "
+            "dests bind capacity 624/624, whereas heap-malloc dests bind it 0/384 — CWE122 "
+            "routes eligible only on its symbolic LENGTH and never establishes a heap "
+            "capacity DECISION, so it is a missing capacity decision, not a different one. "
+            "Genuine independent capacity-establishing families = %d (the stack-array + "
+            "symbolic-strlen pattern, i.e. the CWE806 baseline). Broadening added ZERO "
+            "genuine new families and does NOT approach the 12 gate. Reaching 12 requires "
+            "genuinely different capacity/length DECISION structures the scanner can "
+            "establish — bound heap capacity, integer-arithmetic capacity, loop-computed "
+            "length, index writes — or real-world code (Magma), not more symbolic-strlen "
+            "copy variants."
+            % (len(rows), len(identifiable), conf, genuine)),
         "flow_topology_families": {
             "total_families": len(g),
             "both_sided_families": len(both),
@@ -221,12 +235,15 @@ def main():
     for lvl, t in sensitivity.items():
         mark = "MEETS" if t["confirmatory_both_sided"] >= P.MIN_FAMILIES else "below"
         print(f"  {t['confirmatory_both_sided']:3}  ({mark} 12)  {lvl}")
-    print(f"\nPROPERTY-FAITHFUL independent reasoning families (both-sided): {len(ps_both)}")
+    print(f"\nPROPERTY-FAITHFUL signatures (genuine = both-sided AND capacity bound):")
     for k, meta in list(ps_sigs.items()):
         bs = "both-sided" if meta["both_sided"] else "one-sided "
-        print(f"  n={meta['n']:4}  [{bs}]  {k[:60]:62} {meta['suites']}")
-    print(f"\nVERDICT: raw flow-topology reads {conf} but is inflated by superficial "
-          f"variants; property-faithful independent families = {len(ps_both)} (< 12).")
+        g = "GENUINE" if meta["genuine_capacity_family"] else "not-genuine"
+        print(f"  n={meta['n']:4}  [{bs}]  cap_bound={meta['capacity_bound']:4}/{meta['n']:<4}  "
+              f"[{g}]  {k[:52]:54} {meta['suites']}")
+    print(f"\nVERDICT: raw flow-topology reads {conf} (inflated by superficial variants). "
+          f"GENUINE capacity-establishing independent families = {genuine} (< 12): "
+          f"stack binds capacity, heap does not (0/384).")
     print(f"report -> {OUTDIR}/broaden_families.json")
 
 

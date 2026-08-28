@@ -543,8 +543,8 @@
     "meets_gate_raw_flow_topology": true,
     "total_families": 136
   },
-  "independent_reasoning_families (property-faithful, both-sided)": 2,
-  "meets_gate_property_faithful": false,
+  "genuine_capacity_families (both-sided AND capacity actually bound)": 1,
+  "meets_gate_genuine": false,
   "model_calls": 0,
   "packet_identifiable": 1032,
   "packet_insufficient": 304,
@@ -569,6 +569,8 @@
   "property_signatures": {
     "heap_malloc_dest | (V(V)+V)*V(V)": {
       "both_sided": true,
+      "capacity_bound": 0,
+      "genuine_capacity_family": false,
       "n": 156,
       "suites": {
         "CWE122": 156
@@ -576,6 +578,8 @@
     },
     "heap_malloc_dest | V*V(V)": {
       "both_sided": false,
+      "capacity_bound": 0,
+      "genuine_capacity_family": false,
       "n": 228,
       "suites": {
         "CWE122": 228
@@ -583,6 +587,8 @@
     },
     "other_dest | V*V(V)": {
       "both_sided": false,
+      "capacity_bound": 0,
+      "genuine_capacity_family": false,
       "n": 24,
       "suites": {
         "CWE122": 24
@@ -590,6 +596,8 @@
     },
     "stack_array_dest | V(V)*V(V)": {
       "both_sided": true,
+      "capacity_bound": 624,
+      "genuine_capacity_family": true,
       "n": 624,
       "suites": {
         "CWE121": 416,
@@ -605,5 +613,5 @@
       "within": 3
     }
   },
-  "verdict": "Broadening across the predeclared copy-idiom suites (CWE121 stack + CWE122 heap, incl. nested CWE805/806) scanned 6428 files -> 1336 eligible, 1032 packet-identifiable. Under the pre-registered flow-topology key the confirmatory count reads 24 (>= 12), BUT audit shows that is inflated by variation SUPERFICIAL to the destination-capacity property: opaque reachability guards, source-buffer allocation method (stack/alloca/malloc), and subtype labels. Families with byte-identical capacity+length+sink lines split only by guards; and CWE122 'heap' copy cases overflow a STACK dest, so they share the stack reasoning. Under the property-faithful key (dest-capacity mechanism x write-length shape) there are only 2 independent both-sided reasoning patterns: stack-array dest with symbolic strlen*sizeof, and heap-malloc dest with (strlen+1)*sizeof. So broadening added ONE genuinely new capacity mechanism (heap-malloc dest) over the CWE806 baseline pattern; it did NOT reach 12 independent families. Reaching 12 requires genuinely different length-flow / capacity mechanisms (loop-computed length, integer-arithmetic capacity, index writes) or real-world code (Magma), not more symbolic-strlen copy variants."
+  "verdict": "Broadening across the predeclared copy-idiom suites (CWE121 stack + CWE122 heap, incl. nested CWE805/806) scanned 6428 files -> 1336 eligible, 1032 packet-identifiable. Under the pre-registered flow-topology key the confirmatory count reads 24 (>= 12), BUT that is inflated by variation SUPERFICIAL to the destination-capacity property (opaque reachability guards, source-buffer allocation method, subtype labels; families with byte-identical capacity+length+sink lines split only by guards). Property-faithful, there are 2 both-sided signatures, but a signature is a GENUINE capacity-establishing family only if the scanner actually binds the destination capacity: stack-array dests bind capacity 624/624, whereas heap-malloc dests bind it 0/384 \u2014 CWE122 routes eligible only on its symbolic LENGTH and never establishes a heap capacity DECISION, so it is a missing capacity decision, not a different one. Genuine independent capacity-establishing families = 1 (the stack-array + symbolic-strlen pattern, i.e. the CWE806 baseline). Broadening added ZERO genuine new families and does NOT approach the 12 gate. Reaching 12 requires genuinely different capacity/length DECISION structures the scanner can establish \u2014 bound heap capacity, integer-arithmetic capacity, loop-computed length, index writes \u2014 or real-world code (Magma), not more symbolic-strlen copy variants."
 }
