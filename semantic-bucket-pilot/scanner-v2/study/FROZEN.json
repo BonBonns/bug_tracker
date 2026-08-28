@@ -1,0 +1,24 @@
+{
+  "artifacts_sha256": {
+    "families.json": "e29d4a18475b0e7911b0e4e3511223ed64ae1a13e661065389b607b2893b5f67",
+    "split.json": "4b9b8046b04fbe7b6d6acf54ced272047ef3f712d13689bb8bbf170b869f2ee1",
+    "study_manifest.jsonl": "a86080a36c3100ab5a00165c7d052299c3213377a8fda7d90e71b5ef0f260a0f"
+  },
+  "families_content_only_lowerbound": 177,
+  "families_content_plus_line_upperbound": 235,
+  "families_primary_ordinal": 214,
+  "operations": 498,
+  "split": {
+    "confirmatory_families": 154,
+    "confirmatory_operations": 352,
+    "dev_families": 60,
+    "dev_operations": 146
+  },
+  "split_params": {
+    "dev_fraction": 0.3,
+    "salt": "capeffect-498-v1"
+  },
+  "stage": "0 (manifest/family/split only \u2014 NO LLM conditions run, NO outcome labels)",
+  "study": "capability-effect accuracy \u2014 target population = 498 newly LLM-eligible operations",
+  "write_count_inconsistent_content_groups": 5
+}
