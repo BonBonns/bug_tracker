@@ -122,29 +122,31 @@ def parse_width(width, elem_type):
     return ("symbolic", None) if ids else ("unknown", None)
 
 
-def propose_v2(defect, identity, cap_token, width, elem_type):
-    """Proposed disposition AFTER the capacity-import capability. Establishes
-    capacity only; never declares safe without an offset-0, type-matched,
-    literal comparison."""
-    if defect in ("frontend_or_genuinely_absent",):
-        return "required_evidence_absent", "unchanged (no local capacity)"
-    if defect == "audit_identity_collision" or identity == "ambiguous":
-        return "destination_identity_ambiguous", "shadowed/repeated name — identity unresolved"
+def propose_v2(defect, cap_token, width, elem_type):
+    """Proposed disposition AFTER the capacity-import capability. Capability 1
+    consumes ONLY existing normalized local-array capacity facts with a uniquely
+    matched declaration identity, i.e. only `producer_consumer_gap`. Every other
+    defect is NOT reachable by capability 1 and keeps its own next action."""
+    if defect == "genuine_multi_identity":
+        return "destination_identity_ambiguous", "TChecker facts hold >1 array decl for dest in this fn"
+    if defect == "local_pointer_no_local_array":
+        return "required_evidence_absent", "dest is a local pointer; capacity is not a local array (backing elsewhere)"
+    if defect == "name_collision_other_function":
+        return "required_evidence_absent", "no local array here; same name is an array in a DIFFERENT function"
     if defect == "normalizer_evidence_loss":
-        pre = "needs normalizer fix first; then: "
-    elif defect == "producer_consumer_gap":
-        pre = "after capacity import: "
-    else:
-        return "required_evidence_absent", "unhandled"
+        return "not_reachable_by_capability_1", "capacity dropped by normalization; needs a normalizer fix first"
+    if defect != "producer_consumer_gap":
+        return "required_evidence_absent", "unhandled/other"
+    # producer_consumer_gap: capability 1 binds the capacity, then compares
     kind, k = parse_width(width, elem_type)
     cap_lit = bool(re.fullmatch(r"\d+", str(cap_token or "")))
-    if kind == "symbolic" or kind == "count_based":
-        return "relationship_unresolved", pre + "capacity bound, count symbolic -> relationship"
+    if kind in ("symbolic", "count_based"):
+        return "relationship_unresolved", "capacity bound, count symbolic -> relationship"
     if kind == "literal_elems" and cap_lit and k is not None and k <= int(cap_token):
-        return "deterministic_complete", pre + f"offset-0, type-matched, {k}<={cap_token} (sizeof cancels)"
+        return "deterministic_complete", f"offset-0, type-matched, {k}<={cap_token} (sizeof cancels)"
     if kind == "literal_elems_typemismatch":
-        return "relationship_unresolved", pre + "literal count but sizeof type != array element type"
-    return "relationship_unresolved", pre + "capacity bound, comparison not established"
+        return "relationship_unresolved", "literal count but sizeof type != array element type"
+    return "relationship_unresolved", "capacity bound, comparison not established"
 
 
 def main():
@@ -181,25 +183,27 @@ def main():
         else:
             identity = "no_local_array"
             elem_type, cap_token = None, None
-        l2 = cap_token is not None
+        l2 = cap_token is not None            # exactly ONE array decl in this fn
         l3 = any((fn, dest) in ext and ext[(fn, dest)].get("establishment_status") == "ESTABLISHED"
                  for fn in mids)
         reason = (r.get("primary_reason_code") or r.get("reason_code"))
-        if l2 and l3:
+        if len(decls) > 1:
+            # genuine: TChecker facts hold multiple array declarations for dest
+            defect = "genuine_multi_identity"
+        elif l2 and l3:
             defect = "router_misclassification" if reason == "required_evidence_absent" else "l3_bound_ok"
         elif l2 and not l3:
             defect = "producer_consumer_gap"
-        elif identity == "ambiguous":
-            defect = "audit_identity_collision"
-        else:
+        else:  # no array decl for dest in this function
             raw_in_fn, other = raw_local_is_array(scan_dir, mids, dest)
             if raw_in_fn:
-                defect = "normalizer_evidence_loss"
+                defect = "normalizer_evidence_loss"      # Joern had it in-fn, normalizer dropped it
             elif other:
-                defect = "audit_identity_collision"
+                defect = "name_collision_other_function"  # array only in a DIFFERENT fn (not a TChecker ambiguity)
             else:
-                defect = "frontend_or_genuinely_absent"
-        v2_reason, v2_note = propose_v2(defect, identity, cap_token, r.get("width_expr"), elem_type)
+                defect = "local_pointer_no_local_array"   # dest is a local pointer; capacity is not a local array
+        v2_reason, v2_note = propose_v2(defect, cap_token, r.get("width_expr"), elem_type)
+        cap1_reachable = (defect == "producer_consumer_gap")
         trace.append({
             "source": src, "function": func, "line": r.get("line"), "dest": dest,
             "destination_identity": identity, "element_type": elem_type,
@@ -208,6 +212,7 @@ def main():
             "offset": 0,  # producer recognizes only bare-identifier dests (write at base)
             "write_length": r.get("width_expr"),
             "v1_reason": reason, "defect_category": defect,
+            "capability_1_reachable": cap1_reachable,
             "proposed_v2_reason": v2_reason, "proposed_v2_note": v2_note,
         })
 
@@ -220,10 +225,18 @@ def main():
         "distinct_source_fn_dest_keys": len(dest_by_srcfndest),
         "unaccounted_operations": len(op_recs) - len(trace),
     }
+    crosstab = Counter((t["defect_category"], t["proposed_v2_reason"]) for t in trace)
+    cap1 = [t for t in trace if t["capability_1_reachable"]]
     report = {
         "accounting": accounting,
         "by_defect_category": dict(Counter(t["defect_category"] for t in trace)),
         "by_proposed_v2": dict(Counter(t["proposed_v2_reason"] for t in trace)),
+        "cross_tab_defect_x_disposition": {f"{d} -> {v}": n for (d, v), n in sorted(crosstab.items(), key=lambda x: -x[1])},
+        "capability_1_reach": {
+            "total": len(cap1),
+            "by_proposed_v2": dict(Counter(t["proposed_v2_reason"] for t in cap1)),
+            "unique_functions_deterministic": len({t["function"] for t in cap1 if t["proposed_v2_reason"] == "deterministic_complete"}),
+        },
     }
     with open(os.path.join(HERE, "evidence_trace.json"), "w") as fh:
         json.dump({"summary": report, "trace": trace}, fh, indent=2, sort_keys=True, default=str)
@@ -238,13 +251,21 @@ def main():
     assert not any(t["defect_category"] == "router_misclassification" for t in trace), \
         "a router_misclassification would be a real routing bug"
 
+    # cross-tab must close to 938 with no borrowed evidence
+    assert sum(crosstab.values()) == 938
     print("CLOSING TOTALS (assertions passed):")
     print(f"   operation traces        : {accounting['operation_instances_938']} (== 938)")
     print(f"   destination identities  : {accounting['distinct_source_fn_dest_keys']} (== 738)")
     print(f"   unaccounted operations  : {accounting['unaccounted_operations']} (== 0)")
-    print(f"   distinct decl-node identities: {accounting['distinct_destination_identities']}")
-    print(f"\nby defect category: {report['by_defect_category']}")
-    print(f"by proposed v2 disposition: {report['by_proposed_v2']}")
+    print("\nCROSS-TAB (defect -> proposed v2), closes to 938:")
+    tot = 0
+    for (dfct, disp), n in sorted(crosstab.items(), key=lambda x: -x[1]):
+        print(f"   {dfct:28} -> {disp:32} {n}")
+        tot += n
+    print(f"   {'TOTAL':28}    {'':32} {tot}")
+    print(f"\nCAPABILITY 1 REACH (producer_consumer_gap only): {report['capability_1_reach']['total']}")
+    print(f"   dispositions: {report['capability_1_reach']['by_proposed_v2']}")
+    print(f"   deterministic unique functions: {report['capability_1_reach']['unique_functions_deterministic']}")
 
 
 if __name__ == "__main__":

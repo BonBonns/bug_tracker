@@ -1,105 +1,112 @@
 # Per-operation evidence trace — where the evidence is actually lost (closing)
 
-This supersedes the "misrouting" framing in `MISROUTING_AUDIT.md`. That write-up
-stopped at L2 (capacity is in the normalized facts) and wrongly called cases
-"misrouted." The three levels must be kept separate:
-
-1. **L1 source** — `T buf[N]` exists in the .c/.h.
-2. **L2 normalized fact** — `cpp.json` `locals` carries `T[N]` for `dest` in the function.
-3. **L3 producer binding** — `compute_allocation_extents` ESTABLISHED an extent
-   for `(fn, dest)`; i.e. the producer actually **consumed** the capacity.
-
-Only L3 proves a pure routing mistake. Checking L3 changed the conclusion.
+Supersedes the "misrouting" framing in `MISROUTING_AUDIT.md`. Three levels are
+kept separate: **L1 source** (`T buf[N]` exists), **L2 normalized fact**
+(`cpp.json` `locals` carries `T[N]` for `dest` in the function), **L3 producer
+binding** (`compute_allocation_extents` ESTABLISHED an extent for `(fn, dest)` —
+the producer actually consumed it). Only L3 proves a routing mistake.
 
 ## Closing totals (assertions in `evidence_trace.py` pass)
 
 | | value |
 |--|------|
-| operation instances traced | **938** (== 938) |
-| distinct destination identities `(source, function, dest)` | **738** (== 738) |
+| operation instances traced | **938** |
+| distinct destination identities `(source, function, dest)` | **738** |
 | unaccounted operations | **0** |
-| distinct declaration-node identities | 714 |
 
 Both denominators are reported: **938 operation instances** vs **738 destination
-identities**. The 200 difference is additional write operations to the same
-destinations; each keeps its own offset and write length and is traced
-individually (not assumed to share a disposition). Every operation record
-carries: `normalized_capacity_status`, `producer_binding_status`,
-`destination_identity` (declaration-node id, never the bare name),
-`offset`, `write_length`, `v1_reason`, and `proposed_v2_reason`.
+identities** (the 200 difference are additional write-ops to the same
+destinations, each traced with its own offset and write length). Destination
+identity is keyed on the **declaration node** (`array_decls` returns per-node
+decls), never the bare name, so shadowed/repeated names cannot collapse. Every
+operation carries: `normalized_capacity_status`, `producer_binding_status`,
+`destination_identity`, `offset`, `write_length`, `v1_reason`,
+`capability_1_reachable`, `proposed_v2_reason`.
 
-## Defect category split (per operation) — validated, identity by decl node
+## Cross-tabulation (defect → proposed v2), closes to 938
 
-| defect | ops | meaning |
-|--------|-----|---------|
-| **producer_consumer_gap** | **538** | L2 yes, L3 no — capacity in `cpp.json`, but `compute_allocation_extents` binds only heap `direct_allocation` sites and **never consumes stack fixed-array capacities**. |
-| frontend_or_genuinely_absent | 270 | pointer / no local array capacity in the facts. |
-| audit_identity_collision | 118 | a same-named array is shadowed / lives in a different function; keying on declaration-node identity prevents crediting it. |
-| normalizer_evidence_loss | 12 | raw `locals.tsv` carries the array in this function, normalization dropped it from `cpp.json`. |
-| **router_misclassification** | **0** | none were L3-bound yet abstained. **No pure routing bugs.** |
+This is a real mapping, row by row — not two parallel columns.
 
-**Verification.** `compute_allocation_extents` on the freebl scan yields 66
-extents, **all `provenance=direct_allocation` (heap)** — zero stack-array
-extents; `s_mp_mul_comba_4` gets no extent for any destination, so `at[8]` is
-never bound. v1's `required_evidence_absent` was, from the producer's own state,
-correct: it genuinely lacked a bound capacity. The evidence exists upstream but
-is **not consumed** — a producer–consumer integration gap (and a small
-normalizer loss), **not** a wrong reason label.
+| defect location | required evidence | proposed v2 disposition | count |
+|-----------------|-------------------|-------------------------|-------|
+| **producer_consumer_gap** | stack capacity already normalized, count symbolic | relationship_unresolved | **522** |
+| **producer_consumer_gap** | stack capacity + literal, type-matched, offset-0 comparison | deterministic_complete | **16** |
+| local_pointer_no_local_array | none locally (dest is a pointer; backing elsewhere) | required_evidence_absent | 270 |
+| name_collision_other_function | none here (array is a different function's variable) | required_evidence_absent | 62 |
+| genuine_multi_identity | TChecker facts hold >1 array decl for dest in this fn | destination_identity_ambiguous | 56 |
+| normalizer_evidence_loss | capacity dropped by normalization — must be recovered first | **not reachable by capability 1** | 12 |
+| **TOTAL** | | | **938** |
 
-## Proposed v2 disposition (after the capacity-import capability, no fix applied)
+`router_misclassification = 0` (verified): no operation was L3-bound yet
+abstained. v1's `required_evidence_absent` was correct from the producer's own
+state — the evidence exists upstream but is not consumed.
 
-| proposed v2 reason | ops | why |
-|--------------------|-----|-----|
-| relationship_unresolved | 534 | capacity bound, but the write count is symbolic (`count·sizeof`) → a relationship to prove, not a missing fact. |
-| required_evidence_absent | 270 | genuinely no local capacity (pointer / caller-scope) — unchanged. |
-| destination_identity_ambiguous | 118 | shadowed / repeated declaration — identity must be resolved first. |
-| deterministic_complete | 16 | literal, type-matched, offset-0, `k ≤ N`, fresh lifetime — provable via the sizeof-preserving comparison. |
+### The two previously-collapsed categories, now separated
 
-These are what the dispositions **would become** once the producer consumes the
-capacity; nothing is promoted here.
+- **`frontend_or_genuinely_absent` (270) → all 270 are `local_pointer_no_local_array`.**
+  Checked against Joern's raw `locals.tsv` (function-scoped): every one is a local
+  **pointer**, not a fixed array. There are **0** "present in source but missing
+  from Joern" and **0** "out of scan scope" here — the category did not actually
+  collapse three causes; it is uniformly local-pointer, whose capacity is a
+  separate allocation/backing question, not a local array.
+- **`audit_identity_collision` (118) → 56 genuine + 62 not.** 56 have **>1 array
+  declaration for `dest` in the same function** (a real identity ambiguity in
+  TChecker's facts) → `destination_identity_ambiguous`. The other 62 have **no
+  array in this function**; the same name is an array only in a *different*
+  function — not a TChecker ambiguity, so they are **not** placed in the
+  identity-ambiguous bucket; they get `required_evidence_absent`
+  (`name_collision_other_function`).
 
-## G4 provable subset — 16 instances, but 4 unique functions / one pattern
+## Capability 1 — actual reach = 538, not 938
 
-The 16 `deterministic_complete` proposals are `s_mp_mul_comba_4/8/16/32` × E2/E4
-× vuln/patched — **only 4 unique functions and one repeated code pattern; not 16
-independent examples.** Each validated individually against source (offset 0):
+The narrow stack-capacity integration can affect only operations where (a) a
+normalized local-array capacity fact exists, (b) its declaration identity
+**uniquely** matches the destination, and (c) the producer currently fails to
+consume it — i.e. exactly `producer_consumer_gap`:
 
-| function | dest (decl node) | write | offset | lifetime | k ≤ N |
-|----------|------|-------|--------|----------|-------|
-| s_mp_mul_comba_4 | `mp_digit at[8]` | `memcpy(at, …, 4*sizeof(mp_digit))` | 0 | fresh, no free/reassign | 4 ≤ 8 |
-| s_mp_mul_comba_8 | `at[16]` | `8*sizeof(mp_digit)` | 0 | fresh | 8 ≤ 16 |
-| s_mp_mul_comba_16 | `at[32]` | `16*sizeof(mp_digit)` | 0 | fresh | 16 ≤ 32 |
-| s_mp_mul_comba_32 | `at[64]` | `32*sizeof(mp_digit)` | 0 | fresh | 32 ≤ 64 |
+| capability-1 reach | count |
+|--------------------|-------|
+| **total reachable** | **538** |
+| → relationship_unresolved | 522 |
+| → deterministic_complete | 16 (**4 unique functions**, one repeated pattern) |
+
+Everything else is **out of capability 1's reach** and needs separate work:
+`normalizer_evidence_loss` (12, normalizer fix), `local_pointer_no_local_array`
+(270, allocation/backing analysis), `name_collision_other_function` (62, audit
+join / identity resolution), `genuine_multi_identity` (56, identity resolution).
+Capability 1 does **not** borrow any of that evidence.
+
+## G4 deterministic subset — 16 instances, 4 unique functions, one pattern
+
+`s_mp_mul_comba_4/8/16/32` × E2/E4 × vuln/patched. Each validated individually
+against source (offset 0, fresh stack, `k ≤ N`, `mp_digit` type-matched):
+`at[8]`←4, `at[16]`←8, `at[32]`←16, `at[64]`←32. **Not 16 independent examples.**
 
 **Offset writes validated separately:** each comba function also has a sibling
-`memcpy(at + K, …, K*sizeof(mp_digit))` (K = N/2). These are DIFFERENT operations
-that the producer does **not** recognize (the destination `at + K` is not a bare
-identifier), so they are **outside the 938**. They are also in-bounds
-(`K + K = N ≤ N`) but require offset-aware handling — they are not credited by
-the offset-0 capability and are reported here explicitly, not assumed.
+`memcpy(at + K, …, K*sizeof(mp_digit))` (K = N/2). Those are DIFFERENT operations
+that the producer does **not** recognize (destination `at + K` is not a bare
+identifier), so they are **outside the 938**. They are in-bounds (`K + K = N ≤ N`)
+but require offset-aware handling — reported, not credited by the offset-0
+capability.
 
-## The first sound v2 capability (narrowly defined)
+## Clean conclusion
 
-**Import normalized fixed local-array capacity facts into the existing extent
-model**, preserving declaration identity, element type, capacity expression,
-source provenance, and lifetime scope. It establishes **capacity only** — it must
-never declare a copy safe on its own. After integration:
-
-- symbolic write length → `relationship_unresolved` (534);
-- literal, type-matched, offset-0, `k ≤ N` → `deterministic_complete` only after
-  the offset-aware comparison (16);
-- pointer parameters / unresolved destinations → `required_evidence_absent` (270);
-- conflicting / shadowed identities → `destination_identity_ambiguous` (118).
-
-This is a *binding* improvement (evidence produced but unused → consumed), not a
-reroute and not single-object copying.
+The trace identified a general **producer–consumer integration gap affecting 538
+operations**: normalized stack-array capacity evidence exists but is not consumed
+by the runtime-capacity producer (which binds only heap `direct_allocation`
+extents). A narrow v2 integration — import normalized fixed local-array capacity
+into the extent model, preserving declaration identity, element type, capacity
+expression, source provenance, and lifetime scope, establishing **capacity
+only** — can recover that evidence **without** changing the frontend or
+normalizer. It would turn 522 into `relationship_unresolved` and 16 (4 functions)
+into `deterministic_complete` after the offset-aware, type-matched comparison.
+The other cases require separate frontend, normalization, identity-resolution, or
+allocation/backing work.
 
 ## The 91% caveat (preserved)
 
 The 88.8–91% additional-evidence figure is **the route frozen v1 emitted**, not
 the verified fraction that truly lacked evidence. A corrected v2 percentage may
-be computed only after (a) implementing the capacity-import (and normalizer)
-fixes, (b) re-running over all inputs, and (c) tracing the full additional-evidence
-population to completion. No corrected percentage is claimed here. This deliverable
-is the trace: it shows exactly where the system loses or fails to consume
-semantic evidence. No scanner fix is applied.
+be computed only after implementing the capacity-import fix, re-running over all
+inputs, and tracing the full additional-evidence population to completion. None
+is claimed here. No scanner fix is applied.
