@@ -1,24 +1,38 @@
 {
   "artifacts_sha256": {
-    "families.json": "e29d4a18475b0e7911b0e4e3511223ed64ae1a13e661065389b607b2893b5f67",
-    "split.json": "4b9b8046b04fbe7b6d6acf54ced272047ef3f712d13689bb8bbf170b869f2ee1",
+    "families.json": "0a1b4ad26eed555b5f5727188f4811730f1b0ad0a136942aeea4ab2839560c89",
+    "instances.jsonl": "ee2ecbf84a69b8eef63e7e202877c03904ecc1d261bd899b72830f37261f73aa",
+    "split.json": "043f4e31bc5451f8f3aed93c2dc773483bf83a03af7bce528e3e790648902540",
     "study_manifest.jsonl": "a86080a36c3100ab5a00165c7d052299c3213377a8fda7d90e71b5ef0f260a0f"
   },
-  "families_content_only_lowerbound": 177,
-  "families_content_plus_line_upperbound": 235,
-  "families_primary_ordinal": 214,
+  "confirmatory_instances_by_side": {
+    "patched": 166,
+    "vuln": 166
+  },
+  "families": 214,
+  "families_multi_write": 55,
+  "instances": 438,
+  "instances_by_side": {
+    "patched": 219,
+    "vuln": 219
+  },
   "operations": 498,
-  "split": {
-    "confirmatory_families": 154,
-    "confirmatory_operations": 352,
-    "dev_families": 60,
-    "dev_operations": 146
+  "pairing": {
+    "stmt_anchor_matched": 55,
+    "unambiguous_single_write": 159
+  },
+  "split_families": {
+    "confirmatory": 162,
+    "dev": 52
+  },
+  "split_instances": {
+    "confirmatory": 332,
+    "dev": 106
   },
   "split_params": {
     "dev_fraction": 0.3,
-    "salt": "capeffect-498-v1"
+    "salt": "capeffect-498-v2"
   },
-  "stage": "0 (manifest/family/split only \u2014 NO LLM conditions run, NO outcome labels)",
-  "study": "capability-effect accuracy \u2014 target population = 498 newly LLM-eligible operations",
-  "write_count_inconsistent_content_groups": 5
+  "stage": "0 (two-level manifest/family/split \u2014 NO LLM, NO labels)",
+  "study": "capability-effect accuracy \u2014 target = 498 newly LLM-eligible operations"
 }

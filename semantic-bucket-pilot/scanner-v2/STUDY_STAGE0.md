@@ -2,115 +2,119 @@
 
 Target population: the **498 operations** the stack-capacity capability newly made
 LLM-eligible (v1 `additional_evidence_required` → v2 `semantic_relationship_review`).
-This is the *capability-effect* population, per `ACCURACY_STUDY_PROTOCOL.md` §1 —
-not all v2 LLM-eligible operations.
+This is the *capability-effect* population, per `ACCURACY_STUDY_PROTOCOL.md` §1.
 
-**No LLM condition was run and no outcome label was assigned.** This stage fixes the
+**No LLM condition was run and no outcome label was assigned.** Stage 0 fixes the
 sample so the confirmatory experiment cannot be tuned into existence later.
 
-## Manifest (`study/study_manifest.jsonl`)
+## Two levels — instance (labeled) vs family (clustered)
 
-498 immutable rows, one per operation. Each carries an immutable `op_id` (the frozen
-`build_frozen_corpus._fingerprint` over `source_label|file|function|line|dest`),
-source location (file, function, line, dest), the stack-capacity evidence
-(element type, count, capacity expr, width, unresolved property), and the v1→v2
-route pair. No model output, no label.
+The unit that gets a ground-truth label and A/B/C responses is **not** the same as
+the unit used for statistical clustering. Conflating them was wrong: a vulnerable and
+a patched revision can share the same write statement while surrounding guards,
+callers, or arithmetic differ — the RSA case is exactly that (textually similar sink,
+different security meaning across revisions).
 
-Audited: all 498 `op_id`s distinct, and the set is **identical** to the
-`semantic_relationship_review` transitions in `transition_matrix_v1_v2.json`
-(asserted, symmetric-difference 0).
+- **Case instance** — one operation in one source revision (vuln **or** patched).
+  Ground truth and A/B/C responses belong here. Exact duplicates of the *same
+  revision + site* across the E2/E4 scans collapse to one instance (verified by
+  enclosing-function source hash). **Vulnerable and patched revisions are always
+  separate instances**, even when textually identical.
+- **Case family** — correlated instances of the same logical site across
+  vulnerable/patched revisions and duplicate scans. Used **only** for the dev/
+  confirmatory split and for statistical clustering. A family is **never split after
+  labels are seen**; label disagreement between vuln and patched members is expected,
+  not a defect.
 
-## Independent case families (`study/families.json`)
+## Counts
 
-The unit of independence is the underlying source operation, not the record. Copies
-of one operation — across vuln/patched, across the E2/E4 scans that both include
-freebl, and across macro/line duplication — must share one family.
+| level | count | notes |
+|-------|------:|-------|
+| operations | 498 | frozen fingerprints; = the transition-matrix semantic set (asserted) |
+| **case instances (labeled units)** | **438** | 219 vulnerable + 219 patched |
+| **case families (clusters)** | **214** | over-merge check asserted 0 |
 
-**Primary family key = content-key + site-ordinal within each (scan, side):**
-`(file, function[normalized], dest, element_type, element_count, capacity_expr,
-width_expr)` plus the ordinal of that write among same-content writes in the same
-scan/side (ordered by line). The k-th write matches the k-th across scans/sides, so:
+Instances-per-family: **209 families → 2 instances** (one vuln, one patched; E2/E4
+collapsed as identical revisions), **5 families → 4 instances** (E2 and E4 are
+different revisions of that site, so they stay separate on one or both sides).
+209·2 + 5·4 = 438.
 
-- copies collapse (a patch that shifts line numbers does **not** split a vuln/patched
-  pair — matched by ordinal, not absolute line);
-- **distinct call sites never merge** — over-merge check (any family holding >1 line
-  within a single scan/side) is **0, asserted in code**;
-- **scan guard:** 5 content-groups have different write-counts across E2 vs E4 (the
-  scans captured different coverage). For those, cross-scan ordinal alignment is not
-  1:1, so the key is not merged across scans (vuln/patched, always consistent, still
-  merge). Those families are flagged `write_count_consistent_across_sides=false`.
+The 498 operations are **not** 498 independent observations, and 214 is **not** the
+sample size either — it is the number of correlation clusters. The labeled units are
+the **438 instances**; the clustering unit is the **214 families**.
 
-### Result — 214 independent families
+## Family clustering key
 
-| | families |
-|--|---------:|
-| **primary (content + scan-guarded ordinal)** | **214** |
-| sensitivity: content-only (over-merges distinct sites) | 177 (lower bound) |
-| sensitivity: content + line (splits line-shifted pairs) | 235 (upper bound) |
+`content_key = (file, function[normalized], dest, element_type, element_count,
+capacity_expr, width_expr)` + the **site-ordinal** of that write among same-content
+writes within each (scan, side), scan-guarded where E2/E4 write-counts differ. This
+collapses copies but never merges distinct call sites (asserted). Sensitivity bounds
+from the earlier keyings: content-only 177 (over-merges), content+line 235 (splits
+line-shifted pairs); the ordinal key's 214 sits between.
 
-Size distribution (primary): **179 families of size 2** (one vuln/patched pair) and
-**35 of size 4** (E2/E4 × vuln/patched). 179·2 + 35·4 = 498. No singletons, no giant
-families — the content-only key's 16- and 14-member blobs (`CTS_DecryptUpdate`,
-`sftk_InitCBCMac`) were distinct call sites it wrongly merged; the ordinal key
-separates them.
+## Vuln↔patched pairing is verified, not assumed
 
-The independent sample size is therefore **214**, not 498 — a **2.3× reduction**;
-treating the 498 operations as independent would have overstated n by that factor.
+"No over-merge" does not prove the vulnerable site was matched to the *correct*
+patched site — an added or removed write shifts every later ordinal. Each family's
+pairing is checked with a source anchor:
 
-## Family-level outcome rule
+| pairing verdict | families | basis |
+|-----------------|---------:|-------|
+| unambiguous_single_write | 159 | only one same-content write per side → the pair is forced |
+| stmt_anchor_matched | 55 | multi-write site; ordinal-aligned vuln/patched **write statements match by source text** in every scan |
+| **unverified → excluded** | **0** | would be excluded from confirmatory rather than guessed |
 
-1. **Ground truth is per family.** Members are copies of one operation, so a family
-   has one true outcome ∈ {safe, vulnerable, genuinely-unresolved}. At labeling time
-   (blinded), if any family's members receive *different* labels, that family is
-   split before analysis — the 5 scan-guard-flagged families are the pre-identified
-   candidates for this check.
-2. **A condition is scored once per family.** Primary: run the condition on the
-   family's `representative_op_id` (lowest scan/side then line). If a condition is
-   instead run on every member, the family verdict is the **majority** of member
-   judgments; an exact tie collapses to `abstain`. Per-family result ∈
-   {correct, incorrect, abstain} versus the family ground truth.
-3. **Analysis is at the family level, clustered by family** — never per operation —
-   so within-family copies cannot inflate n or significance.
+All 55 multi-write families (the only ones exposed to ordinal shift) were confirmed;
+none required exclusion. Every family has both a vulnerable and a patched side
+present (checked). Any future family that cannot be verified is marked
+`excluded_unverified` and kept out of the confirmatory set.
+
+## Family-level outcome rule (corrected)
+
+1. **Ground truth is per case instance**, not per family.
+2. **Run and score A/B/C per instance.** Aggregate to uncertainty with
+   **family-clustered** confidence intervals (clustered bootstrap or a mixed-effects
+   model), so correlated instances do not inflate significance.
+3. **A family is never split after labels are seen.** Vuln/patched label disagreement
+   within a family is expected.
+4. Whole families stay entirely within dev or confirmatory (no leakage).
 
 ## Frozen development / confirmatory split (`study/split.json`)
 
-Split **by family, never by operation**, deterministically:
-`bucket = sha256("capeffect-498-v1|" + family_id) mod 10000 < 3000 → dev`.
+Split **by family**, deterministically
+(`sha256("capeffect-498-v2|"+family_id) mod 10000 < 3000 → dev`):
 
-| | families | operations |
-|--|---------:|-----------:|
-| development | 60 | 146 |
-| **confirmatory (held out)** | **154** | 352 |
+| | families (clusters) | instances (labeled units) |
+|--|--------------------:|--------------------------:|
+| development | 52 | 106 |
+| **confirmatory (held out)** | **162** | **332** (166 vuln + 166 patched) |
+| excluded (unverified pairing) | 0 | 0 |
 
-Verified: 0 families and 0 operations shared between dev and confirmatory. The
-development set is for prompt / parsing / scoring debugging only (§7); the
-confirmatory set is run once (§8).
-
-Freeze record `study/FROZEN.json` stores the sha256 of the manifest, families, and
-split files, plus the split parameters — the sample is now immutable.
+Verified: no family and no instance shared between dev and confirmatory. Dev is for
+prompt/parsing/scoring debugging only; confirmatory is run once.
+`study/FROZEN.json` records the sha256 of the op manifest, instances, families, and
+split — the sample is immutable.
 
 ## Independent sample size and power
 
-The real independent n is **214 families** (154 in the confirmatory set). That is the
-**ceiling**, not the effective power. The binding constraint is unknown until blinded
-labeling: **how many families are genuinely vulnerable.** These are predominantly
-crypto buffer copies whose capacity is bound and whose length relationship is merely
-unresolved (many are safe self-referential copies such as `memcpy(iv, …, sizeof(iv))`),
-so the vulnerable class is likely small. Consequences to carry into Stage 1+:
-
-- Report the class base rate (safe / vulnerable / unresolved) among the 214 families
-  **before** interpreting any accuracy number.
-- Because a balanced design over a rare vulnerable class is what powers the test,
-  report **balanced / macro accuracy and per-class results**, or reweight to
-  prevalence — never raw accuracy over an enriched sample (§5).
-- If the confirmatory vulnerable-family count is too small for a paired A/B/C test to
-  detect a plausible effect, say so and treat the result as descriptive; do not
-  manufacture power by splitting copies back apart.
+- **Clusters** in the confirmatory set: **162 families**.
+- **Labeled units**: **332 instances** (166 vulnerable-revision + 166
+  patched-revision) — but these cluster within the 162 families, so the effective n
+  for significance is nearer the cluster count than 332.
+- The binding constraint is still unknown until blinded labeling: **how many
+  instances are genuinely vulnerable** (a patched-side instance is usually safe; a
+  vuln-side instance is only vulnerable if this specific operation carries the bug).
+  Many of these are safe capacity-bound crypto copies, so the genuinely-vulnerable
+  count is likely well below 166.
+- Therefore, after labeling: report the class base rate first; report **balanced /
+  macro accuracy and per-class results**, or reweight to prevalence, never raw
+  accuracy over a class-enriched sample; and if the genuinely-vulnerable cluster
+  count is too small to power a paired A/B/C test, report descriptively rather than
+  splitting copies to manufacture n.
 
 ## Not done here (by design)
 
-No LLM condition (A/B/C) was run; no outcome label was assigned; no prompt was
-written. Stage 0 delivers only the frozen sample and its independent-n audit. The
-next stage establishes ground truth independently and blinded to condition and to
-V1/V2 routing (`ACCURACY_STUDY_PROTOCOL.md` §4, §6), using the development set only
-for debugging.
+No LLM condition (A/B/C), no outcome label, no prompt. Stage 0 delivers only the
+frozen two-level sample and its independence + pairing audit. Next stage establishes
+ground truth per instance, independently and blinded to condition and to V1/V2
+routing, using the development set only for debugging.

@@ -31,13 +31,25 @@ Do not blur the two. The 68 `range_arithmetic_review` and 54 `deterministic_comp
 operations are separate routes with their own questions and are not part of the
 LLM-review population.
 
-## 2. Independent case families
+## 2. Two levels — instance (labeled) vs family (clustered)
 
-Group related operations (same function/pattern across vuln/patched, macro
-expansions, sibling offset writes) into **independent case families** and sample /
-analyze at the family level. The routing study already shows heavy within-family
-repetition (e.g. comba `at[]`, per-curve `hash[]`/`nonce[]`); treating those copies
-as independent observations would inflate n and understate variance.
+Separate the labeling unit from the clustering unit (see `STUDY_STAGE0.md`):
+
+- **Case instance** = one operation in one source revision (vuln OR patched). Ground
+  truth and A/B/C responses are assigned here. Exact duplicates of the *same revision
+  + site* (E2/E4) collapse to one instance; **vulnerable and patched revisions stay
+  separate instances** — the write can be textually identical while the security
+  meaning differs across revisions (the RSA case).
+- **Case family** = correlated instances of the same logical site across
+  vuln/patched and duplicate scans. Used **only** for the dev/confirmatory split and
+  statistical clustering. **Never split a family after seeing labels**; vuln/patched
+  label disagreement is expected.
+
+Label and score **per instance**; compute uncertainty with **family-clustered** CIs
+(clustered bootstrap or mixed-effects). Verify vuln↔patched pairing with source
+anchors (an added/removed write shifts ordinals); exclude unverifiable groups from
+the confirmatory set rather than guessing. Treating the raw operations as independent
+would inflate n and understate variance.
 
 ## 3. Select cases before running A/B/C
 
