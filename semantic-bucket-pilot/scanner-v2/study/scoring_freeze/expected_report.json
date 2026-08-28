@@ -15,6 +15,7 @@
     "note": "packets whose established facts were independently judged INVALID; excluded from the A/B/C analysis and reported as upstream evidence errors, never scored as if the fact were true"
   },
   "minimum_inference_gate": {
+    "computed_after_invalid_exclusion": true,
     "families_by_class": {
       "SAFE": 146,
       "UNRESOLVED": 21,
@@ -23,7 +24,7 @@
     "kind": "minimum-count floor, NOT demonstrated power",
     "min_class_families": 12,
     "passed": true,
-    "rule": "confirmatory CI computed only if every class reaches MIN_CLASS_FAMILIES; otherwise DESCRIPTIVE point only. See mde_simulation.py for the achievable effect size."
+    "rule": "confirmatory CI computed only if every class reaches MIN_CLASS_FAMILIES, RECOMPUTED on the family-cluster counts remaining AFTER invalid packets are excluded (original counts are not reused); otherwise DESCRIPTIVE point only. See mde_simulation.py for the achievable effect size."
   },
   "per_condition": {
     "A": {

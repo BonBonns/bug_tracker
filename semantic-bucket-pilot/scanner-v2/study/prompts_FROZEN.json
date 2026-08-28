@@ -1,0 +1,32 @@
+{
+  "abs_delta_stats": {
+    "max": 5,
+    "median": 3,
+    "p95": 5
+  },
+  "authoritative": false,
+  "b_instruction_tokens": 69,
+  "c_instruction_tokens": {
+    "max": 5,
+    "median": 3,
+    "min": 0,
+    "p95": 5
+  },
+  "fraction_within_tolerance": 1.0,
+  "hashes": {
+    "B_instruction": "30672f7f61396dac",
+    "C_template": "beb9ca1991872796",
+    "question_template": "8f01c3d409aa10a0"
+  },
+  "invariants_to_verify_before_calls": [
+    "same code bytes across A/B/C",
+    "byte-identical facts block B vs C",
+    "byte-identical response schema across A/B/C",
+    "only C contains the category and the relationship question"
+  ],
+  "note": "NON-AUTHORITATIVE proxy \u2014 re-run with the fixed model tokenizer and re-freeze before any A/B/C model call.",
+  "passed": true,
+  "purpose": "token-match B (generic) vs C (bucket-guided) instructions",
+  "tokenizer": "heuristic:word+punct (NON-AUTHORITATIVE)",
+  "tolerance_tokens": 12
+}

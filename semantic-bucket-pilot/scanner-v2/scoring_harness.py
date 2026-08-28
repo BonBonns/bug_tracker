@@ -319,9 +319,12 @@ def run(instances, labels, predictions, split):
             "min_class_families": MIN_CLASS_FAMILIES,
             "families_by_class": class_fam_counts,
             "passed": gate_pass,
+            "computed_after_invalid_exclusion": True,   # counts are POST-exclusion
             "kind": "minimum-count floor, NOT demonstrated power",
             "rule": ("confirmatory CI computed only if every class reaches "
-                     "MIN_CLASS_FAMILIES; otherwise DESCRIPTIVE point only. "
+                     "MIN_CLASS_FAMILIES, RECOMPUTED on the family-cluster counts "
+                     "remaining AFTER invalid packets are excluded (original counts "
+                     "are not reused); otherwise DESCRIPTIVE point only. "
                      "See mde_simulation.py for the achievable effect size."),
         },
         "per_condition": metrics,
