@@ -1,0 +1,90 @@
+{
+  "binary_population": {
+    "families": 161,
+    "instances": 303
+  },
+  "class_distribution": {
+    "SAFE": 223,
+    "UNLABELED": 0,
+    "UNRESOLVED": 29,
+    "VULNERABLE": 80
+  },
+  "per_condition": {
+    "A": {
+      "abstention_rate": 0.1848184818481848,
+      "answered_safe": 185,
+      "answered_vuln": 62,
+      "balanced_accuracy_abstain_wrong": 0.5713004484304933,
+      "coverage": 0.8151815181518152,
+      "parse_failure_rate": 0.056105610561056105,
+      "selective_balanced_accuracy": 0.7141238012205754,
+      "sensitivity": 0.7741935483870968,
+      "specificity": 0.654054054054054,
+      "total_safe": 223,
+      "total_vuln": 80,
+      "unresolved_appropriate_abstention": 0.3793103448275862
+    },
+    "B": {
+      "abstention_rate": 0.09570957095709572,
+      "answered_safe": 202,
+      "answered_vuln": 72,
+      "balanced_accuracy_abstain_wrong": 0.748963004484305,
+      "coverage": 0.9042904290429042,
+      "parse_failure_rate": 0.0033003300330033004,
+      "selective_balanced_accuracy": 0.829551705170517,
+      "sensitivity": 0.8472222222222222,
+      "specificity": 0.8118811881188119,
+      "total_safe": 223,
+      "total_vuln": 80,
+      "unresolved_appropriate_abstention": 0.3103448275862069
+    },
+    "C": {
+      "abstention_rate": 0.2706270627062706,
+      "answered_safe": 157,
+      "answered_vuln": 64,
+      "balanced_accuracy_abstain_wrong": 0.4428251121076233,
+      "coverage": 0.7293729372937293,
+      "parse_failure_rate": 0.0231023102310231,
+      "selective_balanced_accuracy": 0.5863853503184713,
+      "sensitivity": 0.625,
+      "specificity": 0.5477707006369427,
+      "total_safe": 223,
+      "total_vuln": 80,
+      "unresolved_appropriate_abstention": 0.5862068965517241
+    }
+  },
+  "primary_comparison": {
+    "bootstrap": {
+      "n": 10000,
+      "seed": 20260101,
+      "unit": "family"
+    },
+    "ci95": [
+      0.033620542183718016,
+      0.20167687581480676
+    ],
+    "comparison": "B - A",
+    "excludes_zero": true,
+    "metric": "selective_balanced_accuracy",
+    "point": 0.11542790394994162
+  },
+  "secondary_comparisons": {
+    "B - C": {
+      "ci95": [
+        0.1600417648738377,
+        0.32998040171796483
+      ],
+      "holm_p": 0.0,
+      "point": 0.24316635485204574
+    },
+    "C - A": {
+      "ci95": [
+        -0.22557418743617197,
+        -0.026940690690690827
+      ],
+      "holm_p": 0.0154,
+      "point": -0.12773845090210412
+    }
+  },
+  "split": "confirmatory"
+}

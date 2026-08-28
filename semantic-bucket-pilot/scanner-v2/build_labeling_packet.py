@@ -58,6 +58,38 @@ def norm_fn(fn):
     return re.sub(r"<[^>]*>\d*", "", fn or "")
 
 
+_CPG = {}
+
+
+def cpg_funcs(scan_side):
+    """Index CPG function definitions by name: {name: [(line, line_end, file)]}.
+    line/line_end come from the normalized facts (Joern CPG), not regex."""
+    if scan_side not in _CPG:
+        idx = defaultdict(list)
+        try:
+            d = json.load(open(os.path.join(EXP, scan_side, "cpp.json")))
+            for f in d.get("functions", []):
+                if f.get("is_external"):
+                    continue
+                if f.get("line") and f.get("line_end") and f.get("file"):
+                    idx[f["name"]].append((f["line"], f["line_end"], f["file"]))
+        except OSError:
+            pass
+        _CPG[scan_side] = idx
+    return _CPG[scan_side]
+
+
+def cpg_span(scan_side, rel, fn, op_line):
+    """CPG-backed function span containing op_line. Returns (start, end, body_lines)."""
+    lines = flines(scan_side, rel)
+    if not lines:
+        return None
+    for (s, e, ffile) in cpg_funcs(scan_side).get(fn, []):
+        if ffile == rel and s <= op_line <= e and e <= len(lines):
+            return s, e, lines[s - 1:e]
+    return None
+
+
 def func_span(scan_side, rel, fn, op_line):
     """Return (start_line, end_line, body_lines) of the function definition whose
     body contains op_line. 1-indexed inclusive. Distinguishes a definition from a
@@ -199,8 +231,12 @@ def main():
         op_line = it["line_by_scan"][scan_side]
         rel = it["file"]
         fn = norm_fn(it["function"])
-        span = func_span(scan_side, rel, fn, op_line)
-        context_kind = "full_function"
+        # CPG-backed span first (parser line ranges), then regex, then a window.
+        span = cpg_span(scan_side, rel, fn, op_line)
+        context_kind = "cpg_function"
+        if not span:
+            span = func_span(scan_side, rel, fn, op_line)
+            context_kind = "regex_function"
         if span:
             sig_ln, e_ln, body = span
             decl = declaration_line(body, it["dest"])
@@ -273,7 +309,8 @@ def main():
     ck = _C(r["context_kind"] for r in rows)
     print(f"instances in packet          : {len(rows)}")
     print(f"neutrality check             : PASS (no forbidden tokens)")
-    print(f"context kind                 : {dict(ck)}  (window_fallback flagged for reviewers)")
+    print(f"context kind                 : {dict(ck)}  (cpg_function = parser line range; "
+          f"any window_fallback would be flagged)")
     print(f"by split                     : {dict(by_split)}")
     print(f"DEV validation subset        : {dev_n} instances, {dev_ctx} with full context")
     # eyeball two dev rows

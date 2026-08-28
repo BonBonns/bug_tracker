@@ -45,15 +45,24 @@ model judgment, no prose summary. Per instance it carries:
   write (mechanical);
 - **reachability evidence**: whether the function is `static`, and the list of call
   sites (file/line/text);
-- the **enclosing function source** (430/438) or a flagged ±25-line
-  `window_fallback` (8/438, where a macro/K&R definition could not be isolated —
-  the reviewer widens from the file if needed).
+- the **enclosing function source**, recovered from the **CPG function line range**
+  (parser-backed) for all 438/438 instances (`context_kind: cpg_function`); a regex
+  span and a flagged ±25-line window remain as fallbacks in code but are unused.
 
 **Excluded and asserted absent** (neutrality check fails the build if any appear):
 V1/V2 routes, bucket names, `unresolved_property` / `uncertainty_bucket` /
 `established_property`, `llm_eligible`, A/B/C outputs, `pre_patch`/`post_patch`/
-`revision_side`, `stack_fixed_array`, and any generated summary. Within a family the
-two revisions are shown as neutral siblings; the packet never says which is the fix.
+`revision_side`, `stack_fixed_array`, and any generated summary.
+
+**Accurate neutrality claim:** the packet contains **no explicit revision-side,
+routing, bucket, model-condition, or outcome signal**. It does **not** claim the
+outcome is unguessable: within a family the two revisions are shown as neutral
+siblings, and a reviewer comparing paired source may see that one revision added a
+guard or changed a length — that is legitimate review reasoning, not a leaked label.
+What is prevented is the packet *asserting* which revision is the fix or what the
+scanner concluded. Function context is CPG-backed (parser line ranges), so all 438
+instances carry full enclosing-function source; the `window_fallback` path remains
+in code for robustness but is currently unused (0/438).
 
 ## Review procedure
 
@@ -87,3 +96,14 @@ verified fraction.
 **The model whose A/B/C responses this study scores must not assign these labels.**
 That is why Stage 1 is a human/independent step and this repository ships only the
 blinded packet and the empty sidecar schema — no labels.
+
+## Scoring is already frozen (before labels exist)
+
+All Stage-2 analysis decisions are pre-registered in `SCORING_PLAN.md` and
+implemented in `scoring_harness.py`, which was **frozen against synthetic labels**
+(`study/scoring_freeze/`: synthetic labels + A/B/C outputs, `expected_report.json`,
+and `FROZEN.json` with sha256 of the harness, the plan, and the synthetic inputs).
+The freeze run is deterministic and reproduces byte-identically, and it confirms the
+harness recovers a built-in B>A effect (primary CI excludes 0). Stage 2 runs the
+**identical** harness on the real `stage1_labels.jsonl` and real A/B/C prediction
+files — no scoring parameter is chosen after real labels or outputs are visible.
