@@ -20,12 +20,20 @@ operations by the **frozen** operation fingerprint?
 - The fingerprint universe is asserted identical between v1 and v2 (v2 changes
   routes of existing operations; it never adds or removes an operation).
 
-## Distinct-operation population
+## Population — 2,532 fingerprint-distinct operations
 
-**3,246 raw producer records → 2,532 distinct operations** — identical to the
-frozen v1 audit baseline, confirming the same population.
+**3,246 raw producer records → 2,532 fingerprint-distinct operations** — identical
+to the frozen v1 audit baseline, confirming the same population.
 
-## v1 vs v2 route distribution (2,532 distinct operations)
+"Fingerprint-distinct" means keyed by the frozen fingerprint over
+`(_source_label, file, function, line, dest)`: one physical destination-operation
+is one case, and repeated raw records at the same site (macro/repeat expansion)
+collapse into it. This is a stable aggregation key — it is **not** a claim that
+source-level uniqueness was independently established (two truly different writes
+that happen to share all five fields would collapse; none such were separately
+verified here). All counts below are over this fingerprint-distinct population.
+
+## v1 vs v2 route distribution (2,532 fingerprint-distinct operations)
 
 | route | v1 | v1 % | v2 | v2 % |
 |-------|---:|-----:|---:|-----:|
@@ -49,9 +57,59 @@ required_evidence_absent`:
 | additional_evidence_required | deterministic_complete | **54** |
 | *(all other cells)* | *(unchanged)* | diagonal |
 
-**620 distinct operations change route.** The additional-evidence route falls by
+**620 fingerprint-distinct operations change route.** The additional-evidence route falls by
 **24.5 points, from 88.8% to 64.3%** — a real, bounded reduction of the frozen
 distribution, not a headline estimate.
+
+## Conflict sensitivity — the improvement is not an aggregation artifact
+
+The evidence-monotone canonical rule resolves cross-producer disagreements by
+keeping the most-evidence record. Could the 24.5-point drop be an artifact of that
+policy? No — the two are **completely disjoint**:
+
+| | value |
+|--|------|
+| cross-producer conflict groups (v2 population) | 124 |
+| of the 620 changed operations, how many are in a conflict group | **0** |
+| changed operations outside all conflict groups | **620** |
+
+Re-running the matrix with **all 124 conflict groups excluded**:
+
+| | ops | v1 AE | v2 AE | changed |
+|--|----:|------:|------:|--------:|
+| excluding conflicts | 2,408 | **93.4%** | **67.6%** | 620 |
+
+Every one of the 2,248 v1 additional-evidence operations lies outside the conflict
+groups (conflict groups are ops multiple producers already carried past
+abstention), so excluding conflicts removes none of the changes and the drop
+persists — a **25.8-point** reduction on the conflict-free population. The
+aggregation policy touches none of the 620; the improvement is entirely on
+operations where the producers did not disagree.
+
+## Generalization — 148 functions, 49 files, not a few big crypto routines
+
+Is the 24.5-point improvement broad or concentrated in a handful of large crypto
+functions? Broad:
+
+| | value |
+|--|------|
+| distinct functions among the 620 | **148** |
+| distinct source files | **49** |
+| case families (of E1–E5) touched | 3 — E1, E2, E4 |
+| (family, function) pairs | 192 |
+| changes concentrated in the top-1 function | 5.8% (`CTS_DecryptUpdate`, 36) |
+| changes concentrated in the top-3 functions | 12.6% |
+
+By case family: **E1 = 50, E2 = 204, E4 = 366.** E3 (UTF8) and E5 (AVA) contribute
+**0** — they have no stack-fixed-array write pattern, so the capability correctly
+does nothing there. Within the three crypto-heavy scans the effect is spread
+across 148 functions with no single function above ~6% and the top three under
+13%, so the reduction is a general integration improvement, not a few big
+functions inflating the headline.
+
+*(The `deterministic_complete` subset alone remains narrow — 54 ops, one comba
+pattern plus byte-array key/hash copies — as reported in `EVIDENCE_TRACE.md`. It
+is the full 620, dominated by the 566 relationship moves, that generalizes.)*
 
 ## Honesty checks
 

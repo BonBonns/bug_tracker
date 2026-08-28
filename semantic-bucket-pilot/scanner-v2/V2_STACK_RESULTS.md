@@ -35,11 +35,11 @@ untouched — all hold (`compare_v1_v2_stack.py`).
 
 ## Four tightened claims
 
-### 1. The denominator: 2,174 raw runtime records → 2,150 distinct operations
+### 1. The denominator: 2,174 raw runtime records → 2,150 fingerprint-distinct operations
 
 The runtime producer emits **2,174 raw records** over the 10 scans; the frozen
 operation fingerprint (`_source_label|file|function|line|dest`) collapses these to
-**2,150 distinct operations**. The missing **24** are **within-scan fingerprint
+**2,150 fingerprint-distinct operations** (a stable aggregation key over `(source_label,file,function,line,dest)`, not an independently established source-level uniqueness). The missing **24** are **within-scan fingerprint
 collisions** — not dedup across producers, not a filter, not a failed join:
 
 - **12 distinct fingerprints**, each emitted **2–4 times** by the runtime producer
