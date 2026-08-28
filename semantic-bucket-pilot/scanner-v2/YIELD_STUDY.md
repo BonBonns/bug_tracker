@@ -98,8 +98,34 @@ normalize_c_cpp_facts_v03.py → oob_runtime_capacity_v2`) run over a 4-file pil
 - **4 vulnerable + 4 safe → 4 matched vulnerable/safe pairs** (`juliet_yield.py`).
 
 So the pipeline works on external oracle-grounded inputs and the matched cases land
-in the bucket under test. The full `CWE806_declare_memcpy|memmove` set is 224 files
-(56 variants × char/wchar × memcpy/memmove); scaling the scan gives the real yield.
+in the bucket under test.
+
+## Full-scan yield (224 files, frozen pipeline, NO model calls)
+
+Corpus pinned at Juliet mirror commit `f88433e3` (`build_juliet_corpus.py`,
+`study/juliet/corpus_FROZEN.json`):
+
+| measure | result |
+|---------|-------:|
+| files scanned | 224 |
+| exact oracle-matched instances | 364 |
+| complete vulnerable/safe pairs | 152 |
+| **independent normalized families (templates)** | **4** |
+| eligible after leakage-safe packet construction | 4 (0 leakage failures) |
+| vulnerable / safe instances | 152 / 212 |
+| dev / confirmatory families | 2 / 2 |
+| meets min-inference gate (≥12 families) | **NO** |
+
+**Conclusion — this is a yield/pipeline result, not a confirmatory sample.** The 224
+files and 152 pairs are control-flow / data-flow scaffolding around just **4 semantic
+templates** (char/wchar × memcpy/memmove; identical `dest[50]` capacity and
+`strlen(data)*sizeof` width). Counted as independent templates — the only honest
+statistical unit here — the yield is **4**, below the 12-family inference gate. A
+powered Juliet A/B/C would need many more *distinct* templates: other CWE-121 sink
+families (strcpy/strncpy/loop/snprintf, alloca vs declare, different capacities),
+other buffer CWEs (122/124), and different destination sizes — or, better, the
+real-code sources below. The leakage audit passed: every model packet built from the
+eligible families is clean of oracle tells (`juliet_sanitize.py`).
 
 ## Validity caveat (Juliet is synthetic)
 

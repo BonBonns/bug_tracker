@@ -1,0 +1,64 @@
+{
+  "families": {
+    "fam_425764226842": {
+      "key_example": {
+        "dest": "dest",
+        "element_count": 50,
+        "element_type": "wchar_t",
+        "sink": "memcpy",
+        "width_norm": "V(V)*V(V)"
+      },
+      "n_instances": 91,
+      "split": "confirmatory"
+    },
+    "fam_842b0c2208f2": {
+      "key_example": {
+        "dest": "dest",
+        "element_count": 50,
+        "element_type": "char",
+        "sink": "memcpy",
+        "width_norm": "V(V)*V(V)"
+      },
+      "n_instances": 91,
+      "split": "dev"
+    },
+    "fam_87dcbadd2d4a": {
+      "key_example": {
+        "dest": "dest",
+        "element_count": 50,
+        "element_type": "wchar_t",
+        "sink": "memmove",
+        "width_norm": "V(V)*V(V)"
+      },
+      "n_instances": 91,
+      "split": "dev"
+    },
+    "fam_a7b2d5c2764e": {
+      "key_example": {
+        "dest": "dest",
+        "element_count": 50,
+        "element_type": "char",
+        "sink": "memmove",
+        "width_norm": "V(V)*V(V)"
+      },
+      "n_instances": 91,
+      "split": "confirmatory"
+    }
+  },
+  "min_families_gate": 12,
+  "pinned_commit": "f88433e3443648a17671398797a04ea1f8e1a274",
+  "yield_table": {
+    "complete_vulnerable_safe_pairs": 152,
+    "confirmatory_families": 2,
+    "dev_families": 2,
+    "eligible_after_leakage_safe_packets": 4,
+    "exact_oracle_matched_instances": 364,
+    "families_with_both_sides": 4,
+    "files_scanned": 224,
+    "independent_normalized_families": 4,
+    "leakage_failed_families": 0,
+    "meets_min_inference_gate": false,
+    "safe_instances": 212,
+    "vulnerable_instances": 152
+  }
+}
