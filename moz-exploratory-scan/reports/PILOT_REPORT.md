@@ -1,8 +1,18 @@
 # Bounded pilot — mozilla/nss + mozilla/mozjpeg (exploratory, not held-out)
 
-Ran the FROZEN scanner-v2 producers — base v1/v2 write-capacity comparison + capabilities
+> **CORRECTION (post-publication, see "Capability-count correction" below): this pilot
+> ran Capability 1, BOTH Capability-2 models, and Capability 3 — NOT "capabilities 1-4".
+> Capability 4 (`cap_decoder_contract.py`) does not exist at the pinned base commit
+> `8b77705` at all; it was introduced later on the same branch. The "capabilities 1-4"
+> line below is the original (wrong) label, struck through rather than silently edited —
+> see the correction section for the verification and the honest relabeling.**
+
+Ran the FROZEN scanner-v2 producers — base v1/v2 write-capacity comparison + ~~capabilities
 1-4 (`cap_addr_indexed`, `cap_wrapper_summary`, `cap_member_pointer_walk`,
-`cap_counted_loop_writer`) — **unmodified**, imported read-only from the definitive branch
+`cap_counted_loop_writer`)~~ **[WRONG, see correction] Capability 1
+(`cap_addr_indexed`), both Capability-2 models (`cap_wrapper_summary`,
+`cap_counted_loop_writer`), and Capability 3 (`cap_member_pointer_walk`)** —
+**unmodified**, imported read-only from the definitive branch
 (`claude/previous-conversation-context-6gr99h` @ `8b77705`), against current heads of two
 Mozilla C/C++ projects. This is vulnerability-discovery/portability work, run alongside
 Capability 4 development; it does **not** touch, extend, or reference the frozen held-out
@@ -79,15 +89,16 @@ and the two agree in both cases (see `sources_pin/*.md`).
   (`sizeof`-driven heap size whose semantics aren't modeled) or cap3's
   `binding=mismatch/unavailable` (structural for-loop proof unavailable for that write).
 
-By producer (candidate counts):
+By producer (candidate counts) — **corrected labels; see "Capability-count correction"
+below for how the original version of this table mislabeled the last row as "cap4"**:
 
-| Producer | mozjpeg | nss/freebl |
-|---|---:|---:|
-| base_v1v2 (frozen v1 + stack-capacity v2) | 19 | 287 |
-| cap1 — `&(base[index])` | 0 | 12 |
-| cap2 — transparent wrapper summaries | 31 | 27 |
-| cap3 — advancing-pointer struct-member walks | 68 | 17 |
-| cap4 — counted-loop writers | 0 | 9 |
+| Producer | Real capability | mozjpeg | nss/freebl |
+|---|---|---:|---:|
+| base_v1v2 (frozen v1 + stack-capacity v2) | frozen cursor producer (pre-numbering) | 19 | 287 |
+| cap1 — `&(base[index])` | **1** | 0 | 12 |
+| cap2a — transparent wrapper summaries | **2** (delegation-wrapper model) | 31 | 27 |
+| cap3 — advancing-pointer struct-member walks | **3** | 68 | 17 |
+| cap2b — counted-loop writers | **2** (counted-writer/loop model — NOT capability 4) | 0 | 9 |
 
 ## What the DETERMINISTIC findings actually are (sanity check, not promotion)
 
@@ -174,3 +185,138 @@ look," consistent with the frozen scanner's own posture everywhere else it's bee
   this round — flagging for the next one rather than silently expanding scope without
   reporting back first, per "run a bounded pilot first, then the complete feasible source
   scope" as two explicit, separately-reportable steps.
+
+---
+
+## Capability-count correction (reconciliation, not a rewrite)
+
+The original version of this report labeled the run "capabilities 1-4." That was wrong.
+Caught externally, verified here against the git object graph and the modules' own
+docstrings/frozen boundary doc rather than taken on trust — including re-running the
+whole pilot from a **second, independent, freshly-created worktree pinned at `8b77705`**
+with `PYTHONPATH` cleared (`env -i`), to positively rule out module contamination as the
+cause rather than merely assert it wasn't the cause.
+
+### What was actually wrong
+
+`run_moz_scan.py` (v1, `commands/`) assumed a numbering from the four `cap_*.py`
+filenames it found (`cap_addr_indexed`, `cap_wrapper_summary`, `cap_member_pointer_walk`,
+`cap_counted_loop_writer`) and labeled them capability 1/2/3/4 by file-listing order. It
+never checked the modules' own docstrings or the frozen boundary doc. The real mapping,
+per each module's own `"""Capability N — ..."""` docstring and
+`CAP2_CAP3_BOUNDARY_FROZEN.md` (frozen *before* capability 3 began):
+
+| File | Docstring says | Real capability |
+|---|---|---|
+| `cap_addr_indexed.py` | `Capability 1 — address-of indexed destination` | **1** |
+| `cap_wrapper_summary.py` | `Capability 2 — transparent wrapper summaries` | **2** (delegation-wrapper model) |
+| `cap_counted_loop_writer.py` | *(no capability number in its own docstring)* | **2** (counted-writer/loop model — the SECOND of "two models, both cap2" per `CAP2_CAP3_BOUNDARY_FROZEN.md`, introduced by commit `f71fac0` "Split cap2 into two distinct proof models") |
+| `cap_member_pointer_walk.py` | `Capability 3 -- advancing-pointer STRUCT-MEMBER writes` | **3** |
+| `cap_decoder_contract.py` | `Capability 4 -- EXTERNAL DECODER CONTRACTS` | **4 — introduced at commit `111b653`/`6eb1f42`, both STRICTLY AFTER `8b77705`. Confirmed absent from the pinned base commit; never imported or run by this pilot.** |
+
+So: this pilot ran capability 1, both capability-2 models, and capability 3. It did not
+and could not have run capability 4 — the file didn't exist yet in the checkout it was
+built from. Every one of the requested checks below confirms this is (1) a labeling
+mistake on this driver's part, not (2) an untracked file, and not (3) a PYTHONPATH import
+mixup.
+
+### Verification (run against the real branch state, not asserted)
+
+```
+$ git rev-parse HEAD                                    # the exploratory branch tip
+2f6668e98980381511991be3ddd29d4d118e0582
+$ git status --short                                     # clean
+$ git fetch origin claude/previous-conversation-context-6gr99h
+   8b77705..6eb1f42  claude/previous-conversation-context-6gr99h -> origin/...
+$ git merge-base --is-ancestor 8b77705 6eb1f42c08b5025f1342901956d6410c207efdd3 && echo YES
+YES        # confirms 6eb1f42 (real cap4) is a STRICT DESCENDANT of 8b77705 (this pilot's base)
+$ git ls-tree -r 8b77705 --name-only | grep cap_decoder_contract
+           # (no output) -- NOT PRESENT at the commit this pilot actually built from
+$ git ls-tree -r 6eb1f42 --name-only | grep cap_decoder_contract
+semantic-bucket-pilot/scanner-v2/cap_decoder_contract.py
+semantic-bucket-pilot/scanner-v2/cap_decoder_contract_test.py
+$ git ls-tree -r 8b77705 --name-only | grep cap_counted_loop_writer
+semantic-bucket-pilot/scanner-v2/cap_counted_loop_writer.py     # genuinely tracked at 8b77705,
+semantic-bucket-pilot/scanner-v2/cap_counted_loop_writer_test.py # not a stray/untracked file
+```
+
+### Module provenance (captured from the running process, not asserted)
+
+Re-ran both targets from a **second, brand-new worktree** (`git worktree add
+/tmp/clean-repro 8b77705 --detach`, never touched by the original run) with `env -i`
+(clears `PYTHONPATH` and every other inherited env var) and `SCANNER_DIR` pointed
+explicitly at that fresh worktree. `run_moz_scan_v2.py` records each producer module's
+live `__file__` + SHA-256 at call time:
+
+| module | resolved path | sha256 | under `SCANNER_DIR`? |
+|---|---|---|---|
+| base_v1v2 | `oob_runtime_capacity_v2.py` | `b1867edf...9dfbef` | yes |
+| cap1_addr_indexed | `cap_addr_indexed.py` | `6885e589...0e29a6` | yes |
+| cap2a_wrapper_summary | `cap_wrapper_summary.py` | `2f67bdd9...2fca3493` | yes |
+| cap2b_counted_loop_writer | `cap_counted_loop_writer.py` | `d67b03ce...926200fb` | yes |
+| cap3_member_pointer_walk | `cap_member_pointer_walk.py` | `32588e58...585747714` | yes |
+| cap_write_site_dedup | `cap_write_site_dedup.py` | `85ef6ff5...4970ee44` | yes |
+
+Every module resolved inside the fresh worktree's own `scanner-v2/` directory — none
+shadowed from elsewhere on the path. Rules out scenario 3 (PYTHONPATH contamination)
+directly, not by assertion. Full hashes and paths: `raw_outputs/module_provenance.json`.
+
+### Totals reproduced exactly, from the clean worktree
+
+| Target | v1 total (original) | v2 total (clean worktree, PYTHONPATH cleared) |
+|---|---:|---:|
+| mozjpeg | 118 | **118** |
+| nss/freebl | 352 | **352** |
+
+Identical counts confirm this was purely a labeling error (scenario 1), not contamination
+or double-counting — the same records, correctly attributed, from an independently
+rebuilt environment.
+
+### Raw producer records vs. deduplicated physical-write operations
+
+The v1 totals (118 / 352) are **raw producer records — one row per producer's own
+finding, not deduplicated across producers.** The frozen codebase provides a real
+cross-producer physical-write identity + precedence dedup
+(`cap_write_site_dedup.dedup()`, precedence `cursor_producer > direct(cap3) >
+call_site_summary(cap2)`), but **only two of the five producers here actually carry that
+identity**: cap2's two models (via `underlying_write`) and cap3 (each per-walk record's
+`member_writes` list is individually a `WSD.physical_write_identity()` result, flattened
+here into one pseudo-record per constituent write — the identity cap3's own analysis
+already computed, not re-derived). **Capability 1 and the base v1/v2 cursor producer
+carry no WSD identity anywhere in the frozen codebase** (cap1 never imports
+`cap_write_site_dedup`; the base producer predates it) — deduplicating them here would
+mean inventing an identity scheme for a frozen producer, which this driver must not do.
+They are reported as raw counts only, explicitly flagged as not deduplicated, rather than
+silently folded into a combined "unique operations" number that would misrepresent them
+as covered by the same guarantee.
+
+| Target | cap2a+cap2b+cap3 raw records | verifiable | unverifiable (never merged) | **unique physical-write operations** | cap1 (not dedup-integrated) | base_v1v2 (not dedup-integrated) |
+|---|---:|---:|---:|---:|---:|---:|
+| mozjpeg | 323 | 284 | 39 | **272** | 0 | 19 |
+| nss/freebl | 71 | 70 | 1 | **49** | 12 | 287 |
+
+(mozjpeg's 323 in-scope raw records is larger than cap2a+cap3's 31+68=99 top-level
+records because cap3's 68 per-walk records aggregate multiple member writes each — 292
+individual writes flatten out of those 68 walks, plus cap2a's 31, minus 0 from cap2b.)
+
+Full deduplicated operation lists: `raw_outputs/{mozjpeg,nss_freebl}_v2_findings.json`
+(`deduped_operations` key).
+
+### Report-branch verification
+
+Re-checked from a fresh `git fetch` (not the cached worktree state) that
+`moz-exploratory-scan/` is present on `origin/claude/moz-scan-exploratory` and correctly
+**absent** from `origin/claude/how-claude-code-works-j9lpw0`:
+
+```
+$ git ls-tree -r origin/claude/how-claude-code-works-j9lpw0 --name-only | grep moz-exploratory-scan
+           # (no output) -- correctly absent
+$ git ls-tree -r origin/claude/moz-scan-exploratory --name-only | grep moz-exploratory-scan
+moz-exploratory-scan/README.md
+moz-exploratory-scan/... (all 12 files)
+```
+
+This report and all archived artifacts are only ever on `claude/moz-scan-exploratory`.
+No link or reference to `claude/how-claude-code-works-j9lpw0` for this content was found
+anywhere in this session's own output; if a specific broken link is meant, it wasn't
+reproducible from git state and would need to be pointed out directly.

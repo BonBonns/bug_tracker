@@ -1,0 +1,35 @@
+{
+  "note": "identical for both targets (same clean worktree, same process invocation pattern)",
+  "provenance": {
+    "base_v1v2": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/oob_runtime_capacity_v2.py",
+      "sha256": "b1867edf6910b9a5a66d2dce4df5d7f014c74383d0d112081c45d3d2539dfbef",
+      "under_scanner_dir": true
+    },
+    "cap1_addr_indexed": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/cap_addr_indexed.py",
+      "sha256": "6885e589c5263aee985c9209ae3e6e56da0660846b997cd673fdc4d2170e29a6",
+      "under_scanner_dir": true
+    },
+    "cap2a_wrapper_summary": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/cap_wrapper_summary.py",
+      "sha256": "2f67bdd969f74fe6c881ee56918d3f5a7945ac99ae939f736bf93b182fca3493",
+      "under_scanner_dir": true
+    },
+    "cap2b_counted_loop_writer": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/cap_counted_loop_writer.py",
+      "sha256": "d67b03ce222134a11a992262d121b2d5e1f203bfa1da8b060f9e438b926200fb",
+      "under_scanner_dir": true
+    },
+    "cap3_member_pointer_walk": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/cap_member_pointer_walk.py",
+      "sha256": "32588e587843aba6c6f97f4b931e32c2644ca5051334fa516e9d963585747714",
+      "under_scanner_dir": true
+    },
+    "cap_write_site_dedup": {
+      "module_file": "/tmp/clean-repro/semantic-bucket-pilot/scanner-v2/cap_write_site_dedup.py",
+      "sha256": "85ef6ff51081f135af6d08f43cca900e200ba5c1c6068684ada19a224970ee44",
+      "under_scanner_dir": true
+    }
+  }
+}
