@@ -47,6 +47,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import oob_runtime_capacity_v2 as v2
+import cap_write_site_dedup as WSD
 
 DEC_OPS = {"<operator>.postDecrement", "<operator>.preDecrement"}
 INC_OPS = {"<operator>.postIncrement", "<operator>.preIncrement"}
@@ -118,7 +119,7 @@ def summarize_counted_writer(f, calls_by_fn):
     # write goes through the SAME token that is post/pre-incremented in place.
     walk_dests = set()
     advance_counts = {}   # dest_param -> number of increments of the walked alias
-    write_line = {}       # dest_param -> source line of the physical loop write in the callee
+    write_call_id = {}    # dest_param -> node id of the physical loop-write call in the callee
     # first, tally increments per identifier
     inc_by_ident = {}
     for c in body:
@@ -145,7 +146,7 @@ def summarize_counted_writer(f, calls_by_fn):
         if dp in ptr_params:
             walk_dests.add(dp)
             advance_counts[dp] = max(advance_counts.get(dp, 0), adv)
-            write_line[dp] = c.get("line")
+            write_call_id[dp] = c.get("id")
 
     if len(counters) != 1 or len(walk_dests) != 1:
         return None       # zero/many counters or dests -> ambiguous, abstain
@@ -156,15 +157,14 @@ def summarize_counted_writer(f, calls_by_fn):
 
     # `count` is a sound UPPER bound on writes: early exits only write fewer, and the
     # advance==1 gate guarantees no path writes more than one element per iteration.
-    # underlying_write = the PHYSICAL write site inside the callee body (file:line + the
-    # dest parameter it writes through) -- the key for cap2/cap3 write-site dedup.
+    # underlying_write_call_id names the PHYSICAL write site inside the callee body; the
+    # robust cap2/cap3 identity is computed from it in analyze_counted_writers.
     return {"callee": f["name"], "callee_id": f["id"],
             "dest_param_index": ptr_params[dest]["index"], "dest_param": dest,
             "counter_param_index": len_params[L]["index"], "counter_param": L,
             "counter_signed": _is_signed(len_params[L]),
             "advance_per_iteration": 1, "extent_is_upper_bound": True,
-            "underlying_write": {"file": f.get("file"), "line": write_line.get(dest),
-                                 "dest_param": dest},
+            "underlying_write_call_id": write_call_id.get(dest),
             "form": "counted_loop_writer"}
 
 
@@ -191,12 +191,15 @@ def _route_counted(ext, count_code, signed):
 def analyze_counted_writers(cpp):
     d = json.load(open(cpp))
     calls_by_fn = {}
+    call_by_id = {}
     for c in d.get("calls", []):
         calls_by_fn.setdefault(c.get("enclosing_function_id"), []).append(c)
+        call_by_id[c.get("id")] = c
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     locals_idx = {}
     for l in d.get("locals", []):
         locals_idx.setdefault((l.get("method_id"), l.get("name")), []).append(l)
+    index = WSD.build_index(d)   # robust physical-write identity index
 
     summaries = {}
     for f in d.get("functions", []):
@@ -218,12 +221,14 @@ def analyze_counted_writers(cpp):
         dest_code = (args[s["dest_param_index"]].get("code") or "").strip()
         cnt_code = (args[s["counter_param_index"]].get("code") or "").strip()
         fn_id = c.get("enclosing_function_id")
+        wcall = call_by_id.get(s.get("underlying_write_call_id"))
+        uw, uw_node = (WSD.physical_write_identity(wcall, index) if wcall else (None, None))
         rec = {"function": fns.get(fn_id, {}).get("name"), "line": c.get("line"),
                "capability": "counted_loop_writer", "callee": c.get("name"),
                "dest": dest_code, "count": cnt_code, "counter_signed": s["counter_signed"],
                "extent_is_upper_bound": s["extent_is_upper_bound"], "sink": c.get("name"),
-               "attribution": "call_site_summary",
-               "underlying_write": s.get("underlying_write")}
+               "attribution": "call_site_summary", "underlying_write": uw,
+               "underlying_write_node_id": uw_node, "resolved_dest_param": s["dest_param"]}
         base = _root_ident(dest_code)
         decls = [x for x in locals_idx.get((fn_id, base), [])
                  if "[" in (x.get("type_full_name") or x.get("code") or "")]

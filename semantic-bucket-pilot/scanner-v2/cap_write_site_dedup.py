@@ -1,103 +1,187 @@
 #!/usr/bin/env python3
-"""Capability 2 / Capability 3 write-site boundary: deduplication + precedence.
-NO model calls.
+"""Capability 2 / Capability 3 write-site boundary: a ROBUST physical-write identity, plus
+deduplication + precedence. NO model calls.
 
 BOUNDARY DEFINITIONS (frozen; see CAP2_CAP3_BOUNDARY_FROZEN.md):
-  * Capability 2 summarizes a CALLEE's write EFFECT at its CALL SITE (interprocedural).
-    The physical write instruction lives inside the callee; cap2 attributes the effect at
-    each call site and records `underlying_write = {file, line, dest_param}` = that
-    physical site.
-  * Capability 3 recognizes DIRECT pointer-walk writes WITHIN the analyzed function
-    (intraprocedural). Its record IS at the physical write site.
+  * Capability 2 summarizes a CALLEE's write EFFECT at its CALL SITE (interprocedural); its
+    record carries `underlying_write` = the identity of the callee's PHYSICAL write.
+  * Capability 3 recognizes DIRECT pointer-walk writes WITHIN the analyzed function; its
+    record IS at the physical write site.
 
-OVERLAP: when a callee G with a pointer-walk loop is in scope and F calls G, the SAME
-physical write (G:line) is reachable two ways -- cap3 recognizes it directly in G's body,
-and cap2 attributes G's effect at F's call site. That is ONE underlying write, not two
-experimental operations.
+WRITE IDENTITY (cross-run stable; `(basename, line)` is NOT used -- it collapses same-named
+files in different directories and multiple writes on one line). A physical write is
+identified by:
+  * normalized REPOSITORY-RELATIVE file path (full path, not basename);
+  * enclosing function identity + source span (name, line, line_end);
+  * line + SITE ORDINAL within (function, line)  [no column in this schema];
+  * normalized write statement + operator;
+  * destination DECLARATION identity (param -> ("param", index); local -> ("local",
+    decl_line, name)) -- a declaration site, never a bare name.
+The write-call/node id is retained as WITHIN-RUN provenance only; it is NOT part of the
+cross-run identity because node ids may change between runs.
 
-RULE (frozen):
-  * Write-site identity = (basename(file), line) of the PHYSICAL write instruction. For a
-    cap2 record that is its `underlying_write`; for a cap3 record it is the record's own
-    site.
-  * Deduplicate by write-site identity. PRECEDENCE: a DIRECT (cap3) recognition is the
-    canonical operation for a physical site; a cap2 CALL_SITE_SUMMARY of the same site is a
-    propagated view, retained as PROVENANCE, not a second operation.
-  * Both provenance paths are preserved on the merged operation (`provenance` list).
-  * A cap2 call-site summary whose callee body is NOT in scope has no matching direct
-    record and stands on its own as one operation (its underlying_write still names the
-    site, so a later in-scope pass can merge it).
+Both cap2 and cap3 build their identities through THIS module's `physical_write_identity`,
+so the same physical instruction yields the same identity from either path.
 """
 import json
 import os
 import re
 import sys
+from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 _IDENT = re.compile(r"[A-Za-z_]\w*")
+COPY_SINKS = {"memcpy": 0, "memmove": 0, "strncpy": 0, "wcsncpy": 0,
+              "strncat": 0, "wmemcpy": 0, "bcopy": 1}
+INC_OPS = ("<operator>.postIncrement", "<operator>.preIncrement")
 PRECEDENCE = {"direct": 0, "call_site_summary": 1}
 
 
-def _base(p):
-    return os.path.basename(p) if p else p
+def _norm_path(p):
+    if not p:
+        return p
+    p = p.replace("\\", "/")
+    while p.startswith("./"):
+        p = p[2:]
+    while "//" in p:
+        p = p.replace("//", "/")
+    return p
 
 
-def write_site_key(rec):
-    """(basename(file), line) of the physical write this record refers to."""
-    if rec.get("attribution") == "call_site_summary":
-        uw = rec.get("underlying_write") or {}
-        return (_base(uw.get("file")), uw.get("line"))
-    return (_base(rec.get("file")), rec.get("line"))
+def _norm_code(s):
+    return re.sub(r"\s+", " ", (s or "").strip())
+
+
+def _root_ident(expr):
+    s = (expr or "").strip().lstrip("*&( \t")
+    m = _IDENT.match(s)
+    return m.group(0) if m else None
+
+
+def write_target(call):
+    """Destination expression this call writes, or None if the call is not a write."""
+    nm = call.get("name")
+    args = sorted(call.get("arguments", []), key=lambda a: a.get("index", 0))
+    if nm == "<operator>.assignment" and args:
+        tgt = (args[0].get("code") or "").strip()
+        return tgt if (tgt.startswith("*") or "[" in tgt) else None
+    di = COPY_SINKS.get(nm)
+    if di is not None and di < len(args):
+        return (args[di].get("code") or "").strip()
+    return None
+
+
+def build_index(d):
+    """Precompute function/param/local declarations and the per-(function,line) site
+    ordinal over all write-like calls."""
+    funcs = {f["id"]: f for f in d.get("functions", [])}
+    params = {f["id"]: {p["name"]: p for p in (f.get("parameters") or [])}
+              for f in d.get("functions", [])}
+    localdecl = {}
+    for l in d.get("locals", []):
+        localdecl.setdefault(l.get("method_id"), {})[l.get("name")] = l
+    byline = defaultdict(list)
+    for i, c in enumerate(d.get("calls", [])):
+        if write_target(c) is not None:
+            byline[(c.get("enclosing_function_id"), c.get("line"))].append((i, c))
+    ordinal = {}
+    for _key, lst in byline.items():
+        # deterministic, cross-run-stable order: normalized write text, then appearance
+        ordered = sorted(lst, key=lambda ic: (_norm_code(write_target(ic[1])), ic[0]))
+        for ordn, (_i, c) in enumerate(ordered):
+            ordinal[c.get("id")] = ordn
+    return {"funcs": funcs, "params": params, "localdecl": localdecl, "ordinal": ordinal}
+
+
+def dest_decl_identity(call, index):
+    """Declaration identity of the write's destination (NOT a bare name)."""
+    fid = call.get("enclosing_function_id")
+    root = _root_ident(write_target(call))
+    p = index["params"].get(fid, {}).get(root)
+    if p is not None:
+        return ("param", p.get("index"))
+    l = index["localdecl"].get(fid, {}).get(root)
+    if l is not None:
+        return ("local", l.get("line"), root)
+    return ("unknown", root)
+
+
+def physical_write_identity(call, index):
+    """Robust cross-run identity of one physical write. Returns (identity_dict, node_id).
+    node_id is within-run provenance only, excluded from the identity."""
+    fid = call.get("enclosing_function_id")
+    f = index["funcs"].get(fid, {})
+    ident = {
+        "file": _norm_path(f.get("file")),
+        "function": [f.get("name"), f.get("line"), f.get("line_end")],
+        "line": call.get("line"),
+        "ordinal": index["ordinal"].get(call.get("id")),
+        "write": [call.get("name"), _norm_code(write_target(call))],
+        "dest_decl": list(dest_decl_identity(call, index)),
+    }
+    return ident, call.get("id")
+
+
+def identity_key(rec_or_ident):
+    """Hashable cross-run key. Accepts a raw identity dict, or a record carrying
+    `underlying_write` (cap2) / being a direct record with `identity` (cap3)."""
+    ident = rec_or_ident
+    if "underlying_write" in rec_or_ident and rec_or_ident.get("underlying_write"):
+        ident = rec_or_ident["underlying_write"]
+    elif "identity" in rec_or_ident:
+        ident = rec_or_ident["identity"]
+    return (ident.get("file"), tuple(ident.get("function") or []), ident.get("line"),
+            ident.get("ordinal"), tuple(ident.get("write") or []),
+            tuple(ident.get("dest_decl") or []))
 
 
 def direct_walk_write_sites(cpp):
-    """Minimal Capability-3 PRIMITIVE: locate DIRECT pointer-walk write sites
-    (`*p++ = ...`) within each analyzed function. Write-site identification only -- no
-    capacity routing (that is capability 3 proper). Returns one record per physical site."""
-    d = json.load(open(cpp))
-    fns = {f["id"]: f for f in d.get("functions", [])}
+    """Minimal Capability-3 PRIMITIVE: locate DIRECT pointer-walk writes (`*p++ = ...`)
+    within each function. Identification only (no capacity routing). Each record carries
+    the robust `identity` and the within-run `node_id` provenance."""
+    d = json.load(open(cpp)) if isinstance(cpp, str) else cpp
+    index = build_index(d)
     inc_by_fn = {}
     for c in d.get("calls", []):
-        if c.get("name") in ("<operator>.postIncrement", "<operator>.preIncrement") and c.get("arguments"):
-            m = _IDENT.match((c["arguments"][0].get("code") or "").lstrip("*&( "))
-            if m:
-                inc_by_fn.setdefault(c.get("enclosing_function_id"), {})[m.group(0)] = True
+        if c.get("name") in INC_OPS and c.get("arguments"):
+            r = _root_ident(c["arguments"][0].get("code") or "")
+            if r:
+                inc_by_fn.setdefault(c.get("enclosing_function_id"), set()).add(r)
     out = []
     for c in d.get("calls", []):
-        if c.get("name") != "<operator>.assignment" or not c.get("arguments"):
+        if c.get("name") != "<operator>.assignment":
             continue
-        tgt = (sorted(c["arguments"], key=lambda a: a.get("index", 0))[0].get("code") or "").strip()
-        if not tgt.startswith("*"):
+        tgt = write_target(c)
+        if not tgt or not tgt.startswith("*"):
             continue
-        m = _IDENT.match(tgt.lstrip("*&( "))
-        if not m:
-            continue
-        walked = m.group(0)
+        walked = _root_ident(tgt)
         fid = c.get("enclosing_function_id")
-        inline_adv = bool(re.match(r"^\*\s*" + re.escape(walked) + r"\s*(\+\+|--)", tgt))
-        if not (inline_adv or inc_by_fn.get(fid, {}).get(walked)):
-            continue     # not an advancing pointer -> not a pointer-walk write
-        f = fns.get(fid, {})
+        inline_adv = bool(re.match(r"^\*\s*" + re.escape(walked or "") + r"\s*(\+\+|--)", tgt))
+        if not (inline_adv or (walked in inc_by_fn.get(fid, set()))):
+            continue
+        ident, node_id = physical_write_identity(c, index)
         out.append({"attribution": "direct", "capability": "pointer_walk_direct",
-                    "function": f.get("name"), "file": f.get("file"),
-                    "line": c.get("line"), "dest": walked})
+                    "function": index["funcs"].get(fid, {}).get("name"),
+                    "identity": ident, "node_id": node_id})
     return out
 
 
 def dedup(records):
-    """Merge records that refer to the SAME physical write site. One operation per site;
-    canonical = highest-precedence attribution (direct > call_site_summary); all
-    contributing records kept as provenance."""
-    groups = {}
+    """One operation per physical write identity. Canonical = highest-precedence
+    attribution (direct > call_site_summary); all contributing records kept as provenance."""
+    groups = defaultdict(list)
     for r in records:
-        groups.setdefault(write_site_key(r), []).append(r)
+        groups[identity_key(r)].append(r)
     ops = []
-    for key, recs in sorted(groups.items(), key=lambda kv: (str(kv[0][0]), kv[0][1] or 0)):
+    for key, recs in sorted(groups.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
         canonical = min(recs, key=lambda r: PRECEDENCE.get(r.get("attribution"), 9))
+        ident = (canonical.get("underlying_write") or canonical.get("identity"))
         prov = [{"attribution": r.get("attribution"), "capability": r.get("capability"),
-                 "function": r.get("function"), "line": r.get("line")} for r in recs]
-        ops.append({"write_site": {"file": key[0], "line": key[1]},
+                 "function": r.get("function"), "node_id": r.get("node_id"),
+                 "resolved_dest_param": r.get("resolved_dest_param")} for r in recs]
+        ops.append({"identity": ident,
                     "canonical_capability": canonical.get("capability"),
                     "canonical_attribution": canonical.get("attribution"),
                     "n_provenance_paths": len(prov), "provenance": prov})

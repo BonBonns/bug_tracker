@@ -40,6 +40,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import oob_runtime_capacity_v2 as v2
+import cap_write_site_dedup as WSD
 
 # library copy sinks with (dest_index, width_index); width_index None -> no length arg,
 # cannot be a length-transparent summary. Self-contained, not from any bug analysis.
@@ -103,8 +104,8 @@ def summarize_callee(f, calls_by_fn):
     amap = _alias_map(f["id"], calls_by_fn, param_names)
     body = calls_by_fn.get(f["id"], [])
 
-    cands = set()   # (dest_param_name, length_param_name)
-    sink_line = {}  # (dest_param_name) -> source line of the sink call inside the callee
+    cands = set()      # (dest_param_name, length_param_name)
+    sink_call_id = {}  # (dest_param_name) -> node id of the sink call inside the callee
 
     # delegation to a library copy sink whose dest resolves (through aliasing) to a
     # pointer param and whose length is a length param
@@ -120,32 +121,34 @@ def summarize_callee(f, calls_by_fn):
         wcode = (args[wi].get("code") or "").strip()
         if dparam in ptr_params and wcode in len_params:
             cands.add((dparam, wcode))
-            sink_line[dparam] = c.get("line")
+            sink_call_id[dparam] = c.get("id")
 
     dests = {c[0] for c in cands}
     lens = {c[1] for c in cands}
     if len(dests) != 1 or len(lens) != 1:
         return None    # no delegation, or conflicting/ambiguous -> abstain, no summary
     dest, length = next(iter(dests)), next(iter(lens))
-    # underlying_write = the PHYSICAL write site inside the callee body (the sink call's
-    # file:line + the dest parameter it writes through) -- the key for cap2/cap3 dedup.
+    # underlying_write_call_id names the PHYSICAL write site inside the callee body (the
+    # sink call); the robust cap2/cap3 identity is computed from it in analyze_wrapper_calls.
     return {"callee": f["name"], "callee_id": f["id"],
             "dest_param_index": ptr_params[dest], "dest_param": dest,
             "length_param_index": len_params[length], "length_param": length,
-            "underlying_write": {"file": f.get("file"), "line": sink_line.get(dest),
-                                 "dest_param": dest},
+            "underlying_write_call_id": sink_call_id.get(dest),
             "form": "delegation"}
 
 
 def analyze_wrapper_calls(cpp):
     d = json.load(open(cpp))
     calls_by_fn = {}
+    call_by_id = {}
     for c in d.get("calls", []):
         calls_by_fn.setdefault(c.get("enclosing_function_id"), []).append(c)
+        call_by_id[c.get("id")] = c
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     locals_idx = {}
     for l in d.get("locals", []):
         locals_idx.setdefault((l.get("method_id"), l.get("name")), []).append(l)
+    index = WSD.build_index(d)   # robust physical-write identity index
 
     summaries = {}
     for f in d.get("functions", []):
@@ -167,11 +170,14 @@ def analyze_wrapper_calls(cpp):
         dest_code = (args[s["dest_param_index"]].get("code") or "").strip()
         len_code = (args[s["length_param_index"]].get("code") or "").strip()
         fn_id = c.get("enclosing_function_id")
+        wcall = call_by_id.get(s.get("underlying_write_call_id"))
+        uw, uw_node = (WSD.physical_write_identity(wcall, index) if wcall else (None, None))
         rec = {"function": fns.get(fn_id, {}).get("name"), "line": c.get("line"),
                "capability": "wrapper_summary", "callee": c.get("name"),
                "summary_form": s["form"], "dest": dest_code, "length": len_code,
                "sink": c.get("name"), "attribution": "call_site_summary",
-               "underlying_write": s.get("underlying_write")}
+               "underlying_write": uw, "underlying_write_node_id": uw_node,
+               "resolved_dest_param": s["dest_param"]}
         # capacity of the actual destination: independently-established stack array only
         base = _root_ident(dest_code)
         decls = [x for x in locals_idx.get((fn_id, base), [])

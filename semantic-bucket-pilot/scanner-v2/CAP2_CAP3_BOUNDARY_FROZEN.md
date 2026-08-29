@@ -21,33 +21,57 @@ write is never counted as two experimental operations.
   identification primitive is `cap_write_site_dedup.direct_walk_write_sites`
   (identification only; capacity routing is capability 3 proper, implemented next).
 
+## Robust physical-write identity (frozen)
+
+`(basename(file), line)` is NOT used as identity — it collapses same-named files in
+different directories, and it collapses multiple writes on one line. The identity
+(`cap_write_site_dedup.physical_write_identity`, used by BOTH cap2 and cap3 so the same
+instruction yields the same identity) is:
+
+- **normalized repository-relative file path** — the full path (`dirA/w.c`), not the
+  basename; c2cpg records file paths relative to the scan root and preserves subdirectories;
+- **enclosing function identity + source span** — `(name, line, line_end)`;
+- **line + SITE ORDINAL** within `(function, line)` — deterministic order by normalized
+  write text then appearance (this schema exposes no column);
+- **normalized write statement + operator** — `(call name, normalized target code)`;
+- **destination DECLARATION identity** — a parameter is `("param", index)`, a local is
+  `("local", decl_line, name)`; a declaration site, never a bare name. The SYNTACTIC write
+  target (e.g. the walked alias `u`) is resolved to its declaration the SAME way by both
+  capabilities, so a cap2 summary and a cap3 direct record for one physical write agree.
+
+The write-call / node id is retained as WITHIN-RUN provenance only (`node_id` in each
+provenance entry); it is NOT part of the cross-run identity, because node ids may change
+between runs.
+
 ## The overlap and the rule (frozen)
 
 When a callee `G` with a pointer-walk loop is in scope and `F` calls `G`, the SAME physical
-write (`G:line`) is reachable two ways: cap3 recognizes it directly in `G`'s body, and cap2
-attributes `G`'s effect at `F`'s call site. That is ONE underlying write.
+write is reachable two ways: cap3 recognizes it directly in `G`'s body, and cap2 attributes
+`G`'s effect at `F`'s call site. That is ONE underlying write.
 
-- **Write-site identity** = `(basename(file), line)` of the physical write instruction. For
-  a cap2 record it is its `underlying_write`; for a cap3 record it is the record's own site.
-- **Deduplicate** by write-site identity (`cap_write_site_dedup.dedup`).
+- **Deduplicate** by the robust identity key (`cap_write_site_dedup.dedup` /
+  `identity_key`).
 - **Precedence**: a DIRECT (cap3) recognition is the CANONICAL operation for a physical
   site; a cap2 CALL_SITE_SUMMARY of the same site is a propagated view, retained as
-  PROVENANCE, not a second operation. Precedence order: `direct` (0) > `call_site_summary` (1).
-- **Both provenance paths are preserved** on the merged operation (`provenance` list), so
-  the interprocedural path is not lost — it is just not double-counted.
+  PROVENANCE, not a second operation. Order: `direct` (0) > `call_site_summary` (1).
+- **Both provenance paths are preserved** on the merged operation (`provenance` list),
+  including each path's within-run `node_id` and the cap2 `resolved_dest_param`.
 - A cap2 call-site summary whose callee body is NOT in scope has no matching direct record
   and stands as one operation; its `underlying_write` still names the site, so a later
   in-scope pass merges it rather than creating a duplicate.
 
-## Control (frozen, PASS under joern 4.0.608)
+## Controls (frozen, PASS under joern 4.0.608) — `cap_overlap_test.py`
 
-`cap_controls/overlap/overlap.c`: `f_caller` calls the counted-writer `g_writer`, whose body
-(one physical `*u++ = ...` write) is in scope. `cap_overlap_test.py` asserts:
-- cap2 emits one call-site summary in `f_caller` with `underlying_write` into `g_writer`;
-- the cap3 primitive finds exactly one direct write in `g_writer`;
-- both resolve to the SAME write-site key;
-- after `dedup`, there is exactly ONE merged operation for that site (not two), carrying
-  BOTH provenance paths, with the DIRECT recognition canonical.
+- **(a) different directories**: `cap_controls/idcollide/dirA/w.c` and `.../dirB/w.c` each
+  hold a pointer-walk write on the SAME line number; identities differ (full path differs)
+  and dedup keeps them SEPARATE — no basename+line collapse.
+- **(b) two writes on one line**: `cap_controls/idcollide/sameline/two.c` has two distinct
+  `*pa++`/`*pb++` writes on ONE source line; identities differ (ordinal / write text /
+  dest_decl) and dedup keeps them SEPARATE.
+- **(c) merge**: `cap_controls/overlap/overlap.c` — `f_caller` calls counted-writer
+  `g_writer` whose body is in scope. cap2's `underlying_write` and cap3's direct record
+  resolve to the SAME identity key; dedup yields exactly ONE operation carrying BOTH
+  provenance paths, canonical = the direct recognition.
 
 ## Consequence for the held-out evaluation
 
