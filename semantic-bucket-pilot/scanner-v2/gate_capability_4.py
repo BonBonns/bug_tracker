@@ -53,7 +53,7 @@ def main():
     # every archived authority excerpt hash-verifies against the registry (provenance intact).
     import cap_decoder_contract as C
     _bn, prov = C.load_contracts()
-    prov_ok = len(prov) == 4 and all(p["provenance"] == "ok" for p in prov)
+    prov_ok = len(prov) == 5 and all(p["provenance"] == "ok" for p in prov)
     print(("PASS" if prov_ok else "FAIL"),
           "authoritative-provenance: all decoder contracts bound to a verified archived excerpt")
     ok = ok and prov_ok

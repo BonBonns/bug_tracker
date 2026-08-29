@@ -5,6 +5,7 @@
  * wrong-arity calls of the same name, so the signature-arity gate can be exercised. */
 int LZ4_decompress_safe();
 int LZ4_decompress_safe_partial();
+int LZ4_decompress_fast();
 
 typedef struct z_stream_s { unsigned char *next_out; unsigned avail_out; } z_stream;
 typedef z_stream *z_streamp;
@@ -17,11 +18,27 @@ int dc_fits(const char *src, int n) {
     return LZ4_decompress_safe(src, dst, n, 100);
 }
 
-/* OVERSIZED: dstCapacity 200 passed for a 64-byte dst -> the decoder is TOLD it may write up
- * to 200 bytes into a 64-byte buffer -> proven_oversized. */
+/* MAX-BOUND EXCEEDS CAPACITY (NOT proven overflow): dstCapacity 200 is an UPPER bound for a
+ * 64-byte dst -> unsafe configuration, but the input may decode to far less -> open_candidate
+ * (decoder_extent_exceeds_known_capacity), never proven_oversized. */
 int dc_over(const char *src, int n) {
     char dst[64];
     return LZ4_decompress_safe(src, dst, n, 200);
+}
+
+/* EXACT-BOUND WITHIN CAPACITY: LZ4_decompress_fast writes EXACTLY originalSize (50) bytes into
+ * a 64-byte dst -> deterministic_complete. */
+int dc_fast_fits(const char *src) {
+    char dst[64];
+    return LZ4_decompress_fast(src, dst, 50);
+}
+
+/* EXACT-BOUND EXCEEDS CAPACITY (PROVEN overflow): LZ4_decompress_fast writes EXACTLY
+ * originalSize (200) bytes into a 64-byte dst -> the write provably exceeds the buffer ->
+ * proven_oversized (a lower/exact bound greater than capacity). */
+int dc_fast_over(const char *src) {
+    char dst[64];
+    return LZ4_decompress_fast(src, dst, 200);
 }
 
 /* BOUNDED via sizeof: dstCapacity == sizeof(dst) binds the extent to the exact capacity. */

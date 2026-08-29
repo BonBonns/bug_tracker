@@ -9,24 +9,38 @@ destination capacity -- routes them; otherwise it recognizes the operation and l
 relationship UNRESOLVED. It never claims VULNERABLE and never claims safe without a proof.
 
 DELIBERATELY NARROW boundary (soundness over coverage):
-  * A contract is tied to a specific LIBRARY + VERSION-RANGE + EXACT SIGNATURE -- NOT to a
-    bare function name. A same-named user-defined function, or a call whose arity does not
-    match the signature, is NOT bound (it is out of this capability's domain).
-  * Each contract's provenance is an ARCHIVED authoritative header/doc excerpt, sliced
-    verbatim from the pinned upstream tag, hashed; the registry VERIFIES those hashes at load
-    and refuses to operate (fail closed) if any archived excerpt has changed. See
+  * A contract is tied to a specific LIBRARY + EXACT VALIDATED VERSION + EXACT SIGNATURE. Name
+    + arity + "no local definition" is only a CALL-SHAPE match; it does NOT establish library
+    identity (a same-named external symbol could be another library, an interposed symbol, a
+    project function in another translation unit, or a same-signature look-alike). Applying a
+    contract additionally requires ESTABLISHED PROVENANCE of the linked library and version --
+    supplied as an operator BUILD ATTESTATION (pinned build / linked package / verified
+    header). Without it, the call SHAPE is recognized but the contract identity is left
+    unresolved (`contract_identity_unresolved`); with library identity but no validated
+    version, `contract_version_unresolved`.
+  * Version is NOT extrapolated. One archived header validates only its OWN version family
+    (e.g. lz4 1.9.4, zlib 1.3.1); a broader range would require archiving+validating the
+    boundary versions. The attested version must be in the contract's `validated_versions`.
+  * Each contract's authoritative provenance is an ARCHIVED header/doc excerpt, sliced verbatim
+    from the pinned upstream tag, hashed; the registry VERIFIES those hashes at load and drops
+    a contract (fail closed) if its excerpt has changed. See
     cap_controls/cap4_contracts/authorities/PROVENANCE.json.
   * Every argument is mapped by POSITION and by DECLARATION IDENTITY (ref-target), into the
-    roles: destination, available_capacity, input, input_length, state_object.
+    roles: destination, available_capacity / exact_output_size, input, input_length,
+    state_object.
   * PRE-call vs POST-call meanings are modeled explicitly. zlib's `avail_out` is REMAINING
     free capacity BEFORE the call and is DECREMENTED by the bytes written AFTER the call --
     it is NOT "bytes written". Because that pre-state field is not tracked here, an inflate/
     deflate call is RECOGNIZED but its write extent is left unresolved (never mis-read).
+  * AN EXCESSIVE MAXIMUM IS NOT A PROVEN OVERFLOW. A decoder's documented write extent is a
+    per-call bound with a DIRECTION: `max` (upper bound: actual_writes <= extent) or
+    `exact`/`min` (lower bound: actual_writes >= extent). `extent <= capacity` is always a
+    deterministic in-capacity proof. `extent > capacity` is proven_oversized ONLY for a
+    lower/exact bound (the API will write >= extent > capacity); for a MAX bound it is merely
+    an unsafe configuration -- the input might decode to far less -- so it is
+    `decoder_extent_exceeds_known_capacity` / relationship_unresolved, NEVER proven_oversized.
   * Return codes, partial writes, repeated/stateful calls, callbacks, and error exits are
-    recorded on each contract and respected: a bound is the per-call MAXIMUM write extent
-    (an upper bound that holds across partial/repeated/error-exit paths), never an exact
-    count, so it can only DISPROVE safety (oversized) or establish an in-capacity upper
-    bound, never assert a precise write.
+    recorded on each contract and respected.
 
 Additive: emits attribution="call_site_summary", capability="decoder_contract" records with a
 robust write-site identity (the decoder CALL site). Its sites are library-decoder calls that
@@ -51,51 +65,68 @@ BYTE_TYPES = ("char", "unsigned char", "signed char", "int8_t", "uint8_t", "byte
 
 
 # -- CONTRACT REGISTRY --------------------------------------------------------------------
-# Each contract is tied to (library, version_range, signature). `roles` maps an argument
-# INDEX to a role. `max_write_extent` says how the per-call maximum number of bytes written
-# is bounded:
-#   {"kind": "arg_bytes", "arg": i}      -> at most the byte value of argument i (a capacity
-#                                           the caller passes; the API never writes past it).
-#   {"kind": "state_field_prestate", ...}-> bounded by a struct field's PRE-call value that
-#                                           this capability does not track -> unresolved.
+# Each contract is tied to (library, validated_versions, exact signature). `validated_versions`
+# is the version family the ARCHIVED header actually validates -- NOT extrapolated to a broader
+# range. `roles` maps an argument INDEX to a role. `write_extent` says how the per-call write
+# count is bounded AND in which DIRECTION:
+#   {"kind":"arg_bytes","bound":"max","arg":i}   -> actual_writes <= value of arg i (upper).
+#   {"kind":"arg_bytes","bound":"exact","arg":i} -> actual_writes == value of arg i (exact;
+#                                                    a lower bound for overflow purposes).
+#   {"kind":"state_field_prestate",...}          -> bounded by a struct field's PRE-call value
+#                                                    not tracked here -> unresolved.
+# Only a lower/exact bound > capacity is a PROVEN overflow; a max bound > capacity is an unsafe
+# configuration (relationship_unresolved), never proven_oversized.
 # `authority` names the archived excerpt + its sha256 (verified at load).
 CONTRACTS = [
-    {"id": "lz4.LZ4_decompress_safe@v1.7.0+", "library": "lz4",
-     "version_range": ">=1.7.0 (signature stable since r129; verified against v1.9.4)",
+    {"id": "lz4.LZ4_decompress_safe", "library": "lz4", "validated_versions": ["1.9.4"],
      "signature": {"name": "LZ4_decompress_safe", "return_type": "int",
                    "params": ["const char *", "char *", "int", "int"]},
      "roles": {0: "input", 1: "destination", 2: "input_length", 3: "available_capacity"},
-     "capacity_semantics": "arg3 dstCapacity = size of dst BEFORE the call (explicit arg); "
-                           "the API is contractually guaranteed never to write outside dst, "
-                           "i.e. at most dstCapacity bytes.",
-     "max_write_extent": {"kind": "arg_bytes", "arg": 3},
+     "capacity_semantics": "arg3 dstCapacity = size of dst BEFORE the call (explicit arg); the "
+                           "API is contractually guaranteed never to write outside dst, i.e. "
+                           "AT MOST dstCapacity bytes (an UPPER bound; it may write far less).",
+     "write_extent": {"kind": "arg_bytes", "bound": "max", "arg": 3},
      "return_codes": ">0 = bytes decompressed (== bytes written, <= dstCapacity); "
                      "<0 = error (malformed input or dst too small); decoding stops.",
      "partial_writes": "on the <0 error path decoding stops early; bytes already written are "
-                       "still <= dstCapacity (the bound holds on every path).",
+                       "still <= dstCapacity (the upper bound holds on every path).",
      "stateful": False, "callbacks": False,
      "authority": {"excerpt_file": "lz4-1.9.4-LZ4_decompress_safe.txt",
                    "sha256": "71a1710d7b659a00a7c8201f829ed4ddfada184c11873fba6da08ccec7dddf65"}},
 
-    {"id": "lz4.LZ4_decompress_safe_partial@v1.8.3+", "library": "lz4",
-     "version_range": ">=1.8.3 (verified against v1.9.4)",
+    {"id": "lz4.LZ4_decompress_safe_partial", "library": "lz4", "validated_versions": ["1.9.4"],
      "signature": {"name": "LZ4_decompress_safe_partial", "return_type": "int",
                    "params": ["const char *", "char *", "int", "int", "int"]},
      "roles": {0: "input", 1: "destination", 2: "input_length",
                3: "target_output_size", 4: "available_capacity"},
-     "capacity_semantics": "arg4 dstCapacity = size of dst BEFORE the call; the API writes at "
-                           "most dstCapacity bytes (targetOutputSize <= dstCapacity, and the "
-                           "decoder may write up to dstCapacity).",
-     "max_write_extent": {"kind": "arg_bytes", "arg": 4},
+     "capacity_semantics": "arg4 dstCapacity = size of dst BEFORE the call; the API writes AT "
+                           "MOST dstCapacity bytes (upper bound).",
+     "write_extent": {"kind": "arg_bytes", "bound": "max", "arg": 4},
      "return_codes": ">=0 = bytes written into dst (<= dstCapacity); <0 = error.",
      "partial_writes": "writes up to dstCapacity even when it stops at targetOutputSize; the "
-                       "dstCapacity bound holds on every path.",
+                       "dstCapacity upper bound holds on every path.",
      "stateful": False, "callbacks": False,
      "authority": {"excerpt_file": "lz4-1.9.4-LZ4_decompress_safe_partial.txt",
                    "sha256": "c84b9e21aec98f5bf891af8d28c31ed0b5072e0ae4f5816c9cffb6b280d4ac65"}},
 
-    {"id": "zlib.inflate@v1.2.0+", "library": "zlib",
-     "version_range": ">=1.2.0 (verified against v1.3.1)",
+    {"id": "lz4.LZ4_decompress_fast", "library": "lz4", "validated_versions": ["1.9.4"],
+     "signature": {"name": "LZ4_decompress_fast", "return_type": "int",
+                   "params": ["const char *", "char *", "int"]},
+     "roles": {0: "input", 1: "destination", 2: "exact_output_size"},
+     "capacity_semantics": "arg2 originalSize = the uncompressed size to regenerate; the API "
+                           "writes EXACTLY originalSize bytes into dst (an EXACT / lower bound "
+                           "for overflow purposes). If originalSize > dst capacity the write "
+                           "provably exceeds the buffer. (Deprecated + unsafe upstream.)",
+     "write_extent": {"kind": "arg_bytes", "bound": "exact", "arg": 2},
+     "return_codes": "return = bytes read from src (== compressed size); <0 = error. dst "
+                     "receives exactly originalSize bytes.",
+     "partial_writes": "on the <0 malformed path it may stop early, but the caller-asserted "
+                       "originalSize is the intended exact output size.",
+     "stateful": False, "callbacks": False,
+     "authority": {"excerpt_file": "lz4-1.9.4-LZ4_decompress_fast.txt",
+                   "sha256": "a6ad113aff7df32c626268b42daa1a1c47852a7e92e31fe66cf52acd6c0e3060"}},
+
+    {"id": "zlib.inflate", "library": "zlib", "validated_versions": ["1.3.1"],
      "signature": {"name": "inflate", "return_type": "int",
                    "params": ["z_streamp", "int"]},
      "roles": {0: "state_object", 1: "flush_mode"},
@@ -104,8 +135,8 @@ CONTRACTS = [
                            "avail_out is DECREMENTED by the bytes written and total_out is "
                            "incremented -- avail_out is NOT bytes-written. The per-call max "
                            "write extent is the PRE-call avail_out.",
-     "max_write_extent": {"kind": "state_field_prestate", "field": "avail_out",
-                          "meaning": "pre_call_remaining_capacity"},
+     "write_extent": {"kind": "state_field_prestate", "field": "avail_out",
+                      "meaning": "pre_call_remaining_capacity"},
      "return_codes": "Z_OK / Z_STREAM_END / Z_NEED_DICT progress; Z_BUF_ERROR (no progress, "
                      "not fatal); Z_DATA_ERROR / Z_MEM_ERROR / Z_STREAM_ERROR errors.",
      "partial_writes": "STATEFUL + REPEATED: called in a loop, each call consumes avail_in / "
@@ -115,15 +146,14 @@ CONTRACTS = [
      "authority": {"excerpt_file": "zlib-1.3.1-inflate.txt",
                    "sha256": "cb7e42a8ef44bc9f231acda8d6483ba849b0559b98d80f8628d2a2f11bc017b9"}},
 
-    {"id": "zlib.deflate@v1.2.0+", "library": "zlib",
-     "version_range": ">=1.2.0 (verified against v1.3.1)",
+    {"id": "zlib.deflate", "library": "zlib", "validated_versions": ["1.3.1"],
      "signature": {"name": "deflate", "return_type": "int",
                    "params": ["z_streamp", "int"]},
      "roles": {0: "state_object", 1: "flush_mode"},
      "capacity_semantics": "same z_stream next_out/avail_out pre/post semantics as inflate; "
                            "avail_out is pre-call remaining capacity, decremented after.",
-     "max_write_extent": {"kind": "state_field_prestate", "field": "avail_out",
-                          "meaning": "pre_call_remaining_capacity"},
+     "write_extent": {"kind": "state_field_prestate", "field": "avail_out",
+                      "meaning": "pre_call_remaining_capacity"},
      "return_codes": "Z_OK / Z_STREAM_END progress; Z_BUF_ERROR (no progress, not fatal); "
                      "Z_STREAM_ERROR error.",
      "partial_writes": "STATEFUL + REPEATED, as inflate.",
@@ -237,17 +267,40 @@ def _role_map(c, ct, index):
     return roles
 
 
-def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR):
+def _library_identity(library, validated_versions, build_identity):
+    """Establish the linked library IDENTITY + VERSION for a contract, from an operator BUILD
+    ATTESTATION (pinned build / linked package / verified header). A same-named external symbol
+    is NOT proof of provenance. Returns (state, detail):
+      'identity_unresolved' -> library not attested at all;
+      'version_unresolved'  -> attested, but the version is unknown or NOT in the archived
+                               contract's validated family (one header validates only itself);
+      'established'         -> attested version is in the contract's validated set."""
+    bi = (build_identity or {}).get(library)
+    if not bi:
+        return "identity_unresolved", {"library": library, "attested": False}
+    ver = bi.get("version")
+    if ver is None or ver not in validated_versions:
+        return "version_unresolved", {"library": library, "attested_version": ver,
+                                      "validated_versions": validated_versions,
+                                      "established_by": bi.get("established_by")}
+    return "established", {"library": library, "version": ver,
+                           "established_by": bi.get("established_by")}
+
+
+def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR, build_identity=None):
+    """`build_identity` is an operator attestation of the linked libraries, e.g.
+    {"lz4": {"version": "1.9.4", "established_by": "pinned_build"}}. A contract's write-extent
+    routing is applied ONLY when the library identity + version is established by it; otherwise
+    the call shape is recognized and the contract identity/version is left unresolved."""
     d = json.load(open(cpp)) if isinstance(cpp, str) else cpp
     by_name, _prov = load_contracts(auth_dir)
     index = WSD.build_index(d)
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     heap_ext = AE.compute_allocation_extents(d)
     # user-defined (non-external, with body) function names shadow any library contract:
-    # the contract is tied to the LIBRARY signature, not the name.
+    # the contract is tied to the LIBRARY, not the name.
     local_defs = {f.get("name") for f in d.get("functions", [])
                   if not f.get("is_external") and f.get("line_end")}
-    call_by_id = index["call_by_id"]
 
     ops = []
     for c in d.get("calls", []):
@@ -256,8 +309,9 @@ def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR):
         if not cands:
             continue
         args = sorted(c.get("arguments", []), key=lambda a: a.get("index", 0))
-        # SIGNATURE match (not name): the callee must NOT be a user-defined same-named
-        # function, and the call arity must equal the contract's parameter count.
+        # CALL-SHAPE match: the callee must NOT be a user-defined same-named function, and the
+        # call arity must equal the contract's parameter count. (This is shape only, NOT proof
+        # of library identity -- that is checked next.)
         if name in local_defs:
             continue
         ct = next((x for x in cands if len(x["signature"]["params"]) == len(args)), None)
@@ -270,85 +324,109 @@ def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR):
         rec = {"capability": "decoder_contract", "attribution": "call_site_summary",
                "function": index["funcs"].get(fid, {}).get("name"), "line": c.get("line"),
                "callee": name, "contract_id": ct["id"], "library": ct["library"],
-               "version_range": ct["version_range"], "roles": roles,
+               "validated_versions": ct["validated_versions"], "roles": roles,
                "stateful": ct["stateful"], "callbacks": ct["callbacks"],
                "identity": ident, "node_id": c.get("id")}
 
-        mwe = ct["max_write_extent"]
-        # ---- max write extent per contract -------------------------------------------------
-        if mwe["kind"] == "state_field_prestate":
-            # e.g. zlib avail_out: pre-call remaining capacity, NOT tracked here. RECOGNIZE
-            # the operation, leave the relationship unresolved (never mis-read as bytes-written).
+        # ---- LIBRARY IDENTITY provenance gate (name+arity is only a call shape) -------------
+        idstate, idinfo = _library_identity(ct["library"], ct["validated_versions"],
+                                            build_identity)
+        rec["library_identity"] = idinfo
+        if idstate == "identity_unresolved":
+            rec.update(route="additional_evidence_required",
+                       reason="contract_identity_unresolved",
+                       disposition="relationship_unresolved",
+                       note="external callee matches the contract call shape, but the linked "
+                            "library identity is not established (no build attestation); a "
+                            "same-named symbol is not proof of provenance")
+            ops.append(rec); continue
+        if idstate == "version_unresolved":
+            rec.update(route="additional_evidence_required",
+                       reason="contract_version_unresolved",
+                       disposition="relationship_unresolved",
+                       note="library identity established but the version is not in the "
+                            "archived contract's validated family %s (attested %r); one header "
+                            "validates only its own version"
+                            % (ct["validated_versions"], idinfo.get("attested_version")))
+            ops.append(rec); continue
+
+        we = ct["write_extent"]
+        # ---- zlib avail_out: pre-call remaining capacity, NOT tracked -> recognize, unresolved
+        if we["kind"] == "state_field_prestate":
             state = roles.get("state_object", {})
             rec.update(route="additional_evidence_required",
                        reason="decoder_capacity_in_state_object",
                        disposition="relationship_unresolved",
-                       max_write_extent="unresolved_prestate_field",
-                       extent_field=mwe["field"], extent_field_meaning=mwe["meaning"],
+                       write_extent="unresolved_prestate_field", extent_bound=None,
+                       extent_field=we["field"], extent_field_meaning=we["meaning"],
                        state_object=state.get("code"),
                        note="write extent is the PRE-call %s (remaining capacity) of the "
                             "z_stream, which is not tracked; not treated as bytes written"
-                            % mwe["field"])
+                            % we["field"])
             ops.append(rec); continue
 
-        # arg_bytes: the caller passes the capacity/extent bound explicitly.
-        cap_role = roles.get("available_capacity", {})
-        cap_code = cap_role.get("code", "")
+        # ---- arg_bytes: the extent argument, with a DIRECTION (max upper / exact lower) ------
+        bound = we.get("bound", "max")   # "max" -> upper bound; "exact"/"min" -> lower bound
+        ext_i = we["arg"]
+        cap_code = WSD._norm_code(args[ext_i].get("code") or "") if ext_i < len(args) else ""
         dest_role = roles.get("destination", {})
         dest_arg = args[dest_role["arg_index"]] if "destination" in roles else None
         dest_code = dest_role.get("code", "")
-
-        # destination byte capacity (established fixed array / literal allocation only)
         dcap, why = (_dest_capacity(dest_arg, dest_code, fid, index, stack_ext, heap_ext)
                      if dest_arg is not None else (None, "no_destination_arg"))
 
-        # value of the max write extent: literal bytes, or sizeof(dest) == capacity exactly
+        # extent value: literal bytes, or sizeof(dest) which binds to the exact capacity.
         extent = _lit_bytes(cap_code)
         m = _SIZEOF.match(cap_code)
         extent_is_sizeof_dest = bool(m and dcap is not None
                                      and m.group(1) == WSD._root_ident(dest_code))
 
+        common = dict(extent_bound=bound, extent_arg=cap_code, dest=dest_code)
         if extent is None and not extent_is_sizeof_dest:
-            # symbolic capacity argument -> cannot bound the extent -> recognize, unresolved.
-            rec.update(route="additional_evidence_required",
-                       reason="write_extent_unresolved",
-                       disposition="relationship_unresolved",
-                       max_write_extent="symbolic",
-                       capacity_arg=cap_code, dest=dest_code,
-                       dest_capacity=(dcap["bytes"] if dcap else None),
-                       note="decoder capacity argument is symbolic; max write extent not bounded")
+            rec.update(route="additional_evidence_required", reason="write_extent_unresolved",
+                       disposition="relationship_unresolved", write_extent="symbolic",
+                       dest_capacity=(dcap["bytes"] if dcap else None), **common,
+                       note="decoder extent argument is symbolic; write extent not bounded")
             ops.append(rec); continue
-
         if dcap is None:
-            # extent known but destination buffer capacity not established -> unresolved.
             rec.update(route="additional_evidence_required", reason=why,
                        disposition="relationship_unresolved",
-                       max_write_extent=(dcap and "sizeof_dest") or extent,
-                       capacity_arg=cap_code, dest=dest_code, dest_capacity=None,
-                       note="max write extent bounded by contract, but destination capacity "
-                            "is not independently established")
+                       write_extent=(extent if not extent_is_sizeof_dest else "sizeof_dest"),
+                       dest_capacity=None, **common,
+                       note="write extent bounded by contract, but destination capacity is not "
+                            "independently established")
             ops.append(rec); continue
 
-        # both established: compare the per-call MAXIMUM write extent to the dest capacity.
         ext_bytes = dcap["bytes"] if extent_is_sizeof_dest else extent
-        if extent_is_sizeof_dest or ext_bytes <= dcap["bytes"]:
+        capN = dcap["bytes"]
+        if ext_bytes <= capN:
+            # extent <= capacity: in-capacity for BOTH a max and an exact/lower bound.
             rec.update(route="deterministic_complete",
                        reason="write_extent_within_destination_capacity",
-                       disposition="deterministic_complete",
-                       max_write_extent=ext_bytes, dest=dest_code,
-                       dest_capacity=dcap["bytes"], dest_capacity_prov=dcap["prov"],
-                       note=("sizeof(dst) passed as capacity -> API cannot write past dst"
+                       disposition="deterministic_complete", write_extent=ext_bytes,
+                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                       note=("sizeof(dst) as capacity -> API cannot write past dst"
                              if extent_is_sizeof_dest else
-                             "%d-byte cap arg <= %d-byte dst -> API bounded within dst"
-                             % (ext_bytes, dcap["bytes"])))
-        else:
+                             "%s write extent %d <= %d-byte dst -> within capacity"
+                             % (bound, ext_bytes, capN)))
+        elif bound in ("exact", "min"):
+            # LOWER/EXACT bound > capacity: the API WILL write >= ext_bytes > capacity.
             rec.update(route="range_arithmetic_review",
-                       reason="write_extent_within_destination_capacity",
-                       disposition="proven_oversized",
-                       max_write_extent=ext_bytes, dest=dest_code,
-                       dest_capacity=dcap["bytes"], dest_capacity_prov=dcap["prov"],
-                       note="%d-byte capacity passed to decoder for a %d-byte dst -> the API "
-                            "is told it may write past the buffer" % (ext_bytes, dcap["bytes"]))
+                       reason="write_extent_exceeds_destination_capacity",
+                       disposition="proven_oversized", write_extent=ext_bytes,
+                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                       note="%s write extent %d > %d-byte dst -> the API writes past the buffer"
+                            % (bound, ext_bytes, capN))
+        else:
+            # MAX (upper) bound > capacity: unsafe CONFIGURATION, but the input may decode to
+            # far less -- NOT a proven overflow (no lower bound on actual writes). Open.
+            rec.update(route="open_candidate",
+                       reason="decoder_extent_exceeds_known_capacity",
+                       disposition="relationship_unresolved", write_extent=ext_bytes,
+                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                       note="max write extent %d > %d-byte dst -> unsafe configuration, but "
+                            "actual writes may be far less (upper bound only) -> not proven "
+                            "oversized" % (ext_bytes, capN))
         ops.append(rec)
     return ops
 
@@ -358,6 +436,10 @@ if __name__ == "__main__":
     for p in prov:
         print("PROVENANCE", json.dumps(p, sort_keys=True))
     if len(sys.argv) > 1:
-        for o in analyze_decoder_calls(sys.argv[1]):
+        # demo attestation (pinned build) so contracts apply; omit build_identity to see the
+        # conservative default (every decoder call -> contract_identity_unresolved).
+        bi = {"lz4": {"version": "1.9.4", "established_by": "pinned_build"},
+              "zlib": {"version": "1.3.1", "established_by": "pinned_build"}}
+        for o in analyze_decoder_calls(sys.argv[1], build_identity=bi):
             print(json.dumps({k: o[k] for k in o if k not in ("roles", "identity")},
                              sort_keys=True))

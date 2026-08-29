@@ -13,11 +13,17 @@
          "excerpt_sha256": "71a1710d7b659a00a7c8201f829ed4ddfada184c11873fba6da08ccec7dddf65",
          "prototype_line": 205,
          "prototype": "int LZ4_decompress_safe(const char* src, char* dst, int compressedSize, int dstCapacity)"},
-        {"contract_id": "lz4.LZ4_decompress_safe_partial@v1.8.3+",
+        {"contract_id": "lz4.LZ4_decompress_safe_partial",
          "excerpt_file": "lz4-1.9.4-LZ4_decompress_safe_partial.txt",
          "excerpt_sha256": "c84b9e21aec98f5bf891af8d28c31ed0b5072e0ae4f5816c9cffb6b280d4ac65",
          "prototype_line": 306,
-         "prototype": "int LZ4_decompress_safe_partial(const char* src, char* dst, int srcSize, int targetOutputSize, int dstCapacity)"}
+         "prototype": "int LZ4_decompress_safe_partial(const char* src, char* dst, int srcSize, int targetOutputSize, int dstCapacity)"},
+        {"contract_id": "lz4.LZ4_decompress_fast",
+         "excerpt_file": "lz4-1.9.4-LZ4_decompress_fast.txt",
+         "excerpt_sha256": "a6ad113aff7df32c626268b42daa1a1c47852a7e92e31fe66cf52acd6c0e3060",
+         "prototype_line": 822,
+         "prototype": "int LZ4_decompress_fast(const char* src, char* dst, int originalSize)",
+         "extent_semantics": "originalSize is the EXACT number of bytes written into dst (a lower/exact bound), not an upper bound"}
       ]
     },
     {

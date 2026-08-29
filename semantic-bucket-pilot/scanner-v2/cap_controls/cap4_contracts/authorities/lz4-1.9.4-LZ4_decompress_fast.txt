@@ -1,0 +1,31 @@
+# EXCERPT (verbatim) from lz4 v1.9.4 lib/lz4.h lines 795-822
+# source: https://raw.githubusercontent.com/lz4/lz4/v1.9.4/lib/lz4.h
+# ----------------------------------------------------------------
+/*! Obsolete LZ4_decompress_fast variants (since v1.9.0) :
+ *  These functions used to be faster than LZ4_decompress_safe(),
+ *  but this is no longer the case. They are now slower.
+ *  This is because LZ4_decompress_fast() doesn't know the input size,
+ *  and therefore must progress more cautiously into the input buffer to not read beyond the end of block.
+ *  On top of that `LZ4_decompress_fast()` is not protected vs malformed or malicious inputs, making it a security liability.
+ *  As a consequence, LZ4_decompress_fast() is strongly discouraged, and deprecated.
+ *
+ *  The last remaining LZ4_decompress_fast() specificity is that
+ *  it can decompress a block without knowing its compressed size.
+ *  Such functionality can be achieved in a more secure manner
+ *  by employing LZ4_decompress_safe_partial().
+ *
+ *  Parameters:
+ *  originalSize : is the uncompressed size to regenerate.
+ *                 `dst` must be already allocated, its size must be >= 'originalSize' bytes.
+ * @return : number of bytes read from source buffer (== compressed size).
+ *           The function expects to finish at block's end exactly.
+ *           If the source stream is detected malformed, the function stops decoding and returns a negative result.
+ *  note : LZ4_decompress_fast*() requires originalSize. Thanks to this information, it never writes past the output buffer.
+ *         However, since it doesn't know its 'src' size, it may read an unknown amount of input, past input buffer bounds.
+ *         Also, since match offsets are not validated, match reads from 'src' may underflow too.
+ *         These issues never happen if input (compressed) data is correct.
+ *         But they may happen if input data is invalid (error or intentional tampering).
+ *         As a consequence, use these functions in trusted environments with trusted data **only**.
+ */
+LZ4_DEPRECATED("This function is deprecated and unsafe. Consider using LZ4_decompress_safe() instead")
+LZ4LIB_API int LZ4_decompress_fast (const char* src, char* dst, int originalSize);
