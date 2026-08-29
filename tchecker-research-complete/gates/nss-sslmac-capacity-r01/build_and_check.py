@@ -99,5 +99,53 @@ ck('ambiguous member name (StructA.buf[16] vs StructB.buf[512]): resolves via ba
 ck('ambiguous member name: does NOT conflate with the other struct\'s capacity (512)',
    not (dc_amb and dc_amb[0]['capacity_bytes'] == 512))
 
+# --- 7. STRUCT-MEMBER-OFFSET-R01: `obj->key + off` as the memcpy destination.
+# Must resolve to the member's FULL capacity, tagged offset_shape=True -- an
+# open candidate, not a claim about the narrowed remaining bound.
+build(str(HERE / 'raw_adv_offset_add'), struct_name='SFTKSSLMACInfoStr', member_name='key',
+      member_type_full_name='unsigned char[256]', extent_local_name='ulValueLen',
+      dest_shape='add_offset')
+r_add = run('raw_adv_offset_add', 'out_adv_offset_add')
+dc_add = r_add['destcapacity']['dest_capacities']
+ck('offset shape `obj->key + off`: capacity resolved (256)', len(dc_add) == 1 and dc_add[0]['capacity_bytes'] == 256)
+ck('offset shape `obj->key + off`: offset_shape=True, offset_expr="off"',
+   dc_add and dc_add[0]['offset_shape'] is True and dc_add[0]['offset_expr'] == 'off')
+ck('offset shape `obj->key + off`: rule=CPP_STRUCT_MEMBER_OFFSET_ARRAY_CAPACITY',
+   dc_add and dc_add[0]['derivation']['rule'] == 'CPP_STRUCT_MEMBER_OFFSET_ARRAY_CAPACITY')
+ck('offset shape `obj->key + off`: still no bound fact (open_candidate)', r_add['bound']['bounds'] == [])
+
+# --- 8. STRUCT-MEMBER-OFFSET-R01: `&obj->key[off]` as the memcpy destination.
+build(str(HERE / 'raw_adv_offset_index'), struct_name='SFTKSSLMACInfoStr', member_name='key',
+      member_type_full_name='unsigned char[256]', extent_local_name='ulValueLen',
+      dest_shape='addr_index_offset')
+r_idx = run('raw_adv_offset_index', 'out_adv_offset_index')
+dc_idx = r_idx['destcapacity']['dest_capacities']
+ck('offset shape `&obj->key[off]`: capacity resolved (256)', len(dc_idx) == 1 and dc_idx[0]['capacity_bytes'] == 256)
+ck('offset shape `&obj->key[off]`: offset_shape=True, offset_expr="off"',
+   dc_idx and dc_idx[0]['offset_shape'] is True and dc_idx[0]['offset_expr'] == 'off')
+
+# --- 9. Non-offset facts stay offset_shape=False (no accidental tagging).
+ck('NSS site (bare, no offset): offset_shape is explicitly False, not just falsy-absent',
+   dc and dc[0]['offset_shape'] is False and dc[0]['offset_expr'] is None)
+
+# --- 10. UNION-R01 fail-closed: same shape as the confirmed NSS site, but the
+# struct is now flagged as a UNION via aggregate_kinds.tsv. Must NEVER emit a
+# capacity fact for this member -- identity may resolve, capacity must not.
+build(str(HERE / 'raw_adv_union_member'), struct_name='UnionKeyInfo', member_name='key',
+      member_type_full_name='unsigned char[256]', extent_local_name='len', is_union=True)
+r_union = run('raw_adv_union_member', 'out_adv_union_member')
+ck('union member: no capacity fabricated (fail-closed)', r_union['destcapacity']['dest_capacities'] == [])
+ck('union member: classified UNION_MEMBER_FAIL_CLOSED',
+   r_union['fieldcapclass']['classification'].get('UNION_MEMBER_FAIL_CLOSED') == 1)
+
+# --- 11. UNION-R01 fail-closed also holds through the offset-shape path
+# (`u.key + off` on a union member must not resolve either).
+build(str(HERE / 'raw_adv_union_offset'), struct_name='UnionKeyInfo', member_name='key',
+      member_type_full_name='unsigned char[256]', extent_local_name='len',
+      dest_shape='add_offset', is_union=True)
+r_union_off = run('raw_adv_union_offset', 'out_adv_union_offset')
+ck('union member via offset shape: no capacity fabricated (fail-closed)',
+   r_union_off['destcapacity']['dest_capacities'] == [])
+
 print(f'NSS_SSLMAC_CAPACITY_R01={ok}/{total}')
 sys.exit(0 if ok == total else 1)

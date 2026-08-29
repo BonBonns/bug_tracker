@@ -31,6 +31,26 @@ def writer(path: String): PrintWriter = new PrintWriter(new File(path), "UTF-8")
     members.println(Seq(m.id.toString,t.id.toString,b64(m.name),b64(m.code),b64(m.typeFullName),optInt(m.lineNumber)).mkString("\t"))
   }} finally members.close()
 
+  // UNION-R01: best-effort aggregate-kind emission for the fail-closed union check in
+  // normalize_c_cpp_facts_v03.py. UNVERIFIED against real Joern output -- no Joern
+  // install in the environment this was written in to confirm c2cpg's actual TypeDecl.code
+  // convention for a union (this heuristic assumes it starts with the literal "union",
+  // e.g. "union SFTKFoo", the common CDT/c2cpg pattern, but that has not been checked
+  // against a real CPG). The consumer treats this file as fully OPTIONAL and defaults to
+  // today's behavior when it's absent or when a row is missing/ambiguous, so a wrong or
+  // silent-no-output heuristic here fails safe (no union detected -> unchanged behavior),
+  // never fails toward a false capacity claim. Verify against a real CPG before relying on
+  // this to actually gate anything; until then treat every UNION classification it produces
+  // as a hypothesis, not a fact.
+  val aggKinds = writer(s"$outDir/aggregate_kinds.tsv")
+  try cpg.typeDecl.l.foreach { t =>
+    val kind = if (t.code != null && t.code.trim.startsWith("union")) "UNION"
+               else if (t.code != null && t.code.trim.startsWith("struct")) "STRUCT"
+               else if (t.code != null && t.code.trim.startsWith("class")) "CLASS"
+               else "UNKNOWN"
+    if (kind != "UNKNOWN") aggKinds.println(Seq(t.id.toString, b64(kind)).mkString("\t"))
+  } finally aggKinds.close()
+
   val methods = writer(s"$outDir/methods.tsv")
   try cpg.method.l.foreach { m =>
     methods.println(Seq(m.id.toString,b64(m.name),b64(m.fullName),b64(m.signature),b64(m.filename),optInt(m.lineNumber),optInt(m.lineNumberEnd),b64(m.astParentType),b64(m.astParentFullName),m.isExternal.toString).mkString("\t"))

@@ -99,6 +99,20 @@ def main():
                            'line':int(r[4] or 0),'is_external':r[5].lower()=='true','inherits_from':strs(r[6])})
     members=[{'id':int(r[0]),'type_decl_id':int(r[1]),'name':dec(r[2]),'code':dec(r[3]),
               'type_full_name':dec(r[4]),'line':int(r[5] or 0)} for r in rows(raw/'members.tsv',6)]
+
+    # UNION-R01: OPTIONAL aggregate-kind fact, absent from every fixture/export that
+    # predates this change (backward compatible: rows() on a missing file returns [],
+    # so every existing raw dir -- none of which has this file -- behaves EXACTLY as
+    # before). type_decl_id -> 'UNION' | 'STRUCT' | 'CLASS' | anything else. Only
+    # 'UNION' is acted on below; everything else (including simply not appearing
+    # here at all) keeps today's behavior. This is deliberately NOT sourced from
+    # export_c_cpp_facts_v03.sc's t.code text heuristic being independently
+    # verified against real Joern output -- Joern is not installed in this
+    # environment (see NOTE in that .sc file and this gate's README) -- so treat
+    # aggregate_kinds as a real fact input whose PRODUCTION side is unverified,
+    # while the CONSUMPTION side (the fail-closed check below) is fully tested
+    # against a hand-built fixture that sets it directly.
+    _union_type_ids={int(r[0]) for r in rows(raw/'aggregate_kinds.tsv',2) if dec(r[1]).upper()=='UNION'}
     method_returns=[{'id':int(r[0]),'method_id':int(r[1]),'code':dec(r[2]),'type_full_name':dec(r[3]),
                      'line':int(r[4] or 0)} for r in rows(raw/'method_returns.tsv',5)]
     locals_=[{'id':int(r[0]),'method_id':int(r[1]),'name':dec(r[2]),'code':dec(r[3]),'type_full_name':dec(r[4]),
@@ -1273,6 +1287,49 @@ def main():
     _facall_by_code={}
     for _c in _facall_by_id.values():
         _facall_by_code.setdefault(_c.get('code'),_c['id'])
+
+    # STRUCT-MEMBER-OFFSET-R01: `base->member + offset_expr` or `&base->member[offset_expr]`.
+    # Same posture as oob_copy_length_verdict.py's pointer-offset extension for LOCAL
+    # arrays: this does NOT attempt to compute a narrowed "N - offset" remaining-capacity
+    # bound (offset_expr may be an arbitrary runtime expression) -- it treats the shape as
+    # an OPEN CANDIDATE carrying the member's FULL declared capacity, tagged offset_shape so
+    # a consumer knows the true remaining bound is unproven, not that 256 bytes are safe to
+    # write starting at that offset. Recognizes exactly two shapes, one-directional (matches
+    # the local-array producer's convention of not also matching `offset + field`):
+    #   <operator>.addition(fieldAccess(base,member), offset_expr)
+    #   <operator>.addressOf(indexAccess(fieldAccess(base,member), offset_expr))
+    _FIELD_OPS=('<operator>.fieldAccess','<operator>.indirectFieldAccess')
+    _INDEX_OPS=('<operator>.indexAccess','<operator>.indirectIndexAccess')
+    def _offset_field_capacity(_operand_id):
+        _oc=call_by_id.get(_operand_id)
+        if _oc is None: return None
+        _field_call_id=None; _offset_expr=None
+        if _oc['name']=='<operator>.addition':
+            _aa=sorted(_oc.get('arguments',[]),key=lambda a:a['index'])
+            if len(_aa)!=2: return None
+            _lhs_call=call_by_id.get(_aa[0]['id'])
+            if _lhs_call is None or _lhs_call['name'] not in _FIELD_OPS: return None
+            _field_call_id=_aa[0]['id']; _offset_expr=(_aa[1].get('code') or '').strip()
+        elif _oc['name']=='<operator>.addressOf':
+            _aa=_oc.get('arguments',[])
+            if len(_aa)!=1: return None
+            _inner=call_by_id.get(_aa[0]['id'])
+            if _inner is None or _inner['name'] not in _INDEX_OPS: return None
+            _ia=sorted(_inner.get('arguments',[]),key=lambda a:a['index'])
+            if len(_ia)!=2: return None
+            _base_call=call_by_id.get(_ia[0]['id'])
+            if _base_call is None or _base_call['name'] not in _FIELD_OPS: return None
+            _field_call_id=_ia[0]['id']; _offset_expr=(_ia[1].get('code') or '').strip()
+        else:
+            return None
+        _fi=_fieldid_by_access.get(_field_call_id)
+        if _fi is None: return None
+        _md=_memdecl_by_id.get(_fi['member_decl_id'])
+        if _md is None or _md.get('type_decl_id') in _union_type_ids: return None
+        _cap=_fixed_array_capacity(_md.get('type_full_name') or '')
+        if _cap is None: return None
+        return (_cap,_offset_expr,_fi)
+
     _r02b_cls={}
     def _bump(_k): _r02b_cls[_k]=_r02b_cls.get(_k,0)+1
     for _r in _operand_roles:
@@ -1284,6 +1341,7 @@ def main():
         _vr=_arg.get('value_ref') or {}
         _cap=None; _rule='CPP_FIXED_ARRAY_CAPACITY'; _sid=_vr.get('referenced_id') or _vr.get('id')
         _skind='VALUE_ID'; _fkey=None   # CAP-KEY-R01: default local storage joins by value id
+        _offset_shape=False; _offset_expr=None
         if _vr.get('kind')=='LOCAL':
             _loc=_loc_by_id.get(_vr.get('referenced_id') or _vr.get('id'))
             if _loc:
@@ -1305,6 +1363,13 @@ def main():
             if _fi is not None:
                 _bump('FIELD_ID_PRESENT')
                 _md=_memdecl_by_id.get(_fi['member_decl_id'])
+                # UNION-R01: fail closed. A union member's declared array size is real
+                # backing-store capacity for THIS write in isolation, but this scanner makes
+                # no claim about which member is the currently-live one -- never emit a
+                # capacity fact for a union member at all, rather than imply more certainty
+                # than "identity resolved" actually supports.
+                if _md is not None and _md.get('type_decl_id') in _union_type_ids:
+                    _bump('UNION_MEMBER_FAIL_CLOSED'); _md=None
                 if _md is not None:
                     _bump('MEMBER_DECL_PRESENT')
                     _mtype=_md.get('type_full_name') or ''
@@ -1323,6 +1388,18 @@ def main():
                         _bump('UNKNOWN_ARRAY_DIMENSION')  # T[] — dimension lost by frontend
                     else:
                         _bump('UNKNOWN_ELEMENT_WIDTH')
+            if _cap is None:
+                # STRUCT-MEMBER-OFFSET-R01 fallback: the operand isn't a bare field access
+                # (or its identity/member-decl didn't resolve) -- try `field + offset` /
+                # `&field[offset]` before giving up. Uses the operand's OWN node id (the
+                # value_ref's id, which for an unrecognized shape is the addition/addressOf
+                # call itself) rather than the field access id used above.
+                _off=_offset_field_capacity(_av) if _av is not None else None
+                if _off is not None:
+                    _bump('OFFSET_FIELD_CAPACITY')
+                    _cap,_offset_expr,_fi=_off
+                    _rule='CPP_STRUCT_MEMBER_OFFSET_ARRAY_CAPACITY'
+                    _fkey=_fi['composite_key']; _skind='FIELD_OFFSET'; _offset_shape=True
         if _cap is None: continue
         _bytes,_elem,_n=_cap
         _fact={'storage_value_id':_sid,
@@ -1330,6 +1407,7 @@ def main():
                'function_id':_r['function_id'],'capacity_bytes':_bytes,
                'elem_type':_elem,'elem_count':_n,'resolution':'EXACT_STORAGE_IDENTITY',
                'call_id':_r['id'],'cmp_side':_r['role'],
+               'offset_shape':_offset_shape,'offset_expr':_offset_expr,
                'derivation':{'origin':'FRONTEND_DERIVED','rule':_rule,
                              'source_node_ids':[_r['id']]}}
         if _r['role']=='WRITE_DEST': _dest_caps.append(_fact)

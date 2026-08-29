@@ -83,7 +83,7 @@ Exactly the proof obligation asked for:
 - **Result:** `open_candidate` / `relationship_unresolved`, naming the
   missing upper bound as **256 bytes**
 
-## Adversarial matrix (`build_and_check.py`, 14/14 passing)
+## Adversarial matrix (`build_and_check.py`, 24/24 passing)
 
 | Scenario | Expected | Result |
 |---|---|---|
@@ -93,11 +93,76 @@ Exactly the proof obligation asked for:
 | Flexible array member (`unsigned char key[]`) | no capacity fabricated; `UNKNOWN_ARRAY_DIMENSION` | PASS |
 | Arithmetic-macro dimension (`unsigned char buf[(64*2)+8]`) | capacity=136, resolved by the folding fix | PASS |
 | Member name ambiguous across two structs with *different* array sizes (`StructA.buf[16]` vs `StructB.buf[512]`) | resolves via base-identifier's own type (16), never conflates with 512 | PASS |
+| Offset shape `obj->key + off` | capacity=256, `offset_shape=True`, `offset_expr="off"`, still no bound fact | PASS |
+| Offset shape `&obj->key[off]` | capacity=256, `offset_shape=True`, `offset_expr="off"` | PASS |
+| Bare field access (no offset) | `offset_shape` explicitly `False`, not just absent | PASS |
+| Union member (`UnionKeyInfo.key[256]` flagged via `aggregate_kinds.tsv`) | no capacity fabricated; `UNION_MEMBER_FAIL_CLOSED` | PASS |
+| Union member reached via an offset shape (`u.key + off`) | still no capacity fabricated (fail-closed holds through both paths) | PASS |
 
 Run: `python3 build_and_check.py` from this directory (pure Python, no
 Joern/Java needed for this part -- only the CPP_MEMORY_R02 cross-check
 above needs `javac`/`java`, both present in this environment and confirmed
 passing).
+
+## Round 2: struct-member offsets + fail-closed unions
+
+Two more real gaps found and fixed, same session, same "abstain rather than
+guess" posture:
+
+1. **`p->buffer + n` and `&p->buffer[n]` as a copy destination were
+   completely invisible.** `memory_targets()`/`value_ref()` only resolve a
+   bare field access; an offset on top of one falls through to
+   `{'kind':'CALL', ...}`, which the destcapacity code had no handler for --
+   so the write silently produced *zero* facts, not a flagged-but-uncertain
+   one. Added `_offset_field_capacity()`, wired as a fallback in the same
+   operand-role loop, recognizing exactly `<operator>.addition(fieldAccess,
+   offset)` and `<operator>.addressOf(indexAccess(fieldAccess, offset))`.
+   Matches `oob_copy_length_verdict.py`'s existing posture for *local*
+   arrays: emits the member's **full** declared capacity tagged
+   `offset_shape: true, offset_expr: "<the offset text>"` -- an open
+   candidate, never a computed "capacity minus offset" bound (offset may be
+   an arbitrary runtime expression). `.bound.json` is deliberately never
+   populated for an offset shape either, for the same reason.
+
+2. **Union members had no fail-closed handling because the raw fact schema
+   had no way to say "this is a union" at all.** `export_c_cpp_facts_v03.sc`
+   never exported an aggregate kind (struct vs union vs class), and no
+   consumer checked for one. Added a new, fully **optional** raw fact,
+   `aggregate_kinds.tsv` (`type_decl_id -> 'UNION'|'STRUCT'|'CLASS'`) --
+   absent from every pre-existing fixture and therefore behaviorally a
+   no-op for all of them (verified: `CPP_MEMORY_R02` 15/15 and
+   `CPP_DYNAMIC_NO_HARDEN` still pass unchanged). When a member's owning
+   `type_decl_id` is flagged `UNION`, capacity resolution now unconditionally
+   abstains for that member -- through *both* the bare-field-access path and
+   the new offset-shape path -- tracked as `UNION_MEMBER_FAIL_CLOSED`.
+   Fail-closed here means: never claim a capacity for a union member, even
+   though a union member's own declared array size is technically real
+   backing-store capacity for an isolated write -- this scanner makes no
+   claim about which member is the currently-live one, and a bare capacity
+   fact could be read as implying more than that.
+
+**Important asymmetry, stated plainly:** the *consumption* side (the
+normalizer's fail-closed check, given `aggregate_kinds.tsv` says UNION) is
+fully tested above. The *production* side (the `.sc` script's guess that a
+union's `TypeDecl.code` literally starts with the text `"union"`) is
+**unverified** -- there is no Joern install in this environment to confirm
+that's actually how c2cpg represents a union's `code` field. Said directly
+in the `.sc` file's own comment: treat every `UNION` classification it would
+produce as a hypothesis until checked against a real CPG, not as validated
+behavior. If it guesses wrong in either direction, the *safe* failure mode
+holds either way: guessing "not a union" when it is one reproduces exactly
+today's pre-fail-closed behavior (a real gap, but not a new one this session
+introduced); guessing "union" when it isn't one only costs a missed
+candidate, never a false capacity claim.
+
+## Remaining, explicitly open (unchanged from round 1 unless noted)
+
+- Casts and shadowed declarations on the struct-member path -- still not
+  exercised by a fixture.
+- The `.sc` script's union-detection heuristic -- unverified, as above.
+- Full-repository parsing with real headers/macros, running the ~40
+  unrelated gates elsewhere in the tree, and a new held-out corpus --
+  still out of scope for this gate, as in round 1.
 
 ## Scope and limitations -- explicitly NOT done this session
 
@@ -126,19 +191,8 @@ project's own abstain-by-default convention:
 - **No new held-out corpus evaluation.** No such corpus exists in this
   environment to evaluate against; building one is a separate, large task
   the original request also flagged as a later step, not this one.
-- **Offset handling (`p->buffer + n`, `&p->buffer[n]`) for struct members**
-  -- NOT implemented. The destcapacity computation only recognizes a bare
-  field access as the WRITE_DEST/READ_SRC operand; an offset expression on
-  top of one falls outside the `_member_name_of`/operand-role matching
-  entirely and silently abstains (verified by code reading, not by a
-  fixture -- a fixture for this would be the natural next addition).
-- **Union members** -- not exercised. `members.tsv` doesn't currently
-  distinguish a union's members from a struct's; the capacity model as
-  written would very likely treat a union member exactly like a struct
-  member (same fixed-size array capacity), which is UNSOUND for a union
-  (the "capacity" of an array member sharing storage with other members
-  says nothing about what's actually live at the write) -- flagged as a
-  real, unaddressed soundness gap, not implemented or fixed this session.
+- **Offset handling and union fail-closed handling** -- now implemented,
+  see "Round 2" above.
 - **Casts and shadowed declarations on the struct-member path** -- not
   exercised by a fixture. The general cast pass-through in `value_ref()`
   covers casts on ordinary values; whether it composes correctly with the
