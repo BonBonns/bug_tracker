@@ -12,13 +12,13 @@
     "offset_and_unit_handling": "PASS (frozen v2.compare: literal-byte vs byte-array capacity; symbolic length -> relationship_unresolved with capacity bound)",
     "conflict_ambiguity_controls": "PASS (two sinks writing dest param with different lengths -> abstain)",
     "unchanged_existing_verdicts": "PASS (additive/disjoint from frozen v1 ops; 0 ops on bare direct-memcpy; cap1 harness ALL PASS; ANALYSIS_RECORD_R01 53/53 unaffected)",
-    "magma_dev_site_recovery": "PASS on REAL delegation body. TIF013 _TIFFmemcpy at _TIFFmemcpy(buffer[512], pImage, decodedSize): frozen scanner 0/1 -> cap2 recognizes, binds capacity 512, routes relationship_unresolved (decodedSize symbolic), no false capacity claim. (SSL004 ascii2ebcdic is the counted-loop model's dev-site, not this one.)",
+    "magma_dev_site_recovery": "MODEL-LEVEL recovery on an EXTRACTED real-source development body (NOT full-pipeline/site recovery). TIF013 _TIFFmemcpy: the real one-line delegation wrapper body was placed in a minimal translation unit with a REDUCED caller (buffer[512]); the complete libtiff target was NOT built and the original tif_jbig.c site did NOT pass through c2cpg (JBIG unavailable). On that extracted body the delegation model recognizes the wrapper, binds capacity 512, routes relationship_unresolved (decodedSize symbolic), no false capacity claim. Full-pipeline/site recovery is deferred until the complete target builds and the original site passes through c2cpg. (SSL004 ascii2ebcdic is the counted-loop model's dev-site.)",
     "held_out_corpus_measurement": "PENDING BY DESIGN. Pooled held-out corpus frozen (258 sites, 42 families). No held-out scanner measurement until the capabilities for the confirmatory run are implemented and the definitive scanner commit is fixed under the frozen 4.0.608 frontend. cap2 tuned only on controls + dev-site; no pooled yield inspected.",
     "toolchain_validity": "PASS. Reproduced under frozen joern-c2cpg v4.0.608 (archive sha256 97989843...), which reproduces the archived cve-2016-1950/vuln producer output exactly (TOOLCHAIN_FROZEN.md)."
   },
   "controls": {
     "synthetic": "cap_controls/cap2/controls.c",
-    "magma_dev_real_body": "cap_controls/cap2_magma/tif013.c",
-    "harness": "cap_wrapper_summary_test.py (16 checks + no-regression, ALL PASS under 4.0.608)"
+    "magma_extracted_dev_body": "cap_controls/cap2_magma/tif013.c (real _TIFFmemcpy body + reduced caller; extracted, not full-build)",
+    "harness": "cap_wrapper_summary_test.py (ALL PASS under 4.0.608)"
   }
 }

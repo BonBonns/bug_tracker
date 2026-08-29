@@ -104,6 +104,7 @@ def summarize_callee(f, calls_by_fn):
     body = calls_by_fn.get(f["id"], [])
 
     cands = set()   # (dest_param_name, length_param_name)
+    sink_line = {}  # (dest_param_name) -> source line of the sink call inside the callee
 
     # delegation to a library copy sink whose dest resolves (through aliasing) to a
     # pointer param and whose length is a length param
@@ -119,15 +120,20 @@ def summarize_callee(f, calls_by_fn):
         wcode = (args[wi].get("code") or "").strip()
         if dparam in ptr_params and wcode in len_params:
             cands.add((dparam, wcode))
+            sink_line[dparam] = c.get("line")
 
     dests = {c[0] for c in cands}
     lens = {c[1] for c in cands}
     if len(dests) != 1 or len(lens) != 1:
         return None    # no delegation, or conflicting/ambiguous -> abstain, no summary
     dest, length = next(iter(dests)), next(iter(lens))
+    # underlying_write = the PHYSICAL write site inside the callee body (the sink call's
+    # file:line + the dest parameter it writes through) -- the key for cap2/cap3 dedup.
     return {"callee": f["name"], "callee_id": f["id"],
             "dest_param_index": ptr_params[dest], "dest_param": dest,
             "length_param_index": len_params[length], "length_param": length,
+            "underlying_write": {"file": f.get("file"), "line": sink_line.get(dest),
+                                 "dest_param": dest},
             "form": "delegation"}
 
 
@@ -164,7 +170,8 @@ def analyze_wrapper_calls(cpp):
         rec = {"function": fns.get(fn_id, {}).get("name"), "line": c.get("line"),
                "capability": "wrapper_summary", "callee": c.get("name"),
                "summary_form": s["form"], "dest": dest_code, "length": len_code,
-               "sink": c.get("name")}
+               "sink": c.get("name"), "attribution": "call_site_summary",
+               "underlying_write": s.get("underlying_write")}
         # capacity of the actual destination: independently-established stack array only
         base = _root_ident(dest_code)
         decls = [x for x in locals_idx.get((fn_id, base), [])

@@ -80,12 +80,13 @@ def main():
     checks.append(("SEPARATION: cw/cw_signed are NOT transparent-wrapper summaries",
                    "cw" not in wsumm and "cw_signed" not in wsumm))
 
-    # Magma SSL004 dev-site recovery on the REAL ascii2ebcdic loop body.
+    # Magma SSL004: MODEL-LEVEL recovery on an EXTRACTED real ascii2ebcdic body
+    # (reconstructed caller; complete target NOT built, original site NOT through c2cpg).
     mcpp = scan(os.path.join(HERE, "cap_controls", "cap2_magma"))
     mops, msumm = C.analyze_counted_writers(mcpp)
     m_by = {o["callee"]: o for o in mops}
     checks += [
-        ("MAGMA SSL004 ascii2ebcdic summarized as counted writer (real body)",
+        ("MAGMA SSL004 ascii2ebcdic summarized as counted writer (extracted real body)",
          msumm.get("ascii2ebcdic", {}).get("form") == "counted_loop_writer"
          and msumm["ascii2ebcdic"]["advance_per_iteration"] == 1),
         ("MAGMA SSL004 call recognized, cap 1024 bound, correct abstention (unsigned count)",

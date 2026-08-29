@@ -118,6 +118,7 @@ def summarize_counted_writer(f, calls_by_fn):
     # write goes through the SAME token that is post/pre-incremented in place.
     walk_dests = set()
     advance_counts = {}   # dest_param -> number of increments of the walked alias
+    write_line = {}       # dest_param -> source line of the physical loop write in the callee
     # first, tally increments per identifier
     inc_by_ident = {}
     for c in body:
@@ -144,6 +145,7 @@ def summarize_counted_writer(f, calls_by_fn):
         if dp in ptr_params:
             walk_dests.add(dp)
             advance_counts[dp] = max(advance_counts.get(dp, 0), adv)
+            write_line[dp] = c.get("line")
 
     if len(counters) != 1 or len(walk_dests) != 1:
         return None       # zero/many counters or dests -> ambiguous, abstain
@@ -154,11 +156,15 @@ def summarize_counted_writer(f, calls_by_fn):
 
     # `count` is a sound UPPER bound on writes: early exits only write fewer, and the
     # advance==1 gate guarantees no path writes more than one element per iteration.
+    # underlying_write = the PHYSICAL write site inside the callee body (file:line + the
+    # dest parameter it writes through) -- the key for cap2/cap3 write-site dedup.
     return {"callee": f["name"], "callee_id": f["id"],
             "dest_param_index": ptr_params[dest]["index"], "dest_param": dest,
             "counter_param_index": len_params[L]["index"], "counter_param": L,
             "counter_signed": _is_signed(len_params[L]),
             "advance_per_iteration": 1, "extent_is_upper_bound": True,
+            "underlying_write": {"file": f.get("file"), "line": write_line.get(dest),
+                                 "dest_param": dest},
             "form": "counted_loop_writer"}
 
 
@@ -215,7 +221,9 @@ def analyze_counted_writers(cpp):
         rec = {"function": fns.get(fn_id, {}).get("name"), "line": c.get("line"),
                "capability": "counted_loop_writer", "callee": c.get("name"),
                "dest": dest_code, "count": cnt_code, "counter_signed": s["counter_signed"],
-               "extent_is_upper_bound": s["extent_is_upper_bound"], "sink": c.get("name")}
+               "extent_is_upper_bound": s["extent_is_upper_bound"], "sink": c.get("name"),
+               "attribution": "call_site_summary",
+               "underlying_write": s.get("underlying_write")}
         base = _root_ident(dest_code)
         decls = [x for x in locals_idx.get((fn_id, base), [])
                  if "[" in (x.get("type_full_name") or x.get("code") or "")]

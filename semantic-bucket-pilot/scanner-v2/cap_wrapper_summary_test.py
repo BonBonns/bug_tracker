@@ -77,8 +77,8 @@ def main():
     checks.append(("ADDITIVE: cap2 call sites disjoint from frozen scanner ops",
                    frozen_lines.isdisjoint(cap2_lines)))
 
-    # Magma dev-site recovery for the DELEGATION form on a REAL wrapper body: TIF013
-    # _TIFFmemcpy. Frozen scanner recognized 0/1; cap2 recognizes and routes with correct
+    # Magma dev-site: MODEL-LEVEL recovery on an EXTRACTED real _TIFFmemcpy body (reduced
+    # caller; complete libtiff target NOT built, original site NOT through c2cpg). cap2
     # abstention (symbolic length), no false capacity claim. (SSL004 ascii2ebcdic is the
     # counted-loop model's dev-site, asserted in cap_counted_loop_writer_test.py -- it
     # must NOT be a wrapper summary here.)
@@ -86,7 +86,7 @@ def main():
     mops, msumm = C.analyze_wrapper_calls(mcpp)
     m_by = {o["callee"]: o for o in mops}
     checks += [
-        ("MAGMA TIF013 _TIFFmemcpy summarized (real delegation body)",
+        ("MAGMA TIF013 _TIFFmemcpy summarized (extracted real delegation body)",
          msumm.get("_TIFFmemcpy", {}).get("form") == "delegation"),
         ("MAGMA TIF013 call recognized, cap 512 bound, correct abstention",
          m_by.get("_TIFFmemcpy", {}).get("dest_capacity") == 512

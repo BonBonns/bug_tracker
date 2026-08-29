@@ -20,11 +20,11 @@
     "signed_symbolic": "relationship_unresolved / count_sign_unresolved, no false safe.",
     "dest_capacity_source": "independently-established bare local fixed array only; else additional_evidence_required."
   },
-  "magma_dev_site_recovery": "PASS on the REAL SSL004 ascii2ebcdic body (OpenSSL crypto/ebcdic.c @ 3bd5319, loop form) at its real call site ascii2ebcdic(ebcdic_buf[1024], q, num): frozen scanner recognized 0/1 -> counted-writer model recognizes (advance 1, unsigned size_t counter), binds capacity 1024, routes relationship_unresolved on the symbolic num with no false capacity claim.",
+  "magma_dev_site_recovery": "MODEL-LEVEL recovery on an EXTRACTED real-source development body (NOT full-pipeline/site recovery). SSL004: the REAL ascii2ebcdic body (OpenSSL crypto/ebcdic.c @ 3bd5319, verbatim) was placed in a minimal translation unit with a caller reconstructed from the real x509_obj.c structure (ebcdic_buf[1024], num clamp); the complete OpenSSL target was NOT built and the original site did NOT pass through c2cpg. On that extracted body the counted-writer model recognizes the loop (advance 1, unsigned size_t counter), binds capacity 1024, routes relationship_unresolved on the symbolic num, no false capacity claim. Full-pipeline/site recovery is deferred until the complete target builds and the original site passes through c2cpg.",
   "separation_verified": "cw/cw_signed are NOT transparent-wrapper summaries; _TIFFmemcpy delegation is NOT a counted-writer summary; ascii2ebcdic is a counted writer, NOT a wrapper summary; asserted in both harnesses.",
   "controls": {
     "synthetic": "cap_controls/cap_loop/controls.c",
-    "magma_dev_real_body": "cap_controls/cap2_magma/ssl004.c",
-    "harness": "cap_counted_loop_writer_test.py (18 checks + no-regression, ALL PASS under 4.0.608)"
+    "magma_extracted_dev_body": "cap_controls/cap2_magma/ssl004.c (real ascii2ebcdic body + reconstructed caller; extracted, not full-build)",
+    "harness": "cap_counted_loop_writer_test.py (ALL PASS under 4.0.608)"
   }
 }

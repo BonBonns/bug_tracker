@@ -29,6 +29,9 @@ SUBGATES = [
     ("counted-writer/loop model (separate impl) + controls + Magma dev-site",
      [sys.executable, os.path.join(HERE, "cap_counted_loop_writer_test.py")],
      r"^ALL PASS$"),
+    ("cap2/cap3 boundary overlap control (one write != two operations)",
+     [sys.executable, os.path.join(HERE, "cap_overlap_test.py")],
+     r"^ALL PASS$"),
     ("frozen outputs unchanged outside cap2's domain (analysis-record-r01)",
      [sys.executable, os.path.join(REPO, "tchecker-research-complete",
       "portable-engine-full-review-package", "tests", "gates",
@@ -58,9 +61,11 @@ def main():
     # The gate script itself is excluded: it legitimately names the forbidden tokens to
     # enforce this very check.
     srcs = ["cap_wrapper_summary.py", "cap_counted_loop_writer.py",
-            "cap_wrapper_summary_test.py", "cap_counted_loop_writer_test.py",
+            "cap_write_site_dedup.py", "cap_wrapper_summary_test.py",
+            "cap_counted_loop_writer_test.py", "cap_overlap_test.py",
             os.path.join("cap_controls", "cap2", "controls.c"),
-            os.path.join("cap_controls", "cap_loop", "controls.c")]
+            os.path.join("cap_controls", "cap_loop", "controls.c"),
+            os.path.join("cap_controls", "overlap", "overlap.c")]
     leak = False
     for s in srcs:
         txt = open(os.path.join(HERE, s)).read()
