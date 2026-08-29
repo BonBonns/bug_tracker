@@ -118,6 +118,12 @@ REASON_DEFINITIONS = {
         "bucket": None, "unresolved_property": None,
         "route": "lifetime_analysis", "llm_eligible": False,
         "analysis_status": "rerouted", "candidate_class": "lifetime_use_after_invalidation"},
+    "write_exceeds_stack_capacity": {
+        "condition": "a literal write length/offset provably exceeds a stack/object "
+                     "fixed extent -- a distinguished proven-oversized finding, never "
+                     "a hard vulnerable verdict (flag, never assume safe)",
+        "bucket": "relationship_unresolved", "unresolved_property": "write_length_within_destination_capacity",
+        "route": "range_arithmetic_review", "llm_eligible": False},
     "delegated_to_stack_capacity_v2": {
         "condition": "destination resolves (via CPG reference-target) to a fixed "
                      "stack/object extent -- an array or a scalar; V1 has no capacity "
@@ -139,6 +145,7 @@ PRECEDENCE = (
     "free_may_reach_sink",
     "allocation_overflow_relation_unresolved",
     "capacity_relation_not_established",
+    "write_exceeds_stack_capacity",
     "write_count_bound_not_established",
     "required_evidence_absent",
 )

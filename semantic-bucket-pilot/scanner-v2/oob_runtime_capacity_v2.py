@@ -53,6 +53,7 @@ TOOLS = os.path.abspath(os.path.join(
     HERE, "..", "..", "tchecker-research-complete",
     "portable-engine-full-review-package", "tools"))
 sys.path.insert(0, TOOLS)
+import analysis_record as AR   # single source of truth for reason->route/bucket/llm_eligible
 
 BYTE_TYPES = {"char", "unsigned char", "signed char", "uint8_t", "int8_t",
               "PRUint8", "PRInt8", "JOCTET", "CK_BYTE"}
@@ -212,7 +213,22 @@ def _finalize_disposition(r2, disp, route, prop):
     MEAN in terms of analysis_status/reason_code -- shared by the bare-destination
     stack-array path and the delegated (non-bare) stack/object path, so the two
     populations can never drift into inconsistent output shapes for the same
-    disposition."""
+    disposition.
+
+    `recommended_route`/`llm_eligible` are derived from `analysis_record`'s
+    REGISTERED route for the chosen reason_code -- the schema's own source of
+    truth -- NOT copied verbatim from compare()'s returned `route`. compare()
+    can return a finer-grained route for a specific sub-shape (e.g.
+    "range_arithmetic_review" for a literal-byte-count-vs-non-byte-element
+    mismatch) than the single reason_code this function collapses everything
+    into actually has registered ("semantic_relationship_review" for
+    capacity_relation_not_established) -- copying it verbatim produced records
+    that failed `analysis_record.validate_record()` (caught by
+    dev_controls/emitgap/test.py's schema check, pre-existing in the frozen V2
+    code, not introduced by the delegation change). compare()'s own route/note
+    is preserved in `_v2_evidence` for diagnostic purposes -- never lost, just
+    not exposed via the schema-controlled field when it would violate the
+    schema's own invariant."""
     r2.pop("candidate_class", None)   # only meaningful on the pre-adjudication rerouted record
     if disp == "deterministic_complete":
         for k in ("reason_code", "primary_reason_code", "all_reason_codes", "uncertainty_bucket",
@@ -227,23 +243,25 @@ def _finalize_disposition(r2, disp, route, prop):
         r2["established_property"] = "write_length_within_destination_capacity"
         r2["unaddressed_properties"] = ["source_length_sufficiency", "pointer_validity", "lifetime"]
     elif disp == "relationship_unresolved":
+        rc = "capacity_relation_not_established"
         r2["analysis_status"] = "open_candidate"
-        r2["reason_code"] = r2["primary_reason_code"] = "capacity_relation_not_established"
-        r2["all_reason_codes"] = ["capacity_relation_not_established"]
-        r2["uncertainty_bucket"] = "relationship_unresolved"
-        r2["recommended_route"] = route
+        r2["reason_code"] = r2["primary_reason_code"] = rc
+        r2["all_reason_codes"] = [rc]
+        r2["uncertainty_bucket"] = AR.bucket_for_reason(rc)
+        r2["recommended_route"] = AR.route_for_reason(rc)
         r2["unresolved_property"] = prop
-        r2["llm_eligible"] = (route == "semantic_relationship_review")
+        r2["llm_eligible"] = AR.llm_eligible_for_reason(rc)
     elif disp == "proven_oversized":
+        rc = "write_exceeds_stack_capacity"
         r2["analysis_status"] = "open_candidate"
-        r2["reason_code"] = r2["primary_reason_code"] = "write_exceeds_stack_capacity"
-        r2["all_reason_codes"] = ["write_exceeds_stack_capacity"]
-        r2["uncertainty_bucket"] = "relationship_unresolved"
-        r2["recommended_route"] = route
-        r2["llm_eligible"] = False
+        r2["reason_code"] = r2["primary_reason_code"] = rc
+        r2["all_reason_codes"] = [rc]
+        r2["uncertainty_bucket"] = AR.bucket_for_reason(rc)
+        r2["recommended_route"] = AR.route_for_reason(rc)
+        r2["llm_eligible"] = AR.llm_eligible_for_reason(rc)
         r2["proven_oversized"] = True
     r2["_v2_disposition"] = disp
-    r2["_v2_route"] = route
+    r2["_v2_route"] = route   # compare()'s own raw route, diagnostic only (see docstring)
     return r2
 
 
@@ -263,13 +281,22 @@ def _adjudicate_delegated(r):
     same posture as cap_addr_indexed.py's own negative-offset abstention). An
     offset at or past the object's own extent is a distinguished proven-oversized
     finding -- the destination pointer itself is out of bounds, before the write
-    width is even considered."""
+    width is even considered.
+
+    V2 is CANONICAL in the returned record; V1's original rerouted handoff is
+    preserved unconditionally as `v1_provenance` (never overwritten by any branch
+    below), so a consumer can always recover exactly what V1 discovered
+    independent of what V2 concluded from it -- the same canonical-record /
+    preserved-provenance shape the confirmatory branch's own V1->V2 correction
+    already established for the bare-destination case (evutil_aggregation_audit)."""
     facts = (r.get("established_facts") or [{}])[0]
     elem_type = facts.get("element_type")
     elem_count = facts.get("element_count")
     off = facts.get("offset_elements")
     width = facts.get("width_expr")
     r2 = dict(r)
+    r2["v1_provenance"] = {"status": "rerouted", "reason": "delegated_to_stack_capacity_v2",
+                           "established_facts": facts, "destination_form": r.get("destination_form")}
     r2["_v2_evidence"] = {"provenance": "stack_or_scalar_object", "element_type": elem_type,
                           "element_count": elem_count, "offset_elements": off, "width": width}
 
@@ -285,30 +312,29 @@ def _adjudicate_delegated(r):
                                      "write_length_within_capacity")
 
     if off < 0:
+        rc = "destination_identity_ambiguous"
         r2.pop("candidate_class", None)
         r2["analysis_status"] = "abstained"
-        r2.update(reason_code="destination_identity_ambiguous",
-                  primary_reason_code="destination_identity_ambiguous",
-                  all_reason_codes=["destination_identity_ambiguous"],
-                  uncertainty_bucket="identity_ambiguous",
-                  recommended_route="additional_evidence_required",
-                  unresolved_property="destination_object_identity", llm_eligible=False)
+        r2.update(reason_code=rc, primary_reason_code=rc, all_reason_codes=[rc],
+                  uncertainty_bucket=AR.bucket_for_reason(rc),
+                  recommended_route=AR.route_for_reason(rc),
+                  unresolved_property="destination_object_identity",
+                  llm_eligible=AR.llm_eligible_for_reason(rc))
         r2["_v2_disposition"] = "identity_ambiguous"
-        r2["_v2_route"] = "additional_evidence_required"
+        r2["_v2_route"] = AR.route_for_reason(rc)
         return r2
 
     remaining = elem_count - off
     if remaining < 0:
+        rc = "write_exceeds_stack_capacity"
         r2.pop("candidate_class", None)
         r2["analysis_status"] = "open_candidate"
-        r2.update(reason_code="write_exceeds_stack_capacity",
-                  primary_reason_code="write_exceeds_stack_capacity",
-                  all_reason_codes=["write_exceeds_stack_capacity"],
-                  uncertainty_bucket="relationship_unresolved",
-                  recommended_route="range_arithmetic_review", llm_eligible=False,
-                  proven_oversized=True)
+        r2.update(reason_code=rc, primary_reason_code=rc, all_reason_codes=[rc],
+                  uncertainty_bucket=AR.bucket_for_reason(rc),
+                  recommended_route=AR.route_for_reason(rc),
+                  llm_eligible=AR.llm_eligible_for_reason(rc), proven_oversized=True)
         r2["_v2_disposition"] = "proven_oversized"
-        r2["_v2_route"] = "range_arithmetic_review"
+        r2["_v2_route"] = AR.route_for_reason(rc)
         return r2
 
     disp, route, prop, note = compare({"element_count": remaining, "element_type": elem_type}, width)

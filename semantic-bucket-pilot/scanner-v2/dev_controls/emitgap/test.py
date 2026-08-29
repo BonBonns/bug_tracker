@@ -28,6 +28,7 @@ TOOLS = os.path.join(SV, "..", "..", "tchecker-research-complete",
                      "portable-engine-full-review-package", "tools")
 sys.path.insert(0, TOOLS)
 sys.path.insert(0, SV)
+import analysis_record as AR
 
 
 def _L(n):
@@ -174,6 +175,31 @@ ok = ok and shadow_v2_ok
 print(("PASS " if shadow_v2_ok else "FAIL ")
       + f"V2 {'f_shadow':20} statuses={shadow_v2_statuses} "
         f"(expect [deterministic_complete, open_candidate] -- inner fits, outer exceeds)")
+
+# --- SCHEMA v2 validation: every V1 rerouted record AND every V2-adjudicated
+# record must pass analysis_record.validate_record() (SCHEMA_VERSION now "2").
+# A record this driver's own logic produces that DOESN'T validate is exactly the
+# "silent" failure mode the schema bump is meant to rule out -- assert it here,
+# not just at the frozen ANALYSIS_RECORD_R01 gate (which validates cursor/interproc
+# records, not these two new code paths).
+schema_fail = []
+for r in recs_all:
+    try:
+        AR.validate_record(r)
+    except Exception as e:
+        schema_fail.append((r.get("function"), r.get("line"), "V1", str(e)))
+for r in v2_ops:
+    try:
+        AR.validate_record(r)
+    except Exception as e:
+        schema_fail.append((r.get("function"), r.get("line"), "V2", str(e)))
+schema_ok = not schema_fail
+ok = ok and schema_ok
+print(("PASS " if schema_ok else "FAIL ")
+      + f"{'schema v2 (validate_record on every emitted record)':45} "
+        f"{len(recs_all) + len(v2_ops)} records checked, {len(schema_fail)} failed")
+for fn, line, stage, err in schema_fail[:10]:
+    print(f"   {stage} {fn}:{line}  {err}")
 
 print("\nALL PASS" if ok else "\nFAILURES PRESENT")
 sys.exit(0 if ok else 1)
