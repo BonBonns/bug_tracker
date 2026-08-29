@@ -1,60 +1,36 @@
 {
   "FROZEN": true,
-  "confirmatory_protocol": "Run ALL frozen capabilities (1-4) on these 44 sites exactly ONCE, scoring exact-site recognition + evidence + route against the external is_vulnerable/statement labels. No capability may be designed or tuned using any result from this corpus.",
   "counts": {
-    "by_cwe": {
-      "CWE-120": 8,
-      "CWE-122": 5,
-      "CWE-787": 31
+    "by_cwe_mapped": {
+      "CWE-120": 1,
+      "CWE-787": 2
     },
-    "by_project": {
-      "ImageMagick": 1,
-      "ImageMagick6": 1,
-      "LibRaw": 1,
-      "aircrack-ng": 1,
-      "clickhouse-driver": 1,
-      "core": 1,
-      "curl": 1,
-      "ettercap": 1,
-      "gpac": 4,
-      "hhvm": 1,
-      "htmldoc": 1,
-      "jhead": 1,
-      "jq": 1,
-      "libwebp": 1,
-      "linux": 7,
-      "lldpd": 1,
-      "mujs": 1,
-      "openexr-viewer": 1,
-      "openjpeg": 1,
-      "pdfresurrect": 1,
-      "pjproject": 1,
-      "podofo": 1,
-      "qtsvg": 1,
-      "sgxwallet": 1,
-      "sleuthkit": 1,
-      "tensorflow": 1,
-      "tmux": 1,
-      "uwsgi": 1,
-      "vim": 6,
-      "wolfssl": 1
+    "family_by_vuln_count": {
+      "fam_42418a7cbf67": 1,
+      "fam_d3b5215e864d": 1
     },
-    "included_sites": 44,
-    "non_vulnerable": 31,
-    "vulnerable": 13
+    "mapped_non_vulnerable": 1,
+    "mapped_total": 3,
+    "mapped_vulnerable": 2,
+    "mapping": {
+      "ambiguous": 16,
+      "mapped": 3,
+      "no_write_found": 25
+    },
+    "sites_after_filters": 44,
+    "vulnerable_families": 2
   },
   "exclusions": {
     "ambiguous_cwe_119": 30,
-    "duplicate_site": 0,
-    "magma_overlap_project": 0,
     "other_cwe_not_write": 227
   },
-  "family_definition": "Frozen by RULE, applied ONCE at the confirmatory measurement (not computed now, to avoid inspecting yields): cluster included sites by the destination-write PROOF OBLIGATION / representation shape (the same obligation-level unit used for Juliet and Magma), reported separately from external CWE category. Coarse external family = CWE write-category (787 OOB-write / 122 heap-overflow / 120 buffer-copy-overflow).",
-  "held_out_rule": "Capability yields are NOT inspected on this corpus. Capabilities 2-4 are developed using ONLY Magma + synthetic controls. All frozen capabilities are run on this corpus ONCE as the confirmatory measurement.",
-  "inclusion_rule": "external labels + destination-capacity WRITE property ONLY (NOT any TChecker outcome): CWE in {787 OOB-write, 122 heap-overflow, 120 buffer-copy-overflow}; exclude CWE-119 (read-or-write ambiguous); remove Magma-overlap projects (php-src/openssl/libsndfile/... ); dedup by (project,commit,filepath,func_name).",
+  "full_dataset_status": "HuggingFace arag0rn/SecVulEval is proxy-BLOCKED (403) in this environment; only random_subset.json is reachable. This freeze is the reachable population; expansion needs an unblocked fetch.",
+  "mapping_yield_finding": "Deterministic unique write-site mapping is LOW-YIELD on SecVulEval by design of the dataset, not a script bug: func_bodies are full (median 126 lines), labeled statements are locatable in 44/44, but labels are FUNCTION-LEVEL fix statements (often a guard, not the write) and functions carry many writes (up to 27), so within +-3 lines of the label multiple writes are present -> ambiguous, or none -> no_write_found. 44 sites -> 3 mapped (2 vulnerable). This label-granularity limitation would persist at full scale (larger absolute counts, similar mapped fraction).",
   "model_calls": 0,
   "pinned_commit": "d937c2453939a53d5c72c09bf93a06c39d8156c9",
   "random_subset_sha256": "5e7f8a7fea9a8a017e0fbf3f945631c8cb6439eb51d6c90aa7ee68fcdb7d87bc",
+  "rule_1_write_site_mapping": "deterministic text-only mapping of labeled statement -> a UNIQUE destination write within +-3 source lines (or the sole write if no anchor); mapped/ambiguous/no_write_found; only mapped sites score.",
+  "rule_2_family_assignment": "deterministic family_id = hash(write_kind | dest_shape | length_shape) from source structure only; frozen now, never recomputed after scanner outputs are seen.",
   "sites": [
     {
       "commit_id": "a868bacb46e3c900530bed47a1c6f85b0fbe701c",
@@ -64,18 +40,13 @@
       "func_body_sha256": "a25e509c74f16cba705d67c75b54a2adcf0e21e7ecd600036782931c9fcde0a2",
       "func_name": "input_csi_dispatch_sgr_colon",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          1979,
-          "\t\t} else"
-        ]
-      ],
       "labeled_statements": [
         [
           1979,
           "else"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "tmux",
       "site_id": "70d25e73d8e88cc4"
     },
@@ -87,18 +58,13 @@
       "func_body_sha256": "c7441d4da50514d2a9b24d701b8fc009ca18c75ee99d41ddfb8b1b34e254ce7d",
       "func_name": "jvp_literal_number_literal",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          638,
-          "    int len = jvp_dec_number_ptr(n)->digits + 14;"
-        ]
-      ],
       "labeled_statements": [
         [
           638,
           "int len = jvp_dec_number_ptr(n)->digits + 14;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "jq",
       "site_id": "a2faef84e20a68f6"
     },
@@ -110,18 +76,13 @@
       "func_body_sha256": "d11d55783918f688374cbc09e02986fc82cc313ea6ff6b47e1e20e3954343459",
       "func_name": "ReadJpegSections",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          172,
-          "        Data = (uchar *)malloc(itemlen);"
-        ]
-      ],
       "labeled_statements": [
         [
           172,
           "Data = (uchar *)malloc(itemlen);"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "jhead",
       "site_id": "7521f17dae966f80"
     },
@@ -133,18 +94,13 @@
       "func_body_sha256": "51bb29eae75b91179145f99ac16042e5290f0e955cc62f4d31803a7b77f662e3",
       "func_name": "LibRaw_file_datastream::gets",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          290,
-          "  if(sz<1) return NULL;"
-        ]
-      ],
       "labeled_statements": [
         [
           290,
           "if(sz<1)"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "LibRaw",
       "site_id": "647dc9ecce9a4f4f"
     },
@@ -156,28 +112,6 @@
       "func_body_sha256": "6b6c9674a813bfb164fe2b7df563ebc063edfed07fa52a06adc7d2c5c5800294",
       "func_name": "hevc_parse_vps_extension",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          7478,
-          "\tif (vps->num_output_layer_sets > MAX_LHVC_LAYERS) {"
-        ],
-        [
-          7479,
-          "\t\tGF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Wrong number of output layer sets in VPS %d, max %d supported\\n\", vps->num_output_layer_sets, MAX_LHVC_LAYERS));"
-        ],
-        [
-          7480,
-          "\t\tvps->num_output_layer_sets = 1;"
-        ],
-        [
-          7481,
-          "\t\treturn GF_FALSE;"
-        ],
-        [
-          7482,
-          "\t}"
-        ]
-      ],
       "labeled_statements": [
         [
           7478,
@@ -200,6 +134,7 @@
           "\t}\n"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "gpac",
       "site_id": "ecb9e8dba33927e2"
     },
@@ -207,40 +142,12 @@
       "commit_id": "71fe87878c9cbc3db429f5e5c70f28e4b3d96e3b",
       "cve": "CVE-2022-0137",
       "cwe": "CWE-787",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
       "filepath": "htmldoc/image.cxx",
       "func_body_sha256": "1b01bc3880a94da449598cac7343e2d6e4e226288f921d1953c537fefa94371d",
       "func_name": "image_load_gif",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          1346,
-          "          img->width  = (buf[5] << 8) | buf[4];"
-        ],
-        [
-          1347,
-          "          img->height = (buf[7] << 8) | buf[6];"
-        ],
-        [
-          1348,
-          "          img->depth  = gray ? 1 : 3;"
-        ],
-        [
-          1349,
-          ""
-        ],
-        [
-          1350,
-          "\t  if (img->width <= 0 || img->width > 32767 || img->height <= 0 || img->height > 32767)"
-        ],
-        [
-          1351,
-          "\t    return (-1);"
-        ],
-        [
-          1352,
-          ""
-        ]
-      ],
       "labeled_statements": [
         [
           1304,
@@ -267,8 +174,12 @@
           "return (-1);"
         ]
       ],
+      "mapping_status": "mapped",
       "project": "htmldoc",
-      "site_id": "8701a92e4efbf8e7"
+      "site_id": "8701a92e4efbf8e7",
+      "write_dest": "buf",
+      "write_kind": "index_write",
+      "write_line": "buf[0] = (uchar)getc(fp);"
     },
     {
       "commit_id": "ca72d88378b2f2444d3ec145dd442d449d3fefbc",
@@ -278,24 +189,6 @@
       "func_body_sha256": "e3d8d3fbc4cd5c5b1ce5440138b157e83b08355412c6b384d58100afe0eb1d82",
       "func_name": "hash__init_new_context",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          117,
-          "\tindex = realloc_context_ids(&mm->context);\n"
-        ],
-        [
-          118,
-          "\tif (index < 0)\n"
-        ],
-        [
-          119,
-          "\t\treturn index;\n"
-        ],
-        [
-          120,
-          "\n"
-        ]
-      ],
       "labeled_statements": [
         [
           117,
@@ -314,6 +207,7 @@
           "\n"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "linux",
       "site_id": "ec92de806f46651c"
     },
@@ -325,44 +219,6 @@
       "func_body_sha256": "4ad8e428063dda186eb8a495f9a0a6406c039c8f8abb484b4318e93b4f2bbc8b",
       "func_name": "hevc_parse_vps_extension",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          7729,
-          "\t\t\tu32 num_bits=0;"
-        ],
-        [
-          7730,
-          "\t\t\tfor (i = 0; i < num_scalability_types-1; i++) {"
-        ],
-        [
-          7732,
-          "\t\t\t\tnum_bits+=dimension_id_len[i];"
-        ],
-        [
-          7736,
-          "\t\t\tif (num_bits>=6) {"
-        ],
-        [
-          7737,
-          "\t\t\t\tGF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Too many its defined for dimension IDs (%d vs 5 max)\\n\", num_bits));"
-        ],
-        [
-          7738,
-          "\t\t\t\treturn -1;"
-        ],
-        [
-          7739,
-          "\t\t\t}"
-        ],
-        [
-          7740,
-          "\t\t\tdimension_id_len[num_scalability_types - 1] = 6 - num_bits; //1 + (5 - dim_bit_offset[num_scalability_types - 1]);"
-        ],
-        [
-          7741,
-          "\t\t\tdim_bit_offset[num_scalability_types - 1] = 6;"
-        ]
-      ],
       "labeled_statements": [
         [
           7729,
@@ -401,6 +257,7 @@
           "dim_bit_offset[num_scalability_types - 1] = 6;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "gpac",
       "site_id": "b2fa2bfde29c0966"
     },
@@ -412,32 +269,6 @@
       "func_body_sha256": "5969f8baebdfd55354ba06ecfbdf18949dc3051d9b0149e4c6d966d47c56e3fb",
       "func_name": "i2c_smbus_xfer_emulated",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          404,
-          "\t\t\tif (msg[0].len > I2C_SMBUS_BLOCK_MAX + 1) {\n"
-        ],
-        [
-          405,
-          "\t\t\t\tdev_err(&adapter->dev,\n"
-        ],
-        [
-          406,
-          "\t\t\t\t\t\"Invalid block write size %d\\n\",\n"
-        ],
-        [
-          407,
-          "\t\t\t\t\tdata->block[0]);\n"
-        ],
-        [
-          408,
-          "\t\t\t\treturn -EINVAL;\n"
-        ],
-        [
-          409,
-          "\t\t\t}\n"
-        ]
-      ],
       "labeled_statements": [
         [
           404,
@@ -456,6 +287,7 @@
           "\t\t\t}\n"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "linux",
       "site_id": "c82e826790d9b46f"
     },
@@ -467,32 +299,6 @@
       "func_body_sha256": "51b12028e82d655b76c7620c794520502bf05d89429b69cd1b96f186ef7dbb2b",
       "func_name": "ReadHuffmanCodeLengths",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          265,
-          "  HuffmanTables tables;"
-        ],
-        [
-          267,
-          "  if (!VP8LHuffmanTablesAllocate(1 << LENGTHS_TABLE_BITS, &tables) ||"
-        ],
-        [
-          268,
-          "      !VP8LBuildHuffmanTable(&tables, LENGTHS_TABLE_BITS,"
-        ],
-        [
-          269,
-          "                             code_length_code_lengths, NUM_CODE_LENGTH_CODES)) {"
-        ],
-        [
-          289,
-          "    p = &tables.curr_segment->start[VP8LPrefetchBits(br) & LENGTHS_TABLE_MASK];"
-        ],
-        [
-          312,
-          "  VP8LHuffmanTablesDeallocate(&tables);"
-        ]
-      ],
       "labeled_statements": [
         [
           265,
@@ -511,6 +317,7 @@
           "VP8LHuffmanTablesDeallocate(&tables);"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "libwebp",
       "site_id": "1b1ca3f7a2fc5968"
     },
@@ -522,32 +329,6 @@
       "func_body_sha256": "f73859b9d44d1c8f632cd3171540b25b0700b160d916ebd83b217663405f3736",
       "func_name": "labeljumps",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          797,
-          "static void labeljumps(JF, js_Ast *stm, int baddr, int caddr)"
-        ],
-        [
-          799,
-          "\tjs_JumpList *jump = stm->jumps;"
-        ],
-        [
-          801,
-          "\t\tjs_JumpList *next = jump->next;"
-        ],
-        [
-          806,
-          "\t\tjs_free(J, jump);"
-        ],
-        [
-          807,
-          "\t\tjump = next;"
-        ],
-        [
-          809,
-          "\tstm->jumps = NULL;"
-        ]
-      ],
       "labeled_statements": [
         [
           797,
@@ -574,6 +355,7 @@
           "stm->jumps = NULL;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "mujs",
       "site_id": "ed7288167f11a28f"
     },
@@ -585,18 +367,13 @@
       "func_body_sha256": "865e62c0867a82c91835c20123f279c85ae4158dda63ba2d3e61c63323130227",
       "func_name": "gps_tracker",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          4500,
-          "        \tif( recv( gpsd_sock, line + pos, sizeof( line ) - pos - 1, 0 ) <= 0 )"
-        ]
-      ],
       "labeled_statements": [
         [
           4500,
           "if( recv( gpsd_sock, line + pos, sizeof( line ) - pos - 1, 0 ) <= 0 )"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "aircrack-ng",
       "site_id": "7791b007fc6703a8"
     },
@@ -608,16 +385,6 @@
       "func_body_sha256": "820ac8f53ee32b5ada312c3706cf4364df7cf5784cbcffeb4dea233bfdbb2e26",
       "func_name": "PdfXRefStreamParserObject::ReadXRefTable",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          70,
-          "        PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
-        ],
-        [
-          78,
-          "            PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
-        ]
-      ],
       "labeled_statements": [
         [
           70,
@@ -628,6 +395,7 @@
           "PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "podofo",
       "site_id": "90940c50fc31849c"
     },
@@ -639,24 +407,6 @@
       "func_body_sha256": "9b1c4d20d8633fa8b209a8b7202ffb69a85856e3069dff3234b0fca100a51318",
       "func_name": "pdf_get_version",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          196,
-          "    char *header, *c;"
-        ],
-        [
-          197,
-          ""
-        ],
-        [
-          198,
-          "    header = get_header(fp);"
-        ],
-        [
-          202,
-          "        (c + strlen(\"%PDF-M.m\") + 2))"
-        ]
-      ],
       "labeled_statements": [
         [
           196,
@@ -675,6 +425,7 @@
           "if ((c = strstr(header, \"%PDF-\")) && \n        (c + strlen(\"%PDF-M.m\") + 2))"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "pdfresurrect",
       "site_id": "ea6904b7c7402692"
     },
@@ -686,40 +437,6 @@
       "func_body_sha256": "da19abdedd5e0fd5a22f419b70031edf90ce2a700a09a8a68c97e1169c54ca02",
       "func_name": "uwsgi_expand_path",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          3677,
-          "\tif (dir_len > PATH_MAX)"
-        ],
-        [
-          3678,
-          "\t{"
-        ],
-        [
-          3679,
-          "\t\tuwsgi_log(\"invalid path size: %d (max %d)\\n\", dir_len, PATH_MAX);"
-        ],
-        [
-          3680,
-          "\t\treturn NULL;"
-        ],
-        [
-          3681,
-          "\t}"
-        ],
-        [
-          3682,
-          "\tchar *src = uwsgi_concat2n(dir, dir_len, \"\", 0);"
-        ],
-        [
-          3690,
-          "\t\tfree(src);"
-        ],
-        [
-          3693,
-          "\tfree(src);"
-        ]
-      ],
       "labeled_statements": [
         [
           3677,
@@ -754,6 +471,7 @@
           "free(src);"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "uwsgi",
       "site_id": "30565a0962b03982"
     },
@@ -765,52 +483,6 @@
       "func_body_sha256": "78d4090a5bc40635d5129ac0692b7e08e350b637c8d684eb44ebcd118af77155",
       "func_name": "handle_rx",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          759,
-          "\ts16 headcount, nheads = 0;\n"
-        ],
-        [
-          787,
-          "\t\theadcount = get_rx_bufs(vq, vq->heads + nheads, vhost_len,\n"
-        ],
-        [
-          859,
-          "\t\tnheads += headcount;\n"
-        ],
-        [
-          860,
-          "\t\tif (nheads > VHOST_RX_BATCH) {\n"
-        ],
-        [
-          861,
-          "\t\t\tvhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n"
-        ],
-        [
-          862,
-          "\t\t\t\t\t\t    nheads);\n"
-        ],
-        [
-          863,
-          "\t\t\tnheads = 0;\n"
-        ],
-        [
-          864,
-          "\t\t}\n"
-        ],
-        [
-          875,
-          "\tif (nheads)\n"
-        ],
-        [
-          876,
-          "\t\tvhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n"
-        ],
-        [
-          877,
-          "\t\t\t\t\t    nheads);\n"
-        ]
-      ],
       "labeled_statements": [
         [
           759,
@@ -849,6 +521,7 @@
           "vhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n\t\t\t\t\t    nheads);"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "linux",
       "site_id": "4fca564f61682c5a"
     },
@@ -856,24 +529,24 @@
       "commit_id": "be1684930f5262a622d40ce7a6f1423530d87f89",
       "cve": "CVE-2024-46725",
       "cwe": "CWE-787",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
       "filepath": "drivers/gpu/drm/amd/amdgpu/amdgpu_ring.c",
       "func_body_sha256": "07048f201ebb02f3208b261b79aaed0b31fbb7352381bd655bfcba3875c4aa43",
       "func_name": "amdgpu_ring_init",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          355,
-          "\tif (!ring->no_scheduler && ring->funcs->type < AMDGPU_HW_IP_NUM) {\n"
-        ]
-      ],
       "labeled_statements": [
         [
           355,
           "if (!ring->no_scheduler && ring->funcs->type < AMDGPU_HW_IP_NUM)"
         ]
       ],
+      "mapping_status": "mapped",
       "project": "linux",
-      "site_id": "127cd0d8e9215768"
+      "site_id": "127cd0d8e9215768",
+      "write_dest": "sched",
+      "write_kind": "index_write",
+      "write_line": "adev->gpu_sched[hw_ip][hw_prio].sched[(*num_sched)++] ="
     },
     {
       "commit_id": "ba1dbd78e5f1ed67c1b8d37ac89d90e5e330b628",
@@ -883,16 +556,6 @@
       "func_body_sha256": "2a29c8ec08fa30f3955edc76bb66ffb123516dcdd230e0a33ec4a28d35096bd1",
       "func_name": "Curl_smtp_escape_eob",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1566,
-          "    scratch = newscratch = malloc(2 * UPLOAD_BUFSIZE);"
-        ],
-        [
-          1573,
-          "  DEBUGASSERT(UPLOAD_BUFSIZE >= nread);"
-        ]
-      ],
       "labeled_statements": [
         [
           1566,
@@ -903,6 +566,7 @@
           "DEBUGASSERT(UPLOAD_BUFSIZE >= nread);"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "curl",
       "site_id": "2417dec06e66ee4a"
     },
@@ -914,18 +578,13 @@
       "func_body_sha256": "d1ae0f11727e5d363ccd6eb46e9e2a4878781562799f3d9f0901616b97e94c4e",
       "func_name": "__ext4_get_inode_loc",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          4509,
-          "\tif (!ext4_valid_inum(sb, inode->i_ino))\n"
-        ]
-      ],
       "labeled_statements": [
         [
           4509,
           "if (!ext4_valid_inum(sb, inode->i_ino))"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "linux",
       "site_id": "7b3965cbc8679b5e"
     },
@@ -937,18 +596,13 @@
       "func_body_sha256": "f8ff5374273ff08ff5c393b5e8bf92915b60b6dc85ec49db8d149b469cba3f04",
       "func_name": "yaffsfs_istat",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          2442,
-          "    char timeBuf[128];"
-        ]
-      ],
       "labeled_statements": [
         [
           2442,
           "char timeBuf[128];"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "sleuthkit",
       "site_id": "e007bfca3894e603"
     },
@@ -960,18 +614,13 @@
       "func_body_sha256": "73fb432b2a88964cf9f085cfc7823b93421d78eb313aa180a31911cf9e44e868",
       "func_name": "carray2Hex",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          89,
-          "    for (uint64_t j = 0; j < _len; j++) {"
-        ]
-      ],
       "labeled_statements": [
         [
           89,
           "for (uint64_t j = 0; j < _len; j++) {"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "sgxwallet",
       "site_id": "e8903fb239b9e7fb"
     },
@@ -983,18 +632,13 @@
       "func_body_sha256": "ea0b1b8993a9c0bff41db69d975f6127d8032d689310c0a885be7716b7fd632c",
       "func_name": "ReadTIFFImage",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1897,
-          "        extent=4*MagickMax(rows*TIFFTileRowSize(tiff),TIFFTileSize(tiff));"
-        ]
-      ],
       "labeled_statements": [
         [
           1897,
           "extent=4*MagickMax(rows*TIFFTileRowSize(tiff),TIFFTileSize(tiff));"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "ImageMagick6",
       "site_id": "ecdf0067fa9ae0b9"
     },
@@ -1006,28 +650,6 @@
       "func_body_sha256": "585b8fc8d4393f4b7b33c5c653a493d5dcd42ad68495b91faec57ed7d7bcd953",
       "func_name": "mlir::tfg::ImportGenericFunction",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          482,
-          "    TF_ASSIGN_OR_RETURN("
-        ],
-        [
-          483,
-          "        ret_vals[position->second],"
-        ],
-        [
-          484,
-          "        value_manager.GetValueOrCreatePlaceholder(ret_val.second));"
-        ],
-        [
-          498,
-          "    TF_ASSIGN_OR_RETURN(Value result, value_manager.GetValueOrCreatePlaceholder("
-        ],
-        [
-          499,
-          "                                          (Twine(\"^\") + ret_val.second).str()));"
-        ]
-      ],
       "labeled_statements": [
         [
           482,
@@ -1042,6 +664,7 @@
           "                                          (Twine(\"^\") + ret_val.second).str()));\n"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "tensorflow",
       "site_id": "b1db571bd655b996"
     },
@@ -1053,16 +676,6 @@
       "func_body_sha256": "1d74854a0fc5f22594ec57e87b19a00651899710043929a22f01955940cd5755",
       "func_name": "get_tga_ushort",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          584,
-          "static unsigned short get_tga_ushort(const unsigned char *data)"
-        ],
-        [
-          586,
-          "    return data[0] | (data[1] << 8);"
-        ]
-      ],
       "labeled_statements": [
         [
           584,
@@ -1073,6 +686,7 @@
           "return data[0] | (data[1] << 8);"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "openjpeg",
       "site_id": "be5362bc07f74508"
     },
@@ -1084,108 +698,6 @@
       "func_body_sha256": "af2b8eba230ea1a550fedb322e4791b3643ac84447214d448d370d5fb4eae043",
       "func_name": "RsaPad_PSS",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1119,
-          "#if defined(WOLFSSL_NO_MALLOC) && !defined(WOLFSSL_STATIC_MEMORY)"
-        ],
-        [
-          1120,
-          "    byte msg[RSA_MAX_SIZE/8 + RSA_PSS_PAD_SZ];"
-        ],
-        [
-          1121,
-          "#else"
-        ],
-        [
-          1122,
-          "    byte* msg = NULL;"
-        ],
-        [
-          1123,
-          "#endif"
-        ],
-        [
-          1125,
-          "    byte* salt;"
-        ],
-        [
-          1188,
-          "        msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,"
-        ],
-        [
-          1190,
-          "        if (msg == NULL) {"
-        ],
-        [
-          1194,
-          "    salt = s = m = msg;"
-        ],
-        [
-          1207,
-          "    if (pkcsBlockLen < RSA_PSS_PAD_SZ + inputLen + saltLen) {"
-        ],
-        [
-          1208,
-          "    #if !defined(WOLFSSL_NO_MALLOC) || defined(WOLFSSL_STATIC_MEMORY)"
-        ],
-        [
-          1209,
-          "        msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,"
-        ],
-        [
-          1210,
-          "                                                       DYNAMIC_TYPE_RSA_BUFFER);"
-        ],
-        [
-          1211,
-          "        if (msg == NULL) {"
-        ],
-        [
-          1212,
-          "            return MEMORY_E;"
-        ],
-        [
-          1213,
-          "        }"
-        ],
-        [
-          1214,
-          "    #endif"
-        ],
-        [
-          1215,
-          "        m = msg;"
-        ],
-        [
-          1216,
-          "    }"
-        ],
-        [
-          1217,
-          "    else {"
-        ],
-        [
-          1218,
-          "        m = pkcsBlock;"
-        ],
-        [
-          1219,
-          "    }"
-        ],
-        [
-          1220,
-          "    s = m;"
-        ],
-        [
-          1258,
-          "        if (msg != NULL) {"
-        ],
-        [
-          1259,
-          "            XFREE(msg, heap, DYNAMIC_TYPE_RSA_BUFFER);"
-        ]
-      ],
       "labeled_statements": [
         [
           1119,
@@ -1276,6 +788,7 @@
           "XFREE(msg, heap, DYNAMIC_TYPE_RSA_BUFFER);"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "wolfssl",
       "site_id": "68b94cd616533f7f"
     },
@@ -1287,68 +800,6 @@
       "func_body_sha256": "e9ddf11eb08c547b4476f991ff9c21347e10abb6eed664aad551ac8b4b9155f3",
       "func_name": "proc_hugetlb_doulongvec_minmax",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          3468,
-          "static int proc_hugetlb_doulongvec_minmax(struct ctl_table *table, int write,\n"
-        ],
-        [
-          3469,
-          "\t\t\t\t\t  void *buffer, size_t *length,\n"
-        ],
-        [
-          3470,
-          "\t\t\t\t\t  loff_t *ppos, unsigned long *out)\n"
-        ],
-        [
-          3471,
-          "{\n"
-        ],
-        [
-          3472,
-          "\tstruct ctl_table dup_table;\n"
-        ],
-        [
-          3473,
-          "\n"
-        ],
-        [
-          3474,
-          "\t/*\n"
-        ],
-        [
-          3475,
-          "\t * In order to avoid races with __do_proc_doulongvec_minmax(), we\n"
-        ],
-        [
-          3476,
-          "\t * can duplicate the @table and alter the duplicate of it.\n"
-        ],
-        [
-          3477,
-          "\t */\n"
-        ],
-        [
-          3478,
-          "\tdup_table = *table;\n"
-        ],
-        [
-          3479,
-          "\tdup_table.data = out;\n"
-        ],
-        [
-          3480,
-          "\n"
-        ],
-        [
-          3481,
-          "\treturn proc_doulongvec_minmax(&dup_table, write, buffer, length, ppos);\n"
-        ],
-        [
-          3482,
-          "}\n"
-        ]
-      ],
       "labeled_statements": [
         [
           3468,
@@ -1391,6 +842,7 @@
           "}\n"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "linux",
       "site_id": "a26545398a38fb25"
     },
@@ -1402,16 +854,6 @@
       "func_body_sha256": "2a8a7853bf6e5696b47d86eab3bf8fba74f40fdc1a9a713af72619ca2a0af1d5",
       "func_name": "ext4_xattr_ibody_inline_set",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          2215,
-          "\tif (error)\n"
-        ],
-        [
-          2216,
-          "\t\treturn error;\n"
-        ]
-      ],
       "labeled_statements": [
         [
           2215,
@@ -1422,6 +864,7 @@
           "return error;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "linux",
       "site_id": "653ddec612c394c4"
     },
@@ -1433,16 +876,6 @@
       "func_body_sha256": "15c43eb40d28954359212f357a748b8c88f3e473c6fedcbf974a252df180d0fd",
       "func_name": "diff_mark_adjust_tp",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          406,
-          "\t\t    off = 0;"
-        ],
-        [
-          429,
-          "\t\t\t    off = dp->df_lnum[idx] - lnum_deleted;"
-        ]
-      ],
       "labeled_statements": [
         [
           406,
@@ -1453,6 +886,7 @@
           "off = dp->df_lnum[idx] - lnum_deleted;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "vim",
       "site_id": "25f13c29ec6db6e4"
     },
@@ -1464,224 +898,6 @@
       "func_body_sha256": "eb73683cc7e5f0390a9ddf5e405231f279e0178b84facd8e1654114ba7a56507",
       "func_name": "NSFile::CUtf8Converter::GetUnicodeStringFromUTF8_4bytes",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          162,
-          "                int val = 0;"
-        ],
-        [
-          163,
-          "                if ((lIndex + 1) < lCount)"
-        ],
-        [
-          164,
-          "                {"
-        ],
-        [
-          165,
-          "                    val = (int)(((byteMain & 0x1F) << 6) |"
-        ],
-        [
-          166,
-          "                                (pBuffer[lIndex + 1] & 0x3F));"
-        ],
-        [
-          167,
-          "                }"
-        ],
-        [
-          168,
-          ""
-        ],
-        [
-          175,
-          "                int val = 0;"
-        ],
-        [
-          176,
-          "                if ((lIndex + 2) < lCount)"
-        ],
-        [
-          177,
-          "                {"
-        ],
-        [
-          178,
-          "                    val = (int)(((byteMain & 0x0F) << 12) |"
-        ],
-        [
-          179,
-          "                                ((pBuffer[lIndex + 1] & 0x3F) << 6) |"
-        ],
-        [
-          180,
-          "                                (pBuffer[lIndex + 2] & 0x3F));"
-        ],
-        [
-          181,
-          "                }"
-        ],
-        [
-          182,
-          ""
-        ],
-        [
-          189,
-          "                int val = 0;"
-        ],
-        [
-          190,
-          "                if ((lIndex + 3) < lCount)"
-        ],
-        [
-          191,
-          "                {"
-        ],
-        [
-          192,
-          "                    val = (int)(((byteMain & 0x07) << 18) |"
-        ],
-        [
-          193,
-          "                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |"
-        ],
-        [
-          194,
-          "                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |"
-        ],
-        [
-          195,
-          "                                (pBuffer[lIndex + 3] & 0x3F));"
-        ],
-        [
-          196,
-          "                }"
-        ],
-        [
-          197,
-          ""
-        ],
-        [
-          204,
-          "                int val = 0;"
-        ],
-        [
-          205,
-          "                if ((lIndex + 3) < lCount)"
-        ],
-        [
-          206,
-          "                {"
-        ],
-        [
-          207,
-          "                    val = (int)(((byteMain & 0x07) << 18) |"
-        ],
-        [
-          208,
-          "                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |"
-        ],
-        [
-          209,
-          "                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |"
-        ],
-        [
-          210,
-          "                                (pBuffer[lIndex + 3] & 0x3F));"
-        ],
-        [
-          211,
-          "                }"
-        ],
-        [
-          212,
-          ""
-        ],
-        [
-          219,
-          "                int val = 0;"
-        ],
-        [
-          220,
-          "                if ((lIndex + 4) < lCount)"
-        ],
-        [
-          221,
-          "                {"
-        ],
-        [
-          222,
-          "                    val = (int)(((byteMain & 0x03) << 24) |"
-        ],
-        [
-          223,
-          "                                ((pBuffer[lIndex + 1] & 0x3F) << 18) |"
-        ],
-        [
-          224,
-          "                                ((pBuffer[lIndex + 2] & 0x3F) << 12) |"
-        ],
-        [
-          225,
-          "                                ((pBuffer[lIndex + 3] & 0x3F) << 6) |"
-        ],
-        [
-          226,
-          "                                (pBuffer[lIndex + 4] & 0x3F));"
-        ],
-        [
-          227,
-          "                }"
-        ],
-        [
-          228,
-          ""
-        ],
-        [
-          235,
-          "                int val = 0;"
-        ],
-        [
-          236,
-          "                if ((lIndex + 5) < lCount)"
-        ],
-        [
-          237,
-          "                {"
-        ],
-        [
-          238,
-          "                    val = (int)(((byteMain & 0x01) << 30) |"
-        ],
-        [
-          239,
-          "                                ((pBuffer[lIndex + 1] & 0x3F) << 24) |"
-        ],
-        [
-          240,
-          "                                ((pBuffer[lIndex + 2] & 0x3F) << 18) |"
-        ],
-        [
-          241,
-          "                                ((pBuffer[lIndex + 3] & 0x3F) << 12) |"
-        ],
-        [
-          242,
-          "                                ((pBuffer[lIndex + 4] & 0x3F) << 6) |"
-        ],
-        [
-          243,
-          "                                (pBuffer[lIndex + 5] & 0x3F));"
-        ],
-        [
-          244,
-          "                }"
-        ],
-        [
-          245,
-          ""
-        ]
-      ],
       "labeled_statements": [
         [
           162,
@@ -1828,6 +1044,7 @@
           "\n"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "core",
       "site_id": "6f2e0cb720632b6c"
     },
@@ -1839,100 +1056,6 @@
       "func_body_sha256": "c42c063bda156eac3c23605835c3a7a813c64e571e531a7b9467d3d6f1734192",
       "func_name": "parsePathDataFast",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1598,
-          "    const int maxElementCount = 0x7fff; // Assume file corruption if more path elements than this"
-        ],
-        [
-          1606,
-          "    bool ok = true;"
-        ],
-        [
-          1607,
-          "    while (ok && str != end) {"
-        ],
-        [
-          1624,
-          "        while (ok && count > 0) {"
-        ],
-        [
-          1630,
-          "                    ok = false;"
-        ],
-        [
-          1647,
-          "                    ok = false;"
-        ],
-        [
-          1673,
-          "                    ok = false;"
-        ],
-        [
-          1686,
-          "                    ok = false;"
-        ],
-        [
-          1726,
-          "                    ok = false;"
-        ],
-        [
-          1742,
-          "                    ok = false;"
-        ],
-        [
-          1758,
-          "                    ok = false;"
-        ],
-        [
-          1779,
-          "                    ok = false;"
-        ],
-        [
-          1800,
-          "                    ok = false;"
-        ],
-        [
-          1815,
-          "                    ok = false;"
-        ],
-        [
-          1830,
-          "                    ok = false;"
-        ],
-        [
-          1850,
-          "                    ok = false;"
-        ],
-        [
-          1870,
-          "                    ok = false;"
-        ],
-        [
-          1892,
-          "                    ok = false;"
-        ],
-        [
-          1913,
-          "                ok = false;"
-        ],
-        [
-          1914,
-          "                break;"
-        ],
-        [
-          1917,
-          "            if (path.elementCount() > maxElementCount)"
-        ],
-        [
-          1918,
-          "                ok = false;"
-        ],
-        [
-          1921,
-          "    return ok;"
-        ]
-      ],
       "labeled_statements": [
         [
           1598,
@@ -2027,6 +1150,7 @@
           "return ok;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "qtsvg",
       "site_id": "aa824dab09beffd3"
     },
@@ -2038,24 +1162,6 @@
       "func_body_sha256": "68741d0ac496411339f9bc3f7c9e4d01d234e3d5974f37ee10e3167b4eb2c648",
       "func_name": "EncodeImage",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          676,
-          "      next_pixel=MagickFalse;"
-        ],
-        [
-          677,
-          "      displacement=1;"
-        ],
-        [
-          683,
-          "      if (k < 0)"
-        ],
-        [
-          684,
-          "        continue;"
-        ]
-      ],
       "labeled_statements": [
         [
           676,
@@ -2074,6 +1180,7 @@
           "continue;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "ImageMagick",
       "site_id": "8d956f60d6caba9f"
     },
@@ -2085,18 +1192,13 @@
       "func_body_sha256": "8943ed13de6502e03bad49f9b1b213c2d038d5716b1abfdd75c74a6c1947dddc",
       "func_name": "FramebufferModel::~FramebufferModel",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          61,
-          "FramebufferModel::~FramebufferModel() {}"
-        ]
-      ],
       "labeled_statements": [
         [
           61,
           "FramebufferModel::~FramebufferModel()"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "openexr-viewer",
       "site_id": "02af5e9a993ef157"
     },
@@ -2104,24 +1206,24 @@
       "commit_id": "4ef3ede30181eca9add74305ad26dbcb0c3686a0",
       "cve": "CVE-2010-3844",
       "cwe": "CWE-120",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
       "filepath": "src/interfaces/gtk/ec_gtk_conf.c",
       "func_body_sha256": "03ba2496072953a6a8b80c52c3ddfe2fd338cd2a8813f8e1fb4958a04dffc908",
       "func_name": "gtkui_conf_read",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          77,
-          "   path = g_get_tmp_dir();"
-        ]
-      ],
       "labeled_statements": [
         [
           77,
           "path = g_get_tmp_dir();"
         ]
       ],
+      "mapping_status": "mapped",
       "project": "ettercap",
-      "site_id": "c2894cd823cdb008"
+      "site_id": "c2894cd823cdb008",
+      "write_dest": "path",
+      "write_kind": "pointer_deref",
+      "write_line": "/* path = g_get_home_dir(); */"
     },
     {
       "commit_id": "77ed81c069e10b3861d88f72e1c6be1277ee7eae",
@@ -2131,32 +1233,6 @@
       "func_body_sha256": "2432e6fe29908316c396bfca269481d81d275132dd3384fb94bd0868c4f40bad",
       "func_name": "stbl_AddChunkOffset",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          701,
-          "GF_Err stbl_AddChunkOffset(GF_MediaBox *mdia, u32 sampleNumber, u32 StreamDescIndex, u64 offset, u32 nb_pack_samples)"
-        ],
-        [
-          716,
-          "\tif (!nb_pack_samples)"
-        ],
-        [
-          717,
-          "\t\tnb_pack_samples = 1;"
-        ],
-        [
-          733,
-          "\t\tstsc->w_lastSampleNumber = sampleNumber + nb_pack_samples-1;"
-        ],
-        [
-          788,
-          "\tent->samplesPerChunk = nb_pack_samples;"
-        ],
-        [
-          792,
-          "\tif (sampleNumber + nb_pack_samples - 1 == stsc->w_lastSampleNumber) {"
-        ]
-      ],
       "labeled_statements": [
         [
           701,
@@ -2183,6 +1259,7 @@
           "if (sampleNumber + nb_pack_samples - 1 == stsc->w_lastSampleNumber)"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "gpac",
       "site_id": "4168f72364a47da2"
     },
@@ -2194,20 +1271,6 @@
       "func_body_sha256": "37af75350b2502a639b18b66c478ab0a10f6c365f1039ea81c83c072f3297172",
       "func_name": "changed_common",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          551,
-          "    if (VIsual_active)"
-        ],
-        [
-          552,
-          "\tcheck_visual_pos();"
-        ],
-        [
-          553,
-          ""
-        ]
-      ],
       "labeled_statements": [
         [
           460,
@@ -2222,6 +1285,7 @@
           "check_visual_pos();"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "vim",
       "site_id": "af76e9cd22dd049f"
     },
@@ -2233,36 +1297,6 @@
       "func_body_sha256": "bd887b51ffacd7ae59f3691e7fad7aea7d1a95b5f282f458753a5e358eeccf08",
       "func_name": "lldp_decode",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          729,
-          "\t\t\tif (addr_str_length > sizeof(addr_str_buffer)) {"
-        ],
-        [
-          730,
-          "\t\t\t\tlog_warnx(\"lldp\", \"too large management address on %s\","
-        ],
-        [
-          731,
-          "\t\t\t\t    hardware->h_ifname);"
-        ],
-        [
-          732,
-          "\t\t\t\tgoto malformed;"
-        ],
-        [
-          733,
-          "\t\t\t}"
-        ],
-        [
-          742,
-          ""
-        ],
-        [
-          760,
-          "\t\t\tCHECK_TLV_SIZE(1 + (int)sizeof(orgid), \"Organisational\");"
-        ]
-      ],
       "labeled_statements": [
         [
           726,
@@ -2289,6 +1323,7 @@
           "CHECK_TLV_SIZE(1 + (int)sizeof(orgid), \"Organisational\");"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "lldpd",
       "site_id": "1e0cb176a0bf57dc"
     },
@@ -2300,20 +1335,6 @@
       "func_body_sha256": "4cf024d62b495fedc012fbde1dbc4fafc11827aa7241075c6c0c534e954a5f14",
       "func_name": "__pyx_pf_17clickhouse_driver_6varint_2read_varint",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1529,
-          "  int __pyx_lineno = 0;"
-        ],
-        [
-          1530,
-          "  const char *__pyx_filename = NULL;"
-        ],
-        [
-          1531,
-          "  int __pyx_clineno = 0;"
-        ]
-      ],
       "labeled_statements": [
         [
           1529,
@@ -2328,6 +1349,7 @@
           "int __pyx_clineno = 0;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "clickhouse-driver",
       "site_id": "8132ce80516ff4a8"
     },
@@ -2339,44 +1361,6 @@
       "func_body_sha256": "d63d4233e92f915a39761f5634ca2ab3db76b96c8cc9f5595b09920beee766fe",
       "func_name": "pjsip_auth_create_aka_response",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          60,
-          "    pj_status_t status;"
-        ],
-        [
-          68,
-          "\tpjsip_auth_create_digest(&auth->response, &auth->nonce, &auth->nc,"
-        ],
-        [
-          69,
-          "\t\t\t\t &auth->cnonce, &auth->qop, &auth->uri,"
-        ],
-        [
-          70,
-          "\t\t\t\t &auth->realm, cred, method);"
-        ],
-        [
-          71,
-          "\treturn PJ_SUCCESS;"
-        ],
-        [
-          150,
-          "\tpjsip_auth_create_digest(&auth->response, &chal->nonce,"
-        ],
-        [
-          152,
-          "\t\t\t\t &auth->uri, &chal->realm, &aka_cred, method);"
-        ],
-        [
-          189,
-          "\tpjsip_auth_create_digest(&auth->response, &chal->nonce,"
-        ],
-        [
-          199,
-          "    return PJ_SUCCESS;"
-        ]
-      ],
       "labeled_statements": [
         [
           60,
@@ -2403,6 +1387,7 @@
           "return PJ_SUCCESS;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "pjproject",
       "site_id": "d44c7c00326816ec"
     },
@@ -2414,40 +1399,6 @@
       "func_body_sha256": "e8e0814a120b10e88461157c0e02eb115a1ded7c6bb0d03ebff14a0f40ba8dc2",
       "func_name": "HPHP::_php_mb_regex_ereg_replace_exec",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          3612,
-          "        auto const remaining = replacement.size() - i;"
-        ],
-        [
-          3613,
-          "        if (remaining >= 2 && fwd == 1 &&"
-        ],
-        [
-          3614,
-          "            p[0] == '\\\\' && p[1] >= '0' && p[1] <= '9') {"
-        ],
-        [
-          3625,
-          "        } else if (remaining >= fwd) {"
-        ],
-        [
-          3629,
-          "        } else {"
-        ],
-        [
-          3630,
-          "          raise_warning(\"Replacement ends with unterminated %s: 0x%hhx\","
-        ],
-        [
-          3631,
-          "                        enc->name, *p);"
-        ],
-        [
-          3632,
-          "          break;"
-        ]
-      ],
       "labeled_statements": [
         [
           3612,
@@ -2474,6 +1425,7 @@
           "break;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "hhvm",
       "site_id": "ff75fb0ae5ebce01"
     },
@@ -2485,18 +1437,13 @@
       "func_body_sha256": "b9cbc8083e47a683f471278ee555bf9ba056524faa6f2b7f7324969c5bf79436",
       "func_name": "trunc_string",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          356,
-          "\tbuf[e - 1] = NUL;"
-        ]
-      ],
       "labeled_statements": [
         [
           356,
           "buf[e - 1] = NUL;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "vim",
       "site_id": "c877406362737999"
     },
@@ -2508,20 +1455,6 @@
       "func_body_sha256": "1adab3070d1fd3631911c46a19dbd2b9eb8edc9f47d0faf92e3649c6ebf24d1e",
       "func_name": "sgpd_parse_entry",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          9986,
-          "\tcase 0:"
-        ],
-        [
-          9987,
-          "\t\tGF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, (\"[iso file] sgpd entry null grouping_type is invalid\\n\") );"
-        ],
-        [
-          9988,
-          "\t\treturn NULL;"
-        ]
-      ],
       "labeled_statements": [
         [
           9986,
@@ -2536,6 +1469,7 @@
           "return NULL;"
         ]
       ],
+      "mapping_status": "ambiguous",
       "project": "gpac",
       "site_id": "2c1242a5dd1abd78"
     },
@@ -2547,18 +1481,13 @@
       "func_body_sha256": "ff50d70464f2905fc634b0e4f8d66601db63bcc4691fa79675183db1ed3c67ab",
       "func_name": "latin_ptr2len",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          1086,
-          "    return *p == NUL ? 0 : 1;"
-        ]
-      ],
       "labeled_statements": [
         [
           1086,
           "return *p == NUL ? 0 : 1;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "vim",
       "site_id": "c11e08c418949cfc"
     },
@@ -2570,18 +1499,13 @@
       "func_body_sha256": "faef0d6692564644089e105c22b42092f6b944c6d2a851093863c42c4816d6e2",
       "func_name": "nv_scroll",
       "is_vulnerable": true,
-      "labeled_line_statements": [
-        [
-          3732,
-          "\t\t    --curwin->w_cursor.lnum;"
-        ]
-      ],
       "labeled_statements": [
         [
           3732,
           "--curwin->w_cursor.lnum;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "vim",
       "site_id": "bc8371c622c44a76"
     },
@@ -2593,16 +1517,6 @@
       "func_body_sha256": "2932bc663e081f3529e6a5c084dff0e1704047a0905978e509b593f5fb1f0ca2",
       "func_name": "ex_substitute",
       "is_vulnerable": false,
-      "labeled_line_statements": [
-        [
-          4523,
-          "\t\t    if (nmatch < 0)"
-        ],
-        [
-          4524,
-          "\t\t\tgoto skip;"
-        ]
-      ],
       "labeled_statements": [
         [
           4523,
@@ -2613,10 +1527,17 @@
           "goto skip;"
         ]
       ],
+      "mapping_status": "no_write_found",
       "project": "vim",
       "site_id": "df480471d90f6758"
     }
   ],
-  "source": "SecVulEval (basimbd/SecVulEval) random_subset.json",
-  "vuln_fixed_pairs": "NONE available in-subset (0 sites carry both is_vulnerable True and False); vulnerable and non-vulnerable functions are separate. Confirmatory scoring is per-site against is_vulnerable, not paired."
+  "source": "SecVulEval basimbd/SecVulEval random_subset.json",
+  "status": "INSUFFICIENT as a confirmatory corpus from reachable data: 2 vulnerable families << 12 gate, and the full HuggingFace dataset is proxy-blocked (403). Frozen as a corpus-construction PILOT with the two deterministic rules applied; NOT yet a finalized confirmatory population. Capability 2 must NOT start until a finalized, powered held-out population is frozen.",
+  "tchecker_used": false,
+  "twelve_vuln_family_gate": {
+    "gate": 12,
+    "meets_gate": false,
+    "vulnerable_families": 2
+  }
 }
