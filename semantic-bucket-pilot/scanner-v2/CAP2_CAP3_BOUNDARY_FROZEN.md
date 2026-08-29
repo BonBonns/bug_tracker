@@ -31,17 +31,25 @@ instruction yields the same identity) is:
 - **normalized repository-relative file path** — the full path (`dirA/w.c`), not the
   basename; c2cpg records file paths relative to the scan root and preserves subdirectories;
 - **enclosing function identity + source span** — `(name, line, line_end)`;
-- **line + SITE ORDINAL** within `(function, line)` — deterministic order by normalized
-  write text then appearance (this schema exposes no column);
+- **line + SITE position** — `("col", N)`, the SOURCE COLUMN of the write on its line,
+  read from the source text (`metadata.root` + file). This schema exposes no column field,
+  so the column is recovered from source; it is NOT derived from fact-list appearance order
+  or node ids. When two writes on one line are otherwise identical, their differing source
+  columns keep them distinct. (If the source is unavailable, a flagged `("rank", N)`
+  appearance fallback is used; the frozen scans always have source, so `col` is used.)
 - **normalized write statement + operator** — `(call name, normalized target code)`;
-- **destination DECLARATION identity** — a parameter is `("param", index)`, a local is
-  `("local", decl_line, name)`; a declaration site, never a bare name. The SYNTACTIC write
-  target (e.g. the walked alias `u`) is resolved to its declaration the SAME way by both
-  capabilities, so a cap2 summary and a cap3 direct record for one physical write agree.
+- **destination DECLARATION identity** — a parameter is `("param", index)`; a local is
+  `("local", decl_line, name, decl_ordinal)` where `decl_ordinal` distinguishes same-name
+  locals declared in separate nested scopes on ONE line (by source column). A write is
+  bound to the nearest-preceding same-name declaration on its line. Never a bare name. The
+  SYNTACTIC write target (e.g. the walked alias `u`) is resolved to its declaration the
+  SAME way by both capabilities, so a cap2 summary and a cap3 direct record for one
+  physical write agree.
 
 The write-call / node id is retained as WITHIN-RUN provenance only (`node_id` in each
 provenance entry); it is NOT part of the cross-run identity, because node ids may change
-between runs.
+between runs. The identity does not depend on fact-list appearance order either — all
+positional components come from the source text.
 
 ## The overlap and the rule (frozen)
 
@@ -72,6 +80,15 @@ write is reachable two ways: cap3 recognizes it directly in `G`'s body, and cap2
   `g_writer` whose body is in scope. cap2's `underlying_write` and cap3's direct record
   resolve to the SAME identity key; dedup yields exactly ONE operation carrying BOTH
   provenance paths, canonical = the direct recognition.
+- **(d) two IDENTICAL writes on one line**: `cap_controls/idadv/adv.c` `twin` has
+  `*p++ = v; *p++ = v;` — identical text, operator, dest declaration, file, function, line.
+  The two writes get TWO distinct identities (source columns), TWO INDEPENDENT Joern
+  rescans produce the SAME two identities, and dedup does not collapse them.
+- **(e) shadowed same-line locals**: `cap_controls/idadv/adv.c` `shadow` declares
+  `char *x` twice in separate scopes on one line. The two declarations get distinct
+  declaration identities (decl ordinal by source column), the two writes through them get
+  distinct identities (each bound to a distinct decl ordinal), and dedup keeps them
+  separate.
 
 ## Consequence for the held-out evaluation
 

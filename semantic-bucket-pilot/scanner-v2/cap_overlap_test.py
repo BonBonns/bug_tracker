@@ -80,6 +80,42 @@ def main():
          len(D.dedup(two)) == 2),
     ]
 
+    # ---- (d) TWIN: two IDENTICAL writes on one line, cross-run stable --------------------
+    # Two INDEPENDENT Joern rescans of the same source (separate c2cpg builds).
+    adv1 = scan(os.path.join(HERE, "cap_controls", "idadv"))
+    adv2 = scan(os.path.join(HERE, "cap_controls", "idadv"))
+    tw1 = [o for o in D.direct_walk_write_sites(adv1) if o["function"] == "twin"]
+    tw2 = [o for o in D.direct_walk_write_sites(adv2) if o["function"] == "twin"]
+    kset1 = {D.identity_key(o) for o in tw1}
+    kset2 = {D.identity_key(o) for o in tw2}
+    checks += [
+        ("(d) twin: two identical-text writes on one line -> TWO distinct identities",
+         len(tw1) == 2 and len(kset1) == 2),
+        ("(d) twin identity uses SOURCE COLUMN (not node id / appearance rank)",
+         all(o["identity"]["site"] and o["identity"]["site"][0] == "col" for o in tw1)),
+        ("(d) two independent Joern rescans -> the SAME two identities",
+         kset1 == kset2 and len(kset2) == 2),
+        ("(d) dedup does NOT collapse the two identical-line writes",
+         len(D.dedup(tw1)) == 2),
+    ]
+
+    # ---- (e) SHADOW: same-name locals in nested scopes on one line ----------------------
+    sh = [o for o in D.direct_walk_write_sites(adv1) if o["function"] == "shadow"]
+    xdecls = [r for r in D.local_declaration_identities(adv1)
+              if r["function"] == "shadow" and r["name"] == "x"]
+    checks += [
+        ("(e) shadowed same-line locals x -> TWO distinct DECLARATION identities",
+         len(xdecls) == 2 and len({D.decl_identity_key(r) for r in xdecls}) == 2),
+        ("(e) writes through shadowed same-line locals -> TWO distinct identities",
+         len(sh) == 2 and len({D.identity_key(o) for o in sh}) == 2),
+        ("(e) each shadow write binds a distinct local decl ordinal (0 and 1)",
+         all(o["identity"]["dest_decl"][0] == "local" and o["identity"]["dest_decl"][2] == "x"
+             for o in sh)
+         and {o["identity"]["dest_decl"][3] for o in sh} == {0, 1}),
+        ("(e) dedup keeps both shadowed-local writes SEPARATE",
+         len(D.dedup(sh)) == 2),
+    ]
+
     ok = True
     for name, c in checks:
         print(("PASS" if c else "FAIL"), name); ok = ok and c
