@@ -16,7 +16,12 @@ Real bodies parse once the target's generated headers + include paths are suppli
 - openssl @3bd5319b: `./config` (`opensslconf.h`); `x509_obj.c` → 274 calls.
 - c2cpg invoked with `--include <dirs> --with-include-auto-discovery`.
 
-## Result — the frozen scanner recognizes 0 of 7 bug write-sites
+## Result — the frozen scanner recognizes 0 of 6 *parsed* bug write-sites
+
+**Denominator:** build integration succeeded for **6 of 7** sites; frozen-scanner
+recognition was **0 of 6**. TIF013 was **not tested** (build-incomplete — JBIG optional
+dependency unconfigured, 0 call bodies), so it is neither a recognition success nor a
+measured miss. Do not report "0 of 7".
 
 | bug | family / obligation | parsed | bug-site recognized | miss form |
 |-----|--------------------|:------:|:-------------------:|-----------|
@@ -50,3 +55,13 @@ The SND trio is one positioned-write topology family (a pipeline feasibility tie
 three families. So the build-integration tier delivered a working real-code parse+scan
 pipeline and a rigorous **negative** recognition result — the honest input to deciding
 whether to invest in scanner coverage next.
+
+## Corrected status line
+
+- Real-code parsing succeeded for **6/7** sites (TIF013 build-incomplete).
+- Frozen-scanner recognition was **0/6** on the parsed sites.
+- Four **general representation gaps** identified (not four bug-specific aliases):
+  address-of-indexed dest, wrapper-copy sink, pointer-walk write, external-decoder write.
+- **Magma is now the development corpus** (all 7 bugs are development/regression cases,
+  never confirmatory). A **separate held-out corpus** (statement-level, e.g. SecVulEval)
+  must supply confirmatory accuracy/coverage evidence.

@@ -52,11 +52,11 @@
   },
   "scanner": "FROZEN oob_runtime_capacity_v2 (UNMODIFIED; no aliases/write-models added)",
   "summary": {
-    "bug_sites_recognized": "0 of 7",
-    "build_incomplete": 1,
+    "DENOMINATOR_NOTE": "Report 0/6 recognized among successfully parsed sites, NOT 0/7. TIF013 was never actually tested (JBIG optional dependency unconfigured); it is neither a recognition success nor a measured miss.",
+    "bug_sites_recognized": "0 of 6 PARSED sites (TIF013 NOT tested: build-incomplete)",
+    "build_integration_succeeded": "6 of 7 sites",
     "consequence": "None of the 7 mapped bugs are currently evaluation-eligible. If the scanner is later extended to cover these write forms, the 7 Magma bugs become development/regression cases (not confirmatory), and a separate HELD-OUT corpus is required.",
-    "interpretation": "The FROZEN scanner (tuned on Juliet-style simple array/malloc dests) recognizes NONE of the mapped Magma bug write-sites. Real-code writes use forms outside its model: offset-into-struct-field-buffer dests, decoder calls, pointer-walks, and library copy wrappers. All are RECORDED as scanner-coverage findings, NOT fixed (adding support + re-evaluating on these bugs = training on the test set).",
-    "measured_misses": 6,
+    "interpretation": "The FROZEN scanner (tuned on Juliet-style simple array/malloc dests) recognizes NONE of the 6 measurable mapped Magma bug write-sites. The 4 general representation gaps: address-of-indexed dest, wrapper-copy sink, pointer-walk write, external-decoder write. RECORDED, not fixed.",
     "miss_forms": {
       "dest_&(struct.field[idx])": [
         "SND010",
@@ -72,7 +72,9 @@
       "wrapper_copy(ascii2ebcdic)": [
         "SSL004"
       ]
-    }
+    },
+    "not_measurable_build_incomplete": 1,
+    "parsed_and_measured": 6
   },
   "training_on_test_prohibition": "This dest-form gap is RECORDED, not fixed. Adding &(ptr[offset]) dest support and re-evaluating on SND would be training on the test set."
 }
