@@ -28,14 +28,37 @@ pool = json.load(open(os.path.join(HERE, "study", "pooled", "FROZEN_heldout_pool
 
 POOLED_TOTAL = 258
 FAMILIES_TOTAL = 42
+# The 8 SecVulEval sites (first 8 in pooled order) exposed during runner validation, and their
+# 6 distinct families. See PROTOCOL_DEVIATION.md. The FULL 258 result is PRIMARY; excluding
+# these is a SECONDARY sensitivity check, not a replacement denominator.
 EXPOSED_SITES = {"ee5cad67577fa31d", "d232778c9a7f7df0", "6a970f8fab53b550",
-                 "1a58eb99070d0fbe", "4aad12d8262078cf"}
+                 "1a58eb99070d0fbe", "4aad12d8262078cf", "9eeeaa5836bf7a49",
+                 "c342772544ffe23d", "09dc95c27e7d38c6"}
 EXPOSED_FAMILIES = {"fam_42418a7cbf67", "fam_83e36e70488c", "fam_9152d9e125ef",
-                    "fam_bbab2acb2e20"}
+                    "fam_bbab2acb2e20", "fam_4bdb4421b431", "fam_31f08ea2c79e"}
 
 # all pooled sites per family (denominator for strict macro recall; includes unrecoverable)
 fam_all = Counter(s["family_id"] for s in pool["sites"])
 all_families = set(fam_all)
+
+# ---- COMPLETION ASSERTIONS (run once, on the archived raw) --------------------------------
+_sv = [r for r in rows if r["pool_source"] == "secvuleval_full"]
+_ot = [r for r in rows if r["pool_source"] != "secvuleval_full"]
+assert len(rows) == 258, f"expected 258 rows, got {len(rows)}"
+assert len(_ot) == 83 and all(
+    r.get("pipeline_attrition") == "source_not_reconstructable_from_frozen_manifest"
+    for r in _ot), "83 source_not_reconstructable rows expected"
+assert len(_sv) == 175, f"expected 175 SecVulEval attempts, got {len(_sv)}"
+assert sum(bool(r.get("stage1_source_available")) for r in _sv) == 175, \
+    "all 175 SecVulEval body hashes must verify (stage1)"
+
+def _uid(s):
+    return s.get("site_id") or (s["pool_source"] + "|" + str(s.get("diff_sha256")))
+assert len({_uid(s) for s in pool["sites"]}) == 258, "258 unique pooled site ids expected"
+# identity chain (raw >= id-bearing >= unique) is asserted per-body in the runner and again in
+# aggregate inside compute().
+print("COMPLETION ASSERTIONS PASSED: 258 rows = 83 not-reconstructable + 175 function-packet "
+      "attempts; 258 unique site ids; 175 body hashes verified.")
 
 
 def _rowkey(r):
@@ -152,14 +175,16 @@ print("NOT perfectly blind: see PROTOCOL_DEVIATION.md (5 sites pre-exposed).")
 print("SecVulEval = recognition from frozen FUNCTION-LEVEL source packets, not full-repo recall.")
 print("=" * 80)
 
-full = compute(rows, fam_all, "FULL (all pooled families/sites)")
+full = compute(rows, fam_all, "PRIMARY / FULL (all 258 pooled sites, 42 families)")
 show(full)
 
-# sensitivity: drop the 5 exposed sites AND their 4 whole families
+# SECONDARY sensitivity: drop the 8 exposed sites AND their 6 whole families (not a
+# replacement denominator).
 rows_sa = [r for r in rows if r.get("site_id") not in EXPOSED_SITES
            and r.get("family_id") not in EXPOSED_FAMILIES]
 fam_all_sa = Counter({f: n for f, n in fam_all.items() if f not in EXPOSED_FAMILIES})
-sens = compute(rows_sa, fam_all_sa, "SENSITIVITY (exclude 5 exposed sites + their 4 families)")
+sens = compute(rows_sa, fam_all_sa,
+               "SECONDARY / SENSITIVITY (exclude 8 exposed sites + their 6 families)")
 show(sens)
 
 out = {"full": full, "sensitivity_excluding_exposed": sens,

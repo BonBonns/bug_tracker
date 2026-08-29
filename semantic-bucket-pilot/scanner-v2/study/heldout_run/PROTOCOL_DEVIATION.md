@@ -1,34 +1,44 @@
 # Held-out run — protocol deviation record
 
-This run is **NOT** described as perfectly blind or untouched. Before the run manifest and
-runner were frozen, five held-out sites were executed during runner validation, and two of
-them were additionally inspected by hand while debugging the recognition-extraction code. The
-scanner capabilities and producers were already frozen and were **not** changed, so this does
-not invalidate the scanner *measurement*, but it is a protocol deviation and is recorded here
-in full.
+This run is **NOT** described as perfectly blind or untouched. During runner validation, the
+first **eight** SecVulEval sites (pooled order) were executed, and two of them were additionally
+inspected by hand while debugging the recognition-extraction code. The scanner capabilities and
+producers were already frozen and were **not** changed, so this does not invalidate the scanner
+*measurement*, but it is a protocol deviation and is recorded here in full.
 
-## Exposed sites (5) and families (4 distinct)
+Two validation passes exposed sites:
+- **first 5 sites** — `heldout_run.py <dir> 5`, run on the INITIAL runner (before the
+  identity-reconciliation changes);
+- **first 8 sites** — `heldout_run.py <dir> 8`, run on the MODIFIED runner (after the
+  identity-reconciliation / relabel / function-packet changes). This pass re-ran sites 1–5 and
+  additionally exposed sites 6–8.
 
-All five are the first five SecVulEval sites in pooled order; they were run via
-`heldout_run.py <dir> 5` (and 8) during runner validation.
+The exposed set is the union: the **first 8 SecVulEval sites**, spanning **6 distinct families**.
 
-| site_id            | function                    | family_id         | family_signature                  | write_kind    |
-|--------------------|-----------------------------|-------------------|-----------------------------------|---------------|
-| `ee5cad67577fa31d` | `pfkey_register`            | `fam_42418a7cbf67`| `pointer_deref\|unknown\|deref`     | pointer_deref |
-| `d232778c9a7f7df0` | `wilc_wfi_cfg_parse_ch_attr`| `fam_83e36e70488c`| `copy_sink\|struct_field\|V->V`     | copy_sink     |
-| `6a970f8fab53b550` | `ice_free_q_vector`         | `fam_9152d9e125ef`| `index_write\|struct_field\|index`  | index_write   |
-| `1a58eb99070d0fbe` | `nxp_fspi_fill_txfifo`      | `fam_bbab2acb2e20`| `copy_sink\|unknown\|V`             | copy_sink     |
-| `4aad12d8262078cf` | `mlxsw_sp_acl_tcam_init`    | `fam_42418a7cbf67`| `pointer_deref\|unknown\|deref`     | pointer_deref |
+## Exposed sites (8) and families (6 distinct)
 
-Distinct exposed families (4): `fam_42418a7cbf67` (2 sites), `fam_83e36e70488c`,
-`fam_9152d9e125ef`, `fam_bbab2acb2e20`.
+| # | site_id            | function                    | family_id         | family_signature                   | write_kind    | exposed in |
+|---|--------------------|-----------------------------|-------------------|------------------------------------|---------------|------------|
+| 1 | `ee5cad67577fa31d` | `pfkey_register`            | `fam_42418a7cbf67`| `pointer_deref\|unknown\|deref`      | pointer_deref | 5 & 8; hand-inspected |
+| 2 | `d232778c9a7f7df0` | `wilc_wfi_cfg_parse_ch_attr`| `fam_83e36e70488c`| `copy_sink\|struct_field\|V->V`      | copy_sink     | 5 & 8; hand-inspected |
+| 3 | `6a970f8fab53b550` | `ice_free_q_vector`         | `fam_9152d9e125ef`| `index_write\|struct_field\|index`   | index_write   | 5 & 8 |
+| 4 | `1a58eb99070d0fbe` | `nxp_fspi_fill_txfifo`      | `fam_bbab2acb2e20`| `copy_sink\|unknown\|V`              | copy_sink     | 5 & 8 |
+| 5 | `4aad12d8262078cf` | `mlxsw_sp_acl_tcam_init`    | `fam_42418a7cbf67`| `pointer_deref\|unknown\|deref`      | pointer_deref | 5 & 8 |
+| 6 | `9eeeaa5836bf7a49` | `mi_enum_attr`              | `fam_42418a7cbf67`| `pointer_deref\|unknown\|deref`      | pointer_deref | 8 only (modified runner) |
+| 7 | `c342772544ffe23d` | `psi_write`                 | `fam_4bdb4421b431`| `index_write\|local_array\|index`    | index_write   | 8 only (modified runner) |
+| 8 | `09dc95c27e7d38c6` | `rtw_wx_set_scan`           | `fam_31f08ea2c79e`| `copy_sink\|unknown\|V[V].V`         | copy_sink     | 8 only (modified runner) |
+
+Distinct exposed families (6): `fam_42418a7cbf67` (sites 1, 5, 6), `fam_83e36e70488c`,
+`fam_9152d9e125ef`, `fam_bbab2acb2e20`, `fam_4bdb4421b431` (site 7), `fam_31f08ea2c79e` (site 8).
 
 ## What was observed
 
-- **Validation runs (5 then 8 sites):** every exposed site passed stages 1–3 (source
-  available, build/parse OK, labeled write mapped) and was **NOT recognized** by any producer
-  or capability (`stage4_recognized = false`, `distinct_recognized_ops = 0`). Identical across
-  the validation run, the first (superseded) full run, and the re-run — deterministic.
+- **Validation runs (5 then 8 sites):** every one of the 8 exposed sites was **NOT recognized**
+  by any producer or capability (`stage4_recognized = false`, `distinct_recognized_ops = 0`);
+  raw recognized records = 0 for each. Sites 1,3,4,5,6,8 passed stages 1–3 (source available,
+  build/parse OK, labeled write mapped); site 7 (`psi_write`) built but its labeled write did
+  not map into the CPG (stage-3 pipeline attrition). Identical across the 5-site pass, the
+  8-site pass, the first (superseded) full run, and the re-run — deterministic.
 - **Manual inspection #1 — `pfkey_register`:** scanned the reconstructed body; ran the three
   frozen producers directly → **0 records each**. The labeled write
   (`struct pfkey_sock *pfk = pfkey_sk(sk);`) is a pointer declaration, outside all four
@@ -67,6 +77,7 @@ in `RUN_MANIFEST.json` are the frozen-commit values. The scanner is byte-for-byt
 
 ## Handling in the report
 
-The full result is reported, AND a **sensitivity analysis** is reported that excludes the five
-exposed sites and their four entire families, to show the measurement does not depend on the
-exposed material.
+The **full 258-site result is PRIMARY**, with this protocol deviation clearly stated. A
+**secondary sensitivity analysis** excludes the 8 exposed sites and their 6 entire families to
+show the measurement does not depend on the exposed material — it is a sensitivity check, NOT a
+replacement denominator.
