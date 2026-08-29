@@ -120,11 +120,14 @@ def recognized_records(cpp):
     return out
 
 
-def dedup_recognized(cpp, recs):
-    """Deduplicate recognized records through the frozen physical-write identity: for each
-    (function,line,dest) locate the write call in cpp.json and key by WSD.identity_key,
-    preserving every producer's provenance. Records with no locatable call fall back to a
-    (function,line,dest) key (still never merged across distinct sites)."""
+def reconcile_identity(cpp, recs):
+    """Reconcile producer output through the frozen physical-write identity and ASSERT the
+    monotone chain
+        raw recognized records  >=  identity-bearing records  >=  unique physical operations.
+    For each recognized record, an identity is computed from the MATCHED CPG write node
+    (cap1/cursor producers do not natively carry the shared identity); a record with no
+    matched write node is marked identity_unverifiable and is NEVER merged with another (each
+    gets its own monotonic op). Every producer's provenance is preserved."""
     d = json.load(open(cpp))
     index = WSD.build_index(d)
     by_fl = {}
@@ -132,24 +135,41 @@ def dedup_recognized(cpp, recs):
         if WSD.write_target(c) is not None:
             by_fl.setdefault((index["funcs"].get(c.get("enclosing_function_id"), {}).get("name"),
                               c.get("line")), []).append(c)
-    groups = {}
-    for r in recs:
-        if r.get("error"):
-            continue
+    raw = [r for r in recs if not r.get("error")]
+    id_groups = {}          # frozen-identity key -> op (identity-bearing; merged by identity)
+    unverifiable = []       # each its own op, never merged
+    identity_bearing = 0
+    for r in raw:
         fn, ln, dest = r.get("function"), r.get("line"), r.get("dest")
-        key = None
+        rd = WSD._root_ident(dest or "")
+        node = None
         for c in by_fl.get((fn, ln), []):
-            if WSD._root_ident(WSD.write_target(c) or "") == WSD._root_ident(dest or ""):
-                key = ("id", WSD.identity_key({"identity": WSD.physical_write_identity(c, index)[0]}))
+            if rd and WSD._root_ident(WSD.write_target(c) or "") == rd:
+                node = c
                 break
-        if key is None:
-            key = ("fl", fn, ln, WSD._root_ident(dest or ""))
-        groups.setdefault(str(key), {"key": str(key), "function": fn, "line": ln, "dest": dest,
-                                     "provenance": []})
-        groups[str(key)]["provenance"].append(
-            {"producer": r["producer"], "status": r.get("status"), "reason": r.get("reason"),
-             "route": r.get("route")})
-    return list(groups.values())
+        prov = {"producer": r["producer"], "status": r.get("status"),
+                "reason": r.get("reason"), "route": r.get("route")}
+        if node is not None:
+            ident, _ = WSD.physical_write_identity(node, index)
+            key = str(WSD.identity_key({"identity": ident}))
+            g = id_groups.setdefault(key, {"identity_key": key, "function": fn, "line": ln,
+                                           "dest": dest, "verifiable": bool(ident.get("verifiable")),
+                                           "provenance": []})
+            g["provenance"].append(prov)
+            identity_bearing += 1
+        else:
+            unverifiable.append({"identity_key": "UNVERIFIABLE#%d" % len(unverifiable),
+                                 "function": fn, "line": ln, "dest": dest,
+                                 "verifiable": False, "provenance": [prov]})
+    unique_ops = len(id_groups)
+    # ASSERT the identity/denominator chain (identity-bearing records collapse to <= unique ops;
+    # unverifiable records are raw but not identity-bearing).
+    assert len(raw) >= identity_bearing >= unique_ops, (len(raw), identity_bearing, unique_ops)
+    return {"raw_recognized_records": len(raw),
+            "identity_bearing_records": identity_bearing,
+            "unique_physical_operations": unique_ops,
+            "identity_unverifiable_records": len(unverifiable),
+            "ops": list(id_groups.values()), "unverifiable_ops": unverifiable}
 
 
 def map_labeled_write(body_lines, cpp, write_line, write_dest):
@@ -205,15 +225,21 @@ def main():
             bodies[h] = o["func_body"]
 
     raw = open(raw_path, "w")
-    # 83 non-SecVulEval pooled sites: no function body / filepath in the frozen artifacts ->
-    # STAGE-1 pipeline attrition (source unavailable), recorded, NOT scanner misses.
+    # 83 non-SecVulEval pooled sites: filepath/function source was NOT retained in the frozen
+    # local manifests, so they are not reconstructable HERE. This is pipeline / data-packaging
+    # attrition -- their repos+commits may still be retrievable later; it is NOT proof the
+    # source no longer exists. Recorded, kept SEPARATE from scanner misses.
     for s in other:
         raw.write(json.dumps({
             "pool_source": s["pool_source"], "family_id": s["family_id"],
             "write_kind": s.get("write_kind"), "write_dest": s.get("write_dest"),
+            "repository": s.get("repository") or s.get("project"),
+            "commit": s.get("commit_id") or s.get("fix_commit"),
             "stage1_source_available": False,
-            "pipeline_attrition": "source_not_in_frozen_artifacts",
-            "detail": "metadata-only freeze for this source (no func_body / filepath)"}) + "\n")
+            "pipeline_attrition": "source_not_reconstructable_from_frozen_manifest",
+            "detail": "filepath/function source not retained in the frozen local manifest; "
+                      "repository+commit may be retrievable later (not proof source is gone)"})
+            + "\n")
 
     done = 0
     for s in sv:
@@ -224,7 +250,11 @@ def main():
         row = {"pool_source": "secvuleval_full", "site_id": s["site_id"],
                "func_name": s["func_name"], "family_id": s["family_id"],
                "write_kind": s.get("write_kind"), "write_dest": s.get("write_dest"),
-               "write_line": s.get("write_line")}
+               "write_line": s.get("write_line"),
+               # NOT a full-repository build: this is recognition from a frozen FUNCTION-LEVEL
+               # source packet (missing headers/decls/macros/callers/build config may lose
+               # evidence). Reported as function-packet recognition, not full-repo recall.
+               "analysis_mode": "frozen_function_level_source_packet"}
         body = bodies.get(h)
         # STAGE 1: source available + sha-verified
         if body is None or hashlib.sha256(body.encode()).hexdigest() != h:
@@ -247,9 +277,14 @@ def main():
                                                s.get("write_dest"))
         row.update(stage3_labeled_write_mapped=mapped, mapped_line=L, map_detail=mdetail)
         recs = recognized_records(cpp)
-        deduped = dedup_recognized(cpp, recs)
-        row["distinct_recognized_ops"] = len(deduped)
-        row["recognized_provenance"] = deduped
+        recon = reconcile_identity(cpp, recs)
+        row["identity_reconciliation"] = {
+            k: recon[k] for k in ("raw_recognized_records", "identity_bearing_records",
+                                  "unique_physical_operations", "identity_unverifiable_records")}
+        row["distinct_recognized_ops"] = (recon["unique_physical_operations"]
+                                          + recon["identity_unverifiable_records"])
+        row["recognized_ops"] = recon["ops"]
+        row["recognized_unverifiable_ops"] = recon["unverifiable_ops"]
         if not mapped:
             row["pipeline_attrition"] = "labeled_write_not_mapped"
             raw.write(json.dumps(row) + "\n"); continue
