@@ -1,0 +1,38 @@
+# EXCERPT (verbatim) from lz4 v1.9.4 lib/lz4.h lines 272-306
+# source: https://raw.githubusercontent.com/lz4/lz4/v1.9.4/lib/lz4.h
+# ----------------------------------------------------------------
+/*! LZ4_decompress_safe_partial() :
+ *  Decompress an LZ4 compressed block, of size 'srcSize' at position 'src',
+ *  into destination buffer 'dst' of size 'dstCapacity'.
+ *  Up to 'targetOutputSize' bytes will be decoded.
+ *  The function stops decoding on reaching this objective.
+ *  This can be useful to boost performance
+ *  whenever only the beginning of a block is required.
+ *
+ * @return : the number of bytes decoded in `dst` (necessarily <= targetOutputSize)
+ *           If source stream is detected malformed, function returns a negative result.
+ *
+ *  Note 1 : @return can be < targetOutputSize, if compressed block contains less data.
+ *
+ *  Note 2 : targetOutputSize must be <= dstCapacity
+ *
+ *  Note 3 : this function effectively stops decoding on reaching targetOutputSize,
+ *           so dstCapacity is kind of redundant.
+ *           This is because in older versions of this function,
+ *           decoding operation would still write complete sequences.
+ *           Therefore, there was no guarantee that it would stop writing at exactly targetOutputSize,
+ *           it could write more bytes, though only up to dstCapacity.
+ *           Some "margin" used to be required for this operation to work properly.
+ *           Thankfully, this is no longer necessary.
+ *           The function nonetheless keeps the same signature, in an effort to preserve API compatibility.
+ *
+ *  Note 4 : If srcSize is the exact size of the block,
+ *           then targetOutputSize can be any value,
+ *           including larger than the block's decompressed size.
+ *           The function will, at most, generate block's decompressed size.
+ *
+ *  Note 5 : If srcSize is _larger_ than block's compressed size,
+ *           then targetOutputSize **MUST** be <= block's decompressed size.
+ *           Otherwise, *silent corruption will occur*.
+ */
+LZ4LIB_API int LZ4_decompress_safe_partial (const char* src, char* dst, int srcSize, int targetOutputSize, int dstCapacity);

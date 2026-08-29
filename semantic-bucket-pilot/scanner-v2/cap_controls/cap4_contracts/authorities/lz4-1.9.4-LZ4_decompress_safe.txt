@@ -1,0 +1,18 @@
+# EXCERPT (verbatim) from lz4 v1.9.4 lib/lz4.h lines 191-205
+# source: https://raw.githubusercontent.com/lz4/lz4/v1.9.4/lib/lz4.h
+# ----------------------------------------------------------------
+/*! LZ4_decompress_safe() :
+ *  compressedSize : is the exact complete size of the compressed block.
+ *  dstCapacity : is the size of destination buffer (which must be already allocated), presumed an upper bound of decompressed size.
+ * @return : the number of bytes decompressed into destination buffer (necessarily <= dstCapacity)
+ *           If destination buffer is not large enough, decoding will stop and output an error code (negative value).
+ *           If the source stream is detected malformed, the function will stop decoding and return a negative result.
+ * Note 1 : This function is protected against malicious data packets :
+ *          it will never writes outside 'dst' buffer, nor read outside 'source' buffer,
+ *          even if the compressed block is maliciously modified to order the decoder to do these actions.
+ *          In such case, the decoder stops immediately, and considers the compressed block malformed.
+ * Note 2 : compressedSize and dstCapacity must be provided to the function, the compressed block does not contain them.
+ *          The implementation is free to send / store / derive this information in whichever way is most beneficial.
+ *          If there is a need for a different format which bundles together both compressed data and its metadata, consider looking at lz4frame.h instead.
+ */
+LZ4LIB_API int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
