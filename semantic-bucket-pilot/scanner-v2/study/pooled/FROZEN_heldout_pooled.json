@@ -33,33 +33,82 @@
     "fam_1383388357d4",
     "fam_b41a25fd581c"
   ],
+  "families_new_from_secvuleval_full": [
+    "fam_0d230c8e7c0a",
+    "fam_27ca4337511d",
+    "fam_31f08ea2c79e",
+    "fam_37e1f0a0bcab",
+    "fam_39cea207749a",
+    "fam_427812717b95",
+    "fam_4f88756267a5",
+    "fam_54c5cc6a0e5a",
+    "fam_6457ad6d7b21",
+    "fam_751d0478a908",
+    "fam_7a1d27ad3fe7",
+    "fam_7c46501897c4",
+    "fam_90ef7ccfa529",
+    "fam_9e3402a31e9d",
+    "fam_9e74c8640cd1",
+    "fam_9ecb9bb8ae2e",
+    "fam_a7c30e3997e1",
+    "fam_c6751e3d810b",
+    "fam_cdcbe9ff4e0a",
+    "fam_daafd5e84681",
+    "fam_efcc18aa8c71",
+    "fam_f6adc84a191d",
+    "fam_febb8b2d6f1e"
+  ],
   "family_sizes": {
-    "fam_0e4ba716265b": 3,
-    "fam_1383388357d4": 2,
+    "fam_0d230c8e7c0a": 1,
+    "fam_0e4ba716265b": 7,
+    "fam_1383388357d4": 4,
     "fam_223b8c51e55f": 3,
-    "fam_42418a7cbf67": 28,
-    "fam_4bdb4421b431": 3,
-    "fam_56c918f63585": 2,
-    "fam_83e36e70488c": 1,
-    "fam_9152d9e125ef": 4,
+    "fam_27ca4337511d": 1,
+    "fam_31f08ea2c79e": 1,
+    "fam_37e1f0a0bcab": 1,
+    "fam_39cea207749a": 1,
+    "fam_42418a7cbf67": 121,
+    "fam_427812717b95": 1,
+    "fam_4bdb4421b431": 8,
+    "fam_4f88756267a5": 1,
+    "fam_54c5cc6a0e5a": 1,
+    "fam_56c918f63585": 8,
+    "fam_6457ad6d7b21": 1,
+    "fam_751d0478a908": 1,
+    "fam_7a1d27ad3fe7": 1,
+    "fam_7c46501897c4": 1,
+    "fam_83e36e70488c": 3,
+    "fam_90ef7ccfa529": 1,
+    "fam_9152d9e125ef": 11,
+    "fam_9e3402a31e9d": 1,
+    "fam_9e74c8640cd1": 1,
+    "fam_9ecb9bb8ae2e": 1,
     "fam_a189881f6e54": 3,
-    "fam_aeb728439472": 7,
-    "fam_b41a25fd581c": 1,
-    "fam_bbab2acb2e20": 2,
+    "fam_a7c30e3997e1": 1,
+    "fam_aeb728439472": 20,
+    "fam_b41a25fd581c": 5,
+    "fam_bbab2acb2e20": 6,
     "fam_c35aa6788b76": 1,
+    "fam_c6751e3d810b": 1,
     "fam_c87ccc3e0563": 1,
     "fam_cae379e2673a": 1,
-    "fam_d3b5215e864d": 16,
-    "fam_d9e4e31ba3b4": 3,
+    "fam_cdcbe9ff4e0a": 1,
+    "fam_d3b5215e864d": 26,
+    "fam_d9e4e31ba3b4": 5,
+    "fam_daafd5e84681": 1,
     "fam_e314471e5d26": 1,
-    "fam_fc51b2985a63": 1
+    "fam_efcc18aa8c71": 1,
+    "fam_f6adc84a191d": 1,
+    "fam_fc51b2985a63": 1,
+    "fam_febb8b2d6f1e": 1
   },
   "inputs_sha256": {
     "arvo": "9ff747927282ebf422b265e91f54e40ae435e5945a34650bfa01e156313ed805",
     "bigvul": "60be9359bdd337ac45c415ac6b33d7c062aae669c7d2d47c277fd3a4d559ec7a",
     "magma_write_mapping": "eef714292a04f34c8c96cf5e6b4c279cb1f81a789ec4edaff65b8e004626faba",
     "postcutoff": "82d5fbd74a416b2b268e3992f38e26c62bbf7daea79e8a2ea45d2939c642324b",
-    "secvuleval": "2fcb73e427249bed51226285047ac95c4caa48ec9ec9f6653d4e381c9e24b143"
+    "secvuleval": "2fcb73e427249bed51226285047ac95c4caa48ec9ec9f6653d4e381c9e24b143",
+    "secvuleval_full": "6da82c03401aa483fbddf7d8bf27fd22b56879538150123e517f42580bdf2ec6"
   },
   "magma_development_families_flagged": [
     "fam_56c918f63585"
@@ -85,10 +134,15 @@
     }
   },
   "model_calls": 0,
-  "pooled_sites": 83,
-  "pooled_vulnerable_families": 19,
+  "pooled_sites": 258,
+  "pooled_vulnerable_families": 42,
   "postcutoff_pooled": 21,
   "preregistration": "PREREGISTER_BIGVUL.md (committed before bigvul_freeze ran)",
+  "secvuleval_full_dropped_by_dedup": {
+    "dup_cve": 4
+  },
+  "secvuleval_full_mapped_vuln_before_dedup": 179,
+  "secvuleval_full_pooled": 175,
   "secvuleval_pilot_families_subsumed": [
     "fam_42418a7cbf67",
     "fam_d3b5215e864d"
@@ -1438,12 +1492,3929 @@
       "write_dest": "&entry",
       "write_kind": "copy_sink",
       "write_line": "memset (&entry, '\\0', sizeof (entry));"
+    },
+    {
+      "commit_id": "ba953a9d89a00c078b85f4b190bc1dde66fe16b5",
+      "cve_list": [
+        "CVE-2022-3028"
+      ],
+      "cwe_list": [
+        "CWE-362",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "net/key/af_key.c",
+      "func_body_sha256": "9a406b8d424ea2770e7551aa9c56747aa567d392473f73b5a65a6c256408b317",
+      "func_name": "pfkey_register",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "ee5cad67577fa31d",
+      "write_dest": "pfk",
+      "write_kind": "pointer_deref",
+      "write_line": "struct pfkey_sock *pfk = pfkey_sk(sk);"
+    },
+    {
+      "commit_id": "0cdfa9e6f0915e3d243e2393bfa8a22e12d553b0",
+      "cve_list": [
+        "CVE-2022-47518"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_83e36e70488c",
+      "family_signature": "copy_sink|struct_field|V->V",
+      "filepath": "drivers/net/wireless/microchip/wilc1000/cfg80211.c",
+      "func_body_sha256": "3f285499aa1df5da777a839c9c5310ad11cf7882249a24a7b7411d7ed8a142fa",
+      "func_name": "wilc_wfi_cfg_parse_ch_attr",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "d232778c9a7f7df0",
+      "write_dest": "e->ch_list",
+      "write_kind": "copy_sink",
+      "write_line": "memset(e->ch_list, sta_ch, e->no_of_channels);"
+    },
+    {
+      "commit_id": "2a5dc090b92cfa5270e20056074241c6db5c9cdd",
+      "cve_list": [
+        "CVE-2024-46766"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "drivers/net/ethernet/intel/ice/ice_base.c",
+      "func_body_sha256": "48e4eb16f0266b905e8ed245b8cdb2747f5768dd520ebb6ec251e661edf19392",
+      "func_name": "ice_free_q_vector",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "6a970f8fab53b550",
+      "write_dest": "vsi->q_vectors",
+      "write_kind": "index_write",
+      "write_line": "vsi->q_vectors[v_idx] = NULL;"
+    },
+    {
+      "commit_id": "2a8787c1cdc7be24fdd8953ecd1a8743a1006235",
+      "cve_list": [
+        "CVE-2024-46853"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "filepath": "drivers/spi/spi-nxp-fspi.c",
+      "func_body_sha256": "1c8fdca7d4e454075764d8f11ebe6d67183bcc13ba6a37558e9025389de92446",
+      "func_name": "nxp_fspi_fill_txfifo",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "1a58eb99070d0fbe",
+      "write_dest": "&data",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(&data, buf + i + j, 4);"
+    },
+    {
+      "commit_id": "483ae90d8f976f8339cf81066312e1329f2d3706",
+      "cve_list": [
+        "CVE-2024-26586"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "drivers/net/ethernet/mellanox/mlxsw/spectrum_acl_tcam.c",
+      "func_body_sha256": "68633e5740e8e77a23515115dc22286ba60527241e647c3b0b3fcbf521ecfc08",
+      "func_name": "mlxsw_sp_acl_tcam_init",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "4aad12d8262078cf",
+      "write_dest": "ops",
+      "write_kind": "pointer_deref",
+      "write_line": "const struct mlxsw_sp_acl_tcam_ops *ops = mlxsw_sp->acl_tcam_ops;"
+    },
+    {
+      "commit_id": "54e45702b648b7c0000e90b3e9b890e367e16ea8",
+      "cve_list": [
+        "CVE-2022-48423"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "fs/ntfs3/record.c",
+      "func_body_sha256": "9dd7ca0ae6075eee244bd303039df34c86af0499b3baf4af466c948e261e9140",
+      "func_name": "mi_enum_attr",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "9eeeaa5836bf7a49",
+      "write_dest": "rec",
+      "write_kind": "pointer_deref",
+      "write_line": "const struct MFT_REC *rec = mi->mrec;"
+    },
+    {
+      "commit_id": "6fcca0fa48118e6d63733eb4644c6cd880c15b8f",
+      "cve_list": [
+        "CVE-2020-0110"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "filepath": "kernel/sched/psi.c",
+      "func_body_sha256": "b3fecc4c9fe29149ddd1f2e463630db26e2ff1f1fc7b986632a6ab0d24393211",
+      "func_name": "psi_write",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "c342772544ffe23d",
+      "write_dest": "buf",
+      "write_kind": "index_write",
+      "write_line": "buf[buf_size - 1] = '\\0';"
+    },
+    {
+      "commit_id": "74b6b20df8cfe90ada777d621b54c32e69e27cd7",
+      "cve_list": [
+        "CVE-2021-28660"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_31f08ea2c79e",
+      "family_signature": "copy_sink|unknown|V[V].V",
+      "filepath": "drivers/staging/rtl8188eu/os_dep/ioctl_linux.c",
+      "func_body_sha256": "3f09ddaf8b05d404dff33919305f7e6a7afd0fcb6ac97ecf8c26ed99ea53e1ab",
+      "func_name": "rtw_wx_set_scan",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "09dc95c27e7d38c6",
+      "write_dest": "ssid[ssid_index].ssid",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(ssid[ssid_index].ssid, pos, ssid[ssid_index].ssid_length);"
+    },
+    {
+      "commit_id": "780e982905bef61d13496d9af5310bf4af3a64d3",
+      "cve_list": [
+        "CVE-2017-18552"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "net/rds/af_rds.c",
+      "func_body_sha256": "cb999cbd502788d8a2b3813d881d26c1bcf68cae5a6ea649643cc1cd82eedc83",
+      "func_name": "rds_recv_track_latency",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "8868321641fe285a",
+      "write_dest": "rs->rs_rx_trace",
+      "write_kind": "index_write",
+      "write_line": "rs->rs_rx_trace[i] = trace.rx_trace_pos[i];"
+    },
+    {
+      "commit_id": "7992c18810e568b95c869b227137a2215702a805",
+      "cve_list": [
+        "CVE-2018-9363"
+      ],
+      "cwe_list": [
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "net/bluetooth/hidp/core.c",
+      "func_body_sha256": "b6faa30b35eaa98829a64ded46bc0da6e18ff7b3aa3b06998d3a942f10a47209",
+      "func_name": "hidp_process_report",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "2f34cb9b65fc505a",
+      "write_dest": "session->input_buf",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(session->input_buf, data, len);"
+    },
+    {
+      "commit_id": "819b23f1c501b17b9694325471789e6b5cc2d0d2",
+      "cve_list": [
+        "CVE-2018-10878"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "fs/ext4/balloc.c",
+      "func_body_sha256": "9191e647091484e0cb9c13ddfa9b351573182eab7bb7e33a384029c96431b930",
+      "func_name": "ext4_init_block_bitmap",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "de9a5a39cade79ac",
+      "write_dest": "sbi",
+      "write_kind": "pointer_deref",
+      "write_line": "struct ext4_sb_info *sbi = EXT4_SB(sb);"
+    },
+    {
+      "commit_id": "8a2b307c21d4b290e3cbe33f768f194286d07c23",
+      "cve_list": [
+        "CVE-2018-10840"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "fs/ext4/xattr.c",
+      "func_body_sha256": "8a79564deaad2caba31c6cb58c6d68bba684d7daa1dd3511123eed38eb8cd8ce",
+      "func_name": "ext4_xattr_set_entry",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "a933bb039496ec64",
+      "write_dest": "first_val",
+      "write_kind": "pointer_deref",
+      "write_line": "void *first_val = s->base + min_offs;"
+    },
+    {
+      "commit_id": "8aba27c4a5020abdf60149239198297f88338a8d",
+      "cve_list": [
+        "CVE-2024-45030"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "drivers/net/ethernet/intel/igb/igb_main.c",
+      "func_body_sha256": "0568380cf2f5dde83b3a3044f13838e8445cdcf7fd3204f4c33e6e6f0d778bbf",
+      "func_name": "igb_set_rx_buffer_len",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "ac034554ab866498",
+      "write_dest": "hw",
+      "write_kind": "pointer_deref",
+      "write_line": "struct e1000_hw *hw = &adapter->hw;"
+    },
+    {
+      "commit_id": "8f0541186e9ad1b62accc9519cc2b7a7240272a7",
+      "cve_list": [
+        "CVE-2022-47942"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_751d0478a908",
+      "family_signature": "copy_sink|unknown|V(V->V)",
+      "filepath": "fs/ksmbd/smbacl.c",
+      "func_body_sha256": "4f225c2ab1a96283575777d52c1e8aa1be8b6b000c05f7c73c1e0c91a58dc002",
+      "func_name": "set_ntacl_dacl",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "6f2e1b531485e3f8",
+      "write_dest": "(char *)pndace + size",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy((char *)pndace + size, ntace, le16_to_cpu(ntace->size));"
+    },
+    {
+      "commit_id": "918fc3855a6507a200e9cf22c20be852c0982687",
+      "cve_list": [
+        "CVE-2021-46931"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_54c5cc6a0e5a",
+      "family_signature": "copy_sink|local_array|implicit_or_2arg",
+      "filepath": "drivers/net/ethernet/mellanox/mlx5/core/en/reporter_tx.c",
+      "func_body_sha256": "c31ac507ad1cc48651298eef02ffe7a2020e25dd1a6c030b190286ee813248ac",
+      "func_name": "mlx5e_reporter_tx_timeout",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "0e425b557a9ac1ae",
+      "write_dest": "err_str",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(err_str, sizeof(err_str),"
+    },
+    {
+      "commit_id": "9a2fa1472083580b6c66bdaf291f591e1170123a",
+      "cve_list": [
+        "CVE-2024-45025"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "filepath": "tools/testing/selftests/core/close_range_test.c",
+      "func_body_sha256": "90bdfb87be2e09de2cc1e25c3f53e41e9ff699e4610b51b17f83ec65d45824ec",
+      "func_name": "TEST",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "0a3fbee250d5c1ad",
+      "write_dest": "open_fds",
+      "write_kind": "index_write",
+      "write_line": "open_fds[i] = fd;"
+    },
+    {
+      "commit_id": "acf69c946233259ab4d64f8869d4037a198c7f06",
+      "cve_list": [
+        "CVE-2020-14386"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "net/packet/af_packet.c",
+      "func_body_sha256": "467ecdda815ed02b62f9afb3a4e994fd0975380a730d25a1f3dfa5baec5c4014",
+      "func_name": "tpacket_rcv",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "68d98cf2da371780",
+      "write_dest": "copy_skb",
+      "write_kind": "pointer_deref",
+      "write_line": "struct sk_buff *copy_skb = NULL;"
+    },
+    {
+      "commit_id": "b4487b93545214a9db8cbf32e86411677b0cca21",
+      "cve_list": [
+        "CVE-2020-25212"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "fs/nfs/nfs4xdr.c",
+      "func_body_sha256": "fa12eda7fe6500da6994e61266d055e0e840b93eba86e6d90d8ca4f87decbd99",
+      "func_name": "decode_attr_security_label",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "b147367a8cdb62e8",
+      "write_dest": "label->label",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(label->label, p, len);"
+    },
+    {
+      "commit_id": "b70261a288ea4d2f4ac7cd04be08a9f0f2de4f4d",
+      "cve_list": [
+        "CVE-2020-12653"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_4f88756267a5",
+      "family_signature": "copy_sink|struct_field|implicit_or_2arg",
+      "filepath": "drivers/net/wireless/marvell/mwifiex/scan.c",
+      "func_body_sha256": "3ed204f57e0b89d8070aafc38b65932b26b7d93552cdedcfa05bb4170f391b48",
+      "func_name": "mwifiex_cmd_append_vsie_tlv",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "129071d685a10180",
+      "write_dest": "vs_param_set->ie",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(vs_param_set->ie, priv->vs_ie[id].ie,"
+    },
+    {
+      "commit_id": "b922f622592af76b57cbc566eaeccda0b31a3496",
+      "cve_list": [
+        "CVE-2021-43975"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "drivers/net/ethernet/aquantia/atlantic/hw_atl/hw_atl_utils.c",
+      "func_body_sha256": "08eecd0e29c220d3c303c3fe58ac0447589ce06165687e7c6db5c2001a5d2db9",
+      "func_name": "hw_atl_utils_fw_rpc_wait",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "11246689f58b7381",
+      "write_dest": "rpc",
+      "write_kind": "pointer_deref",
+      "write_line": "*rpc = &self->rpc;"
+    },
+    {
+      "commit_id": "be1684930f5262a622d40ce7a6f1423530d87f89",
+      "cve_list": [
+        "CVE-2024-46725"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "drivers/gpu/drm/amd/amdgpu/amdgpu_ring.c",
+      "func_body_sha256": "a8342c2363573054007335b8e477283e6eb72dada9cdf6024e327d8cbafb5642",
+      "func_name": "amdgpu_ring_init",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "127cd0d8e9215768",
+      "write_dest": "sched",
+      "write_kind": "index_write",
+      "write_line": "adev->gpu_sched[hw_ip][hw_prio].sched[(*num_sched)++] ="
+    },
+    {
+      "commit_id": "d2ffed5185df9d8d9ccd150e4340e3b6f96a8381",
+      "cve_list": [
+        "CVE-2018-9385"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "drivers/amba/bus.c",
+      "func_body_sha256": "44dd1b9fdb9d3a16396b0283c5bcc33656032bddb2844b703f169eba350d496f",
+      "func_name": "driver_override_store",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "de6b5a9bd786a1c3",
+      "write_dest": "dev",
+      "write_kind": "pointer_deref",
+      "write_line": "struct amba_device *dev = to_amba_device(_dev);"
+    },
+    {
+      "commit_id": "d33fe1714a44ff540629b149d8fab4ac6967585c",
+      "cve_list": [
+        "CVE-2024-42093"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "drivers/net/ethernet/freescale/dpaa2/dpaa2-eth.c",
+      "func_body_sha256": "45a70efafe3c33d90eb69dcf34600056ae0526a273b16d858c16a067d2249b05",
+      "func_name": "update_xps",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "0095840e3afb92e3",
+      "write_dest": "net_dev",
+      "write_kind": "pointer_deref",
+      "write_line": "struct net_device *net_dev = priv->net_dev;"
+    },
+    {
+      "commit_id": "ec2b9a5e11e51fea1bb04c1e7e471952e887e874",
+      "cve_list": [
+        "CVE-2024-43910"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "kernel/bpf/verifier.c",
+      "func_body_sha256": "0541d568d37b1f58ca3364a6ac09c94533f1e093865d160bae83ba1cd341a4d8",
+      "func_name": "process_dynptr_func",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "faa6f69ad9864b82",
+      "write_dest": "regs",
+      "write_kind": "pointer_deref",
+      "write_line": "struct bpf_reg_state *regs = cur_regs(env), *reg = &regs[regno];"
+    },
+    {
+      "commit_id": "f1e255d60ae66a9f672ff9a207ee6cd8e33d2679",
+      "cve_list": [
+        "CVE-2018-16276"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9e3402a31e9d",
+      "family_signature": "copy_sink|local_array|\"%V\\V\",V->V",
+      "filepath": "drivers/usb/misc/yurex.c",
+      "func_body_sha256": "13785be62544697b5dcbb78c8824b70f0c2e1e20cff7a14257faaa4def0cdd51",
+      "func_name": "yurex_read",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "37f63548edae38f9",
+      "write_dest": "in_buffer",
+      "write_kind": "copy_sink",
+      "write_line": "bytes_read = snprintf(in_buffer, 20, \"%lld\\n\", dev->bbu);"
+    },
+    {
+      "commit_id": "f2fcfcd670257236ebf2088bbdf26f6a8ef459fe",
+      "cve_list": [
+        "CVE-2017-1000251"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "filepath": "net/bluetooth/l2cap.c",
+      "func_body_sha256": "568de158df2182ec4e744d806af814a4fc2c3af33a8349c0b399fae48d3fbbd2",
+      "func_name": "l2cap_parse_conf_req",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "5d8ff0383f5a9977",
+      "write_dest": "&rfc",
+      "write_kind": "copy_sink",
+      "write_line": "memset(&rfc, 0, sizeof(rfc));"
+    },
+    {
+      "commit_id": "050fad7c4534c13c8eb1d9c2ba66012e014773cb",
+      "cve_list": [
+        "CVE-2018-25020"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "kernel/bpf/core.c",
+      "func_body_sha256": "e6ce7ce1cdb91d7eb7e0bbe86307b133f4564725bdbc1825b6a8b8da8279c02b",
+      "func_name": "bpf_adj_branches",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "d7dff80996bf5b68",
+      "write_dest": "insn",
+      "write_kind": "pointer_deref",
+      "write_line": "struct bpf_insn *insn = prog->insnsi;"
+    },
+    {
+      "commit_id": "050fad7c4534c13c8eb1d9c2ba66012e014773cb",
+      "cve_list": [
+        "CVE-2018-25020"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_7c46501897c4",
+      "family_signature": "copy_sink|struct_field|V(*V)*V",
+      "filepath": "kernel/bpf/core.c",
+      "func_body_sha256": "707d3988b6a10ba135e3e0233c5e950a2ced74758a991d9555bffee2f75f239f",
+      "func_name": "bpf_patch_insn_single",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "621b768abaee7e29",
+      "write_dest": "prog_adj->insnsi + off",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(prog_adj->insnsi + off, patch, sizeof(*patch) * len);"
+    },
+    {
+      "commit_id": "b102f0c522cf668c8382c56a4f771b37d011cda2",
+      "cve_list": [
+        "CVE-2020-12465"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "drivers/net/wireless/mediatek/mt76/dma.c",
+      "func_body_sha256": "f20584dc6d3678b57daca3a203c1ec8f7b6dbed359b445370a4b292b3247de62",
+      "func_name": "mt76_add_fragment",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "2cce4d1ce2323f82",
+      "write_dest": "skb",
+      "write_kind": "pointer_deref",
+      "write_line": "struct sk_buff *skb = q->rx_head;"
+    },
+    {
+      "commit_id": "8f0541186e9ad1b62accc9519cc2b7a7240272a7",
+      "cve_list": [
+        "CVE-2022-47942"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "fs/ksmbd/smb2pdu.c",
+      "func_body_sha256": "62c3673126fafa7bc61b47dbf777e7158746e87d612315ce2541ece32ff66c31",
+      "func_name": "smb2_allocate_rsp_buf",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "c640a8012afe6ce2",
+      "write_dest": "hdr",
+      "write_kind": "pointer_deref",
+      "write_line": "struct smb2_hdr *hdr = smb2_get_msg(work->request_buf);"
+    },
+    {
+      "commit_id": "8f0541186e9ad1b62accc9519cc2b7a7240272a7",
+      "cve_list": [
+        "CVE-2022-47942"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "fs/ksmbd/smb2pdu.c",
+      "func_body_sha256": "2c5ca92f6129605071148805995955a2b67d0242c10e84ad914f88dd9fa21bd3",
+      "func_name": "smb2_get_info_sec",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "linux",
+      "site_id": "a744b342a6321627",
+      "write_dest": "pntsd",
+      "write_kind": "pointer_deref",
+      "write_line": "struct smb_ntsd *pntsd = (struct smb_ntsd *)rsp->Buffer, *ppntsd = NULL;"
+    },
+    {
+      "commit_id": "76a6c363c18cfe7b6a1524ae64202ac9db330767",
+      "cve_list": [
+        "CVE-2023-46852"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "proto_proxy.c",
+      "func_body_sha256": "d0cc760ca34a8098c4859a9a96115580227b21df9536ff3ace06e18a7069c9f5",
+      "func_name": "proxy_process_command",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "memcached",
+      "site_id": "6a216ff1def8a374",
+      "write_dest": "cur",
+      "write_kind": "pointer_deref",
+      "write_line": "char *cur = temp;"
+    },
+    {
+      "commit_id": "4565747056a11356210ed8edcecb920105e40b60",
+      "cve_list": [
+        "CVE-2023-47470"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "libavcodec/evc_ps.c",
+      "func_body_sha256": "a0a611fa2a78ba4d71adabdbfebd014ccbf7c3c5fb892efe3fed688a4d7e40ff",
+      "func_name": "ff_evc_parse_sps",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "FFmpeg",
+      "site_id": "7367955ce1d93c4b",
+      "write_dest": "sps->num_ref_pic_list_in_sps",
+      "write_kind": "index_write",
+      "write_line": "sps->num_ref_pic_list_in_sps[1] = get_ue_golomb(gb);"
+    },
+    {
+      "commit_id": "7882080388be5088e72c425b02223c02e6cb4295",
+      "cve_list": [
+        "CVE-2015-5745"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "hw/char/virtio-serial-bus.c",
+      "func_body_sha256": "6bdebb11ea1d37b99aa1fbe6d3b6cd9afc30bf6b20e802432e730f94297253d3",
+      "func_name": "send_control_msg",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "qemu",
+      "site_id": "703f8628fb121021",
+      "write_dest": "elem.in_sg[0].iov_base",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(elem.in_sg[0].iov_base, buf, len);"
+    },
+    {
+      "commit_id": "09b9d4f1994a674c4ec85b4947aa656eda1aed8a",
+      "cve_list": [
+        "CVE-2018-8787"
+      ],
+      "cwe_list": [
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "libfreerdp/gdi/graphics.c",
+      "func_body_sha256": "d71c610ee1754d9a48b87a5495b5ea146443f4ce3131bc735fe73cfae81dfb52",
+      "func_name": "gdi_Bitmap_Decompress",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "FreeRDP",
+      "site_id": "994ce94fa48b670f",
+      "write_dest": "gdi",
+      "write_kind": "pointer_deref",
+      "write_line": "rdpGdi* gdi = context->gdi;"
+    },
+    {
+      "commit_id": "abe0b29e4d3a610f9bc920b8be4ad8403364c2d4",
+      "cve_list": [
+        "CVE-2019-3556",
+        "CVE-2020-1916"
+      ],
+      "cwe_list": [
+        "CWE-22",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "hphp/runtime/ext/ldap/ext_ldap.cpp",
+      "func_body_sha256": "a753546684ec9da46257e53b30a59ee1523c643fc226150ad9a0bf8a269f51dd",
+      "func_name": "HPHP::HHVM_FUNCTION",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "hhvm",
+      "site_id": "864ba474893952e9",
+      "write_dest": "rdata",
+      "write_kind": "pointer_deref",
+      "write_line": "char *rdata = result.get()->mutableData(), *r = rdata;"
+    },
+    {
+      "commit_id": "08193b7f0cd3910256e00d599f0f3eb2519c44ca",
+      "cve_list": [
+        "CVE-2020-1919",
+        "CVE-2020-1921",
+        "CVE-2021-24025",
+        "CVE-2020-1917",
+        "CVE-2020-1918"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "filepath": "hphp/runtime/base/mem-file.cpp",
+      "func_body_sha256": "a8626dd1bdc887846f096862d6238046c26a037b26fde49deec8e7631b2cbc41",
+      "func_name": "HPHP::MemFile::readImpl",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "hhvm",
+      "site_id": "90a2f1fc394c7a68",
+      "write_dest": "buffer",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(buffer, (const void *)(m_data + m_cursor), length);"
+    },
+    {
+      "commit_id": "08193b7f0cd3910256e00d599f0f3eb2519c44ca",
+      "cve_list": [
+        "CVE-2020-1919",
+        "CVE-2020-1921",
+        "CVE-2021-24025",
+        "CVE-2020-1917",
+        "CVE-2020-1918"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_cdcbe9ff4e0a",
+      "family_signature": "copy_sink|heap_alloc|V::V(V,V.V())",
+      "filepath": "hphp/runtime/ext/mcrypt/ext_mcrypt.cpp",
+      "func_body_sha256": "28fb41cea6738d01d8f529b28a2c6f732547244fa3ee4eb480214562580a69df",
+      "func_name": "HPHP::HHVM_FUNCTION",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "hhvm",
+      "site_id": "d39dd6f3d0ab8d13",
+      "write_dest": "iv_s",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(iv_s, iv.data(), std::min(iv_size, iv.size()));"
+    },
+    {
+      "commit_id": "08193b7f0cd3910256e00d599f0f3eb2519c44ca",
+      "cve_list": [
+        "CVE-2020-1919",
+        "CVE-2020-1921",
+        "CVE-2021-24025",
+        "CVE-2020-1917",
+        "CVE-2020-1918"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "hphp/runtime/ext/string/ext_string.cpp",
+      "func_body_sha256": "b51f5f0f6ee2f61db158dfd410e8f4d2eb2e97e9e31341c267e91feb64ef0fa2",
+      "func_name": "HPHP::HHVM_FUNCTION",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "hhvm",
+      "site_id": "ae024cc306ffbf18",
+      "write_dest": "s1",
+      "write_kind": "pointer_deref",
+      "write_line": "const char *s1 = main_str.data();"
+    },
+    {
+      "commit_id": "7578e1c04ee280dda50c4c2813e7d55f539c6501",
+      "cve_list": [
+        "CVE-2023-1801"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_6457ad6d7b21",
+      "family_signature": "copy_sink|heap_alloc|V",
+      "filepath": "tcpdump.c",
+      "func_body_sha256": "6ec40521aeda9f03e07cde9edab3707c7715c03ea980686200362d78b6533f90",
+      "func_name": "MakeFilename",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tcpdump",
+      "site_id": "e9e38466ce149e9f",
+      "write_dest": "filename",
+      "write_kind": "copy_sink",
+      "write_line": "strncpy(filename, orig_name, PATH_MAX);"
+    },
+    {
+      "commit_id": "dc92574c10f3e2516ec6445b88c5d584f40df4e5",
+      "cve_list": [
+        "CVE-2021-36978"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "libqpdf/Pl_ASCII85Decoder.cc",
+      "func_body_sha256": "508833aa115ff45ae969da56998bfbaf363dafb2e62f8199de39ad864e2987f8",
+      "func_name": "Pl_ASCII85Decoder::flush",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "qpdf",
+      "site_id": "78baf3f15f88ee7a",
+      "write_dest": "this->inbuf",
+      "write_kind": "copy_sink",
+      "write_line": "memset(this->inbuf, 117, 5);"
+    },
+    {
+      "commit_id": "dc92574c10f3e2516ec6445b88c5d584f40df4e5",
+      "cve_list": [
+        "CVE-2021-36978"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "libqpdf/Pl_ASCIIHexDecoder.cc",
+      "func_body_sha256": "5a447325a8dd953d2ca7ccc24377b7556c2e07ccad2fea69d0300a1db896d3f0",
+      "func_name": "Pl_ASCIIHexDecoder::flush",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "qpdf",
+      "site_id": "5c454c870cb0738a",
+      "write_dest": "this->inbuf",
+      "write_kind": "index_write",
+      "write_line": "this->inbuf[0] = '0';"
+    },
+    {
+      "commit_id": "329acc18a0768c21ba22522f01a5c7f46cacc4d5",
+      "cve_list": [
+        "CVE-2016-10196"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_27ca4337511d",
+      "family_signature": "copy_sink|local_array|V",
+      "filepath": "evutil.c",
+      "func_body_sha256": "d4934c3ba09e2ad23376ed654174508295a9519e67bc08dabc0393d8a82ce7a2",
+      "func_name": "evutil_parse_sockaddr_port",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "libevent",
+      "site_id": "674f6825c63e21da",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(buf, ip_as_string+1, len);"
+    },
+    {
+      "commit_id": "62a97e6a561ce65e88d4c537a1b82c336f012722",
+      "cve_list": [
+        "CVE-2017-7870"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "tools/source/generic/poly.cxx",
+      "func_body_sha256": "e0c556070a36e4a7dc4c7bcaf3e5054751389323c94f0fc5cfcc345c3ea16b3c",
+      "func_name": "tools::Polygon::Insert",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "f8f407c9ec76d742",
+      "write_dest": "mpImplPolygon->mpPointAry",
+      "write_kind": "index_write",
+      "write_line": "mpImplPolygon->mpPointAry[ nPos ] = rPt;"
+    },
+    {
+      "commit_id": "605ec91e5a7330d61be313637e495fa02a6dc264",
+      "cve_list": [
+        "CVE-2021-4136"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/eval.c",
+      "func_body_sha256": "0ffd2e165c134a6981eaf0d21622cd3ffc066f8f04007762ec90a5d86a7ac5d8",
+      "func_name": "eval_lambda",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "c952811fb5747f99",
+      "write_dest": "arg",
+      "write_kind": "pointer_deref",
+      "write_line": "*arg = skipwhite_and_linebreak(*arg, evalarg);"
+    },
+    {
+      "commit_id": "caea66442d86e7bbba3bf3dc202c3c0d549b9853",
+      "cve_list": [
+        "CVE-2022-2343"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/insexpand.c",
+      "func_body_sha256": "ad81724ed53d99896dc3703d7cf2c3c9e9547b7ee77b9b665099212752511b31",
+      "func_name": "ins_compl_add_infercase",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "dad1f59642639bdd",
+      "write_dest": "str",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t*str = str_arg;"
+    },
+    {
+      "commit_id": "baefde14550231f6468ac2ed2ed495bc381c0c92",
+      "cve_list": [
+        "CVE-2022-2344"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "src/insexpand.c",
+      "func_body_sha256": "9b23ba473bbd077c53b46c45bd6fb298019df2d6a98020b790ce931e41fe8530",
+      "func_name": "ins_compl_add",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "0267057e91d7c2e3",
+      "write_dest": "match->cp_text",
+      "write_kind": "index_write",
+      "write_line": "match->cp_text[i] = vim_strsave(cptext[i]);"
+    },
+    {
+      "commit_id": "c32949b0779106ed5710ae3bffc5053e49083ab4",
+      "cve_list": [
+        "CVE-2023-0051"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/message.c",
+      "func_body_sha256": "3c4ac7d2b851521c8e52e5b574df570fb3f8f416e63329d226bf86d64787cca7",
+      "func_name": "msg_puts_printf",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "d944a867d7e5ee4d",
+      "write_dest": "tofree",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u *tofree = NULL;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "806d16b5028c8ac91da12fdaf3a884215212a8b127e405d9e323676b1bc9d8b5",
+      "func_name": "did_set_concealcursor",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "fbada612204ff77a",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "c2be7e5bffa871dbd0e8274e64941c81ddf1d59743d9dbbbbe73ddddd3f0479b",
+      "func_name": "did_set_cpoptions",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "1e5d963cb726a066",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "178be2473c781e21c025cbd39b2694bc415c35559ad89bbb6d5b82fb19036485",
+      "func_name": "did_set_formatoptions",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "ef8acd802a416c8a",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "1e87523d7d28d2cbbc766a2feeafe6c0c9cc2df0fb616c3098971b8737cf14a0",
+      "func_name": "did_set_guioptions",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "84b869c38c05be8d",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "ceaf879fc7494a079c6b4750558d3d5c25472bd8923f7dcc7fd1f2bbe0839806",
+      "func_name": "did_set_mouse",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "bd0c11365257da41",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "215ef6a2dff78eea5f3e8334d4b797110a138de4f75d1c178f11ed79cb011fd1",
+      "func_name": "did_set_shortmess",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "a9e0df7bef9b5b82",
+      "write_dest": "varp",
+      "write_kind": "pointer_deref",
+      "write_line": "char_u\t**varp = (char_u **)args->os_varp;"
+    },
+    {
+      "commit_id": "b39b240c386a5a29241415541f1c99e2e6b8ce47",
+      "cve_list": [
+        "CVE-2024-22667"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_daafd5e84681",
+      "family_signature": "copy_sink|parameter|(V*)V(V)",
+      "filepath": "src/optionstr.c",
+      "func_body_sha256": "ed069fec582ad539ea8f707ab6c9f18173c6d244f9564015f6f8a05ecc3c22a4",
+      "func_name": "illegal_char",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "vim",
+      "site_id": "8ab029aa113dbd68",
+      "write_dest": "(char *)errbuf",
+      "write_kind": "copy_sink",
+      "write_line": "sprintf((char *)errbuf, _(e_illegal_character_str), (char *)transchar(c));"
+    },
+    {
+      "commit_id": "d4bc023436e4cce7c23c5f8bb5199e178b4cc743",
+      "cve_list": [
+        "CVE-2022-37452"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/src/host.c",
+      "func_body_sha256": "a1885ede5e1fbbb238eeb84d8ae4d9789df9702045683a13bdcc6eb3aea803e8",
+      "func_name": "host_name_lookup",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "exim",
+      "site_id": "f2da7bf8d294c3a1",
+      "write_dest": "aptr",
+      "write_kind": "pointer_deref",
+      "write_line": "uschar **aptr = NULL;"
+    },
+    {
+      "commit_id": "d4bc023436e4cce7c23c5f8bb5199e178b4cc743",
+      "cve_list": [
+        "CVE-2022-37452"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/src/host.c",
+      "func_body_sha256": "b96f819c736599dad7c84d41ab951ebd3f17fb7aaa0c072b9cc7f751d0552851",
+      "func_name": "host_name_lookup_byaddr",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "exim",
+      "site_id": "f87e968515568b21",
+      "write_dest": "aliases",
+      "write_kind": "pointer_deref",
+      "write_line": "for (uschar ** aliases = USS hosts->h_aliases; *aliases; aliases++) count++;"
+    },
+    {
+      "commit_id": "0cf1400c61850065de590d403f6d49e32882fd76",
+      "cve_list": [
+        "CVE-2019-20840"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_83e36e70488c",
+      "family_signature": "copy_sink|struct_field|V->V",
+      "filepath": "libvncserver/ws_decode.c",
+      "func_body_sha256": "d1ed7cf739ff7c705b1d744e41c4a8113bd2868124451fab3c46baa33ade17c7",
+      "func_name": "hybiReadAndDecode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "libvncserver",
+      "site_id": "a50b140716358d8a",
+      "write_dest": "wsctx->writePos",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(wsctx->writePos, wsctx->carryBuf, wsctx->carrylen);"
+    },
+    {
+      "commit_id": "0ff832d31470471803b175cfff4e40c1b08ee779",
+      "cve_list": [
+        "CVE-2017-20006"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "cmddata.cpp",
+      "func_body_sha256": "4aef4271b83a78bccf8a2e2f431b490f9c6411385be15661cb442f00f3c3f48c",
+      "func_name": "CommandData::IsProcessFile",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "unrar",
+      "site_id": "47f793e10f3d06e3",
+      "write_dest": "MatchedArg",
+      "write_kind": "pointer_deref",
+      "write_line": "*MatchedArg=0;"
+    },
+    {
+      "commit_id": "0ff832d31470471803b175cfff4e40c1b08ee779",
+      "cve_list": [
+        "CVE-2017-20006"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "filepath": "unicode.cpp",
+      "func_body_sha256": "b6c1046f619d5b453763f486cf6a81c68c5f8c37d3e9af13584addc6e56fb8ea",
+      "func_name": "CharToWideMap",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "unrar",
+      "site_id": "c524eb3cc2161880",
+      "write_dest": "&ps",
+      "write_kind": "copy_sink",
+      "write_line": "memset(&ps,0,sizeof(ps));"
+    },
+    {
+      "commit_id": "0ff832d31470471803b175cfff4e40c1b08ee779",
+      "cve_list": [
+        "CVE-2017-20006"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_efcc18aa8c71",
+      "family_signature": "copy_sink|struct_field|V(V::V,V)",
+      "filepath": "unpack30.cpp",
+      "func_body_sha256": "12feb99e0f38ce04d82963ab5e6a69a4c5596e93527ba3218ac5b4cf59a27248",
+      "func_name": "Unpack::AddVMCode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "unrar",
+      "site_id": "bfc168887b410bff",
+      "write_dest": "VMCodeInp.InBuf",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(VMCodeInp.InBuf,Code,Min(BitInput::MAX_SIZE,CodeSize));"
+    },
+    {
+      "commit_id": "8dccf79857ceeb7a6d3e42c1e762e7b865d5344d",
+      "cve_list": [
+        "CVE-2017-6309",
+        "CVE-2017-6310"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/tnef.c",
+      "func_body_sha256": "83844e5b26bf916c34c618129fdb83a8f49cc00df06950225bafdaabf2bdcaad",
+      "func_name": "parse_file",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tnef",
+      "site_id": "5aba9b7eff939d4b",
+      "write_dest": "a",
+      "write_kind": "pointer_deref",
+      "write_line": "MAPI_Attr *a = mapi_attrs[i];"
+    },
+    {
+      "commit_id": "e069be2ecc5060ef47391716e4de94999595b260",
+      "cve_list": [
+        "CVE-2022-25044"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsparse.c",
+      "func_body_sha256": "c277c8200f642742c3ed8fe5ee75f21b32ec512a7046f79cf2c579ce0eb67129",
+      "func_name": "jspGetNamedFieldInParents",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "Espruino",
+      "site_id": "bd505fd047e68a1a",
+      "write_dest": "objName",
+      "write_kind": "pointer_deref",
+      "write_line": "const char *objName = jswGetBasicObjectName(object);"
+    },
+    {
+      "commit_id": "fb2288c46dd4c864b78f00a47a364b96a09a5c0f",
+      "cve_list": [
+        "CVE-2020-36177"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "wolfcrypt/src/rsa.c",
+      "func_body_sha256": "d4333159a53e77384e6748ea13cfc3f944507bb8558bccc9ecc15c664c94711f",
+      "func_name": "RsaPad_PSS",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "wolfssl",
+      "site_id": "68b94cd616533f7f",
+      "write_dest": "salt",
+      "write_kind": "pointer_deref",
+      "write_line": "byte* salt = NULL;"
+    },
+    {
+      "commit_id": "77ed81c069e10b3861d88f72e1c6be1277ee7eae",
+      "cve_list": [
+        "CVE-2021-32439"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/isomedia/stbl_write.c",
+      "func_body_sha256": "e9fd5251b37f3a80d712d095421ea38e0a37ff049c1e2785c951eb89bf0a37f1",
+      "func_name": "stbl_AppendTime",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpac",
+      "site_id": "bafa78676daf4a9f",
+      "write_dest": "stts",
+      "write_kind": "pointer_deref",
+      "write_line": "GF_TimeToSampleBox *stts = stbl->TimeToSample;"
+    },
+    {
+      "commit_id": "ea7395f39f601a7750d48d606e9d10ea0b7beefe",
+      "cve_list": [
+        "CVE-2023-0760"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/isomedia/box_code_base.c",
+      "func_body_sha256": "a086760c315c352fc0ec1347d8385edbe49fcdeae026e165286c1edcafbe32b4",
+      "func_name": "dac3_box_write",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpac",
+      "site_id": "ec2b1d22646b7e69",
+      "write_dest": "ptr",
+      "write_kind": "pointer_deref",
+      "write_line": "GF_AC3ConfigBox *ptr = (GF_AC3ConfigBox *)s;"
+    },
+    {
+      "commit_id": "ea7395f39f601a7750d48d606e9d10ea0b7beefe",
+      "cve_list": [
+        "CVE-2023-0760"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/isomedia/box_code_base.c",
+      "func_body_sha256": "b59b622a19f8d6ba48ae157154f635adfd0ac7a7e2ff2d6b3384d631eb1db0c4",
+      "func_name": "video_sample_entry_box_size",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpac",
+      "site_id": "88e4c0cb2dce110a",
+      "write_dest": "ptr",
+      "write_kind": "pointer_deref",
+      "write_line": "GF_MPEGVisualSampleEntryBox *ptr = (GF_MPEGVisualSampleEntryBox *)s;"
+    },
+    {
+      "commit_id": "e7f96c2d3774e4ea25f952bcdf55af1dd6e919f4",
+      "cve_list": [
+        "CVE-2023-1655"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "src/filters/reframe_rawpcm.c",
+      "func_body_sha256": "02a24d3b72e186557b4478f3ee93f9a5fd542579513808f56b8ebe6c7177a027",
+      "func_name": "pcmreframe_process",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpac",
+      "site_id": "5a77e59d83eb5f90",
+      "write_dest": "ctx->probe_data",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(ctx->probe_data, data, pck_size);"
+    },
+    {
+      "commit_id": "a7b467b151d9b54badbc4dd71e7a366b7c391817",
+      "cve_list": [
+        "CVE-2023-46927"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "filepath": "src/isomedia/isom_write.c",
+      "func_body_sha256": "e9e04ab66aa3f8137ca1b2d13747d257b214a6f96df1a9ffec51bced78703505",
+      "func_name": "gf_isom_set_root_iod",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpac",
+      "site_id": "af48e2053375c203",
+      "write_dest": "iod",
+      "write_kind": "copy_sink",
+      "write_line": "memset(iod, 0, sizeof(GF_IsomInitialObjectDescriptor));"
+    },
+    {
+      "commit_id": "3287534daa3beac68e2e83ca4b4fe8a3148ff870",
+      "cve_list": [
+        "CVE-2018-14350",
+        "CVE-2018-14358"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "message.c",
+      "func_body_sha256": "ed78f5d464398b31568e17f806d1adbbed6e7b002837b4392f4001082d4340b4",
+      "func_name": "msg_parse_fetch",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "mutt",
+      "site_id": "9a0c4cf9f6cf04d6",
+      "write_dest": "ptmp",
+      "write_kind": "pointer_deref",
+      "write_line": "*ptmp = 0;"
+    },
+    {
+      "commit_id": "6f163e07ae68654d7ac5268cbb7565f6df79ad85",
+      "cve_list": [
+        "CVE-2018-14359"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "mutt/rfc2047.c",
+      "func_body_sha256": "1642364683b01b588aea4ec48d8d5b7ebddf744aaa5b57e2311c5b22465187c9",
+      "func_name": "rfc2047_decode_word",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "neomutt",
+      "site_id": "bbb103ca14b361bd",
+      "write_dest": "out",
+      "write_kind": "pointer_deref",
+      "write_line": "char *out = mutt_mem_malloc(3 * len / 4 + 1);"
+    },
+    {
+      "commit_id": "6f163e07ae68654d7ac5268cbb7565f6df79ad85",
+      "cve_list": [
+        "CVE-2018-14359"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "filepath": "test/base64.c",
+      "func_body_sha256": "b62721a064b6f93831279ee6383e10ba1f4dfbccd5083c879b6894b93b0eee11",
+      "func_name": "test_base64_lengths",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "neomutt",
+      "site_id": "b3239b4da32d30f5",
+      "write_dest": "out1",
+      "write_kind": "index_write",
+      "write_line": "out1[0] = '\\0';"
+    },
+    {
+      "commit_id": "b7d08bc04a4296982fcef8b6b8a354a9e4e7afca",
+      "cve_list": [
+        "CVE-2020-10531"
+      ],
+      "cwe_list": [
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "icu4c/source/common/unistr.cpp",
+      "func_body_sha256": "a5b400fc4d4757378313b1d421864ef65aeb2d90fe512002d5f472f045e3fafa",
+      "func_name": "UnicodeString::doAppend",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "icu",
+      "site_id": "109572c15179f3eb",
+      "write_dest": "oldArray",
+      "write_kind": "pointer_deref",
+      "write_line": "const UChar* oldArray = getArrayStart();"
+    },
+    {
+      "commit_id": "5ddda15d89f5ac82f4416208c5319ace4aecdc36",
+      "cve_list": [
+        "CVE-2018-20742"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_1383388357d4",
+      "family_signature": "pointer_deref|heap_alloc|deref",
+      "filepath": "src/enclave/App/App.cpp",
+      "func_body_sha256": "20781891ebd0d2d0714cc4f538d794efd691967daacd2bba339baa5e6b396438",
+      "func_name": "ocall_malloc",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "opaque-sql",
+      "site_id": "24bdcf074a57e402",
+      "write_dest": "ret",
+      "write_kind": "pointer_deref",
+      "write_line": "*ret = static_cast<uint8_t *>(malloc(size));"
+    },
+    {
+      "commit_id": "204945b19e44b57906c9344c0d00120eeeae178a",
+      "cve_list": [
+        "CVE-2020-15214",
+        "CVE-2020-15212",
+        "CVE-2020-15213"
+      ],
+      "cwe_list": [
+        "CWE-770",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/segment_sum.cc",
+      "func_body_sha256": "4f5fae76c40ed5274f600b87584ce8630637c00596d8da882af051a95dbf4985",
+      "func_name": "tflite::ops::builtin::segment_sum::ResizeOutputTensor",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "b8c24d4828d4e4bb",
+      "write_dest": "output_shape",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteIntArray* output_shape = TfLiteIntArrayCreate(NumDimensions(data));"
+    },
+    {
+      "commit_id": "e11f55585f614645b360563072ffeb5c3eeff162",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/experimental/delegates/coreml/builders/convolution_op_builder.cc",
+      "func_body_sha256": "98ef6695d2f8c428d2f6ad3492136df1b9e67d781de5366f96ebaf3371a61e77",
+      "func_name": "tflite::delegates::coreml::IsConvolutionOpSupported",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "3f1f3937f4fe6c0a",
+      "write_dest": "weights",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* weights = GetInput(context, node, kWeightTensor);"
+    },
+    {
+      "commit_id": "e11f55585f614645b360563072ffeb5c3eeff162",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/experimental/delegates/coreml/builders/pad_op_builder.cc",
+      "func_body_sha256": "8ad3e7155fadb3d43788de44140cf69d5038a695820f57921e651e1cafd1c336",
+      "func_name": "tflite::delegates::coreml::IsPadOpSupported",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "bceae9e2883164c4",
+      "write_dest": "padding",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* padding = GetInput(context, node, 1);"
+    },
+    {
+      "commit_id": "e11f55585f614645b360563072ffeb5c3eeff162",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/experimental/delegates/coreml/builders/reshape_op_builder.cc",
+      "func_body_sha256": "e5f4feca4b40222acc9e554c578ef64b92cfbba87dcf6735c9c5d7ce4b77fd33",
+      "func_name": "tflite::delegates::coreml::IsReshapeOpSupported",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "6b2693ac4eb1eca0",
+      "write_dest": "shape",
+      "write_kind": "pointer_deref",
+      "write_line": "const auto* shape = GetInput(context, node, kShapeTensor);"
+    },
+    {
+      "commit_id": "fff2c8326280c07733828f990548979bdc893859",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/micro/kernels/concatenation.cc",
+      "func_body_sha256": "535d965696f95e34747fd4ba1e4559c552a6e171d2414cf866a4fcbc13603543",
+      "func_name": "tflite::ops::micro::concatenation::Prepare",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "23d6840bf50af734",
+      "write_dest": "params",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteConcatenationParams* params ="
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/add_n.cc",
+      "func_body_sha256": "64000c1165b054ee1d0532296322cd94d12e5e08b96267d6dc75312ba0ebd5b5",
+      "func_name": "tflite::ops::builtin::add_n::Eval",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "c899bad42c80ee6a",
+      "write_dest": "output",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* output = GetOutput(context, node, kOutputTensor);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/assign_variable.cc",
+      "func_body_sha256": "a42dece3b40193fcd5c4e0b8a42d6f59353fe91aa279107b3199d30bd0843f61",
+      "func_name": "tflite::ops::custom::assign_variable::Prepare",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "d438b25301959c71",
+      "write_dest": "input_resource_id_tensor",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* input_resource_id_tensor ="
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/conv.cc",
+      "func_body_sha256": "713ea03c8005f22533729eabc0e0f7570380e7850690fec79ca28833ab23b012",
+      "func_name": "tflite::ops::builtin::conv::Eval",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "66e030404d018529",
+      "write_dest": "input",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* input = GetInput(context, node, 0);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/depthwise_conv.cc",
+      "func_body_sha256": "54261ba1688f46a2f6b6ad50908a3992d87463292a49b976557990911c691b9f",
+      "func_name": "tflite::ops::builtin::depthwise_conv::Eval",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "87d7dd221e1a610f",
+      "write_dest": "input",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* input = GetInput(context, node, kInputTensor);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/numeric_verify.cc",
+      "func_body_sha256": "abd465e1bb6b97cc7f4eb4219cb1b43a78501695064cc0419a6bf765e244a670",
+      "func_name": "tflite::ops::custom::numeric_verify::Eval",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "f8f75553e328c389",
+      "write_dest": "dequantized",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* dequantized = GetTemporary(context, node, /*index=*/0);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/read_variable.cc",
+      "func_body_sha256": "be330e12e03bf4145ec4eb82328bf0e7d43c12765dd3eb43677a8fd72e3b4fdf",
+      "func_name": "tflite::ops::custom::read_variable::Prepare",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "28216fb40d951c23",
+      "write_dest": "output",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* output = GetOutput(context, node, kOutputValue);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reduce.cc",
+      "func_body_sha256": "64453dddab80eefbd85fc750b1a905be89cd0710ab84378335d383ac47c55362",
+      "func_name": "tflite::ops::builtin::reduce::PrepareAny",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "5a69256bdc28ccd8",
+      "write_dest": "input",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* input = GetInput(context, node, 0);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reduce.cc",
+      "func_body_sha256": "2172dda71a94bc70b01d685f60b604d0094f942d4f29b0f5558e7a4c2f377a2c",
+      "func_name": "tflite::ops::builtin::reduce::PrepareMeanOrSum",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "c4b56038a096775f",
+      "write_dest": "temp_sum",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* temp_sum = GetTemporary(context, node, /*index=*/2);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reduce.cc",
+      "func_body_sha256": "518c17971bf0c6b8ffa8d5e5e1155646c77fafec9107e8f6ba719d9d0373b380",
+      "func_name": "tflite::ops::builtin::reduce::PrepareSimple",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "0c1602f9d9f0a6e7",
+      "write_dest": "resolved_axis",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* resolved_axis = GetTemporary(context, node, /*index=*/1);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reshape.cc",
+      "func_body_sha256": "1836c0ff76a1353f7be0c5901499cfbf638015d4b303aef8b6090f3be42b2390",
+      "func_name": "tflite::ops::builtin::reshape::Prepare",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "8a6022356663c380",
+      "write_dest": "output",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* output = GetOutput(context, node, kOutputTensor);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reshape.cc",
+      "func_body_sha256": "5cfd760d03b955ce36f6a2119666aff3387740c1e494cabb6bba3e309123902f",
+      "func_name": "tflite::ops::builtin::reshape::ShapeIsVector",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "dc26d83a141db069",
+      "write_dest": "shape",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* shape = GetInput(context, node, kShapeTensor);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reverse_sequence.cc",
+      "func_body_sha256": "4370c6a88246d43c6aba07fbad59d2ea1453556d28192ede36cd8ed2b264ca7d",
+      "func_name": "tflite::ops::builtin::reverse_sequence::Eval",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "5ad221d405e79ce8",
+      "write_dest": "output",
+      "write_kind": "pointer_deref",
+      "write_line": "TfLiteTensor* output = GetOutput(context, node, kOutputTensor);"
+    },
+    {
+      "commit_id": "1970c2158b1ffa416d159d03c3370b9a462aee35",
+      "cve_list": [
+        "CVE-2020-15211"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/lite/kernels/reverse_sequence.cc",
+      "func_body_sha256": "f76addc861df1409b6e6c22bdd85f72937b6c3f1ffb3b948ad369c7049f9c3e9",
+      "func_name": "tflite::ops::builtin::reverse_sequence::ReverseSequenceHelper",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "16a1c11f12c34d9b",
+      "write_dest": "seq_lengths_tensor",
+      "write_kind": "pointer_deref",
+      "write_line": "const TfLiteTensor* seq_lengths_tensor ="
+    },
+    {
+      "commit_id": "a324ac84e573fba362a5e53d4e74d5de6729933e",
+      "cve_list": [
+        "CVE-2021-29536"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/core/kernels/quantized_reshape_op.cc",
+      "func_body_sha256": "8b18138eed1be2a49e35a5889b3f296323fe63e4927046a4d0e269973b773c64",
+      "func_name": "tensorflow::QuantizedReshapeOp::Compute",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "1b6fdb9eef885af9",
+      "write_dest": "output_min",
+      "write_kind": "pointer_deref",
+      "write_line": "Tensor* output_min = nullptr;"
+    },
+    {
+      "commit_id": "e0b6e58c328059829c3eb968136f17aa72b6c876",
+      "cve_list": [
+        "CVE-2021-37650"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/core/kernels/data/experimental/to_tf_record_op.cc",
+      "func_body_sha256": "7bfeb583b5cdfcbadec9093131043ae62196a8202595d5f9668a86be2f7fa502",
+      "func_name": "tensorflow::data::experimental::ToTFRecordOp::DoCompute",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "5a3d76d9f3057508",
+      "write_dest": "parent",
+      "write_kind": "pointer_deref",
+      "write_line": "&iter_ctx, /*parent=*/nullptr, \"ToTFRecordOpIterator\", &iterator));"
+    },
+    {
+      "commit_id": "97282c6d0d34476b6ba033f961590b783fa184cd",
+      "cve_list": [
+        "CVE-2022-23566"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "tensorflow/core/grappler/costs/graph_properties.cc",
+      "func_body_sha256": "40a6e7a9b0766e51c1a26c509ac4d63d9a76db2addd1d5a58068d071352931f8",
+      "func_name": "tensorflow::grappler::SymbolicShapeRefiner::SetUnknownShape",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "320e6a15405d2908",
+      "write_dest": "ctx",
+      "write_kind": "pointer_deref",
+      "write_line": "InferenceContext* ctx = GetContext(node);"
+    },
+    {
+      "commit_id": "6364463d6f5b6254cac3d6aedf999b6a96225038",
+      "cve_list": [
+        "CVE-2022-23560"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "filepath": "tensorflow/lite/kernels/internal/utils/sparsity_format_converter.cc",
+      "func_body_sha256": "6b1945070b64237fa04f4aa50a34cd7db0d5e0d31ffba454e555fda139bcc39e",
+      "func_name": "tflite::internal::sparsity::FormatConverter<T>::Populate",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tensorflow",
+      "site_id": "dbca0304b63793da",
+      "write_dest": "indices",
+      "write_kind": "index_write",
+      "write_line": "indices[level] = array_indices[i];"
+    },
+    {
+      "commit_id": "341f12cd5b97ab419e53853ca00176457c9f1681",
+      "cve_list": [
+        "CVE-2019-15146",
+        "CVE-2019-15147",
+        "CVE-2019-15148"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "filepath": "demo/GPMF_mp4reader.c",
+      "func_body_sha256": "41e21ad5593dc926b5afee8451ef0366a2cc2f9edd42c329f33211d126cd901e",
+      "func_name": "OpenMP4SourceUDTA",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "gpmf-parser",
+      "site_id": "a9592e321dcd9f42",
+      "write_dest": "nestsize",
+      "write_kind": "index_write",
+      "write_line": "uint64_t nestsize[MAX_NEST_LEVEL] = { 0 };"
+    },
+    {
+      "commit_id": "0943c006c7d900dfc0281639e992791d6c567438",
+      "cve_list": [
+        "CVE-2019-15694"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "common/rdr/TLSOutStream.cxx",
+      "func_body_sha256": "fd20acb86ea7c8eeb44f09a062f6da43734fe0ce7df8a7a4b299acb2648b1bdc",
+      "func_name": "TLSOutStream::flush",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tigervnc",
+      "site_id": "4906a19270e35f01",
+      "write_dest": "sentUpTo",
+      "write_kind": "pointer_deref",
+      "write_line": "U8* sentUpTo = start;"
+    },
+    {
+      "commit_id": "0943c006c7d900dfc0281639e992791d6c567438",
+      "cve_list": [
+        "CVE-2019-15694"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "filepath": "common/rfb/Configuration.cxx",
+      "func_body_sha256": "95c0a9db8964e96c822a686abce35e121effdfff5c3259faf9cc706c068b47cc",
+      "func_name": "BinaryParameter::BinaryParameter",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tigervnc",
+      "site_id": "3ccf4df231d2ab5f",
+      "write_dest": "value",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(value, v, l);"
+    },
+    {
+      "commit_id": "0943c006c7d900dfc0281639e992791d6c567438",
+      "cve_list": [
+        "CVE-2019-15694"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "common/rfb/Configuration.cxx",
+      "func_body_sha256": "5822c883464c1fb72bc2210b5628b0c26db30ba1ef6660867bf13bed8567f7d7",
+      "func_name": "BinaryParameter::getData",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tigervnc",
+      "site_id": "cb4c7d57f8c742ef",
+      "write_dest": "length_",
+      "write_kind": "pointer_deref",
+      "write_line": "if (length_) *length_ = length;"
+    },
+    {
+      "commit_id": "0943c006c7d900dfc0281639e992791d6c567438",
+      "cve_list": [
+        "CVE-2019-15694"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "common/rfb/Password.cxx",
+      "func_body_sha256": "8ffe32f555d603606e269932e6273c709b7ac903457f73eada2834ee6b6327ef",
+      "func_name": "ObfuscatedPasswd::ObfuscatedPasswd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tigervnc",
+      "site_id": "5b4192baef9b95ea",
+      "write_dest": "buf",
+      "write_kind": "index_write",
+      "write_line": "buf[i] = i<l ? plainPwd.buf[i] : 0;"
+    },
+    {
+      "commit_id": "e4d1558aa2c1c04a05066ee8600f37603890ba8c",
+      "cve_list": [
+        "CVE-2019-18224"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_c6751e3d810b",
+      "family_signature": "copy_sink|parameter|implicit_or_2arg",
+      "filepath": "lib/lookup.c",
+      "func_body_sha256": "1339987caa6a5797eab2209ae02e36b05204f12fa91fc5750bd72e7ea6dc6aa7",
+      "func_name": "idn2_to_ascii_4i",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "libidn2",
+      "site_id": "3ba588bfeaefe697",
+      "write_dest": "output",
+      "write_kind": "copy_sink",
+      "write_line": "strcpy (output, (const char *) output_u8);"
+    },
+    {
+      "commit_id": "034c6e9a1d296286305f4cfd1e0072b879f52568",
+      "cve_list": [
+        "CVE-2019-18397"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "lib/fribidi-bidi.c",
+      "func_body_sha256": "5d4ea0157f1d11dc1a71ff54bbb981933b1a1e196bb9f157dc193a2911dc17dd",
+      "func_name": "fribidi_get_par_embedding_levels_ex",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "fribidi",
+      "site_id": "8d000c0c57f49165",
+      "write_dest": "base_level_per_iso_level",
+      "write_kind": "index_write",
+      "write_line": "base_level_per_iso_level[isolate_level] = new_level;"
+    },
+    {
+      "commit_id": "f22593b82b5d1668d1997dbccd10a9c31ffea3b3",
+      "cve_list": [
+        "CVE-2022-25309"
+      ],
+      "cwe_list": [
+        "CWE-122"
+      ],
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "filepath": "lib/fribidi-char-sets-cap-rtl.c",
+      "func_body_sha256": "543b383de007580ed30580488b35ba728d93ceb25af7b18e6f95a7f16ecc0dac",
+      "func_name": "fribidi_cap_rtl_to_unicode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "fribidi",
+      "site_id": "c8fcb701de95c739",
+      "write_dest": "us",
+      "write_kind": "index_write",
+      "write_line": "us[j++] = caprtl_to_unicode[(int) s[i]];"
+    },
+    {
+      "commit_id": "fc85be7123050b91b054e45b91c78d3241a5047a",
+      "cve_list": [
+        "CVE-2019-18609"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "filepath": "librabbitmq/amqp_connection.c",
+      "func_body_sha256": "cda20827bde1251344449160046acb3331c30c9324e63850ac773dabff4e61f9",
+      "func_name": "amqp_handle_input",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "rabbitmq-c",
+      "site_id": "a670d1e912dbce00",
+      "write_dest": "state->inbound_buffer.bytes",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(state->inbound_buffer.bytes, state->header_buffer, HEADER_SIZE);"
+    },
+    {
+      "commit_id": "c3a3a0c424322009fec3ab735fb20ce8f6e19e70",
+      "cve_list": [
+        "CVE-2019-20791"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/core/meshcop/commissioner.cpp",
+      "func_body_sha256": "c62c19da6df270704ce8d8a1d7365d7f47898745bc4e14caa09b00e51d117ad8",
+      "func_name": "ot::MeshCoP::Commissioner::AddJoiner",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "openthread",
+      "site_id": "ddbe27aed61bf991",
+      "write_dest": "joiner",
+      "write_kind": "pointer_deref",
+      "write_line": "for (Joiner *joiner = &mJoiners[0]; joiner < OT_ARRAY_END(mJoiners); joiner++)"
+    },
+    {
+      "commit_id": "c4603ba5ce229db83a2a4fb93e6d4b4e3ec3776a",
+      "cve_list": [
+        "CVE-2020-11958"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "filepath": "src/parse/scanner.cc",
+      "func_body_sha256": "58210a437ef8787d094d5458ab2f9b0d4abc1f9cc8357c8fd9941347f3242c0f",
+      "func_name": "re2c::Scanner::fill",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "re2c",
+      "site_id": "4e97b369431b0a05",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "memmove(buf, tok, copy);"
+    },
+    {
+      "commit_id": "d27f79da11df7bc8bb56c2f291d71e54df8d2c47",
+      "cve_list": [
+        "CVE-2022-24754"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjsip/src/pjsip/sip_auth_server.c",
+      "func_body_sha256": "bdde49bc85564ea67f8af5324210a14e8f74f2823b40e75cfa3bdb50bdf9b209",
+      "func_name": "pjsip_auth_verify",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "76930c2f97fee89b",
+      "write_dest": "dig",
+      "write_kind": "pointer_deref",
+      "write_line": "const pjsip_digest_credential *dig = &hdr->credential.digest;"
+    },
+    {
+      "commit_id": "11559e49e65bdf00922ad5ae28913ec6a198d508",
+      "cve_list": [
+        "CVE-2022-24786"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjmedia/src/pjmedia/rtcp_fb.c",
+      "func_body_sha256": "08f0c895335472a907b1ab370f7743d2ed638f6ec8c869560a81fc160cb4efa4",
+      "func_name": "pjmedia_rtcp_fb_build_nack",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "f939cc913ee55fec",
+      "write_dest": "FMT",
+      "write_kind": "pointer_deref",
+      "write_line": "hdr->count = 1; /* FMT = 1 */"
+    },
+    {
+      "commit_id": "11559e49e65bdf00922ad5ae28913ec6a198d508",
+      "cve_list": [
+        "CVE-2022-24786"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjmedia/src/pjmedia/rtcp_fb.c",
+      "func_body_sha256": "327e7b1b9e0081c7e1ac24c9b8439e0266656ae540adbbefee637d34a53f0f76",
+      "func_name": "pjmedia_rtcp_fb_build_rpsi",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "175a9602bc184fa7",
+      "write_dest": "FMT",
+      "write_kind": "pointer_deref",
+      "write_line": "hdr->count = 3; /* FMT = 3 */"
+    },
+    {
+      "commit_id": "11559e49e65bdf00922ad5ae28913ec6a198d508",
+      "cve_list": [
+        "CVE-2022-24786"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjmedia/src/pjmedia/rtcp_fb.c",
+      "func_body_sha256": "e16d0cc9a0ab8f31f55b186cd52a9bf9b51973c23fba42b86cd8ccd3483cec4d",
+      "func_name": "pjmedia_rtcp_fb_build_sli",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "81cc2a2ddc748254",
+      "write_dest": "FMT",
+      "write_kind": "pointer_deref",
+      "write_line": "hdr->count = 2; /* FMT = 2 */"
+    },
+    {
+      "commit_id": "11559e49e65bdf00922ad5ae28913ec6a198d508",
+      "cve_list": [
+        "CVE-2022-24786"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjmedia/src/pjmedia/rtcp_fb.c",
+      "func_body_sha256": "2523b9599908cdd19424fbb272017868d74afa6c19c677ccc05629ad29ecc9a8",
+      "func_name": "pjmedia_rtcp_fb_parse_rpsi",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "e46aecd00d0560fc",
+      "write_dest": "hdr",
+      "write_kind": "pointer_deref",
+      "write_line": "pjmedia_rtcp_common *hdr = (pjmedia_rtcp_common*) buf;"
+    },
+    {
+      "commit_id": "11559e49e65bdf00922ad5ae28913ec6a198d508",
+      "cve_list": [
+        "CVE-2022-24786"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjmedia/src/pjmedia/rtcp_fb.c",
+      "func_body_sha256": "78306fc5c1d154b1e0fec1766abe3f1ce3b4e8468b76e075a6bfec5fbffb5341",
+      "func_name": "pjmedia_rtcp_fb_parse_sli",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "ea5ee080fbc315ac",
+      "write_dest": "hdr",
+      "write_kind": "pointer_deref",
+      "write_line": "pjmedia_rtcp_common *hdr = (pjmedia_rtcp_common*) buf;"
+    },
+    {
+      "commit_id": "450baca94f475345542c6953832650c390889202",
+      "cve_list": [
+        "CVE-2022-31031"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjlib-util/src/pjlib-util/stun_simple.c",
+      "func_body_sha256": "596eccb430f5ecc7b889ba4b8d260ed39f5f6f9d8166b5afb5ae0b0c35fc51d6",
+      "func_name": "pjstun_parse_msg",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "3e8bcbea518e38a2",
+      "write_dest": "attr",
+      "write_kind": "pointer_deref",
+      "write_line": "pjstun_attr_hdr **attr = &msg->attr[msg->attr_count];"
+    },
+    {
+      "commit_id": "c4d34984ec92b3d5252a7d5cddd85a1d3a8001ae",
+      "cve_list": [
+        "CVE-2022-39244"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "pjlib-util/src/pjlib-util/scanner.c",
+      "func_body_sha256": "e5ca58d4a169ae9bc26883f30460cafdefaf5b020c9adb5436b3848e45a3de74",
+      "func_name": "pj_scan_skip_line",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pjproject",
+      "site_id": "e7082ce544f0d232",
+      "write_dest": "s",
+      "write_kind": "pointer_deref",
+      "write_line": "char *s = pj_memchr(scanner->curptr, '\\n', scanner->end - scanner->curptr);"
+    },
+    {
+      "commit_id": "3a5474f9102cbdc10fbd9e7b1b2c8d3f3f45d91b",
+      "cve_list": [
+        "CVE-2022-34927"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_7a1d27ad3fe7",
+      "family_signature": "copy_sink|local_array|V(V)",
+      "filepath": "src/milkyplay/LoaderXM.cpp",
+      "func_body_sha256": "d16d93f0559f922cd2201ed90c003c970fb7a51c3fabdb187c75beb3b8bca14c",
+      "func_name": "LoaderXM::load",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "MilkyTracker",
+      "site_id": "e02244464678c44c",
+      "write_dest": "buffer",
+      "write_kind": "copy_sink",
+      "write_line": "memset(buffer, 0, sizeof(buffer));"
+    },
+    {
+      "commit_id": "5d499272b95a6b890a1397e11d20937de000d31b",
+      "cve_list": [
+        "CVE-2020-15900"
+      ],
+      "cwe_list": [
+        "CWE-191",
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "psi/zstring.c",
+      "func_body_sha256": "ddd0e3757943d3d35bc55a911bd5ddb4c0c798f86e05c8ced7f62e555685392d",
+      "func_name": "search_impl",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "ghostpdl",
+      "site_id": "99cd1c05eba1868e",
+      "write_dest": "op",
+      "write_kind": "index_write",
+      "write_line": "op[-1] = *op1;"
+    },
+    {
+      "commit_id": "80bf71f16c804108fd933e267fe31692aaa509b4",
+      "cve_list": [
+        "CVE-2020-18750"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "xpdf/CharCodeToUnicode.cc",
+      "func_body_sha256": "a0ba3eb00a17a651487e049b0da0595bda891355448001fe8c717ab6b3524824",
+      "func_name": "CharCodeToUnicode::addMapping",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "pdf2json",
+      "site_id": "ed89b0d0efd5ef7e",
+      "write_dest": "map",
+      "write_kind": "index_write",
+      "write_line": "map[i] = 0;"
+    },
+    {
+      "commit_id": "091835377369c8fd5917d9b87acffa721ad2a168",
+      "cve_list": [
+        "CVE-2020-1912"
+      ],
+      "cwe_list": [
+        "CWE-125",
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "lib/IRGen/ESTreeIRGen.cpp",
+      "func_body_sha256": "5e8764a51b47ef0d98b8491ef008c98cf43f4931a365e3eebdf5aea48dc02367",
+      "func_name": "hermes::irgen::ESTreeIRGen::doLazyFunction",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "hermes",
+      "site_id": "5f88b62f147754f0",
+      "write_dest": "func",
+      "write_kind": "pointer_deref",
+      "write_line": "auto *func = genES5Function(lazyData->originalName, parentVar, node);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_febb8b2d6f1e",
+      "family_signature": "copy_sink|local_array|\"%V\",V.V",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "38194d2d8ccea5b40121fe7249bc3b6b75563ea603490605dc11d99557842db7",
+      "func_name": "DebugAddCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "b94de83a87e81310",
+      "write_dest": "nbuf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(nbuf, sizeof(nbuf), \"%d\", bp.id);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "6de662d0a917af9a490919ca385bf2f8a3c52b35a20dca94995ea1f73720191e",
+      "func_name": "DebugInfoCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "855b9629eb912a37",
+      "write_dest": "val",
+      "write_kind": "pointer_deref",
+      "write_line": "Jsi_Value *val = Jsi_ValueArrayIndex(interp, args, 0);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "9867b507daaaadea4904a27c603352bfdc86b0635874eee565fb0387f722b7d1",
+      "func_name": "SysGetEnvCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "b8b062e5ec12dc27",
+      "write_dest": "ores",
+      "write_kind": "pointer_deref",
+      "write_line": "Jsi_Obj  *ores = Jsi_ObjNew(interp);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_37e1f0a0bcab",
+      "family_signature": "copy_sink|local_array|\"(V=%.VV)\\V\",(V-V->V)",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "3b2645d784e64faf004ee58e2b790236b14e18593e1f9e16e12b87c9d4dbf345",
+      "func_name": "SysTimesCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "91a6255571eb7c8b",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(buf, sizeof(buf), \" (times = %.6f sec)\\n\", (now-interp->timesStart));"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "00131fe3b475477704605d2e4e65e295cff22153e686f83212fb2d663ef089d2",
+      "func_name": "SysVerConvertCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "85c22a5786251fe9",
+      "write_dest": "flag",
+      "write_kind": "pointer_deref",
+      "write_line": "Jsi_Value *flag = Jsi_ValueArrayIndex(interp, args, 1);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiCmds.c",
+      "func_body_sha256": "a7568785e3bb7a76f9d641a7fec5efc9efc3f0ca2a9a4704f54890ec599768ca",
+      "func_name": "jsi_PkgDumpInfo",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "178fbb3252e2b20a",
+      "write_dest": "cp",
+      "write_kind": "pointer_deref",
+      "write_line": "const char *cp = (ptr->loadFile?ptr->loadFile:\"\");"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiEval.c",
+      "func_body_sha256": "039e851f55e7b00ccee2e4199786686b23260624c9d667240934d00a4b7eda47",
+      "func_name": "jsi_evalcode_sub",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "dcf8f14333c5aff7",
+      "write_dest": "obj",
+      "write_kind": "pointer_deref",
+      "write_line": "Jsi_Obj *obj = v->d.obj;"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_9e74c8640cd1",
+      "family_signature": "copy_sink|local_array|\"%.*\"V,V,V",
+      "filepath": "src/jsiNumber.c",
+      "func_body_sha256": "2ac17230267ea06ef80356164a06f6c4a80e0f55834d1e90a3474bfd5e42e10f",
+      "func_name": "NumberToPrecisionCmd",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "28b9fde22d7def78",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(buf, sizeof(buf),\"%.*\" JSI_NUMFFMT, prec, num);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_f6adc84a191d",
+      "family_signature": "copy_sink|local_array|\"%\"V,V",
+      "filepath": "src/jsiOptions.c",
+      "func_body_sha256": "06568f7879ab28f8578a07dad5224533749331048ceeb8437986e6ac2760066f",
+      "func_name": "jsi_BitfieldToValue",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "d79c00d8c46e0f84",
+      "write_dest": "obuf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(obuf, sizeof(obuf), \"%\" PRId64, inum);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_39cea207749a",
+      "family_signature": "copy_sink|local_array|\"VVV:%.V\",V->V",
+      "filepath": "src/jsiSqlite.c",
+      "func_body_sha256": "b0d93b7c8c8b65abfa57fa5cfea2a8ef6fa03087779bab88bea52b06278d628f",
+      "func_name": "jsiSqlFunc",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "74af5347228de43a",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(buf, sizeof(buf), \"error in function: %.200s\", p->zName);"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "src/jsiValue.c",
+      "func_body_sha256": "843a671b146b6f33e320f94703f1c45492afc09a2959297060258a70800540ae",
+      "func_name": "Jsi_ValueToString",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "ad1bde14a8882246",
+      "write_dest": "lenPtr",
+      "write_kind": "pointer_deref",
+      "write_line": "if (lenPtr) *lenPtr = 0;"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/jsiWebSocket.c",
+      "func_body_sha256": "ab59730a51200328df8336fb184d12fbe4461970f8599cb163bb863edb437f3c",
+      "func_name": "jsi_wsHttp",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "00d8e17c3db95a60",
+      "write_dest": "cpde",
+      "write_kind": "pointer_deref",
+      "write_line": "char extBuf[100], *cpde = Jsi_Strrchr(buf, '/');"
+    },
+    {
+      "commit_id": "430ea27accd4d4ffddc946c9402e7c9064835a18",
+      "cve_list": [
+        "CVE-2020-22873"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_a7c30e3997e1",
+      "family_signature": "copy_sink|local_array|\"%V\",V->V",
+      "filepath": "src/jsiWebSocket.c",
+      "func_body_sha256": "1069c89b193a0a25cd259041cc726080276b66a41bf1fee48b08e6e9b3ca92a6",
+      "func_name": "jsi_wscallback_websock",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jsish",
+      "site_id": "9d863d5b00a00d64",
+      "write_dest": "nbuf",
+      "write_kind": "copy_sink",
+      "write_line": "snprintf(nbuf, sizeof(nbuf), \"%d\", cmdPtr->bufferPwr2);"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "9e5e85e624b58373d7be20791f0956807ad9e1cc30f2c1356cf2741b78dd8804",
+      "func_name": "__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_10__reduce_cython__",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "12830e7f9b29665c",
+      "write_dest": "_dict",
+      "write_kind": "pointer_deref",
+      "write_line": "*     _dict = getattr(self, '__dict__', None)"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "c5d8a442923ebacc15ad84ccd83768af8a11689092fe8374e6c9fef519dd2b5d",
+      "func_name": "__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_19current_buffer_size___get__",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "1da2ad5f41c85653",
+      "write_dest": "__pyx_t_1",
+      "write_kind": "pointer_deref",
+      "write_line": "PyObject *__pyx_t_1 = NULL;"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "5363c89fac873d89b13c68f68ddfa7ef87d9fdd6c9dc1acf41e96c9cca0a76c0",
+      "func_name": "__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_8position___get__",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "60927740d8071a5e",
+      "write_dest": "__pyx_t_1",
+      "write_kind": "pointer_deref",
+      "write_line": "PyObject *__pyx_t_1 = NULL;"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "c8693fef403df70bb3f76714c8de441b2d176b63e7e4d8c33ca0ac04fcb92477",
+      "func_name": "__pyx_pf_17clickhouse_driver_14bufferedreader_20BufferedSocketReader_4__reduce_cython__",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "c02ba65a00cc1341",
+      "write_dest": "_dict",
+      "write_kind": "pointer_deref",
+      "write_line": "*     _dict = getattr(self, '__dict__', None)"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "ba38f78c541f4b4ec83f40531b1ac49918043d732606a7b9e556eb5da60dd53f",
+      "func_name": "__pyx_pf_17clickhouse_driver_14bufferedreader_24CompressedBufferedReader_4__reduce_cython__",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "418cefebad48d253",
+      "write_dest": "_dict",
+      "write_kind": "pointer_deref",
+      "write_line": "*     _dict = getattr(self, '__dict__', None)"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve_list": [
+        "CVE-2020-26759"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "clickhouse_driver/bufferedreader.c",
+      "func_body_sha256": "cfd4f9c85665a9a415a4e1a54b211f054fcae69d80b753d00480dfa1701b1443",
+      "func_name": "__pyx_pw_17clickhouse_driver_14bufferedreader_14BufferedReader_5read",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "clickhouse-driver",
+      "site_id": "426cc117402dc71f",
+      "write_dest": "__pyx_r",
+      "write_kind": "pointer_deref",
+      "write_line": "PyObject *__pyx_r = 0;"
+    },
+    {
+      "commit_id": "14ac462a32ca4b3b78f56502ac976d5b0222ce3d",
+      "cve_list": [
+        "CVE-2020-28248"
+      ],
+      "cwe_list": [
+        "CWE-190",
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "src/PngImg.cc",
+      "func_body_sha256": "a0e37fb0c67d3f6bdb88fd3a6e556b148c8b33195795f3c810e17fc56a614ff4",
+      "func_name": "PngImg::InitStorage_",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "png-img",
+      "site_id": "fb4bc5154bdc0b7f",
+      "write_dest": "rowPtrs_",
+      "write_kind": "index_write",
+      "write_line": "rowPtrs_[i] = data_ + i * info_.rowbytes;"
+    },
+    {
+      "commit_id": "4827ed31c226dc5ed93603bd649e0e387a1778da",
+      "cve_list": [
+        "CVE-2020-28840"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "filepath": "jpgfile.c",
+      "func_body_sha256": "57b67bbef4e67460825f041c7e3e6eca38e9ce2331f7be5676a71855801ddb95",
+      "func_name": "process_COM",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "jhead",
+      "site_id": "0b53f6af8dde8621",
+      "write_dest": "Comment",
+      "write_kind": "index_write",
+      "write_line": "Comment[nch++] = (char)ch;"
+    },
+    {
+      "commit_id": "c4c6470e88210afc95262c8b9fcc27e30ca043ee",
+      "cve_list": [
+        "CVE-2020-29367"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_0d230c8e7c0a",
+      "family_signature": "copy_sink|parameter|(VV)V",
+      "filepath": "blosc/blosc2.c",
+      "func_body_sha256": "5bc34c19f4c5aa28b50dd5a032216c2c6e453b5716eb245be53c34336336c0ae",
+      "func_name": "blosc_c",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "c-blosc2",
+      "site_id": "617926f6f7451bbc",
+      "write_dest": "dest",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(dest, _src + j * neblock, (unsigned int)neblock);"
+    },
+    {
+      "commit_id": "bea84e2844b647532a9b7fbc3a6a8989d66e49e3",
+      "cve_list": [
+        "CVE-2020-6018"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "src/common/crypto_libsodium.cpp",
+      "func_body_sha256": "663157328ebb0017dc89ec9fdac554ded4ec2170f1b98506d259a31c3326bbbc",
+      "func_name": "AES_GCM_DecryptContext::Decrypt",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "GameNetworkingSockets",
+      "site_id": "44393303e4a0bdeb",
+      "write_dest": "pcbPlaintextData",
+      "write_kind": "pointer_deref",
+      "write_line": "*pcbPlaintextData = pcbPlaintextData_longlong;"
+    },
+    {
+      "commit_id": "bea84e2844b647532a9b7fbc3a6a8989d66e49e3",
+      "cve_list": [
+        "CVE-2020-6018"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "src/common/crypto_libsodium.cpp",
+      "func_body_sha256": "12af09ec75d6dd40080494af99eda48237b3f32bb7e7136df62be375773a1b76",
+      "func_name": "AES_GCM_EncryptContext::Encrypt",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "GameNetworkingSockets",
+      "site_id": "4f5e43707a0d3fa5",
+      "write_dest": "pcbEncryptedDataAndTag",
+      "write_kind": "pointer_deref",
+      "write_line": "*pcbEncryptedDataAndTag = pcbEncryptedDataAndTag_longlong;"
+    },
+    {
+      "commit_id": "299f804acbb95a612ab7c504d25ab908aa59ae93",
+      "cve_list": [
+        "CVE-2020-8905"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "filepath": "asylo/platform/host_call/trusted/host_calls.cc",
+      "func_body_sha256": "93a2e64f62084b5d17b2d0ab5030de84f168aee35d18bb1ff5b8c7bbf3a20bfb",
+      "func_name": "enc_untrusted_recvfrom",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "asylo",
+      "site_id": "dc45378c9a563ec4",
+      "write_dest": "buf",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(buf, buffer_received.data(), len);"
+    },
+    {
+      "commit_id": "71fe87878c9cbc3db429f5e5c70f28e4b3d96e3b",
+      "cve_list": [
+        "CVE-2022-0137"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "htmldoc/image.cxx",
+      "func_body_sha256": "1b01bc3880a94da449598cac7343e2d6e4e226288f921d1953c537fefa94371d",
+      "func_name": "image_load_gif",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "htmldoc",
+      "site_id": "8701a92e4efbf8e7",
+      "write_dest": "buf",
+      "write_kind": "index_write",
+      "write_line": "buf[0] = (uchar)getc(fp);"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve_list": [
+        "CVE-2021-36218"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "BLSCrypto.cpp",
+      "func_body_sha256": "20c1bf75e796c58566b3b6c34aad1878a19b9a8aa2903dd2bf092c3aca61e479",
+      "func_name": "hex2carray",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "sgxwallet",
+      "site_id": "721775249d462a5c",
+      "write_dest": "_bin_len",
+      "write_kind": "pointer_deref",
+      "write_line": "*_bin_len = len / 2;"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve_list": [
+        "CVE-2021-36218"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_90ef7ccfa529",
+      "family_signature": "copy_sink|unknown|V-V",
+      "filepath": "secure_enclave/secure_enclave.c",
+      "func_body_sha256": "67f4e244cd071bc41f9cd122d1fc9be4577fb92be630bf565a1fc09be9951110",
+      "func_name": "trustedDkgVerifyAES",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "sgxwallet",
+      "site_id": "a014a9080153c670",
+      "write_dest": "encr_sshare",
+      "write_kind": "copy_sink",
+      "write_line": "strncpy(encr_sshare, s_share, ECDSA_SKEY_LEN - 1);"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve_list": [
+        "CVE-2021-36218"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "secure_enclave/secure_enclave.c",
+      "func_body_sha256": "e02e8babc3e2f44db77b1bbb780fa79687931ef59509d519a7224531446d5815",
+      "func_name": "trustedGenDkgSecretAES",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "sgxwallet",
+      "site_id": "367ffb3e7600b8cc",
+      "write_dest": "enc_len",
+      "write_kind": "pointer_deref",
+      "write_line": "*enc_len = strlen(dkg_secret) + SGX_AESGCM_MAC_SIZE + SGX_AESGCM_IV_SIZE;"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve_list": [
+        "CVE-2021-36218"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "filepath": "secure_enclave/secure_enclave.c",
+      "func_body_sha256": "3b766f260febee384f2c48d0f10d8240cb610318b8322ee995cf579c9625ff4e",
+      "func_name": "trustedGenerateSEK",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "sgxwallet",
+      "site_id": "fa783187b0535882",
+      "write_dest": "AES_key",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(AES_key, SEK_raw, SGX_AESGCM_KEY_SIZE);"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve_list": [
+        "CVE-2021-36218"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "secure_enclave/secure_enclave.c",
+      "func_body_sha256": "0ad93d1d4bdfb15ec0ad48da82c87a43c4ceb93627dae38a3d3dedb314509b29",
+      "func_name": "trustedGetPublicEcdsaKeyAES",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "sgxwallet",
+      "site_id": "2ae1512af2275c7b",
+      "write_dest": "skey",
+      "write_kind": "index_write",
+      "write_line": "skey[enc_len - SGX_AESGCM_MAC_SIZE - SGX_AESGCM_IV_SIZE] = '\\0';"
+    },
+    {
+      "commit_id": "d72ccf06c98259d7261e0f3ac4fd8717778782c1",
+      "cve_list": [
+        "CVE-2021-37232"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/extracts.cpp",
+      "func_body_sha256": "199f73df38838be8e9e1219c0203642b7e2e5b654702aa262c8b8ac7527e2832",
+      "func_name": "APar_ExtractDetails",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "atomicparsley",
+      "site_id": "2a3f9d9306ec06f8",
+      "write_dest": "mvhdAtom",
+      "write_kind": "pointer_deref",
+      "write_line": "AtomicInfo *mvhdAtom = APar_FindAtom(\"moov.mvhd\", false, VERSIONED_ATOM, 0);"
+    },
+    {
+      "commit_id": "05bbd147caccc60162d6fba9baaaf24befa281cd",
+      "cve_list": [
+        "CVE-2022-36044"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "librz/bin/format/luac/luac_bin.c",
+      "func_body_sha256": "ad3e210ec0041c01a0fd51d82c8cc14a1183073d6ba9cd31dfae255b1bec5d3f",
+      "func_name": "_luac_build_info",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "rizin",
+      "site_id": "0bf1c7146c2da1da",
+      "write_dest": "upvalue_names",
+      "write_kind": "index_write",
+      "write_line": "upvalue_names[i] = (char *)debug_upv_entry->upvalue_name;"
+    },
+    {
+      "commit_id": "63b596c915977f038eafd7647d1db25488a8c133",
+      "cve_list": [
+        "CVE-2023-43887"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "filepath": "libde265/decctx.cc",
+      "func_body_sha256": "d745dad1c3c472dfc2c61350f2adca76561fcd7f98a147335ba4170f416ea398",
+      "func_name": "decoder_context::read_pps_NAL",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "libde265",
+      "site_id": "fe486e047a16266d",
+      "write_dest": "pps",
+      "write_kind": "index_write",
+      "write_line": "pps[ (int)new_pps->pic_parameter_set_id ] = new_pps;"
+    },
+    {
+      "commit_id": "c6655a0b620a3e31f085cc906f8073fe81b2fad3",
+      "cve_list": [
+        "CVE-2022-29242"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "gost_ec_keyx.c",
+      "func_body_sha256": "a0d3c2eda936342dca6fd799d64964743c9e61c5ca9ca3509c2a3c8d0e74a170",
+      "func_name": "pkey_gost2018_encrypt",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "engine",
+      "site_id": "994c9e1c5d8828db",
+      "write_dest": "out_len",
+      "write_kind": "pointer_deref",
+      "write_line": "if ((*out_len = i2d_PSKeyTransport_gost(pst, out ? &out : NULL)) > 0)"
+    },
+    {
+      "commit_id": "7df766124f87768b43b9e8947c5a01e17545772c",
+      "cve_list": [
+        "CVE-2022-29242"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "gost_ec_keyx.c",
+      "func_body_sha256": "d4f819e73116f4ebd1522d7cd3a607d815c5063417e68245d1a4c1cbb3657312",
+      "func_name": "pkey_GOST_ECcp_encrypt",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "engine",
+      "site_id": "05abd9c0eb157a57",
+      "write_dest": "out_len",
+      "write_kind": "pointer_deref",
+      "write_line": "if ((*out_len = i2d_GOST_KEY_TRANSPORT(gkt, out ? &out : NULL)) > 0)"
+    },
+    {
+      "commit_id": "b17d5e860f30e8be2caeb0022b63be4c76660178",
+      "cve_list": [
+        "CVE-2022-29777"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "DesktopEditor/fontengine/fontconverter/FontFileType1.cpp",
+      "func_body_sha256": "a0373fbf64ad8d4c7702ce50455d7ab09df95c13d1d15a421318f869e19e662b",
+      "func_name": "NSFontConverter::CFontFileType1::RemovePfbMarkers",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "6495b469324a09f1",
+      "write_dest": "sBuffer",
+      "write_kind": "pointer_deref",
+      "write_line": "unsigned char *sBuffer = NULL;"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_1383388357d4",
+      "family_signature": "pointer_deref|heap_alloc|deref",
+      "filepath": "DesktopEditor/cximage/CxImage/ximabmp.cpp",
+      "func_body_sha256": "cb8cbbec23d649baa4e809919d634272174944a666f073f5ec51b87a744da1a9",
+      "func_name": "CxImageBMP::Decode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "b70880bf2ab577b0",
+      "write_dest": "buff32",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t* buff32=(uint8_t*)malloc(imagesize);"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "DesktopEditor/cximage/CxImage/ximatif.cpp",
+      "func_body_sha256": "c822d26aa177870e00b33aaa56351f63a36c4147f41923a6b18c6e9606697b9b",
+      "func_name": "CxImageTIF::Decode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "5731f39e7002e1c4",
+      "write_dest": "bits16",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t * bits16 = NULL;\t\t\t\t\t\t\t\t\t\t  // + VK"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "filepath": "DesktopEditor/cximage/CxImage/xmemfile.cpp",
+      "func_body_sha256": "433fe32abb741b328373c99add39ba3c40c152d8ce7bfdae4d9da2077512c514",
+      "func_name": "CxMemFile::Read",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "486019d6ff19c991",
+      "write_dest": "buffer",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(buffer, m_pBuffer + m_Position, nRead);"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "filepath": "DesktopEditor/cximage/raw/libdcr.c",
+      "func_body_sha256": "b03beff88f2a110a895b0a58972074a5e43d547674f4d1419bd580cfb4b21a0f",
+      "func_name": "dcr_cam_xyz_coeff",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "0283814072a5a499",
+      "write_dest": "p->pre_mul",
+      "write_kind": "index_write",
+      "write_line": "p->pre_mul[i] = 1 / (float)num;"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_9ecb9bb8ae2e",
+      "family_signature": "copy_sink|struct_field|VV->V",
+      "filepath": "DesktopEditor/cximage/raw/libdcr.c",
+      "func_body_sha256": "5c9816326491889df7a437fdcb9fa80655bab62267f50106f81273412cd35fdf",
+      "func_name": "dcr_parse_tiff",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "20ec17429321975a",
+      "write_dest": "p->tiff_ifd",
+      "write_kind": "copy_sink",
+      "write_line": "memset (p->tiff_ifd, 0, sizeof p->tiff_ifd);"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve_list": [
+        "CVE-2022-29776"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "DesktopEditor/fontengine/fontconverter/FontFileType1.cpp",
+      "func_body_sha256": "d3b1ca60d27643bcfaf945f3ea42935239324ed09bd83d530301a14a45abbff7",
+      "func_name": "NSFontConverter::CFontFileType1::DecryptEexec",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "d0ea3160be0732af",
+      "write_dest": "sCur",
+      "write_kind": "pointer_deref",
+      "write_line": "unsigned char *sCur = (unsigned char*)(*ppEexecBuffer);"
+    },
+    {
+      "commit_id": "2b6ad83b36afd9845085b536969d366d1d61150a",
+      "cve_list": [
+        "CVE-2023-30188",
+        "CVE-2023-30186",
+        "CVE-2023-30187"
+      ],
+      "cwe_list": [
+        "CWE-416",
+        "CWE-787",
+        "CWE-835"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "DesktopEditor/doctrenderer/embed/v8/v8_NativeControl.cpp",
+      "func_body_sha256": "e4a83e9c45e88eb398b7f32bdb92e20e513ab8325e3a9ea768168f0191ecff53",
+      "func_name": "CNativeControlEmbed::CreateObjectBuilderInContext",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "893dc882a969d3b1",
+      "write_dest": "current",
+      "write_kind": "pointer_deref",
+      "write_line": "v8::Isolate* current = CV8Worker::GetCurrent();"
+    },
+    {
+      "commit_id": "2b6ad83b36afd9845085b536969d366d1d61150a",
+      "cve_list": [
+        "CVE-2023-30188",
+        "CVE-2023-30186",
+        "CVE-2023-30187"
+      ],
+      "cwe_list": [
+        "CWE-416",
+        "CWE-787",
+        "CWE-835"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "DesktopEditor/doctrenderer/embed/v8/v8_NativeControl.cpp",
+      "func_body_sha256": "4c293f3fe14722fca57ef07f192c01e5dd5deb1acd27cfe7594aa384b13f1973",
+      "func_name": "CNativeControlEmbed::CreateObjectInContext",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "core",
+      "site_id": "d014552c6a51c038",
+      "write_dest": "current",
+      "write_kind": "pointer_deref",
+      "write_line": "v8::Isolate* current = CV8Worker::GetCurrent();"
+    },
+    {
+      "commit_id": "306490c8d848c367faa2d9df81f5e69dab46ffb5",
+      "cve_list": [
+        "CVE-2023-22745"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/tss2-rc/tss2_rc.c",
+      "func_body_sha256": "b9790967e870c601713a114836af2cfea60f4a834f3f16a46e7a9719221f80e6",
+      "func_name": "Tss2_RC_Decode",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "tpm2-tss",
+      "site_id": "91b4f2934ce5eb51",
+      "write_dest": "e",
+      "write_kind": "pointer_deref",
+      "write_line": "const char *e = err_bits ? handler(err_bits) : \"success\";"
+    },
+    {
+      "commit_id": "56d0332bf91104cfc877635f6c82e9348587df04",
+      "cve_list": [
+        "CVE-2023-31470"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "src/dns.c",
+      "func_body_sha256": "9430a265c6935e69edf6adec6634d3b062cd2f32ce70779853dd38850b530367",
+      "func_name": "_dns_encode_HTTPS",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "smartdns",
+      "site_id": "9296ea74224f9661",
+      "write_dest": "param",
+      "write_kind": "pointer_deref",
+      "write_line": "struct dns_https_param *param = NULL;"
+    },
+    {
+      "commit_id": "56d0332bf91104cfc877635f6c82e9348587df04",
+      "cve_list": [
+        "CVE-2023-31470"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "src/dns.c",
+      "func_body_sha256": "9ed007605863a4cd818dd3dba3064fc8ad62c436da169b602e08b5bd71ab0cd0",
+      "func_name": "dns_get_HTTPS_svcparm_start",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "smartdns",
+      "site_id": "60089bf334faad2a",
+      "write_dest": "priority",
+      "write_kind": "pointer_deref",
+      "write_line": "*priority = _dns_read_short(&data);"
+    },
+    {
+      "commit_id": "f57bd745b4cbed577ea654fad4701bea4d38b44c",
+      "cve_list": [
+        "CVE-2023-42801"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "filepath": "src/Connection.c",
+      "func_body_sha256": "c6063b6b077bf0c8c32e8ea7245d78d9efe8aa8222a0e2e1dab6e3b99112b94e",
+      "func_name": "LiStartConnection",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "moonlight-common-c",
+      "site_id": "51feb17b31c79d77",
+      "write_dest": "&StreamConfig",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(&StreamConfig, streamConfig, sizeof(StreamConfig));"
+    },
+    {
+      "commit_id": "f57bd745b4cbed577ea654fad4701bea4d38b44c",
+      "cve_list": [
+        "CVE-2023-42801"
+      ],
+      "cwe_list": [
+        "CWE-120"
+      ],
+      "family_id": "fam_427812717b95",
+      "family_signature": "copy_sink|parameter|V(*V)",
+      "filepath": "src/Misc.c",
+      "func_body_sha256": "5901e53cd434a9cf6f8e7054f380ea760ea15a07d7c62565c6f44ff4a03a32b1",
+      "func_name": "LiInitializeConnectionCallbacks",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "moonlight-common-c",
+      "site_id": "bcfe6f37698f55c0",
+      "write_dest": "clCallbacks",
+      "write_kind": "copy_sink",
+      "write_line": "memset(clCallbacks, 0, sizeof(*clCallbacks));"
+    },
+    {
+      "commit_id": "902bc9190331343b2017211debcec8d2ab87e17a",
+      "cve_list": [
+        "CVE-2023-4863"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "src/utils/huffman_utils.c",
+      "func_body_sha256": "2ae2c74e8e63ca2a18f1efae0c0847bac5369d9e0e04b4c8cb892ec597654680",
+      "func_name": "VP8LBuildHuffmanTable",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "libwebp",
+      "site_id": "f572341774c26e76",
+      "write_dest": "const sorted",
+      "write_kind": "pointer_deref",
+      "write_line": "uint16_t* const sorted ="
+    },
+    {
+      "commit_id": "2c871f9e084b2c03d1961884228a6901387ab8d6",
+      "cve_list": [
+        "CVE-2019-13106"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "filepath": "common/spl/spl_fit.c",
+      "func_body_sha256": "0f832072a175a3695026b90be70d55d07ab898e1a8575b8eef61f5f67f273aa0",
+      "func_name": "spl_load_fit_image",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "u-boot",
+      "site_id": "bedac77933b12b54",
+      "write_dest": "(void *)load_addr",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy((void *)load_addr, src, length);"
+    },
+    {
+      "commit_id": "673ce95d481ea9368c4d4d43ac756ba1d6d9e608",
+      "cve_list": [
+        "CVE-2018-6063"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "components/printing/renderer/print_render_frame_helper.cc",
+      "func_body_sha256": "8e625773918bd7ee57f74d21c64ec8e78f6545fd235c75e06862c57e1fe2598d",
+      "func_name": "PrintRenderFrameHelper::CopyMetafileDataToSharedMem",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "Chrome",
+      "site_id": "d305766bb868857b",
+      "write_dest": "shared_mem_handle",
+      "write_kind": "pointer_deref",
+      "write_line": "*shared_mem_handle ="
+    },
+    {
+      "commit_id": "673ce95d481ea9368c4d4d43ac756ba1d6d9e608",
+      "cve_list": [
+        "CVE-2018-6063"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "content/browser/renderer_host/render_process_host_impl.cc",
+      "func_body_sha256": "bf2c3d8bd75596b134b3c59f626c7810e48ffa2add9889d809baa7e28cc98e63",
+      "func_name": "RenderProcessHostImpl::CreateSharedRendererHistogramAllocator",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "Chrome",
+      "site_id": "36e552d0cf3b6b82",
+      "write_dest": "readonly",
+      "write_kind": "pointer_deref",
+      "write_line": "std::move(shm), GetID(), \"RendererMetrics\", /*readonly=*/false));"
+    },
+    {
+      "commit_id": "673ce95d481ea9368c4d4d43ac756ba1d6d9e608",
+      "cve_list": [
+        "CVE-2018-6063"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "filepath": "mojo/edk/system/core.cc",
+      "func_body_sha256": "065365e41f45ad06b2897410f2e9c8d05a8001168aa9b0d2d176848f125aa764",
+      "func_name": "Core::UnwrapPlatformSharedBufferHandle",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "Chrome",
+      "site_id": "2e701a07e152f213",
+      "write_dest": "flags",
+      "write_kind": "pointer_deref",
+      "write_line": "*flags = MOJO_PLATFORM_SHARED_BUFFER_HANDLE_FLAG_NONE;"
+    },
+    {
+      "commit_id": "04e8cd58f075bec5892e369c8deebca9c67e855c",
+      "cve_list": [
+        "CVE-2018-9496"
+      ],
+      "cwe_list": [
+        "CWE-787"
+      ],
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "filepath": "decoder/ixheaacd_esbr_polyphase.c",
+      "func_body_sha256": "0452c398cc0338601a48992ef251cdbc095f024fbcb02408d0f9a2e43b143c30",
+      "func_name": "ixheaacd_real_synth_filt",
+      "is_vulnerable": true,
+      "mapping_status": "mapped",
+      "pool_source": "secvuleval_full",
+      "project": "Android",
+      "site_id": "09ff54824cf57d43",
+      "write_dest": "syn_buf",
+      "write_kind": "pointer_deref",
+      "write_line": "FLOAT32 *syn_buf = &buffer[kmax];"
     }
   ],
   "tchecker_used": false,
   "twelve_vuln_family_gate": {
     "gate": 12,
     "meets_gate": true,
-    "vulnerable_families": 19
+    "vulnerable_families": 42
   }
 }
