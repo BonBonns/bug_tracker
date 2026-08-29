@@ -1,0 +1,28 @@
+{
+  "corpus": {
+    "bodies_sha_verified": "101/101",
+    "overlap_with_vulnerable_pool": 0,
+    "population": "101 NON-VULNERABLE mapped SecVulEval sites (mapping_status=mapped, is_vulnerable=false)",
+    "secvuleval_gz_sha256": "d37bab32cf172a7f03b9048c793e52e58334a537a4697128bfaa92440ea037a9",
+    "source_manifest": "study/secvuleval_full/FROZEN_heldout.json",
+    "source_manifest_sha256": "6da82c03401aa483fbddf7d8bf27fd22b56879538150123e517f42580bdf2ec6"
+  },
+  "distinct_from": "the consumed 258-site vulnerable corpus; this is a SEPARATE frozen measurement",
+  "does_not_measure": "conventional accuracy / precision (the scanner emits comparable safe/vulnerable conclusions on only a minority of sites); this completes the SOUNDNESS picture, not an accuracy claim",
+  "harness_files_sha256": {
+    "heldout_negatives_run.py": "972d0bb42a5a5619023dd3219ea8c2c918abd6b8939a8b501c10ef0e8e6277e4",
+    "heldout_run.py": "24f1ad3500fabd76ffb179fd67d9afdccc6cf6d74f276f949234fdf20e7c5e4d"
+  },
+  "measures": [
+    "recognition funnel on labeled NON-vulnerable write sites (source/build/map/recognize)",
+    "UNSUPPORTED VULNERABILITY PROMOTIONS: recognized non-vuln sites (and any write in a non-vuln body) routed to proven_oversized",
+    "safe promotions (deterministic_complete) and abstention behavior"
+  ],
+  "no_scanner_changes": "the scanner is byte-identical to 544a606; only a new driver (heldout_negatives_run.py) reuses the unchanged harness functions",
+  "run": "specificity_soundness_negatives",
+  "scanner_implementation_commit": "544a606f915a68c8253258a241ae782150dea272 (UNCHANGED)",
+  "toolchain": {
+    "frontend": "joern-c2cpg v4.0.608",
+    "joern_archive_sha256": "97989843f7d6be1449296936644b04803e80723e607648c33edf87ded6202ded"
+  }
+}
