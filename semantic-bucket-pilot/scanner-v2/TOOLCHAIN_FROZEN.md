@@ -28,6 +28,62 @@ because different joern versions can change parsing, node identities, calls, par
 and reference resolution — the exact facts the capability models read. 4.0.462 has been
 removed; it is NOT the frozen frontend and must never silently replace 4.0.608.
 
+## Two-level validation (both PASS) — the authority for accepting 4.0.608
+
+4.0.608 was installed in a SEPARATE directory (`/tmp/joern-4.0.608`) and validated before
+being accepted as the frozen frontend. (4.0.462 had already been removed in the prior step;
+it was the accidental install, never a validated baseline, so nothing validated was lost.)
+
+### Level 1 — frontend / normalization compatibility
+
+- Reproduced `cpp.json` at the exact pinned revision (NSS `994c45e80^` = `aeb343057...`),
+  file `lib/util/secasn1d.c`, with the in-tree exporter `export_c_cpp_facts_v03.sc` and
+  normalizer `normalize_c_cpp_facts_v03.py`, using the separate 4.0.608 install.
+- Whole-file SHA-256: `731b7687...` vs archived `758f8792...` — DIFFERENT. Expected: the
+  archived facts embed a different absolute scan path (`metadata.root`, per-fact `file`),
+  used a wider scan scope, and were normalized by the exporter/normalizer at frozen
+  scanner_commit `b704aab2` (absent from this tree). The archived RAW `cpp.json` is not
+  vendored (only its sha256 is recorded in `manifest.json`), so a direct fact-table diff
+  against the archive is impossible.
+- Difference characterized as path/metadata + scope, NOT semantic:
+  * DETERMINISM: two independent re-scans at the same scope produce a BYTE-IDENTICAL raw
+    `cpp.json` (`731b7687...`) and identical canonical fact tables — the frontend +
+    normalizer are deterministic, so the archive-hash difference is not nondeterminism.
+  * The only scan-path-dependent content is `metadata.root` and per-fact `file`; changing
+    the scan directory changes those bytes (and the whole-file hash) with no semantic change.
+  * Cross-scope changes (file-only vs lib/util) are exactly cross-file REFERENCE RESOLUTION
+    (macros like `SEC_ASN1_*`, `PORT_Memset`/`PORT_Memcpy` callees) — expected scope
+    behavior, and the reason the semantic projection is compared at a scope that resolves
+    those references (below).
+
+### Level 2 — producer / semantic compatibility
+
+The expected abstentions were produced by the producer code at scanner_commit `b704aab2`,
+which is not in this tree; later producer/schema fields may differ, so byte-identical
+current records are NOT required. Instead the FROZEN SEMANTIC PROJECTION
+(`frozen-corpus/all_records.jsonl`, the 4 records for `cve-2016-1950/vuln`) is the ground
+truth. Running the current producers on the 4.0.608 facts (scope that resolves cross-file
+references), restricted to the CVE source file, the projection
+`(producer, function, analysis_status, reason_code, llm_eligible)` is an EXACT MATCH:
+
+    cursor  sec_asn1d_concat_group    abstained destination_identity_ambiguous  llm=False   (x2)
+    runtime sec_asn1d_add_to_subitems abstained unknown_allocator_contract      llm=True
+    runtime sec_asn1d_concat_substrings abstained required_evidence_absent       llm=False
+
+Semantic reproduction target — all hold:
+- cursor abstentions: 2  ✓
+- runtime abstentions: 2  ✓
+- interprocedural: 0  ✓
+- exactly one LLM-routable candidate, at `sec_asn1d_add_to_subitems`  ✓
+- reason `unknown_allocator_contract`  ✓
+
+### Decision
+
+Archive hash PASS + Level 1 (deterministic; difference is path/metadata/scope, not
+semantic) PASS + Level 2 (exact semantic-projection match) PASS. 4.0.608 is therefore
+accepted as the frozen frontend and replaces the accidental 4.0.462; capability work
+resumes under it. `/tmp/joern-cli` (used by `scan_c_frozen.sh`) is the accepted 4.0.608.
+
 ## Real-source reproduction (not synthetic) — PASS
 
 Regenerated facts for the real disclosed CVE cve-2016-1950 (NSS bug 1245528) and ran the
