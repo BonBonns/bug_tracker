@@ -1,0 +1,37 @@
+{
+ "deterministic_complete_total": 2,
+ "oversized": [],
+ "promotions": [
+  {
+   "basis": "stack_fixed_array",
+   "count": 8,
+   "delegated": false,
+   "dest": "ukm",
+   "elem": "unsigned char",
+   "established_property": "write_length_within_destination_capacity",
+   "function": "pkey_GOST_ECcp_encrypt",
+   "line": 20,
+   "note": "8 bytes <= 8 (byte array), offset 0",
+   "off": null,
+   "provenance": "stack_fixed_array",
+   "sid": "05abd9c0eb157a57",
+   "width": "8"
+  },
+  {
+   "basis": "stack_fixed_array",
+   "count": 44,
+   "delegated": false,
+   "dest": "wrappedKey",
+   "elem": "unsigned char",
+   "established_property": "write_length_within_destination_capacity",
+   "function": "pkey_GOST_ECcp_decrypt",
+   "line": 52,
+   "note": "8 bytes <= 44 (byte array), offset 0",
+   "off": null,
+   "provenance": "stack_fixed_array",
+   "sid": "93dc5f6e3120481d",
+   "width": "8"
+  }
+ ],
+ "proven_oversized_total": 0
+}
