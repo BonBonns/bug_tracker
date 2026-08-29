@@ -40,8 +40,35 @@
     "oob_runtime_capacity_v2": "b1867edf6910b9a5a66d2dce4df5d7f014c74383d0d112081c45d3d2539dfbef",
     "oob_runtime_capacity_verdict": "da91b64fd28a5cc20103ddb87a0b7e83524533c08d98a90db548219a8680fde9"
   },
+  "provenance": {
+    "corpus_inputs_sha256": {
+      "pooled_manifest": "973a0a58d487a1035bfe6e211b1d2794e46a1bfd6e5a6200a4f470d16b410dbe",
+      "secvuleval_full_jsonl_gz": "d37bab32cf172a7f03b9048c793e52e58334a537a4697128bfaa92440ea037a9"
+    },
+    "evaluation_harness_commit": "dbcc4c80eaa9b0a14220f6c49bb575f12f792fc2",
+    "execution": {
+      "environment": {
+        "JOERN": "/tmp/joern-cli/joern",
+        "REPO": "/home/user/bug_tracker",
+        "background_task_id": "bl0kz8i27",
+        "cwd": "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
+      },
+      "final_command": "JOERN=/tmp/joern-cli/joern REPO=/home/user/bug_tracker python3 heldout_run.py $(pwd)/study/heldout_run",
+      "joern_archive_sha256": "97989843f7d6be1449296936644b04803e80723e607648c33edf87ded6202ded",
+      "joern_path": "/tmp/joern-cli/joern",
+      "joern_version": "4.0.608",
+      "start_time_approx": "2026-08-29 07:22:48"
+    },
+    "harness_files_sha256": {
+      "PROTOCOL_DEVIATION.md": "140fca9aed3b7cef45d037b446a5ce2ddffe982018c518f99a18bbd4f30e4fed",
+      "heldout_run.py": "24f1ad3500fabd76ffb179fd67d9afdccc6cf6d74f276f949234fdf20e7c5e4d",
+      "heldout_summarize.py": "494a7f219d0eb155d21a9dccc06dfc1c14791bbdc3410142eb5ab174e6bde1ba"
+    },
+    "scanner_implementation_commit": "544a606f915a68c8253258a241ae782150dea272"
+  },
   "run": "one_time_heldout_confirmatory",
   "scanner_commit": "544a606f915a68c8253258a241ae782150dea272",
+  "scanner_commit_note": "scanner implementation = 544a606; evaluation harness = dbcc4c80 (see provenance)",
   "scope": "vulnerable-only recognition/recall & coverage; NOT precision/FPR/accuracy. 101 non-vulnerable SecVulEval sites are a separate future specificity experiment.",
   "source_availability": "175 SecVulEval sites reconstructable (func_body via sha-verified gz); 83 PostCutoff/BigVul/ARVO sites are metadata-only in the frozen artifacts -> stage-1 pipeline attrition (not scanner misses).",
   "toolchain": {
