@@ -114,6 +114,19 @@ def main():
          by.get("mw_offset", {}).get("disposition") == "proven_oversized"
          and by["mw_offset"]["cursor_start_offset"] == 100
          and by["mw_offset"]["iteration_count"] == 200),
+        # NO DoS: a 2e9 literal bound resolved by O(1) closed form (this test returns instantly).
+        ("NO-DoS huge literal bound -> proven_oversized via closed form (2e9 writes, O(1))",
+         by.get("mw_huge", {}).get("disposition") == "proven_oversized"
+         and by["mw_huge"]["iteration_count"] == 2000000000
+         and by["mw_huge"]["bound_shape"] == "literal_count"),
+        # C SEMANTICS: signed overflow at the boundary -> cannot promote (open, not fits).
+        ("SIGNED-OVERFLOW boundary -> open_candidate (counter_overflow_unproven, not fits)",
+         route("mw_ovf") == "open_candidate"
+         and by["mw_ovf"]["bound_shape"] == "counter_overflow_unproven"),
+        # C SEMANTICS: unsigned decrement wraps past 0 -> cannot prove count -> open.
+        ("UNSIGNED-WRAP decrement -> open_candidate (counter_overflow_unproven)",
+         route("mw_wrap") == "open_candidate"
+         and by["mw_wrap"]["bound_shape"] == "counter_overflow_unproven"),
         # negatives: outside the domain -> NO cap3 op
         ("NEG non-advancing single member write -> no cap3 op", "mw_single" not in by),
         ("NEG byte *p++ deref (cursor domain) -> no cap3 op", "mw_byte" not in by),
@@ -162,11 +175,20 @@ def main():
                 "witnesses": [(wid, wcode + " /*STALE*/") for (wid, wcode) in fs["witnesses"]]}
     mm = {o["function"]: o for o in C.analyze_member_walks(cpp, for_struct=tampered)}
     checks.append(
-        ("BINDING MISMATCH: tampered witness -> fail closed (for_structure_cpp_cpg_mismatch)",
+        ("BINDING MISMATCH (witness): tampered node witness -> fail closed",
          len(fs["witnesses"]) > 0
          and reason("mw_open") == "write_count_bound_not_established"   # sanity: real run ok
          and mm.get("mw_open", {}).get("reason") == "for_structure_cpp_cpg_mismatch"
          and mm["mw_open"]["route"] == "additional_evidence_required"))
+
+    # TWO-FILE MANIFEST: a cpp.json hash that does not match the manifest -> fail closed, even
+    # though the node witnesses are intact (this is the check the witnesses alone cannot make).
+    bad_cpp_sha = dict(fs); bad_cpp_sha["cpp_sha"] = "0" * 64
+    mh = {o["function"]: o for o in C.analyze_member_walks(cpp, for_struct=bad_cpp_sha)}
+    checks.append(
+        ("BINDING MISMATCH (manifest): wrong cpp.json hash -> fail closed",
+         mh.get("mw_open", {}).get("reason") == "for_structure_cpp_cpg_mismatch"
+         and mh["mw_open"]["route"] == "additional_evidence_required"))
 
     # MULTIPLE UNVERIFIABLE records remain DISTINCT: dedup must not merge them, and must give
     # each a monotonic per-run index (NOT object id()) as its "never merge" guarantee.

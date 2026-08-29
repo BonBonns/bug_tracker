@@ -47,26 +47,43 @@ any site it already recognizes (cursor_producer > direct > call_site_summary).
   i++` form — never assumed for any other init/operator/step.
 - **The ITERATION COUNT is proven, not the bound token.** A literal bound token is NOT the
   write count. A verdict (deterministic_complete / proven_oversized) is issued only when ALL
-  of these are literal and structurally established, then the loop is *simulated* to get the
-  exact count: (1) the counter's initial value from the for-INIT; (2) the comparison operator
-  (`<`, `<=`, `>`, `>=`, `!=`) from the for-CONDITION; (3) a single unit/literal counter step
-  and its DIRECTION from the for-UPDATE (`i++`→+1, `i--`→−1, `i+=k`→+k, `i-=k`→−k); (4) the
-  counter is NOT modified in the BODY; (5) the cursor's STARTING OFFSET from its base binding
-  (`array`→0, `array+k`→k, `&array[k]`→k, literal k only). In-bounds iff
-  `start_offset + count <= capacity`. So `i=0; i<=256` simulates to **257** writes (oversized,
-  not 256); `i=1; i<=256` to **256**; `i=1; i<256` to **255**; `i+=2` over `[0,256)` to
-  **128**. Any of (1)–(5) not literally established → conservative `open_candidate` with a
-  specific `bound_shape` (`counter_modified_in_body`, `symbolic_expr`/`symbolic_signed`/
-  `symbolic_unsigned`, `cursor_offset_unresolved`, `counter_step_ambiguous`,
-  `counter_init_unresolved`) — never a false safe.
-- **`cpp.json` is cryptographically bound to `cpg.bin`.** Node ids are meaningful only within
-  one CPG generation, and Capability 3 combines the normalized facts (`cpp.json`) with a
-  separate query on `cpg.bin` (`export_for_structure.sc`). `for_structure.json` records the
-  generating `cpg.bin` SHA-256 (and is regenerated if the `cpg.bin` sha changes — stale-artifact
-  protection) plus per-FOR **binding witnesses** (the condition node's id + code). Before using
-  any structural fact, cap3 re-checks each witness id/code against `cpp.json`'s calls; if any
-  disagree the two artifacts are not from the same generation and cap3 **fails closed**
-  (`for_structure_cpp_cpg_mismatch`), never trusting cross-generation node ids.
+  of these are literal and structurally established: (1) the counter's initial value from the
+  for-INIT; (2) the comparison operator (`<`, `<=`, `>`, `>=`, `!=`) from the for-CONDITION;
+  (3) a single unit/literal counter step and its DIRECTION from the for-UPDATE (`i++`→+1,
+  `i--`→−1, `i+=k`→+k, `i-=k`→−k); (4) the counter is NOT modified in the BODY; (5) the
+  cursor's STARTING OFFSET from its base binding (`array`→0, `array+k`→k, `&array[k]`→k,
+  literal k only). In-bounds iff `start_offset + count <= capacity`. So the count is **257**
+  for `i=0; i<=256` (oversized, not 256); **256** for `i=1; i<=256`; **255** for `i=1; i<256`;
+  **128** for `i+=2` over `[0,256)`. Any of (1)–(5) not literally established → conservative
+  `open_candidate` with a specific `bound_shape` (`counter_modified_in_body`,
+  `symbolic_expr`/`symbolic_signed`/`symbolic_unsigned`, `cursor_offset_unresolved`,
+  `counter_step_ambiguous`, `counter_init_unresolved`) — never a false safe.
+- **CLOSED-FORM count, no analysis-time DoS.** The trip count is computed by O(1) closed-form
+  arithmetic (`_trip_count`), NOT by iterating the loop — a literal bound of two billion is
+  resolved instantly, never simulated. Cases the closed form does not resolve return
+  `trip_count_indeterminate` (open); a loop that does not terminate over the integers returns
+  `nonterminating` → proven_oversized (it writes without bound, exceeding any finite capacity).
+- **C INTEGER SEMANTICS gate.** The ideal-integer count is trustworthy only if stepping the
+  counter of its DECLARED type from `i0` to the exit value `E = i0 + count·step` (the first
+  value failing the condition) cannot overflow/wrap, and the bound is representable in that
+  type (no signed↔unsigned conversion surprise). `_counter_range` resolves the counter's C
+  type to `[min,max]` (unsigned/width from `type_full_name`); a deterministic promotion
+  requires `i0`, `E`, and the bound all within range. If the type is unknown or any endpoint is
+  exceeded (signed overflow at the boundary, unsigned decrement wrapping past 0, …), no-wrap is
+  unproven → conservative `open_candidate` (`counter_overflow_unproven`), never a false safe.
+  `max(0, num)` applies ONLY to the canonical signed `i=0; i<num; i++` form.
+- **Hash-bound CPG with semantic witnesses (two-file binding manifest).** Node ids are
+  meaningful only within one CPG generation, and Capability 3 combines the normalized facts
+  (`cpp.json`) with a separate query on `cpg.bin` (`export_for_structure.sc`). Hashing
+  `cpg.bin` + checking node witnesses establishes strong cross-artifact CONSISTENCY but does
+  not by itself bind the complete `cpp.json`; so the binding manifest (`for_structure.json`)
+  stores the SHA-256 of BOTH files, and at analysis time cap3 recomputes BOTH the current
+  `cpp.json` and the current `cpg.bin` and requires an exact match against the manifest, AND
+  re-checks per-FOR **semantic witnesses** (the condition node's id + code) against
+  `cpp.json`'s calls (catching same-manifest-hash-but-wrong-generation node id reuse). The
+  manifest is regenerated if the `cpg.bin` sha changes (stale-artifact protection). Any failure
+  → cap3 **fails closed** (`for_structure_cpp_cpg_mismatch`), never trusting cross-generation
+  node ids.
 - **Fail-closed dedup uses a monotonic per-run index, never `id(object)`.** Unverifiable
   records (source position or declaration ordinal unresolvable) all collapse to the same
   `identity_key` (`("UNVERIFIABLE", node_or_None)`), so identity alone would merge them. Dedup
@@ -94,8 +111,16 @@ ITERATION-COUNT controls (the bound token is not the write count — each simula
 `mw_bodymod` (counter mutated in body) -> open_candidate `counter_modified_in_body`;
 `mw_offset` (`cursor = array + 100`, 200 writes) -> proven_oversized (reaches index 299 >=
 256; the start offset is counted, not dropped).
-BINDING control: a tampered `for_structure` witness (code no longer matching `cpp.json`) ->
-fail closed `for_structure_cpp_cpg_mismatch` (cross-generation node ids never trusted).
+NO-DoS / C-SEMANTICS controls: `mw_huge` (`i<2000000000`) -> proven_oversized computed by O(1)
+closed form (the test returns instantly, never iterating 2e9 times); `mw_ovf`
+(`i=2147483645; i<=INT_MAX; i++`) -> open_candidate `counter_overflow_unproven` (only 3 body
+runs, but the final `i++` overflows signed `int` — not promoted to a false fit); `mw_wrap`
+(`unsigned i=300; i>=0; i--`) -> open_candidate `counter_overflow_unproven` (decrement wraps
+past 0; the ideal count is not the real one).
+BINDING controls (two-file manifest + witnesses): a tampered `for_structure` witness (code no
+longer matching `cpp.json`) -> fail closed `for_structure_cpp_cpg_mismatch`; a `cpp.json` hash
+not matching the manifest -> fail closed even with witnesses intact (the check witnesses alone
+cannot make). Cross-generation node ids are never trusted.
 DEDUP control: two unverifiable records collapse to the same `identity_key` yet dedup keeps
 them as two distinct never-merged ops with monotonic `unverifiable_index` 0/1 (no `id()`).
 Adversarial abstentions, each a distinct trajectory/capacity failure:

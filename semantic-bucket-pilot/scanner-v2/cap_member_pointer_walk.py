@@ -64,22 +64,76 @@ def _lit(s):
     return int(s) if INT_RE.match(s) else None
 
 
-def _iteration_count(i0, sym, bound, step, guard):
-    """Exact number of body executions for a literal counter loop (i0, op, bound, step).
-    Returns (count, 'exact') or (None, reason). `guard` caps the simulation so a runaway /
-    wrong-direction loop is reported rather than looping forever."""
+def _cmp(a, sym, b):
+    return {"<": a < b, "<=": a <= b, ">": a > b, ">=": a >= b, "!=": a != b}[sym]
+
+
+def _trip_count(i0, sym, bound, step):
+    """CLOSED-FORM trip count (number of body executions) for a literal counter loop
+    `for (i=i0; i OP bound; i+=step)`, computed over MATHEMATICAL integers in O(1) -- NO
+    simulation, so an astronomically large literal bound cannot cause analysis-time DoS.
+    Returns: an int >= 0 (exact count); the string 'infinite' (loop never terminates in the
+    ideal integer model -- it writes without bound, so it exceeds any finite capacity); or
+    None (a comparison/step combination this closed form does not resolve -> abstain).
+    NOTE: this is the IDEAL-integer count; C wrap/overflow safety is proven separately by the
+    caller before any deterministic promotion (a wrapping counter is NOT modeled here)."""
     if step == 0:
-        return None, "counter_step_zero"
-    cmp = {"<": lambda a, b: a < b, "<=": lambda a, b: a <= b,
-           ">": lambda a, b: a > b, ">=": lambda a, b: a >= b,
-           "!=": lambda a, b: a != b}[sym]
-    count, i = 0, i0
-    while cmp(i, bound):
-        count += 1
-        i += step
-        if count > guard:
-            return None, "counter_runaway_or_nonterminating"
-    return count, "exact"
+        return "infinite" if _cmp(i0, sym, bound) else 0
+    if sym in ("<", "<="):
+        if not _cmp(i0, sym, bound):
+            return 0
+        if step < 0:                      # condition true but moving away -> never exits
+            return "infinite"
+        span = bound - i0 + (1 if sym == "<=" else 0)
+        return (span + step - 1) // step  # ceil(span/step), span>0 here
+    if sym in (">", ">="):
+        if not _cmp(i0, sym, bound):
+            return 0
+        if step > 0:
+            return "infinite"
+        st = -step
+        span = i0 - bound + (1 if sym == ">=" else 0)
+        return (span + st - 1) // st
+    if sym == "!=":
+        if i0 == bound:
+            return 0
+        diff = bound - i0
+        if diff % step == 0 and diff // step > 0:  # lands exactly on bound, moving toward it
+            return diff // step
+        return "infinite"                 # steps over / away from bound -> never equals it
+    return None
+
+
+_INT_WIDTH = (("long long", 64), ("int64", 64), ("uint64", 64), ("size_t", 64),
+              ("ssize_t", 64), ("ptrdiff", 64), ("intptr", 64),
+              ("short", 16), ("int16", 16), ("uint16", 16),
+              ("char", 8), ("int8", 8), ("uint8", 8),
+              ("long", 64), ("int32", 32), ("uint32", 32), ("int", 32))
+
+
+def _counter_range(name, index, fid):
+    """Representable range of the counter's declared C type as (min, max, unsigned:bool),
+    or None if the type is unknown/unrecognized (then no-overflow cannot be proven -> the
+    caller stays conservative). Resolved from the counter's parameter/local type_full_name."""
+    t = None
+    f = index["funcs"].get(fid, {})
+    for p in (f.get("parameters") or []):
+        if p.get("name") == name:
+            t = p.get("type_full_name"); break
+    if t is None:
+        for l in index["locals_by_id"].values():
+            if l.get("method_id") == fid and l.get("name") == name:
+                t = l.get("type_full_name"); break
+    if not t:
+        return None
+    tl = t.lower()
+    unsigned = ("unsigned" in tl) or ("uint" in tl) or ("size_t" in tl)
+    width = next((w for key, w in _INT_WIDTH if key in tl), None)
+    if width is None:
+        return None
+    if unsigned:
+        return (0, (1 << width) - 1, True)
+    return (-(1 << (width - 1)), (1 << (width - 1)) - 1, False)
 
 
 def _cursor_start_offset(base_binding_call):
@@ -114,8 +168,9 @@ def load_for_structure(cpp):
     cpp_sha} or None if unavailable (fail closed). cpg.bin is a sibling of cpp.json; the
     result is cached next to it as for_structure.json and re-generated if the cpg.bin sha
     changed (stale-artifact protection). The `witnesses` are (node_id, code) pairs from the
-    CPG that analyze_member_walks re-checks against cpp.json to CRYPTOGRAPHICALLY bind the
-    two artifacts to the same CPG generation (node ids are only meaningful within one)."""
+    CPG that analyze_member_walks re-checks against cpp.json as a SEMANTIC CONSISTENCY witness;
+    the full cross-artifact binding is the two-file SHA-256 manifest (both cpg_sha and cpp_sha),
+    re-verified against the live files at analysis time (node ids mean nothing across CPGs)."""
     out_dir = os.path.dirname(os.path.abspath(cpp))
     fs_json = os.path.join(out_dir, "for_structure.json")
     cpg = os.path.join(out_dir, "cpg.bin")
@@ -156,8 +211,11 @@ def load_for_structure(cpp):
              "cond": set(r["cond"]), "update": set(r["update"]), "body": set(r["body"])})
         if r.get("witness_id", -1) != -1:
             witnesses.append((r["witness_id"], r.get("witness_code", "")))
+    # Return the PERSISTED manifest hashes (what was recorded when the structural facts were
+    # generated), so analyze_member_walks can re-verify BOTH the current cpp.json and the
+    # current cpg.bin against them -- a genuine two-file binding manifest, not just witnesses.
     return {"by_method": dict(by_method), "witnesses": witnesses,
-            "cpg_sha": cpg_sha, "cpp_sha": cpp_sha}
+            "cpg_sha": cached["cpg_sha"], "cpp_sha": cached["cpp_sha"]}
 
 
 def _resolve(idid, ident_by_id):
@@ -229,18 +287,32 @@ def analyze_member_walks(cpp, for_struct="AUTO"):
         call_by_id[c.get("id")] = c
     fns = index["funcs"]
 
-    # CRYPTOGRAPHIC cpp.json <-> cpg.bin binding: the FOR-structure facts carry witness
-    # (node_id, code) pairs from the CPG; re-check them against cpp.json's calls. Node ids
-    # are only meaningful within one CPG generation, so a mismatch means stale artifacts.
+    # HASH-BOUND CPG WITH SEMANTIC WITNESSES. Two independent checks bind the facts:
+    #  (a) TWO-FILE BINDING MANIFEST: the structural facts record the SHA-256 of BOTH the
+    #      cpp.json AND the cpg.bin they were generated from; here we recompute both current
+    #      files and require an exact match, so a swapped/edited cpp.json or cpg.bin is caught.
+    #  (b) SEMANTIC WITNESSES: per-FOR condition (node_id, code) pairs from the CPG, re-checked
+    #      against cpp.json's calls -- node ids are meaningful only within one CPG generation,
+    #      so this catches same-hash-manifest-but-wrong-generation node id reuse.
+    # Any failure -> binding="mismatch" -> fail closed.
     by_method, binding = {}, "unavailable"
     if for_struct is not None:
         by_method = for_struct.get("by_method", {})
         binding = "ok"
-        for wid, wcode in for_struct.get("witnesses", []):
-            c = call_by_id.get(wid)
-            if c is None or WSD._norm_code(c.get("code")) != WSD._norm_code(wcode):
-                binding = "mismatch"
-                break
+        man_cpp, man_cpg = for_struct.get("cpp_sha"), for_struct.get("cpg_sha")
+        cur_cpp = _sha256(cpp) if isinstance(cpp, str) and os.path.exists(cpp) else None
+        cpg_path = (os.path.join(os.path.dirname(os.path.abspath(cpp)), "cpg.bin")
+                    if isinstance(cpp, str) else None)
+        cur_cpg = _sha256(cpg_path) if cpg_path and os.path.exists(cpg_path) else None
+        if (man_cpp is not None and cur_cpp is not None and man_cpp != cur_cpp) or \
+           (man_cpg is not None and cur_cpg is not None and man_cpg != cur_cpg):
+            binding = "mismatch"
+        else:
+            for wid, wcode in for_struct.get("witnesses", []):
+                c = call_by_id.get(wid)
+                if c is None or WSD._norm_code(c.get("code")) != WSD._norm_code(wcode):
+                    binding = "mismatch"
+                    break
 
     # 1. member-write calls grouped by (function, resolved cursor decl node)
     groups = defaultdict(list)
@@ -439,17 +511,46 @@ def analyze_member_walks(cpp, for_struct="AUTO"):
                  base_capacity=cap_n, bound_shape=shape,
                  iteration_count="not_provable", cursor_start_offset=offset); continue
 
-        # exact count via simulation (handles <, <=, !=, >, >=, any literal init/step/dir)
-        count, ic_reason = _iteration_count(i0, sym, bound_lit, step, cap_n + offset + 8)
-        # write positions are offset, offset+1, ..., offset+count-1 (unit-advance cursor);
-        # in-bounds iff offset + count <= capacity.
-        if count is None:                       # runaway / wrong-direction -> overflows
+        # CLOSED-FORM trip count (O(1), no simulation -> no DoS on a billion-sized bound).
+        count = _trip_count(i0, sym, bound_lit, step)
+        if count is None:
+            # comparison/step combination not resolved by the closed form -> abstain.
+            emit("open_candidate", "write_count_bound_not_established",
+                 disposition="relationship_unresolved", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="trip_count_indeterminate",
+                 iteration_count="not_provable", cursor_start_offset=offset); continue
+        if count == "infinite":
+            # never terminates over the integers -> writes without bound -> exceeds capacity.
             emit("range_arithmetic_review", "write_count_within_destination_capacity",
                  disposition="proven_oversized", base_prov=cap["provenance"],
-                 base_capacity=cap_n, bound_shape="literal_count",
-                 iteration_count=ic_reason, cursor_start_offset=offset,
-                 note=f"loop does not terminate within capacity {cap_n} (offset {offset})")
-        elif offset + count <= cap_n:
+                 base_capacity=cap_n, bound_shape="nonterminating",
+                 iteration_count="nonterminating", cursor_start_offset=offset,
+                 note=f"loop does not terminate over the integers -> exceeds capacity {cap_n}")
+            continue
+
+        # C INTEGER SEMANTICS: the ideal count is trustworthy only if stepping the counter of
+        # its declared type from i0 to the exit value cannot overflow/wrap, and the bound is
+        # representable in that type (no signed<->unsigned conversion surprise). The counter
+        # takes values i0 .. E (monotonic), where E = i0 + count*step is the first value that
+        # fails the condition; bounding the endpoints bounds the whole trajectory. If the type
+        # is unknown or any bound is exceeded, we CANNOT prove no-wrap -> stay conservative.
+        rng = _counter_range(counter, index, fid)
+        exit_val = i0 + count * step
+        overflow_safe = (rng is not None
+                         and rng[0] <= i0 <= rng[1]
+                         and rng[0] <= exit_val <= rng[1]
+                         and rng[0] <= bound_lit <= rng[1])
+        if not overflow_safe:
+            emit("open_candidate", "write_count_bound_not_established",
+                 disposition="relationship_unresolved", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="counter_overflow_unproven",
+                 iteration_count=count, cursor_start_offset=offset,
+                 counter_type_range=(list(rng) if rng else None),
+                 note="cannot prove the counter cannot overflow/wrap in its C type"); continue
+
+        # write positions are offset, offset+1, ..., offset+count-1 (unit-advance cursor);
+        # in-bounds iff offset + count <= capacity.
+        if offset + count <= cap_n:
             emit("deterministic_complete", "write_count_within_destination_capacity",
                  disposition="deterministic_complete", base_prov=cap["provenance"],
                  base_capacity=cap_n, bound_shape="literal_count",

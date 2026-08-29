@@ -156,3 +156,27 @@ void mw_offset(const unsigned char *s) {
     struct rgb pal[256]; struct rgb *pp = pal + 100; int i;
     for (i = 0; i < 200; i++, pp++) { pp->red = s[i]; }
 }
+
+/* NO ANALYSIS-TIME DoS -- a huge literal bound must be handled by O(1) closed-form trip-count
+ * arithmetic, NOT by iterating two billion times. 2e9 writes >> capacity -> proven_oversized,
+ * computed instantly; `int i` reaches 2000000000 <= INT_MAX so the count is trustworthy. */
+void mw_huge(const unsigned char *s) {
+    struct rgb pal[256]; struct rgb *pp; int i;
+    for (i = 0, pp = pal; i < 2000000000; i++, pp++) { pp->red = s[i]; }
+}
+
+/* C INTEGER SEMANTICS #1 -- SIGNED OVERFLOW at the boundary. Only 3 body executions (would
+ * fit 256), but the final `i++` steps from INT_MAX to INT_MAX+1 (signed overflow / UB), so
+ * the trip count is not trustworthy -> conservative open_candidate, NOT deterministic_complete. */
+void mw_ovf(const unsigned char *s) {
+    struct rgb pal[256]; struct rgb *pp; int i;
+    for (i = 2147483645, pp = pal; i <= 2147483647; i++, pp++) { pp->red = s[i & 255]; }
+}
+
+/* C INTEGER SEMANTICS #2 -- UNSIGNED WRAPAROUND. An `unsigned` counter decremented past 0
+ * wraps to a huge value; the ideal integer count is not the real one, and no-wrap cannot be
+ * proven -> conservative open_candidate (never a false safe). */
+void mw_wrap(const unsigned char *s) {
+    struct rgb pal[256]; struct rgb *pp; unsigned i;
+    for (i = 300, pp = pal; i >= 0; i--, pp++) { pp->red = s[i & 255]; }
+}

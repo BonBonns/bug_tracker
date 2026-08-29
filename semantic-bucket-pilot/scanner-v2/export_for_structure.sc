@@ -2,9 +2,11 @@
 // the CPG (does NOT modify the frozen exporter or the producers' cpp.json). For each FOR
 // loop, emits the CPG node ids in its init / condition / update / body AST subtrees. C
 // for-loop AST child order: 1=init, 2=condition, 3=update, 4=body. Node ids share the
-// cpp.json id space (same CPG). Also emits a BINDING WITNESS -- the condition node's id and
-// code -- so capability 3 can cryptographically verify that the cpp.json it reads was
-// generated from THIS cpg.bin (node ids are only meaningful within one CPG generation).
+// cpp.json id space (same CPG). Also emits a semantic BINDING WITNESS -- the condition node's
+// id and code -- so capability 3 can verify that the cpp.json it reads shares THIS cpg.bin's
+// generation (node ids are only meaningful within one CPG generation). This is a CONSISTENCY
+// witness; the full cross-artifact binding is the two-file SHA-256 manifest (both cpp.json and
+// cpg.bin hashes) that capability 3 records and re-verifies -- see cap_member_pointer_walk.py.
 @main def exec(cpgFile: String, outFile: String) = {
   importCpg(cpgFile)
   def esc(s: String): String = s.replace("\\", "\\\\").replace("\"", "\\\"")
