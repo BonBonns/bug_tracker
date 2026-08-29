@@ -382,7 +382,26 @@ def analyze_operations(prefix):
                 'file': op['file'], 'function': fname, 'line': line,
                 'dest': dest, 'width_expr': width}
         if not re.fullmatch(r'[A-Za-z_]\w*', dest):
-            continue   # non-bare-identifier destination: out of this producer's scope
+            # EMISSION-GAP FIX: a recognized sink (memcpy family) whose destination is
+            # IDENTIFIABLE but not a bare pointer -- a struct/union member (`p->buf`), an
+            # address-of (`&obj`), or pointer arithmetic (`base + off`) -- has no
+            # allocation/stack capacity tracked by this producer. Previously the operation was
+            # silently DROPPED. Now emit it as an EXPLICIT ABSTENTION so the recognized
+            # operation reaches the router with the exact missing requirement named. It is never
+            # promoted (this producer does not establish capacity for a non-bare destination).
+            if dest:
+                base['analysis_status'] = 'abstained'
+                base['reason_code'] = 'required_evidence_absent'
+                base['primary_reason_code'] = 'required_evidence_absent'
+                base['all_reason_codes'] = ['required_evidence_absent']
+                base['uncertainty_bucket'] = bucket_for_reason('required_evidence_absent')
+                base['recommended_route'] = route_for_reason('required_evidence_absent')
+                base['unresolved_property'] = property_for_reason('required_evidence_absent')
+                base['llm_eligible'] = llm_eligible_for_reason('required_evidence_absent')
+                base['missing_requirement'] = 'destination_capacity'
+                base['destination_form'] = 'member_or_expression'
+                records.append(base)
+            continue   # non-bare destination: recognized + abstained, never promoted
 
         status = None
         reasons = []
@@ -394,6 +413,9 @@ def analyze_operations(prefix):
             if extent is None or extent.get('establishment_status') != 'ESTABLISHED':
                 status = 'abstained'
                 reasons = _diagnose_capacity(d, fn, dest)
+                if reasons == ['required_evidence_absent']:
+                    # name the missing requirement explicitly (bare dest, no reaching allocation)
+                    base['missing_requirement'] = 'destination_capacity'
             else:
                 sink = capacity_status_at_sink(cfg_index, fn, extent['allocation_site'],
                                                free_sites.get((fn, dest), []), op['call_id'])
