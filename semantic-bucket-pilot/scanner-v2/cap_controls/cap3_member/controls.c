@@ -89,3 +89,23 @@ void mw_byte(const char *s, int n) {
     char buf[64]; char *p = buf;
     while (n-- != 0) *p++ = *s++;
 }
+
+/* MULTILINE for-header (for-update advance split across lines). AST membership must
+ * recognize the update advance regardless of line layout. */
+void mw_multiline(const unsigned char *s, int n) {
+    struct rgb pal[256]; struct rgb *pp; int i;
+    for (i = 0, pp = pal;
+         i < n;
+         i++, pp++)
+    {
+        pp->red = s[3*i]; pp->green = s[3*i+1]; pp->blue = s[3*i+2];
+    }
+}
+
+/* SAME-LINE body increment: a BODY increment written on the header's line. The old
+ * line-coincidence heuristic would misread this as a for-update; AST membership must place
+ * it in the BODY (not the update) and abstain. */
+void mw_sameline(const unsigned char *s, int n) {
+    struct rgb pal[256]; struct rgb *pp = pal; int i;
+    for (i = 0; i < n; i++) { pp++; pp->red = s[i]; }
+}

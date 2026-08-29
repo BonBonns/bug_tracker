@@ -35,6 +35,9 @@ import re
 import sys
 from collections import defaultdict
 
+import subprocess
+from collections import defaultdict as _dd
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import oob_runtime_capacity_v2 as v2
@@ -48,6 +51,39 @@ LT_OPS = ("<operator>.lessThan", "<operator>.lessEqualsThan")
 GT_OPS = ("<operator>.greaterThan", "<operator>.greaterEqualsThan")
 INT_RE = re.compile(r"^\s*\d+\s*$")
 UNSIGNED_HINTS = ("unsigned", "size_t", "uint")
+
+
+def load_for_structure(cpp):
+    """FOR control-structure AST membership from the CPG (a SEPARATE analysis on cpg.bin,
+    NOT a change to the frozen exporter). Returns {method: [{for_id, cond, update, body}]}
+    where cond/update/body are sets of CPG node ids, or None if unavailable (fail closed).
+    cpg.bin is a sibling of cpp.json; the result is cached next to it as for_structure.json."""
+    out_dir = os.path.dirname(os.path.abspath(cpp))
+    fs_json = os.path.join(out_dir, "for_structure.json")
+    cpg = os.path.join(out_dir, "cpg.bin")
+    if not os.path.exists(fs_json):
+        if not os.path.exists(cpg):
+            return None
+        joern = os.environ.get("JOERN", "/tmp/joern-cli/joern")
+        sc = os.path.join(HERE, "export_for_structure.sc")
+        try:
+            subprocess.run([joern, "--script", sc, "--param", f"cpgFile={cpg}",
+                            "--param", f"outFile={fs_json}"],
+                           capture_output=True, text=True, timeout=900)
+        except Exception:
+            return None
+        if not os.path.exists(fs_json):
+            return None
+    try:
+        data = json.load(open(fs_json))
+    except Exception:
+        return None
+    by_method = _dd(list)
+    for r in data:
+        by_method[r["method"]].append(
+            {"for_id": r["for_id"], "cond": set(r["cond"]),
+             "update": set(r["update"]), "body": set(r["body"])})
+    return dict(by_method)
 
 
 def _resolve(idid, ident_by_id):
@@ -105,8 +141,10 @@ def _is_unsigned(bound_code, index, fid):
     return False
 
 
-def analyze_member_walks(cpp):
+def analyze_member_walks(cpp, for_struct="AUTO"):
     d = json.load(open(cpp))
+    if for_struct == "AUTO":
+        for_struct = load_for_structure(cpp)   # None -> fail closed downstream
     index = WSD.build_index(d)
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     heap_ext = AE.compute_allocation_extents(d)
@@ -204,53 +242,48 @@ def analyze_member_walks(cpp):
         if cap is None:
             emit("additional_evidence_required", why, base_prov="unresolved"); continue
 
-        # loop counter + bound: a DIFFERENT incremented var compared via < / <= to a bound.
-        # header_line = the loop-header line (where that comparison sits).
-        counters = {WSD._root_ident(c["arguments"][0].get("code") or "")
-                    for c in body if c.get("name") in INC_OPS and c.get("arguments")}
-        counters.discard(cursor_name)
-        bound_code, header_line = None, None
+        # ---- STRUCTURAL trajectory proof via the CPG/AST (NOT source-line coincidence) ---
+        # Fail closed if the control-structure facts are unavailable.
+        if for_struct is None:
+            emit("additional_evidence_required", "for_structure_unavailable",
+                 base_prov=cap["provenance"],
+                 detail="CPG control-structure facts required for a structural proof"); continue
+        fors = for_struct.get(fns.get(fid, {}).get("name"), [])
+        adv_id = adv.get("id")
+        # (2) the increment must be inside a FOR's UPDATE component (proven, not line-based)
+        the_for = next((F for F in fors if adv_id in F["update"]), None)
+        if the_for is None:
+            in_body = any(adv_id in F["body"] for F in fors)
+            emit("additional_evidence_required",
+                 "cursor_advance_in_loop_body_not_update" if in_body
+                 else "cursor_advance_not_in_structured_for",
+                 base_prov=cap["provenance"],
+                 detail="increment is not in a for-loop UPDATE component "
+                        "(conditional / body increment / while-loop / macro)"); continue
+        # (3) all member writes must be in THAT for's BODY component
+        if not all(c.get("id") in the_for["body"] for c in writes):
+            emit("additional_evidence_required", "member_writes_not_in_loop_body",
+                 base_prov=cap["provenance"],
+                 detail="a member write is not in the same for-loop's body"); continue
+        # (4) write-before-update is established by the for-loop's structured semantics:
+        #     the UPDATE component executes AFTER the BODY on every iteration, so a member
+        #     write in the body precedes the increment -> no one-past on the member write.
+        rec["proof"] = {"for_id": the_for["for_id"], "advance_in_update": True,
+                        "writes_in_body": True, "write_before_update": "for_structured_semantics"}
+
+        # bound: the counter+comparison must live in THIS for's CONDITION component
+        bound_code = None
         for c in body:
-            if c.get("name") in LT_OPS and c.get("arguments"):
+            if (c.get("id") in the_for["cond"] and c.get("name") in LT_OPS
+                    and c.get("arguments")):
                 a = sorted(c["arguments"], key=lambda x: x.get("index", 0))
-                lhs = WSD._root_ident(a[0].get("code") or "")
-                if lhs in counters and len(a) > 1:
+                if len(a) > 1:
                     bound_code = (a[1].get("code") or "").strip()
-                    header_line = c.get("line")
                     break
-
-        # Advance placement -- the trajectory is PROVEN per-iteration only for a for-UPDATE
-        # advance (on the loop-header line, runs once after each body execution). A BODY
-        # advance is not proven unconditional/per-iteration without CFG dominance:
-        #   * a body advance BEFORE the member write -> possible one-past  -> abstain;
-        #   * any other body advance -> per-iteration not proven (conditional?) -> abstain.
-        aln = adv.get("line")
-        wln = min(c.get("line") for c in writes)
-        if aln is not None and header_line is not None and aln != header_line:
-            if wln > aln:
-                emit("additional_evidence_required", "cursor_one_past_write",
-                     base_prov=cap["provenance"],
-                     detail="body advance precedes the member write (possible one-past)")
-            else:
-                emit("additional_evidence_required", "cursor_advance_not_proven_per_iteration",
-                     base_prov=cap["provenance"],
-                     detail="advance is in the body, not the for-update; per-iteration "
-                            "execution not provable without CFG dominance (e.g. conditional)")
-            continue
-
         if bound_code is None:
             emit("open_candidate", "write_count_bound_not_established",
                  disposition="relationship_unresolved", base_prov=cap["provenance"],
                  base_capacity=cap["element_count"], bound_shape="no_loop_bound"); continue
-
-        # guard: bound compared via > / >= AND clamped (reassigned) -> capacity-bounded
-        gt = any(c.get("name") in GT_OPS and any(
-            WSD._root_ident(x.get("code") or "") == bound_code for x in c.get("arguments", []))
-            for c in body)
-        clamp = any(c.get("name") == "<operator>.assignment" and c.get("arguments")
-                    and (sorted(c["arguments"], key=lambda a: a.get("index", 0))[0].get("code") or "").strip() == bound_code
-                    for c in body)
-        guarded = gt and clamp
 
         cap_n = cap["element_count"]
         if INT_RE.match(bound_code):
@@ -265,21 +298,22 @@ def analyze_member_walks(cpp):
                      disposition="proven_oversized", base_prov=cap["provenance"],
                      base_capacity=cap_n, bound_shape="literal",
                      note=f"{k} > capacity {cap_n}")
-        elif guarded:
-            emit("deterministic_complete", "write_count_within_destination_capacity",
-                 disposition="deterministic_complete", base_prov=cap["provenance"],
-                 base_capacity=cap_n, bound_shape="symbolic_guarded",
-                 note="loop bound clamped to capacity by a visible guard")
         else:
-            # symbolic, unguarded bound: the count-vs-capacity relationship is NOT
-            # established (a large positive count would overflow) -> OPEN CANDIDATE (flag),
-            # never a safety claim. Sign is recorded but does not make it safe: a negative
-            # signed value merely means 0 iterations, which does not resolve the relation.
+            # SYMBOLIC bound. A safety claim would require rigorously proving a guard that
+            # dominates the loop, constrains this exact bound, has the right polarity, and is
+            # not invalidated before/during the loop -- NOT attempted here. Conservatively
+            # flag: the count-vs-capacity relationship is NOT established (a large positive
+            # count overflows). For signed `num` the effective count is max(0, num): a
+            # negative value gives 0 iterations (safe) but does NOT resolve the relation, so
+            # signedness alone is not "unresolved" -- it is still an OPEN CANDIDATE flag,
+            # never a false safe. (Conversions/overflow on the bound expression stay flagged.)
+            arithmetic = not re.match(r"^[A-Za-z_]\w*$", bound_code)
             emit("open_candidate", "write_count_bound_not_established",
                  disposition="relationship_unresolved", base_prov=cap["provenance"],
                  base_capacity=cap_n,
-                 bound_shape=("symbolic_unsigned" if _is_unsigned(bound_code, index, fid)
-                              else "symbolic_signed"))
+                 bound_shape=("symbolic_expr" if arithmetic
+                              else ("symbolic_unsigned" if _is_unsigned(bound_code, index, fid)
+                                    else "symbolic_signed")))
     return ops
 
 

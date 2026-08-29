@@ -40,45 +40,65 @@ def main():
         ("POS mw_open -> open_candidate / write_count_bound_not_established",
          route("mw_open") == "open_candidate"
          and reason("mw_open") == "write_count_bound_not_established"),
-        ("FAMILY: mw_open is ONE operation over 3 member writes, ONE family_id",
+        ("FAMILY: mw_open is ONE op over 3 member writes, ONE family_id, 3 DISTINCT sites",
          by["mw_open"]["n_member_writes"] == 3
          and len(by["mw_open"]["member_writes"]) == 3
+         and len({WSD.identity_key({"identity": m}) for m in by["mw_open"]["member_writes"]}) == 3
+         and len(set(by["mw_open"]["member_write_nodes"])) == 3
          and isinstance(by["mw_open"]["family_id"], str)
-         and len([o for o in C.analyze_member_walks(cpp) if o["function"] == "mw_open"]) == 1),
+         and len([o for o in by.values() if o["function"] == "mw_open"]) == 1),
         ("CAPACITY established from static array (256), not assumed",
          by["mw_open"]["base_capacity"] == 256
          and by["mw_open"]["base_prov"] == "stack_fixed_array"),
-        # guarded / literal
-        ("GUARDED clamp -> deterministic_complete",
-         route("mw_guarded") == "deterministic_complete"),
+        ("STRUCTURAL PROOF: advance in for-UPDATE, writes in for-BODY (AST, not lines)",
+         by["mw_open"].get("proof", {}).get("advance_in_update") is True
+         and by["mw_open"]["proof"].get("writes_in_body") is True),
+        # multiline header + same-line body increment: the AST fix's key regressions
+        ("MULTILINE for-header -> recognized (open_candidate) via AST, not line coincidence",
+         route("mw_multiline") == "open_candidate"
+         and by["mw_multiline"]["n_member_writes"] == 3),
+        ("SAME-LINE body increment -> abstain (in body, not update); line heuristic would MISread",
+         reason("mw_sameline") == "cursor_advance_in_loop_body_not_update"),
+        # literal (sound without a guard proof)
         ("LITERAL fits (100<=256) -> deterministic_complete",
          route("mw_fits") == "deterministic_complete"),
         ("LITERAL over (300>256) -> proven_oversized",
          by.get("mw_over", {}).get("disposition") == "proven_oversized"),
+        # GUARDED symbolic bound: conservatively an OPEN CANDIDATE (no false safe without a
+        # rigorous guard-dominance/polarity/non-invalidation proof -- deferred).
+        ("GUARDED symbolic bound -> open_candidate (no unproven safe claim)",
+         route("mw_guarded") == "open_candidate"),
         # adversarial abstentions (each a distinct trajectory failure)
-        ("CONDITIONAL increment -> abstain (per-iteration not proven)",
+        ("CONDITIONAL increment -> abstain (in loop body, not update)",
          route("mw_cond") == "additional_evidence_required"
-         and reason("mw_cond") == "cursor_advance_not_proven_per_iteration"),
+         and reason("mw_cond") == "cursor_advance_in_loop_body_not_update"),
         ("MULTIPLE increments -> abstain (advance ambiguous)",
          reason("mw_multi") == "cursor_advance_ambiguous"),
         ("POINTER RESET -> abstain (trajectory reset)",
          reason("mw_reset") == "cursor_trajectory_reset"),
         ("ALIAS CONFLICT -> abstain (destination identity ambiguous)",
          reason("mw_alias") == "destination_identity_ambiguous"),
-        ("ONE-PAST (body advance before write) -> abstain (one past)",
-         reason("mw_onepast") == "cursor_one_past_write"),
+        ("ONE-PAST (body advance before write) -> abstain (in loop body, not update)",
+         reason("mw_onepast") == "cursor_advance_in_loop_body_not_update"),
         ("EARLY EXIT -> open_candidate (count is upper bound, no false safe)",
          route("mw_break") == "open_candidate"),
         ("UNKNOWN LIFETIME / param base -> abstain (capacity unresolved)",
          reason("mw_param") == "capacity_of_base_unresolved"
          and by["mw_param"].get("base_capacity") is None),
-        # SYMBOLIC/negative bound never yields a false safe
+        # SYMBOLIC/signed bound never yields a false safe (max(0,num) semantics noted)
         ("SYMBOLIC bound never deterministic_complete (open candidate flag)",
          by["mw_open"]["disposition"] == "relationship_unresolved"),
         # negatives: outside the domain -> NO cap3 op
         ("NEG non-advancing single member write -> no cap3 op", "mw_single" not in by),
         ("NEG byte *p++ deref (cursor domain) -> no cap3 op", "mw_byte" not in by),
     ]
+
+    # FAIL CLOSED: without control-structure facts, cap3 must NOT recognize (abstain).
+    fc = {o["function"]: o for o in C.analyze_member_walks(cpp, for_struct=None)}
+    checks.append(
+        ("FAIL CLOSED: no for-structure facts -> mw_open abstains (for_structure_unavailable)",
+         fc.get("mw_open", {}).get("route") == "additional_evidence_required"
+         and fc["mw_open"]["reason"] == "for_structure_unavailable"))
 
     # PNG003 extracted development body (Magma dev evidence only)
     png = scan(os.path.join(HERE, "cap_controls", "audit"))  # a6_png003.c lives here

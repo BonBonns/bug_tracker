@@ -76,13 +76,21 @@ def _root_ident(expr):
     return m.group(0) if m else None
 
 
+_MEMBER_TGT = re.compile(r"^[A-Za-z_]\w*\s*(?:->|\.)\s*[A-Za-z_]\w*$")
+
+
 def write_target(call):
-    """Destination expression this call writes, or None if the call is not a write."""
+    """Destination expression this call writes, or None if the call is not a write. Covers
+    pointer-dereference / indexed writes (`*p`, `p[i]`) AND struct-member writes
+    (`p->field`, `p.field`) so capability 3's member writes get proper physical identities.
+    (Only `*`-prefixed targets are treated as pointer-WALK writes by direct_walk_write_sites.)"""
     nm = call.get("name")
     args = sorted(call.get("arguments", []), key=lambda a: a.get("index", 0))
     if nm == "<operator>.assignment" and args:
         tgt = (args[0].get("code") or "").strip()
-        return tgt if (tgt.startswith("*") or "[" in tgt) else None
+        if tgt.startswith("*") or "[" in tgt or _MEMBER_TGT.match(tgt):
+            return tgt
+        return None
     di = COPY_SINKS.get(nm)
     if di is not None and di < len(args):
         return (args[di].get("code") or "").strip()
@@ -113,12 +121,16 @@ def _occurrence_columns(line_text, needle):
 
 
 def write_dest_arg(call):
-    """The destination ARGUMENT node (carrying id/kind) this write targets, or None."""
+    """The destination ARGUMENT node (carrying id/kind) this write targets, or None.
+    Mirrors write_target: pointer-deref / indexed / struct-member assignment LHS, or a
+    copy-sink destination argument."""
     nm = call.get("name")
     args = sorted(call.get("arguments", []), key=lambda a: a.get("index", 0))
     if nm == "<operator>.assignment" and args:
         tgt = (args[0].get("code") or "").strip()
-        return args[0] if (tgt.startswith("*") or "[" in tgt) else None
+        if tgt.startswith("*") or "[" in tgt or _MEMBER_TGT.match(tgt):
+            return args[0]
+        return None
     di = COPY_SINKS.get(nm)
     if di is not None and di < len(args):
         return args[di]
