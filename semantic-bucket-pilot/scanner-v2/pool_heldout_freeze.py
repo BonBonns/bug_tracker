@@ -45,6 +45,10 @@ def main():
     sv, sv_sha = load("study/secvuleval/FROZEN_heldout.json")
     bv, bv_sha = load("study/bigvul/FROZEN_heldout.json")
     mg, mg_sha = load("study/magma/write_mapping.json")
+    av, av_sha = (None, None)
+    av_path = os.path.join(HERE, "study", "arvo", "FROZEN_heldout.json")
+    if os.path.exists(av_path):        # third source per PREREGISTER_ARVO.md
+        av, av_sha = load("study/arvo/FROZEN_heldout.json")
 
     pc_mapped = [s for s in pc["sites"] if s["mapping_status"] == "mapped"]
     sv_sites = sv["sites"]
@@ -72,8 +76,23 @@ def main():
             continue
         bv_pool.append(s)
 
+    av_pool, av_dropped = [], Counter()
+    if av is not None:
+        bv_pool_pc = {(s["project"].lower(), s["commit_id"]) for s in bv_pool}
+        bv_pool_shas = {s["diff_sha256"] for s in bv_pool}
+        for s in [x for x in av["sites"] if x["mapping_status"] == "mapped"]:
+            pck = (s["project"].lower(), s["fix_commit"])
+            if s["fix_commit"] and pck in sv_proj_commit | mg_proj_commit | bv_pool_pc:
+                av_dropped["dup_project_commit"] += 1
+                continue
+            if s["diff_sha256"] in pc_diff_shas | bv_pool_shas:
+                av_dropped["dup_diff_sha"] += 1
+                continue
+            av_pool.append(s)
+
     pool = [dict(s, pool_source="postcutoff") for s in pc_mapped] + \
-           [dict(s, pool_source="bigvul") for s in bv_pool]
+           [dict(s, pool_source="bigvul") for s in bv_pool] + \
+           [dict(s, pool_source="arvo") for s in av_pool]
     fams = Counter(s["family_id"] for s in pool)
     pc_fams = {s["family_id"] for s in pc_mapped}
     new_fams = {f for f in fams if f not in pc_fams}
@@ -84,7 +103,8 @@ def main():
         "FROZEN": True, "model_calls": 0, "tchecker_used": False,
         "preregistration": "PREREGISTER_BIGVUL.md (committed before bigvul_freeze ran)",
         "inputs_sha256": {"postcutoff": pc_sha, "secvuleval": sv_sha,
-                          "bigvul": bv_sha, "magma_write_mapping": mg_sha},
+                          "bigvul": bv_sha, "magma_write_mapping": mg_sha,
+                          "arvo": av_sha},
         "dedup_rules": "pre-registered: drop Big-Vul mapped site on CVE match (PostCutoff/"
                        "SecVulEval), (project, fix commit) match (SecVulEval/Magma), or "
                        "identical diff_sha256 (PostCutoff); Magma projects excluded "
@@ -93,12 +113,21 @@ def main():
         "bigvul_mapped_before_dedup": len(bv_mapped),
         "bigvul_dropped_by_dedup": dict(dropped),
         "bigvul_pooled": len(bv_pool),
+        "arvo_mapped_before_dedup": (len([x for x in av["sites"]
+                                          if x["mapping_status"] == "mapped"])
+                                     if av is not None else None),
+        "arvo_dropped_by_dedup": dict(av_dropped),
+        "arvo_pooled": len(av_pool),
         "postcutoff_pooled": len(pc_mapped),
         "pooled_sites": len(pool),
         "pooled_vulnerable_families": len(fams),
         "family_sizes": dict(fams),
         "families_from_postcutoff": sorted(pc_fams),
-        "families_new_from_bigvul": sorted(new_fams),
+        "families_new_from_bigvul": sorted({s["family_id"] for s in bv_pool}
+                                           - pc_fams),
+        "families_new_from_arvo": sorted({s["family_id"] for s in av_pool}
+                                         - pc_fams
+                                         - {s["family_id"] for s in bv_pool}),
         "secvuleval_pilot_families_subsumed": sorted(sv_vuln_fams),
         "magma_development_families_flagged": sorted(
             f for f in fams if f in magma_fam_ids),
@@ -120,9 +149,11 @@ def main():
     json.dump(manifest, open(outp, "w"), indent=2, sort_keys=True)
     print("bigvul mapped:", len(bv_mapped), " dropped:", dict(dropped),
           " pooled from bigvul:", len(bv_pool))
+    if av is not None:
+        print("arvo pooled:", len(av_pool), " dropped:", dict(av_dropped))
     print("POOLED sites:", len(pool), "  POOLED VULNERABLE FAMILIES:", len(fams),
           f" (12-gate: {'MEETS' if len(fams) >= 12 else 'BELOW'})")
-    print("new families from bigvul:", len(new_fams))
+    print("families beyond postcutoff's:", len(new_fams))
     print("magma-flagged families in pool:", sorted(f for f in fams if f in magma_fam_ids))
     print("frozen ->", outp)
 
