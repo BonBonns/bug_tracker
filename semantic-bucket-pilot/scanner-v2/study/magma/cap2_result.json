@@ -1,0 +1,22 @@
+{
+  "capability": "2 - transparent wrapper summaries",
+  "model_calls": 0,
+  "tchecker_used": false,
+  "joern_cli_version": "v4.0.462",
+  "design": "General interprocedural model: infer that a user-defined callee writes its LENGTH argument into its DESTINATION parameter, from the callee BODY only (never the name). Two body forms -> one summary {dest_param, length_param}: (A) delegation to a library copy sink whose dest resolves through local aliasing to a pointer param and whose length is a length param; (B) loop pointer-walk through a pointer resolving to a dest param, bounded by a decremented length param. Additive: fires only on calls to summarized user-defined functions, which the frozen scanner never routes.",
+  "soundness_gates": "A summary is emitted only when exactly one (dest_param, length_param) is implied; multiple write targets, multiple lengths, a non-parameter length, or a dest-local write -> NO summary (abstain). At the call site, capacity comes ONLY from an independently-established bare local fixed array; otherwise additional_evidence_required (capacity_of_dest_unresolved), never a guess.",
+  "acceptance_criteria": {
+    "synthetic_positive_negative_controls": "PASS (deleg / deleg_alias / walk recognized; copy_into name-only, writes_local dest-not-param, fixed_len length-not-param, conflict ambiguous -> no summary and no ops)",
+    "declaration_identity_binding": "PASS (dest bound to a real pointer parameter, resolved through one-hop local aliasing; name never consulted)",
+    "offset_and_unit_handling": "PASS (call-site routing reuses the frozen v2.compare: literal-byte vs byte-array capacity; symbolic length -> relationship_unresolved with capacity bound)",
+    "conflict_ambiguity_controls": "PASS (two sinks writing the dest param with different lengths -> abstain, no summary)",
+    "unchanged_existing_verdicts": "PASS (ADDITIVE check: cap2 call sites are disjoint from the frozen v1 runtime scanner ops; 0 cap2 summaries/ops on a bare direct-memcpy file; cap1 harness still ALL PASS; ANALYSIS_RECORD_R01 still 53/53)",
+    "magma_dev_site_recovery": "PASS on REAL wrapper bodies. SSL004 ascii2ebcdic (OpenSSL crypto/ebcdic.c @ 3bd5319, loop pointer-walk form) at its real call site ascii2ebcdic(ebcdic_buf[1024], q, num): frozen scanner 0/1 recognized -> cap2 recognizes, binds capacity 1024, routes relationship_unresolved (num symbolic) with no false capacity claim. TIF013 _TIFFmemcpy (libtiff portable delegation wrapper) at _TIFFmemcpy(buffer[512], pImage, decodedSize): frozen scanner 0/1 -> cap2 recognizes, binds capacity 512, routes relationship_unresolved (decodedSize symbolic). Both wrapper forms recovered; recognition is a representation-coverage improvement, not an evidence-resolution improvement (symbolic lengths still abstain, correctly).",
+    "held_out_corpus_measurement": "PENDING BY DESIGN. The pooled held-out corpus is now frozen (study/pooled/FROZEN_heldout_pooled.json: 258 sites, 42 families, gate MET), but per the frozen ordering no held-out scanner measurement runs until all capabilities intended for the confirmatory run are implemented and the definitive scanner commit is fixed. cap2 is accepted on its controls + real dev-sites; it was neither designed nor tuned against any held-out yield (none inspected)."
+  },
+  "controls": {
+    "synthetic": "cap_controls/cap2/controls.c",
+    "magma_dev_real_bodies": ["cap_controls/cap2_magma/ssl004.c", "cap_controls/cap2_magma/tif013.c"],
+    "harness": "cap_wrapper_summary_test.py (18 checks + no-regression, ALL PASS)"
+  }
+}
