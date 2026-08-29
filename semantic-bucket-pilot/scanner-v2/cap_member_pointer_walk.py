@@ -49,41 +49,115 @@ INC_OPS = ("<operator>.postIncrement", "<operator>.preIncrement")
 PLUS_OPS = ("<operator>.assignmentPlus",)
 LT_OPS = ("<operator>.lessThan", "<operator>.lessEqualsThan")
 GT_OPS = ("<operator>.greaterThan", "<operator>.greaterEqualsThan")
-INT_RE = re.compile(r"^\s*\d+\s*$")
+NE_OPS = ("<operator>.notEquals",)
+CMP_SYM = {"<operator>.lessThan": "<", "<operator>.lessEqualsThan": "<=",
+           "<operator>.greaterThan": ">", "<operator>.greaterEqualsThan": ">=",
+           "<operator>.notEquals": "!="}
+DEC_OPS = ("<operator>.postDecrement", "<operator>.preDecrement")
+MINUS_OPS = ("<operator>.assignmentMinus",)
+INT_RE = re.compile(r"^\s*[+-]?\d+\s*$")
 UNSIGNED_HINTS = ("unsigned", "size_t", "uint")
+
+
+def _lit(s):
+    s = (s or "").strip()
+    return int(s) if INT_RE.match(s) else None
+
+
+def _iteration_count(i0, sym, bound, step, guard):
+    """Exact number of body executions for a literal counter loop (i0, op, bound, step).
+    Returns (count, 'exact') or (None, reason). `guard` caps the simulation so a runaway /
+    wrong-direction loop is reported rather than looping forever."""
+    if step == 0:
+        return None, "counter_step_zero"
+    cmp = {"<": lambda a, b: a < b, "<=": lambda a, b: a <= b,
+           ">": lambda a, b: a > b, ">=": lambda a, b: a >= b,
+           "!=": lambda a, b: a != b}[sym]
+    count, i = 0, i0
+    while cmp(i, bound):
+        count += 1
+        i += step
+        if count > guard:
+            return None, "counter_runaway_or_nonterminating"
+    return count, "exact"
+
+
+def _cursor_start_offset(base_binding_call):
+    """Cursor start offset from `cursor = <base>` : `array` -> 0, `array + k` -> k,
+    `&array[k]` -> k (literal k only). Returns (offset:int or None, reason)."""
+    a = sorted(base_binding_call.get("arguments", []), key=lambda x: x.get("index", 0))
+    if len(a) < 2:
+        return None, "base_binding_unreadable"
+    rhs = WSD._norm_code(a[1].get("code") or "")
+    if re.fullmatch(r"[A-Za-z_]\w*", rhs):
+        return 0, "array_base"
+    m = re.fullmatch(r"[A-Za-z_]\w*\s*\+\s*(\d+)", rhs)
+    if m:
+        return int(m.group(1)), "array_plus_literal"
+    m = re.fullmatch(r"&\s*[A-Za-z_]\w*\s*\[\s*(\d+)\s*\]", rhs)
+    if m:
+        return int(m.group(1)), "addr_of_indexed_literal"
+    return None, "cursor_offset_unresolved"
+
+
+def _sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for ch in iter(lambda: f.read(1 << 20), b""):
+            h.update(ch)
+    return h.hexdigest()
 
 
 def load_for_structure(cpp):
     """FOR control-structure AST membership from the CPG (a SEPARATE analysis on cpg.bin,
-    NOT a change to the frozen exporter). Returns {method: [{for_id, cond, update, body}]}
-    where cond/update/body are sets of CPG node ids, or None if unavailable (fail closed).
-    cpg.bin is a sibling of cpp.json; the result is cached next to it as for_structure.json."""
+    NOT a change to the frozen exporter). Returns a dict {by_method, witnesses, cpg_sha,
+    cpp_sha} or None if unavailable (fail closed). cpg.bin is a sibling of cpp.json; the
+    result is cached next to it as for_structure.json and re-generated if the cpg.bin sha
+    changed (stale-artifact protection). The `witnesses` are (node_id, code) pairs from the
+    CPG that analyze_member_walks re-checks against cpp.json to CRYPTOGRAPHICALLY bind the
+    two artifacts to the same CPG generation (node ids are only meaningful within one)."""
     out_dir = os.path.dirname(os.path.abspath(cpp))
     fs_json = os.path.join(out_dir, "for_structure.json")
     cpg = os.path.join(out_dir, "cpg.bin")
-    if not os.path.exists(fs_json):
-        if not os.path.exists(cpg):
-            return None
+    if not os.path.exists(cpg):
+        return None
+    cpg_sha = _sha256(cpg)
+    cpp_sha = _sha256(cpp)
+    cached = None
+    if os.path.exists(fs_json):
+        try:
+            cached = json.load(open(fs_json))
+        except Exception:
+            cached = None
+    # (re)generate if missing or the cached artifact is bound to a different cpg.bin
+    if not (isinstance(cached, dict) and cached.get("cpg_sha") == cpg_sha):
         joern = os.environ.get("JOERN", "/tmp/joern-cli/joern")
         sc = os.path.join(HERE, "export_for_structure.sc")
+        raw_out = fs_json + ".raw"
         try:
             subprocess.run([joern, "--script", sc, "--param", f"cpgFile={cpg}",
-                            "--param", f"outFile={fs_json}"],
+                            "--param", f"outFile={raw_out}"],
                            capture_output=True, text=True, timeout=900)
         except Exception:
             return None
-        if not os.path.exists(fs_json):
+        if not os.path.exists(raw_out):
             return None
-    try:
-        data = json.load(open(fs_json))
-    except Exception:
-        return None
+        try:
+            raw = json.load(open(raw_out))
+        except Exception:
+            return None
+        cached = {"cpg_sha": cpg_sha, "cpp_sha": cpp_sha, "fors": raw}
+        json.dump(cached, open(fs_json, "w"))
     by_method = _dd(list)
-    for r in data:
+    witnesses = []
+    for r in cached["fors"]:
         by_method[r["method"]].append(
-            {"for_id": r["for_id"], "cond": set(r["cond"]),
-             "update": set(r["update"]), "body": set(r["body"])})
-    return dict(by_method)
+            {"for_id": r["for_id"], "init": set(r.get("init", [])),
+             "cond": set(r["cond"]), "update": set(r["update"]), "body": set(r["body"])})
+        if r.get("witness_id", -1) != -1:
+            witnesses.append((r["witness_id"], r.get("witness_code", "")))
+    return {"by_method": dict(by_method), "witnesses": witnesses,
+            "cpg_sha": cpg_sha, "cpp_sha": cpp_sha}
 
 
 def _resolve(idid, ident_by_id):
@@ -149,9 +223,24 @@ def analyze_member_walks(cpp, for_struct="AUTO"):
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     heap_ext = AE.compute_allocation_extents(d)
     calls_by_fn = defaultdict(list)
+    call_by_id = {}
     for c in d.get("calls", []):
         calls_by_fn[c.get("enclosing_function_id")].append(c)
+        call_by_id[c.get("id")] = c
     fns = index["funcs"]
+
+    # CRYPTOGRAPHIC cpp.json <-> cpg.bin binding: the FOR-structure facts carry witness
+    # (node_id, code) pairs from the CPG; re-check them against cpp.json's calls. Node ids
+    # are only meaningful within one CPG generation, so a mismatch means stale artifacts.
+    by_method, binding = {}, "unavailable"
+    if for_struct is not None:
+        by_method = for_struct.get("by_method", {})
+        binding = "ok"
+        for wid, wcode in for_struct.get("witnesses", []):
+            c = call_by_id.get(wid)
+            if c is None or WSD._norm_code(c.get("code")) != WSD._norm_code(wcode):
+                binding = "mismatch"
+                break
 
     # 1. member-write calls grouped by (function, resolved cursor decl node)
     groups = defaultdict(list)
@@ -243,12 +332,17 @@ def analyze_member_walks(cpp, for_struct="AUTO"):
             emit("additional_evidence_required", why, base_prov="unresolved"); continue
 
         # ---- STRUCTURAL trajectory proof via the CPG/AST (NOT source-line coincidence) ---
-        # Fail closed if the control-structure facts are unavailable.
-        if for_struct is None:
+        # Fail closed if the control-structure facts are unavailable or not bound to this cpp.
+        if for_struct is None or binding == "unavailable":
             emit("additional_evidence_required", "for_structure_unavailable",
                  base_prov=cap["provenance"],
                  detail="CPG control-structure facts required for a structural proof"); continue
-        fors = for_struct.get(fns.get(fid, {}).get("name"), [])
+        if binding == "mismatch":
+            emit("additional_evidence_required", "for_structure_cpp_cpg_mismatch",
+                 base_prov=cap["provenance"],
+                 detail="cpp.json and cpg.bin witnesses disagree (stale/mismatched artifacts)")
+            continue
+        fors = by_method.get(fns.get(fid, {}).get("name"), [])
         adv_id = adv.get("id")
         # (2) the increment must be inside a FOR's UPDATE component (proven, not line-based)
         the_for = next((F for F in fors if adv_id in F["update"]), None)
@@ -266,54 +360,109 @@ def analyze_member_walks(cpp, for_struct="AUTO"):
                  base_prov=cap["provenance"],
                  detail="a member write is not in the same for-loop's body"); continue
         # (4) write-before-update is established by the for-loop's structured semantics:
-        #     the UPDATE component executes AFTER the BODY on every iteration, so a member
-        #     write in the body precedes the increment -> no one-past on the member write.
+        #     the UPDATE component executes AFTER the BODY on every iteration.
         rec["proof"] = {"for_id": the_for["for_id"], "advance_in_update": True,
                         "writes_in_body": True, "write_before_update": "for_structured_semantics"}
 
-        # bound: the counter+comparison must live in THIS for's CONDITION component
-        bound_code = None
-        for c in body:
-            if (c.get("id") in the_for["cond"] and c.get("name") in LT_OPS
+        cap_n = cap["element_count"]
+        # loop-condition comparison in THIS for's CONDITION component: op + counter + bound
+        cond_cmp = next((c for c in body if c.get("id") in the_for["cond"]
+                         and c.get("name") in (LT_OPS + GT_OPS + NE_OPS) and c.get("arguments")),
+                        None)
+        if cond_cmp is None:
+            emit("open_candidate", "write_count_bound_not_established",
+                 disposition="relationship_unresolved", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="no_loop_bound"); continue
+        ca = sorted(cond_cmp["arguments"], key=lambda x: x.get("index", 0))
+        counter = WSD._root_ident(ca[0].get("code") or "")
+        bound_code = (ca[1].get("code") or "").strip() if len(ca) > 1 else ""
+        sym = CMP_SYM[cond_cmp["name"]]
+
+        # PROVE THE ITERATION COUNT (not just the bound token): need literal bound, literal
+        # counter init in the for-INIT, a single unit/step counter update in the for-UPDATE,
+        # the counter NOT modified in the body, and a literal cursor start offset.
+        offset, off_reason = _cursor_start_offset(base_bindings[0])
+        i0 = None
+        for c in body:  # counter init inside the for-INIT
+            if (c.get("id") in the_for["init"] and c.get("name") == "<operator>.assignment"
                     and c.get("arguments")):
                 a = sorted(c["arguments"], key=lambda x: x.get("index", 0))
-                if len(a) > 1:
-                    bound_code = (a[1].get("code") or "").strip()
-                    break
-        if bound_code is None:
-            emit("open_candidate", "write_count_bound_not_established",
-                 disposition="relationship_unresolved", base_prov=cap["provenance"],
-                 base_capacity=cap["element_count"], bound_shape="no_loop_bound"); continue
+                if WSD._root_ident(a[0].get("code") or "") == counter and len(a) > 1:
+                    i0 = _lit(a[1].get("code")); break
+        # counter step from the for-UPDATE (on the counter, not the cursor)
+        step, step_ops = None, 0
+        for c in body:
+            if c.get("id") not in the_for["update"] or not c.get("arguments"):
+                continue
+            root = WSD._root_ident(c["arguments"][0].get("code") or "")
+            if root != counter:
+                continue
+            if c.get("name") in INC_OPS:
+                step, step_ops = 1, step_ops + 1
+            elif c.get("name") in DEC_OPS:
+                step, step_ops = -1, step_ops + 1
+            elif c.get("name") in PLUS_OPS and len(c["arguments"]) > 1:
+                step, step_ops = _lit(c["arguments"][1].get("code")), step_ops + 1
+            elif c.get("name") in MINUS_OPS and len(c["arguments"]) > 1:
+                k = _lit(c["arguments"][1].get("code"))
+                step, step_ops = (-k if k is not None else None), step_ops + 1
+        # counter modified in the BODY (breaks a clean count) -> abstain
+        counter_in_body = any(
+            c.get("id") in the_for["body"] and (
+                (c.get("name") in (INC_OPS + DEC_OPS + PLUS_OPS + MINUS_OPS) and c.get("arguments")
+                 and WSD._root_ident(c["arguments"][0].get("code") or "") == counter)
+                or (c.get("name") == "<operator>.assignment" and c.get("arguments")
+                    and WSD._root_ident(sorted(c["arguments"], key=lambda a: a.get("index", 0))[0].get("code") or "") == counter))
+            for c in body)
 
-        cap_n = cap["element_count"]
-        if INT_RE.match(bound_code):
-            k = int(bound_code)
-            if k <= cap_n:
-                emit("deterministic_complete", "write_count_within_destination_capacity",
-                     disposition="deterministic_complete", base_prov=cap["provenance"],
-                     base_capacity=cap_n, bound_shape="literal",
-                     note=f"{k} elems (loop bound) <= capacity {cap_n}")
+        bound_lit = _lit(bound_code)
+        exact = (bound_lit is not None and i0 is not None and step is not None
+                 and step_ops == 1 and offset is not None and not counter_in_body)
+        if not exact:
+            # cannot prove the exact iteration count -> conservative OPEN CANDIDATE flag,
+            # never a false safe. Record why the count is not exactly provable.
+            if counter_in_body:
+                shape = "counter_modified_in_body"
+            elif bound_lit is None:
+                arithmetic = not re.match(r"^[A-Za-z_]\w*$", bound_code)
+                shape = ("symbolic_expr" if arithmetic else
+                         ("symbolic_unsigned" if _is_unsigned(bound_code, index, fid)
+                          else "symbolic_signed"))
+            elif offset is None:
+                shape = "cursor_offset_unresolved"
+            elif step_ops != 1 or step is None:
+                shape = "counter_step_ambiguous"
             else:
-                emit("range_arithmetic_review", "write_count_within_destination_capacity",
-                     disposition="proven_oversized", base_prov=cap["provenance"],
-                     base_capacity=cap_n, bound_shape="literal",
-                     note=f"{k} > capacity {cap_n}")
-        else:
-            # SYMBOLIC bound. A safety claim would require rigorously proving a guard that
-            # dominates the loop, constrains this exact bound, has the right polarity, and is
-            # not invalidated before/during the loop -- NOT attempted here. Conservatively
-            # flag: the count-vs-capacity relationship is NOT established (a large positive
-            # count overflows). For signed `num` the effective count is max(0, num): a
-            # negative value gives 0 iterations (safe) but does NOT resolve the relation, so
-            # signedness alone is not "unresolved" -- it is still an OPEN CANDIDATE flag,
-            # never a false safe. (Conversions/overflow on the bound expression stay flagged.)
-            arithmetic = not re.match(r"^[A-Za-z_]\w*$", bound_code)
+                shape = "counter_init_unresolved"
             emit("open_candidate", "write_count_bound_not_established",
                  disposition="relationship_unresolved", base_prov=cap["provenance"],
-                 base_capacity=cap_n,
-                 bound_shape=("symbolic_expr" if arithmetic
-                              else ("symbolic_unsigned" if _is_unsigned(bound_code, index, fid)
-                                    else "symbolic_signed")))
+                 base_capacity=cap_n, bound_shape=shape,
+                 iteration_count="not_provable", cursor_start_offset=offset); continue
+
+        # exact count via simulation (handles <, <=, !=, >, >=, any literal init/step/dir)
+        count, ic_reason = _iteration_count(i0, sym, bound_lit, step, cap_n + offset + 8)
+        # write positions are offset, offset+1, ..., offset+count-1 (unit-advance cursor);
+        # in-bounds iff offset + count <= capacity.
+        if count is None:                       # runaway / wrong-direction -> overflows
+            emit("range_arithmetic_review", "write_count_within_destination_capacity",
+                 disposition="proven_oversized", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="literal_count",
+                 iteration_count=ic_reason, cursor_start_offset=offset,
+                 note=f"loop does not terminate within capacity {cap_n} (offset {offset})")
+        elif offset + count <= cap_n:
+            emit("deterministic_complete", "write_count_within_destination_capacity",
+                 disposition="deterministic_complete", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="literal_count",
+                 iteration_count=count, cursor_start_offset=offset,
+                 note=f"{count} writes at offset {offset} -> max index {offset+count-1} "
+                      f"< capacity {cap_n}")
+        else:
+            emit("range_arithmetic_review", "write_count_within_destination_capacity",
+                 disposition="proven_oversized", base_prov=cap["provenance"],
+                 base_capacity=cap_n, bound_shape="literal_count",
+                 iteration_count=count, cursor_start_offset=offset,
+                 note=f"{count} writes at offset {offset} -> reaches index {offset+count-1} "
+                      f">= capacity {cap_n}")
     return ops
 
 

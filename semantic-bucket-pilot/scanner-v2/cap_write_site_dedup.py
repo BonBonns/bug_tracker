@@ -340,12 +340,14 @@ def is_verifiable(rec_or_ident):
 
 
 def identity_key(rec_or_ident):
-    """Hashable cross-run key. FAIL CLOSED: an unverifiable identity gets a unique key so it
-    can never be merged with anything (dedup also flags it and excludes it from trust)."""
+    """Hashable cross-run key for a VERIFIABLE identity. Unverifiable records are NEVER
+    keyed here (they must not be merged); dedup routes them to a separate, never-merged path
+    with an explicit monotonic per-run index -- object id() is NEVER used as a key."""
     ident = _ident_of(rec_or_ident)
     if not ident.get("verifiable", True):
-        node = (rec_or_ident.get("node_id")
-                or rec_or_ident.get("underlying_write_node_id") or id(rec_or_ident))
+        # A within-run node id disambiguates when present; otherwise dedup's monotonic index
+        # is the only "never merge" guarantee. No id(object) fallback (address reuse is a bug).
+        node = rec_or_ident.get("node_id") or rec_or_ident.get("underlying_write_node_id")
         return ("UNVERIFIABLE", node)
     return (ident.get("file"), tuple(ident.get("function") or []), ident.get("line"),
             tuple(ident.get("site") or []), tuple(ident.get("write") or []),
@@ -406,8 +408,11 @@ def dedup(records):
                     "canonical_capability": canonical.get("capability"),
                     "canonical_attribution": canonical.get("attribution"),
                     "n_provenance_paths": len(prov), "provenance": prov})
-    for r in unverifiable:
+    # Unverifiable records are NEVER merged: each becomes its own op with an explicit
+    # monotonic per-run index (NOT object id()) as its "never merge" guarantee.
+    for uidx, r in enumerate(unverifiable):
         ops.append({"identity": _ident_of(r), "identity_unverifiable": True,
+                    "unverifiable_index": uidx,
                     "canonical_capability": r.get("capability"),
                     "canonical_attribution": r.get("attribution"),
                     "n_provenance_paths": 1,

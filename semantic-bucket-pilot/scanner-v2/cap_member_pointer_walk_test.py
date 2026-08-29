@@ -88,6 +88,32 @@ def main():
         # SYMBOLIC/signed bound never yields a false safe (max(0,num) semantics noted)
         ("SYMBOLIC bound never deterministic_complete (open candidate flag)",
          by["mw_open"]["disposition"] == "relationship_unresolved"),
+        # ITERATION COUNT proofs (bound token != iteration count) --------------------------
+        # i=0; i<=256 -> 257 writes -> oversized (NOT safe just because token==capacity).
+        ("ITER i=0;i<=256 OFF-BY-ONE -> proven_oversized (257 writes)",
+         by.get("mw_le256", {}).get("disposition") == "proven_oversized"
+         and by.get("mw_le256", {}).get("iteration_count") == 257),
+        # i=1; i<=256 -> 256 writes -> fits exactly (nonzero init handled).
+        ("ITER i=1;i<=256 NONZERO-INIT -> deterministic_complete (256 writes)",
+         route("mw_init1") == "deterministic_complete"
+         and by["mw_init1"]["iteration_count"] == 256),
+        # i=256; i>0; i-- -> 256 writes -> fits (decrementing counter handled).
+        ("ITER i=256;i>0;i-- DECREMENT -> deterministic_complete (256 writes)",
+         route("mw_dec") == "deterministic_complete"
+         and by["mw_dec"]["iteration_count"] == 256),
+        # i=0; i<256; i+=2 -> 128 writes -> fits (literal step drives the count, not step 1).
+        ("ITER i+=2 STEP -> deterministic_complete (128 writes, not 256)",
+         route("mw_step2") == "deterministic_complete"
+         and by["mw_step2"]["iteration_count"] == 128),
+        # counter mutated in the body -> count not header-determined -> conservative open.
+        ("ITER counter modified in body -> open_candidate (counter_modified_in_body)",
+         route("mw_bodymod") == "open_candidate"
+         and by["mw_bodymod"]["bound_shape"] == "counter_modified_in_body"),
+        # cursor = array + 100, 200 writes -> reaches index 299 >= 256 -> oversized.
+        ("ITER cursor=array+offset -> proven_oversized (offset 100 counted)",
+         by.get("mw_offset", {}).get("disposition") == "proven_oversized"
+         and by["mw_offset"]["cursor_start_offset"] == 100
+         and by["mw_offset"]["iteration_count"] == 200),
         # negatives: outside the domain -> NO cap3 op
         ("NEG non-advancing single member write -> no cap3 op", "mw_single" not in by),
         ("NEG byte *p++ deref (cursor domain) -> no cap3 op", "mw_byte" not in by),
@@ -127,6 +153,42 @@ def main():
         ("SEPARATION: cap3 member-write sites are disjoint from cursor-recognized sites",
          cap3_member_keys.isdisjoint(cur_keys)),
     ]
+
+    # CPP<->CPG BINDING FAIL-CLOSED: a for_structure whose witness code no longer matches
+    # the cpp.json (node ids are only meaningful within one CPG generation) must be rejected.
+    fs = C.load_for_structure(cpp)
+    tampered = {"by_method": fs["by_method"], "cpg_sha": fs["cpg_sha"],
+                "cpp_sha": fs["cpp_sha"],
+                "witnesses": [(wid, wcode + " /*STALE*/") for (wid, wcode) in fs["witnesses"]]}
+    mm = {o["function"]: o for o in C.analyze_member_walks(cpp, for_struct=tampered)}
+    checks.append(
+        ("BINDING MISMATCH: tampered witness -> fail closed (for_structure_cpp_cpg_mismatch)",
+         len(fs["witnesses"]) > 0
+         and reason("mw_open") == "write_count_bound_not_established"   # sanity: real run ok
+         and mm.get("mw_open", {}).get("reason") == "for_structure_cpp_cpg_mismatch"
+         and mm["mw_open"]["route"] == "additional_evidence_required"))
+
+    # MULTIPLE UNVERIFIABLE records remain DISTINCT: dedup must not merge them, and must give
+    # each a monotonic per-run index (NOT object id()) as its "never merge" guarantee.
+    unver = [{"attribution": "direct", "capability": "member_pointer_walk",
+              "function": "fA", "node_id": None,
+              "identity": {"verifiable": False, "file": "x.c",
+                           "function": ["fA", 1, 9], "write": ["=", "p->f"]}},
+             {"attribution": "direct", "capability": "member_pointer_walk",
+              "function": "fB", "node_id": None,
+              "identity": {"verifiable": False, "file": "x.c",
+                           "function": ["fB", 1, 9], "write": ["=", "q->f"]}}]
+    dd = WSD.dedup(unver)
+    un_ops = [o for o in dd if o.get("identity_unverifiable")]
+    # Both unverifiable records collapse to the SAME identity_key (("UNVERIFIABLE", None)):
+    # that is exactly why the monotonic per-run index -- not the key, not object id() -- is
+    # the thing guaranteeing they are never merged.
+    same_key = WSD.identity_key(unver[0]) == WSD.identity_key(unver[1]) == ("UNVERIFIABLE", None)
+    checks.append(
+        ("MULTIPLE UNVERIFIABLE: 2 records -> 2 distinct never-merged ops, monotonic index",
+         len(un_ops) == 2 and same_key
+         and sorted(o["unverifiable_index"] for o in un_ops) == [0, 1]
+         and all(o["n_provenance_paths"] == 1 for o in un_ops)))
 
     ok = True
     for name, c in checks:

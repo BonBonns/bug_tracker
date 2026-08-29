@@ -43,7 +43,37 @@ any site it already recognizes (cursor_producer > direct > call_site_summary).
   effective count is `max(0, num)`: a negative value means zero iterations (does not overflow)
   but does not RESOLVE the relation, so signedness alone is not "unresolved" — it stays an
   open-candidate flag; a bound that is an arithmetic expression (possible conversion/overflow)
-  is flagged `symbolic_expr`.
+  is flagged `symbolic_expr`. `max(0, num)` applies ONLY to the canonical signed `i=0; i<num;
+  i++` form — never assumed for any other init/operator/step.
+- **The ITERATION COUNT is proven, not the bound token.** A literal bound token is NOT the
+  write count. A verdict (deterministic_complete / proven_oversized) is issued only when ALL
+  of these are literal and structurally established, then the loop is *simulated* to get the
+  exact count: (1) the counter's initial value from the for-INIT; (2) the comparison operator
+  (`<`, `<=`, `>`, `>=`, `!=`) from the for-CONDITION; (3) a single unit/literal counter step
+  and its DIRECTION from the for-UPDATE (`i++`→+1, `i--`→−1, `i+=k`→+k, `i-=k`→−k); (4) the
+  counter is NOT modified in the BODY; (5) the cursor's STARTING OFFSET from its base binding
+  (`array`→0, `array+k`→k, `&array[k]`→k, literal k only). In-bounds iff
+  `start_offset + count <= capacity`. So `i=0; i<=256` simulates to **257** writes (oversized,
+  not 256); `i=1; i<=256` to **256**; `i=1; i<256` to **255**; `i+=2` over `[0,256)` to
+  **128**. Any of (1)–(5) not literally established → conservative `open_candidate` with a
+  specific `bound_shape` (`counter_modified_in_body`, `symbolic_expr`/`symbolic_signed`/
+  `symbolic_unsigned`, `cursor_offset_unresolved`, `counter_step_ambiguous`,
+  `counter_init_unresolved`) — never a false safe.
+- **`cpp.json` is cryptographically bound to `cpg.bin`.** Node ids are meaningful only within
+  one CPG generation, and Capability 3 combines the normalized facts (`cpp.json`) with a
+  separate query on `cpg.bin` (`export_for_structure.sc`). `for_structure.json` records the
+  generating `cpg.bin` SHA-256 (and is regenerated if the `cpg.bin` sha changes — stale-artifact
+  protection) plus per-FOR **binding witnesses** (the condition node's id + code). Before using
+  any structural fact, cap3 re-checks each witness id/code against `cpp.json`'s calls; if any
+  disagree the two artifacts are not from the same generation and cap3 **fails closed**
+  (`for_structure_cpp_cpg_mismatch`), never trusting cross-generation node ids.
+- **Fail-closed dedup uses a monotonic per-run index, never `id(object)`.** Unverifiable
+  records (source position or declaration ordinal unresolvable) all collapse to the same
+  `identity_key` (`("UNVERIFIABLE", node_or_None)`), so identity alone would merge them. Dedup
+  routes each to a separate never-merged op carrying an explicit monotonically-assigned
+  `unverifiable_index` (from `enumerate`). It is NOT a semantic identity — it only guarantees
+  "never merge." `id(record)` is gone everywhere (object-address reuse across short-lived temps
+  is unsound).
 
 ## Controls (cap_member_pointer_walk_test.py, ALL PASS)
 
@@ -56,6 +86,18 @@ abstain cursor_advance_in_loop_body_not_update.
 Resolved (LITERAL only, sound without a guard proof): `mw_fits` (100<=256) ->
 deterministic_complete; `mw_over` (300>256) -> proven_oversized. `mw_guarded` (symbolic,
 visible clamp) -> open_candidate (no unproven safe claim).
+ITERATION-COUNT controls (the bound token is not the write count — each simulated):
+`mw_le256` (`i=0; i<=256`) -> proven_oversized at **257** writes (NOT safe though the token
+256 equals capacity); `mw_init1` (`i=1; i<=256`) -> deterministic_complete at **256**;
+`mw_dec` (`i=256; i>0; i--`) -> deterministic_complete at **256** (decrementing, `>` op);
+`mw_step2` (`i=0; i<256; i+=2`) -> deterministic_complete at **128** (literal step, not 256);
+`mw_bodymod` (counter mutated in body) -> open_candidate `counter_modified_in_body`;
+`mw_offset` (`cursor = array + 100`, 200 writes) -> proven_oversized (reaches index 299 >=
+256; the start offset is counted, not dropped).
+BINDING control: a tampered `for_structure` witness (code no longer matching `cpp.json`) ->
+fail closed `for_structure_cpp_cpg_mismatch` (cross-generation node ids never trusted).
+DEDUP control: two unverifiable records collapse to the same `identity_key` yet dedup keeps
+them as two distinct never-merged ops with monotonic `unverifiable_index` 0/1 (no `id()`).
 Adversarial abstentions, each a distinct trajectory/capacity failure:
 `mw_cond` conditional increment -> cursor_advance_in_loop_body_not_update;
 `mw_multi` multiple increments -> cursor_advance_ambiguous;
