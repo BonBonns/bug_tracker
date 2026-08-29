@@ -32,8 +32,15 @@ def _load(name):
     m = importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
 
 
-PROD = {n: _load(n) for n in ("oob_cursor_write_verdict", "oob_runtime_capacity_verdict",
-                              "oob_interprocedural_verdict")}
+# HARNESS CORRECTION: the intended final scanner uses the STACK-CAPACITY integration
+# oob_runtime_capacity_v2.analyze_operations_v2 (declared in RUN_MANIFEST), NOT the heap-only V1
+# oob_runtime_capacity_verdict. The original archived run mistakenly loaded V1 here. V2 is an
+# ADDITIVE enrichment over V1's recognized operations, so the recognition SET (and 4/118) is
+# unchanged; V2 only improves the ROUTE of already-recognized ops (e.g. evutil: a memcpy into a
+# known stack array -> relationship_unresolved instead of required_evidence_absent). Cursor and
+# interproc are unchanged.
+PROD = {n: _load(n) for n in ("oob_cursor_write_verdict", "oob_interprocedural_verdict")}
+import oob_runtime_capacity_v2 as _RCV2   # provides analyze_operations_v2 (stack-capacity)
 
 # reasons/dispositions that mean the required capacity/contract EVIDENCE was NOT established
 EVIDENCE_ABSENT = {
@@ -74,6 +81,15 @@ def recognized_records(cpp):
                             "route": r.get("recommended_route")})
         except Exception as e:
             out.append({"producer": pname, "error": str(e)})
+    try:   # runtime-capacity V2 (stack-capacity integration) -- the intended final producer
+        v2ops, _trans = _RCV2.analyze_operations_v2(cpp)
+        for r in v2ops:
+            out.append({"producer": "oob_runtime_capacity_v2", "function": r.get("function"),
+                        "line": r.get("line"), "dest": r.get("dest"),
+                        "status": r.get("analysis_status"), "reason": r.get("reason_code"),
+                        "route": r.get("recommended_route")})
+    except Exception as e:
+        out.append({"producer": "oob_runtime_capacity_v2", "error": str(e)})
     try:
         for r in C1.analyze_addr_indexed(cpp):
             out.append({"producer": "cap1_addr_indexed", "function": r.get("function"),

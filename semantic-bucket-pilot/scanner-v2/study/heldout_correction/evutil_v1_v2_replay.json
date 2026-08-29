@@ -1,0 +1,114 @@
+{
+ "site": "evutil_parse_sockaddr_port",
+ "site_id": "674f6825c63e21da",
+ "labeled_line": 25,
+ "write": "memcpy(buf, ip_as_string+1, len); buf=char[128]",
+ "raw_v1_record": [
+  {
+   "candidate_id": "cand_e66045da6db8d859",
+   "operation_id": "cand_e66045da6db8d859",
+   "recognized_operation": "buffer_write",
+   "file": "body.c",
+   "function": "evutil_parse_sockaddr_port",
+   "line": 25,
+   "dest": "buf",
+   "width_expr": "len",
+   "analysis_status": "abstained",
+   "reason_code": "required_evidence_absent",
+   "primary_reason_code": "required_evidence_absent",
+   "all_reason_codes": [
+    "required_evidence_absent"
+   ],
+   "uncertainty_bucket": "insufficient_evidence",
+   "recommended_route": "additional_evidence_required",
+   "unresolved_property": null,
+   "llm_eligible": false
+  }
+ ],
+ "raw_v2_record": [
+  {
+   "candidate_id": "cand_e66045da6db8d859",
+   "operation_id": "cand_e66045da6db8d859",
+   "recognized_operation": "buffer_write",
+   "file": "body.c",
+   "function": "evutil_parse_sockaddr_port",
+   "line": 25,
+   "dest": "buf",
+   "width_expr": "len",
+   "analysis_status": "open_candidate",
+   "reason_code": "capacity_relation_not_established",
+   "primary_reason_code": "capacity_relation_not_established",
+   "all_reason_codes": [
+    "capacity_relation_not_established"
+   ],
+   "uncertainty_bucket": "relationship_unresolved",
+   "recommended_route": "semantic_relationship_review",
+   "unresolved_property": "length_meaning",
+   "llm_eligible": true,
+   "_v2_evidence": {
+    "provenance": "stack_fixed_array",
+    "decl_node": 94489280513,
+    "element_type": "char",
+    "element_count": 128,
+    "capacity_expr": "128*sizeof(char)",
+    "width": "len",
+    "established_property": "length_meaning",
+    "note": "capacity bound; length expression meaning unresolved"
+   },
+   "_v2_disposition": "relationship_unresolved",
+   "_v2_route": "semantic_relationship_review"
+  }
+ ],
+ "v1_to_v2_transition": [
+  {
+   "function": "evutil_parse_sockaddr_port",
+   "line": 25,
+   "dest": "buf",
+   "source": null,
+   "from": {
+    "status": "abstained",
+    "reason": "required_evidence_absent",
+    "route": "additional_evidence_required"
+   },
+   "to_status": "open_candidate",
+   "disposition": "relationship_unresolved",
+   "route": "semantic_relationship_review",
+   "established_property": "length_meaning",
+   "evidence": {
+    "provenance": "stack_fixed_array",
+    "decl_node": 94489280513,
+    "element_type": "char",
+    "element_count": 128,
+    "capacity_expr": "128*sizeof(char)",
+    "width": "len",
+    "established_property": "length_meaning",
+    "note": "capacity bound; length expression meaning unresolved"
+   }
+  },
+  {
+   "function": "evutil_parse_sockaddr_port",
+   "line": 42,
+   "dest": "buf",
+   "source": null,
+   "from": {
+    "status": "abstained",
+    "reason": "required_evidence_absent",
+    "route": "additional_evidence_required"
+   },
+   "to_status": "open_candidate",
+   "disposition": "relationship_unresolved",
+   "route": "semantic_relationship_review",
+   "established_property": "length_meaning",
+   "evidence": {
+    "provenance": "stack_fixed_array",
+    "decl_node": 94489280513,
+    "element_type": "char",
+    "element_count": 128,
+    "capacity_expr": "128*sizeof(char)",
+    "width": "cp-ip_as_string",
+    "established_property": "length_meaning",
+    "note": "capacity bound; length expression meaning unresolved"
+   }
+  }
+ ]
+}

@@ -13,6 +13,17 @@ after completion. **Not perfectly blind** — see `PROTOCOL_DEVIATION.md` (8 sit
 See `RUN_MANIFEST.json` for all pinned hashes and the timing disclosure. Raw archived first:
 `raw_sites.jsonl` (sha `ba413dea…`), then the frozen summarizer run exactly once.
 
+## Harness correction (see study/heldout_correction/CORRECTION.md)
+
+A post-hoc audit found the runner loaded the **heap-only V1** runtime-capacity producer
+(`oob_runtime_capacity_verdict`) instead of the intended **V2 stack-capacity integration**
+(`oob_runtime_capacity_v2`, declared in the manifest). Because V2 only *enriches* V1's already-
+recognized operations (it forms no new ones), the **recognition count is unchanged: 4/118 vuln,
+7/143 combined stand**. One of the 7 recognized dispositions is corrected — `evutil_parse_sockaddr_port`
+upgrades from `required_evidence_absent` to `relationship_unresolved` (capacity `buf[128]`
+established, length symbolic). Still **0 deterministic verdicts** under either producer. The
+harness is fixed; the scanner (V2 byte-identical to the frozen commit) was never changed.
+
 ## Two measurements
 
 ### PRIMARY / FULL — all 258 pooled sites, 42 families
