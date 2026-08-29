@@ -1,0 +1,4522 @@
+{
+  "FROZEN": true,
+  "counts": {
+    "by_crash_type": {
+      "Heap-buffer-overflow": 43,
+      "Stack-buffer-overflow": 8
+    },
+    "by_project_mapped": {
+      "aom": 1,
+      "assimp": 1,
+      "binutils-gdb": 1,
+      "croaring": 1,
+      "exiv2": 1,
+      "ffmpeg": 5,
+      "file": 2,
+      "ghostpdl": 1,
+      "graphicsmagick": 2,
+      "imagemagick": 7,
+      "karchive": 1,
+      "libass": 1,
+      "libheif": 1,
+      "libjxl": 1,
+      "librawspeed": 1,
+      "libredwg": 2,
+      "libvips": 1,
+      "mupdf": 1,
+      "ndpi": 1,
+      "njs": 1,
+      "opensc": 3,
+      "openthread": 1,
+      "pcre2": 1,
+      "radare2": 1,
+      "relic": 2,
+      "simdutf": 1,
+      "wasm3": 1,
+      "wireshark": 2,
+      "wolfmqtt": 1,
+      "wolfssl": 3,
+      "zstd": 2
+    },
+    "by_write_kind": {
+      "copy_sink": 13,
+      "index_write": 18,
+      "pointer_deref": 20
+    },
+    "family_sizes": {
+      "fam_0e4ba716265b": 3,
+      "fam_1383388357d4": 1,
+      "fam_223b8c51e55f": 1,
+      "fam_42418a7cbf67": 13,
+      "fam_4bdb4421b431": 1,
+      "fam_56c918f63585": 1,
+      "fam_83e36e70488c": 1,
+      "fam_9152d9e125ef": 3,
+      "fam_a189881f6e54": 3,
+      "fam_aeb728439472": 5,
+      "fam_bbab2acb2e20": 2,
+      "fam_c35aa6788b76": 1,
+      "fam_c87ccc3e0563": 1,
+      "fam_d3b5215e864d": 12,
+      "fam_d9e4e31ba3b4": 1,
+      "fam_e314471e5d26": 1,
+      "fam_fc51b2985a63": 1
+    },
+    "mapped_vulnerable": 51,
+    "mapping": {
+      "ambiguous": 348,
+      "mapped": 51,
+      "no_write_found": 65
+    },
+    "sites_after_filters": 464,
+    "vulnerable_families": 17
+  },
+  "exclusions": {
+    "duplicate_project_commit": 67,
+    "magma_overlap_project": 13,
+    "no_patch_file": 1,
+    "not_c_cpp": 19,
+    "not_write_crash_type": 4429
+  },
+  "inclusion": "crash_type starts with {Heap,Stack,Global}-buffer-overflow WRITE (sanitizer expression of the frozen write family); Magma-overlap projects removed (same frozen union list); C/C++ diff only (postcutoff's exact regex); one site per localId, in-source dedup by (project, fix_commit) and diff sha256; ENTIRE meta folder processed, no early stop.",
+  "model_calls": 0,
+  "pinned_repo_commit": "7e1a64f52520a5d63c766d5546a32fd748f23e21",
+  "preregistration": "PREREGISTER_ARVO.md (committed before first run)",
+  "rule_1_write_site_mapping": "IMPORTED unchanged (diff_hunk_lines + writes_in; unique (kind,dest) across hunks).",
+  "rule_2_family_assignment": "IMPORTED unchanged (structural family_id).",
+  "sites": [
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "2b763883747996b9dc7b8f897ad84b6021ee5e1d42b8f05ebab3e1ff93dbe10d",
+      "fix_commit": "?id=edf40148545038d07a394082caa1b9155941f88f",
+      "local_id": 289,
+      "mapping_status": "ambiguous",
+      "project": "freetype2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "dd72c46a69edaaa99ca25b8fe99a49f749b2c54a1f167d45e3178761a6c29e87",
+      "fix_commit": "?id=e6699596af5c5d6f0ae0ea06e19df87dce088df8",
+      "local_id": 509,
+      "mapping_status": "ambiguous",
+      "project": "freetype2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "2a61e8a5b9952b0d4d3e6d98e43c5c23b6c8662fea9df1d01d573017c9dd8e65",
+      "fix_commit": "?id=779309744222a736eba0f1731e8162fce6288d4e",
+      "local_id": 739,
+      "mapping_status": "ambiguous",
+      "project": "freetype2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "f17ea9901feb18df62e929faecda4378eafc135dc3027217beeb30efb08108bc",
+      "fix_commit": "?id=7bbb91fbf47fc0775cc9705673caf0c47a81f94b",
+      "local_id": 759,
+      "mapping_status": "ambiguous",
+      "project": "freetype2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "8a22bf43498005afa6d0eb3ceb47d05fa258472618431204c5697d2334fe202c",
+      "fix_commit": "26e92bc554db487f600a8178f9ad97b8b02e9345",
+      "local_id": 783,
+      "mapping_status": "ambiguous",
+      "project": "pcre2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 1",
+      "diff_sha256": "9f32054b836ccc1897cb0ea836e3a6b06ce9f478c8f7b97e0916d1b1ab8b2be3",
+      "fix_commit": "22f05d620f428c0769227f0173876c95fb9aead4",
+      "local_id": 1237,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "6559e68b5c90da0f965558d59a26ad5ae061160853b56fddb293102cc447c4ca",
+      "fix_commit": "f52fbf4f3ed02a7d872d8a102006f29b4421f360",
+      "local_id": 1345,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "f4f8c8bfbfe8c7db430bb230e29598ace189cd7870e048442b496a614f46ee2e",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "ce551a3925a1cf9c7824e26a246b99b6773bda4b",
+      "local_id": 1348,
+      "mapping_status": "mapped",
+      "project": "ffmpeg",
+      "sanitizer": "ubsan",
+      "write_dest": "seq",
+      "write_kind": "pointer_deref",
+      "write_line": "SeqVideoContext *seq = avctx->priv_data;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "23bb7d85ba2beb67a6d0c2a3d348bc0447d03d5265a732053b55dc2ea84d4491",
+      "fix_commit": "e1b60aad77c27ed5d4dfc11e5e6a05a38c70489d",
+      "local_id": 1378,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "1531f579cc84af197e371dbe1502124b9b0e15019d14d2b47ee86d48c9b4fc2f",
+      "fix_commit": "1e42736b95065c69a7481d0cf55247024f54b660",
+      "local_id": 1427,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "a51fe7334ad188f8c28df030c6449d3365703c08f2cc32ad9e5eb585f6985431",
+      "fix_commit": "6b5d3fb26fb4be48e4966e4b1d97c2165538d4ef",
+      "local_id": 1434,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "6906ac2ba44da0fc4ad8e14605e366ac6c5be7a49ad0c14d079765637be1afcd",
+      "fix_commit": "ca6776a993903dbcfef5ae8a18556c40ecf83e1c",
+      "local_id": 1442,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "799b1cf72b03f463b49a62be0e348387f66c96f7a8cd326f3a476c0d5a9ad5a0",
+      "fix_commit": "cb243972b121b1ae6b60a78ff55a0506c69f3879",
+      "local_id": 1466,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "873ad5238270f6ea872a881f1105925336de3103bdc81e479090510c9f9c8622",
+      "fix_commit": "7ac5067146613997bb38442cb022d7f41321a706",
+      "local_id": 1478,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "9cad2282b386ab5864c4e08413836bcf6a6d3048087b2aa77c4feb5f50ab90a2",
+      "fix_commit": "ba62303c7caca9789d71efa62be6abae1c16f9ee",
+      "local_id": 1588,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 2",
+      "diff_sha256": "102f2ec6b28b01edf883092b3ca8e208972bd2da6071393702847c6867e00863",
+      "fix_commit": "aef369f536ecb89ab94c2c6bc6b6e0a767fab39d",
+      "local_id": 1947,
+      "mapping_status": "no_write_found",
+      "project": "opus",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE {*}",
+      "diff_sha256": "1cf2760451a5eeda9aafefa70395deb259e0ccb416b52b7e90f0afd547821f66",
+      "fix_commit": "1d7a1679162b4879e624483e95e5874d1d0334c7",
+      "local_id": 2052,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 10",
+      "diff_sha256": "78f518f69eeab9edb22798533ced28ba2533c4ef3b41f8d804fd270413150b5c",
+      "fix_commit": "d30d55fa06470a028327b7088562f605367f8497",
+      "local_id": 2105,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "51d6805dfa2f9051a8fc65f9e7b1c3368e67eb1b05d13175b8a4a6f8e291a298",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "c5d6dde502e4e30c7de4476e82b459361fe2f486",
+      "local_id": 3522,
+      "mapping_status": "mapped",
+      "project": "zstd",
+      "sanitizer": "asan",
+      "write_dest": "unknown 0",
+      "write_kind": "pointer_deref",
+      "write_line": "srcSize -= 1;  /* unknown 0 => -1ULL : presumed large */"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "b873e05e45e9f34f8676567e2a918ac7f69f596a05b9a92f4cece6d755bb7ff0",
+      "fix_commit": "3455a82ddb781794d1a32b9ee94153f02117c61c",
+      "local_id": 3736,
+      "mapping_status": "ambiguous",
+      "project": "open62541",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 7",
+      "diff_sha256": "12ca2d2707ee2eec0530c3510aab03284bd6bd68f4131a0b2ca693cdc5d0ac5e",
+      "fix_commit": "0d1eeb16dd0a574d81ba0eaeea430f1be105a038",
+      "local_id": 3940,
+      "mapping_status": "ambiguous",
+      "project": "proj.4",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "437ff456f7cb7a2dfd512e344e784d510ddce406fb55dba8cd77c4dd4341f6a7",
+      "fix_commit": "c272d0842c43b5bbde4ccce5189fd196b5359ed9",
+      "local_id": 4071,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e388fab7878da2055ff2e563cabb8e3024c08681e99dc2e20653869fe1c09310",
+      "fix_commit": "0ff832d31470471803b175cfff4e40c1b08ee779",
+      "local_id": 4373,
+      "mapping_status": "ambiguous",
+      "project": "unrar",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "44fcba0f77e8247b9e4f80fec9eb2e0f6b471ab5cc60a8e56d82826ba3c953f6",
+      "fix_commit": "b08b150e21a096e49f56dc044537295991986fa4",
+      "local_id": 4511,
+      "mapping_status": "ambiguous",
+      "project": "librawspeed",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "bf4175f88e54e762946232a2527e85fcdcd3252c39ae11aa27e503fddff1ddc4",
+      "fix_commit": "b399b04902c43f479b51b142505700edcfc34271",
+      "local_id": 4785,
+      "mapping_status": "no_write_found",
+      "project": "curl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "c4fd9275e8463af385d2822d672086a78c03500d395532cdd12535f681c4c8fb",
+      "fix_commit": "dbe7591e54bad5e6430d38be6bed051582da76b9",
+      "local_id": 5256,
+      "mapping_status": "ambiguous",
+      "project": "librawspeed",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "c7c0f84d3be089f2184d5d64f78e7d3a71acb23dc3e1c7d5ccc49871eec0a86e",
+      "fix_commit": "bb4e7e8919573caf70bd5af3330e991ddbad0c92",
+      "local_id": 5429,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "9cdde29cc325be3a7fdbb06edc5a7c6e6de55b20224896df6925035d8d1b6f76",
+      "fix_commit": "614d7b140cd03a0d38f76ae55a7fcb2c9d76012a",
+      "local_id": 5450,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "c02502572e342bb1a2c27616a75d0841594a7c0de44dceaa56cd8220ad051bde",
+      "fix_commit": "3c8e8dbc5f8f617fa902cffaa90368beb96fd8a4",
+      "local_id": 5481,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "1cdf66f58e96c45ea9030d831c0000713150065c0796f40ed0d95522d877595e",
+      "fix_commit": "71ceebcf56e682504da22c4035b39a2d451e8ffd",
+      "local_id": 5494,
+      "mapping_status": "no_write_found",
+      "project": "mupdf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "2fed05777e8ea4b9b94e182d5d8a09281a27cd472c4b0308ea8476edae89835d",
+      "fix_commit": "147814adf1c657f647ee7e73027dbedde5ac2467",
+      "local_id": 5547,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "1c61c27ec6aef5539b531f94b11cba6d3056df6123e3e1cabc67941d279108f4",
+      "fix_commit": "c9a75ec387eb3c1f3c9584b97260d72512868b1b",
+      "local_id": 5646,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "8dfbf42423ae890eea3d334fa127aa2989932ec8ded88d80f07e9c960779652f",
+      "fix_commit": "2ebcbdbaee0a9bdfa0f11f9b47774668537ea709",
+      "local_id": 5889,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "658f564f1d60272caf7b4c3feb19bf285c60251372ebbb80302a1e35dddd0132",
+      "fix_commit": "d14bf09d94be40e3e2ed2be5b0b55c9d885f1513",
+      "local_id": 5903,
+      "mapping_status": "ambiguous",
+      "project": "proj.4",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "c33d4a2b6ffd1dab6c2b7c73b4c3a87c5abf9aba9941cb54b3cf96a8c71aea8b",
+      "fix_commit": "69c4513a4fb5f71421a21643edb53de53d3864a6",
+      "local_id": 6096,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "08161f8e2d10c0d4c1b605c1d3a23f6a4f0fdc246d9d8bcca83a0bb6709b501e",
+      "fix_commit": "98c7ca653ad749c281ef32fbf3258274ff81f13a",
+      "local_id": 6430,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "0839722f865617aaabf15e7d4b1ebe445a6463eeb313c7aafcafec10c9cf0091",
+      "fix_commit": "b78a613f16150d6db3b055731211f467756bc412",
+      "local_id": 6488,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "a58b9fc52be500531e8c5aef3ec2761d082dc4874c2496e9085531469b38edb4",
+      "fix_commit": "a7e810e41cfc29c9c8e6eabb43ea0c52e26d0664",
+      "local_id": 6545,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e11a732db422a586288318432b6eeac5a33222d42bc6913d5b8a97475f93b7e5",
+      "fix_commit": "e39f7ace21226021b095db562d6d46ef3c749784",
+      "local_id": 6582,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "e778a54ff4b7272adc47ea0b5b3d491f4b971c0280227d9b7d2cc3ef21c9075f",
+      "fix_commit": "279e7b878d41c362d74a82c0c88f12a94d5d3acd",
+      "local_id": 6584,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "8d566d80188530b81ada1d4f939bc6a151fdea15f12a6e93492d23f57e4ea5d2",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "7a03766efc1f45cf13cbd435902d86c3f321368e",
+      "local_id": 6846,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "dash_polygon",
+      "write_kind": "index_write",
+      "write_line": "dash_polygon[0]=primitive_info[0];"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "a10e4c11d212d41324e2e0d6242c10fc810b65609b9808beb60c2719517bfa72",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "3c96caf391336735dd15331267694d52a6d3ecd1",
+      "local_id": 6861,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "dash_polygon",
+      "write_kind": "index_write",
+      "write_line": "dash_polygon[0]=primitive_info[0];"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "a217354e27043da271940c80742032a547769e3bf70e481b89eefba6a187ada0",
+      "fix_commit": "f075b2776b896df38a6fc6afda672236c268d524",
+      "local_id": 6912,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 4",
+      "diff_sha256": "d3444d48d70abe0380020b99c4752d10596cc48c76de4194f6d248b11b2b21a6",
+      "fix_commit": "0cb16a8ccb86c904c18b7f5c6d55b2db36c2275a",
+      "local_id": 6922,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "e34a7497e2f7ee8e2708a1db69dbec7facd6974942e2109d77e6355b3b460109",
+      "fix_commit": "d43a4d4d937dfc71fe7b80de4525b1a20b38c2d2",
+      "local_id": 6932,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "fd8dffc99650094ed5df329c215cf87bd9657553c348c3628365e4cc132f6d6e",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "8239e79ee4c8cc34034838eefe4f34bab02c5fc7",
+      "local_id": 7034,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "dash_polygon",
+      "write_kind": "index_write",
+      "write_line": "dash_polygon[0]=primitive_info[0];"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "25c0b3b7c1047539dc6981d1c665a2f8f86eabf55d1810a0431f49139f720678",
+      "fix_commit": "1cf81c1b71e2f40fd52cd76fb693add9b214310e",
+      "local_id": 7078,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "3bfcd249b06e4fba3dd6eb58a5153d728771cee3842054e8005dc2c257fcfdcd",
+      "family_id": "fam_83e36e70488c",
+      "family_signature": "copy_sink|struct_field|V->V",
+      "fix_commit": "7fce9752137f7040358dfbc90c677240396f8b82",
+      "local_id": 7134,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "prop->data",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(prop->data, propDb.data, prop->size);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "1c40158108f484e797d72ea6c3b18494a6f6e6b26d7e57668e4c89b218b68b84",
+      "fix_commit": "287da0ac097045639929150965c50d207431ebff",
+      "local_id": 7301,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "eda2ace247d456cf6dcc5e25dc419aa52f6fbe6d81d3cad1ff38aea549035789",
+      "fix_commit": "6e9e67bfe3783c3516918441f2a123e68cd2d8bb",
+      "local_id": 7313,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "be863a1e3dc4e190cffe50e4192f4081a5f31d5c65af594f966146a4ba1ddc2b",
+      "fix_commit": "e971a9d9bb7f8b11ba25f95405d085f9aa5ca8bf",
+      "local_id": 7535,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "b0ce5645ab17ddbd11af145de6f01b97de57262587c7b0520af3b51fffffe605",
+      "fix_commit": "76fdecd663409a50e6a509239f7ced405ecf4a64",
+      "local_id": 7649,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "275f6e6aa26729e4e933c066fdf892fb4c5408cb951167692fbf39093c7bc40a",
+      "fix_commit": "0b2039d9d9b0bb1ad1321bc6c242b0426626bde2",
+      "local_id": 7902,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "3d3b071c8ecc44cd8e40b1d8b4380fca62d5952bf5fc4bcac0426feced78f397",
+      "fix_commit": "4a9f1e7fb3ea45dcc70db2319820593373e65e35",
+      "local_id": 7915,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ea59713736d28adef3df8ae6e9ba9ff57c6c5b29626f08cf3319edc5cde995ff",
+      "family_id": "fam_c87ccc3e0563",
+      "family_signature": "copy_sink|unknown|V+(V!=V?V:V)",
+      "fix_commit": "graphicsmagick04275afef42e986ca7cd6d39aa81ec2d73bd035e",
+      "local_id": 7935,
+      "mapping_status": "mapped",
+      "project": "graphicsmagick",
+      "sanitizer": "asan",
+      "write_dest": "pixels",
+      "write_kind": "copy_sink",
+      "write_line": "(void) memset(pixels,0,packets + (packets != 0 ? 256 : 0));"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "5a31fa43f96a72d2d5961d2295ab20eb77434d9144ce631264af2d2e7966a4a5",
+      "fix_commit": "3b2ed44d6a5d1c33a8add4ccf5cc2deb46cf50cd",
+      "local_id": 7972,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "c856a14049b5ce659af424e878b22fe8115fa9c05821f14f534071dd1e38b96d",
+      "fix_commit": "4413d43962e1aed72a285ae8fb68780bb64a11fe",
+      "local_id": 7987,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "24fc95292a29d1f3ea09fa0f184a7edbefbd8191c78b56e372a3930c80dd40ba",
+      "fix_commit": "d9d23d85b46e5046682c322f8611faf95b421d31",
+      "local_id": 7990,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e534ebfa5eb7e36e6954584c9db3ee4d95a68049b0012379318b7c9335dbbbae",
+      "fix_commit": "3c630f9b0af097663a64e5c875c580aa9808a92b",
+      "local_id": 7995,
+      "mapping_status": "ambiguous",
+      "project": "curl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "2d4fb89e1e76a17fd576d8c9e7bf6184ac6395d75d5257e81cc6ab5bbd06e58b",
+      "fix_commit": "coree89350cc1e0b8696ef51251acfb7543fd196ff3a",
+      "local_id": 8313,
+      "mapping_status": "no_write_found",
+      "project": "libreoffice",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "602a5d13ab005629ef2b2140551f2702b6c90e9a1cee0dc8ced3d0006cf09921",
+      "fix_commit": "coref504273c10a7448aabd619175bc1e041458cb1a7",
+      "local_id": 8354,
+      "mapping_status": "no_write_found",
+      "project": "libreoffice",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "bc37377c6003407eddb86f72e792ead7d334c0beecfdc9d4989e995cf607644e",
+      "fix_commit": "1541e955d940bc316c1739292b740e9e4a949d68",
+      "local_id": 8383,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "ed3de441fd1d99f5961e508b019b69fa37af890e40ebb6cde93585f1cf18912b",
+      "fix_commit": "graphicsmagick432696c6a3f90b8999809d41ac97a9a2a63a06e4",
+      "local_id": 8384,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "131c61c1bd14f67713e26f9ce93fe05884bfbe893e94fcf4e318029d1b45bd1f",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "b6e541290a2bbc4b5b6849f328b0e42e340a212b",
+      "local_id": 8458,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "points",
+      "write_kind": "index_write",
+      "write_line": "points[4] = { {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0} },"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "16a84d0b5f31649e64ea8efbd0096fc6e0ddfdd04fdd80de33670011b37fead2",
+      "fix_commit": "5a560f3f6aa2cbfad957cf6223e50c3b61ef575b",
+      "local_id": 9230,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "420b35fa5c9e39f3564cf6ba80eb8ae4f6bcadc43ad0cc9a24b88f702b8e9400",
+      "fix_commit": "09f2e173850e011e6390c49a4f761e87dd87ffba",
+      "local_id": 9325,
+      "mapping_status": "ambiguous",
+      "project": "mupdf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "41c484b70bf6647f4ce397bce0498c66c8e59c7fea889767f019383cd9ee6be5",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "9e53a942c9c972954c33b7effbafa5197f539265",
+      "local_id": 9360,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "macro",
+      "write_kind": "index_write",
+      "write_line": "macro[end-start]='\\0';"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "a77cdb816af5a76d3ff03c588577e820bee37fffaa6128951ac4247917c7eff3",
+      "fix_commit": "d68366982b85afcb7a03436b8330678ca2e67246",
+      "local_id": 9370,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "c91e049913508642dd89d27e3e659d0eeb511eccccb7098164e16e45032b921b",
+      "fix_commit": "71d9816081d9e0a0e5dc490ecf9be0fd06ce160c",
+      "local_id": 9471,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "7ba54ee814244c41d39634593e5f1f4ab316b37e5f2a310b63bfa5843906f8d7",
+      "fix_commit": "c6a186860fea8711852d3c6ea32b2ee439ed96a3",
+      "local_id": 9506,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "259e687074f52ef621955b90a4444f334ce0a4d84c41bb0192adaeb2dae58614",
+      "fix_commit": "730ac94eda1a32c89c1534db8cb4255b818da9b0",
+      "local_id": 9660,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "c7200c6167c00c46f1f03c1cd012e518ab9f36459340c645d151cd7decb032ab",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "graphicsmagickbc328f2fcf47f91b1b14d04665cb209e30e0716d",
+      "local_id": 10055,
+      "mapping_status": "mapped",
+      "project": "graphicsmagick",
+      "sanitizer": "asan",
+      "write_dest": "key",
+      "write_kind": "index_write",
+      "write_line": "key[i]=(*p++);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "6cec3541180af5eb161dc480fed435aa844a5d3055407d6cd4b4d720e74b2e41",
+      "fix_commit": "graphicsmagickf9154aa8139f5761d61b8108a2252c55187b0602",
+      "local_id": 10096,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "8b447b80a5cdfa20e7627a426ed0907e8572462bef4b7256f01e174f826cc3ba",
+      "fix_commit": "32017745b0b4cb6d69ced6250dd67d9faf6282f8%5E%21",
+      "local_id": 10252,
+      "mapping_status": "ambiguous",
+      "project": "aom",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "b79da92af6f89a0f94837c02ecc3ba3de762e92dfa9a1f5f8a378325bfc315c7",
+      "fix_commit": "graphicsmagick90ff9f04a465b7f797c23799afdd3d45c45f07ce",
+      "local_id": 10306,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "fcc2cf0be778b28ac7558c44b6aaad263663a9d670fc13ffcf336d14c16028d7",
+      "fix_commit": "78c6015cb05591819fe834b1b3abf59d229074d9%5E%21",
+      "local_id": 10378,
+      "mapping_status": "no_write_found",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "eb0b1438820e1faf8a70863c9d818cf4581ffb87457f68b7486d2efc87209a95",
+      "fix_commit": "b52dd6c9e4ef7cf95c2a6ae5ab7ccac7f6d462a1",
+      "local_id": 11011,
+      "mapping_status": "ambiguous",
+      "project": "libarchive",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "6399766ce62bb0961d040bce14782fddbca335acfea2718dbbe0a4a2ad592fbb",
+      "fix_commit": "07afa23bd0fa74d18fb7faee898b2a876536a170%5E%21",
+      "local_id": 11040,
+      "mapping_status": "no_write_found",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "c350de5693b9471964776029009a5ce077e1aa7879ae17739378da1748a52aed",
+      "fix_commit": "39976b99178eaa4862c43eaf00959f2653a01a6f",
+      "local_id": 11253,
+      "mapping_status": "ambiguous",
+      "project": "openvswitch",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "99d91d9ccb90a674745c3d1c64a975dbef9d2cd9d9696a3881ca97a9d016e80d",
+      "fix_commit": "6d3cb2a81e6fecc86ff1e9cedda719b7a7e9672a%5E%21",
+      "local_id": 11281,
+      "mapping_status": "no_write_found",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "e83725f4fbc4f393d0d2d2baac00d9d24c24add34f7b3bf9802c7b0db7e86be6",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "0bcf3488a4989c2724f0c4383401b0d0dcfc3dcc",
+      "local_id": 11429,
+      "mapping_status": "mapped",
+      "project": "librawspeed",
+      "sanitizer": "asan",
+      "write_dest": "data",
+      "write_kind": "index_write",
+      "write_line": "data[iPixel] = dequantize(pixelValue);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "89abf17f71f7d8266b44637561ca4d5735d6ce94c66dd6230b74e9ec3aab77f1",
+      "fix_commit": "017ac1c6d516e7a5b5c0de4001673942f54fd942%5E%21",
+      "local_id": 11498,
+      "mapping_status": "no_write_found",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "2867471ca52285bff6a53651ff6eb0062ab2da80594f2ae7ffb307771d8c3739",
+      "fix_commit": "fc97f222ff1f9dc496a4b277f0a41fac51b155b8%5E%21",
+      "local_id": 11766,
+      "mapping_status": "ambiguous",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ca780202a9814dddb89c3612cb078309515951aaab6c7596f881cc5efb75ca24",
+      "fix_commit": "e4d1558aa2c1c04a05066ee8600f37603890ba8c",
+      "local_id": 12420,
+      "mapping_status": "ambiguous",
+      "project": "libidn2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 7",
+      "diff_sha256": "b636df58270255dd138b2397279416932191fa8b696a1696c9c2756cd94fc0f8",
+      "fix_commit": "4bd12b6f40cb4413c8970c52f15f3b6885b5e32f",
+      "local_id": 12466,
+      "mapping_status": "ambiguous",
+      "project": "libarchive",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "6fd1ab78b28376be98d127c41d4d438e2b538a0e5a84edf950c784e9876c1d04",
+      "fix_commit": "249bc598748ad08a98b08995698669613594e54b",
+      "local_id": 12642,
+      "mapping_status": "ambiguous",
+      "project": "openthread",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "563878a15d1d4861ea961d11645294a5711ddcabd5801b83f673a9cd23077092",
+      "fix_commit": "a51cbd865f922b9a39a0db421ab84b6c4108bd56",
+      "local_id": 12818,
+      "mapping_status": "ambiguous",
+      "project": "kimageformats",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "a31906a1db45a57884582939b571ad9f65c29ee16caeca29ac34fc158a0764cb",
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "fix_commit": "a3548df579617e737b075be4a88591e68195e115",
+      "local_id": 13334,
+      "mapping_status": "mapped",
+      "project": "openthread",
+      "sanitizer": "asan",
+      "write_dest": "GetPrefix()",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(GetPrefix(), aPrefix, BitVectorBytes(aPrefixLength));"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "f038394ac5e273743fbf2b242badad92392359ba755c067059bb77cc428745e3",
+      "fix_commit": "c3b517dac2bbd3007c5ac8fc61efe87661dda5c0",
+      "local_id": 13851,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "bae16dfb9a368351b1cf22327ece8e9a2a2a9e9e541cc9122cd3a29c13990106",
+      "fix_commit": "9f840c6306b853e98eab75ed2fa9522f7e2dae98",
+      "local_id": 13858,
+      "mapping_status": "ambiguous",
+      "project": "radare2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "74c12a0802ae5d34a3813c6a30dffab9a020099efdc590be9f62f5dbc1f166e7",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "152b3f31096f83d6507d400b2e43ac02033dc7a0",
+      "local_id": 13940,
+      "mapping_status": "mapped",
+      "project": "mupdf",
+      "sanitizer": "asan",
+      "write_dest": "bounds",
+      "write_kind": "pointer_deref",
+      "write_line": "float *bounds = func->u.st.bounds;"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "046557c8649bc4d25df0b0380dcc2b6f8d9a414a5d5e8de4f8806c2466998a3d",
+      "fix_commit": "2fce6f81cc59144bf4f2f66f7620233d609b41ef",
+      "local_id": 14331,
+      "mapping_status": "ambiguous",
+      "project": "libarchive",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 8",
+      "diff_sha256": "63fb530dcadcb5abe618f47e1b0f8f60c06fe2075c9d63e6177c3be1e3dcac60",
+      "fix_commit": "8feaf5303d43cad4d057a51722713213d3c9732c",
+      "local_id": 14529,
+      "mapping_status": "ambiguous",
+      "project": "lwan",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "8cd87175e09588fc1ed92a53fe5c102e8d6508ab47a88bf9d16140961fd8130b",
+      "fix_commit": "fb4a98f6550529162d4daf7b528c7a74cdb7008a",
+      "local_id": 14621,
+      "mapping_status": "ambiguous",
+      "project": "open62541",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "a33ebea6ad12af33e8f6319f43ab5f7d70fd8006d6e47faa02a4e469d518b298",
+      "fix_commit": "a875795bb5d8c216fa17d685b49784c4d5c93f87",
+      "local_id": 14690,
+      "mapping_status": "ambiguous",
+      "project": "radare2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "0e1f5aeeb9246f30b99d13d8223675e62ec56fbeeafc627663e3fb1046af4269",
+      "fix_commit": "5724138c01c616f8327e5be5156f56290c9a395c",
+      "local_id": 14703,
+      "mapping_status": "ambiguous",
+      "project": "karchive",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "1255cd6246fdffe21a6915cd7b310ac18be7bfd524308ccf966cabcc59451453",
+      "fix_commit": "156242f66f0480eeccc69b52b91ebf01ae0b128c",
+      "local_id": 14782,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "f95ac10164ae628a628dd8138c006e962b5e54389bc39ca0b043e3ec09a63908",
+      "fix_commit": "8bb50d4ccde667295f892f976ee5ff90ba4a4a2f",
+      "local_id": 14821,
+      "mapping_status": "ambiguous",
+      "project": "openthread",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 9",
+      "diff_sha256": "f2ff5ed62f01e2e786107c3b10f0d58c3a0f09cea5ff85b773f2128bf70d5ba9",
+      "fix_commit": "bcfa791912dd7bd3dd7432f9f6313b6dd5ca358b",
+      "local_id": 14854,
+      "mapping_status": "no_write_found",
+      "project": "openthread",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "3aba411bfe3feeb7355dea1884902dd64d9960f4b214a67429cb87e1cd513da4",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "5dedab8cb9ec5acb94d6f9957f0f3494f59a3316",
+      "local_id": 14959,
+      "mapping_status": "mapped",
+      "project": "karchive",
+      "sanitizer": "asan",
+      "write_dest": "ba",
+      "write_kind": "index_write",
+      "write_line": "ba[BUFFER_SIZE + i] = i;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "de5a49816dd5dcb2d356152b0c3781efc0da7bf6a9ae657ba96cf403021d04c8",
+      "fix_commit": "7d30ff52fc1be6f9698b166107b8981eab6ec7ba",
+      "local_id": 15035,
+      "mapping_status": "ambiguous",
+      "project": "radare2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "5a7e05cc6569dd74dfc66a8fd6e87e0f88b18aaa28a31383fd43766742c38fe6",
+      "fix_commit": "a1ec2655d242d528af0337c4ee28059f245999e8",
+      "local_id": 15143,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "e4de7995ef8e24ce20a71a0e8b8bcdf4f72c802873c2b9bd0a992195dc75abbc",
+      "fix_commit": "054f460d6e9e98deba186eee6bd956756dfc89e0",
+      "local_id": 15152,
+      "mapping_status": "ambiguous",
+      "project": "open62541",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "d696956718ef453bfff9fd51bc121ce2b06160fe50932e793a930d04fba11dbf",
+      "fix_commit": "2ec8d3c9f2103c7da8bcb7d864db000b9e93a05a",
+      "local_id": 15218,
+      "mapping_status": "ambiguous",
+      "project": "radare2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "73f53caeb0153d33c425aefecfbb6259764fd246ac6d8d86221744266a68f2d2",
+      "fix_commit": "d33414d2ad27a5d2193c9ab0948ba7a282c2f910",
+      "local_id": 15270,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "ca4677066b19b4009032a11036c1609e6111fe45338638eb1a38ef4382cfa34f",
+      "fix_commit": "b949cc3ddfbeb1b3fba571fb53b186b645e66e9c",
+      "local_id": 15459,
+      "mapping_status": "ambiguous",
+      "project": "c-ares",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 3",
+      "diff_sha256": "13c0fe2fba13972f6a251e310727eb00d9bf940895fd2d20e0ce77fe26d3bfdb",
+      "fix_commit": "c43455749b914feef56b178b256f29b3016146eb",
+      "local_id": 15499,
+      "mapping_status": "ambiguous",
+      "project": "icu",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "3367721ec16bc3b0f57380f922cff03d53978f0d3e10a55fae115368c45dde35",
+      "fix_commit": "ba54b896969930491645aa3ec4125b76480add9c",
+      "local_id": 15936,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "c585f384e14c903586807be6285a55d46c064e3b50deb87a1e91cb0d33a89977",
+      "fix_commit": "13a2d9e34ffc4170720ce417c73e396d0ac1471a",
+      "local_id": 15941,
+      "mapping_status": "ambiguous",
+      "project": "lz4",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "f47435ef58ea2ac685e6f76d392995fe009db46d48d444073ff19e8879b7ad7e",
+      "fix_commit": "5ac28e9cc19069a104f5534dcf603218066d144c",
+      "local_id": 16135,
+      "mapping_status": "no_write_found",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "4f636849c68d9d27f8225f6b18083bdc55d98d9c4447deeebc8d575736272558",
+      "fix_commit": "a42bbb4e058063be8b61b3e00306eb6fb886a836",
+      "local_id": 16445,
+      "mapping_status": "ambiguous",
+      "project": "zstd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "7511279e46999a37745fbd8d291cfd2bb094fc0c4b6ea4ef2c4595c020adbaf1",
+      "fix_commit": "6f28264c1170fae4f6c847625f4a6d4467a3262b%5E%21",
+      "local_id": 16604,
+      "mapping_status": "ambiguous",
+      "project": "libmpeg2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b169721682e6ea0724f6e279448bdc82daa9cf9950bc3822fd3c6f7cff83166d",
+      "family_id": "fam_a189881f6e54",
+      "family_signature": "copy_sink|unknown|implicit_or_2arg",
+      "fix_commit": "06de62c022138f63de9bcd04074491945eaa8662",
+      "local_id": 16634,
+      "mapping_status": "mapped",
+      "project": "file",
+      "sanitizer": "asan",
+      "write_dest": "RCAST(char *",
+      "write_kind": "copy_sink",
+      "write_line": "(void)memcpy(RCAST(char *, buf) + offs,"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b3d042db193433971ecc8c107753fcc36248d354f5c38ab5b28b562f308f3fe7",
+      "family_id": "fam_c35aa6788b76",
+      "family_signature": "copy_sink|unknown|V(V[V].V)",
+      "fix_commit": "46a8443f76cec4b41ec736eca396984c74664f84",
+      "local_id": 16780,
+      "mapping_status": "mapped",
+      "project": "file",
+      "sanitizer": "asan",
+      "write_dest": "&inp[i].pi_val",
+      "write_kind": "copy_sink",
+      "write_line": "memset(&inp[i].pi_val, 0, sizeof(inp[i].pi_val));"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "1df16b7678dc4db9d43e2f95152665f8c544375f52838aa0a656492f20458db1",
+      "fix_commit": "21c76cb68393c53c13b5bbdbd5737ba71f6cb5f4%5E%21",
+      "local_id": 16817,
+      "mapping_status": "no_write_found",
+      "project": "libhevc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "2ae19a70bec7432fc3876e1f01908445f27916e69dddfc40370dd33f2f5a4f27",
+      "fix_commit": "7a9958485036ef37b4e88df5cbe32bd7ec4c0d25",
+      "local_id": 16874,
+      "mapping_status": "ambiguous",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "ee743327aa541ab412acac73dc9ed3fc986c978394e27dbf8c817039f9e171cb",
+      "fix_commit": "60f9768c9e8488be9f5b5ba88ffe0a4528504a68%5E%21",
+      "local_id": 17029,
+      "mapping_status": "ambiguous",
+      "project": "libhevc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "50221d716c98138e92ce22a2aca8a2a1f180d1d18742294c1a626ad06e967542",
+      "fix_commit": "40dbcab01b9a057c7511781f9b9f5031263bf34d%5E%21",
+      "local_id": 17031,
+      "mapping_status": "ambiguous",
+      "project": "libhevc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "d81830302356bc282d9711edde6d92cf18de90e1c43951b8ca6ed6618843347b",
+      "fix_commit": "a368569d61258d7b1709bd2b4cd223d5eeebfc18%5E%21",
+      "local_id": 17286,
+      "mapping_status": "ambiguous",
+      "project": "libhevc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "f758cbc9025d8fd3cb7c415abdcf2d24363a02dec52ef42205a9d81bf0fabb4b",
+      "fix_commit": "8be8bf1fdff6181453a2c5e946618186b8b64c54",
+      "local_id": 17330,
+      "mapping_status": "ambiguous",
+      "project": "openthread",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "b53a8887d4eb95a778edc27d13ecd91c322b9f0dc07b23927855de529a37312a",
+      "fix_commit": "3758ba36d7ba381ce28920715a6099c2a06775ba",
+      "local_id": 18130,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "1a6ee54a6b35c30921f4dd3c40749d4ee07312037a38a1cce5cf055fdfaeab37",
+      "fix_commit": "bbf9a0b5eef3599a1c6a7a3bea40da9f2c37df83",
+      "local_id": 18225,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "03356d0d6fca8a38a85ab06638930be498858718e091cd2c247b09463fac6573",
+      "fix_commit": "974a84e41b64e6473d8588acd4a35ee0db54b376",
+      "local_id": 18305,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "b3a7babfc605213bf6f1dd8bc21f7f17a13e6d67dffc606a003dccc7a73ace8b",
+      "fix_commit": "7a1e42e1352201127d1a97b6cb5f41e48cace0f5",
+      "local_id": 18577,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 15",
+      "diff_sha256": "17d2699a68996c320cf3184c67ce9df26e155b4386d2749c9ae1d6d3e3956b66",
+      "fix_commit": "efea62b44631289f995db16faf70979d6592580b",
+      "local_id": 18615,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "6bc74a6330c1f7912a822659ba3fbf77f99a9e82d0297c33c14547edea8bb745",
+      "fix_commit": "22fb7aed8f38f3bdbad8944a27f67476cc1c8a5d",
+      "local_id": 18696,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 1",
+      "diff_sha256": "3db8d2149489ff2a370d5218ee63b697dcaba9aab18f9feb3788692172c0e43a",
+      "fix_commit": "d7fc0d27fbea5c68d61444033517d0e962e822e6",
+      "local_id": 18988,
+      "mapping_status": "ambiguous",
+      "project": "lwan",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "4e95adbdfb45e573a5135067fc2d7c7623ea424533a1c5b1de03cc054648fac5",
+      "fix_commit": "b8c3161281f8e15873f8decabd8eac461717aefe",
+      "local_id": 19386,
+      "mapping_status": "ambiguous",
+      "project": "openthread",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 16",
+      "diff_sha256": "0edc16f7cc506da058106cce335ed07df39497a3031b3736773496866213f20d",
+      "fix_commit": "f00901886d0acb7a4d4b177a5cabe8bd9ca2307b",
+      "local_id": 19414,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "9e716d486176f4b34d95d9a138fdd6e7261fad56d5a93a15e8e61adf4ecec9ff",
+      "fix_commit": "c247a8351f4d2be224e8cc424e104d8823450f5d",
+      "local_id": 19426,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 6",
+      "diff_sha256": "45466acc744c36b336102a18adee902e93ab6af0bc456f9195a26cef60c2c1d7",
+      "fix_commit": "daae1cc9b1ae6b7c6b4187003fabb2a6ffab44f0",
+      "local_id": 19544,
+      "mapping_status": "ambiguous",
+      "project": "ndpi",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "7a0eea733ac51fba12025e84fd92d62aca0eb1b2b0a349672b3585ed41f48a6a",
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "fix_commit": "333c41c5d51450177553b8fd8cb2d710a7f7dec5",
+      "local_id": 19548,
+      "mapping_status": "mapped",
+      "project": "opensc",
+      "sanitizer": "asan",
+      "write_dest": "oid.value",
+      "write_kind": "index_write",
+      "write_line": "oid.value[j] = blob->data[j+1]; /* ignore first byte of blob (algo ID) */"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "c946a6796ef5ce89d97a705b94b96037b0e6a0938a8870fd6129ca1582ab7450",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "228c8f4be0c428369ec6b68e25696863d1e62ed7",
+      "local_id": 19573,
+      "mapping_status": "mapped",
+      "project": "binutils-gdb",
+      "sanitizer": "asan",
+      "write_dest": "contents",
+      "write_kind": "index_write",
+      "write_line": "contents[sz] = 0;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ea276da5b15e12574b54263fc7021467fb483c401116a86a72ac9595df1f6a56",
+      "fix_commit": "1410b61985d074d39714794eec61f9acf1bf0db1",
+      "local_id": 19769,
+      "mapping_status": "no_write_found",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "b80d330103ee353494a9d1a249010bbbbd9e4d33da86f046703ddf1a9647231f",
+      "fix_commit": "2124b9b4c95e66e63b1eb26a8dab49753b82fd6c",
+      "local_id": 19902,
+      "mapping_status": "ambiguous",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ae8f99c972041f30c92cbc5c615850122141946af462666da6ed239754fda315",
+      "fix_commit": "4a0d0200e0d95c9731bae0423463f0741b74c8f1",
+      "local_id": 19903,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "d3eee4d36004b30923eab8add98bf22aefd54e3b9ad457a2959634c6d6fe0ec1",
+      "fix_commit": "5496abe1c5c31aa6648e8fdb15e4122025bcabfe",
+      "local_id": 20050,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "e6d1afc9187481a49f702375d2c61e4cfa539eb99e12190356a43a4fecd706bc",
+      "fix_commit": "ee86f51fcfe18e6517caedcc63f5a2d70ddef8aa",
+      "local_id": 20096,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "e20ff31fac7466ae5d684d837564457f80d17ba4a6de4ad935e2681e84d421a5",
+      "fix_commit": "a6307cc8a0127a4852b7d3d2c20940a094eed0d6",
+      "local_id": 20116,
+      "mapping_status": "ambiguous",
+      "project": "arrow",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "cba2d1ad51d41fd39ab747fb699aa945822038a8d0d06b347fa9a3621d522f8b",
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "fix_commit": "4ef7ed9ffd2acacfc5026db4fb984a1386a07bdb",
+      "local_id": 20188,
+      "mapping_status": "mapped",
+      "project": "opensc",
+      "sanitizer": "asan",
+      "write_dest": "reader->atr.value",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(reader->atr.value, chunk, chunk_size);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "4282a8c7d17d859431d9c9fc699163414bd2bd79001032e4d802366f7806accf",
+      "fix_commit": "graphicsmagick83b4d2b4b873dc2cb29cd7dff5c209c2b8f05682",
+      "local_id": 20318,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "f1fef688533e694a898866f2d47758a1ccd06f2751fd3f3c789ce13f5d5dcea8",
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "fix_commit": "njs9b70f038abfa8036d1d8a84d2d8db7c98039a957",
+      "local_id": 20646,
+      "mapping_status": "mapped",
+      "project": "njs",
+      "sanitizer": "asan",
+      "write_dest": "hex2char",
+      "write_kind": "index_write",
+      "write_line": "static char   hex2char[16] = { '0', '1', '2', '3', '4', '5', '6', '7',"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b4be57255fc6b50349bd9669f71bc524435528aaa4ab0b217a13847e4c0622da",
+      "fix_commit": "libspectre.git155777e316aa1bbc0f3be9ed7a6e7a9b76b58968",
+      "local_id": 20977,
+      "mapping_status": "no_write_found",
+      "project": "libspectre",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "6802aa750906e4230af49ffc2aee0a9426205dad8463a520fb8540d15e8d26de",
+      "fix_commit": "6db645ceb7190735134d13deed846f61d0b0ed0e",
+      "local_id": 21044,
+      "mapping_status": "no_write_found",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "3afdb7ce9403527434137a49abbb34f8c709b03b263ca2fcb54aa14a61edab96",
+      "fix_commit": "3f42d02b6d24f458b301af5db491f5ea7d9b4f90",
+      "local_id": 21345,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "04162d74bcf34cd4177a1acba73908afab301fa1b1c403c7d658b5d59113da58",
+      "fix_commit": "06b279a676ce5928f86e61329c27d22b957c1374",
+      "local_id": 21435,
+      "mapping_status": "ambiguous",
+      "project": "leptonica",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "c66aac549a1ffc38482291d93952caf87bd79ede2e6decfe526b9b765be3cdc6",
+      "fix_commit": "97f2d9cf5cdaee655e5a5527c78f42715b61ad51",
+      "local_id": 21936,
+      "mapping_status": "ambiguous",
+      "project": "radare2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "bb881c7bf29002de1a70f6ad5a9bc00984284faadc1d408fb6068d023190727c",
+      "fix_commit": "397ac80850bf8d010fae23dd215db0ee2c677306",
+      "local_id": 21984,
+      "mapping_status": "no_write_found",
+      "project": "libzmq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "c8697a6ff0b03cf35d9e1b49fc07e245c56cbf6f75f53b2afa06460bf2f60758",
+      "fix_commit": "a9010da8a4af17479c706f2cf4e8c6acdc1585ce",
+      "local_id": 22320,
+      "mapping_status": "ambiguous",
+      "project": "rdkit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "cc51bfd1487e510659b2f599231a513a4c22578bcd78bd0a9370266a7db28387",
+      "fix_commit": "15c63688e3f1a3c6067e6af70e3e9bf999d91389",
+      "local_id": 22507,
+      "mapping_status": "ambiguous",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "bd852895fa5dd55bd999baa2dc1980f173046678401ebbf621e4f73912059d67",
+      "fix_commit": "1f0e84c12727dff0bd46240fe9e649985fc73512",
+      "local_id": 22642,
+      "mapping_status": "ambiguous",
+      "project": "gdal",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "b8d745aecb9bf13c5c33b5eccf52ec0b1670680b4a74d9e40b855fda2e5bc913",
+      "fix_commit": "38c3fa6b27e4328b5ad9cbf7265d225d8579a15a",
+      "local_id": 22966,
+      "mapping_status": "ambiguous",
+      "project": "PcapPlusPlus",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "e05b8efdae358e4929e252800ad6bf093c6981f0bb69d8cbd77f5891d3f6e403",
+      "fix_commit": "9d294de90d1cc66956389856e60b6944b27b4817",
+      "local_id": 22967,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "cbf858aeb195d47326d1ecb6f37d3ac90e1ad01808833963aeab7faf6b2e0c58",
+      "fix_commit": "e70ded8b0bc231f7ed3fd5d2e83d61bd18ef5e94",
+      "local_id": 22978,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "ac600780bf47c2ec56a7d6e2404d750f1b126efe4c5f34fab2c634cc4f2cb790",
+      "fix_commit": "d3d1cc7b13b4b1f11862d6b58174c81536fb3340",
+      "local_id": 23074,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "e7863695d4f6edb451aedbca616e823b9744f45254be8ed9c5d2ae87b55a0abc",
+      "fix_commit": "graphicsmagickb0aa53a5f970cc7d4954104a1c65b0d9d7f36279",
+      "local_id": 23077,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "39ce5298f5897f9a26ba77c45e74c89c1a5a4ef1c4f46fb4ac67c43a60b88f1f",
+      "fix_commit": "15ee455939ff8c44be22158fb6e36ae02cc5ba9e%5E%21",
+      "local_id": 23595,
+      "mapping_status": "ambiguous",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "237cc4d836e81c44ab4aca3c424b9eeabed468484dad4c335ab77c9288731ef9",
+      "fix_commit": "08488f66b6028761d8eb60a3bddb9aa080a2af4a",
+      "local_id": 23653,
+      "mapping_status": "ambiguous",
+      "project": "haproxy",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ec1a3945aec0d6cce0989933bd58073c7967a66ccf38eeca48f396a6e093d19e",
+      "fix_commit": "e3fdd3e506a23ec66d9f3fe2fe346e4a03b1787a",
+      "local_id": 23794,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "a9723ee513b6e5d2b516f8bd488606be08ab684c9d0a351bf3adec55a03992e8",
+      "fix_commit": "ddb43bab174c50656331e5460b18bd8e8be5f522",
+      "local_id": 23877,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "95eabf2394a99b1241f6de274e0e41c8f4328ba6446c2542bdcbaff812eb56c8",
+      "fix_commit": "e3fdc001d359d6bcd033c1276c772e72d3f49078",
+      "local_id": 24020,
+      "mapping_status": "no_write_found",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "61faf8b6d1810c3e0c1c12c12d07138ad0ae5e25e16c1f9598ff0dd0f5798a59",
+      "fix_commit": "fe8d996bb22c83ecd080b81a0f6dc942d37e07ae",
+      "local_id": 24099,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "a96bc62f41184878cae58db484f9395002a95c04c55ee442657de7bcb671283f",
+      "fix_commit": "f2d5b7615ec97abb32d24d2b021d386283d983ec",
+      "local_id": 24106,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 9",
+      "diff_sha256": "5897baecae8006a3acb649034d5c37ed03d067915ea94377618d20cd3239f2db",
+      "fix_commit": "c59916a5cc0ae7574780555fe5d6cf80160cdae1%5E%21",
+      "local_id": 24246,
+      "mapping_status": "ambiguous",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "2491093d739581e8e3ddfed82654d61a9e50f21f33c32c35de7eaa0dfc7c5798",
+      "fix_commit": "6903aebfddc466d966c7b865fae34572bf3ed23e",
+      "local_id": 24316,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "7ef82cb6bf6595e60513e0578746bda73689604aa97cb816d3f63af96bd42d75",
+      "fix_commit": "b81e313c5177b4abcd049192f857caed8d804b18",
+      "local_id": 24350,
+      "mapping_status": "ambiguous",
+      "project": "rdkit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "c9c88c5372c126ac7860f7c791831d3da246af27ea6227daa8b3d6df4a34fbdf",
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "fix_commit": "1909b3e8d27deed5acc93e7f9a0bf48b397e1788",
+      "local_id": 24465,
+      "mapping_status": "mapped",
+      "project": "assimp",
+      "sanitizer": "asan",
+      "write_dest": "buffer",
+      "write_kind": "index_write",
+      "write_line": "buffer[i] = m_cache[m_cachePos];"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "b1420a8622888bc97e2fe3c136d869f7e301670af4c97069a850cc3bc895c990",
+      "fix_commit": "3a94514709b7d0d3420f96549172059bfaac2b65",
+      "local_id": 24591,
+      "mapping_status": "ambiguous",
+      "project": "libucl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "0e58bf7d9836d49a1d1466c67d6783d9df199549c2935e5db2940d38c4bc24e2",
+      "fix_commit": "5b0956c38198652c3ab41d325e93cd89a076635f",
+      "local_id": 25136,
+      "mapping_status": "ambiguous",
+      "project": "libzmq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "9d9a9a04e5a6e46b6ca669a6f5fea64c6ffd985ceaa5629b7cdb6aa5f06d446b",
+      "fix_commit": "03fca626a95130ab80f86adada54b29d27242759",
+      "local_id": 25381,
+      "mapping_status": "ambiguous",
+      "project": "uWebSockets",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "142e186c9e45b6a1b801fc67b4ef286e5a1405589596dd89d7369032f071bf7c",
+      "fix_commit": "3249c757aed678780e22e99a1a49f4672851bca9",
+      "local_id": 25425,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "9ce634c164788325464f537c83cd53d189ea6c5e1488d7435560874741332686",
+      "fix_commit": "31472b638bb2bd7020a3465d6e6ddffd564ae0ea",
+      "local_id": 25505,
+      "mapping_status": "no_write_found",
+      "project": "openexr",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "5e7a7205ab8642a9a2f414db81f9e21aa43240d52af0a002b710002a245b4eed",
+      "fix_commit": "a4aaa67878509ea8296ef349bcfe98da48bc5457",
+      "local_id": 25893,
+      "mapping_status": "ambiguous",
+      "project": "oniguruma",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE {*}",
+      "diff_sha256": "d878d3725b50a0643652dd9b1e5322f7be872e7a4c73357d5c3d5dbde4a20a5b",
+      "fix_commit": "571d48e007718321bca8adb5f100555fed0e1957",
+      "local_id": 25957,
+      "mapping_status": "ambiguous",
+      "project": "arrow",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "33a4f65fcbcb9347eb6851fc71d0a47d149e83429b1bea0b430c489e40493e63",
+      "fix_commit": "732ed77ad67e5303c46c0fa767929afd87076c87",
+      "local_id": 25998,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "48f9c6fc38c51676abda138236d35e46ecdbebc54d4303d555a9015e86831c59",
+      "fix_commit": "0b40d3b999d1e9feddbd9ebd144cf7b11ab81020",
+      "local_id": 26103,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "685a1ff45873c57440dc6bef109de32cfba1086413bb8e8272f66ef557daa1bb",
+      "fix_commit": "f4925bd5ebb2db38263eef0ec816bf393293cf9c",
+      "local_id": 26197,
+      "mapping_status": "ambiguous",
+      "project": "usrsctp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "e66a9982af7aaafb323da92e7ea2f3367d8812313f11c7dd458a311261f61235",
+      "fix_commit": "20b8d16e4f3fa4d94b606a7f7804ee56c776768b",
+      "local_id": 26268,
+      "mapping_status": "no_write_found",
+      "project": "leptonica",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e668210a8d953d412fbbca43eabec1e6577f6de69c551559a31f7b9e5b7b1315",
+      "fix_commit": "4364700c01bb55bc664106e6c8b997849ec69228",
+      "local_id": 26295,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "20555362c6d3be9fb19f3966fb8535d3ef11dbdf25b1f0e0582ece5dea0026be",
+      "fix_commit": "72b62d2270edda9a0281ff8a6c3903d99e1892c9",
+      "local_id": 26304,
+      "mapping_status": "ambiguous",
+      "project": "fluent-bit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "1bc0abb0cdc1121508318aa25adff5c83fa3324f1ce72ea48ec6280270575ec8",
+      "fix_commit": "c4c6470e88210afc95262c8b9fcc27e30ca043ee",
+      "local_id": 26442,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ad80c3600af18d04e26a3984f45193a8ec099c27af1d4744c49636cea1aa278f",
+      "fix_commit": "63bf5dc56ccbfc12a73b06327361687091a4c6f7",
+      "local_id": 26567,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "86c2b08aba5516b6d8a8dfbb2bc1c589c144ecb58a09bc9bf1721081029380a7",
+      "family_id": "fam_1383388357d4",
+      "family_signature": "pointer_deref|heap_alloc|deref",
+      "fix_commit": "017137471d0043e0321e377ed8da48e45a3ec632",
+      "local_id": 26674,
+      "mapping_status": "mapped",
+      "project": "libass",
+      "sanitizer": "asan",
+      "write_dest": "buf",
+      "write_kind": "pointer_deref",
+      "write_line": "unsigned char *buf = 0;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "950ef28305a9db7bfe66629402fc19e7d4415b557f342c0507bee4e3f8c83704",
+      "fix_commit": "8fbcc546b83e2ce242a0b75054ec2ca304a171df",
+      "local_id": 26821,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "f90e0bbff2033cf00f333941f6e70654d5d42bacccacdfc1afd611f26e18600e",
+      "fix_commit": "64396aa487fc24cd26b62a9b92e13a952c6ecf74",
+      "local_id": 26829,
+      "mapping_status": "ambiguous",
+      "project": "arrow",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "2934336acf453516bafc45bf920c37295cb065af4b1f313ea4f81110fbcc1fc7",
+      "fix_commit": "cadff53c093210404aed01c4cf586adb8caa07af",
+      "local_id": 27261,
+      "mapping_status": "ambiguous",
+      "project": "fluent-bit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "fb9c3ef9351dae9dc7cd43f9403cfb73b272e7d28da7c872f176b34f0e05f289",
+      "fix_commit": "df2af999105cd6c94ec8b533bcca498664b1aa16",
+      "local_id": 27368,
+      "mapping_status": "ambiguous",
+      "project": "fluent-bit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "fbab98615902f66cc0d7c9919aa541d1a777ee7b5046eb0a269e5dacc3539ab3",
+      "fix_commit": "1ce8f2d1845ecdde19a35605cabdbb884776d52d",
+      "local_id": 27625,
+      "mapping_status": "no_write_found",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "c808ff2f65893bee75270e894fe79ad2ed34075891dcd1665efa59dfe6187437",
+      "fix_commit": "d118cebb93846c690b86187af890c11ff602d18c",
+      "local_id": 27710,
+      "mapping_status": "ambiguous",
+      "project": "fluent-bit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "889f288f55cf9b676bbe7081e64f368b100e24378a6f7d6490582af04b0253af",
+      "fix_commit": "afa70ddff5cbf887cee26264c00ce12d08553bca%5E%21",
+      "local_id": 27856,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "a1ec8fa54af5a79e9bc74ab63c37b0bc96a3cd9f74f7607299b1de905ee50d4f",
+      "fix_commit": "16f4084f36c78d1c121a78aafb7dc1db5fe699e9",
+      "local_id": 28256,
+      "mapping_status": "ambiguous",
+      "project": "fluent-bit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "06c954c368df82028a56ca7e1adf1a70ffae684e2e4f1cf9dd224796c1ddb55b",
+      "fix_commit": "dc92574c10f3e2516ec6445b88c5d584f40df4e5",
+      "local_id": 28262,
+      "mapping_status": "ambiguous",
+      "project": "qpdf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "77dc6ae90715e8395576feb5abc5c30c546c3de68c5e7f28ae51a1255a94386d",
+      "fix_commit": "e2b0a850d7f7087efc15181b8ab11a6b8a566228",
+      "local_id": 28660,
+      "mapping_status": "ambiguous",
+      "project": "rdkit",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "225d8ac3163ac158401b3e6ee1397d2399f7e829c800d0fe13662a991257f42c",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "a2bc5b53570b1bc95e57870651932cb2096d7b6f",
+      "local_id": 28730,
+      "mapping_status": "mapped",
+      "project": "wireshark",
+      "sanitizer": "asan",
+      "write_dest": "gts_tree",
+      "write_kind": "pointer_deref",
+      "write_line": "proto_tree *gts_tree = proto_tree_add_subtree(idn_tree, tvb, offset, -1, ett_dic_tree, NULL, \"Dictionary\");"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "60d9185fc1f455e2cfadceb9131916e6b6d82c5ac2f19196fc2679b380f30870",
+      "fix_commit": "1b96ef4b0dca65c3a0dd65eea26d0e9d8fb3c2db",
+      "local_id": 28773,
+      "mapping_status": "ambiguous",
+      "project": "mdbtools",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "e1ebfa026d47ae9b0f8ffcb8c5934d737ba560bdebb40b15fe38f2e83e0d4ce0",
+      "fix_commit": "78bbf4250ecc510c46274300b6f7fed73140147b",
+      "local_id": 28780,
+      "mapping_status": "ambiguous",
+      "project": "mdbtools",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "df0f69f55d4bf4d2815be9c5d4c1030ede2e7049b14f2611e029454594d41946",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "fix_commit": "81f70fba5f6f3fd4715cbe1d51e3b7e76ce22b5d",
+      "local_id": 28991,
+      "mapping_status": "mapped",
+      "project": "wolfssl",
+      "sanitizer": "asan",
+      "write_dest": "str",
+      "write_kind": "pointer_deref",
+      "write_line": "*str = '\\0';"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "690cb727999ec4f002593a6ea4bb989e74d832b37e21052070c6e86e19ed0a72",
+      "fix_commit": "c1ac0637c597189656c02e0a7d2550641227b951%5E%21",
+      "local_id": 29183,
+      "mapping_status": "ambiguous",
+      "project": "skia",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "83c6af7d9e605fa240b418b32a44bd13541050526e15cf37418b8edaaf84b679",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "fix_commit": "267b00e0a2ac5b7a4d5375113329d03ddc4c5456",
+      "local_id": 29185,
+      "mapping_status": "mapped",
+      "project": "wolfssl",
+      "sanitizer": "asan",
+      "write_dest": "norm",
+      "write_kind": "pointer_deref",
+      "write_line": "*   norm = 2^k - m, where k is the number of bits in m"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "233199c1f56d2d30d5290f4b70c2aa3168a3b1d275b182bf8b84180922eba414",
+      "family_id": "fam_a189881f6e54",
+      "family_signature": "copy_sink|unknown|implicit_or_2arg",
+      "fix_commit": "eaf760145905caaf45e8856d646f9c36003af0cd",
+      "local_id": 29189,
+      "mapping_status": "mapped",
+      "project": "imagemagick",
+      "sanitizer": "asan",
+      "write_dest": "?",
+      "write_kind": "copy_sink",
+      "write_line": "* Fixed memset() negative-size-param (reference"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "e58a2468c2bff68a6036023dc8a20dc8e258699ffce204e481ab857450a1933f",
+      "fix_commit": "jbig2dec.git8c4cb846ba1634f1e149833090beb7376f216157",
+      "local_id": 29213,
+      "mapping_status": "ambiguous",
+      "project": "jbig2dec",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "0e5480d9af0d37c66b67ffcba6e160a9a4669a721fd99310a1784a077ec65024",
+      "fix_commit": "5681c6275b5ad9cf3d84af243a66b900a0628f72",
+      "local_id": 29451,
+      "mapping_status": "ambiguous",
+      "project": "selinux",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "b88580dbcc9e3a31b15b87a665281285959350adf305246d2dc5424d201469e7",
+      "fix_commit": "1e9394d5a80b4f565c7bc3b5a5df40b3126a3af7",
+      "local_id": 29471,
+      "mapping_status": "no_write_found",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "35d53a499dc5c33642d566e1cfe383d832df5cae9a2bec0e563261bb5b86280a",
+      "fix_commit": "b8156d287254b2fca00f266d4b5b12d982329625",
+      "local_id": 29545,
+      "mapping_status": "ambiguous",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "18b8377fd25d921cd73efc704b5373cd8e2f5dd02d72bea72c4bd5729cb7ea6f",
+      "fix_commit": "090cded525dc26aa1609a20d4ac98c7d52b08caa",
+      "local_id": 29620,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "b670bfc7312b77b3db58b41a54171c3562d24092ac1b1dd911d6512f4d9c134f",
+      "fix_commit": "465767437da1bcf99a375295799d33948d9fc5f0",
+      "local_id": 29633,
+      "mapping_status": "ambiguous",
+      "project": "fio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "8b56c25c4b3976f170eb6d505040496df2b5386897d476993e5413fb8db17682",
+      "fix_commit": "40afaaa5bf7e3f9cd6d6d9d9d8ae26496df82aea",
+      "local_id": 29827,
+      "mapping_status": "ambiguous",
+      "project": "htslib",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "400d0b1bba3df290c013e0464def7f3f131b183e427b3b018e0a7f56f72f5ae6",
+      "family_id": "fam_223b8c51e55f",
+      "family_signature": "pointer_deref|local_array|deref",
+      "fix_commit": "bba5b5fa5489706ab4eaf5d7d0c2550e0a9722c0",
+      "local_id": 29993,
+      "mapping_status": "mapped",
+      "project": "relic",
+      "sanitizer": "asan",
+      "write_dest": "win",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t *win = RLC_ALLOCA(uint8_t, bn_bits(b));"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "9674fd91fc5da3f0e1a5e3d1ebe0e37ad05ea86bc8c07a1b699e6f93717bab57",
+      "fix_commit": "2f19958fade08de870257f099d88ecc813ab623f",
+      "local_id": 30081,
+      "mapping_status": "ambiguous",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e33e3d24a972f9b9481e2cf149d86aeadb0d850998d9473d9c69d30ae3ce4f43",
+      "fix_commit": "af1c98b16ef3fb90c7c1714d61f069b38d479588",
+      "local_id": 30181,
+      "mapping_status": "no_write_found",
+      "project": "wolfmqtt",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "127aa6a6859a30021701ee9dfabaa5b40e80eabbf5fc2a0cdaf319b7c5fcc1c3",
+      "fix_commit": "714aa97490f0574fff7f766f31931de13cb2b986",
+      "local_id": 30187,
+      "mapping_status": "no_write_found",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "6c20359cb33663b867a161642ef8a31f477e02d5e6fa3e6c5836d2606691858e",
+      "fix_commit": "363e91ea656f4ce46584b4b0af6285030f236b7e",
+      "local_id": 30324,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "ffe5765f304e5b375c2981b755eb24b20061a836345aea2e92fdd4afe412acfe",
+      "fix_commit": "e2cb33534a9b9b32dd530d687dada1bafbdf7179",
+      "local_id": 30328,
+      "mapping_status": "no_write_found",
+      "project": "relic",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "a4cf9356178b1434af30b676052c62aeaaafd4edf751e44326964e56faf09e52",
+      "fix_commit": "7986b37aa5c991d6210ef8d430b3ef532abcb7f2",
+      "local_id": 30339,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 6",
+      "diff_sha256": "f4545c746c242b561f84f25f6ee2f869ae9296db3eceda0db2f26ce14a78860e",
+      "fix_commit": "1ec621c85b9411cc611652fd57a892cfef478af3",
+      "local_id": 30393,
+      "mapping_status": "ambiguous",
+      "project": "ndpi",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "392a100728911b5c37480a2a842bfcba54173aa3c0079ab82116a28f0fa02c6b",
+      "fix_commit": "707708d83188b04ea0b7b0ae2487aa8ac7e62f41",
+      "local_id": 30537,
+      "mapping_status": "ambiguous",
+      "project": "relic",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "70f69a5062ca018e4813a2af8280f7737d7cade6426726307d509f2023f76099",
+      "fix_commit": "1a906274a66dd58bf81836db1306902d4a7dc185",
+      "local_id": 30581,
+      "mapping_status": "ambiguous",
+      "project": "libusb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "08dc6fcaf2ed04cbbbd70fed9efe28f5c4441addcdb8136d8f9870f6b633fadb",
+      "fix_commit": "fee095410b0969765b5c2545c10e585f69e961b0",
+      "local_id": 30684,
+      "mapping_status": "ambiguous",
+      "project": "flatbuffers",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "97e3b2f8405ff7db6bdf9d5e34b661d14c8b85b3ffe6fae48f278b26eca4c231",
+      "fix_commit": "505514415d345ab14c6c0b04418fdf132da3079b",
+      "local_id": 30754,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 12",
+      "diff_sha256": "ffdee6db8b0183b5b66d47027f3e823ecf241b3b8b765136d2640a977524fd23",
+      "fix_commit": "830de9a9fb99e30f9ac9caa0a7f7bba29c3b4863",
+      "local_id": 30867,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "2bfbffa765d7b4f9f705d38a177c84e6d4f95b0c88898ec7cafc9bcab374055e",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "2ba52cdc0e4216dafdfc32498fc0210c99449ec9",
+      "local_id": 31198,
+      "mapping_status": "mapped",
+      "project": "wireshark",
+      "sanitizer": "asan",
+      "write_dest": "subset_tvb",
+      "write_kind": "pointer_deref",
+      "write_line": "struct tvb_subset *subset_tvb = (struct tvb_subset *) tvb;"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 1",
+      "diff_sha256": "718f5e23ed83833731a574388e4ed223553a9e3c1e4742c46b0864642b6ace3f",
+      "fix_commit": "f930b0ad5bc73689d4b63d3742f39d6ff49197a9",
+      "local_id": 31479,
+      "mapping_status": "ambiguous",
+      "project": "libcoap",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b6f08faf82ce2617c7d8beed89e96671ed5c4f6558742cb2b9d2692cda569fdf",
+      "fix_commit": "c2d57bc9de5c0a2de0a25a6354e930380c27f372",
+      "local_id": 31587,
+      "mapping_status": "no_write_found",
+      "project": "draco",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "72d9f2f54148b38bd9e3c85836b40b63d83a15c775dc6080595a5864b5e76cb9",
+      "fix_commit": "e1fce24788ad7dfa6619c205c660e0be03281ffc%5E%21",
+      "local_id": 31757,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE 4",
+      "diff_sha256": "84ea16d7b6fee8b762d547e1508454dd8998201997cdb17679d7eb94d268b739",
+      "fix_commit": "78c84bf926fc263a588c96c7cd313fb9a9988b4b",
+      "local_id": 31961,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "0d84afef011dc9479bc537a5108ddee01afdf9d34bfb9659fb69e689793fdd26",
+      "fix_commit": "e670bb4036fd7c840b1c206b8739f292346b1aa9",
+      "local_id": 32040,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "bad66f8c2a6bef00b7ac4fb3283943bc22bb284ee8424d158537c7169b64a5a8",
+      "fix_commit": "e5be5a65d8473d490333bc6124e0879147f13609",
+      "local_id": 32785,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "794d29e7058018a70bb05ad24a47ecdc28535f17ebcad2cc0c169e52b28a79cd",
+      "fix_commit": "411e27776f5c0ec8359508f0e2cabb1538375e53%5E%21",
+      "local_id": 32837,
+      "mapping_status": "ambiguous",
+      "project": "skcms",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "0dd4e078218898fafaf7a0f060dec8e0bd507a07efb4174321146767800154ab",
+      "fix_commit": "9b8f308d9eccb4e8e5704f93b0a8946e85a50c4d",
+      "local_id": 32855,
+      "mapping_status": "ambiguous",
+      "project": "libvips",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ed4d4a41cab7a41f512e7ffaa1c0c869580daaaad9b5001bffaedc6653cb0541",
+      "fix_commit": "f35fd27ec641c42d6b115bfa595e483ec58188d2",
+      "local_id": 32964,
+      "mapping_status": "ambiguous",
+      "project": "libjpeg-turbo",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "5714ae5416f807e4b2c6fa613ed27935d759d93a3a045824fae2a211916444e8",
+      "fix_commit": "79255ba1dbbb476e57a5f450eb0bbe1b84ef0f01",
+      "local_id": 33196,
+      "mapping_status": "ambiguous",
+      "project": "wasm3",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "ca84e2b0c83cfd3310079df628546f2fdf32915b6f299ea5771524dde64b839c",
+      "fix_commit": "3f897554837966b71aa3bfd72dd7ce482e5e55ae",
+      "local_id": 33217,
+      "mapping_status": "ambiguous",
+      "project": "pcl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e45041e65e61883e2d4708b5841a4be0e9ca4dc31b812dcacbf9e5d8f9629581",
+      "fix_commit": "a6b4a11f80a05a17995a036b643c37adb3c3dc62",
+      "local_id": 33240,
+      "mapping_status": "ambiguous",
+      "project": "wasm3",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "7d0affa6396171275dcd26465f6e799f9908a7e00051e2f18aebc732c60467f8",
+      "fix_commit": "b48695bb940e55c0baa0a3d5740cf48e03643b58",
+      "local_id": 33318,
+      "mapping_status": "ambiguous",
+      "project": "wasm3",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ab755b6e1fededac253766070d69df4ef647062e3150b8a68136e408196aaca1",
+      "fix_commit": "718e03e5f297564b828730dfc012fa3f6fbf576b",
+      "local_id": 33402,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "fd2b130a203f12bd11c878590ac28d105bbcbeffd1217ae74fd54d4a4a094b8a",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "fix_commit": "8f3986a66c390e1125493531648b828099fab982",
+      "local_id": 33457,
+      "mapping_status": "mapped",
+      "project": "wasm3",
+      "sanitizer": "asan",
+      "write_dest": "o_startPC",
+      "write_kind": "pointer_deref",
+      "write_line": "* o_startPC = GetPagePC (elsePage);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "c30382d8d44f93e0e701ebecf55e0eb9d62fad8d560de6525dc6ead79e3842f1",
+      "fix_commit": "321ba58316e77b5f4d977897aaa4bdbe43a5e38b",
+      "local_id": 33554,
+      "mapping_status": "ambiguous",
+      "project": "wasm3",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "b0da39707891749f6aa4f627ecac7cb52b8741763bbaf04024c676db0c309672",
+      "fix_commit": "2e5c468aa59b6458d2894e7b5c730ca251e84b57",
+      "local_id": 33556,
+      "mapping_status": "ambiguous",
+      "project": "lxc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "81f83646ec826d0536d0b3226608201eba880119fa44e93eeb366b8b0e0a4bea",
+      "fix_commit": "2305ab68ea2be5e2fcdee52b2929f21ebbc03059",
+      "local_id": 34374,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "50de0d586cf7986911068189802d8bce3fa047712910c926dcc7c04a830231ae",
+      "fix_commit": "bf1ba89a400038deee7742c97327037bbd58f1d3",
+      "local_id": 34468,
+      "mapping_status": "ambiguous",
+      "project": "vlc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "9dfc1871728acfc0b2d9bf1987a21ef0ccb88efa8167d11252355b593de21721",
+      "fix_commit": "a8e36de0ac38f5e9c1175c519adefa52f054598a",
+      "local_id": 34480,
+      "mapping_status": "ambiguous",
+      "project": "vlc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "352c00b69ebf0fce74de64a262ab465e9a7689f44a0175b89f599f0d83d50da1",
+      "family_id": "fam_a189881f6e54",
+      "family_signature": "copy_sink|unknown|implicit_or_2arg",
+      "fix_commit": "fc8dbfdb441f618441eb7ccb3ea97e92ab445e60",
+      "local_id": 34518,
+      "mapping_status": "mapped",
+      "project": "libvips",
+      "sanitizer": "asan",
+      "write_dest": "?",
+      "write_kind": "copy_sink",
+      "write_line": "/* Temp buffer for snprintf() layer on old systems."
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "7ee42ee340973a90f47f413578d006009e43dc99bfd70a9b4ff0831d60665bff",
+      "fix_commit": "063b49ab8e6a10212c7f88e5b114b90fe59296f7",
+      "local_id": 34652,
+      "mapping_status": "ambiguous",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "884f47b8f9c0685b705871b64fd727925c930be55489e250614ebe532f503d8c",
+      "fix_commit": "cfef249041313a0b6a5229fca4a414aa8c053fa8",
+      "local_id": 34713,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 6",
+      "diff_sha256": "6e6f309960e020f552e01a00c96f26b94fb7058e862b34963ff8a0ade494ceb1",
+      "fix_commit": "4b39a34563b4c66470ecc7d1ee1d2d4b14146cd6",
+      "local_id": 34816,
+      "mapping_status": "no_write_found",
+      "project": "jsoncons",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "700a8b9f4ea357da0e8458e68f9e547f6a6618e1663c49ea3a66d44f7e064d36",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "fix_commit": "85aa1491b967709701d2d2293627c5cd1c7cb96d",
+      "local_id": 35172,
+      "mapping_status": "mapped",
+      "project": "libjxl",
+      "sanitizer": "asan",
+      "write_dest": "size",
+      "write_kind": "pointer_deref",
+      "write_line": "*size = row_size * ysize;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "40a4d348eaa72b7c075e3e0b8acf013cfa491e4eed4058c52b759dbf4e3e9865",
+      "fix_commit": "05b6773fbcce1075edbe498a821f9a41249cf384",
+      "local_id": 35209,
+      "mapping_status": "ambiguous",
+      "project": "zstd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "a51afbc45ca998d8fb523b7ffc8f921ac53d9aae1e378afdb21bff07c6158a7e",
+      "fix_commit": "601356f1d2881b57945de8c22349d8758927f76a",
+      "local_id": 35422,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "5ddccd6207705e01a42d8b24d463398b528ae09c33cc6c799f65ca561d5cefde",
+      "fix_commit": "dnsmasq.git -> 41adecad14af8a4255bfd47a79b86b6834a1b5d6",
+      "local_id": 35858,
+      "mapping_status": "ambiguous",
+      "project": "dnsmasq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "7dc816ccb9435deff048a6d9f9d78744c4a706b91b3485911a70c520aaf3432a",
+      "fix_commit": "dnsmasq.git -> 7b80c75d9d3c19d8d328f749c06d06788ddb63fc",
+      "local_id": 35865,
+      "mapping_status": "ambiguous",
+      "project": "dnsmasq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "cc251b67d92b22cf5dba8020301ecaab16010c4b2a585a06ec9bc2df144c204d",
+      "fix_commit": "dnsmasq.git -> 03345ecefeb0d82e3c3a4c28f27c3554f0611b39",
+      "local_id": 35898,
+      "mapping_status": "ambiguous",
+      "project": "dnsmasq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "cf7d704d7ba302fca6d92f38f2960b429eb61d01a933fe0006892bb66fa271fd",
+      "fix_commit": "1f12e1d26707123b5516540ec07f8c77aa437f31",
+      "local_id": 35925,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "404a7f9128e422fa823b21f5f3fdcc1c332bbd30b4d45d9144f028680ea5fc97",
+      "fix_commit": "456ac566938a1da774db06126a2fa6c0cba514b3",
+      "local_id": 36200,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "fbaaf99a9b98867eb9b93f2c159d927f0521b73fc55b5457052a66146416e658",
+      "fix_commit": "48e2a0ba25a7bac9ec510c48e322e5199de0583e",
+      "local_id": 36490,
+      "mapping_status": "ambiguous",
+      "project": "libjxl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "a161c655e3c73ccd569ee8400d865709f1e0ee0b525c454324525aaaf7e59a39",
+      "fix_commit": "5f98ccd606310bf6b96e5acd8c5048e359f44908",
+      "local_id": 36694,
+      "mapping_status": "ambiguous",
+      "project": "tidy-html5",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "32049e20cdd449abf09017b5b63ca511f3ae7541129031f4f4650a2db114571e",
+      "fix_commit": "trunk1892012",
+      "local_id": 36747,
+      "mapping_status": "no_write_found",
+      "project": "httpd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 2",
+      "diff_sha256": "4bc9804d14c910e8ebcaa2f190bf0b7b030b96c6fed41ee04c728647feb24338",
+      "fix_commit": "knot-dns99a46fbeb330727b9c4ce4a1d8e9ea2036d8d9c0",
+      "local_id": 37151,
+      "mapping_status": "ambiguous",
+      "project": "knot-dns",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "d802e18e3e6735d710d0056a4c09a64d76eda86d3edd50033ed61c2816e0dd87",
+      "fix_commit": "6c44dd11d551ffad1f0d9d3f8cbb065f202c844c",
+      "local_id": 37642,
+      "mapping_status": "ambiguous",
+      "project": "httpd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "7b91b370a781984f9df3e85dccfb8bba5bc947c18866d6df23e5022f638a09aa",
+      "fix_commit": "1af95a20b81624f64c4b19794cb3ca991e6d0a76",
+      "local_id": 37814,
+      "mapping_status": "ambiguous",
+      "project": "draco",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "012ff5ea129a717f507a15a9df0923043a49d6c9543d08ceb055ed9097623cbc",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "84d4b53122e0fa0280c7872350b89d5777dabbb2",
+      "local_id": 37866,
+      "mapping_status": "mapped",
+      "project": "wolfmqtt",
+      "sanitizer": "asan",
+      "write_dest": "mms_stat",
+      "write_kind": "pointer_deref",
+      "write_line": "*mms_stat = MQTT_MSG_WAIT;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "de671bb2e62a8c87d49c1f3e4261fd22b017677d95efadb4db8834743e28af39",
+      "fix_commit": "dav1d.git159215a82da88ca6c511194c8188e9df7a193998",
+      "local_id": 38152,
+      "mapping_status": "ambiguous",
+      "project": "dav1d",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "f3489c63c165e4b6fdbf0b1ef492d7ffe96d366ba03c347a079dc3cb4cd92431",
+      "fix_commit": "svn1907",
+      "local_id": 38233,
+      "mapping_status": "no_write_found",
+      "project": "freeimage-svn",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "d98107653e57b8ba381a6114f0e879cad946875688175404227b057f1de8c76b",
+      "fix_commit": "8f702156e8c9ecc8bbcbabfc0d8ee38bc294dddd",
+      "local_id": 38313,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "0ab83aac7d6f9e0f7b826738c56aabfc6ae930ae62ee1fc411eab3f4d3812df0",
+      "fix_commit": "2f209573d0f582385baa00cae45dcf10d50d96c4",
+      "local_id": 38347,
+      "mapping_status": "no_write_found",
+      "project": "flac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "d1293eaa560c4bb9de041c3f8bf38a0564786dcc3f7f41c1eeea0bb568ee726c",
+      "fix_commit": "044c8b47224d7cfbbd57317906e91f2db5b30994",
+      "local_id": 38553,
+      "mapping_status": "ambiguous",
+      "project": "zstd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "e12d75f3887fc40d12bd398765733a117f75ca6c53b5f69c6955634c572a1088",
+      "fix_commit": "b2625f93f2dcb28ea6c4b33d4cb7ff50a24f3c00",
+      "local_id": 38985,
+      "mapping_status": "ambiguous",
+      "project": "libpsl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "738dff6fd27cd5648a4391f495664d50439b6c706a8e86dc84a905b23d3ec8b4",
+      "fix_commit": "1023a9ad12d146608ba6326a3114f9b23b812124",
+      "local_id": 39226,
+      "mapping_status": "ambiguous",
+      "project": "libpsl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "0ef51afe5886a23184118b5419ce0c4e1dfbb0bd1fe79d3fb1456dfbed4ae49e",
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "fix_commit": "0522e19fc1f2b399ef52a6a1268ccf4d6e91ef30",
+      "local_id": 39806,
+      "mapping_status": "mapped",
+      "project": "wolfssl",
+      "sanitizer": "asan",
+      "write_dest": "c->dp",
+      "write_kind": "index_write",
+      "write_line": "c->dp[x] = 0;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "6e78bf39204924760c9581fb3f6997e5ffa375b9d7379dc73640935e605d8a1f",
+      "fix_commit": "7010ed0f0a414b1367e4620a504f106759341cc2",
+      "local_id": 39931,
+      "mapping_status": "ambiguous",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "44a0829f9265fa38de70742f32e5af7317f30f5d862db73e40a2ec1d43188b89",
+      "fix_commit": "866ad2e95262606b194cb2e79ce8a7e63c32ce06",
+      "local_id": 39956,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "05cc6c45b02b604545c89a726e07da52c7cf2c9a3790b95e9143474f11d9252e",
+      "fix_commit": "839ef3e392240fc3994b8b73e5164ac5cad4d30a",
+      "local_id": 40396,
+      "mapping_status": "ambiguous",
+      "project": "libjxl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "44b37cc8b4535a9bad79b5c9de8b8dedb0e96eb2ca5d74c658e80cc5ac735712",
+      "fix_commit": "6ef4fa071e2c25b71e81a91646b43378cf957388",
+      "local_id": 40465,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "65793b7de5e8aff3091f3e08a753d7abfff44cfd44b204b75c56f43a63065792",
+      "fix_commit": "c27cdb4c534e0b52ea877b6800f832756ee16a2f",
+      "local_id": 40544,
+      "mapping_status": "no_write_found",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "b6dfe8302354f35172cec4000416ebdc79819c59a269ec0efe9abc5d678316fd",
+      "fix_commit": "dav1d.gitc7a5b900017d379d62a242d8ef884eeb48862a27",
+      "local_id": 40661,
+      "mapping_status": "ambiguous",
+      "project": "dav1d",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "5ab0ae8ce24d2d7b19624ca88b2d9c62580e66b3c8d8507fbd37cb301217debd",
+      "fix_commit": "3de25bf0bbd2039421e191ff936a31f3900460ae%5E%21",
+      "local_id": 40851,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "c268898d4b7d3dcd3b81b9d6085461ff3f120fe588625f0237f2a4209572aea6",
+      "fix_commit": "587ce1dc5fcf4172591bdfdcb8882d47507d7daa",
+      "local_id": 41221,
+      "mapping_status": "ambiguous",
+      "project": "arrow",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "648a503bd202ba3336f87dfa975a794db26d778ffbcc0a8301db2fd65986e600",
+      "fix_commit": "08a988f55735e7d18f0eb01e84294089706016b6",
+      "local_id": 41655,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "a4233bc281784b7b0b12358c9bf5e0b75c9e589f8a38f95cc4998bd030bea99a",
+      "fix_commit": "20d0f3fd2f690d7d97068c412f5d97cf494aa74d",
+      "local_id": 42108,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "4d967bdfbfc3e05506cc1698f473a96b755f6b1fa729a1f3b56288e78962e11c",
+      "fix_commit": "ce2e8fe5f2fdb3779505935f05f93481d4905e62",
+      "local_id": 42131,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "54bf9f5253b633ba4980fa21503a163d4ea6e43f940d1140a126585a8b47e581",
+      "fix_commit": "9b54b561858b3fb265f57d2b4ddf35fba2603069",
+      "local_id": 42179,
+      "mapping_status": "no_write_found",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Global-buffer-overflow WRITE {*}",
+      "diff_sha256": "4ec97a1d3d03b0ff9461513a1ea0799b4ea90b243ca71c2bdd27f957ca792db2",
+      "fix_commit": "32d19328855dd599bf7f15dcfd5fafd6f87fb0d5",
+      "local_id": 42227,
+      "mapping_status": "no_write_found",
+      "project": "lcms",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "0cb47ff024d2ac67ccdcd075c41b6c791efb5cecc8b84d90fdc33873e6fa21fd",
+      "fix_commit": "0c4e9f7312637d512fec2b806570bfbea9da1aff",
+      "local_id": 42298,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b3a33b2351ac09d9fb52601c7d2f3b1e251a104b703cc6173873268ca864f2f8",
+      "fix_commit": "1ae55674f6d68eb6215d7d0f82610f636d81ad3d",
+      "local_id": 42325,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "71194486bb5d2b658f79771884e056c99e3104a1f684f382f82ed4bf8487e907",
+      "fix_commit": "a7f2474c5aaac7a75a4119478c77d2cafcf45b85",
+      "local_id": 42329,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "9c607ecff67c3a26b2ae0bd308cab60606a8fbd56c4a3cc9318b2d3ddb58cfdd",
+      "fix_commit": "9191f693bbfe5b70b91cb068d2fb38316aa0cc5e",
+      "local_id": 42454,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "f31838e63647e9eaf533ff1b3330651ebcdf0dbdca7175110d1cb27684310153",
+      "fix_commit": "d77d3ebe14d6fb7085fde26c30678a82f6fe562c",
+      "local_id": 42537,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "bc8bacd7a70724f6335a5c52f8d9881d06cd095c5127df02459a238d1f2106f7",
+      "fix_commit": "4107288ebb23d418ff5c1a9d40c48a4f00950193",
+      "local_id": 42560,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "1d5dad073cfe0fb1188118401793cc60048fbedd0345766d5bc0e1c46b118314",
+      "fix_commit": "7f5d467726db47da4102a6d6f1d49e63d3c0b77f",
+      "local_id": 42736,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "435f40f31839c38ae789c3663ffbd4f96982b09e98ed6d254eb307350b5f9a83",
+      "fix_commit": "efd5f9a71af7bd5ab3816ba49edc8c3f7c370bae",
+      "local_id": 42783,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "a6a2cb22a82109eb78ee9d28c984cc2c0848b76c44a27f234b3d88185889e38e",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "0d5d7852f1dfee64aade1ff31eebf7427841d531",
+      "local_id": 42796,
+      "mapping_status": "mapped",
+      "project": "ghostpdl",
+      "sanitizer": "asan",
+      "write_dest": "Else set C",
+      "write_kind": "pointer_deref",
+      "write_line": "/* Else set C = M = Y = 0, K = 1 */"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "9e4439964ca60df866a7b38d771acc9b82b56ae7b0c2ee97b4fffd427ebfabc7",
+      "fix_commit": "d6b2357eddca392ee137cb2a92ff178a0a7d0cce",
+      "local_id": 42821,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "bc4a97861c0b65fd8baf5a066826b6a1818c2a48ce602381999e8da6b33153e6",
+      "fix_commit": "533444ddc1a71987f263a40fb6286c3303a54a51",
+      "local_id": 42839,
+      "mapping_status": "ambiguous",
+      "project": "libjxl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "7a096f41ee0c8569bd324cc2d55e2b3accf975a55058a0ea5deea90744dc9a95",
+      "fix_commit": "fabad29820734af831cf4f2ae6c4beb4179d4733",
+      "local_id": 42908,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "0476e928191827f7185fc592710ca5ef4f3f72e64e1f1a10329861d812f00d50",
+      "fix_commit": "afdbc940c6011b64c1856f88d2b0609369f87406",
+      "local_id": 42938,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "9cd3473931100157029dfdd90dd55e6281583c0055f511ec58a9a4aef8d78433",
+      "fix_commit": "321a00bd85a497c0b2424b906eb9e9d309e31321",
+      "local_id": 43012,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "4a604e8512981c5774b15441b954cf5b0b20dd3c54970bb31790ffa89f44c5d3",
+      "fix_commit": "dnsmasq.git -> e426c2d3bc182d790f83039b77a09d55230ca71f",
+      "local_id": 43300,
+      "mapping_status": "ambiguous",
+      "project": "dnsmasq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "f45e3caa801d34c3c671046c7dc6574f32dc6de602a995019d7425360b9d9ec2",
+      "fix_commit": "2d8441efcd538ac0bc20925656883647cb95afaf",
+      "local_id": 43318,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "15132437c978d0bbb6e668644e21c768fe1d5f754d73ecb917226c5bee662dad",
+      "fix_commit": "4149bcde427b331fdfc2cb16c6ded991cd8315cc",
+      "local_id": 43431,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "12cc3f8a0c1c1d4e660984863df7daf97428dc8b14829b4137dd25a2262055c0",
+      "fix_commit": "graphicsmagick024041c500c78db5f482130229ff9a0db8d825cc",
+      "local_id": 43511,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "c881bd43ca97ecc10fb5e5075857108baf1d1c0d519eda18b0a3e0eeda97195a",
+      "fix_commit": "0c036b19d498afdbe07895ff605298372b3432e2",
+      "local_id": 43688,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "6b5d276a791f6e81bc8f4e8294aa0e05c6da1740964b78a75b8135e59ced8b1b",
+      "fix_commit": "0d9b7a60617849f55014d619306dc34ae77eb062",
+      "local_id": 43719,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "02e8ca87f4580bdc36eaa8c6228310da5ba712fb3dcaeed45e7573ad888c2ad8",
+      "fix_commit": "2295654a792beed3d2b2e81d346271089fa1cd02",
+      "local_id": 43847,
+      "mapping_status": "ambiguous",
+      "project": "PcapPlusPlus",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "061df3459bad1fb001de1c73609cf86299b5737e6cadffd26020e0516c0a7081",
+      "fix_commit": "260621179f340cd8be4c0251004061c2e861d26f",
+      "local_id": 43862,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "d9b554e0243d552fbf53577c45db904adb6b7b727484e6daa5e41106944882e2",
+      "fix_commit": "bd747c5c2d320cd80ce08f16627c70a77ff67978",
+      "local_id": 44034,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "9a95f83a89c7173b78db7ef0f6ee188879e92899e86d380f4c0c1904edec589d",
+      "fix_commit": "e90fb954b51dd5f1def2f5c8d63163b2bda236d7",
+      "local_id": 44062,
+      "mapping_status": "ambiguous",
+      "project": "envoy",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "46d2461c0c8c740ab937ebcc7ce79796da79121a2e7cb8905904112267bcdb50",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "d64d5ddc57ac58f3bcff2bd531cbe1e71bc4e356",
+      "local_id": 44122,
+      "mapping_status": "mapped",
+      "project": "zstd",
+      "sanitizer": "asan",
+      "write_dest": "generatedSequences",
+      "write_kind": "index_write",
+      "write_line": "generatedSequences[nbSeqGenerated++] = endBlock;"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "10c3744790334003f08b2b121f0ea90943eacb768adb56d5cff54be8c31961d7",
+      "fix_commit": "76c27d4f4dceeba02840a29c6e3ba45989a7daca",
+      "local_id": 44160,
+      "mapping_status": "no_write_found",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "4518828464a8994c06971db51e5d6c0195520c5187edc79497398872f28e9e70",
+      "fix_commit": "3dbe11b37d65c8472faf0654410068e5500b3adb",
+      "local_id": 44221,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "f41b24e358df208066101643ddd4b60cff98fb981a92f04e29adf97bf98f592f",
+      "fix_commit": "cad9f8d5f9c451b1cc8ce00a16c125e3d2ffc418",
+      "local_id": 44239,
+      "mapping_status": "ambiguous",
+      "project": "zstd",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "73fef106ffb9c5fd0ed85a54f8b758b41334d971a6510e93216a881d69454c3b",
+      "fix_commit": "fe03c5a89cbd441b6840335bd484cf08bc65c7c4",
+      "local_id": 44432,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "dd3aa1f39210ad75f6a7aeab5169b15ffb11f3855db820ac91502d7b109756b0",
+      "fix_commit": "30770fce40f0b47c4da1c41e187b45f9f59edc63",
+      "local_id": 44610,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "18c06177a463b612acedefa90e4dbdb5bdf4ca9645f329c64c77f511fd64fedf",
+      "fix_commit": "86477f7ecc1606e15abae1ff784e6b0c55d99619",
+      "local_id": 44791,
+      "mapping_status": "no_write_found",
+      "project": "fmt",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "bbf4ba03e013dc6e400cf4e2f4f450b6450fa77c487aa4c85f1100fafa289935",
+      "fix_commit": "ee9dbcb018f20f16348b22bc413dec1c9d901183%5E%21",
+      "local_id": 44862,
+      "mapping_status": "ambiguous",
+      "project": "aom",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "a914f6a331e206671320bae3d59d3aad4bcc7f8861b950c6e436be9dd5897a15",
+      "fix_commit": "8697a01850d5e02a3099acd5160d0a0ee2d31077",
+      "local_id": 45430,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "eb170c875cc4beda3bd5e083fb179cf1b559f6b8a3ceca47e9299bdd28ace31f",
+      "fix_commit": "e96dbe9a59b30f00eefa823b731c85e89d5aa960",
+      "local_id": 45552,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "37f0149ebd548067caa07f5a276b956dc318c7dc1d0068a8ac7f1d4a13158ffa",
+      "fix_commit": "b59ea948cdcb8422964595c32076312756550f17",
+      "local_id": 45846,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "03a650ca071109b26561dc7c55df8621f7ef84d7b8311726ba6101ac459c4c75",
+      "fix_commit": "9f6772c1292022dee6576b2f3d0c258e523af834",
+      "local_id": 45886,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "2048dff8ca046b960d5312ab3369793d8cad1353d6c6c664a224b485837a9335",
+      "fix_commit": "089cedc7520fbb9e0e4a912c4c3866a1aa429de6",
+      "local_id": 46002,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "5c38500fbcbccf7a74456654f00e2084bd99d28314a1583fb1ad18c1098dc00b",
+      "fix_commit": "bb475dedd127c7c657af07c4842eff11866cc8ad",
+      "local_id": 46437,
+      "mapping_status": "no_write_found",
+      "project": "kimageformats",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "bd468049d9acc1ae4cf207c72870ea7f81363ce398f2e1be96601d6273004f47",
+      "fix_commit": "cd826186c8b271fa7a1f5ff93b55acd672baf646",
+      "local_id": 46516,
+      "mapping_status": "no_write_found",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "3600fc6bb1e24c21799dee2821cc2ace26a3c6d5eb473d6c6987a81152261325",
+      "fix_commit": "580e8bbebf18579b97e2c20b032368b9079624ca",
+      "local_id": 46983,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "33e80c89e6e902958252d1795507cc778e94868cc3fd91d4d5b75c0f69f6364a",
+      "fix_commit": "6f87d3fd27417e5adb2aa6f106a614296425df57",
+      "local_id": 47101,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "2d620bee3dd061220feaa7bce11bd55f92ed3e4b17617b407a9d9dc878c249ea",
+      "fix_commit": "05f55eeb219ff43373eebe904819c55276b3e393",
+      "local_id": 47443,
+      "mapping_status": "ambiguous",
+      "project": "moddable",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "e8c5cbb272e9227ea5f59779f44c29c1e95079da51f522118e3598f8d260ca7a",
+      "fix_commit": "0535bfc3b7d5cd6fc73a7d4a6749a338fc5d7703",
+      "local_id": 47500,
+      "mapping_status": "ambiguous",
+      "project": "openjpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "c8e08ab15d3f6de78b6c9bb217355fbbdc456238bf6ab027bc88dcfc69523400",
+      "fix_commit": "dac1b53e1fe266329e74c35e0ef282f0cf7a5bde",
+      "local_id": 47553,
+      "mapping_status": "ambiguous",
+      "project": "moddable",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "d6436ca492ad76ef0a02ebbb0777672f316c14c7e492a9d8544bab952009bc51",
+      "fix_commit": "9040bc74c94dbd44cd86b29ec3de40621df53467",
+      "local_id": 47730,
+      "mapping_status": "ambiguous",
+      "project": "ndpi",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "3b5d50475e0088d8c4206a77e9d584653d7792163f04bb50b03a1064ac513fd6",
+      "fix_commit": "367c3ad2ef2c10cb29602f72163e7fb23c3f5827",
+      "local_id": 47769,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ef5cee349826de1be6a951aa6d36ec48b2b9bb18d7930ce35afacbe851cca09f",
+      "fix_commit": "b7e30a13d4e4557b87f977b76a6bb5e3cbe5ac78",
+      "local_id": 47877,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "71370453a3c9553c95168e76ba64c53a85824231b3c43cff0fe314869040bc3c",
+      "fix_commit": "be4d1caad40e05b0c6b1cf2320fd8112fe9da14b",
+      "local_id": 47899,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "f4f8cc1574d6ab6024f5b654ea5a33ca0a41d9fb7c870bbfd7ad939dd0353416",
+      "fix_commit": "7de9c0e9d7f537389a238b30d40eac57a2fbaf6d",
+      "local_id": 47911,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "a27286671c28c5b1c86e1cb05a41017d09ee9d5a61a5bf91030145b9b9d1cb44",
+      "fix_commit": "4f8cb7809e3f5aa1fd7b28c1934bf4893ec3195f",
+      "local_id": 47947,
+      "mapping_status": "no_write_found",
+      "project": "igraph",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "d6a123869b0f71b1158ec02f9578766ae90e8c74844e1b085c405ffc06534b05",
+      "fix_commit": "d86a86dbcddba0414f0dea13c3357f1c38826cb2",
+      "local_id": 47986,
+      "mapping_status": "ambiguous",
+      "project": "libical",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "9d00e5f9fa1b032c2f3ff802ab4ed6bc2fc76420119b42ce29cdbd52aa27ad97",
+      "fix_commit": "f0395f9ef6051315973f1fdded1804f81458566d",
+      "local_id": 48281,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "d5f40b90e12da2e30b11ea28c016fe8581c2600bc1d3c89cf03bf29378fd00e3",
+      "fix_commit": "1f5fc428a330444ee86ace7834334f669746c1f3",
+      "local_id": 48411,
+      "mapping_status": "ambiguous",
+      "project": "moddable",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "3b9ad487f3f5f66c3959728f451ce6d2e2e89418346d6f056c3685ff1fd63e34",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "fix_commit": "cd847f86d31f87f0f7733ca6ab7a2c022a1398bd",
+      "local_id": 48429,
+      "mapping_status": "mapped",
+      "project": "ffmpeg",
+      "sanitizer": "asan",
+      "write_dest": "got_frame",
+      "write_kind": "pointer_deref",
+      "write_line": "*got_frame = 1;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "b907dc01883a42730da78248a68e5d996cc996bfa83f079d3d02b0154d302a30",
+      "fix_commit": "933b6b90a583b593efd8acb644603ab189226309%5E%21",
+      "local_id": 48609,
+      "mapping_status": "ambiguous",
+      "project": "libvpx",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "bc6c3caec7d40db88cd9f61d504750bfd07a0d88815351e51e1b77b6a84ffeec",
+      "fix_commit": "03d81a044ad587ea83567f75dc36bc3d64278199",
+      "local_id": 48638,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 9",
+      "diff_sha256": "4f53d2dd51d1b68a21197954d37f326f377ebc3b22439717f3e643b4cb675482",
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "fix_commit": "9450f759748d02d1d284d2e4afd741cb0fe0c04a",
+      "local_id": 48799,
+      "mapping_status": "mapped",
+      "project": "ffmpeg",
+      "sanitizer": "asan",
+      "write_dest": "dst",
+      "write_kind": "copy_sink",
+      "write_line": "memset(dst, 0, count);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "b33420cae1c8d6d89000451274630e1bcaf5e19c5d9ece0fc78e03503c6ae902",
+      "fix_commit": "37c2f080f09390105956edb2565627f29281e24e",
+      "local_id": 49045,
+      "mapping_status": "no_write_found",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "d2a48071580bb3606dd853ae3d2b3f1d446207cd593b8b3224460b4ecd5627eb",
+      "fix_commit": "6140e82cbbf79a360adf8a75e11e8d76847dbcca",
+      "local_id": 49049,
+      "mapping_status": "no_write_found",
+      "project": "libjxl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "40330d699af94d0da162b46bfb8bdf48708f183e819b570c6a5d630db9149f39",
+      "fix_commit": "2b074893723ebb335e6469c34caa2d8eac05d6ed",
+      "local_id": 49259,
+      "mapping_status": "no_write_found",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "fdd660602f63bbc82faea987724fa511a8e23a160d75ce48042cf5aa22cd4c00",
+      "fix_commit": "99e56395fb17b9c8c60e2eceae3b484f842a2b20",
+      "local_id": 49357,
+      "mapping_status": "ambiguous",
+      "project": "moddable",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "b6f9589fd64d05dd911021396dcd95b2c4c2998cb6592f278c08211979828d3e",
+      "fix_commit": "6ecf2c0a5e4d100754be3fb99ff0656d1b112e24",
+      "local_id": 49518,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "8f9a6bb45a15350ee1bc82923f2693175f050553d66440d951ad9fe0088bb442",
+      "fix_commit": "824d44b70542f2434135fe5d12b0cb71df1ef05c",
+      "local_id": 49521,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "fdf61cb52a56f8ba476372f096f2c0b5b3b3d1e79dbb1ebd605f8471ee316bbb",
+      "fix_commit": "55eb460d1aa66059da534c5fa7315e0f315cadf8",
+      "local_id": 49522,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "424880db5b2b9e913898974cab9c782bf160569bcd0f6d2e47c9c81f3bbdcd4e",
+      "fix_commit": "428d1ed6a874d11b39a34f779140755f087fc9e2",
+      "local_id": 49613,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "794b39de0e7d0a94e8e943971e32a19a6637341830cb6539b3ca5f1008499343",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "8cc8160a5cb1e2e79db9f010896d70656981f409%5E%21",
+      "local_id": 49652,
+      "mapping_status": "mapped",
+      "project": "aom",
+      "sanitizer": "asan",
+      "write_dest": "const mi_params",
+      "write_kind": "pointer_deref",
+      "write_line": "const CommonModeInfoParams *const mi_params = &cm->mi_params;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "6f5a62ff89cf493399a0d1780c4e39da4d61f4ff0083ef012c6e90a6142a8aee",
+      "fix_commit": "5ccca7e45b802051e00e3398ecf036f86ba92843",
+      "local_id": 49763,
+      "mapping_status": "ambiguous",
+      "project": "mruby",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "89a526b83b0b388835e6c868045d4d3d06a83ed599cb6d91fa21bbaeb0941d00",
+      "fix_commit": "04db0511ca687574fafb551d3c1a763c1e4d8a09",
+      "local_id": 50194,
+      "mapping_status": "no_write_found",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "eff653adca8901f6d7ce7cb80a91460627d3783f38774adb28346d6722faec9c",
+      "fix_commit": "fc370414d680550407d6cb2a8f692c755fa02f6d",
+      "local_id": 50267,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "ca813ff1f71807774268740b68218a36a12359f65d17cd9d3051cdbb45c65741",
+      "fix_commit": "eba3379360caec1d881d96c5d51ed4282278cd1f",
+      "local_id": 50326,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "1ffc78e579a5ea0170b83997c6bee3f262a7bcc4e29c9f59954e4296001d6cdb",
+      "fix_commit": "55e9b06c6191af68938dc3301b7ed4153cf86f7a",
+      "local_id": 50433,
+      "mapping_status": "ambiguous",
+      "project": "c-blosc2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "edd5ac39ee56eadaf9eb1ea63342458c4b9c3e30c5b65dcea617e7f53b3761f1",
+      "fix_commit": "581b93543abbeda6c17a5da11e2cf82401824bef",
+      "local_id": 50683,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "de0ca05d513881b626a084bdac75312d2703a0f3b9be4917631e57a4902f5b9c",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "d3651fdbd352cbaf259f89abf7557da343339378",
+      "local_id": 50901,
+      "mapping_status": "mapped",
+      "project": "exiv2",
+      "sanitizer": "asan",
+      "write_dest": "xmpData_",
+      "write_kind": "index_write",
+      "write_line": "xmpData_[\"Xmp.video.URL\"] = Exiv2::toString(buf.data());"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "7784001e9e0d7b514769fb02fb0752a4d33a07df8ed65d10b3ebcbf0cfd204d3",
+      "fix_commit": "0db460c9b0aad040ea1ab0335c3f07d18a0bc4cf",
+      "local_id": 51707,
+      "mapping_status": "ambiguous",
+      "project": "exiv2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ea23d5198c4933c7d1cfbf01a5e994073b535a3eae5faee8f8c6a7762aa3009e",
+      "fix_commit": "459910c36a21369c09b75bcfa82f287c9da56abf",
+      "local_id": 52053,
+      "mapping_status": "ambiguous",
+      "project": "exiv2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "ea16f0b20fbee684f2dd05bdb0ffbd60891969db799442cc0d78cb94a26c8b2b",
+      "fix_commit": "bf41b35362b3f6b8fbb0eb54d92ba01ead9b418e",
+      "local_id": 52066,
+      "mapping_status": "ambiguous",
+      "project": "MapServer",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "2e506f366080f7ea81798323fb09954532a55e27d3e9f7f2e234be0122859632",
+      "fix_commit": "b062947e3122a7f3dfc5812a230ede71b5bc7664",
+      "local_id": 52305,
+      "mapping_status": "ambiguous",
+      "project": "MapServer",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "d1f22371e24327325f3c05e8442453c139db8887d77735f6080ff805576f39e0",
+      "fix_commit": "6cac0c842537b9b6aaa104d909a06b85192793a6",
+      "local_id": 52465,
+      "mapping_status": "ambiguous",
+      "project": "net-snmp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 6",
+      "diff_sha256": "a6c05b99ec3bf79e8dbdeb52a6cd0e6c732dd2d4c6f0d573303881982bba1cde",
+      "fix_commit": "63794a2471b426ff4268de6982e8a6f711163e2e",
+      "local_id": 52579,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 9",
+      "diff_sha256": "d31e399967bd51b1bc794de59747b578c7730707a400ca53e4e86772cb2dda0a",
+      "fix_commit": "39910654d3010fc1d199754c962979592293ebd6",
+      "local_id": 52596,
+      "mapping_status": "ambiguous",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "aa365f84eca8403bd64694b9262458da4ea29656f3778dacea33658fc5f08796",
+      "fix_commit": "dc0c984edfc9b36089f86f6068ee7805e9cd9efc",
+      "local_id": 52672,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "01c4b0657ef37140e494b8aa9426ed0c4d356dd8bc4e124ef28acb64eaa03ff6",
+      "fix_commit": "2c7708a03edf0495fb83fe5fcf1c16bfbae25a6e",
+      "local_id": 52748,
+      "mapping_status": "ambiguous",
+      "project": "ClickHouse",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "39088e796eee03b81f5f325c009540342bd3ff6e8058fa9b3908c924eedb68b7",
+      "fix_commit": "8586bb47193aebecab2f84ff531beaaeaa7bf93c",
+      "local_id": 52775,
+      "mapping_status": "no_write_found",
+      "project": "kimageformats",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "85b068cf82d1cef658ee76116674af81b0fd409af348a5323721202fd983ec13",
+      "fix_commit": "a50a568b786da111a0406e4861813949c0058bf4",
+      "local_id": 52901,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "94a0082cfc52b6db80423c50d1ce366cd9808dceebc191aafcb897d4349ac17a",
+      "fix_commit": "graphicsmagick04a6be8caf4350024f591b5b7a525417aeecd096",
+      "local_id": 52917,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "04bf81f014aa74016a7b2308db32a8f294b2ef921c792267c1b32dac5162aa38",
+      "fix_commit": "32bd447fd7d0933c5aecac75cc1823b3ee897f11",
+      "local_id": 53149,
+      "mapping_status": "ambiguous",
+      "project": "util-linux",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "b71fa1075d04b54ad0ff827b9145c15de730ad6ff373a249008ccda6658c4c29",
+      "fix_commit": "b7771a8e4c01851f7674146e47f7a460633f5e99",
+      "local_id": 53158,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "f9d73f4efaeef4f22762b1dbb4fc0cc59f39241672e69d7f892bc2b6f9fa2c3d",
+      "fix_commit": "gstreamer.git97c6d7495e6edb009789cf43ea79e26c54f88538",
+      "local_id": 53210,
+      "mapping_status": "ambiguous",
+      "project": "gstreamer",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "e1a970c23b355e301c4f7f30bfe19b5dc592dfdcddd06b4bee2aa18b5b5a4305",
+      "fix_commit": "5663f11795e396511ba895fb80b221e5c370f3b2",
+      "local_id": 53454,
+      "mapping_status": "ambiguous",
+      "project": "flac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 7",
+      "diff_sha256": "ad01fd80089228ad53553710056fa8953a7d434d4fab71565bce40e9401d65e2",
+      "fix_commit": "db34d54064ae35adc78a499c49363a256f5145f6",
+      "local_id": 53456,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "b6c5944e79033b02e548e58edc49de065397eca146918b249524ae15dd1161dd",
+      "fix_commit": "98ff1fd10306d031cfcf8a6becf78b3ac0afe49b",
+      "local_id": 53499,
+      "mapping_status": "ambiguous",
+      "project": "libjpeg-turbo.dev",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "f3c423859de4f5d9b4503edb9772599292e9d0fe794d1b820e9ef7fa63eba1ad",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "a9d15d43eb0f976b982bf2ad6ec1d8ac084c7ded",
+      "local_id": 53623,
+      "mapping_status": "mapped",
+      "project": "ffmpeg",
+      "sanitizer": "asan",
+      "write_dest": "s",
+      "write_kind": "pointer_deref",
+      "write_line": "VqcContext *s = avctx->priv_data;"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "a538b155a9b1e8ec8b8153cf39f6b7c565f5e5c9f16e0142c001becc1df5f885",
+      "family_id": "fam_bbab2acb2e20",
+      "family_signature": "copy_sink|unknown|V",
+      "fix_commit": "e7f81d86dcdc751f4737f4b29a99bfc54d29c5c9",
+      "local_id": 53631,
+      "mapping_status": "mapped",
+      "project": "opensc",
+      "sanitizer": "asan",
+      "write_dest": "zeroBuffer",
+      "write_kind": "copy_sink",
+      "write_line": "memset(zeroBuffer, 0, max_write_unit);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "343bf3030869d6e82fa390e61e11730543ee077e09ed6a00a9eb60b4735b6345",
+      "fix_commit": "c5507dff5f5b2936937442b43f6c021b4f8a493d",
+      "local_id": 53666,
+      "mapping_status": "ambiguous",
+      "project": "krb5",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "d6042a9f311a0a6ead0ce216f77a8dc8f92b7ad95f5fdef5cea20b94a1ca3cc8",
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "fix_commit": "d4cf7f6faa73136fe14938fa47b24fcc6c626c47",
+      "local_id": 53919,
+      "mapping_status": "mapped",
+      "project": "relic",
+      "sanitizer": "asan",
+      "write_dest": "c->dp",
+      "write_kind": "index_write",
+      "write_line": "c->dp[c->used] = carry;"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "ad1361ea9e123c0477da1c8940f553882043c3c7b5e33e183b6cdf170bd6829b",
+      "fix_commit": "578aed8391ef117ca64a9e0cba8e5c264368a0ec",
+      "local_id": 53927,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "de04739406d46088ffe25c9909f7825b93b1c114950f66248aff4a3995b9248d",
+      "fix_commit": "df5a176bfdf8c52ba89c7fef1f82f6f3b9312bc1",
+      "local_id": 54312,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e0a48814f4d7faeaeed8e08bdf72a7ee46a373bc9090e5a325758b404c546d1e",
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "fix_commit": "7f9016032a29873a9c30c6d6548cda13e67fd335",
+      "local_id": 54625,
+      "mapping_status": "mapped",
+      "project": "libredwg",
+      "sanitizer": "asan",
+      "write_dest": "obj",
+      "write_kind": "copy_sink",
+      "write_line": "memset (obj, 0, sizeof (Dwg_Object));"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "ecfe663deb6871448a73de8b6eefc5d58cfcc9982a298233df155ce13de586b5",
+      "fix_commit": "d5afb087251d154ecd324ffc1b018705f7e745c9",
+      "local_id": 54728,
+      "mapping_status": "no_write_found",
+      "project": "exiv2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "43bc5e70bb9179a6b1b7b3c66f1ab6bafed6153aa9ff9db7daa1784942a477bc",
+      "fix_commit": "84d938b1d28d514eead8fdc21e7eec4fdfe053f5",
+      "local_id": 54839,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "c9b0800bf903ef6cb6cf86ad0a998d2290653d5892c7644f33f200e426307284",
+      "fix_commit": "1b59de3770b2e3f7f44ec4adba27c88b79adaaec",
+      "local_id": 54850,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "172855343d5c1819df03d658e7330f266ba7411d3971f2f659106a2928479585",
+      "fix_commit": "4eef658ca59d3d6ba46ab52a36d7faf5fe820874",
+      "local_id": 54861,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "3446e4884df8194e70c199925081001b59243ccdf3cbb87b9830b68eb82250e5",
+      "fix_commit": "3803b028dda9d7f3bf06836b5ad4522ff1ae0cb3",
+      "local_id": 55010,
+      "mapping_status": "ambiguous",
+      "project": "node",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "a3555c326ede665023840770b6b718ddd14d3289d4f40dcc2b8de85c98aa66d3",
+      "fix_commit": "b95b2c8492fc1b52afd8fbe67b3be3cd518485d6",
+      "local_id": 55026,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "3ab2e3cc252ed848f57b752a2ba9114d37f4ed24e2ce530f768d3f04b8da953a",
+      "fix_commit": "5b8026899b9fbe24ccb3ba94cc5d3738d228ab28",
+      "local_id": 55161,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "854b7547c934f7c0158494c8616f79660ae1011ae817d8f1f0cc56188dee5e9f",
+      "fix_commit": "a1837c354628e6ed368fb8085858a15a7c9a0db9",
+      "local_id": 55607,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "5346b94b45a2b57edee1c73fe216abd3c1f0e0704a4d191a206bd04532dd6148",
+      "fix_commit": "92b68f24426ba6cb4f4f52ada11ad9b9671b0b9f",
+      "local_id": 55847,
+      "mapping_status": "ambiguous",
+      "project": "net-snmp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "8931990b62da226a357fe553970b99232bb865576858510abe971e0bf3883de8",
+      "fix_commit": "a97e702bb8e66b4f5b6230b9962b7d36869237bc",
+      "local_id": 55851,
+      "mapping_status": "ambiguous",
+      "project": "opensc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "6c2b59713d1152141ad54140579d805b97f0cfe6b2387a242a448b1b784b8899",
+      "fix_commit": "8739b7da75f305ab391eb36c613210c23243fe5b",
+      "local_id": 55877,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "687e7393eb67f75f1da10f819522a218a1bebf839e215e068aa6102fa255fc73",
+      "fix_commit": "7c41a083b756c8daf34cf1d6bb8367b2151b4e4f",
+      "local_id": 55926,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "d7f7b561f1cc0c7bc540f71b73f011a901f987f89db9720d5ebd599cb398a907",
+      "fix_commit": "0d2f72332c7606fa3181b54dceef82d1af403624",
+      "local_id": 55933,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "8fac1d3033c85cc8e87f42bc4e8c68929edeca081e0710626444b9c26000e85e",
+      "fix_commit": "23983afe82e61d7aa1b4cdfd192a88b5317e20bb",
+      "local_id": 55948,
+      "mapping_status": "ambiguous",
+      "project": "mosquitto",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "ccbad7d3ca3f3c2a4cebb18999471223f64d8d159526203691f2ccc30dc73a3e",
+      "fix_commit": "795bab5629195395d512bb9a830542de6067195b",
+      "local_id": 55961,
+      "mapping_status": "ambiguous",
+      "project": "samba",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "ba94e8a37f69935a2bb54ca5f2b20d018a8f0fcad78bc91ec2b57820590539e7",
+      "fix_commit": "e9896af945d36f9548089164a8077cb368a4ad8f",
+      "local_id": 55982,
+      "mapping_status": "ambiguous",
+      "project": "freeradius-server",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "ff8844c4b8a3d2b1977bd93d97a4c7483c183ee1d8726a272e15b34b7c38e955",
+      "fix_commit": "8cfe505e168185fecd1b573711c68252aefb9f77",
+      "local_id": 56156,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "1644a2bf2277d807c6cd70e1c270fc81daae03492a94e60fb18e7c119b672abc",
+      "fix_commit": "c0ca3b2979a6f0999c57549986f99334666e8ef7",
+      "local_id": 56386,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "55ea75821c446a832591ba797c1d1fd77ffd8a311824072c2fa331035b4a1097",
+      "fix_commit": "f62a3f606db3163b85666a0b8997e52987c87e97",
+      "local_id": 56544,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "cdb7186646488413a0909966dd435e5d377656c9e6b67129dbab25b8b19ff1f9",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "2c6708ec84cb8d574c58463c0937e0a922e31f26",
+      "local_id": 56710,
+      "mapping_status": "mapped",
+      "project": "croaring",
+      "sanitizer": "asan",
+      "write_dest": "bitmap",
+      "write_kind": "pointer_deref",
+      "write_line": "roaring_bitmap_t* bitmap = roaring_bitmap_portable_deserialize_safe(data, size);"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "034ed28810855cf1e13680ac3073d9d92d5be60af5564b531d73ad8de3226a9a",
+      "fix_commit": "495fe725e0dfa2f0bf3f588ea154488d9fc0a82c",
+      "local_id": 57494,
+      "mapping_status": "no_write_found",
+      "project": "wireshark",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "762b1c871b059c5b3f4e2d7e5e6cf7dce8028a055b6f0d651f3c38223de5df0c",
+      "fix_commit": "44a5c05ced95c2464dd75e0e068f5151b797a7db",
+      "local_id": 57540,
+      "mapping_status": "ambiguous",
+      "project": "simdutf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "15d6eebaef5d80ffb111c840cac70fb071495dc0ea1afd564a887356004d5298",
+      "family_id": "fam_e314471e5d26",
+      "family_signature": "index_write|heap_alloc|index",
+      "fix_commit": "c1ed1d91e28a6ddc7a9b5479d4795d58fb6be0ca",
+      "local_id": 57587,
+      "mapping_status": "mapped",
+      "project": "libredwg",
+      "sanitizer": "asan",
+      "write_dest": "wstr",
+      "write_kind": "index_write",
+      "write_line": "wstr[i++] = '\\r';"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "55d0d5202e787f3cdfdf591697061ef4e3019944ad5611bb2a2b001478b4259e",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "fix_commit": "72af817153515c8715417794e7b0d7b91eb1be12",
+      "local_id": 57632,
+      "mapping_status": "mapped",
+      "project": "simdutf",
+      "sanitizer": "asan",
+      "write_dest": "index",
+      "write_kind": "index_write",
+      "write_line": "index[t] = c"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "87df2972ba249261b561bea3f740a1b174ea77783e15fca3835332f03e7355fd",
+      "fix_commit": "03280d7dbe8e91f0ecc06d88fef8adc0fbb41d14",
+      "local_id": 57670,
+      "mapping_status": "no_write_found",
+      "project": "simdutf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "c28df16e0dd785e63fa6577b6aa676a0420de8377386ddbdbc590a29655f8930",
+      "fix_commit": "7eced55b5700c0d2aa2e102ed78f10b0ce755a64",
+      "local_id": 57745,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "675039e30a1dfdc74bb9facfeef06f17623474c8341fa9a3ac56903823b12226",
+      "fix_commit": "fa618f5f492f94d19dd8d32bcea084523fb4e2d8",
+      "local_id": 57825,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "341488100f30c74a4efdf2c070b10d9b22ced6cc4dc106ca0c7c34e5295e718a",
+      "fix_commit": "8b79248eabe494179bd7c97a1e6478959d12595e",
+      "local_id": 58061,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "9adaca245fb9378a75854f6cd60c7360e63e0f8f37cc466385434773c86c1bdc",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "23d968d55a6e00dfc46799cfd0eb2ed02379037d",
+      "local_id": 58120,
+      "mapping_status": "mapped",
+      "project": "ffmpeg",
+      "sanitizer": "asan",
+      "write_dest": "vt",
+      "write_kind": "pointer_deref",
+      "write_line": "FFIMFTrackFileVirtualTrack *vt = NULL;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "0fcfb2c8b0350b418684487089ca6028a63812d09eee733d4e75a5f62b50c15e",
+      "fix_commit": "95a78c08c17b73a50ad64c1b82e47970a3f2bc41",
+      "local_id": 58134,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "78efd19e1e04d0ced7555731995cfa58a2df272529a2c5a6e7adbbe623030299",
+      "fix_commit": "72ef3b6a17a65d656321ac1a7fcecf6293c9c758",
+      "local_id": 58262,
+      "mapping_status": "ambiguous",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "35ac07de1c39f7fde95caf1686cb3f08dfc80ce6d9b8dd298c53738da36812be",
+      "fix_commit": "5cee79dded54abbe3a5fbf5f87ca1f3951bd0347",
+      "local_id": 58287,
+      "mapping_status": "ambiguous",
+      "project": "faad2",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "4e0f6a3f43ba841edb2c70daf26bc3c29d58fdab3364083288ae3a80601c6263",
+      "fix_commit": "5078eedc5b18f0d208af6e30f60b33419132d1b6",
+      "local_id": 58295,
+      "mapping_status": "ambiguous",
+      "project": "cpython3",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "c25b501f618a910bd2d1b73aa30755a22e7b3f25301b2b0f7cadc89a798ff380",
+      "fix_commit": "38e5e7a1f535c85f0c0c699214aca533ba552a79",
+      "local_id": 58405,
+      "mapping_status": "ambiguous",
+      "project": "ghostpdl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "c9e56549ec6e8a8f9226cc4039a4640ca370566bbd18c12914e2f947099f5b97",
+      "fix_commit": "graphicsmagick9035beaece926b8c76fc867ea1eebe0551316151",
+      "local_id": 58754,
+      "mapping_status": "ambiguous",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "18e2427bdb326385ce8b6800fd0be91ba743a9d23f7558ea8186c7c530026f33",
+      "fix_commit": "bb3844bee2734e09dcc121e61b15ca2336b9434f",
+      "local_id": 59491,
+      "mapping_status": "ambiguous",
+      "project": "net-snmp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "7416d15f973ea881f3ac36aef97977288ed064e8f92749f9d637246e8c9e0a25",
+      "fix_commit": "6fc018e9e593a3235dbf7026726ba4665373b741",
+      "local_id": 59591,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "fa575483aeace01e34f0c01b8dbae2d444fa812b1b33ced5f91bd88ae3d37865",
+      "fix_commit": "89bbed83db22b8d63b3e6354963d8d595199304e",
+      "local_id": 59682,
+      "mapping_status": "ambiguous",
+      "project": "FreeRDP",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "7d09ff828f1ff63ed9e739a7d4b3dbc2559e94cbc4cf1e9bef559cdc2aef6c91",
+      "fix_commit": "ce53bc020d37e10a06a59501c45f1ab82539f0c5",
+      "local_id": 59695,
+      "mapping_status": "ambiguous",
+      "project": "hdf5",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "5535578ed0c9e28b14cfabc8b83c05b84f7dd6ef8ec1e70a63b270da253abde0",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "94e5a84d1f05fe905e91a41e8a17e29437c3c15e",
+      "local_id": 59814,
+      "mapping_status": "mapped",
+      "project": "libheif",
+      "sanitizer": "asan",
+      "write_dest": "plane",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t* plane = image->get_plane(channel, &stride);"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "afb48e9df36c7042fd35af1aa7fa8080107338478c29d4987f1f4f34185b6cc4",
+      "fix_commit": "3a1600ff26d02a3440186a6e8355521086a7e11f",
+      "local_id": 60070,
+      "mapping_status": "ambiguous",
+      "project": "ndpi",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "0bacf033d3c7bf4a316c1f61d4690a4bef04ec189dbb5171e144b2f01a38b26c",
+      "fix_commit": "9a35f1652ed34ea6aaa7daef36de219b1ed8a3ce",
+      "local_id": 60349,
+      "mapping_status": "ambiguous",
+      "project": "mupdf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "e73cfd03483b0b8ca4394c959b2ab0c2e8b1a215cfd9d79d9e1287ae575151ca",
+      "fix_commit": "2a00fecd38857cad686cf150dfe499ee15d6e220",
+      "local_id": 60372,
+      "mapping_status": "ambiguous",
+      "project": "libjpeg-turbo.2.0.x",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 4",
+      "diff_sha256": "181efeec28f5dc7c6863135c53eba93c1237ee9f35deba53583908d060a56259",
+      "fix_commit": "3baa51068767ae2070c4661e00a3b77d5c3139b7",
+      "local_id": 60728,
+      "mapping_status": "ambiguous",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "54fcc41db7540c0b006794811a1f219f82017685715787c46ce0d1e79bbe9895",
+      "fix_commit": "ebca79d508d424687707462675a4a5f09ab4429c",
+      "local_id": 60766,
+      "mapping_status": "ambiguous",
+      "project": "libjpeg-turbo.main",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 3",
+      "diff_sha256": "6da41ea27426972376f52c1f51af97848d6bedeeb7de099bf7f9fcf3b43a6e32",
+      "fix_commit": "0c39b8074e5599ef667c72f94eecc27945e976df",
+      "local_id": 60815,
+      "mapping_status": "ambiguous",
+      "project": "wolfssl",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "a7a9fb13f07348b63b37f4ace9bf12becb9149dd1f5e285cf7fc5991186fbeaa",
+      "fix_commit": "17294b5fd82bff80463c21386d3847142a37549d",
+      "local_id": 60983,
+      "mapping_status": "no_write_found",
+      "project": "libraw",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "99101d6b5b752821f54f340efcf4e406637b6ac0d8c27d0065ee9a22a27ee76e",
+      "family_id": "fam_fc51b2985a63",
+      "family_signature": "copy_sink|struct_field|(V*V.V+V)*V(V)",
+      "fix_commit": "fb1c7d27db09a4d0a2b6e1486c4f1a4d332e8b8c",
+      "local_id": 61269,
+      "mapping_status": "mapped",
+      "project": "pcre2",
+      "sanitizer": "asan",
+      "write_dest": "cb.groupinfo",
+      "write_kind": "copy_sink",
+      "write_line": "memset(cb.groupinfo, 0, (2 * cb.bracount + 1) * sizeof(uint32_t));"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "2a605784387686fd1ca4f6b6aa6d62963578654d3615669799fc08dee1629213",
+      "fix_commit": "54d57acf610e5db2e70afa234fd4018207606774",
+      "local_id": 61822,
+      "mapping_status": "ambiguous",
+      "project": "binutils-gdb",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "77b180b5e531546cd028bcce0d6023c0a8587bda027774552c0e6201b623b5f7",
+      "fix_commit": "4f4dc0a1a29d3689ba8e73a08c13d4f2e152aad1",
+      "local_id": 61991,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 4",
+      "diff_sha256": "b42802e861b52c5af71323c46b3a1efe692f3fdd411ac0123c5d0435fd383751",
+      "fix_commit": "a981cefdd239ca44bfd12eb7d78dc0c0560f016d",
+      "local_id": 62057,
+      "mapping_status": "ambiguous",
+      "project": "kimageformats",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "0855fd67d52205afc3aa7f5c7769491c48d2dce8be0ba231368a2028ad241d0e",
+      "fix_commit": "b4296e1c9b01be7c8b052ae023e0927cc6762b1b",
+      "local_id": 62083,
+      "mapping_status": "ambiguous",
+      "project": "serenity",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "6c0869c8ac9580ff4b6c00c1f6b0b8cc989dd7bc8bfc1f2ff1077ea884430267",
+      "fix_commit": "9e978c6cd1bf3b2692e44f246b904927b4982d03",
+      "local_id": 62313,
+      "mapping_status": "no_write_found",
+      "project": "serenity",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "4f9bf503d4f057a53630ea232e1db38860ebabf312110ec81945e240a3c7a446",
+      "fix_commit": "386e9a10db28af620658ca0c635e1d98915f6306",
+      "local_id": 62348,
+      "mapping_status": "ambiguous",
+      "project": "icu",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "3e67be492d1ffdaff3f95d3a80ad5a15f2db58188fbbf2e8acc947c897185aa5",
+      "fix_commit": "b0287a6d29e0c09eaffe29121bbc34c471feb87a",
+      "local_id": 62363,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "3cbc0dab5fffc06b891787b82337ab7314e72256382d76d869905e8fb968c101",
+      "fix_commit": "462607e556faf37a5cd2f75e4c1136e9836ae386",
+      "local_id": 62973,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "711f27e6188cde93248c6208f759799c4a9e8d74d35bf524f69156f36c9863c1",
+      "fix_commit": "f522359c08d49e0f1a059ad6cc8566ddeb7a37ed",
+      "local_id": 63057,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "5c509fee0d4bcec495af8a5c1c7d9e3d22143997abc9eb2a94ad5c2820ba1214",
+      "fix_commit": "37b5f4a1f6a9c7c8f3620c6b1f7f2b0bb997e5d7",
+      "local_id": 63090,
+      "mapping_status": "ambiguous",
+      "project": "ffmpeg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 11",
+      "diff_sha256": "00f075a222a408b9e29c72d6fc87aa18759b6a2adc6759cdca13739eaa496032",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "fix_commit": "30fc89e556e5c09bf62b9548862cc3d924b9ec81",
+      "local_id": 63179,
+      "mapping_status": "mapped",
+      "project": "ndpi",
+      "sanitizer": "asan",
+      "write_dest": "serializer",
+      "write_kind": "pointer_deref",
+      "write_line": "ndpi_private_serializer *serializer = (ndpi_private_serializer*)_serializer;"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "a46d069841032fb94e1f8adafafdb9bb66d22c6a224ff7fd6fba291976c8b32d",
+      "fix_commit": "84c15da1997559c37841dc16f9e2c70c643dd9d2",
+      "local_id": 63679,
+      "mapping_status": "ambiguous",
+      "project": "arrow",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "8b15dd97be6c6c690986f19aefbecc8e9e3c25aadd1290eff442e089d7e05594",
+      "fix_commit": "e399bd7e3d4cb4071e426ecb735084c6577a8644",
+      "local_id": 63746,
+      "mapping_status": "ambiguous",
+      "project": "ndpi",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "3c573e9148ad3fc0b5d473632b9425963ac97d163e3962092ffcb26f811594f8",
+      "fix_commit": "a0ecc6dad71f445c95936697c7ee15997d5761b2",
+      "local_id": 64110,
+      "mapping_status": "ambiguous",
+      "project": "PcapPlusPlus",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "3ef54b0a0fdc4ada0f02f366314325b46dd395881aae2d69c03f5c5f122c8f92",
+      "fix_commit": "3bd6f29d9ecc28d17dca371606992a9a87fa7f13",
+      "local_id": 64315,
+      "mapping_status": "ambiguous",
+      "project": "net-snmp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 16",
+      "diff_sha256": "4bf5d426fb0218ac1b307c710d9d9bcc7a2afe4c24463f413ebc6a53346a9173",
+      "fix_commit": "00a00aa5dbdf0a6c444fe7294494f53542a6ec31",
+      "local_id": 64351,
+      "mapping_status": "ambiguous",
+      "project": "net-snmp",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "1957f3f31ed1c1a917137875f8d89e07f4790572e24c4af86d147a049de14c93",
+      "fix_commit": "28727baf58aa7c8983769aff1ceecb3121a26ee6",
+      "local_id": 64431,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "d0b2d7e8408a2e0bb6325448799142ed91396e92a59bedbb2a8c600549865f93",
+      "fix_commit": "df740b5ebcccb9b46bed8c4f6f8e9b04b3e4441c",
+      "local_id": 64432,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "312950ab9938c9e85413cda29b5d5699df84bb6efb45cc4fc78bad9621f875af",
+      "fix_commit": "e49a9150a3b1cfc3fb9097ca02dd042e35226129",
+      "local_id": 64436,
+      "mapping_status": "ambiguous",
+      "project": "libavc",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 11",
+      "diff_sha256": "45c2c72de9010b0156d44abee70fc5f7ebc106f900c192ae778c6e46dfe724af",
+      "family_id": "fam_0e4ba716265b",
+      "family_signature": "copy_sink|unknown|V(V)",
+      "fix_commit": "c7e91db654127765a2d2238752ce76a836b55e02",
+      "local_id": 64529,
+      "mapping_status": "mapped",
+      "project": "radare2",
+      "sanitizer": "asan",
+      "write_dest": "&entry",
+      "write_kind": "copy_sink",
+      "write_line": "memset (&entry, '\\0', sizeof (entry));"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "137e9bb469669f82aa767624d86cb95416c1d13d5ceae10b26cbe095b41bdba8",
+      "fix_commit": "71c2ab509a8628dbbad4bc7b3f98a64aa90d3297",
+      "local_id": 64574,
+      "mapping_status": "ambiguous",
+      "project": "jq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 2",
+      "diff_sha256": "41d31c9acc98989b3404c09e3e7ccfb5b89ed0fc7843e7c25961c70d8b07be83",
+      "fix_commit": "c9a51565214eece8f1053089739aea73145bfd6b",
+      "local_id": 64771,
+      "mapping_status": "no_write_found",
+      "project": "jq",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE {*}",
+      "diff_sha256": "4484e1f9c491ccaca139f92a576d08062cf6f64fbd9d7eb96d0e378226c843ad",
+      "fix_commit": "graphicsmagick29b601c0dfcb280468eded8645b8856b8f8ba9c1",
+      "local_id": 64935,
+      "mapping_status": "no_write_found",
+      "project": "graphicsmagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 8",
+      "diff_sha256": "bfba9796089bccb1454a0b88e00df7260ce1deb44ef03d6468034ef7ad114390",
+      "fix_commit": "2624ae15b4d115a02623ec9f231237c429337a02",
+      "local_id": 64960,
+      "mapping_status": "ambiguous",
+      "project": "libxaac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "dd5bc86619369c95adaf00bd5edfdd6849daa6f5e8e76120d13ba217cf8289d6",
+      "fix_commit": "067bef9548698847fe9126308626e672e1ecab75",
+      "local_id": 65264,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "78be01e2cb6c48671392d665d8a195806da024b466094de2eff3896cb9f2a9e2",
+      "fix_commit": "539e8f41a35fec30fba4cfb3a65ea4db67978f85",
+      "local_id": 65486,
+      "mapping_status": "ambiguous",
+      "project": "icu",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "0c9e9af400fb71c2437e019ff2ca93881ac7c61d7cb7a040862c6ff70d8ac276",
+      "fix_commit": "0ff40625b602590afffb383ab03d155e0ba509ed",
+      "local_id": 65763,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "4e495bc3b9c59de684adcbcedda3c0342e5fd73e413df7cb0e4cabf06f06e263",
+      "fix_commit": "3eb8923b9730efeae10a92f8054f63495fe8a95f",
+      "local_id": 65873,
+      "mapping_status": "ambiguous",
+      "project": "icu",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "0d22340cf39f3bd4368d8c9e7818e6150b1c369a09a45ed8229db2084235e633",
+      "fix_commit": "52da2ef6b33c26d4ffd72d1d4ae6c42631ea433f",
+      "local_id": 66005,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 2",
+      "diff_sha256": "793e561b55bc4612f0d0dec0c3d3033f5a452b4004cf5e84dae0b9166593464f",
+      "fix_commit": "d0a274e902c6ecd8809aa81d2a4dc39f5874a100",
+      "local_id": 66046,
+      "mapping_status": "ambiguous",
+      "project": "libredwg",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 16",
+      "diff_sha256": "84107e2626445ae994565134a3e186d701595168063e2edb87b65eea04c2baa4",
+      "fix_commit": "c708a9e4c1dc880241c252bec76fada53ab84da3",
+      "local_id": 66063,
+      "mapping_status": "no_write_found",
+      "project": "simdutf",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "42733873dcfb2bc2dfa43f5ed426cf3c2f6a5b12f4bfed1c5b6eebad11e058da",
+      "fix_commit": "ce9b069cc1ad9748e91b9d37be54cfbb6a714ac5",
+      "local_id": 66135,
+      "mapping_status": "ambiguous",
+      "project": "imagemagick",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE {*}",
+      "diff_sha256": "d0edad0a842f6645e1f68821c156c17a99559ed06419f233221cc07e9b35af33",
+      "fix_commit": "b352e21fc6e697dbb9d060b4bc17d76d04b73e64",
+      "local_id": 66262,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "51755aedd55eedb76da9030d52694293178590cb7bc6d84ed5847475c0a051dd",
+      "fix_commit": "00eb62012dbcf7154e5abc4704051e9c604680e9",
+      "local_id": 66415,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 8",
+      "diff_sha256": "1740f13a665ebe9efff3372fae1516f33b4146318cb277d1964c837f8fad5a9c",
+      "fix_commit": "1565241343f00b203ee86810694d42992336b7f4",
+      "local_id": 66627,
+      "mapping_status": "ambiguous",
+      "project": "matio",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Heap-buffer-overflow WRITE 1",
+      "diff_sha256": "0a2d021a1a99ac29005e85498814e76c48732d732c7d83121db060da37dcb128",
+      "fix_commit": "ff627002687235bc6c585fc7ce24137cc6eeb73b",
+      "local_id": 67043,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    },
+    {
+      "crash_type": "Stack-buffer-overflow WRITE 1",
+      "diff_sha256": "4b3f82ba02b4c70b7cccafc57405b773dc13460c0d7eb74352b97d5b5b396e14",
+      "fix_commit": "b5dc2164d7456bd61bfa3a8415f468bab1dc517e",
+      "local_id": 67263,
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "sanitizer": "asan"
+    }
+  ],
+  "source": "ARVO-Meta (github.com/n132/ARVO-Meta), OSS-Fuzz reproducible vulnerabilities with in-repo fix diffs",
+  "tchecker_used": false
+}
