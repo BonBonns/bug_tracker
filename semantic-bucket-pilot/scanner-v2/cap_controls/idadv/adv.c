@@ -14,3 +14,12 @@ void twin(char *p, const char *s) {
 void shadow(const char *a, const char *b, char *o1, char *o2) {
     { char *x = o1; *x++ = *a; }  { char *x = o2; *x++ = *b; }
 }
+
+/* OUTER-SHADOW: an outer `x` is declared; an inner block shadows `x` and ENDS; a later
+ * write uses the OUTER `x`. A nearest-preceding-name heuristic would mis-bind the later
+ * write to the inner declaration; the reference-target method must bind it to the outer. */
+void outer_shadow(char *o, char *inner, const char *a, const char *b) {
+    char *x = o;
+    { char *x = inner; *x++ = *a; }
+    *x++ = *b;
+}

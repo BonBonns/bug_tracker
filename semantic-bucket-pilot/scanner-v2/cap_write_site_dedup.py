@@ -13,12 +13,24 @@ files in different directories and multiple writes on one line). A physical writ
 identified by:
   * normalized REPOSITORY-RELATIVE file path (full path, not basename);
   * enclosing function identity + source span (name, line, line_end);
-  * line + SITE ORDINAL within (function, line)  [no column in this schema];
+  * line + SITE column (source column of the write; NOT fact-list order / node id);
   * normalized write statement + operator;
-  * destination DECLARATION identity (param -> ("param", index); local -> ("local",
-    decl_line, name)) -- a declaration site, never a bare name.
+  * destination DECLARATION identity, built in TWO SEPARATE STEPS:
+      1. RESOLVE the write target to its declaration node via Joern's reference-target
+         edge (`identifiers[].ref_target_ids`) -- a semantic reference resolution, NOT a
+         name/nearest-declaration heuristic. This binds correctly across nested scopes
+         (an outer `x` used after an inner shadow's block ends resolves to the OUTER decl).
+      2. SERIALIZE that resolved declaration node into a stable cross-run identity:
+         relative file, enclosing function, declaration line, normalized declaration
+         text/type, and a source-column DECLARATION ordinal (which only disambiguates
+         same-name same-line declarations; it does NOT decide which declaration is meant).
 The write-call/node id is retained as WITHIN-RUN provenance only; it is NOT part of the
 cross-run identity because node ids may change between runs.
+
+FAIL CLOSED: if the source text needed to serialize a site column or a same-line
+declaration ordinal is unavailable, the identity is marked `identity_unverifiable`; such
+records are NEVER merged by dedup and are excluded from trust decisions -- the fact-list
+appearance order is NEVER used as a fallback identity.
 
 Both cap2 and cap3 build their identities through THIS module's `physical_write_identity`,
 so the same physical instruction yields the same identity from either path.
@@ -96,126 +108,229 @@ def _occurrence_columns(line_text, needle):
     return sorted(m.start() for m in re.finditer(pat, line_text))
 
 
+def write_dest_arg(call):
+    """The destination ARGUMENT node (carrying id/kind) this write targets, or None."""
+    nm = call.get("name")
+    args = sorted(call.get("arguments", []), key=lambda a: a.get("index", 0))
+    if nm == "<operator>.assignment" and args:
+        tgt = (args[0].get("code") or "").strip()
+        return args[0] if (tgt.startswith("*") or "[" in tgt) else None
+    di = COPY_SINKS.get(nm)
+    if di is not None and di < len(args):
+        return args[di]
+    return None
+
+
+def _descend_to_identifier(argnode, call_by_id):
+    """Walk down argument index 0 (the pointer base) until an IDENTIFIER node, return its id."""
+    node = argnode
+    for _ in range(32):
+        if node is None:
+            return None
+        if node.get("kind") == "IDENTIFIER":
+            return node.get("id")
+        c = call_by_id.get(node.get("id"))
+        if not c:
+            return None
+        a = sorted(c.get("arguments", []), key=lambda x: x.get("index", 0))
+        if not a:
+            return None
+        node = a[0]
+    return None
+
+
+def _init_column(local, txt, d, call_by_id, ident_by_id):
+    """Source column of a local's initializer on its decl line, located via the RHS text of
+    the assignment whose LHS reference-targets this local. None if not locatable."""
+    if txt is None:
+        return None
+    lid, mid, line = local.get("id"), local.get("method_id"), local.get("line")
+    for c in d.get("calls", []):
+        if (c.get("name") != "<operator>.assignment" or c.get("enclosing_function_id") != mid
+                or c.get("line") != line):
+            continue
+        args = sorted(c.get("arguments", []), key=lambda a: a.get("index", 0))
+        if len(args) < 2:
+            continue
+        idid = _descend_to_identifier(args[0], call_by_id)
+        ident = ident_by_id.get(idid)
+        if not ident or lid not in (ident.get("ref_target_ids") or []):
+            continue
+        cols = _occurrence_columns(txt, (args[1].get("code") or "").strip())
+        if len(cols) == 1:
+            return cols[0]
+        acols = _occurrence_columns(txt, _norm_code(c.get("code") or ""))
+        return acols[0] if len(acols) >= 1 else None
+    return None
+
+
 def build_index(d):
-    """Precompute function/param/local declarations plus SOURCE-DERIVED positions:
-      * site_col[call_id]  = source column of each write on its line (the site ordinal);
-      * local_cols[(method,name,line)] = sorted decl columns of same-name same-line locals.
-    Positions come from the source text (metadata.root + file), NOT from fact-list order or
-    node ids. If the source is unavailable, an appearance-rank fallback is used (flagged)."""
+    """Precompute declarations, reference-target edges, and SOURCE-DERIVED positions. NO
+    positional component comes from fact-list order or node ids. Where the source text
+    needed to serialize a position is unavailable, the affected node is marked UNVERIFIABLE
+    (fail closed) rather than falling back to appearance order."""
     meta = (d.get("metadata") or [{}])[0]
     root = meta.get("root")
     funcs = {f["id"]: f for f in d.get("functions", [])}
-    params = {f["id"]: {p["name"]: p for p in (f.get("parameters") or [])}
-              for f in d.get("functions", [])}
-    # local declarations grouped by (method, name, line), with source columns
+    call_by_id = {c.get("id"): c for c in d.get("calls", [])}
+    ident_by_id = {i.get("id"): i for i in d.get("identifiers", [])}
+    params_by_id = {}
+    for f in d.get("functions", []):
+        for p in (f.get("parameters") or []):
+            params_by_id[p.get("id")] = (f["id"], p)
+    locals_by_id = {l.get("id"): l for l in d.get("locals", [])}
+
+    # declaration ordinal per local node id (source-column rank; group size 1 -> 0; else via
+    # initializer column). Fail closed (decl_unverifiable) when source/init not resolvable.
     local_groups = defaultdict(list)
     for l in d.get("locals", []):
-        local_groups[(l.get("method_id"), l.get("name"), l.get("line"))].append(l)
-    local_cols = {}
-    for (mid, name, line), decls in local_groups.items():
+        local_groups[(l.get("method_id"), _norm_code(l.get("code") or l.get("name")),
+                      l.get("line"))].append(l)
+    decl_ordinal = {}
+    decl_unverifiable = set()
+    for (mid, _code, line), decls in local_groups.items():
+        if len(decls) == 1:
+            decl_ordinal[decls[0].get("id")] = 0
+            continue
         txt = _line_text(root, _norm_path(funcs.get(mid, {}).get("file")), line)
-        cols = _occurrence_columns(txt, (decls[0].get("code") or name))
-        if len(cols) != len(decls):
-            cols = list(range(len(decls)))     # fallback: rank (flagged via source_ok)
-            local_cols[(mid, name, line)] = ("rank", cols)
+        colmap = {}
+        for l in decls:
+            col = _init_column(l, txt, d, call_by_id, ident_by_id)
+            if col is None:
+                break
+            colmap[l.get("id")] = col
+        if len(colmap) == len(decls) and len(set(colmap.values())) == len(decls):
+            for rank, (nid, _col) in enumerate(sorted(colmap.items(), key=lambda kv: kv[1])):
+                decl_ordinal[nid] = rank
         else:
-            local_cols[(mid, name, line)] = ("col", cols)
+            for l in decls:
+                decl_unverifiable.add(l.get("id"))
 
-    # write sites grouped by (function, line, write-target text), with source columns
+    # site column per write call (pairs same-target writes on a line to their source columns)
     byline = defaultdict(list)
     for i, c in enumerate(d.get("calls", [])):
-        tgt = write_target(c)
-        if tgt is not None:
-            byline[(c.get("enclosing_function_id"), c.get("line"), _norm_code(tgt))].append((i, c))
+        if write_target(c) is not None:
+            byline[(c.get("enclosing_function_id"), c.get("line"),
+                    _norm_code(write_target(c)))].append((i, c))
     site_col = {}
+    site_unverifiable = set()
     for (fid, line, tgt), lst in byline.items():
-        lst.sort(key=lambda ic: ic[0])         # appearance order only pairs calls to columns
+        lst.sort(key=lambda ic: ic[0])
         txt = _line_text(root, _norm_path(funcs.get(fid, {}).get("file")), line)
         cols = _occurrence_columns(txt, tgt)
-        if len(cols) == len(lst):
+        if txt is not None and len(cols) == len(lst):
             for (_i, c), col in zip(lst, cols):
-                site_col[c.get("id")] = ("col", col)
+                site_col[c.get("id")] = col
         else:
-            for rank, (_i, c) in enumerate(lst):   # fallback: appearance rank (flagged)
-                site_col[c.get("id")] = ("rank", rank)
-    return {"funcs": funcs, "params": params, "root": root,
-            "local_groups": local_groups, "local_cols": local_cols, "site_col": site_col}
+            for _i, c in lst:
+                site_unverifiable.add(c.get("id"))
+
+    return {"funcs": funcs, "root": root, "call_by_id": call_by_id,
+            "ident_by_id": ident_by_id, "params_by_id": params_by_id,
+            "locals_by_id": locals_by_id, "decl_ordinal": decl_ordinal,
+            "decl_unverifiable": decl_unverifiable, "site_col": site_col,
+            "site_unverifiable": site_unverifiable}
 
 
-def dest_decl_identity(call, index):
-    """Declaration identity of the write's destination (NOT a bare name). A local carries a
-    declaration ordinal derived from its source column, so same-name locals declared in
-    separate scopes on ONE line do not collide; the write is bound to the nearest-preceding
-    same-name declaration on its line."""
-    fid = call.get("enclosing_function_id")
-    root_id = _root_ident(write_target(call))
-    p = index["params"].get(fid, {}).get(root_id)
-    if p is not None:
-        return ("param", p.get("index"))
-    # local: find same-name decls in this function (any line), pick the nearest-preceding
-    # declaration on the write's line by source column; else the unique/first same-name decl.
-    same = [(k, index["local_cols"][k]) for k in index["local_groups"]
-            if k[0] == fid and k[1] == root_id]
-    if not same:
-        return ("unknown", root_id)
-    wc = index["site_col"].get(call.get("id"))
-    wcol = wc[1] if wc and wc[0] == "col" else None
-    # candidate declarations with (line, column, ordinal-within-line)
-    cands = []
-    for (mid, name, dline), (kind, cols) in same:
-        for ordn, col in enumerate(cols):
-            cands.append((dline, col if kind == "col" else None, ordn))
-    on_line = [c for c in cands if wcol is not None and c[1] is not None and c[1] <= wcol]
-    chosen = max(on_line, key=lambda c: c[1]) if on_line else min(cands, key=lambda c: (c[0], c[2]))
-    return ("local", chosen[0], root_id, chosen[2])
+def resolve_dest_declaration(call, index):
+    """STEP 1 -- resolve the write target to its declaration NODE via Joern's reference
+    target (`ref_target_ids`). Returns a decl node id, or None if unresolved/ambiguous. This
+    is a semantic resolution, NOT a name or nearest-declaration heuristic."""
+    arg = write_dest_arg(call)
+    if arg is None:
+        return None
+    idid = _descend_to_identifier(arg, index["call_by_id"])
+    ident = index["ident_by_id"].get(idid)
+    if not ident:
+        return None
+    refs = ident.get("ref_target_ids") or []
+    return refs[0] if len(refs) == 1 else None
+
+
+def serialize_declaration(decl_node_id, index):
+    """STEP 2 -- serialize a RESOLVED declaration node into a stable cross-run identity.
+    Returns (identity_tuple, verifiable_bool). Source position only serializes; it does not
+    decide which declaration is meant (that was step 1)."""
+    if decl_node_id is None:
+        return ("unresolved_ref",), False
+    if decl_node_id in index["params_by_id"]:
+        fid, p = index["params_by_id"][decl_node_id]
+        f = index["funcs"].get(fid, {})
+        return ("param", _norm_path(f.get("file")), f.get("name"), p.get("line"),
+                _norm_code(p.get("type_full_name") or ""), p.get("index")), True
+    l = index["locals_by_id"].get(decl_node_id)
+    if l is not None:
+        f = index["funcs"].get(l.get("method_id"), {})
+        if l.get("id") in index["decl_unverifiable"]:
+            return ("local_unverifiable", _norm_path(f.get("file")), f.get("name"),
+                    l.get("line")), False
+        return ("local", _norm_path(f.get("file")), f.get("name"), l.get("line"),
+                _norm_code(l.get("code") or l.get("name")),
+                index["decl_ordinal"].get(l.get("id"), 0)), True
+    return ("unresolved_ref",), False
 
 
 def physical_write_identity(call, index):
     """Robust cross-run identity of one physical write. Returns (identity_dict, node_id).
-    The ordinal is a SOURCE column (or a flagged appearance rank when source is
-    unavailable); node_id is within-run provenance only, excluded from the identity."""
+    node_id is within-run provenance only, excluded from the identity."""
     fid = call.get("enclosing_function_id")
     f = index["funcs"].get(fid, {})
-    sc = index["site_col"].get(call.get("id"))
+    cid = call.get("id")
+    site_ok = cid in index["site_col"]
+    site = ("col", index["site_col"][cid]) if site_ok else ("unverifiable",)
+    decl_node = resolve_dest_declaration(call, index)
+    dest_decl, decl_ok = serialize_declaration(decl_node, index)
     ident = {
         "file": _norm_path(f.get("file")),
         "function": [f.get("name"), f.get("line"), f.get("line_end")],
         "line": call.get("line"),
-        "site": list(sc) if sc else None,      # ("col", N) source column, or ("rank", N)
+        "site": list(site),
         "write": [call.get("name"), _norm_code(write_target(call))],
-        "dest_decl": list(dest_decl_identity(call, index)),
+        "dest_decl": list(dest_decl),
+        "verifiable": bool(site_ok and decl_ok),
     }
-    return ident, call.get("id")
+    return ident, cid
 
 
 def local_declaration_identities(cpp):
-    """Declaration-level identities of every local, with a source-column decl ordinal, so
-    shadowed same-name same-line locals are distinct. For the shadowed-locals control."""
+    """Declaration-level identities of every local (ref-target serialization). For the
+    shadowed-locals control."""
     d = json.load(open(cpp)) if isinstance(cpp, str) else cpp
     index = build_index(d)
     out = []
-    for (mid, name, line), decls in index["local_groups"].items():
-        kind, cols = index["local_cols"][(mid, name, line)]
-        f = index["funcs"].get(mid, {})
-        for ordn, _decl in enumerate(sorted(decls, key=lambda x: x.get("id") or 0)):
-            out.append({"file": _norm_path(f.get("file")), "function": f.get("name"),
-                        "name": name, "line": line,
-                        "decl_site": [kind, cols[ordn] if ordn < len(cols) else ordn]})
+    for nid, l in index["locals_by_id"].items():
+        f = index["funcs"].get(l.get("method_id"), {})
+        ser, ok = serialize_declaration(nid, index)
+        out.append({"file": _norm_path(f.get("file")), "function": f.get("name"),
+                    "name": l.get("name"), "line": l.get("line"),
+                    "serialized": list(ser), "verifiable": ok})
     return out
 
 
 def decl_identity_key(rec):
-    return (rec["file"], rec["function"], rec["name"], rec["line"], tuple(rec["decl_site"]))
+    return tuple(rec["serialized"])
+
+
+def _ident_of(rec_or_ident):
+    if "underlying_write" in rec_or_ident and rec_or_ident.get("underlying_write"):
+        return rec_or_ident["underlying_write"]
+    if "identity" in rec_or_ident:
+        return rec_or_ident["identity"]
+    return rec_or_ident
+
+
+def is_verifiable(rec_or_ident):
+    return bool(_ident_of(rec_or_ident).get("verifiable", True))
 
 
 def identity_key(rec_or_ident):
-    """Hashable cross-run key. Accepts a raw identity dict, or a record carrying
-    `underlying_write` (cap2) / being a direct record with `identity` (cap3)."""
-    ident = rec_or_ident
-    if "underlying_write" in rec_or_ident and rec_or_ident.get("underlying_write"):
-        ident = rec_or_ident["underlying_write"]
-    elif "identity" in rec_or_ident:
-        ident = rec_or_ident["identity"]
+    """Hashable cross-run key. FAIL CLOSED: an unverifiable identity gets a unique key so it
+    can never be merged with anything (dedup also flags it and excludes it from trust)."""
+    ident = _ident_of(rec_or_ident)
+    if not ident.get("verifiable", True):
+        node = (rec_or_ident.get("node_id")
+                or rec_or_ident.get("underlying_write_node_id") or id(rec_or_ident))
+        return ("UNVERIFIABLE", node)
     return (ident.get("file"), tuple(ident.get("function") or []), ident.get("line"),
             tuple(ident.get("site") or []), tuple(ident.get("write") or []),
             tuple(ident.get("dest_decl") or []))
@@ -254,21 +369,36 @@ def direct_walk_write_sites(cpp):
 
 def dedup(records):
     """One operation per physical write identity. Canonical = highest-precedence
-    attribution (direct > call_site_summary); all contributing records kept as provenance."""
+    attribution (direct > call_site_summary); all contributing records kept as provenance.
+    FAIL CLOSED: unverifiable records are never merged and are flagged
+    identity_unverifiable=True so trust decisions can exclude them."""
     groups = defaultdict(list)
+    unverifiable = []
     for r in records:
-        groups[identity_key(r)].append(r)
+        if is_verifiable(r):
+            groups[identity_key(r)].append(r)
+        else:
+            unverifiable.append(r)
     ops = []
     for key, recs in sorted(groups.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
         canonical = min(recs, key=lambda r: PRECEDENCE.get(r.get("attribution"), 9))
-        ident = (canonical.get("underlying_write") or canonical.get("identity"))
+        ident = _ident_of(canonical)
         prov = [{"attribution": r.get("attribution"), "capability": r.get("capability"),
                  "function": r.get("function"), "node_id": r.get("node_id"),
                  "resolved_dest_param": r.get("resolved_dest_param")} for r in recs]
-        ops.append({"identity": ident,
+        ops.append({"identity": ident, "identity_unverifiable": False,
                     "canonical_capability": canonical.get("capability"),
                     "canonical_attribution": canonical.get("attribution"),
                     "n_provenance_paths": len(prov), "provenance": prov})
+    for r in unverifiable:
+        ops.append({"identity": _ident_of(r), "identity_unverifiable": True,
+                    "canonical_capability": r.get("capability"),
+                    "canonical_attribution": r.get("attribution"),
+                    "n_provenance_paths": 1,
+                    "provenance": [{"attribution": r.get("attribution"),
+                                    "capability": r.get("capability"),
+                                    "function": r.get("function"),
+                                    "node_id": r.get("node_id")}]})
     return ops
 
 

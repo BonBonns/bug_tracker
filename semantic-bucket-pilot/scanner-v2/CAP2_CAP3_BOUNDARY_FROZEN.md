@@ -38,18 +38,30 @@ instruction yields the same identity) is:
   columns keep them distinct. (If the source is unavailable, a flagged `("rank", N)`
   appearance fallback is used; the frozen scans always have source, so `col` is used.)
 - **normalized write statement + operator** — `(call name, normalized target code)`;
-- **destination DECLARATION identity** — a parameter is `("param", index)`; a local is
-  `("local", decl_line, name, decl_ordinal)` where `decl_ordinal` distinguishes same-name
-  locals declared in separate nested scopes on ONE line (by source column). A write is
-  bound to the nearest-preceding same-name declaration on its line. Never a bare name. The
-  SYNTACTIC write target (e.g. the walked alias `u`) is resolved to its declaration the
-  SAME way by both capabilities, so a cap2 summary and a cap3 direct record for one
-  physical write agree.
+- **destination DECLARATION identity — built in TWO SEPARATE STEPS:**
+  1. **RESOLVE** the write target to its declaration NODE via Joern's reference-target edge
+     (`identifiers[].ref_target_ids`, reached by descending the write's argument tree to its
+     identifier). This is a semantic reference resolution, NOT a name or
+     nearest-declaration heuristic, so it binds correctly across nested scopes — an outer
+     `x` used after an inner shadow's block ends resolves to the OUTER declaration.
+  2. **SERIALIZE** the resolved declaration node into a stable identity: a parameter is
+     `("param", file, function, decl_line, norm_type, index)`; a local is
+     `("local", file, function, decl_line, norm_decl_text, decl_ordinal)`, where
+     `decl_ordinal` (a source-column rank via the declaration's initializer) only
+     disambiguates same-name same-line declarations — it does NOT decide which declaration
+     the identifier means (step 1 did). Both cap2 and cap3 resolve+serialize the SAME
+     physical write's declaration identically, so their identities agree.
 
 The write-call / node id is retained as WITHIN-RUN provenance only (`node_id` in each
 provenance entry); it is NOT part of the cross-run identity, because node ids may change
 between runs. The identity does not depend on fact-list appearance order either — all
 positional components come from the source text.
+
+**FAIL CLOSED.** If the source text needed to serialize a site column or a same-line
+declaration ordinal is unavailable, the identity is marked `verifiable=false`; `dedup`
+never merges an unverifiable record (each becomes its own operation flagged
+`identity_unverifiable=true`) and trust decisions must exclude them. The unstable
+fact-list appearance order is NEVER used as a fallback identity.
 
 ## The overlap and the rule (frozen)
 
@@ -86,9 +98,16 @@ write is reachable two ways: cap3 recognizes it directly in `G`'s body, and cap2
   rescans produce the SAME two identities, and dedup does not collapse them.
 - **(e) shadowed same-line locals**: `cap_controls/idadv/adv.c` `shadow` declares
   `char *x` twice in separate scopes on one line. The two declarations get distinct
-  declaration identities (decl ordinal by source column), the two writes through them get
-  distinct identities (each bound to a distinct decl ordinal), and dedup keeps them
-  separate.
+  declaration identities (decl ordinal by source column), the two writes are bound by
+  reference-target to distinct declarations (ordinals 0/1), and dedup keeps them separate.
+- **(f) outer-shadow binding**: `cap_controls/idadv/adv.c` `outer_shadow` — outer `x`
+  declared, an inner block shadows `x` and ends, a later write uses the outer `x`.
+  Reference-target binds the later write to the OUTER declaration (earliest decl line),
+  where a nearest-preceding-name heuristic would mis-bind it to the nearer inner decl; the
+  inner write binds to the inner decl, and the two do not merge.
+- **(g) fail closed**: with the source root pointed at a nonexistent path, writes become
+  `identity_unverifiable`; `dedup` never merges them (each stays a separate flagged
+  operation) — appearance order is never used as a fallback identity.
 
 ## Consequence for the held-out evaluation
 

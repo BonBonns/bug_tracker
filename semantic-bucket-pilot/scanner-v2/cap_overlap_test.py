@@ -103,17 +103,59 @@ def main():
     sh = [o for o in D.direct_walk_write_sites(adv1) if o["function"] == "shadow"]
     xdecls = [r for r in D.local_declaration_identities(adv1)
               if r["function"] == "shadow" and r["name"] == "x"]
+    sh_decls = {tuple(o["identity"]["dest_decl"]) for o in sh}
     checks += [
         ("(e) shadowed same-line locals x -> TWO distinct DECLARATION identities",
-         len(xdecls) == 2 and len({D.decl_identity_key(r) for r in xdecls}) == 2),
+         len(xdecls) == 2 and len({D.decl_identity_key(r) for r in xdecls}) == 2
+         and all(r["verifiable"] for r in xdecls)),
         ("(e) writes through shadowed same-line locals -> TWO distinct identities",
          len(sh) == 2 and len({D.identity_key(o) for o in sh}) == 2),
-        ("(e) each shadow write binds a distinct local decl ordinal (0 and 1)",
-         all(o["identity"]["dest_decl"][0] == "local" and o["identity"]["dest_decl"][2] == "x"
-             for o in sh)
-         and {o["identity"]["dest_decl"][3] for o in sh} == {0, 1}),
+        ("(e) each shadow write binds a distinct local decl (via ref-target, ordinals 0/1)",
+         all(dd[0] == "local" for dd in sh_decls)
+         and {dd[-1] for dd in sh_decls} == {0, 1}),
         ("(e) dedup keeps both shadowed-local writes SEPARATE",
          len(D.dedup(sh)) == 2),
+    ]
+
+    # ---- (f) OUTER-SHADOW: later write to outer x after inner block ends ----------------
+    # ref-target must bind to the OUTER decl (earlier line), NOT the nearer inner decl.
+    osh = [o for o in D.direct_walk_write_sites(adv1) if o["function"] == "outer_shadow"]
+    xdecl_lines = sorted(r["line"] for r in D.local_declaration_identities(adv1)
+                         if r["function"] == "outer_shadow" and r["name"] == "x")
+    # the later write is the one on the LARGEST line (after the inner block closes)
+    later = max(osh, key=lambda o: o["identity"]["line"]) if osh else None
+    inner = min(osh, key=lambda o: o["identity"]["line"]) if osh else None
+    checks += [
+        ("(f) outer_shadow has two x decls on different lines and two writes",
+         len(xdecl_lines) == 2 and len(osh) == 2),
+        ("(f) REF-TARGET binds the later write to the OUTER decl (earliest decl line)",
+         later and later["identity"]["dest_decl"][0] == "local"
+         and later["identity"]["dest_decl"][3] == xdecl_lines[0]),
+        ("(f) the inner write binds to the INNER decl (later decl line) -- not merged",
+         inner and inner["identity"]["dest_decl"][3] == xdecl_lines[1]
+         and D.identity_key(later) != D.identity_key(inner)),
+        ("(f) a nearest-preceding-name heuristic would MISbind (outer decl line < inner)",
+         xdecl_lines[0] < xdecl_lines[1] and later["identity"]["line"] > xdecl_lines[1]),
+    ]
+
+    # ---- (g) FAIL CLOSED: source unavailable -> identity_unverifiable, never merged ------
+    import json as _json
+    dd = _json.load(open(adv1))
+    dd["metadata"][0]["root"] = "/nonexistent-source-root-xyz"   # source now unreadable
+    ui = D.build_index(dd)
+    tw_calls = [c for c in dd["calls"]
+                if c.get("name") == "<operator>.assignment"
+                and (sorted(c["arguments"], key=lambda a: a.get("index", 0))[0].get("code") or "").startswith("*")]
+    uverif = [D.physical_write_identity(c, ui)[0] for c in tw_calls]
+    urecs = [{"attribution": "direct", "capability": "pointer_walk_direct",
+              "identity": idn, "node_id": i} for i, idn in enumerate(uverif)]
+    checks += [
+        ("(g) source unavailable -> writes are identity_unverifiable (fail closed)",
+         uverif and all(v["verifiable"] is False and v["site"] == ["unverifiable"]
+                        for v in uverif)),
+        ("(g) unverifiable records are NEVER merged (each stays a separate op, flagged)",
+         all(op["identity_unverifiable"] for op in D.dedup(urecs))
+         and len(D.dedup(urecs)) == len(urecs)),
     ]
 
     ok = True
