@@ -141,25 +141,129 @@ guess" posture:
    claim about which member is the currently-live one, and a bare capacity
    fact could be read as implying more than that.
 
-**Important asymmetry, stated plainly:** the *consumption* side (the
-normalizer's fail-closed check, given `aggregate_kinds.tsv` says UNION) is
-fully tested above. The *production* side (the `.sc` script's guess that a
-union's `TypeDecl.code` literally starts with the text `"union"`) is
-**unverified** -- there is no Joern install in this environment to confirm
-that's actually how c2cpg represents a union's `code` field. Said directly
-in the `.sc` file's own comment: treat every `UNION` classification it would
-produce as a hypothesis until checked against a real CPG, not as validated
-behavior. If it guesses wrong in either direction, the *safe* failure mode
-holds either way: guessing "not a union" when it is one reproduces exactly
-today's pre-fail-closed behavior (a real gap, but not a new one this session
-introduced); guessing "union" when it isn't one only costs a missed
-candidate, never a false capacity claim.
+**Important asymmetry, stated plainly (round 2; resolved in round 3 below):**
+the *consumption* side (the normalizer's fail-closed check, given
+`aggregate_kinds.tsv` says UNION) was fully tested above. The *production*
+side (the `.sc` script's guess that a union's `TypeDecl.code` literally
+starts with the text `"union"`) was **unverified** -- there was no Joern
+install in the environment round 2 was written in to confirm that's
+actually how c2cpg represents a union's `code` field.
 
-## Remaining, explicitly open (unchanged from round 1 unless noted)
+## Round 3: real Joern validation of the `.sc` producer (Joern v4.0.608)
+
+Round 2 flagged the `.sc` script's `TypeDecl.code`-prefix heuristic as an
+unverified hypothesis. This round installs the pinned Joern (`v4.0.608`,
+per `tchecker-research-complete/bootstrap.sh`), builds a real CPG from a
+hand-written fixture exercising every aggregate shape the task asked for
+(named struct/union/class, `typedef` aliases of the struct and union,
+anonymous struct/union, bare member expressions, `obj->buffer + off`, and
+`&obj->buffer[off]`), runs the real `export_c_cpp_facts_v03.sc` against it,
+and traces IDs through `type_decls.tsv` -> `aggregate_kinds.tsv` ->
+`members.tsv` -> `calls.tsv` -> `arguments.tsv` into the normalizer's
+output.
+
+**The heuristic was correct for every shape except one, and that one
+divergence was a real, silent, security-relevant bug -- not merely an
+"unverified but harmless" gap.**
+
+Confirmed `TypeDecl.code` for each shape (real Joern output, not inferred):
+
+| Shape | `TypeDecl.code` | Prefix match |
+|---|---|---|
+| `struct NamedStruct { unsigned char buffer[256]; };` | `"struct NamedStruct {\n    unsigned char buffer[256];\n}"` | matches `"struct"` |
+| `union NamedUnion { unsigned char buffer[256]; ... };` | `"union NamedUnion {\n    unsigned char buffer[256];\n...}"` | matches `"union"` |
+| `class NamedClass { public: unsigned char buffer[256]; };` | `"class NamedClass {\npublic:\n    unsigned char buffer[256];\n}"` | matches `"class"` |
+| anonymous `struct { unsigned char buffer[256]; } anonStructInstance;` | `"struct {\n    unsigned char buffer[256];\n}"` | matches `"struct"` |
+| anonymous `union { unsigned char buffer[256]; } anonUnionInstance;` | `"union {\n    unsigned char buffer[256];\n}"` | matches `"union"` |
+| `typedef struct NamedStruct StructAlias;` | `"typedef struct NamedStruct StructAlias;"` | **matches nothing** (starts with `"typedef"`) |
+| `typedef union NamedUnion UnionAlias;` | `"typedef union NamedUnion UnionAlias;"` | **matches nothing** (starts with `"typedef"`) |
+
+So a typedef'd alias's own `TypeDecl` was always left `UNKNOWN` by the
+pre-round-3 heuristic. On its own that would just be a missed candidate --
+consistent with the stated "fails safe" design. It is not safe, and here is
+the join trace that proves it:
+
+`members.tsv` is built by `cpg.typeDecl.l.foreach { t => t.member.l... }` --
+one row **per (owning TypeDecl, member) pair**. c2cpg re-exposes the SAME
+member node id under BOTH the real union's TypeDecl and the alias's
+TypeDecl (confirmed: member id `98784247809` ("buffer") appears in
+`members.tsv` with `type_decl_id=<NamedUnion>` AND, later in the same file,
+with `type_decl_id=<UnionAlias>`). The normalizer indexes members by id
+with `_memdecl_by_id={_md['id']:_md for _md in members}` -- a plain dict
+comprehension, so the LAST row for a given member id wins. Because
+`cpg.typeDecl.l` yields TypeDecls in roughly source order and the typedef
+is declared after the struct/union it aliases, the alias's (misclassified,
+`UNKNOWN`) row silently overwrote the real union's (correctly `UNION`)
+row for that shared member id.
+
+**Consequence, reproduced end-to-end against real Joern output before any
+fix (`raw_real_joern_aggkinds/`, `fixture_source.cpp`):** a plain
+`memcpy(u->buffer, src, n)` where `u` is `NamedUnion*` -- accessing the
+union directly, never through the alias, in a function that never even
+mentions `UnionAlias` -- fabricated a real capacity fact
+(`CPP_STRUCT_MEMBER_ARRAY_CAPACITY`, `capacity_bytes: 256`) purely because
+a `typedef union NamedUnion UnionAlias;` existed **anywhere else in the
+same translation unit**. The same held for the offset-shape path
+(`&u->buffer[off]`) and for access through the alias itself. This is
+exactly the false-capacity-claim-on-a-union outcome round 2's fail-closed
+design exists to prevent, defeated by an unrelated declaration elsewhere
+in the file.
+
+**Fix applied (`export_c_cpp_facts_v03.sc`):** resolve a typedef through
+`TypeDecl.aliasTypeFullName` -- a real, stable semantic property Joern
+populates for every typedef (confirmed: `StructAlias.aliasTypeFullName ==
+"NamedStruct"`, `UnionAlias.aliasTypeFullName == "NamedUnion"`), not a text
+guess -- to the aliased type's own `TypeDecl` and classify from *that*
+`TypeDecl`'s code instead of the alias's own `"typedef ..."` text. Bounded
+(8 hops), cycle-safe, for chained typedefs; only ever resolves through a
+LOCAL (non-external) same-named definition, and leaves an alias `UNKNOWN`
+rather than guessing between multiple same-named candidates. Strictly
+additive over the round-2 heuristic: only ever turns an `UNKNOWN` into a
+real kind, never changes a kind the code-prefix check already resolved --
+so every round-1/round-2 fixture (which never has a typedef in its
+hand-built raw facts) is provably unaffected.
+
+**Verified fixed, same real CPG, same fixture, exact tracked `.sc` file
+(`raw_real_joern_aggkinds/aggregate_kinds.tsv`):** `StructAlias` now
+classifies `STRUCT`, `UnionAlias` now classifies `UNION`. Re-running the
+same `memcpy(u->buffer, ...)`, `memcpy(&u->buffer[off], ...)`, and
+`memcpy(ua->buffer, ...)` call sites through the real, unmodified
+normalizer now produces **zero** dest-capacity facts for all three
+(`UNION_MEMBER_FAIL_CLOSED`), while the struct/class equivalents
+(`copyStructBare`, `copyStructOffset` (`+off`), `copyStructIndexOffset`
+(`&x[off]`), `copyClassBare`, `copyViaStructAlias`) all correctly resolve
+to `capacity_bytes: 256`, with `offset_shape`/`offset_expr` retained
+verbatim on the two offset-shaped facts and no `BoundFact` ever produced
+for either. See `check_real_joern_aggkinds.py` (24/24) for the executable
+form of every claim in this section, and `raw_real_joern_aggkinds/` for the
+frozen real Joern output it runs against (regeneration command in that
+script's docstring; Joern is not required to re-run the check itself,
+only to regenerate the frozen raw facts from a changed fixture).
+
+No change was needed to `normalize_c_cpp_facts_v03.py` -- the consumption
+side was already correct once given a correct `aggregate_kinds.tsv`;
+round 2's own claim that the consumer was "fully tested" holds up
+unchanged against real output.
+
+Regression, same real CPG pipeline (`c2cpg.sh` + this `.sc` file +
+`joern`), Joern v4.0.608:
+- `CPP_R06` (`tests/gates/cpp-r06/run.sh`, real Joern, unrelated to member
+  capacity -- basic call-graph loader sanity): 10/10, unchanged.
+- `CPP_MEMORY_R02`: 15/15, unchanged (hand-built raw facts, never touches
+  the `.sc` file).
+- `CPP_DYNAMIC_NO_HARDEN`: 1/1, unchanged (same reason).
+- This gate's own 24/24 (`build_and_check.py`): 24/24, unchanged (same
+  reason -- none of those fixtures build a typedef).
+
+## Remaining, explicitly open
 
 - Casts and shadowed declarations on the struct-member path -- still not
   exercised by a fixture.
-- The `.sc` script's union-detection heuristic -- unverified, as above.
+- Multi-level typedef chains (`typedef UnionAlias UnionAlias2;`) and a
+  same-named type redefined ambiguously across translation units -- the
+  round-3 fix handles chains up to 8 hops and deliberately abstains
+  (leaves `UNKNOWN`) rather than guessing when a name resolves to more
+  than one local `TypeDecl`, but neither case has its own fixture yet.
 - Full-repository parsing with real headers/macros, running the ~40
   unrelated gates elsewhere in the tree, and a new held-out corpus --
   still out of scope for this gate, as in round 1.
@@ -169,19 +273,22 @@ candidate, never a false capacity claim.
 Reporting these as open rather than silently dropping them, per this
 project's own abstain-by-default convention:
 
-- **No real Joern run.** Joern is not installed in this environment (`which
-  joern*` finds nothing). Every fixture here is a hand-built raw-TSV stand-in
-  for what `export_c_cpp_facts_v03.sc` would emit for the given C shape,
-  following the exact convention already used by this test suite's other
-  `make_*_raw.py` fixtures (e.g. `cpp-r06/tests/make_memory_r02_raw.py`).
-  This is real, executed evidence of the *normalizer's* behavior on that
-  input -- it is not evidence of what Joern's c2cpg would actually produce
-  from real NSS source, most importantly whether `typeFullName` really does
-  carry `MAX_KEY_LEN` already expanded to `256` (this repo's own prior
-  finding, in `moz-scan-paired-cve-validation-round1.md`, that a real
-  scan of `mozjpeg/jchuff.c`'s `BUFSIZE` macro arrived pre-expanded as
-  `(64*2)+8` supports that assumption, but it is an assumption carried over
-  from a different corpus, not verified fresh against NSS specifically).
+- **No real Joern run against actual NSS source.** Round 3 (above) did
+  install the pinned Joern (`v4.0.608`) and run a real CPG through the real
+  `export_c_cpp_facts_v03.sc` and the real normalizer -- so the prior
+  "hand-built raw-TSV stand-in, unverified against real output" limitation
+  no longer holds for the aggregate-kind producer or for the round-1/round-2
+  struct-member-capacity shapes in general. What round 3 did NOT do is
+  rescan the actual NSS source tree: the round-3 fixture is a minimal,
+  hand-written `.cpp` file covering the aggregate shapes the task asked for
+  (named/anonymous struct/union/class, typedef aliases, bare and both
+  offset forms), not `lib/softoken/pkcs11c.c` itself. Whether `typeFullName`
+  for `SFTKSSLMACInfoStr.key` really does carry `MAX_KEY_LEN` pre-expanded
+  to `256` in a real NSS build (this repo's own prior finding, in
+  `moz-scan-paired-cve-validation-round1.md`, that a real scan of
+  `mozjpeg/jchuff.c`'s `BUFSIZE` macro arrived pre-expanded as `(64*2)+8`
+  supports that assumption, but it is carried over from a different
+  corpus) remains unverified against NSS specifically.
 - **"Rescan real NSS" / "run every frozen capability gate"** -- not done.
   Most of the ~40 gates elsewhere in this tree (malicious-npm, denylist-
   bypass, serialize-DoS, state-provenance, various TypeScript gates, ...)

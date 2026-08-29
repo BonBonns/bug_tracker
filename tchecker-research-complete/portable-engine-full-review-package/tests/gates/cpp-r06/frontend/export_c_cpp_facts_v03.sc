@@ -32,22 +32,65 @@ def writer(path: String): PrintWriter = new PrintWriter(new File(path), "UTF-8")
   }} finally members.close()
 
   // UNION-R01: best-effort aggregate-kind emission for the fail-closed union check in
-  // normalize_c_cpp_facts_v03.py. UNVERIFIED against real Joern output -- no Joern
-  // install in the environment this was written in to confirm c2cpg's actual TypeDecl.code
-  // convention for a union (this heuristic assumes it starts with the literal "union",
-  // e.g. "union SFTKFoo", the common CDT/c2cpg pattern, but that has not been checked
-  // against a real CPG). The consumer treats this file as fully OPTIONAL and defaults to
-  // today's behavior when it's absent or when a row is missing/ambiguous, so a wrong or
-  // silent-no-output heuristic here fails safe (no union detected -> unchanged behavior),
-  // never fails toward a false capacity claim. Verify against a real CPG before relying on
-  // this to actually gate anything; until then treat every UNION classification it produces
-  // as a hypothesis, not a fact.
+  // normalize_c_cpp_facts_v03.py. VERIFIED against real Joern v4.0.608 output (see
+  // gates/nss-sslmac-capacity-r01/README.md, "Round 3"): the code-prefix heuristic below
+  // is correct for a named struct/union/class, and also for an anonymous one -- but WRONG
+  // for a typedef alias. A `typedef union Foo Bar;` TypeDecl's own `code` is the literal
+  // text "typedef union Foo Bar;", which starts with "typedef", not "union" -- so the
+  // alias's own TypeDecl was always left UNKNOWN. That is worse than a missed candidate:
+  // c2cpg re-exposes the SAME member node ids under the alias's TypeDecl as under the real
+  // one, and the consumer's id-keyed member lookup lets whichever TypeDecl's row is emitted
+  // last win -- so an unclassified alias TypeDecl can silently overwrite the real union's
+  // classification for those member ids, defeating the union fail-closed check even for
+  // accesses that never go through the alias at all (confirmed reproducing this with a real
+  // CPG before this fix). Fixed by resolving a typedef through `TypeDecl.aliasTypeFullName`
+  // -- a stable semantic property (not text) that real Joern populates for every typedef,
+  // confirmed above -- to the aliased type's OWN TypeDecl and classifying from ITS code
+  // instead of guessing from the alias's own "typedef ..." text. Bounded, cycle-safe hop
+  // count for chained typedefs; resolution only ever considers a LOCAL (non-external)
+  // same-named definition, and never guesses between multiple same-named candidates
+  // (leaves the alias UNKNOWN instead, same as before this fix). Strictly additive over the
+  // prior heuristic: only ever turns an UNKNOWN into a real kind, never changes a kind the
+  // code-prefix check already resolved. The consumer treats this file as fully OPTIONAL and
+  // defaults to today's behavior when it's absent or a row is missing/ambiguous, so any
+  // residual misclassification here still fails safe: guessing "not a union" costs nothing
+  // new (identical to pre-fix behavior); guessing "union" when it isn't costs only a missed
+  // candidate, never a false capacity claim.
+  def classifyByCode(code: String): String =
+    if (code == null) "UNKNOWN"
+    else {
+      val c = code.trim
+      if (c.startsWith("union")) "UNION"
+      else if (c.startsWith("struct")) "STRUCT"
+      else if (c.startsWith("class")) "CLASS"
+      else "UNKNOWN"
+    }
+  val localTypeDeclsByFullName: Map[String, List[io.shiftleft.codepropertygraph.generated.nodes.TypeDecl]] =
+    cpg.typeDecl.l.filterNot(_.isExternal).groupBy(_.fullName)
+  def classify(t: io.shiftleft.codepropertygraph.generated.nodes.TypeDecl): String = {
+    val ownKind = classifyByCode(t.code)
+    if (ownKind != "UNKNOWN") ownKind
+    else {
+      var seen = Set.empty[String]
+      var cur = t.aliasTypeFullName
+      var result = "UNKNOWN"
+      var hops = 0
+      while (result == "UNKNOWN" && cur.isDefined && hops < 8 && !seen.contains(cur.get)) {
+        seen += cur.get
+        localTypeDeclsByFullName.get(cur.get) match {
+          case Some(target :: Nil) =>
+            val k = classifyByCode(target.code)
+            if (k != "UNKNOWN") result = k else cur = target.aliasTypeFullName
+          case _ => cur = None
+        }
+        hops += 1
+      }
+      result
+    }
+  }
   val aggKinds = writer(s"$outDir/aggregate_kinds.tsv")
   try cpg.typeDecl.l.foreach { t =>
-    val kind = if (t.code != null && t.code.trim.startsWith("union")) "UNION"
-               else if (t.code != null && t.code.trim.startsWith("struct")) "STRUCT"
-               else if (t.code != null && t.code.trim.startsWith("class")) "CLASS"
-               else "UNKNOWN"
+    val kind = classify(t)
     if (kind != "UNKNOWN") aggKinds.println(Seq(t.id.toString, b64(kind)).mkString("\t"))
   } finally aggKinds.close()
 
