@@ -1,10 +1,15 @@
-# Design note: unsigned-underflow-fed length/offset capability (not built this round)
+# Design note: unsigned-underflow-fed length/offset capability
 
-**Status: designed, not implemented.** This is the "biggest build" item from the
-improvement notes — best-corroborated (3 independent hits: 2 old-TChecker-corpus CVEs +
-this session's `hmacct.c` write-2), but a real build, not a quick addition. Writing up the
-design now that a key piece of infrastructure turned out to already exist, so the next
-pass can start from a scoped plan instead of from scratch.
+**Status: BUILT and validated** — `cap_underflow_length.py` /
+`cap_underflow_length_test.py` / `cap_controls/underflow/`, results in
+`UNDERFLOW_CAPABILITY_RESULTS.md` (11/11 synthetic checks pass; real-world run against
+mozilla/nss `lib/freebl` found the exact motivating `hmacct.c::MAC` site plus 26 more
+candidates). This is the "biggest build" item from the improvement notes —
+best-corroborated (3 independent hits: 2 old-TChecker-corpus CVEs + this session's
+`hmacct.c` write-2). The design below is unchanged from when it was written (before
+implementation); the scoped-first-cut shape it describes is exactly what got built —
+see the results doc for what shipped vs. what stayed explicitly out of scope
+(pointer-arithmetic offsets).
 
 ## The gap
 
