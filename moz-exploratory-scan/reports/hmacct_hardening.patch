@@ -1,0 +1,78 @@
+Hardening patch proposal: lib/freebl/hmacct.c::MAC() -- enforce the invariant
+overhang computation depends on, instead of borrowing it from the one current caller.
+
+Context (full writeup in AUDIT_hmacct_MAC.md): `overhang = headerLen - mdBlockSize`
+underflows as an unsigned int if `headerLen < mdBlockSize`. The one real caller
+(ssl3con.c's internal SSLv3/TLS record-MAC code) always supplies headerLen=71 or 75
+(fixed by protocol format), so this never fires today -- but nothing in hmacct.c or
+softoken's SetupMAC()/sftk_SSLv3MACConstantTime_New() enforces the invariant locally;
+it is borrowed entirely from that one caller's behavior. A future or alternate
+PKCS#11-layer caller supplying a short/empty MAC key to CKM_SSL3_MD5_MAC/SHA1_MAC
+would violate it: headerLen could drop below mdBlockSize (64), producing a
+multi-gigabyte out-of-bounds read (from a 75-byte header buffer) and write (into a
+144-byte firstBlock) via the underflowed `overhang`.
+
+Fix: check the invariant explicitly, at the point that depends on it, rather than
+trusting the caller. MAC() currently has no failure return path at all (always
+returns SECSuccess) -- this patch adds one, consistent with how its own callers
+(HMAC_ConstantTime / SSLv3_MAC_ConstantTime) already propagate a SECStatus and are
+already called through PORT_CheckSuccess by softoken.
+
+--- a/lib/freebl/hmacct.c
++++ b/lib/freebl/hmacct.c
+@@ -174,6 +174,13 @@ static SECStatus
+     if (k > 0) {
+         if (isSSLv3) {
++            /* The overhang computation below assumes headerLen >= mdBlockSize (true
++             * for every real SSLv3/TLS header this function is documented to accept
++             * -- see the top-of-file comment -- but not otherwise enforced anywhere
++             * in this call chain). Check it explicitly rather than borrow the
++             * invariant from the one caller that currently happens to satisfy it:
++             * an unsigned underflow here would turn into a multi-gigabyte
++             * out-of-bounds read of |header| and write into |firstBlock|. */
++            if (headerLen < mdBlockSize) {
++                PORT_SetError(SEC_ERROR_INPUT_LEN);
++                return SECFailure;
++            }
+             /* The SSLv3 header is larger than a single block.
+              * overhang is the number of bytes beyond a single
+              * block that the header consumes: either 7 bytes
+
+Also apply the same style of check to write 1 (line ~152), upgrading the
+already-dead-in-release PORT_Assert to a real check -- not because it is reachable
+today (SetupMAC()'s own `secretLength > sizeof(secret)` check already bounds it to
+<=64, comfortably under hmacPad's 144-byte capacity), but because MAC()'s own local
+bound (`sizeof(hmacPad)` = 144) is looser than what SetupMAC() enforces (<=64) --
+a future caller supplying a secret between 65 and 144 bytes would be safe for MAC()
+itself but currently rejected one frame up by a stricter, unrelated check. Making
+MAC() assert its own real bound decouples the two and documents the actual local
+contract:
+
+--- a/lib/freebl/hmacct.c
++++ b/lib/freebl/hmacct.c
+@@ -149,7 +149,10 @@ static SECStatus
+         bits += 8 * mdBlockSize;
+         memset(hmacPad, 0, mdBlockSize);
+-        PORT_Assert(macSecretLen <= sizeof(hmacPad));
++        if (macSecretLen > sizeof(hmacPad)) {
++            PORT_SetError(SEC_ERROR_INPUT_LEN);
++            return SECFailure;
++        }
+         memcpy(hmacPad, macSecret, macSecretLen);
+
+Validation this patch would need before landing (not done here -- this is a proposal,
+not an applied/tested change):
+  - NSS's own test suite (softoken PKCS#11 MAC mechanism tests, SSL/TLS record-MAC
+    tests) -- confirm the new failure paths are never hit by real traffic, and that
+    HMAC_ConstantTime/SSLv3_MAC_ConstantTime's existing SECFailure handling in
+    sftk_*ConstantTime_Update (via PORT_CheckSuccess) degrades sanely rather than
+    crashing when MAC() newly returns failure.
+  - Constant-time review: the new `if` at the top of the isSSLv3 branch is a
+    length-dependent (not secret-dependent) branch -- headerLen/mdBlockSize are
+    public protocol parameters, not the secret data this function exists to process
+    in constant time, so this should not reopen a timing side-channel, but that
+    reasoning should be checked against NSS's own constant-time review process
+    before landing, not assumed here.
+
+Not filed upstream -- this is a local proposal for review, per the exploratory-scan
+scope (no CVE-based selection, no changes committed to any frozen branch).
