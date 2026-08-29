@@ -110,23 +110,36 @@ def analyze_addr_indexed(cpp):
         base, index_expr = m.group(1).replace(" ", ""), m.group(2)
         fn_id = c.get("enclosing_function_id")
         cap, why = base_capacity(fn_id, base, stack_ext, heap_ext, locals_idx)
-        offset = _int(index_expr)
+        # A side-effecting index (++/--, embedded assignment, or a call) makes the offset
+        # value AND pointer validity unresolved -- never compute a remaining capacity.
+        side_effect = bool(re.search(r"\+\+|--|(?<![<>=!])=(?!=)|[A-Za-z_]\w*\s*\(", index_expr))
+        offset = None if side_effect else _int(index_expr)
         width = (args[wi].get("code") or "").strip() if (wi is not None and wi < len(args)) else None
         rec = {"function": fns.get(fn_id, {}).get("name"), "line": c.get("line"),
                "capability": "addr_indexed", "dest": dest_code, "base": base,
                "index": index_expr, "offset": offset, "width_expr": width,
-               "sink": c.get("name")}
+               "sink": c.get("name"), "remaining_capacity": None}
         if cap is None:
-            rec.update(route="additional_evidence_required", reason=why,
-                       remaining_capacity=None)
+            rec.update(route="additional_evidence_required", reason=why)
         elif cap["provenance"] == "heap_direct_allocation" or not isinstance(cap.get("element_count"), int):
             rec.update(route="additional_evidence_required", reason="base_capacity_symbolic",
-                       remaining_capacity=None, base_provenance=cap["provenance"])
+                       base_provenance=cap["provenance"])
+        elif side_effect:
+            rec.update(route="additional_evidence_required", reason="side_effecting_index",
+                       base_capacity=cap["element_count"], base_provenance=cap["provenance"])
         elif offset is None:
             rec.update(route="additional_evidence_required", reason="offset_not_numeric",
-                       remaining_capacity=None, base_capacity=cap["element_count"],
-                       base_provenance=cap["provenance"])
+                       base_capacity=cap["element_count"], base_provenance=cap["provenance"])
+        elif offset < 0:
+            # &base[-k] points before the buffer -> pointer validity unresolved; do NOT
+            # treat capacity+|offset| as available. Abstain.
+            rec.update(route="additional_evidence_required",
+                       reason="negative_offset_pointer_validity_unresolved",
+                       base_capacity=cap["element_count"], base_provenance=cap["provenance"])
         else:
+            # 0 <= offset: the pointer &base[offset] is in-range for offset <= capacity
+            # (offset == capacity is the one-past-the-end pointer -> remaining 0). Beyond
+            # capacity the pointer itself is out of bounds -> oversized.
             remaining = cap["element_count"] - offset
             rec["remaining_capacity"] = remaining
             rec["base_capacity"] = cap["element_count"]

@@ -37,6 +37,13 @@ def main():
         ("UNIT int-array element units (remaining8, ok)", one("unitcase").get("remaining_capacity") == 8 and one("unitcase").get("disposition") == "deterministic_complete"),
         ("NONARRAY pointer param -> no false bind", one("nonarray").get("reason") == "capacity_of_base_unresolved"),
         ("AMBIG shadowed decls -> abstain", all(o.get("reason") == "conflicting_base_decls" for o in ops.get("ambig", [{}]))),
+        # safety-critical edge controls: 'remaining capacity' must never be treated as
+        # established while pointer validity or index arithmetic is unresolved.
+        ("NEGIDX negative index -> abstain (no cap+1)", one("negidx").get("reason") == "negative_offset_pointer_validity_unresolved" and one("negidx").get("remaining_capacity") is None),
+        ("ONEPASTEND offset==cap -> remaining0, positive write not 'safe'", one("onepast").get("remaining_capacity") == 0 and one("onepast").get("disposition") != "deterministic_complete"),
+        ("SYMARITH symbolic index arithmetic -> abstain", one("symarith").get("reason") == "offset_not_numeric"),
+        ("SIDEEFFECT side-effecting index -> abstain", one("sideeffect").get("reason") == "side_effecting_index"),
+        ("UNITMISMATCH byte width vs element array -> abstain", one("unitmismatch").get("disposition") == "relationship_unresolved" and one("unitmismatch").get("route") != "deterministic_complete"),
     ]
     ok = True
     for name, c in checks:

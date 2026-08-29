@@ -1,16 +1,18 @@
 {
+  "SND_result_precise": "0/5 recognized -> 5/5 recognized with correct abstention; 0/5 capacity relationships resolved. This is a representation-coverage improvement (the positioned-write op is now VISIBLE and routed), NOT an evidence-resolution improvement: the five SND writes still route additional_evidence_required because the backing capacity is a reallocating struct field (capacity_of_base_unresolved). Resolving that capacity would need a separate realloc/struct-field extent model.",
   "acceptance_criteria": {
     "conflict_ambiguity_controls": "PASS (AMBIG shadowed decls -> abstain conflicting_base_decls)",
     "declaration_identity_binding": "PASS (base resolved to decl; NONARRAY pointer-param -> no false bind)",
     "held_out_corpus_measurement": "PENDING (SecVulEval statement-level; must be fetched + frozen before evaluation; Magma is dev-only)",
     "magma_dev_site_recovery": "PASS (real SND site: frozen v2 = 0 ops unchanged; cap1 recognizes all 5 &(psf->header.ptr[indx]) writes, route additional_evidence_required reason capacity_of_base_unresolved -- recognized, no false capacity claim)",
     "offset_and_unit_handling": "PASS (POS3 byte array; UNIT int array element-units, sizeof cancels)",
+    "safety_critical_edge_controls": "PASS (negative index, one-past-the-end, symbolic index arithmetic, side-effecting index, offset-unit mismatch all ABSTAIN -- 'remaining capacity' is never treated as established while pointer validity or arithmetic is unresolved)",
     "synthetic_positive_negative_controls": "PASS (POS1/2/3, NEG1/2/3)",
     "unchanged_existing_verdicts": "PASS (0 cap1 ops on Juliet 224 files + CWE121/122 broaden batch + bare-local file; frozen v2 untouched, additive by construction)"
   },
   "capability": "1 - address-of indexed destination &(base[index])",
   "capacity_rule": "base capacity taken ONLY from independently-established evidence (local fixed-array decl or ESTABLISHED heap extent); struct-field / realloc / parameter bases left UNRESOLVED, never assumed.",
-  "controls": "cap_controls/cap1/{controls.c,controls2.c}; harness cap_addr_indexed_test.py (11 checks, ALL PASS)",
+  "controls": "cap_controls/cap1/{controls.c,controls2.c,controls3.c}; harness cap_addr_indexed_test.py (16 checks, ALL PASS)",
   "model_calls": 0,
   "note": "Recognition is additive and independent of vuln/fixed; it makes the positioned-write op VISIBLE and routed for evidence rather than silently dropped. It does NOT by itself resolve the SND capacity (realloc'd) -- that would need capability for realloc/struct-field extents, a separate model.",
   "type": "general representation-shape evidence model (additive; not a bug-name alias)"
