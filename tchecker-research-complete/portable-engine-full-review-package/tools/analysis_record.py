@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Analysis-record taxonomy for TChecker's automatic bucket layer -- FROZEN v1.
+"""Analysis-record taxonomy for TChecker's automatic bucket layer -- FROZEN v2.
+
+SCHEMA_VERSION "2" (bumped from "1" to add `delegated_to_stack_capacity_v2` -- a
+REROUTED handoff, same shape as the pre-existing `free_dominates_sink`, for a V1
+non-heap destination whose CPG-resolved structure is known but whose capacity
+adjudication belongs to V2's stack-capacity integration, never to V1 itself; see
+`oob_runtime_capacity_verdict.diagnose_nonbare_destination`'s `fixed()`). No
+existing reason code's condition, bucket, route, or llm_eligible changed.
 
 SCHEMA_VERSION "1" freezes: the reason codes, their exact conditions, the bucket
 mappings, the ROUTES (keyed on reason, not merely bucket), the llm_eligible flag,
@@ -28,6 +35,7 @@ per-reason. The bucket names the broad cause; the reason + property name the tas
   destination_identity_ambiguous           identity_ambiguous        additional_evidence_required  n
   required_evidence_absent                 insufficient_evidence     additional_evidence_required  n
   free_dominates_sink                      (none: rerouted)          lifetime_analysis             n
+  delegated_to_stack_capacity_v2           (none: rerouted)          stack_object_capacity_adjudication  n
 
 semantic_contract_review is DISTINCT from a generic LLM review: the task is to
 ESTABLISH an allocator/callee contract from implementation, documentation, or
@@ -44,12 +52,23 @@ adjudicator confirms identity, no replacement definition, a feasible post-free
 path, and an actual dereference. Until that layer exists it is a deterministic
 lifetime CANDIDATE, not a finding.
 
+delegated_to_stack_capacity_v2 is the same shape of handoff, for a different
+producer boundary: the V1 heap-capacity producer has no capacity SOURCE for a
+stack array, struct-member array, or scalar object (only for heap allocations).
+When it CPG-resolves a non-heap destination's structure (element type, element
+count, offset, the write's raw width expression) it hands those facts off rather
+than guessing or finalizing a comparison itself -- V2's stack-capacity
+integration is the one arithmetic owner for that adjudication, for both bare and
+non-bare destinations alike. It is never emitted as a candidate-review bucket
+(bucket=None, llm_eligible=False) because the next step is deterministic
+arithmetic, not a semantic judgment call.
+
 PRECEDENCE: producers emit ALL detected reasons in `all_reason_codes`; the PRIMARY
 reason (which fixes the bucket) is the EARLIEST FAILED PREREQUISITE below -- never
 dict/iteration order.
 """
 
-SCHEMA_VERSION = "1"
+SCHEMA_VERSION = "2"
 
 ANALYSIS_STATUSES = ("open_candidate", "abstained", "deterministic_complete", "rerouted")
 
@@ -99,6 +118,13 @@ REASON_DEFINITIONS = {
         "bucket": None, "unresolved_property": None,
         "route": "lifetime_analysis", "llm_eligible": False,
         "analysis_status": "rerouted", "candidate_class": "lifetime_use_after_invalidation"},
+    "delegated_to_stack_capacity_v2": {
+        "condition": "destination resolves (via CPG reference-target) to a fixed "
+                     "stack/object extent -- an array or a scalar; V1 has no capacity "
+                     "SOURCE for non-heap objects and does not adjudicate",
+        "bucket": None, "unresolved_property": None,
+        "route": "stack_object_capacity_adjudication", "llm_eligible": False,
+        "analysis_status": "rerouted", "candidate_class": "stack_object_capacity_pending"},
 }
 
 CANDIDATE_REVIEW_BUCKETS = ("relationship_unresolved", "external_contract_unknown",

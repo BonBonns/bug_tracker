@@ -36,8 +36,18 @@ void eg_bare_alloc_open(const char *src, int n, int m) { char *p = malloc(n); me
  * resolution the diagnosis must perform (NOT a text pattern).
  * ------------------------------------------------------------------------- */
 
-/* &local_scalar: &obj, obj is int -> fixed extent 4, offset 0, width 4 => within-bounds. */
+/* &local_scalar: &obj, obj is int -> fixed extent 4, offset 0, LITERAL BYTE width
+ * "4" (not sizeof(int)) => relationship_unresolved: comparing a raw byte literal
+ * against a 1-int extent would require assuming sizeof(int)==4, an ABI fact this
+ * arithmetic never assumes without a real sizeof() in the width expression. */
 void f_addr_scalar(const char *src) { int obj; memcpy(&obj, src, 4); }
+
+/* &local_scalar with a WIDTH EXPRESSED AS sizeof(int): unit-safe by construction
+ * (k_sizeof, k=1, wt="int" == element_type "int") -> 1<=1 => deterministic_complete.
+ * Proves the delegated scalar path actually reaches a safe verdict when the
+ * width expression itself carries the unit relationship, rather than only ever
+ * proving the two symbolic/unit-mismatch abstention traps. */
+void f_addr_scalar_sizeof(const char *src) { int obj; memcpy(&obj, src, sizeof(int)); }
 
 /* fixed-array MEMBER: s->buf is char[16] -> member extent KNOWN, symbolic width
  * => capacity_relation_not_established (fixed_array_member). */
