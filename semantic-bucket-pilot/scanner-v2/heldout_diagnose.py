@@ -40,7 +40,8 @@ def _recognized_no_cap3(cpp_path):
     for r in ops:
         out.append({"producer": "cap2_wrapper", "function": r.get("function"),
                     "line": r.get("line"), "dest": r.get("dest")})
-    for r in C2L.analyze_counted_writers(cpp_path):
+    cl = C2L.analyze_counted_writers(cpp_path)
+    for r in (cl[0] if isinstance(cl, tuple) else cl):
         out.append({"producer": "cap2_counted_loop", "function": r.get("function"),
                     "line": r.get("line"), "dest": r.get("dest")})
     for r in C4.analyze_decoder_calls(cpp_path):

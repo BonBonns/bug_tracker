@@ -92,7 +92,8 @@ def recognized_records(cpp):
     except Exception as e:
         out.append({"producer": "cap2_wrapper", "error": str(e)})
     try:
-        for r in C2L.analyze_counted_writers(cpp):
+        cl = C2L.analyze_counted_writers(cpp)
+        for r in (cl[0] if isinstance(cl, tuple) else cl):   # returns (ops, summaries)
             out.append({"producer": "cap2_counted_loop", "function": r.get("function"),
                         "line": r.get("line"), "dest": r.get("dest"),
                         "status": r.get("disposition"), "reason": r.get("reason"),
