@@ -64,7 +64,8 @@
       "heldout_run.py": "24f1ad3500fabd76ffb179fd67d9afdccc6cf6d74f276f949234fdf20e7c5e4d",
       "heldout_summarize.py": "494a7f219d0eb155d21a9dccc06dfc1c14791bbdc3410142eb5ab174e6bde1ba"
     },
-    "scanner_implementation_commit": "544a606f915a68c8253258a241ae782150dea272"
+    "scanner_implementation_commit": "544a606f915a68c8253258a241ae782150dea272",
+    "timing_disclosure": "The scanner, corpus, and runner content were fixed before the final run. The manifest's administrative provenance addendum and the frozen summarizer/deviation updates were committed DURING execution (at ~123 rows), before completion and before inspection of the final raw output. The running scanner and runner files did not change. The complete manifest is NOT described as pre-execution frozen; only the scanner/corpus/runner content is."
   },
   "run": "one_time_heldout_confirmatory",
   "scanner_commit": "544a606f915a68c8253258a241ae782150dea272",
