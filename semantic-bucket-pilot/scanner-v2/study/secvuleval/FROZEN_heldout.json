@@ -1,0 +1,2622 @@
+{
+  "FROZEN": true,
+  "confirmatory_protocol": "Run ALL frozen capabilities (1-4) on these 44 sites exactly ONCE, scoring exact-site recognition + evidence + route against the external is_vulnerable/statement labels. No capability may be designed or tuned using any result from this corpus.",
+  "counts": {
+    "by_cwe": {
+      "CWE-120": 8,
+      "CWE-122": 5,
+      "CWE-787": 31
+    },
+    "by_project": {
+      "ImageMagick": 1,
+      "ImageMagick6": 1,
+      "LibRaw": 1,
+      "aircrack-ng": 1,
+      "clickhouse-driver": 1,
+      "core": 1,
+      "curl": 1,
+      "ettercap": 1,
+      "gpac": 4,
+      "hhvm": 1,
+      "htmldoc": 1,
+      "jhead": 1,
+      "jq": 1,
+      "libwebp": 1,
+      "linux": 7,
+      "lldpd": 1,
+      "mujs": 1,
+      "openexr-viewer": 1,
+      "openjpeg": 1,
+      "pdfresurrect": 1,
+      "pjproject": 1,
+      "podofo": 1,
+      "qtsvg": 1,
+      "sgxwallet": 1,
+      "sleuthkit": 1,
+      "tensorflow": 1,
+      "tmux": 1,
+      "uwsgi": 1,
+      "vim": 6,
+      "wolfssl": 1
+    },
+    "included_sites": 44,
+    "non_vulnerable": 31,
+    "vulnerable": 13
+  },
+  "exclusions": {
+    "ambiguous_cwe_119": 30,
+    "duplicate_site": 0,
+    "magma_overlap_project": 0,
+    "other_cwe_not_write": 227
+  },
+  "family_definition": "Frozen by RULE, applied ONCE at the confirmatory measurement (not computed now, to avoid inspecting yields): cluster included sites by the destination-write PROOF OBLIGATION / representation shape (the same obligation-level unit used for Juliet and Magma), reported separately from external CWE category. Coarse external family = CWE write-category (787 OOB-write / 122 heap-overflow / 120 buffer-copy-overflow).",
+  "held_out_rule": "Capability yields are NOT inspected on this corpus. Capabilities 2-4 are developed using ONLY Magma + synthetic controls. All frozen capabilities are run on this corpus ONCE as the confirmatory measurement.",
+  "inclusion_rule": "external labels + destination-capacity WRITE property ONLY (NOT any TChecker outcome): CWE in {787 OOB-write, 122 heap-overflow, 120 buffer-copy-overflow}; exclude CWE-119 (read-or-write ambiguous); remove Magma-overlap projects (php-src/openssl/libsndfile/... ); dedup by (project,commit,filepath,func_name).",
+  "model_calls": 0,
+  "pinned_commit": "d937c2453939a53d5c72c09bf93a06c39d8156c9",
+  "random_subset_sha256": "5e7f8a7fea9a8a017e0fbf3f945631c8cb6439eb51d6c90aa7ee68fcdb7d87bc",
+  "sites": [
+    {
+      "commit_id": "a868bacb46e3c900530bed47a1c6f85b0fbe701c",
+      "cve": "CVE-2020-27347",
+      "cwe": "CWE-787",
+      "filepath": "input.c",
+      "func_body_sha256": "a25e509c74f16cba705d67c75b54a2adcf0e21e7ecd600036782931c9fcde0a2",
+      "func_name": "input_csi_dispatch_sgr_colon",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          1979,
+          "\t\t} else"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1979,
+          "else"
+        ]
+      ],
+      "project": "tmux",
+      "site_id": "70d25e73d8e88cc4"
+    },
+    {
+      "commit_id": "71c2ab509a8628dbbad4bc7b3f98a64aa90d3297",
+      "cve": "CVE-2023-50246",
+      "cwe": "CWE-787",
+      "filepath": "src/jv.c",
+      "func_body_sha256": "c7441d4da50514d2a9b24d701b8fc009ca18c75ee99d41ddfb8b1b34e254ce7d",
+      "func_name": "jvp_literal_number_literal",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          638,
+          "    int len = jvp_dec_number_ptr(n)->digits + 14;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          638,
+          "int len = jvp_dec_number_ptr(n)->digits + 14;"
+        ]
+      ],
+      "project": "jq",
+      "site_id": "a2faef84e20a68f6"
+    },
+    {
+      "commit_id": "5186ddcf9e35a7aa0ff0539489a930434a1325f4",
+      "cve": "CVE-2020-26208",
+      "cwe": "CWE-787",
+      "filepath": "jpgfile.c",
+      "func_body_sha256": "d11d55783918f688374cbc09e02986fc82cc313ea6ff6b47e1e20e3954343459",
+      "func_name": "ReadJpegSections",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          172,
+          "        Data = (uchar *)malloc(itemlen);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          172,
+          "Data = (uchar *)malloc(itemlen);"
+        ]
+      ],
+      "project": "jhead",
+      "site_id": "7521f17dae966f80"
+    },
+    {
+      "commit_id": "bc3aaf4223fdb70d52d470dae65c5a7923ea2a49",
+      "cve": "CVE-2021-32142",
+      "cwe": "CWE-787",
+      "filepath": "src/libraw_datastream.cpp",
+      "func_body_sha256": "51bb29eae75b91179145f99ac16042e5290f0e955cc62f4d31803a7b77f662e3",
+      "func_name": "LibRaw_file_datastream::gets",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          290,
+          "  if(sz<1) return NULL;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          290,
+          "if(sz<1)"
+        ]
+      ],
+      "project": "LibRaw",
+      "site_id": "647dc9ecce9a4f4f"
+    },
+    {
+      "commit_id": "1273cdc706eeedf8346d4b9faa5b33435056061d",
+      "cve": "CVE-2021-33362",
+      "cwe": "CWE-787",
+      "filepath": "src/media_tools/av_parsers.c",
+      "func_body_sha256": "6b6c9674a813bfb164fe2b7df563ebc063edfed07fa52a06adc7d2c5c5800294",
+      "func_name": "hevc_parse_vps_extension",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          7478,
+          "\tif (vps->num_output_layer_sets > MAX_LHVC_LAYERS) {"
+        ],
+        [
+          7479,
+          "\t\tGF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Wrong number of output layer sets in VPS %d, max %d supported\\n\", vps->num_output_layer_sets, MAX_LHVC_LAYERS));"
+        ],
+        [
+          7480,
+          "\t\tvps->num_output_layer_sets = 1;"
+        ],
+        [
+          7481,
+          "\t\treturn GF_FALSE;"
+        ],
+        [
+          7482,
+          "\t}"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          7478,
+          "if (vps->num_output_layer_sets > MAX_LHVC_LAYERS)"
+        ],
+        [
+          7479,
+          "GF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Wrong number of output layer sets in VPS %d, max %d supported\\n\", vps->num_output_layer_sets, MAX_LHVC_LAYERS));"
+        ],
+        [
+          7480,
+          "vps->num_output_layer_sets = 1;"
+        ],
+        [
+          7481,
+          "return GF_FALSE;"
+        ],
+        [
+          7482,
+          "\t}\n"
+        ]
+      ],
+      "project": "gpac",
+      "site_id": "ecb9e8dba33927e2"
+    },
+    {
+      "commit_id": "71fe87878c9cbc3db429f5e5c70f28e4b3d96e3b",
+      "cve": "CVE-2022-0137",
+      "cwe": "CWE-787",
+      "filepath": "htmldoc/image.cxx",
+      "func_body_sha256": "1b01bc3880a94da449598cac7343e2d6e4e226288f921d1953c537fefa94371d",
+      "func_name": "image_load_gif",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          1346,
+          "          img->width  = (buf[5] << 8) | buf[4];"
+        ],
+        [
+          1347,
+          "          img->height = (buf[7] << 8) | buf[6];"
+        ],
+        [
+          1348,
+          "          img->depth  = gray ? 1 : 3;"
+        ],
+        [
+          1349,
+          ""
+        ],
+        [
+          1350,
+          "\t  if (img->width <= 0 || img->width > 32767 || img->height <= 0 || img->height > 32767)"
+        ],
+        [
+          1351,
+          "\t    return (-1);"
+        ],
+        [
+          1352,
+          ""
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1304,
+          "case ',' :\t/* Image data */\n          fread(buf, 9, 1, fp);\n\n          if (buf[8] & GIF_COLORMAP)\n          {\n            ncolors = 2 << (buf[8] & 0x07);\n\n\t    if (gif_read_cmap(fp, ncolors, cmap, &gray))\n\t      return (-1);\n\t  }\n\n          if (transparent >= 0)\n          {\n           /*\n            * Map transparent color to background color...\n            */\n\n            if (BodyColor[0])\n\t    {\n\t      float rgb[3]; /* RGB color */\n\n\n\t      get_color((uchar *)BodyColor, rgb);\n\n\t      cmap[transparent][0] = (uchar)(rgb[0] * 255.0f + 0.5f);\n\t      cmap[transparent][1] = (uchar)(rgb[1] * 255.0f + 0.5f);\n\t      cmap[transparent][2] = (uchar)(rgb[2] * 255.0f + 0.5f);\n\t    }\n\t    else\n\t    {\n\t      cmap[transparent][0] = 255;\n              cmap[transparent][1] = 255;\n              cmap[transparent][2] = 255;\n\t    }\n\n           /*\n\t    * Allocate a mask image...\n\t    */\n\n            image_need_mask(img);\n\t  }\n\n          img->width  = (buf[5] << 8) | buf[4];\n          img->height = (buf[7] << 8) | buf[6];\n          img->depth  = gray ? 1 : 3;\n\n\t  if (img->width <= 0 || img->width > 32767 || img->height <= 0 || img->height > 32767)\n\t    return (-1);\n\n\t  if (!load_data)\n\t    return (0);\n\n          img->pixels = (uchar *)malloc((size_t)(img->width * img->height * img->depth));\n          if (img->pixels == NULL)\n            return (-1);\n\n\t  return (gif_read_image(fp, img, cmap, buf[8] & GIF_INTERLACE, transparent));"
+        ],
+        [
+          1346,
+          "img->width  = (buf[5] << 8) | buf[4];"
+        ],
+        [
+          1347,
+          "img->height = (buf[7] << 8) | buf[6];"
+        ],
+        [
+          1348,
+          "img->depth  = gray ? 1 : 3;"
+        ],
+        [
+          1350,
+          "if (img->width <= 0 || img->width > 32767 || img->height <= 0 || img->height > 32767)"
+        ],
+        [
+          1351,
+          "return (-1);"
+        ]
+      ],
+      "project": "htmldoc",
+      "site_id": "8701a92e4efbf8e7"
+    },
+    {
+      "commit_id": "ca72d88378b2f2444d3ec145dd442d449d3fefbc",
+      "cve": "CVE-2019-12817",
+      "cwe": "CWE-787",
+      "filepath": "arch/powerpc/mm/mmu_context_book3s64.c",
+      "func_body_sha256": "e3d8d3fbc4cd5c5b1ce5440138b157e83b08355412c6b384d58100afe0eb1d82",
+      "func_name": "hash__init_new_context",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          117,
+          "\tindex = realloc_context_ids(&mm->context);\n"
+        ],
+        [
+          118,
+          "\tif (index < 0)\n"
+        ],
+        [
+          119,
+          "\t\treturn index;\n"
+        ],
+        [
+          120,
+          "\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          117,
+          "index = realloc_context_ids(&mm->context);"
+        ],
+        [
+          118,
+          "if (index < 0)"
+        ],
+        [
+          119,
+          "return index;"
+        ],
+        [
+          120,
+          "\n"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "ec92de806f46651c"
+    },
+    {
+      "commit_id": "66abf0887c89c29a484d9e65e70882794e9e3a1b",
+      "cve": "CVE-2023-48014",
+      "cwe": "CWE-787",
+      "filepath": "src/media_tools/av_parsers.c",
+      "func_body_sha256": "4ad8e428063dda186eb8a495f9a0a6406c039c8f8abb484b4318e93b4f2bbc8b",
+      "func_name": "hevc_parse_vps_extension",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          7729,
+          "\t\t\tu32 num_bits=0;"
+        ],
+        [
+          7730,
+          "\t\t\tfor (i = 0; i < num_scalability_types-1; i++) {"
+        ],
+        [
+          7732,
+          "\t\t\t\tnum_bits+=dimension_id_len[i];"
+        ],
+        [
+          7736,
+          "\t\t\tif (num_bits>=6) {"
+        ],
+        [
+          7737,
+          "\t\t\t\tGF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Too many its defined for dimension IDs (%d vs 5 max)\\n\", num_bits));"
+        ],
+        [
+          7738,
+          "\t\t\t\treturn -1;"
+        ],
+        [
+          7739,
+          "\t\t\t}"
+        ],
+        [
+          7740,
+          "\t\t\tdimension_id_len[num_scalability_types - 1] = 6 - num_bits; //1 + (5 - dim_bit_offset[num_scalability_types - 1]);"
+        ],
+        [
+          7741,
+          "\t\t\tdim_bit_offset[num_scalability_types - 1] = 6;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          7729,
+          "u32 num_bits=0;"
+        ],
+        [
+          7730,
+          "for (i = 0; i < num_scalability_types-1; i++) {"
+        ],
+        [
+          7732,
+          "num_bits+=dimension_id_len[i];"
+        ],
+        [
+          7736,
+          "if (num_bits>=6)"
+        ],
+        [
+          7737,
+          "GF_LOG(GF_LOG_ERROR, GF_LOG_CODING, (\"[HEVC] Too many its defined for dimension IDs (%d vs 5 max)\\n\", num_bits));"
+        ],
+        [
+          7738,
+          "return -1;"
+        ],
+        [
+          7739,
+          "\t\t\t}\n"
+        ],
+        [
+          7740,
+          "\t\t\tdimension_id_len[num_scalability_types - 1] = 6 - num_bits; //1 + (5 - dim_bit_offset[num_scalability_types - 1]);\n"
+        ],
+        [
+          7741,
+          "dim_bit_offset[num_scalability_types - 1] = 6;"
+        ]
+      ],
+      "project": "gpac",
+      "site_id": "b2fa2bfde29c0966"
+    },
+    {
+      "commit_id": "89c6efa61f5709327ecfa24bff18e57a4e80c7fa",
+      "cve": "CVE-2017-18551",
+      "cwe": "CWE-787",
+      "filepath": "drivers/i2c/i2c-core-smbus.c",
+      "func_body_sha256": "5969f8baebdfd55354ba06ecfbdf18949dc3051d9b0149e4c6d966d47c56e3fb",
+      "func_name": "i2c_smbus_xfer_emulated",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          404,
+          "\t\t\tif (msg[0].len > I2C_SMBUS_BLOCK_MAX + 1) {\n"
+        ],
+        [
+          405,
+          "\t\t\t\tdev_err(&adapter->dev,\n"
+        ],
+        [
+          406,
+          "\t\t\t\t\t\"Invalid block write size %d\\n\",\n"
+        ],
+        [
+          407,
+          "\t\t\t\t\tdata->block[0]);\n"
+        ],
+        [
+          408,
+          "\t\t\t\treturn -EINVAL;\n"
+        ],
+        [
+          409,
+          "\t\t\t}\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          404,
+          "if (msg[0].len > I2C_SMBUS_BLOCK_MAX + 1)"
+        ],
+        [
+          405,
+          "dev_err(&adapter->dev,\n\t\t\t\t\t\"Invalid block write size %d\\n\",\n\t\t\t\t\tdata->block[0]);"
+        ],
+        [
+          408,
+          "return -EINVAL;"
+        ],
+        [
+          409,
+          "\t\t\t}\n"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "c82e826790d9b46f"
+    },
+    {
+      "commit_id": "902bc9190331343b2017211debcec8d2ab87e17a",
+      "cve": "CVE-2023-4863",
+      "cwe": "CWE-787",
+      "filepath": "src/dec/vp8l_dec.c",
+      "func_body_sha256": "51b12028e82d655b76c7620c794520502bf05d89429b69cd1b96f186ef7dbb2b",
+      "func_name": "ReadHuffmanCodeLengths",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          265,
+          "  HuffmanTables tables;"
+        ],
+        [
+          267,
+          "  if (!VP8LHuffmanTablesAllocate(1 << LENGTHS_TABLE_BITS, &tables) ||"
+        ],
+        [
+          268,
+          "      !VP8LBuildHuffmanTable(&tables, LENGTHS_TABLE_BITS,"
+        ],
+        [
+          269,
+          "                             code_length_code_lengths, NUM_CODE_LENGTH_CODES)) {"
+        ],
+        [
+          289,
+          "    p = &tables.curr_segment->start[VP8LPrefetchBits(br) & LENGTHS_TABLE_MASK];"
+        ],
+        [
+          312,
+          "  VP8LHuffmanTablesDeallocate(&tables);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          265,
+          "HuffmanTables tables;"
+        ],
+        [
+          267,
+          "if (!VP8LHuffmanTablesAllocate(1 << LENGTHS_TABLE_BITS, &tables) ||\n      !VP8LBuildHuffmanTable(&tables, LENGTHS_TABLE_BITS,\n                             code_length_code_lengths, NUM_CODE_LENGTH_CODES))"
+        ],
+        [
+          289,
+          "p = &tables.curr_segment->start[VP8LPrefetchBits(br) & LENGTHS_TABLE_MASK];"
+        ],
+        [
+          312,
+          "VP8LHuffmanTablesDeallocate(&tables);"
+        ]
+      ],
+      "project": "libwebp",
+      "site_id": "1b1ca3f7a2fc5968"
+    },
+    {
+      "commit_id": "df8559e7bdbc6065276e786217eeee70f28fce66",
+      "cve": "CVE-2021-45005",
+      "cwe": "CWE-787",
+      "filepath": "jscompile.c",
+      "func_body_sha256": "f73859b9d44d1c8f632cd3171540b25b0700b160d916ebd83b217663405f3736",
+      "func_name": "labeljumps",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          797,
+          "static void labeljumps(JF, js_Ast *stm, int baddr, int caddr)"
+        ],
+        [
+          799,
+          "\tjs_JumpList *jump = stm->jumps;"
+        ],
+        [
+          801,
+          "\t\tjs_JumpList *next = jump->next;"
+        ],
+        [
+          806,
+          "\t\tjs_free(J, jump);"
+        ],
+        [
+          807,
+          "\t\tjump = next;"
+        ],
+        [
+          809,
+          "\tstm->jumps = NULL;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          797,
+          "static void labeljumps(JF, js_Ast *stm, int baddr, int caddr)"
+        ],
+        [
+          799,
+          "js_JumpList *jump = stm->jumps;"
+        ],
+        [
+          801,
+          "js_JumpList *next = jump->next;"
+        ],
+        [
+          806,
+          "js_free(J, jump);"
+        ],
+        [
+          807,
+          "jump = next;"
+        ],
+        [
+          809,
+          "stm->jumps = NULL;"
+        ]
+      ],
+      "project": "mujs",
+      "site_id": "ed7288167f11a28f"
+    },
+    {
+      "commit_id": "ff70494dd389ba570dbdbf36f217c28d4381c6b5",
+      "cve": "CVE-2014-8321",
+      "cwe": "CWE-787",
+      "filepath": "src/airodump-ng.c",
+      "func_body_sha256": "865e62c0867a82c91835c20123f279c85ae4158dda63ba2d3e61c63323130227",
+      "func_name": "gps_tracker",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          4500,
+          "        \tif( recv( gpsd_sock, line + pos, sizeof( line ) - pos - 1, 0 ) <= 0 )"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          4500,
+          "if( recv( gpsd_sock, line + pos, sizeof( line ) - pos - 1, 0 ) <= 0 )"
+        ]
+      ],
+      "project": "aircrack-ng",
+      "site_id": "7791b007fc6703a8"
+    },
+    {
+      "commit_id": "535a786f124b739e3c857529cecc29e4eeb79778",
+      "cve": "CVE-2023-2241",
+      "cwe": "CWE-787",
+      "filepath": "src/podofo/main/PdfXRefStreamParserObject.cpp",
+      "func_body_sha256": "820ac8f53ee32b5ada312c3706cf4364df7cf5784cbcffeb4dea233bfdbb2e26",
+      "func_name": "PdfXRefStreamParserObject::ReadXRefTable",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          70,
+          "        PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
+        ],
+        [
+          78,
+          "            PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          70,
+          "PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
+        ],
+        [
+          78,
+          "PODOFO_RAISE_ERROR_INFO(PdfErrorCode::NoXRef, \"Invalid XRef stream /W array\");"
+        ]
+      ],
+      "project": "podofo",
+      "site_id": "90940c50fc31849c"
+    },
+    {
+      "commit_id": "1b422459f07353adce2878806d5247d9e91fb397",
+      "cve": "CVE-2020-20740",
+      "cwe": "CWE-787",
+      "filepath": "pdf.c",
+      "func_body_sha256": "9b1c4d20d8633fa8b209a8b7202ffb69a85856e3069dff3234b0fca100a51318",
+      "func_name": "pdf_get_version",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          196,
+          "    char *header, *c;"
+        ],
+        [
+          197,
+          ""
+        ],
+        [
+          198,
+          "    header = get_header(fp);"
+        ],
+        [
+          202,
+          "        (c + strlen(\"%PDF-M.m\") + 2))"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          196,
+          "char *header, *c;"
+        ],
+        [
+          197,
+          "\n"
+        ],
+        [
+          198,
+          "header = get_header(fp);"
+        ],
+        [
+          201,
+          "if ((c = strstr(header, \"%PDF-\")) && \n        (c + strlen(\"%PDF-M.m\") + 2))"
+        ]
+      ],
+      "project": "pdfresurrect",
+      "site_id": "ea6904b7c7402692"
+    },
+    {
+      "commit_id": "cb4636f7c0af2e97a4eef7a3cdcbd85a71247bfe",
+      "cve": "CVE-2018-6758",
+      "cwe": "CWE-787",
+      "filepath": "core/utils.c",
+      "func_body_sha256": "da19abdedd5e0fd5a22f419b70031edf90ce2a700a09a8a68c97e1169c54ca02",
+      "func_name": "uwsgi_expand_path",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          3677,
+          "\tif (dir_len > PATH_MAX)"
+        ],
+        [
+          3678,
+          "\t{"
+        ],
+        [
+          3679,
+          "\t\tuwsgi_log(\"invalid path size: %d (max %d)\\n\", dir_len, PATH_MAX);"
+        ],
+        [
+          3680,
+          "\t\treturn NULL;"
+        ],
+        [
+          3681,
+          "\t}"
+        ],
+        [
+          3682,
+          "\tchar *src = uwsgi_concat2n(dir, dir_len, \"\", 0);"
+        ],
+        [
+          3690,
+          "\t\tfree(src);"
+        ],
+        [
+          3693,
+          "\tfree(src);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          3677,
+          "if (dir_len > PATH_MAX)"
+        ],
+        [
+          3678,
+          "\t{\n"
+        ],
+        [
+          3679,
+          "uwsgi_log(\"invalid path size: %d (max %d)\\n\", dir_len, PATH_MAX);"
+        ],
+        [
+          3680,
+          "return NULL;"
+        ],
+        [
+          3681,
+          "\t}\n"
+        ],
+        [
+          3682,
+          "char *src = uwsgi_concat2n(dir, dir_len, \"\", 0);"
+        ],
+        [
+          3690,
+          "free(src);"
+        ],
+        [
+          3693,
+          "free(src);"
+        ]
+      ],
+      "project": "uwsgi",
+      "site_id": "30565a0962b03982"
+    },
+    {
+      "commit_id": "e2b3b35eb9896f26c98b9a2c047d9111638059a2",
+      "cve": "CVE-2018-16880",
+      "cwe": "CWE-787",
+      "filepath": "drivers/vhost/net.c",
+      "func_body_sha256": "78d4090a5bc40635d5129ac0692b7e08e350b637c8d684eb44ebcd118af77155",
+      "func_name": "handle_rx",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          759,
+          "\ts16 headcount, nheads = 0;\n"
+        ],
+        [
+          787,
+          "\t\theadcount = get_rx_bufs(vq, vq->heads + nheads, vhost_len,\n"
+        ],
+        [
+          859,
+          "\t\tnheads += headcount;\n"
+        ],
+        [
+          860,
+          "\t\tif (nheads > VHOST_RX_BATCH) {\n"
+        ],
+        [
+          861,
+          "\t\t\tvhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n"
+        ],
+        [
+          862,
+          "\t\t\t\t\t\t    nheads);\n"
+        ],
+        [
+          863,
+          "\t\t\tnheads = 0;\n"
+        ],
+        [
+          864,
+          "\t\t}\n"
+        ],
+        [
+          875,
+          "\tif (nheads)\n"
+        ],
+        [
+          876,
+          "\t\tvhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n"
+        ],
+        [
+          877,
+          "\t\t\t\t\t    nheads);\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          759,
+          "s16 headcount, nheads = 0;"
+        ],
+        [
+          787,
+          "headcount = get_rx_bufs(vq, vq->heads + nheads, vhost_len,\n\t\t\t\t\t&in, vq_log, &log,\n\t\t\t\t\tlikely(mergeable) ? UIO_MAXIOV : 1);"
+        ],
+        [
+          859,
+          "nheads += headcount;"
+        ],
+        [
+          860,
+          "if (nheads > VHOST_RX_BATCH)"
+        ],
+        [
+          861,
+          "vhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n\t\t\t\t\t\t    nheads);"
+        ],
+        [
+          863,
+          "nheads = 0;"
+        ],
+        [
+          864,
+          "\t\t}\n"
+        ],
+        [
+          875,
+          "if (nheads)"
+        ],
+        [
+          876,
+          "vhost_add_used_and_signal_n(&net->dev, vq, vq->heads,\n\t\t\t\t\t    nheads);"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "4fca564f61682c5a"
+    },
+    {
+      "commit_id": "be1684930f5262a622d40ce7a6f1423530d87f89",
+      "cve": "CVE-2024-46725",
+      "cwe": "CWE-787",
+      "filepath": "drivers/gpu/drm/amd/amdgpu/amdgpu_ring.c",
+      "func_body_sha256": "07048f201ebb02f3208b261b79aaed0b31fbb7352381bd655bfcba3875c4aa43",
+      "func_name": "amdgpu_ring_init",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          355,
+          "\tif (!ring->no_scheduler && ring->funcs->type < AMDGPU_HW_IP_NUM) {\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          355,
+          "if (!ring->no_scheduler && ring->funcs->type < AMDGPU_HW_IP_NUM)"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "127cd0d8e9215768"
+    },
+    {
+      "commit_id": "ba1dbd78e5f1ed67c1b8d37ac89d90e5e330b628",
+      "cve": "CVE-2018-0500",
+      "cwe": "CWE-787",
+      "filepath": "lib/smtp.c",
+      "func_body_sha256": "2a29c8ec08fa30f3955edc76bb66ffb123516dcdd230e0a33ec4a28d35096bd1",
+      "func_name": "Curl_smtp_escape_eob",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1566,
+          "    scratch = newscratch = malloc(2 * UPLOAD_BUFSIZE);"
+        ],
+        [
+          1573,
+          "  DEBUGASSERT(UPLOAD_BUFSIZE >= nread);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1566,
+          "scratch = newscratch = malloc(2 * UPLOAD_BUFSIZE);"
+        ],
+        [
+          1573,
+          "DEBUGASSERT(UPLOAD_BUFSIZE >= nread);"
+        ]
+      ],
+      "project": "curl",
+      "site_id": "2417dec06e66ee4a"
+    },
+    {
+      "commit_id": "c37e9e013469521d9adb932d17a1795c139b36db",
+      "cve": "CVE-2018-10882",
+      "cwe": "CWE-787",
+      "filepath": "fs/ext4/inode.c",
+      "func_body_sha256": "d1ae0f11727e5d363ccd6eb46e9e2a4878781562799f3d9f0901616b97e94c4e",
+      "func_name": "__ext4_get_inode_loc",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          4509,
+          "\tif (!ext4_valid_inum(sb, inode->i_ino))\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          4509,
+          "if (!ext4_valid_inum(sb, inode->i_ino))"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "7b3965cbc8679b5e"
+    },
+    {
+      "commit_id": "459ae818fc8dae717549810150de4d191ce158f1",
+      "cve": "CVE-2020-10232",
+      "cwe": "CWE-787",
+      "filepath": "tsk/fs/yaffs.cpp",
+      "func_body_sha256": "f8ff5374273ff08ff5c393b5e8bf92915b60b6dc85ec49db8d149b469cba3f04",
+      "func_name": "yaffsfs_istat",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          2442,
+          "    char timeBuf[128];"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          2442,
+          "char timeBuf[128];"
+        ]
+      ],
+      "project": "sleuthkit",
+      "site_id": "e007bfca3894e603"
+    },
+    {
+      "commit_id": "77425c862ad20cd270d42c54f3d63e1eb4e02195",
+      "cve": "CVE-2021-36218",
+      "cwe": "CWE-787",
+      "filepath": "BLSCrypto.cpp",
+      "func_body_sha256": "73fb432b2a88964cf9f085cfc7823b93421d78eb313aa180a31911cf9e44e868",
+      "func_name": "carray2Hex",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          89,
+          "    for (uint64_t j = 0; j < _len; j++) {"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          89,
+          "for (uint64_t j = 0; j < _len; j++) {"
+        ]
+      ],
+      "project": "sgxwallet",
+      "site_id": "e8903fb239b9e7fb"
+    },
+    {
+      "commit_id": "1f860f52bd8d58737ad883072203391096b30b51",
+      "cve": "CVE-2022-1115",
+      "cwe": "CWE-787",
+      "filepath": "coders/tiff.c",
+      "func_body_sha256": "ea0b1b8993a9c0bff41db69d975f6127d8032d689310c0a885be7716b7fd632c",
+      "func_name": "ReadTIFFImage",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1897,
+          "        extent=4*MagickMax(rows*TIFFTileRowSize(tiff),TIFFTileSize(tiff));"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1897,
+          "extent=4*MagickMax(rows*TIFFTileRowSize(tiff),TIFFTileSize(tiff));"
+        ]
+      ],
+      "project": "ImageMagick6",
+      "site_id": "ecdf0067fa9ae0b9"
+    },
+    {
+      "commit_id": "760322a71ac9033e122ef1f4b1c62813021e5938",
+      "cve": "CVE-2023-25671",
+      "cwe": "CWE-787",
+      "filepath": "tensorflow/core/ir/importexport/functiondef_import.cc",
+      "func_body_sha256": "585b8fc8d4393f4b7b33c5c653a493d5dcd42ad68495b91faec57ed7d7bcd953",
+      "func_name": "mlir::tfg::ImportGenericFunction",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          482,
+          "    TF_ASSIGN_OR_RETURN("
+        ],
+        [
+          483,
+          "        ret_vals[position->second],"
+        ],
+        [
+          484,
+          "        value_manager.GetValueOrCreatePlaceholder(ret_val.second));"
+        ],
+        [
+          498,
+          "    TF_ASSIGN_OR_RETURN(Value result, value_manager.GetValueOrCreatePlaceholder("
+        ],
+        [
+          499,
+          "                                          (Twine(\"^\") + ret_val.second).str()));"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          482,
+          "TF_ASSIGN_OR_RETURN(\n        ret_vals[position->second],\n        value_manager.GetValueOrCreatePlaceholder(ret_val.second));"
+        ],
+        [
+          498,
+          "    TF_ASSIGN_OR_RETURN(Value result, value_manager.GetValueOrCreatePlaceholder(\n"
+        ],
+        [
+          499,
+          "                                          (Twine(\"^\") + ret_val.second).str()));\n"
+        ]
+      ],
+      "project": "tensorflow",
+      "site_id": "b1db571bd655b996"
+    },
+    {
+      "commit_id": "2cd30c2b06ce332dede81cccad8b334cde997281",
+      "cve": "CVE-2017-14040",
+      "cwe": "CWE-787",
+      "filepath": "src/bin/jp2/convert.c",
+      "func_body_sha256": "1d74854a0fc5f22594ec57e87b19a00651899710043929a22f01955940cd5755",
+      "func_name": "get_tga_ushort",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          584,
+          "static unsigned short get_tga_ushort(const unsigned char *data)"
+        ],
+        [
+          586,
+          "    return data[0] | (data[1] << 8);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          584,
+          "static unsigned short get_tga_ushort(const unsigned char *data)"
+        ],
+        [
+          586,
+          "return data[0] | (data[1] << 8);"
+        ]
+      ],
+      "project": "openjpeg",
+      "site_id": "be5362bc07f74508"
+    },
+    {
+      "commit_id": "fb2288c46dd4c864b78f00a47a364b96a09a5c0f",
+      "cve": "CVE-2020-36177",
+      "cwe": "CWE-787",
+      "filepath": "wolfcrypt/src/rsa.c",
+      "func_body_sha256": "af2b8eba230ea1a550fedb322e4791b3643ac84447214d448d370d5fb4eae043",
+      "func_name": "RsaPad_PSS",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1119,
+          "#if defined(WOLFSSL_NO_MALLOC) && !defined(WOLFSSL_STATIC_MEMORY)"
+        ],
+        [
+          1120,
+          "    byte msg[RSA_MAX_SIZE/8 + RSA_PSS_PAD_SZ];"
+        ],
+        [
+          1121,
+          "#else"
+        ],
+        [
+          1122,
+          "    byte* msg = NULL;"
+        ],
+        [
+          1123,
+          "#endif"
+        ],
+        [
+          1125,
+          "    byte* salt;"
+        ],
+        [
+          1188,
+          "        msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,"
+        ],
+        [
+          1190,
+          "        if (msg == NULL) {"
+        ],
+        [
+          1194,
+          "    salt = s = m = msg;"
+        ],
+        [
+          1207,
+          "    if (pkcsBlockLen < RSA_PSS_PAD_SZ + inputLen + saltLen) {"
+        ],
+        [
+          1208,
+          "    #if !defined(WOLFSSL_NO_MALLOC) || defined(WOLFSSL_STATIC_MEMORY)"
+        ],
+        [
+          1209,
+          "        msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,"
+        ],
+        [
+          1210,
+          "                                                       DYNAMIC_TYPE_RSA_BUFFER);"
+        ],
+        [
+          1211,
+          "        if (msg == NULL) {"
+        ],
+        [
+          1212,
+          "            return MEMORY_E;"
+        ],
+        [
+          1213,
+          "        }"
+        ],
+        [
+          1214,
+          "    #endif"
+        ],
+        [
+          1215,
+          "        m = msg;"
+        ],
+        [
+          1216,
+          "    }"
+        ],
+        [
+          1217,
+          "    else {"
+        ],
+        [
+          1218,
+          "        m = pkcsBlock;"
+        ],
+        [
+          1219,
+          "    }"
+        ],
+        [
+          1220,
+          "    s = m;"
+        ],
+        [
+          1258,
+          "        if (msg != NULL) {"
+        ],
+        [
+          1259,
+          "            XFREE(msg, heap, DYNAMIC_TYPE_RSA_BUFFER);"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1119,
+          "#if defined(WOLFSSL_NO_MALLOC) && !defined(WOLFSSL_STATIC_MEMORY)\n    byte msg[RSA_MAX_SIZE/8 + RSA_PSS_PAD_SZ];\n#else\n    byte* msg = NULL;\n#endif"
+        ],
+        [
+          1120,
+          "byte msg[RSA_MAX_SIZE/8 + RSA_PSS_PAD_SZ];"
+        ],
+        [
+          1121,
+          "#else\n    byte* msg = NULL;"
+        ],
+        [
+          1122,
+          "byte* msg = NULL;"
+        ],
+        [
+          1125,
+          "byte* salt;"
+        ],
+        [
+          1188,
+          "msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,\n                                                       DYNAMIC_TYPE_RSA_BUFFER);"
+        ],
+        [
+          1190,
+          "if (msg == NULL)"
+        ],
+        [
+          1194,
+          "salt = s = m = msg;"
+        ],
+        [
+          1207,
+          "if (pkcsBlockLen < RSA_PSS_PAD_SZ + inputLen + saltLen)"
+        ],
+        [
+          1208,
+          "#if !defined(WOLFSSL_NO_MALLOC) || defined(WOLFSSL_STATIC_MEMORY)\n        msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,\n                                                       DYNAMIC_TYPE_RSA_BUFFER);\n        if (msg == NULL) {\n            return MEMORY_E;\n        }\n    #endif"
+        ],
+        [
+          1209,
+          "msg = (byte*)XMALLOC(RSA_PSS_PAD_SZ + inputLen + saltLen, heap,\n                                                       DYNAMIC_TYPE_RSA_BUFFER);"
+        ],
+        [
+          1211,
+          "if (msg == NULL)"
+        ],
+        [
+          1212,
+          "return MEMORY_E;"
+        ],
+        [
+          1213,
+          "        }\n"
+        ],
+        [
+          1215,
+          "m = msg;"
+        ],
+        [
+          1216,
+          "    }\n"
+        ],
+        [
+          1217,
+          "else"
+        ],
+        [
+          1218,
+          "m = pkcsBlock;"
+        ],
+        [
+          1219,
+          "    }\n"
+        ],
+        [
+          1220,
+          "s = m;"
+        ],
+        [
+          1258,
+          "if (msg != NULL)"
+        ],
+        [
+          1259,
+          "XFREE(msg, heap, DYNAMIC_TYPE_RSA_BUFFER);"
+        ]
+      ],
+      "project": "wolfssl",
+      "site_id": "68b94cd616533f7f"
+    },
+    {
+      "commit_id": "17743798d81238ab13050e8e2833699b54e15467",
+      "cve": "CVE-2020-25285",
+      "cwe": "CWE-787",
+      "filepath": "mm/hugetlb.c",
+      "func_body_sha256": "e9ddf11eb08c547b4476f991ff9c21347e10abb6eed664aad551ac8b4b9155f3",
+      "func_name": "proc_hugetlb_doulongvec_minmax",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          3468,
+          "static int proc_hugetlb_doulongvec_minmax(struct ctl_table *table, int write,\n"
+        ],
+        [
+          3469,
+          "\t\t\t\t\t  void *buffer, size_t *length,\n"
+        ],
+        [
+          3470,
+          "\t\t\t\t\t  loff_t *ppos, unsigned long *out)\n"
+        ],
+        [
+          3471,
+          "{\n"
+        ],
+        [
+          3472,
+          "\tstruct ctl_table dup_table;\n"
+        ],
+        [
+          3473,
+          "\n"
+        ],
+        [
+          3474,
+          "\t/*\n"
+        ],
+        [
+          3475,
+          "\t * In order to avoid races with __do_proc_doulongvec_minmax(), we\n"
+        ],
+        [
+          3476,
+          "\t * can duplicate the @table and alter the duplicate of it.\n"
+        ],
+        [
+          3477,
+          "\t */\n"
+        ],
+        [
+          3478,
+          "\tdup_table = *table;\n"
+        ],
+        [
+          3479,
+          "\tdup_table.data = out;\n"
+        ],
+        [
+          3480,
+          "\n"
+        ],
+        [
+          3481,
+          "\treturn proc_doulongvec_minmax(&dup_table, write, buffer, length, ppos);\n"
+        ],
+        [
+          3482,
+          "}\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          3468,
+          "static int proc_hugetlb_doulongvec_minmax(struct ctl_table *table, int write,\n\t\t\t\t\t  void *buffer, size_t *length,\n\t\t\t\t\t  loff_t *ppos, unsigned long *out)"
+        ],
+        [
+          3471,
+          "{\n"
+        ],
+        [
+          3472,
+          "struct ctl_table dup_table;"
+        ],
+        [
+          3473,
+          "\n"
+        ],
+        [
+          3474,
+          "/*\n\t * In order to avoid races with __do_proc_doulongvec_minmax(), we\n\t * can duplicate the @table and alter the duplicate of it.\n\t */"
+        ],
+        [
+          3478,
+          "dup_table = *table;"
+        ],
+        [
+          3479,
+          "dup_table.data = out;"
+        ],
+        [
+          3480,
+          "\n"
+        ],
+        [
+          3481,
+          "return proc_doulongvec_minmax(&dup_table, write, buffer, length, ppos);"
+        ],
+        [
+          3482,
+          "}\n"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "a26545398a38fb25"
+    },
+    {
+      "commit_id": "8bc1379b82b8e809eef77a9fedbb75c6c297be19",
+      "cve": "CVE-2018-10883",
+      "cwe": "CWE-787",
+      "filepath": "fs/ext4/xattr.c",
+      "func_body_sha256": "2a8a7853bf6e5696b47d86eab3bf8fba74f40fdc1a9a713af72619ca2a0af1d5",
+      "func_name": "ext4_xattr_ibody_inline_set",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          2215,
+          "\tif (error)\n"
+        ],
+        [
+          2216,
+          "\t\treturn error;\n"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          2215,
+          "if (error)"
+        ],
+        [
+          2216,
+          "return error;"
+        ]
+      ],
+      "project": "linux",
+      "site_id": "653ddec612c394c4"
+    },
+    {
+      "commit_id": "c101abff4c6756db4f5e740fde289decb9452efa",
+      "cve": "CVE-2022-2210",
+      "cwe": "CWE-787",
+      "filepath": "src/diff.c",
+      "func_body_sha256": "15c43eb40d28954359212f357a748b8c88f3e473c6fedcbf974a252df180d0fd",
+      "func_name": "diff_mark_adjust_tp",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          406,
+          "\t\t    off = 0;"
+        ],
+        [
+          429,
+          "\t\t\t    off = dp->df_lnum[idx] - lnum_deleted;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          406,
+          "off = 0;"
+        ],
+        [
+          429,
+          "off = dp->df_lnum[idx] - lnum_deleted;"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "25f13c29ec6db6e4"
+    },
+    {
+      "commit_id": "88cf60a3ed4a2b40d71a1c2ced72fa3902a30967",
+      "cve": "CVE-2022-29776",
+      "cwe": "CWE-787",
+      "filepath": "DesktopEditor/common/File.cpp",
+      "func_body_sha256": "eb73683cc7e5f0390a9ddf5e405231f279e0178b84facd8e1654114ba7a56507",
+      "func_name": "NSFile::CUtf8Converter::GetUnicodeStringFromUTF8_4bytes",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          162,
+          "                int val = 0;"
+        ],
+        [
+          163,
+          "                if ((lIndex + 1) < lCount)"
+        ],
+        [
+          164,
+          "                {"
+        ],
+        [
+          165,
+          "                    val = (int)(((byteMain & 0x1F) << 6) |"
+        ],
+        [
+          166,
+          "                                (pBuffer[lIndex + 1] & 0x3F));"
+        ],
+        [
+          167,
+          "                }"
+        ],
+        [
+          168,
+          ""
+        ],
+        [
+          175,
+          "                int val = 0;"
+        ],
+        [
+          176,
+          "                if ((lIndex + 2) < lCount)"
+        ],
+        [
+          177,
+          "                {"
+        ],
+        [
+          178,
+          "                    val = (int)(((byteMain & 0x0F) << 12) |"
+        ],
+        [
+          179,
+          "                                ((pBuffer[lIndex + 1] & 0x3F) << 6) |"
+        ],
+        [
+          180,
+          "                                (pBuffer[lIndex + 2] & 0x3F));"
+        ],
+        [
+          181,
+          "                }"
+        ],
+        [
+          182,
+          ""
+        ],
+        [
+          189,
+          "                int val = 0;"
+        ],
+        [
+          190,
+          "                if ((lIndex + 3) < lCount)"
+        ],
+        [
+          191,
+          "                {"
+        ],
+        [
+          192,
+          "                    val = (int)(((byteMain & 0x07) << 18) |"
+        ],
+        [
+          193,
+          "                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |"
+        ],
+        [
+          194,
+          "                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |"
+        ],
+        [
+          195,
+          "                                (pBuffer[lIndex + 3] & 0x3F));"
+        ],
+        [
+          196,
+          "                }"
+        ],
+        [
+          197,
+          ""
+        ],
+        [
+          204,
+          "                int val = 0;"
+        ],
+        [
+          205,
+          "                if ((lIndex + 3) < lCount)"
+        ],
+        [
+          206,
+          "                {"
+        ],
+        [
+          207,
+          "                    val = (int)(((byteMain & 0x07) << 18) |"
+        ],
+        [
+          208,
+          "                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |"
+        ],
+        [
+          209,
+          "                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |"
+        ],
+        [
+          210,
+          "                                (pBuffer[lIndex + 3] & 0x3F));"
+        ],
+        [
+          211,
+          "                }"
+        ],
+        [
+          212,
+          ""
+        ],
+        [
+          219,
+          "                int val = 0;"
+        ],
+        [
+          220,
+          "                if ((lIndex + 4) < lCount)"
+        ],
+        [
+          221,
+          "                {"
+        ],
+        [
+          222,
+          "                    val = (int)(((byteMain & 0x03) << 24) |"
+        ],
+        [
+          223,
+          "                                ((pBuffer[lIndex + 1] & 0x3F) << 18) |"
+        ],
+        [
+          224,
+          "                                ((pBuffer[lIndex + 2] & 0x3F) << 12) |"
+        ],
+        [
+          225,
+          "                                ((pBuffer[lIndex + 3] & 0x3F) << 6) |"
+        ],
+        [
+          226,
+          "                                (pBuffer[lIndex + 4] & 0x3F));"
+        ],
+        [
+          227,
+          "                }"
+        ],
+        [
+          228,
+          ""
+        ],
+        [
+          235,
+          "                int val = 0;"
+        ],
+        [
+          236,
+          "                if ((lIndex + 5) < lCount)"
+        ],
+        [
+          237,
+          "                {"
+        ],
+        [
+          238,
+          "                    val = (int)(((byteMain & 0x01) << 30) |"
+        ],
+        [
+          239,
+          "                                ((pBuffer[lIndex + 1] & 0x3F) << 24) |"
+        ],
+        [
+          240,
+          "                                ((pBuffer[lIndex + 2] & 0x3F) << 18) |"
+        ],
+        [
+          241,
+          "                                ((pBuffer[lIndex + 3] & 0x3F) << 12) |"
+        ],
+        [
+          242,
+          "                                ((pBuffer[lIndex + 4] & 0x3F) << 6) |"
+        ],
+        [
+          243,
+          "                                (pBuffer[lIndex + 5] & 0x3F));"
+        ],
+        [
+          244,
+          "                }"
+        ],
+        [
+          245,
+          ""
+        ]
+      ],
+      "labeled_statements": [
+        [
+          162,
+          "int val = 0;"
+        ],
+        [
+          163,
+          "if ((lIndex + 1) < lCount)"
+        ],
+        [
+          164,
+          "                {\n"
+        ],
+        [
+          165,
+          "val = (int)(((byteMain & 0x1F) << 6) |\n                                (pBuffer[lIndex + 1] & 0x3F));"
+        ],
+        [
+          167,
+          "                }\n"
+        ],
+        [
+          168,
+          "\n"
+        ],
+        [
+          175,
+          "int val = 0;"
+        ],
+        [
+          176,
+          "if ((lIndex + 2) < lCount)"
+        ],
+        [
+          177,
+          "                {\n"
+        ],
+        [
+          178,
+          "val = (int)(((byteMain & 0x0F) << 12) |\n                                ((pBuffer[lIndex + 1] & 0x3F) << 6) |\n                                (pBuffer[lIndex + 2] & 0x3F));"
+        ],
+        [
+          181,
+          "                }\n"
+        ],
+        [
+          182,
+          "\n"
+        ],
+        [
+          189,
+          "int val = 0;"
+        ],
+        [
+          190,
+          "if ((lIndex + 3) < lCount)"
+        ],
+        [
+          191,
+          "                {\n"
+        ],
+        [
+          192,
+          "val = (int)(((byteMain & 0x07) << 18) |\n                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |\n                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |\n                                (pBuffer[lIndex + 3] & 0x3F));"
+        ],
+        [
+          196,
+          "                }\n"
+        ],
+        [
+          197,
+          "\n"
+        ],
+        [
+          204,
+          "int val = 0;"
+        ],
+        [
+          205,
+          "if ((lIndex + 3) < lCount)"
+        ],
+        [
+          206,
+          "                {\n"
+        ],
+        [
+          207,
+          "val = (int)(((byteMain & 0x07) << 18) |\n                                ((pBuffer[lIndex + 1] & 0x3F) << 12) |\n                                ((pBuffer[lIndex + 2] & 0x3F) << 6) |\n                                (pBuffer[lIndex + 3] & 0x3F));"
+        ],
+        [
+          211,
+          "                }\n"
+        ],
+        [
+          212,
+          "\n"
+        ],
+        [
+          219,
+          "int val = 0;"
+        ],
+        [
+          220,
+          "if ((lIndex + 4) < lCount)"
+        ],
+        [
+          221,
+          "                {\n"
+        ],
+        [
+          222,
+          "val = (int)(((byteMain & 0x03) << 24) |\n                                ((pBuffer[lIndex + 1] & 0x3F) << 18) |\n                                ((pBuffer[lIndex + 2] & 0x3F) << 12) |\n                                ((pBuffer[lIndex + 3] & 0x3F) << 6) |\n                                (pBuffer[lIndex + 4] & 0x3F));"
+        ],
+        [
+          227,
+          "                }\n"
+        ],
+        [
+          228,
+          "\n"
+        ],
+        [
+          235,
+          "int val = 0;"
+        ],
+        [
+          236,
+          "if ((lIndex + 5) < lCount)"
+        ],
+        [
+          237,
+          "                {\n"
+        ],
+        [
+          238,
+          "val = (int)(((byteMain & 0x01) << 30) |\n                                ((pBuffer[lIndex + 1] & 0x3F) << 24) |\n                                ((pBuffer[lIndex + 2] & 0x3F) << 18) |\n                                ((pBuffer[lIndex + 3] & 0x3F) << 12) |\n                                ((pBuffer[lIndex + 4] & 0x3F) << 6) |\n                                (pBuffer[lIndex + 5] & 0x3F));"
+        ],
+        [
+          244,
+          "                }\n"
+        ],
+        [
+          245,
+          "\n"
+        ]
+      ],
+      "project": "core",
+      "site_id": "6f2e0cb720632b6c"
+    },
+    {
+      "commit_id": "36cfd9efb9b22b891adee9c48d30202289cfa620",
+      "cve": "CVE-2021-45930",
+      "cwe": "CWE-787",
+      "filepath": "src/svg/qsvghandler.cpp",
+      "func_body_sha256": "c42c063bda156eac3c23605835c3a7a813c64e571e531a7b9467d3d6f1734192",
+      "func_name": "parsePathDataFast",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1598,
+          "    const int maxElementCount = 0x7fff; // Assume file corruption if more path elements than this"
+        ],
+        [
+          1606,
+          "    bool ok = true;"
+        ],
+        [
+          1607,
+          "    while (ok && str != end) {"
+        ],
+        [
+          1624,
+          "        while (ok && count > 0) {"
+        ],
+        [
+          1630,
+          "                    ok = false;"
+        ],
+        [
+          1647,
+          "                    ok = false;"
+        ],
+        [
+          1673,
+          "                    ok = false;"
+        ],
+        [
+          1686,
+          "                    ok = false;"
+        ],
+        [
+          1726,
+          "                    ok = false;"
+        ],
+        [
+          1742,
+          "                    ok = false;"
+        ],
+        [
+          1758,
+          "                    ok = false;"
+        ],
+        [
+          1779,
+          "                    ok = false;"
+        ],
+        [
+          1800,
+          "                    ok = false;"
+        ],
+        [
+          1815,
+          "                    ok = false;"
+        ],
+        [
+          1830,
+          "                    ok = false;"
+        ],
+        [
+          1850,
+          "                    ok = false;"
+        ],
+        [
+          1870,
+          "                    ok = false;"
+        ],
+        [
+          1892,
+          "                    ok = false;"
+        ],
+        [
+          1913,
+          "                ok = false;"
+        ],
+        [
+          1914,
+          "                break;"
+        ],
+        [
+          1917,
+          "            if (path.elementCount() > maxElementCount)"
+        ],
+        [
+          1918,
+          "                ok = false;"
+        ],
+        [
+          1921,
+          "    return ok;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1598,
+          "    const int maxElementCount = 0x7fff; // Assume file corruption if more path elements than this\n"
+        ],
+        [
+          1606,
+          "bool ok = true;"
+        ],
+        [
+          1607,
+          "while (ok && str != end) {"
+        ],
+        [
+          1624,
+          "while (ok && count > 0) {"
+        ],
+        [
+          1630,
+          "ok = false;"
+        ],
+        [
+          1647,
+          "ok = false;"
+        ],
+        [
+          1673,
+          "ok = false;"
+        ],
+        [
+          1686,
+          "ok = false;"
+        ],
+        [
+          1726,
+          "ok = false;"
+        ],
+        [
+          1742,
+          "ok = false;"
+        ],
+        [
+          1758,
+          "ok = false;"
+        ],
+        [
+          1779,
+          "ok = false;"
+        ],
+        [
+          1800,
+          "ok = false;"
+        ],
+        [
+          1815,
+          "ok = false;"
+        ],
+        [
+          1830,
+          "ok = false;"
+        ],
+        [
+          1850,
+          "ok = false;"
+        ],
+        [
+          1870,
+          "ok = false;"
+        ],
+        [
+          1892,
+          "ok = false;"
+        ],
+        [
+          1913,
+          "ok = false;"
+        ],
+        [
+          1914,
+          "break;"
+        ],
+        [
+          1917,
+          "if (path.elementCount() > maxElementCount)"
+        ],
+        [
+          1918,
+          "ok = false;"
+        ],
+        [
+          1921,
+          "return ok;"
+        ]
+      ],
+      "project": "qtsvg",
+      "site_id": "aa824dab09beffd3"
+    },
+    {
+      "commit_id": "61135001a625364e29bdce83832f043eebde7b5a",
+      "cve": "CVE-2019-13308",
+      "cwe": "CWE-787",
+      "filepath": "coders/gif.c",
+      "func_body_sha256": "68741d0ac496411339f9bc3f7c9e4d01d234e3d5974f37ee10e3167b4eb2c648",
+      "func_name": "EncodeImage",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          676,
+          "      next_pixel=MagickFalse;"
+        ],
+        [
+          677,
+          "      displacement=1;"
+        ],
+        [
+          683,
+          "      if (k < 0)"
+        ],
+        [
+          684,
+          "        continue;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          676,
+          "next_pixel=MagickFalse;"
+        ],
+        [
+          677,
+          "displacement=1;"
+        ],
+        [
+          683,
+          "if (k < 0)"
+        ],
+        [
+          684,
+          "continue;"
+        ]
+      ],
+      "project": "ImageMagick",
+      "site_id": "8d956f60d6caba9f"
+    },
+    {
+      "commit_id": "d0a7e85dfeb519951fb8a8d70f73f30d41cdd3d9",
+      "cve": "CVE-2023-50245",
+      "cwe": "CWE-120",
+      "filepath": "src/model/framebuffer/FramebufferModel.cpp",
+      "func_body_sha256": "8943ed13de6502e03bad49f9b1b213c2d038d5716b1abfdd75c74a6c1947dddc",
+      "func_name": "FramebufferModel::~FramebufferModel",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          61,
+          "FramebufferModel::~FramebufferModel() {}"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          61,
+          "FramebufferModel::~FramebufferModel()"
+        ]
+      ],
+      "project": "openexr-viewer",
+      "site_id": "02af5e9a993ef157"
+    },
+    {
+      "commit_id": "4ef3ede30181eca9add74305ad26dbcb0c3686a0",
+      "cve": "CVE-2010-3844",
+      "cwe": "CWE-120",
+      "filepath": "src/interfaces/gtk/ec_gtk_conf.c",
+      "func_body_sha256": "03ba2496072953a6a8b80c52c3ddfe2fd338cd2a8813f8e1fb4958a04dffc908",
+      "func_name": "gtkui_conf_read",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          77,
+          "   path = g_get_tmp_dir();"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          77,
+          "path = g_get_tmp_dir();"
+        ]
+      ],
+      "project": "ettercap",
+      "site_id": "c2894cd823cdb008"
+    },
+    {
+      "commit_id": "77ed81c069e10b3861d88f72e1c6be1277ee7eae",
+      "cve": "CVE-2021-32439",
+      "cwe": "CWE-120",
+      "filepath": "src/isomedia/stbl_write.c",
+      "func_body_sha256": "2432e6fe29908316c396bfca269481d81d275132dd3384fb94bd0868c4f40bad",
+      "func_name": "stbl_AddChunkOffset",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          701,
+          "GF_Err stbl_AddChunkOffset(GF_MediaBox *mdia, u32 sampleNumber, u32 StreamDescIndex, u64 offset, u32 nb_pack_samples)"
+        ],
+        [
+          716,
+          "\tif (!nb_pack_samples)"
+        ],
+        [
+          717,
+          "\t\tnb_pack_samples = 1;"
+        ],
+        [
+          733,
+          "\t\tstsc->w_lastSampleNumber = sampleNumber + nb_pack_samples-1;"
+        ],
+        [
+          788,
+          "\tent->samplesPerChunk = nb_pack_samples;"
+        ],
+        [
+          792,
+          "\tif (sampleNumber + nb_pack_samples - 1 == stsc->w_lastSampleNumber) {"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          701,
+          "GF_Err stbl_AddChunkOffset(GF_MediaBox *mdia, u32 sampleNumber, u32 StreamDescIndex, u64 offset, u32 nb_pack_samples)"
+        ],
+        [
+          716,
+          "if (!nb_pack_samples)"
+        ],
+        [
+          717,
+          "nb_pack_samples = 1;"
+        ],
+        [
+          733,
+          "stsc->w_lastSampleNumber = sampleNumber + nb_pack_samples-1;"
+        ],
+        [
+          788,
+          "ent->samplesPerChunk = nb_pack_samples;"
+        ],
+        [
+          792,
+          "if (sampleNumber + nb_pack_samples - 1 == stsc->w_lastSampleNumber)"
+        ]
+      ],
+      "project": "gpac",
+      "site_id": "4168f72364a47da2"
+    },
+    {
+      "commit_id": "7ce5b2b590256ce53d6af28c1d203fb3bc1d2d97",
+      "cve": "CVE-2022-1735",
+      "cwe": "CWE-120",
+      "filepath": "src/change.c",
+      "func_body_sha256": "37af75350b2502a639b18b66c478ab0a10f6c365f1039ea81c83c072f3297172",
+      "func_name": "changed_common",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          551,
+          "    if (VIsual_active)"
+        ],
+        [
+          552,
+          "\tcheck_visual_pos();"
+        ],
+        [
+          553,
+          ""
+        ]
+      ],
+      "labeled_statements": [
+        [
+          460,
+          "changed_common(\n    linenr_T\tlnum,\n    colnr_T\tcol,\n    linenr_T\tlnume,\n    long\txtra)\n{\n    win_T\t*wp;\n    tabpage_T\t*tp;\n    int\t\ti;\n    int\t\tcols;\n    pos_T\t*p;\n    int\t\tadd;\n\n    // mark the buffer as modified\n    changed();\n\n#ifdef FEAT_EVAL\n    may_record_change(lnum, col, lnume, xtra);\n#endif\n#ifdef FEAT_DIFF\n    if (curwin->w_p_diff && diff_internal())\n\tcurtab->tp_diff_update = TRUE;\n#endif\n\n    // set the '. mark\n    if ((cmdmod.cmod_flags & CMOD_KEEPJUMPS) == 0)\n    {\n\tcurbuf->b_last_change.lnum = lnum;\n\tcurbuf->b_last_change.col = col;\n\n\t// Create a new entry if a new undo-able change was started or we\n\t// don't have an entry yet.\n\tif (curbuf->b_new_change || curbuf->b_changelistlen == 0)\n\t{\n\t    if (curbuf->b_changelistlen == 0)\n\t\tadd = TRUE;\n\t    else\n\t    {\n\t\t// Don't create a new entry when the line number is the same\n\t\t// as the last one and the column is not too far away.  Avoids\n\t\t// creating many entries for typing \"xxxxx\".\n\t\tp = &curbuf->b_changelist[curbuf->b_changelistlen - 1];\n\t\tif (p->lnum != lnum)\n\t\t    add = TRUE;\n\t\telse\n\t\t{\n\t\t    cols = comp_textwidth(FALSE);\n\t\t    if (cols == 0)\n\t\t\tcols = 79;\n\t\t    add = (p->col + cols < col || col + cols < p->col);\n\t\t}\n\t    }\n\t    if (add)\n\t    {\n\t\t// This is the first of a new sequence of undo-able changes\n\t\t// and it's at some distance of the last change.  Use a new\n\t\t// position in the changelist.\n\t\tcurbuf->b_new_change = FALSE;\n\n\t\tif (curbuf->b_changelistlen == JUMPLISTSIZE)\n\t\t{\n\t\t    // changelist is full: remove oldest entry\n\t\t    curbuf->b_changelistlen = JUMPLISTSIZE - 1;\n\t\t    mch_memmove(curbuf->b_changelist, curbuf->b_changelist + 1,\n\t\t\t\t\t  sizeof(pos_T) * (JUMPLISTSIZE - 1));\n\t\t    FOR_ALL_TAB_WINDOWS(tp, wp)\n\t\t    {\n\t\t\t// Correct position in changelist for other windows on\n\t\t\t// this buffer.\n\t\t\tif (wp->w_buffer == curbuf && wp->w_changelistidx > 0)\n\t\t\t    --wp->w_changelistidx;\n\t\t    }\n\t\t}\n\t\tFOR_ALL_TAB_WINDOWS(tp, wp)\n\t\t{\n\t\t    // For other windows, if the position in the changelist is\n\t\t    // at the end it stays at the end.\n\t\t    if (wp->w_buffer == curbuf\n\t\t\t    && wp->w_changelistidx == curbuf->b_changelistlen)\n\t\t\t++wp->w_changelistidx;\n\t\t}\n\t\t++curbuf->b_changelistlen;\n\t    }\n\t}\n\tcurbuf->b_changelist[curbuf->b_changelistlen - 1] =\n\t\t\t\t\t\t\tcurbuf->b_last_change;\n\t// The current window is always after the last change, so that \"g,\"\n\t// takes you back to it.\n\tcurwin->w_changelistidx = curbuf->b_changelistlen;\n    }\n\n    if (VIsual_active)\n\tcheck_visual_pos();\n\n    FOR_ALL_TAB_WINDOWS(tp, wp)\n    {\n\tif (wp->w_buffer == curbuf)\n\t{\n#ifdef FEAT_FOLDING\n\t    linenr_T last = lnume + xtra - 1;  // last line after the change\n#endif\n\t    // Mark this window to be redrawn later.\n\t    if (wp->w_redr_type < VALID)\n\t\twp->w_redr_type = VALID;\n\n\t    // Check if a change in the buffer has invalidated the cached\n\t    // values for the cursor.\n#ifdef FEAT_FOLDING\n\t    // Update the folds for this window.  Can't postpone this, because\n\t    // a following operator might work on the whole fold: \">>dd\".\n\t    foldUpdate(wp, lnum, last);\n\n\t    // The change may cause lines above or below the change to become\n\t    // included in a fold.  Set lnum/lnume to the first/last line that\n\t    // might be displayed differently.\n\t    // Set w_cline_folded here as an efficient way to update it when\n\t    // inserting lines just above a closed fold.\n\t    i = hasFoldingWin(wp, lnum, &lnum, NULL, FALSE, NULL);\n\t    if (wp->w_cursor.lnum == lnum)\n\t\twp->w_cline_folded = i;\n\t    i = hasFoldingWin(wp, last, NULL, &last, FALSE, NULL);\n\t    if (wp->w_cursor.lnum == last)\n\t\twp->w_cline_folded = i;\n\n\t    // If the changed line is in a range of previously folded lines,\n\t    // compare with the first line in that range.\n\t    if (wp->w_cursor.lnum <= lnum)\n\t    {\n\t\ti = find_wl_entry(wp, lnum);\n\t\tif (i >= 0 && wp->w_cursor.lnum > wp->w_lines[i].wl_lnum)\n\t\t    changed_line_abv_curs_win(wp);\n\t    }\n#endif\n\t    if (wp->w_cursor.lnum > lnum)\n\t\tchanged_line_abv_curs_win(wp);\n\t    else if (wp->w_cursor.lnum == lnum && wp->w_cursor.col >= col)\n\t\tchanged_cline_bef_curs_win(wp);\n\t    if (wp->w_botline >= lnum)\n\t    {\n\t\tif (xtra < 0)\n\t\t    invalidate_botline_win(wp);\n\t\telse\n\t\t    // Assume that botline doesn't change (inserted lines make\n\t\t    // other lines scroll down below botline).\n\t\t    approximate_botline_win(wp);\n\t    }\n\n\t    // Check if any w_lines[] entries have become invalid.\n\t    // For entries below the change: Correct the lnums for\n\t    // inserted/deleted lines.  Makes it possible to stop displaying\n\t    // after the change.\n\t    for (i = 0; i < wp->w_lines_valid; ++i)\n\t\tif (wp->w_lines[i].wl_valid)\n\t\t{\n\t\t    if (wp->w_lines[i].wl_lnum >= lnum)\n\t\t    {\n\t\t\tif (wp->w_lines[i].wl_lnum < lnume)\n\t\t\t{\n\t\t\t    // line included in change\n\t\t\t    wp->w_lines[i].wl_valid = FALSE;\n\t\t\t}\n\t\t\telse if (xtra != 0)\n\t\t\t{\n\t\t\t    // line below change\n\t\t\t    wp->w_lines[i].wl_lnum += xtra;\n#ifdef FEAT_FOLDING\n\t\t\t    wp->w_lines[i].wl_lastlnum += xtra;\n#endif\n\t\t\t}\n\t\t    }\n#ifdef FEAT_FOLDING\n\t\t    else if (wp->w_lines[i].wl_lastlnum >= lnum)\n\t\t    {\n\t\t\t// change somewhere inside this range of folded lines,\n\t\t\t// may need to be redrawn\n\t\t\twp->w_lines[i].wl_valid = FALSE;\n\t\t    }\n#endif\n\t\t}\n\n#ifdef FEAT_FOLDING\n\t    // Take care of side effects for setting w_topline when folds have\n\t    // changed.  Esp. when the buffer was changed in another window.\n\t    if (hasAnyFolding(wp))\n\t\tset_topline(wp, wp->w_topline);\n#endif\n\t    // If lines have been added or removed, relative numbering always\n\t    // requires a redraw.\n\t    if (wp->w_p_rnu && xtra != 0)\n\t    {\n\t\twp->w_last_cursor_lnum_rnu = 0;\n\t\tredraw_win_later(wp, VALID);\n\t    }\n#ifdef FEAT_SYN_HL\n\t    // Cursor line highlighting probably need to be updated with\n\t    // \"VALID\" if it's below the change.\n\t    // If the cursor line is inside the change we need to redraw more.\n\t    if (wp->w_p_cul)\n\t    {\n\t\tif (xtra == 0)\n\t\t    redraw_win_later(wp, VALID);\n\t\telse if (lnum <= wp->w_last_cursorline)\n\t\t    redraw_win_later(wp, SOME_VALID);\n\t    }\n#endif\n\t}\n    }\n\n    // Call update_screen() later, which checks out what needs to be redrawn,\n    // since it notices b_mod_set and then uses b_mod_*.\n    if (must_redraw < VALID)\n\tmust_redraw = VALID;\n\n    // when the cursor line is changed always trigger CursorMoved\n    if (lnum <= curwin->w_cursor.lnum\n\t\t && lnume + (xtra < 0 ? -xtra : xtra) > curwin->w_cursor.lnum)\n\tlast_cursormoved.lnum = 0;\n}"
+        ],
+        [
+          551,
+          "if (VIsual_active)"
+        ],
+        [
+          552,
+          "check_visual_pos();"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "af76e9cd22dd049f"
+    },
+    {
+      "commit_id": "dd4f16e7e816f2165fba76e3d162cd8d2978dcb2",
+      "cve": "CVE-2015-8011",
+      "cwe": "CWE-120",
+      "filepath": "src/daemon/protocols/lldp.c",
+      "func_body_sha256": "bd887b51ffacd7ae59f3691e7fad7aea7d1a95b5f282f458753a5e358eeccf08",
+      "func_name": "lldp_decode",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          729,
+          "\t\t\tif (addr_str_length > sizeof(addr_str_buffer)) {"
+        ],
+        [
+          730,
+          "\t\t\t\tlog_warnx(\"lldp\", \"too large management address on %s\","
+        ],
+        [
+          731,
+          "\t\t\t\t    hardware->h_ifname);"
+        ],
+        [
+          732,
+          "\t\t\t\tgoto malformed;"
+        ],
+        [
+          733,
+          "\t\t\t}"
+        ],
+        [
+          742,
+          ""
+        ],
+        [
+          760,
+          "\t\t\tCHECK_TLV_SIZE(1 + (int)sizeof(orgid), \"Organisational\");"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          726,
+          "case LLDP_TLV_MGMT_ADDR:\n\t\t\tCHECK_TLV_SIZE(1, \"Management address\");\n\t\t\taddr_str_length = PEEK_UINT8;\n\t\t\tif (addr_str_length > sizeof(addr_str_buffer)) {\n\t\t\t\tlog_warnx(\"lldp\", \"too large management address on %s\",\n\t\t\t\t    hardware->h_ifname);\n\t\t\t\tgoto malformed;\n\t\t\t}\n\t\t\tCHECK_TLV_SIZE(1 + addr_str_length, \"Management address\");\n\t\t\tPEEK_BYTES(addr_str_buffer, addr_str_length);\n\t\t\taddr_length = addr_str_length - 1;\n\t\t\taddr_family = addr_str_buffer[0];\n\t\t\taddr_ptr = &addr_str_buffer[1];\n\t\t\tCHECK_TLV_SIZE(1 + addr_str_length + 5, \"Management address\");\n\t\t\tiface_subtype = PEEK_UINT8;\n\t\t\tiface_number = PEEK_UINT32;\n\n\t\t\taf = lldpd_af_from_lldp_proto(addr_family);\n\t\t\tif (af == LLDPD_AF_UNSPEC)\n\t\t\t\tbreak;\n\t\t\tif (iface_subtype == LLDP_MGMT_IFACE_IFINDEX)\n\t\t\t\tiface = iface_number;\n\t\t\telse\n\t\t\t\tiface = 0;\n\t\t\tmgmt = lldpd_alloc_mgmt(af, addr_ptr, addr_length, iface);\n\t\t\tif (mgmt == NULL) {\n\t\t\t\tassert(errno == ENOMEM);\n\t\t\t\tlog_warn(\"lldp\", \"unable to allocate memory \"\n\t\t\t\t\t\t\t\"for management address\");\n\t\t\t\t\t\tgoto malformed;\n\t\t\t}\n\t\t\tTAILQ_INSERT_TAIL(&chassis->c_mgmt, mgmt, m_entries);\n\t\t\tbreak;"
+        ],
+        [
+          729,
+          "if (addr_str_length > sizeof(addr_str_buffer))"
+        ],
+        [
+          730,
+          "log_warnx(\"lldp\", \"too large management address on %s\",\n\t\t\t\t    hardware->h_ifname);"
+        ],
+        [
+          732,
+          "goto malformed;"
+        ],
+        [
+          733,
+          "\t\t\t}\n"
+        ],
+        [
+          760,
+          "CHECK_TLV_SIZE(1 + (int)sizeof(orgid), \"Organisational\");"
+        ]
+      ],
+      "project": "lldpd",
+      "site_id": "1e0cb176a0bf57dc"
+    },
+    {
+      "commit_id": "3e990547e064b8fca916b23a0f7d6fe8c63c7f6b",
+      "cve": "CVE-2020-26759",
+      "cwe": "CWE-120",
+      "filepath": "clickhouse_driver/varint.c",
+      "func_body_sha256": "4cf024d62b495fedc012fbde1dbc4fafc11827aa7241075c6c0c534e954a5f14",
+      "func_name": "__pyx_pf_17clickhouse_driver_6varint_2read_varint",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1529,
+          "  int __pyx_lineno = 0;"
+        ],
+        [
+          1530,
+          "  const char *__pyx_filename = NULL;"
+        ],
+        [
+          1531,
+          "  int __pyx_clineno = 0;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1529,
+          "int __pyx_lineno = 0;"
+        ],
+        [
+          1530,
+          "const char *__pyx_filename = NULL;"
+        ],
+        [
+          1531,
+          "int __pyx_clineno = 0;"
+        ]
+      ],
+      "project": "clickhouse-driver",
+      "site_id": "8132ce80516ff4a8"
+    },
+    {
+      "commit_id": "d27f79da11df7bc8bb56c2f291d71e54df8d2c47",
+      "cve": "CVE-2022-24754",
+      "cwe": "CWE-120",
+      "filepath": "pjsip/src/pjsip/sip_auth_aka.c",
+      "func_body_sha256": "d63d4233e92f915a39761f5634ca2ab3db76b96c8cc9f5595b09920beee766fe",
+      "func_name": "pjsip_auth_create_aka_response",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          60,
+          "    pj_status_t status;"
+        ],
+        [
+          68,
+          "\tpjsip_auth_create_digest(&auth->response, &auth->nonce, &auth->nc,"
+        ],
+        [
+          69,
+          "\t\t\t\t &auth->cnonce, &auth->qop, &auth->uri,"
+        ],
+        [
+          70,
+          "\t\t\t\t &auth->realm, cred, method);"
+        ],
+        [
+          71,
+          "\treturn PJ_SUCCESS;"
+        ],
+        [
+          150,
+          "\tpjsip_auth_create_digest(&auth->response, &chal->nonce,"
+        ],
+        [
+          152,
+          "\t\t\t\t &auth->uri, &chal->realm, &aka_cred, method);"
+        ],
+        [
+          189,
+          "\tpjsip_auth_create_digest(&auth->response, &chal->nonce,"
+        ],
+        [
+          199,
+          "    return PJ_SUCCESS;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          60,
+          "pj_status_t status;"
+        ],
+        [
+          68,
+          "pjsip_auth_create_digest(&auth->response, &auth->nonce, &auth->nc,\n\t\t\t\t &auth->cnonce, &auth->qop, &auth->uri,\n\t\t\t\t &auth->realm, cred, method);"
+        ],
+        [
+          71,
+          "return PJ_SUCCESS;"
+        ],
+        [
+          150,
+          "pjsip_auth_create_digest(&auth->response, &chal->nonce, \n\t\t\t\t &auth->nc, &auth->cnonce, &auth->qop, \n\t\t\t\t &auth->uri, &chal->realm, &aka_cred, method);"
+        ],
+        [
+          189,
+          "pjsip_auth_create_digest(&auth->response, &chal->nonce, \n\t\t\t\t &auth->nc, &auth->cnonce, &auth->qop, \n\t\t\t\t &auth->uri, &chal->realm, &aka_cred, method);"
+        ],
+        [
+          199,
+          "return PJ_SUCCESS;"
+        ]
+      ],
+      "project": "pjproject",
+      "site_id": "d44c7c00326816ec"
+    },
+    {
+      "commit_id": "1c518555dba6ceb45d5ba61845b96e261219c3b7",
+      "cve": "CVE-2019-11935",
+      "cwe": "CWE-120",
+      "filepath": "hphp/runtime/ext/mbstring/ext_mbstring.cpp",
+      "func_body_sha256": "e8e0814a120b10e88461157c0e02eb115a1ded7c6bb0d03ebff14a0f40ba8dc2",
+      "func_name": "HPHP::_php_mb_regex_ereg_replace_exec",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          3612,
+          "        auto const remaining = replacement.size() - i;"
+        ],
+        [
+          3613,
+          "        if (remaining >= 2 && fwd == 1 &&"
+        ],
+        [
+          3614,
+          "            p[0] == '\\\\' && p[1] >= '0' && p[1] <= '9') {"
+        ],
+        [
+          3625,
+          "        } else if (remaining >= fwd) {"
+        ],
+        [
+          3629,
+          "        } else {"
+        ],
+        [
+          3630,
+          "          raise_warning(\"Replacement ends with unterminated %s: 0x%hhx\","
+        ],
+        [
+          3631,
+          "                        enc->name, *p);"
+        ],
+        [
+          3632,
+          "          break;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          3612,
+          "auto const remaining = replacement.size() - i;"
+        ],
+        [
+          3613,
+          "if (remaining >= 2 && fwd == 1 &&\n            p[0] == '\\\\' && p[1] >= '0' && p[1] <= '9')"
+        ],
+        [
+          3625,
+          "else if (remaining >= fwd)"
+        ],
+        [
+          3629,
+          "else"
+        ],
+        [
+          3630,
+          "raise_warning(\"Replacement ends with unterminated %s: 0x%hhx\",\n                        enc->name, *p);"
+        ],
+        [
+          3632,
+          "break;"
+        ]
+      ],
+      "project": "hhvm",
+      "site_id": "ff75fb0ae5ebce01"
+    },
+    {
+      "commit_id": "3bd7fa12e146c6051490d048a4acbfba974eeb04",
+      "cve": "CVE-2023-5344",
+      "cwe": "CWE-122",
+      "filepath": "src/message.c",
+      "func_body_sha256": "b9cbc8083e47a683f471278ee555bf9ba056524faa6f2b7f7324969c5bf79436",
+      "func_name": "trunc_string",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          356,
+          "\tbuf[e - 1] = NUL;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          356,
+          "buf[e - 1] = NUL;"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "c877406362737999"
+    },
+    {
+      "commit_id": "ea7395f39f601a7750d48d606e9d10ea0b7beefe",
+      "cve": "CVE-2023-0760",
+      "cwe": "CWE-122",
+      "filepath": "src/isomedia/box_code_base.c",
+      "func_body_sha256": "1adab3070d1fd3631911c46a19dbd2b9eb8edc9f47d0faf92e3649c6ebf24d1e",
+      "func_name": "sgpd_parse_entry",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          9986,
+          "\tcase 0:"
+        ],
+        [
+          9987,
+          "\t\tGF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, (\"[iso file] sgpd entry null grouping_type is invalid\\n\") );"
+        ],
+        [
+          9988,
+          "\t\treturn NULL;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          9986,
+          "case 0:"
+        ],
+        [
+          9987,
+          "GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, (\"[iso file] sgpd entry null grouping_type is invalid\\n\") );"
+        ],
+        [
+          9988,
+          "return NULL;"
+        ]
+      ],
+      "project": "gpac",
+      "site_id": "2c1242a5dd1abd78"
+    },
+    {
+      "commit_id": "f6d39c31d2177549a986d170e192d8351bd571e2",
+      "cve": "CVE-2022-2849",
+      "cwe": "CWE-122",
+      "filepath": "src/mbyte.c",
+      "func_body_sha256": "ff50d70464f2905fc634b0e4f8d66601db63bcc4691fa79675183db1ed3c67ab",
+      "func_name": "latin_ptr2len",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          1086,
+          "    return *p == NUL ? 0 : 1;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          1086,
+          "return *p == NUL ? 0 : 1;"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "c11e08c418949cfc"
+    },
+    {
+      "commit_id": "232bdaaca98c34a99ffadf27bf6ee08be6cc8f6a",
+      "cve": "CVE-2023-0288",
+      "cwe": "CWE-122",
+      "filepath": "src/normal.c",
+      "func_body_sha256": "faef0d6692564644089e105c22b42092f6b944c6d2a851093863c42c4816d6e2",
+      "func_name": "nv_scroll",
+      "is_vulnerable": true,
+      "labeled_line_statements": [
+        [
+          3732,
+          "\t\t    --curwin->w_cursor.lnum;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          3732,
+          "--curwin->w_cursor.lnum;"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "bc8371c622c44a76"
+    },
+    {
+      "commit_id": "f6d28fe2c95c678cc3202cc5dc825a3fcc709e93",
+      "cve": "CVE-2023-4781",
+      "cwe": "CWE-122",
+      "filepath": "src/ex_cmds.c",
+      "func_body_sha256": "2932bc663e081f3529e6a5c084dff0e1704047a0905978e509b593f5fb1f0ca2",
+      "func_name": "ex_substitute",
+      "is_vulnerable": false,
+      "labeled_line_statements": [
+        [
+          4523,
+          "\t\t    if (nmatch < 0)"
+        ],
+        [
+          4524,
+          "\t\t\tgoto skip;"
+        ]
+      ],
+      "labeled_statements": [
+        [
+          4523,
+          "if (nmatch < 0)"
+        ],
+        [
+          4524,
+          "goto skip;"
+        ]
+      ],
+      "project": "vim",
+      "site_id": "df480471d90f6758"
+    }
+  ],
+  "source": "SecVulEval (basimbd/SecVulEval) random_subset.json",
+  "vuln_fixed_pairs": "NONE available in-subset (0 sites carry both is_vulnerable True and False); vulnerable and non-vulnerable functions are separate. Confirmatory scoring is per-site against is_vulnerable, not paired."
+}
