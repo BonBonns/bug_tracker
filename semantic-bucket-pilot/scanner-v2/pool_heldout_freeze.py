@@ -49,6 +49,10 @@ def main():
     av_path = os.path.join(HERE, "study", "arvo", "FROZEN_heldout.json")
     if os.path.exists(av_path):        # third source per PREREGISTER_ARVO.md
         av, av_sha = load("study/arvo/FROZEN_heldout.json")
+    svf, svf_sha = (None, None)        # fourth source per PREREGISTER_SECVULEVAL_FULL.md
+    svf_path = os.path.join(HERE, "study", "secvuleval_full", "FROZEN_heldout.json")
+    if os.path.exists(svf_path):
+        svf, svf_sha = load("study/secvuleval_full/FROZEN_heldout.json")
 
     pc_mapped = [s for s in pc["sites"] if s["mapping_status"] == "mapped"]
     sv_sites = sv["sites"]
@@ -90,9 +94,26 @@ def main():
                 continue
             av_pool.append(s)
 
+    svf_pool, svf_dropped = [], Counter()
+    if svf is not None:
+        bv_cves = {s["cve"] for s in bv_pool if s.get("cve")}
+        bv_pc2 = {(s["project"].lower(), s["commit_id"]) for s in bv_pool}
+        av_pc2 = {(s["project"].lower(), s["fix_commit"]) for s in av_pool
+                  if s.get("fix_commit")}
+        for s in [x for x in svf["sites"]
+                  if x["mapping_status"] == "mapped" and x["is_vulnerable"]]:
+            if set(s.get("cve_list") or []) & (pc_cves | bv_cves):
+                svf_dropped["dup_cve"] += 1
+                continue
+            if (s["project"].lower(), s["commit_id"]) in bv_pc2 | av_pc2:
+                svf_dropped["dup_project_commit"] += 1
+                continue
+            svf_pool.append(s)
+
     pool = [dict(s, pool_source="postcutoff") for s in pc_mapped] + \
            [dict(s, pool_source="bigvul") for s in bv_pool] + \
-           [dict(s, pool_source="arvo") for s in av_pool]
+           [dict(s, pool_source="arvo") for s in av_pool] + \
+           [dict(s, pool_source="secvuleval_full") for s in svf_pool]
     fams = Counter(s["family_id"] for s in pool)
     pc_fams = {s["family_id"] for s in pc_mapped}
     new_fams = {f for f in fams if f not in pc_fams}
@@ -104,7 +125,7 @@ def main():
         "preregistration": "PREREGISTER_BIGVUL.md (committed before bigvul_freeze ran)",
         "inputs_sha256": {"postcutoff": pc_sha, "secvuleval": sv_sha,
                           "bigvul": bv_sha, "magma_write_mapping": mg_sha,
-                          "arvo": av_sha},
+                          "arvo": av_sha, "secvuleval_full": svf_sha},
         "dedup_rules": "pre-registered: drop Big-Vul mapped site on CVE match (PostCutoff/"
                        "SecVulEval), (project, fix commit) match (SecVulEval/Magma), or "
                        "identical diff_sha256 (PostCutoff); Magma projects excluded "
@@ -118,6 +139,12 @@ def main():
                                      if av is not None else None),
         "arvo_dropped_by_dedup": dict(av_dropped),
         "arvo_pooled": len(av_pool),
+        "secvuleval_full_mapped_vuln_before_dedup": (
+            len([x for x in svf["sites"]
+                 if x["mapping_status"] == "mapped" and x["is_vulnerable"]])
+            if svf is not None else None),
+        "secvuleval_full_dropped_by_dedup": dict(svf_dropped),
+        "secvuleval_full_pooled": len(svf_pool),
         "postcutoff_pooled": len(pc_mapped),
         "pooled_sites": len(pool),
         "pooled_vulnerable_families": len(fams),
@@ -128,6 +155,10 @@ def main():
         "families_new_from_arvo": sorted({s["family_id"] for s in av_pool}
                                          - pc_fams
                                          - {s["family_id"] for s in bv_pool}),
+        "families_new_from_secvuleval_full": sorted(
+            {s["family_id"] for s in svf_pool}
+            - pc_fams - {s["family_id"] for s in bv_pool}
+            - {s["family_id"] for s in av_pool}),
         "secvuleval_pilot_families_subsumed": sorted(sv_vuln_fams),
         "magma_development_families_flagged": sorted(
             f for f in fams if f in magma_fam_ids),
@@ -151,6 +182,8 @@ def main():
           " pooled from bigvul:", len(bv_pool))
     if av is not None:
         print("arvo pooled:", len(av_pool), " dropped:", dict(av_dropped))
+    if svf is not None:
+        print("secvuleval_full pooled:", len(svf_pool), " dropped:", dict(svf_dropped))
     print("POOLED sites:", len(pool), "  POOLED VULNERABLE FAMILIES:", len(fams),
           f" (12-gate: {'MEETS' if len(fams) >= 12 else 'BELOW'})")
     print("families beyond postcutoff's:", len(new_fams))
