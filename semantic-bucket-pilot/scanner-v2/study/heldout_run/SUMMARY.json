@@ -1,0 +1,105 @@
+{
+  "full": {
+    "counts": {
+      "families": 42,
+      "other_not_reconstructable": 83,
+      "pooled": 258,
+      "s1_source_available": 175,
+      "s2_build_parse_ok": 175,
+      "s3_mapped_into_cpg": 118,
+      "s4_recognized": 4,
+      "s5_evidence_established": 0
+    },
+    "family_coverage_ge1_recognized": {
+      "over_all_families": [
+        4,
+        42
+      ],
+      "over_families_reaching_scanner": [
+        4,
+        27
+      ]
+    },
+    "identity_reconciliation_aggregate": {
+      "chain_raw_ge_idbearing_ge_unique": true,
+      "identity_bearing_records": 47,
+      "identity_unverifiable_records": 0,
+      "raw_recognized_records": 47,
+      "unique_physical_operations": 40
+    },
+    "macro_family_recall_conditional_over_mapped": 0.09313725490196079,
+    "macro_family_recall_strict_over_all_families": 0.05257772530499803,
+    "measurement_A_end_to_end_coverage": {
+      "denominator": 258,
+      "recognized": 4,
+      "unrecovered_pipeline_attrition": 140,
+      "value": 0.015503875968992248
+    },
+    "measurement_B_conditional_scanner_recall": {
+      "denominator": 118,
+      "recognized": 4,
+      "value": 0.03389830508474576
+    },
+    "note": "PRIMARY / FULL (all 258 pooled sites, 42 families)",
+    "relationship_of_recognized": {
+      "missing": 4
+    },
+    "scanner_misses_by_write_kind": {
+      "copy_sink": 26,
+      "index_write": 13,
+      "pointer_deref": 75
+    }
+  },
+  "protocol": "see PROTOCOL_DEVIATION.md; scanner unchanged (RUN_MANIFEST.json hashes).",
+  "sensitivity_excluding_exposed": {
+    "counts": {
+      "families": 36,
+      "other_not_reconstructable": 45,
+      "pooled": 108,
+      "s1_source_available": 63,
+      "s2_build_parse_ok": 63,
+      "s3_mapped_into_cpg": 39,
+      "s4_recognized": 3,
+      "s5_evidence_established": 0
+    },
+    "family_coverage_ge1_recognized": {
+      "over_all_families": [
+        3,
+        36
+      ],
+      "over_families_reaching_scanner": [
+        3,
+        21
+      ]
+    },
+    "identity_reconciliation_aggregate": {
+      "chain_raw_ge_idbearing_ge_unique": true,
+      "identity_bearing_records": 16,
+      "identity_unverifiable_records": 0,
+      "raw_recognized_records": 16,
+      "unique_physical_operations": 12
+    },
+    "macro_family_recall_conditional_over_mapped": 0.11904761904761904,
+    "macro_family_recall_strict_over_all_families": 0.061111111111111116,
+    "measurement_A_end_to_end_coverage": {
+      "denominator": 108,
+      "recognized": 3,
+      "unrecovered_pipeline_attrition": 69,
+      "value": 0.027777777777777776
+    },
+    "measurement_B_conditional_scanner_recall": {
+      "denominator": 39,
+      "recognized": 3,
+      "value": 0.07692307692307693
+    },
+    "note": "SECONDARY / SENSITIVITY (exclude 8 exposed sites + their 6 families)",
+    "relationship_of_recognized": {
+      "missing": 3
+    },
+    "scanner_misses_by_write_kind": {
+      "copy_sink": 21,
+      "index_write": 7,
+      "pointer_deref": 8
+    }
+  }
+}
