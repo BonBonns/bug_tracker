@@ -1047,6 +1047,19 @@ def main():
         'memset':  {0:'WRITE_DEST', 2:'EXTENT'},
         'strncpy': {0:'WRITE_DEST', 1:'READ_SRC', 2:'EXTENT'},
         'snprintf':{0:'WRITE_DEST', 1:'EXTENT'},
+        # NSS-R01: PORT_Memcpy/PORT_Memmove are NSS's own memcpy/memmove wrappers
+        # (lib/util/secport.c — thin calls straight through to libc memcpy/memmove,
+        # same (dest, src, len) argument order and byte-count semantics). wmemcpy
+        # is the same shape at wchar_t granularity. Without these three, this
+        # entire operand-role/capacity/bound pipeline silently ABSTAINS on any
+        # PORT_Memcpy call site — which is exactly the callee in the confirmed
+        # sftk_doSSLMACInit bug (lib/softoken/pkcs11c.c:2547) this fixture set is
+        # built from: `PORT_Memcpy(sslmacinfo->key, keyval->attrib.pValue,
+        # keyval->attrib.ulValueLen)`. Found by reading this table against that
+        # real call site, not hypothetically.
+        'PORT_Memcpy':  {0:'WRITE_DEST', 1:'READ_SRC', 2:'EXTENT'},
+        'PORT_Memmove': {0:'WRITE_DEST', 1:'READ_SRC', 2:'EXTENT'},
+        'wmemcpy': {0:'WRITE_DEST', 1:'READ_SRC', 2:'EXTENT'},
         # TOR-B2a two-sided comparison extent: BOTH operands are read with the SAME extent.
         # Distinct roles (A/B) keep the two sides separately identified downstream.
         'memcmp':  {0:'READ_CMP_A', 1:'READ_CMP_B', 2:'EXTENT'},
@@ -1181,18 +1194,39 @@ def main():
         {'schema':'portable-field-identity-facts/0.1','field_identities':_field_ids,
          'classification':_field_cls},indent=1,sort_keys=True)+'\n')
 
-    # CapacityFact supertype. NARROW v0.1: fixed-size array locals with a
-    # NUMERIC-LITERAL dimension only. Macro/symbolic (int[GF_SIZE+1]) and unsized
-    # (char*[]) ABSTAIN. malloc/new deferred (0 alloc-dest operands in corpus;
-    # linking alloc result to operand needs points-to we will not guess).
+    # CapacityFact supertype. v0.2 (was: NUMERIC-LITERAL dimension only). A macro
+    # used as an array dimension (e.g. `unsigned char key[MAX_KEY_LEN]`) survives
+    # into typeFullName as WHATEVER TEXT the preprocessing step left behind: a
+    # bare literal if the macro is a plain `#define NAME 256` (already matched a
+    # bare \d+ dimension, e.g. NSS's own MAX_KEY_LEN — see
+    # lib/softoken/pkcs11i.h), or a constant ARITHMETIC EXPRESSION if the macro
+    # itself is arithmetic (mozjpeg's `#define BUFSIZE (DCTSIZE2*2)+8`, already
+    # handled for LOCAL arrays by oob_copy_length_verdict.py's
+    # `_eval_const_int_expr` — this was NOT wired into struct-MEMBER capacity,
+    # so a member like `JOCTET buffer[BUFSIZE]` still abstained here even though
+    # the equivalent local array did not. Reuses the identical safe-eval
+    # approach: restricted to digits/whitespace/+-*/() BEFORE ever calling eval,
+    # so this can't become a code-injection surface via attacker-controlled
+    # source text. Still ABSTAINS on anything that isn't cleanly a
+    # non-negative constant expression (an unresolved macro name, a `sizeof(...)`
+    # dimension, a variable-length array) and on unsized (`char*[]`) members —
+    # narrowing to "no guess", not widening to "guess when in doubt".
     import re as _re
     _ELEM_BYTES={'char':1,'signed char':1,'unsigned char':1,'int8_t':1,'uint8_t':1,
                  'short':2,'int16_t':2,'uint16_t':2,'int':4,'int32_t':4,'uint32_t':4,
                  'float':4,'long':8,'int64_t':8,'uint64_t':8,'double':8}
+    def _eval_const_dim_expr(_expr):
+        _e=(_expr or '').strip()
+        if not _e or not _re.fullmatch(r'[\d\s+\-*/()]+',_e): return None
+        try: _v=eval(_e,{'__builtins__':{}},{})
+        except Exception: return None
+        return _v if isinstance(_v,int) and _v>=0 else None
     def _fixed_array_capacity(_type):
-        _m=_re.match(r'^\s*([A-Za-z_][A-Za-z0-9_ ]*?)\s*\[\s*(\d+)\s*\]\s*$', _type or '')
+        _m=_re.match(r'^\s*([A-Za-z_][A-Za-z0-9_ ]*?)\s*\[\s*([\d\s+\-*/()]+)\s*\]\s*$', _type or '')
         if not _m: return None
-        _elem=_m.group(1).strip(); _n=int(_m.group(2))
+        _elem=_m.group(1).strip()
+        _n=_eval_const_dim_expr(_m.group(2))
+        if _n is None: return None
         _w=_ELEM_BYTES.get(_elem)
         if _w is None: return None
         return (_w*_n,_elem,_n)
