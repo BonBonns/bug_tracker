@@ -1,0 +1,662 @@
+{
+  "FROZEN": true,
+  "bigvul_dropped_by_dedup": {},
+  "bigvul_mapped_before_dedup": 11,
+  "bigvul_pooled": 11,
+  "confirmatory_protocol": "Run ALL frozen capabilities once on the pooled mapped sites after branch reconciliation freezes ONE definitive scanner commit; score exact-site recognition/evidence/route against external labels. No capability designed or tuned using any result from this corpus. Yields NOT inspected. No held-out scanner measurement before reconciliation.",
+  "dedup_rules": "pre-registered: drop Big-Vul mapped site on CVE match (PostCutoff/SecVulEval), (project, fix commit) match (SecVulEval/Magma), or identical diff_sha256 (PostCutoff); Magma projects excluded wholesale at inclusion; family dedup at counting time (distinct family_id counted once).",
+  "families_from_postcutoff": [
+    "fam_223b8c51e55f",
+    "fam_42418a7cbf67",
+    "fam_4bdb4421b431",
+    "fam_56c918f63585",
+    "fam_9152d9e125ef",
+    "fam_aeb728439472",
+    "fam_cae379e2673a",
+    "fam_d3b5215e864d",
+    "fam_d9e4e31ba3b4"
+  ],
+  "families_new_from_bigvul": [
+    "fam_1383388357d4",
+    "fam_b41a25fd581c"
+  ],
+  "family_sizes": {
+    "fam_1383388357d4": 1,
+    "fam_223b8c51e55f": 2,
+    "fam_42418a7cbf67": 15,
+    "fam_4bdb4421b431": 2,
+    "fam_56c918f63585": 1,
+    "fam_9152d9e125ef": 1,
+    "fam_aeb728439472": 2,
+    "fam_b41a25fd581c": 1,
+    "fam_cae379e2673a": 1,
+    "fam_d3b5215e864d": 4,
+    "fam_d9e4e31ba3b4": 2
+  },
+  "inputs_sha256": {
+    "bigvul": "60be9359bdd337ac45c415ac6b33d7c062aae669c7d2d47c277fd3a4d559ec7a",
+    "magma_write_mapping": "eef714292a04f34c8c96cf5e6b4c279cb1f81a789ec4edaff65b8e004626faba",
+    "postcutoff": "82d5fbd74a416b2b268e3992f38e26c62bbf7daea79e8a2ea45d2939c642324b",
+    "secvuleval": "2fcb73e427249bed51226285047ac95c4caa48ec9ec9f6653d4e381c9e24b143"
+  },
+  "magma_development_families_flagged": [
+    "fam_56c918f63585"
+  ],
+  "magma_family_map": {
+    "SND010": {
+      "commit": "86c9f9eb7022d186ad4d0689487e7d4f04ce2b29",
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "tgt": "libsndfile"
+    },
+    "SND012": {
+      "commit": "86c9f9eb7022d186ad4d0689487e7d4f04ce2b29",
+      "family_id": "fam_dbdb99ebbc80",
+      "family_signature": "copy_sink|struct_field|V+(V&V)",
+      "tgt": "libsndfile"
+    },
+    "SND013": {
+      "commit": "86c9f9eb7022d186ad4d0689487e7d4f04ce2b29",
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "tgt": "libsndfile"
+    }
+  },
+  "model_calls": 0,
+  "pooled_sites": 32,
+  "pooled_vulnerable_families": 11,
+  "postcutoff_pooled": 21,
+  "preregistration": "PREREGISTER_BIGVUL.md (committed before bigvul_freeze ran)",
+  "secvuleval_pilot_families_subsumed": [
+    "fam_42418a7cbf67",
+    "fam_d3b5215e864d"
+  ],
+  "sites": [
+    {
+      "benchmark_id": "case_037fb711ced5d07d7378",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5466",
+      "cwe_ids": [
+        20,
+        190,
+        295,
+        347,
+        354,
+        787
+      ],
+      "diff_sha256": "ea90eb50d24a67639b6f62cca3c50ce0f1d616f2eda84e0d79bf86d704098bbc",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "component.  With s",
+      "write_kind": "pointer_deref",
+      "write_line": "* component.  With s=0, [s](...) yields the point at infinity whose"
+    },
+    {
+      "benchmark_id": "case_04f6149200a676923a18",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-25794",
+      "cwe_ids": [
+        122,
+        190
+      ],
+      "diff_sha256": "ed3e649ce0253995622b8922e640e687040ef595378e15ddd5e45a90b4c03987",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "crBuffer",
+      "write_kind": "pointer_deref",
+      "write_line": "*crBuffer = NULL, *cbBuffer = NULL, *yBuffer = NULL;"
+    },
+    {
+      "benchmark_id": "case_11b3b55ab9553776261c",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2025-62525",
+      "cwe_ids": [
+        20,
+        125,
+        787
+      ],
+      "diff_sha256": "fb189179f9890d77f32bca81918f7700ddd5e6133f9e8e9834e33718cc572699",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "openwrt/openwrt",
+      "time_band": "post_2025_08_31",
+      "write_dest": "g_xdata_addr",
+      "write_kind": "pointer_deref",
+      "write_line": "@@ -61,7 +61,7 @@ static void *g_xdata_addr = NULL;"
+    },
+    {
+      "benchmark_id": "case_402d0f990789ac6b6c7e",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2025-69209",
+      "cwe_ids": [
+        120
+      ],
+      "diff_sha256": "315e1472166e0df302cb6746a2f22d06a2fa7051a72b80ea3640df5835dc51c7",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "arduino/arduinocore-avr",
+      "time_band": "post_2025_08_31",
+      "write_dest": "this",
+      "write_kind": "pointer_deref",
+      "write_line": "*this = dtostrf(value, (decimalPlaces + 2), decimalPlaces, buf);"
+    },
+    {
+      "benchmark_id": "case_56c30364c690d6773640",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-10664",
+      "cwe_ids": [
+        787
+      ],
+      "diff_sha256": "c03cf80c5faeaf554144d05ac66bed88217d9b3eff81840a30a4dd20edfcd91c",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "zephyrproject-rtos/zephyr",
+      "time_band": "post_2025_08_31",
+      "write_dest": "vif_ctx_zep",
+      "write_kind": "pointer_deref",
+      "write_line": "struct nrf_wifi_vif_ctx_zep *vif_ctx_zep = NULL;"
+    },
+    {
+      "benchmark_id": "case_624ccdb48fd2312b72ef",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-0819",
+      "cwe_ids": [
+        20,
+        121,
+        122,
+        125,
+        191,
+        203,
+        335,
+        358,
+        787
+      ],
+      "diff_sha256": "bcc580fe3781fb96de09d1d390ffe1e78260ce91fa1b53a8a9a57bbe9cf2d788",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "echX",
+      "write_kind": "pointer_deref",
+      "write_line": "TLSX* echX = TLSX_Find(ssl->extensions, TLSX_ECH);"
+    },
+    {
+      "benchmark_id": "case_644b3e3cf66dc80b6e79",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5264",
+      "cwe_ids": [
+        122
+      ],
+      "diff_sha256": "b5d38d7201807f58c05c2e74464153f5abceeafd695a7a0ce3682f4e878bb62c",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "prevNext",
+      "write_kind": "pointer_deref",
+      "write_line": "*prevNext = rn->next;"
+    },
+    {
+      "benchmark_id": "case_684d26f754f6cac01b9f",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5295",
+      "cwe_ids": [
+        120,
+        121,
+        190,
+        197,
+        787
+      ],
+      "diff_sha256": "d7d04f6a7df48428f2001c4f453be95f809939455a96aef998db3ceb7138f9e2",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "ffdhe2048_p",
+      "write_kind": "index_write",
+      "write_line": "static const byte ffdhe2048_p[256] = {"
+    },
+    {
+      "benchmark_id": "case_7e61d903b41214ff3d2b",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-33535",
+      "cwe_ids": [
+        787
+      ],
+      "diff_sha256": "abe220f67534800d627b3abbf363137844ae0358d8904dce4f2e09f857a03638",
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "delta",
+      "write_kind": "index_write",
+      "write_line": "delta[MagickPathExtent] = \"\";"
+    },
+    {
+      "benchmark_id": "case_8762ecc43454da1abe9a",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5295",
+      "cwe_ids": [
+        120,
+        121,
+        190,
+        197,
+        787
+      ],
+      "diff_sha256": "008f1ff1f41fca49208d768a539451f6c642c2d51abab90987e9735e18dab7dd",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "p7",
+      "write_kind": "pointer_deref",
+      "write_line": "wc_PKCS7* p7 = NULL;"
+    },
+    {
+      "benchmark_id": "case_9388e7a256bb0f36a38f",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-10673",
+      "cwe_ids": [
+        125,
+        369,
+        400,
+        401,
+        476,
+        617,
+        787
+      ],
+      "diff_sha256": "7dfcd3ee84cc04d9e228725ecd109142eb813f1c83838b5bd5668c685c78c8ba",
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "zephyrproject-rtos/zephyr",
+      "time_band": "post_2025_08_31",
+      "write_dest": "&ctx->buf[ctx->scur]",
+      "write_kind": "copy_sink",
+      "write_line": "memcpy(&ctx->buf[ctx->scur], &ctx->oa_rx_buf[rx_pos], len);"
+    },
+    {
+      "benchmark_id": "case_96937afbd5aac280cd6e",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-25968",
+      "cwe_ids": [
+        121
+      ],
+      "diff_sha256": "de6889763d88acc181f74b284e9b9d7ae6bd8c722a59dbc8c0df7d2c0b0067fc",
+      "family_id": "fam_223b8c51e55f",
+      "family_signature": "pointer_deref|local_array|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "tmp",
+      "write_kind": "pointer_deref",
+      "write_line": "char *tmp = AcquireString(value);"
+    },
+    {
+      "benchmark_id": "case_a4da690af35c8d14863f",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2025-62526",
+      "cwe_ids": [
+        122
+      ],
+      "diff_sha256": "c8975f19e2d173b6e875dfd27749e293e67c850498949115cb178179e503af0e",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "openwrt/ubus",
+      "time_band": "post_2025_08_31",
+      "write_dest": "o",
+      "write_kind": "pointer_deref",
+      "write_line": "struct ubusd_acl_obj *o = ubusd_acl_alloc_obj(file, obj);"
+    },
+    {
+      "benchmark_id": "case_b98e5b6dd7cae0e8823e",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-33899",
+      "cwe_ids": [
+        122,
+        191
+      ],
+      "diff_sha256": "32eb65f9a73dccaac7c9f26ba69f806a64698ff6169e57b13d781e6f7c8e923a",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "utf8",
+      "write_kind": "index_write",
+      "write_line": "utf8[length-1]='\\0';"
+    },
+    {
+      "benchmark_id": "case_ba592affb09c36c752b2",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-48724",
+      "cwe_ids": [
+        787
+      ],
+      "diff_sha256": "5b2d963362289c8d74cb62e4c6c6eff1642de3fb6fdb2fdab35131aa37c0cdf9",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "q",
+      "write_kind": "index_write",
+      "write_line": "q[i]=ScaleAnyToQuantum(ScaleQuantumToAny(ClampPixel((MagickRealType)"
+    },
+    {
+      "benchmark_id": "case_c2b0a0725e477d007bec",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-55958",
+      "cwe_ids": [
+        393,
+        787
+      ],
+      "diff_sha256": "3f94dd81bb29e87848eb5f24c3e9b396ccf657fff73fffc92ea2b835ae902a4d",
+      "family_id": "fam_9152d9e125ef",
+      "family_signature": "index_write|struct_field|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "bag->msgTypes",
+      "write_kind": "index_write",
+      "write_line": "bag->msgTypes[bag->msgIdx++] = *data;   /* store message type */"
+    },
+    {
+      "benchmark_id": "case_cb451697b5b63eadcc4c",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-28686",
+      "cwe_ids": [
+        122,
+        131
+      ],
+      "diff_sha256": "aa8c94d9054497e9c2cd85161cf7e6bbbf7e4c72374df6a74ef4a67e546d5205",
+      "family_id": "fam_cae379e2673a",
+      "family_signature": "copy_sink|unknown|(V+V",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_08_31",
+      "write_dest": "compress_pixels",
+      "write_kind": "copy_sink",
+      "write_line": "(void) memset(compress_pixels,0,(length+256)*"
+    },
+    {
+      "benchmark_id": "case_d6de4c0776bec922d7bc",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2025-53101",
+      "cwe_ids": [
+        124
+      ],
+      "diff_sha256": "34f805dee4865c3474b6682ea02e385b5058c368721ac8c838ac52b42f841643",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "imagemagick/imagemagick",
+      "time_band": "post_2025_04_30_to_2025_08_31",
+      "write_dest": "q",
+      "write_kind": "pointer_deref",
+      "write_line": "*q='\\0';"
+    },
+    {
+      "benchmark_id": "case_e062ef20612dc292fa98",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5264",
+      "cwe_ids": [
+        122
+      ],
+      "diff_sha256": "29f92c4f31bfbf8ca8e142fa2fcdd0074c984145ba1c3d2f18a70c8c9f8dc1de",
+      "family_id": "fam_aeb728439472",
+      "family_signature": "pointer_deref|parameter|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "prevNext",
+      "write_kind": "pointer_deref",
+      "write_line": "*prevNext = rn;"
+    },
+    {
+      "benchmark_id": "case_e0e81d544d7f8597e2e1",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2025-62526",
+      "cwe_ids": [
+        122
+      ],
+      "diff_sha256": "00cec4c9914e28dfa4a2560d35bd3a1f4a4cd35e251aabc43b1939897c3a0904",
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "openwrt/ubus",
+      "time_band": "post_2025_08_31",
+      "write_dest": "pattern",
+      "write_kind": "index_write",
+      "write_line": "pattern[len - 1] = 0;"
+    },
+    {
+      "benchmark_id": "case_faac9f02124339d0941e",
+      "binary_label": "vulnerability_fix",
+      "cve": "CVE-2026-5295",
+      "cwe_ids": [
+        120,
+        121,
+        190,
+        197,
+        787
+      ],
+      "diff_sha256": "a8fe818bbc3a6a9fbd0ee512bbb70528911eae0882cf1615c89f92f9dbfb7af5",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "postcutoff",
+      "repository": "wolfssl/wolfssl",
+      "time_band": "post_2025_08_31",
+      "write_dest": "p7",
+      "write_kind": "pointer_deref",
+      "write_line": "wc_PKCS7* p7 = NULL;"
+    },
+    {
+      "commit_id": "c535531f03369623b9b833ef41952c62257b507e",
+      "cve": "CVE-2017-14039",
+      "cwe": "CWE-787",
+      "diff_sha256": "2dda83edff3beefddd6627aed3c8bd309eb2933f48dfee942f84d3a568abb4ad",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "openjpeg",
+      "publish_date": "2017-08-30",
+      "write_dest": "c",
+      "write_kind": "index_write",
+      "write_line": "c[0] = 255;"
+    },
+    {
+      "commit_id": "796dd28aaa6b9fa76d99c42c4d5ff8b257cc2191",
+      "cve": "CVE-2017-9949",
+      "cwe": "CWE-787",
+      "diff_sha256": "6db0fc2b22ce44402287c323090b193bbb8a3c5983237102b56918345e55e8a5",
+      "family_id": "fam_223b8c51e55f",
+      "family_signature": "pointer_deref|local_array|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "radare2",
+      "publish_date": "2017-06-26",
+      "write_dest": "filename",
+      "write_kind": "pointer_deref",
+      "write_line": "char * filename = grub_malloc (dirent.namelen + 1);"
+    },
+    {
+      "commit_id": "2d6253c7a692a3d92785dd990fce7256ea05e794",
+      "cve": "CVE-2017-9432",
+      "cwe": "CWE-787",
+      "diff_sha256": "406d5f0ec70d91ad45c844e5a17978ac37688241422a2bed006d6fd05c473659",
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "libstaroffice",
+      "publish_date": "2017-06-04",
+      "write_dest": "positions",
+      "write_kind": "index_write",
+      "write_line": "for (int j=0; j<2; ++j) positions[i]=int(input->readULong(4));"
+    },
+    {
+      "commit_id": "a4f247707f08e322f0b41e82c3e06e224240a654",
+      "cve": "CVE-2017-9203",
+      "cwe": "CWE-787",
+      "diff_sha256": "cf4f5f64b50fa9f49299f850ca6ef55545c0ccc231ef203d01471bff1630c905",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "imageworsener",
+      "publish_date": "2017-05-23",
+      "write_dest": "out_pix",
+      "write_kind": "pointer_deref",
+      "write_line": "iw_tmpsample *out_pix = NULL;"
+    },
+    {
+      "commit_id": "e477f09d0b3619f3d29173b2cd593e17e2d1978e",
+      "cve": "CVE-2017-7863",
+      "cwe": "CWE-787",
+      "diff_sha256": "a715e0d4e5e794b5005a13ca7a2f6f42daac2ee7cf2bedbe689ac7f25244f05d",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "FFmpeg",
+      "publish_date": "2017-04-14",
+      "write_dest": "row",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t *row = &s->image_buf[s->image_linesize * y];"
+    },
+    {
+      "commit_id": "0b0ef9344255ff5acfac6b7af09198ac9c9756c8",
+      "cve": "CVE-2018-14681",
+      "cwe": "CWE-787",
+      "diff_sha256": "fd2ebed021255cfdb446c1596f573cdafe73715dece1d861f3be1977930a7145",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "libmspack",
+      "publish_date": "2018-07-28",
+      "write_dest": "fn",
+      "write_kind": "pointer_deref",
+      "write_line": "char *fn = (char *) sys->alloc(sys, (size_t) 13);"
+    },
+    {
+      "commit_id": "bed844f109b6c222816740555068de2e101e8018",
+      "cve": "CVE-2018-11593",
+      "cwe": "CWE-787",
+      "diff_sha256": "f0cd573218da230650cc36e9f0158a8d0b2639c37dbd38ea027da56be9b7fb55",
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "Espruino",
+      "publish_date": "2018-05-31",
+      "write_dest": "str",
+      "write_kind": "copy_sink",
+      "write_line": "case LEX_EOF : strncpy(str, \"EOF\", len); return;"
+    },
+    {
+      "commit_id": "6f8bb34c2993a48ab9afbe353e6d0cff7c8d821d",
+      "cve": "CVE-2018-10540",
+      "cwe": "CWE-787",
+      "diff_sha256": "14460e1c28789073013f7415660dcd6d86edd66b55ebaa85b50ef4e85c7c6845",
+      "family_id": "fam_1383388357d4",
+      "family_signature": "pointer_deref|heap_alloc|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "WavPack",
+      "publish_date": "2018-04-29",
+      "write_dest": "buff",
+      "write_kind": "pointer_deref",
+      "write_line": "char *buff = malloc (bytes_to_copy);"
+    },
+    {
+      "commit_id": "9ba91381954ad325ea4fd26b9c65a8bd9a2a85b6",
+      "cve": "CVE-2018-14879",
+      "cwe": "CWE-120",
+      "diff_sha256": "d874d3db66180d3c0343b8c3c9636511aa47dcf4b05ca7b4d2df5679860b4b85",
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "tcpdump",
+      "publish_date": "2019-10-03",
+      "write_dest": "ptr",
+      "write_kind": "index_write",
+      "write_line": "ptr[strlen(ptr) - 1] = '\\0';"
+    },
+    {
+      "commit_id": "11fb7aa03437eccac98d90ca2de1730a02a515e2",
+      "cve": "CVE-2018-9504",
+      "cwe": "CWE-787",
+      "diff_sha256": "e2cd62d2b839435525b5598759ab53e4d67346d63c4e87cfc67d0f671117d9a2",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "Android",
+      "publish_date": "2018-10-02",
+      "write_dest": "old_p",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t* old_p = p;"
+    },
+    {
+      "commit_id": "a96567f02a0881561c964e5c11afe9c1af17a5f7",
+      "cve": "CVE-2017-15407",
+      "cwe": "CWE-787",
+      "diff_sha256": "4e297f955f7a6cdc3abdf5e3224ab08d8d9626b462724728c302ff762dc5caaa",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "pool_source": "bigvul",
+      "project": "Chrome",
+      "publish_date": "2018-08-28",
+      "write_dest": "error_details",
+      "write_kind": "pointer_deref",
+      "write_line": "*error_details = \"Received stream data outside of maximum range.\";"
+    }
+  ],
+  "tchecker_used": false,
+  "twelve_vuln_family_gate": {
+    "gate": 12,
+    "meets_gate": false,
+    "vulnerable_families": 11
+  }
+}

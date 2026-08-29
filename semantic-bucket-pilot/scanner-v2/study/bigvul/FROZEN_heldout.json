@@ -1,0 +1,670 @@
+{
+  "FROZEN": true,
+  "counts": {
+    "by_project_mapped": {
+      "Android": 1,
+      "Chrome": 1,
+      "Espruino": 1,
+      "FFmpeg": 1,
+      "WavPack": 1,
+      "imageworsener": 1,
+      "libmspack": 1,
+      "libstaroffice": 1,
+      "openjpeg": 1,
+      "radare2": 1,
+      "tcpdump": 1
+    },
+    "by_write_kind": {
+      "copy_sink": 1,
+      "index_write": 3,
+      "pointer_deref": 7
+    },
+    "family_sizes": {
+      "fam_1383388357d4": 1,
+      "fam_223b8c51e55f": 1,
+      "fam_42418a7cbf67": 5,
+      "fam_4bdb4421b431": 1,
+      "fam_b41a25fd581c": 1,
+      "fam_d3b5215e864d": 1,
+      "fam_d9e4e31ba3b4": 1
+    },
+    "mapped_vulnerable": 11,
+    "mapping": {
+      "ambiguous": 22,
+      "mapped": 11,
+      "no_write_found": 29
+    },
+    "sites_after_filters": 62,
+    "vulnerable_families": 7
+  },
+  "csv_sha256": "02970f6d07f22dcff4f03983a89b1fd68bebb63289eaa98f4c7e11d6218d907c",
+  "exclusions": {
+    "magma_overlap_project": 7,
+    "not_c_cpp_or_no_patch": 8,
+    "not_write_cwe": 4355
+  },
+  "inclusion": "cwe_id in write family {787,122,120,121,124,680,805,806}; Magma-overlap projects removed (union of the two frozen lists); C/C++ file patches only; one site per (cve_id, commit_id); ENTIRE dataset processed, no early stop.",
+  "model_calls": 0,
+  "pinned_repo_commit": "6022ca320b2204baa6ae1ba50e6564b717a8be51",
+  "preregistration": "PREREGISTER_BIGVUL.md (committed before first run)",
+  "rule_1_write_site_mapping": "IMPORTED unchanged: postcutoff diff variant -- diff_hunk_lines + writes_in; mapped iff a UNIQUE (write_kind, dest) exists across the C/C++ fix-diff hunks; ambiguous/no_write_found otherwise; only mapped sites score.",
+  "rule_2_family_assignment": "IMPORTED unchanged: family_id = hash(write_kind | dest_shape | length_shape) from source structure only; frozen now, never recomputed.",
+  "sites": [
+    {
+      "commit_id": "9b57da0630c9fd36ed7a20fc0f98dc82cc0777fa",
+      "cve": "CVE-2016-9755",
+      "cwe": "CWE-787",
+      "diff_sha256": "78346235824cf2cfa23454230ce1fc957544cace002129f9bb3eb62800b32919",
+      "mapping_status": "no_write_found",
+      "project": "linux",
+      "publish_date": "2016-12-28"
+    },
+    {
+      "commit_id": "af3ff8045bbf3e32f1a448542e73abb4c8ceb6f1",
+      "cve": "CVE-2017-17806",
+      "cwe": "CWE-787",
+      "diff_sha256": "50e8f3c1758d0e9213092334dcb4e4301c01bb7f384f5f8f9cbedbf682b764ef",
+      "mapping_status": "no_write_found",
+      "project": "linux",
+      "publish_date": "2017-12-20"
+    },
+    {
+      "commit_id": "dcac91b8c72f743bda7dbfa9032356bc8110098a",
+      "cve": "CVE-2017-14164",
+      "cwe": "CWE-787",
+      "diff_sha256": "093b567b0eefa8d9f40cbf8b6a5a37fb709edc955c04cb98bed850a380b490dc",
+      "mapping_status": "no_write_found",
+      "project": "openjpeg",
+      "publish_date": "2017-09-06"
+    },
+    {
+      "commit_id": "4241ae6fbbf1de9658764a80944dc8108f2b4154",
+      "cve": "CVE-2017-14152",
+      "cwe": "CWE-787",
+      "diff_sha256": "3759edb0a969c678ba959e944333c7938f60cde88a9cb88d2cd2bb836f7171af",
+      "mapping_status": "ambiguous",
+      "project": "openjpeg",
+      "publish_date": "2017-09-05"
+    },
+    {
+      "commit_id": "e5285319229a5d77bf316bb0d3a6cbd3cb8666d9",
+      "cve": "CVE-2017-14041",
+      "cwe": "CWE-787",
+      "diff_sha256": "c58dccd70992085469366bed1ba1b9275039870677913e89f698c6188eb862c1",
+      "mapping_status": "no_write_found",
+      "project": "openjpeg",
+      "publish_date": "2017-08-30"
+    },
+    {
+      "commit_id": "2cd30c2b06ce332dede81cccad8b334cde997281",
+      "cve": "CVE-2017-14040",
+      "cwe": "CWE-787",
+      "diff_sha256": "9860d44ac4652de1d2f9c491cc180ea53fdcf694271d21dcedb28b0e54dcba70",
+      "mapping_status": "ambiguous",
+      "project": "openjpeg",
+      "publish_date": "2017-08-30"
+    },
+    {
+      "commit_id": "c535531f03369623b9b833ef41952c62257b507e",
+      "cve": "CVE-2017-14039",
+      "cwe": "CWE-787",
+      "diff_sha256": "2dda83edff3beefddd6627aed3c8bd309eb2933f48dfee942f84d3a568abb4ad",
+      "family_id": "fam_d3b5215e864d",
+      "family_signature": "index_write|unknown|index",
+      "mapping_status": "mapped",
+      "project": "openjpeg",
+      "publish_date": "2017-08-30",
+      "write_dest": "c",
+      "write_kind": "index_write",
+      "write_line": "c[0] = 255;"
+    },
+    {
+      "commit_id": "796dd28aaa6b9fa76d99c42c4d5ff8b257cc2191",
+      "cve": "CVE-2017-9949",
+      "cwe": "CWE-787",
+      "diff_sha256": "6db0fc2b22ce44402287c323090b193bbb8a3c5983237102b56918345e55e8a5",
+      "family_id": "fam_223b8c51e55f",
+      "family_signature": "pointer_deref|local_array|deref",
+      "mapping_status": "mapped",
+      "project": "radare2",
+      "publish_date": "2017-06-26",
+      "write_dest": "filename",
+      "write_kind": "pointer_deref",
+      "write_line": "char * filename = grub_malloc (dirent.namelen + 1);"
+    },
+    {
+      "commit_id": "2d6253c7a692a3d92785dd990fce7256ea05e794",
+      "cve": "CVE-2017-9432",
+      "cwe": "CWE-787",
+      "diff_sha256": "406d5f0ec70d91ad45c844e5a17978ac37688241422a2bed006d6fd05c473659",
+      "family_id": "fam_4bdb4421b431",
+      "family_signature": "index_write|local_array|index",
+      "mapping_status": "mapped",
+      "project": "libstaroffice",
+      "publish_date": "2017-06-04",
+      "write_dest": "positions",
+      "write_kind": "index_write",
+      "write_line": "for (int j=0; j<2; ++j) positions[i]=int(input->readULong(4));"
+    },
+    {
+      "commit_id": "3b63d12038c8d8fc278e81c942fa9bec7c704c8b",
+      "cve": "CVE-2017-9228",
+      "cwe": "CWE-787",
+      "diff_sha256": "526c48f1b16fd76890d01eee8c83955375d0829e1a5a5e01584b87009ca0f53a",
+      "mapping_status": "ambiguous",
+      "project": "oniguruma",
+      "publish_date": "2017-05-24"
+    },
+    {
+      "commit_id": "b4bf968ad52afe14e60a2dc8a95d3555c543353a",
+      "cve": "CVE-2017-9226",
+      "cwe": "CWE-787",
+      "diff_sha256": "8c2a8e25cd7f1ae39c4e25cd0ecb6f486e62bab4f8456c9254831c16fdb2133b",
+      "mapping_status": "no_write_found",
+      "project": "oniguruma",
+      "publish_date": "2017-05-24"
+    },
+    {
+      "commit_id": "166a6c3999bf06b4de0ab4ce6b088a468cc4029f",
+      "cve": "CVE-2017-9225",
+      "cwe": "CWE-787",
+      "diff_sha256": "3cacaa630d51569b562a07076967b98fdff6065ad796f75fad1c4ed8e999ff75",
+      "mapping_status": "no_write_found",
+      "project": "oniguruma",
+      "publish_date": "2017-05-24"
+    },
+    {
+      "commit_id": "a4f247707f08e322f0b41e82c3e06e224240a654",
+      "cve": "CVE-2017-9203",
+      "cwe": "CWE-787",
+      "diff_sha256": "cf4f5f64b50fa9f49299f850ca6ef55545c0ccc231ef203d01471bff1630c905",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "project": "imageworsener",
+      "publish_date": "2017-05-23",
+      "write_dest": "out_pix",
+      "write_kind": "pointer_deref",
+      "write_line": "iw_tmpsample *out_pix = NULL;"
+    },
+    {
+      "commit_id": "f7a547b7ef8fc8ebdeaa4c28515c9d72e592fb6d",
+      "cve": "CVE-2017-7875",
+      "cwe": "CWE-787",
+      "diff_sha256": "40e2ccab759fa163cc1fe1044be6cdb5c85fd3834a665460975a0d4623f73542",
+      "mapping_status": "ambiguous",
+      "project": "feh",
+      "publish_date": "2017-04-14"
+    },
+    {
+      "commit_id": "e371f031b942d73e02c090170975561fabd5c264",
+      "cve": "CVE-2017-7866",
+      "cwe": "CWE-787",
+      "diff_sha256": "eef8e5b3b36a729b3d38d7d4f8779575a118c1debe7ec20b72b7085de15b2175",
+      "mapping_status": "no_write_found",
+      "project": "FFmpeg",
+      "publish_date": "2017-04-14"
+    },
+    {
+      "commit_id": "2080bc33717955a0e4268e738acf8c1eeddbf8cb",
+      "cve": "CVE-2017-7865",
+      "cwe": "CWE-787",
+      "diff_sha256": "e2b232942f0b2f85fb715dd6d863632e53c0c2faf867b45324a09980571dd9b4",
+      "mapping_status": "no_write_found",
+      "project": "FFmpeg",
+      "publish_date": "2017-04-14"
+    },
+    {
+      "commit_id": "e477f09d0b3619f3d29173b2cd593e17e2d1978e",
+      "cve": "CVE-2017-7863",
+      "cwe": "CWE-787",
+      "diff_sha256": "a715e0d4e5e794b5005a13ca7a2f6f42daac2ee7cf2bedbe689ac7f25244f05d",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "project": "FFmpeg",
+      "publish_date": "2017-04-14",
+      "write_dest": "row",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t *row = &s->image_buf[s->image_linesize * y];"
+    },
+    {
+      "commit_id": "8c2ea3030af7b40a3c4275696fb5c76cdb80950a",
+      "cve": "CVE-2017-7862",
+      "cwe": "CWE-787",
+      "diff_sha256": "782e3acc619113ff2e4023392e335feeec91cad7c5ea864893a96e9f6efa7f9c",
+      "mapping_status": "no_write_found",
+      "project": "FFmpeg",
+      "publish_date": "2017-04-14"
+    },
+    {
+      "commit_id": "32ee5213fe64f1e10ec76c1ee861ee6f233120dd",
+      "cve": "CVE-2017-6439",
+      "cwe": "CWE-787",
+      "diff_sha256": "107e80acade22c8b26a4858b1484ce5fc180aa1f710a3a4bfea2bdc778fa6f5e",
+      "mapping_status": "no_write_found",
+      "project": "libplist",
+      "publish_date": "2017-03-15"
+    },
+    {
+      "commit_id": "91cc3f36f2ccbd485a0456bab9aebe63b635da88",
+      "cve": "CVE-2017-5510",
+      "cwe": "CWE-787",
+      "diff_sha256": "af4f37da15c1daa9eea979ee48e28091c5cd3f398d13fea5eefdbfbbd7db8934",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-03-24"
+    },
+    {
+      "commit_id": "d4ec73f866a7c42a2e7f301fcd696e5cb7a7d3ab",
+      "cve": "CVE-2017-5509",
+      "cwe": "CWE-787",
+      "diff_sha256": "71898ac2862077400aa84a7b1326bd6f372e9d6ac4976de4343e4d91d32337df",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-03-24"
+    },
+    {
+      "commit_id": "53c1dcd34bed85181b901bfce1a2322f85a59472",
+      "cve": "CVE-2016-7538",
+      "cwe": "CWE-787",
+      "diff_sha256": "9535dc8f1c26808588b0963be71cea83f5bc5aae71a2cb519afddab612aa13cc",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-04-20"
+    },
+    {
+      "commit_id": "b6ae2f9e0ab13343c0281732d479757a8e8979c7",
+      "cve": "CVE-2016-7526",
+      "cwe": "CWE-787",
+      "diff_sha256": "4d3c9199362aa61ef2eda0ebf2ed6216dd0ec4f3ba20e008a6e84a81f9fa6677",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-04-20"
+    },
+    {
+      "commit_id": "365abe807cab2d60dc9ec307292a06181f77a9c2",
+      "cve": "CVE-2016-6870",
+      "cwe": "CWE-787",
+      "diff_sha256": "b303a9f5805ad4645b6f205620fd316a9d17dc32a219dcd12533bf55de919eb0",
+      "mapping_status": "ambiguous",
+      "project": "hhvm",
+      "publish_date": "2017-02-17"
+    },
+    {
+      "commit_id": "864f5d4c127def386dd5cc926ad96934b297f04e",
+      "cve": "CVE-2018-19198",
+      "cwe": "CWE-787",
+      "diff_sha256": "1ff4da081bf07a6aac7e252cae62de5719ed953bccb8469203cfd9eef2816d69",
+      "mapping_status": "ambiguous",
+      "project": "uriparser",
+      "publish_date": "2018-11-12"
+    },
+    {
+      "commit_id": "40ef1b4093d77ad3a5cfcee1f5cb6108b3a3bcc2",
+      "cve": "CVE-2018-18584",
+      "cwe": "CWE-787",
+      "diff_sha256": "54d023001df5106ad38636c0eee89a3d5596cb4c6e3d7e1708f1af86f6fea9a4",
+      "mapping_status": "no_write_found",
+      "project": "libmspack",
+      "publish_date": "2018-10-22"
+    },
+    {
+      "commit_id": "cc4ac341f29fa368da6ef01c207deaf8c61f6a2e",
+      "cve": "CVE-2018-16642",
+      "cwe": "CWE-787",
+      "diff_sha256": "f4b16a2569e18d1b8884d6a80a273a4ea0bf267f6ae9beeb8e884fafd2618b4a",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2018-09-06"
+    },
+    {
+      "commit_id": "0b0ef9344255ff5acfac6b7af09198ac9c9756c8",
+      "cve": "CVE-2018-14681",
+      "cwe": "CWE-787",
+      "diff_sha256": "fd2ebed021255cfdb446c1596f573cdafe73715dece1d861f3be1977930a7145",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "project": "libmspack",
+      "publish_date": "2018-07-28",
+      "write_dest": "fn",
+      "write_kind": "pointer_deref",
+      "write_line": "char *fn = (char *) sys->alloc(sys, (size_t) 13);"
+    },
+    {
+      "commit_id": "81f9c4e4177d31ced6f52a89bb70e93bfb77ca03",
+      "cve": "CVE-2018-12714",
+      "cwe": "CWE-787",
+      "diff_sha256": "6a94c96432699dfd924fa0231806b643058fd0584bf84ff00bb193583fdbc8b7",
+      "mapping_status": "no_write_found",
+      "project": "linux",
+      "publish_date": "2018-06-24"
+    },
+    {
+      "commit_id": "bed844f109b6c222816740555068de2e101e8018",
+      "cve": "CVE-2018-11593",
+      "cwe": "CWE-787",
+      "diff_sha256": "f0cd573218da230650cc36e9f0158a8d0b2639c37dbd38ea027da56be9b7fb55",
+      "family_id": "fam_b41a25fd581c",
+      "family_signature": "copy_sink|parameter|V",
+      "mapping_status": "mapped",
+      "project": "Espruino",
+      "publish_date": "2018-05-31",
+      "write_dest": "str",
+      "write_kind": "copy_sink",
+      "write_line": "case LEX_EOF : strncpy(str, \"EOF\", len); return;"
+    },
+    {
+      "commit_id": "6f8bb34c2993a48ab9afbe353e6d0cff7c8d821d",
+      "cve": "CVE-2018-10540",
+      "cwe": "CWE-787",
+      "diff_sha256": "14460e1c28789073013f7415660dcd6d86edd66b55ebaa85b50ef4e85c7c6845",
+      "family_id": "fam_1383388357d4",
+      "family_signature": "pointer_deref|heap_alloc|deref",
+      "mapping_status": "mapped",
+      "project": "WavPack",
+      "publish_date": "2018-04-29",
+      "write_dest": "buff",
+      "write_kind": "pointer_deref",
+      "write_line": "char *buff = malloc (bytes_to_copy);"
+    },
+    {
+      "commit_id": "d1112c279bd1a327e8e4d0b5f371458bf2579659",
+      "cve": "CVE-2018-8788",
+      "cwe": "CWE-787",
+      "diff_sha256": "918f09cdc2a043cb8282897d154a186151e66604cf32ca7ff9dc9e56acd61942",
+      "mapping_status": "ambiguous",
+      "project": "FreeRDP",
+      "publish_date": "2018-11-29"
+    },
+    {
+      "commit_id": "c095508770aebf1b9218e77026e48345d719b17c",
+      "cve": "CVE-2018-5332",
+      "cwe": "CWE-787",
+      "diff_sha256": "afb2f1757a7f6bba5c5d3797a176801ad5440893a3e0b035aebc9f82ccba3af0",
+      "mapping_status": "no_write_found",
+      "project": "linux",
+      "publish_date": "2018-01-11"
+    },
+    {
+      "commit_id": "b71812168571fa55e44cdd0254471331b9c4c4c6",
+      "cve": "CVE-2018-1068",
+      "cwe": "CWE-787",
+      "diff_sha256": "1b3dd1e54570e38eb7ab2a6cdf0ea9586d245cf15473fb52ae3fdf9f2b0e4936",
+      "mapping_status": "no_write_found",
+      "project": "linux",
+      "publish_date": "2018-03-16"
+    },
+    {
+      "commit_id": "6c0f101a62489b1c5927b4ed63b0e1d37db40282",
+      "cve": "CVE-2017-1000458",
+      "cwe": "CWE-787",
+      "diff_sha256": "3cd7b4137805829423ef4dda40dde5f663c906f16dda8caed73910ebfc670b44",
+      "mapping_status": "no_write_found",
+      "project": "bro",
+      "publish_date": "2018-01-02"
+    },
+    {
+      "commit_id": "927688ddab43c2b203569de79407a899e734fabe",
+      "cve": "CVE-2019-17113",
+      "cwe": "CWE-120",
+      "diff_sha256": "302cad9e103eab83fc6c321a5322eaa13417f6ab06c09f9407c708d3e4ae3211",
+      "mapping_status": "ambiguous",
+      "project": "openmpt",
+      "publish_date": "2019-10-03"
+    },
+    {
+      "commit_id": "341f12cd5b97ab419e53853ca00176457c9f1681",
+      "cve": "CVE-2019-15148",
+      "cwe": "CWE-787",
+      "diff_sha256": "677a48e31f6a9e4b8891267f69db9243f33c3d042806622ae7b146203dde1636",
+      "mapping_status": "ambiguous",
+      "project": "gpmf-parser",
+      "publish_date": "2019-08-18"
+    },
+    {
+      "commit_id": "0c4120fffa3dffe97b95c486a120eded82afe8a6",
+      "cve": "CVE-2019-14934",
+      "cwe": "CWE-787",
+      "diff_sha256": "aad9d0d9346ecb7b97271c69831922c17553bba2ddafdf06d54d58234fa3987f",
+      "mapping_status": "ambiguous",
+      "project": "pdfresurrect",
+      "publish_date": "2019-08-11"
+    },
+    {
+      "commit_id": "7caac62ed598a196d6ddf8d9c121e12e082cac3",
+      "cve": "CVE-2019-14816",
+      "cwe": "CWE-120",
+      "diff_sha256": "df338979219f133565b8c309a4dd05bfab4f7f2d32ce7b932217a6111870614c",
+      "mapping_status": "ambiguous",
+      "project": "linux",
+      "publish_date": "2019-09-20"
+    },
+    {
+      "commit_id": "7caac62ed598a196d6ddf8d9c121e12e082cac3a",
+      "cve": "CVE-2019-14814",
+      "cwe": "CWE-120",
+      "diff_sha256": "df338979219f133565b8c309a4dd05bfab4f7f2d32ce7b932217a6111870614c",
+      "mapping_status": "ambiguous",
+      "project": "linux",
+      "publish_date": "2019-09-20"
+    },
+    {
+      "commit_id": "3b67dc844789dc0f00e934270c7b349bcb547865",
+      "cve": "CVE-2019-14495",
+      "cwe": "CWE-787",
+      "diff_sha256": "f17a039fb2332055c4ffdf102dd09cb4abbc900ddef7463319e4e7a4c7eaa7a0",
+      "mapping_status": "ambiguous",
+      "project": "3proxy",
+      "publish_date": "2019-08-01"
+    },
+    {
+      "commit_id": "master",
+      "cve": "CVE-2019-13106",
+      "cwe": "CWE-787",
+      "diff_sha256": "aac3ae6af86d4280fefd8376cf632844a2f43a1f59779db2c660490de2616400",
+      "mapping_status": "ambiguous",
+      "project": "u-boot",
+      "publish_date": "2019-08-06"
+    },
+    {
+      "commit_id": "2f07985bef9fbae124cc63e5c0272e32da4fdaec",
+      "cve": "CVE-2019-11921",
+      "cwe": "CWE-787",
+      "diff_sha256": "2966023406786654ec2516bda663e96e8905dd9c1e8e8c93c12f049c595e6778",
+      "mapping_status": "no_write_found",
+      "project": "proxygen",
+      "publish_date": "2019-07-25"
+    },
+    {
+      "commit_id": "1c449a34fe0b50aaffb881bfb9d7c5ab0bb18cdd",
+      "cve": "CVE-2018-20763",
+      "cwe": "CWE-787",
+      "diff_sha256": "26e3f2fe5bd820f0b5f2c9e2ef2a5c6147353d985c41a1eb1e2e395773401afa",
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "publish_date": "2019-02-06"
+    },
+    {
+      "commit_id": "4c1360818fc8948e9307059fba4dc47ba8ad255d",
+      "cve": "CVE-2018-20760",
+      "cwe": "CWE-787",
+      "diff_sha256": "3098d793302ac2d563cff68e78a62dd70db300da24826ddc3014c197081e9f14",
+      "mapping_status": "ambiguous",
+      "project": "gpac",
+      "publish_date": "2019-02-06"
+    },
+    {
+      "commit_id": "9ba91381954ad325ea4fd26b9c65a8bd9a2a85b6",
+      "cve": "CVE-2018-14879",
+      "cwe": "CWE-120",
+      "diff_sha256": "d874d3db66180d3c0343b8c3c9636511aa47dcf4b05ca7b4d2df5679860b4b85",
+      "family_id": "fam_d9e4e31ba3b4",
+      "family_signature": "index_write|parameter|index",
+      "mapping_status": "mapped",
+      "project": "tcpdump",
+      "publish_date": "2019-10-03",
+      "write_dest": "ptr",
+      "write_kind": "index_write",
+      "write_line": "ptr[strlen(ptr) - 1] = '\\0';"
+    },
+    {
+      "commit_id": "f015fbdd95f76438cd86366467bb2b39870dd7c6",
+      "cve": "CVE-2017-9226",
+      "cwe": "CWE-787",
+      "diff_sha256": "09888e32f7c7cec0e0cd5ebdba1650e75f6e16015143cb006ab7575c0f1d1fef",
+      "mapping_status": "no_write_found",
+      "project": "oniguruma",
+      "publish_date": "2017-05-24"
+    },
+    {
+      "commit_id": "e87af64b1ff1635a32d9b6162f1b0e260fb54ed9",
+      "cve": "CVE-2017-5510",
+      "cwe": "CWE-787",
+      "diff_sha256": "b016f09dceb808ecea745cbbacd6a8ed813462d9fa315dfe016d40deca535ecc",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-03-24"
+    },
+    {
+      "commit_id": "37a1710e2dab6ed91128ea648d654a22fbe2a6af",
+      "cve": "CVE-2017-5509",
+      "cwe": "CWE-787",
+      "diff_sha256": "999c4ed4d3bffdbfb82f2daf4bf01921e847641a2b494ac84f95bb35fdc7ebf6",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-03-24"
+    },
+    {
+      "commit_id": "d9b2209a69ee90d8df81fb124eb66f593eb9f599",
+      "cve": "CVE-2016-7526",
+      "cwe": "CWE-787",
+      "diff_sha256": "8d27704fcd8f0ac0ae51892ae38beefe05f80c3ceb4823e5bcfea70dd52a4e20",
+      "mapping_status": "no_write_found",
+      "project": "ImageMagick",
+      "publish_date": "2017-04-20"
+    },
+    {
+      "commit_id": "594bf934384920618d2b6ce0bcda1f60144cb3eb",
+      "cve": "CVE-2017-0594",
+      "cwe": "CWE-120",
+      "diff_sha256": "9fcf92253e26c563843c8856532c17045de1cf0f6b5e72e0ebeb0ff1e57245e4",
+      "mapping_status": "ambiguous",
+      "project": "Android",
+      "publish_date": "2017-05-12"
+    },
+    {
+      "commit_id": "11fb7aa03437eccac98d90ca2de1730a02a515e2",
+      "cve": "CVE-2018-9504",
+      "cwe": "CWE-787",
+      "diff_sha256": "e2cd62d2b839435525b5598759ab53e4d67346d63c4e87cfc67d0f671117d9a2",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "project": "Android",
+      "publish_date": "2018-10-02",
+      "write_dest": "old_p",
+      "write_kind": "pointer_deref",
+      "write_line": "uint8_t* old_p = p;"
+    },
+    {
+      "commit_id": "77c955200ddd1761d6ed7a6c1578349fedbb55e4",
+      "cve": "CVE-2018-9498",
+      "cwe": "CWE-787",
+      "diff_sha256": "d311eee7a2778a7dd64ad86c1927e4bebe129ef6d47c08b9afa716640bfd8fcc",
+      "mapping_status": "ambiguous",
+      "project": "Android",
+      "publish_date": "2018-10-02"
+    },
+    {
+      "commit_id": "bef16671c891e16f25a7b174bc528eea109357be",
+      "cve": "CVE-2018-9497",
+      "cwe": "CWE-787",
+      "diff_sha256": "03fc12e6aa6ad98a5f7e1ebcc9d09b40de0ef819064e5810491734eb1ba6315e",
+      "mapping_status": "no_write_found",
+      "project": "Android",
+      "publish_date": "2018-10-02"
+    },
+    {
+      "commit_id": "04e8cd58f075bec5892e369c8deebca9c67e855c",
+      "cve": "CVE-2018-9496",
+      "cwe": "CWE-787",
+      "diff_sha256": "d673866a8b2443029ecf80974964681f1aa70bd2f5af574a491a4abb065ba97c",
+      "mapping_status": "ambiguous",
+      "project": "Android",
+      "publish_date": "2018-10-02"
+    },
+    {
+      "commit_id": "9c90f2cec381a0460e3879eb8efd14bac4488dbe",
+      "cve": "CVE-2017-5032",
+      "cwe": "CWE-787",
+      "diff_sha256": "3b08181940254047ee9558fb7cb10b8977e967c5c6edb83cf47d5fe44cf1e2b4",
+      "mapping_status": "ambiguous",
+      "project": "Chrome",
+      "publish_date": "2017-04-24"
+    },
+    {
+      "commit_id": "d59a4441697f6253e7dc3f7ae5caad6e5fd2c778",
+      "cve": "CVE-2016-5209",
+      "cwe": "CWE-787",
+      "diff_sha256": "2467096eca281d3769f85aaeea9cb04b3f7f134dc2027866e6ae0d6634ed3f08",
+      "mapping_status": "no_write_found",
+      "project": "Chrome",
+      "publish_date": "2017-01-19"
+    },
+    {
+      "commit_id": "673ce95d481ea9368c4d4d43ac756ba1d6d9e608",
+      "cve": "CVE-2018-6063",
+      "cwe": "CWE-787",
+      "diff_sha256": "f74505770f6974c47cad4f9a489070b055b45f8c58231aac5af79fffd3b17f4d",
+      "mapping_status": "ambiguous",
+      "project": "Chrome",
+      "publish_date": "2018-11-14"
+    },
+    {
+      "commit_id": "a96567f02a0881561c964e5c11afe9c1af17a5f7",
+      "cve": "CVE-2017-15407",
+      "cwe": "CWE-787",
+      "diff_sha256": "4e297f955f7a6cdc3abdf5e3224ab08d8d9626b462724728c302ff762dc5caaa",
+      "family_id": "fam_42418a7cbf67",
+      "family_signature": "pointer_deref|unknown|deref",
+      "mapping_status": "mapped",
+      "project": "Chrome",
+      "publish_date": "2018-08-28",
+      "write_dest": "error_details",
+      "write_kind": "pointer_deref",
+      "write_line": "*error_details = \"Received stream data outside of maximum range.\";"
+    },
+    {
+      "commit_id": "ce1446c00f0fd8f5a3b00727421be2124cb7370f",
+      "cve": "CVE-2017-5130",
+      "cwe": "CWE-787",
+      "diff_sha256": "0a1d2c6afbfea313a68bcde63ac62f17b143de6c9d2dbcbe41414aeb9664bf77",
+      "mapping_status": "ambiguous",
+      "project": "Chrome",
+      "publish_date": "2018-02-07"
+    },
+    {
+      "commit_id": "4e59d6660a2bbbf17b6582b45848782b92371250",
+      "cve": "CVE-2019-5785",
+      "cwe": "CWE-787",
+      "diff_sha256": "0185481e5886e11908ee9bbd5ab0fad89f572bbb31af6508a39f7aea63f872e0",
+      "mapping_status": "no_write_found",
+      "project": "Chrome",
+      "publish_date": "2019-06-27"
+    },
+    {
+      "commit_id": "9f6510f20ccd794c4a71d5779ae802241e6e3f9b",
+      "cve": "CVE-2018-6144",
+      "cwe": "CWE-787",
+      "diff_sha256": "ac33c0a67f4fb71e22673790ec5924e42c1e68659e0abeecbc8f7c7f8eb19f1d",
+      "mapping_status": "no_write_found",
+      "project": "Chrome",
+      "publish_date": "2019-01-09"
+    }
+  ],
+  "source": "Big-Vul MSR'20 commit-level release (github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset)",
+  "tchecker_used": false,
+  "unparseable_file_objects": 0
+}
