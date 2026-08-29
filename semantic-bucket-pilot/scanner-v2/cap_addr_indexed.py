@@ -15,6 +15,21 @@ Capacity of the base is taken ONLY from independently-established evidence: a lo
 fixed-array declaration, or an ESTABLISHED heap allocation extent. Struct-field / realloc /
 parameter bases are left UNRESOLVED (never assumed) -> additional_evidence_required.
 Ambiguous base (shadowed decls) -> abstain (conflicting).
+
+PHYSICAL-WRITE IDENTITY (added; previously absent). Every prior capability that shares
+domain with another (cap2/cap3) is integrated with `cap_write_site_dedup`'s robust
+cross-run physical-write identity so an accidentally-shared physical write collapses to
+one operation instead of being silently double-counted in any pooled report
+(`CAP2_CAP3_BOUNDARY_FROZEN.md`). Capability 1 was the one recognizer with NO identity at
+all -- a real gap, not by design: `&(base[index])` passed to a copy-family call is exactly
+`write_dest_arg`'s existing copy-sink branch (already correct for this shape; it descends
+through `<operator>.addressOf` -> `<operator>.indirectIndexAccess` -> the base
+IDENTIFIER the same way `_descend_to_identifier` already walks any argument-index-0 chain
+-- no change to `cap_write_site_dedup.py` was needed). Every emitted record now carries
+`identity`/`node_id`, `attribution="direct"` (recognized directly at the physical site,
+the same tier as capability 3, not an interprocedural call-site summary). This changes NO
+existing field/route/disposition -- purely additive, verified by the unchanged frozen
+`cap_addr_indexed_test.py` controls.
 """
 import json
 import os
@@ -27,6 +42,7 @@ TOOLS = os.path.abspath(os.path.join(HERE, "..", "..", "tchecker-research-comple
 sys.path.insert(0, TOOLS); sys.path.insert(0, HERE)
 import oob_runtime_capacity_v2 as v2
 import allocation_extent as AE
+import cap_write_site_dedup as WSD
 
 # copy-family destination/width argument positions (self-contained; not from bug analysis)
 CONTRACTS = {"memcpy": (0, 2), "memmove": (0, 2), "strncpy": (0, 2), "wcsncpy": (0, 2),
@@ -94,6 +110,7 @@ def analyze_addr_indexed(cpp):
     heap_ext = AE.compute_allocation_extents(d)
     locals_idx = _locals_index(d)
     fns = {f["id"]: f for f in d.get("functions", [])}
+    wsd_index = WSD.build_index(d)
     ops = []
     for c in d.get("calls", []):
         contract = CONTRACTS.get(c.get("name"))
@@ -153,6 +170,10 @@ def analyze_addr_indexed(cpp):
                     {"element_count": remaining, "element_type": cap["element_type"]}, width)
                 rec.update(route=route or "deterministic_complete", reason=prop,
                            disposition=disp, note=note)
+        identity, node_id = WSD.physical_write_identity(c, wsd_index)
+        rec["attribution"] = "direct"
+        rec["identity"] = identity
+        rec["node_id"] = node_id
         ops.append(rec)
     return ops
 
