@@ -25,6 +25,10 @@ void fixed_len(char *d, const char *s, unsigned n) { memcpy(d, s, 4); }
 /* NEG conflict: two sinks write the dest param with DIFFERENT lengths -> ambiguous. */
 void conflict(char *d, const char *s, unsigned n, unsigned m) { memcpy(d, s, n); memmove(d, s, m); }
 
+/* ARGUMENT POSITION: params in NON-standard order (dest is arg1, length is arg0). The
+ * summary must bind dest_param_index=1, length_param_index=0 -- not assume memcpy's 0/2. */
+void deleg_reordered(unsigned n, char *d, const char *s) { memcpy(d, s, n); }
+
 void caller(const char *src, unsigned n) {
     char big[64];
     char small[16];
@@ -36,4 +40,5 @@ void caller(const char *src, unsigned n) {
     writes_local(big, src, n);    /* NOT recognized (dest not a param) */
     fixed_len(big, src, n);       /* NOT recognized (length not a param) */
     conflict(big, src, n, n);     /* NOT recognized (conflicting summary) */
+    deleg_reordered(32, big, src);/* arg-position: dest=arg1, len=arg0 -> 32<=64 safe */
 }

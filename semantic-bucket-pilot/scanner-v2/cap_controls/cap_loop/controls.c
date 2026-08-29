@@ -37,6 +37,19 @@ void two_dests(char *a, char *b, const char *srce, unsigned count) {
     while (count-- != 0) { *ua++ = *v; *ub++ = *v; }
 }
 
+/* ARGUMENT POSITION: params in NON-standard order (dest is arg1, counter is arg0). */
+void cw_reordered(unsigned count, void *dest, const void *srce) {
+    unsigned char *u = dest; const unsigned char *v = srce;
+    while (count-- != 0) *u++ = TBL[*v++];
+}
+
+/* EARLY EXIT: a break inside the loop writes FEWER than count; count stays a sound upper
+ * bound, so the summary is still emitted (single advance, one counter). */
+void cw_break(void *dest, const void *srce, unsigned count) {
+    unsigned char *u = dest; const unsigned char *v = srce;
+    while (count-- != 0) { if (*v == 0) break; *u++ = TBL[*v++]; }
+}
+
 void caller(const char *src, unsigned n, int sn) {
     char big[64];
     char small[16];
@@ -45,4 +58,6 @@ void caller(const char *src, unsigned n, int sn) {
     cw(big, src, 0);         /* ZERO COUNT literal -> proven safe */
     cw(big, src, n);         /* unsigned symbolic -> count_bound_not_established */
     cw_signed(big, src, sn); /* SIGNED symbolic -> count_sign_unresolved (no false safe) */
+    cw_reordered(16, big, src); /* arg-position: dest=arg1, counter=arg0 -> 16<=64 safe */
+    cw_break(big, src, 20);  /* EARLY EXIT: still summarized; 20<=64 upper-bound safe */
 }

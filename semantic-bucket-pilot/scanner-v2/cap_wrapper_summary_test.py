@@ -57,6 +57,13 @@ def main():
         ("POS deleg_alias(big,n) symbolic -> unresolved, capacity bound",
          only("deleg_alias").get("disposition") == "relationship_unresolved"
          and only("deleg_alias").get("dest_capacity") == 64),
+        # ARGUMENT POSITION: non-standard param order bound correctly (dest arg1, len arg0)
+        ("ARG-POSITION deleg_reordered binds dest=1/len=0",
+         summ.get("deleg_reordered", {}).get("dest_param_index") == 1
+         and summ["deleg_reordered"]["length_param_index"] == 0),
+        ("ARG-POSITION deleg_reordered(32,big,src) routes 32<=64 -> deterministic_complete",
+         only("deleg_reordered").get("dest") == "big"
+         and only("deleg_reordered").get("disposition") == "deterministic_complete"),
         # non-summarized callees produce ZERO call-site ops
         ("NEG no ops for name-only/dest-local/fixed/conflict/loop callees",
          not any(c in ops_by_callee for c in ("copy_into", "writes_local", "fixed_len", "conflict", "walk"))),

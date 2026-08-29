@@ -55,6 +55,17 @@ def main():
          by.get(("cw_signed", "sn"), {}).get("reason") == "count_sign_unresolved"
          and by[("cw_signed", "sn")]["disposition"] != "deterministic_complete"),
         ("extent is a sound UPPER bound flag set", all(o.get("extent_is_upper_bound") for o in ops)),
+        # ARGUMENT POSITION: non-standard param order (dest arg1, counter arg0)
+        ("ARG-POSITION cw_reordered binds dest=1/counter=0",
+         summ.get("cw_reordered", {}).get("dest_param_index") == 1
+         and summ["cw_reordered"]["counter_param_index"] == 0),
+        ("ARG-POSITION cw_reordered(16,big,src) routes 16<=64 -> deterministic_complete",
+         by.get(("cw_reordered", "16"), {}).get("disposition") == "deterministic_complete"),
+        # EARLY EXIT: a break still yields a sound summary (count is upper bound)
+        ("EARLY-EXIT cw_break summarized (single advance, one counter)",
+         summ.get("cw_break", {}).get("form") == "counted_loop_writer"),
+        ("EARLY-EXIT cw_break(20,big) routes 20<=64 -> deterministic_complete (upper bound)",
+         by.get(("cw_break", "20"), {}).get("disposition") == "deterministic_complete"),
     ]
 
     # additive-ness: disjoint from the frozen v1 runtime scanner ops
