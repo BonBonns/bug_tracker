@@ -1,0 +1,91 @@
+{
+  "FROZEN": true,
+  "dedup_precedence_rule": "Deduplicate by robust physical-write identity (cap_write_site_dedup). PRECEDENCE cursor_producer > direct (cap3) > call_site_summary (cap2). For a site in the overlap domain the FROZEN cursor producer is canonical; capability 3 enriches its evidence or abstains and is retained only as PROVENANCE -- it never emits a second operation. Both producer provenances are preserved on the merged operation. Capability 3 OWNS only the new_capability_3_domain sites (cursor recognizes nothing there).",
+  "existing_cursor_domain": "pointer-DEREFERENCE writes on byte buffers with a resolvable capacity: *p = x, *p++ = x, *(p+n) = x (oob_cursor_write_verdict, frozen; regexes INCR_WRITE_RE / DEREF_WRITE_RE / OFFSET_DEREF_WRITE_RE). Base identity chained through p=arr and q=p; static byte arrays and literal-constant malloc/PORT_Alloc capacity. Does NOT model member writes (p->field), non-byte element buffers, or call-argument sinks.",
+  "frontend": "joern-c2cpg v4.0.608",
+  "model_calls": 0,
+  "new_capability_3_domain": "pointer-walk writes the cursor producer MISSES: a write through an ADVANCING pointer whose target is a STRUCT/UNION MEMBER (base->field / base.field) and/or whose element is a non-byte aggregate (e.g. png_color[]). The PNG003 png_handle_PLTE palette walk (pal_ptr->red/green/blue = buf[..], pal_ptr++) is the canonical case (scanner_ok=false in the frozen Magma screen).",
+  "overlap_domain": "raw *p++ / array-backed *p++ / heap-backed *p++ on byte buffers -- recognized by BOTH the cursor producer and the direct pointer-walk primitive. Capability 3 must NOT emit an independent operation here.",
+  "per_fixture": {
+    "a1_raw_deref": {
+      "cursor_only_sites": 0,
+      "cursor_reasons": [
+        "write_count_bound_not_established"
+      ],
+      "cursor_recognized": 1,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 1,
+      "member_walk_sites_cap3_target": 0,
+      "overlap_canonical": "cursor_producer",
+      "overlap_merges_to_one_op": true,
+      "overlap_provenances": [
+        "cursor_producer",
+        "direct"
+      ],
+      "overlap_sites": 1
+    },
+    "a2_offset_deref": {
+      "cursor_only_sites": 1,
+      "cursor_reasons": [
+        "write_count_bound_not_established"
+      ],
+      "cursor_recognized": 1,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 0,
+      "member_walk_sites_cap3_target": 0,
+      "overlap_sites": 0
+    },
+    "a3_struct_member": {
+      "cursor_only_sites": 0,
+      "cursor_reasons": [],
+      "cursor_recognized": 0,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 0,
+      "member_walk_sites_cap3_target": 3,
+      "overlap_sites": 0
+    },
+    "a4_array_backed": {
+      "cursor_only_sites": 0,
+      "cursor_reasons": [
+        "write_count_bound_not_established"
+      ],
+      "cursor_recognized": 1,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 1,
+      "member_walk_sites_cap3_target": 0,
+      "overlap_canonical": "cursor_producer",
+      "overlap_merges_to_one_op": true,
+      "overlap_provenances": [
+        "cursor_producer",
+        "direct"
+      ],
+      "overlap_sites": 1
+    },
+    "a5_heap_backed": {
+      "cursor_only_sites": 0,
+      "cursor_reasons": [
+        "write_count_bound_not_established"
+      ],
+      "cursor_recognized": 1,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 1,
+      "member_walk_sites_cap3_target": 0,
+      "overlap_canonical": "cursor_producer",
+      "overlap_merges_to_one_op": true,
+      "overlap_provenances": [
+        "cursor_producer",
+        "direct"
+      ],
+      "overlap_sites": 1
+    },
+    "a6_png003": {
+      "cursor_only_sites": 0,
+      "cursor_reasons": [],
+      "cursor_recognized": 0,
+      "direct_only_sites": 0,
+      "direct_pptr_recognized": 0,
+      "member_walk_sites_cap3_target": 3,
+      "overlap_sites": 0
+    }
+  }
+}

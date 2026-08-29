@@ -48,7 +48,11 @@ _IDENT = re.compile(r"[A-Za-z_]\w*")
 COPY_SINKS = {"memcpy": 0, "memmove": 0, "strncpy": 0, "wcsncpy": 0,
               "strncat": 0, "wmemcpy": 0, "bcopy": 1}
 INC_OPS = ("<operator>.postIncrement", "<operator>.preIncrement")
-PRECEDENCE = {"direct": 0, "call_site_summary": 1}
+# Precedence for the canonical operation at a shared physical-write identity: the frozen
+# cursor producer owns the sites it recognizes; capability 3 (direct) owns only the
+# remainder; cap2 (call_site_summary) is the interprocedural propagation. See
+# CAP3_DOMAIN_AUDIT.json / CAP2_CAP3_BOUNDARY_FROZEN.md.
+PRECEDENCE = {"cursor_producer": 0, "direct": 1, "call_site_summary": 2}
 
 
 def _norm_path(p):
