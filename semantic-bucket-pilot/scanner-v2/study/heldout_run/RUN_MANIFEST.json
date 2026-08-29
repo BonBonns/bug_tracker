@@ -1,0 +1,51 @@
+{
+  "capabilities_sha256": {
+    "cap1_addr_indexed": "6885e589c5263aee985c9209ae3e6e56da0660846b997cd673fdc4d2170e29a6",
+    "cap2_counted_loop_writer": "d67b03ce222134a11a992262d121b2d5e1f203bfa1da8b060f9e438b926200fb",
+    "cap2_wrapper_summary": "2f67bdd969f74fe6c881ee56918d3f5a7945ac99ae939f736bf93b182fca3493",
+    "cap3_export_for_structure_sc": "7f54ec31c527b206c16d7d27e117674a9e37d199ad0a6b23a76b47dd06426efc",
+    "cap3_member_pointer_walk": "32588e587843aba6c6f97f4b931e32c2644ca5051334fa516e9d963585747714",
+    "cap4_decoder_contract": "a065640c4c22c8bff58747d0078f06df5344ccfaef982af7274f6227345e7a81"
+  },
+  "contract_authorities_sha256": {
+    "PROVENANCE.json": "f3065760e22441a81ce3a9f93ed1360a5a03d7bd969b6f41988d881d445ee270",
+    "lz4-1.9.4-LZ4_decompress_fast.txt": "a6ad113aff7df32c626268b42daa1a1c47852a7e92e31fe66cf52acd6c0e3060",
+    "lz4-1.9.4-LZ4_decompress_safe.txt": "71a1710d7b659a00a7c8201f829ed4ddfada184c11873fba6da08ccec7dddf65",
+    "lz4-1.9.4-LZ4_decompress_safe_partial.txt": "c84b9e21aec98f5bf891af8d28c31ed0b5072e0ae4f5816c9cffb6b280d4ac65",
+    "synthetic-testonly-1.0.0-spec.txt": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a",
+    "zlib-1.3.1-deflate.txt": "f3060f732c4af15558e51c32db715ca298a8600af250436419747b7dac859f1f",
+    "zlib-1.3.1-inflate.txt": "cb7e42a8ef44bc9f231acda8d6483ba849b0559b98d80f8628d2a2f11bc017b9"
+  },
+  "corpus": {
+    "families": 42,
+    "non_vulnerable_sites": 0,
+    "pooled_manifest": "study/pooled/FROZEN_heldout_pooled.json",
+    "pooled_manifest_sha256": "973a0a58d487a1035bfe6e211b1d2794e46a1bfd6e5a6200a4f470d16b410dbe",
+    "secvuleval_gz_sha256": "d37bab32cf172a7f03b9048c793e52e58334a537a4697128bfaa92440ea037a9",
+    "vulnerable_sites": 258
+  },
+  "exporter_normalizer_sha256": {
+    "exporter_export_c_cpp_facts_v03_sc": "a571de423a3f27c35158575f2e3115f24b9da29fbbe08010a1f51823e4512d8a",
+    "normalizer_normalize_c_cpp_facts_v03": "222e71969b877aa1ace2fcbe1823164adca5fd9108122c872481ee58e14b21b8"
+  },
+  "identity_dedup_sha256": {
+    "cap_write_site_dedup": "85ef6ff51081f135af6d08f43cca900e200ba5c1c6068684ada19a224970ee44"
+  },
+  "no_post_result_scanner_changes": "attested: no capability/producer/normalizer/exporter/contract code is modified after examining any held-out result.",
+  "producers_sha256": {
+    "allocation_extent": "3bf89e413b1ba10c2e6f188da602c375d9e753408b8ea0a087d235733cee2aee",
+    "analysis_record": "45d5056838b436e0adbe415605ec23b9e2a6d60976107e5b8889447bb4367d8a",
+    "oob_cursor_write_verdict": "d418f7fc5f1508f30a3452245cc51ff8b7666212d230cc3949dc4de9b33c6177",
+    "oob_interprocedural_verdict": "ad57bc707922b9470be4d04693c2f1e6cab440cfca3c0a4e1c5d34212ae4f9d4",
+    "oob_runtime_capacity_v2": "b1867edf6910b9a5a66d2dce4df5d7f014c74383d0d112081c45d3d2539dfbef",
+    "oob_runtime_capacity_verdict": "da91b64fd28a5cc20103ddb87a0b7e83524533c08d98a90db548219a8680fde9"
+  },
+  "run": "one_time_heldout_confirmatory",
+  "scanner_commit": "544a606f915a68c8253258a241ae782150dea272",
+  "scope": "vulnerable-only recognition/recall & coverage; NOT precision/FPR/accuracy. 101 non-vulnerable SecVulEval sites are a separate future specificity experiment.",
+  "source_availability": "175 SecVulEval sites reconstructable (func_body via sha-verified gz); 83 PostCutoff/BigVul/ARVO sites are metadata-only in the frozen artifacts -> stage-1 pipeline attrition (not scanner misses).",
+  "toolchain": {
+    "frontend": "joern-c2cpg v4.0.608",
+    "joern_archive_sha256": "97989843f7d6be1449296936644b04803e80723e607648c33edf87ded6202ded"
+  }
+}
