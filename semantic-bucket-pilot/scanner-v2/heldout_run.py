@@ -81,13 +81,20 @@ def recognized_records(cpp):
                             "route": r.get("recommended_route")})
         except Exception as e:
             out.append({"producer": pname, "error": str(e)})
-    try:   # runtime-capacity V2 (stack-capacity integration) -- the intended final producer
-        v2ops, _trans = _RCV2.analyze_operations_v2(cpp)
+    try:   # runtime-capacity: V2 (stack-capacity) is CANONICAL over V1; V1 kept as provenance.
+        # Route selection cannot retain V1's required_evidence_absent over V2's enriched
+        # relationship_unresolved -- V2's record is the one emitted; V1 rides along as provenance.
+        v1ops, v2ops, _trans = _RCV2.analyze_operations_v1_and_v2(cpp)
+        v1by = {(r.get("function"), r.get("line"), r.get("dest")): r for r in v1ops}
         for r in v2ops:
-            out.append({"producer": "oob_runtime_capacity_v2", "function": r.get("function"),
-                        "line": r.get("line"), "dest": r.get("dest"),
-                        "status": r.get("analysis_status"), "reason": r.get("reason_code"),
-                        "route": r.get("recommended_route")})
+            v1 = v1by.get((r.get("function"), r.get("line"), r.get("dest")))
+            out.append({"producer": "oob_runtime_capacity_v2", "canonical": "v2",
+                        "function": r.get("function"), "line": r.get("line"),
+                        "dest": r.get("dest"), "status": r.get("analysis_status"),
+                        "reason": r.get("reason_code"), "route": r.get("recommended_route"),
+                        "v1_provenance": ({"status": v1.get("analysis_status"),
+                                           "reason": v1.get("reason_code"),
+                                           "route": v1.get("recommended_route")} if v1 else None)})
     except Exception as e:
         out.append({"producer": "oob_runtime_capacity_v2", "error": str(e)})
     try:

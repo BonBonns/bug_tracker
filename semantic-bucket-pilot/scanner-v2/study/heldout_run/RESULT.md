@@ -13,16 +13,19 @@ after completion. **Not perfectly blind** — see `PROTOCOL_DEVIATION.md` (8 sit
 See `RUN_MANIFEST.json` for all pinned hashes and the timing disclosure. Raw archived first:
 `raw_sites.jsonl` (sha `ba413dea…`), then the frozen summarizer run exactly once.
 
-## Harness correction (see study/heldout_correction/CORRECTION.md)
+## Harness correction (post hoc — see study/heldout_correction/CORRECTION.md)
 
-A post-hoc audit found the runner loaded the **heap-only V1** runtime-capacity producer
-(`oob_runtime_capacity_verdict`) instead of the intended **V2 stack-capacity integration**
-(`oob_runtime_capacity_v2`, declared in the manifest). Because V2 only *enriches* V1's already-
-recognized operations (it forms no new ones), the **recognition count is unchanged: 4/118 vuln,
-7/143 combined stand**. One of the 7 recognized dispositions is corrected — `evutil_parse_sockaddr_port`
-upgrades from `required_evidence_absent` to `relationship_unresolved` (capacity `buf[128]`
-established, length symbolic). Still **0 deterministic verdicts** under either producer. The
-harness is fixed; the scanner (V2 byte-identical to the frozen commit) was never changed.
+**The original one-time run misconfigured the runtime component by invoking V1
+(`oob_runtime_capacity_verdict`, heap-only) instead of the declared V2 stack-capacity
+integration (`oob_runtime_capacity_v2`).** A post-hoc replay on the archived CPGs established
+that the preregistered recognition endpoint is **invariant** — no labeled operations were added
+or removed (vulnerable 4→4, negative 3→3) — but **one vulnerable-site disposition changed from
+missing evidence to unresolved relationship** (`evutil_parse_sockaddr_port`: capacity `buf[128]`
+established, length symbolic). Thus the **recognition result `4/118` survives**; the original
+route distribution required correction. Still **0 deterministic verdicts**. This is a
+harness-invocation correction (the scanner, V2 byte-identical to the frozen commit, was never
+changed), stored separately as a post-hoc dataset. It is NOT claimed the intended final scanner
+was evaluated in the original run.
 
 ## Two measurements
 

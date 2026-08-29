@@ -38,20 +38,39 @@ V2 is an **additive enrichment over V1's recognized operations** — it does not
 - The **19 emission-gap** sites and the **28 unsupported-sink** sites are unaffected by V1→V2
   (their dests are struct-fields / parameters, not stack arrays, so V2 recognizes none of them).
 
-## Disposition
+## evutil aggregation audit (`evutil_aggregation_audit.json`)
 
-- **The confirmatory recognition result `4/118` STANDS** as a recognition/coverage measurement:
-  the intended V2 scanner recognizes the identical set. This document is the required
-  documented correction; the number does not move.
-- **One correction to the recorded dispositions**: under the intended V2 scanner,
-  `evutil_parse_sockaddr_port` establishes capacity (stack `buf[128]`) and routes
-  `relationship_unresolved`, not `required_evidence_absent`. The held-out `RESULT.md` /
-  `DIAGNOSIS.md` all-abstain wording is annotated accordingly (1 of 7 recognized sites
-  establishes capacity under V2; still 0 deterministic verdicts).
-- **Harness fixed**: `heldout_run.py` now invokes `oob_runtime_capacity_v2.analyze_operations_v2`
-  (the intended producer) instead of V1. The scanner itself was never changed — `V2` is
-  byte-identical to the frozen commit and was always declared in the manifest.
+- raw V1 record: `abstained / required_evidence_absent`
+- raw V2 record: `open_candidate / capacity_relation_not_established` (relationship_unresolved)
+- merged physical identity: `(body.c, evutil_parse_sockaddr_port, line 25, col 9, memcpy buf,
+  local char buf[128])`
+- **canonical record = V2** (`open_candidate / relationship_unresolved`)
+- **preserved provenance = [V1, V2]**
+- route-selection rule: V2's enriched `relationship_unresolved` supersedes V1's
+  `required_evidence_absent`; dedup cannot retain V1 because only V2's record is emitted, with
+  V1 attached as provenance.
 
-This correction is computed from the frozen `cpp.json` cache (same frozen frontend 4.0.608) and
-the frozen V2 producer; it is a harness-invocation correction, not a scanner change, so the
-corpus's confirmatory status is preserved.
+## Corrected full population (`corrected_vulnerable.jsonl` + `corrected_negative.jsonl`)
+
+Post-hoc replay of the entire population on the archived CPGs with V2 canonical over V1
+(`CORRECTED_SUMMARY.json`). It does NOT overwrite the original one-time run.
+
+- 258 vulnerable rows + 101 negative rows; corrected runner + generator + cache-merkle + input
+  hashes recorded.
+- Recognition set INVARIANT: vulnerable 4→4, negative 3→3 (no labeled operations added or
+  removed).
+- Disposition changes: vulnerable **1** (`evutil_parse_sockaddr_port`: missing→open), negative
+  **0** (checked, unchanged).
+
+## Corrected claim (exact)
+
+**The original one-time run misconfigured the runtime component by invoking V1 instead of the
+declared V2.** A post-hoc replay on the archived CPGs established that the preregistered
+recognition endpoint is **invariant** — no labeled operations were added or removed — but **one
+vulnerable-site disposition changed from missing evidence to unresolved relationship**. Thus the
+recognition result survives; the original route distribution required correction.
+
+This is a harness-invocation correction (the scanner — V2 byte-identical to the frozen commit —
+was never changed); it is stored explicitly as a post-hoc correction dataset, separate from the
+original archived run. It is NOT claimed that the intended final scanner was evaluated in the
+original run, nor that the corpus is untouched.

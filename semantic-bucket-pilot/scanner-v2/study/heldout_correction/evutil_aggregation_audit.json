@@ -1,0 +1,47 @@
+{
+ "site": "evutil_parse_sockaddr_port",
+ "operation": "memcpy(buf, ip_as_string+1, len); buf=char[128]",
+ "raw_v1_record": {
+  "analysis_status": "abstained",
+  "reason_code": "required_evidence_absent",
+  "recommended_route": "additional_evidence_required",
+  "width_expr": "len"
+ },
+ "raw_v2_record": {
+  "analysis_status": "open_candidate",
+  "reason_code": "capacity_relation_not_established",
+  "recommended_route": "semantic_relationship_review",
+  "width_expr": "len"
+ },
+ "merged_physical_identity": [
+  "body.c",
+  [
+   "evutil_parse_sockaddr_port",
+   1,
+   101
+  ],
+  25,
+  [
+   "col",
+   9
+  ],
+  [
+   "memcpy",
+   "buf"
+  ],
+  [
+   "local",
+   "body.c",
+   "evutil_parse_sockaddr_port",
+   4,
+   "char buf[128]",
+   0
+  ]
+ ],
+ "canonical_record": "V2: open_candidate / capacity_relation_not_established / semantic_relationship_review",
+ "preserved_provenance": [
+  "V1: abstained / required_evidence_absent",
+  "V2: open_candidate / capacity_relation_not_established"
+ ],
+ "route_selection_rule": "V2 enriched (relationship_unresolved) > V1 abstention (required_evidence_absent); dedup cannot retain V1 because only V2's record is emitted, with V1 attached as provenance"
+}

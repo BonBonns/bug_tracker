@@ -11,6 +11,15 @@ non-vulnerable write sites. **What it does NOT measure:** conventional accuracy/
 scanner emitted **no** safe/vulnerable conclusions on these sites at all (see below), so no
 accuracy figure can be formed. This completes the **soundness** picture only.
 
+## Harness correction check (post hoc — see study/heldout_correction/)
+
+This negative run used the same harness that mistakenly invoked V1 instead of the declared V2
+runtime-capacity producer. The post-hoc V2 replay on the archived CPGs was applied to all 101
+negative rows: the recognition set is invariant (3→3) and **0 negative dispositions changed** —
+no non-vulnerable site is promoted or re-routed under V2. The 101-site soundness conclusion
+below (0 unsupported vulnerability promotions, all recognized writes abstain) is **unchanged**
+by the correction.
+
 ## Recognition funnel (101 non-vulnerable sites)
 
 | stage                       | result   |

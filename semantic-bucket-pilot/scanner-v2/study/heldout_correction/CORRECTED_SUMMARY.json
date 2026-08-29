@@ -1,0 +1,40 @@
+{
+  "cache_cpp_files": 276,
+  "cache_dir_merkle_sha256": "c6499c41e4b7f48209feda8252a9f507639823df40d8b9c379f52cf18722c02f",
+  "corrected_runner_sha256": "5e6c8a45dec35a287f5642bdae3f1df71d71b78ff6900622960e333614e1afaf",
+  "correction_generator_sha256": "9f82eefa3e3f3f8901974f6e57372bb4c28add74f52cd9c3eae3b99f8706bbfd",
+  "disposition_changes": {
+    "negative": [],
+    "vulnerable": [
+      {
+        "site": "evutil_parse_sockaddr_port",
+        "site_id": "674f6825c63e21da",
+        "v1": "missing",
+        "v2": "open",
+        "vuln": null
+      }
+    ]
+  },
+  "inputs_sha256": {
+    "original_raw_negatives": "5c624dc5ac4023c3f79f398857cf082e3661b7479f1db328108f74813716c455",
+    "original_raw_sites": "ba413deafd3815ec8f65cb751fc200826a25cfbe7cdb5be435963c5887c1a60a",
+    "pooled_manifest": "973a0a58d487a1035bfe6e211b1d2794e46a1bfd6e5a6200a4f470d16b410dbe"
+  },
+  "kind": "post_hoc_correction (does NOT overwrite the original one-time run)",
+  "population": {
+    "negative_rows": 101,
+    "vulnerable_rows": 258
+  },
+  "recognition_set_comparison": {
+    "negative": {
+      "invariant": true,
+      "v1_recognized_mapped": 3,
+      "v2_recognized_mapped": 3
+    },
+    "vulnerable": {
+      "invariant": true,
+      "v1_recognized_mapped": 4,
+      "v2_recognized_mapped": 4
+    }
+  }
+}
