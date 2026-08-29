@@ -1,0 +1,30 @@
+{
+  "model": "counted-writer / loop summary (distinct from the transparent delegation wrapper)",
+  "relation_to_plan": "Foundation for CAPABILITY_PLAN capability 3 (pointer-walk writes). Kept as its OWN proof model, not merged into capability 2, because a counted loop through an incremented pointer has different proof obligations than a delegation wrapper.",
+  "model_calls": 0,
+  "tchecker_used": false,
+  "frontend": "joern-c2cpg v4.0.608 (frozen; TOOLCHAIN_FROZEN.md)",
+  "design": "Infer a summary {dest_param, counter_param} for a user-defined callee that writes through an INCREMENTED pointer (aliasing a dest param) in a loop bounded by a decremented counter param. From body only; name never consulted. Additive (disjoint from frozen v1 ops).",
+  "proof_obligations_each_a_control": {
+    "pointer_advancement": "PASS - single-slot `*p =` (no advance) is extent 1, not count -> NO summary (no_advance control).",
+    "advancement_multiplicity": "PASS - two advances per iteration -> extent 2*count -> abstain, no summary (double_advance control).",
+    "alias_identity": "PASS - the advancing pointer must resolve to the dest PARAMETER via aliasing; an unrelated local -> NO summary (alien_walk control).",
+    "signedness": "PASS - counter signedness recorded from its type; a signed, not-provably-nonnegative count at a call site -> count_sign_unresolved, never proven safe (cw_signed control).",
+    "zero_count": "PASS - literal 0 count -> extent 0 -> proven safe, never a false overflow (cw(big,0) control).",
+    "early_exits": "PASS by soundness - `count` is a sound UPPER bound (early exits write fewer; the advance==1 gate forbids writing more than one element/iteration). The normalized fact schema carries no break/return nodes, so early exits are handled by this soundness argument, not by detecting the exit; the model never widens beyond count.",
+    "conflicting_paths": "PASS - more than one walked dest param or more than one counter -> abstain, no summary (two_dests control)."
+  },
+  "call_site_routing": {
+    "literal_count": "compared element-wise to dest capacity: <= -> deterministic_complete; > -> proven_oversized; 0 -> safe.",
+    "unsigned_symbolic": "relationship_unresolved / count_bound_not_established, capacity bound.",
+    "signed_symbolic": "relationship_unresolved / count_sign_unresolved, no false safe.",
+    "dest_capacity_source": "independently-established bare local fixed array only; else additional_evidence_required."
+  },
+  "magma_dev_site_recovery": "PASS on the REAL SSL004 ascii2ebcdic body (OpenSSL crypto/ebcdic.c @ 3bd5319, loop form) at its real call site ascii2ebcdic(ebcdic_buf[1024], q, num): frozen scanner recognized 0/1 -> counted-writer model recognizes (advance 1, unsigned size_t counter), binds capacity 1024, routes relationship_unresolved on the symbolic num with no false capacity claim.",
+  "separation_verified": "cw/cw_signed are NOT transparent-wrapper summaries; _TIFFmemcpy delegation is NOT a counted-writer summary; ascii2ebcdic is a counted writer, NOT a wrapper summary; asserted in both harnesses.",
+  "controls": {
+    "synthetic": "cap_controls/cap_loop/controls.c",
+    "magma_dev_real_body": "cap_controls/cap2_magma/ssl004.c",
+    "harness": "cap_counted_loop_writer_test.py (18 checks + no-regression, ALL PASS under 4.0.608)"
+  }
+}

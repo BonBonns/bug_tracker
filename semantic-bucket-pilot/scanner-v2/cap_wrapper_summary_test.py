@@ -33,15 +33,15 @@ def main():
         return (ops_by_callee.get(callee) or [{}])[0]
 
     checks = [
-        # summaries inferred from BODY (three positives), abstentions get no summary
+        # summaries inferred from BODY (delegation positives), abstentions get no summary
         ("SUMM deleg (delegation, dest0/len2)",
          summ.get("deleg", {}).get("dest_param_index") == 0 and summ["deleg"]["length_param"] == "n"
-         and summ["deleg"]["forms"] == ["delegation"]),
+         and summ["deleg"]["form"] == "delegation"),
         ("SUMM deleg_alias via local alias of dest param",
          summ.get("deleg_alias", {}).get("dest_param") == "d"),
-        ("SUMM walk (loop pointer-walk, count)",
-         summ.get("walk", {}).get("forms") == ["loop_pointer_walk"]
-         and summ["walk"]["length_param"] == "count"),
+        # a counted loop is NOT a transparent delegation wrapper -> no wrapper summary here
+        ("SEPARATION: loop 'walk' is NOT a wrapper-summary (handled by counted-loop model)",
+         "walk" not in summ),
         # body-not-name discipline + soundness abstentions -> NO summary at all
         ("NEG name-only copy_into has NO summary", "copy_into" not in summ),
         ("NEG dest-not-param writes_local has NO summary", "writes_local" not in summ),
@@ -57,12 +57,9 @@ def main():
         ("POS deleg_alias(big,n) symbolic -> unresolved, capacity bound",
          only("deleg_alias").get("disposition") == "relationship_unresolved"
          and only("deleg_alias").get("dest_capacity") == 64),
-        ("POS walk(big,n) symbolic -> recognized + capacity bound, no false safe",
-         only("walk").get("dest_capacity") == 64
-         and only("walk").get("disposition") != "deterministic_complete"),
-        # the four non-summarized callees produce ZERO call-site ops
-        ("NEG no ops for name-only/dest-local/fixed/conflict callees",
-         not any(c in ops_by_callee for c in ("copy_into", "writes_local", "fixed_len", "conflict"))),
+        # non-summarized callees produce ZERO call-site ops
+        ("NEG no ops for name-only/dest-local/fixed/conflict/loop callees",
+         not any(c in ops_by_callee for c in ("copy_into", "writes_local", "fixed_len", "conflict", "walk"))),
     ]
 
     # additive-ness: the frozen v1/v2 runtime scanner emits NOTHING on these wrapper
@@ -73,23 +70,22 @@ def main():
     checks.append(("ADDITIVE: cap2 call sites disjoint from frozen scanner ops",
                    frozen_lines.isdisjoint(cap2_lines)))
 
-    # Magma dev-site recovery on REAL wrapper bodies (SSL004 ascii2ebcdic loop form,
-    # TIF013 _TIFFmemcpy delegation). Frozen scanner recognized 0/2; cap2 recognizes
-    # both and routes with correct abstention (symbolic length), no false capacity claim.
+    # Magma dev-site recovery for the DELEGATION form on a REAL wrapper body: TIF013
+    # _TIFFmemcpy. Frozen scanner recognized 0/1; cap2 recognizes and routes with correct
+    # abstention (symbolic length), no false capacity claim. (SSL004 ascii2ebcdic is the
+    # counted-loop model's dev-site, asserted in cap_counted_loop_writer_test.py -- it
+    # must NOT be a wrapper summary here.)
     mcpp = scan(os.path.join(HERE, "cap_controls", "cap2_magma"))
     mops, msumm = C.analyze_wrapper_calls(mcpp)
     m_by = {o["callee"]: o for o in mops}
     checks += [
-        ("MAGMA SSL004 ascii2ebcdic summarized (real loop body)",
-         msumm.get("ascii2ebcdic", {}).get("forms") == ["loop_pointer_walk"]),
-        ("MAGMA SSL004 call recognized, cap 1024 bound, correct abstention",
-         m_by.get("ascii2ebcdic", {}).get("dest_capacity") == 1024
-         and m_by["ascii2ebcdic"]["disposition"] == "relationship_unresolved"),
         ("MAGMA TIF013 _TIFFmemcpy summarized (real delegation body)",
-         msumm.get("_TIFFmemcpy", {}).get("forms") == ["delegation"]),
+         msumm.get("_TIFFmemcpy", {}).get("form") == "delegation"),
         ("MAGMA TIF013 call recognized, cap 512 bound, correct abstention",
          m_by.get("_TIFFmemcpy", {}).get("dest_capacity") == 512
          and m_by["_TIFFmemcpy"]["disposition"] == "relationship_unresolved"),
+        ("SEPARATION: ascii2ebcdic loop is NOT a wrapper summary",
+         "ascii2ebcdic" not in msumm),
     ]
 
     ok = True
