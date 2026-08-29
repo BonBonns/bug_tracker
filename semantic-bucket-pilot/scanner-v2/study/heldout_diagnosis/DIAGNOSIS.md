@@ -97,9 +97,12 @@ the raw "mapped rejected" count and are removed by the validated-write denominat
 
 ## Conclusion — three separate defects, quantified
 
-Low coverage is NOT primarily an adjudication problem (no false positives/negatives in
-adjudication). The pipeline almost never delivers a complete operation to adjudication, for three
-distinct reasons:
+Low coverage is NOT primarily an adjudication problem. **Adjudication accuracy was not exercised
+at all** — the scanner emitted **zero deterministic vulnerability/safety verdicts** on held-out
+code, so there were zero opportunities for an adjudication error. Zero opportunities is NOT
+evidence of zero adjudication errors. The pipeline almost never delivers a complete operation to
+adjudication, for three distinct reasons (see TRACE54.md for the site-level seven-field trace of
+the 54 producer-reaching cases):
 
 1. **Noisy target labels** — 64/276 (23 %) labeled sites are not destination writes (declarations,
    comment, guard).

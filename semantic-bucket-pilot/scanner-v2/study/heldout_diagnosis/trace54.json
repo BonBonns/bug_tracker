@@ -1,0 +1,713 @@
+{
+ "missing_capacity": [
+  {
+   "site": "wilc_wfi_cfg_parse_ch_attr",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "e->ch_list(struct_field)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:e->no_of_channels",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "ice_free_q_vector",
+   "vuln": true,
+   "kind": "index_write",
+   "target": "vsi->q_vectors(struct_field)",
+   "form": "scalar_or_pointer_assign",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "nxp_fspi_fill_txfifo",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "&data(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "literal:4",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "rtw_wx_set_scan",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "ssid[ssid_index].ssid(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:ssid[ssid_index].ssid_le",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "hidp_process_report",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "session->input_buf(struct_field)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:len",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "set_ntacl_dacl",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "(char *)pndace + size(unresolved)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": false,
+   "capacity_established": false,
+   "write_length_established": "symbolic:le16_to_cpu(ntace->size)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mlx5e_reporter_tx_timeout",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "err_str(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(err_str)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mwifiex_cmd_append_vsie_tlv",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "vs_param_set->ie(struct_field)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:le16_to_cpu(vs_param_set",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "l2cap_parse_conf_req",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "&rfc(local)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(rfc)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "bpf_patch_insn_single",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "prog_adj->insnsi + off(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(*patch) * len",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "ff_evc_parse_sps",
+   "vuln": true,
+   "kind": "index_write",
+   "target": "sps->num_ref_pic_list_in_sps(struct_field)",
+   "form": "scalar_or_pointer_assign",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "send_control_msg",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "elem.in_sg[0].iov_base(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:len",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "illegal_char",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "(char *)errbuf(unresolved)",
+   "form": "copy_call:sprintf",
+   "dest_identity_established": false,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "hybiReadAndDecode",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "wsctx->writePos(struct_field)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:wsctx->carrylen",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "pcmreframe_process",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "ctx->probe_data(struct_field)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:pck_size",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "gf_isom_set_root_iod",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "iod(local)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(GF_IsomInitialObj",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "idn2_to_ascii_4i",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "output(parameter)",
+   "form": "copy_call:strcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "amqp_handle_input",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "state->inbound_buffer.bytes(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:<unknown> HEADER_SIZE",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "trustedDkgVerifyAES",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "encr_sshare(local)",
+   "form": "copy_sink:strncpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:ECDSA_SKEY_LEN - 1",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "trustedGenerateSEK",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "AES_key(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:<unknown> SGX_AESGCM_KEY",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "LiStartConnection",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "&StreamConfig(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(StreamConfig)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "LiInitializeConnectionCallbacks",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "clCallbacks(parameter)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(*clCallbacks)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "spl_load_fit_image",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "(void *)load_addr(unresolved)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": false,
+   "capacity_established": false,
+   "write_length_established": "symbolic:length",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mwifiex_update_vs_ie",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "ie->ie_buffer + le16_to_cpu(ie->ie_length)(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:vs_ie->len + 2",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mwifiex_set_wmm_params",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "&bss_cfg->wmm_info(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:*(wmm_ie + 1)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "decode_frame",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "ptr(local)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:out_line_size",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "zgfx_decompress_segment",
+   "vuln": false,
+   "kind": "index_write",
+   "target": "zgfx->OutputBuffer(struct_field)",
+   "form": "scalar_or_pointer_assign",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "ParseRiffHeaderConfig",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "&riff_chunk_header(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "literal:4",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "ConnectClientToUnixSock",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "addr.sun_path(struct_field)",
+   "form": "copy_call:strcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "gf_hevc_read_sps_bs_internal",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "&ptl(local)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(ptl)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "pdf_summarize",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "dst_name(local)",
+   "form": "copy_call:sprintf",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "ssdp_recv",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "buf(local)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(buf)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "handle_PORT",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "addr(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(addr)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "WRITE_JSON_ELEMENT",
+   "vuln": false,
+   "kind": "index_write",
+   "target": "ctx->commaNeeded(struct_field)",
+   "form": "scalar_or_pointer_assign",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "uev_init1",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "ctx(parameter)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(*ctx)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "LiInitializeServerInformation",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "serverInfo(parameter)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(*serverInfo)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mwifiex_update_vs_ie",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "ie->ie_buffer + le16_to_cpu(ie->ie_length)(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:vs_ie->len + 2",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "mwifiex_set_wmm_params",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "&bss_cfg->wmm_info(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:*(wmm_ie + 1)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "impeg2d_dec_hdr",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "ps_dec->pu1_input_buffer(struct_field)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:u4_size",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  }
+ ],
+ "capacity_established_no_relation": [
+  {
+   "site": "MakeFilename",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "filename(local)",
+   "form": "copy_sink:strncpy",
+   "dest_identity_established": true,
+   "capacity_established": "heap_literal_allocation",
+   "write_length_established": "symbolic:<unknown> PATH_MAX",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "DebugAddCmd",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "nbuf(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "symbolic:sizeof(nbuf)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "SysTimesCmd",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "buf(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "symbolic:sizeof(buf)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "jsiSqlFunc",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "buf(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "symbolic:sizeof(buf)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "jsi_wscallback_websock",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "nbuf(local)",
+   "form": "copy_sink:snprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "symbolic:sizeof(nbuf)",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "numtostr",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "buf(local)",
+   "form": "copy_call:sprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "bz3_new",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "bz3_state->sais_array(struct_field)",
+   "form": "copy_sink:memset",
+   "dest_identity_established": true,
+   "capacity_established": "heap_literal_allocation",
+   "write_length_established": "symbolic:sizeof(s32) * BWT_BOUND(",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  },
+  {
+   "site": "getAttributesList",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "payloadStr(local)",
+   "form": "copy_call:sprintf",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": "SILENT_DROP"
+  }
+ ],
+ "emitted": [
+  {
+   "site": "evutil_parse_sockaddr_port",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "buf(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": "stack_fixed_array",
+   "write_length_established": "symbolic:len",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_runtime_capacity_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "msg_parse_fetch",
+   "vuln": true,
+   "kind": "pointer_deref",
+   "target": "ptmp(local)",
+   "form": "deref_write",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_cursor_write_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "blosc_c",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "dest(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:(unsigned int)neblock",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_runtime_capacity_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ],
+    [
+     "oob_interprocedural_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "enc_untrusted_recvfrom",
+   "vuln": true,
+   "kind": "copy_sink",
+   "target": "buf(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:len",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_runtime_capacity_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ],
+    [
+     "oob_interprocedural_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "nsc_rle_decode",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "out(parameter)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "literal:4",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_runtime_capacity_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ],
+    [
+     "oob_interprocedural_verdict",
+     "required_evidence_absent",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "msg_parse_fetch",
+   "vuln": false,
+   "kind": "pointer_deref",
+   "target": "ptmp(local)",
+   "form": "deref_write",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "n/a",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_cursor_write_verdict",
+     "destination_identity_ambiguous",
+     "additional_evidence_required"
+    ]
+   ]
+  },
+  {
+   "site": "new_creator",
+   "vuln": false,
+   "kind": "copy_sink",
+   "target": "daddy(local)",
+   "form": "copy_sink:memcpy",
+   "dest_identity_established": true,
+   "capacity_established": false,
+   "write_length_established": "symbolic:sizeof(creator_template)",
+   "relationship_established": false,
+   "emitted": [
+    [
+     "oob_runtime_capacity_verdict",
+     "unknown_allocator_contract",
+     "semantic_contract_review"
+    ]
+   ]
+  }
+ ]
+}
