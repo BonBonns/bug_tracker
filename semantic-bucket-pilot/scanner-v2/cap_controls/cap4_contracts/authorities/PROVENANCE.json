@@ -44,6 +44,24 @@
          "prototype_line": 248,
          "prototype": "int deflate(z_streamp strm, int flush)"}
       ]
+    },
+    {
+      "library": "synthetic_testonly",
+      "upstream_tag": "1.0.0",
+      "upstream_url": "SYNTHETIC (test-only; not a real library, never linked in a real build)",
+      "full_file_sha256": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a",
+      "full_file_bytes": null,
+      "note": "This authority is the archived synthetic spec itself; full_file_sha256 == the spec's sha256. It exists only to exercise unconditional exact/lower-bound routing.",
+      "excerpts": [
+        {"contract_id": "synthetic_testonly.synth_fill_exact",
+         "excerpt_file": "synthetic-testonly-1.0.0-spec.txt",
+         "excerpt_sha256": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a",
+         "prototype": "void synth_fill_exact(char* dst, int n)  [writes EXACTLY n bytes, unconditional]"},
+        {"contract_id": "synthetic_testonly.synth_fill_atleast",
+         "excerpt_file": "synthetic-testonly-1.0.0-spec.txt",
+         "excerpt_sha256": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a",
+         "prototype": "void synth_fill_atleast(char* dst, int n)  [writes AT LEAST n bytes, unconditional]"}
+      ]
     }
   ]
 }

@@ -1,0 +1,21 @@
+# SYNTHETIC TEST-ONLY CONTRACT SPEC  --  NOT A REAL LIBRARY
+# library: synthetic_testonly   version: 1.0.0
+#
+# This spec exists SOLELY to exercise Capability 4's lower/exact-bound write-extent routing
+# with a GENUINELY UNCONDITIONAL write count. No such library is linked in any real build, and
+# no real-source scan will ever carry a build attestation for it. It is the authoritative
+# source for these two synthetic contracts (its sha256 is the contract's provenance fingerprint),
+# exactly as a real header is for a real contract.
+#
+# synth_fill_exact(char* dst, int n):
+#     Unconditionally writes EXACTLY n bytes into dst on EVERY execution. There is no error
+#     path, no early stop, no partial-write path. Postcondition: actual_writes == n.
+#
+# synth_fill_atleast(char* dst, int n):
+#     Unconditionally writes AT LEAST n bytes into dst on EVERY execution (it may write more).
+#     There is no execution on which it writes fewer than n. Postcondition: actual_writes >= n.
+#
+# These unconditional guarantees are what a real decoder like LZ4_decompress_fast does NOT
+# provide: malformed input can make a real decoder stop early and return an error before
+# completing the requested output, so a real decoder's declared size is a destination
+# precondition / upper bound, never an unconditional lower/exact write count.

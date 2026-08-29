@@ -7,6 +7,12 @@ int LZ4_decompress_safe();
 int LZ4_decompress_safe_partial();
 int LZ4_decompress_fast();
 
+/* SYNTHETIC test-only external APIs (see authorities/synthetic-testonly-1.0.0-spec.txt): an
+ * UNCONDITIONAL exact writer and an UNCONDITIONAL lower-bound writer -- the only way to test
+ * exact / lower-bound routing, since real decoders can stop early on malformed input. */
+void synth_fill_exact(char *dst, int n);
+void synth_fill_atleast(char *dst, int n);
+
 typedef struct z_stream_s { unsigned char *next_out; unsigned avail_out; } z_stream;
 typedef z_stream *z_streamp;
 int inflate();
@@ -26,20 +32,36 @@ int dc_over(const char *src, int n) {
     return LZ4_decompress_safe(src, dst, n, 200);
 }
 
-/* EXACT-BOUND WITHIN CAPACITY: LZ4_decompress_fast writes EXACTLY originalSize (50) bytes into
- * a 64-byte dst -> deterministic_complete. */
+/* LZ4_decompress_fast: originalSize is an UPPER bound (writes <= originalSize; malformed input
+ * stops early) PLUS a destination precondition (dst >= originalSize). originalSize 50 <= 64 ->
+ * within capacity -> deterministic_complete. */
 int dc_fast_fits(const char *src) {
     char dst[64];
     return LZ4_decompress_fast(src, dst, 50);
 }
 
-/* EXACT-BOUND EXCEEDS CAPACITY (PROVEN overflow): LZ4_decompress_fast writes EXACTLY
- * originalSize (200) bytes into a 64-byte dst -> the write provably exceeds the buffer ->
- * proven_oversized (a lower/exact bound greater than capacity). */
+/* originalSize 200 > 64-byte dst -> destination PRECONDITION violated (unsafe / contract-
+ * invalid), but malformed input might stop before exceeding the buffer -> open_candidate
+ * (decoder_destination_precondition_violated), NOT proven_oversized. */
 int dc_fast_over(const char *src) {
     char dst[64];
     return LZ4_decompress_fast(src, dst, 200);
 }
+
+/* SYNTHETIC EXACT within capacity: writes EXACTLY 50 <= 64 -> deterministic_complete. */
+void dc_synth_exact_fits(void) { char dst[64]; synth_fill_exact(dst, 50); }
+
+/* SYNTHETIC EXACT over capacity: writes EXACTLY 200 > 64 unconditionally -> PROVEN oversized. */
+void dc_synth_exact_over(void) { char dst[64]; synth_fill_exact(dst, 200); }
+
+/* SYNTHETIC LOWER-BOUND below capacity: writes AT LEAST 50 into a 64-byte dst -> the true
+ * maximum is unknown and may exceed 64 -> safety NOT established -> open_candidate
+ * (lower_bound_below_capacity_inconclusive). A lower bound below capacity is not safe. */
+void dc_synth_atleast_below(void) { char dst[64]; synth_fill_atleast(dst, 50); }
+
+/* SYNTHETIC LOWER-BOUND over capacity: writes AT LEAST 200 into a 64-byte dst -> the API writes
+ * >= 200 > 64 -> PROVEN oversized. */
+void dc_synth_atleast_over(void) { char dst[64]; synth_fill_atleast(dst, 200); }
 
 /* BOUNDED via sizeof: dstCapacity == sizeof(dst) binds the extent to the exact capacity. */
 int dc_sizeof(const char *src, int n) {

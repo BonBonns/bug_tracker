@@ -112,19 +112,53 @@ CONTRACTS = [
     {"id": "lz4.LZ4_decompress_fast", "library": "lz4", "validated_versions": ["1.9.4"],
      "signature": {"name": "LZ4_decompress_fast", "return_type": "int",
                    "params": ["const char *", "char *", "int"]},
-     "roles": {0: "input", 1: "destination", 2: "exact_output_size"},
-     "capacity_semantics": "arg2 originalSize = the uncompressed size to regenerate; the API "
-                           "writes EXACTLY originalSize bytes into dst (an EXACT / lower bound "
-                           "for overflow purposes). If originalSize > dst capacity the write "
-                           "provably exceeds the buffer. (Deprecated + unsafe upstream.)",
-     "write_extent": {"kind": "arg_bytes", "bound": "exact", "arg": 2},
-     "return_codes": "return = bytes read from src (== compressed size); <0 = error. dst "
-                     "receives exactly originalSize bytes.",
-     "partial_writes": "on the <0 malformed path it may stop early, but the caller-asserted "
-                       "originalSize is the intended exact output size.",
+     "roles": {0: "input", 1: "destination", 2: "required_output_size"},
+     "capacity_semantics": "arg2 originalSize = the intended decompressed size; the API REQUIRES "
+                           "dst to be >= originalSize (a DESTINATION PRECONDITION) and, given "
+                           "that, never writes past dst. It is NOT an unconditional exact write: "
+                           "malformed input makes it stop early and return <0, so actual writes "
+                           "are <= originalSize (an UPPER bound). originalSize > dst capacity is "
+                           "a precondition VIOLATION (unsafe/contract-invalid), not a proven "
+                           "overflow -- malformed input might stop before exceeding the buffer. "
+                           "(Deprecated + unsafe upstream.)",
+     "write_extent": {"kind": "arg_bytes", "bound": "max", "arg": 2},
+     "destination_precondition": {"min_capacity_arg": 2},
+     "return_codes": "return = bytes read from src (== compressed size); <0 = error (malformed "
+                     "input stops decoding early). dst receives at most originalSize bytes.",
+     "partial_writes": "on the <0 malformed path it stops early, writing fewer than "
+                       "originalSize bytes; the originalSize UPPER bound holds on every path.",
      "stateful": False, "callbacks": False,
      "authority": {"excerpt_file": "lz4-1.9.4-LZ4_decompress_fast.txt",
                    "sha256": "a6ad113aff7df32c626268b42daa1a1c47852a7e92e31fe66cf52acd6c0e3060"}},
+
+    # SYNTHETIC test-only contracts (library synthetic_testonly, never linked in a real build):
+    # the ONLY way to exercise genuinely-unconditional exact / lower-bound routing, since real
+    # decoders can stop early on malformed input. Authority is the archived synthetic spec.
+    {"id": "synthetic_testonly.synth_fill_exact", "library": "synthetic_testonly",
+     "validated_versions": ["1.0.0"],
+     "signature": {"name": "synth_fill_exact", "return_type": "void",
+                   "params": ["char *", "int"]},
+     "roles": {0: "destination", 1: "exact_output_size"},
+     "capacity_semantics": "arg1 = the number of bytes written; the API UNCONDITIONALLY writes "
+                           "EXACTLY arg1 bytes on every execution (no error/early-stop path).",
+     "write_extent": {"kind": "arg_bytes", "bound": "exact", "arg": 1},
+     "return_codes": "void; no error path.", "partial_writes": "none (unconditional).",
+     "stateful": False, "callbacks": False,
+     "authority": {"excerpt_file": "synthetic-testonly-1.0.0-spec.txt",
+                   "sha256": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a"}},
+
+    {"id": "synthetic_testonly.synth_fill_atleast", "library": "synthetic_testonly",
+     "validated_versions": ["1.0.0"],
+     "signature": {"name": "synth_fill_atleast", "return_type": "void",
+                   "params": ["char *", "int"]},
+     "roles": {0: "destination", 1: "min_output_size"},
+     "capacity_semantics": "arg1 = a LOWER bound; the API UNCONDITIONALLY writes AT LEAST arg1 "
+                           "bytes on every execution (possibly more).",
+     "write_extent": {"kind": "arg_bytes", "bound": "min", "arg": 1},
+     "return_codes": "void; no error path.", "partial_writes": "none (unconditional).",
+     "stateful": False, "callbacks": False,
+     "authority": {"excerpt_file": "synthetic-testonly-1.0.0-spec.txt",
+                   "sha256": "4a874ca39e12a2d8e7af8202051fa334de593d5eb9a89e8925ca6742ac80d82a"}},
 
     {"id": "zlib.inflate", "library": "zlib", "validated_versions": ["1.3.1"],
      "signature": {"name": "inflate", "return_type": "int",
@@ -267,15 +301,54 @@ def _role_map(c, ct, index):
     return roles
 
 
-def _library_identity(library, validated_versions, build_identity):
-    """Establish the linked library IDENTITY + VERSION for a contract, from an operator BUILD
-    ATTESTATION (pinned build / linked package / verified header). A same-named external symbol
-    is NOT proof of provenance. Returns (state, detail):
-      'identity_unresolved' -> library not attested at all;
-      'version_unresolved'  -> attested, but the version is unknown or NOT in the archived
-                               contract's validated family (one header validates only itself);
-      'established'         -> attested version is in the contract's validated set."""
-    bi = (build_identity or {}).get(library)
+def _prov_fingerprints(auth_dir):
+    """(library, version) -> full-file SHA-256 of the authoritative header/spec, from the
+    archived PROVENANCE.json. This is the fingerprint the linked-build's header must match."""
+    fp = {}
+    pj = os.path.join(auth_dir, "PROVENANCE.json")
+    if not os.path.exists(pj):
+        return fp
+    for a in json.load(open(pj)).get("authorities", []):
+        tag = (a.get("upstream_tag") or "").lstrip("v")   # "v1.9.4" -> "1.9.4"
+        fp[(a.get("library"), tag)] = a.get("full_file_sha256")
+    return fp
+
+
+def load_build_attestation(cpp):
+    """Load the build attestation from the TRUSTED, SCAN-BOUND channel: a `build_attestation.json`
+    emitted into the scan output directory (a sibling of cpp.json / cpg.bin) by the scan
+    pipeline -- NOT passed in as caller-controlled contract JSON. It is rejected (treated as
+    absent) unless it is FINGERPRINTED to THIS scan: its recorded cpp.json (and cpg.bin) SHA-256
+    must match the artifacts actually analyzed, so an attestation cannot be replayed against a
+    different scan. Returns (attestation_dict, status)."""
+    if not isinstance(cpp, str):
+        return None, "no_scan_dir"
+    sdir = os.path.dirname(os.path.abspath(cpp))
+    ap = os.path.join(sdir, "build_attestation.json")
+    if not os.path.exists(ap):
+        return None, "no_attestation"
+    try:
+        a = json.load(open(ap))
+    except Exception:
+        return None, "attestation_unreadable"
+    scan = a.get("scan", {})
+    if scan.get("cpp_sha256") != _sha256_file(cpp):
+        return None, "attestation_not_scan_bound"      # replayed / wrong scan -> reject
+    cpg = os.path.join(sdir, "cpg.bin")
+    if os.path.exists(cpg) and scan.get("cpg_sha256") not in (None, _sha256_file(cpg)):
+        return None, "attestation_not_scan_bound"
+    return a, "ok"
+
+
+def _library_identity(library, validated_versions, attestation, prov_fp):
+    """Establish the linked library IDENTITY + VERSION for a contract from the SCAN-BOUND build
+    attestation (already verified as bound to this scan). A same-named external symbol is not
+    proof of provenance. Establishment additionally requires the attested build's header
+    FINGERPRINT to match the archived authority's full-file hash for that validated version --
+    i.e. the scan's build actually used the header the contract was validated against. Returns
+    (state, detail)."""
+    libs = (attestation or {}).get("libraries", {})
+    bi = libs.get(library)
     if not bi:
         return "identity_unresolved", {"library": library, "attested": False}
     ver = bi.get("version")
@@ -283,17 +356,26 @@ def _library_identity(library, validated_versions, build_identity):
         return "version_unresolved", {"library": library, "attested_version": ver,
                                       "validated_versions": validated_versions,
                                       "established_by": bi.get("established_by")}
+    expected = prov_fp.get((library, ver))
+    if expected is None or bi.get("header_sha256") != expected:
+        return "fingerprint_mismatch", {"library": library, "attested_version": ver,
+                                        "attested_header_sha256": bi.get("header_sha256"),
+                                        "expected_header_sha256": expected,
+                                        "established_by": bi.get("established_by")}
     return "established", {"library": library, "version": ver,
-                           "established_by": bi.get("established_by")}
+                           "established_by": bi.get("established_by"),
+                           "header_sha256": bi.get("header_sha256")}
 
 
-def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR, build_identity=None):
-    """`build_identity` is an operator attestation of the linked libraries, e.g.
-    {"lz4": {"version": "1.9.4", "established_by": "pinned_build"}}. A contract's write-extent
-    routing is applied ONLY when the library identity + version is established by it; otherwise
-    the call shape is recognized and the contract identity/version is left unresolved."""
+def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR):
+    """Library identity comes ONLY through the trusted scan-bound build attestation
+    (load_build_attestation), never a caller-supplied dict. A contract's write-extent routing is
+    applied only when the library identity + version + build-header fingerprint are established;
+    otherwise the call shape is recognized and the contract identity/version is left unresolved."""
     d = json.load(open(cpp)) if isinstance(cpp, str) else cpp
     by_name, _prov = load_contracts(auth_dir)
+    attestation, _att_status = load_build_attestation(cpp)
+    prov_fp = _prov_fingerprints(auth_dir)
     index = WSD.build_index(d)
     stack_ext = v2.compute_stack_fixed_array_extents(d)
     heap_ext = AE.compute_allocation_extents(d)
@@ -330,15 +412,15 @@ def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR, build_identity=None):
 
         # ---- LIBRARY IDENTITY provenance gate (name+arity is only a call shape) -------------
         idstate, idinfo = _library_identity(ct["library"], ct["validated_versions"],
-                                            build_identity)
+                                            attestation, prov_fp)
         rec["library_identity"] = idinfo
         if idstate == "identity_unresolved":
             rec.update(route="additional_evidence_required",
                        reason="contract_identity_unresolved",
                        disposition="relationship_unresolved",
                        note="external callee matches the contract call shape, but the linked "
-                            "library identity is not established (no build attestation); a "
-                            "same-named symbol is not proof of provenance")
+                            "library identity is not established by the scan-bound build "
+                            "attestation; a same-named symbol is not proof of provenance")
             ops.append(rec); continue
         if idstate == "version_unresolved":
             rec.update(route="additional_evidence_required",
@@ -348,6 +430,14 @@ def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR, build_identity=None):
                             "archived contract's validated family %s (attested %r); one header "
                             "validates only its own version"
                             % (ct["validated_versions"], idinfo.get("attested_version")))
+            ops.append(rec); continue
+        if idstate == "fingerprint_mismatch":
+            rec.update(route="additional_evidence_required",
+                       reason="contract_build_fingerprint_mismatch",
+                       disposition="relationship_unresolved",
+                       note="attested version is in the validated family, but the build's header "
+                            "fingerprint does not match the archived authority hash for it -- the "
+                            "scan's build did not use the validated header")
             ops.append(rec); continue
 
         we = ct["write_extent"]
@@ -399,34 +489,78 @@ def analyze_decoder_calls(cpp, auth_dir=AUTH_DIR, build_identity=None):
 
         ext_bytes = dcap["bytes"] if extent_is_sizeof_dest else extent
         capN = dcap["bytes"]
-        if ext_bytes <= capN:
-            # extent <= capacity: in-capacity for BOTH a max and an exact/lower bound.
-            rec.update(route="deterministic_complete",
-                       reason="write_extent_within_destination_capacity",
-                       disposition="deterministic_complete", write_extent=ext_bytes,
-                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
-                       note=("sizeof(dst) as capacity -> API cannot write past dst"
-                             if extent_is_sizeof_dest else
-                             "%s write extent %d <= %d-byte dst -> within capacity"
-                             % (bound, ext_bytes, capN)))
-        elif bound in ("exact", "min"):
-            # LOWER/EXACT bound > capacity: the API WILL write >= ext_bytes > capacity.
-            rec.update(route="range_arithmetic_review",
-                       reason="write_extent_exceeds_destination_capacity",
-                       disposition="proven_oversized", write_extent=ext_bytes,
-                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
-                       note="%s write extent %d > %d-byte dst -> the API writes past the buffer"
-                            % (bound, ext_bytes, capN))
-        else:
-            # MAX (upper) bound > capacity: unsafe CONFIGURATION, but the input may decode to
-            # far less -- NOT a proven overflow (no lower bound on actual writes). Open.
-            rec.update(route="open_candidate",
-                       reason="decoder_extent_exceeds_known_capacity",
-                       disposition="relationship_unresolved", write_extent=ext_bytes,
-                       dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
-                       note="max write extent %d > %d-byte dst -> unsafe configuration, but "
-                            "actual writes may be far less (upper bound only) -> not proven "
-                            "oversized" % (ext_bytes, capN))
+        below = ext_bytes <= capN
+        # CORRECT bound-direction matrix:
+        #                      extent <= capacity        extent > capacity
+        #   max  (actual<=U):  deterministic within      unresolved (config/precondition)
+        #   exact(actual==E):  deterministic within      proven_oversized
+        #   min  (actual>=L):  UNRESOLVED (L below cap    proven_oversized
+        #                      says nothing about a max)
+        # A lower bound BELOW capacity cannot establish safety -- actual writes may be far larger.
+        has_precond = "destination_precondition" in ct
+        if bound == "max":
+            if below:
+                rec.update(route="deterministic_complete",
+                           reason="write_extent_within_destination_capacity",
+                           disposition="deterministic_complete", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note=("sizeof(dst) as capacity -> API cannot write past dst"
+                                 if extent_is_sizeof_dest else
+                                 "upper-bound write extent %d <= %d-byte dst -> within capacity"
+                                 % (ext_bytes, capN)))
+            elif has_precond:
+                # e.g. LZ4_decompress_fast: originalSize > dst is a destination PRECONDITION
+                # violation (unsafe / contract-invalid), but malformed input might stop early
+                # before exceeding the buffer -> NOT a proven overflow.
+                rec.update(route="open_candidate",
+                           reason="decoder_destination_precondition_violated",
+                           disposition="relationship_unresolved", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="required output size %d > %d-byte dst -> destination "
+                                "precondition violated (unsafe/contract-invalid), but not a "
+                                "proven overflow (may stop early on malformed input)"
+                                % (ext_bytes, capN))
+            else:
+                rec.update(route="open_candidate",
+                           reason="decoder_extent_exceeds_known_capacity",
+                           disposition="relationship_unresolved", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="upper-bound write extent %d > %d-byte dst -> unsafe "
+                                "configuration, but actual writes may be far less -> not proven "
+                                "oversized" % (ext_bytes, capN))
+        elif bound == "exact":
+            if below:
+                rec.update(route="deterministic_complete",
+                           reason="write_extent_within_destination_capacity",
+                           disposition="deterministic_complete", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="exact write extent %d <= %d-byte dst -> within capacity"
+                                % (ext_bytes, capN))
+            else:
+                rec.update(route="range_arithmetic_review",
+                           reason="write_extent_exceeds_destination_capacity",
+                           disposition="proven_oversized", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="exact write extent %d > %d-byte dst -> the API writes past dst"
+                                % (ext_bytes, capN))
+        else:  # bound == "min" (lower bound)
+            if below:
+                # LOWER bound below capacity establishes NOTHING about safety (actual >= L, but
+                # the true maximum is unknown and may exceed capacity) -> unresolved.
+                rec.update(route="open_candidate",
+                           reason="lower_bound_below_capacity_inconclusive",
+                           disposition="relationship_unresolved", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="lower-bound write extent %d <= %d-byte dst -> actual writes are "
+                                ">= %d with no known maximum -> safety NOT established"
+                                % (ext_bytes, capN, ext_bytes))
+            else:
+                rec.update(route="range_arithmetic_review",
+                           reason="write_extent_exceeds_destination_capacity",
+                           disposition="proven_oversized", write_extent=ext_bytes,
+                           dest_capacity=capN, dest_capacity_prov=dcap["prov"], **common,
+                           note="lower-bound write extent %d > %d-byte dst -> the API writes "
+                                ">= %d > capacity -> past dst" % (ext_bytes, capN, ext_bytes))
         ops.append(rec)
     return ops
 
@@ -436,10 +570,8 @@ if __name__ == "__main__":
     for p in prov:
         print("PROVENANCE", json.dumps(p, sort_keys=True))
     if len(sys.argv) > 1:
-        # demo attestation (pinned build) so contracts apply; omit build_identity to see the
-        # conservative default (every decoder call -> contract_identity_unresolved).
-        bi = {"lz4": {"version": "1.9.4", "established_by": "pinned_build"},
-              "zlib": {"version": "1.3.1", "established_by": "pinned_build"}}
-        for o in analyze_decoder_calls(sys.argv[1], build_identity=bi):
+        # library identity comes ONLY from a scan-bound build_attestation.json in the scan dir;
+        # without one every decoder call -> contract_identity_unresolved (conservative default).
+        for o in analyze_decoder_calls(sys.argv[1]):
             print(json.dumps({k: o[k] for k in o if k not in ("roles", "identity")},
                              sort_keys=True))
