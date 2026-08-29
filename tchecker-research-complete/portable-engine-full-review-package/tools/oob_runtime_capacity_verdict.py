@@ -336,6 +336,294 @@ def _record_id(fn, dest, line):
     return 'cand_' + hashlib.sha256(f'{fn}|{dest}|{line}'.encode()).hexdigest()[:16]
 
 
+# --- Form-aware non-bare destination diagnosis --------------------------------
+# A recognized memcpy-family sink whose destination is NOT a bare pointer
+# identifier (a struct member, an address-of, pointer arithmetic, a cast, or a
+# side-effecting expression). This heap-capacity producer does NOT finalize a
+# verdict for such a destination -- it has no capacity SOURCE for non-heap
+# objects. It emits an ABSTENTION (or, for a provable overrun, a CANDIDATE never a
+# hard verdict) whose reason is chosen from the CPG-RESOLVED form of the
+# destination, NOT from the destination text matching a regex. "Identifiable"
+# means the base identifier's Joern reference-target resolves to exactly ONE
+# declaration node; a fixed extent means that declaration's type is a
+# compile-time-sized array or a scalar whose byte size is modeled here.
+#
+# The frozen V1/V2 boundary is preserved: this V1 producer NEVER promotes a
+# non-heap destination to a safe verdict (`deterministic_complete`). A fixed
+# extent whose write provably fits is UNDER-CLAIMED (abstained, not promoted); a
+# fixed extent whose write provably exceeds is surfaced as an `open_candidate`
+# (flag-never-assume-safe), with the computed comparison attached so the
+# stack-capacity owner / adjudicator finalizes. No stack/scalar capacity SOURCE is
+# introduced into V1's candidate/guard logic -- the comparison lives only in this
+# diagnosis layer and is pure literal arithmetic over a CPG-resolved fixed size
+# (the same class of sound reasoning as the existing `len<=N` literal check).
+
+OP_ADDR = '<operator>.addressOf'
+OP_CAST = '<operator>.cast'
+OP_FIELD = ('<operator>.indirectFieldAccess', '<operator>.fieldAccess')
+OP_INDEX = ('<operator>.indirectIndexAccess', '<operator>.computedMemberAccess')
+OP_ADD = ('<operator>.addition',)
+OP_SUB = ('<operator>.subtraction',)
+OP_INDIR = ('<operator>.indirection',)
+OP_INCDEC = ('<operator>.postIncrement', '<operator>.preIncrement',
+             '<operator>.postDecrement', '<operator>.preDecrement')
+
+# Byte sizes for element/scalar types whose width is fixed by the C standard on
+# every target this scanner runs against. `long`, `size_t`, pointer types, enums,
+# and anything unlisted are DELIBERATELY absent: their size is platform-dependent
+# or unknown here, so extent resolution FAILS CLOSED (no comparison is attempted).
+_TYPE_BYTES = {
+    'char': 1, 'signed char': 1, 'unsigned char': 1, 'int8_t': 1, 'uint8_t': 1,
+    'short': 2, 'short int': 2, 'unsigned short': 2, 'int16_t': 2, 'uint16_t': 2,
+    'int': 4, 'signed int': 4, 'unsigned int': 4, 'unsigned': 4,
+    'int32_t': 4, 'uint32_t': 4, 'float': 4,
+    'long long': 8, 'long long int': 8, 'unsigned long long': 8,
+    'int64_t': 8, 'uint64_t': 8, 'double': 8,
+}
+
+
+def _array_extent(type_full_name):
+    """(elem_bytes, count) for a fixed `T[N]` type whose element size is modeled,
+    else None. Fails closed on unknown element sizes."""
+    m = re.fullmatch(r'(.+?)\s*\[(\d+)\]', (type_full_name or '').strip())
+    if not m:
+        return None
+    es = _TYPE_BYTES.get(m.group(1).strip())
+    return (es, int(m.group(2))) if es is not None else None
+
+
+def _scalar_bytes(type_full_name):
+    return _TYPE_BYTES.get((type_full_name or '').strip())
+
+
+def _is_pointer_type(t):
+    return (t or '').strip().endswith('*')
+
+
+def _build_form_index(d):
+    call_by_id = {c.get('id'): c for c in d.get('calls', [])}
+    ident_by_id = {}
+    for i in d.get('identifiers', []):
+        # Same node id may appear under both <global> and its enclosing function;
+        # ref_target_ids agree across those copies (verified), so last-wins is safe.
+        ident_by_id[i.get('id')] = i
+    params_by_id = {}
+    for f in d.get('functions', []):
+        for p in (f.get('parameters') or []):
+            params_by_id[p.get('id')] = (f.get('id'), p)
+    locals_by_id = {l.get('id'): l for l in d.get('locals', [])}
+    members = d.get('members', [])
+    type_decls = d.get('type_decls', [])
+    return {'call_by_id': call_by_id, 'ident_by_id': ident_by_id,
+            'params_by_id': params_by_id, 'locals_by_id': locals_by_id,
+            'members': members, 'type_decls': type_decls}
+
+
+def _full_node(node, ix):
+    """The full CPG node for an argument -- the embedded argument copy omits the
+    operator `name`; the calls-list entry carries it."""
+    return ix['call_by_id'].get(node.get('id'), node)
+
+
+def _walk_dest(node, ix, depth=0):
+    """Walk a destination expression into a flat descriptor. Returns a dict with
+    `kind` in {ident, member, deref, sideeffect, unsupported}. `off` (for ident) is
+    an ELEMENT offset into the base array (int, or 'sym'). CAST is transparent
+    (unwrapped to its value operand); ADDRESS-OF is transparent (`&X` ~ `X`)."""
+    if node is None or depth > 32:
+        return {'kind': 'unsupported'}
+    n = _full_node(node, ix)
+    kind = n.get('kind')
+    op = n.get('name') or n.get('method_full_name')
+    if kind == 'IDENTIFIER':
+        return {'kind': 'ident', 'base': n.get('id'), 'off': 0}
+    args = sorted(n.get('arguments', []), key=lambda a: a.get('index', 0))
+    if op in OP_INCDEC:
+        return {'kind': 'sideeffect'}
+    if op == OP_CAST:
+        vals = [a for a in args if _full_node(a, ix).get('kind') != 'TYPE_REF']
+        return _walk_dest(vals[0], ix, depth + 1) if vals else {'kind': 'unsupported'}
+    if op == OP_ADDR:
+        return _walk_dest(args[0], ix, depth + 1) if args else {'kind': 'unsupported'}
+    if op in OP_FIELD:
+        base = _walk_dest(args[0], ix, depth + 1) if args else {'kind': 'unsupported'}
+        fa = _full_node(args[1], ix) if len(args) > 1 else {}
+        return {'kind': 'member', 'baseobj': base,
+                'field': fa.get('code') or fa.get('name')}
+    if op in OP_INDEX:
+        base = _walk_dest(args[0], ix, depth + 1) if args else {'kind': 'unsupported'}
+        ia = _full_node(args[1], ix) if len(args) > 1 else {}
+        if base.get('kind') != 'ident':
+            return {'kind': 'unsupported'}
+        idx = (int(ia['code']) if ia.get('kind') == 'LITERAL'
+               and re.fullmatch(r'\d+', (ia.get('code') or '').strip()) else 'sym')
+        return {'kind': 'ident', 'base': base['base'], 'off': idx}
+    if op in OP_ADD or op in OP_SUB:
+        base = _walk_dest(args[0], ix, depth + 1) if args else {'kind': 'unsupported'}
+        oa = _full_node(args[1], ix) if len(args) > 1 else {}
+        if base.get('kind') != 'ident':
+            return {'kind': 'unsupported'}
+        if oa.get('kind') == 'LITERAL' and re.fullmatch(r'\d+', (oa.get('code') or '').strip()):
+            off = int(oa['code'])
+            if op in OP_SUB:
+                off = -off
+        else:
+            off = 'sym'
+        return {'kind': 'ident', 'base': base['base'], 'off': off}
+    if op in OP_INDIR:
+        base = _walk_dest(args[0], ix, depth + 1) if args else {'kind': 'unsupported'}
+        return {'kind': 'deref', 'baseobj': base}
+    return {'kind': 'unsupported'}
+
+
+def _resolve_object(ident_id, ix):
+    """Resolve a base IDENTIFIER node to its declaration via the CPG reference
+    target. Returns {'type', 'src', 'decl'} or None when the reference does not
+    resolve to exactly one declaration (unresolved / ambiguous)."""
+    ident = ix['ident_by_id'].get(ident_id)
+    if not ident:
+        return None
+    refs = ident.get('ref_target_ids') or []
+    if len(refs) != 1:
+        return None
+    decl = refs[0]
+    if decl in ix['params_by_id']:
+        _, p = ix['params_by_id'][decl]
+        return {'type': p.get('type_full_name'), 'src': 'param', 'decl': decl}
+    l = ix['locals_by_id'].get(decl)
+    if l is not None:
+        return {'type': l.get('type_full_name'), 'src': 'local', 'decl': decl}
+    return None
+
+
+def _member_type(struct_ptr_type, field, ix):
+    """The declared type of `field` in the struct named by `struct_ptr_type` (e.g.
+    'S*' or 'S'), via the CPG member declarations. None if the struct/field is not
+    found or the member type is ambiguous across same-named type decls (fail
+    closed -- never guess an extent)."""
+    base = (struct_ptr_type or '').strip().rstrip('*').strip()
+    base = re.sub(r'^(struct|union)\s+', '', base)
+    if not base or not field:
+        return None
+    tds = {t.get('id') for t in ix['type_decls'] if t.get('name') == base}
+    types = {m.get('type_full_name') for m in ix['members']
+             if m.get('name') == field and m.get('type_decl_id') in tds}
+    return types.pop() if len(types) == 1 else None
+
+
+def _abstain_fields(reason, base, extra):
+    """Fill the frozen reason-emission fields for an abstention/candidate record."""
+    base['reason_code'] = reason
+    base['primary_reason_code'] = reason
+    base['all_reason_codes'] = [reason]
+    base['uncertainty_bucket'] = bucket_for_reason(reason)
+    base['recommended_route'] = route_for_reason(reason)
+    base['unresolved_property'] = property_for_reason(reason)
+    base['llm_eligible'] = llm_eligible_for_reason(reason)
+    base.update(extra)
+    return base
+
+
+def diagnose_nonbare_destination(dest_arg_node, width_code, ix, base):
+    """Classify a recognized-but-non-bare memcpy destination by its CPG-resolved
+    form and populate `base` with the correct abstention/candidate record. Returns
+    `base`. Mapping (see module note):
+      * identity unresolvable / side-effecting  -> destination_identity_ambiguous
+      * identity known, no fixed extent          -> required_evidence_absent
+      * fixed extent, symbolic offset/width      -> capacity_relation_not_established
+      * fixed extent, literal offset+width, fits -> capacity_relation_not_established
+                                                    (abstained; comparison attached)
+      * fixed extent, literal offset+width, over -> capacity_relation_not_established
+                                                    (open_candidate; comparison attached)
+    """
+    w = _walk_dest(dest_arg_node, ix)
+    kind = w.get('kind')
+
+    def ambiguous(form):
+        base['analysis_status'] = 'abstained'
+        base['destination_form'] = form
+        base['missing_requirement'] = 'destination_object_identity'
+        return _abstain_fields('destination_identity_ambiguous', base, {})
+
+    def evidence_absent(form):
+        base['analysis_status'] = 'abstained'
+        base['destination_form'] = form
+        base['missing_requirement'] = 'destination_capacity'
+        return _abstain_fields('required_evidence_absent', base, {})
+
+    def fixed(extent, elem, off_elems, form_prefix):
+        """A CPG-resolved fixed-extent object. Compute the remaining-capacity
+        comparison when offset and width are literal; otherwise the relation is
+        unresolved. Never promotes to a safe verdict; a provable overrun becomes an
+        open_candidate."""
+        if off_elems == 'sym':
+            base['analysis_status'] = 'abstained'
+            return _abstain_fields('capacity_relation_not_established', base, {
+                'destination_form': 'fixed_extent_symbolic_relation',
+                'destination_fixed_extent_bytes': extent})
+        byte_off = off_elems * (elem or 1)
+        remaining = extent - byte_off
+        if byte_off < 0 or not re.fullmatch(r'\d+', (width_code or '').strip()):
+            # negative/symbolic offset or symbolic width: relation not established
+            base['analysis_status'] = 'abstained'
+            return _abstain_fields('capacity_relation_not_established', base, {
+                'destination_form': form_prefix + '_symbolic_relation',
+                'destination_fixed_extent_bytes': extent})
+        width = int(width_code)
+        fits = width <= remaining
+        comparison = {'destination_fixed_extent_bytes': extent, 'byte_offset': byte_off,
+                      'write_width_bytes': width, 'remaining_capacity_bytes': remaining,
+                      'write_fits': fits}
+        base['analysis_status'] = 'open_candidate' if not fits else 'abstained'
+        base['destination_form'] = (form_prefix + '_write_exceeds_bounds' if not fits
+                                    else form_prefix + '_write_within_bounds')
+        base['capacity_comparison'] = comparison
+        # `capacity_relation_not_established` names it precisely in BOTH directions:
+        # the SAFE relation (width<=capacity) is either disproven (overrun -> flagged
+        # candidate) or established-but-not-finalized-here (fits -> under-claimed
+        # abstention, preserving the heap-only-finalization boundary).
+        return _abstain_fields('capacity_relation_not_established', base,
+                               {'established_facts': [comparison]})
+
+    if kind == 'sideeffect':
+        return ambiguous('side_effecting_expression')
+    if kind in ('unsupported', 'deref'):
+        return ambiguous('unsupported_expression')
+    if kind == 'member':
+        bo = w.get('baseobj') or {}
+        if bo.get('kind') != 'ident':
+            return ambiguous('unresolved_member_base')
+        obj = _resolve_object(bo.get('base'), ix)
+        if obj is None:
+            return ambiguous('unresolved_reference')
+        mt = _member_type(obj.get('type'), w.get('field'), ix)
+        if mt is None:
+            return evidence_absent('member_extent_unknown')
+        if _is_pointer_type(mt):
+            return evidence_absent('pointer_member')
+        arr = _array_extent(mt)
+        if arr is not None:
+            return fixed(arr[0] * arr[1], arr[0], 0, 'fixed_array_member')
+        sb = _scalar_bytes(mt)
+        if sb is not None:
+            return fixed(sb, sb, 0, 'scalar_member')
+        return evidence_absent('member_extent_unknown')
+    # ident-based (array / scalar / pointer, with an optional element offset)
+    obj = _resolve_object(w.get('base'), ix)
+    if obj is None:
+        return ambiguous('unresolved_reference')
+    t = obj.get('type')
+    if _is_pointer_type(t):
+        return evidence_absent('pointer_object')
+    arr = _array_extent(t)
+    if arr is not None:
+        return fixed(arr[0] * arr[1], arr[0], w.get('off', 0), 'fixed_array_object')
+    sb = _scalar_bytes(t)
+    if sb is not None:
+        return fixed(sb, sb, w.get('off', 0), 'scalar_object')
+    return evidence_absent('object_extent_unknown')
+
+
 def analyze_operations(prefix):
     """Emit one ANALYSIS RECORD per recognized buffer-write operation, with an
     EXPLICIT machine-derived reason_code and (for recognized-but-open/abstained
@@ -352,6 +640,7 @@ def analyze_operations(prefix):
     extents = compute_allocation_extents(d)
     free_sites = compute_free_sites(d)
     cfg_index = build_cfg_index(d)
+    form_index = _build_form_index(d)
 
     # recognized buffer-write operations (same contract-driven extraction)
     ops = []
@@ -367,7 +656,8 @@ def analyze_operations(prefix):
         ops.append({'call_id': c.get('id'), 'function_id': c.get('enclosing_function_id'),
                     'file': c.get('file'), 'line': c.get('line'),
                     'dest_code': (args[da].get('code') or '').strip(),
-                    'width_code': (args[wa].get('code') or '').strip()})
+                    'width_code': (args[wa].get('code') or '').strip(),
+                    'dest_arg': args[da]})
 
     open_keys = {(x['function_id'], x['dest'], x['width_expr'], x['line'])
                  for x in emit_candidates(prefix)}
@@ -382,26 +672,22 @@ def analyze_operations(prefix):
                 'file': op['file'], 'function': fname, 'line': line,
                 'dest': dest, 'width_expr': width}
         if not re.fullmatch(r'[A-Za-z_]\w*', dest):
-            # EMISSION-GAP FIX: a recognized sink (memcpy family) whose destination is
-            # IDENTIFIABLE but not a bare pointer -- a struct/union member (`p->buf`), an
-            # address-of (`&obj`), or pointer arithmetic (`base + off`) -- has no
-            # allocation/stack capacity tracked by this producer. Previously the operation was
-            # silently DROPPED. Now emit it as an EXPLICIT ABSTENTION so the recognized
-            # operation reaches the router with the exact missing requirement named. It is never
-            # promoted (this producer does not establish capacity for a non-bare destination).
+            # EMISSION-GAP FIX (FORM-AWARE): a recognized sink (memcpy family) whose
+            # destination is not a bare pointer identifier. Previously the operation was
+            # silently DROPPED; the first fix collapsed every such case into one
+            # `required_evidence_absent`/`member_or_expression` record. That reason was too
+            # coarse -- a non-bare text form does NOT prove capacity is absent. The reason is
+            # now chosen from the CPG-RESOLVED form of the destination (reference-target /
+            # declaration resolution, never a text regex): an unresolved reference or a
+            # side-effecting expression is an IDENTITY gap; a resolved pointer object/member
+            # is an EVIDENCE gap; a resolved fixed-extent object is a RELATIONSHIP gap whose
+            # remaining-capacity comparison is computed when the offset and width are literal.
+            # This producer never promotes a non-heap destination to a safe verdict; a
+            # provable overrun is surfaced as an open_candidate, never a hard verdict.
             if dest:
-                base['analysis_status'] = 'abstained'
-                base['reason_code'] = 'required_evidence_absent'
-                base['primary_reason_code'] = 'required_evidence_absent'
-                base['all_reason_codes'] = ['required_evidence_absent']
-                base['uncertainty_bucket'] = bucket_for_reason('required_evidence_absent')
-                base['recommended_route'] = route_for_reason('required_evidence_absent')
-                base['unresolved_property'] = property_for_reason('required_evidence_absent')
-                base['llm_eligible'] = llm_eligible_for_reason('required_evidence_absent')
-                base['missing_requirement'] = 'destination_capacity'
-                base['destination_form'] = 'member_or_expression'
+                diagnose_nonbare_destination(op.get('dest_arg'), width, form_index, base)
                 records.append(base)
-            continue   # non-bare destination: recognized + abstained, never promoted
+            continue   # non-bare destination: recognized, form-aware reason, never promoted safe
 
         status = None
         reasons = []
