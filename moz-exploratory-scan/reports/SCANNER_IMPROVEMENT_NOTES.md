@@ -45,7 +45,7 @@ corpus (once `raw_sites.jsonl` lands) and rank which single gate, if loosened
 soundly, would recover the most real sites — the pilot's 100% miss rate for cap3's own
 domain suggests one of the four is doing most of the rejecting, not all four equally.
 
-## 3. cap1 (`cap_addr_indexed`) is not integrated with the frozen physical-write identity at all
+## 3. cap1 (`cap_addr_indexed`) is not integrated with the frozen physical-write identity at all — **DONE, `claude/cap1-wsd-identity`**
 
 Confirmed directly (not inferred) while building this session's dedup pass
 (`run_moz_scan_v2.py`): `cap_addr_indexed.py` never imports `cap_write_site_dedup`, and no
@@ -63,7 +63,35 @@ a `call` object and a `dest`) and register it in the precedence tuple, ahead of 
 `call_site_summary` per whatever the real overlap turns out to be — same pattern already
 built for cap2/cap3.
 
-## 4. `unknown_allocator_contract` recurs across the *_Resurrect family — a plausibly cheap win
+## 4. `unknown_allocator_contract` recurs across the *_Resurrect family — bigger than it looked; not built this round
+
+**Scope correction, from actually starting the implementation**: I originally called this
+"cheap" on the assumption the allocation and write were in the same function or one
+textual hop away. On inspection (`MD2_Resurrect(unsigned char *space, void *arg) { MD2Context
+*cx = MD2_NewContext(); if (cx) memcpy(cx, space, sizeof(*cx)); return cx; }`, real NSS
+source), it's genuinely safe but via a **two-part gap**, not one:
+
+1. **Factory-function extent propagation** (single-hop, callee-return-value direction —
+   the *opposite* of `oob_interprocedural_verdict.py`'s existing single-hop pass, which
+   propagates a caller's KNOWN capacity *into* a callee's parameter; this needs the
+   callee's *own* return value's extent resolved from *its* body — `MD2_NewContext()`'s
+   `PORT_ZAlloc(sizeof(MD2Context))` — and credited back to the caller's local). Buildable,
+   same "abstain over guess" posture as the rest of `allocation_extent.py` (fire only when
+   the callee's body is in-corpus and has exactly one unambiguous alloc-and-return).
+2. **`sizeof(*ptr)` vs. `sizeof(Type)` textual normalization** — the write is
+   `sizeof(*cx)` (pointee-of-a-variable); the propagated allocation's `size_expression`
+   would be `sizeof(MD2Context)` (a type name). These are textually different strings, and
+   this producer family's existing safety-crediting is explicitly TEXT-match-based
+   (`allocation_extent.py`'s own docstring: "an EXACT textual match ... no arithmetic
+   involved at all"). Without resolving `cx`'s declared type from the CPG and rewriting
+   `sizeof(*cx)` → `sizeof(<cx's type>)` before the match, part 1 alone doesn't close the
+   gap — it would credit the allocation but still fail to match it against the write.
+
+Neither part is individually hard, but together they're a real two-piece feature, not the
+"narrow, cheap" single addition I originally estimated. Not built this round — flagging the
+corrected scope rather than shipping a half-fix (part 1 without part 2 would silently do
+nothing, since the text match would still fail). A future pass should budget for both
+pieces together.
 
 8 nss + 1 mozjpeg finding, all the same shape: a `*_Resurrect` context-reuse function
 writing `sizeof(*ctx)`/`sizeof(ContextType)` bytes into a pointer whose allocation-site
