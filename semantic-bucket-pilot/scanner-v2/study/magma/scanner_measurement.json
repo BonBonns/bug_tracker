@@ -1,0 +1,78 @@
+{
+  "SND_family": {
+    "bugs": [
+      "SND010",
+      "SND012",
+      "SND013"
+    ],
+    "classification": "scanner-coverage finding (dest-form recognition gap)",
+    "dest_form": "&(psf->header.ptr[psf->header.indx]) = address-of an indexed struct-field buffer",
+    "miss_reason": "recognition gap: frozen scanner models simple pointer/array dests, not address-of-indexed-struct-field-buffer; NOT a sink-name issue (memcpy recognized elsewhere in the file)",
+    "packet_valid": "N/A (no operation)",
+    "parse": "common.c fully parsed (2188 calls, 9 memcpy) both variants",
+    "route": "N/A (no operation)",
+    "scanner_recognized": "NO",
+    "scanner_recognizes_file": "YES - 4 operations recognized at simple-variable dests (ptr, mem, pnew, data)",
+    "target_site_recognized": "NO - 0 operations at all 5 memcpy sites in psf_binheader_writef",
+    "topology": "ONE positioned-write family (offset+length<=buffer_len); pipeline feasibility tier, not 3 families",
+    "vuln_vs_fixed": "identical recognition (0 ops both) - recognition is independent of the fix"
+  },
+  "build": "libsndfile @86c9f9eb, CMake-configured (config.h/sndfile.h generated); c2cpg --include src build/src build/include",
+  "model_calls": 0,
+  "other_mapped_bugs": {
+    "PNG003": {
+      "bug_site_recognized": "NO",
+      "classification": "scanner-coverage finding (pointer-walk write)",
+      "miss_reason": "non-copy pointer-walk struct write into fixed array palette[]; not a modeled sink",
+      "note": "file parses (16396 calls, memcpy present) but the palette write is pointer-walk pal_ptr->red=...",
+      "parsed": true,
+      "recognized_ops_in_fn": 0
+    },
+    "SSL004": {
+      "bug_site_recognized": "NO",
+      "classification": "scanner-coverage finding (wrapper-copy sink)",
+      "miss_reason": "bug write ascii2ebcdic(ebcdic_buf,q,num) is a library wrapper, not a modeled sink",
+      "note": "scanner recognizes an UNRELATED memcpy(p,...) at dest 'p' (route additional_evidence_required), NOT the bug write",
+      "parsed": true,
+      "recognized_ops_in_fn": 1
+    },
+    "TIF002": {
+      "bug_site_recognized": "NO",
+      "classification": "scanner-coverage finding (external-decoder write)",
+      "miss_reason": "write is external decoder call inflate(&sp->stream) into sp->tbuf; not a modeled write sink",
+      "parsed": true,
+      "recognized_ops_in_fn": 0
+    },
+    "TIF013": {
+      "bug_site_recognized": "N/A",
+      "classification": "build-incomplete (needs jbig headers); recognition not cleanly measurable here",
+      "note": "JBIGDecode body yields 0 calls: JBIG optional dependency (jbig.h/jbg_*) not configured in the build; body not parsed",
+      "parsed": false
+    }
+  },
+  "scanner": "FROZEN oob_runtime_capacity_v2 (UNMODIFIED; no aliases/write-models added)",
+  "summary": {
+    "bug_sites_recognized": "0 of 7",
+    "build_incomplete": 1,
+    "consequence": "None of the 7 mapped bugs are currently evaluation-eligible. If the scanner is later extended to cover these write forms, the 7 Magma bugs become development/regression cases (not confirmatory), and a separate HELD-OUT corpus is required.",
+    "interpretation": "The FROZEN scanner (tuned on Juliet-style simple array/malloc dests) recognizes NONE of the mapped Magma bug write-sites. Real-code writes use forms outside its model: offset-into-struct-field-buffer dests, decoder calls, pointer-walks, and library copy wrappers. All are RECORDED as scanner-coverage findings, NOT fixed (adding support + re-evaluating on these bugs = training on the test set).",
+    "measured_misses": 6,
+    "miss_forms": {
+      "dest_&(struct.field[idx])": [
+        "SND010",
+        "SND012",
+        "SND013"
+      ],
+      "external_decoder(inflate)": [
+        "TIF002"
+      ],
+      "pointer_walk_write": [
+        "PNG003"
+      ],
+      "wrapper_copy(ascii2ebcdic)": [
+        "SSL004"
+      ]
+    }
+  },
+  "training_on_test_prohibition": "This dest-form gap is RECORDED, not fixed. Adding &(ptr[offset]) dest support and re-evaluating on SND would be training on the test set."
+}
