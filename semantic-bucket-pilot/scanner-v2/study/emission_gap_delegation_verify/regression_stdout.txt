@@ -1,0 +1,26 @@
+cached function packets scanned : 276
+--- BODY-WIDE (every non-bare recognized memcpy in the packets) ---
+packets with a non-bare memcpy  : 28
+non-bare recognized sites (old=silently DROPPED) : 45
+now emitting a visible record   : 45
+still silently dropped          : 0
+safe promotions at these sites  : 0  (MUST be 0)
+by reason_code:
+    30  required_evidence_absent
+    13  destination_identity_ambiguous
+     2  delegated_to_stack_capacity_v2
+by destination_form:
+    15  member_extent_unknown
+    11  object_extent_unknown
+     8  unsupported_expression
+     5  unresolved_member_base
+     4  pointer_object
+     2  fixed_array_object_offset_resolved
+--- LABELED VULNERABLE non-bare copy_sink sites (group-A subset) ---
+labeled vuln non-bare copy_sink : 20
+now emitting at the labeled dest: 13
+labeled-site reason_code:
+    10  required_evidence_absent
+     3  destination_identity_ambiguous
+
+REGRESSION PASS

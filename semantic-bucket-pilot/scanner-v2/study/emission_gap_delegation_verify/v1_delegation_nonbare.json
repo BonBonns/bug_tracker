@@ -1,0 +1,407 @@
+{
+"09dc95c27e7d38c6|rtw_wx_set_scan|ssid[0].ssid|59": {
+"analysis_status": "abstained",
+"dest": "ssid[0].ssid",
+"destination_form": "member_extent_unknown",
+"function": "rtw_wx_set_scan",
+"line": 59,
+"reason_code": "required_evidence_absent",
+"sid": "09dc95c27e7d38c6"
+},
+"09dc95c27e7d38c6|rtw_wx_set_scan|ssid[ssid_index].ssid|94": {
+"analysis_status": "abstained",
+"dest": "ssid[ssid_index].ssid",
+"destination_form": "member_extent_unknown",
+"function": "rtw_wx_set_scan",
+"line": 94,
+"reason_code": "required_evidence_absent",
+"sid": "09dc95c27e7d38c6"
+},
+"09ff54824cf57d43|ixheaacd_real_synth_filt|&g[(2 * i + 0) * synth_size]|92": {
+"analysis_status": "abstained",
+"dest": "&g[(2 * i + 0) * synth_size]",
+"destination_form": "object_extent_unknown",
+"function": "ixheaacd_real_synth_filt",
+"line": 92,
+"reason_code": "required_evidence_absent",
+"sid": "09ff54824cf57d43"
+},
+"09ff54824cf57d43|ixheaacd_real_synth_filt|&g[(2 * i + 1) * synth_size]|94": {
+"analysis_status": "abstained",
+"dest": "&g[(2 * i + 1) * synth_size]",
+"destination_form": "object_extent_unknown",
+"function": "ixheaacd_real_synth_filt",
+"line": 94,
+"reason_code": "required_evidence_absent",
+"sid": "09ff54824cf57d43"
+},
+"129071d685a10180|mwifiex_cmd_append_vsie_tlv|vs_param_set->ie|27": {
+"analysis_status": "abstained",
+"dest": "vs_param_set->ie",
+"destination_form": "member_extent_unknown",
+"function": "mwifiex_cmd_append_vsie_tlv",
+"line": 27,
+"reason_code": "required_evidence_absent",
+"sid": "129071d685a10180"
+},
+"1a58eb99070d0fbe|nxp_fspi_fill_txfifo|&data|38": {
+"analysis_status": "abstained",
+"dest": "&data",
+"destination_form": "object_extent_unknown",
+"function": "nxp_fspi_fill_txfifo",
+"line": 38,
+"reason_code": "required_evidence_absent",
+"sid": "1a58eb99070d0fbe"
+},
+"2a3f9d9306ec06f8|APar_ExtractDetails|track_info.track_hdlr_name|51": {
+"analysis_status": "abstained",
+"dest": "track_info.track_hdlr_name",
+"destination_form": "member_extent_unknown",
+"function": "APar_ExtractDetails",
+"line": 51,
+"reason_code": "required_evidence_absent",
+"sid": "2a3f9d9306ec06f8"
+},
+"2f34cb9b65fc505a|hidp_process_report|session->input_buf|7": {
+"analysis_status": "abstained",
+"dest": "session->input_buf",
+"destination_form": "member_extent_unknown",
+"function": "hidp_process_report",
+"line": 7,
+"reason_code": "required_evidence_absent",
+"sid": "2f34cb9b65fc505a"
+},
+"41e95a2a43a9ee1c|impeg2d_dec_hdr|ps_dec->pu1_input_buffer|16": {
+"analysis_status": "abstained",
+"dest": "ps_dec->pu1_input_buffer",
+"destination_form": "member_extent_unknown",
+"function": "impeg2d_dec_hdr",
+"line": 16,
+"reason_code": "required_evidence_absent",
+"sid": "41e95a2a43a9ee1c"
+},
+"51feb17b31c79d77|LiStartConnection|&AudioCallbacks|14": {
+"analysis_status": "abstained",
+"dest": "&AudioCallbacks",
+"destination_form": "object_extent_unknown",
+"function": "LiStartConnection",
+"line": 14,
+"reason_code": "required_evidence_absent",
+"sid": "51feb17b31c79d77"
+},
+"51feb17b31c79d77|LiStartConnection|&ListenerCallbacks|19": {
+"analysis_status": "abstained",
+"dest": "&ListenerCallbacks",
+"destination_form": "object_extent_unknown",
+"function": "LiStartConnection",
+"line": 19,
+"reason_code": "required_evidence_absent",
+"sid": "51feb17b31c79d77"
+},
+"51feb17b31c79d77|LiStartConnection|&StreamConfig|8": {
+"analysis_status": "abstained",
+"dest": "&StreamConfig",
+"destination_form": "object_extent_unknown",
+"function": "LiStartConnection",
+"line": 8,
+"reason_code": "required_evidence_absent",
+"sid": "51feb17b31c79d77"
+},
+"51feb17b31c79d77|LiStartConnection|&VideoCallbacks|13": {
+"analysis_status": "abstained",
+"dest": "&VideoCallbacks",
+"destination_form": "object_extent_unknown",
+"function": "LiStartConnection",
+"line": 13,
+"reason_code": "required_evidence_absent",
+"sid": "51feb17b31c79d77"
+},
+"5a77e59d83eb5f90|pcmreframe_process|ctx->out_data + ctx->nb_bytes_in_frame|139": {
+"analysis_status": "abstained",
+"dest": "ctx->out_data + ctx->nb_bytes_in_frame",
+"destination_form": "unsupported_expression",
+"function": "pcmreframe_process",
+"line": 139,
+"reason_code": "destination_identity_ambiguous",
+"sid": "5a77e59d83eb5f90"
+},
+"5a77e59d83eb5f90|pcmreframe_process|ctx->out_data + ctx->nb_bytes_in_frame|144": {
+"analysis_status": "abstained",
+"dest": "ctx->out_data + ctx->nb_bytes_in_frame",
+"destination_form": "unsupported_expression",
+"function": "pcmreframe_process",
+"line": 144,
+"reason_code": "destination_identity_ambiguous",
+"sid": "5a77e59d83eb5f90"
+},
+"5a77e59d83eb5f90|pcmreframe_process|ctx->probe_data + ctx->probe_data_size|36": {
+"analysis_status": "abstained",
+"dest": "ctx->probe_data + ctx->probe_data_size",
+"destination_form": "unsupported_expression",
+"function": "pcmreframe_process",
+"line": 36,
+"reason_code": "destination_identity_ambiguous",
+"sid": "5a77e59d83eb5f90"
+},
+"5a77e59d83eb5f90|pcmreframe_process|ctx->probe_data|92": {
+"analysis_status": "abstained",
+"dest": "ctx->probe_data",
+"destination_form": "member_extent_unknown",
+"function": "pcmreframe_process",
+"line": 92,
+"reason_code": "required_evidence_absent",
+"sid": "5a77e59d83eb5f90"
+},
+"5d8ff0383f5a9977|l2cap_parse_conf_req|&rfc|36": {
+"analysis_status": "abstained",
+"dest": "&rfc",
+"destination_form": "object_extent_unknown",
+"function": "l2cap_parse_conf_req",
+"line": 36,
+"reason_code": "required_evidence_absent",
+"sid": "5d8ff0383f5a9977"
+},
+"621b768abaee7e29|bpf_patch_insn_single|prog->insnsi + off|9": {
+"analysis_status": "abstained",
+"dest": "prog->insnsi + off",
+"destination_form": "unsupported_expression",
+"function": "bpf_patch_insn_single",
+"line": 9,
+"reason_code": "destination_identity_ambiguous",
+"sid": "621b768abaee7e29"
+},
+"621b768abaee7e29|bpf_patch_insn_single|prog_adj->insnsi + off + len|36": {
+"analysis_status": "abstained",
+"dest": "prog_adj->insnsi + off + len",
+"destination_form": "unsupported_expression",
+"function": "bpf_patch_insn_single",
+"line": 36,
+"reason_code": "destination_identity_ambiguous",
+"sid": "621b768abaee7e29"
+},
+"621b768abaee7e29|bpf_patch_insn_single|prog_adj->insnsi + off|38": {
+"analysis_status": "abstained",
+"dest": "prog_adj->insnsi + off",
+"destination_form": "unsupported_expression",
+"function": "bpf_patch_insn_single",
+"line": 38,
+"reason_code": "destination_identity_ambiguous",
+"sid": "621b768abaee7e29"
+},
+"6a216ff1def8a374|proxy_process_command|c->resp->wbuf|114": {
+"analysis_status": "abstained",
+"dest": "c->resp->wbuf",
+"destination_form": "unresolved_member_base",
+"function": "proxy_process_command",
+"line": 114,
+"reason_code": "destination_identity_ambiguous",
+"sid": "6a216ff1def8a374"
+},
+"6f2e1b531485e3f8|set_ntacl_dacl|(char *)pndace + size|17": {
+"analysis_status": "abstained",
+"dest": "(char *)pndace + size",
+"destination_form": "pointer_object",
+"function": "set_ntacl_dacl",
+"line": 17,
+"reason_code": "required_evidence_absent",
+"sid": "6f2e1b531485e3f8"
+},
+"703f8628fb121021|send_control_msg|elem.in_sg[0].iov_base|14": {
+"analysis_status": "abstained",
+"dest": "elem.in_sg[0].iov_base",
+"destination_form": "unresolved_member_base",
+"function": "send_control_msg",
+"line": 14,
+"reason_code": "destination_identity_ambiguous",
+"sid": "703f8628fb121021"
+},
+"73176817cbb67034|performRtspHandshake|AudioPingPayload.payload|241": {
+"analysis_status": "abstained",
+"dest": "AudioPingPayload.payload",
+"destination_form": "member_extent_unknown",
+"function": "performRtspHandshake",
+"line": 241,
+"reason_code": "required_evidence_absent",
+"sid": "73176817cbb67034"
+},
+"73176817cbb67034|performRtspHandshake|VideoPingPayload.payload|298": {
+"analysis_status": "abstained",
+"dest": "VideoPingPayload.payload",
+"destination_form": "member_extent_unknown",
+"function": "performRtspHandshake",
+"line": 298,
+"reason_code": "required_evidence_absent",
+"sid": "73176817cbb67034"
+},
+"9296ea74224f9661|_dns_encode_HTTPS|context->ptr|54": {
+"analysis_status": "abstained",
+"dest": "context->ptr",
+"destination_form": "member_extent_unknown",
+"function": "_dns_encode_HTTPS",
+"line": 54,
+"reason_code": "required_evidence_absent",
+"sid": "9296ea74224f9661"
+},
+"93dc5f6e3120481d|pkey_GOST_ECcp_decrypt|wrappedKey + 40|56": {
+"analysis_status": "rerouted",
+"dest": "wrappedKey + 40",
+"destination_form": "fixed_array_object_offset_resolved",
+"function": "pkey_GOST_ECcp_decrypt",
+"line": 56,
+"reason_code": "delegated_to_stack_capacity_v2",
+"sid": "93dc5f6e3120481d"
+},
+"93dc5f6e3120481d|pkey_GOST_ECcp_decrypt|wrappedKey + 8|54": {
+"analysis_status": "rerouted",
+"dest": "wrappedKey + 8",
+"destination_form": "fixed_array_object_offset_resolved",
+"function": "pkey_GOST_ECcp_decrypt",
+"line": 54,
+"reason_code": "delegated_to_stack_capacity_v2",
+"sid": "93dc5f6e3120481d"
+},
+"95597013e5ec6d04|mwifiex_set_wmm_params|&bss_cfg->wmm_info.oui|22": {
+"analysis_status": "abstained",
+"dest": "&bss_cfg->wmm_info.oui",
+"destination_form": "unresolved_member_base",
+"function": "mwifiex_set_wmm_params",
+"line": 22,
+"reason_code": "destination_identity_ambiguous",
+"sid": "95597013e5ec6d04"
+},
+"95597013e5ec6d04|mwifiex_set_wmm_params|&bss_cfg->wmm_info|17": {
+"analysis_status": "abstained",
+"dest": "&bss_cfg->wmm_info",
+"destination_form": "member_extent_unknown",
+"function": "mwifiex_set_wmm_params",
+"line": 17,
+"reason_code": "required_evidence_absent",
+"sid": "95597013e5ec6d04"
+},
+"9ed8802f8a463311|mwifiex_update_vs_ie|ie->ie_buffer + le16_to_cpu(ie->ie_length)|23": {
+"analysis_status": "abstained",
+"dest": "ie->ie_buffer + le16_to_cpu(ie->ie_length)",
+"destination_form": "unsupported_expression",
+"function": "mwifiex_update_vs_ie",
+"line": 23,
+"reason_code": "destination_identity_ambiguous",
+"sid": "9ed8802f8a463311"
+},
+"a50b140716358d8a|hybiReadAndDecode|wsctx->carryBuf|91": {
+"analysis_status": "abstained",
+"dest": "wsctx->carryBuf",
+"destination_form": "member_extent_unknown",
+"function": "hybiReadAndDecode",
+"line": 91,
+"reason_code": "required_evidence_absent",
+"sid": "a50b140716358d8a"
+},
+"a50b140716358d8a|hybiReadAndDecode|wsctx->writePos|13": {
+"analysis_status": "abstained",
+"dest": "wsctx->writePos",
+"destination_form": "member_extent_unknown",
+"function": "hybiReadAndDecode",
+"line": 13,
+"reason_code": "required_evidence_absent",
+"sid": "a50b140716358d8a"
+},
+"a670d1e912dbce00|amqp_handle_input|state->inbound_buffer.bytes|74": {
+"analysis_status": "abstained",
+"dest": "state->inbound_buffer.bytes",
+"destination_form": "unresolved_member_base",
+"function": "amqp_handle_input",
+"line": 74,
+"reason_code": "destination_identity_ambiguous",
+"sid": "a670d1e912dbce00"
+},
+"a933bb039496ec64|ext4_xattr_set_entry|(void *)here + size|169": {
+"analysis_status": "abstained",
+"dest": "(void *)here + size",
+"destination_form": "pointer_object",
+"function": "ext4_xattr_set_entry",
+"line": 169,
+"reason_code": "required_evidence_absent",
+"sid": "a933bb039496ec64"
+},
+"a933bb039496ec64|ext4_xattr_set_entry|first_val + old_size|140": {
+"analysis_status": "abstained",
+"dest": "first_val + old_size",
+"destination_form": "pointer_object",
+"function": "ext4_xattr_set_entry",
+"line": 140,
+"reason_code": "required_evidence_absent",
+"sid": "a933bb039496ec64"
+},
+"a933bb039496ec64|ext4_xattr_set_entry|here->e_name|173": {
+"analysis_status": "abstained",
+"dest": "here->e_name",
+"destination_form": "member_extent_unknown",
+"function": "ext4_xattr_set_entry",
+"line": 173,
+"reason_code": "required_evidence_absent",
+"sid": "a933bb039496ec64"
+},
+"b99f672ddb919fb7|ParseRiffHeaderConfig|&riff_chunk_header|20": {
+"analysis_status": "abstained",
+"dest": "&riff_chunk_header",
+"destination_form": "object_extent_unknown",
+"function": "ParseRiffHeaderConfig",
+"line": 20,
+"reason_code": "required_evidence_absent",
+"sid": "b99f672ddb919fb7"
+},
+"bedac77933b12b54|spl_load_fit_image|(void *)load_addr|95": {
+"analysis_status": "abstained",
+"dest": "(void *)load_addr",
+"destination_form": "object_extent_unknown",
+"function": "spl_load_fit_image",
+"line": 95,
+"reason_code": "required_evidence_absent",
+"sid": "bedac77933b12b54"
+},
+"bf38f9cebd4ff212|mwifiex_set_wmm_params|&bss_cfg->wmm_info.oui|22": {
+"analysis_status": "abstained",
+"dest": "&bss_cfg->wmm_info.oui",
+"destination_form": "unresolved_member_base",
+"function": "mwifiex_set_wmm_params",
+"line": 22,
+"reason_code": "destination_identity_ambiguous",
+"sid": "bf38f9cebd4ff212"
+},
+"bf38f9cebd4ff212|mwifiex_set_wmm_params|&bss_cfg->wmm_info|17": {
+"analysis_status": "abstained",
+"dest": "&bss_cfg->wmm_info",
+"destination_form": "member_extent_unknown",
+"function": "mwifiex_set_wmm_params",
+"line": 17,
+"reason_code": "required_evidence_absent",
+"sid": "bf38f9cebd4ff212"
+},
+"dcf8f14333c5aff7|jsi_evalcode_sub|str+l2|368": {
+"analysis_status": "abstained",
+"dest": "str+l2",
+"destination_form": "pointer_object",
+"function": "jsi_evalcode_sub",
+"line": 368,
+"reason_code": "required_evidence_absent",
+"sid": "dcf8f14333c5aff7"
+},
+"df45144e79115079|mwifiex_update_vs_ie|ie->ie_buffer + le16_to_cpu(ie->ie_length)|23": {
+"analysis_status": "abstained",
+"dest": "ie->ie_buffer + le16_to_cpu(ie->ie_length)",
+"destination_form": "unsupported_expression",
+"function": "mwifiex_update_vs_ie",
+"line": 23,
+"reason_code": "destination_identity_ambiguous",
+"sid": "df45144e79115079"
+},
+"fa783187b0535882|trustedGenerateSEK|<unknown> AES_key|14": {
+"analysis_status": "abstained",
+"dest": "<unknown> AES_key",
+"destination_form": "object_extent_unknown",
+"function": "trustedGenerateSEK",
+"line": 14,
+"reason_code": "required_evidence_absent",
+"sid": "fa783187b0535882"
+}
+}

@@ -1,28 +1,46 @@
 #!/usr/bin/env python3
-"""Capability 1 (v2): consume normalized stack fixed-array capacity.
+"""Capability 1 (v2): consume normalized stack fixed-array capacity, AND adjudicate
+V1's `delegated_to_stack_capacity_v2` handoffs for non-bare (struct-member array,
+address-of-scalar, array+offset) destinations.
 
-Frozen v1 is NOT modified. This v2 producer runs v1's analysis and, ONLY for
-operations v1 abstained on with `required_evidence_absent`, tries to bind a
-`stack_fixed_array` extent to the sink and re-classify. Boundaries (all enforced):
+Frozen v1 is NOT modified. This v2 producer runs v1's analysis and refines two
+distinct populations, through the SAME arithmetic (`compare()` -- one unit-aware
+implementation, never a second copy):
 
-  * new extent provenance `stack_fixed_array`, keyed by (function id, DECLARATION
-    NODE id) -- never (function, variable name);
-  * the sink destination reference must resolve UNIQUELY to that declaration
-    (dest arg `value_ref.kind == LOCAL` whose id is a single fixed-array local);
-  * accept only fixed, COMPILE-TIME array capacities `T[N]` with literal N;
-  * exclude VLAs (non-literal N), multidimensional arrays, member accesses,
-    aliases, casts, pointer params, and unresolved/offset destinations (their
-    dest arg resolves to CALL/PARAM/ANY, not a LOCAL array decl);
+  1. Bare destinations V1 abstained on with `required_evidence_absent`: bind a
+     `stack_fixed_array` extent to the sink (dest arg `value_ref.kind == LOCAL`)
+     and re-classify.
+  2. Non-bare destinations V1 rerouted with `delegated_to_stack_capacity_v2`: V1
+     already CPG-resolved the destination's structure (element type, element
+     count, offset, raw width expression) via reference-target resolution; V2
+     does not re-walk the CPG, it only runs the resolved structure through
+     `compare()`. V1 NEVER computes or finalizes this comparison itself -- see
+     `oob_runtime_capacity_verdict.diagnose_nonbare_destination`.
+
+Boundaries (all enforced, both populations):
+
+  * new extent provenance `stack_fixed_array` / `stack_or_scalar_object`, keyed
+    by CPG declaration identity (bare: DECLARATION NODE id; non-bare: V1's own
+    reference-target resolution) -- never by variable name;
+  * accept only fixed, COMPILE-TIME sizes: `T[N]` with literal N, or a modeled
+    scalar (element_count=1); exclude VLAs, multidimensional arrays, pointer
+    params/members, and unresolved destinations;
   * preserve element type; element counts are compared as counts, never
-    conflated with byte counts;
-  * stack extents NEVER override or merge with heap extents -- v2 only touches
-    ops that had NO heap extent (v1 abstained);
-  * symbolic write length -> relationship_unresolved (never guessed safe);
-  * deterministic_complete requires the full type-matched, offset-0 comparison
-    k <= N; a literal k > N is a distinguished `proven_oversized` finding, never
-    called safe.
+    conflated with byte counts (`compare()`'s BYTE_TYPES / k_sizeof handling is
+    the ONLY place a byte-vs-element or sizeof(T) relationship is decided --
+    never assumed elsewhere, never an ABI byte count for `&scalar`);
+  * a symbolic or negative offset (non-bare) or symbolic write length (either
+    population) -> relationship_unresolved / identity_ambiguous, never guessed
+    safe or clamped to 0;
+  * stack/object extents NEVER override or merge with heap extents -- v2 only
+    touches ops V1 itself abstained/rerouted on for a non-heap reason;
+  * deterministic_complete requires the full type-matched comparison k <= N at
+    the resolved offset; a literal k > N (or an offset itself past the object)
+    is a distinguished `proven_oversized` finding, never called safe.
 
-Heap-allocation behavior is unchanged (those records pass through untouched).
+Heap-allocation behavior and every other V1 reason (identity-ambiguous,
+unknown-allocator-contract, free-dominates-sink, ...) are unchanged (those
+records pass through untouched).
 """
 import importlib.util
 import json
@@ -35,6 +53,7 @@ TOOLS = os.path.abspath(os.path.join(
     HERE, "..", "..", "tchecker-research-complete",
     "portable-engine-full-review-package", "tools"))
 sys.path.insert(0, TOOLS)
+import analysis_record as AR   # single source of truth for reason->route/bucket/llm_eligible
 
 BYTE_TYPES = {"char", "unsigned char", "signed char", "uint8_t", "int8_t",
               "PRUint8", "PRInt8", "JOCTET", "CK_BYTE"}
@@ -188,6 +207,143 @@ def _recognized_calls(d):
     return idx
 
 
+def _finalize_disposition(r2, disp, route, prop):
+    """Map a compare() disposition to the final output fields. The ONE place that
+    decides what deterministic_complete / relationship_unresolved / proven_oversized
+    MEAN in terms of analysis_status/reason_code -- shared by the bare-destination
+    stack-array path and the delegated (non-bare) stack/object path, so the two
+    populations can never drift into inconsistent output shapes for the same
+    disposition.
+
+    `recommended_route`/`llm_eligible` are derived from `analysis_record`'s
+    REGISTERED route for the chosen reason_code -- the schema's own source of
+    truth -- NOT copied verbatim from compare()'s returned `route`. compare()
+    can return a finer-grained route for a specific sub-shape (e.g.
+    "range_arithmetic_review" for a literal-byte-count-vs-non-byte-element
+    mismatch) than the single reason_code this function collapses everything
+    into actually has registered ("semantic_relationship_review" for
+    capacity_relation_not_established) -- copying it verbatim produced records
+    that failed `analysis_record.validate_record()` (caught by
+    dev_controls/emitgap/test.py's schema check, pre-existing in the frozen V2
+    code, not introduced by the delegation change). compare()'s own route/note
+    is preserved in `_v2_evidence` for diagnostic purposes -- never lost, just
+    not exposed via the schema-controlled field when it would violate the
+    schema's own invariant."""
+    r2.pop("candidate_class", None)   # only meaningful on the pre-adjudication rerouted record
+    if disp == "deterministic_complete":
+        for k in ("reason_code", "primary_reason_code", "all_reason_codes", "uncertainty_bucket",
+                  "recommended_route", "unresolved_property", "llm_eligible"):
+            r2.pop(k, None)
+        # deterministic ONLY for the destination-capacity property; NOT a claim
+        # that the memcpy/operation is safe (source length, pointer validity,
+        # lifetime are separate, unaddressed properties).
+        r2["analysis_status"] = "deterministic_complete"
+        r2["capacity_basis"] = "stack_fixed_array"
+        r2["establishment_status"] = "ESTABLISHED"
+        r2["established_property"] = "write_length_within_destination_capacity"
+        r2["unaddressed_properties"] = ["source_length_sufficiency", "pointer_validity", "lifetime"]
+    elif disp == "relationship_unresolved":
+        rc = "capacity_relation_not_established"
+        r2["analysis_status"] = "open_candidate"
+        r2["reason_code"] = r2["primary_reason_code"] = rc
+        r2["all_reason_codes"] = [rc]
+        r2["uncertainty_bucket"] = AR.bucket_for_reason(rc)
+        r2["recommended_route"] = AR.route_for_reason(rc)
+        r2["unresolved_property"] = prop
+        r2["llm_eligible"] = AR.llm_eligible_for_reason(rc)
+    elif disp == "proven_oversized":
+        rc = "write_exceeds_stack_capacity"
+        r2["analysis_status"] = "open_candidate"
+        r2["reason_code"] = r2["primary_reason_code"] = rc
+        r2["all_reason_codes"] = [rc]
+        r2["uncertainty_bucket"] = AR.bucket_for_reason(rc)
+        r2["recommended_route"] = AR.route_for_reason(rc)
+        r2["llm_eligible"] = AR.llm_eligible_for_reason(rc)
+        r2["proven_oversized"] = True
+    r2["_v2_disposition"] = disp
+    r2["_v2_route"] = route   # compare()'s own raw route, diagnostic only (see docstring)
+    return r2
+
+
+def _adjudicate_delegated(r):
+    """Finalize a V1 `delegated_to_stack_capacity_v2` handoff -- a non-bare
+    destination (struct-member array, address-of-scalar, or array+offset) whose
+    CPG structure V1 already resolved but never adjudicated. The ONLY arithmetic
+    here is `compare()`, the SAME function the bare-destination path uses: one
+    unit-aware implementation for both, never a second, independently-maintained
+    copy (the drift risk the delegation itself exists to avoid).
+
+    A symbolic or non-numeric offset means pointer validity into the object is
+    unresolved -- abstain, exactly like the bare-destination path abstains on a
+    symbolic width, and exactly like cap_addr_indexed.py abstains on a symbolic
+    `&(base[index])` offset rather than guessing. A negative offset means the
+    pointer is before the object (never treat capacity+|offset| as available,
+    same posture as cap_addr_indexed.py's own negative-offset abstention). An
+    offset at or past the object's own extent is a distinguished proven-oversized
+    finding -- the destination pointer itself is out of bounds, before the write
+    width is even considered.
+
+    V2 is CANONICAL in the returned record; V1's original rerouted handoff is
+    preserved unconditionally as `v1_provenance` (never overwritten by any branch
+    below), so a consumer can always recover exactly what V1 discovered
+    independent of what V2 concluded from it -- the same canonical-record /
+    preserved-provenance shape the confirmatory branch's own V1->V2 correction
+    already established for the bare-destination case (evutil_aggregation_audit)."""
+    facts = (r.get("established_facts") or [{}])[0]
+    elem_type = facts.get("element_type")
+    elem_count = facts.get("element_count")
+    off = facts.get("offset_elements")
+    width = facts.get("width_expr")
+    r2 = dict(r)
+    r2["v1_provenance"] = {"status": "rerouted", "reason": "delegated_to_stack_capacity_v2",
+                           "established_facts": facts, "destination_form": r.get("destination_form")}
+    r2["_v2_evidence"] = {"provenance": "stack_or_scalar_object", "element_type": elem_type,
+                          "element_count": elem_count, "offset_elements": off, "width": width}
+
+    if not isinstance(elem_count, int) or off == "sym" or not isinstance(off, int):
+        # Symbolic offset: pointer validity into the object is unresolved, exactly
+        # the same "relationship_unresolved" disposition compare() itself returns
+        # for a symbolic WIDTH -- route through the SAME finalizer so the two
+        # symbolic cases (offset vs. width) land on the identical, consistent
+        # output shape (open_candidate, never abstained -- relationship_unresolved
+        # is a candidate-review bucket everywhere else in this module).
+        return _finalize_disposition(r2, "relationship_unresolved",
+                                     "semantic_relationship_review",
+                                     "write_length_within_capacity")
+
+    if off < 0:
+        rc = "destination_identity_ambiguous"
+        r2.pop("candidate_class", None)
+        r2["analysis_status"] = "abstained"
+        r2.update(reason_code=rc, primary_reason_code=rc, all_reason_codes=[rc],
+                  uncertainty_bucket=AR.bucket_for_reason(rc),
+                  recommended_route=AR.route_for_reason(rc),
+                  unresolved_property="destination_object_identity",
+                  llm_eligible=AR.llm_eligible_for_reason(rc))
+        r2["_v2_disposition"] = "identity_ambiguous"
+        r2["_v2_route"] = AR.route_for_reason(rc)
+        return r2
+
+    remaining = elem_count - off
+    if remaining < 0:
+        rc = "write_exceeds_stack_capacity"
+        r2.pop("candidate_class", None)
+        r2["analysis_status"] = "open_candidate"
+        r2.update(reason_code=rc, primary_reason_code=rc, all_reason_codes=[rc],
+                  uncertainty_bucket=AR.bucket_for_reason(rc),
+                  recommended_route=AR.route_for_reason(rc),
+                  llm_eligible=AR.llm_eligible_for_reason(rc), proven_oversized=True)
+        r2["_v2_disposition"] = "proven_oversized"
+        r2["_v2_route"] = AR.route_for_reason(rc)
+        return r2
+
+    disp, route, prop, note = compare({"element_count": remaining, "element_type": elem_type}, width)
+    r2["_v2_evidence"]["remaining_capacity"] = remaining
+    r2["_v2_evidence"]["established_property"] = prop
+    r2["_v2_evidence"]["note"] = note
+    return _finalize_disposition(r2, disp, route, prop)
+
+
 def analyze_operations_v2(prefix):
     _v1, out, transitions = _analyze_both(prefix)
     return out, transitions
@@ -213,8 +369,20 @@ def _analyze_both(prefix):
     out, transitions = [], []
     for r in v1_records:
         reason = r.get("primary_reason_code") or r.get("reason_code")
-        if not (r.get("analysis_status") == "abstained" and reason == "required_evidence_absent"):
-            out.append(r)   # heap / other -> unchanged
+        status = r.get("analysis_status")
+
+        if status == "rerouted" and reason == "delegated_to_stack_capacity_v2":
+            before = {"status": status, "reason": reason, "route": r.get("recommended_route")}
+            r2 = _adjudicate_delegated(r)
+            transitions.append({"function": r.get("function"), "line": r.get("line"), "dest": r.get("dest"),
+                                "source": r.get("_source_label"), "from": before,
+                                "to_status": r2["analysis_status"], "disposition": r2["_v2_disposition"],
+                                "route": r2["_v2_route"], "evidence": r2["_v2_evidence"]})
+            out.append(r2)
+            continue
+
+        if not (status == "abstained" and reason == "required_evidence_absent"):
+            out.append(r)   # heap / other / any other V1 reason -> unchanged
             continue
         # locate the call for this op and resolve the sink to a declaration node
         call = None
@@ -233,43 +401,13 @@ def _analyze_both(prefix):
             out.append(r)
             continue
         disp, route, prop, note = compare(ext, width)
-        before = {"status": r["analysis_status"], "reason": reason,
-                  "route": r.get("recommended_route")}
+        before = {"status": status, "reason": reason, "route": r.get("recommended_route")}
         r2 = dict(r)
         r2["_v2_evidence"] = {"provenance": "stack_fixed_array", "decl_node": ext["decl_node"],
                               "element_type": ext["element_type"], "element_count": ext["element_count"],
                               "capacity_expr": ext["capacity_expr"], "width": width,
                               "established_property": prop, "note": note}
-        if disp == "deterministic_complete":
-            for k in ("reason_code", "primary_reason_code", "all_reason_codes", "uncertainty_bucket",
-                      "recommended_route", "unresolved_property", "llm_eligible"):
-                r2.pop(k, None)
-            # deterministic ONLY for the destination-capacity property; NOT a claim
-            # that the memcpy/operation is safe (source length, pointer validity,
-            # lifetime are separate, unaddressed properties).
-            r2["analysis_status"] = "deterministic_complete"
-            r2["capacity_basis"] = "stack_fixed_array"
-            r2["establishment_status"] = "ESTABLISHED"
-            r2["established_property"] = "write_length_within_destination_capacity"
-            r2["unaddressed_properties"] = ["source_length_sufficiency", "pointer_validity", "lifetime"]
-        elif disp == "relationship_unresolved":
-            r2["analysis_status"] = "open_candidate"
-            r2["reason_code"] = r2["primary_reason_code"] = "capacity_relation_not_established"
-            r2["all_reason_codes"] = ["capacity_relation_not_established"]
-            r2["uncertainty_bucket"] = "relationship_unresolved"
-            r2["recommended_route"] = route
-            r2["unresolved_property"] = prop
-            r2["llm_eligible"] = (route == "semantic_relationship_review")
-        elif disp == "proven_oversized":
-            r2["analysis_status"] = "open_candidate"
-            r2["reason_code"] = r2["primary_reason_code"] = "write_exceeds_stack_capacity"
-            r2["all_reason_codes"] = ["write_exceeds_stack_capacity"]
-            r2["uncertainty_bucket"] = "relationship_unresolved"
-            r2["recommended_route"] = route
-            r2["llm_eligible"] = False
-            r2["proven_oversized"] = True
-        r2["_v2_disposition"] = disp
-        r2["_v2_route"] = route
+        _finalize_disposition(r2, disp, route, prop)
         transitions.append({"function": r.get("function"), "line": r.get("line"), "dest": r.get("dest"),
                             "source": r.get("_source_label"), "from": before, "to_status": r2["analysis_status"],
                             "disposition": disp, "route": route, "established_property": prop,

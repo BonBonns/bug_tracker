@@ -59,17 +59,30 @@ def main():
             ev = r2.get("_v2_evidence")
             disp = r2.get("_v2_disposition")
             by_disp[disp] += 1
-            # (a) only justified by stack evidence
-            if not ev or ev.get("provenance") != "stack_fixed_array":
+            # (a) only justified by stack/object evidence -- TWO justified provenances now:
+            # "stack_fixed_array" (bare destination, the original path) and
+            # "stack_or_scalar_object" (V1's delegated_to_stack_capacity_v2 handoff for a
+            # non-bare destination -- struct-member array, &scalar, array+offset -- adjudicated
+            # by _adjudicate_delegated via the SAME compare()). Neither is heap evidence.
+            if not ev or ev.get("provenance") not in ("stack_fixed_array", "stack_or_scalar_object"):
                 unjustified.append((label, r2.get("function"), r2.get("line")))
             # (b) no unsupported promotion
             if r2.get("analysis_status") == "deterministic_complete":
                 note = (ev or {}).get("note", "")
                 if not ("<=" in note and ("type-matched" in note or "byte array" in note)):
                     unsupported.append((label, r2.get("function"), r2.get("line"), note))
-            # (c) heap/other must not change: v1 abstained+required_evidence_absent is the only mover
-            if not (r1.get("analysis_status") == "abstained"
-                    and (r1.get("primary_reason_code") or r1.get("reason_code")) == "required_evidence_absent"):
+            # (c) heap/other must not change: the only legitimate movers are
+            # v1 abstained+required_evidence_absent (bare destination, original path) and
+            # v1 rerouted+delegated_to_stack_capacity_v2 (non-bare destination, delegation path).
+            # Anything else changing between V1-raw and V2-final IS a heap/other-domain leak.
+            r1_moved = (
+                (r1.get("analysis_status") == "abstained"
+                 and (r1.get("primary_reason_code") or r1.get("reason_code")) == "required_evidence_absent")
+                or
+                (r1.get("analysis_status") == "rerouted"
+                 and (r1.get("primary_reason_code") or r1.get("reason_code")) == "delegated_to_stack_capacity_v2")
+            )
+            if not r1_moved:
                 heap_touched.append((label, r2.get("function"), r2.get("line")))
         for t in trans:
             t["source"] = label

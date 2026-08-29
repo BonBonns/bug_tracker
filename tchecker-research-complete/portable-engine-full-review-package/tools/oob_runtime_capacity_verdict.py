@@ -348,15 +348,18 @@ def _record_id(fn, dest, line):
 # declaration node; a fixed extent means that declaration's type is a
 # compile-time-sized array or a scalar whose byte size is modeled here.
 #
-# The frozen V1/V2 boundary is preserved: this V1 producer NEVER promotes a
-# non-heap destination to a safe verdict (`deterministic_complete`). A fixed
-# extent whose write provably fits is UNDER-CLAIMED (abstained, not promoted); a
-# fixed extent whose write provably exceeds is surfaced as an `open_candidate`
-# (flag-never-assume-safe), with the computed comparison attached so the
-# stack-capacity owner / adjudicator finalizes. No stack/scalar capacity SOURCE is
-# introduced into V1's candidate/guard logic -- the comparison lives only in this
-# diagnosis layer and is pure literal arithmetic over a CPG-resolved fixed size
-# (the same class of sound reasoning as the existing `len<=N` literal check).
+# The frozen V1/V2 boundary is preserved, and made explicit: this V1 producer
+# NEVER computes or finalizes a capacity comparison for a non-heap destination --
+# it has no capacity SOURCE for stack/scalar objects, and a second,
+# independently-maintained copy of V2's unit-aware arithmetic (element vs. byte
+# units, sizeof(T) relationships -- see oob_runtime_capacity_v2.compare()) would
+# be a drift risk, not a soundness improvement. A CPG-resolved FIXED extent
+# (array or scalar) is reported as a REROUTED HANDOFF (`delegated_to_stack_capacity_v2`,
+# the same shape as the existing `free_dominates_sink` handoff to the lifetime
+# layer) carrying the resolved structure (element type, element count, offset,
+# raw width expression); V2's stack-capacity integration is the SOLE owner of the
+# fits/exceeds adjudication, one arithmetic implementation for both bare and
+# non-bare destinations.
 
 OP_ADDR = '<operator>.addressOf'
 OP_CAST = '<operator>.cast'
@@ -383,17 +386,23 @@ _TYPE_BYTES = {
 
 
 def _array_extent(type_full_name):
-    """(elem_bytes, count) for a fixed `T[N]` type whose element size is modeled,
-    else None. Fails closed on unknown element sizes."""
+    """(element_type_name, count) for a fixed `T[N]` type whose element size is
+    modeled (whitelisted in _TYPE_BYTES), else None. Fails closed on unknown
+    element types. Returns the TYPE NAME, not a byte width -- this producer does
+    not compute capacity arithmetic (see diagnose_nonbare_destination's `fixed`);
+    the name is passed through to V2's own unit-aware compare()."""
     m = re.fullmatch(r'(.+?)\s*\[(\d+)\]', (type_full_name or '').strip())
     if not m:
         return None
-    es = _TYPE_BYTES.get(m.group(1).strip())
-    return (es, int(m.group(2))) if es is not None else None
+    tname = m.group(1).strip()
+    return (tname, int(m.group(2))) if tname in _TYPE_BYTES else None
 
 
-def _scalar_bytes(type_full_name):
-    return _TYPE_BYTES.get((type_full_name or '').strip())
+def _scalar_type(type_full_name):
+    """The type name itself when it's a modeled fixed-size scalar, else None
+    (fail closed -- same whitelist as _array_extent, no byte width computed)."""
+    t = (type_full_name or '').strip()
+    return t if t in _TYPE_BYTES else None
 
 
 def _is_pointer_type(t):
@@ -526,15 +535,13 @@ def _abstain_fields(reason, base, extra):
 
 def diagnose_nonbare_destination(dest_arg_node, width_code, ix, base):
     """Classify a recognized-but-non-bare memcpy destination by its CPG-resolved
-    form and populate `base` with the correct abstention/candidate record. Returns
+    form and populate `base` with the correct abstention/handoff record. Returns
     `base`. Mapping (see module note):
       * identity unresolvable / side-effecting  -> destination_identity_ambiguous
       * identity known, no fixed extent          -> required_evidence_absent
-      * fixed extent, symbolic offset/width      -> capacity_relation_not_established
-      * fixed extent, literal offset+width, fits -> capacity_relation_not_established
-                                                    (abstained; comparison attached)
-      * fixed extent, literal offset+width, over -> capacity_relation_not_established
-                                                    (open_candidate; comparison attached)
+      * fixed extent (array or scalar), any offset/width, literal or symbolic
+        -> delegated_to_stack_capacity_v2 (rerouted handoff; V1 never computes or
+           finalizes the capacity comparison -- V2 owns that arithmetic)
     """
     w = _walk_dest(dest_arg_node, ix)
     kind = w.get('kind')
@@ -551,39 +558,37 @@ def diagnose_nonbare_destination(dest_arg_node, width_code, ix, base):
         base['missing_requirement'] = 'destination_capacity'
         return _abstain_fields('required_evidence_absent', base, {})
 
-    def fixed(extent, elem, off_elems, form_prefix):
-        """A CPG-resolved fixed-extent object. Compute the remaining-capacity
-        comparison when offset and width are literal; otherwise the relation is
-        unresolved. Never promotes to a safe verdict; a provable overrun becomes an
-        open_candidate."""
-        if off_elems == 'sym':
-            base['analysis_status'] = 'abstained'
-            return _abstain_fields('capacity_relation_not_established', base, {
-                'destination_form': 'fixed_extent_symbolic_relation',
-                'destination_fixed_extent_bytes': extent})
-        byte_off = off_elems * (elem or 1)
-        remaining = extent - byte_off
-        if byte_off < 0 or not re.fullmatch(r'\d+', (width_code or '').strip()):
-            # negative/symbolic offset or symbolic width: relation not established
-            base['analysis_status'] = 'abstained'
-            return _abstain_fields('capacity_relation_not_established', base, {
-                'destination_form': form_prefix + '_symbolic_relation',
-                'destination_fixed_extent_bytes': extent})
-        width = int(width_code)
-        fits = width <= remaining
-        comparison = {'destination_fixed_extent_bytes': extent, 'byte_offset': byte_off,
-                      'write_width_bytes': width, 'remaining_capacity_bytes': remaining,
-                      'write_fits': fits}
-        base['analysis_status'] = 'open_candidate' if not fits else 'abstained'
-        base['destination_form'] = (form_prefix + '_write_exceeds_bounds' if not fits
-                                    else form_prefix + '_write_within_bounds')
-        base['capacity_comparison'] = comparison
-        # `capacity_relation_not_established` names it precisely in BOTH directions:
-        # the SAFE relation (width<=capacity) is either disproven (overrun -> flagged
-        # candidate) or established-but-not-finalized-here (fits -> under-claimed
-        # abstention, preserving the heap-only-finalization boundary).
-        return _abstain_fields('capacity_relation_not_established', base,
-                               {'established_facts': [comparison]})
+    def fixed(element_type, element_count, off_elems, form_prefix):
+        """A CPG-resolved fixed-extent object -- an array (`element_count` from the
+        declared `T[N]`) or a scalar modeled as a single-element array
+        (`element_count=1`, `element_type=<scalar type>`, matching "&scalar capacity
+        is sizeof(type)" rather than an assumed ABI byte count). This V1
+        heap-capacity producer has NO capacity SOURCE for non-heap objects and does
+        NOT compute a capacity comparison here: doing so would duplicate V2's
+        unit-aware arithmetic (element vs. byte units, sizeof(T) relationships) in a
+        second, independently-maintained implementation -- exactly the drift risk a
+        single frozen `compare()` exists to avoid. V1 discovers and reports the
+        CPG-resolved STRUCTURE; it never finalizes a stack/object capacity relation.
+
+        Emitted as a REROUTED handoff (same shape as free_dominates_sink's handoff
+        to the lifetime layer): not a candidate-review bucket, not LLM-eligible (the
+        next step is V2's deterministic arithmetic, not a semantic judgment call),
+        carrying `established_facts` with everything V2 needs to adjudicate without
+        re-walking the CPG."""
+        d0 = REASON_DEFINITIONS['delegated_to_stack_capacity_v2']
+        base['analysis_status'] = 'rerouted'
+        base['destination_form'] = (form_prefix + '_symbolic_offset' if off_elems == 'sym'
+                                    else form_prefix + '_offset_resolved')
+        base.update({'reason_code': 'delegated_to_stack_capacity_v2',
+                     'primary_reason_code': 'delegated_to_stack_capacity_v2',
+                     'all_reason_codes': ['delegated_to_stack_capacity_v2'],
+                     'uncertainty_bucket': None, 'recommended_route': d0['route'],
+                     'candidate_class': d0['candidate_class'], 'llm_eligible': False,
+                     'established_facts': [{'element_type': element_type,
+                                            'element_count': element_count,
+                                            'offset_elements': off_elems,
+                                            'width_expr': width_code}]})
+        return base
 
     if kind == 'sideeffect':
         return ambiguous('side_effecting_expression')
@@ -603,10 +608,10 @@ def diagnose_nonbare_destination(dest_arg_node, width_code, ix, base):
             return evidence_absent('pointer_member')
         arr = _array_extent(mt)
         if arr is not None:
-            return fixed(arr[0] * arr[1], arr[0], 0, 'fixed_array_member')
-        sb = _scalar_bytes(mt)
+            return fixed(arr[0], arr[1], 0, 'fixed_array_member')
+        sb = _scalar_type(mt)
         if sb is not None:
-            return fixed(sb, sb, 0, 'scalar_member')
+            return fixed(sb, 1, 0, 'scalar_member')
         return evidence_absent('member_extent_unknown')
     # ident-based (array / scalar / pointer, with an optional element offset)
     obj = _resolve_object(w.get('base'), ix)
@@ -617,10 +622,10 @@ def diagnose_nonbare_destination(dest_arg_node, width_code, ix, base):
         return evidence_absent('pointer_object')
     arr = _array_extent(t)
     if arr is not None:
-        return fixed(arr[0] * arr[1], arr[0], w.get('off', 0), 'fixed_array_object')
-    sb = _scalar_bytes(t)
+        return fixed(arr[0], arr[1], w.get('off', 0), 'fixed_array_object')
+    sb = _scalar_type(t)
     if sb is not None:
-        return fixed(sb, sb, w.get('off', 0), 'scalar_object')
+        return fixed(sb, 1, w.get('off', 0), 'scalar_object')
     return evidence_absent('object_extent_unknown')
 
 

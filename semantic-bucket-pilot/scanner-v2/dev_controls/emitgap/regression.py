@@ -12,7 +12,15 @@ Soundness invariants asserted here:
   * every previously-dropped non-bare site now emits a record (no silent drop);
   * NONE is promoted to a safe verdict (`deterministic_complete`) -- the heap
     producer never finalizes a non-heap destination as safe;
-  * each record's reason is one of the four form-aware causal codes.
+  * each record's reason is one of the form-aware causal codes -- UPDATED for the
+    V1/V2 delegation split: a fixed-extent destination (array or scalar) now
+    reports `delegated_to_stack_capacity_v2` (a REROUTED handoff) instead of the
+    old, misleading `capacity_relation_not_established` for BOTH the literal-fits
+    and literal-exceeds sub-cases (V1 no longer computes that comparison at all --
+    see oob_runtime_capacity_verdict.diagnose_nonbare_destination). `analysis_status
+    == 'rerouted'` is therefore also an expected, non-drop outcome here, distinct
+    from `deterministic_complete` (still asserted to never occur for a non-bare
+    destination) and from `abstained`/`open_candidate`.
 """
 import glob, json, os, re, sys, importlib.util
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -63,7 +71,7 @@ def nonbare_memcpy_sites(d):
 
 
 REASON_OK = {'destination_identity_ambiguous', 'required_evidence_absent',
-             'capacity_relation_not_established'}
+             'capacity_relation_not_established', 'delegated_to_stack_capacity_v2'}
 
 dropped_old = 0            # non-bare recognized memcpy sites, body-wide (old = drop)
 emitted_new = 0            # now producing a record

@@ -1,0 +1,81 @@
+{
+ "delegated_sites": [
+  {
+   "dest": "wrappedKey + 40",
+   "function": "pkey_GOST_ECcp_decrypt",
+   "line": 56,
+   "sid": "93dc5f6e3120481d",
+   "v1": {
+    "analysis_status": "rerouted",
+    "candidate_class": "stack_object_capacity_pending",
+    "destination_form": "fixed_array_object_offset_resolved",
+    "reason_code": "delegated_to_stack_capacity_v2",
+    "recommended_route": "stack_object_capacity_adjudication"
+   },
+   "v2": {
+    "analysis_status": "deterministic_complete",
+    "disposition": "deterministic_complete",
+    "has_v1_provenance": true,
+    "reason_code": null,
+    "v2_evidence": {
+     "element_count": 44,
+     "element_type": "unsigned char",
+     "established_property": "write_length_within_destination_capacity",
+     "note": "4 bytes <= 4 (byte array), offset 0",
+     "offset_elements": 40,
+     "provenance": "stack_or_scalar_object",
+     "remaining_capacity": 4,
+     "width": "4"
+    }
+   }
+  },
+  {
+   "dest": "wrappedKey + 8",
+   "function": "pkey_GOST_ECcp_decrypt",
+   "line": 54,
+   "sid": "93dc5f6e3120481d",
+   "v1": {
+    "analysis_status": "rerouted",
+    "candidate_class": "stack_object_capacity_pending",
+    "destination_form": "fixed_array_object_offset_resolved",
+    "reason_code": "delegated_to_stack_capacity_v2",
+    "recommended_route": "stack_object_capacity_adjudication"
+   },
+   "v2": {
+    "analysis_status": "deterministic_complete",
+    "disposition": "deterministic_complete",
+    "has_v1_provenance": true,
+    "reason_code": null,
+    "v2_evidence": {
+     "element_count": 44,
+     "element_type": "unsigned char",
+     "established_property": "write_length_within_destination_capacity",
+     "note": "32 bytes <= 36 (byte array), offset 0",
+     "offset_elements": 8,
+     "provenance": "stack_or_scalar_object",
+     "remaining_capacity": 36,
+     "width": "32"
+    }
+   }
+  }
+ ],
+ "nonbare_v1_by_reason": {
+  "delegated_to_stack_capacity_v2": 2,
+  "destination_identity_ambiguous": 13,
+  "required_evidence_absent": 30
+ },
+ "nonbare_v1_by_status": {
+  "abstained": 43,
+  "rerouted": 2
+ },
+ "v1_invalid": [],
+ "v1_provenance_missing": [],
+ "v1_records_total": 64,
+ "v2_disposition_counts": {
+  "deterministic_complete": 2
+ },
+ "v2_invalid": [],
+ "v2_oversized_promotions": 0,
+ "v2_records_total": 64,
+ "v2_safe_promotions": 2
+}

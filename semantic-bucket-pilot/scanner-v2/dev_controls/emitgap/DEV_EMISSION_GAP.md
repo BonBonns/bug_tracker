@@ -25,35 +25,44 @@ text matching a non-bare regex. "Identifiable" means the base identifier's `ref_
 resolves to exactly ONE declaration; a fixed extent means that declaration's type is a
 compile-time-sized array or a modeled scalar. The split:
 
+> **CORRECTED** (see `RECONCILIATION.md`): the table below is the ORIGINAL,
+> internally-contradictory design — a real fits/exceeds comparison, computed for
+> the "fixed extent, literal offset+width" row, was labeled
+> `capacity_relation_not_established` regardless of the outcome, conflating
+> "the relationship IS established, V1 just doesn't finalize it" with "the
+> relationship genuinely could not be determined." Struck through, not silently
+> edited. The CURRENT design: V1 never computes this comparison at all for a
+> fixed extent (any offset/width, literal or symbolic) — it emits a REROUTED
+> handoff, `delegated_to_stack_capacity_v2`, and V2's stack-capacity integration
+> is the sole adjudicator, reusing the exact `compare()` bare destinations
+> already go through.
+
 | CPG-resolved form | `analysis_status` | `reason_code` | bucket |
 |---|---|---|---|
 | base ref unresolved / ambiguous; side-effecting (`p++`); unsupported expr | abstained | `destination_identity_ambiguous` | identity_ambiguous |
 | identity known, pointer object / pointer member / cast-of-pointer / unknown member/object extent | abstained | `required_evidence_absent` | insufficient_evidence |
-| fixed extent, symbolic offset or symbolic width | abstained | `capacity_relation_not_established` | relationship_unresolved |
-| fixed extent, literal offset + literal width, **fits** | abstained | `capacity_relation_not_established` | relationship_unresolved |
-| fixed extent, literal offset + literal width, **exceeds** | open_candidate | `capacity_relation_not_established` | relationship_unresolved |
+| ~~fixed extent, symbolic offset or symbolic width~~ **fixed extent, ANY offset/width** | ~~abstained~~ **rerouted** | ~~`capacity_relation_not_established`~~ **`delegated_to_stack_capacity_v2`** | ~~relationship_unresolved~~ **(none: rerouted, see V2)** |
+| ~~fixed extent, literal offset + literal width, **fits**~~ | ~~abstained~~ | ~~`capacity_relation_not_established`~~ | ~~relationship_unresolved~~ |
+| ~~fixed extent, literal offset + literal width, **exceeds**~~ | ~~open_candidate~~ | ~~`capacity_relation_not_established`~~ | ~~relationship_unresolved~~ |
 
-For a fixed-extent object with literal offset and width, the remaining-capacity comparison is
-**computed and attached** (`capacity_comparison = {destination_fixed_extent_bytes, byte_offset,
-write_width_bytes, remaining_capacity_bytes, write_fits}`), and `established_facts` carries it.
+V1 now attaches `established_facts = [{element_type, element_count, offset_elements,
+width_expr}]` (the CPG-resolved structure) instead of a computed comparison. See
+`oob_runtime_capacity_v2.py`'s `_adjudicate_delegated()` for what V2 does with it —
+`fits → deterministic_complete`, `exceeds → open_candidate/write_exceeds_stack_capacity`,
+symbolic offset or width (or a unit relationship `compare()` won't assume, e.g. a
+raw byte literal against a non-byte-typed element) `→ open_candidate/capacity_relation_not_established`.
 
-### Scope / soundness boundary (deliberate)
+### Scope / soundness boundary (deliberate, now enforced by construction)
 
 This is the **V1 heap-capacity producer**. Its capacity SOURCE is heap allocation extents; it has
-none for stack/scalar/member objects (that is the V2 stack-capacity integration's domain). So the
-form-aware layer **never finalizes a non-heap destination as safe**:
-
-- a fixed-extent write that provably **fits** is **under-claimed** (abstained, *not*
-  `deterministic_complete`) — the safe direction — with the comparison attached so the
-  stack-capacity owner / adjudicator can finalize;
-- a fixed-extent write that provably **exceeds** is surfaced as an **`open_candidate`** (a
-  candidate for review, never a hard vulnerable verdict — "flag, never assume safe"), with the
-  comparison attached.
-
-The comparison itself is pure literal arithmetic over a CPG-resolved compile-time size — the same
-class of sound reasoning as the pre-existing `int(len) <= N` literal check in `emit_candidates`. No
-new stack/scalar capacity source is added to V1's candidate/guard logic; the arithmetic lives only
-in this abstention-diagnosis layer.
+none for stack/scalar/member objects (that is the V2 stack-capacity integration's domain). The
+form-aware layer **never computes or finalizes** a non-heap destination's capacity relation at all
+— not "under-claims" it, doesn't touch it: the arithmetic (element-vs-byte units, `sizeof(T)`
+relationships) lives in exactly ONE place, `oob_runtime_capacity_v2.compare()`, used identically
+for bare and non-bare destinations. `delegated_to_stack_capacity_v2` is not a candidate-review
+bucket (`bucket=None`, `llm_eligible=False`) — the next step is deterministic arithmetic, not a
+semantic judgment call, the same posture `free_dominates_sink`'s handoff already established for
+the lifetime layer.
 
 ## Validation
 

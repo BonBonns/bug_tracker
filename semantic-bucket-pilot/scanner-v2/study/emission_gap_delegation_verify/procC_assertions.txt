@@ -1,0 +1,17 @@
+PASS site-set identical (no additions/losses)
+PASS 45 non-bare sites both
+PASS none newly dropped (all emit)
+PASS exactly 2 body-wide reason changes
+PASS every change is capacity_relation_not_established -> delegated_to_stack_capacity_v2
+PASS changed sites become rerouted
+PASS all other 43 sites unchanged in status+reason
+PASS v2 delegated sites == 2
+PASS every delegated record has v1_provenance
+PASS v2 canonical (status differs from v1 rerouted on all delegated)
+PASS v1 records all schema-valid
+PASS v2 records all schema-valid
+PASS 2 delegated deterministic_complete
+PASS 0 proven_oversized
+PASS every deterministic_complete justified (byte array, off+width<=count)
+
+ALL PROC-C ASSERTIONS PASS
