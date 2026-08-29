@@ -35,9 +35,18 @@ mapped into CPG **118**, physical site recognized **4**, capacity/contract evide
 
 All **4** recognized labeled sites resolved to **relationship = missing** — the producer
 recognized the write operation but the required capacity/contract evidence was **absent** in the
-function packet, so it **abstained** (`required_evidence_absent`). **Zero** verdicts
-(deterministic / oversized) and **zero** false "safe" calls were issued on held-out vulnerable
-code — consistent with the conservative design.
+function packet, so it **abstained** (`required_evidence_absent`). **Zero observed unsupported
+safe promotions at labeled vulnerable sites**: none of the 4 recognized vulnerable writes was
+promoted to `deterministic_complete` (nor to `proven_oversized`). This is a statement about these
+4 recognized labeled sites only — NOT a general "no false safes" claim.
+
+**Framing of the two numbers (neither is vulnerability-detection accuracy):**
+- **4/258 (1.55 %) is end-to-end artifact/pipeline coverage** — how many labeled vulnerable
+  operations the whole pipeline reaches and recognizes, dominated by source-packaging and
+  CPG-mapping attrition.
+- **4/118 (3.39 %) is conditional scanner recognition** — recognition rate after source
+  reconstruction and CPG mapping succeed.
+- Neither measures whether the scanner correctly decides vulnerable-vs-safe.
 
 | recognized labeled site        | write_kind    | family            | producer(s)                                   |
 |--------------------------------|---------------|-------------------|-----------------------------------------------|
@@ -82,10 +91,34 @@ executed analysis correctly excluded **8 sites / 6 families** (see the SECONDARY
 `PROTOCOL_DEVIATION.md`, which are authoritative). The frozen summarizer was not re-edited or
 re-run after the result was seen.
 
+## Negative generalization result
+
+This is a **meaningful negative generalization result**: the frozen scanner barely reaches the
+labeled vulnerable operations outside its development distributions. Capabilities 1–4 passed
+their synthetic and development gates but **did not generalize broadly** to these function-level
+held-out vulnerability sites. Crucially, **the main failure precedes semantic reasoning** — it is
+missing source packaging (83), failed target mapping (57), unsupported write representations (114
+of 118 mapped writes fell outside the modeled forms), and missing capacity/contract evidence
+(0/4 recognized). The 40 unique recognized operations vs 4 labeled matches is telling: the
+scanner recognized writes *inside* these functions, just usually **not the vulnerable one**.
+
+This is **low coverage under the frozen scanner's deliberately narrow modeled domain** — not
+"low coverage by design" as a virtue. No conclusion here concerns precision, false-positive rate,
+or vulnerability-detection accuracy.
+
+## Consequence: this corpus is now consumed
+
+These 258 sites have been used as a confirmatory generalization measurement. Their misses may be
+analyzed, but **any scanner change motivated by them turns these 258 sites into development
+data** — a NEW, unseen corpus would be required for another confirmatory generalization claim.
+Before any such development, the best remaining frozen measurement is the separately preserved
+**101 non-vulnerable mapped SecVulEval sites** (a specificity / soundness experiment run with the
+UNCHANGED scanner), which is being run next.
+
 ## One-line reading
 
-On a frozen, vulnerable-only held-out corpus, the sound narrow scanner (capabilities 1–4 + three
-frozen producers) **recognizes 4 of 118 CPG-mapped vulnerable write sites (3.4 %) and abstains on
-all of them for lack of packet-level evidence** — high-precision-by-design coverage is low on
-diverse real vulnerable code, and no false "safe" verdict was ever issued. This is a coverage
-measurement, not an accuracy or false-positive measurement.
+On a frozen, vulnerable-only held-out corpus, the sound narrow scanner **recognizes 4 of 118
+CPG-mapped vulnerable write sites (3.4 %), reaches only 4 of 258 end-to-end (1.6 %), and made
+zero observed unsupported safe promotions at those 4 sites** — low coverage under a deliberately
+narrow modeled domain, with the dominant losses upstream of any semantic reasoning. A coverage
+measurement, not accuracy or false-positive rate.
