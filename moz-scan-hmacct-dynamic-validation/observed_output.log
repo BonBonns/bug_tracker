@@ -1,0 +1,30 @@
+== Using dist dir:   /tmp/claude-0/-home-user-bug-tracker/2b40070e-c1bc-53e3-94e0-04dd8a1d1bb9/scratchpad/nss-work/dist ==
+== Isolated NSS DB dir: /tmp/claude-0/-home-user-bug-tracker/2b40070e-c1bc-53e3-94e0-04dd8a1d1bb9/scratchpad/nssdb.cwRk5O ==
+== Compiling mac_init_test.c with ASan ==
+== Running probe against isolated DB (LD_LIBRARY_PATH set for ASan-built libs) ==
+== NSS initialized against isolated DB: /tmp/claude-0/-home-user-bug-tracker/2b40070e-c1bc-53e3-94e0-04dd8a1d1bb9/scratchpad/nssdb.cwRk5O ==
+== HASH_BLOCK_LENGTH_MAX (hmacct.c hmacPad capacity) = 144
+== sftk_MACConstantTimeCtx.secret capacity           = 64
+
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=16    MAC-INIT SUCCEEDED (within safe bound)
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=64    MAC-INIT SUCCEEDED (within safe bound)
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=65    MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=100   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=144   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=145   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=200   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=1000  MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_HMAC_CONSTANT_TIME] keyLen=65536  MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=16    MAC-INIT SUCCEEDED (within safe bound)
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=64    MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=65    MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=100   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=144   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=145   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=200   MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=1000  MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+[CKM_NSS_SSL3_MAC_CONSTANT_TIME] keyLen=65536  MAC-INIT REJECTED (validation held): SEC_ERROR_INVALID_ARGS
+
+== RESULT: every key >64 bytes (up to and beyond hmacct.c's 144-byte hmacPad) was rejected at MAC-init time; hmacct.c's MAC() memcpy was never reached with an unvalidated length ==
+== mac_init_test exited with status 0 ==
