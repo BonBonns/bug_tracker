@@ -17,6 +17,17 @@ completeness. Every eligible package this later surfaces still goes through REAL
 eligibility verification (downloaded tarball, real file listing) before being counted --
 this stage only casts the net; it does not itself decide eligibility.
 
+This script's output is labeled `discovery_provenance = REGISTRY_RELEVANCE_SEARCH` and is
+referred to elsewhere in this corpus as the **SEARCH_DERIVED_CANDIDATE_COHORT** -- a
+real, reproducible, but coverage-BOUNDED pre-filter candidate list, explicitly NOT a pinned
+npm universe manifest (item 2 of the corpus-phase instruction) and NOT comparable in any way
+to a post-eligibility-filter reference count (this cohort is pre-filter; any such count is
+post-filter -- similar magnitude between the two proves nothing about coverage and must never
+be cited as validation). See `enumerate_registry.py` for the complementary
+`REGISTRY_ENUMERATION`-provenance discovery method (CouchDB `_all_docs` walk +
+metadata prefilter) this cohort is unioned with before item 2's manifest is frozen; see
+`CORPUS_STATUS.md` for the current, authoritative status of that union.
+
 Output: candidates.tsv (package name, discovery query, npm search score/popularity fields
 returned by the API) -- one row per (package, query) pair; downstream dedup by package name.
 """
