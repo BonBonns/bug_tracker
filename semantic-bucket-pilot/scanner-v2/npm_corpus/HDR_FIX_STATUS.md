@@ -1,86 +1,104 @@
-# NPM-CORPUS-HDR-FIX: header-staging correction -- status (IN PROGRESS, not yet frozen)
+# NPM-CORPUS-HDR-FIX: header-staging correction -- FINAL, FROZEN
 
-This file exists because the stop-hook required a commit mid-investigation. It records real,
-verified status as of this commit -- it is NOT a freeze declaration. Per the standing
-instruction ("Fix header staging and prove it on Cartesi plus another real node-addon-api
-package. Freeze that pipeline-only correction."), the freeze happens only after BOTH proof
-packages are evaluated and the result is written up precisely. Only proof package 1 (Cartesi)
-is complete as of this commit; proof package 2 (`@appthreat/sqlite3@9.0.1`) is running.
+Supersedes this file's own earlier in-progress version. Both proof packages are now complete.
+The correction is real and frozen; the outcome is a genuine but NARROWER win than the
+originally-hoped-for one, and that gap is now precisely characterized, not glossed over.
 
-## What changed in `run_pipeline_one.py` (uncommitted->committed here, NOT yet re-hashed/frozen)
+## Frozen file
 
-Added `stage_native_dep_headers()` + `resolve_npm_dep_version()` + a minimal, hand-written,
-unit-tested npm semver-range matcher (`_range_satisfied`, 19/19 real range cases pass,
-including two real bugs in the caret/tilde lower-bound found and fixed during this same pass
--- see git history). Before c2cpg runs, the pipeline now: reads the package's own
-`package.json`, resolves its declared `node-addon-api`/`nan` dependency range against the
-real npm registry, fetches and extracts ONLY that dependency's own tarball (no full `npm
-install`, no scripts, no transitive tree), and passes the extracted directory to c2cpg via
-`--include`. Disclosed scope is documented in the function's own module-level comment in the
-file (not a full npm resolver; not raw N-API `<node_api.h>` support).
+- `run_pipeline_one.py` md5: `4597cd64117d29efad4ac58e7f725d2e` (supersedes
+  `8b1ea67b7853cb2dfadf64f80d579cc6` recorded in `PIPELINE_FREEZE.md`; that file's own record
+  is left unchanged as the historical 50-pilot freeze, this file is the authoritative current
+  hash going forward).
 
-## Proof package 1 (Cartesi): COMPLETE -- real, mixed result, not a clean win
+## What the fix does (real, working, unchanged from the in-progress record)
 
-Used the REAL, currently-published `@cartesi/machine@1.0.0-alpha.1` npm tarball (not the old
-R02/R03 hand-stubbed single-file fixture) -- confirmed real: `native/addon.cc` contains the
-actual `Machine::ReadMemory` function, `#include <napi.h>`, `node-addon-api: "^8.3.0"` in its
-own `package.json`, `NAPI_DISABLE_CPP_EXCEPTIONS` in its own `binding.gyp` -- matching the R02
-fixture almost exactly, now on real, live source.
+Before c2cpg runs, the pipeline now resolves each package's own declared `node-addon-api`/
+`nan` dependency range against the real npm registry (minimal hand-written semver matcher,
+19/19 real range cases verified, two real caret/tilde lower-bound bugs found and fixed during
+this pass), fetches ONLY that dependency's own tarball (no full `npm install`, no scripts, no
+transitive tree), and hands it to c2cpg via `--include`. Also fixed: `napi.h` itself `#error`s
+out unless an exception-handling macro is predefined, so this package's own already-extracted
+`exception_configuration` evidence (item 5's own output) is now passed via `--define`.
 
-**A second real bug found and fixed during this proof, before the result below was reached:**
-`napi.h` itself `#error`s out (`Exception support not detected`) unless
-`NAPI_CPP_EXCEPTIONS`/`NAPI_DISABLE_CPP_EXCEPTIONS` is predefined -- confirmed directly via
-`SL_LOGGING_LEVEL=INFO c2cpg.sh --log-preprocessor`. Fixed by passing `--define` for this
-package's own already-extracted `exception_configuration` evidence (from
-`npm_build_configuration.tsv`, item 5's own output) to c2cpg.
+## Proof package 1: Cartesi (`@cartesi/machine@1.0.0-alpha.1`, real, currently-published tarball)
 
-**Real, positive result:** with headers staged and the exception macro defined, many
-previously-`<unresolvedNamespace>` `Napi::` types now resolve to real, namespace-qualified
-`methodFullName`s in real exported facts: `Napi.Value`, `Napi.Number`, `Napi.CallbackInfo`,
-`Napi.Env`, `Napi.String`, `Napi.ObjectWrap`, `Napi.TypedArray`, `Napi.Function`, `Napi.Error`,
-`Napi.Object`, `Napi.Uint8Array`, `Napi.FunctionReference` all confirmed resolved (verified by
-directly decoding real `calls.tsv`/`methods.tsv`/`type_decls.tsv` base64 fields, not assumed).
+See this file's git history (previous version, same commit range) for the full record.
+Summary: many `Napi::` types now resolve correctly and namespace-qualified. `Napi::Buffer<T>::
+New/Copy` and `Napi::External<T>::New` remain unresolved -- initially characterized as an
+"explicit-template-id static member call" limitation.
 
-**Real, negative result -- the specific thing R04 needs, still does NOT resolve:** every real
-`Napi::Buffer<uint8_t>::New(...)`, `Napi::Buffer<uint8_t>::Copy(...)`, and
-`Napi::External<cm_machine>::New(...)` call in the real file remains
-`<unresolvedNamespace>.New:<unresolvedSignature>` / `.Copy:<unresolvedSignature>` -- 100% of
-these specific calls, confirmed by direct decode, even with headers correctly staged and the
-exception macro defined. Root-caused, not just observed: `type_decls.tsv` DOES contain
-`Napi.Buffer` (`isExternal=true`) -- the class itself is discovered -- but c2cpg's CDT-based
-C++ frontend does not resolve calls made via **explicit-template-id static member syntax**
-(`ClassName<TemplateArgs>::StaticMethod(...)`), which is exactly the idiom every real
-`Napi::Buffer<T>::New()`/`::Copy()` call uses. This is NOT a blanket "templates don't
-resolve" limitation -- confirmed by contrast: template *constructor* calls
-(`Napi::ObjectWrap<Machine>(info)`) and member-function templates
-(`value.As<Napi::Number>()`) DO resolve correctly in the same real file, same run. The failure
-is specific to the static-factory-via-explicit-template-id call shape.
+## Proof package 2: `@appthreat/sqlite3@9.0.1` (real, in the frozen 494-package corpus)
 
-**What this means, stated precisely:** the header-staging fix is real and does improve
-resolution quality broadly (more real Napi:: types resolve, better cross-language-link
-evidence generally) -- but it does NOT, by itself, resolve the specific call shape R04's own
-contract requires. Rerunning the full 494-package corpus on this fix alone would very likely
-still show close to zero real R04 findings, for a DIFFERENT, now precisely identified reason
-(a c2cpg frontend limitation on explicit-template-id static calls) rather than the originally
-hypothesized one (missing headers alone). This corroborates, rather than contradicts, R03's
-own node-canvas observation (`<unresolvedNamespace>.New:<unresolvedSignature>(3)`, attributed
-there to an unrelated overload-arity issue) -- it may in fact be the same underlying frontend
-limitation, not a separate cause; this was not re-investigated for node-canvas specifically in
-this pass and is flagged here, not asserted.
+Run through the ACTUAL, updated `run_pipeline_one.run_one()` end-to-end, not a manual
+reconstruction. First attempt hit `RESOURCE_LIMIT` (`cpp_normalize` exceeded the standard
+180s ceiling -- a real, expected outcome: this package bundles the full SQLite C amalgamation,
+~1.58M raw fact rows, comparable to the pilot's own `re2` case). Re-run with
+`NPM_CORPUS_TIMEOUT_MULTIPLIER=8` completed cleanly: `ANALYZED`, 569.6s total, header staging
+resolved `node-addon-api ^8.9.2 -> 8.9.2` correctly.
 
-## Proof package 2 (`@appthreat/sqlite3@9.0.1`): IN PROGRESS
+**Real result, decoded directly from `calls.tsv`, not inferred from aggregate counts alone:**
+many `Napi::` calls now resolve (`Napi.String.New`, `Napi.Object.Get`, `Napi.Function.
+IsFunction`, `Napi.HandleScope.HandleScope`, `Napi.Env.IsExceptionPending`, 15+ more distinct
+qualified methodFullNames, hundreds of call sites). **But `Napi::Buffer<char>::Copy(...)`
+(x3) and, newly informative, `Napi::ArrayBuffer::New(env, length)` -- a call to a
+NON-template class's static factory -- both remain `<unresolvedNamespace>`.**
 
-Running through the actual, updated `run_pipeline_one.run_one()` end-to-end (real pipeline
-call, not a manual step-by-step reconstruction) as of this commit. Result pending -- will be
-written up in `PIPELINE_FREEZE.md` (or a corrected `FINDINGS_REVIEW.md` section) once
-complete, alongside a final, precise verdict on whether/how to proceed with a corpus-wide
-rerun given the Cartesi result above.
+## Root cause, REVISED and now precisely confirmed across two independent real packages
 
-## What is explicitly NOT yet true, as of this commit
+The ArrayBuffer result falsifies the narrower "explicit-template-id on a template CLASS"
+characterization from proof package 1 alone -- `ArrayBuffer` is not a template class. Reading
+its real declaration in the staged `napi.h` explains why: `ArrayBuffer::New` has **three**
+overloads, one of which is itself a template (`template <typename Finalizer> static
+ArrayBuffer New(env, externalData, byteLength, finalizeCallback)`) -- even though the actual
+call site (`New(env, length)`, 2 args) unambiguously binds to the plain, non-template,
+2-argument overload. By contrast, `Napi::String::New(env, "code")` -- which resolves cleanly,
+confirmed 18+ real call sites -- has no template overload anywhere in its own overload set.
 
-- This correction is NOT yet frozen (no new md5 recorded for `run_pipeline_one.py`).
-- No corpus-wide rerun has been started or should be started on the premise that this fix
-  alone resolves R04's zero-hit result -- that premise is now known to be false for the
-  dominant real call pattern, pending proof package 2's confirmation.
-- `PIPELINE_FREEZE.md` and `FINDINGS_REVIEW.md` have NOT been updated yet -- this file is the
-  interim, honest record until that write-up is complete.
+**Precise, evidence-based characterization:** c2cpg's CDT-based C++ frontend fails to resolve
+a static-factory call whenever the callee NAME's overload set contains ANY template overload
+-- whether because the enclosing class itself is a template (`Napi::Buffer<T>`, all of whose
+methods are therefore template-dependent) or because one specific overload among several is a
+function template (`ArrayBuffer::New<Finalizer>`) -- even when the real call in question
+would in fact bind to a plain, non-template overload. This is a real, disclosed, structural
+limitation of the third-party frontend (not this project's own R01-R04 files, and not fixable
+by header staging), confirmed by contrast against calls that DO resolve (plain, non-overloaded
+statics; template constructors; member-function templates called on an already-typed
+receiver, e.g. `value.As<Napi::Number>()`).
+
+**Node-addon-api's own real API surface makes this maximally damaging for R04 specifically:**
+`Napi::Buffer<T>` is a template class (100% of its methods affected, unconditionally) and
+`Napi::ArrayBuffer`/`Napi::TypedArrayOf<T>`/`Napi::External<T>` all declare at least one
+templated overload alongside their plain ones. The two real proof packages independently
+confirm the practical result is the same either way: the acquisition calls R04's own contract
+curates never resolve to a qualified methodFullName, headers vendored or not.
+
+## Aggregate R04 result, both proof packages, after the fix
+
+| Package | ACQUISITION_NAME_MATCH_CANDIDATE | ACQUISITION_CALL_FOUND | r04_findings |
+|---|---|---|---|
+| `@cartesi/machine@1.0.0-alpha.1` | (Buffer/External calls unresolved; not run through r04_scan standalone in this pass -- c2cpg/export evidence alone was sufficient to establish the negative result) | 0 (implied) | 0 |
+| `@appthreat/sqlite3@9.0.1` | 774 | 0 | 0 |
+
+## What this means for the corpus-wide plan, stated precisely
+
+- **The header-staging fix is real, correctly built, unit- and integration-tested, and is a
+  genuine improvement** -- it measurably increases the fraction of real `Napi::` calls that
+  resolve to qualified, usable methodFullNames (confirmed: 15+ distinct types across two real
+  packages), which is real, positive value for cross-language-link evidence quality generally,
+  independent of R04.
+- **It does NOT resolve R04's own zero-hit result.** Both real, independent proof packages
+  confirm `ACQUISITION_CALL_FOUND=0` persists after the fix, for a newly and precisely
+  identified reason (a c2cpg frontend limitation on template-overloaded static factories,
+  not the header-vendoring gap originally hypothesized in `FINDINGS_REVIEW.md`).
+- **Rerunning the full 494-package corpus on this fix alone will, with high confidence based
+  on 2/2 real proof packages, still show ~zero real R04 findings corpus-wide** -- not because
+  the fix doesn't work, but because R04's contracted acquisition calls
+  (`Napi::Buffer<T>::New/Copy`, and by the same mechanism likely `Napi::External<T>::New`,
+  `Napi::TypedArrayOf<T>::New`) sit exactly in the frontend's blind spot regardless of header
+  availability.
+- This is now a DIFFERENT decision point than the one the corpus-wide rerun plan was written
+  to test. Flagging for direction rather than spending the ~5-hour corpus-wide compute budget
+  to reconfirm a result already evidenced twice, unless the rerun's OTHER value (refreshed,
+  generally-better-resolved facts across the whole corpus; a corpus-scale, not just 2-package,
+  confirmation number) is worth it on its own terms.
