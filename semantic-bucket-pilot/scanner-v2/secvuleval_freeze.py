@@ -68,7 +68,64 @@ def writes_in(lines):
             out.append((i, "index_write", m.group(1).strip(), l.strip())); continue
         m = DEREFW.search(l)
         if m and "==" not in l:
-            out.append((i, "pointer_deref", m.group(1).strip(), l.strip()))
+            # DECL-R01: reject when the char immediately before the matched `*` (skipping
+            # whitespace) is a word character -- that means the `*` is a pointer-type
+            # declarator glued to a preceding type name (`Type *var = expr;`), not a
+            # leading dereference-store (`*var = expr;`). Confirmed real: PostCutoff-CVE
+            # case_5b60666e (openwrt/openwrt, an OpenSSL patch-context line) matched
+            # "PROV_AES_SIV_CTX *ctx = (PROV_AES_SIV_CTX *)vctx;" as a pointer_deref WRITE --
+            # that is a variable declaration with an initializer, not a store through ctx.
+            before = l[:m.start()].rstrip()
+            # a preceding word char/underscore = type name glued to this `*` (single-level
+            # declarator); a preceding `*` = a multi-level declarator chain (`int **pp = ..`,
+            # where DEREFW's own leading-`*` position doesn't match, so .search() lands on
+            # the SECOND `*` instead -- still a declaration, not a dereference-store).
+            is_decl_star = bool(before) and (before[-1].isalnum() or before[-1] in "_*")
+            if not is_decl_star:
+                out.append((i, "pointer_deref", m.group(1).strip(), l.strip()))
+    return out
+
+
+def strip_comments(lines):
+    """COMMENT-R01: blank out C/C++ comment text so COPY/IDXW/DEREFW never match inside a
+    // line comment or a /* block */ comment (including one spanning multiple lines) --
+    confirmed real: PostCutoff-CVE case_037fb711 (wolfSSL eccsi.c) mapped a pointer_deref
+    write with dest text "component.  With s", which is not code at all -- it is the
+    doc-comment line "* component.  With s=0, [s](...) yields the point at infinity..."
+    matching DEREFW's bare `\\*...=` pattern on the leading `*` continuation marker plus the
+    prose's own incidental "s=0". Preserves line COUNT and ORDER (comment text is blanked in
+    place, not deleted) so caller line indices -- which map_write correlates against
+    locate_label's line indices -- stay valid. Deliberately does not special-case string/char
+    literals containing `//` or `/*` (unhandled, same as every other regex in this module);
+    that is a distinct, separate limitation, not something this fix claims to cover."""
+    out = []
+    in_block = False
+    for l in lines:
+        buf = []
+        i, n = 0, len(l)
+        while i < n:
+            if in_block:
+                j = l.find("*/", i)
+                if j == -1:
+                    i = n
+                else:
+                    i = j + 2
+                    in_block = False
+                continue
+            j_line = l.find("//", i)
+            j_block = l.find("/*", i)
+            if j_line == -1 and j_block == -1:
+                buf.append(l[i:]); i = n
+            elif j_block == -1 or (j_line != -1 and j_line < j_block):
+                buf.append(l[i:j_line]); i = n
+            else:
+                buf.append(l[i:j_block])
+                k = l.find("*/", j_block + 2)
+                if k == -1:
+                    in_block = True; i = n
+                else:
+                    i = k + 2
+        out.append("".join(buf))
     return out
 
 
@@ -89,7 +146,7 @@ def locate_label(lines, labeled):
 def map_write(func_body, labeled):
     """RULE 1. Deterministic unique mapping. Returns (status, write_or_None)."""
     lines = func_body.splitlines()
-    ws = writes_in(lines)
+    ws = writes_in(strip_comments(lines))
     if not ws:
         return "no_write_found", None
     labs = locate_label(lines, labeled)

@@ -64,7 +64,9 @@ def main():
         if not re.search(r"\.(c|cc|cpp|cxx|h|hpp)\b", diff):
             excl["not_c_cpp"] += 1; continue
         lines = diff_hunk_lines(diff)
-        ws = S.writes_in(lines)
+        # COMMENT-R01 (see secvuleval_freeze.strip_comments): write-detection runs on
+        # comment-stripped text; family_id below still uses the original `lines`/`body`.
+        ws = S.writes_in(S.strip_comments(lines))
         if not ws:
             status = "no_write_found"
         else:

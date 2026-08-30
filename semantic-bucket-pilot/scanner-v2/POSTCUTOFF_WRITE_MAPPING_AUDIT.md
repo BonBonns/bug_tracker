@@ -100,19 +100,83 @@ more trustworthy corpus, not a bigger one — consistent with this project's sta
 preference for an honest small yield over an inflated one (cf. the SecVulEval freeze,
 accepted as "insufficient" rather than gamed).
 
-## What this fix does NOT address (separate, pre-existing, out of scope here)
+## Round 2: the comment-text-matching artifact (flagged above), fixed
 
-- `case_037fb711` (eccsi.c) remains mapped as `pointer_deref` with `write_dest` literally
-  `"component.  With s"` — a fragment of a **code comment**, not an expression. `DEREFW`/
-  `IDXW`/`COPY` all operate on raw diff-hunk text with no comment stripping, so a comment
-  containing e.g. `* p = ...`-shaped text can match. This is a distinct, pre-existing gap
-  (comment-blind matching), not the copy-macro gap this round fixes; flagging it rather
-  than silently also patching it, since it needs its own audit of how many other sites it
-  affects before a fix is evidence-supported.
+`case_037fb711` (eccsi.c) was left mapped after round 1, `pointer_deref` with `write_dest`
+literally `"component.  With s"` — not an expression, a fragment of the doc comment
+`/* Validate s is in [1, q-1]... * component.  With s=0, [s](...) yields the point at
+infinity... */`. `DEREFW`/`IDXW`/`COPY` all ran on raw diff-hunk text with no comment
+stripping, so `DEREFW`'s bare `\*...=` pattern matched the `*` comment-continuation
+marker plus the prose's own incidental `s=0`. Verified: `DEREFW.search()` on that exact
+line returns a match; the CVE this site is tagged with is a signature-validation bug with
+zero real writes anywhere in its diff (confirmed in the round-1 table above) — so this was
+never a real write site, comment or not.
+
+**Fix:** added `strip_comments()` to `secvuleval_freeze.py` — blanks `//` and `/* */`
+(including multi-line block) comment text in place, preserving line count/order so
+`map_write`'s line-index correlation against `locate_label` stays valid. Wired into
+`writes_in()`'s input in both `map_write` (comment-stripped for write-detection, original
+text kept for label matching) and `postcutoff_freeze.py`'s direct call. Verified against
+the reproduced eccsi.c comment (now correctly `no_write_found`, matching the round-1 manual
+finding) and a battery of real-write/real-comment mixed cases (trailing `//`, same-line and
+multi-line `/* */`, all correctly stripped without touching genuine code on the same or
+following lines).
+
+**A second, distinct pre-existing bug this surfaced directly (fixed too, same round,
+concrete evidence, not speculative scope creep):** removing the comment noise promoted a
+previously-`ambiguous` site (`case_5b60666e`, `openwrt/openwrt`) to `mapped`,
+`pointer_deref`, dest `"ctx"` — matched from `PROV_AES_SIV_CTX *ctx = (PROV_AES_SIV_CTX
+*)vctx;`, a **pointer declaration with an initializer**, not a dereference-store. (The
+"source" here is actually upstream OpenSSL code reproduced inside an OpenWrt package
+patch file — `package/libs/openssl/patches/010-fix-aes-gcm-siv-cipher.patch` — a version
+bump with no real destination-capacity write in the diff at all.) `DEREFW` cannot tell
+`Type *var = expr;` from `*var = expr;`. Fixed by rejecting a `DEREFW` match when the
+character immediately preceding the matched `*` (skipping whitespace) is a word
+character/underscore (a type name glued to the declarator) or another `*` (a multi-level
+declarator chain, `int **pp = ...`, where `.search()` lands on the second `*`). Verified
+against 8 cases: single- and multi-level declarations rejected; genuine dereference-writes
+(including after a prior statement, mid-statement, struct-field-typed) still accepted.
+
+## Combined result (both rounds, same byte-identical dataset snapshot)
+
+| | round 1 (baseline) | round 1 fix (copy-macros) | round 2 fix (+ comments/decls) |
+|---|--:|--:|--:|
+| mapped | 21 | 18 | **17** |
+| ambiguous | 34 | 40 | 32 |
+| no_write_found | 57 | 54 | 63 |
+| vulnerable families | 9 | 8 | **11** |
+| copy_sink | 2 | 3 | **6** |
+| 12-family gate | BELOW | BELOW | BELOW (11/12 — one short) |
+
+Family diversity nearly doubled (8 → 11, one short of the gate) once the declaration-star
+false positives stopped competing with (and sometimes masking, via ambiguity) genuine
+`copy_sink`/`index_write` matches. `case_faac9f02` (the `pkcs7.c` `oriOID` XMEMCPY bug,
+confirmed genuine in round 1 but demoted to `ambiguous` by the copy-macro fix alone) is now
+correctly `mapped` as `copy_sink` once the declaration-noise around it also clears. Spot-
+checked 3 of the newly-mapped/changed sites across 2 more repos (zephyr, wolfSSL) against
+real diffs: all are genuine write operations in the diff (one, `case_9eff7b57`, matches a
+real `memset` that is very likely *not* the CVE's actual root cause — a shared-vs-per-
+connection buffer bug, not a memset-size bug — which is RULE 1 behaving exactly as
+designed: it finds *a* write mechanically, never claims semantic certainty that it is *the*
+fix-relevant one. That imprecision is inherent to RULE 1's design, pre-dates both fixes in
+this document, and is not something either one claims to solve).
+
+## What remains out of scope here (separate, pre-existing)
+
+- RULE 1's "finds *a* write, not necessarily *the* fix-relevant write" imprecision (see
+  `case_9eff7b57` above) — inherent to a purely mechanical, no-manual-interpretation rule;
+  narrowing it further would mean adding semantic bug-localization, a different and much
+  larger undertaking, not a regex fix.
+- `DEREFW`'s capture character class doesn't include `*` or `(`, so cast-and-dereference
+  forms like `*(int*)dst = 5;` don't match at all (verified: pre-existing, unaffected by
+  either fix in this document).
+- The blanket `"==" not in l` exclusion in `writes_in()` drops an entire line's write if it
+  contains `==` *anywhere*, even a genuine write on the same line after an unrelated
+  comparison (e.g. `if (a == b) *p = c;`) — verified pre-existing, unaffected here.
 - No re-freeze of the SecVulEval pilot corpus (`study/secvuleval/FROZEN_heldout.json`) —
-  same shared `COPY` regex, so the identical class of gap likely applies there too, but its
-  source `random_subset.json` was not re-fetched this round; the existing SecVulEval freeze
-  is already documented as "insufficient" and not gating anything, so it was left as is.
+  same shared `COPY`/`DEREFW` code, so the identical classes of gap likely apply there too,
+  but its source `random_subset.json` was not re-fetched; the existing SecVulEval freeze is
+  already documented as "insufficient" and not gating anything, so left as is.
 - Recognition measurement (build wolfSSL/ImageMagick/etc. from source, run the real
   scanner, score `mapped` sites) — not yet done. This audit was a precondition for it, not
   a substitute.
