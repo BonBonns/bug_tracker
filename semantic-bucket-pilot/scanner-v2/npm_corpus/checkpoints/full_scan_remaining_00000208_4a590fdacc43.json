@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"genx\", \"version\": \"2.0.0\", \"stages\": {\"download\": {\"seconds\": 0.08414506912231445}, \"extract\": {\"seconds\": 0.00525665283203125}, \"c2cpg\": {\"seconds\": 2.8524301052093506, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 3.3341708183288574, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 9.84348726272583, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 7.796666860580444, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 0.645106315612793}, \"js_normalize\": {\"seconds\": 0.034148454666137695}, \"polyglot_link\": {\"seconds\": 0.4826788902282715}, \"r04_scan\": {\"seconds\": 0.08177733421325684}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 12, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 12}, \"r04_findings\": [], \"total_seconds\": 25.167691230773926}",
+  "name": "full_scan_remaining",
+  "row_count": 208,
+  "sha256": "4a590fdacc43b78256b5b48d5d4486a7c158d3bf9d33a845decbb51bf1a819e4",
+  "snapshot_path": "checkpoints/full_scan_remaining_00000208_4a590fdacc43.tsv",
+  "snapshot_time_utc": "2026-08-30T10:44:32Z",
+  "source_path": "full_scan_remaining_working.jsonl"
+}
