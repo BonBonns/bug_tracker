@@ -1,0 +1,27 @@
+{
+ "classification": {
+  "ACQUISITION_CALL_FOUND": 1,
+  "ACQUISITION_NAME_MATCH_CANDIDATE": 7,
+  "ACQUISITION_SIGNATURE_UNRECOGNIZED": 6,
+  "PREDICATE_FAILURE_BRANCH_DOES_NOT_TERMINATE": 1,
+  "VALUE_ACQUISITION_GUARD_MISSING": 1
+ },
+ "contract_pool": "real",
+ "findings": [
+  {
+   "acquisition_call_id": 30064771180,
+   "acquisition_kind": "STATIC_FACTORY",
+   "applicable_exception_configuration_assumed": "exceptions_disabled -- per node-addon-api's own official documentation (doc/error_handling.md, 'Handling Errors With Maybe Type and C++ Exceptions Disabled' / 'Handling Errors Without C++ Exceptions'): when C++ exceptions are DISABLED at compile time, a node-addon-api call that would otherwise throw instead raises a pending JavaScript exception and returns an EMPTY Napi::Value (napi.h ~line 515: 'a method with a Value return type may return an empty value to indicate a pending exception... callers should check whether the value is empty before attempting to use it'). Under an exceptions-ENABLED build, the SAME failure instead throws a C++ exception of type Napi::Error directly (doc/error_handling.md, 'Handling Errors With C++ Exceptions') -- code after the acquisition call is simply never reached on failure, and a missing IsEmpty() check is not the same defect. R03 cannot determine which configuration a given call site was compiled under (no preprocessor state, no try/catch AST, is exported by this project's Joern facts) -- every finding against this contract discloses this assumption explicitly rather than silently assuming it. UNCHANGED from R02 -- this correction touches only qualifier_type, not this field.",
+   "contract_citation": "nodejs/node-addon-api (pinned to the `main` branch source read for this mining pass): include-equivalent napi.h (Value::IsEmpty(), Buffer<T>::New(napi_env, size_t)) and doc/buffer.md, doc/error_handling.md (official documentation of both exception configurations). qualifier_type's namespace-qualified form is additionally confirmed directly against real Joern v4.0.608 c2cpg output (see RESOURCE_GUARD_R02.md's Blind test #2 and this file's own module docstring).",
+   "downstream_write_evidence": null,
+   "evidence_note": "invalid-handle-use evidence only -- this contract's failure predicate proves acquisition/handle validity, not destination capacity; no CWE-787 or capacity claim is made here, and this finding alone is not a vulnerability claim -- runtime behavior and security impact are separate, unestablished questions",
+   "method_id": 107374182406,
+   "method_name": "DecompressInner",
+   "object": "dstBuffer",
+   "result_type": "Buffer",
+   "unguarded_use_call_id": 30064771185,
+   "verdict": "VALUE_ACQUISITION_GUARD_MISSING"
+  }
+ ],
+ "schema": "resource-guard-verdict-r03/0.1"
+}

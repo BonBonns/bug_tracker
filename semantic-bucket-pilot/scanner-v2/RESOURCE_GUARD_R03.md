@@ -185,3 +185,147 @@ test: select a real npm package independently, using the same applicable allocat
 a real `Napi::` namespace, exceptions-disabled behavior, an attacker-influenced size, and a
 genuine downstream use (either a correct guard or a missing one), run the frozen R03 pipeline
 against it, and record the result without modifying anything above in response to it.
+
+## R03 blind test: `@julusian/jpeg-turbo`, `src/decompress.cc`, `DecompressInner`
+
+**Target selection (independently verified, not taken on trust from any search report):**
+`@julusian/jpeg-turbo`, confirmed genuinely published on the npm registry (`curl
+https://registry.npmjs.org/@julusian%2Fjpeg-turbo`: `dist-tags.latest = "3.0.1"`, and that
+version's `gitHead` field equals `5e141c1c04fc6da8fb6dc756fcce73dda86c894b` -- fetched and
+compared directly, not assumed). Real repo: `Julusian/node-jpeg-turbo`, file
+`src/decompress.cc`, function `DecompressInner`, pinned to that exact commit.
+
+Checked against the required shape BEFORE writing any fixture:
+
+- **Same applicable allocating overload:** yes -- `Napi::Buffer<unsigned char>::New(env,
+  targetSize)`, the curated 2-argument form (confirmed via real, independently-fetched
+  source at `src/decompress.cc:202`).
+- **Real `Napi::` namespace:** yes -- `#include <napi.h>`, genuine `Napi::Buffer<...>`,
+  `Napi::TypeError`, no local shadowing/wrapper class anywhere in the file (independently
+  confirmed by reading the fetched source directly, not only from the search report).
+- **Attacker-influenced size:** yes -- `targetSize = resWidth * resHeight * bpp`, where
+  `resWidth`/`resHeight` are decoded directly out of the attacker-supplied JPEG file's own
+  header via `tjDecompressHeader(handle, props.srcData, props.srcLength, &props.resWidth,
+  &props.resHeight)` -- not a literal, not a simple JS-argument passthrough, but genuinely
+  external-content-controlled.
+- **Downstream use:** yes -- `props.resData = dstBuffer.Data();`, then `dstBuffer.Length()`
+  is compared and `dstBuffer` is ultimately returned.
+- **Exceptions-disabled behavior:** **NOT confirmed -- a real, disclosed mismatch, found and
+  stated BEFORE running the pipeline.** Unlike Cartesi (which explicitly defines
+  `NAPI_DISABLE_CPP_EXCEPTIONS`), this project's real `CMakeLists.txt` (independently
+  fetched and read in full) sets neither `NAPI_CPP_EXCEPTIONS` nor
+  `NAPI_DISABLE_CPP_EXCEPTIONS`, and no `-fno-exceptions`/`/EHs-c-` override appears
+  anywhere. node-addon-api's own real default-resolution logic (independently confirmed by
+  fetching `nodejs/node-addon-api`'s current `napi.h` directly): when neither macro is set,
+  C++ exceptions are enabled if the compiler itself was built with exceptions on -- the
+  near-universal C++ default absent an explicit opt-out, which this project's CMake
+  configuration does not set. This project therefore most likely builds with C++ exceptions
+  **ENABLED**, the OPPOSITE of this contract's own disclosed `"exceptions_disabled"`
+  assumption -- meaning a real allocation failure at this call site would most likely throw a
+  C++ exception rather than return an empty `Buffer`, and a missing `IsEmpty()` check would
+  not be the applicable defect in that case. This mismatch does not disqualify the site from
+  the blind test (the contract's assumption is a disclosed one, stated on every finding, by
+  design, never a per-site detection -- this is exactly the scenario that disclosure exists
+  for), but it materially qualifies how any resulting finding should be read.
+
+**Structurally novel real pattern, also identified before running:** the real function's one
+`IsEmpty()` call checks the PRE-EXISTING `dstBuffer` variable BEFORE the acquisition, to
+decide whether allocation is even needed (a caller-supplied destination buffer skips
+allocation) -- not a post-acquisition failure check on the newly-allocated result. None of
+R02/R03's synthetic controls exercise a predicate call that precedes its own acquisition in
+program order under the same variable name.
+
+A minimally-stubbed, statement-faithful fixture
+(`study/resource_guard_r03/raw_case_jpegturbo_decompress/fixture_source.cpp`, real statements
+preserved for the acquisition path) was compiled with a real C++17 compiler, run through the
+same real Joern v4.0.608 pipeline, then run against the FROZEN `REAL_CONTRACTS` exactly as
+committed -- md5s reconfirmed unchanged immediately before this run.
+
+**Recorded result:**
+
+```json
+{"classification": {"ACQUISITION_NAME_MATCH_CANDIDATE": 7, "ACQUISITION_SIGNATURE_UNRECOGNIZED": 6,
+ "ACQUISITION_CALL_FOUND": 1, "PREDICATE_FAILURE_BRANCH_DOES_NOT_TERMINATE": 1,
+ "VALUE_ACQUISITION_GUARD_MISSING": 1},
+ "findings": [{"verdict": "VALUE_ACQUISITION_GUARD_MISSING", "object": "dstBuffer",
+               "result_type": "Buffer", "acquisition_kind": "STATIC_FACTORY",
+               "method_name": "DecompressInner", "unguarded_use_call_id": 30064771185,
+               "downstream_write_evidence": null, ...}]}
+```
+
+`VALUE_ACQUISITION_GUARD_MISSING` fires. Decoding the real facts confirms every step
+precisely: the real call's `methodFullName` resolves cleanly to
+`"Napi.Buffer.New:Napi.Buffer(napi_env__*,long)"` (matching the corrected qualifier); the
+other 6 `ACQUISITION_NAME_MATCH_CANDIDATE`s are the function's own 6 separate
+`Napi::TypeError::New(...)` calls, each correctly rejected via
+`ACQUISITION_SIGNATURE_UNRECOGNIZED` (a real site independently confirming the same
+qualifier-discrimination control 12/R03B already exercise, now against MULTIPLE distinct
+same-named calls in one real function, not a synthetic pair); and
+`PREDICATE_FAILURE_BRANCH_DOES_NOT_TERMINATE` fires for the pre-existing `IsEmpty()` check --
+correctly, because its "invalid" branch (where the real allocation happens) has no early
+return/throw at all and instead flows straight into `dstBuffer.Data()` (a call whose own
+receiver argument is `dstBuffer`), so `resolves_without_touching_object` correctly detects
+that this branch touches the object again before any return, and (as designed, unchanged
+logic) never contributes a clearance edge. The final dominance walk, starting at the
+acquisition call itself, therefore proceeds straight to the real use with no clearance
+crossed, correctly yielding `VALUE_ACQUISITION_GUARD_MISSING` on a real site whose guard
+shape none of the 16+5 synthetic controls specifically anticipated (a predicate on the same
+variable NAME, occurring structurally BEFORE its own acquisition).
+
+**Evidence checklist, same discipline as the Cartesi recovery section:**
+
+- Two-argument allocating overload, correct namespace qualification -- automatically
+  evidenced (`ACQUISITION_CALL_FOUND=1`, real mfn confirmed above).
+- Attacker-influenced size -- **NOT automatically evidenced** by `attacker_influence_evidence`
+  (the field is absent from this finding, exactly as with Cartesi): `resWidth`/`resHeight`
+  are populated via `tjDecompressHeader(..., &props.resWidth, &props.resHeight)`, the SAME
+  out-parameter data-flow pattern that made Cartesi's own trace fail, for the same reason
+  (`backward_attacker_trace`, unmodified, follows `lhs = rhs` assignment chains only). The
+  underlying fact -- decoded straight from attacker-supplied file content -- was
+  independently verified by reading the real source directly, not re-derived by the tool.
+- Downstream use before any failure check -- automatically evidenced:
+  `unguarded_use_call_id` present.
+- No dominating guard -- automatically evidenced by the verdict itself, and additionally by
+  `PREDICATE_FAILURE_BRANCH_DOES_NOT_TERMINATE` explaining precisely WHY the one candidate
+  predicate in this function was correctly excluded.
+- Exceptions-disabled configuration -- carried as the contract's own disclosed assumption
+  (`applicable_exception_configuration_assumed`, unchanged text), but per the mismatch
+  identified above, most likely NOT the real configuration for this project -- see claims
+  boundary below.
+
+**Claims boundary -- stated exactly, same discipline as Cartesi's:**
+
+`DecompressInner`'s newly-allocated `dstBuffer` is a real, unguarded acquisition matching
+this contract's `STATIC_FACTORY`/`VALUE_ACQUISITION_GUARD_MISSING` shape under the contract's
+own stated assumptions -- **not a confirmed real vulnerability, not automatically CWE-787,
+not proof of exploitable memory corruption.** Its evidentiary weight is WEAKER than
+Cartesi's own recovery finding in one specific, disclosed respect: Cartesi's exceptions-
+disabled assumption was independently corroborated by an explicit `NAPI_DISABLE_CPP_
+EXCEPTIONS` in its own build config; this site's most-likely-real configuration
+(exceptions-ENABLED, per node-addon-api's own default-resolution logic) actively
+CONTRADICTS the contract's stated assumption, meaning a real allocation failure here would
+most plausibly throw rather than return empty, and this finding's practical applicability is
+correspondingly less certain than Cartesi's. This is reported precisely, not smoothed over,
+exactly as node-canvas's overload mismatch and Cartesi's own trace-evidence gap were reported.
+
+**What this blind test establishes, and what it does not:**
+
+- **Cross-contract structural portability on applicable real code: ESTABLISHED.** This is a
+  genuinely untouched, independently-verified, genuinely-published real npm package, matching
+  the curated contract's exact overload and namespace form, correctly producing
+  `VALUE_ACQUISITION_GUARD_MISSING` from the frozen R03 pipeline with no modification made in
+  response -- unlike node-canvas (wrong overload, R02) and unlike Cartesi (contract-curation
+  gap, R02/R03's own motivating case). This is the FIRST site in this project's whole
+  RESOURCE_GUARD lineage (R01, R02, R03) where the frozen algorithm, run blind against a
+  genuinely new, unmodified real site, produces a guard-missing finding without any
+  after-the-fact correction.
+- **Cross-project vulnerability generalization: still NOT established**, and this section
+  does not claim it. A missing guard under a disclosed-assumption contract, on a
+  possibly-mismatched exception configuration, is real evidence of the ALGORITHM'S
+  portability -- it is not evidence that `DecompressInner` is exploitable, or even that this
+  specific missing check is the operative defect once the real exception configuration is
+  accounted for.
+- The `PREDICATE_FAILURE_BRANCH_DOES_NOT_TERMINATE` classification firing correctly on a
+  real, structurally novel guard shape (a pre-acquisition predicate reusing the same variable
+  name) is itself a meaningful piece of generalization evidence, independent of the final
+  verdict -- the algorithm did not need to be extended or special-cased to handle it.
