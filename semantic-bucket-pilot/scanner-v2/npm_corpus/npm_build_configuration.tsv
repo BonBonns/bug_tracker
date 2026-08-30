@@ -1,0 +1,495 @@
+package_name	version	exception_configuration	disable_evidence	enable_evidence	config_file_families	status	detail
+node-addon-api	8.9.2	unresolved			package.json	OK	
+@kooper-ai/yskip-embeddings	1.0.29	unresolved			cmake;package.json	OK	
+napi-addon-spdlog	0.0.17	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@brick-a-brack/napi-canon-cameras	0.1.5	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+ultimate-tictactoe-ai	0.4.3	enabled		binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+node-spdlog	0.1.5	conflict	binding.gyp: -fno-exceptions; spdlog/CMakeLists.txt: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;cmake;package.json	OK	
+napi-addon-fdtd	3.4.9	unresolved			cmake;package.json	OK	
+morfeusz2-node-bindings	0.1.4	unresolved			binding.gyp;cmake;package.json	OK	
+@jimp-native/plugin-resize-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-color-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+win-macro	2.1.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@jimp-native/plugin-mask-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@depup/node-addon-api	8.9.2-depup.0	unresolved			package.json	OK	
+@jimp-native/plugin-blit-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-crop-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-blur-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-circle-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-composite-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-dither-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@matteogheza/node-eventlog	2.0.9	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+@jimp-native/plugin-rotate-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@jimp-native/plugin-flip-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+emnapi	1.11.3	unresolved			cmake;package.json	OK	
+@jimp-native/plugin-invert-napi	0.1.0	unresolved			binding.gyp;package.json	OK	
+@mapbox/node-cpp-skel	0.2.0	unresolved			binding.gyp;package.json	OK	
+odbc	2.5.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+electron-nspanel	0.0.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+xxhash-addon	2.1.0	unresolved			binding.gyp;package.json	OK	
+@eliyya/sange	1.2.0	unresolved			cmake;package.json	OK	
+re2	1.26.1	unresolved			binding.gyp;cmake;package.json	OK	
+@theia/ffmpeg	1.75.0	unresolved			binding.gyp;package.json	OK	
+@lynx-js/weak-node-api	0.1.0	unresolved			cmake;package.json	OK	
+@nodriverai/mavjs	0.1.2	unresolved			cmake;package.json	OK	
+pqclean	0.8.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+ffi-napi	4.0.3	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+ssh2	1.17.0	unresolved			binding.gyp;package.json	OK	
+@simon-shd/libltc-napi-limited	0.2.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+zstd-napi	0.0.13	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+pulsar-client	1.18.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+roaring	2.7.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+eiows	11.1.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@camol/file-lock	1.1.4	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+sqlite3	6.0.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-pty	1.1.0	unresolved			binding.gyp;package.json	OK	
+@lukaselmer/odbc	2.7.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@jasonscheirer/native-progress-bar	1.1.2	unresolved			binding.gyp;package.json	OK	
+secp256k1	5.0.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-snap7	1.0.9	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@2060.io/ffi-napi	4.0.9	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+highs-addon	0.10.3	unresolved			cmake;package.json	OK	
+ember-one-way-controls	3.1.0	unresolved			binding.gyp;package.json	OK	
+joulescope_driver	2.4.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+scrypt	6.0.3	unresolved			binding.gyp;package.json	OK	
+fast-find-in-files	1.0.5	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+naudiodon2	2.5.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@gjsify/napi	0.44.0	disabled	meson.build: -fno-exceptions		meson;package.json	OK	
+@primno/dpapi	2.0.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-liblzma	5.1.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+keytar	7.9.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-hid	3.4.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;meson;package.json	OK	
+@vscode/sqlite3	5.1.14-vscode	unresolved			binding.gyp;package.json	OK	
+sharp	0.35.4	enabled		src/binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+libpq	1.11.0	unresolved			binding.gyp;package.json	OK	
+unix-dgram	2.0.7	unresolved			binding.gyp;package.json	OK	
+@openzim/libzim	4.5.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+fontnik	0.7.7	unresolved			cmake;package.json	OK	
+libxmljs4	2.0.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+openzwave-shared	1.7.2	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+nlpplus	1.3.24	conflict	nlp-engine/vcpkg/ports/irrlicht/CMakeLists.txt: -fno-exceptions	CMakeLists.txt: NAPI_CPP_EXCEPTIONS	cmake;gn;package.json	OK	
+@mongodb-js/zstd	7.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+react-native-node-api	1.1.1	unresolved			cmake;package.json	OK	
+msgpack	1.0.3	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+tdl	8.1.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@serialport/bindings-cpp	13.0.1	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+node-crc16	2.0.7	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@julusian/segfault-raub	2.3.3	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-llama-cpp	3.20.0	enabled		llama/CMakeLists.txt: -fexceptions	cmake;package.json	OK	
+@confluentinc/kafka-javascript	1.10.0	unresolved			binding.gyp;cmake;package.json	OK	
+@adhdev/ghostty-vt-node	1.0.46	disabled	CMakeLists.txt: NAPI_DISABLE_CPP_EXCEPTIONS		cmake;package.json	OK	
+@stdlib/ndarray-base-napi-addon-arguments	0.2.3	unresolved			package.json	OK	
+macos-export-certificate-and-key	2.0.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+rabin-bindings	1.7.4	unresolved			binding.gyp;package.json	OK	
+great-big-file-reader	1.0.4	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+microtime	3.1.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+x11-dri	0.6.0	unresolved			binding.gyp;package.json	OK	
+yatag	1.3.0	unresolved			package.json	OK	
+bcrypt	6.0.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+eccrypto	1.1.6	unresolved			binding.gyp;package.json	OK	
+libsamplerate	2.1.1	unresolved			cmake;package.json	OK	
+ibm_db	4.0.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@makeomatic/ffi-napi	4.2.0	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@gjsify/node-gi	0.44.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@kiran.kk.phonpe/node-native-ocr	0.3.9	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+naudiodon	2.3.6	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+napi-snap7	1.2.3	conflict	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+win-export-certificate-and-key	3.0.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+hnswlib-node	3.0.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@zerob13/nativekit	0.6.3	enabled		binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+macos-alias	0.2.12	unresolved			binding.gyp;package.json	OK	
+@tensorflow/tfjs-node	4.22.0	unresolved			binding.gyp;package.json	OK	
+node-libcurl	5.1.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+fuse-napi	2.3.1	unresolved			binding.gyp;package.json	OK	
+ffi	2.3.0	unresolved			binding.gyp;package.json	OK	
+win-version-info	6.0.1	unresolved			binding.gyp;package.json	OK	
+linux-device	2.1.4	unresolved			binding.gyp;package.json	OK	
+windows-foreground-love	0.6.1	unresolved			binding.gyp;package.json	OK	
+@appthreat/sqlite3	9.0.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+keyring_js	1.1.0	unresolved			binding.gyp;package.json	OK	
+multi-spec-parser	0.4.2	unresolved			package.json	OK	
+@cdktf/node-pty-prebuilt-multiarch	0.10.2	unresolved			binding.gyp;package.json	OK	
+duckdb	1.4.4	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@stdlib/strided-napi-addon-arguments	0.2.3	unresolved			package.json	OK	
+node-firebird-native-api	3.3.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+murmurhash-native	3.5.1	unresolved			binding.gyp;package.json	OK	
+wework-chat-node	1.3.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+faiss-node	0.5.1	unresolved			cmake;package.json	OK	
+@cerebruminc/i420-jpeg-encoder	1.2.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@h1x4dev/node-addon-api	2.0.0	unresolved			binding.gyp;package.json	OK	
+weak-napi	2.0.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+zip-node-addon	0.0.11	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-quirc	2.3.0	unresolved			binding.gyp;package.json	OK	
+velociradix	8.3.1	unresolved			package.json	OK	
+ffi-napi-v22	0.0.1	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+libcec	8.1.6	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@vlad-fresha/segfault-raub	2.10.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+pdfium-native	0.9.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+windows-notification-state	2.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+deasync	0.1.31	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-postal	1.3.0	unresolved			binding.gyp;package.json	OK	
+@stdlib/math-base-napi-binary	0.3.3	unresolved			package.json	OK	
+@stdlib/math-base-napi-unary	0.2.7	unresolved			package.json	OK	
+@xan105/remote-thread	1.1.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi	0.4.1	unresolved			package.json	OK	
+@stdlib/napi-argv-float	0.2.3	unresolved			package.json	OK	
+@stdlib/napi-argv-double	0.2.2	unresolved			package.json	OK	
+@stdlib/napi-create-int32	0.0.3	unresolved			package.json	OK	
+@stdlib/assert-napi-equal-types	0.2.3	unresolved			package.json	OK	
+@stdlib/assert-napi-is-type	0.2.3	unresolved			package.json	OK	
+@stdlib/napi-argv-int32	0.2.3	unresolved			package.json	OK	
+ref-napi	3.0.3	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+nice-napi	1.0.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-create-double	0.0.3	unresolved			package.json	OK	
+@stdlib/assert-napi-is-typedarray	0.2.3	unresolved			package.json	OK	
+@stdlib/assert-napi-equal-typedarray-types	0.2.3	unresolved			package.json	OK	
+@stdlib/napi-argv-float64array	0.2.3	unresolved			package.json	OK	
+@stdlib/napi-argv-bool	0.1.1	unresolved			package.json	OK	
+@stdlib/math-base-napi-ternary	0.3.2	unresolved			package.json	OK	
+napi-thread-safe-callback	0.0.6	disabled	test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-argv-int64	0.2.3	unresolved			package.json	OK	
+uiohook-napi	1.5.5	unresolved			binding.gyp;package.json	OK	
+@rclnodejs/ref-napi	4.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-argv-strided-float64array	0.2.3	unresolved			package.json	OK	
+@2060.io/ref-napi	3.0.6	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@rclnodejs/ref-array-di	1.2.2	disabled	test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-argv-float32array	0.2.3	unresolved			package.json	OK	
+@newrelic/native-metrics	13.1.0	unresolved			binding.gyp;package.json	OK	
+@stdlib/napi-argv-strided-float32array	0.2.3	unresolved			package.json	OK	
+@napi-ffi/ffi-napi	4.0.7	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+nftables-napi	0.7.1	unresolved			package.json	OK	
+@stdlib/math-base-napi-quaternary	0.2.4	unresolved			package.json	OK	
+@jellybrick/ffi-napi	4.0.18	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@breush/ffi-napi	4.0.13	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+ref-array-di	1.2.2	unresolved			binding.gyp;package.json	OK	
+selection-hook	2.1.0	conflict	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+napi-thread-safe-callback-cancellable	0.0.7	disabled	test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+smart-whisper	0.8.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@lwahonen/ffi-napi	4.0.12	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@makeomatic/ref-napi	3.0.6	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-argv-strided-complex64array	0.2.3	unresolved			package.json	OK	
+@stdlib/napi-argv-strided-complex128array	0.3.3	unresolved			package.json	OK	
+@stdlib/assert-napi-has-property	0.0.3	unresolved			package.json	OK	
+@stdlib/napi-argv-complex64	0.0.3	unresolved			package.json	OK	
+@stdlib/napi-argv-complex128	0.1.1	unresolved			package.json	OK	
+@sentry/node-native-stacktrace	0.5.2	unresolved			binding.gyp;package.json	OK	
+@stdlib/napi-argv-uint8array	0.2.3	unresolved			package.json	OK	
+napi-ldap	1.0.4	unresolved			binding.gyp;package.json	OK	
+interruptor	2.0.1	unresolved			binding.gyp;package.json	OK	
+numbl	0.4.19	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@breush/ref-napi	4.0.9	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@sentry-internal/node-native-stacktrace	0.5.0	unresolved			binding.gyp;package.json	OK	
+@stdlib/napi-argv-strided-uint8array	0.2.3	unresolved			package.json	OK	
+ref-union-di	1.0.1	unresolved			binding.gyp;package.json	OK	
+ref-array-napi	1.2.2	unresolved			binding.gyp;package.json	OK	
+@tigerconnect/ffi-napi	4.0.3-tc3	disabled	binding.gyp: -fno-exceptions; test/binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+native-machine-id	0.3.11	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@jellybrick/ref-napi	4.0.10	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@louislam/sqlite3	15.1.6	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@stdlib/napi-argv-strided-float64array2d	0.1.1	unresolved			package.json	OK	
+@stdlib/napi-argv-strided-float32array2d	0.1.1	unresolved			package.json	OK	
+@stdlib/napi-create-complex-like	0.1.1	unresolved			package.json	OK	
+@stagetimerio/grandiose	0.2.0	unresolved			binding.gyp;package.json	OK	
+@cherrystudio/mac-system-ocr	0.2.7	unresolved			binding.gyp;package.json	OK	
+node-lzma7z	0.1.3	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@ssxv/node-printer	1.1.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+memcore	1.0.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+hidraw-native	0.2.2	unresolved			binding.gyp;package.json	OK	
+fast-etag-crc32	0.1.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+mongodb-client-encryption	7.2.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@choysen/mac-system-ocr	0.2.8	unresolved			binding.gyp;package.json	OK	
+ioctl-native	0.1.0	unresolved			binding.gyp;package.json	OK	
+zeromq	6.6.0	enabled		CMakeLists.txt: NAPI_CPP_EXCEPTIONS	cmake;package.json	OK	
+native-hdr-histogram	1.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+koffi	3.1.6	disabled	src/koffi/CMakeLists.txt: -fno-exceptions		cmake;package.json	OK	
+kerberos	7.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+fuse-native	2.2.6	unresolved			binding.gyp;package.json	OK	
+@nexusmods/fomod-installer-native	0.13.3	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@stoprocent/bluetooth-hci-socket	2.3.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+native-is-elevated	0.9.0	unresolved			binding.gyp;package.json	OK	
+audify	1.10.1	unresolved			binding.gyp;cmake;meson;package.json	OK	
+@samyok/annoy	1.1.0	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+native-reg	1.1.1	unresolved			binding.gyp;package.json	OK	
+os-dns-native	2.0.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@gristlabs/sqlite3	6.0.1-grist.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+rsa-keypair	2.0.2	unresolved			binding.gyp;package.json	OK	
+@zkochan/fuse-native	0.1.0	unresolved			binding.gyp;package.json	OK	
+utp-native	2.5.3	unresolved			binding.gyp;package.json	OK	
+qpdf-compress	0.7.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@ipshipyard/node-datachannel	0.26.6	unresolved			cmake;package.json	OK	
+@stoprocent/noble	2.8.0	conflict	lib/mac/binding.gyp: -fno-exceptions; lib/win/binding.gyp: -fno-exceptions	lib/mac/binding.gyp: NAPI_CPP_EXCEPTIONS; lib/win/binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+@flyskywhy/react-native-gcanvas	6.0.24	conflict	core/CMakeLists.txt: -fno-exceptions	core/test/linux/CMakeLists.txt: -fexceptions; node/CMakeLists.txt: -fexceptions	cmake;meson;package.json	OK	
+realm	20.2.0	unresolved			binding.gyp;cmake;package.json	OK	
+ibmmq	2.1.9	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+cpu-features	0.0.10	unresolved			binding.gyp;cmake;package.json	OK	
+pprof	5.0.0	unresolved			binding.gyp;package.json	OK	
+@abandonware/bluetooth-hci-socket	0.5.3-12	unresolved			binding.gyp;package.json	OK	
+java	0.18.0	unresolved			binding.gyp;package.json	OK	
+native-watchdog	1.4.2	unresolved			binding.gyp;package.json	OK	
+@vscode/native-watchdog	1.4.6	unresolved			binding.gyp;package.json	OK	
+@kaciras/deasync	1.1.0	unresolved			binding.gyp;package.json	OK	
+node-calls-python	1.13.0	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+lzma-native	8.0.6	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@pokusew/pcsclite	0.6.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+execSync	1.0.2	unresolved			binding.gyp;package.json	OK	
+lru-native2	1.2.6	unresolved			binding.gyp;package.json	OK	
+krb5	0.5.5	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+zlib-sync	0.1.10	unresolved			binding.gyp;package.json	OK	
+contextify	1.0.0	unresolved			binding.gyp;package.json	OK	
+blake2	5.0.1	unresolved			binding.gyp;package.json	OK	
+bluetooth-hci-socket	0.5.1	unresolved			binding.gyp;package.json	OK	
+tree-sitter-gdscript	6.1.0	unresolved			binding.gyp;package.json	OK	
+dbus	1.0.7	unresolved			binding.gyp;cmake;package.json	OK	
+@port-labs/jq-node-bindings	1.0.6	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+png-img	5.0.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-cmake	2.5.1	unresolved			cmake;package.json	OK	
+fibers_node_v8	3.1.5	unresolved			binding.gyp;package.json	OK	
+@meza/curseforge-fingerprint	1.1.43	unresolved			binding.gyp;package.json	OK	
+fibers	5.0.3	unresolved			binding.gyp;package.json	OK	
+node-zopfli-es	2.0.6	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;cmake;package.json	OK	
+@automattic/yara	2.6.3	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+mariasql	0.2.6	unresolved			binding.gyp;package.json	OK	
+hypertube-binaries	3.1.8	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+midi	2.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+nbind	0.3.15	unresolved			package.json	OK	
+inotify	1.4.6	unresolved			binding.gyp;package.json	OK	
+webworker-threads	0.7.17	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+talib	2.0.5	unresolved			binding.gyp;cmake;package.json	OK	
+@snyk/node-dump-stacks	1.8.2	unresolved			binding.gyp;cmake;package.json	OK	
+mfpdev-cli	8.0.2022100206	unresolved			binding.gyp;cmake;package.json	OK	
+genx	2.0.0	unresolved			binding.gyp;cmake;package.json	OK	
+cue-sdk	4.0.84	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+infinitysqlite	1.3.10	conflict	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+gdal-async	3.12.3	unresolved			binding.gyp;cmake;package.json	OK	
+muhammara	6.0.6	disabled	src/deps/PDFWriter/binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@ronomon/quoted-printable	3.2.1	unresolved			binding.gyp;package.json	OK	
+vscode-sqlite3	4.0.11	unresolved			binding.gyp;package.json	OK	
+node-openjtalk-binding	1.3.0	enabled		binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+pwuid	2.0.0	unresolved			binding.gyp;package.json	OK	
+giac	1.23.69823	enabled		binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+fuse-shared-library-linux-arm	1.0.0	unresolved			binding.gyp;package.json	OK	
+heapdump	0.3.15	unresolved			binding.gyp;package.json	OK	
+memoryjs	3.5.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+yencode	1.2.4	unresolved			binding.gyp;package.json	OK	
+buffertools	2.1.6	unresolved			binding.gyp;package.json	OK	
+node-libgpiod	0.6.0	unresolved			binding.gyp;package.json	OK	
+@super-protocol/uplink-nodejs	1.2.20	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+uplink-nodejs	1.2.6	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+fuse-shared-library-darwin	1.1.3	unresolved			binding.gyp;package.json	OK	
+@polarsignals/custom-labels	0.3.9	unresolved			binding.gyp;package.json	OK	
+node-zopfli	2.1.4	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@nodert-win10-au/windows.applicationmodel	0.4.4	unresolved			binding.gyp;package.json	OK	
+node-pty-prebuilt-multiarch	0.10.0-test.3	unresolved			binding.gyp;package.json	OK	
+swisseph	0.5.17	unresolved			binding.gyp;package.json	OK	
+nodehun	3.0.2	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+nobind17	2.0.1	unresolved			binding.gyp;package.json	OK	
+sleep	6.3.0	unresolved			binding.gyp;package.json	OK	
+node-lmdb	0.10.1	unresolved			binding.gyp;package.json	OK	
+electron-edge-js	44.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nodert-win10-21h1/windows.devices.geolocation	0.1.6	unresolved			binding.gyp;package.json	OK	
+leveldown-prebuilt	1.0.8	unresolved			binding.gyp;package.json	OK	
+cracklib	3.0.0	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-au/windows.foundation	0.4.4	unresolved			binding.gyp;package.json	OK	
+@node-lightning/secp256k1	0.28.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+ced	2.0.0	unresolved			binding.gyp;cmake;package.json	OK	
+@langateam/sqlite3	3.1.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-au/windows.data.xml.dom	0.4.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.security.credentials.ui	0.4.4	unresolved			binding.gyp;package.json	OK	
+nodencl	1.4.2	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@astronautlabs/webrtc	0.6.1	unresolved			cmake;package.json	OK	
+@nodert-win10-au/windows.ui.notifications	0.4.4	unresolved			binding.gyp;package.json	OK	
+indy-sdk	1.16.0	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-au/windows.ui.startscreen	0.4.4	unresolved			binding.gyp;package.json	OK	
+cdt-gdb-adapter	1.10.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+mishiro-core	6.3.7	unresolved			binding.gyp;meson;package.json	OK	
+gst-kit	0.3.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+nosql-leveldb	3.0.1	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@vigcoin/cryptonote-util	0.2.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+libyang	0.13.13	disabled	binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@vlasky/quoted-printable	3.2.2	unresolved			binding.gyp;package.json	OK	
+@wireapp/node-addressbook	3.3.1	unresolved			binding.gyp;package.json	OK	
+@nodert-win10/windows.foundation	0.2.96	unresolved			binding.gyp;package.json	OK	
+gdal	0.11.1	unresolved			binding.gyp;cmake;package.json	OK	
+ogg	1.2.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.data.xml.dom	0.4.4	unresolved			binding.gyp;package.json	OK	
+@eyevinn/srt	0.8.3	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+waitpid2	2.0.5	unresolved			binding.gyp;package.json	OK	
+@fugood/whisper.node	1.1.3	unresolved			cmake;package.json	OK	
+text-similarity-node	1.2.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-gyp-hw	1.1.21	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-ulaw	1.0.2	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@huxinhai/mmkv	0.1.7	enabled		binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+@pgql/parse	13.0.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+nwm	1.3.0	unresolved			binding.gyp;package.json	OK	
+sdenv	1.1.3	unresolved			binding.gyp;package.json	OK	
+@genee/dbus	1.0.7-9	unresolved			binding.gyp;cmake;package.json	OK	
+@nodert-win10/windows.storage.streams	0.2.96	unresolved			binding.gyp;package.json	OK	
+macadam	2.0.18	unresolved			binding.gyp;package.json	OK	
+@realtimex/node-llama-cpp	0.283.0	enabled		llama/CMakeLists.txt: -fexceptions	cmake;package.json	OK	
+node-webcodecs	1.3.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+get-console-process-list	1.0.5	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+canvas	3.2.3	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+electron-application-desktop-toolbar	1.2.2	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.ui.notifications	0.4.4	unresolved			binding.gyp;package.json	OK	
+caeneus-native	0.1.3	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-20h1/windows.media.speechrecognition	0.1.0	unresolved			binding.gyp;package.json	OK	
+uriparser	2.4.0	unresolved			binding.gyp;cmake;package.json	OK	
+@co_snow/hello	0.0.57	unresolved			package.json	OK	
+librsvg	0.7.0	unresolved			binding.gyp;package.json	OK	
+rocksdb-lite	1.1.6	disabled	binding.gyp: -fno-exceptions; deps/leveldb/leveldb-rocksdb/CMakeLists.txt: -fno-exceptions; deps/leveldb/leveldb-rocksdb/tools/rdb/binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+libwebview-nodejs	0.12.2	unresolved			cmake;package.json	OK	
+@nodert-win10/windows.media.playback	0.2.96	unresolved			binding.gyp;package.json	OK	
+@zowe/db2-for-zowe-cli	6.1.17	disabled	node_modules/ibm_db/binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@zkochan/fuse-shared-library-darwin	0.0.0	unresolved			binding.gyp;package.json	OK	
+tree-sitter-fsharp	0.3.11	unresolved			binding.gyp;package.json	OK	
+@plasosdk/mouse_position_reporter	1.0.1	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-cu/windows.ui.startscreen	0.4.4	unresolved			binding.gyp;package.json	OK	
+mecab-gyp	1.2.0	enabled		binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@nodert-win10-cu/windows.ui.notifications	0.4.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win10/windows.media	0.2.96	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-cu/windows.applicationmodel	0.4.4	unresolved			binding.gyp;package.json	OK	
+netlinkwrapper	2.0.2	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+fullname-native	3.0.0	unresolved			binding.gyp;package.json	OK	
+@antcube/capnp	0.5.52	unresolved			binding.gyp;cmake;package.json	OK	
+node-syslog	1.2.0	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.security.credentials.ui	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-cu/windows.data.xml.dom	0.4.4	unresolved			binding.gyp;package.json	OK	
+kepmon	0.4.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@sentry/node-cpu-profiler	2.4.3	unresolved			binding.gyp;package.json	OK	
+@discordjs/opus	0.10.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@trufflesuite/bigint-buffer	1.1.10	unresolved			binding.gyp;package.json	OK	
+mountutils	2.0.8	unresolved			binding.gyp;package.json	OK	
+usb-detection	4.14.2	unresolved			binding.gyp;package.json	OK	
+@thiagoelg/node-printer	0.6.2	unresolved			binding.gyp;package.json	OK	
+node-pty-prebuilt	0.7.6	unresolved			binding.gyp;package.json	OK	
+@timokunze/node-printer	0.6.34	unresolved			binding.gyp;package.json	OK	
+raknet-native	1.2.3	unresolved			cmake;package.json	OK	
+@farcaster/rocksdb	5.5.0	disabled	binding.gyp: -fno-exceptions; deps/rocksdb/rocksdb/CMakeLists.txt: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@grandchef/node-printer	0.8.0	unresolved			binding.gyp;package.json	OK	
+lzo-decompress	1.0.11	unresolved			binding.gyp;package.json	OK	
+webbluetooth	3.7.0	unresolved			cmake;package.json	OK	
+@u4/opencv4nodejs	7.1.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@archwayhq/keyring-go	0.2.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+logosdb	1.0.1	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@lastapp/node-printer	0.8.0	unresolved			binding.gyp;package.json	OK	
+@js-ak/watchdog	1.5.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+heapdump-prebuild	0.0.6	unresolved			binding.gyp;package.json	OK	
+@woovi/node-printer	1.0.1	unresolved			binding.gyp;package.json	OK	
+leveldb-zlib	1.2.0	unresolved			cmake;package.json	OK	
+@driftlog/tree-sitter-dart	1.0.4	unresolved			binding.gyp;package.json	OK	
+ldap-native	0.1.4	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@elchetz/cld	2.8.5	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@codeplaydata/dbc2dbf	1.1.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@luckykiet/node-printer	1.0.3	unresolved			binding.gyp;package.json	OK	
+@acomsys/dash-utils	0.0.17	unresolved			cmake;package.json	OK	
+vsfragments_node	0.0.42	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@8crafter/leveldb-zlib	1.6.0	unresolved			cmake;package.json	OK	
+node-snap7-micro-client	0.1.0	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@guilherme_souza/node-printer-updated-fork	0.6.17	unresolved			binding.gyp;package.json	OK	
+inkdrop-keyboard-layout	3.0.2	unresolved			binding.gyp;package.json	OK	
+@trkyshorty/node-lzf	1.1.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+spellchecker-prebuild	3.7.0	unresolved			binding.gyp;package.json	OK	
+@mgarnier11/my-canvas	1.0.3	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+font-ls	0.6.6	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+jsmeow	1.0.9	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@dwieeb/node-pty-prebuilt	0.8.1	unresolved			binding.gyp;package.json	OK	
+@faressoft/node-pty-prebuilt	0.9.0	unresolved			binding.gyp;package.json	OK	
+@tbalegas/node-printer	1.0.2	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+native-recorder-nodejs	1.2.0	enabled		CMakeLists.txt: NAPI_CPP_EXCEPTIONS	cmake;package.json	OK	
+cquant	0.1.5	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;cmake;package.json	OK	
+@todesktop/robotjs-prebuild	0.6.28	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@cocktailpeanut/node-pty-prebuilt-multiarch	0.11.16	unresolved			binding.gyp;package.json	OK	
+@codeporter/robotjs	0.6.0	unresolved			binding.gyp;package.json	OK	
+@zhuolinho/babel-preset-abc	0.3.13	conflict	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+ingescape	4.6.5	unresolved			binding.gyp;package.json	OK	
+@damonsmith/node-printer	0.7.3	unresolved			binding.gyp;package.json	OK	
+@tachyon-ipc/core	0.5.1	unresolved			cmake;package.json	OK	
+mongodb-js-zstd-wuc656	2.0.5	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+w.process.tree.windows	0.3.78	unresolved			binding.gyp;package.json	OK	
+glome-deasync	1.0.10	unresolved			binding.gyp;package.json	OK	
+@flovy/node-printer	0.6.3	unresolved			binding.gyp;package.json	OK	
+@niick555/node-printer	1.0.2	unresolved			binding.gyp;package.json	OK	
+@fqlan/add-example-prebuild	1.0.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@oleavr/prebuild	6.2.0	unresolved			binding.gyp;package.json	OK	
+@lemonbread/node-printer	0.6.3	unresolved			binding.gyp;package.json	OK	
+encore.hdf5.binding	0.3.55	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+@s-h-a-d-o-w/speech-recorder	2.1.12	conflict	binding.gyp: -fno-exceptions	binding.gyp: NAPI_CPP_EXCEPTIONS	binding.gyp;package.json	OK	
+javonet-binaries	2.6.16	unresolved			binding.gyp;package.json	OK	
+@lgeiger/napi-prebuild-starter	0.3.1	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-addon-example	0.1.5	unresolved			binding.gyp;package.json	OK	
+mk-node-addon-example	0.1.8	unresolved			binding.gyp;package.json	OK	
+node-addon-example2	0.1.3	unresolved			binding.gyp;package.json	OK	
+workspace-publishing	2.0.3	unresolved			binding.gyp;package.json	OK	
+@deepfocus/get-windows	1.0.21	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+hello_publishing-native-pre-gyp	1.0.4	unresolved			binding.gyp;package.json	OK	
+@ladvace/get-windows	2.0.4	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+tree-sitter	0.25.1	unresolved			binding.gyp;package.json	OK	
+argon2	0.45.1	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+arkime-iptrie	0.0.10	unresolved			binding.gyp;package.json	OK	
+keysender	2.4.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+electron-printer	0.0.5	unresolved			binding.gyp;package.json	OK	
+tree-sitter-4dm	2.11.0	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.devices.printers	0.4.4	unresolved			binding.gyp;package.json	OK	
+@ampretia/x509	0.4.10	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.foundation	0.4.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win10/windows.data.xml.dom	0.2.96	unresolved			binding.gyp;package.json	OK	
+cppunitlite	1.0.0	unresolved			binding.gyp;package.json	OK	
+sqlite3_wins	3.3.15	unresolved			binding.gyp;package.json	OK	
+raw-socket	1.8.1	unresolved			binding.gyp;package.json	OK	
+autostock-simulation-tools	2.7.2	unresolved			binding.gyp;package.json	OK	
+@nodert-win10/windows.applicationmodel	0.2.96	unresolved			binding.gyp;package.json	OK	
+jpeg-turbo	0.4.0	unresolved			binding.gyp;cmake;package.json	OK	
+@nodert-win10/windows.ui.startscreen	0.2.96	unresolved			binding.gyp;package.json	OK	
+@plugos-org/node-llama-cpp	3.15.1	enabled		llama/CMakeLists.txt: -fexceptions	cmake;package.json	OK	
+@nodert-win10-au/windows.storage.streams	0.4.4	unresolved			binding.gyp;package.json	OK	
+ms-flakeless	4.7.2	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.gaming.xboxlive.storage	0.1.6	unresolved			binding.gyp;package.json	OK	
+win-audio	3.0.5	unresolved			binding.gyp;package.json	OK	
+@nodert-win10/windows.ui.notifications	0.2.96	unresolved			binding.gyp;package.json	OK	
+xprofiler	3.1.0	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.applicationmodel.datatransfer.sharetarget	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-au/windows.media.playback	0.4.4	unresolved			binding.gyp;package.json	OK	
+@sentry-internal/node-cpu-profiler	2.4.1	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-19h1/windows.globalization.numberformatting	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.management.policies	0.1.6	unresolved			binding.gyp;package.json	OK	
+nodejs-java	1.0.16	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.media.miracast	0.1.6	unresolved			binding.gyp;package.json	OK	
+phplike	2.5.12	enabled		binding.gyp: -fexceptions; src/cpp/basic/src/binding.gyp: -fexceptions; src/cpp/basic/tests/binding.gyp: -fexceptions; src/cpp/curl/src/binding.gyp: -fexceptions; src/cpp/exec/bin/binding.gyp: -fexceptions	binding.gyp;package.json	OK	
+abletonlink	0.1.3	conflict	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS	binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+profoundjs-fibers	2.7.5	unresolved			binding.gyp;package.json	OK	
+iconv	3.0.1	unresolved			binding.gyp;package.json	OK	
+guetzli-js	1.0.9	unresolved			binding.gyp;cmake;package.json	OK	
+@nodert-win10-au/windows.media	0.4.4	unresolved			binding.gyp;package.json	OK	
+cryptonote-util-bbscoin-gcc6	1.0.4	conflict	binding.gyp: -fno-exceptions	binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
+detect-character-encoding	0.9.0	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.phone.system	0.1.6	unresolved			binding.gyp;package.json	OK	
+@dolthub/doltlite	0.11.55	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS		binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.applicationmodel.userdatatasks	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-cu/windows.foundation	0.4.4	unresolved			binding.gyp;package.json	OK	
+@github/keytar	7.10.6	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.ui.shell	0.4.4	unresolved			binding.gyp;package.json	OK	
+node-hmd	0.2.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-datachannel	0.33.2	unresolved			cmake;package.json	OK	
+@nodert-win10-rs4/windows.devices.lights	0.4.4	unresolved			binding.gyp;package.json	OK	
+x509	0.3.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs3/windows.applicationmodel	0.4.4	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.ui.composition	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.media.capture	0.1.6	unresolved			binding.gyp;package.json	OK	
+thunder-node-sdk-lite-m	0.1.16	unresolved			binding.gyp;package.json	OK	
+@nodert-win10-rs4/windows.storage.streams	0.4.4	unresolved			binding.gyp;package.json	OK	
+native-keymap	3.3.9	unresolved			binding.gyp;package.json	OK	
+zlib	1.0.5	unresolved			package.json	OK	
+cld	2.10.1	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nebula-contrib/nebula-nodejs	3.0.3	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.ui.notifications	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.ui.input.spatial	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.media.protection.playready	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.networking.pushnotifications	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.phone.system.userprofile.gameservices.core	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.applicationmodel.calls.background	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.media.import	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.applicationmodel.calls	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.applicationmodel.userdatatasks.dataprovider	0.1.6	unresolved			binding.gyp;package.json	OK	
+contarejavalinux	0.11.17	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.ui.text.core	0.1.6	unresolved			binding.gyp;package.json	OK	
+@nodert-win11-22h2/windows.security.authentication.web.core	0.1.6	unresolved			binding.gyp;package.json	OK	
