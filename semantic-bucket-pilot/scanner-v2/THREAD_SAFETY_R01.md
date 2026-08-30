@@ -109,16 +109,81 @@ corpus (SecVulEval's "insufficient", Juliet's "pipeline study, not a powered exp
 No detection capability exists for this property yet; this file freezes the confirmatory
 target a future capability would be measured against, nothing more.
 
+## Capability 1: missing-unlock-before-return (`lock_balance_verdict.py`)
+
+Built on the **real, Joern-derived raw facts** (`cfg_edges.tsv`, `calls.tsv`,
+`arguments.tsv`, `returns.tsv` — the same exporter output the destination-capacity-write
+capabilities consume), not a diff-text heuristic. For each registered lock-acquire call,
+walks the real CFG forward, treating a matching unlock call **on the same object** (text-
+identity match on the call's first argument, conservative/abstain-first, same posture as
+the write property's capabilities) as a barrier; any `return` reachable without first
+crossing that barrier is a `LOCK_LEAK_CANDIDATE` — open finding, never a certainty. `LOCK_
+FUNCS`/`UNLOCK_FUNCS` reuse `thread_freeze.py`'s exact evidence-based registered-function
+list.
+
+**Two real design bugs found and fixed via fixture testing before any real-code
+validation** (all 6 controls in `lockcap_probe.c`, run through real Joern):
+
+1. **Lock-call success/failure branch confusion.** The naive version treated the lock
+   call's own `if (LOCK(...) != 0) return err;` failure-return as if it were a leak — the
+   object was never acquired on that path, so a return there is correct, not a bug.
+   `cfg_edges.tsv` carries no true/false branch label, so this can't be read off raw CFG
+   topology directly. Added `guard_success_start()`: locates the comparison call
+   immediately downstream of the lock call (skipping Joern's intermediate non-Call CFG
+   nodes) whose code contains the lock call's own code, then of its two successors,
+   identifies the one that is **the** genuine failure branch by object identity — every
+   forward path from it reaches a `return` before touching the SAME lock object via any
+   LOCK/UNLOCK call — and starts the leak-search from the *other* successor instead. Two
+   iterations were needed to get the "which branch is which" criterion right: an early
+   version wrongly flagged `<operator>.minus` (just computing the literal `-1` for the
+   return value) as "real work," and a later version wrongly flagged a failure branch that
+   unlocks a **different, unrelated** object as non-trivial — both caught by the
+   `negTwoObjectsBalanced`/`vulnMissingUnlock` fixture controls before any real code was
+   touched.
+2. **Off-by-one in the guard-search helper.** `next_call_nodes()` initially included its
+   own start node as a "found" call (since the lock call itself is, trivially, a call),
+   short-circuiting before ever walking to its successors. Caught by the same fixture
+   suite returning identical (wrong) output across two supposedly-different fix attempts.
+
+**Validated (`check_lock_balance.py`, 11/11):**
+- All 6 synthetic controls (`lockcap_probe.c`): the missing-unlock bug flagged with
+  *exactly* the real bug's return, not the guard's; the fixed version, the fully-balanced
+  negative control, and the two-different-locks ambiguity control all correctly produce
+  zero findings; the unregistered-lock-name negative control proves the registration table
+  is load-bearing (same pattern as `PORT_Memcpy`'s own negative control on the write side).
+- **Development-site recovery**: `Dtls13RtxAddAck` copied **verbatim** from the real
+  vulnerable wolfSSL commit (`7efc962d`, the site `case_e062ef20`/CVE-2026-5264 was mapped
+  from) — the capability flags **exactly** the two returns the real fix (`3034dd9e`) adds
+  an unlock to (the duplicate-record path and the allocation-failure path), no more, no
+  less, with the lock object correctly identified as `&ssl->dtls13Rtx.mutex`.
+- **No false positive on the real fix**: the same function with the real fix applied
+  produces zero findings.
+
+**Explicit, evidenced limitation — a different representation shape is out of scope.**
+`case_644b3e3c` (`Dtls13RtxRemoveCurAck`, the OTHER original motivating site) is **not**
+recoverable by this capability: at its vulnerable revision the function has **no lock call
+at all** — the bug is a totally absent critical section, not an existing lock with an
+incomplete release. This capability's shape (missing-unlock-given-an-existing-lock) simply
+doesn't apply; recognizing "a critical section that should exist but doesn't" is a
+different, harder capability (needs an external contract for which data needs protection,
+not just "is there a call to a registered lock function") — explicitly not attempted here,
+same "don't fabricate scope" discipline as the write property's own capability boundaries.
+
 ## What's out of scope here
 
-- **No detection capability.** `oob_runtime_capacity_verdict`-equivalent for lock-safety
-  (recognize a missing-unlock-before-return pattern, etc.) is unbuilt. Building one and
-  measuring it against `study/postcutoff_thread/FROZEN_heldout.json` is the natural next
-  step, mirroring exactly how Capability 1 followed the write property's own corpus freeze.
+- **The "should there be a lock at all" shape** (see `case_644b3e3c` above) — a
+  structurally different, harder capability than missing-unlock-before-return.
 - **LOCK/UNLOCK evidence beyond wolfSSL** — pthreads/Zephyr/kernel/NSPR/Win32 entries are
   standard-API assumptions, not verified against real headers one by one the way `wc_LockMutex`
   was. A pass reading Zephyr's actual mutex API naming against its real bug sites (mirroring
   how `XMEMCPY` was confirmed for wolfSSL) would likely recover more sites.
+- **Measurement against the other 4 corpus sites** (`case_644b3e3c` itself,
+  `case_267d5a93`, `case_a6eb1f6d`, `case_f21da596`) — only `case_e062ef20` was used for
+  development-site recovery this round. `case_267d5a93` in particular, on closer reading of
+  its real vulnerable revision, looks like it may be a capacity/overflow bug (unbounded ACK-
+  list growth) whose fix incidentally touches lock/unlock code, not a genuine lock-balance
+  bug in its own right — flagged here, not resolved, since it wasn't re-examined against
+  this capability specifically.
 - **No re-audit of the write-property corpus for false negatives caused by lock-related CWE
   mislabeling** — the `case_644b3e3c`/`case_e062ef20` CWE-122 mislabeling found here is the
   same *direction* of noise (a real bug tagged with an unrelated CWE) as the write property's
