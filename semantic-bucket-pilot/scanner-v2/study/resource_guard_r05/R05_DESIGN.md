@@ -101,7 +101,15 @@ apart from a directly-resolved R04 one -- never silently merged into the same-lo
   local, or a call passed directly as another call's argument, is NOT covered by this pass
   and falls through unrecovered (abstains, does not guess). Real corpus usage (Cartesi,
   sqlite3) predominantly uses the covered pattern; this boundary is stated here so it is not
-  discovered as a surprise later.
+  discovered as a surprise later. Confirmed real in Cartesi's own `ReadConsoleOutput` (a bare
+  `return Napi::Buffer<uint8_t>::New(env, 0);`, see `CARTESI_RECOVERY.md`).
+- A base-class upcast performed AT the acquisition site itself (e.g.
+  `Napi::Value buf = static_cast<Napi::Value>(Napi::Buffer<uint8_t>::New(env, 0));`) is also
+  NOT covered -- the local's own declared type is the base class (`Napi.Value`), not the
+  curated `result_type_forms`, so this correctly falls through unrecovered rather than being
+  matched. Confirmed real in the `@gjsify/node-gi` blind test (`BLIND_TEST.md`,
+  `src/marshal.cc:1159`) -- not previously observed in Cartesi or the r05_controls fixture,
+  recorded here once found rather than only in the blind-test writeup.
 - The underlying c2cpg resolution trigger itself remains unexplained (see
   `AB_FIXTURE_RESULT.md`) -- R05 recovers from the OBSERVED, CONFIRMED behavior, not from a
   root-caused mechanism.
