@@ -41,10 +41,17 @@ revision `82f0f971` (the CVE-2020-1896 vulnerable revision — the fix commit do
 this class). Constructor matching is on **parameter count**, not exact type text — a real,
 confirmed c2cpg quirk (below) makes exact-type matching unsound.
 
-The analysis logic in `resource_guard_verdict.py` never special-cases the string
-`"ScopedNativeCallFrame"` or `"overflowed"` — it reads the contract table generically. The
-whole mechanism was exercised, unmodified, against a class named `PlainBuffer` in the
-synthetic controls (below) to prove this.
+**Correction to how this was described when first built:** this is not "no hardcoding."
+`ScopedNativeCallFrame` and `overflowed()` ARE explicitly encoded — as data, in
+`resource_contracts.py`, not as string literals inside `resource_guard_verdict.py`'s
+control flow. The accurate claim: **the analysis algorithm is not Hermes-specific; it is
+parameterized by an explicit resource contract.** R01 validates *structural*
+generalization *within* that one contract — different control-flow shapes, different use
+patterns, different call sites — not generalization to a different contract. The
+`PlainBuffer` synthetic control (below) proves the algorithm does not guess semantics for
+an *unmodeled* class — it abstains — but abstaining correctly on an absent contract is not
+the same claim as correctly handling a *second, present* one. That is untested here; see
+"Mining beyond Hermes" below for exactly what is and isn't covered.
 
 ## Verdicts
 
@@ -183,16 +190,31 @@ them, verbatim, run through the real pipeline:
   groups → correctly `RESOURCE_GUARD_ESTABLISHED`, with `backward_attacker_trace` correctly
   following the arithmetic expression through to the real `nCaptures` parameter (3 hops).
 
-**Honest conclusion:** this capability is validated against exactly **one** real
-vulnerability (CVE-2020-1896) and its own fix, 12 synthetic controls, and 3 additional
-real, independently-written, currently-bug-free call sites of the same curated class (which
-demonstrate the general algorithm — not just fixture-specific tuning — correctly handles
-different attacker-influence sources and different use shapes without false-positiving).
-It does **not** have independent confirmation of catching a *second* real CVE — the corpus
-mined here doesn't contain one, and no claim of broader generalization (beyond this one
-class, this one codebase) is made. Extending the curated contract table to other classes,
-in other codebases, with their own real evidence, is future work, not implied by anything
-here.
+**What this proves:**
+- The scanner recognizes the property across different control-flow and use shapes.
+- It distinguishes missing, correct, late, wrong-object, and unresolved guards.
+- It works on multiple real call sites without function-specific rules.
+- The Hermes vulnerability is correctly differentiated from patched and safe code.
+
+**What this does not prove:**
+- Generalization to a different resource class.
+- Generalization to another project.
+- Automatic discovery of an unfamiliar resource's failure semantics.
+- Detection of a second real vulnerability.
+
+**Conclusion:** RESOURCE-GUARD-R01 successfully detects the Hermes vulnerability and
+generalizes *structurally* across the explicitly modeled Hermes resource contract.
+Cross-contract and cross-project generalization remain untested. That is still a real and
+useful result — just one level short of a broad generalization claim.
+
+**The next legitimate test** is blind evaluation on a second contract: a different
+project + a different resource class + a different failure predicate + the same underlying
+create → validate → use property. R01 is frozen (below) before that search starts. If a
+second API can be added *only* by supplying a new contract entry, and the *unchanged*
+algorithm then handles its unsafe and safe sites correctly, that demonstrates cross-contract
+generalization. If it catches a previously-unseen vulnerable site *before* being adjusted
+around that site, that demonstrates meaningful cross-project vulnerability generalization.
+See `RESOURCE_GUARD_R02.md` for that pass, once it exists.
 
 ## What's out of scope here
 
