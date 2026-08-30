@@ -191,14 +191,13 @@ streamPDF(void *c, const uint8_t *data, unsigned len) {
 }
 ```
 
-A real, unguarded acquisition -- `buf` is used immediately, with no `IsEmpty()`/
-`IsExceptionPending()` check anywhere in the function. A minimally-stubbed, statement-
-faithful fixture (`study/resource_guard_r02/raw_case_node_canvas_streampdf/fixture_source.cpp`,
-real TODO comment preserved) was compiled through the same real Joern v4.0.608 pipeline as
-every other fixture in this project (`c2cpg.sh` -> `export_c_cpp_facts_v03.sc`), and run
-(step E) against the FROZEN `REAL_CONTRACTS` exactly as committed -- no edits to
-`resource_guard_verdict_r02.py` or `resource_contracts_r02.py` before or during this run
-(md5s unchanged from the Freeze section above, re-checked immediately before running).
+A minimally-stubbed, statement-faithful fixture
+(`study/resource_guard_r02/raw_case_node_canvas_streampdf/fixture_source.cpp`, real TODO
+comment preserved) was compiled through the same real Joern v4.0.608 pipeline as every other
+fixture in this project (`c2cpg.sh` -> `export_c_cpp_facts_v03.sc`), and run (step E) against
+the FROZEN `REAL_CONTRACTS` exactly as committed -- no edits to `resource_guard_verdict_r02.py`
+or `resource_contracts_r02.py` before or during this run (md5s unchanged from the Freeze
+section above, re-checked immediately before running).
 
 **Recorded result** (`expected_output.json` in that directory):
 
@@ -207,11 +206,23 @@ every other fixture in this project (`c2cpg.sh` -> `export_c_cpp_facts_v03.sc`),
  "contract_pool": "real", "findings": [], "schema": "resource-guard-verdict-r02/0.1"}
 ```
 
-Zero findings. R02 **correctly abstained** rather than guessing -- this is not a null
-result to be explained away, it is the algorithm doing exactly what it is designed to do
-when a real site does not match its curated contract. Inspecting the real exported facts
-(`calls.tsv`, decoded) shows why, and reveals THREE independent, honestly-disclosed reasons,
-not one:
+**Correction to the initial write-up of this result.** This site is not an applicable test
+of the curated contract, and the zero-findings result must not be read as R02 "failing to
+detect" anything at this call site. The curated contract
+(`REAL_CONTRACTS["Napi::Buffer"]["result_mfn_prefixes"]`) targets the 2-argument ALLOCATING
+overload, `Buffer<T>::New(napi_env, size_t length)`. The real call here is the 3-argument
+EXTERNAL-DATA overload, `Buffer<T>::New(napi_env, T* data, size_t length)` -- a different
+overload of the same family, wrapping caller-supplied storage instead of allocating new
+storage, with different failure semantics that were never curated into this contract. The
+correct reading is: **the scanner correctly found the call family (`ACQUISITION_NAME_MATCH_
+CANDIDATE`), then correctly abstained because the signature is outside its contract
+(`ACQUISITION_SIGNATURE_UNRECOGNIZED`).** This is an out-of-contract blind test, not a missed
+detection -- there is no vulnerability claim of any kind to make or fail to make here, because
+the contract this scanner enforces was never applicable to this call in the first place.
+
+Inspecting the real exported facts (`calls.tsv`/`locals.tsv`, decoded) shows two further,
+independently-confirmed facts about why nothing beyond `_UNRECOGNIZED` could have fired, kept
+here as disclosed structural notes, not as reasons the site "should" have been flagged:
 
 1. **The c2cpg frontend itself never resolves the call.** The real `Buffer<uint8_t>::New(...)`
    call's own exported `methodFullName` is `<unresolvedNamespace>.New:<unresolvedSignature>(3)`
@@ -222,50 +233,67 @@ not one:
    (`ACQUISITION_NAME_MATCH_CANDIDATE`), then correctly rejected it once the qualified-prefix
    check failed (`ACQUISITION_SIGNATURE_UNRECOGNIZED`) -- exactly the same code path exercised
    by control 12 (`raw_r02c12_unrelated_class`), doing its job on a real site.
-2. **Real overload arity mismatch, independent of (1).** This call site uses the 3-argument
-   external-data overload (`Buffer<T>::New(napi_env, T* data, size_t length)`), not the
-   2-argument allocating overload (`Buffer<T>::New(napi_env, size_t length)`) curated in
-   `REAL_CONTRACTS["Napi::Buffer"]["result_mfn_prefixes"]` before this test was run. Even if
-   (1) had resolved cleanly, the param-count check would still reject this call as
-   `VALUE_ACQUISITION_SEMANTICS_UNRESOLVED` (`ACQUISITION_SIGNATURE_PARAM_COUNT_UNRECOGNIZED`)
-   -- the exact behavior control 13 (`raw_r02c13_no_size_argument`) exercises.
-3. **Real base-class-typed LHS, independent of (1) and (2).** The real code declares
-   `Napi::Value buf = ...` -- `buf`'s exported declared type is `Value` (confirmed in
-   `locals.tsv`: `['...', 'buf', 'Value buf', 'Value', '64']`), not `Buffer` (the contract's
-   `result_type`). Even with (1) and (2) both resolved, RESOURCE-OBJ-ID-R02's `type_matches()`
-   requires an EXACT `result_type` match and has no notion of base-class widening/upcast --
-   this would independently block object-identity binding to the failure predicate and the
-   downstream use.
+2. **Real base-class-typed LHS.** The real code declares `Napi::Value buf = ...` -- `buf`'s
+   exported declared type is `Value` (confirmed in `locals.tsv`: `['...', 'buf', 'Value buf',
+   'Value', '64']`), not `Buffer` (the contract's `result_type`). Even on an applicable call
+   of the curated overload, RESOURCE-OBJ-ID-R02's `type_matches()` requires an EXACT
+   `result_type` match and has no notion of base-class widening/upcast -- a real, disclosed
+   scope boundary worth naming, independent of this particular site's inapplicability.
 
-Each of these was identified as a real possibility BEFORE running the pipeline (see the
-prior "select a package" reasoning); all three are now confirmed against the real exported
-facts, not assumed. None was fixed before this result was recorded, per the required
-sequence (step F: do not modify R02 in response to the package result until the result is
-recorded) -- this section documents that unmodified result.
+None of this was fixed before the result was recorded, per the required sequence (step F:
+do not modify R02 in response to the package result until the result is recorded) -- and
+none of it should now be "fixed" retroactively to make this specific site match. Widening
+`REAL_CONTRACTS["Napi::Buffer"]` to also cover the 3-argument external-data overload would be
+a real, legitimate, SEPARATE contract addition (with its own citation-backed failure
+semantics, since an external-data `Buffer` may have different validity/lifetime behavior
+than an allocating one) -- not a retune of this result, and not attempted here.
 
-**What this establishes, and what it does not:**
+**A separate, distinct issue is visible in the real source and must not be folded into this
+contract's property.** `streamPDF`'s own comment states: "we're returning a pointer to the
+data in a vector in a class with automatic storage duration. If the canvas goes out of scope
+while we're in the handler, a use-after-free could happen." That is a LIFETIME/OWNERSHIP
+defect class (the wrapped external buffer may outlive, or be outlived by, its backing
+storage) -- categorically different from `FALLIBLE_VALUE_ACQUISITION` (whether the
+acquisition call itself succeeded) or `FALLIBLE_BOUNDED_RESOURCE` (capacity). R02 makes no
+claim about it, and it must not be counted as evidence for or against R02 in any direction.
 
-- It does NOT establish cross-project vulnerability generalization. node-canvas's `streamPDF`
-  remains a genuine, real, still-unguarded acquisition site (worth reporting to that project
-  independently of this exercise), but R02 as frozen did not detect it -- reporting a
-  detection here would be false.
-- It DOES establish that R02, faced with a real site outside its curated contract's exact
-  scope, abstains cleanly (zero findings, explicit `_UNRECOGNIZED` classification) rather
-  than fabricating a verdict -- the same non-guessing discipline R01's own controls enforce
-  (e.g. R01's `ACQUISITION_SIGNATURE_UNRECOGNIZED` behavior), now confirmed to hold on a
-  real, un-curated, real-world call site, not just on synthetic negative controls.
-- Reason (1) (frontend template-resolution) is a boundary of the underlying Joern export,
-  not of R02's own reasoning -- worth naming explicitly so it isn't mistaken for an R02 gap.
-- Reasons (2) and (3) are real, disclosed SCOPE limitations of `REAL_CONTRACTS["Napi::Buffer"]`
-  as curated: it covers exactly one overload and exactly one declared-type shape, both
-  narrower than real node-addon-api usage in the wild. Widening the contract to cover the
-  3-argument overload and/or base-class-typed results is a legitimate follow-up, but it is a
-  SEPARATE, explicitly-labeled step from this blind test, not a silent retune of this
-  result -- and per (1), it would likely not even help this specific call site, since the
-  frontend never resolves its methodFullName regardless of which overload signature is
-  curated.
+**What this establishes, and what it does not -- stated precisely:**
 
-This blind test's honest outcome is therefore: **cross-contract structural portability
-established** (the 16 controls), **safe/unsafe real-pattern recognition NOT established on
-this real site** (frontend resolution + contract scope both fell short, independently and
-for named reasons), and **no cross-project vulnerability generalization claim is made**.
+- **Schema-level factory support:** established synthetically (the 16 controls, `STATIC_
+  FACTORY` and `INSTANCE_FACTORY` both exercised, 20/20).
+- **Cross-contract structural portability:** NOT yet established on applicable real code --
+  no real call site matching the curated contract's exact overload and result type has been
+  run through R02 yet. The synthetic controls establish the algorithm generalizes on its own
+  terms; they do not by themselves establish it against a real, un-curated codebase.
+- **Real node-canvas site:** correctly recorded as `ACQUISITION_SIGNATURE_UNRECOGNIZED` --
+  an out-of-contract abstention, not a detection attempt that failed, and not evidence that
+  `streamPDF` is or is not vulnerable. `IsEmpty()`-shaped predicates prove handle validity
+  under an applicable exception configuration; they do not prove buffer capacity, and a
+  missing check is not, by itself, evidence of CWE-787 or any other memory-corruption defect
+  -- this holds independently of whether this contract even applied here.
+- **Cross-project vulnerability generalization:** not established.
+
+## Next blind target: required shape (must be verified BEFORE running the pipeline)
+
+Per the correction above, the next real site selected for a blind test must satisfy ALL of
+the following before it is run -- verified from the real source, not assumed, exactly as
+`REAL_CONTRACTS["Napi::Buffer"]` itself was verified before freezing:
+
+- `Buffer<T>::New(env, attacker_influenced_length)` -- the two-argument ALLOCATING overload,
+  matching `result_mfn_prefixes` as curated (not the three-argument external-data overload
+  node-canvas used).
+- The length argument is attacker-influenced (not a compile-time-constant/literal size --
+  see control 14's `SIZE_ATTACKER_INDEPENDENT` behavior, which correctly produces no finding
+  for a provably-safe constant size).
+- An exceptions-disabled build configuration is established for the call site (or at least
+  plausible/documented for the project), matching this contract's own disclosed
+  `applicable_exception_configuration` assumption -- not an exceptions-enabled site, where a
+  missing `IsEmpty()` check is not the same defect at all.
+- The returned `Buffer`/`Value` is subsequently used (a real downstream operation exists to
+  evaluate guard-dominance against).
+- `IsEmpty()` (or `env.IsExceptionPending()`, the modeled-vs-unmodeled distinction already
+  documented above) is the semantically applicable guard for that configuration.
+
+R02 stays frozen (unchanged md5s, reconfirmed above) while this search continues -- the
+current abstention on node-canvas is the correct, expected behavior of the frozen algorithm
+on an out-of-contract site, not a defect to patch around.
