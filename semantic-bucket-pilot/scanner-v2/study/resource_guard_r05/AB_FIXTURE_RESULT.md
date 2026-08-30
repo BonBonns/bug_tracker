@@ -69,3 +69,17 @@ class, across different call sites in the same or different packages) -- R05's o
 matching (`R05_DESIGN.md`) must accept BOTH forms as equivalent identity evidence for the
 same curated type, not just one, and this file records that requirement so it is not lost
 when R05 is implemented.
+
+## Further corroborating real data point (from `r05_controls/fixture_source.cpp`)
+
+Building R05's negative-control fixtures surfaced one more real, relevant fact: in a file
+that `#include <napi.h>`, even TWO totally UNRELATED classes declared in the SAME file
+(`Other::Buffer`, a lookalike; `Widget`, unrelated) -- neither of which is itself part of
+node-addon-api -- also resolve their own `::New(...)` calls to `<unresolvedNamespace>`,
+exactly like `Napi::Buffer`/`Napi::TypeError` do. Both classes resolved CLEANLY in the
+`ab_fixture_*` isolation tests above, which never included real `napi.h`. This corroborates,
+rather than newly explains, the "trigger not isolated" conclusion: whatever real napi.h does
+that breaks static-factory resolution is not confined to node-addon-api's own types -- it
+appears tied to napi.h's own presence/complexity somewhere in the translation unit, degrading
+resolution translation-unit-wide. This is recorded as a further real data point, not asserted
+as the root cause -- the precise mechanism remains unisolated.
