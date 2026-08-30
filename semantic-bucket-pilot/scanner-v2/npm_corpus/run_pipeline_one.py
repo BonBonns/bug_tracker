@@ -96,6 +96,188 @@ def fetch_bytes(url, timeout=60, retries=3):
     return None, "exhausted retries"
 
 
+def fetch_json(url, timeout=30, retries=3):
+    raw, err = fetch_bytes(url, timeout=timeout, retries=retries)
+    if err:
+        return None, err
+    try:
+        return json.loads(raw), None
+    except Exception as e:
+        return None, f"bad JSON from {url}: {type(e).__name__}: {e}"
+
+
+# --- Header-staging correction (NPM-CORPUS-HDR-FIX) -------------------------------------------
+# Real, confirmed root cause (FINDINGS_REVIEW.md): every package in the corpus declares
+# node-addon-api (sometimes nan) as an npm DEPENDENCY and #includes its header, but no
+# package's own tarball vendors that header -- it is meant to resolve from
+# node_modules/<dep>/ after `npm install`, which this pipeline never ran. c2cpg therefore
+# could not resolve ANY Napi:: static-factory call, corpus-wide. This section fetches ONLY
+# the specific declared dependency's own header-only package (not a full `npm install`: no
+# scripts run, no transitive tree, no unrelated native deps built) and hands its extracted
+# directory to c2cpg via --include, so #include <napi.h> / #include <nan.h> resolve exactly
+# as they would after a real install.
+#
+# Disclosed scope, stated precisely -- this is NOT a full npm resolver:
+#  - Only "node-addon-api" and "nan" are staged (the two node-addon-api-style header-only C++
+#    wrapper libraries actually observed in this corpus's binding_evidence). Raw N-API usage
+#    via <node_api.h>/<js_native_api.h> is NOT covered -- those are Node.js's own core
+#    headers, not distributed via any npm package, and staging them would require vendoring a
+#    matching Node.js headers tarball, a separate, larger undertaking not attempted here.
+#  - Version resolution is a minimal, hand-written npm range matcher (exact/^/~/>=/>/<=/</*),
+#    not a byte-for-byte reimplementation of npm's own resolver. It excludes prereleases and
+#    falls back to the package's "latest" dist-tag if the range can't be parsed or nothing in
+#    the registry's version list satisfies it -- a real, disclosed approximation, not a
+#    silent guess: every resolution (or failure) is recorded in the package's own
+#    `header_staging` evidence field.
+#  - Staging is fail-OPEN: a missing package.json, an unresolvable range, or a failed fetch
+#    means that dependency is simply not staged (recorded as such) -- c2cpg still runs
+#    exactly as it did before this fix, so this correction can only ADD resolution, never
+#    remove or regress any package's prior result.
+
+NATIVE_HEADER_DEPS = ("node-addon-api", "nan")
+
+
+def _parse_semver(v):
+    # Strips build metadata (+...) and returns (major, minor, patch, prerelease_or_None).
+    v = v.strip().lstrip("v")
+    core = v.split("+", 1)[0]
+    if "-" in core:
+        core, pre = core.split("-", 1)
+    else:
+        pre = None
+    parts = (core.split(".") + ["0", "0", "0"])[:3]
+    try:
+        major, minor, patch = (int(p) for p in parts)
+    except ValueError:
+        return None
+    return (major, minor, patch, pre)
+
+
+def _range_satisfied(ver, range_spec):
+    # ver: parsed (major, minor, patch, prerelease) tuple, already prerelease-excluded by the
+    # caller. Supports the common single-clause forms actually seen in real package.json
+    # dependency fields: exact "X.Y.Z", "^X.Y.Z", "~X.Y.Z", ">=X.Y.Z", ">X.Y.Z", "<=X.Y.Z",
+    # "<X.Y.Z", "*"/""/"latest". Anything else (OR ranges, hyphen ranges, "x" wildcards) is
+    # NOT parsed -- the caller treats that as "unresolvable" and falls back to dist-tags.latest.
+    spec = range_spec.strip()
+    if spec in ("", "*", "latest"):
+        return True
+    for op, cmp_fn in ((">=", lambda a, b: a >= b), ("<=", lambda a, b: a <= b),
+                        (">", lambda a, b: a > b), ("<", lambda a, b: a < b)):
+        if spec.startswith(op):
+            target = _parse_semver(spec[len(op):])
+            return target is not None and cmp_fn(ver[:3], target[:3])
+    if spec.startswith("^"):
+        target = _parse_semver(spec[1:])
+        if target is None:
+            return None
+        maj, minr, pat, _ = target
+        if maj > 0:
+            return (maj, minr, pat) <= ver[:3] < (maj + 1, 0, 0)
+        if minr > 0:
+            return (0, minr, pat) <= ver[:3] < (0, minr + 1, 0)
+        return (0, 0, pat) <= ver[:3] <= (0, 0, pat)
+    if spec.startswith("~"):
+        target = _parse_semver(spec[1:])
+        if target is None:
+            return None
+        maj, minr, pat, _ = target
+        return (maj, minr, pat) <= ver[:3] < (maj, minr + 1, 0)
+    target = _parse_semver(spec)
+    if target is not None:
+        return ver[:3] == target[:3]
+    return None  # unrecognized range shape -- caller falls back to latest
+
+
+def resolve_npm_dep_version(dep_name, range_spec):
+    """Returns (resolved_version_or_None, tarball_url_or_None, note)."""
+    meta, err = fetch_json(f"https://registry.npmjs.org/{dep_name}")
+    if err:
+        return None, None, f"metadata fetch failed: {err}"
+    latest_tag = meta.get("dist-tags", {}).get("latest")
+    versions = meta.get("versions", {})
+    candidates = []
+    for v, info in versions.items():
+        parsed = _parse_semver(v)
+        if parsed is None or parsed[3] is not None:  # skip unparsed / prerelease
+            continue
+        sat = _range_satisfied(parsed, range_spec)
+        if sat is None:
+            candidates = None  # unrecognized range shape -- abandon range matching entirely
+            break
+        if sat:
+            candidates.append((parsed[:3], v))
+    if candidates:
+        candidates.sort()
+        resolved = candidates[-1][1]
+        note = f"range '{range_spec}' resolved to {resolved} (highest satisfying release)"
+    elif latest_tag and latest_tag in versions:
+        resolved = latest_tag
+        note = f"range '{range_spec}' unresolvable/unsatisfied -- fell back to latest ({resolved})"
+    else:
+        return None, None, f"no satisfying version and no usable latest tag for '{range_spec}'"
+    tarball = versions.get(resolved, {}).get("dist", {}).get("tarball")
+    if not tarball:
+        return None, None, f"resolved {resolved} but no dist.tarball in registry metadata"
+    return resolved, tarball, note
+
+
+def stage_native_dep_headers(pkg_dir, work_root):
+    """Fetches and extracts node-addon-api/nan (whichever this package actually declares) into
+    work_root/headers/<dep>/, returning (include_dirs, evidence_list) for c2cpg --include."""
+    include_dirs = []
+    evidence = []
+    pkg_json_path = os.path.join(pkg_dir, "package.json")
+    if not os.path.isfile(pkg_json_path):
+        return include_dirs, [{"dep": None, "staged": False, "note": "no package.json found"}]
+    try:
+        with open(pkg_json_path) as f:
+            pkg_json = json.load(f)
+    except Exception as e:
+        return include_dirs, [{"dep": None, "staged": False,
+                                 "note": f"package.json unreadable: {type(e).__name__}: {e}"}]
+    declared = {}
+    for field in ("dependencies", "devDependencies", "peerDependencies", "optionalDependencies"):
+        declared.update(pkg_json.get(field) or {})
+    for dep in NATIVE_HEADER_DEPS:
+        if dep not in declared:
+            continue
+        range_spec = declared[dep]
+        resolved, tarball, note = resolve_npm_dep_version(dep, range_spec)
+        if not tarball:
+            evidence.append({"dep": dep, "declared_range": range_spec, "staged": False,
+                              "note": note})
+            continue
+        tb, err = fetch_bytes(tarball)
+        if err:
+            evidence.append({"dep": dep, "declared_range": range_spec, "resolved_version":
+                              resolved, "staged": False, "note": f"tarball fetch failed: {err}"})
+            continue
+        dep_dir = os.path.join(work_root, "headers", dep)
+        try:
+            os.makedirs(dep_dir, exist_ok=True)
+            tf = tarfile.open(fileobj=__import__("io").BytesIO(tb), mode="r:gz")
+            tf.extractall(dep_dir, filter="data")
+            tf.close()
+            inner = os.path.join(dep_dir, "package")
+            if os.path.isdir(inner):
+                for name in os.listdir(inner):
+                    shutil.move(os.path.join(inner, name), os.path.join(dep_dir, name))
+                os.rmdir(inner)
+        except Exception as e:
+            evidence.append({"dep": dep, "declared_range": range_spec, "resolved_version":
+                              resolved, "staged": False,
+                              "note": f"extract failed: {type(e).__name__}: {e}"})
+            continue
+        include_dirs.append(dep_dir)
+        evidence.append({"dep": dep, "declared_range": range_spec, "resolved_version": resolved,
+                          "staged": True, "note": note})
+    if not evidence:
+        evidence.append({"dep": None, "staged": False,
+                          "note": "package.json present but declares neither node-addon-api nor nan"})
+    return include_dirs, evidence
+
+
 def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     record = {"package_name": pkg_name, "version": version, "stages": {}, "status": None,
               "detail": ""}
@@ -131,13 +313,27 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         return record
     record["stages"]["extract"] = {"seconds": time.time() - t0}
 
+    # NPM-CORPUS-HDR-FIX: stage this package's own declared node-addon-api/nan headers (see
+    # stage_native_dep_headers's docstring for the disclosed scope) before c2cpg runs, so
+    # #include <napi.h> resolves instead of falling back to <unresolvedNamespace> for every
+    # Napi:: call, as it did corpus-wide before this fix (FINDINGS_REVIEW.md).
+    t0 = time.time()
+    include_dirs, header_evidence = stage_native_dep_headers(pkg_dir, work_root)
+    record["header_staging"] = header_evidence
+    record["stages"]["header_staging"] = {"seconds": time.time() - t0,
+                                            "n_staged": len(include_dirs)}
+
     # Collect JS/TS files into a separate dir (jssrc2cpg over the whole tree would also work,
     # but node_modules-free npm tarballs are small enough that pointing jssrc2cpg at pkg_dir
     # directly is simpler and equally correct -- use pkg_dir itself for JS, and c2cpg also
     # over pkg_dir for C/C++; both frontends only pick up their own extensions.)
     cpp_bin = os.path.join(work, "cpp.cpg.bin")
+    c2cpg_cmd = [f"{JOERN_HOME}/c2cpg.sh", "-o", cpp_bin]
+    for d in include_dirs:
+        c2cpg_cmd += ["--include", d]
+    c2cpg_cmd.append(pkg_dir)
     rc, secs, mem, err = run_stage(
-        [f"{JOERN_HOME}/c2cpg.sh", "-o", cpp_bin, pkg_dir],
+        c2cpg_cmd,
         os.path.join(work, "cpp_gen.log"))
     record["stages"]["c2cpg"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
     if err or rc != 0:
