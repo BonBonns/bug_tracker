@@ -331,6 +331,20 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     c2cpg_cmd = [f"{JOERN_HOME}/c2cpg.sh", "-o", cpp_bin]
     for d in include_dirs:
         c2cpg_cmd += ["--include", d]
+    # RESOURCE-GUARD-R05-HDR-FIX2: real napi.h #errors out (Exception support not detected)
+    # unless NAPI_CPP_EXCEPTIONS/NAPI_DISABLE_CPP_EXCEPTIONS is predefined -- confirmed real,
+    # see HDR_FIX_STATUS.md. Use this package's OWN already-extracted exception_config where
+    # known ("disabled"/"enabled"); for "unresolved"/"conflict"/missing, define
+    # NAPI_DISABLE_CPP_EXCEPTIONS anyway AS A PARSING AID ONLY -- disclosed, deliberate: this
+    # maximizes real structural resolution quality (most of the corpus's KNOWN values are
+    # "disabled" -- CORPUS_STATUS.md: 140 disabled vs 19 enabled -- and Cartesi/sqlite3/
+    # gjsify-node-gi are all real "disabled" packages) without smuggling in an unjustified
+    # verdict: R04/R05's own APPLICABILITY GATE reads this package's REAL build_config.json
+    # independently and still correctly abstains (BUILD_CONFIGURATION_UNRESOLVED/_CONFLICT)
+    # for any package whose real evidence doesn't establish "disabled" -- this parsing-time
+    # define never substitutes for that separate, already-existing check.
+    c2cpg_cmd += ["--define", "NAPI_CPP_EXCEPTIONS" if exception_config == "enabled"
+                  else "NAPI_DISABLE_CPP_EXCEPTIONS"]
     c2cpg_cmd.append(pkg_dir)
     rc, secs, mem, err = run_stage(
         c2cpg_cmd,
@@ -469,6 +483,34 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"r04 scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["r04_scan"] = {"seconds": time.time() - t0}
+
+    # RESOURCE-GUARD-R05: run alongside R04, not instead of it -- R05's own matching path for
+    # already-resolved calls is byte-for-byte R04's (see resource_guard_verdict_r05.py's own
+    # module docstring), so this is a strict superset; keeping BOTH outputs, separately keyed,
+    # gives a direct per-package A/B record of exactly what recovery adds, rather than
+    # silently replacing R04's own recorded numbers.
+    r05_out = os.path.join(work, "r05_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, f"{SCANNER_V2}/resource_guard_verdict_r05.py",
+                         cpp_raw, r05_out, "--real", "--build-config", build_config_path],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(r05_out) as f:
+            r05_doc = json.load(f)
+        record["r05_classification"] = r05_doc.get("classification", {})
+        record["r05_findings"] = r05_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"r05_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"r05 scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

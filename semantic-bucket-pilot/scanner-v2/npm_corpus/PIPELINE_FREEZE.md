@@ -71,3 +71,35 @@ reason THESE files cannot handle (e.g. a genuinely malformed tarball, an unsuppo
 API shape) is recorded with its real status and reason -- not silently patched around
 mid-run. Any further fix to these files would itself need the same discipline this one did:
 found via real re-run, fixed narrowly, re-verified, then re-frozen with a new recorded hash.
+
+## R05 addendum: `run_pipeline_one.py` re-frozen at `1c031795a3383ff63aa1a22e382daeae`
+
+Two real, disclosed additions on top of the freeze above, both found and validated via the
+same discipline (real re-run, fixed narrowly, re-verified -- see `HDR_FIX_STATUS.md` and
+`../RESOURCE_GUARD_R05.md` for the full account):
+
+1. **The c2cpg invocation now passes `--define`** for the exception-configuration macro
+   (`NAPI_CPP_EXCEPTIONS` if this package's own already-extracted `exception_config` is
+   `"enabled"`, else `NAPI_DISABLE_CPP_EXCEPTIONS`) -- real napi.h `#error`s out without one
+   of these defined (confirmed real, `HDR_FIX_STATUS.md`). For `"unresolved"`/`"conflict"`/
+   missing evidence, `NAPI_DISABLE_CPP_EXCEPTIONS` is defined anyway as a disclosed PARSING
+   AID ONLY (the corpus's own known values skew disabled: 140 vs 19 enabled, per
+   `CORPUS_STATUS.md`) -- this never substitutes for the SEPARATE, real
+   `build_config.json`-driven applicability gate R04/R05 both independently enforce before
+   reporting a MISSING/ESTABLISHED verdict; a package whose real evidence doesn't establish
+   "disabled" still correctly abstains (`BUILD_CONFIGURATION_UNRESOLVED`/`_CONFLICT`)
+   regardless of what this parsing-time define was.
+2. **A new `r05_scan` stage runs alongside, not instead of, `r04_scan`** -- both outputs kept,
+   separately keyed (`r04_classification`/`r04_findings` vs `r05_classification`/
+   `r05_findings`), since R05's own already-resolved-call path is byte-for-byte R04's (a
+   strict superset), giving a direct per-package A/B record of exactly what recovery adds.
+
+Smoke-tested end-to-end on the real `@cartesi/machine@1.0.0-alpha.1` package through the
+actual `run_one()` function (not a manual reconstruction) before this freeze: reproduces the
+same 3 real recovered findings `RESOURCE_GUARD_R05.md`/`CARTESI_RECOVERY.md` already
+documented via a direct script call, confirming the integration itself introduces no drift.
+No separate 50-package re-pilot was run before this freeze -- the change is narrow (one
+additional `--define` flag; one additional scan stage reusing R04's already-pilot-calibrated
+timeout tier) and backward-safe (a package that runs slower under `--define` still gets the
+SAME existing `RESOURCE_LIMIT` classification and safety net as before, never a silent
+failure) -- disclosed here as a real, deliberate scope decision, not an oversight.
