@@ -190,6 +190,81 @@ them, verbatim, run through the real pipeline:
   groups → correctly `RESOURCE_GUARD_ESTABLISHED`, with `backward_attacker_trace` correctly
   following the arithmetic expression through to the real `nCaptures` parameter (3 hops).
 
+**Pass 3 — CVEfixes-wide C/C++ search for `constructor(...); ... if (!obj.predicate())`.**
+Downloaded the full CVEfixes v1.0.8 dataset (12,987 rows, same as `js_c_transition`'s own
+provenance) and regex-mined all 4,237 C/C++ rows for a diff that ADDS a validity-predicate
+check (`isValid`/`overflowed`/`failed`/`ok`/`hasError`/etc.) on a variable constructed with
+real C++ constructor syntax nearby. One real, independent, non-Hermes hit surfaced:
+`CVE-2024-21639`/`CVE-2024-21640` (Chromium Embedded Framework,
+[GHSA-m375-jw5x-x8mg](https://github.com/chromiumembedded/cef/security/advisories/GHSA-m375-jw5x-x8mg)),
+`CefLayeredWindowUpdaterOSR::OnAllocatedSharedMemory` — initially promising (a fallible
+resource acquisition, a real security fix, a genuinely different project). **Traced the
+complete vulnerable/patched differential before treating it as a candidate, and rejected
+it — it is not this property:**
+
+```cpp
+// vulnerable
+auto region2 = std::move(region);
+shared_memory_ = region2.Map();
+DCHECK(shared_memory_.IsValid());   // compiled OUT in release builds -- not a real check
+
+// patched
+auto mapping = region.Map();
+if (!mapping.IsValid()) { return; }              // acquisition-failed guard
+if (mapping.size() < expected_bytes) { return; } // <-- the ACTUAL fix for the OOB read
+shared_memory_ = std::move(mapping);
+```
+
+A mapping can satisfy `IsValid()` while still being *smaller than `expected_bytes`* — the
+GPU process can supply a validly-mapped region that is simply too small for the
+`pixel_size` it also claims. `IsValid()` alone proves the mapping *succeeded*; it does not
+prove the mapping is *large enough*. The condition that actually prevents the documented
+OOB read is the size **comparison** (`mapping.size() >= expected_bytes`), not the
+resource-validity **predicate**. That is a runtime-capacity relationship between two
+sizes — the property this project's *existing* `oob_runtime_capacity_v2.py` scanner
+targets — not FALLIBLE_BOUNDED_RESOURCE's create → validate → use shape. (The release-mode
+`DCHECK` gap is real and is a validity-guard defect in spirit, but it is not what the CVE's
+own OOB read traces to, and the fix's `IsValid()` re-check is not sufficient by itself
+either — an `IsValid()`-only fix would still be vulnerable.) The attacker boundary is also
+wrong for this track: a compromised/malicious **GPU process → browser-process C++** over
+Mojo IPC, not **JavaScript/TypeScript → C++** — CEF's own JS bindings play no role in this
+bug at all.
+
+Logged, not adopted: `CVE-2024-21639` is a real, independent near-match, but belongs to
+**RUNTIME_CAPACITY / INSUFFICIENT_MAPPED_REGION** (a capacity-comparison defect, and a
+candidate confirmatory case for the *existing* write-property scanner in a future round —
+not attempted here), and its trust boundary is not JS/TS→native at all. Not counted as
+cross-contract or cross-project evidence for RESOURCE-GUARD-R01. R01 stays frozen at
+`resource_guard_verdict.py`'s current committed state; no schema extension was made on the
+strength of this case.
+
+**Pass 4 — targeted search for the JS/TS→C/C++ shape specifically.** Widened the query
+that originally built the `js_c_transition` corpus: instead of requiring CVEfixes' own
+"dominant language" tag to already be C/C++ (Pass 1's scope), pulled every CVEfixes row
+whose `file_paths` touch *both* a `.js`/`.ts`/`.jsx`/`.tsx`/`.mjs` file *and* a
+`.c`/`.cc`/`.cpp`/`.cxx`/`.h`/`.hpp` file in the same commit, regardless of which language
+CVEfixes labeled it — 44 rows (vs. Pass 1's 25), 19 not previously examined. Checked every
+one with a memory-safety-plausible CWE (787/125/416/476/190/843/670/681) whose native side
+wasn't already read in Pass 1:
+- `CVE-2022-29379` (njs, "stack overflow" in `njs_default_module_loader`) — despite the
+  name, an off-by-omission arithmetic bug (`length = dir->length` should have been `length
+  += dir->length`), not a resource-guard defect at all.
+- `CVE-2022-27007` (njs, UAF in `njs_function_frame_save`/`_restore`) — a stale-pointer
+  bug from not resetting fields after a `memcpy`-based frame save, not a missing
+  validity-predicate check.
+- `CVE-2020-1913` (Hermes, integer-signedness bug in bytecode switch dispatch) — unrelated.
+- `CVE-2023-25933`/`CVE-2023-28081` (Hermes) and `CVE-2021-46463` (njs) — type-confusion
+  bugs, unrelated to resource acquisition at all.
+
+**No case in the available corpus matches the JS/TS→C/C++ FALLIBLE_BOUNDED_RESOURCE shape
+independent of Hermes.** This is reported as a negative result, not stretched to fit —
+per instruction, CEF (Pass 3) was traced and rejected rather than counted despite being the
+closest surface-level match, and no other real candidate that fits was found after four
+separate mining passes across two corpora (25 rows read by hand, 4,237 C/C++ rows
+regex-mined, 44 cross-language rows checked). The search is not exhaustive — CVEfixes is
+one dataset, not the universe of real CVEs — so this is "not found in what was searched,"
+not "proven not to exist."
+
 **What this proves:**
 - The scanner recognizes the property across different control-flow and use shapes.
 - It distinguishes missing, correct, late, wrong-object, and unresolved guards.
