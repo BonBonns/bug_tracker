@@ -41,7 +41,19 @@ SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
-STAGE_TIMEOUT = 180  # seconds, per Joern subprocess -- established as a real limit from the pilot
+# Real limits established from the 50-package pilot (see RESOURCE_LIMITS section of
+# CORPUS_STATUS.md / the pilot commit message): 48/50 packages completed every stage in
+# well under these standard timeouts (c2cpg max observed 41.4s, cpp_export max 31.7s,
+# cpp_normalize median 0.24s). The 2/50 exceptions (re2, pqclean) are large, real, bundled
+# C++ codebases (re2: 551 files, 1.34M raw fact rows) -- normalize alone took a real,
+# reproduced 127.6s for re2, confirmed by manual re-run with a generous timeout, not a hang.
+# TIMEOUT_MULTIPLIER lets the SAME script serve both the standard pass (multiplier=1) and the
+# high-resource retry queue (multiplier=8 -> 1440s/720s ceilings) without duplicating logic.
+TIMEOUT_MULTIPLIER = float(os.environ.get("NPM_CORPUS_TIMEOUT_MULTIPLIER", "1"))
+STAGE_TIMEOUT = int(180 * TIMEOUT_MULTIPLIER)     # c2cpg / jssrc2cpg / cpp_export / js_export
+NORMALIZE_TIMEOUT = int(180 * TIMEOUT_MULTIPLIER)  # cpp_normalize / js_normalize (re2's real 127.6s + margin)
+LINK_TIMEOUT = int(90 * TIMEOUT_MULTIPLIER)        # polyglot_link
+SCAN_TIMEOUT = int(90 * TIMEOUT_MULTIPLIER)        # r04_scan (reads raw TSVs directly, not the large normalized JSON)
 
 
 def rss_now():
@@ -169,8 +181,16 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     t0 = time.time()
     try:
         subprocess.run([sys.executable, f"{CPP_FRONTEND}/normalize_c_cpp_facts_v03.py",
-                         cpp_raw, cpp_facts], check=True, timeout=60,
+                         cpp_raw, cpp_facts], check=True, timeout=NORMALIZE_TIMEOUT,
                         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    except subprocess.TimeoutExpired:
+        record["stages"]["cpp_normalize"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"cpp_normalize exceeded {NORMALIZE_TIMEOUT}s (real, reproduced " \
+                            "case: re2 took 127.6s on a full re-run outside this timeout -- " \
+                            "large, genuinely bundled C++ codebases need the high-resource " \
+                            "retry queue, not a silent drop)"
+        return record
     except Exception as e:
         record["stages"]["cpp_normalize"] = {"seconds": time.time() - t0}
         record["status"] = "NORMALIZATION_FAILED"
@@ -182,8 +202,13 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     t0 = time.time()
     try:
         subprocess.run([sys.executable, f"{JS_FRONTEND}/normalize_joern_facts.py",
-                         js_raw, js_facts], check=True, timeout=60,
+                         js_raw, js_facts], check=True, timeout=NORMALIZE_TIMEOUT,
                         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    except subprocess.TimeoutExpired:
+        record["stages"]["js_normalize"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"js_normalize exceeded {NORMALIZE_TIMEOUT}s"
+        return record
     except Exception as e:
         record["stages"]["js_normalize"] = {"seconds": time.time() - t0}
         record["status"] = "NORMALIZATION_FAILED"
@@ -199,7 +224,7 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         import polyglot_compat_adapter
         polyglot_compat_adapter.adapt_js_facts(js_facts, js_facts_adapted)
         subprocess.run([sys.executable, POLYGLOT, js_facts_adapted, cpp_facts, merged,
-                         "--js-receiver", "bindings"], check=True, timeout=60,
+                         "--js-receiver", "bindings"], check=True, timeout=LINK_TIMEOUT,
                         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
         with open(merged) as f:
             merged_doc = json.load(f)
@@ -209,6 +234,11 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
             "n_linked_calls": len(xlb.get("linked_calls", [])),
             "n_unlinked_calls": len(xlb.get("unlinked_calls", [])),
         }
+    except subprocess.TimeoutExpired:
+        record["stages"]["polyglot_link"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"polyglot_link exceeded {LINK_TIMEOUT}s"
+        return record
     except Exception as e:
         record["stages"]["polyglot_link"] = {"seconds": time.time() - t0}
         record["status"] = "BINDING_UNRESOLVED"
@@ -226,11 +256,17 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     try:
         subprocess.run([sys.executable, f"{SCANNER_V2}/resource_guard_verdict_r04.py",
                          cpp_raw, r04_out, "--real", "--build-config", build_config_path],
-                        check=True, timeout=60, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
         with open(r04_out) as f:
             r04_doc = json.load(f)
         record["r04_classification"] = r04_doc.get("classification", {})
         record["r04_findings"] = r04_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["r04_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"r04_scan exceeded {SCAN_TIMEOUT}s"
+        return record
     except Exception as e:
         record["stages"]["r04_scan"] = {"seconds": time.time() - t0}
         record["status"] = "NORMALIZATION_FAILED"
