@@ -13,41 +13,45 @@ corrected here.
   the JS/TS Joern frontends, and the existing cross-language binding resolver
   (`link_napi_facts.py`). No semantic change has been made to any of these files during
   corpus construction.
-- **Item 2 (pin the npm universe): IN PROGRESS.** A single immutable snapshot manifest of
-  "the npm universe" has NOT yet been produced. What exists so far is described precisely
-  below -- neither piece, alone or combined so far, constitutes item 2's deliverable.
-- **Search-derived discovery cohort: 7,653 candidates, INCOMPLETE / COVERAGE-BOUNDED.**
+- **Item 2 (pin the npm universe): SCOPE FINALIZED per direct instruction.** The corpus's
+  eligible-package pool is the fully-processed `SEARCH_DERIVED_CANDIDATE_COHORT` alone (see
+  below) -- registry-wide enumeration is retained ONLY as a documentation-of-universe-size
+  artifact and explicitly does NOT feed eligibility, deduplication, build-configuration
+  extraction, or scanning. This narrows the earlier plan (union of two discovery-provenance
+  cohorts before scanning) to the simpler, directly-instructed scope: finish the 7,653-name
+  eligibility pass, count/freeze eligible packages, dedup, extract build config, pilot, scan.
+- **Search-derived discovery cohort: 7,653 candidates, COMPLETE eligibility processing.**
   `discover_candidates.py` queried the npm registry's relevance-ranked search API across 10
-  indicator terms, bounded at 2000 results per term. This is a **`SEARCH_DERIVED_CANDIDATE_
-  COHORT`** -- a real, reproducible, but coverage-bounded PRE-FILTER candidate list, not a
-  measurement of the npm universe and not comparable to any post-filter eligible-package
-  count. **The earlier comparison of this cohort's 7,653 unique names to CHARON's
-  approximately 8.2K reference count implied a coverage validation that does not hold and is
-  withdrawn.** CHARON's number describes packages that passed real eligibility filtering;
-  this cohort is pre-filter, produced by a fundamentally different (relevance-search, not
-  registry-enumeration) discovery method, and the two counts happening to be the same order
-  of magnitude is not evidence of comparable coverage.
-- **Search-derived eligibility processing: real-time count, see below.** The eligibility
-  filter (`eligibility_filter.py`) is running against the search-derived cohort in the
-  background. Current completed-row count is reported at each checkpoint (see
-  `checkpoints/`, newest `eligibility_search_cohort_*.json` sidecar for the authoritative
-  current count) -- this document does not restate a point-in-time number that would go
-  stale; check the newest checkpoint metadata instead.
-- **Registry-wide enumeration: NOT YET STARTED as of this correction** (build underway in
-  this same work session -- see `enumerate_registry.py` once committed). Will use the public
-  npm CouchDB `_all_docs` interface, checkpointed key-based pagination, and a documented
-  high-recall metadata prefilter, producing a `REGISTRY_ENUMERATION`-provenance candidate set
-  independent of the search-derived cohort.
-- **Final candidate union: NOT YET FROZEN.** The eventual pinned npm universe manifest
-  (item 2's real deliverable) will be the union of the search-derived cohort
-  (`REGISTRY_RELEVANCE_SEARCH` provenance) and the registry-enumeration cohort
-  (`REGISTRY_ENUMERATION` provenance), with `BOTH` recorded for names appearing in both.
-  That union has not been constructed or frozen.
-- **Full Joern dataset evaluation: NOT YET STARTED.** Deduplication, build-configuration
-  extraction, and the dual-CPG (jssrc2cpg + c2cpg) cross-language scan pipeline (items 4-7)
-  do not begin until the candidate union above is frozen. The currently-running eligibility
-  pass over the search-derived cohort is explicitly an infrastructure/early-cohort run, not
-  the start of the final corpus evaluation.
+  indicator terms, bounded at 2000 results per term -- a real, reproducible, but
+  coverage-bounded PRE-FILTER candidate list (`SEARCH_DERIVED_CANDIDATE_COHORT`), not a
+  measurement of the npm universe. **The earlier comparison of this cohort's 7,653 unique
+  names to CHARON's approximately 8.2K reference count implied a coverage validation that
+  does not hold and remains withdrawn.**
+- **Search-derived eligibility processing: COMPLETE, 7,653/7,653.** Real counts: ANALYZED
+  (eligible) 494; NO_CPP_SOURCE 5,928; NO_JS_TS_SOURCE 792; NO_PACKAGE_OWNED_NATIVE_BINDING
+  318; DOWNLOAD_FAILED 121. Frozen in `eligible_packages.tsv` (494 rows) and
+  `checkpoints/eligibility_search_cohort_FINAL_00007653_*`.
+- **Deduplication (item 4): COMPLETE.** All 494 eligible packages hashed
+  (`npm_source_deduplication.tsv`); 494 distinct source trees, zero exact duplicates found in
+  this cohort (`unique_source_trees.tsv`).
+- **Build-configuration extraction (item 5): COMPLETE.** `npm_build_configuration.tsv`, all
+  494 packages: unresolved 302, disabled 140, conflict 33, enabled 19.
+- **Registry-wide enumeration: COMPLETE, documentation-only.** `enumerate_registry.py`
+  walked the full public registry via `_all_docs`: 4,342,485 package id/rev pairs enumerated
+  (registry grew slightly, from a 4,342,471 snapshot doc_count, during the ~35-minute walk --
+  a real, expected fact about a live system, not an error). Recorded in
+  `registry_universe_snapshot_metadata.json`. Per direct instruction, this number is cited
+  ONLY to document registry universe size -- it is not fetched, scanned, prefiltered, or
+  unioned into the eligible-package pool.
+- **50-package Joern infrastructure pilot (item 6): IN PROGRESS / see latest commit for
+  real results** -- `run_pipeline_one.py` orchestrates the full validated pipeline
+  (download -> c2cpg -> export -> normalize; jssrc2cpg -> export -> normalize;
+  cross-language linking; R04 scan) per package, with real per-stage timing and a real
+  integration bug found and fixed along the way (see that commit's message for the
+  `link_napi_facts.py`/normalizer metadata-shape incompatibility and its disclosed,
+  narrowly-scoped adapter fix).
+- **Full frozen-scanner run across all remaining eligible packages (item 7): NOT YET
+  STARTED** -- begins once the 50-package pilot establishes real resource limits.
 
 ## Discovery provenance values (used from this point forward)
 
