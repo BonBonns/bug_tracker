@@ -13,8 +13,63 @@ else is left exactly as the JS frontend classified it (never hardened).
 
 The two frontends emit overlapping Joern id spaces, so every id on the C/C++
 side is offset by a disjoint constant before merging.
+
+CROSSLANG-LINK-FIX01 (see study/crosslang_link_fix/CHARACTERIZATION.md for the full,
+real, quantitative account): the original JS-side candidate filter
+(`c.get('receiver_name') == a.js_receiver`, default "bindings") never matched ANY real
+call across the whole frozen 494-package corpus -- 0 linked_calls, 0 unlinked_calls,
+even for the 163 real packages where the C/C++ side above successfully found 1,119 real
+`exports.Set(...)` registrations. Root cause, confirmed on two independent real packages
+by regenerating and reading their real JS facts directly: the JS/TS frontend's own
+`receiver_name` field is essentially NEVER populated for a real native-binding member
+call (confirmed: 0 non-null values across 1,099 real calls in `memoryjs`, 0 across 3,672
+in `node-liblzma`) -- so no `--js-receiver` value, however chosen, could ever have
+matched real code. The frontend DOES populate a different, real, structural field
+instead: `receiver_type`, set (via the frontend's own type inference) to the exact string
+argument of the `require(...)` call that initialized the receiver's local variable --
+confirmed real: `const memoryjs = require('./build/Release/memoryjs')` gives
+`receiver_type: "build/Release/memoryjs"`; `const liblzma =
+require('node-gyp-build')(bindingPath)` gives `receiver_type: "node-gyp-build"` (the
+OUTER require's argument, even through one level of call-chaining) -- and real downstream
+calls (`liblzma.isXZ(...)`, `memoryjs.openProcess(...)`) carry that SAME `receiver_type`,
+with `resolution: "HEURISTIC"` (not yet `"EXACT"`), exactly matching this file's own
+existing `c['resolution'] != 'EXACT'` candidate condition. `is_native_binding_receiver()`
+below matches on THIS field instead, against a small, curated, disclosed set of
+real, well-known native-addon-loading conventions -- never a substring/loose match, same
+discipline as `resource_contracts_r03.py`'s own qualifier-prefix fix. The OLD
+`receiver_name`/`--js-receiver` check is kept, unchanged, as an alternative match (never
+removed) in case some real, not-yet-observed JS/TS frontend path DOES populate it.
 """
 import json, sys, argparse
+
+# Real, curated, disclosed native-addon-loading conventions -- confirmed against real
+# require() targets in two independent real corpus packages (see module docstring).
+# Matched by EXACT membership/prefix, never a substring -- an unrelated package whose name
+# merely CONTAINS one of these (e.g. "some-bindings-helper") must NOT match; see
+# study/crosslang_link_fix/controls for the real, run fixture proving this.
+NATIVE_LOADER_PACKAGES = {
+    'bindings', 'node-gyp-build', 'node-pre-gyp', '@mapbox/node-pre-gyp',
+    'prebuild-install',
+}
+NATIVE_BUILD_PATH_MARKERS = ('build/Release/', 'build/Debug/')
+
+
+def is_native_binding_receiver(receiver_type):
+    """True iff `receiver_type` (a JS/TS local's own resolved type, per the frontend's
+    type inference over its `require(...)` initializer -- see module docstring) matches a
+    real, curated native-addon-loading convention. None/empty never matches (fails closed,
+    same as every other abstention in this project). Matched by EXACT set membership for
+    loader package names (never a substring -- "some-bindings-helper" must not match "the
+    'bindings' package") and by substring only for the two fixed, meaningful node-gyp
+    output path segments, which are real, unambiguous directory names, not bare words."""
+    if not receiver_type:
+        return False
+    rt = receiver_type.strip()
+    if rt in NATIVE_LOADER_PACKAGES:
+        return True
+    if rt.endswith('.node'):
+        return True
+    return any(marker in rt for marker in NATIVE_BUILD_PATH_MARKERS)
 
 OFFSET = 1 << 44  # far above any observed Joern id (~2^35); keeps both spaces disjoint
 
@@ -96,7 +151,15 @@ def main():
 
     linked, unlinked = [], []
     for c in js['calls']:
-        if c.get('receiver_name') == a.js_receiver and c['resolution'] != 'EXACT':
+        # CROSSLANG-LINK-FIX01: a candidate is either the ORIGINAL --js-receiver name match
+        # (kept, unchanged, never removed -- see module docstring) OR the new, real,
+        # structural receiver_type match. Tried independently, same as R05's own "a call CAN
+        # match via more than one path" discipline -- either one qualifies, never double-
+        # counted (a call can only be linked/unlinked once per run, since it's visited once).
+        is_candidate = ((c.get('receiver_name') == a.js_receiver
+                          or is_native_binding_receiver(c.get('receiver_type')))
+                         and c['resolution'] != 'EXACT')
+        if is_candidate:
             if c['name'] in table:
                 fid, full = table[c['name']]
                 c['resolution'] = 'EXACT'

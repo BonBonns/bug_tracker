@@ -1,0 +1,6159 @@
+{
+ "assignments": [
+  {
+   "cfg_anchor": 30064771072,
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+    "source_node_ids": [
+     17622250815488,
+     17660905521152,
+     17622250815489
+    ]
+   },
+   "function_id": 17699560226816,
+   "id": 17622250815488,
+   "line": 8,
+   "target_local_id": 17686675324928,
+   "value_ref": {
+    "code": "info.Env()",
+    "id": 17622250815489,
+    "kind": "CALL"
+   }
+  },
+  {
+   "cfg_anchor": 30064771075,
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+    "source_node_ids": [
+     17622250815491,
+     17660905521155,
+     17622250815492
+    ]
+   },
+   "function_id": 17699560226818,
+   "id": 17622250815491,
+   "line": 13,
+   "target_local_id": 17686675324929,
+   "value_ref": {
+    "code": "info.Env()",
+    "id": 17622250815492,
+    "kind": "CALL"
+   }
+  },
+  {
+   "cfg_anchor": 30064771078,
+   "derivation": {
+    "origin": "FRONTEND_DERIVED",
+    "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+    "source_node_ids": [
+     17622250815494,
+     17660905521158,
+     17622250815495
+    ]
+   },
+   "function_id": 17699560226819,
+   "id": 17622250815494,
+   "line": 18,
+   "target_local_id": 17686675324930,
+   "value_ref": {
+    "code": "info.Env()",
+    "id": 17622250815495,
+    "kind": "CALL"
+   }
+  }
+ ],
+ "calls": [
+  {
+   "arguments": [
+    {
+     "call_id": 30064771072,
+     "code": "native1",
+     "id": 68719476737,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 8,
+     "name": "native1",
+     "type_full_name": "build/Release/addon1"
+    },
+    {
+     "call_id": 30064771072,
+     "code": "1",
+     "id": 90194313216,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 8,
+     "name": "",
+     "type_full_name": "__ecma.Number"
+    },
+    {
+     "call_id": 30064771072,
+     "code": "2",
+     "id": 90194313217,
+     "index": 2,
+     "kind": "LITERAL",
+     "line": 8,
+     "name": "",
+     "type_full_name": "__ecma.Number"
+    }
+   ],
+   "candidate_target_full_names": [
+    "Foo:Napi.Value(Napi.CallbackInfo&)"
+   ],
+   "candidate_target_ids": [
+    17699560226816
+   ],
+   "canonical_targets": [
+    "build/Release/addon1:Foo"
+   ],
+   "code": "native1.Foo(1, 2)",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182400,
+   "file": "index.js",
+   "id": 30064771072,
+   "line": 8,
+   "method_full_name": "build/Release/addon1:Foo",
+   "name": "Foo",
+   "receiver_owner_match": false,
+   "receiver_type": "build/Release/addon1",
+   "resolution": "EXACT",
+   "resolution_corrected": "EXACT",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "CROSS_LANGUAGE_NAPI_BINDING",
+   "stub_targets": [
+    "build/Release/addon1:Foo"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771073,
+     "code": "native1",
+     "id": 68719476736,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 8,
+     "name": "native1",
+     "type_full_name": "build/Release/addon1"
+    },
+    {
+     "call_id": 30064771073,
+     "code": "Foo",
+     "id": 55834574848,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 8,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "native1.Foo",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182400,
+   "file": "index.js",
+   "id": 30064771073,
+   "line": 8,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771090,
+     "code": "callFoo",
+     "id": 68719476750,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 8,
+     "name": "callFoo",
+     "type_full_name": "index.js::program:callFoo"
+    },
+    {
+     "call_id": 30064771090,
+     "code": "callFoo",
+     "id": 120259084289,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 8,
+     "name": "",
+     "type_full_name": "index.js::program:callFoo"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function callFoo = function callFoo() { return native1.Foo(1, 2); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771090,
+   "line": 8,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771091,
+     "code": "callBar",
+     "id": 68719476751,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 11,
+     "name": "callBar",
+     "type_full_name": "index.js::program:callBar"
+    },
+    {
+     "call_id": 30064771091,
+     "code": "callBar",
+     "id": 120259084290,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 11,
+     "name": "",
+     "type_full_name": "index.js::program:callBar"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function callBar = function callBar() { return native2.Bar(3); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771091,
+   "line": 11,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771092,
+     "code": "callBaz",
+     "id": 68719476752,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 14,
+     "name": "callBaz",
+     "type_full_name": "index.js::program:callBaz"
+    },
+    {
+     "call_id": 30064771092,
+     "code": "callBaz",
+     "id": 120259084291,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 14,
+     "name": "",
+     "type_full_name": "index.js::program:callBaz"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function callBaz = function callBaz() { return native3.Baz(); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771092,
+   "line": 14,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771093,
+     "code": "readIt",
+     "id": 68719476753,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 17,
+     "name": "readIt",
+     "type_full_name": "index.js::program:readIt"
+    },
+    {
+     "call_id": 30064771093,
+     "code": "readIt",
+     "id": 120259084292,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 17,
+     "name": "",
+     "type_full_name": "index.js::program:readIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function readIt = function readIt() { return fs.readFileSync('/tmp/x'); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771093,
+   "line": 17,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771094,
+     "code": "mapIt",
+     "id": 68719476754,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 20,
+     "name": "mapIt",
+     "type_full_name": "index.js::program:mapIt"
+    },
+    {
+     "call_id": 30064771094,
+     "code": "mapIt",
+     "id": 120259084293,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 20,
+     "name": "",
+     "type_full_name": "index.js::program:mapIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function mapIt = function mapIt(arr) { return lodash.map(arr, function (x) { return x; }); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771094,
+   "line": 20,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771095,
+     "code": "helpIt",
+     "id": 68719476755,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 23,
+     "name": "helpIt",
+     "type_full_name": "index.js::program:helpIt"
+    },
+    {
+     "call_id": 30064771095,
+     "code": "helpIt",
+     "id": 120259084294,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 23,
+     "name": "",
+     "type_full_name": "index.js::program:helpIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "function helpIt = function helpIt() { return helper.Assist(); }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771095,
+   "line": 23,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771096,
+     "code": "native1",
+     "id": 68719476756,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 7,
+     "name": "native1",
+     "type_full_name": "build/Release/addon1"
+    },
+    {
+     "call_id": 30064771096,
+     "code": "require('./build/Release/addon1')",
+     "id": 30064771084,
+     "index": 2,
+     "kind": "CALL",
+     "line": 7,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const native1 = require('./build/Release/addon1')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771096,
+   "line": 7,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771097,
+     "code": "native2",
+     "id": 68719476759,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 10,
+     "name": "native2",
+     "type_full_name": "node-gyp-build"
+    },
+    {
+     "call_id": 30064771097,
+     "code": "require('node-gyp-build')(__dirname)",
+     "id": 30064771085,
+     "index": 2,
+     "kind": "CALL",
+     "line": 10,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const native2 = require('node-gyp-build')(__dirname)",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771097,
+   "line": 10,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771099,
+     "code": "native3",
+     "id": 68719476764,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 13,
+     "name": "native3",
+     "type_full_name": "bindings"
+    },
+    {
+     "call_id": 30064771099,
+     "code": "require('bindings')('addon3')",
+     "id": 30064771086,
+     "index": 2,
+     "kind": "CALL",
+     "line": 13,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const native3 = require('bindings')('addon3')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771099,
+   "line": 13,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771101,
+     "code": "fs",
+     "id": 68719476768,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 16,
+     "name": "fs",
+     "type_full_name": "fs"
+    },
+    {
+     "call_id": 30064771101,
+     "code": "require('fs')",
+     "id": 30064771087,
+     "index": 2,
+     "kind": "CALL",
+     "line": 16,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const fs = require('fs')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771101,
+   "line": 16,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771102,
+     "code": "lodash",
+     "id": 68719476771,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 19,
+     "name": "lodash",
+     "type_full_name": "lodash"
+    },
+    {
+     "call_id": 30064771102,
+     "code": "require('lodash')",
+     "id": 30064771088,
+     "index": 2,
+     "kind": "CALL",
+     "line": 19,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const lodash = require('lodash')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771102,
+   "line": 19,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771103,
+     "code": "helper",
+     "id": 68719476774,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 22,
+     "name": "helper",
+     "type_full_name": "some-bindings-helper"
+    },
+    {
+     "call_id": 30064771103,
+     "code": "require('some-bindings-helper')",
+     "id": 30064771089,
+     "index": 2,
+     "kind": "CALL",
+     "line": 22,
+     "name": "",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "const helper = require('some-bindings-helper')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771103,
+   "line": 22,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771104,
+     "code": "module.exports",
+     "id": 30064771105,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771104,
+     "code": "{ callFoo, callBar, callBaz, readIt, mapIt, helpIt }",
+     "id": 25769803784,
+     "index": 2,
+     "kind": "BLOCK",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "module.exports = { callFoo, callBar, callBaz, readIt, mapIt, helpIt }",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771104,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771084,
+     "code": "this",
+     "id": 68719476758,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 7,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771084,
+     "code": "\"./build/Release/addon1\"",
+     "id": 90194313220,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 7,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('./build/Release/addon1')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771084,
+   "line": 7,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771085,
+     "code": "this",
+     "id": 68719476762,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 10,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771085,
+     "code": "__dirname",
+     "id": 68719476763,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 10,
+     "name": "__dirname",
+     "type_full_name": "ANY"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require('node-gyp-build')"
+   ],
+   "candidate_target_ids": [
+    107374182419
+   ],
+   "canonical_targets": [
+    "index.js::program:require('node-gyp-build')"
+   ],
+   "code": "require('node-gyp-build')(__dirname)",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771085,
+   "line": 10,
+   "method_full_name": "index.js::program:require('node-gyp-build')",
+   "name": "require('node-gyp-build')",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require('node-gyp-build')"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771086,
+     "code": "this",
+     "id": 68719476767,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 13,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771086,
+     "code": "\"addon3\"",
+     "id": 90194313223,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 13,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require('bindings')"
+   ],
+   "candidate_target_ids": [
+    107374182420
+   ],
+   "canonical_targets": [
+    "index.js::program:require('bindings')"
+   ],
+   "code": "require('bindings')('addon3')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771086,
+   "line": 13,
+   "method_full_name": "index.js::program:require('bindings')",
+   "name": "require('bindings')",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require('bindings')"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771087,
+     "code": "this",
+     "id": 68719476770,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 16,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771087,
+     "code": "\"fs\"",
+     "id": 90194313224,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 16,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('fs')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771087,
+   "line": 16,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771088,
+     "code": "this",
+     "id": 68719476773,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 19,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771088,
+     "code": "\"lodash\"",
+     "id": 90194313225,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 19,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('lodash')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771088,
+   "line": 19,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771089,
+     "code": "this",
+     "id": 68719476776,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 22,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771089,
+     "code": "\"some-bindings-helper\"",
+     "id": 90194313226,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 22,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('some-bindings-helper')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771089,
+   "line": 22,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771105,
+     "code": "module",
+     "id": 68719476777,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "module",
+     "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js/index.js\"); }"
+    },
+    {
+     "call_id": 30064771105,
+     "code": "exports",
+     "id": 55834574854,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "module.exports",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771105,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771098,
+     "code": "this",
+     "id": 68719476761,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 10,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771098,
+     "code": "\"node-gyp-build\"",
+     "id": 90194313221,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 10,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('node-gyp-build')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771098,
+   "line": 10,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771100,
+     "code": "this",
+     "id": 68719476766,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 13,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "call_id": 30064771100,
+     "code": "\"bindings\"",
+     "id": 90194313222,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 13,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "index.js::program:require"
+   ],
+   "candidate_target_ids": [
+    107374182418
+   ],
+   "canonical_targets": [
+    "index.js::program:require"
+   ],
+   "code": "require('bindings')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771100,
+   "line": 13,
+   "method_full_name": "index.js::program:require",
+   "name": "require",
+   "receiver_owner_match": false,
+   "receiver_type": "index.js::program",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "index.js::program:require"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771106,
+     "code": "_tmp_0.callFoo",
+     "id": 30064771107,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771106,
+     "code": "callFoo",
+     "id": 68719476779,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "callFoo",
+     "type_full_name": "index.js::program:callFoo"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callFoo = callFoo",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771106,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771108,
+     "code": "_tmp_0.callBar",
+     "id": 30064771109,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771108,
+     "code": "callBar",
+     "id": 68719476781,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "callBar",
+     "type_full_name": "index.js::program:callBar"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callBar = callBar",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771108,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771110,
+     "code": "_tmp_0.callBaz",
+     "id": 30064771111,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771110,
+     "code": "callBaz",
+     "id": 68719476783,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "callBaz",
+     "type_full_name": "index.js::program:callBaz"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callBaz = callBaz",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771110,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771112,
+     "code": "_tmp_0.readIt",
+     "id": 30064771113,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771112,
+     "code": "readIt",
+     "id": 68719476785,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "readIt",
+     "type_full_name": "index.js::program:readIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.readIt = readIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771112,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771114,
+     "code": "_tmp_0.mapIt",
+     "id": 30064771115,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771114,
+     "code": "mapIt",
+     "id": 68719476787,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "mapIt",
+     "type_full_name": "index.js::program:mapIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.mapIt = mapIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771114,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771116,
+     "code": "_tmp_0.helpIt",
+     "id": 30064771117,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771116,
+     "code": "helpIt",
+     "id": 68719476789,
+     "index": 2,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "helpIt",
+     "type_full_name": "index.js::program:helpIt"
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.helpIt = helpIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771116,
+   "line": 25,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771107,
+     "code": "_tmp_0",
+     "id": 68719476778,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771107,
+     "code": "callFoo",
+     "id": 55834574855,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callFoo",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771107,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771109,
+     "code": "_tmp_0",
+     "id": 68719476780,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771109,
+     "code": "callBar",
+     "id": 55834574856,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callBar",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771109,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771111,
+     "code": "_tmp_0",
+     "id": 68719476782,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771111,
+     "code": "callBaz",
+     "id": 55834574857,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.callBaz",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771111,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771113,
+     "code": "_tmp_0",
+     "id": 68719476784,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771113,
+     "code": "readIt",
+     "id": 55834574858,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.readIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771113,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771115,
+     "code": "_tmp_0",
+     "id": 68719476786,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771115,
+     "code": "mapIt",
+     "id": 55834574859,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.mapIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771115,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771117,
+     "code": "_tmp_0",
+     "id": 68719476788,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "_tmp_0",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771117,
+     "code": "helpIt",
+     "id": 55834574860,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 25,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "_tmp_0.helpIt",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182401,
+   "file": "index.js",
+   "id": 30064771117,
+   "line": 25,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771074,
+     "code": "native2",
+     "id": 68719476739,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 11,
+     "name": "native2",
+     "type_full_name": "node-gyp-build"
+    },
+    {
+     "call_id": 30064771074,
+     "code": "3",
+     "id": 90194313218,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 11,
+     "name": "",
+     "type_full_name": "__ecma.Number"
+    }
+   ],
+   "candidate_target_full_names": [
+    "Bar:Napi.Value(Napi.CallbackInfo&)"
+   ],
+   "candidate_target_ids": [
+    17699560226818
+   ],
+   "canonical_targets": [
+    "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+    "node-gyp-build:Bar"
+   ],
+   "code": "native2.Bar(3)",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182402,
+   "file": "index.js",
+   "id": 30064771074,
+   "line": 11,
+   "method_full_name": "node-gyp-build:Bar",
+   "name": "Bar",
+   "receiver_owner_match": false,
+   "receiver_type": "node-gyp-build",
+   "resolution": "EXACT",
+   "resolution_corrected": "EXACT",
+   "resolution_raw": "AMBIGUOUS",
+   "resolution_reason": "CROSS_LANGUAGE_NAPI_BINDING",
+   "stub_targets": [
+    "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+    "node-gyp-build:Bar"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771075,
+     "code": "native2",
+     "id": 68719476738,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 11,
+     "name": "native2",
+     "type_full_name": "node-gyp-build"
+    },
+    {
+     "call_id": 30064771075,
+     "code": "Bar",
+     "id": 55834574849,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 11,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "native2.Bar",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182402,
+   "file": "index.js",
+   "id": 30064771075,
+   "line": 11,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771076,
+     "code": "native3",
+     "id": 68719476741,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 14,
+     "name": "native3",
+     "type_full_name": "bindings"
+    }
+   ],
+   "candidate_target_full_names": [
+    "Baz:Napi.Value(Napi.CallbackInfo&)"
+   ],
+   "candidate_target_ids": [
+    17699560226819
+   ],
+   "canonical_targets": [
+    "bindings:Baz",
+    "index.js::program:require('bindings'):<returnValue>:Baz"
+   ],
+   "code": "native3.Baz()",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182403,
+   "file": "index.js",
+   "id": 30064771076,
+   "line": 14,
+   "method_full_name": "bindings:Baz",
+   "name": "Baz",
+   "receiver_owner_match": false,
+   "receiver_type": "bindings",
+   "resolution": "EXACT",
+   "resolution_corrected": "EXACT",
+   "resolution_raw": "AMBIGUOUS",
+   "resolution_reason": "CROSS_LANGUAGE_NAPI_BINDING",
+   "stub_targets": [
+    "bindings:Baz",
+    "index.js::program:require('bindings'):<returnValue>:Baz"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771077,
+     "code": "native3",
+     "id": 68719476740,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 14,
+     "name": "native3",
+     "type_full_name": "bindings"
+    },
+    {
+     "call_id": 30064771077,
+     "code": "Baz",
+     "id": 55834574850,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 14,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "native3.Baz",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182403,
+   "file": "index.js",
+   "id": 30064771077,
+   "line": 14,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771078,
+     "code": "fs",
+     "id": 68719476743,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 17,
+     "name": "fs",
+     "type_full_name": "fs"
+    },
+    {
+     "call_id": 30064771078,
+     "code": "\"/tmp/x\"",
+     "id": 90194313219,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 17,
+     "name": "",
+     "type_full_name": "__ecma.String"
+    }
+   ],
+   "candidate_target_full_names": [
+    "fs:readFileSync"
+   ],
+   "candidate_target_ids": [
+    107374182415
+   ],
+   "canonical_targets": [
+    "fs:readFileSync"
+   ],
+   "code": "fs.readFileSync('/tmp/x')",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182404,
+   "file": "index.js",
+   "id": 30064771078,
+   "line": 17,
+   "method_full_name": "fs:readFileSync",
+   "name": "readFileSync",
+   "receiver_owner_match": false,
+   "receiver_type": "fs",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "fs:readFileSync"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771079,
+     "code": "fs",
+     "id": 68719476742,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 17,
+     "name": "fs",
+     "type_full_name": "fs"
+    },
+    {
+     "call_id": 30064771079,
+     "code": "readFileSync",
+     "id": 55834574851,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 17,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "fs.readFileSync",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182404,
+   "file": "index.js",
+   "id": 30064771079,
+   "line": 17,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771080,
+     "code": "lodash",
+     "id": 68719476746,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 20,
+     "name": "lodash",
+     "type_full_name": "lodash"
+    },
+    {
+     "call_id": 30064771080,
+     "code": "arr",
+     "id": 68719476747,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 20,
+     "name": "arr",
+     "type_full_name": "ANY"
+    },
+    {
+     "call_id": 30064771080,
+     "code": "<lambda>0",
+     "id": 120259084288,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 20,
+     "name": "",
+     "type_full_name": "index.js::program:mapIt:<lambda>0"
+    }
+   ],
+   "candidate_target_full_names": [
+    "lodash:map"
+   ],
+   "candidate_target_ids": [
+    107374182416
+   ],
+   "canonical_targets": [
+    "lodash:map"
+   ],
+   "code": "lodash.map(arr, function (x) { return x; })",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182406,
+   "file": "index.js",
+   "id": 30064771080,
+   "line": 20,
+   "method_full_name": "lodash:map",
+   "name": "map",
+   "receiver_owner_match": false,
+   "receiver_type": "lodash",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "lodash:map"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771081,
+     "code": "lodash",
+     "id": 68719476745,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 20,
+     "name": "lodash",
+     "type_full_name": "lodash"
+    },
+    {
+     "call_id": 30064771081,
+     "code": "map",
+     "id": 55834574852,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 20,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "lodash.map",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182406,
+   "file": "index.js",
+   "id": 30064771081,
+   "line": 20,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771082,
+     "code": "helper",
+     "id": 68719476749,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 23,
+     "name": "helper",
+     "type_full_name": "some-bindings-helper"
+    }
+   ],
+   "candidate_target_full_names": [
+    "some-bindings-helper:Assist"
+   ],
+   "candidate_target_ids": [
+    107374182417
+   ],
+   "canonical_targets": [
+    "some-bindings-helper:Assist"
+   ],
+   "code": "helper.Assist()",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "DYNAMIC_DISPATCH",
+   "enclosing_function_id": 107374182407,
+   "file": "index.js",
+   "id": 30064771082,
+   "line": 23,
+   "method_full_name": "some-bindings-helper:Assist",
+   "name": "Assist",
+   "receiver_owner_match": false,
+   "receiver_type": "some-bindings-helper",
+   "resolution": "HEURISTIC",
+   "resolution_corrected": "HEURISTIC",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+   "stub_targets": [
+    "some-bindings-helper:Assist"
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "call_id": 30064771083,
+     "code": "helper",
+     "id": 68719476748,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 23,
+     "name": "helper",
+     "type_full_name": "some-bindings-helper"
+    },
+    {
+     "call_id": 30064771083,
+     "code": "Assist",
+     "id": 55834574853,
+     "index": 2,
+     "kind": "FIELD_IDENTIFIER",
+     "line": 23,
+     "name": "",
+     "type_full_name": ""
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "canonical_targets": [],
+   "code": "helper.Assist",
+   "concrete_targets": [],
+   "corrected_targets": [],
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 107374182407,
+   "file": "index.js",
+   "id": 30064771083,
+   "line": 23,
+   "method_full_name": "<operator>.fieldAccess",
+   "name": "<operator>.fieldAccess",
+   "receiver_owner_match": false,
+   "receiver_type": null,
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "NOT_DISPATCH",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NOT_DISPATCH_CALL",
+   "stub_targets": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521152
+      ]
+     },
+     "id": 17660905521152,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 8,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324928,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "info.Env()",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815489
+      ]
+     },
+     "id": 17622250815489,
+     "index": 1,
+     "kind": "CALL",
+     "line": 8,
+     "name": "",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "info.Env()",
+      "id": 17622250815489,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "env = info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226816,
+   "file": "addon.cc",
+   "id": 17622250815488,
+   "line": 8,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NON_DISPATCH_OPERATOR",
+   "type_full_name": "void"
+  },
+  {
+   "arguments": [],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226816,
+   "file": "addon.cc",
+   "id": 17622250815489,
+   "line": 8,
+   "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
+   "name": "Env",
+   "receiver_name": "info",
+   "receiver_node_id": 17660905521153,
+   "receiver_type": "Napi.CallbackInfo&",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521154
+      ]
+     },
+     "id": 17660905521154,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 9,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324928,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "1",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357632
+      ]
+     },
+     "id": 17682380357632,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 9,
+     "name": "",
+     "type_full_name": "int",
+     "value_ref": {
+      "code": "1",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Number::New(env, 1)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226816,
+   "file": "addon.cc",
+   "id": 17622250815490,
+   "line": 9,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521155
+      ]
+     },
+     "id": 17660905521155,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 13,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324929,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "info.Env()",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815492
+      ]
+     },
+     "id": 17622250815492,
+     "index": 1,
+     "kind": "CALL",
+     "line": 13,
+     "name": "",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "info.Env()",
+      "id": 17622250815492,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "env = info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226818,
+   "file": "addon.cc",
+   "id": 17622250815491,
+   "line": 13,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NON_DISPATCH_OPERATOR",
+   "type_full_name": "void"
+  },
+  {
+   "arguments": [],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226818,
+   "file": "addon.cc",
+   "id": 17622250815492,
+   "line": 13,
+   "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
+   "name": "Env",
+   "receiver_name": "info",
+   "receiver_node_id": 17660905521156,
+   "receiver_type": "Napi.CallbackInfo&",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521157
+      ]
+     },
+     "id": 17660905521157,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 14,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324929,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "2",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357633
+      ]
+     },
+     "id": 17682380357633,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 14,
+     "name": "",
+     "type_full_name": "int",
+     "value_ref": {
+      "code": "2",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Number::New(env, 2)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226818,
+   "file": "addon.cc",
+   "id": 17622250815493,
+   "line": 14,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521158
+      ]
+     },
+     "id": 17660905521158,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 18,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324930,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "info.Env()",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815495
+      ]
+     },
+     "id": 17622250815495,
+     "index": 1,
+     "kind": "CALL",
+     "line": 18,
+     "name": "",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "info.Env()",
+      "id": 17622250815495,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "env = info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226819,
+   "file": "addon.cc",
+   "id": 17622250815494,
+   "line": 18,
+   "method_full_name": "<operator>.assignment",
+   "name": "<operator>.assignment",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "NON_DISPATCH_OPERATOR",
+   "type_full_name": "void"
+  },
+  {
+   "arguments": [],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "info.Env()",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226819,
+   "file": "addon.cc",
+   "id": 17622250815495,
+   "line": 18,
+   "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
+   "name": "Env",
+   "receiver_name": "info",
+   "receiver_node_id": 17660905521159,
+   "receiver_type": "Napi.CallbackInfo&",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521160
+      ]
+     },
+     "id": 17660905521160,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 19,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17686675324930,
+      "kind": "LOCAL"
+     }
+    },
+    {
+     "code": "3",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357634
+      ]
+     },
+     "id": 17682380357634,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 19,
+     "name": "",
+     "type_full_name": "int",
+     "value_ref": {
+      "code": "3",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Number::New(env, 3)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226819,
+   "file": "addon.cc",
+   "id": 17622250815496,
+   "line": 19,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "Napi::String::New(env, \"Foo\")",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815498
+      ]
+     },
+     "id": 17622250815498,
+     "index": 0,
+     "kind": "CALL",
+     "line": 23,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::String::New(env, \"Foo\")",
+      "id": 17622250815498,
+      "kind": "CALL"
+     }
+    },
+    {
+     "code": "Napi::Function::New(env, Foo)",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815499
+      ]
+     },
+     "id": 17622250815499,
+     "index": 1,
+     "kind": "CALL",
+     "line": 23,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::Function::New(env, Foo)",
+      "id": 17622250815499,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "exports.Set(Napi::String::New(env, \"Foo\"), Napi::Function::New(env, Foo))",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815497,
+   "line": 23,
+   "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
+   "name": "Set",
+   "receiver_name": "exports",
+   "receiver_node_id": 17660905521161,
+   "receiver_type": "Napi.Object",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "Napi::String::New(env, \"Bar\")",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815501
+      ]
+     },
+     "id": 17622250815501,
+     "index": 0,
+     "kind": "CALL",
+     "line": 24,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::String::New(env, \"Bar\")",
+      "id": 17622250815501,
+      "kind": "CALL"
+     }
+    },
+    {
+     "code": "Napi::Function::New(env, Bar)",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815502
+      ]
+     },
+     "id": 17622250815502,
+     "index": 1,
+     "kind": "CALL",
+     "line": 24,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::Function::New(env, Bar)",
+      "id": 17622250815502,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "exports.Set(Napi::String::New(env, \"Bar\"), Napi::Function::New(env, Bar))",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815500,
+   "line": 24,
+   "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
+   "name": "Set",
+   "receiver_name": "exports",
+   "receiver_node_id": 17660905521164,
+   "receiver_type": "Napi.Object",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "Napi::String::New(env, \"Baz\")",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815504
+      ]
+     },
+     "id": 17622250815504,
+     "index": 0,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::String::New(env, \"Baz\")",
+      "id": 17622250815504,
+      "kind": "CALL"
+     }
+    },
+    {
+     "code": "Napi::Function::New(env, Baz)",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17622250815505
+      ]
+     },
+     "id": 17622250815505,
+     "index": 1,
+     "kind": "CALL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "ANY",
+     "value_ref": {
+      "code": "Napi::Function::New(env, Baz)",
+      "id": 17622250815505,
+      "kind": "CALL"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "exports.Set(Napi::String::New(env, \"Baz\"), Napi::Function::New(env, Baz))",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815503,
+   "line": 25,
+   "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
+   "name": "Set",
+   "receiver_name": "exports",
+   "receiver_node_id": 17660905521167,
+   "receiver_type": "Napi.Object",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521162
+      ]
+     },
+     "id": 17660905521162,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 23,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "\"Foo\"",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357635
+      ]
+     },
+     "id": 17682380357635,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 23,
+     "name": "",
+     "type_full_name": "char[4]",
+     "value_ref": {
+      "code": "\"Foo\"",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::String::New(env, \"Foo\")",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815498,
+   "line": 23,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521163
+      ]
+     },
+     "id": 17660905521163,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 23,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "Foo",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17712445128704
+      ]
+     },
+     "id": 17712445128704,
+     "index": 1,
+     "kind": "METHOD_REF",
+     "line": 23,
+     "name": "",
+     "type_full_name": "Value",
+     "value_ref": {
+      "code": "Foo",
+      "id": -1,
+      "kind": "UNKNOWN"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Function::New(env, Foo)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815499,
+   "line": 23,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521165
+      ]
+     },
+     "id": 17660905521165,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 24,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "\"Bar\"",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357636
+      ]
+     },
+     "id": 17682380357636,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 24,
+     "name": "",
+     "type_full_name": "char[4]",
+     "value_ref": {
+      "code": "\"Bar\"",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::String::New(env, \"Bar\")",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815501,
+   "line": 24,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521166
+      ]
+     },
+     "id": 17660905521166,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 24,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "Bar",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17712445128705
+      ]
+     },
+     "id": 17712445128705,
+     "index": 1,
+     "kind": "METHOD_REF",
+     "line": 24,
+     "name": "",
+     "type_full_name": "Value",
+     "value_ref": {
+      "code": "Bar",
+      "id": -1,
+      "kind": "UNKNOWN"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Function::New(env, Bar)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815502,
+   "line": 24,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521168
+      ]
+     },
+     "id": 17660905521168,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "\"Baz\"",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17682380357637
+      ]
+     },
+     "id": 17682380357637,
+     "index": 1,
+     "kind": "LITERAL",
+     "line": 25,
+     "name": "",
+     "type_full_name": "char[4]",
+     "value_ref": {
+      "code": "\"Baz\"",
+      "id": -1,
+      "kind": "CONSTANT"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::String::New(env, \"Baz\")",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815504,
+   "line": 25,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521169
+      ]
+     },
+     "id": 17660905521169,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 25,
+     "name": "env",
+     "type_full_name": "Napi.Env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194115,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "Baz",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17712445128706
+      ]
+     },
+     "id": 17712445128706,
+     "index": 1,
+     "kind": "METHOD_REF",
+     "line": 25,
+     "name": "",
+     "type_full_name": "Value",
+     "value_ref": {
+      "code": "Baz",
+      "id": -1,
+      "kind": "UNKNOWN"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::Function::New(env, Baz)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226820,
+   "file": "addon.cc",
+   "id": 17622250815505,
+   "line": 25,
+   "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "name": "New",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  },
+  {
+   "arguments": [
+    {
+     "code": "env",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521171
+      ]
+     },
+     "id": 17660905521171,
+     "index": 0,
+     "kind": "IDENTIFIER",
+     "line": 29,
+     "name": "env",
+     "type_full_name": "napi_env",
+     "value_ref": {
+      "code": "env",
+      "id": 17703855194117,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "exports",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17660905521172
+      ]
+     },
+     "id": 17660905521172,
+     "index": 1,
+     "kind": "IDENTIFIER",
+     "line": 29,
+     "name": "exports",
+     "type_full_name": "napi_value",
+     "value_ref": {
+      "code": "exports",
+      "id": 17703855194118,
+      "kind": "PARAMETER"
+     }
+    },
+    {
+     "code": "Init",
+     "derivation": {
+      "origin": "FRONTEND_DIRECT",
+      "rule": "ARGUMENT_NODE_REF",
+      "source_node_ids": [
+       17712445128707
+      ]
+     },
+     "id": 17712445128707,
+     "index": 2,
+     "kind": "METHOD_REF",
+     "line": 29,
+     "name": "",
+     "type_full_name": "Object",
+     "value_ref": {
+      "code": "Init",
+      "id": -1,
+      "kind": "UNKNOWN"
+     }
+    }
+   ],
+   "candidate_target_full_names": [],
+   "candidate_target_ids": [],
+   "code": "Napi::RegisterModule(env, exports, Init)",
+   "dispatch_type": "STATIC_DISPATCH",
+   "enclosing_function_id": 17699560226821,
+   "file": "addon.cc",
+   "id": 17622250815506,
+   "line": 29,
+   "method_full_name": "Napi.RegisterModule:ANY(ANY,ANY,Napi.Object(*)(Napi.Env,Napi.Object))",
+   "name": "RegisterModule",
+   "resolution": "UNRESOLVED",
+   "resolution_corrected": "UNRESOLVED",
+   "resolution_raw": "EXACT",
+   "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+   "type_full_name": "ANY"
+  }
+ ],
+ "cpp_memory": {
+  "ambiguous_indirect_writes": 0,
+  "compound_assignments": 0,
+  "exact_deref_reads": 0,
+  "exact_field_accesses": 0,
+  "exact_index_accesses": 0,
+  "exact_indirect_writes": 0,
+  "exact_pointer_param_writes": 0,
+  "pointer_bindings": 0,
+  "reaching_def_facts": 0,
+  "synthetic_locations": 0,
+  "unknown_index_accesses": 0,
+  "unresolved_pointer_param_writes": 0
+ },
+ "cpp_memory_locations": [],
+ "cross_language_bindings": {
+  "id_offset": 17592186044416,
+  "idiom": "napi-exports-set",
+  "js_receiver": "bindings",
+  "linked_calls": [
+   {
+    "cpp_function_id": 17699560226816,
+    "js_call": 30064771072,
+    "name": "Foo"
+   },
+   {
+    "cpp_function_id": 17699560226818,
+    "js_call": 30064771074,
+    "name": "Bar"
+   },
+   {
+    "cpp_function_id": 17699560226819,
+    "js_call": 30064771076,
+    "name": "Baz"
+   }
+  ],
+  "registrations": [
+   {
+    "fn": "Foo",
+    "linked_function_id": 107374182400,
+    "name": "Foo",
+    "set_call": 30064771081
+   },
+   {
+    "fn": "Bar",
+    "linked_function_id": 107374182402,
+    "name": "Bar",
+    "set_call": 30064771084
+   },
+   {
+    "fn": "Baz",
+    "linked_function_id": 107374182403,
+    "name": "Baz",
+    "set_call": 30064771087
+   }
+  ],
+  "unlinked_calls": []
+ },
+ "frontend": "polyglot-composer(joern-jssrc2cpg+joern-c2cpg)",
+ "frontend_counters": {
+  "exported_calls": 19,
+  "exported_functions": 12,
+  "exported_identifiers": 42,
+  "exported_locals": 3,
+  "exported_returns": 5,
+  "exported_type_decls": 18,
+  "exported_value_returns": 5,
+  "exported_void_returns": 0
+ },
+ "functions": [
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:callFoo",
+   "id": 107374182400,
+   "is_external": false,
+   "line": 8,
+   "line_end": 8,
+   "name": "callFoo",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149696,
+     "index": 0,
+     "line": 8,
+     "method_id": 107374182400,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "index.js::program",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "index.js",
+   "full_name": "index.js::program",
+   "id": 107374182401,
+   "is_external": false,
+   "line": 1,
+   "line_end": 26,
+   "name": ":program",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149705,
+     "index": 0,
+     "line": 1,
+     "method_id": 107374182401,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:callBar",
+   "id": 107374182402,
+   "is_external": false,
+   "line": 11,
+   "line_end": 11,
+   "name": "callBar",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149697,
+     "index": 0,
+     "line": 11,
+     "method_id": 107374182402,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:callBaz",
+   "id": 107374182403,
+   "is_external": false,
+   "line": 14,
+   "line_end": 14,
+   "name": "callBaz",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149698,
+     "index": 0,
+     "line": 14,
+     "method_id": 107374182403,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:readIt",
+   "id": 107374182404,
+   "is_external": false,
+   "line": 17,
+   "line_end": 17,
+   "name": "readIt",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149699,
+     "index": 0,
+     "line": 17,
+     "method_id": 107374182404,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:mapIt:<lambda>0",
+   "id": 107374182405,
+   "is_external": false,
+   "line": 20,
+   "line_end": 20,
+   "name": "<lambda>0",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149700,
+     "index": 0,
+     "line": 20,
+     "method_id": 107374182405,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "code": "x",
+     "id": 111669149701,
+     "index": 1,
+     "line": 20,
+     "method_id": 107374182405,
+     "name": "x",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:mapIt",
+   "id": 107374182406,
+   "is_external": false,
+   "line": 20,
+   "line_end": 20,
+   "name": "mapIt",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149702,
+     "index": 0,
+     "line": 20,
+     "method_id": 107374182406,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    },
+    {
+     "code": "arr",
+     "id": 111669149703,
+     "index": 1,
+     "line": 20,
+     "method_id": 107374182406,
+     "name": "arr",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<empty>",
+   "ast_parent_type": "<empty>",
+   "file": "index.js",
+   "full_name": "index.js::program:helpIt",
+   "id": 107374182407,
+   "is_external": false,
+   "line": 23,
+   "line_end": 23,
+   "name": "helpIt",
+   "parameters": [
+    {
+     "code": "this",
+     "id": 111669149704,
+     "index": 0,
+     "line": 23,
+     "method_id": 107374182407,
+     "name": "this",
+     "type_full_name": "index.js::program"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "<operator>.fieldAccess",
+   "id": 107374182408,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "<operator>.fieldAccess",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 111669149706,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182408,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149707,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182408,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "<operator>.assignment",
+   "id": 107374182409,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "<operator>.assignment",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 111669149708,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182409,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149709,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182409,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "build/Release/addon1:Foo",
+   "id": 107374182410,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Foo",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149710,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182410,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149711,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182410,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149712,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182410,
+     "name": "p2",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p3",
+     "id": 111669149713,
+     "index": 4,
+     "line": null,
+     "method_id": 107374182410,
+     "name": "p3",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "node-gyp-build:Bar",
+   "id": 107374182411,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Bar",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149714,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182411,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149715,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182411,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149716,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182411,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+   "id": 107374182412,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Bar",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149717,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182412,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149718,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182412,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149719,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182412,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "bindings:Baz",
+   "id": 107374182413,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Baz",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149720,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182413,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149721,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182413,
+     "name": "p1",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "index.js::program:require('bindings'):<returnValue>:Baz",
+   "id": 107374182414,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Baz",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149722,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182414,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149723,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182414,
+     "name": "p1",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "fs:readFileSync",
+   "id": 107374182415,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "readFileSync",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149724,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182415,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149725,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182415,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149726,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182415,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "lodash:map",
+   "id": 107374182416,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "map",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149727,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182416,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149728,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182416,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149729,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182416,
+     "name": "p2",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p3",
+     "id": 111669149730,
+     "index": 4,
+     "line": null,
+     "method_id": 107374182416,
+     "name": "p3",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<speculatedMethods>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "some-bindings-helper:Assist",
+   "id": 107374182417,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "Assist",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149731,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182417,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149732,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182417,
+     "name": "p1",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "index.js::program",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "<empty>",
+   "full_name": "index.js::program:require",
+   "id": 107374182418,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "require",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149733,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182418,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149734,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182418,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149735,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182418,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "index.js::program",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "<empty>",
+   "full_name": "index.js::program:require('node-gyp-build')",
+   "id": 107374182419,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "require('node-gyp-build')",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149736,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182419,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149737,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182419,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149738,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182419,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "index.js::program",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "<empty>",
+   "full_name": "index.js::program:require('bindings')",
+   "id": 107374182420,
+   "is_external": true,
+   "line": null,
+   "line_end": null,
+   "name": "require('bindings')",
+   "parameters": [
+    {
+     "code": "p0",
+     "id": 111669149739,
+     "index": 1,
+     "line": null,
+     "method_id": 107374182420,
+     "name": "p0",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p1",
+     "id": 111669149740,
+     "index": 2,
+     "line": null,
+     "method_id": 107374182420,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 111669149741,
+     "index": 3,
+     "line": null,
+     "method_id": 107374182420,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "Foo:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17699560226816,
+   "is_external": false,
+   "line": 7,
+   "line_end": 10,
+   "name": "Foo",
+   "parameters": [
+    {
+     "code": "const Napi::CallbackInfo &info",
+     "id": 17703855194112,
+     "index": 0,
+     "line": 7,
+     "method_id": 17699560226816,
+     "name": "info",
+     "type_full_name": "Napi.CallbackInfo&"
+    }
+   ],
+   "signature": "Napi.Value(Napi.CallbackInfo&)"
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "addon.cc:<global>",
+   "id": 17699560226817,
+   "is_external": false,
+   "line": 1,
+   "line_end": 29,
+   "name": "<global>",
+   "parameters": [],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "Bar:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17699560226818,
+   "is_external": false,
+   "line": 12,
+   "line_end": 15,
+   "name": "Bar",
+   "parameters": [
+    {
+     "code": "const Napi::CallbackInfo &info",
+     "id": 17703855194113,
+     "index": 0,
+     "line": 12,
+     "method_id": 17699560226818,
+     "name": "info",
+     "type_full_name": "Napi.CallbackInfo&"
+    }
+   ],
+   "signature": "Napi.Value(Napi.CallbackInfo&)"
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "Baz:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17699560226819,
+   "is_external": false,
+   "line": 17,
+   "line_end": 20,
+   "name": "Baz",
+   "parameters": [
+    {
+     "code": "const Napi::CallbackInfo &info",
+     "id": 17703855194114,
+     "index": 0,
+     "line": 17,
+     "method_id": 17699560226819,
+     "name": "info",
+     "type_full_name": "Napi.CallbackInfo&"
+    }
+   ],
+   "signature": "Napi.Value(Napi.CallbackInfo&)"
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+   "id": 17699560226820,
+   "is_external": false,
+   "line": 22,
+   "line_end": 27,
+   "name": "Init",
+   "parameters": [
+    {
+     "code": "Napi::Env env",
+     "id": 17703855194115,
+     "index": 0,
+     "line": 22,
+     "method_id": 17699560226820,
+     "name": "env",
+     "type_full_name": "Napi.Env"
+    },
+    {
+     "code": "Napi::Object exports",
+     "id": 17703855194116,
+     "index": 1,
+     "line": 22,
+     "method_id": 17699560226820,
+     "name": "exports",
+     "type_full_name": "Napi.Object"
+    }
+   ],
+   "signature": "Napi.Object(Napi.Env,Napi.Object)"
+  },
+  {
+   "ast_parent_full_name": "addon.cc:<global>",
+   "ast_parent_type": "TYPE_DECL",
+   "file": "addon.cc",
+   "full_name": "__napi_Init:napi_value(napi_env,napi_value)",
+   "id": 17699560226821,
+   "is_external": false,
+   "line": 29,
+   "line_end": 29,
+   "name": "__napi_Init",
+   "parameters": [
+    {
+     "code": "NODE_API_MODULE(addon, Init)",
+     "id": 17703855194117,
+     "index": 0,
+     "line": 29,
+     "method_id": 17699560226821,
+     "name": "env",
+     "type_full_name": "napi_env"
+    },
+    {
+     "code": "NODE_API_MODULE(addon, Init)",
+     "id": 17703855194118,
+     "index": 1,
+     "line": 29,
+     "method_id": 17699560226821,
+     "name": "exports",
+     "type_full_name": "napi_value"
+    }
+   ],
+   "signature": "napi_value(napi_env,napi_value)"
+  },
+  {
+   "ast_parent_full_name": "<includes>:<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<includes>",
+   "full_name": "<includes>:<global>",
+   "id": 17699560226822,
+   "is_external": false,
+   "line": 1,
+   "line_end": 0,
+   "name": "<global>",
+   "parameters": [],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "<operator>.assignment",
+   "id": 17699560226823,
+   "is_external": true,
+   "line": 0,
+   "line_end": 0,
+   "name": "<operator>.assignment",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 17703855194119,
+     "index": 0,
+     "line": 0,
+     "method_id": 17699560226823,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 17703855194120,
+     "index": 1,
+     "line": 0,
+     "method_id": 17699560226823,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": ""
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
+   "id": 17699560226824,
+   "is_external": true,
+   "line": 0,
+   "line_end": 0,
+   "name": "Env",
+   "parameters": [],
+   "signature": "Napi.Env()<const>"
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+   "id": 17699560226825,
+   "is_external": true,
+   "line": 0,
+   "line_end": 0,
+   "name": "New",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 17703855194122,
+     "index": 0,
+     "line": 0,
+     "method_id": 17699560226825,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 17703855194123,
+     "index": 1,
+     "line": 0,
+     "method_id": 17699560226825,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": "<unresolvedSignature>"
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
+   "id": 17699560226826,
+   "is_external": true,
+   "line": 0,
+   "line_end": 0,
+   "name": "Set",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 17703855194125,
+     "index": 0,
+     "line": 0,
+     "method_id": 17699560226826,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 17703855194126,
+     "index": 1,
+     "line": 0,
+     "method_id": 17699560226826,
+     "name": "p2",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": "<unresolvedSignature>"
+  },
+  {
+   "ast_parent_full_name": "<global>",
+   "ast_parent_type": "NAMESPACE_BLOCK",
+   "file": "<empty>",
+   "full_name": "Napi.RegisterModule:ANY(ANY,ANY,Napi.Object(*)(Napi.Env,Napi.Object))",
+   "id": 17699560226827,
+   "is_external": true,
+   "line": 0,
+   "line_end": 0,
+   "name": "RegisterModule",
+   "parameters": [
+    {
+     "code": "p1",
+     "id": 17703855194127,
+     "index": 0,
+     "line": 0,
+     "method_id": 17699560226827,
+     "name": "p1",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p2",
+     "id": 17703855194128,
+     "index": 1,
+     "line": 0,
+     "method_id": 17699560226827,
+     "name": "p2",
+     "type_full_name": "ANY"
+    },
+    {
+     "code": "p3",
+     "id": 17703855194129,
+     "index": 2,
+     "line": 0,
+     "method_id": 17699560226827,
+     "name": "p3",
+     "type_full_name": "ANY"
+    }
+   ],
+   "signature": "ANY(ANY,ANY,Napi.Object(*)(Napi.Env,Napi.Object))"
+  }
+ ],
+ "identifiers": [
+  {
+   "code": "native1",
+   "id": 68719476736,
+   "line": 8,
+   "method_id": 107374182400,
+   "name": "native1",
+   "ref_target_ids": [
+    94489280533
+   ],
+   "type_full_name": "build/Release/addon1"
+  },
+  {
+   "code": "native1",
+   "id": 68719476737,
+   "line": 8,
+   "method_id": 107374182400,
+   "name": "native1",
+   "ref_target_ids": [
+    94489280533
+   ],
+   "type_full_name": "build/Release/addon1"
+  },
+  {
+   "code": "native1",
+   "id": 68719476736,
+   "line": 8,
+   "method_id": 107374182401,
+   "name": "native1",
+   "ref_target_ids": [
+    94489280533
+   ],
+   "type_full_name": "build/Release/addon1"
+  },
+  {
+   "code": "native1",
+   "id": 68719476737,
+   "line": 8,
+   "method_id": 107374182401,
+   "name": "native1",
+   "ref_target_ids": [
+    94489280533
+   ],
+   "type_full_name": "build/Release/addon1"
+  },
+  {
+   "code": "native2",
+   "id": 68719476738,
+   "line": 11,
+   "method_id": 107374182401,
+   "name": "native2",
+   "ref_target_ids": [
+    94489280532
+   ],
+   "type_full_name": "node-gyp-build"
+  },
+  {
+   "code": "native2",
+   "id": 68719476739,
+   "line": 11,
+   "method_id": 107374182401,
+   "name": "native2",
+   "ref_target_ids": [
+    94489280532
+   ],
+   "type_full_name": "node-gyp-build"
+  },
+  {
+   "code": "native3",
+   "id": 68719476740,
+   "line": 14,
+   "method_id": 107374182401,
+   "name": "native3",
+   "ref_target_ids": [
+    94489280531
+   ],
+   "type_full_name": "bindings"
+  },
+  {
+   "code": "native3",
+   "id": 68719476741,
+   "line": 14,
+   "method_id": 107374182401,
+   "name": "native3",
+   "ref_target_ids": [
+    94489280531
+   ],
+   "type_full_name": "bindings"
+  },
+  {
+   "code": "fs",
+   "id": 68719476742,
+   "line": 17,
+   "method_id": 107374182401,
+   "name": "fs",
+   "ref_target_ids": [
+    94489280530
+   ],
+   "type_full_name": "fs"
+  },
+  {
+   "code": "fs",
+   "id": 68719476743,
+   "line": 17,
+   "method_id": 107374182401,
+   "name": "fs",
+   "ref_target_ids": [
+    94489280530
+   ],
+   "type_full_name": "fs"
+  },
+  {
+   "code": "x",
+   "id": 68719476744,
+   "line": 20,
+   "method_id": 107374182401,
+   "name": "x",
+   "ref_target_ids": [
+    111669149701
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "lodash",
+   "id": 68719476745,
+   "line": 20,
+   "method_id": 107374182401,
+   "name": "lodash",
+   "ref_target_ids": [
+    94489280529
+   ],
+   "type_full_name": "lodash"
+  },
+  {
+   "code": "lodash",
+   "id": 68719476746,
+   "line": 20,
+   "method_id": 107374182401,
+   "name": "lodash",
+   "ref_target_ids": [
+    94489280529
+   ],
+   "type_full_name": "lodash"
+  },
+  {
+   "code": "arr",
+   "id": 68719476747,
+   "line": 20,
+   "method_id": 107374182401,
+   "name": "arr",
+   "ref_target_ids": [
+    111669149703
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "helper",
+   "id": 68719476748,
+   "line": 23,
+   "method_id": 107374182401,
+   "name": "helper",
+   "ref_target_ids": [
+    94489280528
+   ],
+   "type_full_name": "some-bindings-helper"
+  },
+  {
+   "code": "helper",
+   "id": 68719476749,
+   "line": 23,
+   "method_id": 107374182401,
+   "name": "helper",
+   "ref_target_ids": [
+    94489280528
+   ],
+   "type_full_name": "some-bindings-helper"
+  },
+  {
+   "code": "callFoo",
+   "id": 68719476750,
+   "line": 8,
+   "method_id": 107374182401,
+   "name": "callFoo",
+   "ref_target_ids": [
+    94489280512
+   ],
+   "type_full_name": "index.js::program:callFoo"
+  },
+  {
+   "code": "callBar",
+   "id": 68719476751,
+   "line": 11,
+   "method_id": 107374182401,
+   "name": "callBar",
+   "ref_target_ids": [
+    94489280513
+   ],
+   "type_full_name": "index.js::program:callBar"
+  },
+  {
+   "code": "callBaz",
+   "id": 68719476752,
+   "line": 14,
+   "method_id": 107374182401,
+   "name": "callBaz",
+   "ref_target_ids": [
+    94489280514
+   ],
+   "type_full_name": "index.js::program:callBaz"
+  },
+  {
+   "code": "readIt",
+   "id": 68719476753,
+   "line": 17,
+   "method_id": 107374182401,
+   "name": "readIt",
+   "ref_target_ids": [
+    94489280515
+   ],
+   "type_full_name": "index.js::program:readIt"
+  },
+  {
+   "code": "mapIt",
+   "id": 68719476754,
+   "line": 20,
+   "method_id": 107374182401,
+   "name": "mapIt",
+   "ref_target_ids": [
+    94489280516
+   ],
+   "type_full_name": "index.js::program:mapIt"
+  },
+  {
+   "code": "helpIt",
+   "id": 68719476755,
+   "line": 23,
+   "method_id": 107374182401,
+   "name": "helpIt",
+   "ref_target_ids": [
+    94489280517
+   ],
+   "type_full_name": "index.js::program:helpIt"
+  },
+  {
+   "code": "native1",
+   "id": 68719476756,
+   "line": 7,
+   "method_id": 107374182401,
+   "name": "native1",
+   "ref_target_ids": [
+    94489280518
+   ],
+   "type_full_name": "build/Release/addon1"
+  },
+  {
+   "code": "require",
+   "id": 68719476757,
+   "line": 7,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476758,
+   "line": 7,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "native2",
+   "id": 68719476759,
+   "line": 10,
+   "method_id": 107374182401,
+   "name": "native2",
+   "ref_target_ids": [
+    94489280519
+   ],
+   "type_full_name": "node-gyp-build"
+  },
+  {
+   "code": "require",
+   "id": 68719476760,
+   "line": 10,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476761,
+   "line": 10,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "this",
+   "id": 68719476762,
+   "line": 10,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "__dirname",
+   "id": 68719476763,
+   "line": 10,
+   "method_id": 107374182401,
+   "name": "__dirname",
+   "ref_target_ids": [
+    94489280527
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "native3",
+   "id": 68719476764,
+   "line": 13,
+   "method_id": 107374182401,
+   "name": "native3",
+   "ref_target_ids": [
+    94489280520
+   ],
+   "type_full_name": "bindings"
+  },
+  {
+   "code": "require",
+   "id": 68719476765,
+   "line": 13,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476766,
+   "line": 13,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "this",
+   "id": 68719476767,
+   "line": 13,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "fs",
+   "id": 68719476768,
+   "line": 16,
+   "method_id": 107374182401,
+   "name": "fs",
+   "ref_target_ids": [
+    94489280521
+   ],
+   "type_full_name": "fs"
+  },
+  {
+   "code": "require",
+   "id": 68719476769,
+   "line": 16,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476770,
+   "line": 16,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "lodash",
+   "id": 68719476771,
+   "line": 19,
+   "method_id": 107374182401,
+   "name": "lodash",
+   "ref_target_ids": [
+    94489280522
+   ],
+   "type_full_name": "lodash"
+  },
+  {
+   "code": "require",
+   "id": 68719476772,
+   "line": 19,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476773,
+   "line": 19,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "helper",
+   "id": 68719476774,
+   "line": 22,
+   "method_id": 107374182401,
+   "name": "helper",
+   "ref_target_ids": [
+    94489280523
+   ],
+   "type_full_name": "some-bindings-helper"
+  },
+  {
+   "code": "require",
+   "id": 68719476775,
+   "line": 22,
+   "method_id": 107374182401,
+   "name": "require",
+   "ref_target_ids": [
+    94489280526
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "this",
+   "id": 68719476776,
+   "line": 22,
+   "method_id": 107374182401,
+   "name": "this",
+   "ref_target_ids": [
+    111669149705
+   ],
+   "type_full_name": "index.js::program"
+  },
+  {
+   "code": "module",
+   "id": 68719476777,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "module",
+   "ref_target_ids": [
+    94489280525
+   ],
+   "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js/index.js\"); }"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476778,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "callFoo",
+   "id": 68719476779,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "callFoo",
+   "ref_target_ids": [
+    94489280512
+   ],
+   "type_full_name": "index.js::program:callFoo"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476780,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "callBar",
+   "id": 68719476781,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "callBar",
+   "ref_target_ids": [
+    94489280513
+   ],
+   "type_full_name": "index.js::program:callBar"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476782,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "callBaz",
+   "id": 68719476783,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "callBaz",
+   "ref_target_ids": [
+    94489280514
+   ],
+   "type_full_name": "index.js::program:callBaz"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476784,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "readIt",
+   "id": 68719476785,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "readIt",
+   "ref_target_ids": [
+    94489280515
+   ],
+   "type_full_name": "index.js::program:readIt"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476786,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "mapIt",
+   "id": 68719476787,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "mapIt",
+   "ref_target_ids": [
+    94489280516
+   ],
+   "type_full_name": "index.js::program:mapIt"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476788,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "helpIt",
+   "id": 68719476789,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "helpIt",
+   "ref_target_ids": [
+    94489280517
+   ],
+   "type_full_name": "index.js::program:helpIt"
+  },
+  {
+   "code": "_tmp_0",
+   "id": 68719476790,
+   "line": 25,
+   "method_id": 107374182401,
+   "name": "_tmp_0",
+   "ref_target_ids": [],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "native2",
+   "id": 68719476738,
+   "line": 11,
+   "method_id": 107374182402,
+   "name": "native2",
+   "ref_target_ids": [
+    94489280532
+   ],
+   "type_full_name": "node-gyp-build"
+  },
+  {
+   "code": "native2",
+   "id": 68719476739,
+   "line": 11,
+   "method_id": 107374182402,
+   "name": "native2",
+   "ref_target_ids": [
+    94489280532
+   ],
+   "type_full_name": "node-gyp-build"
+  },
+  {
+   "code": "native3",
+   "id": 68719476740,
+   "line": 14,
+   "method_id": 107374182403,
+   "name": "native3",
+   "ref_target_ids": [
+    94489280531
+   ],
+   "type_full_name": "bindings"
+  },
+  {
+   "code": "native3",
+   "id": 68719476741,
+   "line": 14,
+   "method_id": 107374182403,
+   "name": "native3",
+   "ref_target_ids": [
+    94489280531
+   ],
+   "type_full_name": "bindings"
+  },
+  {
+   "code": "fs",
+   "id": 68719476742,
+   "line": 17,
+   "method_id": 107374182404,
+   "name": "fs",
+   "ref_target_ids": [
+    94489280530
+   ],
+   "type_full_name": "fs"
+  },
+  {
+   "code": "fs",
+   "id": 68719476743,
+   "line": 17,
+   "method_id": 107374182404,
+   "name": "fs",
+   "ref_target_ids": [
+    94489280530
+   ],
+   "type_full_name": "fs"
+  },
+  {
+   "code": "x",
+   "id": 68719476744,
+   "line": 20,
+   "method_id": 107374182405,
+   "name": "x",
+   "ref_target_ids": [
+    111669149701
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "x",
+   "id": 68719476744,
+   "line": 20,
+   "method_id": 107374182406,
+   "name": "x",
+   "ref_target_ids": [
+    111669149701
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "lodash",
+   "id": 68719476745,
+   "line": 20,
+   "method_id": 107374182406,
+   "name": "lodash",
+   "ref_target_ids": [
+    94489280529
+   ],
+   "type_full_name": "lodash"
+  },
+  {
+   "code": "lodash",
+   "id": 68719476746,
+   "line": 20,
+   "method_id": 107374182406,
+   "name": "lodash",
+   "ref_target_ids": [
+    94489280529
+   ],
+   "type_full_name": "lodash"
+  },
+  {
+   "code": "arr",
+   "id": 68719476747,
+   "line": 20,
+   "method_id": 107374182406,
+   "name": "arr",
+   "ref_target_ids": [
+    111669149703
+   ],
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "helper",
+   "id": 68719476748,
+   "line": 23,
+   "method_id": 107374182407,
+   "name": "helper",
+   "ref_target_ids": [
+    94489280528
+   ],
+   "type_full_name": "some-bindings-helper"
+  },
+  {
+   "code": "helper",
+   "id": 68719476749,
+   "line": 23,
+   "method_id": 107374182407,
+   "name": "helper",
+   "ref_target_ids": [
+    94489280528
+   ],
+   "type_full_name": "some-bindings-helper"
+  },
+  {
+   "code": "env",
+   "id": 17660905521152,
+   "line": 8,
+   "method_id": 17699560226816,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324928
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521153,
+   "line": 8,
+   "method_id": 17699560226816,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194112
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521154,
+   "line": 9,
+   "method_id": 17699560226816,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324928
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521152,
+   "line": 8,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324928
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521153,
+   "line": 8,
+   "method_id": 17699560226817,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194112
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521154,
+   "line": 9,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324928
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521155,
+   "line": 13,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324929
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521156,
+   "line": 13,
+   "method_id": 17699560226817,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194113
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521157,
+   "line": 14,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324929
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521158,
+   "line": 18,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324930
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521159,
+   "line": 18,
+   "method_id": 17699560226817,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194114
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521160,
+   "line": 19,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324930
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521161,
+   "line": 23,
+   "method_id": 17699560226817,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521162,
+   "line": 23,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521163,
+   "line": 23,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521164,
+   "line": 24,
+   "method_id": 17699560226817,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521165,
+   "line": 24,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521166,
+   "line": 24,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521167,
+   "line": 25,
+   "method_id": 17699560226817,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521168,
+   "line": 25,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521169,
+   "line": 25,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521170,
+   "line": 26,
+   "method_id": 17699560226817,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521171,
+   "line": 29,
+   "method_id": 17699560226817,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194117
+   ],
+   "type_full_name": "napi_env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521172,
+   "line": 29,
+   "method_id": 17699560226817,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194118
+   ],
+   "type_full_name": "napi_value"
+  },
+  {
+   "code": "env",
+   "id": 17660905521155,
+   "line": 13,
+   "method_id": 17699560226818,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324929
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521156,
+   "line": 13,
+   "method_id": 17699560226818,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194113
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521157,
+   "line": 14,
+   "method_id": 17699560226818,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324929
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521158,
+   "line": 18,
+   "method_id": 17699560226819,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324930
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "info",
+   "id": 17660905521159,
+   "line": 18,
+   "method_id": 17699560226819,
+   "name": "info",
+   "ref_target_ids": [
+    17703855194114
+   ],
+   "type_full_name": "Napi.CallbackInfo&"
+  },
+  {
+   "code": "env",
+   "id": 17660905521160,
+   "line": 19,
+   "method_id": 17699560226819,
+   "name": "env",
+   "ref_target_ids": [
+    17686675324930
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521161,
+   "line": 23,
+   "method_id": 17699560226820,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521162,
+   "line": 23,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521163,
+   "line": 23,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521164,
+   "line": 24,
+   "method_id": 17699560226820,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521165,
+   "line": 24,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521166,
+   "line": 24,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521167,
+   "line": 25,
+   "method_id": 17699560226820,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521168,
+   "line": 25,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "env",
+   "id": 17660905521169,
+   "line": 25,
+   "method_id": 17699560226820,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194115
+   ],
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521170,
+   "line": 26,
+   "method_id": 17699560226820,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194116
+   ],
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "env",
+   "id": 17660905521171,
+   "line": 29,
+   "method_id": 17699560226821,
+   "name": "env",
+   "ref_target_ids": [
+    17703855194117
+   ],
+   "type_full_name": "napi_env"
+  },
+  {
+   "code": "exports",
+   "id": 17660905521172,
+   "line": 29,
+   "method_id": 17699560226821,
+   "name": "exports",
+   "ref_target_ids": [
+    17703855194118
+   ],
+   "type_full_name": "napi_value"
+  }
+ ],
+ "locals": [
+  {
+   "code": "Napi::Env env",
+   "id": 17686675324928,
+   "line": 8,
+   "method_id": 17699560226816,
+   "name": "env",
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "Napi::Env env",
+   "id": 17686675324929,
+   "line": 13,
+   "method_id": 17699560226818,
+   "name": "env",
+   "type_full_name": "Napi.Env"
+  },
+  {
+   "code": "Napi::Env env",
+   "id": 17686675324930,
+   "line": 18,
+   "method_id": 17699560226819,
+   "name": "env",
+   "type_full_name": "Napi.Env"
+  }
+ ],
+ "members": [],
+ "metadata": [
+  {
+   "cpg_version": "4.0.608",
+   "language": "JSSRC",
+   "root": "/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js"
+  },
+  {
+   "language": "NEWC",
+   "root": "/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cpp",
+   "version": "4.0.608"
+  }
+ ],
+ "method_returns": [
+  {
+   "code": "RET",
+   "id": 17716740096000,
+   "line": 7,
+   "method_id": 17699560226816,
+   "type_full_name": "Napi.Value"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096005,
+   "line": 1,
+   "method_id": 17699560226817,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096001,
+   "line": 12,
+   "method_id": 17699560226818,
+   "type_full_name": "Napi.Value"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096002,
+   "line": 17,
+   "method_id": 17699560226819,
+   "type_full_name": "Napi.Value"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096003,
+   "line": 22,
+   "method_id": 17699560226820,
+   "type_full_name": "Napi.Object"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096004,
+   "line": 29,
+   "method_id": 17699560226821,
+   "type_full_name": "napi_value"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096006,
+   "line": 1,
+   "method_id": 17699560226822,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096007,
+   "line": 0,
+   "method_id": 17699560226823,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096008,
+   "line": 0,
+   "method_id": 17699560226824,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096009,
+   "line": 0,
+   "method_id": 17699560226825,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096010,
+   "line": 0,
+   "method_id": 17699560226826,
+   "type_full_name": "ANY"
+  },
+  {
+   "code": "RET",
+   "id": 17716740096011,
+   "line": 0,
+   "method_id": 17699560226827,
+   "type_full_name": "ANY"
+  }
+ ],
+ "returns": [
+  {
+   "code": "return native1.Foo(1, 2)",
+   "id": 141733920768,
+   "line": 8,
+   "method_id": 107374182400,
+   "returned_value_ids": [
+    30064771072
+   ]
+  },
+  {
+   "code": "return native1.Foo(1, 2)",
+   "id": 141733920768,
+   "line": 8,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771072
+   ]
+  },
+  {
+   "code": "return native2.Bar(3)",
+   "id": 141733920769,
+   "line": 11,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771074
+   ]
+  },
+  {
+   "code": "return native3.Baz()",
+   "id": 141733920770,
+   "line": 14,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771076
+   ]
+  },
+  {
+   "code": "return fs.readFileSync('/tmp/x')",
+   "id": 141733920771,
+   "line": 17,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771078
+   ]
+  },
+  {
+   "code": "return x",
+   "id": 141733920772,
+   "line": 20,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    68719476744
+   ]
+  },
+  {
+   "code": "return lodash.map(arr, function (x) { return x; })",
+   "id": 141733920773,
+   "line": 20,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771080
+   ]
+  },
+  {
+   "code": "return helper.Assist()",
+   "id": 141733920774,
+   "line": 23,
+   "method_id": 107374182401,
+   "returned_value_ids": [
+    30064771082
+   ]
+  },
+  {
+   "code": "return native2.Bar(3)",
+   "id": 141733920769,
+   "line": 11,
+   "method_id": 107374182402,
+   "returned_value_ids": [
+    30064771074
+   ]
+  },
+  {
+   "code": "return native3.Baz()",
+   "id": 141733920770,
+   "line": 14,
+   "method_id": 107374182403,
+   "returned_value_ids": [
+    30064771076
+   ]
+  },
+  {
+   "code": "return fs.readFileSync('/tmp/x')",
+   "id": 141733920771,
+   "line": 17,
+   "method_id": 107374182404,
+   "returned_value_ids": [
+    30064771078
+   ]
+  },
+  {
+   "code": "return x",
+   "id": 141733920772,
+   "line": 20,
+   "method_id": 107374182405,
+   "returned_value_ids": [
+    68719476744
+   ]
+  },
+  {
+   "code": "return x",
+   "id": 141733920772,
+   "line": 20,
+   "method_id": 107374182406,
+   "returned_value_ids": [
+    68719476744
+   ]
+  },
+  {
+   "code": "return lodash.map(arr, function (x) { return x; })",
+   "id": 141733920773,
+   "line": 20,
+   "method_id": 107374182406,
+   "returned_value_ids": [
+    30064771080
+   ]
+  },
+  {
+   "code": "return helper.Assist()",
+   "id": 141733920774,
+   "line": 23,
+   "method_id": 107374182407,
+   "returned_value_ids": [
+    30064771082
+   ]
+  },
+  {
+   "code": "return Napi::Number::New(env, 1);",
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "RETURN_AST_CHILD",
+    "source_node_ids": [
+     17733919965184,
+     17622250815490
+    ]
+   },
+   "function_id": 17699560226816,
+   "id": 17733919965184,
+   "is_void": false,
+   "line": 9,
+   "value_ref": {
+    "code": "return Napi::Number::New(env, 1);",
+    "id": 17622250815490,
+    "kind": "CALL"
+   }
+  },
+  {
+   "code": "return Napi::Number::New(env, 2);",
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "RETURN_AST_CHILD",
+    "source_node_ids": [
+     17733919965185,
+     17622250815493
+    ]
+   },
+   "function_id": 17699560226818,
+   "id": 17733919965185,
+   "is_void": false,
+   "line": 14,
+   "value_ref": {
+    "code": "return Napi::Number::New(env, 2);",
+    "id": 17622250815493,
+    "kind": "CALL"
+   }
+  },
+  {
+   "code": "return Napi::Number::New(env, 3);",
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "RETURN_AST_CHILD",
+    "source_node_ids": [
+     17733919965186,
+     17622250815496
+    ]
+   },
+   "function_id": 17699560226819,
+   "id": 17733919965186,
+   "is_void": false,
+   "line": 19,
+   "value_ref": {
+    "code": "return Napi::Number::New(env, 3);",
+    "id": 17622250815496,
+    "kind": "CALL"
+   }
+  },
+  {
+   "code": "return exports;",
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "RETURN_AST_CHILD",
+    "source_node_ids": [
+     17733919965187,
+     17660905521170
+    ]
+   },
+   "function_id": 17699560226820,
+   "id": 17733919965187,
+   "is_void": false,
+   "line": 26,
+   "value_ref": {
+    "code": "exports",
+    "id": 17703855194116,
+    "kind": "PARAMETER"
+   }
+  },
+  {
+   "code": "NODE_API_MODULE(addon, Init)",
+   "derivation": {
+    "origin": "FRONTEND_DIRECT",
+    "rule": "RETURN_AST_CHILD",
+    "source_node_ids": [
+     17733919965188,
+     17622250815506
+    ]
+   },
+   "function_id": 17699560226821,
+   "id": 17733919965188,
+   "is_void": false,
+   "line": 29,
+   "value_ref": {
+    "code": "NODE_API_MODULE(addon, Init)",
+    "id": 17622250815506,
+    "kind": "CALL"
+   }
+  }
+ ],
+ "schema": "portable-program-facts/0.2",
+ "type_decls": [
+  {
+   "file": "addon.cc",
+   "full_name": "Foo:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17759689768960,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 7,
+   "name": "Foo"
+  },
+  {
+   "file": "addon.cc",
+   "full_name": "Bar:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17759689768961,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 12,
+   "name": "Bar"
+  },
+  {
+   "file": "addon.cc",
+   "full_name": "Baz:Napi.Value(Napi.CallbackInfo&)",
+   "id": 17759689768962,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 17,
+   "name": "Baz"
+  },
+  {
+   "file": "addon.cc",
+   "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+   "id": 17759689768963,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 22,
+   "name": "Init"
+  },
+  {
+   "file": "addon.cc",
+   "full_name": "__napi_Init:napi_value(napi_env,napi_value)",
+   "id": 17759689768964,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 29,
+   "name": "__napi_Init"
+  },
+  {
+   "file": "addon.cc",
+   "full_name": "addon.cc:<global>",
+   "id": 17759689768965,
+   "inherits_from": [],
+   "is_external": false,
+   "line": 1,
+   "name": "<global>"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "ANY",
+   "id": 17759689768966,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "ANY"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Napi.CallbackInfo&",
+   "id": 17759689768967,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "CallbackInfo&"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Napi.Env",
+   "id": 17759689768968,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "Env"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Napi.Object",
+   "id": 17759689768969,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "Object"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Napi.Value",
+   "id": 17759689768970,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "Value"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Object",
+   "id": 17759689768971,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "Object"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "Value",
+   "id": 17759689768972,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "Value"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "char[4]",
+   "id": 17759689768973,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "char[4]"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "int",
+   "id": 17759689768974,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "int"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "napi_env",
+   "id": 17759689768975,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "napi_env"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "napi_value",
+   "id": 17759689768976,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "napi_value"
+  },
+  {
+   "file": "<includes>",
+   "full_name": "void",
+   "id": 17759689768977,
+   "inherits_from": [],
+   "is_external": true,
+   "line": 0,
+   "name": "void"
+  }
+ ]
+}
