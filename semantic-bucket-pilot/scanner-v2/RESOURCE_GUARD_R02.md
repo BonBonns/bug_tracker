@@ -297,3 +297,80 @@ the following before it is run -- verified from the real source, not assumed, ex
 R02 stays frozen (unchanged md5s, reconfirmed above) while this search continues -- the
 current abstention on node-canvas is the correct, expected behavior of the frozen algorithm
 on an out-of-contract site, not a defect to patch around.
+
+## Blind test #2: cartesi/rollups-ts (`@cartesi/machine`), `native/addon.cc`, `Machine::ReadMemory`
+
+Target selected and independently verified (not taken on trust from any search report) by
+fetching the pinned real source directly: `cartesi/rollups-ts`,
+`packages/machine/native/addon.cc`, commit `1d0f419c7fdcb1dbaac31589990a1d946716a1d9`.
+Checked against every item in the "Next blind target" list above, from the real source and
+`binding.gyp`, BEFORE writing any fixture:
+
+```cpp
+Napi::Value Machine::ReadMemory(const Napi::CallbackInfo &info) {
+    Napi::Env env = info.Env();
+    uint64_t address = 0;
+    uint64_t length = 0;
+    if (!get_u64(env, info[0], "address", &address) || !get_u64(env, info[1], "length", &length)) {
+        return env.Undefined();
+    }
+    if (length > SIZE_MAX) {
+        Napi::RangeError::New(env, "length is too large").ThrowAsJavaScriptException();
+        return env.Undefined();
+    }
+    Napi::Buffer<uint8_t> data = Napi::Buffer<uint8_t>::New(env, static_cast<size_t>(length));
+    CHECK_CM(env, cm_read_memory(machine_, address, data.Data(), length));
+    return data;
+}
+```
+
+- **Two-argument allocating overload:** yes -- `Napi::Buffer<uint8_t>::New(env, static_cast<size_t>(length))`, no data-pointer argument.
+- **Attacker-influenced length:** yes -- `length` comes from `get_u64(env, info[1], "length", &length)`, a JS-caller-supplied value; `get_u64` (read from the same file) only rejects non-safe-integers, and `ReadMemory` itself only rejects `length > SIZE_MAX` -- no application-level bound.
+- **Exceptions-disabled configuration plausible:** yes -- `packages/machine/binding.gyp` (fetched and read directly) defines `"defines": ["NAPI_VERSION=8", "NAPI_DISABLE_CPP_EXCEPTIONS", "NODE_ADDON_API_DISABLE_DEPRECATED"]`, with its own comment clarifying this is specifically about node-addon-api's error handling, independent of the separate compiler-level `-fexceptions` re-enablement done for an unrelated file. No `try`/`catch` appears anywhere in `addon.cc` (grepped, zero hits).
+- **Downstream use:** yes -- `data.Data()` is passed as the destination pointer to `cm_read_memory(...)`, then `data` itself is returned.
+- **Guard applicability:** no `IsEmpty()`/`env.IsExceptionPending()` check appears anywhere near the call -- an unguarded real site, matching this contract's `VALUE_ACQUISITION_GUARD_MISSING` shape if the site is otherwise recognized.
+
+This is a genuinely APPLICABLE site by every criterion above -- unlike node-canvas, this is not an out-of-contract overload. A minimally-stubbed, statement-faithful fixture
+(`study/resource_guard_r02/raw_case_cartesi_readmemory/fixture_source.cpp`, `Machine::ReadMemory`'s own statements preserved verbatim) was built modeling node-addon-api's real
+`namespace Napi { ... }` structure (including `Env`'s real implicit `operator napi_env() const` conversion), compiled successfully with a real C++17 compiler before being run through
+the same real Joern v4.0.608 pipeline, then run (step E) against the FROZEN `REAL_CONTRACTS` exactly as committed -- md5s reconfirmed unchanged immediately before and after this run.
+
+**Recorded result:**
+
+```json
+{"classification": {"ACQUISITION_NAME_MATCH_CANDIDATE": 2, "ACQUISITION_SIGNATURE_UNRECOGNIZED": 2},
+ "contract_pool": "real", "findings": [], "schema": "resource-guard-verdict-r02/0.1"}
+```
+
+Zero findings again -- but for a THIRD, DIFFERENT, precisely-isolated reason than either of node-canvas's two. Decoding the real exported facts shows the `Buffer::New` call's
+`methodFullName` DID resolve cleanly this time (`Napi.Buffer.New:Napi.Buffer(napi_env__*,long)` -- 2 parameters, matching the curated `result_mfn_prefixes`), and the acquired object's
+own declared type resolved to bare `Buffer` (`locals.tsv`: `['...', 'data', 'Napi::Buffer<unsigned char> data', 'Buffer', '99']` -- c2cpg strips the namespace from a plain
+`type_full_name`, unlike a call's `methodFullName`), exactly matching `result_type: "Buffer"`. The SOLE reason this call is rejected is the qualified-prefix check:
+`REAL_CONTRACTS["Napi::Buffer"]["qualifier_type"]` is `"Buffer"`, so the algorithm requires `mfn.startswith("Buffer.New:")` -- but the real, correctly-resolved mfn is
+`"Napi.Buffer.New:Napi.Buffer(napi_env__*,long)"`, which starts with `"Napi.Buffer.New:"`, not `"Buffer.New:"`. (The second `ACQUISITION_NAME_MATCH_CANDIDATE`/`_UNRECOGNIZED` pair is
+`Napi::RangeError::New(...)` -- also named `New`, correctly rejected on the same qualified-prefix check, the same discrimination control 12 exercises.)
+
+**Root cause, stated precisely, and why it was not visible before this run:** the `REAL_CONTRACTS["Napi::Buffer"]` entry was originally authored and verified (per the Freeze section)
+against a probe fixture (`npm_mining/probe/probe1.cpp`, scratchpad-only, not committed) that declared `Buffer`/`Env` at GLOBAL scope, with no `namespace Napi { ... }` wrapper -- an
+unfaithful simplification of node-addon-api's real structure, which genuinely wraps everything in `namespace Napi`. c2cpg qualifies a call's `methodFullName` with its enclosing
+namespace (confirmed directly in this run's own facts: `Napi.Env`, `Napi.RangeError`, `Napi.CallbackInfo`, `Napi.Buffer` are all namespace-prefixed), but does NOT include the namespace
+in a variable's plain `type_full_name` (`data`'s type is bare `Buffer`, not `Napi.Buffer`) -- an asymmetry the original probe never exercised, because it never modeled the namespace at
+all. This is a real, disclosed CURATION gap in the frozen contract's `qualifier_type` field -- not an R02 algorithm defect (the qualified-prefix check itself is doing exactly what
+control 12 requires of it) and not a defect in this candidate site (it satisfies every required property).
+
+**Per the standing instruction, R02 is NOT modified in response to this finding.** `resource_guard_verdict_r02.py` and `resource_contracts_r02.py` remain byte-identical to the Freeze
+section's recorded md5s (reconfirmed above). This section records what was found -- including the specific, narrow fix that a namespace-aware `qualifier_type` (e.g. `"Napi.Buffer"`
+instead of `"Buffer"`) would need to be curated as, if that widening is deliberately chosen later -- without applying it.
+
+**What THIS blind test establishes, and what it does not:**
+
+- It confirms, on a SECOND independent real site, that R02 abstains (zero findings) rather than fabricating a verdict when a real call falls outside its curated contract's exact
+  matching text -- the same non-guessing discipline as blind test #1, now demonstrated for a structurally different reason (namespace-qualification, not overload arity).
+- It does NOT establish cross-contract structural portability on applicable real code: this site satisfies every one of the five required properties above, and STILL was not detected,
+  because of a contract-curation gap unrelated to any of those five properties. The claim "cross-contract structural portability NOT yet established on applicable real code" (from blind
+  test #1's corrected write-up) still stands after this result, for a newly-precise reason.
+- It does NOT establish cross-project vulnerability generalization. `Machine::ReadMemory` remains a real, unguarded call satisfying every property this contract cares about, but R02 as
+  frozen did not flag it -- reporting a detection here would be false, exactly as with node-canvas.
+- It DOES narrow the open question considerably: the blocking issue here is one specific, well-understood field (`qualifier_type`'s missing namespace prefix), not an unresolved mix of
+  overload/type-shape mismatches as with node-canvas. Whether to widen `REAL_CONTRACTS["Napi::Buffer"]["qualifier_type"]` to account for the real `Napi::` namespace -- and re-run this
+  exact site to see whether it then correctly resolves to `VALUE_ACQUISITION_GUARD_MISSING` -- is a deliberate, separate decision left open here, not taken as part of this blind test.
