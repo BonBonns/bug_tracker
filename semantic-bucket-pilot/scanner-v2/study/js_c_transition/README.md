@@ -76,6 +76,62 @@ Top-level keys, each a list of full CVEfixes rows (all fields preserved: `cve_id
   present in the full row set (not extracted here): Go (`golang/crypto`), Java
   (`connectbot/sshlib`), Python (`jtesta/ssh-audit`) fixes for the same CVE.
 
+## Measurement: does the write-property scanner (`oob_runtime_capacity_v2.py`) catch any
+## of these? (`check_js_c_transition.py`, 1/1)
+
+Of the 25 usable rows, exactly 2 carry a CWE in the scanner's write family
+(`{787, 122, 120, 121, 124, 680, 805, 806}`, per `postcutoff_freeze.py`'s `WRITE_CWE`):
+`CVE-2020-1896` and `CVE-2023-23556`, both Facebook Hermes, both CWE-787. Both were
+inspected against real pre-fix source (fetched at the exact parent commit of each fix);
+only one turned out to be a real, in-scope test.
+
+**`CVE-2023-23556` — the CWE label doesn't point at a write.** The official NVD text says
+"An error in BigInt conversion to Number ... due to an out-of-bound write," which maps to
+this fix commit's `BigIntSupport.cpp` change: `toDouble()` now clamps a malformed NaN
+payload coming out of `llvh::APInt::roundToDouble()`. But `roundToDouble()` itself --
+where the actual out-of-bounds write would have to live -- is vendored LLVM code, not
+touched by this diff at all; the fix is a downstream mitigation, not the buggy write site.
+(The same commit hash also carries 2 unrelated fixes bundled into one "re-sync" commit --
+an `Array.cpp` descriptor-computation reordering, and the real `CVE-2023-24833` UAF fix in
+`Operations.cpp` -- neither of which is CWE-787-shaped either.) Not run through the
+scanner: there is no write statement in the diff to run it against.
+
+**`CVE-2020-1896` — a real write-capacity bug, but not a shape the scanner models.** Real
+pre-fix `hermesBuiltinApply` (`lib/VM/JSLib/HermesBuiltin.cpp`, revision `82f0f971`, the
+direct parent of the fix commit) computes `len` from a JS array's `.length` (fully
+attacker-controlled from JS), constructs a `ScopedNativeCallFrame` that allocates `len`
+register slots on Hermes's bounded native register stack -- and on overflow, that
+constructor sets `overflowed_` and leaves the frame **unallocated**, requiring the caller
+to check `overflowed()` before touching it. `hermesBuiltinApply` doesn't check: it writes
+`len` `HermesValue`s into `newFrame->getArgRef(i)` in an unconditional loop. Extracted the
+real function into a minimal fixture (real code verbatim; every referenced type stubbed
+with real member/method signatures pulled from `Runtime.h` at the same revision -- see
+`raw_case_hermes_apply/fixture_source.cpp`), ran it through the real pipeline (`c2cpg.sh`
+→ `export_c_cpp_facts_v03.sc` → `normalize_c_cpp_facts_v03.py`, real Joern v4.0.608, clean
+parse, no warnings), and ran `analyze_operations_v2` against the resulting `program.json`.
+
+**Result: zero operations recorded — not "judged safe," never even considered a
+candidate.** `oob_runtime_capacity_v2`'s operation extraction (both v1 and v2) is entirely
+keyed on `CALLEE_CONTRACTS`, a fixed dict of 7 recognized callee names (`memcpy`,
+`memmove`, `wmemcpy`, `PORT_Memcpy`, `PORT_Memmove`, `PORT_Memset`, `HMAC_Finish`) plus
+capability 1's own direct-indexed-array-write pattern. `newFrame->getArgRef(i) = ...` is
+neither: it's an assignment through a C++ operator-> and a method call on a custom RAII
+class, and the "capacity" being violated is that class's own constructor-time allocation
+logic, not a declared fixed array or a call to a name in that list. Confirmed this isn't a
+parse/pipeline failure -- Joern's own reaching-def pass log shows `hermesBuiltinApply` was
+fully parsed and analyzed (131 reaching-definition facts recorded for it) -- the function
+was seen in full; the scanner's write-recognition vocabulary just has no entry for this
+shape. Pinned as `check_js_c_transition.py`'s one assertion: an honest, evidenced coverage
+gap, not a scanner bug and not a claim the bug was caught.
+
+This is a **5th write-representation shape**, distinct from all 4 in `CAPABILITY_PLAN.md`
+(fixed stack array w/ direct index; transparent memcpy-family wrapper; pointer-walk
+`*p++=`/`p[k]=`; external decoder contract) -- a bounded-capacity RAII resource whose
+allocation can fail, gated behind a caller-checked flag, with the unsafe write coming from
+skipping that check. Not attempted here; would need its own capability (in the shape of
+Capability 1's own missing-unlock-before-return pattern from `THREAD_SAFETY_R01.md`, more
+than the CWE-787 write-property track's existing 4).
+
 ## Honest caveats
 
 - **Thin.** 16 + 4 + 3 + 2 = 25 usable rows total, out of 12,987 -- this property is rare
