@@ -43,15 +43,20 @@ corrected here.
   `registry_universe_snapshot_metadata.json`. Per direct instruction, this number is cited
   ONLY to document registry universe size -- it is not fetched, scanned, prefiltered, or
   unioned into the eligible-package pool.
-- **50-package Joern infrastructure pilot (item 6): IN PROGRESS / see latest commit for
-  real results** -- `run_pipeline_one.py` orchestrates the full validated pipeline
-  (download -> c2cpg -> export -> normalize; jssrc2cpg -> export -> normalize;
-  cross-language linking; R04 scan) per package, with real per-stage timing and a real
-  integration bug found and fixed along the way (see that commit's message for the
-  `link_napi_facts.py`/normalizer metadata-shape incompatibility and its disclosed,
-  narrowly-scoped adapter fix).
-- **Full frozen-scanner run across all remaining eligible packages (item 7): NOT YET
-  STARTED** -- begins once the 50-package pilot establishes real resource limits.
+- **50-package Joern infrastructure pilot (item 6): COMPLETE, 50/50 ANALYZED.** See
+  `PIPELINE_FREEZE.md` for the frozen pipeline hashes and real per-stage resource limits.
+- **Full frozen-scanner run across all 494 eligible packages (item 7): COMPLETE.**
+  473 ANALYZED, 18 RESOURCE_LIMIT (flagged, not yet retried), 3 CPP_CPG_FAILED. See
+  `npm_pipeline_status.tsv` / `npm_pipeline_full_results.jsonl`.
+- **Finding review (item 5): COMPLETE -- with a major, corpus-wide caveat, see
+  `FINDINGS_REVIEW.md`.** Zero raw R04 findings across all 473 ANALYZED packages -- traced
+  to a real, confirmed, corpus-wide PIPELINE GAP (c2cpg is never given the packages'
+  declared native dependencies' headers, e.g. `node-addon-api`'s `napi.h`, so it cannot
+  resolve ANY `Napi::` static-factory call -- confirmed by direct re-inspection of two real
+  packages, 1,173/1,173 "New" calls unresolved). This is NOT evidence about real-world
+  `Napi::Buffer::New()` prevalence; it is evidence of a gap in this pipeline specifically.
+  Not yet fixed -- flagged for a deliberate decision, per instruction not to make further
+  scanner/contract changes without direction.
 
 ## Discovery provenance values (used from this point forward)
 
