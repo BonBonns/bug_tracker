@@ -42,14 +42,37 @@ removed) in case some real, not-yet-observed JS/TS frontend path DOES populate i
 """
 import json, sys, argparse
 
-# Real, curated, disclosed native-addon-loading conventions -- confirmed against real
-# require() targets in two independent real corpus packages (see module docstring).
-# Matched by EXACT membership/prefix, never a substring -- an unrelated package whose name
-# merely CONTAINS one of these (e.g. "some-bindings-helper") must NOT match; see
+# CROSSLANG-LINK-FIX01C: only packages CONFIRMED to export a directly-callable loader
+# function -- `require(PKG)(args)` -- belong here, since that exact shape is what
+# `_via_loader_invocation`'s <returnValue> marker check requires. Confirmed real by reading
+# each package's own published source (`module.exports = <function>`), not assumed:
+#   - "bindings" (bindings@1.5.0: `module.exports = exports = bindings;`, a function)
+#   - "node-gyp-build" (confirmed via real corpus usage, node-liblzma's own
+#     `require('node-gyp-build')(bindingPath)`)
+# REMOVED after review, disclosed here rather than silently dropped -- both were in an
+# earlier version of this set WITHOUT the same per-package verification, an overclaim this
+# entry now corrects:
+#   - "node-pre-gyp" / "@mapbox/node-pre-gyp": read the real published source
+#     (node-pre-gyp@0.17.0's lib/node-pre-gyp.js) -- `module.exports` is a plain OBJECT
+#     (`exports.find = ...`, `exports.Run = ...`), NOT a callable function. Real usage is a
+#     DIFFERENT, two-step shape this mechanism does not cover:
+#     `require('node-pre-gyp').find(path)` (a METHOD CALL on the bare module, the same
+#     "helper, not the binding" case `_via_loader_invocation` exists to reject) followed by a
+#     SEPARATE `require(<dynamic path>)` whose argument is not a literal, so it cannot
+#     resolve to a matching receiver_type either. Including these names was inert (never
+#     matched real node-pre-gyp usage) rather than actively wrong, but the module docstring's
+#     claim that this whole set was "confirmed against real require() targets" did not hold
+#     for these two -- corrected by removing them rather than leaving an unverified entry
+#     alongside verified ones.
+#   - "prebuild-install": confirmed via its own published package.json -- `main` is absent
+#     entirely (`bin` only). It is a CLI-only install-time tool, never `require()`-able as a
+#     runtime library at all -- including it here was a real error, not a disclosed
+#     approximation, and is removed rather than caveated.
+# Matched by EXACT membership, never a substring -- an unrelated package whose name merely
+# CONTAINS one of these (e.g. "some-bindings-helper") must NOT match; see
 # study/crosslang_link_fix/controls for the real, run fixture proving this.
 NATIVE_LOADER_PACKAGES = {
-    'bindings', 'node-gyp-build', 'node-pre-gyp', '@mapbox/node-pre-gyp',
-    'prebuild-install',
+    'bindings', 'node-gyp-build',
 }
 NATIVE_BUILD_PATH_MARKERS = ('build/Release/', 'build/Debug/')
 

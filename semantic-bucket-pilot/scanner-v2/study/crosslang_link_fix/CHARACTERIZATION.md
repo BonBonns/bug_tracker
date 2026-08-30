@@ -172,6 +172,44 @@ binding into an R05-recovered (or R04-direct) unguarded acquisition. That compos
 input -> linked native callback -> R05 finding) is real, separate follow-on work, planned
 for after R05's own corpus results are frozen (see section 7 below) -- not claimed here.
 
+## 6b. CROSSLANG-LINK-FIX01C: a real overclaim in the curated set, found and corrected
+
+Prompted by a direct "anything else to fix" review pass, not found during the original work
+-- worth recording precisely rather than quietly amending. The original `NATIVE_LOADER_
+PACKAGES` set (`bindings`, `node-gyp-build`, `node-pre-gyp`, `@mapbox/node-pre-gyp`,
+`prebuild-install`) was documented as "confirmed against real require() targets in two
+independent real corpus packages" -- true for `bindings` and `node-gyp-build` only. The
+other three were added from general npm-ecosystem knowledge, never verified per-package the
+way the discipline this whole project runs on requires. Checked directly against each
+package's own real, published source:
+
+- **`bindings`**: confirmed, `bindings@1.5.0`'s `module.exports = exports = bindings;` is a
+  callable function -- matches the `require(PKG)(args)` shape `_via_loader_invocation` checks.
+- **`node-gyp-build`**: already confirmed via real corpus usage (`node-liblzma`'s own
+  `require('node-gyp-build')(bindingPath)`).
+- **`node-pre-gyp`/`@mapbox/node-pre-gyp`**: `node-pre-gyp@0.17.0`'s real
+  `lib/node-pre-gyp.js` exports a plain OBJECT (`exports.find = ...`, `exports.Run = ...`),
+  not a function. Real usage is `require('node-pre-gyp').find(path)` (itself the exact
+  "method call on the bare loader helper" case CROSSLANG-LINK-FIX01B exists to reject) then
+  a SEPARATE `require(<dynamic path>)` whose non-literal argument this mechanism cannot
+  resolve to a matching `receiver_type` at all. Including these names never matched real
+  node-pre-gyp usage (confirmed: removing them changed nothing in any regression re-run --
+  `memoryjs`, `node-liblzma`, and the controls fixture all reproduce byte-identical results)
+  -- inert, not actively wrong, but the "confirmed" claim did not hold for them.
+- **`prebuild-install`**: real published `package.json` has NO `main` field at all -- a
+  CLI-only install-time tool, never `require()`-able as a runtime library. This one was a
+  real error, not a disclosed approximation.
+
+**Fix:** `NATIVE_LOADER_PACKAGES` narrowed to `{'bindings', 'node-gyp-build'}` -- the only
+two entries with real, per-package verification. All prior real controls and both real
+end-to-end packages re-verified unchanged after the removal (`registrations=3 linked=3
+unlinked=0`; `registrations=12 linked=15 unlinked=25`; `registrations=6 linked=6
+unlinked=0`) -- confirming the three removed entries contributed nothing real, only an
+overclaim in the documentation. If real coverage of `node-pre-gyp`-style two-step loaders is
+wanted later, it needs a genuinely different mechanism (tracking a helper-method-call ->
+dynamic-`require()` chain) -- not attempted here, and not implied to already work by this
+set's presence.
+
 ## 7. What happens next (after R05 is frozen -- not started yet)
 
 Per direct instruction: this branch stays unmerged until the R05 corpus rerun (main working
