@@ -233,8 +233,65 @@ that provably never runs concurrently (single-threaded init, a documented extern
 invariant), which this design has no way to know. Every finding is `MISSING_LOCK_CANDIDATE`
 — open, never a certainty — same posture as Capability 1's `LOCK_LEAK_CANDIDATE`.
 
+## Corpus measurement, round 2: the remaining 3 sites (`check_corpus_measurement.py`, 6/6)
+
+Both capabilities run against real code from the real pinned revisions of all 3 sites left
+unmeasured after round 1. This is a MEASUREMENT, not a validation suite — 4 of the 6
+assertions confirm correct behavior, but 2 deliberately pin **known false positives**, each
+with a diagnosed root cause, as an honest regression baseline. Read the assertion text, not
+just the PASS/FAIL, before treating any of this as "the capability is right."
+
+**`case_267d5a93` (`Dtls13RtxAddAck`, pre-`DTLS13_MAX_ACK_RECORDS` fix) — true negative,
+confirms the round-1 suspicion.** Capability 1 finds zero leaks; the lock is classified
+`BALANCED_ON_ALL_PATHS`, not silently invisible. Matches the manual diff audit: this is a
+word16-overflow/unbounded-list-growth bug (destination-capacity-write territory), and the
+existing lock/unlock was already fully correct at this revision — the fix's own
+`wc_UnLockMutex` call is incidental to the new capacity guard it adds, not evidence of a
+prior lock-balance defect.
+
+**`case_a6eb1f6d` (full `wolfSSL_RAND_bytes`, pre-FIPS-reseed fix) — 2 false positives,
+distinct root causes, real code is correctly balanced.** The actual bug (a missing
+reseed-on-fork check under old FIPS bundles) is a cryptographic-freshness issue, unrelated
+to lock balance; both real locks (`gRandMethodMutex`, `globalRNGMutex`) are already
+correctly paired at this revision. Capability 1 flags both anyway:
+- `&gRandMethodMutex`: the lock's own guard is a **compound condition**,
+  `wolfSSL_RAND_InitMutex() == 0 && wc_LockMutex(&gRandMethodMutex) == 0` —
+  `guard_success_start()` only recognizes a lock call as the comparison's direct, sole
+  condition (the `if (LOCK(...) != 0) return;` idiom), so it doesn't resolve here and falls
+  back to the raw, unguarded lock call as the BFS start — over-exploring into code the lock
+  was never actually guarding.
+- `&globalRNGMutex`: **path-insensitivity.** `if (used_global == 1) wc_UnLockMutex(...)`
+  re-tests a flag set by an *earlier* branch; once both branches of that earlier decision
+  converge back to one CFG node, a pure CFG-reachability walk (no data-flow/value tracking)
+  can't tell the flag's later value is correlated with which branch was taken, so it treats
+  a semantically-infeasible "skip the unlock" successor as reachable. Exactly the same root
+  cause independently reproduces in `case_f21da596`'s fixture below.
+
+**`case_f21da596` (`wolfSSL_RAND_bytes` + `wolfSSL_RAND_poll`, pre-lock fix) — a genuine
+missing-lock bug, and a genuine Capability 2 scope gap.** `wolfSSL_RAND_poll()` reseeds the
+same `globalRNG` that `wolfSSL_RAND_bytes()` protects with `globalRNGMutex`, via
+`wc_RNG_DRBG_Reseed(&globalRNG, ...)`, with **no lock at all** — exactly Capability 2's
+target shape, and a real, independently-callable public API race (any thread calling
+`wolfSSL_RAND_poll()` directly races any thread in `wolfSSL_RAND_bytes()`). Capability 2
+finds nothing: confirmed as a real scope gap, not an accidental miss — the classification is
+completely empty, meaning zero field-access calls were even extracted for this pair, because
+`globalRNG` is a **plain global variable/pointer argument**, not a struct-field-path
+expression (`ssl->dtls13Rtx.seenRecords`-shaped) — `protected_field_verdict.py`'s
+normalization scheme has no representation for "this identifier itself, not a field on it."
+Running Capability 1 against the same fixture's `wolfSSL_RAND_bytes` reproduces the
+`&globalRNGMutex` path-insensitivity false positive again, independently confirming that
+root cause rather than it being an artifact of one specific fixture's structure.
+
 ## What's out of scope here
 
+- **Fixing either false-positive root cause found in round 2** (compound-condition guards;
+  path-insensitivity across a re-tested flag after a branch merge) — both are diagnosed and
+  pinned as a regression baseline, not fixed. The path-insensitivity one in particular would
+  need real data-flow tracking (which CFG-node values a variable can hold on entry, keyed by
+  which predecessor edge was taken), a materially bigger undertaking than a guard-pattern
+  extension.
+- **Capability 2 for plain-global-variable protection** (see `case_f21da596` above) — needs
+  a different normalization scheme than the struct-field-path one; not attempted.
 - **Whole-program / cross-file protected-field inference.** Capability 2 only sees
   evidence within a single c2cpg export (effectively one file); a lock and the function
   missing it living in different translation units of a real multi-file build is invisible
@@ -243,13 +300,6 @@ invariant), which this design has no way to know. Every finding is `MISSING_LOCK
   standard-API assumptions, not verified against real headers one by one the way `wc_LockMutex`
   was. A pass reading Zephyr's actual mutex API naming against its real bug sites (mirroring
   how `XMEMCPY` was confirmed for wolfSSL) would likely recover more sites.
-- **Measurement against the remaining 3 corpus sites** (`case_267d5a93`, `case_a6eb1f6d`,
-  `case_f21da596`) — `case_644b3e3c` (Capability 2) and `case_e062ef20` (Capability 1) are
-  now both used for development-site recovery; the other 3 were not re-examined against
-  either capability this round. `case_267d5a93` in particular, on closer reading of its real
-  vulnerable revision, looks like it may be a capacity/overflow bug (unbounded ACK-list
-  growth) whose fix incidentally touches lock/unlock code, not a genuine lock-balance bug in
-  its own right — flagged here, not resolved.
 - **No re-audit of the write-property corpus for false negatives caused by lock-related CWE
   mislabeling** — the `case_644b3e3c`/`case_e062ef20` CWE-122 mislabeling found here is the
   same *direction* of noise (a real bug tagged with an unrelated CWE) as the write property's
