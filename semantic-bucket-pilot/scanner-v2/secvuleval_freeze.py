@@ -29,7 +29,25 @@ MAGMA_PROJECTS = {"libpng", "libsndfile", "libtiff", "libxml2", "lua", "openssl"
                   "php", "php-src", "poppler", "sqlite3", "sqlite"}
 
 COPY = re.compile(r"\b(memcpy|memmove|strcpy|strncpy|strlcpy|strcat|strncat|strlcat|"
-                  r"sprintf|snprintf|vsnprintf|vsprintf|bcopy|memset|wmemcpy|wcscpy|wcsncpy)\s*\(")
+                  r"sprintf|snprintf|vsnprintf|vsprintf|bcopy|memset|wmemcpy|wcscpy|wcsncpy|"
+                  # POSTCUTOFF-R01: portability copy-macro wrappers, same (dest, src, len)
+                  # argument order/semantics as their bare libc equivalents -- invisible to
+                  # this regex before, so RULE 1 fell through to an incidental pointer_deref
+                  # or index_write match elsewhere in the diff hunk (wrong statement mapped)
+                  # instead of the real write. wolfSSL's XMEMCPY/XMEMSET/XMEMMOVE/XSTRNCPY/
+                  # XSTRNCAT/XSNPRINTF/XSPRINTF confirmed by reading the real macro defs at
+                  # wolfssl/wolfcrypt/types.h:1078-1091,1198-1254 (thin #define wrappers over
+                  # memcpy/memset/memmove/strncpy/strncat/snprintf/sprintf); found scanning
+                  # real PostCutoff-CVE wolfSSL sites (case_8762ecc4, case_faac9f02, both
+                  # genuine XMEMCPY-into-undersized-dest bugs that this regex was blind to).
+                  # NSS's PORT_Memcpy/PORT_Memmove carried over from this project's own prior,
+                  # separately-verified finding on the scanner side (dad8f00) -- same wrapper
+                  # class, not new speculation. Deliberately EXCLUDES same-family macros that
+                  # are reads/compares, never writes: XMEMCMP (memcmp), XSTRCMP/XSTRNCMP
+                  # (strcmp/strncmp), XSTRSTR/XSTRNSTR/XSTRSEP (strstr/strsep) -- adding those
+                  # would fabricate write sites, not just recognize missed ones.
+                  r"XMEMCPY|XMEMSET|XMEMMOVE|XSTRNCPY|XSTRNCAT|XSNPRINTF|XSPRINTF|"
+                  r"PORT_Memcpy|PORT_Memmove)\s*\(")
 IDXW = re.compile(r"([A-Za-z_]\w*(?:\s*(?:->|\.)\s*[A-Za-z_]\w*)*)\s*\[[^\]\n]+\]\s*=(?!=)")
 DEREFW = re.compile(r"\*\s*\(?\s*([A-Za-z_][\w.\->\[\] ]*?)\s*\)?\s*=(?!=)")
 WINDOW = 3   # frozen: a write must be within +-WINDOW source lines of the labeled statement

@@ -8,33 +8,32 @@
       "imagemagick/imagemagick": 7,
       "openwrt/openwrt": 1,
       "openwrt/ubus": 2,
-      "wolfssl/wolfssl": 8,
+      "wolfssl/wolfssl": 5,
       "zephyrproject-rtos/zephyr": 2
     },
     "by_write_kind": {
-      "copy_sink": 2,
-      "index_write": 6,
-      "pointer_deref": 13
+      "copy_sink": 3,
+      "index_write": 4,
+      "pointer_deref": 11
     },
     "family_sizes": {
       "fam_223b8c51e55f": 1,
-      "fam_42418a7cbf67": 10,
+      "fam_42418a7cbf67": 8,
       "fam_4bdb4421b431": 1,
-      "fam_56c918f63585": 1,
-      "fam_9152d9e125ef": 1,
+      "fam_56c918f63585": 2,
       "fam_aeb728439472": 2,
       "fam_cae379e2673a": 1,
-      "fam_d3b5215e864d": 3,
+      "fam_d3b5215e864d": 2,
       "fam_d9e4e31ba3b4": 1
     },
-    "mapped_vulnerable": 21,
+    "mapped_vulnerable": 18,
     "mapping": {
-      "ambiguous": 34,
-      "mapped": 21,
-      "no_write_found": 57
+      "ambiguous": 40,
+      "mapped": 18,
+      "no_write_found": 54
     },
     "sites_after_filters": 112,
-    "vulnerable_families": 9
+    "vulnerable_families": 8
   },
   "exclusions": {
     "magma_overlap_repo": 36,
@@ -679,14 +678,9 @@
         787
       ],
       "diff_sha256": "d7d04f6a7df48428f2001c4f453be95f809939455a96aef998db3ceb7138f9e2",
-      "family_id": "fam_d3b5215e864d",
-      "family_signature": "index_write|unknown|index",
-      "mapping_status": "mapped",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
-      "time_band": "post_2025_08_31",
-      "write_dest": "ffdhe2048_p",
-      "write_kind": "index_write",
-      "write_line": "static const byte ffdhe2048_p[256] = {"
+      "time_band": "post_2025_08_31"
     },
     {
       "benchmark_id": "case_69561288c0a566179df5",
@@ -943,14 +937,9 @@
         787
       ],
       "diff_sha256": "008f1ff1f41fca49208d768a539451f6c642c2d51abab90987e9735e18dab7dd",
-      "family_id": "fam_42418a7cbf67",
-      "family_signature": "pointer_deref|unknown|deref",
-      "mapping_status": "mapped",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
-      "time_band": "post_2025_08_31",
-      "write_dest": "p7",
-      "write_kind": "pointer_deref",
-      "write_line": "wc_PKCS7* p7 = NULL;"
+      "time_band": "post_2025_08_31"
     },
     {
       "benchmark_id": "case_87c0309367da8072f556",
@@ -1229,9 +1218,14 @@
         787
       ],
       "diff_sha256": "455f9ca6d9452cdfeb8e8118fdf2c9976d817ee8d4f8fd4c61ab5f82fee6d507",
-      "mapping_status": "no_write_found",
+      "family_id": "fam_56c918f63585",
+      "family_signature": "copy_sink|struct_field|V",
+      "mapping_status": "mapped",
       "repository": "wolfssl/wolfssl",
-      "time_band": "post_2025_08_31"
+      "time_band": "post_2025_08_31",
+      "write_dest": "key->pubkey_raw",
+      "write_kind": "copy_sink",
+      "write_line": "XMEMCPY(key->pubkey_raw, (byte*)in, inLen);"
     },
     {
       "benchmark_id": "case_be68cf6a2d593256061b",
@@ -1354,14 +1348,9 @@
         787
       ],
       "diff_sha256": "3f94dd81bb29e87848eb5f24c3e9b396ccf657fff73fffc92ea2b835ae902a4d",
-      "family_id": "fam_9152d9e125ef",
-      "family_signature": "index_write|struct_field|index",
-      "mapping_status": "mapped",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
-      "time_band": "post_2025_08_31",
-      "write_dest": "bag->msgTypes",
-      "write_kind": "index_write",
-      "write_line": "bag->msgTypes[bag->msgIdx++] = *data;   /* store message type */"
+      "time_band": "post_2025_08_31"
     },
     {
       "benchmark_id": "case_c44909f67530c50b3f92",
@@ -1417,7 +1406,7 @@
         787
       ],
       "diff_sha256": "1dae6df64a8ed1a757d59b2d6205ad39f209785b1233858c54688b0a4cc2d9af",
-      "mapping_status": "no_write_found",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
       "time_band": "post_2025_08_31"
     },
@@ -1437,7 +1426,7 @@
         787
       ],
       "diff_sha256": "a3f7537faa0e02b188ab16d46475ebb0282ac4162711d24d87050fa852ca34a8",
-      "mapping_status": "no_write_found",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
       "time_band": "post_2025_08_31"
     },
@@ -1767,14 +1756,9 @@
         787
       ],
       "diff_sha256": "a8fe818bbc3a6a9fbd0ee512bbb70528911eae0882cf1615c89f92f9dbfb7af5",
-      "family_id": "fam_42418a7cbf67",
-      "family_signature": "pointer_deref|unknown|deref",
-      "mapping_status": "mapped",
+      "mapping_status": "ambiguous",
       "repository": "wolfssl/wolfssl",
-      "time_band": "post_2025_08_31",
-      "write_dest": "p7",
-      "write_kind": "pointer_deref",
-      "write_line": "wc_PKCS7* p7 = NULL;"
+      "time_band": "post_2025_08_31"
     },
     {
       "benchmark_id": "case_fb65ef29b3369447e6ba",
@@ -1841,7 +1825,7 @@
   "twelve_vuln_family_gate": {
     "gate": 12,
     "meets_gate": false,
-    "vulnerable_families": 9
+    "vulnerable_families": 8
   },
   "why_this_source": "SecVulEval full set is HuggingFace-blocked in this environment (403); PostCutoff-CVE is git-reachable, ships real fix diffs in-repo (code intact, only paths blinded), hunk-labeled, and time-sliced post-2025 cutoffs so it is genuinely held out. The 44-site SecVulEval freeze remains a pilot.",
   "zenodo_release_sha256": "2446956911b943a58fcdffd3f8be3b63fec545109d870ddc1ec2818b43e95872"
