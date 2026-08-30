@@ -1,0 +1,9 @@
+{
+  "exception_configuration": "disabled",
+  "evidence": [
+    {"source": "packages/machine/binding.gyp (cartesi/rollups-ts, commit 1d0f419c7fdcb1dbaac31589990a1d946716a1d9)",
+     "detail": "\"defines\": [\"NAPI_VERSION=8\", \"NAPI_DISABLE_CPP_EXCEPTIONS\", \"NODE_ADDON_API_DISABLE_DEPRECATED\"] -- with the file's own comment clarifying this is specifically about node-addon-api's own error handling, independent of a separate compiler-level -fno-exceptions removal done for an unrelated file (native/slirp-forward.cc)",
+     "citation": "https://raw.githubusercontent.com/cartesi/rollups-ts/1d0f419c7fdcb1dbaac31589990a1d946716a1d9/packages/machine/binding.gyp"}
+  ],
+  "citation": "RESOURCE_GUARD_R02.md's 'Blind test #2' section, independently re-verified for R04"
+}

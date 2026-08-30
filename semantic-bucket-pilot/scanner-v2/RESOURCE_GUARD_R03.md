@@ -329,3 +329,70 @@ exactly as node-canvas's overload mismatch and Cartesi's own trace-evidence gap 
   real, structurally novel guard shape (a pre-acquisition predicate reusing the same variable
   name) is itself a meaningful piece of generalization evidence, independent of the final
   verdict -- the algorithm did not need to be extended or special-cased to handle it.
+
+## Reclassification: the jpeg-turbo result was a false positive, not a successful generalization
+
+**This section corrects the INTERPRETATION of the recorded result above. The recorded R03
+result itself is preserved EXACTLY, unmodified: `resource_guard_verdict_r03.py` and
+`resource_contracts_r03.py` remain byte-identical to the Freeze section's hashes
+(`81ce5856f142d77f9da33472faafc65a` / `7a73af8853c28ec3edba4fd078d67305`, reconfirmed at the
+time of this addendum), and the committed `expected_output.json` under
+`study/resource_guard_r03/raw_case_jpegturbo_decompress/` still reads exactly
+`VALUE_ACQUISITION_GUARD_MISSING`. Nothing above this addendum is rewritten.**
+
+The disclosed exceptions-configuration mismatch identified above turned out to be the whole
+story, not a minor caveat on an otherwise-valid finding. Because `@julusian/jpeg-turbo` most
+likely builds with C++ exceptions enabled (real, verified: neither `NAPI_CPP_EXCEPTIONS` nor
+`NAPI_DISABLE_CPP_EXCEPTIONS` appears anywhere in its real `CMakeLists.txt`, and per
+node-addon-api's own real default-resolution logic, absent either macro, exceptions are
+enabled if the compiler itself was built with exceptions on -- the near-universal default
+this project's build never opts out of), a failed `Buffer::New()` at this call site should
+THROW a C++ exception directly rather than return an empty value. Per node-addon-api's own
+official documentation
+([`doc/value.md`](https://github.com/nodejs/node-addon-api/blob/main/doc/value.md)), an
+empty value specifically represents the failure mode under the exceptions-DISABLED
+configuration -- under exceptions-enabled, code after the acquisition call is never even
+reached on failure, so the missing `IsEmpty()` check R03 flagged is not the same defect the
+contract's own failure signature describes. **The contract's most important applicability
+condition -- an exceptions-disabled build -- does not hold at this site.**
+
+The frozen scanner produced `VALUE_ACQUISITION_GUARD_MISSING`. The correct classification,
+had the applicability condition been enforced rather than merely disclosed, is approximately:
+
+```
+CONTRACT_NOT_APPLICABLE: ACQUISITION_FAILURE_THROWS
+```
+
+**Reclassifying the recorded R03 blind result as:**
+
+```
+FALSE_POSITIVE_CONFIGURATION_MISMATCH
+```
+(equivalently, describing the LIMITATION this revealed in R03 itself:
+`CONTRACT_APPLICABILITY_NOT_ENFORCED`)
+
+**Honest conclusions, restated precisely:**
+
+- **Cross-project syntactic/graph-shape recognition: established.** R03 correctly found the
+  real acquisition, resolved its namespace-qualified qualifier, bound object identity,
+  traced the downstream use, and correctly determined no guard dominated that use --
+  every mechanical step of the analysis was right.
+- **Cross-contract semantic portability: NOT established.** The contract's own semantic
+  premise -- that acquisition failure is representable as an empty value, checkable via
+  `IsEmpty()` -- was never actually verified to hold at this site, and most likely does not.
+  Finding the right SHAPE is not the same as the shape MEANING what the contract assumes it
+  means.
+- **This blind-test result: a configuration-driven false positive**, not evidence of
+  successful semantic generalization. It is still valuable evidence -- of exactly this gap.
+- **The limitation this revealed is in R03 (and, before it, R02) itself:**
+  `applicable_exception_configuration` was always carried as a disclosed, cited ASSUMPTION on
+  every finding -- but R03 never actually REQUIRED evidence that the assumption held before
+  reporting a MISSING/ESTABLISHED verdict. Disclosure is not enforcement.
+- **Cross-project vulnerability generalization: still not established** (unchanged from the
+  original write-up above -- this was never claimed).
+
+This blind test was still genuinely valuable: it revealed that the scanner can recognize a
+real code SHAPE across an independent, untouched real project, but does not yet ask whether
+that shape carries the same MEANING under the package's actual build configuration. See
+`RESOURCE_GUARD_R04.md` for the narrow, disclosed fix -- an applicability gate requiring real
+build-configuration evidence before a MISSING/ESTABLISHED verdict is reported at all.

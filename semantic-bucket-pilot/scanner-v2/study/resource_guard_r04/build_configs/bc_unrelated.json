@@ -1,0 +1,7 @@
+{
+  "exception_configuration": "PYTHON_DISABLE_EXCEPTIONS_SEEN",
+  "evidence": [
+    {"source": "control fixture (synthetic scenario)", "detail": "build script sets an unrelated PYTHON_DISABLE_EXCEPTIONS flag for an embedded Python interpreter build step; this has no bearing on NAPI_CPP_EXCEPTIONS/NAPI_DISABLE_CPP_EXCEPTIONS", "citation": "n/a -- structural control proving an irrelevant flag does not get mistaken for real evidence"}
+  ],
+  "citation": "R04 control: an unrelated exception-sounding flag must not establish applicability either way"
+}

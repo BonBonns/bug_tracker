@@ -1,0 +1,12 @@
+{
+  "exception_configuration": "enabled",
+  "evidence": [
+    {"source": "CMakeLists.txt (Julusian/node-jpeg-turbo, commit 5e141c1c04fc6da8fb6dc756fcce73dda86c894b)",
+     "detail": "neither NAPI_CPP_EXCEPTIONS nor NAPI_DISABLE_CPP_EXCEPTIONS is defined anywhere in the real build config; no -fno-exceptions/-EHs-c- override is set",
+     "citation": "https://raw.githubusercontent.com/Julusian/node-jpeg-turbo/5e141c1c04fc6da8fb6dc756fcce73dda86c894b/CMakeLists.txt"},
+    {"source": "nodejs/node-addon-api napi.h (main branch, independently fetched)",
+     "detail": "absent either macro, C++ exceptions are enabled by default if the compiler itself was built with exceptions on (the near-universal C++ default absent an explicit -fno-exceptions, which this project's CMakeLists.txt does not set)",
+     "citation": "https://raw.githubusercontent.com/nodejs/node-addon-api/main/napi.h"}
+  ],
+  "citation": "RESOURCE_GUARD_R03.md's 'R03 blind test' section (the mismatch identified there, now enforced rather than merely disclosed)"
+}

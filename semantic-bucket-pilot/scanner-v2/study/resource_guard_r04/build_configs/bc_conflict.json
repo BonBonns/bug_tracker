@@ -1,0 +1,7 @@
+{
+  "exception_configuration": "conflict",
+  "evidence": [
+    {"source": "control fixture (synthetic scenario)", "detail": "binding.gyp defines NAPI_CPP_EXCEPTIONS in one target's defines list, while a shared common.gypi included by the same build also defines NAPI_DISABLE_CPP_EXCEPTIONS", "citation": "n/a -- structural control exercising the BUILD_CONFIGURATION_CONFLICT path; no real package with this exact contradiction was located"}
+  ],
+  "citation": "R04 control: contradictory build-configuration evidence"
+}

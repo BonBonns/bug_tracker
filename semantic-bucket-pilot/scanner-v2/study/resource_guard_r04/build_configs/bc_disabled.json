@@ -1,0 +1,7 @@
+{
+  "exception_configuration": "disabled",
+  "evidence": [
+    {"source": "control fixture (synthetic scenario)", "detail": "NAPI_DISABLE_CPP_EXCEPTIONS explicitly defined", "citation": "n/a -- structural control, modeled on Cartesi's own real binding.gyp evidence"}
+  ],
+  "citation": "R04 control: exceptions explicitly disabled"
+}
