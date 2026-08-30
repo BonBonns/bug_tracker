@@ -282,16 +282,92 @@ Running Capability 1 against the same fixture's `wolfSSL_RAND_bytes` reproduces 
 `&globalRNGMutex` path-insensitivity false positive again, independently confirming that
 root cause rather than it being an artifact of one specific fixture's structure.
 
+## Round 3: precision fixes (`check_corpus_measurement.py`, 9/9)
+
+Round 2 left 3 issues on the table: 2 false positives with diagnosed root causes, and 1
+scope gap. All 3 were investigated; 2 were fixed and verified against the same frozen real
+Joern facts used to find them; the third was deliberately left unfixed after a general fix
+was designed and then proven unsound.
+
+**Fixed — `COMPOUND-GUARD-R01` (`&gRandMethodMutex` false positive).** The lock's own guard
+is a compound condition, `wolfSSL_RAND_InitMutex() == 0 && wc_LockMutex(&gRandMethodMutex)
+== 0`. The comparison node holding the lock call has only **1** CFG successor (it feeds an
+`<operator>.logicalAnd` node, which is where the real 2-way branch lives), not the 2
+`guard_success_start()` expected when checking "is the lock call the comparison's direct,
+sole condition." Fixed by adding `branch_point()`: starting from the lock call's comparison
+node, walk forward through single-successor CFG chains (arbitrarily deep, bounded and
+cycle-guarded) until reaching a node with a real 2-way (or 0-way) branch, and classify
+*that* node's branches instead of the immediate successor's. Verified on the frozen
+`raw_case_a6eb1f6d` facts: before the fix, `&gRandMethodMutex` was flagged
+`LEAK_CANDIDATE_UNSAFE_RETURN`; after, it's `BALANCED_ON_ALL_PATHS`, and
+`check_lock_balance.py` still passes 11/11 (the fix only changes which node gets classified
+for compound-condition guards, it doesn't touch the already-correct simple-guard path).
+
+**Fixed — `DEPTH-R01` (depth-exhaustion masking the fix above).** Applying
+`branch_point()` alone wasn't enough: `resolves_without_touching_object()`'s default depth
+bound (10, tuned against small synthetic fixtures) was too shallow for the real, longer
+`wolfSSL_RAND_bytes` — the "skip the guarded block" side of the branch needed to walk more
+than 9 CFG hops before reaching a return, so it hit depth exhaustion and was treated as
+"doesn't resolve" (abstain) rather than "resolves trivially," which broke the guard's
+2-way-branch classification downstream. Fixed by raising the bound to 60 in both capability
+scripts. This is a tuning fix, not a design change — real (non-fixture-sized) functions
+just need more hops, and 60 is comfortably above what either wolfSSL fixture requires.
+
+**Fixed — `GLOBAL-VAR-R01` (Capability 2's plain-global-variable scope gap).**
+`protected_field_verdict.py`'s signature scheme only recognized `.`/`->` struct-field-access
+chains (`<operator>.fieldAccess`/`indirectFieldAccess`); a plain `static WC_RNG globalRNG;`
+is referenced as `<operator>.addressOf` on a bare identifier, which the old logic never
+looked at. Fixed by: collecting `known_globals` (names of `locals.tsv` rows owned by any
+method literally named `<global>` — the file-scope pseudo-method Joern uses for top-level
+declarations), adding `normalize_global()` to recognize `&name`-shaped `addressOf` calls
+against that set and produce a `::name`-namespaced signature (kept in a separate namespace
+from field-path signatures' `.`-prefix, so a global named the same as some struct's field
+can never collide), and folding the resulting `global_touches_by_method` extraction into the
+same downstream protection-inference pipeline field-path touches already used — including
+the same `LOCK-OBJECT-EXCLUSION-R01` exclusion (now via a combined `normalize_any()`) so
+lock objects that happen to be globals themselves (`globalRNGMutex`, `gRandMethodMutex`)
+still can't be flagged as needing their own protection. Verified against the frozen
+`raw_case_f21da596` facts: Capability 2 now produces exactly one finding —
+`wolfSSL_RAND_poll` touching `::globalRNG` without holding `globalRNGMutex` — while
+`wolfSSL_RAND_bytes`'s own correctly-locked access to the same global is classified
+`PROTECTED_ACCESS`, not flagged. `check_protected_field.py` still passes 11/11 unchanged
+(the new global-touch extraction is additive and finds nothing in the existing field-only
+fixtures, which have no matching globals).
+
+**Deliberately NOT fixed — path-insensitivity (`&globalRNGMutex` false positive).** The
+natural general fix is: whenever a mid-walk branch has one side that
+`resolves_without_touching_object()` (reaches a return without touching the lock) and the
+other side doesn't, treat the walk as following the "doesn't resolve" side only, on the
+theory that a flag re-tested later must correlate with whichever branch actually ran. This
+was implemented, then proven **unsound** by a constructed counter-example before being kept:
+
+```c
+if (a) {
+    /* BUG: forgot to unlock here */
+} else {
+    unlock(&m);
+}
+return 0;
+```
+
+From pure CFG topology, this is **structurally identical** to the legitimate
+flag-guarded-cleanup pattern in `wolfSSL_RAND_bytes` (`if (used_global == 1)
+wc_UnLockMutex(...)` after an earlier branch that may or may not have set `used_global`) —
+both are "one branch reaches a return having touched the lock object, the other doesn't,
+and both converge before the return." The general fix can't tell these apart without
+tracking *which value* the flag actually holds along each path, i.e. real data-flow
+analysis, not CFG reachability. Applying it would silently turn a real missing-unlock bug
+into a suppressed one — a false negative introduced to chase a false positive, which is a
+worse trade for this project's purposes. Left as an honestly pinned, evidenced limitation
+in `check_corpus_measurement.py` rather than force an unsound "fix."
+
 ## What's out of scope here
 
-- **Fixing either false-positive root cause found in round 2** (compound-condition guards;
-  path-insensitivity across a re-tested flag after a branch merge) — both are diagnosed and
-  pinned as a regression baseline, not fixed. The path-insensitivity one in particular would
-  need real data-flow tracking (which CFG-node values a variable can hold on entry, keyed by
-  which predecessor edge was taken), a materially bigger undertaking than a guard-pattern
-  extension.
-- **Capability 2 for plain-global-variable protection** (see `case_f21da596` above) — needs
-  a different normalization scheme than the struct-field-path one; not attempted.
+- **General data-flow-based path sensitivity** — the fix that would resolve the
+  `&globalRNGMutex` false positive above needs tracking which values a flag variable can
+  hold on entry to a node, keyed by which predecessor edge was taken; proven necessary (not
+  just convenient) by the round-3 counter-example, and a materially bigger undertaking than
+  anything built so far here.
 - **Whole-program / cross-file protected-field inference.** Capability 2 only sees
   evidence within a single c2cpg export (effectively one file); a lock and the function
   missing it living in different translation units of a real multi-file build is invisible

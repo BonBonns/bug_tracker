@@ -94,6 +94,32 @@ def normalize_path(code):
     return None
 
 
+def normalize_global(code, known_globals):
+    """GLOBAL-VAR-R01: the plain-global-variable counterpart to normalize_path, for a
+    bug shape struct-field paths can't represent -- confirmed real and NOT recoverable by
+    the field-path scheme alone: PostCutoff-CVE case_f21da596's `wolfSSL_RAND_poll()`
+    reseeds `globalRNG` (a bare `static WC_RNG globalRNG;` at file scope, not a struct
+    field) via `wc_RNG_DRBG_Reseed(&globalRNG, ...)` with no lock at all, while
+    `wolfSSL_RAND_bytes()` protects the SAME variable with `globalRNGMutex` -- exactly
+    Capability 2's target shape, but `&globalRNG` is an `<operator>.addressOf` call on a
+    bare IDENTIFIER, never a `<operator>.fieldAccess`/`indirectFieldAccess`, so
+    normalize_path (which only recognizes `.`/`->` chains) never sees it.
+    `known_globals` is the set of names c2cpg exposes as `locals` of the file's own
+    `<global>` pseudo-method -- real evidence: static/file-scope variable declarations are
+    exported there (confirmed: `static WC_RNG globalRNG;` appears as a `<global>`-owned
+    local with that literal declaration as its code). Returns `::<name>` (a distinct
+    namespace from normalize_path's `.`-prefixed signatures, so a global can never collide
+    with a same-named struct field) for `&name` or a bare `name` where `name` is a known
+    global; None otherwise -- an identifier that ISN'T a known global (a true local, a
+    parameter, an unrecognized macro) is never guessed at."""
+    c = code.strip()
+    if c.startswith("&"):
+        c = c[1:].strip()
+    if c in known_globals:
+        return "::" + c
+    return None
+
+
 def guard_success_start(method_id, lock_call_id, lock_call_code, obj_code, rets,
                         cfg_next, calls, args_by_call):
     """Same as lock_balance_verdict.guard_success_start (duplicated, not imported, so this
@@ -116,7 +142,8 @@ def guard_success_start(method_id, lock_call_id, lock_call_code, obj_code, rets,
                 break
         return found
 
-    def resolves_without_touching_object(start, depth=10):
+    def resolves_without_touching_object(start, depth=60):
+        # DEPTH-R01 -- see lock_balance_verdict.guard_success_start's docstring.
         seen = set(); frontier = [start]
         for _ in range(depth):
             nxt = []
@@ -137,13 +164,29 @@ def guard_success_start(method_id, lock_call_id, lock_call_code, obj_code, rets,
                 return True
         return False
 
+    def branch_point(start, depth=5):
+        """COMPOUND-GUARD-R01 -- see lock_balance_verdict.guard_success_start's docstring
+        for the full rationale (duplicated here, not imported, per this project's
+        standalone-gate-script convention)."""
+        seen = {start}; node = start
+        for _ in range(depth):
+            succs = cfg_next.get((method_id, node), [])
+            if len(succs) != 1:
+                return node
+            nxt = succs[0]
+            if nxt in seen:
+                return node
+            seen.add(nxt); node = nxt
+        return node
+
     for s in next_call_nodes(lock_call_id):
         c = calls.get(s)
         if not c or c["name"] not in CMP_OPS:
             continue
         if lock_call_code not in (c.get("code") or ""):
             continue
-        succs = cfg_next.get((method_id, s), [])
+        branch = branch_point(s)
+        succs = cfg_next.get((method_id, branch), [])
         if len(succs) != 2:
             continue
         failure_like = [t for t in succs if resolves_without_touching_object(t)]
@@ -209,6 +252,22 @@ def main():
         owner, frm, to = int(r[0]), int(r[1]), int(r[2])
         cfg_next[(owner, frm)].append(to)
 
+    # GLOBAL-VAR-R01: file-scope static/global variable declarations are exported as
+    # `locals` owned by the file's own `<global>` pseudo-method (confirmed real:
+    # `static WC_RNG globalRNG;` -> a local owned by the `<global>` method literally named
+    # "<global>", code `static WC_RNG globalRNG`). Collect their names as the known-global
+    # vocabulary normalize_global checks identifiers against -- never guessed beyond this.
+    global_method_ids = {mid for mid, name in methods.items() if name == "<global>"}
+    known_globals = set()
+    for r in rows(f"{raw}/locals.tsv", 6):
+        lid, owner, name = int(r[0]), int(r[1]), dec(r[2])
+        if owner in global_method_ids:
+            known_globals.add(name)
+
+    def normalize_any(code):
+        sig = normalize_path(code)
+        return sig if sig is not None else normalize_global(code, known_globals)
+
     # Field-path signature extraction, subsumption-filtered per method: a field-access
     # call whose code is a strict `sep`-joined prefix of a sibling's code in the same
     # method is just an intermediate step of that longer chain -- drop it, keep only the
@@ -218,24 +277,44 @@ def main():
         if c["name"] in FIELD_OPS and normalize_path(c["code"]) is not None:
             field_calls_by_method[c["owner"]].append(cid)
 
-    # LOCK-OBJECT-EXCLUSION-R01: a field-path that is ITSELF ever passed as a lock/unlock
-    # call's object argument anywhere in the corpus is the LOCK, not protectable data --
-    # dereferencing a mutex to pass it to wc_LockMutex/wc_UnLockMutex is part of the locking
-    # mechanism, never a race on data. Without this, the mutex field's own access sometimes
-    # falls inside vs. outside its critical section (its OWN acquire call's argument is
-    # evaluated before the lock is held; its release calls' argument accesses are inside),
-    # producing a nonsensical "protected by itself" MISSING_LOCK_CANDIDATE -- confirmed real
-    # against xfn_probe.c before this exclusion was added.
+    # Global-variable touch extraction: an <operator>.addressOf call on a bare identifier
+    # matching a known global (the `&globalRNG` shape). No subsumption issue here -- unlike
+    # a struct-field chain, a global reference has no shorter intermediate "prefix" step to
+    # collide with.
+    global_touches_by_method = defaultdict(list)
+    for cid, c in calls.items():
+        if c["name"] != "<operator>.addressOf":
+            continue
+        sig = normalize_global(c["code"], known_globals)
+        if sig is not None:
+            global_touches_by_method[c["owner"]].append((cid, sig))
+
+    # LOCK-OBJECT-EXCLUSION-R01: a field-path OR global that is ITSELF ever passed as a
+    # lock/unlock call's object argument anywhere in the corpus is the LOCK, not
+    # protectable data -- dereferencing a mutex to pass it to wc_LockMutex/wc_UnLockMutex
+    # is part of the locking mechanism, never a race on data. Without this, the mutex's own
+    # access sometimes falls inside vs. outside its critical section (its OWN acquire
+    # call's argument is evaluated before the lock is held; its release calls' argument
+    # accesses are inside), producing a nonsensical "protected by itself"
+    # MISSING_LOCK_CANDIDATE -- confirmed real against xfn_probe.c (field form) and
+    # extended here to the global form (globalRNGMutex/gRandMethodMutex are themselves
+    # plain globals in case_f21da596/case_a6eb1f6d) on the same reasoning, not
+    # independently re-confirmed against a dedicated global-lock-object fixture.
     known_lock_sigs = set()
     for c in calls.values():
         if c["name"] in LOCK_FUNCS or c["name"] in UNLOCK_FUNCS:
             largs = sorted(args_by_call.get(c["id"], []))
             if largs:
-                sig = normalize_path(largs[0][1].strip())
+                sig = normalize_any(largs[0][1].strip())
                 if sig:
                     known_lock_sigs.add(sig)
 
     kept_field_accesses = []  # (call_id, method_id, path_sig)
+    for method_id, touches in global_touches_by_method.items():
+        for cid, sig in touches:
+            if sig in known_lock_sigs:
+                continue
+            kept_field_accesses.append((cid, method_id, sig))
     for method_id, cids in field_calls_by_method.items():
         codes = {cid: calls[cid]["code"] for cid in cids}
         subsumed = set()

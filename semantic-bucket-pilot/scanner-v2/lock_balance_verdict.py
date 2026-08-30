@@ -109,10 +109,17 @@ def guard_success_start(method_id, lock_call_id, lock_call_code, obj_code, rets,
                 break
         return found
 
-    def resolves_without_touching_object(start, depth=10):
+    def resolves_without_touching_object(start, depth=60):
         """True iff every forward path from `start` reaches a return (and stops there)
         before any LOCK/UNLOCK call on obj_code. False if some path touches obj_code
-        first, or the depth budget is exhausted without every path resolving (abstain)."""
+        first, or the depth budget is exhausted without every path resolving (abstain).
+        DEPTH-R01: raised from 10 -- confirmed real, on case_a6eb1f6d's full
+        wolfSSL_RAND_bytes, that the "skip this guarded block, continue into the rest of
+        the function" branch can be dozens of CFG nodes from its own resolution in real
+        (not fixture-sized) code, so a small bound made this abstain (falsely, via depth
+        exhaustion) on exactly the guard shape it needs to resolve. Still bounded, not
+        unlimited -- a genuinely pathological branch still abstains rather than loop
+        forever or silently guess."""
         seen = set(); frontier = [start]
         for _ in range(depth):
             nxt = []
@@ -133,13 +140,38 @@ def guard_success_start(method_id, lock_call_id, lock_call_code, obj_code, rets,
                 return True
         return False  # depth exhausted without every path resolving -> abstain
 
+    def branch_point(start, depth=5):
+        """COMPOUND-GUARD-R01: the comparison isn't always the direct branch node -- a
+        compound condition like `A() == 0 && LOCK(...) == 0` first feeds the comparison's
+        result into a `<operator>.logicalAnd`/`logicalOr` node (which has exactly ONE CFG
+        successor -- it just forwards the combined boolean onward), and THAT node's
+        successors are the real 2-way branch. Confirmed real: PostCutoff-CVE
+        case_a6eb1f6d's `wolfSSL_RAND_InitMutex() == 0 && wc_LockMutex(&gRandMethodMutex)
+        == 0` guard -- without this walk, the comparison's own single successor fails the
+        `len(succs) != 2` check below and this whole guard idiom silently falls back to
+        the unguarded-lock-call BFS start, over-exploring into code the lock never
+        protected. Walks forward through single-successor chains (bounded, cycle-safe)
+        until a 2-successor node is found, or gives up (same fallback as an unrecognized
+        idiom -- never guesses)."""
+        seen = {start}; node = start
+        for _ in range(depth):
+            succs = cfg_next.get((method_id, node), [])
+            if len(succs) != 1:
+                return node
+            nxt = succs[0]
+            if nxt in seen:
+                return node
+            seen.add(nxt); node = nxt
+        return node
+
     for s in next_call_nodes(lock_call_id):
         c = calls.get(s)
         if not c or c["name"] not in CMP_OPS:
             continue
         if lock_call_code not in (c.get("code") or ""):
             continue
-        succs = cfg_next.get((method_id, s), [])
+        branch = branch_point(s)
+        succs = cfg_next.get((method_id, branch), [])
         if len(succs) != 2:
             continue
 
