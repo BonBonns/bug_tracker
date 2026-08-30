@@ -115,14 +115,80 @@ multiple same-named overloads for these specific functions, so no exact registra
 picked without guessing. This is the mechanism's own existing honesty working correctly, now
 actually being exercised for the first time (previously nothing ever reached this stage).
 
+## 5b. CROSSLANG-LINK-FIX01B: the loader-helper-vs-invoked-result boundary control
+
+Requested review caution, checked for real, not just acknowledged: `receiver_type` alone
+CANNOT distinguish a method called on the LOADER HELPER itself
+(`const loader = require('node-gyp-build'); loader.path(x)`) from one called on the
+actual native binding it produces once INVOKED
+(`const native = require('node-gyp-build')(x); native.Bar()`) -- both carry the identical
+`receiver_type: "node-gyp-build"`. Confirmed real and ambiguous with a dedicated fixture,
+then confirmed the SAME ambiguity already existed, unnoticed, in `node-liblzma`'s own real
+facts (its real `isXZ` call).
+
+**Real, structural signal that DOES distinguish them, found by direct inspection, not
+assumed:** only the INVOKED case's `candidate_target_full_names`/`canonical_targets`
+contains a `require('<pkg>'):<returnValue>:` marker (e.g.
+`"lib/lzma.js::program:require('node-gyp-build'):<returnValue>:isXZ"` -- real, from
+`node-liblzma`). The bare, non-invoked loader reference (`loader.path(x)`) never has this
+marker -- confirmed: its `candidate_target_full_names` is just `["node-gyp-build:path"]`.
+
+`_via_loader_invocation()` checks for exactly this marker, scoped to the SAME package name
+matched via `receiver_type` (never a bare "any `<returnValue>` marker", which could in
+principle belong to an unrelated `require()`). Applied ONLY to the loader-PACKAGE-name
+branch of `is_native_binding_receiver()` -- the build-path/`.node` branch needs no such
+check, since a direct `require('./build/Release/x')` already IS the real module in one
+step, with no separate "helper vs. invoked result" to confuse.
+
+Added as a fourth negative control (`controls/js/index.js`'s `checkLoaderPath`), real,
+regenerated through the real frontend, verified directly: `receiver_type: "node-gyp-build"`,
+`resolution: "HEURISTIC"` (i.e. it WOULD have been treated as a candidate under the
+`receiver_type`-only check -- the risk was real, not hypothetical), no `<returnValue>`
+marker -> `is_native_binding_receiver()` correctly returns `False`. All three original
+positive controls and both real end-to-end packages (`memoryjs`, `node-liblzma`)
+re-verified unchanged after this addition (`registrations=3 linked=3 unlinked=0`;
+`registrations=12 linked=15 unlinked=25`; `registrations=6 linked=6 unlinked=0` --
+identical to before this control was added, confirming it only removes the one real risky
+case, changes nothing else).
+
 ## 6. Scope, stated precisely
 
 This fix widens WHICH JS calls are considered CANDIDATES for linking. It does not touch, and
 does not need to touch, the mechanically-exact matching discipline once a call IS a candidate
 (`extract_napi_bindings()`'s own "exactly one candidate function" requirement, `name in table`
 exact lookup) -- that logic is real, already correct, and now, for the first time across this
-corpus, actually gets to run against real candidates. Real, disclosed boundary: a receiver
-loaded through a convention NOT in the curated set (e.g. a fully custom, package-specific
-loader with no recognizable path/package-name signal) still will not become a candidate --
-not attempted to be covered here; the five curated conventions were chosen because they are
+corpus, actually gets to run against real candidates. **Coverage is intentionally a LOWER
+BOUND, stated precisely, not a claim of completeness**: a receiver loaded through a
+convention NOT in the curated set (e.g. a fully custom, package-specific loader with no
+recognizable path/package-name signal) still will not become a candidate -- unknown/custom
+loaders are still missed by design, not attempted to be covered here; the five curated
+conventions were chosen because they are
 real, confirmed, and cover both real packages investigated, not because they are exhaustive.
+
+**A linked/ambiguous count is a BINDING LINK, not a complete attacker-source-to-native-
+finding PATH.** This fix establishes that a JS call structurally reaches a specific real C++
+function -- it does not, by itself, establish that JS-controlled input flows through that
+binding into an R05-recovered (or R04-direct) unguarded acquisition. That composition (JS
+input -> linked native callback -> R05 finding) is real, separate follow-on work, planned
+for after R05's own corpus results are frozen (see section 7 below) -- not claimed here.
+
+## 7. What happens next (after R05 is frozen -- not started yet)
+
+Per direct instruction: this branch stays unmerged until the R05 corpus rerun (main working
+tree, separate branch) is frozen. Once it is, the plan is to RERUN ONLY THE LINKER over the
+already-saved JS/C++ facts from that run (no CPG rebuild needed -- normalize_c_cpp_facts_v03.py
+and normalize_joern_facts.py's outputs are the only inputs `link_napi_facts.py` needs, and
+`run_pipeline_one.py` currently deletes them per-package; the R05 rerun would need to be told
+to retain `cpp_facts.json`/`js_facts_adapted.json` for this purpose, or this fix folded into
+a small follow-up pass that regenerates just those two artifacts from each package's already-
+downloaded tarball -- decided at merge time, not before), then report, corpus-wide:
+
+- packages with real C++ registrations (`n_registrations > 0`);
+- packages with at least one eligible JS native receiver (`is_native_binding_receiver` true
+  for at least one real candidate call);
+- total linked vs. ambiguous/unlinked calls, corpus-wide;
+- how many linked calls reach a real R05 (or R04-direct) finding;
+- complete JS-input -> native-callback -> vulnerable-site paths, where establishable.
+
+Not started -- this section exists so the plan is on record before the merge, not invented
+after the fact.

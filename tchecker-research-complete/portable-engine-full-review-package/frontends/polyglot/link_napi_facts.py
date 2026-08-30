@@ -54,19 +54,46 @@ NATIVE_LOADER_PACKAGES = {
 NATIVE_BUILD_PATH_MARKERS = ('build/Release/', 'build/Debug/')
 
 
-def is_native_binding_receiver(receiver_type):
-    """True iff `receiver_type` (a JS/TS local's own resolved type, per the frontend's
-    type inference over its `require(...)` initializer -- see module docstring) matches a
-    real, curated native-addon-loading convention. None/empty never matches (fails closed,
-    same as every other abstention in this project). Matched by EXACT set membership for
-    loader package names (never a substring -- "some-bindings-helper" must not match "the
-    'bindings' package") and by substring only for the two fixed, meaningful node-gyp
-    output path segments, which are real, unambiguous directory names, not bare words."""
+def _via_loader_invocation(call, pkg):
+    """CROSSLANG-LINK-FIX01B (real boundary control, see module docstring and
+    study/crosslang_link_fix/CHARACTERIZATION.md's own addendum): for a LOADER-PACKAGE
+    receiver_type (e.g. "node-gyp-build"), `receiver_type` alone is NOT enough -- confirmed
+    real and ambiguous: `const loader = require('node-gyp-build'); loader.path(x)` (a call
+    on the loader HELPER itself, never invoked) carries the SAME receiver_type as
+    `const native = require('node-gyp-build')(x); native.Bar()` (the loader actually
+    INVOKED, producing the real native binding). The frontend's own resolution DOES
+    structurally distinguish them, though: only the invoked case's `candidate_target_
+    full_names`/`canonical_targets` contains a `require('<pkg>'):<returnValue>:` marker
+    (confirmed real on both node-liblzma's real `isXZ` call and a dedicated boundary
+    fixture) -- the bare, non-invoked loader reference never does. This checks for exactly
+    that marker, scoped to the SAME package name matched via receiver_type -- never a bare
+    "any <returnValue> marker", which could in principle belong to an unrelated require()."""
+    marker = f"require('{pkg}'):<returnValue>:"
+    targets = list(call.get('candidate_target_full_names') or []) + \
+        list(call.get('canonical_targets') or [])
+    return any(marker in t for t in targets)
+
+
+def is_native_binding_receiver(call):
+    """True iff `call`'s own `receiver_type` (a JS/TS local's own resolved type, per the
+    frontend's type inference over its `require(...)` initializer -- see module docstring)
+    matches a real, curated native-addon-loading convention. None/empty never matches
+    (fails closed, same as every other abstention in this project). Matched by EXACT set
+    membership for loader package names (never a substring -- "some-bindings-helper" must
+    not match "the 'bindings' package") and by substring only for the two fixed, meaningful
+    node-gyp output path segments, which are real, unambiguous directory names, not bare
+    words. For a loader-PACKAGE match specifically, ALSO requires `_via_loader_invocation`
+    evidence that the loader was actually CALLED (not just referenced) -- see that
+    function's own docstring for the real ambiguity this guards against. No such extra
+    requirement for a build-path/`.node` match: a direct `require('./build/Release/x')`
+    already IS the real module in one step, with no separate "helper vs. invoked result"
+    distinction to guard."""
+    receiver_type = call.get('receiver_type')
     if not receiver_type:
         return False
     rt = receiver_type.strip()
     if rt in NATIVE_LOADER_PACKAGES:
-        return True
+        return _via_loader_invocation(call, rt)
     if rt.endswith('.node'):
         return True
     return any(marker in rt for marker in NATIVE_BUILD_PATH_MARKERS)
@@ -157,7 +184,7 @@ def main():
         # match via more than one path" discipline -- either one qualifies, never double-
         # counted (a call can only be linked/unlinked once per run, since it's visited once).
         is_candidate = ((c.get('receiver_name') == a.js_receiver
-                          or is_native_binding_receiver(c.get('receiver_type')))
+                          or is_native_binding_receiver(c))
                          and c['resolution'] != 'EXACT')
         if is_candidate:
             if c['name'] in table:
