@@ -159,31 +159,97 @@ validation** (all 6 controls in `lockcap_probe.c`, run through real Joern):
 - **No false positive on the real fix**: the same function with the real fix applied
   produces zero findings.
 
-**Explicit, evidenced limitation — a different representation shape is out of scope.**
-`case_644b3e3c` (`Dtls13RtxRemoveCurAck`, the OTHER original motivating site) is **not**
-recoverable by this capability: at its vulnerable revision the function has **no lock call
-at all** — the bug is a totally absent critical section, not an existing lock with an
-incomplete release. This capability's shape (missing-unlock-given-an-existing-lock) simply
-doesn't apply; recognizing "a critical section that should exist but doesn't" is a
-different, harder capability (needs an external contract for which data needs protection,
-not just "is there a call to a registered lock function") — explicitly not attempted here,
-same "don't fabricate scope" discipline as the write property's own capability boundaries.
+**Limitation as originally reported (round 1), now resolved (round 2, below).**
+`case_644b3e3c` (`Dtls13RtxRemoveCurAck`, the OTHER original motivating site) was **not**
+recoverable by Capability 1: at its vulnerable revision the function has **no lock call at
+all** — the bug is a totally absent critical section, not an existing lock with an
+incomplete release. Capability 1's shape (missing-unlock-given-an-existing-lock) simply
+doesn't apply there. Recognizing "a critical section that should exist but doesn't" needs a
+DIFFERENT signal than "is there a call to a registered lock function" — see Capability 2.
+
+## Capability 2: cross-function protected-field inference (`protected_field_verdict.py`)
+
+Investigated the round-1 limitation directly rather than leaving it closed. The needed
+signal turns out to already be present in the SAME raw facts Capability 1 uses: Joern
+represents a field access (`ssl->dtls13Rtx.seenRecords`) as a `<operator>.fieldAccess`/
+`<operator>.indirectFieldAccess` call whose `code` carries the full textual chain — no
+exporter change needed.
+
+**Method** (still single-translation-unit scope, not whole-program): for every function
+holding a registered lock, compute the CFG node-set genuinely inside its critical section
+(reusing Capability 1's exact guard-aware barrier-BFS unchanged). For every field-access
+call, normalize away the base identifier (`ssl->dtls13Rtx.seenRecords` ->
+`.dtls13Rtx.seenRecords`) and record whether it falls inside a critical section, and for
+which lock-object signature. **Inference rule**: a field-path is "protected by lock L" only
+if EVERY protected occurrence of it anywhere in the corpus agrees on the same L (conflicting
+evidence -> abstain on that field entirely, never guess which lock is real). Given such an
+L, any access to that field-path OUTSIDE any L-critical-section — including in a function
+with no lock at all — is a `MISSING_LOCK_CANDIDATE`. A field-path with no protected
+occurrence anywhere establishes no pattern and is never flagged.
+
+**Two real false-positive classes found and fixed via a pre-freeze sanity check against the
+real `xfn_probe.c` fixture (both real functions, same file, same vulnerable commit),
+before any synthetic controls were even written:**
+
+1. **Generic single-segment field names.** The first version flagged `.next`, `.heap`,
+   `.epoch`, `.seq` in `Dtls13RtxRemoveCurAck` alongside the real `.dtls13Rtx.seenRecords`
+   finding — all because `Dtls13RtxAddAck` happens to touch `cur->next`/`ssl->heap` etc.
+   *incidentally* while holding its lock, which doesn't mean those specific fields need
+   it (correlation, not causation). Every false positive found was a 1-segment path; the
+   real bug and the lock object itself were both 2-segment. Fixed by requiring >=2 path
+   segments as a precondition for the inference to even consider a field — a common short
+   field name is far more likely to collide across unrelated struct types than a specific
+   nested path.
+2. **The lock object flagged as needing its own protection.** `ssl->dtls13Rtx.mutex`
+   itself came back as a `MISSING_LOCK_CANDIDATE` "protected by" itself — its own
+   acquire call's argument is evaluated before the lock is held (outside the region), its
+   release calls' argument accesses are inside, so the mutex's own field-path picked up
+   conflicting-looking evidence. Fixed by excluding any field-path that is ITSELF ever
+   passed as a lock/unlock call's object argument anywhere in the corpus from ever being
+   treated as protectable data.
+
+**Validated (`check_protected_field.py`, 11/11):**
+- **Development-site recovery**: the real `xfn_probe.c` fixture (both functions verbatim
+  from commit `3034dd9e`) now produces **exactly 2 findings**, both
+  `.dtls13Rtx.seenRecords` in `Dtls13RtxRemoveCurAck`, inferred protector correctly
+  `.dtls13Rtx.mutex` — precisely the `case_644b3e3c` bug this capability was built to
+  recover, with zero of the noise fields and zero self-referential lock-object finding.
+- 3 synthetic controls: a consistently-protected field (no finding), a field never
+  touched under any lock anywhere (no evidence, no finding), and a field protected by
+  two DIFFERENT locks in different functions (ambiguous — abstains on both accesses,
+  classified `AMBIGUOUS_MULTIPLE_PROTECTORS`, not silently dropped).
+- Runs alongside Capability 1's own 11/11 suite with no interference (fully standalone
+  script, shares only the LOCK_FUNCS/UNLOCK_FUNCS vocabulary and the barrier-BFS logic,
+  duplicated rather than imported per this project's standalone-gate-script convention).
+
+**Both original motivating sites are now covered, by two different capabilities matched
+to their two different shapes**: `case_e062ef20` by Capability 1 (existing lock,
+incomplete release), `case_644b3e3c` by Capability 2 (no lock at all, inferred from a
+sibling function's correct usage of the same field).
+
+**What Capability 2 does NOT claim.** This is correlation-based, single-TU evidence, not a
+soundness proof: a flagged field-path might legitimately be accessed unprotected in code
+that provably never runs concurrently (single-threaded init, a documented external
+invariant), which this design has no way to know. Every finding is `MISSING_LOCK_CANDIDATE`
+— open, never a certainty — same posture as Capability 1's `LOCK_LEAK_CANDIDATE`.
 
 ## What's out of scope here
 
-- **The "should there be a lock at all" shape** (see `case_644b3e3c` above) — a
-  structurally different, harder capability than missing-unlock-before-return.
+- **Whole-program / cross-file protected-field inference.** Capability 2 only sees
+  evidence within a single c2cpg export (effectively one file); a lock and the function
+  missing it living in different translation units of a real multi-file build is invisible
+  to it as implemented.
 - **LOCK/UNLOCK evidence beyond wolfSSL** — pthreads/Zephyr/kernel/NSPR/Win32 entries are
   standard-API assumptions, not verified against real headers one by one the way `wc_LockMutex`
   was. A pass reading Zephyr's actual mutex API naming against its real bug sites (mirroring
   how `XMEMCPY` was confirmed for wolfSSL) would likely recover more sites.
-- **Measurement against the other 4 corpus sites** (`case_644b3e3c` itself,
-  `case_267d5a93`, `case_a6eb1f6d`, `case_f21da596`) — only `case_e062ef20` was used for
-  development-site recovery this round. `case_267d5a93` in particular, on closer reading of
-  its real vulnerable revision, looks like it may be a capacity/overflow bug (unbounded ACK-
-  list growth) whose fix incidentally touches lock/unlock code, not a genuine lock-balance
-  bug in its own right — flagged here, not resolved, since it wasn't re-examined against
-  this capability specifically.
+- **Measurement against the remaining 3 corpus sites** (`case_267d5a93`, `case_a6eb1f6d`,
+  `case_f21da596`) — `case_644b3e3c` (Capability 2) and `case_e062ef20` (Capability 1) are
+  now both used for development-site recovery; the other 3 were not re-examined against
+  either capability this round. `case_267d5a93` in particular, on closer reading of its real
+  vulnerable revision, looks like it may be a capacity/overflow bug (unbounded ACK-list
+  growth) whose fix incidentally touches lock/unlock code, not a genuine lock-balance bug in
+  its own right — flagged here, not resolved.
 - **No re-audit of the write-property corpus for false negatives caused by lock-related CWE
   mislabeling** — the `case_644b3e3c`/`case_e062ef20` CWE-122 mislabeling found here is the
   same *direction* of noise (a real bug tagged with an unrelated CWE) as the write property's
