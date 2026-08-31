@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Combined-reporting regression (task #43, item 4): a raw CANDIDATE record from any of the
-three OOB producers (oob_write_candidates / oob_read_candidates / oob_compare_candidates) must
-NEVER be counted as a reportable finding merely because provenance.enrich_record() resolved its
-source file. This is the same one-way rule #35 established for R04/R05/LOCK_BALANCE/
-PROTECTED_FIELD (the node-libcurl regression in check_provenance.py), checked here specifically
-for the three OOB properties, which #35's PROPERTY_CANDIDATE_RULES marks scanner_candidate=True
-unconditionally (every record their own emit_candidates() ever appends IS a real candidate by
-construction -- see provenance.py's own PROPERTY_CANDIDATE_RULES comment). That unconditional
-True makes provenance.resolved the ONLY other gate standing between a raw scanner CANDIDATE and
-reportable=True -- so this must be verified explicitly, not assumed, for all three OOB keys.
+"""Combined-reporting regression (task #43, item 4; task #46 added oob_index_write_candidates):
+a raw CANDIDATE record from any of the four OOB producers (oob_write_candidates /
+oob_index_write_candidates / oob_read_candidates / oob_compare_candidates) must NEVER be counted
+as a reportable finding merely because provenance.enrich_record() resolved its source file. This
+is the same one-way rule #35 established for R04/R05/LOCK_BALANCE/PROTECTED_FIELD (the
+node-libcurl regression in check_provenance.py), checked here specifically for the four OOB
+properties, which #35's PROPERTY_CANDIDATE_RULES marks scanner_candidate=True unconditionally
+(every record their own emit_candidates() ever appends IS a real candidate by construction --
+see provenance.py's own PROPERTY_CANDIDATE_RULES comment). That unconditional True makes
+provenance.resolved the ONLY other gate standing between a raw scanner CANDIDATE and
+reportable=True -- so this must be verified explicitly, not assumed, for all four OOB keys.
 
 Self-contained: builds a minimal real on-disk package + methods.tsv fixture (no c2cpg needed --
 this only exercises the reportability formula and the function_id join, not any scanner's own
@@ -49,7 +50,8 @@ with tempfile.TemporaryDirectory() as td:
 
     manifest = provenance.build_source_manifest(pkg_dir, b"fake-tarball-bytes", "synthetic-pkg", "1.0.0")
 
-    for candidates_key in ("oob_write_candidates", "oob_read_candidates", "oob_compare_candidates"):
+    for candidates_key in ("oob_write_candidates", "oob_index_write_candidates",
+                           "oob_read_candidates", "oob_compare_candidates"):
         record = {candidates_key: [{
             "verdict": "CANDIDATE",
             "class": candidates_key.split("_candidates")[0].upper(),

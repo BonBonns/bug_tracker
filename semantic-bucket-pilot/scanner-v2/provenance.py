@@ -283,11 +283,14 @@ def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict
 #     the real classification pair VALUE_ACQUISITION_GUARD_ESTABLISHED (real negative -- a
 #     confirmed-safe guard, not a candidate) / VALUE_ACQUISITION_GUARD_MISSING (the one real
 #     positive candidate verdict). Only the latter is scanner_candidate=True.
-#   - LOCK_BALANCE/PROTECTED_FIELD/OOB_WRITE/OOB_READ/OOB_COMPARE were checked directly: every
-#     item their own findings/candidates lists ever contain IS already a real candidate (no
-#     abstention-shaped entries are ever appended to those specific lists -- abstentions there
-#     only ever increment a separate classification COUNTER, never enter the list itself) -- so
-#     scanner_candidate=True unconditionally is correct for those five.
+#   - LOCK_BALANCE/PROTECTED_FIELD/OOB_WRITE/OOB_INDEX_WRITE/OOB_READ/OOB_COMPARE were checked
+#     directly: every item their own findings/candidates lists ever contain IS already a real
+#     candidate (no abstention-shaped entries are ever appended to those specific lists --
+#     abstentions there only ever increment a separate classification COUNTER, never enter the
+#     list itself) -- so scanner_candidate=True unconditionally is correct for those six.
+#     OOB_INDEX_WRITE (task #44's own producer, oob_index_write_verdict.py) confirmed the same
+#     way as the other four OOB readers: both of its own `candidates.append(...)` call sites
+#     emit `'verdict': 'CANDIDATE'` unconditionally, never anything else.
 _R04_R05_CANDIDATE_VERDICTS = {"VALUE_ACQUISITION_GUARD_MISSING"}
 
 PROPERTY_CANDIDATE_RULES = {
@@ -300,6 +303,7 @@ PROPERTY_CANDIDATE_RULES = {
     "lock_balance_findings": lambda f: True,
     "protected_field_findings": lambda f: True,
     "oob_write_candidates": lambda f: True,
+    "oob_index_write_candidates": lambda f: True,
     "oob_read_candidates": lambda f: True,
     "oob_compare_candidates": lambda f: True,
 }
@@ -349,7 +353,8 @@ def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) 
             enrich_finding(f, f.get(id_field), method_file_map, manifest, pkg_dir, id_field)
             finalize_reportability(f, candidate_rule(f))
 
-    for candidates_key in ("oob_write_candidates", "oob_read_candidates", "oob_compare_candidates"):
+    for candidates_key in ("oob_write_candidates", "oob_index_write_candidates",
+                           "oob_read_candidates", "oob_compare_candidates"):
         candidate_rule = PROPERTY_CANDIDATE_RULES[candidates_key]
         for c in record.get(candidates_key) or []:
             enrich_finding(c, c.get("function_id"), method_file_map, manifest, pkg_dir, "function_id")
