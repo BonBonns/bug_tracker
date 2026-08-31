@@ -92,15 +92,50 @@ with tempfile.TemporaryDirectory() as td:
        not any(c.get('array') == 'a' and c.get('index_expr') == 'i++' for c in p_idx))
     # decodevv_add: treated explicitly, per direct instruction -- its real vulnerability is on a
     # NESTED/2D index (a[chptr++][i], the second dimension), entirely outside this producer's
-    # single-level indexAccess model. Verified: NO ad hoc flattening was added, so it correctly
-    # produces no candidate for its own real vulnerable line at all (an honest, disclosed
-    # UNSUPPORTED verdict via silent abstention, not a false claim of either safety or detection).
+    # single-level indexAccess model. NO ad hoc flattening was added, so it correctly produces no
+    # CANDIDATE for its own real vulnerable line (no false capacity claim this producer cannot
+    # actually back). Formally bounded (task #44, phase 3): the real nested chain is now
+    # explicitly, structurally detected and reported as its own disclosed ABSTAIN entry --
+    # never silently indistinguishable from "site not examined at all."
     decodevv_fid = [f['id'] for f in json.load(open(vuln_facts))['functions']
                     if f['name'] == 'vorbis_book_decodevv_add'][0]
     ck("decodevv_add: real 2D vulnerability (a[chptr++][i]) correctly produces NO candidate -- "
        "no ad hoc flattening rule was added; this is an explicit, disclosed unsupported case, "
        "not a false negative introduced by this phase",
        not any(c.get('function_id') == decodevv_fid for c in v_idx))
+
+    v_idx2, v_ab = oiw._analyze(vuln_facts)
+    p_idx2, p_ab = oiw._analyze(patched_facts)
+    v_decodevv_ab = [a for a in v_ab if a.get('function_id') == decodevv_fid]
+    ck("decodevv_add VULN: the real nested write is now an EXPLICIT abstention (formally "
+       "bounded, task #44 phase 3), not silent -- array='a', outer_index_expr='chptr++', "
+       "inner_index_expr='i', both real real write sites (shift>=0 and shift<0 branches)",
+       len(v_decodevv_ab) == 2
+       and all(a['array'] == 'a' and a['outer_index_expr'] == 'chptr++'
+               and a['inner_index_expr'] == 'i' and a['reason'] == 'NESTED_INDEX_UNSUPPORTED'
+               for a in v_decodevv_ab))
+    decodevv_fid_p = [f['id'] for f in json.load(open(patched_facts))['functions']
+                      if f['name'] == 'vorbis_book_decodevv_add'][0]
+    p_decodevv_ab = [a for a in p_ab if a.get('function_id') == decodevv_fid_p]
+    ck("decodevv_add PATCHED: the abstention still fires -- the write expression itself "
+       "(a[chptr++][i]) is UNCHANGED between VULN and PATCHED (only the loop headers differ), "
+       "so a real, honest 'no capacity model for this shape' report must not silently "
+       "disappear just because a nearby guard changed",
+       len(p_decodevv_ab) == 2)
+    ck("decodevv_add: emit_candidates()'s own backward-compatible contract is unaffected -- "
+       "still the exact same list _analyze() returns as its first element",
+       v_idx2 == v_idx and p_idx2 == p_idx)
+    ck("decodevs_add's own real 2D READ (t[j][i], line 262/271 -- a genuine nested access, but "
+       "a READ not a write destination) is ALSO reported as an abstention, consistent with the "
+       "pre-existing 1D candidate logic which likewise does not itself discriminate read/write "
+       "role -- never silently treated as though it were the write-side a[o+j] candidate",
+       sum(1 for a in v_ab if a.get('array') == 't') == 2)
+    ck("no inner sub-expression of a real nested chain (a[chptr++] alone, or t[j] alone) is "
+       "EVER separately emitted as its own candidate or abstention -- it is not itself a "
+       "distinct site, only the outer/full chain is reported",
+       not any(c.get('index_expr') == 'chptr++' for c in v_idx)
+       and not any(c.get('index_expr') == 'j' and c.get('array') == 't' for c in v_idx)
+       and not any(a.get('outer_index_expr') == 'chptr++' and a.get('array') != 'a' for a in v_ab))
 
     ck("dedup: OOB_WRITE (memcpy-surface) never ALSO fires on this real site (VULN)",
        len(v_write) == 0)

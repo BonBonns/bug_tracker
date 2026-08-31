@@ -54,6 +54,21 @@ def _elem_count(type_full_name):
     return _eval_const_int_expr(m.group(1)) if m else None
 
 def emit_candidates(prefix):
+    """Backward-compatible entry point -- unchanged contract, list of CANDIDATE dicts only.
+    See _analyze()/emit_abstentions() for the nested/2D-index formal-bound reporting (task #44)
+    added alongside this, never inside it."""
+    return _analyze(prefix)[0]
+
+
+def emit_abstentions(prefix):
+    """Task #44: real, disclosed abstentions this producer explicitly recognized but does not
+    (yet) have a sound capacity model for -- currently just NESTED_INDEX_UNSUPPORTED (a real
+    chained `arr[i][j]` write, structurally detected, never silently mis-parsed as a 1D site).
+    Never a CANDIDATE (no capacity claim is made), never silently dropped either."""
+    return _analyze(prefix)[1]
+
+
+def _analyze(prefix):
     d = json.load(open(prefix))
     calls = d.get('calls', [])
     locals_ = d.get('locals', [])
@@ -162,13 +177,61 @@ def emit_candidates(prefix):
     func_by_id = {f.get('id'): f for f in d.get('functions', [])}
     idx_calls = [c for c in calls if c.get('name') in ('<operator>.indirectIndexAccess',
                                                         '<operator>.indexAccess')]
+    idx_call_ids = {c['id'] for c in idx_calls}
+
+    # NESTED/2D INDEX BOUND (task #44): a chained access `arr[i][j]` (real Tremor
+    # vorbis_book_decodevv_add: `a[chptr++][i]`, `a: ogg_int32_t **`) shows up in real facts as
+    # TWO SEPARATE indirectIndexAccess calls at the same line -- an OUTER one whose own code is
+    # the full `a[chptr++][i]` and whose own arguments[0] is a real, structural reference (by id,
+    # not text) to an INNER one whose own code is just `a[chptr++]`. Confirmed real and necessary
+    # via direct inspection of Tremor's own real facts (tests/gates/oob-index-r01/fixtures/
+    # row1_vuln.program.json): the pre-existing single-index regex below (`^\s*NAME\s*\[`) matches
+    # the OUTER call's code just as readily as a real 1D access, silently parsing `arr` = 'a' and
+    # `idx` = 'chptr++' -- discarding the real second index `i` entirely, examining the WRONG
+    # index for this exact real vulnerability (Tremor's own real fix adds `i<m` to the INNER
+    # loop's own header -- `i`, not `chptr`, is what actually needs bounding here). Silently
+    # mis-parsing this as a 1D site would be worse than not looking at all: it creates the
+    # APPEARANCE of having examined the site while actually reasoning about an unrelated index.
+    # No ad hoc flattening is added (a real 2D capacity model needs bounding TWO separate index
+    # expressions against TWO separate, possibly-derived capacities -- e.g. `i`'s own real bound
+    # here is a LOCAL `m=offset+n`, not a bare sibling parameter PARAM-CAP-R01 already knows how
+    # to identity-match -- a genuinely different, harder capacity-derivation problem than what
+    # this producer's existing machinery solves). Formally bounded instead: detected explicitly,
+    # structurally (by real argument-id linkage, never a string heuristic), and reported as its
+    # own disclosed ABSTAIN entry via emit_abstentions() below -- never silently dropped, and
+    # never counted as a CANDIDATE this producer cannot actually back with a real capacity claim.
+    nested_pairs = []          # [(outer_call, inner_call), ...]
+    nested_inner_ids = set()   # inner call ids -- excluded from standalone 1D processing below
+    for c in idx_calls:
+        args = {a.get('index'): a for a in c.get('arguments', [])}
+        base_arg = args.get(0)
+        if not base_arg or base_arg.get('kind') != 'CALL':
+            continue
+        inner_id = base_arg.get('id')
+        inner = None
+        for ic in idx_calls:
+            if ic['id'] == inner_id:
+                inner = ic
+                break
+        if inner is None:
+            continue   # base is SOME other call (e.g. a function call result) -- not a nested
+                       # index chain; out of scope for this check, handled (or not) elsewhere
+        nested_pairs.append((c, inner))
+        nested_inner_ids.add(inner['id'])
+
     cand = []
     seen = set()
     for c in idx_calls:
+        if c['id'] in nested_inner_ids:
+            continue   # an inner sub-expression of a nested chain, not itself a write
+                       # destination -- handled (as an abstention) via its own OUTER call instead
         code = c.get('code') or ''
         m = re.match(r'^\s*([A-Za-z_]\w*)\s*\[', code)
         if not m:
             continue
+        if any(c['id'] == outer['id'] for outer, _inner in nested_pairs):
+            continue   # the OUTER call of a real nested chain -- reported via
+                       # emit_abstentions(), never silently mis-parsed as a 1D site here
         arr = m.group(1)
         fn = c.get('enclosing_function_id')
         # index operand = the text inside [ ... ]
@@ -261,12 +324,44 @@ def emit_candidates(prefix):
         if corrob:
             entry['call_site_corroboration'] = corrob
         cand.append(entry)
-    return cand
+
+    # NESTED/2D INDEX -- formal bound (task #44): report every real, structurally-detected
+    # nested chain as its own disclosed abstention, never a CANDIDATE (no sound capacity claim)
+    # and never silently dropped. See the real detection above (nested_pairs) for the full
+    # account, including the real Tremor vorbis_book_decodevv_add motivation.
+    abstentions = []
+    for outer, inner in nested_pairs:
+        fn = outer.get('enclosing_function_id')
+        outer_m = re.match(r'^\s*[A-Za-z_]\w*\s*\[\s*([^\]]+?)\s*\]\s*\[\s*([^\]]+?)\s*\]\s*$',
+                            outer.get('code') or '')
+        base_m = re.match(r'^\s*([A-Za-z_]\w*)\s*\[', inner.get('code') or '')
+        _fn = func_by_id.get(fn) or {}
+        abstentions.append({
+            'verdict': 'ABSTAIN', 'class': 'OOB_WRITE', 'subclass': 'INDEX_STORE',
+            'reason': 'NESTED_INDEX_UNSUPPORTED',
+            'array': base_m.group(1) if base_m else None,
+            'outer_index_expr': outer_m.group(1) if outer_m else None,
+            'inner_index_expr': outer_m.group(2) if outer_m else None,
+            'full_expr': outer.get('code'),
+            'file': outer.get('file'), 'function': _fn.get('full_name'),
+            'function_line': _fn.get('line'), 'function_line_end': _fn.get('line_end'),
+            'function_id': fn, 'line': outer.get('line'),
+            'outer_call_id': outer.get('id'), 'inner_call_id': inner.get('id'),
+            'note': 'a real chained arr[i][j] write -- structurally detected (real argument-id '
+                    'linkage, never a string heuristic), reported explicitly rather than '
+                    'silently mis-parsed as a 1D site or dropped. No capacity claim is made; '
+                    'this producer does not (yet) have a sound model for bounding two chained '
+                    'index expressions against two, possibly-derived, capacities.',
+        })
+    return cand, abstentions
 
 if __name__ == '__main__':
     for p in sys.argv[1:]:
-        c = emit_candidates(p)
-        print(p, '->', len(c), 'INDEX_STORE candidate(s)')
+        c, ab = _analyze(p)
+        print(p, '->', len(c), 'INDEX_STORE candidate(s),', len(ab), 'nested-index abstention(s)')
         for x in c:
             cap = x['elem_count'] if 'elem_count' in x else ('param:' + x.get('length_param_name', '?'))
             print('   ', x['array'], '[', x['index_expr'], '] cap=', cap, '@L', x.get('line'))
+        for x in ab:
+            print('    ABSTAIN', x['array'], '[', x['outer_index_expr'], '][', x['inner_index_expr'],
+                  '] reason=', x['reason'], '@L', x.get('line'))
