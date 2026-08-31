@@ -77,32 +77,65 @@ def main():
                 build_config['exception_configuration'] == 'unresolved')
 
     methods_filename = {REAL_READFUNCTION_METHOD_ID: 'src/Easy.cc'}
-    exc, evidence, citation = resolve_exc_config_for_method(
-        build_config, methods_filename, REAL_READFUNCTION_METHOD_ID)
+    cfg = resolve_exc_config_for_method(build_config, methods_filename, REAL_READFUNCTION_METHOD_ID)
     ok &= check('per-finding resolution gives "enabled" (NOT the package-wide "unresolved")',
-                exc == 'enabled', f'got {exc!r}')
-    ok &= check('citation cites the real target name', '<(module_name)' in citation, citation)
+                cfg['exception_configuration'] == 'enabled', f"got {cfg['exception_configuration']!r}")
+    ok &= check('citation cites the real target name', '<(module_name)' in cfg['citation'], cfg['citation'])
     ok &= check('evidence is the real matching_targets list, not empty',
-                bool(evidence) and evidence[0]['target_name'] == '<(module_name)')
+                bool(cfg['evidence']) and cfg['evidence'][0]['target_name'] == '<(module_name)')
+
+    # PHASE B: assert the SELECTED target genuinely compiles the finding's own source file --
+    # not merely "some target says enabled" but the SPECIFIC real target whose own sources
+    # list actually names src/Easy.cc, and that resolution_scope records this as authoritative
+    # per-target resolution, not a package-wide fallback.
+    ok &= check('resolution_scope is "per_target" (real per-target data was used, not a '
+                'package-wide fallback)', cfg['resolution_scope'] == 'per_target',
+                cfg['resolution_scope'])
+    ok &= check('resolved_target_name is the real target name', cfg['resolved_target_name'] == '<(module_name)',
+                cfg['resolved_target_name'])
+    selected_target = next(t for t in REAL_NODE_LIBCURL_BUILD_CONFIG['gyp_targets']
+                            if t['target_name'] == cfg['resolved_target_name'])
+    ok &= check("the SELECTED target's own real sources list genuinely contains "
+                "'src/Easy.cc' (not just any target that happens to say 'enabled')",
+                'src/Easy.cc' in selected_target['sources'])
+    ok &= check("the selected target's own exception_configuration matches what was returned",
+                selected_target['exception_configuration'] == cfg['exception_configuration'])
+
+    # PHASE B: package-wide value is DIAGNOSTIC ONLY -- present, but NOT what was applied.
+    # This is the real, concrete divergence case: package-wide says "unresolved", the real
+    # per-target resolution correctly says "enabled" for this specific file.
+    ok &= check('package_wide_diagnostic is present and reflects the real package-wide value',
+                cfg['package_wide_diagnostic']['exception_configuration'] == 'unresolved')
+    ok &= check('package-wide diagnostic value DIFFERS from the authoritative per-target '
+                'result (proving package-wide was not the one actually applied)',
+                cfg['package_wide_diagnostic']['exception_configuration']
+                != cfg['exception_configuration'])
 
     # Fail-closed: a method whose filename isn't in ANY real target's sources list.
-    exc2, evidence2, citation2 = resolve_exc_config_for_method(
+    cfg2 = resolve_exc_config_for_method(
         build_config, {999: 'src/unrelated_file_not_in_any_target.cc'}, 999)
     ok &= check('unmatched source file fails closed to BUILD_CONFIGURATION_UNRESOLVED '
                 '(never falls back to the package-wide value or a guess)',
-                exc2 == 'BUILD_CONFIGURATION_UNRESOLVED', f'got {exc2!r}')
+                cfg2['exception_configuration'] == 'BUILD_CONFIGURATION_UNRESOLVED',
+                f"got {cfg2['exception_configuration']!r}")
+    ok &= check('fail-closed case records resolution_scope == "per_target_unresolved"',
+                cfg2['resolution_scope'] == 'per_target_unresolved', cfg2['resolution_scope'])
 
     # Fail-closed: a method with no recorded filename at all.
-    exc3, evidence3, citation3 = resolve_exc_config_for_method(build_config, {}, 999)
+    cfg3 = resolve_exc_config_for_method(build_config, {}, 999)
     ok &= check('missing filename fails closed to BUILD_CONFIGURATION_UNRESOLVED',
-                exc3 == 'BUILD_CONFIGURATION_UNRESOLVED', f'got {exc3!r}')
+                cfg3['exception_configuration'] == 'BUILD_CONFIGURATION_UNRESOLVED',
+                f"got {cfg3['exception_configuration']!r}")
 
-    # No gyp_targets at all (e.g. a cmake-only package) -- falls back to package-wide value.
+    # No gyp_targets at all (e.g. a cmake-only package) -- falls back to package-wide value,
+    # and resolution_scope honestly records this as a fallback, not a real per-target result.
     no_gyp_config = {"exception_configuration": "disabled", "evidence": [], "citation": "x",
                       "gyp_targets": None, "gyp_path": None}
-    exc4, evidence4, citation4 = resolve_exc_config_for_method(no_gyp_config, {}, 1)
+    cfg4 = resolve_exc_config_for_method(no_gyp_config, {}, 1)
     ok &= check('no gyp_targets at all -> falls back to package-wide value (disclosed scope)',
-                exc4 == 'disabled', f'got {exc4!r}')
+                cfg4['exception_configuration'] == 'disabled', f"got {cfg4['exception_configuration']!r}")
+    ok &= check('fallback case records resolution_scope == "package_wide_fallback"',
+                cfg4['resolution_scope'] == 'package_wide_fallback', cfg4['resolution_scope'])
 
     print(f"\n{'PASS' if ok else 'FAIL'}")
     sys.exit(0 if ok else 1)

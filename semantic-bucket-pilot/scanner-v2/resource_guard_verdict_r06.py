@@ -278,29 +278,73 @@ def resolve_exc_config_for_method(build_config, methods_filename, method_id):
         the package-wide `exception_configuration`/`evidence`/`citation`, the same real,
         disclosed scope boundary `classify_target_aware`/`resolve_build_config_for_file`
         already document (cmake/meson/gn packages are not target-scoped by this mechanism).
+        `resolution_scope` records this as `"package_wide_fallback"`, never silently
+        indistinguishable from a real per-target resolution.
       - `gyp_targets` present but this method's own `filename` is missing/empty, or no
         real gyp target's own `sources` list names it, or multiple real targets name it
         with DIFFERING configuration -> `BUILD_CONFIGURATION_UNRESOLVED`/`"conflict"`
         (`resolve_build_config_for_targets`'s own fail-closed cases), NEVER the package-
         wide value substituted in as a guess.
-    Returns (exception_configuration, evidence, citation)."""
+
+    The package-wide value is ALWAYS returned too, under `package_wide_diagnostic` --
+    DIAGNOSTIC ONLY, never itself the authoritative verdict when real per-target data
+    exists (`resolution_scope == "per_target"`). This lets a reader see, and a test
+    assert, that the package-wide flat classification and the per-target resolution can
+    genuinely differ (exactly the real node-libcurl case: package-wide `"unresolved"`,
+    `Easy.cc`'s own real target `"enabled"`) without the package-wide value ever being
+    the one actually applied.
+
+    Returns a dict: `{"exception_configuration", "evidence", "citation",
+    "resolution_scope", "resolved_target_name", "package_wide_diagnostic"}`.
+    `resolution_scope` is one of `"per_target"` (a single real target, or multiple real
+    targets that agree, compiles this file), `"per_target_unresolved"` (gyp_targets data
+    exists but this specific finding's target identity could not be resolved -- fails
+    closed), or `"package_wide_fallback"` (no gyp_targets data at all for this package)."""
+    package_wide_diagnostic = {
+        "exception_configuration": build_config["exception_configuration"],
+        "evidence": build_config["evidence"],
+        "citation": build_config["citation"],
+    }
     gyp_targets = build_config.get("gyp_targets")
     if not gyp_targets:
-        return (build_config["exception_configuration"], build_config["evidence"],
-                build_config["citation"])
+        return {
+            "exception_configuration": build_config["exception_configuration"],
+            "evidence": build_config["evidence"],
+            "citation": build_config["citation"],
+            "resolution_scope": "package_wide_fallback",
+            "resolved_target_name": None,
+            "package_wide_diagnostic": package_wide_diagnostic,
+        }
     filename = methods_filename.get(method_id)
     if not filename:
-        return ("BUILD_CONFIGURATION_UNRESOLVED", [],
-                f"method {method_id} has no recorded source filename -- cannot resolve "
-                f"against this package's own real per-target gyp data "
-                f"({build_config.get('gyp_path')!r}); fails closed rather than falling "
-                f"back to the package-wide value")
+        return {
+            "exception_configuration": "BUILD_CONFIGURATION_UNRESOLVED",
+            "evidence": [],
+            "citation": f"method {method_id} has no recorded source filename -- cannot "
+                        f"resolve against this package's own real per-target gyp data "
+                        f"({build_config.get('gyp_path')!r}); fails closed rather than "
+                        f"falling back to the package-wide value",
+            "resolution_scope": "per_target_unresolved",
+            "resolved_target_name": None,
+            "package_wide_diagnostic": package_wide_diagnostic,
+        }
     result = resolve_build_config_for_targets(gyp_targets, filename)
     citation = (f"target-resolved against {build_config.get('gyp_path')!r}: "
                 f"{result['reason']}" +
                 (f" (target={result['resolved_target_name']!r})"
                  if result.get("resolved_target_name") else ""))
-    return result["exception_configuration"], result.get("matching_targets", []), citation
+    return {
+        "exception_configuration": result["exception_configuration"],
+        "evidence": result.get("matching_targets", []),
+        "citation": citation,
+        "resolution_scope": ("per_target_unresolved"
+                              if result["exception_configuration"] == "BUILD_CONFIGURATION_UNRESOLVED"
+                              else "per_target"),  # "conflict" still counts as per_target --
+                                                     # target IDENTITY is resolved, only the
+                                                     # configs among those targets disagree.
+        "resolved_target_name": result.get("resolved_target_name"),
+        "package_wide_diagnostic": package_wide_diagnostic,
+    }
 # ---------------------------------------------------------------------------------------------
 
 
@@ -650,8 +694,25 @@ def main():
         # single package-wide value -- see resolve_exc_config_for_method's own docstring for
         # the real fail-closed semantics. Falls back to the original package-wide R04
         # behavior when this package has no real gyp_targets data at all (disclosed scope).
-        exc_config, cfg_evidence, cfg_citation = resolve_exc_config_for_method(
-            build_config, methods_filename, method_id)
+        cfg = resolve_exc_config_for_method(build_config, methods_filename, method_id)
+        exc_config = cfg["exception_configuration"]
+
+        # PHASE B REFINEMENT: source_boundary_evidence and the per-target resolution metadata
+        # are now attached to EVERY finding this gate can produce -- an abstention (exceptions-
+        # enabled/conflict/unresolved) and a real source-boundary determination are SEPARATE,
+        # independent pieces of real evidence; a reader must be able to see BOTH regardless of
+        # which one this run happens to report as the primary verdict. Neither implies or
+        # suppresses the other -- e.g. node-libcurl correctly carries BOTH "exceptions enabled"
+        # (build_config_evidence) AND "SOURCE_BOUNDARY_UNRESOLVED" (source_boundary_evidence)
+        # on the SAME CONTRACT_NOT_APPLICABLE finding.
+        common_evidence = {
+            "resolution_scope": cfg["resolution_scope"],
+            "resolved_target_name": cfg["resolved_target_name"],
+            "package_wide_diagnostic": cfg["package_wide_diagnostic"],
+        }
+        if attacker_trace:
+            common_evidence["source_boundary_evidence"] = attacker_trace
+
         if exc_config == "enabled":
             classification["CONTRACT_NOT_APPLICABLE"] += 1
             findings.append({
@@ -660,8 +721,8 @@ def main():
                 "acquisition_call_id": cid, "acquisition_kind": contract["acquisition_kind"],
                 "result_type": contract["result_type"], "object": object_var,
                 "contract_citation": contract["citation"],
-                "build_config_evidence": cfg_evidence,
-                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
+                "build_config_evidence": cfg["evidence"],
+                "build_config_citation": cfg["citation"], "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
                     "under an exceptions-ENABLED build (established by this run's own "
@@ -672,6 +733,7 @@ def main():
                     "vulnerability claim, NOT automatically CWE-787, and NOT proof of "
                     "exploitable memory corruption -- it is an applicability determination."
                 ),
+                **common_evidence,
             })
             return
         if exc_config == "conflict":
@@ -680,14 +742,15 @@ def main():
                 "verdict": "BUILD_CONFIGURATION_CONFLICT", "method_id": method_id,
                 "method_name": methods.get(method_id), "acquisition_call_id": cid,
                 "result_type": contract["result_type"], "object": object_var,
-                "build_config_evidence": cfg_evidence,
-                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
+                "build_config_evidence": cfg["evidence"],
+                "build_config_citation": cfg["citation"], "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
                     "this run's build_config evidence contains contradictory signals -- "
                     "applicability cannot be established either way, so no MISSING/"
                     "ESTABLISHED verdict is reported. This is an abstention, never a guess."
                 ),
+                **common_evidence,
             })
             return
         if exc_config != "disabled":
@@ -696,8 +759,8 @@ def main():
                 "verdict": "BUILD_CONFIGURATION_UNRESOLVED", "method_id": method_id,
                 "method_name": methods.get(method_id), "acquisition_call_id": cid,
                 "result_type": contract["result_type"], "object": object_var,
-                "build_config_evidence": cfg_evidence,
-                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
+                "build_config_evidence": cfg["evidence"],
+                "build_config_citation": cfg["citation"], "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
                     "this run carries no usable build-configuration evidence for the "
@@ -706,6 +769,7 @@ def main():
                     "This is an abstention, never a default to 'disabled', and never a "
                     "package-wide guess when target identity could not be resolved."
                 ),
+                **common_evidence,
             })
             return
         # exc_config == "disabled": premise established (for THIS finding's own target, or
@@ -718,9 +782,12 @@ def main():
                    "acquisition_kind": contract["acquisition_kind"],
                    "result_type": contract["result_type"], "object": object_var,
                    "contract_citation": contract["citation"],
-                   "build_config_evidence": cfg_evidence,
-                   "build_config_citation": cfg_citation,
-                   "evidence_source": evidence_source}
+                   "build_config_evidence": cfg["evidence"],
+                   "build_config_citation": cfg["citation"],
+                   "evidence_source": evidence_source,
+                   "resolution_scope": cfg["resolution_scope"],
+                   "resolved_target_name": cfg["resolved_target_name"],
+                   "package_wide_diagnostic": cfg["package_wide_diagnostic"]}
         if attacker_trace:
             # RESOURCE-GUARD-R06: renamed from R04/R05's own `attacker_influence_evidence`
             # -- that name itself overclaimed once a reached parameter could mean EITHER
