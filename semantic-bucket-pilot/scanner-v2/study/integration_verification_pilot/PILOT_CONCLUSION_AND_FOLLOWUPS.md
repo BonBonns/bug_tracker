@@ -693,3 +693,59 @@ status, per-stage timing, candidate counts by property, abstention counts, reach
 distribution, resource limits hit, and confirmation that every record remained
 `reportable=False`) will follow once the run completes or is next checked in — no vulnerability
 totals, true-negative claims, or corpus-prevalence claims will be drawn from this diagnostic run.
+
+## Task #31: vendored-vs-package-owned attribution and cross-package dedup — implemented
+
+Directly resolves the "correction to the correction" above (§ line 19): a finding inside a
+vendored third-party library must be classified, never silently discarded.
+
+**Implementation** (`semantic-bucket-pilot/scanner-v2/vendored_attribution.py`, on
+`claude/provenance-preservation-task35`, commit `e41be3b`):
+
+- `extract_vendored_library_id(relpath)` derives real library identity by reusing
+  `provenance.VENDOR_PATH_MARKERS` verbatim (never a second, divergent marker list) — the path
+  segment immediately after whichever marker matched. Verified against the real re2 evidence:
+  `vendor/abseil-cpp/absl/base/internal/strerror.cc` → `('abseil-cpp',
+  'absl/base/internal/strerror.cc')`.
+- `attribute_finding(finding, package_name)` attaches a `vendored_attribution` block — `status`,
+  `vendored_library_id`, `relpath_within_vendor_dir`, `attribution` (exactly `"<library> as
+  bundled by <package>"`, never an unqualified package finding), `dedup_key` — but ONLY when the
+  finding's own `provenance.resolved` is true AND `provenance.provenance_hint == 'VENDORED_HINT'`.
+  A `PACKAGE_OWNED_HINT` or `UNKNOWN` finding (e.g. re2's own `lib/pattern.cc`) is never touched;
+  neither is a `VENDORED_HINT` finding whose provenance failed to resolve (no real path to
+  attribute from). Attribution is additive and conditional, not a default classification.
+- `aggregate_vendored_dedup(records)` / `summarize(agg)`: cross-package deduplication keyed on
+  `(vendored_library_id, relpath_within_vendor_dir, content_hash, per-site signature)`. Using the
+  finding's own real `content_hash` — not relpath+line alone — is what makes this sound: two
+  packages bundling the exact same vendored file (byte-identical) correctly collapse to one
+  deduplicated entry, while two packages bundling *different versions* of the same library at the
+  same relpath (different bytes, different `content_hash`, so the vulnerable line may not even
+  exist in the other version) correctly do NOT collapse. `relpath_within_vendor_dir` (the path
+  *after* the library's own root) rather than the raw package-relative path means the same
+  vendored file at a different nesting depth (`vendor/abseil-cpp/...` vs
+  `third_party/abseil-cpp/...`) still dedups correctly. Reports `deduplicated_count` and
+  `raw_exposure_count` as two separate headline numbers, always — a deduplicated bug count is not
+  a corpus-exposure count, and this module never collapses the two into one.
+- Deliberately does not touch reportability. Task #35's formula in `provenance.py` remains the
+  sole authority on that question; this module only attributes and deduplicates what is already
+  there.
+
+**Verification** (`check_vendored_attribution.py`, 16/16 passing): 5 checks run against REAL live
+evidence pulled directly from the running overnight-diagnostic-100 output — re2's own real
+`vendor/abseil-cpp/absl/base/internal/strerror.cc` `oob_write_candidates` finding extracts
+`vendored_library_id == 'abseil-cpp'`, attribution `'abseil-cpp as bundled by re2'`,
+`relpath_within_vendor_dir` starting with `absl/`; re2's own real `PACKAGE_OWNED_HINT`
+`oob_index_write_candidates` finding at `lib/pattern.cc` is confirmed never attributed. (Written
+to SKIP gracefully, not silently, if the live run's re2 record isn't present at test time — it
+was.) Remaining 11 checks: unit-level extraction (`vendor/`, `deps/`, no-marker path), three
+never-attributed cases (`PACKAGE_OWNED_HINT`, `UNKNOWN`/unresolved, `VENDORED_HINT`-but-
+unresolved), and three synthetic cross-package dedup scenarios (byte-identical file at two
+different vendor roots → 1 dedup entry, `raw_exposure_count == 2`, both packages listed;
+same relpath, different `content_hash` → 2 entries, no false collapse; two distinct real sites in
+one file, differing by line+call → 2 entries, not 1).
+
+Task #31 is complete. Downstream consumers (the eventual six-property aggregator, task #34; any
+future corpus report) can now call `vendored_attribution.attribute_record()` /
+`aggregate_vendored_dedup()` / `summarize()` to get classified, deduplicated vendored-exposure
+numbers rather than either an unqualified package-attribution error or a silently dropped
+finding.
