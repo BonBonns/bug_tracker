@@ -3,8 +3,29 @@
 NC-R4 guard-presence-alone can't clear; NC-R5 unknown src cap abstains;
 NC-R6 correctly source-bounded exact extent no candidate; NC-R7 dest bound on a
 read extent must NOT suppress (hard teeth, must flip)."""
-import json, sys, pathlib
+import json, os, subprocess, sys, pathlib
 ROOT=pathlib.Path(__file__).resolve().parent.parent
+
+# task #42 (GUARD-R01): see oob_write_controls.py's own identical preamble for the full account
+# -- self-heals a missing /tmp/cap_corpus by rebuilding from the committed source via the real
+# c2cpg/joern/normalize pipeline, falls back to a clear BLOCKED exit (never a bare crash) only
+# if that pipeline itself is unavailable.
+_CAP_CORPUS=pathlib.Path('/tmp/cap_corpus')
+if not (_CAP_CORPUS/'g.json').exists():
+    _BUILDER=ROOT/'tests/gates/guard-r01/fixtures/cap_corpus/build_cap_corpus.sh'
+    _JH=os.environ.get('JOERN_HOME', str(ROOT.parent/'joern-install'/'joern-cli'))
+    _JOERN_OK=pathlib.Path(_JH,'c2cpg.sh').exists()
+    if _BUILDER.exists() and _JOERN_OK:
+        print(f"[oob_read_controls] /tmp/cap_corpus missing -- rebuilding via {_BUILDER}",
+              file=sys.stderr)
+        subprocess.run(['bash',str(_BUILDER)], check=True, env={**os.environ,'JOERN_HOME':_JH})
+    else:
+        print(f"BLOCKED: /tmp/cap_corpus is missing and cannot be rebuilt "
+              f"(builder_present={_BUILDER.exists()}, joern_available={_JOERN_OK}) -- "
+              f"run {_BUILDER} manually with JOERN_HOME set to a real joern-cli install",
+              file=sys.stderr)
+        sys.exit(20)
+
 rdr=(ROOT/'tools/oob_read_verdict.py').read_text()
 sys.path.insert(0,str(ROOT/'tools'))
 exec(rdr.split('if __name__')[0])

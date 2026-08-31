@@ -26,3 +26,29 @@ No archive contains their sources or a builder — see docs/CODE_REVIEW_2026-08-
 finding #2. Until the operator commits the corpus sources + a builder, the oob/bound
 live teeth cannot run and oob_read/oob_write_controls crash (finding #3) rather than
 reporting BLOCKED.
+
+2026-08-31 RESOLVED for /tmp/cap_corpus (task #42): committed real, real C++ source
+for it at `fixtures/cap_corpus/{g,t3,t5}.cpp`, reproducing every function
+oob_write_controls.py/oob_read_controls.py's own real assertions name (g_write_ok,
+g_write_lt, nc_b1, nc_b3, nc_b4, nc_b5, nc_b6, g_read_ok, mix_fixed, teeth_case,
+teeth_read) and a real builder, `fixtures/cap_corpus/build_cap_corpus.sh`, running the
+same real c2cpg -> export_c_cpp_facts_v03.sc -> normalize_c_cpp_facts_v03.py pipeline
+this note already documented. `tools/oob_write_controls.py` and
+`tools/oob_read_controls.py` (and their mirrored copies here) now self-heal: if
+`/tmp/cap_corpus/g.json` is absent, they invoke the builder automatically; only if
+`joern`/`c2cpg.sh` itself is unavailable do they now exit 20 with an explicit BLOCKED
+message, never a bare crash. Verified: both gates pass every one of their original
+assertions against the freshly rebuilt corpus (`OOB_WRITE_CONTROLS=11/11`,
+`OOB_READ_CONTROLS=10/10`), and the pre-existing `bound_controls.py` (which also reads
+`/tmp/cap_corpus` but already degraded gracefully rather than crashing) independently
+confirms the same corpus (`BOUND_CONTROLS=11/11`).
+
+`/tmp/norm_scan` and `/tmp/sd_scan` remain unresolved — they are optional, anchor-only
+inputs for oob_write_controls.py/oob_read_controls.py (each check is wrapped in
+`if pathlib.Path(...).exists()`, so their absence degrades gracefully rather than
+blocking or crashing) and are out of task #42's scope. `/tmp/pp2` and `/tmp/cmp2` (used
+by GUARD-R01's other ten scripts: guard_controls.py, guard_r02.py, status_r02/r03,
+status_norm_gate, keyselector_controls.py, js_source_r01_controls.py,
+origin_kind_purity/corpus_purity, operand_role_controls.py, capacity_controls.py) are
+ALSO still unresolved and still block `run_all.py` gate 114 (GUARD-R01) as a whole —
+a separate, larger fixture-recovery task than #42, not attempted here.
