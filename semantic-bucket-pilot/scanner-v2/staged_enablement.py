@@ -11,10 +11,20 @@ introduction:
     precondition, and is now complete.
   - PROTECTED_FIELD (task #37): ENABLED -- same, task #32 only.
   - OOB_READ (task #39): ENABLED -- #29/#30/#32/#35/#42/#43 are all complete.
-  - OOB_WRITE / OOB_INDEX_WRITE (task #38): NOT enabled -- blocked on task #44 (pointer/length
-    capacity + CFG dominance modeling), still in progress (2 of 3 real Tremor sinks recovered).
-  - OOB_COMPARE (task #40): NOT enabled -- blocked on task #33 (no positive-path evidence found
-    or definitively ruled out yet).
+  - OOB_WRITE / OOB_INDEX_WRITE (task #38): ENABLED -- #30/#32/#35/#42/#44 are all complete. #44
+    (pointer/length capacity + CFG dominance modeling) reached its own real completion point:
+    all 3 real Tremor CVE-2018-5147 sinks are accounted for end to end -- 2 recovered as real
+    candidates, the 3rd (a genuinely nested/2D index, `decodevv_add`'s own `a[chptr++][i]`)
+    formally, explicitly bounded as a disclosed `ABSTAIN` rather than silently dropped or
+    guessed at (`oob_index_write_verdict.py`'s new `emit_abstentions()`). No unbounded gap
+    remains in either OOB_WRITE producer. #46 closed the one remaining wiring gap
+    (`oob_index_write_candidates` was missing from `provenance.py`'s own enrichment on this
+    branch).
+  - OOB_COMPARE (task #40): NOT enabled -- task #33 investigated this directly (a real
+    positive-control fixture proves the detector itself works; a real 33-package corpus survey
+    found zero real positives and root-caused why) and concluded the detector should stay
+    gated pending a real corpus positive or a wider run -- a deliberate, evidence-backed "not
+    yet," not an open precondition waiting to clear on its own.
 `ENABLED_PROPERTIES` is the single, disclosed source of truth for this -- update it (with a
 comment citing the task that justifies the change) as more properties clear their own
 preconditions, rather than scattering the decision across callers.
@@ -41,12 +51,17 @@ that clears both gates here keeps whatever `reportable` value the formula gave i
 """
 
 ENABLED_PROPERTIES = frozenset({
-    "lock_balance_findings",      # task #36
-    "protected_field_findings",   # task #37
-    "oob_read_candidates",        # task #39
+    "lock_balance_findings",         # task #36
+    "protected_field_findings",      # task #37
+    "oob_write_candidates",          # task #38
+    "oob_index_write_candidates",    # task #38
+    "oob_read_candidates",           # task #39
 })
-# NOT enabled: oob_write_candidates / oob_index_write_candidates (task #38, blocked by #44),
-# oob_compare_candidates (task #40, blocked by #33).
+# NOT enabled: oob_compare_candidates -- task #33's own real investigation found no positive-
+# path evidence in the corpus searched and recommended staying gated (task #40), a deliberate
+# evidence-backed decision, not an open precondition. #34 (the eventual six-property aggregator)
+# must NOT silently flip this on -- OOB_COMPARE stays out of ENABLED_PROPERTIES until a real
+# corpus positive is found or a wider run changes this specific conclusion.
 
 _STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                 "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")

@@ -30,17 +30,16 @@ def mk(reportable, reachability_status="TIER_JS_CALL_PROVEN"):
     return f
 
 # --- property-level gate: not-enabled property forces False regardless of anything else ---
-rec1 = {"oob_write_candidates": [mk(True, "TIER_JS_CALL_PROVEN")]}
+# oob_compare_candidates is the ONLY property still not enabled (task #40 -- task #33's own
+# real investigation found no positive-path evidence and recommended staying gated; a
+# deliberate, evidence-backed decision, not an open precondition). oob_write_candidates was
+# enabled as part of task #38 once task #44 formally accounted for all 3 real Tremor sinks.
+rec1 = {"oob_compare_candidates": [mk(True, "TIER_JS_CALL_PROVEN")]}
 se.enforce_staged_enablement(rec1)
-ck("NOT-enabled property (oob_write_candidates, task #38 blocked): forced False",
-   rec1["oob_write_candidates"][0]["reportable"] is False)
+ck("NOT-enabled property (oob_compare_candidates, task #40 stays gated by design): forced False",
+   rec1["oob_compare_candidates"][0]["reportable"] is False)
 ck("NOT-enabled property: stage_status is STAGE_NOT_ENABLED",
-   rec1["oob_write_candidates"][0]["stage_status"] == "STAGE_NOT_ENABLED")
-
-rec1b = {"oob_compare_candidates": [mk(True)]}
-se.enforce_staged_enablement(rec1b)
-ck("NOT-enabled property (oob_compare_candidates, task #40 blocked): forced False",
-   rec1b["oob_compare_candidates"][0]["reportable"] is False)
+   rec1["oob_compare_candidates"][0]["stage_status"] == "STAGE_NOT_ENABLED")
 
 # --- finding-level gate: enabled property, but reachability unresolved -> still forced False ---
 rec2 = {"lock_balance_findings": [mk(True, "REACHABILITY_UNRESOLVED")]}
@@ -63,6 +62,23 @@ se.enforce_staged_enablement(rec3)
 ck("enabled property + resolved reachability + formula True: STAYS True",
    rec3["oob_read_candidates"][0]["reportable"] is True)
 ck("both gates clear: stage_status is STAGE_ENABLED", rec3["oob_read_candidates"][0]["stage_status"] == "STAGE_ENABLED")
+
+# --- task #38: oob_write_candidates / oob_index_write_candidates are now ENABLED ---
+ck("ENABLED_PROPERTIES contains oob_write_candidates (task #38, unblocked by task #44)",
+   "oob_write_candidates" in se.ENABLED_PROPERTIES)
+ck("ENABLED_PROPERTIES contains oob_index_write_candidates (task #38)",
+   "oob_index_write_candidates" in se.ENABLED_PROPERTIES)
+ck("ENABLED_PROPERTIES does NOT contain oob_compare_candidates (task #40 stays gated by "
+   "task #33's own evidence-backed decision)",
+   "oob_compare_candidates" not in se.ENABLED_PROPERTIES)
+rec3b = {"oob_write_candidates": [mk(True, "TIER_JS_CALL_PROVEN")],
+         "oob_index_write_candidates": [mk(True, "TIER_JS_CALL_PROVEN")]}
+se.enforce_staged_enablement(rec3b)
+ck("oob_write_candidates: enabled property + resolved reachability + formula True -> STAYS True",
+   rec3b["oob_write_candidates"][0]["reportable"] is True
+   and rec3b["oob_write_candidates"][0]["stage_status"] == "STAGE_ENABLED")
+ck("oob_index_write_candidates: same", rec3b["oob_index_write_candidates"][0]["reportable"] is True
+   and rec3b["oob_index_write_candidates"][0]["stage_status"] == "STAGE_ENABLED")
 
 rec4 = {"lock_balance_findings": [mk(False, "TIER_REGISTERED_NOT_JS_CALLED")]}
 se.enforce_staged_enablement(rec4)
@@ -120,15 +136,33 @@ if os.path.isfile(BUNDLE):
            all("stage_status" in f for f in record["oob_read_candidates"]))
 
         # re2's real oob_write_out.json DOES have 2 real candidates (StrErrorInternal,
-        # TrySymbolizeWithLimit) -- exercises STAGE_NOT_ENABLED against real, non-empty data
-        # (task #38 stays blocked on #44).
+        # TrySymbolizeWithLimit, both inside vendored abseil-cpp). Now that task #38 has
+        # enabled oob_write_candidates, both clear the property-level gate; their own real
+        # reachability_tier.py classification is TIER_INTERNAL_UNREGISTERED (the WEAKEST real
+        # tier -- neither function is registered as a JS-callable export under any recognized
+        # idiom) -- confirmed empirically, not assumed. Per task #32's own established design
+        # (a real, resolved tier of ANY strength clears the reachability gate -- the floor is
+        # "classified", not "strongest tier only", see check_reachability_tier.py's own
+        # TIER_REGISTERED_NOT_JS_CALLED control), this still reaches STAGE_ENABLED here. That
+        # design point is disclosed, not silently relied on: a real internal C++ helper deep
+        # inside a vendored dependency, with no proof it is ever JS-reachable at all, becoming
+        # reportable under this floor is a genuine, foreseeable consequence of the existing
+        # reachability-gate threshold -- worth a human's attention when this reaches a live,
+        # non-diagnostic run, not something this test papers over.
         n_write = len(record["oob_write_candidates"])
-        ck(f"real re2 end-to-end (OOB_WRITE, task #38 NOT enabled): {n_write} real candidates "
-           "all forced non-reportable with STAGE_NOT_ENABLED, regardless of their own real "
-           "reachability tier",
-           n_write > 0 and all(
-               f["reportable"] is False and f["stage_status"] == "STAGE_NOT_ENABLED"
-               for f in record["oob_write_candidates"]))
+        ck(f"real re2 end-to-end (OOB_WRITE, ENABLED task #38): {n_write} real candidates all "
+           "got a real stage_status, none silently skipped",
+           n_write > 0 and all("stage_status" in f for f in record["oob_write_candidates"]))
+        ck("real re2 end-to-end (OOB_WRITE): both real candidates' own reachability_tier.py "
+           "classification is TIER_INTERNAL_UNREGISTERED (real, empirically confirmed -- "
+           "neither StrErrorInternal nor TrySymbolizeWithLimit is a registered JS-callable "
+           "export under any idiom this module recognizes)",
+           n_write == 2 and all(f["reachability_status"] == "TIER_INTERNAL_UNREGISTERED"
+                                 for f in record["oob_write_candidates"]))
+        ck("real re2 end-to-end (OOB_WRITE): reaches STAGE_ENABLED under the seeded baseline "
+           "(scanner_candidate=True) -- confirms the weakest real reachability tier still "
+           "clears the gate for OOB_WRITE too, consistent with task #32's own established floor",
+           all(f["stage_status"] == "STAGE_ENABLED" for f in record["oob_write_candidates"]))
 else:
     print("SKIP: re2's overnight-diagnostic-100 evidence bundle not present -- real end-to-end "
           "check skipped, all synthetic/unit checks above still ran")
