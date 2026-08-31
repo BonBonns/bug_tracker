@@ -77,16 +77,42 @@ phase before corpus use, especially `OOB_READ` and `OOB_COMPARE`."**
 ## Follow-up work opened, in recommended priority order (read-only judgment, no code changed
 ## by this document)
 
-| Order | Task | Scope | Blocks |
-|---:|---|---|---|
-| 1 | #29 | Root-cause the `src_capacity_bytes: 5` anomaly | `OOB_READ` (and possibly `OOB_WRITE`/`OOB_COMPARE`'s sibling capacity derivers, sharing the same normalizer machinery) |
-| 2 | #30 | Reconcile the Tremor CVE-2018-5147 reproduction discrepancy | `OOB_WRITE`'s only real historical validation case |
-| 3 | #32 | **Tiered** (6-level) JS/native reachability classification for the five non-resource-guard properties — not a single direct-call gate, per the Nan-capability false-negative lesson | `LOCK_BALANCE`, `PROTECTED_FIELD`, `OOB_WRITE`, `OOB_READ`, `OOB_COMPARE` — none currently classify reachability at all, unlike `FALLIBLE_BOUNDED_RESOURCE` |
-| 4 | #31 | Vendored-source **provenance classification and deduplication** (not exclusion) | `OOB_WRITE`/`OOB_READ` (this pilot's only real npm positives are both vendored), and any future corpus-scale attribution/counting for all six properties |
-| 5 | #33 | Find real positive-path evidence for `OOB_COMPARE`, **or formally retire it from promotion** if a genuine, bounded search finds none | `OOB_COMPARE`'s own promotability basis |
+| Order | Task | Scope |
+|---:|---|---|
+| 1 | #29 | Root-cause the `src_capacity_bytes: 5` anomaly |
+| 2 | #30 | Reconcile the Tremor CVE-2018-5147 reproduction discrepancy |
+| 3 | #32 | **Tiered** (6-level) JS/native reachability classification, not a single direct-call gate — per the Nan-capability false-negative lesson |
+| 3.5 | #35 (new) | Every finding must preserve its real source path + a content hash at scan time |
+| 4 | #31 | Vendored-source **provenance classification and deduplication** (not exclusion) |
+| 5 | #33 | Find real positive-path evidence for `OOB_COMPARE`, **or formally retire it from promotion** if a genuine, bounded search finds none |
 
-**GATE, tracked explicitly as project task #34**: the 494-package multi-class corpus run remains
-blocked until at least **#29, #30, and #32** are resolved, per direct instruction. #31 and #33
-are real, necessary follow-up work but do not themselves gate the corpus run — though #31 should
-still land before any corpus-scale run whose findings will include vendored code, to avoid
-redoing attribution/dedup work retroactively.
+## Property-specific blockers (revised: staged run, not one blanket gate)
+
+Per direct instruction, the blockers are property-specific rather than one all-or-nothing gate —
+a staged run can enable whichever properties have their own preconditions met, instead of every
+property waiting for the weakest one. Two explicit conditions govern when a task is genuinely
+non-gating for the overall run:
+
+- **#31 stays non-gating only if #35 (source path + content hash) is done first** for any
+  property that has produced real vendored findings. Without that data captured at scan time,
+  vendored provenance and cross-package deduplication cannot be reconstructed after a run
+  completes and its intermediate artifacts are deleted — so #35 is now a hard precondition for
+  enabling `OOB_WRITE`/`OOB_READ` specifically (the two properties with real vendored positives
+  so far), not merely a nice-to-have before #31's own analysis work.
+- **#33 stays non-gating for the overall run, but hard-gates `OOB_COMPARE` specifically.** If no
+  positive-path evidence is ever established, `OOB_COMPARE` runs disabled, permanently or until
+  #33 closes — its zero-candidate output must never be reported as a meaningful negative
+  alongside the other properties' real findings; it is untested, not validated-safe.
+
+| Property | Task tracker gate | Blocked by |
+|---|---|---|
+| `LOCK_BALANCE` | #36 — Enable in staged run | #32 (attribution only; findings can be generated now) |
+| `PROTECTED_FIELD` | #37 — Enable in staged run | #32 (attribution only; findings can be generated now) |
+| `OOB_WRITE` | #38 — Enable in staged run | #30 (its historical validation case, `oob_write_verdict.py` was a named Tremor producer), #32 (attribution), #35 (real vendored findings already observed) |
+| `OOB_READ` | #39 — Enable in staged run | #29 (suspected wrong capacity values — hard-blocks trusted output, not just attribution), #30 (`oob_read_verdict.py` was also a named Tremor producer), #32 (attribution), #35 (real vendored findings already observed) |
+| `OOB_COMPARE` | #40 — Enable in staged run | #33 (hard gate — disabled until resolved, per the explicit condition above) |
+
+**#34 (the original blanket gate, kept for the case a FULL, all-five-properties-simultaneous run
+is specifically wanted) still requires #29, #30, #32 all resolved.** The staged path (#36-#40)
+is now the recommended way to proceed instead: e.g. `LOCK_BALANCE` alone could be enabled via
+#36 once #32 lands, without waiting on #29/#30/#33 at all.
