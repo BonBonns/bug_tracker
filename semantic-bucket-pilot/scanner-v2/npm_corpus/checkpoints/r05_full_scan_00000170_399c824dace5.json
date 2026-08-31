@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"@stdlib/assert-napi-has-property\", \"version\": \"0.0.3\", \"stages\": {\"download\": {\"seconds\": 0.27120399475097656}, \"extract\": {\"seconds\": 0.005012989044189453}, \"header_staging\": {\"seconds\": 9.584426879882812e-05, \"n_staged\": 0}, \"c2cpg\": {\"seconds\": 2.4288933277130127, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 4.605665922164917, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 11.122032403945923, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 10.91083288192749, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 0.06473135948181152}, \"js_normalize\": {\"seconds\": 0.042554616928100586}, \"polyglot_link\": {\"seconds\": 0.04853081703186035}, \"r04_scan\": {\"seconds\": 0.03409719467163086}, \"r05_scan\": {\"seconds\": 0.03743720054626465}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": null, \"staged\": false, \"note\": \"package.json present but declares neither node-addon-api nor nan\"}], \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {}, \"r04_findings\": [], \"r05_classification\": {}, \"r05_findings\": [], \"total_seconds\": 29.57199788093567}",
+  "name": "r05_full_scan",
+  "row_count": 170,
+  "sha256": "399c824dace525c7f556277d7367d9eed6bc3d1e4a704beb3e115a694241b9db",
+  "snapshot_path": "checkpoints/r05_full_scan_00000170_399c824dace5.tsv",
+  "snapshot_time_utc": "2026-08-31T01:44:20Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
