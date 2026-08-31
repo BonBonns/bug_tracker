@@ -267,3 +267,63 @@ captures for every finding before that deletion:
    to a real file, is not a real scanner candidate, has no established applicability, or has
    already been adjudicated a false positive is never reportable — retained for diagnostics,
    never silently treated as equivalent to a resolved-and-reportable one.
+
+## Task #29: `src_capacity_bytes: 5` anomaly — root cause found and fixed
+
+The pilot's `re2@1.26.1` evidence bundle showed 6 of 7 real `OOB_READ` candidates sharing an
+identical, implausible `src_capacity_bytes: 5` — including a site whose "source" was a
+function-pointer-typed struct field (`c->callback_` in abseil's `mutex.cc`), which cannot
+structurally have a byte capacity of 5.
+
+**Root cause (confirmed against real, freshly rebuilt `c2cpg` facts, not by reasoning alone):**
+`oob_read_verdict.py` joined source-capacity facts to a read site with a single dict keyed only
+by `storage_value_id`:
+```python
+scap={f['storage_value_id']:f for f in json.load(...)['src_capacities']}
+```
+A field access (`p->buf`, `spec->expstr`, `c->callback_`, ...) collapses `storage_value_id` to the
+sentinel `-1` — this is the same `CAP-KEY-R01` rule `oob_write_verdict.py` already documents and
+correctly handles by joining FIELD-kind facts by `call_id` instead. `oob_read_verdict.py` never
+had that split. In the real `re2` bundle there is exactly ONE real FIELD-kind `src_capacities`
+fact in the whole package (a real, unrelated `char[5]` struct member). Because every one of the 7
+real `OOB_READ` candidates' own field-identity resolution also produces `id: -1`, all 7
+spuriously collided on the shared sentinel key `-1` and all reported that one unrelated fact's
+capacity (5), regardless of which struct member, function, or file they actually touched.
+
+**Verification before fixing anything:** printed each of the 7 real candidates' own `call_id` and
+`READ_SRC` `value_ref`. Six had `call_id`s that did not match the real FIELD fact's own
+`call_id` (30064827809) — confirmed spurious. The seventh, `RoundTripFloatToBuffer:804`
+(`memcpy(out, spec->expstr, 4)` in `vendor/abseil-cpp/absl/strings/numbers.cc`), had a `call_id`
+numerically identical to the fact's `call_id`. Checked directly against the real `calls` and
+`functions` tables (not assumed): the call's own `enclosing_function_id` (107374187742) exactly
+matches the fact's `function_id`, and the fact's own `derivation.source_node_ids` points directly
+at this exact call. This is a genuine match, not a coincidence — after the fix, this one site
+correctly resolves `src_capacity_bytes: 5` for `spec->expstr`, while the other 6 correctly abstain.
+
+**Fix:** `oob_read_verdict.py` now mirrors `oob_write_verdict.py`'s `dcap`/`dcap_by_call` split —
+`scap` (VALUE_ID facts, keyed by `storage_value_id >= 0`) and `scap_by_call` (FIELD facts, keyed
+by `call_id`), with a `_capfact` resolution that tries the VALUE_ID lookup first, then the
+per-call FIELD lookup. Verdict logic itself is otherwise unchanged.
+
+**Re-verification after the fix, against the same real `re2` bundle:**
+```
+OOB_READ CANDIDATES: 1
+  CANDIDATE OOB_READ  RoundTripFloatToBuffer:804:memcpy  src_cap=5B
+```
+The 6 spurious candidates are gone; the 1 genuine one remains, with the correct capacity.
+`oob-write-r05-sizeof` and `oob-compare-r07` (the two dedicated OOB gates that currently run in
+this environment) pass unchanged — neither touches `oob_read_verdict.py`. `check_provenance.py`'s
+40/40 also pass unchanged. The repo's own `tools/oob_read_controls.py`/`oob_write_controls.py`
+(guard-r01) could not be re-run in this session: both depend on an external
+`/tmp/cap_corpus/g.json` fixture built by an untracked process in an earlier session that no
+longer exists in this container — confirmed environmental, not a regression, since the untouched
+sibling `oob_write_controls.py` fails identically on the same missing fixture. In its place, a new
+self-contained regression test, `tools/oob_read_capkey_controls.py`, was added (does not depend on
+any external fixture) covering: the ordinary VALUE_ID join path still resolving correctly
+(regression check), the FIELD join resolving correctly at its own matching `call_id`, the FIELD
+sentinel no longer spuriously matching an unrelated `call_id`, and the existing
+`SOURCE_CAPACITY` bound-suppression path — all 5/5 pass.
+
+Code fix lives on `claude/provenance-preservation-task35` (the branch carrying the rest of the
+OOB/PROV-R01 work this fix builds on), not this documentation branch. Task #29 is complete;
+`OOB_READ` (gate #39) remains blocked on #30, #32 (still open), not on #29 any further.
