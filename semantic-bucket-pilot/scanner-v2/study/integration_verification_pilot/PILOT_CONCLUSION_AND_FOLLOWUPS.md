@@ -86,33 +86,61 @@ phase before corpus use, especially `OOB_READ` and `OOB_COMPARE`."**
 | 4 | #31 | Vendored-source **provenance classification and deduplication** (not exclusion) |
 | 5 | #33 | Find real positive-path evidence for `OOB_COMPARE`, **or formally retire it from promotion** if a genuine, bounded search finds none |
 
-## Property-specific blockers (revised: staged run, not one blanket gate)
+## Property-specific blockers (revised again: #35 is universal, not OOB-only)
 
 Per direct instruction, the blockers are property-specific rather than one all-or-nothing gate —
 a staged run can enable whichever properties have their own preconditions met, instead of every
-property waiting for the weakest one. Two explicit conditions govern when a task is genuinely
+property waiting for the weakest one. **Correction to the prior revision**: #35 was scoped there
+to `OOB_WRITE`/`OOB_READ` only, on the reasoning that those were the only properties with real
+vendored findings observed so far. That was wrong — the underlying fact this pilot itself
+established is that **none of the six properties currently preserves source path or content
+hash**, so #35 must gate every property that emits findings, not just the two that happened to
+produce a vendored candidate first. Two explicit conditions govern when a task is genuinely
 non-gating for the overall run:
 
-- **#31 stays non-gating only if #35 (source path + content hash) is done first** for any
-  property that has produced real vendored findings. Without that data captured at scan time,
-  vendored provenance and cross-package deduplication cannot be reconstructed after a run
-  completes and its intermediate artifacts are deleted — so #35 is now a hard precondition for
-  enabling `OOB_WRITE`/`OOB_READ` specifically (the two properties with real vendored positives
-  so far), not merely a nice-to-have before #31's own analysis work.
-- **#33 stays non-gating for the overall run, but hard-gates `OOB_COMPARE` specifically.** If no
-  positive-path evidence is ever established, `OOB_COMPARE` runs disabled, permanently or until
-  #33 closes — its zero-candidate output must never be reported as a meaningful negative
-  alongside the other properties' real findings; it is untested, not validated-safe.
+- **#31 stays non-gating only if #35 (source path + content hash, at scan time, for every
+  property) is done first.** Without that data captured before the source tree is deleted,
+  vendored provenance and cross-package deduplication cannot be reconstructed after any run
+  completes — for any property, not only the ones already observed hitting vendored code.
+- **#33 alone does not clear `OOB_COMPARE` for enablement.** Finding a real positive example
+  would only prove `OOB_COMPARE`'s own property logic is sound — it would still need the same
+  cross-language reachability (#32) and source provenance preservation (#35) every other native
+  finding needs before being reported as a demonstrated npm-package vulnerability. #33 remains
+  the reason `OOB_COMPARE` must stay fully DISABLED (not merely unattributed) until real
+  positive-path evidence is found or the property is retired — its own zero-candidate output
+  must never be reported as a meaningful negative while #33 is open — but #32 and #35 apply to it
+  exactly as they apply to the other four properties.
 
 | Property | Task tracker gate | Blocked by |
 |---|---|---|
-| `LOCK_BALANCE` | #36 — Enable in staged run | #32 (attribution only; findings can be generated now) |
-| `PROTECTED_FIELD` | #37 — Enable in staged run | #32 (attribution only; findings can be generated now) |
-| `OOB_WRITE` | #38 — Enable in staged run | #30 (its historical validation case, `oob_write_verdict.py` was a named Tremor producer), #32 (attribution), #35 (real vendored findings already observed) |
-| `OOB_READ` | #39 — Enable in staged run | #29 (suspected wrong capacity values — hard-blocks trusted output, not just attribution), #30 (`oob_read_verdict.py` was also a named Tremor producer), #32 (attribution), #35 (real vendored findings already observed) |
-| `OOB_COMPARE` | #40 — Enable in staged run | #33 (hard gate — disabled until resolved, per the explicit condition above) |
+| `LOCK_BALANCE` | #36 — Enable in staged run | #32, #35 |
+| `PROTECTED_FIELD` | #37 — Enable in staged run | #32, #35 |
+| `OOB_WRITE` | #38 — Enable in staged run | #30, #32, #35 |
+| `OOB_READ` | #39 — Enable in staged run | #29, #30, #32, #35 |
+| `OOB_COMPARE` | #40 — Enable in staged run | #33, #32, #35 |
 
 **#34 (the original blanket gate, kept for the case a FULL, all-five-properties-simultaneous run
-is specifically wanted) still requires #29, #30, #32 all resolved.** The staged path (#36-#40)
-is now the recommended way to proceed instead: e.g. `LOCK_BALANCE` alone could be enabled via
-#36 once #32 lands, without waiting on #29/#30/#33 at all.
+is specifically wanted) now requires #29 + #30 + #32 + #33 + #35 all resolved** — #33 and #35
+were added on this same correction, since the full run by definition includes `OOB_COMPARE`
+(gated by #33) and every property (gated by #35). **Equivalently**, #34 can be treated as an
+aggregator that is ready exactly when #36, #37, #38, #39, and #40 are all individually
+satisfied — the two framings describe the same underlying condition. The staged path (#36-#40)
+remains the recommended way to proceed: e.g. `LOCK_BALANCE` alone could be enabled via #36 once
+#32 and #35 both land, without waiting on #29/#30/#33 at all.
+
+### What #35 must preserve, at scan time, per direct instruction
+
+Provenance classification itself (#31) may happen later, but the evidence it needs cannot be
+recreated once a run's source tree is deleted — so #35's own work is to capture, for every
+finding, before that deletion:
+
+1. package name and pinned version;
+2. a source-tree hash (one hash over the whole extracted source tree's state at scan time);
+3. the exact relative source path of the finding's own site;
+4. a content hash of that specific source file;
+5. the finding's own line/node identity (already present in most current output — must not
+   regress);
+6. a best-effort package-authored-vs-vendored flag, only where already cheaply determinable at
+   scan time (e.g. a `vendor/`/`deps/`/`third_party/` path heuristic) — not a substitute for
+   #31's own later, authoritative classification, only a preservation of whatever signal would
+   otherwise be lost.
