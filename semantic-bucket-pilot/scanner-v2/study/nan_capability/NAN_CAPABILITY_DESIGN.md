@@ -235,15 +235,61 @@ LESS promotion, never more -- consistent with the whole project's abstain-when-u
 discipline. Neither would have been found by inspecting the synthetic fixture alone; both
 required running against real, structurally diverse corpus code.
 
+## 6b. A third correction: registration + real `info[N]` dataflow can itself establish the JS
+    boundary, when the package's own entry point unconditionally re-exports its native binding
+
+Raised as a direct challenge (not found by this capability's own testing): is requiring a
+CONFIRMED real JS call site too strict for `Upload`/`FullUpload`? If `SetPrototypeMethod`
+exports these methods, external consumers can call them even when the package's own bundled
+wrapper does not -- registration + a real `info[N]` dataflow chain may already establish a
+public JS boundary on its own.
+
+Verified against real facts, not conceded on principle: node-snap7's own actual
+`lib/node-snap7.js:8` reads `module.exports = snap7 = require('bindings')('node_snap7.node')`
+-- the SAME `target` object the C++ side's own `Nan::Set(target, "S7Client",
+Nan::GetFunction(tpl)...)` (`node_snap7_client.cpp:697`) attaches the whole `S7Client` class
+onto. This means every `Nan::SetPrototypeMethod`-registered method on that class -- including
+`Upload`/`FullUpload`, which the package's own convenience wrapper simply never happens to
+call -- is directly, unconditionally callable by ANY consumer of the package, with ANY
+arguments the caller chooses to supply. The package's own internal wrapper choosing not to use
+a method says nothing about whether external code can.
+
+This is a real, confirmed false negative in the original design, distinct in kind from
+Cartesi's own precedent (this project's stated reason for originally requiring a confirmed
+call): Cartesi's real PUBLISHED package's JS entry point was a WASM bundle that never even
+required the native binding at all, so nothing was exported there, confirmed or otherwise --
+node-snap7 is the opposite case, where the native binding genuinely IS the real, live,
+unconditionally-exported implementation.
+
+Fixed with a new, second, explicitly weaker evidence tier
+(`is_native_module_directly_exported`): when no confirmed JS call is found, but the package's
+own JS entry point assigns `module.exports`/`exports` (directly, or via one level of chained
+assignment in the same statement) from a real `require(<loader>)(...)` invocation --
+`LOADER_PACKAGES = ("bindings", "node-gyp-build")`, reusing the same real, frozen vocabulary
+`link_napi_facts.py`'s own `NATIVE_LOADER_PACKAGES` already established, not invented for this
+file -- the finding is promoted anyway, with `js_reachability_tier: "exported_registration"`
+recorded explicitly in its own evidence (never silently equated with the stronger
+`"confirmed_call"` tier). A package that instead selectively re-exports specific names
+(`exports.Foo = binding.Foo`) does NOT match this check -- correctly: only an UNCONDITIONAL,
+whole-module re-export justifies skipping the confirmed-call requirement, and this narrower
+check makes no claim for a package that does something else. Real result after the fix:
+`Upload`/`FullUpload` both correctly promote (`exported_registration` tier); the CopyBuffer
+contract's own `GetArea` (previously `JS_CALL_UNRESOLVED`) now correctly resolves the JS
+boundary too but still abstains at the SEPARATE, later `SOURCE_CAPACITY_UNRESOLVED` gate --
+demonstrating the two gates are properly independent, not accidentally coupled. None of the
+6 negative-control packages are affected (none of them ever reached the
+"registered + real info[N] chain, but no confirmed call" state to begin with -- verified by
+re-running the code path, not merely asserted).
+
 ## 7. Real corpus results
 
 See `study/nan_capability/corpus_runs/<package>/run_result.json` and `nan_verdict.json` for
-the full, real evidence records (post both fixes in Section 6). Summary:
+the full, real evidence records (post all three corrections in Sections 6/6b). Summary:
 
 | Package | Role | Positives | Notable abstentions |
 |---|---|---|---|
-| `node-snap7` | development case | 1: `ReadArea` (`ReadArea`/`Upload`/`FullUpload` all confirmed real info[N]+registration; only `ReadArea` also has a confirmed real JS call site in the package's own bundled wrapper -- `Upload`/`FullUpload` correctly abstain `JS_CALL_UNRESOLVED`, not promoted on registration alone) | `HandleReadWriteEvent` (server-side, network-controlled, matches `R05_INTERIM_NEAR_MISS_AUDIT.md`'s existing finding) correctly `SOURCE_BOUNDARY_UNRESOLVED` for both contracts |
-| `node-snap7-micro-client` | same source, separate npm identity | 1: `ReadArea`, same shape | same pattern as node-snap7 (no server component, so no CopyBuffer candidates at all) |
+| `node-snap7` | development case | 3: `ReadArea` (`confirmed_call` tier -- real JS call in the package's own bundled wrapper), `Upload`/`FullUpload` (`exported_registration` tier -- real registration + real info[N] chain + the whole native binding unconditionally re-exported, no specific call needed, see Section 6b) | `GetArea` (CopyBuffer contract): JS boundary now resolved, but still correctly `SOURCE_CAPACITY_UNRESOLVED` (source pointer's own local allocation site not found -- the two gates are independent). `HandleReadWriteEvent` (server-side, network-controlled, matches `R05_INTERIM_NEAR_MISS_AUDIT.md`'s existing finding) correctly `SOURCE_BOUNDARY_UNRESOLVED` for both contracts |
+| `node-snap7-micro-client` | same source, separate npm identity | 3: `ReadArea`, `Upload`, `FullUpload`, same shape and same tiers as node-snap7 | same pattern (no server component, so no CopyBuffer candidates at all) |
 | `murmurhash-native` | negative control | 0 | `HashSize` (compile-time constant) correctly unresolved, not literal-tagged (see Section 8) |
 | `msgpack` | negative control | 0 | `sb->size` (library-computed) correctly unresolved |
 | `@confluentinc/kafka-javascript` | negative control | 0 | 2 literal-0 fallback sites correctly `SIZE_LITERAL_NOT_APPLICABLE`; 2 correctly unresolved |
@@ -251,9 +297,11 @@ the full, real evidence records (post both fixes in Section 6). Summary:
 | `libpq` | negative control | 0 | `GetCopyData` correctly `SOURCE_BOUNDARY_UNRESOLVED` post Section 6 Bug 2 fix (was a false positive pre-fix) |
 | `phplike` | negative control | 0 | `nodeSocketReceive`'s out-parameter `resLength` correctly unresolved |
 
-**Zero false positives across all 6 independently-verified negative-control packages.** The
-one real, structurally distinct positive (`node-snap7`'s `ReadArea`) is reported as a STATIC
-CANDIDATE per Section 4's disclaimer, not a vulnerability or CWE claim.
+**Eight packages total: `node-snap7`, `node-snap7-micro-client`, and 6 negative controls.**
+**Zero false positives across all 6 independently-verified negative-control packages.** Three
+real, structurally distinct positives across the two development-case packages (`ReadArea` at
+the `confirmed_call` tier; `Upload`/`FullUpload` at the `exported_registration` tier), each
+reported as a STATIC CANDIDATE per Section 4's disclaimer, not a vulnerability or CWE claim.
 
 ## 8. Explicitly not built in this pass
 

@@ -1,10 +1,9 @@
 {
  "classification": {
-  "NAN_COPYBUFFER_SOURCE_CAPACITY_JS_CALL_UNRESOLVED": 1,
   "NAN_COPYBUFFER_SOURCE_CAPACITY_NAME_MATCH_CANDIDATE": 2,
   "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED": 1,
-  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
-  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+  "NAN_COPYBUFFER_SOURCE_CAPACITY_UNRESOLVED": 1,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 3,
   "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 11,
   "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 8
  },
@@ -70,6 +69,7 @@
    "js_call_id": 30064771073,
    "js_linkage_shape": "direct_chain",
    "js_name": "ReadArea",
+   "js_reachability_tier": "confirmed_call",
    "method_id": 107374182963,
    "method_name": "ReadArea",
    "source_boundary": "JS_ARGUMENT_CONTROLLED",
@@ -95,13 +95,17 @@
    "callback_info_index": 2,
    "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
    "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
-   "js_names": [
-    "Upload"
-   ],
+   "evidence_note": "STATIC CANDIDATE, not a vulnerability or CWE claim. This finding establishes: (1) the allocation length is demonstrably JS-argument-controlled via a real registration + info[N] chain + confirmed JS call; (2) no structural upper-bound check was found on that value before the acquisition call. It does NOT evaluate runtime reachability of any specific consequence. Two real, disclosed, structurally-grounded consequences are possible depending on the value supplied and the platform's available memory -- (a) node::Buffer::New/Copy internally rejects an oversized or failed allocation, and .ToLocalChecked() on that empty MaybeLocal triggers V8's own fatal-error path, terminating the process (a real denial-of-service shape, not a crash-safety guess -- see NAN_CAPABILITY_DESIGN.md Section 3, confirmed by reading nan.h's own source); (b) a successful allocation of attacker-influenced size with no detected application-level cap risks excessive memory consumption, and where the size is computed as a product of two JS-controlled factors (as in the ReadArea-shaped case), integer overflow could yield a SMALL allocated size while a later native call still writes the FULL uncapped amount -- a real, disclosed, but NOT independently verified-in-this-pass downstream write-mismatch risk; this file does not trace the downstream native write call to confirm it actually happens.",
+   "js_argument_index": 3,
+   "js_call_id": null,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "Upload",
+   "js_reachability_evidence": "no specific real JS call observed supplying argument 3, but the package's own JS entry point unconditionally re-exports its whole native binding (module.exports = require(<loader>)(...) shape) -- registration alone establishes public reachability with an attacker-chosen argument at this index; weaker than a confirmed call, still real and disclosed as such, never silently equated with it",
+   "js_reachability_tier": "exported_registration",
    "method_id": 107374182975,
    "method_name": "Upload",
-   "reason": "real registration exists (js name(s): ['Upload']), but no confirmed real JS call supplies an argument at the required index 3 (info[2])",
-   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED"
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION"
   },
   {
    "acquisition_call_id": 30064786798,
@@ -111,13 +115,17 @@
    "callback_info_index": 2,
    "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
    "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
-   "js_names": [
-    "FullUpload"
-   ],
+   "evidence_note": "STATIC CANDIDATE, not a vulnerability or CWE claim. This finding establishes: (1) the allocation length is demonstrably JS-argument-controlled via a real registration + info[N] chain + confirmed JS call; (2) no structural upper-bound check was found on that value before the acquisition call. It does NOT evaluate runtime reachability of any specific consequence. Two real, disclosed, structurally-grounded consequences are possible depending on the value supplied and the platform's available memory -- (a) node::Buffer::New/Copy internally rejects an oversized or failed allocation, and .ToLocalChecked() on that empty MaybeLocal triggers V8's own fatal-error path, terminating the process (a real denial-of-service shape, not a crash-safety guess -- see NAN_CAPABILITY_DESIGN.md Section 3, confirmed by reading nan.h's own source); (b) a successful allocation of attacker-influenced size with no detected application-level cap risks excessive memory consumption, and where the size is computed as a product of two JS-controlled factors (as in the ReadArea-shaped case), integer overflow could yield a SMALL allocated size while a later native call still writes the FULL uncapped amount -- a real, disclosed, but NOT independently verified-in-this-pass downstream write-mismatch risk; this file does not trace the downstream native write call to confirm it actually happens.",
+   "js_argument_index": 3,
+   "js_call_id": null,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "FullUpload",
+   "js_reachability_evidence": "no specific real JS call observed supplying argument 3, but the package's own JS entry point unconditionally re-exports its whole native binding (module.exports = require(<loader>)(...) shape) -- registration alone establishes public reachability with an attacker-chosen argument at this index; weaker than a confirmed call, still real and disclosed as such, never silently equated with it",
+   "js_reachability_tier": "exported_registration",
    "method_id": 107374182976,
    "method_name": "FullUpload",
-   "reason": "real registration exists (js name(s): ['FullUpload']), but no confirmed real JS call supplies an argument at the required index 3 (info[2])",
-   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED"
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION"
   },
   {
    "acquisition_call_id": 30064786959,
@@ -175,13 +183,18 @@
    "callback_info_index": 1,
    "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::CopyBuffer(const char *data, uint32_t size) wraps node::Buffer::Copy(...), returns v8::MaybeLocal<v8::Object>; every real corpus call site calls .ToLocalChecked().",
    "contract_id": "NAN_COPYBUFFER_SOURCE_CAPACITY",
-   "js_names": [
-    "GetArea"
-   ],
+   "evidence_note": "length is JS-argument-controlled, but source capacity could not be structurally established -- NOT inferred as an OOB read",
+   "js_argument_index": 2,
+   "js_call_id": null,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "GetArea",
+   "js_reachability_evidence": "no specific real JS call observed supplying argument 2, but the package's own JS entry point unconditionally re-exports its whole native binding (module.exports = require(<loader>)(...) shape) -- registration alone establishes public reachability with an attacker-chosen argument at this index; weaker than a confirmed call, still real and disclosed as such, never silently equated with it",
+   "js_reachability_tier": "exported_registration",
    "method_id": 107374183033,
    "method_name": "GetArea",
-   "reason": "real registration exists (js name(s): ['GetArea']), but no confirmed real JS call supplies an argument at the required index 2 (info[1])",
-   "verdict": "NAN_COPYBUFFER_SOURCE_CAPACITY_JS_CALL_UNRESOLVED"
+   "reason": "SOURCE_NOT_A_SIMPLE_LOCAL_IDENTIFIER -- e.g. a struct/map field or pointer chain with no local variable to trace an allocation for",
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_COPYBUFFER_SOURCE_CAPACITY_UNRESOLVED"
   }
  ],
  "registration_audit": [

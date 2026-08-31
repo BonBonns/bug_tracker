@@ -37,6 +37,9 @@ FIXTURE = os.path.join(ROOT, "study", "nan_capability", "controls", "comprehensi
 CPP_RAW = os.path.join(FIXTURE, "cpp_raw")
 JS_RAW = os.path.join(FIXTURE, "js_raw")
 
+sys.path.insert(0, ROOT)
+from resource_guard_verdict_nan import is_native_module_directly_exported  # noqa: E402
+
 passed = 0
 failed = 0
 
@@ -99,7 +102,9 @@ def main():
           findings_by_method.get("NotRegisteredLike", {}).get("verdict") ==
           "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NOT_JS_REGISTERED")
 
-    check("TopLevelLike -> JS_CALL_UNRESOLVED (registered, but no real JS call in fixture)",
+    check("TopLevelLike -> JS_CALL_UNRESOLVED (registered, but no real JS call in fixture, "
+          "and the fixture's own index.js does not use the unconditional-re-export idiom "
+          "either -- see test_is_native_module_directly_exported below)",
           findings_by_method.get("TopLevelLike", {}).get("verdict") ==
           "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED")
 
@@ -139,8 +144,54 @@ def main():
         check(f"verdict name for {f['method_name']} carries no CWE/vulnerability label",
               "CWE" not in f["verdict"] and "VULN" not in f["verdict"].upper())
 
+    test_is_native_module_directly_exported()
+
     print(f"\n{passed} passed, {failed} failed")
     sys.exit(1 if failed else 0)
+
+
+def test_is_native_module_directly_exported():
+    """Direct unit test for the export-detection function added in response to a real
+    challenge to node-snap7's own Upload/FullUpload abstentions: requiring a confirmed JS
+    call site is too strict when the package's own entry point unconditionally re-exports its
+    whole native binding, since every registered method is then public regardless of whether
+    the package's own bundled wrapper happens to call it. Uses the REAL, verbatim `code` text
+    captured from node-snap7's own actual `lib/node-snap7.js:8` (confirmed via a real
+    jssrc2cpg run over the real package during this fix's own development) as the positive
+    case, and the comprehensive fixture's own real (non-matching) shape as one negative."""
+
+    def js_of(calls):
+        return {"calls": {i: {"name": "<operator>.assignment", "code": c}
+                          for i, c in enumerate(calls)}}
+
+    # Real, verbatim: node-snap7's own actual lib/node-snap7.js:8.
+    real_positive = js_of([
+        "module.exports = snap7 = require('bindings')('node_snap7.node')"])
+    check("real node-snap7 module.exports=X=require('bindings')(...) shape recognized",
+          is_native_module_directly_exported(real_positive) is True)
+
+    # node-gyp-build is the other real, frozen loader package name.
+    node_gyp_build_shape = js_of([
+        "module.exports = require('node-gyp-build')(__dirname)"])
+    check("node-gyp-build loader shape also recognized",
+          is_native_module_directly_exported(node_gyp_build_shape) is True)
+
+    # Real negative: the comprehensive fixture's own actual index.js shape -- a direct
+    # relative require(), not a recognized loader package, still correctly NOT matched.
+    fixture_shape = js_of(["module.exports = probe"])
+    check("fixture's own module.exports = probe (no loader call at all) NOT matched",
+          is_native_module_directly_exported(fixture_shape) is False)
+
+    # Real, disclosed negative: selective re-export must NOT match -- only an UNCONDITIONAL,
+    # whole-module re-export justifies skipping the confirmed-call requirement.
+    selective = js_of(["exports.Foo = binding.Foo"])
+    check("selective re-export (exports.Foo = binding.Foo) NOT matched",
+          is_native_module_directly_exported(selective) is False)
+
+    # No JS facts at all -- must not crash, must return False (same as the module docstring's
+    # own documented behavior for JS_RAW_DIR == "-").
+    check("no JS facts (js=None) returns False, does not raise",
+          is_native_module_directly_exported(None) is False)
 
 
 if __name__ == "__main__":

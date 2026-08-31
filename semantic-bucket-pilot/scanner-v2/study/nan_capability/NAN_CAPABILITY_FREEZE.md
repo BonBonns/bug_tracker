@@ -2,8 +2,10 @@
 
 The two contracts below are frozen as of this document. No further changes are planned to
 `resource_contracts_nan.py` or `resource_guard_verdict_nan.py` unless a new real defect is
-found the same way the two documented in `NAN_CAPABILITY_DESIGN.md` Section 6 were —by running
-against real, structurally diverse corpus code, not by inspection.
+found the same way the three documented in `NAN_CAPABILITY_DESIGN.md` Sections 6/6b were —
+two by running against real, structurally diverse corpus code, one by a direct challenge to
+this capability's own real result, verified against real facts rather than conceded or
+defended on principle alone.
 
 ## Frozen files
 
@@ -34,8 +36,14 @@ For `NAN_NEWBUFFER_UNBOUNDED_ALLOCATION`, promotion to a candidate finding requi
    shape (structural parity only, not yet observed on real Nan code).
 3. A real registration of the enclosing method via `Nan::SetPrototypeMethod`/`Nan::SetMethod`,
    resolved to exactly one real, class-scoped candidate function.
-4. A real JS call by that registered name, in the package's own real JS/TS source, supplying a
-   real argument at the required index (`callback_info_index + 1`).
+4. Real JS reachability, established via EITHER of two explicit, disclosed tiers (recorded as
+   `js_reachability_tier` in the finding's own evidence, never conflated): `"confirmed_call"`
+   — a real JS call by the registered name, in the package's own real JS/TS source, supplying
+   a real argument at the required index (`callback_info_index + 1`); or
+   `"exported_registration"` — no specific call observed, but the package's own JS entry point
+   unconditionally re-exports its whole native binding (`module.exports = require(<bindings|
+   node-gyp-build>)(...)`, verified via `is_native_module_directly_exported` — see
+   `NAN_CAPABILITY_DESIGN.md` Section 6b for the real node-snap7 case that required this).
 5. No structural upper-bound check found on the traced value (or any identifier in its own
    def-chain) before the acquisition call.
 
@@ -58,24 +66,32 @@ disclosed abstention).
   `phplike` — the same six the prevalence study manually confirmed as real negatives, now
   independently reconfirmed by the automated tool itself, through the real pipeline
   (c2cpg + jssrc2cpg + both export stages), not merely re-asserted.
-- **1 real, structurally distinct positive**: `node-snap7`'s `ReadArea` — real registration,
+- **3 real, structurally distinct positives on `node-snap7`**: `ReadArea` — real registration,
   real `info[3]`/`info[4]` chain (`amount * byteCount`), real confirmed JS call
-  (`this.readAreaLike(...)`  in the package's own bundled `lib/node-snap7.js`, itself modeled
-  on the package's own real `DBRead`/`MBRead`/etc. wrapper idiom), no detected bound check.
-  Reported as a STATIC CANDIDATE (`NAN_CAPABILITY_DESIGN.md` Section 4's disclaimer verbatim
-  in the finding's own `evidence_note`), never a vulnerability or CWE claim.
-- **`node-snap7`'s own `Upload`/`FullUpload`, structurally identical to `ReadArea`, correctly
-  abstain** (`JS_CALL_UNRESOLVED`) because the package's own real JS wrapper never actually
-  calls them — real registration is not treated as proof of real reachability, matching this
-  whole project's own established discipline (Cartesi's own WASM case, `node-libcurl`'s own
-  native-callback case).
-- **Two real defects found and fixed by running against diverse real code, not by
-  inspection** — `NAN_CAPABILITY_DESIGN.md` Section 6. Both corrections moved results toward
-  LESS promotion (fixing a false negative on node-snap7's own real registrations; fixing a
-  false positive on libpq's own real `GetCopyData`), never toward more.
+  (`this.readAreaLike(...)` in the package's own bundled `lib/node-snap7.js`, `"confirmed_call"`
+  tier), no detected bound check; `Upload`/`FullUpload` — structurally identical in C++, real
+  registration + real `info[N]` chain, no call observed in the package's own bundled wrapper,
+  but the package's own JS entry point unconditionally re-exports the whole native binding
+  (`"exported_registration"` tier — see `NAN_CAPABILITY_DESIGN.md` Section 6b). All three
+  reported as STATIC CANDIDATES (`NAN_CAPABILITY_DESIGN.md` Section 4's disclaimer verbatim in
+  each finding's own `evidence_note`), never a vulnerability or CWE claim.
+- **Registration alone is still never sufficient on its own** — a method that is BOTH
+  unregistered (`node-snap7`'s own synthetic-shaped internal helpers) and a package that
+  neither confirms a call NOR unconditionally re-exports its native binding both still
+  correctly abstain, matching the project's established discipline (Cartesi's own WASM case,
+  `node-libcurl`'s own native-callback case) — the `exported_registration` tier is a second,
+  real, disclosed, WEAKER-but-still-structural path to the same conclusion, not a relaxation
+  of the requirement that JS reachability be established by real evidence.
+- **Three real defects found and fixed, none by inspection alone** — `NAN_CAPABILITY_DESIGN.md`
+  Sections 6/6b. All three corrections moved results toward MORE ACCURATE promotion, not
+  toward promoting more freely: fixing a false negative on node-snap7's own real registrations
+  (Bug 1); fixing a false positive on libpq's own real `GetCopyData` (Bug 2); fixing a second,
+  distinct false negative on `Upload`/`FullUpload` by recognizing a real, disclosed, narrower
+  reachability tier (Section 6b) rather than either loosening the requirement generally or
+  defending the original, too-strict design on principle.
 - **`node-snap7-micro-client`** (the same real S7 codebase, separate npm identity) reproduces
-  the identical `ReadArea` positive and `Upload`/`FullUpload` abstentions — a real, if modest,
-  stability check across two independently-tarballed copies of nearly the same source.
+  the identical 3 positives at the identical tiers — a real, if modest, stability check across
+  two independently-tarballed copies of nearly the same source.
 
 ## Explicitly frozen OUT of scope (see design doc Section 8 for the complete list)
 

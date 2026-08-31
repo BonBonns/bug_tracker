@@ -39,10 +39,10 @@
   ],
   "js_facts_available": true,
   "classification": {
-    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
-    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 3,
     "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 10,
     "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 7
   },
-  "n_findings": 10
+  "n_findings": 10,
+  "note": " | Re-run after adding the exported-registration reachability tier -- Upload/FullUpload now correctly promoted."
 }

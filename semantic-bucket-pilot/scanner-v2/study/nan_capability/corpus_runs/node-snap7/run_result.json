@@ -39,13 +39,13 @@
   ],
   "js_facts_available": true,
   "classification": {
-    "NAN_COPYBUFFER_SOURCE_CAPACITY_JS_CALL_UNRESOLVED": 1,
     "NAN_COPYBUFFER_SOURCE_CAPACITY_NAME_MATCH_CANDIDATE": 2,
     "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED": 1,
-    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
-    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+    "NAN_COPYBUFFER_SOURCE_CAPACITY_UNRESOLVED": 1,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 3,
     "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 11,
     "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 8
   },
-  "n_findings": 13
+  "n_findings": 13,
+  "note": " | Re-run after adding the exported-registration reachability tier (module.exports = require(bindings)(...) unconditional re-export) -- Upload/FullUpload now correctly promoted; GetArea correctly moves to SOURCE_CAPACITY_UNRESOLVED (JS-reachable confirmed, but source capacity still unresolved)."
 }

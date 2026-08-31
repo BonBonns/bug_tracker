@@ -156,6 +156,60 @@ def load_js_raw(js_raw_dir):
     return {"calls": calls, "calls_by_name": calls_by_name, "args_by_call": args_by_call}
 
 
+# RESOURCE-GUARD-NAN real-corpus fix (found via direct user challenge to node-snap7's own real
+# `Upload`/`FullUpload` abstentions, then independently verified against real facts, not
+# conceded on principle alone): requiring a CONFIRMED real JS call site (the strongest
+# evidence, kept as the primary tier below) is too strict when the package's own JS entry
+# point unconditionally re-exports the ENTIRE native binding object -- real, confirmed via
+# node-snap7's own actual source: `module.exports = snap7 = require('bindings')
+# ('node_snap7.node')` (its own `lib/node-snap7.js:8`) is the SAME `target` object the C++
+# side attaches `S7Client` onto (`Nan::Set(target, "S7Client", Nan::GetFunction(tpl)...)`,
+# `node_snap7_client.cpp:697`) -- meaning EVERY `Nan::SetPrototypeMethod`-registered method on
+# that class, including `Upload`/`FullUpload` (which the package's own bundled convenience
+# wrapper happens never to call), is directly, unconditionally callable by ANY consumer of the
+# package with ANY arguments the caller supplies. A package's own internal wrapper choosing
+# not to call a method says nothing about whether external code can -- Cartesi's own real case
+# (this project's precedent for requiring a confirmed call) was different IN KIND: there, the
+# real PUBLISHED package's JS entry point was a WASM bundle that never even required the
+# native binding at all, so nothing was exported, confirmed or otherwise. Real, narrow,
+# structural check for the "whole native module is unconditionally re-exported" idiom (NOT a
+# general receiver-provenance resolver -- that would be reusing R06/FIX01I's own
+# `resolve_loader_provenance`/`native_binding_receiver_evidence`, deliberately not done here to
+# keep this capability standalone; this is a narrower, sufficient, independently-written check
+# for one specific, real, common shape): does a real `module.exports = ...`/`exports = ...`
+# assignment's own captured `code` text contain a `require(<loader package>)(...)` invocation?
+# `LOADER_PACKAGES` reuses the same real, frozen vocabulary `link_napi_facts.py`'s own
+# `NATIVE_LOADER_PACKAGES` already established (`{'bindings', 'node-gyp-build'}`) -- the
+# de facto standard native-addon loaders, not a value invented for this file.
+import re as _re
+LOADER_PACKAGES = ("bindings", "node-gyp-build")
+LOADER_INVOCATION_RE = _re.compile(
+    r"require\(\s*['\"](" + "|".join(LOADER_PACKAGES) + r")['\"]\s*\)\s*\(")
+
+
+def is_native_module_directly_exported(js):
+    """True iff real JS facts show `module.exports`/`exports` assigned (directly, or via one
+    level of chained/aliased assignment in the SAME statement -- confirmed real on node-snap7's
+    own `module.exports = snap7 = require(...)(...)` shape, where Joern's own captured `code`
+    for the OUTER assignment already contains the full RHS text) from a real
+    `require(<loader>)(...)` invocation. A package that instead selectively re-exports specific
+    names (`exports.Foo = binding.Foo`) will NOT match this -- correctly: only an
+    UNCONDITIONAL, WHOLE-MODULE re-export justifies treating every registered method as public
+    without a confirmed call, and this check does not claim to establish anything for a
+    package that does something narrower."""
+    if js is None:
+        return False
+    for c in js["calls"].values():
+        if c["name"] != "<operator>.assignment":
+            continue
+        code = c.get("code") or ""
+        if not (code.startswith("module.exports") or code.startswith("exports")):
+            continue
+        if LOADER_INVOCATION_RE.search(code):
+            return True
+    return False
+
+
 # --- Registration extraction: Nan::SetPrototypeMethod(tpl, "name", Class::Method) /
 # Nan::SetMethod(target, "name", Fn) -- confirmed real, IDENTICAL structural shape for both
 # idioms (see NAN_CAPABILITY_DESIGN.md Section 2): a real, `<unresolvedNamespace>.<Set...>
@@ -634,22 +688,54 @@ def main():
                         js_call_id, js_name_used = hit, jn
                         break
                 if js_call_id is None:
-                    classification[f"{cname}_JS_CALL_UNRESOLVED"] += 1
-                    findings.append({**base_evidence, "verdict": f"{cname}_JS_CALL_UNRESOLVED",
-                                     "reason": "real registration exists (js name(s): "
-                                               f"{js_names}), but no confirmed real JS call "
-                                               f"supplies an argument at the required index "
-                                               f"{required_js_index} (info["
-                                               f"{trace['callback_info_index']}])",
-                                     "callback_info_index": trace["callback_info_index"],
-                                     "js_names": js_names})
-                    continue
-
-                js_evidence = {"js_call_id": js_call_id, "js_name": js_name_used,
-                               "callback_info_index": trace["callback_info_index"],
-                               "js_argument_index": required_js_index,
-                               "js_linkage_shape": trace["shape"],
-                               "source_boundary": "JS_ARGUMENT_CONTROLLED"}
+                    # No confirmed real call supplies the required argument. Before
+                    # abstaining, check the WEAKER but still real "whole native module
+                    # unconditionally re-exported" tier (see is_native_module_directly_exported's
+                    # own docstring -- found and fixed via a real, direct challenge to
+                    # node-snap7's own Upload/FullUpload abstentions, confirmed against real
+                    # facts, not conceded on principle): once the registration's ENCLOSING
+                    # module is shown to unconditionally re-export its whole native binding,
+                    # a registered method is public API regardless of whether the package's
+                    # own bundled JS ever calls it -- registration + real info[N] dataflow
+                    # already establishes the JS boundary in that case.
+                    if is_native_module_directly_exported(js):
+                        js_evidence = {"js_call_id": None, "js_name": js_names[0],
+                                       "callback_info_index": trace["callback_info_index"],
+                                       "js_argument_index": required_js_index,
+                                       "js_linkage_shape": trace["shape"],
+                                       "source_boundary": "JS_ARGUMENT_CONTROLLED",
+                                       "js_reachability_tier": "exported_registration",
+                                       "js_reachability_evidence": (
+                                           "no specific real JS call observed supplying "
+                                           f"argument {required_js_index}, but the package's "
+                                           "own JS entry point unconditionally re-exports its "
+                                           "whole native binding (module.exports = require("
+                                           "<loader>)(...) shape) -- registration alone "
+                                           "establishes public reachability with an "
+                                           "attacker-chosen argument at this index; weaker "
+                                           "than a confirmed call, still real and disclosed "
+                                           "as such, never silently equated with it")}
+                    else:
+                        classification[f"{cname}_JS_CALL_UNRESOLVED"] += 1
+                        findings.append({**base_evidence,
+                                         "verdict": f"{cname}_JS_CALL_UNRESOLVED",
+                                         "reason": "real registration exists (js name(s): "
+                                                   f"{js_names}), but no confirmed real JS "
+                                                   f"call supplies an argument at the "
+                                                   f"required index {required_js_index} "
+                                                   f"(info[{trace['callback_info_index']}]), "
+                                                   "and the package does not unconditionally "
+                                                   "re-export its whole native binding either",
+                                         "callback_info_index": trace["callback_info_index"],
+                                         "js_names": js_names})
+                        continue
+                else:
+                    js_evidence = {"js_call_id": js_call_id, "js_name": js_name_used,
+                                   "callback_info_index": trace["callback_info_index"],
+                                   "js_argument_index": required_js_index,
+                                   "js_linkage_shape": trace["shape"],
+                                   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+                                   "js_reachability_tier": "confirmed_call"}
 
                 if cname == "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION":
                     bound = find_upper_bound_check(cpp, method_id, trace["visited_names"])
