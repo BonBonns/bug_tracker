@@ -327,3 +327,48 @@ sentinel no longer spuriously matching an unrelated `call_id`, and the existing
 Code fix lives on `claude/provenance-preservation-task35` (the branch carrying the rest of the
 OOB/PROV-R01 work this fix builds on), not this documentation branch. Task #29 is complete;
 `OOB_READ` (gate #39) remains blocked on #30, #32 (still open), not on #29 any further.
+
+### Correction to the #29 writeup above: the surviving candidate is a confirmed negative, not a positive
+
+The #29 section above states the fix correctly (6 spurious sentinel-collision candidates removed;
+`RoundTripFloatToBuffer:804` is a genuine `call_id`/`function_id` match, not a coincidence) but
+stops short of stating what that genuine match actually means, which must be precise:
+
+- The genuine source-capacity association is real: `spec->expstr` really does have capacity 5.
+- It is **not** an OOB-read positive. `memcpy(out, spec->expstr, 4)` copies a compile-time-literal
+  `4` bytes from a compile-time-derived 5-byte source — checked directly against the real facts
+  (`extent arg: {'code': '4', 'kind': 'LITERAL'}`, `capacity_bytes: 5`). `4 <= 5`: this is a
+  **confirmed-safe negative**.
+- The scanner's own `verdict: 'CANDIDATE'` on this site does not encode that safety judgment —
+  unlike `oob_write_verdict.py`'s `STATIC_EXTENT_SAFE` check (which recognizes `sizeof(dest)` as
+  compile-time-safe), `oob_read_verdict.py` has no equivalent numeric-literal-vs-capacity static
+  check. `CANDIDATE` here means only "representable, and no `BoundFact`-derived guard was found for
+  this extent" — the safety call above required direct inspection of the real facts, not scanner
+  output alone. (Whether to add a read-side static-safety check, mirroring the write side, is a
+  separate, not-yet-opened design question — not assumed here.)
+
+**Net result: task #29's fix is real and correct (it removed 6 genuinely spurious candidates), but
+it did not reproduce an `OOB_READ` positive.** `OOB_READ` still has zero reproduced real positives.
+That remains entirely contingent on #30 (the Tremor CVE-2018-5147 reproduction discrepancy) — if
+Tremor's case cannot be reproduced, gate #39 must stay closed for missing positive-path evidence,
+independent of anything #29 established.
+
+### New follow-up: #42, the guard-r01 OOB control-gate fixture is not reproducible from a clean checkout
+
+`tools/oob_read_controls.py` and `tools/oob_write_controls.py` (the repo's own historical,
+richer OOB control gates — isolation checks, bound-suppression edge cases, and more, beyond the
+CAP-KEY-R01 join logic) depend on an external `/tmp/cap_corpus/*.json` fixture that was built by
+an untracked process in an earlier session and no longer exists in this container. This was
+confirmed environmental, not caused by the #29 fix: the untouched `oob_write_controls.py` fails
+identically on the same missing file. The new `tools/oob_read_capkey_controls.py` (5/5,
+self-contained, added by #29) verifies only the CAP-KEY-R01 sentinel-key fix in isolation — it is
+not a substitute for the full historical gate.
+
+Task #42 tracks this and now blocks both #38 (`OOB_WRITE`) and #39 (`OOB_READ`) enablement. Before
+either is enabled: rebuild and commit the missing fixture (or a script that deterministically
+regenerates it from real source via the repo's own `c2cpg` pipeline), or replace the two
+fixture-dependent control scripts with a fully self-contained equivalent covering every assertion
+they currently make.
+
+No corpus run follows from any of this — `OOB_READ` remains blocked by #30, #32, and #42;
+`OOB_WRITE` remains blocked by #30, #32, and #42.
