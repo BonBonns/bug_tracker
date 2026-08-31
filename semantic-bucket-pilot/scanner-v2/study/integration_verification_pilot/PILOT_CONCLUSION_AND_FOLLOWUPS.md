@@ -928,3 +928,49 @@ this corpus's own idiomatic C/C++. OOB_COMPARE stays gated — `staged_enablemen
 `ENABLED_PROPERTIES` does not include `oob_compare_candidates` (task #40) — pending either a
 real corpus positive or a wider run changing this picture. This is a disclosed, evidence-backed
 "not yet", not a permanent retirement of a broken detector.
+
+## Task #41: R06/FIX01I merged into the driven lineage — Resource Guard readiness
+
+`resource_guard_verdict_r06.py` (R06's own real, precisely-scoped fix — no reached parameter is
+ever reported as established attacker influence unconditionally; every one is now
+`SOURCE_BOUNDARY_UNRESOLVED`) previously lived only on the isolated
+`claude/r06-fix01i-integration` branch, never merged into the frozen R04/R05 lineage the corpus
+scan itself ran. Brought over (hash-verified byte-identical before any further local change),
+wired into `run_pipeline_one.py` alongside R04/R05 (never replacing either), and re-verified —
+not merely copied — against real data:
+
+- **New committed real fixtures** (`study/r06_fix01i_integration/real_fixtures/`, ~10MB):
+  node-libcurl's and Cartesi's own real raw c2cpg facts + `build_config.json`, previously living
+  only in ephemeral, uncommitted `/tmp` paths — the exact same failure class that lost `/tmp/
+  cap_corpus` (task #42). Regenerating R06's own output fresh against these committed copies
+  reproduces the original `/tmp`-cached runs' classification exactly (same finding counts, same
+  verdicts — only R06's own additive new fields differ).
+- **New `gate_resource_guard_r06.py`**: (1) no-regression against the same real `r05_controls`
+  fixture `gate_resource_guard_r05.py` already verifies — all 6 real outcomes identical; (2)
+  task #41's own named acceptance test — node-libcurl's real `Easy::ReadFunction` finding now
+  reports `source_boundary_evidence.source_boundary == 'SOURCE_BOUNDARY_UNRESOLVED'` /
+  `attacker_controlled: False`; Cartesi's 3 real findings report `source_boundary_evidence:
+  None` (the real backward walk never reaches any parameter for Cartesi's own out-parameter
+  dataflow shape — no fabricated evidence). ALL PASS.
+- **A real, reproducible bug found and fixed in the process**: `run_pipeline_one.py`'s own
+  `SCANNER_V2` was a hardcoded absolute path to the MAIN working tree, so a subprocess call
+  always ran whatever scanner files happened to be on THAT tree's disk regardless of which
+  checkout's own copy of `run_pipeline_one.py` was actually executing — caught concretely when a
+  fresh worktree's own new `resource_guard_verdict_r06.py` was silently ignored in favor of the
+  main tree's stale copy (missing the file entirely), producing a real `NORMALIZATION_FAILED`.
+  Fixed to be self-referential.
+- **`check_provenance.py`'s existing real end-to-end node-libcurl diagnostic** (a genuine full
+  pipeline run: real tarball download, real c2cpg, real scanners) extended with the R06
+  acceptance check and re-run live — PASS, `PROVENANCE_CONTROLS=43/43` (was 40/40).
+
+All regression gates green: `gate_resource_guard_r05` ALL PASS, `gate_resource_guard_r06` ALL
+PASS, `check_reachability_tier` 17/17, `check_staged_enablement` 14/14,
+`test_promote_via_js_linkage` ALL PASS (now fully self-contained against committed fixtures, no
+`/tmp` dependency).
+
+**Note for a future task**: while wiring this, `provenance.py`'s own `oob_index_write_candidates`
+key (task #44's own OOB Index Write producer) was found to be ABSENT from this branch's
+`PROPERTY_CANDIDATE_RULES`/`enrich_record()` loop, despite an earlier summary claiming it had
+been added here — it appears that change only ever landed on `claude/overnight-diagnostic-100`
+(commit `9fbe0e6`), not on this driven lineage. Not fixed as part of this task (out of its own
+scope); flagged for whoever next touches OOB Index Write's own reportability wiring.
