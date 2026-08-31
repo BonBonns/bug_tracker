@@ -98,18 +98,51 @@ hash, `FALLIBLE_BOUNDED_RESOURCE` (Resource Guard) included**, so #35 gates ever
 emits findings, not just the two that happened to produce a vendored candidate first, and not
 just the five properties task #28 newly integrated.
 
-**#35 is now IMPLEMENTED and CLOSED** (`claude/provenance-preservation-task35`,
+**#35 is now IMPLEMENTED, VERIFIED, and CLOSED** (`claude/provenance-preservation-task35`,
 `provenance.py` + a change to `run_pipeline_one.py` — the real orchestrator, not a side
-script): the source-provenance manifest is built immediately after extraction, before header
-staging/c2cpg/any scanner for any property runs, fail-CLOSED (a new `PROVENANCE_FAILED` status,
-zero scanner output) if it cannot be built. Verified with a real end-to-end run against
-`@fqlan/add-example-prebuild`: `r04_classification`/`r05_classification` came back byte-for-byte
-identical to the pre-#35 baseline (zero scanning-behavior regression), with real provenance
-fields (`source_tree_hash`, per-finding `source_path`/`content_hash`/`provenance_hint`) now
-present. `OOB_WRITE`/`OOB_READ`/`OOB_COMPARE`'s own candidates gained two small, additive join
-keys (`call_id`, `function_id`) so a future orchestrator can attach the same provenance once
-tasks #38-40 wire those scanners in — their own verdict logic is unchanged, both real OOB gates
-(`oob-write-r05-sizeof`, `oob-compare-r07`) still pass identically.
+script). A first pass was found incomplete on direct review and corrected in a second round —
+both rounds are recorded here for the real history, not just the final state:
+
+- The manifest is built immediately after extraction, before header staging/c2cpg/any scanner
+  for any property runs, fail-CLOSED (a new `PROVENANCE_FAILED` status, zero scanner output) if
+  it cannot be built.
+- **Two real, distinct tree-level hashes**, corrected from an initial version that only had one
+  (a tarball hash mislabeled as a "source-tree hash"): `tarball_sha256` (the original compressed
+  tarball's own bytes — real, but sensitive to compression/packaging, not just content) and
+  `source_tree_sha256` (a real, deterministic hash of normalized relative paths + per-file
+  content hashes, sorted by path — reproducible independent of tarball compression, extraction
+  order, or filesystem walk order). Verified directly: two manifests built from identical real
+  file content but different tarball bytes produce identical `source_tree_sha256` and different
+  `tarball_sha256`; a real content change changes `source_tree_sha256` even with the same
+  tarball bytes.
+- **Fail-closed actionability**, added on direct correction ("honest degradation is insufficient
+  if an actionable finding cannot be tied to a real file"): every enriched finding now carries
+  `provenance["resolved"]` and a mirrored top-level `finding["actionable"]`, both `False` on any
+  resolution failure — including a new, more precise `SOURCE_FILE_UNREADABLE_AT_SCAN_TIME` case
+  that a real path match with unreadable content previously collapsed into a generic
+  `PATH_NOT_IN_MANIFEST`. A finding may still be retained diagnostically with `actionable=False`,
+  but is explicitly marked as not to be reported/published as a demonstrated vulnerability.
+- **Real per-finding enrichment verified with real positive diagnostics, not just zero-finding
+  runs** (a real gap in the first round, corrected on direct instruction: "the Resource Guard
+  test used a zero-finding package... proves classification stability, not per-finding
+  enrichment"): `node-libcurl@5.1.2` fetched and run for real through `run_pipeline_one.py`'s
+  own orchestrator reproduces the real `Easy::ReadFunction`/`VALUE_ACQUISITION_GUARD_MISSING`
+  finding (the one real finding the frozen R04/R05 pipeline ever produced across the full corpus
+  scan) — `actionable=True`, real `source_path`, `content_hash` matched against an independently
+  recomputed hash of the real source file on disk. **This finding is the same site already
+  independently confirmed elsewhere as a false positive on security grounds (R06's own
+  source-boundary gate reclassifies it) — used here purely as a real, reproducible POSITIVE
+  RECORD to test provenance enrichment against, not re-litigated as a vulnerability.**
+  `LOCK_BALANCE` and `PROTECTED_FIELD` were similarly verified directly (not merely assumed from
+  their pre-existing `method_id` field): both real, committed wolfSSL fixtures rebuilt fresh
+  through real c2cpg, each producing a real positive finding, each enriched and confirmed
+  `actionable=True` with a matching real content hash.
+- `OOB_WRITE`/`OOB_READ`/`OOB_COMPARE`'s own candidates gained two small, additive join keys
+  (`call_id`, `function_id`) so a future orchestrator can attach the same provenance once tasks
+  #38-40 wire those scanners in — their own verdict logic is unchanged, both real OOB gates
+  (`oob-write-r05-sizeof`, `oob-compare-r07`) still pass identically.
+- 29/29 real checks (`check_provenance.py`), zero synthetic manifests standing in for a real
+  positive finding.
 
 **A real, disclosed gap #35's own implementation surfaced**: the already-collected R04/R05
 corpus data (the stopped 452/494-row `full_scan_r05_working.jsonl`) predates this fix and has no
@@ -134,33 +167,42 @@ Two explicit conditions govern when a task is genuinely non-gating for the overa
 
 | Property | Task tracker gate | Blocked by | Status |
 |---|---|---|---|
-| `FALLIBLE_BOUNDED_RESOURCE` (Resource Guard) | #41 — Enable/realign in staged run | (none remaining — #35 satisfied) | **Effectively clear.** Its own reachability logic already comes from R06/FIX01I; #35 was its one real remaining gap, now closed. |
-| `LOCK_BALANCE` | #36 — Enable in staged run | #32, #35 | #35 satisfied; #32 (tiered reachability) still open |
-| `PROTECTED_FIELD` | #37 — Enable in staged run | #32, #35 | #35 satisfied; #32 still open |
+| `FALLIBLE_BOUNDED_RESOURCE` (Resource Guard) | #41 — Merge R06/FIX01I into the driven lineage, rerun gates | R06/FIX01I integration (real, not yet done) | **NOT clear — corrected on direct instruction.** The prior "effectively clear, reachability logic already comes from R06/FIX01I" claim was checked directly and found false: `git diff` between the provenance branch and `claude/r06-fix01i-integration` shows R06/FIX01I's own real work lives entirely in a separate file, `resource_guard_verdict_r06.py` (922 new lines), never merged into `resource_guard_verdict_r04.py`/`_r05.py` — the exact two files `run_pipeline_one.py` actually calls. #35 (provenance) IS genuinely closed for this property; R06/FIX01I integration is real, separate, not-yet-done work. |
+| `LOCK_BALANCE` | #36 — Enable in staged run | #32, #35 | #35 satisfied (verified with a real positive diagnostic, not just zero-finding runs); #32 (tiered reachability) still open |
+| `PROTECTED_FIELD` | #37 — Enable in staged run | #32, #35 | #35 satisfied (same real verification); #32 still open |
 | `OOB_WRITE` | #38 — Enable in staged run | #30, #32, #35 | #35 satisfied; #30, #32 still open |
 | `OOB_READ` | #39 — Enable in staged run | #29, #30, #32, #35 | #35 satisfied; #29, #30, #32 still open |
 | `OOB_COMPARE` | #40 — Enable in staged run | #33, #32, #35 | #35 satisfied; #33, #32 still open |
 
 **#34 is the SIX-property aggregator** (Resource Guard's own gate #41, plus #36-40), ready only
-when all six are individually satisfied — equivalently, in the #29/#30/#32/#33/#35 framing, #35
-is now satisfied, narrowing the remaining blanket condition to #29 + #30 + #32 + #33. The staged
-path remains the recommended way to proceed: e.g. `FALLIBLE_BOUNDED_RESOURCE` could effectively
-be considered enabled today (its own gate #41 has nothing left blocking it), and `LOCK_BALANCE`
-could be enabled via #36 once #32 alone lands, without waiting on #29/#30/#33 at all.
+when all six are individually satisfied. #35 no longer appears as an open blocker for any
+property — it is genuinely done, verified with real positive diagnostics for every property that
+currently has one available (Resource Guard, `LOCK_BALANCE`, `PROTECTED_FIELD`). What remains
+per property: `FALLIBLE_BOUNDED_RESOURCE` needs #41's own real R06/FIX01I integration work;
+`LOCK_BALANCE`/`PROTECTED_FIELD` need #32; the three OOB properties need their own
+already-tracked combination of #29/#30/#32/#33.
 
-### What #35 must preserve, at scan time, per direct instruction
+### What #35 preserves, at scan time, verified real per the corrected six fields
 
 Provenance classification itself (#31) may happen later, but the evidence it needs cannot be
-recreated once a run's source tree is deleted — so #35's own work is to capture, for every
-finding, before that deletion:
+recreated once a run's source tree is deleted — #35's own work, now implemented and verified,
+captures for every finding before that deletion:
 
 1. package name and pinned version;
-2. a source-tree hash (one hash over the whole extracted source tree's state at scan time);
+2. **two** real, distinct tree-level hashes (corrected from an initial single mislabeled hash):
+   `tarball_sha256` (the original tarball's own bytes) and `source_tree_sha256` (a real,
+   deterministic hash of normalized relative paths + content hashes, independent of tarball
+   compression/extraction/walk order — verified to stay identical across different tarball
+   bytes wrapping the same real content, and to change when real content changes);
 3. the exact relative source path of the finding's own site;
-4. a content hash of that specific source file;
-5. the finding's own line/node identity (already present in most current output — must not
-   regress);
+4. a content hash of that specific source file (verified against an independently recomputed
+   hash of the real file, for every real positive diagnostic run);
+5. the finding's own line/node identity (already present, unregressed — `method_id` for
+   R04/R05/`LOCK_BALANCE`/`PROTECTED_FIELD`, the new additive `call_id`/`function_id` for the
+   three OOB candidate producers);
 6. a best-effort package-authored-vs-vendored flag, only where already cheaply determinable at
-   scan time (e.g. a `vendor/`/`deps/`/`third_party/` path heuristic) — not a substitute for
-   #31's own later, authoritative classification, only a preservation of whatever signal would
-   otherwise be lost.
+   scan time — not a substitute for #31's own later, authoritative classification;
+7. **fail-closed actionability**, added on direct correction: `provenance["resolved"]` and a
+   mirrored top-level `finding["actionable"]`, `False` on any resolution failure — a finding
+   that cannot be tied to a real file may be retained for diagnostics but is explicitly marked
+   as not publishable/actionable, never silently treated as equivalent to a resolved one.
