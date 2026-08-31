@@ -10,7 +10,34 @@ CLASS ISOLATION: must NOT read DestinationCapacityFact, DEST_CAPACITY bounds, or
 any write-side state. Enforced: destcapacity file never opened; bounds filtered to
 bound_side=='SOURCE_CAPACITY'. Separate verdict channel from OOB_WRITE.
 """
-import json, sys, pathlib
+import json, sys, pathlib, re
+
+# B4.7R STATIC_EXTENT_SAFE (task #43) -- read-side mirror of oob_write_verdict.py's B4.7
+# STATIC_EXTENT_SAFE. A provenance-DISTINCT safety reason (NOT a BoundFact): a read is
+# statically safe when the extent is compile-time-provably <= the source's own capacity,
+# independent of any control-flow guard. Two conjoined-narrow forms, so this cannot suppress
+# real teeth cases:
+#   1. extent is EXACTLY sizeof(S) and S is the SAME identifier as the read source -- symmetric
+#      to the write side's sizeof(dest) case. E == capacity(S) mathematically.
+#   2. extent is a compile-time integer LITERAL and the source's own capacity_bytes is a known
+#      compile-time integer -- safe iff literal <= capacity. Concretely motivated by a real re2
+#      site (#29/#43): memcpy(out, spec->expstr, 4) with a real capacity_bytes=5 for spec->expstr
+#      -- 4<=5 is statically safe, yet the scanner reported it as verdict=CANDIDATE before this
+#      fix. Conservative: anything that is not a clean decimal literal of exactly this argument
+#      (an expression, a macro, a variable, a negative/hex/suffixed literal) does NOT match and
+#      stays a CANDIDATE -- no new false negatives.
+_SIZEOF_RE = re.compile(r'\s*sizeof\s*\(\s*([A-Za-z_]\w*)\s*\)\s*\Z')
+_INT_LITERAL_RE = re.compile(r'\s*(\d+)\s*\Z')
+def _src_ident(code):
+    return (code or '').replace('<global>', '').strip()
+def is_static_extent_safe(src_code, ext_code, ext_kind, capacity_bytes):
+    m = _SIZEOF_RE.fullmatch(ext_code or '')
+    if m and m.group(1) == _src_ident(src_code):
+        return True
+    lm = _INT_LITERAL_RE.fullmatch(ext_code or '')
+    if lm and ext_kind == 'LITERAL' and isinstance(capacity_bytes, int):
+        return int(lm.group(1)) <= capacity_bytes
+    return False
 
 def emit_candidates(fact_prefix):
     d=json.load(open(fact_prefix))
@@ -58,6 +85,13 @@ def emit_candidates(fact_prefix):
         elif cid in scap_by_call:
             _capfact=scap_by_call[cid]           # field fact for THIS site
         if evid is None or _capfact is None: continue             # not representable -> abstain
+        # STATIC_EXTENT_SAFE (task #43): extent is compile-time-provably within the source's own
+        # capacity -> statically safe, not a candidate. Provenance-distinct from bounds; uses only
+        # this site's own extent+source code and the already-resolved capacity fact.
+        ext_code=(earg or {}).get('value_ref',{}).get('code')
+        ext_kind=(earg or {}).get('kind')
+        src_code=(sarg or {}).get('value_ref',{}).get('code')
+        if is_static_extent_safe(src_code, ext_code, ext_kind, _capfact['capacity_bytes']): continue
         if (evid,'SOURCE_CAPACITY') in src_bounds: continue       # validly bounded -> no candidate
         candidates.append({'verdict':'CANDIDATE','class':'OOB_READ',
             'function':fns.get(c.get('enclosing_function_id')),'line':c.get('line'),
