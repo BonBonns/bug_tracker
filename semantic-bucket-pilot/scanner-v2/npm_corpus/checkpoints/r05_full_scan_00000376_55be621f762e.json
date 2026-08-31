@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"leveldb-zlib\", \"version\": \"1.2.0\", \"stages\": {\"download\": {\"seconds\": 0.08760356903076172}, \"extract\": {\"seconds\": 0.06511735916137695}, \"header_staging\": {\"seconds\": 0.16821503639221191, \"n_staged\": 1}, \"c2cpg\": {\"seconds\": 9.105153799057007, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 5.528022527694702, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 17.798128366470337, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 12.37099313735962, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 18.324217081069946}, \"js_normalize\": {\"seconds\": 0.39452123641967773}, \"polyglot_link\": {\"seconds\": 7.1122355461120605}, \"r04_scan\": {\"seconds\": 0.8091564178466797}, \"r05_scan\": {\"seconds\": 0.9416420459747314}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": \"node-addon-api\", \"declared_range\": \"^3.1.0\", \"resolved_version\": \"3.2.1\", \"staged\": true, \"note\": \"range '^3.1.0' resolved to 3.2.1 (highest satisfying release)\"}], \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 1, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 1}, \"r04_findings\": [], \"r05_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 1, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 1}, \"r05_findings\": [], \"total_seconds\": 72.79296159744263}",
+  "name": "r05_full_scan",
+  "row_count": 376,
+  "sha256": "55be621f762e1e4a8d2ddcb326142e37cc7a1fdaf7359d5a182f399422b25bc3",
+  "snapshot_path": "checkpoints/r05_full_scan_00000376_55be621f762e.tsv",
+  "snapshot_time_utc": "2026-08-31T05:30:33Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
