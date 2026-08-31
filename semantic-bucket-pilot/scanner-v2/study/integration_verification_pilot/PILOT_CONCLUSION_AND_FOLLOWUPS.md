@@ -100,8 +100,12 @@ just the five properties task #28 newly integrated.
 
 **#35 is now IMPLEMENTED, VERIFIED, and CLOSED** (`claude/provenance-preservation-task35`,
 `provenance.py` + a change to `run_pipeline_one.py` — the real orchestrator, not a side
-script). A first pass was found incomplete on direct review and corrected in a second round —
-both rounds are recorded here for the real history, not just the final state:
+script). Three rounds — a first pass, a correction, and a THIRD correction of a real semantic
+defect the second round itself introduced — are all recorded here for the real history, not
+just the final state. **Read the third-round correction (below the numbered list) before
+trusting any `actionable=True` mention in the round-2 text that follows — that field no longer
+exists, replaced by a strictly narrower `reportable` field for exactly the reason explained
+there.**
 
 - The manifest is built immediately after extraction, before header staging/c2cpg/any scanner
   for any property runs, fail-CLOSED (a new `PROVENANCE_FAILED` status, zero scanner output) if
@@ -141,7 +145,60 @@ both rounds are recorded here for the real history, not just the final state:
   (`call_id`, `function_id`) so a future orchestrator can attach the same provenance once tasks
   #38-40 wire those scanners in — their own verdict logic is unchanged, both real OOB gates
   (`oob-write-r05-sizeof`, `oob-compare-r07`) still pass identically.
-- 29/29 real checks (`check_provenance.py`), zero synthetic manifests standing in for a real
+- 29/29 real checks (`check_provenance.py`) as of round 2 — see round 3 below for why this
+  number and this whole `actionable` field were both superseded.
+
+### Round 3: `actionable=True` on a confirmed false positive was a real, serious defect
+
+Round 2's `finding["actionable"] = True` purely because provenance resolved was flagged directly
+and confirmed concretely: **node-libcurl's own real finding — the same site already
+independently confirmed elsewhere as a CONFIRMED FALSE POSITIVE — came back `actionable=True`
+merely because its source file was resolved.** Provenance resolution is a necessary condition
+for reportability, never a sufficient one. This was exactly the false-positive-reporting risk
+this whole project exists to avoid, introduced by round 2's own fix.
+
+**Corrected**: `actionable` no longer exists. Five separate fields now govern reportability,
+computed by one exact, one-way formula:
+
+```
+finding["reportable"] = (
+    finding.get("scanner_candidate", False)
+    and provenance["resolved"]
+    and finding.get("applicability_status") == "APPLICABLE"
+    and finding.get("adjudication_status") != "CONFIRMED_FALSE_POSITIVE"
+)
+```
+
+Unresolved provenance → `reportable=False`, always, no exceptions. Resolved provenance →
+`reportable` computed from the other three fields, never automatically flipped true by
+resolution alone. `provenance.py` never fabricates `"APPLICABLE"` or clears an adjudication —
+`applicability_status`/`adjudication_status` default to `NOT_YET_DETERMINED`/`NOT_ADJUDICATED`
+(non-affirmative sentinels) unless a scanner or a later adjudication step already set a real
+value — so `reportable` fails closed by construction until real applicability evidence exists
+(R06/FIX01I for Resource Guard — task #41; JS reachability for the other five — task #32).
+
+`scanner_candidate` is derived from each scanner's own real verdict vocabulary, not "present in
+the findings list" — checked directly: R04/R05's own `findings` list mixes the real positive
+verdict (`VALUE_ACQUISITION_GUARD_MISSING`) with abstentions/inapplicable/build-conflict records
+and the real negative verdict (`VALUE_ACQUISITION_GUARD_ESTABLISHED`); only the first is a real
+candidate. `LOCK_BALANCE`/`PROTECTED_FIELD`/all three OOB properties were checked directly too
+and confirmed to contain only real candidates already.
+
+**Re-verified with the exact same real diagnostics, now correctly**: node-libcurl's real finding
+comes back `scanner_candidate=True`, `provenance.resolved=True`,
+`applicability_status=NOT_YET_DETERMINED` (never fabricated as `APPLICABLE`), and — the point of
+this fix — **`reportable=False`**. `LOCK_BALANCE`/`PROTECTED_FIELD`'s own real findings resolve
+the same way (provenance resolved, `scanner_candidate=True`) but also correctly stay
+`reportable=False` by default, since no applicability/adjudication evidence exists for them
+either yet. 40/40 real checks (up from 29), including explicit tests for each of the formula's
+four clauses independently and the one combination that legitimately produces `reportable=True`.
+
+Every `actionable=True` mention above (round 2's own text, kept for the real history) should now
+be read as: provenance resolved correctly, but reportability was never actually established by
+that alone — the field itself has been renamed and its semantics narrowed precisely because that
+conflation was a real defect, not merely a naming issue.
+
+
   positive finding.
 
 **A real, disclosed gap #35's own implementation surfaced**: the already-collected R04/R05
@@ -202,7 +259,11 @@ captures for every finding before that deletion:
    three OOB candidate producers);
 6. a best-effort package-authored-vs-vendored flag, only where already cheaply determinable at
    scan time — not a substitute for #31's own later, authoritative classification;
-7. **fail-closed actionability**, added on direct correction: `provenance["resolved"]` and a
-   mirrored top-level `finding["actionable"]`, `False` on any resolution failure — a finding
-   that cannot be tied to a real file may be retained for diagnostics but is explicitly marked
-   as not publishable/actionable, never silently treated as equivalent to a resolved one.
+7. **fail-closed `reportable`** (round-3 corrected name and semantics — `provenance["resolved"]`
+   is necessary but never sufficient on its own): `finding["reportable"]` is computed by the
+   one-way formula in the round-3 correction above, requiring `scanner_candidate` +
+   `provenance.resolved` + `applicability_status == "APPLICABLE"` +
+   `adjudication_status != "CONFIRMED_FALSE_POSITIVE"` all at once. A finding that cannot be tied
+   to a real file, is not a real scanner candidate, has no established applicability, or has
+   already been adjudicated a false positive is never reportable — retained for diagnostics,
+   never silently treated as equivalent to a resolved-and-reportable one.
