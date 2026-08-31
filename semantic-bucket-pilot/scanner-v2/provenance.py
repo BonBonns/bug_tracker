@@ -77,6 +77,19 @@ Five separate fields, never conflated:
   be reported, published, or counted as a demonstrated vulnerability while `reportable` is False.
   `finding["actionable"]` from the prior, incorrect version of this module no longer exists --
   replaced entirely by `finding["reportable"]`.
+
+  TERMINOLOGY BOUNDARY, stated explicitly so this is never misread downstream:
+  `reportable=True` means "eligible to appear as a gated scanner candidate" -- it is the FLOOR a
+  finding must clear before a human or a later pass may even consider it, not the CEILING of what
+  it takes to call something a confirmed vulnerability. It certifies four narrow, mechanical
+  facts (the scanner itself flagged a real candidate; its source is traceable; its contract's
+  premises are known to hold; nothing has already adjudicated it a false positive) -- it does NOT
+  certify exploitability, real-world impact, or that anyone has reviewed the specific site. An
+  actual vulnerability claim still requires its own affirmative adjudication (e.g. a real
+  `adjudication_status` value such as `CONFIRMED_TRUE_POSITIVE`, which this module does not
+  define or assign -- that is entirely future, separate work, not implied by `reportable=True`
+  alone). Do not report `reportable=True` findings as vulnerabilities; report them as gated
+  candidates awaiting that separate adjudication step.
 """
 import base64
 import hashlib
@@ -294,6 +307,11 @@ def finalize_reportability(finding: dict, is_scanner_candidate: bool) -> dict:
     finding already carries a real value from elsewhere (never overwrites an existing value),
     then computes reportable via the exact, one-way formula. Must be called AFTER
     enrich_finding() has set finding["provenance"]["resolved"].
+
+    reportable=True means "eligible to appear as a gated scanner candidate," never "confirmed
+    vulnerability" -- see this module's own top-level docstring, TERMINOLOGY BOUNDARY. A real
+    vulnerability claim needs its own separate, affirmative adjudication step this function does
+    not perform.
     """
     finding.setdefault("scanner_candidate", is_scanner_candidate)
     finding.setdefault("applicability_status", "NOT_YET_DETERMINED")
