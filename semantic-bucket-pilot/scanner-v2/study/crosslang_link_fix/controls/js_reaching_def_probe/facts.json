@@ -5836,7 +5836,176 @@
       "type_full_name": "ANY"
     }
   ],
-  "locals": [],
+  "locals": [
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callFoo:native1",
+      "id": 94489280539,
+      "method_id": 107374182400,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280512,
+      "method_id": 107374182401,
+      "name": "callFoo"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280513,
+      "method_id": 107374182401,
+      "name": "callBar"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280514,
+      "method_id": 107374182401,
+      "name": "makeWrapper"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280515,
+      "method_id": 107374182401,
+      "name": "callQux"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280516,
+      "method_id": 107374182401,
+      "name": "someFunction"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280518,
+      "method_id": 107374182401,
+      "name": "callCorge"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280519,
+      "method_id": 107374182401,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280521,
+      "method_id": 107374182401,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280523,
+      "method_id": 107374182401,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280524,
+      "method_id": 107374182401,
+      "name": "wrappedBaz"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280526,
+      "method_id": 107374182401,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280527,
+      "method_id": 107374182401,
+      "name": "x5"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280528,
+      "method_id": 107374182401,
+      "name": "y5"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280529,
+      "method_id": 107374182401,
+      "name": "native6"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280531,
+      "method_id": 107374182401,
+      "name": "module"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280532,
+      "method_id": 107374182401,
+      "name": "__dirname"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280533,
+      "method_id": 107374182401,
+      "name": "require"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280534,
+      "method_id": 107374182401,
+      "name": "process"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280520,
+      "method_id": 107374182401,
+      "name": "_tmp_1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280530,
+      "method_id": 107374182401,
+      "name": "_tmp_4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280525,
+      "method_id": 107374182401,
+      "name": "_tmp_3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280522,
+      "method_id": 107374182401,
+      "name": "_tmp_2"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callBar:native2",
+      "id": 94489280538,
+      "method_id": 107374182402,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:makeWrapper:callBaz:native3",
+      "id": 94489280537,
+      "method_id": 107374182403,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callQux:native4",
+      "id": 94489280536,
+      "method_id": 107374182405,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280517,
+      "method_id": 107374182407,
+      "name": "_tmp_0"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callCorge:native6",
+      "id": 94489280535,
+      "method_id": 107374182408,
+      "name": "native6"
+    }
+  ],
   "members": [],
   "metadata": {
     "cpg_version": "4.0.608",

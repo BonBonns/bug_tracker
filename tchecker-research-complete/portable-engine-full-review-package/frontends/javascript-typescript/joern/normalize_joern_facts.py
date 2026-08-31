@@ -100,6 +100,16 @@ def main():
         identifiers.append({"id":int(x[0]),"method_id":int(x[1]),"name":d(x[2]),"code":d(x[3]),
                             "type_full_name":d(x[4]),"line":int(x[5]) if x[5] else None,"ref_target_ids":ints_csv(x[6])})
 
+    # CROSSLANG-LINK-FIX01H: real LOCAL declarations, including Joern's own real
+    # closure-binding evidence -- `locals` was previously always emitted empty for the
+    # JS/TS side (see the hardcoded `"locals":[]` this replaces, just below). Absent
+    # (empty list) for any raw export produced before this fix, same disclosed
+    # backward-compatibility discipline as `cfg_edges` below.
+    locals_=[]
+    for x in rows(r/'locals.tsv',4):
+        locals_.append({"id":int(x[0]),"method_id":int(x[1]),"name":d(x[2]),
+                        "closure_binding_id":d(x[3]) or None})
+
     # CROSSLANG-LINK-FIX01G: real CFG edges + per-method entry/exit ids, for downstream
     # reaching-definition/dominance proof in link_napi_facts.py -- absent (empty lists)
     # for any raw export produced before this fix, since `rows()` returns [] for a
@@ -121,7 +131,7 @@ def main():
             if _line.strip(): try_nested_calls.append(int(_line.strip()))
 
     doc={"schema":"portable-program-facts/0.2","frontend":"joern-jssrc2cpg","metadata":meta,
-         "type_decls":[],"members":[],"method_returns":[],"locals":[],
+         "type_decls":[],"members":[],"method_returns":[],"locals":locals_,
          "functions":sorted(funcs.values(),key=lambda z:z["id"]),"calls":calls,"returns":returns,"identifiers":identifiers,
          "cfg_edges":cfg_edges,"method_cfg_endpoints":method_cfg_endpoints,
          "try_nested_calls":try_nested_calls}

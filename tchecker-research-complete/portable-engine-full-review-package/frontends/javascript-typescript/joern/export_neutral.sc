@@ -112,6 +112,30 @@ def writer(path: String): PrintWriter = new PrintWriter(new File(path), "UTF-8")
     }
   } finally identifiers.close()
 
+  // CROSSLANG-LINK-FIX01H: real LOCAL declarations, INCLUDING Joern's own real
+  // closure-binding evidence (`closureBindingId`), for the cross-function
+  // "immutable captured const" proof in link_napi_facts.py -- confirmed real via direct
+  // Joern-REPL query on a dedicated closure fixture: a nested function that reads an
+  // outer `const`/`let`/`var` gets its OWN LOCAL (owned by the NESTED function itself,
+  // not the outer one) whose `closureBindingId` is `Some("<outer-scope-file-qualified-
+  // full-name>:<captured-var-name>")`, and every real IDENTIFIER use of that name INSIDE
+  // the nested function `refsTo` THIS inner closure-binding LOCAL, not the outer LOCAL
+  // directly -- i.e. Joern itself already proves the capture structurally; this export
+  // just surfaces that fact rather than the Python side re-deriving it heuristically
+  // from lexical-ancestry name lookup alone (which is NOT the same claim -- see
+  // CHARACTERIZATION.md). `locals.tsv` was previously never exported for the JS/TS side
+  // at all (`normalize_joern_facts.py`'s own doc hardcoded `"locals":[]`).
+  val locals = writer(s"$outDir/locals.tsv")
+  try {
+    cpg.method.l.foreach { m =>
+      m.local.l.foreach { l =>
+        locals.println(Seq(
+          l.id.toString, m.id.toString, b64(l.name), b64(l.closureBindingId.getOrElse(""))
+        ).mkString("\t"))
+      }
+    }
+  } finally locals.close()
+
   // CROSSLANG-LINK-FIX01G: real CFG edges, for downstream reaching-definition/dominance
   // proof in link_napi_facts.py -- mirrors the C/C++ side's own export_c_cpp_facts_v03.sc
   // `cfg_edges.tsv` exactly (owner method id, from node id, to node id), confirmed real

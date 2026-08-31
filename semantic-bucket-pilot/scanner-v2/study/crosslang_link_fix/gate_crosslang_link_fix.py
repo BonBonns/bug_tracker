@@ -65,10 +65,17 @@ def gate_reaching_def_probe():
         'Foo': ('MULTIPLE_DEFINITIONS_AMBIGUOUS', False),   # overwrite-before-use
         'Bar': ('MULTIPLE_DEFINITIONS_AMBIGUOUS', False),   # branch multi-definition
         'Baz': ('PARAMETER_SHADOWED', False),               # parameter shadowing
-        'Qux': (None, True),                                 # assignment-after-use,
-                                                              # but never invoked within
-                                                              # this file -- the safe
-                                                              # define+export pattern
+        'Qux': ('CROSS_FUNCTION_NOT_CONST', False),          # assignment-after-use, but
+                                                              # never invoked within this
+                                                              # file -- would be the safe
+                                                              # define+export pattern IF
+                                                              # `const`; this fixture
+                                                              # declares it `var`, so
+                                                              # CROSSLANG-LINK-FIX01H
+                                                              # correctly abstains (no
+                                                              # real immutability
+                                                              # evidence for a cross-
+                                                              # function capture)
         'Corge': ('CALLEE_NOT_REQUIRE', False),             # alias cycle -- no match,
                                                               # no hang, no crash
     }
@@ -88,12 +95,19 @@ def gate_cfg_dominance_probe():
     print('\n=== 4-case CFG-dominance adversarial probe (CROSSLANG-LINK-FIX01G) ===')
     js = json.load(open(CONTROLS / 'cfg_dominance_probe/facts.json'))
     idx = L.JsCallIndex(js)
+    # All four assignments in this fixture use `var`/`let`, not `const` -- under
+    # CROSSLANG-LINK-FIX01H every one of these is now a cross-function case (assignment
+    # at module scope, use inside a nested function) and is rejected at the earlier,
+    # more fundamental CROSS_FUNCTION_NOT_CONST gate before the deeper dominance/
+    # invocation checks are ever reached. See const_cross_function_probe for real,
+    # dedicated coverage of CROSS_FUNCTION_DEFINITION_NOT_DOMINANT and
+    # CROSS_FUNCTION_INVOCATION_NOT_DOMINATED with real `const` fixtures instead.
     expect = {
-        'Foo': 'INVOCATION_NOT_DOMINATED',              # assignment-after-use, invoked
-                                                          # synchronously before assignment
-        'Bar': 'DEFINITION_NOT_DOMINANT',                # one-branch-only assignment
-        'Baz': 'DEFINITION_NOT_DOMINANT',                # loop-only assignment
-        'Qux': 'DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE',   # try/catch-only assignment
+        'Foo': 'CROSS_FUNCTION_NOT_CONST',               # assignment-after-use (`var`)
+        'Bar': 'CROSS_FUNCTION_NOT_CONST',               # one-branch-only (`let`)
+        'Baz': 'CROSS_FUNCTION_NOT_CONST',               # loop-only (`let`)
+        'Qux': 'DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE',   # try/catch-only (`let`) --
+                                                          # checked before the const gate
     }
     ok = True
     for c in js['calls']:
@@ -106,6 +120,39 @@ def gate_cfg_dominance_probe():
     return ok
 
 
+def gate_const_cross_function_probe():
+    print('\n=== const cross-function closure-capture probe (CROSSLANG-LINK-FIX01H) ===')
+    js = json.load(open(CONTROLS / 'const_cross_function_probe/facts.json'))
+    idx = L.JsCallIndex(js)
+    expect = {
+        # (expected tier or None, expected reason or None)
+        'Direct': ('closure_capture_proven', None),   # cross-function const, invoked
+                                                        # after assignment -- safe
+        'Foo': ('closure_capture_proven', None),       # module-level const, invoked
+                                                        # only externally -- the common,
+                                                        # safe real-world pattern
+        'Bar': (None, 'CROSS_FUNCTION_DEFINITION_NOT_DOMINANT'),  # const, but the
+                                                        # defining function has a real
+                                                        # early return before it
+        'Baz': (None, 'CROSS_FUNCTION_INVOCATION_NOT_DOMINATED'),  # const, but invoked
+                                                        # synchronously in the same
+                                                        # defining scope BEFORE the
+                                                        # assignment line
+        'SameFn': ('dominance_proven', None),          # genuinely same-function --
+                                                        # real, direct CFG dominance
+    }
+    ok = True
+    for c in js['calls']:
+        if c['name'] not in expect:
+            continue
+        matched, tier, reason = L.native_binding_receiver_evidence(c, idx)
+        exp_tier, exp_reason = expect[c['name']]
+        ok &= check(f"{c['name']}: tier={exp_tier} reason={exp_reason}",
+                    tier == exp_tier and reason == exp_reason,
+                    f'got matched={matched} tier={tier} reason={reason}')
+    return ok
+
+
 def main():
     h = md5_of(POLYGLOT / 'link_napi_facts.py')
     print(f'link_napi_facts.py md5: {h}')
@@ -113,6 +160,7 @@ def main():
     ok &= gate_14_controls()
     ok &= gate_reaching_def_probe()
     ok &= gate_cfg_dominance_probe()
+    ok &= gate_const_cross_function_probe()
     print(f"\n{'PASS' if ok else 'FAIL'}")
     sys.exit(0 if ok else 1)
 

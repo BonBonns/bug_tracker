@@ -440,6 +440,15 @@ hang or crash.
 
 ## 6f. CROSSLANG-LINK-FIX01G: scope-uniqueness was not real reachability either
 
+**Correction (section 6g, CROSSLANG-LINK-FIX01H, below): this section's own
+cross-function design -- accepting a definition whenever it dominated its own defining
+function's exit, even when the use was in a DIFFERENT function -- was ITSELF a real
+overclaim. "Dominates this function's exit" is a real CFG fact only within that one
+function's own CFG; it says nothing about a node in a different function's own,
+separate CFG. Left as originally written below for the real, honest record of what this
+fix actually did and believed at the time; do not treat the cross-function half of the
+design described here as correct or current -- see section 6g.**
+
 Direct instruction: test assignment-after-use, one-branch-only assignment, loop-only
 assignment, and try/catch-only assignment through the real frontend; the FIX01F
 "unique-scope-definition" rule must not establish loader provenance for any of them;
@@ -579,6 +588,159 @@ regression. The five FIX01F reaching-def probes are unaffected except `Qux`, who
 label changed from `canonical` to `dominance_proven` (same accept decision, stronger,
 now-accurate evidence). `gate_crosslang_link_fix.py` (new, this fix) re-asserts all of
 the above plus the four new cfg_dominance_probe cases in one script: PASS.
+
+## 6g. CROSSLANG-LINK-FIX01H: cross-function "dominance" was itself an overclaim
+
+Direct instruction, reviewing FIX01G: missing or cross-function CFG evidence must cause
+abstention, never fall back to the old scope-only result. For each receiver and every
+loader-alias hop, require (1) the defining assignment is before and CFG-reachable to the
+use, (2) the definition dominates the use, (3) no other definition can reach the use,
+(4) the assignment and use belong to the same CFG/method -- or there is separately
+proven immutable closure capture, and (5) the regex fallback passes the identical CFG
+gate. Explicit warning: the common, normal pattern
+
+    const native = require("node-gyp-build")(__dirname);
+    function wrapper() { return native.Foo(); }
+
+must not be accepted via lexical ancestry mistaken for cross-function dominance.
+
+**The real bug, confirmed by re-reading FIX01G's own logic, not by a new failing
+fixture:** FIX01G's cross-function branch accepted a SCOPE_UNIQUE definition whenever
+(a) it dominated its own defining function's real exit, treating that as sufficient
+by itself when no direct same-scope invocation site existed. But "dominates its own
+function's exit" is a real CFG fact ONLY within THAT function's own CFG. `wrapper`'s
+body is a DIFFERENT function with its own, separate CFG -- the assignment node is not
+even a member of the graph `wrapper`'s own body lives in. There is no single CFG in
+which "the assignment dominates the use" is a well-formed claim across that boundary.
+FIX01G's own exit-dominance check silently substituted a same-function-shaped proof for
+a claim that was never actually about the same function -- exactly the "lexical
+ancestry mistaken for cross-function dominance" the instruction warns against, even
+though FIX01G's own check used real CFG data rather than pure name lookup. **This
+pattern is not a rare edge case: all 8 of the 14-control suite's own real positive
+controls are exactly this cross-function shape** (`const nativeN = require(...)(...);
+function callX() { return nativeN.X(); }`), so FIX01G's overclaim was silently
+responsible for the project's own most common real positive result the whole time.
+
+**The fix, `loader_definition_reaches_use()` (replacing `loader_definition_dominates()`
+entirely, not just renaming it):** splits into two genuinely different evidence kinds
+that are NEVER conflated:
+
+- **SAME-function** (assignment and use are real nodes in the identical method's own
+  CFG): real dominance, checked DIRECTLY against the specific use node via
+  `cfg_dominates` -- not a function-exit proxy as FIX01G used even for the same-function
+  case. Tagged `"dominance_proven"`.
+
+- **CROSS-function**: CFG dominance is NEVER attempted -- there is no code path that
+  computes it across functions any more. Real, SEPARATE closure-capture evidence is
+  required instead, ALL four parts:
+    (a) `_is_const_declaration` -- the assignment's own `code` field (confirmed real via
+        Joern-REPL: `const native = require(...)` preserves the `const` keyword
+        verbatim in `code`) shows a real `const` declaration, JS's own language-enforced
+        immutability of the BINDING. `let`/`var` are excluded even though SCOPE_UNIQUE
+        already limits the file to one real `<operator>.assignment` node for the name --
+        a compound assignment or other mutation this file's index does not model could
+        still alter a `let`/`var` binding without a second `<operator>.assignment` ever
+        appearing.
+    (b) `has_closure_binding_evidence` -- Joern's OWN real, structural closure-binding
+        evidence. Confirmed real via direct Joern-REPL query on a dedicated fixture
+        (`/tmp/const_probe/index.js`, not committed -- superseded by the committed
+        `const_cross_function_probe`): a nested function that reads an outer
+        `const`/`let`/`var` gets its OWN real LOCAL node, owned by the NESTED function
+        itself (id `94489280520`, owned by `wrapper`, distinct from the outer LOCAL
+        `94489280513` owned by `program`), whose `closureBindingId` is exactly
+        `"<capturing-function-full-name>:<captured-variable-name>"`
+        (`"index.js::program:wrapper:native"`); every real IDENTIFIER use of that name
+        INSIDE the nested function `refsTo` THIS inner closure-binding LOCAL, not the
+        outer one, also confirmed via REPL. This is a DIFFERENT and STRONGER claim than
+        `function_ancestor_chain`'s own lexical-ancestry walk (which only proves a
+        same-named declaration exists in an enclosing scope, never used alone as
+        cross-function evidence anywhere in this file). New exported fact:
+        `locals.tsv` (id, method_id, name, closure_binding_id) -- the JS/TS side
+        previously always emitted `"locals":[]`, hardcoded empty; this fix populates it
+        for real.
+    (c) the assignment dominates its OWN defining function's real exit (`methodReturn`)
+        -- proves the module fully finishes loading with the assignment having run,
+        the real precondition any EXTERNAL invocation of a captured closure depends on
+        (module-load-then-export is a real language/runtime contract, not itself a CFG
+        fact -- exactly why this is a different evidence kind from same-function
+        dominance, not merely the same check reused).
+    (d) any real, direct, SAME-DEFINING-SCOPE call whose own `candidate_target_ids`
+        names the use's function is ALSO dominated by the assignment -- still catches
+        assignment-after-use within the same defining scope. Deliberately bounded,
+        disclosed scope (only a DIRECT call inside the defining function is checked,
+        matching `LOADER_ALIAS_DEPTH`'s own precedent) -- the common, safe "define, then
+        `module.exports`, invoked later externally" pattern has no such call site to
+        check, so only a/b/c apply to it.
+  Tagged `"closure_capture_proven"` -- an explicitly DIFFERENT, WEAKER tier name than
+  `"dominance_proven"`, never merged with it in any output.
+
+**Four new, real, adversarial fixtures, all run through the real frontend
+(`controls/const_cross_function_probe/index.js`):**
+
+| Case | Shape | Result |
+|---|---|---|
+| `Direct` | cross-function `const`, capturing function invoked AFTER the assignment, same defining scope | `closure_capture_proven` |
+| `Foo` | module-level `const`, capturing function only exported, never invoked in-file | `closure_capture_proven` |
+| `Bar` | cross-function `const`, but the DEFINING function has a real early `return` BEFORE the `const` line | `CROSS_FUNCTION_DEFINITION_NOT_DOMINANT` |
+| `Baz` | cross-function `const`, but the capturing function is invoked SYNCHRONOUSLY in the same defining scope BEFORE the `const` line | `CROSS_FUNCTION_INVOCATION_NOT_DOMINATED` |
+| `SameFn` | genuinely same-function (`const` and use both directly inside one function, no closure at all) | `dominance_proven` |
+
+`Bar`/`Baz` are real, constructible JS (a genuine early return before a `const`
+declaration; a genuine synchronous same-scope call before a `const` line runs -- the
+latter would also hit a real `ReferenceError` from JS's own temporal-dead-zone rule in
+practice, but this tool does not rely on that: it independently proves the same
+rejection from real CFG facts, since not every real-world case would actually crash
+before reaching whatever else follows). All four required a SEPARATE fixture from
+`cfg_dominance_probe` (FIX01G's own four cases) because those all use `var`/`let`, so
+under FIX01H they are now rejected at the earlier `CROSS_FUNCTION_NOT_CONST` gate and no
+longer exercise the deeper exit-dominance/invocation-dominance checks at all --
+`cfg_dominance_probe`'s own gate expectations were updated to reflect this (still
+correctly REJECTED, just via a different, earlier, and more fundamental reason).
+
+**Item 5 of the instruction -- the regex fallback passes the identical gate:** unchanged
+in mechanism from FIX01G, still true by construction: `CALLEE_NOT_REQUIRE` (the only
+reason the fallback is ever tried) can only be reached in `resolve_loader_provenance`
+AFTER `loader_definition_reaches_use` has already returned a real evidence kind (same-
+function OR cross-function), so the fallback remains automatically subject to the
+identical, now-corrected gate with no separate plumbing.
+
+**Item 2 of the instruction (loader-alias hops get the identical gate too):**
+`_callee_resolves_to_require`'s own alias-hop resolution calls the SAME
+`loader_definition_reaches_use`, unchanged in this respect from FIX01G -- an alias is
+exactly as capable of being a cross-function closure-captured `const` (needing the same
+four-part closure evidence) as the top-level receiver.
+
+**All prior real controls, all five FIX01F reaching-definition probes, and both real
+end-to-end corpus packages re-verified after this fix, re-run through the extended
+exporter so real `locals`/`cfg_edges`/`method_cfg_endpoints`/`try_nested_calls` data is
+present:** the 14-control fixture reproduces IDENTICAL counts (`registrations=8
+linked=8 unlinked=0`) -- now correctly reported as 7 `closure_capture_proven` + 1
+`build_path` (previously mislabeled 7 `dominance_proven`, the exact overclaim this fix
+corrects) instead of 7 `canonical`/`dominance_proven`; `memoryjs` reproduces IDENTICAL
+counts (`registrations=12 linked=15 unlinked=25`, all still `build_path`, entirely
+outside this fix's scope); `node-liblzma` reproduces the SAME 6 links, 0 unlinked, now
+correctly reported as `closure_capture_proven` (all 6 real linked calls, inspected
+directly, are genuine module-level `const` bindings captured by separately-defined
+exported functions), plus the same 30 abstained entries as FIX01G (the one real
+try-nested abstention from that fix is unaffected, checked before the const gate). The
+reaching-def probe's own `Qux` case (assignment-after-use, but only exported) now
+correctly abstains with `CROSS_FUNCTION_NOT_CONST` instead of being accepted -- that
+fixture declares the binding `var`, not `const`, so FIX01H correctly no longer accepts
+it; this is a deliberate, disclosed TIGHTENING relative to FIX01G, not a regression, per
+the direct instruction that cross-function evidence must be real closure-capture
+proof, not scope-only reasoning. `gate_crosslang_link_fix.py` re-asserts all of the
+above plus both new fixtures' cases in one script: PASS.
+
+**Corpus-rerun note:** adding `cfg_edges`/`method_cfg_endpoints`/`try_nested_calls`/
+`locals` to the JS/TS exporter (FIX01G/H, this branch) means the eventual full
+494-package cross-language pass (see section 7 below) will need to regenerate JS
+exports and normalized JS facts through the updated `export_neutral.sc`/
+`normalize_joern_facts.py` -- the OLD saved JS facts from a pre-FIX01G/H run lack these
+fields and this resolver now fails CLOSED (`CFG_UNAVAILABLE`/`CROSS_FUNCTION_
+CFG_UNAVAILABLE`) rather than silently accepting without them. This does NOT touch or
+invalidate the separate C/C++-side R05 corpus run in any way -- the C++ exporter/
+normalizer and `resource_guard_verdict_r05.py` are untouched by this entire branch, and
+C++ facts (`normalize_c_cpp_facts_v03.py`'s own output) need no regeneration for this.
 
 ## 7. What happens next (after R05 is frozen -- not started yet)
 

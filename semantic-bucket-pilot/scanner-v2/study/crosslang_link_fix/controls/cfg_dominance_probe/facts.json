@@ -650,7 +650,7 @@
           "kind": "IDENTIFIER",
           "line": 34,
           "name": "module",
-          "type_full_name": "{ exports: import(\"/tmp/cfg_probe/index.js\"); }"
+          "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe/index.js\"); }"
         },
         {
           "call_id": 30064771106,
@@ -3921,7 +3921,7 @@
       "ref_target_ids": [
         94489280522
       ],
-      "type_full_name": "{ exports: import(\"/tmp/cfg_probe/index.js\"); }"
+      "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe/index.js\"); }"
     },
     {
       "code": "_tmp_0",
@@ -4079,12 +4079,127 @@
       "type_full_name": "node-gyp-build"
     }
   ],
-  "locals": [],
+  "locals": [
+    {
+      "closure_binding_id": "index.js::program:callFoo:native1",
+      "id": 94489280530,
+      "method_id": 107374182400,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280512,
+      "method_id": 107374182401,
+      "name": "callFoo"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280513,
+      "method_id": 107374182401,
+      "name": "callBar"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280514,
+      "method_id": 107374182401,
+      "name": "callBaz"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280515,
+      "method_id": 107374182401,
+      "name": "callQux"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280516,
+      "method_id": 107374182401,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280517,
+      "method_id": 107374182401,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280518,
+      "method_id": 107374182401,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280519,
+      "method_id": 107374182401,
+      "name": "i"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280520,
+      "method_id": 107374182401,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280522,
+      "method_id": 107374182401,
+      "name": "module"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280523,
+      "method_id": 107374182401,
+      "name": "e"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280524,
+      "method_id": 107374182401,
+      "name": "__dirname"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280525,
+      "method_id": 107374182401,
+      "name": "require"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280526,
+      "method_id": 107374182401,
+      "name": "process"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280521,
+      "method_id": 107374182401,
+      "name": "_tmp_0"
+    },
+    {
+      "closure_binding_id": "index.js::program:callBar:native2",
+      "id": 94489280529,
+      "method_id": 107374182402,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": "index.js::program:callBaz:native3",
+      "id": 94489280528,
+      "method_id": 107374182403,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": "index.js::program:callQux:native4",
+      "id": 94489280527,
+      "method_id": 107374182404,
+      "name": "native4"
+    }
+  ],
   "members": [],
   "metadata": {
     "cpg_version": "4.0.608",
     "language": "JSSRC",
-    "root": "/tmp/cfg_probe"
+    "root": "/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe"
   },
   "method_cfg_endpoints": [
     {

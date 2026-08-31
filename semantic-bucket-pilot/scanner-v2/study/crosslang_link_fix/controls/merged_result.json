@@ -8992,43 +8992,43 @@
    },
    {
     "cpp_function_id": 17699560226818,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771074,
     "name": "Bar"
    },
    {
     "cpp_function_id": 17699560226819,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771076,
     "name": "Baz"
    },
    {
     "cpp_function_id": 17699560226820,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771078,
     "name": "Qux"
    },
    {
     "cpp_function_id": 17699560226821,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771092,
     "name": "Quux"
    },
    {
     "cpp_function_id": 17699560226822,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771096,
     "name": "Corge"
    },
    {
     "cpp_function_id": 17699560226823,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771100,
     "name": "Grault"
    },
    {
     "cpp_function_id": 17699560226824,
-    "evidence_tier": "dominance_proven",
+    "evidence_tier": "closure_capture_proven",
     "js_call": 30064771102,
     "name": "Garply"
    }
@@ -14495,6 +14495,366 @@
   }
  ],
  "locals": [
+  {
+   "closure_binding_id": "index.js::program:callFoo:native1",
+   "id": 94489280571,
+   "method_id": 107374182400,
+   "name": "native1"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280512,
+   "method_id": 107374182401,
+   "name": "callFoo"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280513,
+   "method_id": 107374182401,
+   "name": "callBar"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280514,
+   "method_id": 107374182401,
+   "name": "callBaz"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280515,
+   "method_id": 107374182401,
+   "name": "callQux"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280516,
+   "method_id": 107374182401,
+   "name": "readIt"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280517,
+   "method_id": 107374182401,
+   "name": "mapIt"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280518,
+   "method_id": 107374182401,
+   "name": "helpIt"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280519,
+   "method_id": 107374182401,
+   "name": "checkLoaderPath"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280520,
+   "method_id": 107374182401,
+   "name": "checkNodePreGypFind"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280521,
+   "method_id": 107374182401,
+   "name": "checkPrebuildInstallDownload"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280523,
+   "method_id": 107374182401,
+   "name": "callQuux"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280524,
+   "method_id": 107374182401,
+   "name": "checkLoaderTemplatePath"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280525,
+   "method_id": 107374182401,
+   "name": "callCorge"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280526,
+   "method_id": 107374182401,
+   "name": "checkLoaderWhitespacePath"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280527,
+   "method_id": 107374182401,
+   "name": "callGrault"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280528,
+   "method_id": 107374182401,
+   "name": "callGarply"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280529,
+   "method_id": 107374182401,
+   "name": "checkLoaderFnPath"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280530,
+   "method_id": 107374182401,
+   "name": "native1"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280531,
+   "method_id": 107374182401,
+   "name": "native2"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280532,
+   "method_id": 107374182401,
+   "name": "native3"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280533,
+   "method_id": 107374182401,
+   "name": "native4"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280534,
+   "method_id": 107374182401,
+   "name": "fs"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280535,
+   "method_id": 107374182401,
+   "name": "lodash"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280536,
+   "method_id": 107374182401,
+   "name": "helper"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280537,
+   "method_id": 107374182401,
+   "name": "loader"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280538,
+   "method_id": 107374182401,
+   "name": "nodePreGyp"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280539,
+   "method_id": 107374182401,
+   "name": "prebuildInstall"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280540,
+   "method_id": 107374182401,
+   "name": "native5"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280541,
+   "method_id": 107374182401,
+   "name": "loaderTemplate"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280542,
+   "method_id": 107374182401,
+   "name": "native6"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280543,
+   "method_id": 107374182401,
+   "name": "loaderWhitespace"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280544,
+   "method_id": 107374182401,
+   "name": "native7"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280545,
+   "method_id": 107374182401,
+   "name": "loaderFn"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280546,
+   "method_id": 107374182401,
+   "name": "native8"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280548,
+   "method_id": 107374182401,
+   "name": "module"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280549,
+   "method_id": 107374182401,
+   "name": "__dirname"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280550,
+   "method_id": 107374182401,
+   "name": "require"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280547,
+   "method_id": 107374182401,
+   "name": "_tmp_1"
+  },
+  {
+   "closure_binding_id": "index.js::program:callBar:native2",
+   "id": 94489280570,
+   "method_id": 107374182402,
+   "name": "native2"
+  },
+  {
+   "closure_binding_id": "index.js::program:callBaz:native3",
+   "id": 94489280569,
+   "method_id": 107374182403,
+   "name": "native3"
+  },
+  {
+   "closure_binding_id": "index.js::program:callQux:native4",
+   "id": 94489280568,
+   "method_id": 107374182404,
+   "name": "native4"
+  },
+  {
+   "closure_binding_id": "index.js::program:readIt:fs",
+   "id": 94489280567,
+   "method_id": 107374182405,
+   "name": "fs"
+  },
+  {
+   "closure_binding_id": "index.js::program:mapIt:lodash",
+   "id": 94489280566,
+   "method_id": 107374182407,
+   "name": "lodash"
+  },
+  {
+   "closure_binding_id": "index.js::program:helpIt:helper",
+   "id": 94489280565,
+   "method_id": 107374182408,
+   "name": "helper"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderPath:__dirname",
+   "id": 94489280563,
+   "method_id": 107374182409,
+   "name": "__dirname"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderPath:loader",
+   "id": 94489280564,
+   "method_id": 107374182409,
+   "name": "loader"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkNodePreGypFind:nodePreGyp",
+   "id": 94489280562,
+   "method_id": 107374182410,
+   "name": "nodePreGyp"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkPrebuildInstallDownload:prebuildInstall",
+   "id": 94489280561,
+   "method_id": 107374182411,
+   "name": "prebuildInstall"
+  },
+  {
+   "closure_binding_id": null,
+   "id": 94489280522,
+   "method_id": 107374182411,
+   "name": "_tmp_0"
+  },
+  {
+   "closure_binding_id": "index.js::program:callQuux:native5",
+   "id": 94489280560,
+   "method_id": 107374182412,
+   "name": "native5"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderTemplatePath:__dirname",
+   "id": 94489280558,
+   "method_id": 107374182413,
+   "name": "__dirname"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderTemplatePath:loaderTemplate",
+   "id": 94489280559,
+   "method_id": 107374182413,
+   "name": "loaderTemplate"
+  },
+  {
+   "closure_binding_id": "index.js::program:callCorge:native6",
+   "id": 94489280557,
+   "method_id": 107374182414,
+   "name": "native6"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderWhitespacePath:__dirname",
+   "id": 94489280555,
+   "method_id": 107374182415,
+   "name": "__dirname"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderWhitespacePath:loaderWhitespace",
+   "id": 94489280556,
+   "method_id": 107374182415,
+   "name": "loaderWhitespace"
+  },
+  {
+   "closure_binding_id": "index.js::program:callGrault:native7",
+   "id": 94489280554,
+   "method_id": 107374182416,
+   "name": "native7"
+  },
+  {
+   "closure_binding_id": "index.js::program:callGarply:native8",
+   "id": 94489280553,
+   "method_id": 107374182417,
+   "name": "native8"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderFnPath:__dirname",
+   "id": 94489280551,
+   "method_id": 107374182418,
+   "name": "__dirname"
+  },
+  {
+   "closure_binding_id": "index.js::program:checkLoaderFnPath:loaderFn",
+   "id": 94489280552,
+   "method_id": 107374182418,
+   "name": "loaderFn"
+  },
   {
    "code": "Napi::Env env",
    "id": 17686675324928,
