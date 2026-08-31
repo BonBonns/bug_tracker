@@ -1,5 +1,15 @@
 # Task #28, phase 3: behavioral compatibility
 
+**Read `PILOT_CONCLUSION_AND_FOLLOWUPS.md` for the corrected bottom line.** Two framing points
+in this document, below, read as more conclusive than the evidence supports: Section 3.3's
+`dest_capacity_bytes: 100` claim only verifies the capacity *value*, not that the site's own
+write length exceeds it; and the real OOB_WRITE/OOB_READ candidates found here sit inside `re2`'s
+*vendored* `abseil-cpp`, not `re2`'s own package-authored code — neither is a `re2` finding
+without further work. That document also records the corrected per-property status (only
+`LOCK_BALANCE` is close to integration-ready) and the five follow-up tasks (#29-33) this pilot's
+own real evidence opened. The real evidence and numbers in this document itself are unchanged
+and still accurate; only the conclusiveness of their framing is corrected.
+
 Corrects the prior phase's own limit, stated plainly there and now closed: schema/execution
 compatibility (35/35, then 42/42 with the two runs below) is necessary but not sufficient.
 This phase exercises real positive, confirmed-negative, and explicit-abstention paths for all
