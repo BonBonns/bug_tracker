@@ -1,5 +1,15 @@
 # Repository-wide analyzer class inventory
 
+**SUPERSEDED — Section 1's totals (25 / 22 / 20 / 1 / 1 / ~13) mix four different units
+(security properties, implementations/revisions, configuration variants, and infrastructure)
+into single counts, and in one case (Gate-39) subtracts a piece of infrastructure from a
+property total as if it were an unpromotable property. This was flagged directly and is
+corrected in `README.md` and `data/*.csv` in this same directory, with all totals now computed
+programmatically by `compute_totals.py` from normalized tables instead of asserted by hand.
+This document is kept for its research narrative and per-class detail (Sections 2-5 remain
+accurate as investigative record), but its Section 1 numbers should not be cited — use
+`README.md`'s computed output instead.**
+
 Read-only inventory, per explicit instruction: nothing modified, nothing run. Does **not** use
 `ANALYZER_FREEZE.md` as the universe — that document's own claim was already shown
 (`study/ANALYZER_CLASS_COVERAGE_MATRIX.md`) to be stale/incomplete. This inventory instead
