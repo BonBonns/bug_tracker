@@ -34,14 +34,49 @@ Does not itself decide whether a finding IS real, IS attributable, or IS reachab
 those are #31 (provenance classification) and #32 (reachability) respectively, both explicitly
 downstream of this module's own output.
 
-FAIL-CLOSED ACTIONABILITY (direct correction): a finding whose own node identity cannot be
-resolved to a real source_path + content_hash is NEVER treated as equivalent to a resolved one.
-Every enriched finding carries `provenance["resolved"]` (bool) and a mirrored top-level
-`finding["actionable"]` flag -- False whenever resolution failed for any reason. Such a finding
-may still be RETAINED for diagnostic purposes (its own real classification/reason fields are
-never deleted), but MUST NOT be reported, published, or counted as a demonstrated vulnerability
-while `actionable` is False. A caller building any future report/publish step MUST filter on
-this field explicitly -- this module does not do that filtering itself, only marks it.
+REPORTABILITY (direct correction, replacing an earlier, WRONG version of this section): a first
+implementation set `finding["actionable"] = True` purely because provenance resolved -- a real
+semantic defect, concretely confirmed on node-libcurl's own real finding (a site independently
+confirmed elsewhere as a CONFIRMED FALSE POSITIVE) coming back marked actionable=True merely
+because its source file was resolved. Provenance resolution is a NECESSARY condition for
+reportability, never a SUFFICIENT one -- resolving a file tells you nothing about whether the
+finding is a real candidate, whether its contract's premises are known to apply, or whether it
+has already been adjudicated a false positive.
+
+Five separate fields, never conflated:
+  - `scanner_candidate` (bool): did the SCANNER's OWN verdict logic classify this as a real
+    candidate, as opposed to an abstention/inapplicable/build-conflict/confirmed-safe record
+    that happens to share the same output list? Determined per-property from each scanner's own
+    real verdict vocabulary (see PROPERTY_CANDIDATE_RULES below) -- provenance.py does not
+    invent this, it reads what the scanner itself already encoded.
+  - `provenance.resolved` (bool): this module's own job, unchanged -- a real source_path +
+    content_hash were both resolved.
+  - `applicability_status` (str): whether this contract's real premises (e.g. exceptions-disabled
+    build config for Resource Guard, JS-reachability for the others) are known to hold. NEVER set
+    to "APPLICABLE" by this module -- it has no evidence to determine this; defaults to
+    "NOT_YET_DETERMINED" unless the finding already carries a real value from elsewhere (a
+    scanner's own applicability gate, or a later adjudication pass).
+  - `adjudication_status` (str): whether this SPECIFIC finding has already been manually or
+    automatically adjudicated. NEVER set to "CONFIRMED_FALSE_POSITIVE" by this module (it has no
+    evidence to determine this either); defaults to "NOT_ADJUDICATED" unless already present.
+  - `reportable` (bool): computed by the exact, one-way formula below -- ALL FOUR of the above
+    must hold before a finding is ever reportable; failing any one is enough to make it False,
+    and NOTHING in this module can force it True on its own:
+
+      finding["reportable"] = (
+          finding.get("scanner_candidate", False)
+          and finding["provenance"]["resolved"]
+          and finding.get("applicability_status") == "APPLICABLE"
+          and finding.get("adjudication_status") != "CONFIRMED_FALSE_POSITIVE"
+      )
+
+  One-way rule: unresolved provenance -> reportable=False, always, unconditionally. Resolved
+  provenance -> reportable is computed from the OTHER three fields, never automatically flipped
+  true by resolution alone. A finding with reportable=False may still be RETAINED for diagnostic
+  purposes (its own real classification/reason fields are never deleted) -- it must simply never
+  be reported, published, or counted as a demonstrated vulnerability while `reportable` is False.
+  `finding["actionable"]` from the prior, incorrect version of this module no longer exists --
+  replaced entirely by `finding["reportable"]`.
 """
 import base64
 import hashlib
@@ -169,33 +204,34 @@ def _relpath_from_absolute_or_raw(raw_file_field: str, pkg_dir: str) -> str:
 
 def _unresolved(finding: dict, reason: str) -> dict:
     """Marks a finding's provenance as unresolved, FAIL-CLOSED: source_path/content_hash stay
-    None, provenance_hint names the real reason, provenance["resolved"] and the mirrored
-    top-level finding["actionable"] are both explicitly False. A caller must check "actionable"
-    (or provenance["resolved"]) before ever reporting this finding as a demonstrated
-    vulnerability -- it may still be kept for diagnostic purposes, never silently promoted."""
+    None, provenance_hint names the real reason, provenance["resolved"] is explicitly False.
+    Does NOT set finding["reportable"] -- that is computed once, uniformly, by
+    finalize_reportability(), which honors the one-way rule (unresolved -> reportable=False)
+    regardless of this function's own caller."""
     finding["provenance"]["source_path"] = None
     finding["provenance"]["content_hash"] = None
     finding["provenance"]["provenance_hint"] = reason
     finding["provenance"]["resolved"] = False
-    finding["actionable"] = False
     return finding
 
 
 def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict, pkg_dir: str,
                     id_field_name: str) -> dict:
-    """Attaches the six provenance fields to ONE finding/candidate dict, in place, and returns
-    it. node_id is the method_id (R04/R05/LOCK_BALANCE/PROTECTED_FIELD) or function_id
+    """Attaches ONLY the provenance fields (package identity, both tree hashes, source_path,
+    content_hash, provenance_hint, resolved) to ONE finding/candidate dict, in place, and
+    returns it. Does NOT set scanner_candidate/applicability_status/adjudication_status/
+    reportable -- call finalize_reportability() separately (enrich_record does this
+    automatically) so provenance resolution and reportability stay two clearly separate steps,
+    never conflated.
+
+    node_id is the method_id (R04/R05/LOCK_BALANCE/PROTECTED_FIELD) or function_id
     (OOB_WRITE/READ/COMPARE, via PROV-R01's additive field) to join through methods.tsv.
     id_field_name is recorded so a reader can see which of the finding's own existing fields
-    was used as the join key (e.g. "method_id" or "function_id") -- never silently ambiguous.
-    Fields 5 (line/node identity) are the finding's own PRE-EXISTING fields, untouched here.
-
-    FAIL-CLOSED: finding["actionable"] (mirrored from provenance["resolved"]) is True ONLY when
-    a real source_path AND a real content_hash were both resolved. Any failure mode below sets
-    both False -- an unresolvable finding is never treated as equivalent to a resolved one.
+    was used as the join key -- never silently ambiguous. Fields 5 (line/node identity) are the
+    finding's own PRE-EXISTING fields, untouched here.
     """
     finding["provenance"] = {
-        "schema": "source-provenance-finding/0.2",
+        "schema": "source-provenance-finding/0.3",
         "package_name": manifest.get("package_name"),
         "version": manifest.get("version"),
         "tarball_sha256": manifest.get("tarball_sha256"),
@@ -222,14 +258,61 @@ def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict
     finding["provenance"]["content_hash"] = entry["content_hash"]
     finding["provenance"]["provenance_hint"] = entry["provenance_hint"]
     finding["provenance"]["resolved"] = True
-    finding["actionable"] = True
+    return finding
+
+
+# PROPERTY_CANDIDATE_RULES: which of a scanner's OWN real verdict values represent a genuine
+# candidate, as opposed to an abstention/inapplicable/build-conflict/confirmed-safe record that
+# happens to share the same output list. Read directly from each scanner's own source, not
+# guessed:
+#   - R04/R05's own "findings" list mixes VALUE_ACQUISITION_SEMANTICS_UNRESOLVED (abstention),
+#     CONTRACT_NOT_APPLICABLE, BUILD_CONFIGURATION_CONFLICT/UNRESOLVED (all abstentions), and
+#     the real classification pair VALUE_ACQUISITION_GUARD_ESTABLISHED (real negative -- a
+#     confirmed-safe guard, not a candidate) / VALUE_ACQUISITION_GUARD_MISSING (the one real
+#     positive candidate verdict). Only the latter is scanner_candidate=True.
+#   - LOCK_BALANCE/PROTECTED_FIELD/OOB_WRITE/OOB_READ/OOB_COMPARE were checked directly: every
+#     item their own findings/candidates lists ever contain IS already a real candidate (no
+#     abstention-shaped entries are ever appended to those specific lists -- abstentions there
+#     only ever increment a separate classification COUNTER, never enter the list itself) -- so
+#     scanner_candidate=True unconditionally is correct for those five.
+_R04_R05_CANDIDATE_VERDICTS = {"VALUE_ACQUISITION_GUARD_MISSING"}
+
+PROPERTY_CANDIDATE_RULES = {
+    "r04_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
+    "r05_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
+    "lock_balance_findings": lambda f: True,
+    "protected_field_findings": lambda f: True,
+    "oob_write_candidates": lambda f: True,
+    "oob_read_candidates": lambda f: True,
+    "oob_compare_candidates": lambda f: True,
+}
+
+
+def finalize_reportability(finding: dict, is_scanner_candidate: bool) -> dict:
+    """Sets scanner_candidate (from the caller's own per-property rule, never invented here),
+    defaults applicability_status/adjudication_status to non-affirmative sentinels UNLESS the
+    finding already carries a real value from elsewhere (never overwrites an existing value),
+    then computes reportable via the exact, one-way formula. Must be called AFTER
+    enrich_finding() has set finding["provenance"]["resolved"].
+    """
+    finding.setdefault("scanner_candidate", is_scanner_candidate)
+    finding.setdefault("applicability_status", "NOT_YET_DETERMINED")
+    finding.setdefault("adjudication_status", "NOT_ADJUDICATED")
+    finding["reportable"] = (
+        bool(finding.get("scanner_candidate", False))
+        and bool(finding.get("provenance", {}).get("resolved", False))
+        and finding.get("applicability_status") == "APPLICABLE"
+        and finding.get("adjudication_status") != "CONFIRMED_FALSE_POSITIVE"
+    )
     return finding
 
 
 def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) -> dict:
     """Enriches every finding/candidate across all six properties' own output keys already
     present in `record` (whichever are present -- silently skips a key that isn't in this
-    record, so this is safe to call regardless of which properties actually ran)."""
+    record, so this is safe to call regardless of which properties actually ran). Attaches
+    provenance, then computes reportability per PROPERTY_CANDIDATE_RULES -- never the reverse
+    order, and never lets provenance resolution alone imply reportable."""
     method_file_map = load_method_file_map(cpp_raw_dir)
 
     for findings_key, id_field in (
@@ -238,11 +321,15 @@ def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) 
         ("lock_balance_findings", "method_id"),
         ("protected_field_findings", "method_id"),
     ):
+        candidate_rule = PROPERTY_CANDIDATE_RULES[findings_key]
         for f in record.get(findings_key) or []:
             enrich_finding(f, f.get(id_field), method_file_map, manifest, pkg_dir, id_field)
+            finalize_reportability(f, candidate_rule(f))
 
     for candidates_key in ("oob_write_candidates", "oob_read_candidates", "oob_compare_candidates"):
+        candidate_rule = PROPERTY_CANDIDATE_RULES[candidates_key]
         for c in record.get(candidates_key) or []:
             enrich_finding(c, c.get("function_id"), method_file_map, manifest, pkg_dir, "function_id")
+            finalize_reportability(c, candidate_rule(c))
 
     return record
