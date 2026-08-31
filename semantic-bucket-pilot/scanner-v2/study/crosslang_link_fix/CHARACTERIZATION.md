@@ -378,13 +378,16 @@ identical check is now used for the ALIAS-hop resolution inside `_callee_resolve
 require()` too (an alias is exactly as capable of being ambiguous or shadowed as the
 top-level receiver, and was not checked this way before this fix).
 
-**CFG reachability, as the instruction also offered as an alternative:** the JS/TS
-program-facts schema does not currently export CFG edges at all (confirmed: `export_
-neutral.sc`'s own output has no `cfg_edges` key, unlike the C/C++ side) -- building real
-CFG-based reachability would require a genuine frontend/export change, not a Python-side
-fix. The lexical-scope + single-definition + shadow check above is the strongest provenance
-available from data already exported, and it is what actually falsified all three real bugs
-above -- stated precisely as what it is, not oversold as full dataflow reachability.
+**CFG reachability, as the instruction also offered as an alternative:** at the time of
+this fix, the JS/TS program-facts schema did not export CFG edges at all (confirmed:
+`export_neutral.sc`'s own output had no `cfg_edges` key, unlike the C/C++ side) --
+building real CFG-based reachability would require a genuine frontend/export change, not
+a Python-side fix. The lexical-scope + single-definition + shadow check above is the
+strongest provenance available from data exported AT THIS POINT, and it is what actually
+falsified all three real bugs above -- stated precisely as what it is, not oversold as
+full dataflow reachability. **This gap was closed in CROSSLANG-LINK-FIX01G below
+(section 6f)**, once real adversarial testing showed scope-uniqueness alone is not
+sufficient either.
 
 **The regex fallback is now gated behind this SAME check, not tried independently** --
 confirmed necessary: without this, the fallback alone reproduces the overwrite/branch false
@@ -429,8 +432,153 @@ losing any previously-correct real link. The five reaching-definition probes (a 
 fixture, `controls/js_reaching_def_probe/reaching_def_probe.js`) now resolve exactly as
 intended: overwrite and
 branch cases -> `MULTIPLE_DEFINITIONS_AMBIGUOUS`; parameter shadowing ->
-`PARAMETER_SHADOWED`; the single, real, unambiguous definition case (`Qux`) -> still
-`canonical`, unaffected; the alias cycle -> `CALLEE_NOT_REQUIRE`, no hang or crash.
+`PARAMETER_SHADOWED`; the single, real, unambiguous definition case (`Qux`) -> accepted
+(tagged `canonical` at the time this section was written; see section 6f, where this
+same case's tag changes to `dominance_proven` once real CFG dominance is also checked --
+the accept decision itself does not change); the alias cycle -> `CALLEE_NOT_REQUIRE`, no
+hang or crash.
+
+## 6f. CROSSLANG-LINK-FIX01G: scope-uniqueness was not real reachability either
+
+Direct instruction: test assignment-after-use, one-branch-only assignment, loop-only
+assignment, and try/catch-only assignment through the real frontend; the FIX01F
+"unique-scope-definition" rule must not establish loader provenance for any of them;
+first check whether jssrc2cpg already contains usable CFG edges even though the exporter
+omits them, and if so extend the exporter/normalizer and prove real dominance; rename the
+existing tier from `canonical` to `scope_unique` until true reachability is established;
+apply the same gate to the regex fallback.
+
+**A new, real, adversarial fixture** (`controls/cfg_dominance_probe/index.js`, four
+cases, each with exactly ONE real `<operator>.assignment` to its name so FIX01F's own
+rule cannot reject any of them on scope-uniqueness alone):
+
+| Case | Shape | FIX01F verdict (before this fix) |
+|---|---|---|
+| `Foo` | assignment-after-use: `callFoo()` invoked synchronously BEFORE the `require(...)` line | WRONGLY `matched=True, tier=canonical` |
+| `Bar` | one-branch-only: the sole assignment is inside an `if` with no `else` | WRONGLY `matched=True, tier=canonical` |
+| `Baz` | loop-only: the sole assignment is inside a `for` loop body | WRONGLY `matched=True, tier=canonical` |
+| `Qux` | try/catch-only: the sole assignment is inside a `try`, empty `catch` | WRONGLY `matched=True, tier=canonical` |
+
+All four confirmed wrongly accepted by direct testing against the FIX01F implementation
+before starting this fix -- exactly the gap the instruction predicted.
+
+**Step 1 -- do real CFG edges exist?** Checked directly via Joern REPL on the real CPG
+(`fooCall.outE("CFG").l` / `.inE("CFG").l` / `.cfgNext`) before writing any exporter
+code: yes, jssrc2cpg builds real CFG structure; the exporter had simply never surfaced
+it. This settled which branch of the instruction applied -- extend the exporter, not the
+"CFG facts genuinely do not exist" conservative fallback.
+
+**Step 2 -- extending the exporter, and a real quirk found while doing it.**
+`export_neutral.sc` gained two new blocks: `cfg_edges.tsv` (owner/from/to, walking
+`method.cfgNode.cfgNext`, mirroring the C/C++ side's own `export_c_cpp_facts_v03.sc`
+convention exactly) and `method_cfg_endpoints.tsv` (method_id/entry_id/exit_id, using
+the Method node as entry and MethodReturn as exit -- Joern's own stated convention).
+
+Regenerating the cfg_dominance_probe fixture's real facts through this first version and
+inspecting the raw edges directly (not assumed) found the exit id UNREACHABLE from the
+walked edge set for every function: `method.cfgNode` -- the set the walk iterates --
+excludes BOTH the Method node itself and its own MethodReturn node. Confirmed precisely
+via direct REPL query: `RETURN.cfgNext` (successor, the semantic step the walk uses)
+returns EMPTY even though a real raw CFG edge into MethodReturn exists
+(`methodReturn.inE("CFG").size == 1`, and `methodReturn.cfgIn` -- the PREDECESSOR step --
+correctly returns the real terminal node). An intentional, direction-asymmetric filter in
+Joern's own semantic CFG steps, not a bug in this exporter, but one that silently breaks
+every dominance computation downstream if not patched around. Fixed by adding the two
+boundary hops explicitly: `method.start.cfgNext` for entry -> first-real-node, and
+`method.methodReturn.cfgIn` for last-real-node(s) -> exit. Re-verified real: the
+cfg_dominance_probe fixture's edge count went 127 -> 137 (the ten real boundary hops
+across five real functions), and entry/exit became reachable from the walked graph.
+
+**Step 3 -- `loader_definition_dominates()`, the real dominance algorithm
+(`link_napi_facts.py`).** Standard node-removal CFG dominance (`cfg_dominates()`): does
+every real path from a function's entry to a target node pass through a given node?
+Applied as two real, disclosed requirements, both necessary before a `scope_unique`
+definition (FIX01F's rule, renamed from `canonical` since it establishes scope-
+uniqueness only, nothing about execution order) is trusted as loader provenance:
+
+  (a) the assignment must dominate its own defining function's real exit (MethodReturn)
+      -- any real path from entry to a real return statement that bypasses the
+      assignment fails this. This alone rejects `Bar` (the `else`-less branch has a path
+      to exit that never assigns) and `Baz` (the loop may run zero times, so a path to
+      exit exists that never enters the body) -- confirmed real, independent of whether
+      the defining function is ever invoked at all.
+
+  (b) ONLY when the use lives in a DIFFERENT function than the assignment, the
+      assignment must ALSO dominate every real, DIRECT, SAME-DEFINING-SCOPE call whose
+      own `candidate_target_ids` names the use's function. This is what rejects `Foo`:
+      the assignment alone unconditionally dominates its own function's exit (it is the
+      last, straight-line statement -- check (a) alone would WRONGLY accept it), but the
+      direct `callFoo();` invocation inside the SAME scope, found via (b), is NOT
+      dominated by the assignment (it runs first) -- correctly rejected.
+
+  Check (b)'s scope is deliberately bounded and disclosed: only a call found DIRECTLY
+  within the assignment's own defining function is checked, matching this project's
+  established bounded-trace discipline (`LOADER_ALIAS_DEPTH`). A function merely
+  DEFINED then exported via `module.exports`, invoked later by external code after the
+  whole module has finished loading -- the common, safe, real pattern -- is correctly
+  NOT penalized: no such invocation site exists inside the defining function to check,
+  so only requirement (a) applies, which that pattern already satisfies. Verified as a
+  real, deliberate A/B distinction, not just an assumption: the reaching-def probe's own
+  `Qux` case (FIX01F, section 6e -- assignment-after-use, but the closure is only
+  EXPORTED, never invoked within that file) is now correctly ACCEPTED
+  (`dominance_proven`) by this exact same code path, while cfg_dominance_probe's `Foo`
+  (assignment-after-use WITH a real, direct, same-scope invocation before the
+  assignment) is correctly REJECTED -- the two fixtures differ in exactly the one
+  variable this design means to test.
+
+**Step 4 -- a second real gap, found only by testing, not anticipated in the design:**
+after steps 1-3, `Qux` (try/catch-only) was still WRONGLY accepted
+(`dominance_proven`). Investigated by direct REPL query rather than assumed: jssrc2cpg's
+static CFG construction does not model an implicit exceptional edge from an arbitrary
+statement into its `catch` handler -- only a real, explicit `throw` statement would
+create one, and this fixture has none. Removing the assignment node from the graph
+(the dominance test's own node-removal step) therefore finds NO alternate path to exit
+through the catch block, because the catch block is not wired into this frontend's CFG
+at all for this shape -- CFG dominance is genuinely UNSOUND for a try-nested assignment,
+not merely imprecise. Fixed by adding a third, real, disclosed exported fact,
+`try_nested_calls.tsv` (`cpg.controlStructure.controlStructureType("TRY").ast.isCall.id`
+-- confirmed via REPL to correctly identify the real assignment call id nested inside
+the fixture's own `try` block), and an explicit, syntactic override in
+`loader_definition_dominates()`: an assignment AST-nested inside a `try` block is
+rejected outright (`DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE`), regardless of what CFG
+dominance alone would say, since that answer cannot be trusted for this shape.
+
+**The regex fallback tier is gated by the identical dominance requirement, with no
+separate plumbing needed** -- by construction: `resolve_loader_provenance()` now runs
+the dominance check immediately after establishing a `scope_unique` definition, BEFORE
+ever inspecting the definition's own value shape. The `CALLEE_NOT_REQUIRE` reason (the
+ONLY reason the fallback is ever tried) can therefore only be reached AFTER dominance has
+already passed. The same dominance check is also applied to each alias hop inside
+`_callee_resolves_to_require()` (an alias is exactly as capable of being defined in a
+dead branch, a loop, a try block, or after its own use as the top-level receiver is).
+
+**Tier naming.** Per direct instruction, the FIX01F tier is not called `canonical` in
+this file's own internal terminology any more -- `JsCallIndex.receiver_definition()`
+establishes SCOPE_UNIQUE evidence only, a real but, as these four fixtures proved, NOT
+sufficient condition. Accepted, dominance-proven evidence is now tagged
+`"dominance_proven"` in `link_napi_facts.py`'s own output (not `"scope_unique"` -- that
+name would itself have been a real overclaim, since a `scope_unique` definition that
+fails dominance is REJECTED, never surfaced as a linked call under any tier name).
+`"scope_unique"` is used only descriptively, for the specific, narrower thing FIX01F's
+own reaching-definition check establishes on its own.
+
+**All prior real controls, all five FIX01F reaching-definition probes, and both real
+end-to-end corpus packages re-verified after this fix, re-run through the extended
+exporter so real `cfg_edges`/`method_cfg_endpoints`/`try_nested_calls` data is present
+(not assumed carried over from stale facts):** the 14-control fixture reproduces IDENTICAL
+counts (`registrations=8 linked=8 unlinked=0`; 7 of the 8 positives now tagged
+`dominance_proven`, one straight `build_path` match unaffected by this fix's scope);
+`memoryjs` reproduces IDENTICAL counts (`registrations=12 linked=15 unlinked=25`; all 15
+were always `build_path` matches, outside this fix's scope entirely, confirming this fix
+changes nothing for a package that loads its binding via a direct build-path require);
+`node-liblzma` reproduces the SAME 6 `dominance_proven` links, 0 unlinked, plus ONE new,
+real, correctly-conservative abstention (`DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE`, 29 -> 30
+abstained) on a real, previously-unflagged try-nested loader-adjacent assignment
+elsewhere in that package's own source -- a genuine new finding from this fix, not a
+regression. The five FIX01F reaching-def probes are unaffected except `Qux`, whose tier
+label changed from `canonical` to `dominance_proven` (same accept decision, stronger,
+now-accurate evidence). `gate_crosslang_link_fix.py` (new, this fix) re-asserts all of
+the above plus the four new cfg_dominance_probe cases in one script: PASS.
 
 ## 7. What happens next (after R05 is frozen -- not started yet)
 

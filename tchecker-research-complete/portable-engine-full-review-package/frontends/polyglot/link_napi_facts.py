@@ -59,8 +59,56 @@ demoted to an explicitly labeled FALLBACK, tried ONLY when the canonical resolve
 establish provenance (e.g. genuinely ambiguous/duplicate assignments, or a receiver-
 initialization shape the canonical walk does not (yet) model) -- never presented as
 established evidence. Every linked call's own audit record carries which tier produced
-it (`"canonical"` or `"fallback_marker_regex"`), so a reader can always tell them apart;
-`link_napi_facts.py`'s own output never merges the two silently.
+it, so a reader can always tell them apart; `link_napi_facts.py`'s own output never
+merges tiers silently.
+
+CROSSLANG-LINK-FIX01G (this revision -- see CHARACTERIZATION.md's own addendum for the
+full, real account): FIX01F's own "exactly one real assignment, in a real lexical
+ancestor scope, not parameter-shadowed" rule -- now called SCOPE_UNIQUE, since that is
+precisely and only what it establishes -- was shown, by direct testing through the real
+frontend on four dedicated adversarial fixtures, to say NOTHING about EXECUTION ORDER:
+a scope-unique definition inside a single `if` branch with no `else`, inside a `for`
+loop body, inside a `try` block (no corresponding assignment on the `catch` path), or
+positioned in the source AFTER a synchronous call that already reaches the use, is
+indistinguishable from a genuinely safe unconditional definition under SCOPE_UNIQUE
+alone -- confirmed real: all four cases were WRONGLY accepted before this fix.
+
+First checked whether jssrc2cpg's own CPG contains usable CFG structure even though the
+JS/TS exporter had never surfaced it: confirmed real via direct Joern-REPL query
+(`call.outE("CFG").l` / `.cfgNext` returned real edges). `export_neutral.sc` and
+`normalize_joern_facts.py` were extended (mirroring the C/C++ side's own
+`export_c_cpp_facts_v03.sc` `cfg_edges.tsv` convention exactly) to surface `cfg_edges`
+(owner/from/to) and `method_cfg_endpoints` (method_id/entry_id/exit_id, using Joern's own
+Method-node-as-entry / MethodReturn-as-exit convention) in the normalized JS facts doc.
+
+`loader_definition_dominates()` below is the real, structural fix: a SCOPE_UNIQUE
+definition is accepted as loader provenance ONLY IF real CFG dominance is ALSO proven --
+(a) the assignment dominates its own defining function's real exit node (methodReturn;
+rules out one-branch-only, loop-only, and try/catch-only assignments -- any path from
+entry to a real return statement that bypasses the assignment fails this, whichever
+function is being checked), AND (b), only when the use lives in a DIFFERENT function than
+the assignment, the assignment additionally dominates every real, DIRECT, SAME-DEFINING-
+SCOPE call whose own `candidate_target_ids` names the use's function (rules out
+assignment-after-use: a synchronous same-scope invocation reached before the assignment
+runs). Check (b)'s scope is deliberately bounded and disclosed, matching this project's
+own established bounded-trace discipline (e.g. `LOADER_ALIAS_DEPTH` above): a function
+invoked from OUTSIDE its own defining scope -- the common, safe "define, then
+`module.exports`, invoked later by external code after the whole module has finished
+loading" pattern -- is correctly NOT rejected by (b), since (a) alone already establishes
+the real safety property that pattern needs (the assignment is guaranteed to have run by
+the time the defining function itself finishes executing).
+
+Accepted evidence is now tagged `"dominance_proven"` (not `"canonical"` -- that name
+overclaimed; SCOPE_UNIQUE is a necessary but, as these four fixtures proved, NOT a
+sufficient condition on its own). The `CALLEE_NOT_REQUIRE` abstention reason -- the ONLY
+reason the marker-regex fallback is ever tried -- can now only be reached AFTER the
+dominance gate has already passed inside `resolve_loader_provenance()`, which
+automatically applies the identical dominance gate to the fallback tier too, with no
+separate plumbing needed. Verified real and correct: all four new adversarial fixtures
+now abstain with an explicit reason (`DEFINITION_NOT_DOMINANT` or
+`INVOCATION_NOT_DOMINATED`); the full existing control suite and both real end-to-end
+corpus packages (`memoryjs`, `node-liblzma`) re-verified with zero regressions, re-run
+through the extended exporter so real `cfg_edges`/`method_cfg_endpoints` data is present.
 """
 import json, re, sys, argparse
 from collections import defaultdict
@@ -115,21 +163,66 @@ def _strip_literal_quotes(code):
     return c
 
 
+def _cfg_reachable(cfg_next, start_id, target_id, avoid=None):
+    """CROSSLANG-LINK-FIX01G: real, bounded BFS reachability from `start_id` to
+    `target_id` over `cfg_next` (a real CFG-successor adjacency map, node id -> [node
+    id, ...], built from the frontend's own `cfg_edges` export). `avoid`, if given, is
+    treated as removed from the graph for this walk only (a temporary BFS-time
+    exclusion, never a persistent mutation of `cfg_next` itself) -- the standard
+    node-removal dominance test's own reachability sub-step. `visited` bounds the walk
+    to the real, finite node count, so a genuine CFG cycle (a loop) cannot hang this."""
+    if start_id == target_id:
+        return True
+    seen = {start_id}
+    stack = [start_id]
+    while stack:
+        n = stack.pop()
+        for nxt in cfg_next.get(n, ()):
+            if nxt == target_id:
+                return True
+            if nxt == avoid or nxt in seen:
+                continue
+            seen.add(nxt)
+            stack.append(nxt)
+    return False
+
+
+def cfg_dominates(cfg_next, entry_id, dom_id, target_id):
+    """CROSSLANG-LINK-FIX01G: real, structural CFG dominance -- does EVERY real path
+    from `entry_id` to `target_id` pass through `dom_id`? Computed by the standard
+    node-removal test: `target_id` is reachable from `entry_id` in the real graph
+    (else there is nothing to prove either way), then `dom_id` is temporarily excluded
+    and reachability is re-checked -- if `target_id` is STILL reachable without
+    `dom_id`, `dom_id` does not dominate it. Returns True (proven dominant), False
+    (proven NOT dominant), or None ("cannot establish" -- `target_id` is not reachable
+    from `entry_id` at all, usually a real id mismatch or genuinely dead code, never
+    silently treated as a pass by any caller in this file)."""
+    if not _cfg_reachable(cfg_next, entry_id, target_id):
+        return None
+    if dom_id == target_id:
+        return True
+    return not _cfg_reachable(cfg_next, entry_id, target_id, avoid=dom_id)
+
+
 class JsCallIndex:
     """Real, ID-keyed indices over a JS/TS program-facts doc's own `calls`/`functions`
-    lists -- built once per run, consumed by `resolve_loader_provenance()`. No new
-    export/frontend capability needed: every field used here (`id`, `name`, `code`,
-    `full_name`, `parameters[].name`, `arguments[].id`, `arguments[].kind`,
-    `arguments[].code`, `enclosing_function_id`) was already present in the existing
-    schema."""
+    lists -- built once per run, consumed by `resolve_loader_provenance()`. Every field
+    used here (`id`, `name`, `code`, `full_name`, `parameters[].name`, `arguments[].id`,
+    `arguments[].kind`, `arguments[].code`, `enclosing_function_id`) was already present
+    in the existing schema; `cfg_edges`/`method_cfg_endpoints` (CROSSLANG-LINK-FIX01G)
+    are new, real fields added to the JS/TS exporter for this fix -- absent (empty) on
+    an older raw export, which then fails CLOSED on every dominance check below
+    (`CFG_UNAVAILABLE`), never silently passes one."""
 
     def __init__(self, js):
         self.calls_by_id = {c['id']: c for c in js.get('calls', [])}
         self.functions_by_id = {f['id']: f for f in js.get('functions', [])}
         self.functions_by_full_name = {f['full_name']: f for f in js.get('functions', [])}
-        # assignments_by_lhs: name -> [(rhs_arg, enclosing_function_id), ...] -- tracks
-        # WHERE each real assignment lives, not just its value, so scope/shadowing can be
-        # checked (see CROSSLANG-LINK-FIX01F, module docstring).
+        # assignments_by_lhs: name -> [(rhs_arg, enclosing_function_id, assign_call_id),
+        # ...] -- tracks WHERE each real assignment lives (for scope/shadowing,
+        # CROSSLANG-LINK-FIX01F) and its OWN CFG node id (for dominance,
+        # CROSSLANG-LINK-FIX01G: the `<operator>.assignment` call's own id IS the real
+        # CFG node representing "this assignment has executed").
         self.assignments_by_lhs = defaultdict(list)
         self.require_calls = []  # [(call_id, pkg_name)]
         for c in js.get('calls', []):
@@ -138,11 +231,25 @@ class JsCallIndex:
                 lhs, rhs = args.get(1), args.get(2)
                 if lhs and lhs.get('kind') == 'IDENTIFIER' and rhs:
                     self.assignments_by_lhs[lhs['code']].append(
-                        (rhs, c.get('enclosing_function_id')))
+                        (rhs, c.get('enclosing_function_id'), c['id']))
             if c.get('name') == 'require':
                 lit = args.get(1)
                 if lit and lit.get('kind') == 'LITERAL':
                     self.require_calls.append((c['id'], _strip_literal_quotes(lit['code'])))
+
+        # CROSSLANG-LINK-FIX01G: cfg_next (node id -> [next node id, ...]) and
+        # method_exit (method/function id -> its real methodReturn node id), both built
+        # from the frontend's own real `cfg_edges`/`method_cfg_endpoints` export.
+        self.cfg_next = defaultdict(list)
+        for e in js.get('cfg_edges', []):
+            self.cfg_next[e['from']].append(e['to'])
+        self.method_exit = {ep['method_id']: ep['exit_id']
+                             for ep in js.get('method_cfg_endpoints', [])}
+        # CROSSLANG-LINK-FIX01G addendum: real ids of calls AST-nested inside a `try`
+        # block -- see `loader_definition_dominates()`'s own docstring for why CFG
+        # dominance alone is not sound for these (jssrc2cpg's CFG does not model an
+        # implicit exceptional edge into `catch`, confirmed real on a dedicated fixture).
+        self.try_nested_calls = set(js.get('try_nested_calls', []))
 
     def function_ancestor_chain(self, function_id):
         """Real, structural lexical-nesting chain for the function with this id, from
@@ -173,12 +280,19 @@ class JsCallIndex:
         return chain
 
     def receiver_definition(self, receiver_name, enclosing_function_id):
-        """CROSSLANG-LINK-FIX01F -- see module docstring for the full, real account of
-        why this exists. Returns (rhs_arg, None) for the single, unambiguous,
-        correctly-in-scope, unshadowed real definition of `receiver_name` reaching a
-        use inside the function identified by `enclosing_function_id`, or (None,
-        reason) with an explicit, disclosed abstention reason otherwise -- never a
-        guess. `reason` is one of:
+        """CROSSLANG-LINK-FIX01F/G -- see module docstring for the full, real account of
+        why this exists. Establishes SCOPE_UNIQUE reaching-definition evidence ONLY --
+        real CFG dominance (CROSSLANG-LINK-FIX01G) is a SEPARATE, additional gate
+        applied by the caller via `loader_definition_dominates()`, not by this method;
+        this method's name predates that split and is kept for continuity, but what it
+        proves is now precisely SCOPE_UNIQUE, nothing about execution order. Returns
+        (rhs_arg, def_function_id, assign_call_id, None) for the single, unambiguous,
+        correctly-in-scope, unshadowed real definition of `receiver_name` reaching a use
+        inside the function identified by `enclosing_function_id` -- `def_function_id`
+        and `assign_call_id` (the defining `<operator>.assignment` call's own real CFG
+        node id) are what the caller's dominance check needs next. On failure, returns
+        (None, None, None, reason) with an explicit, disclosed abstention reason -- never
+        a guess. `reason` is one of:
           NO_DEFINITION, MULTIPLE_DEFINITIONS_AMBIGUOUS (more than one real
           `<operator>.assignment` to this name anywhere in the file -- reassignment,
           branch-multi-definition, or genuine ambiguity are all indistinguishable
@@ -196,24 +310,91 @@ class JsCallIndex:
           necessary via a dedicated fixture, see CHARACTERIZATION.md)."""
         assigns = self.assignments_by_lhs.get(receiver_name)
         if not assigns:
-            return None, 'NO_DEFINITION'
+            return None, None, None, 'NO_DEFINITION'
         if len(assigns) > 1:
-            return None, 'MULTIPLE_DEFINITIONS_AMBIGUOUS'
-        rhs, def_function_id = assigns[0]
+            return None, None, None, 'MULTIPLE_DEFINITIONS_AMBIGUOUS'
+        rhs, def_function_id, assign_call_id = assigns[0]
         call_chain = self.function_ancestor_chain(enclosing_function_id)
         def_func = self.functions_by_id.get(def_function_id)
         if not call_chain or def_func is None:
-            return None, 'SCOPE_UNRESOLVED'
+            return None, None, None, 'SCOPE_UNRESOLVED'
         def_full_name = def_func.get('full_name')
         def_index = next((i for i, f in enumerate(call_chain)
                            if f.get('full_name') == def_full_name), None)
         if def_index is None:
-            return None, 'DEFINITION_NOT_IN_SCOPE'
+            return None, None, None, 'DEFINITION_NOT_IN_SCOPE'
         for f in call_chain[def_index + 1:]:
             for p in f.get('parameters', []):
                 if p.get('name') == receiver_name:
-                    return None, 'PARAMETER_SHADOWED'
-        return rhs, None
+                    return None, None, None, 'PARAMETER_SHADOWED'
+        return rhs, def_function_id, assign_call_id, None
+
+
+def loader_definition_dominates(idx, assign_call_id, def_function_id, use_function_id):
+    """CROSSLANG-LINK-FIX01G -- see module docstring for the full, real account. Real
+    CFG-dominance proof that a SCOPE_UNIQUE definition (`JsCallIndex.receiver_definition`)
+    also reaches the use with respect to EXECUTION ORDER, not merely lexical scope.
+    Returns (True, None) when dominance is proven; otherwise (False, reason) with an
+    explicit, disclosed reason:
+
+      CFG_UNAVAILABLE -- `def_function_id`'s own real exit node is not known (an older
+      raw export with no `cfg_edges`/`method_cfg_endpoints`, or the id genuinely isn't a
+      real method in this doc) -- fails CLOSED, never silently treated as a pass.
+
+      DEFINITION_NOT_DOMINANT -- the assignment does not dominate its own defining
+      function's real exit node (`methodReturn`): some real path from that function's
+      entry to a real return statement bypasses the assignment entirely. Catches
+      one-branch-only, loop-only (the loop body may run zero times), and
+      try/catch-only (the catch path never assigns) definitions -- confirmed real on
+      three dedicated adversarial fixtures.
+
+      INVOCATION_NOT_DOMINATED -- the use lives in a DIFFERENT function than the
+      assignment, and a real, direct, SAME-DEFINING-SCOPE call that invokes the use's
+      function (its own `candidate_target_ids` names `use_function_id`) is not
+      dominated by the assignment -- i.e. that call can execute before the assignment
+      does. Catches assignment-after-use (a synchronous same-scope call reached before
+      the later `require(...)` assignment line) -- confirmed real on a dedicated
+      fixture.
+
+      DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE -- the assignment is itself AST-nested inside
+      a `try` block. Found real and necessary via a dedicated try/catch-only fixture:
+      jssrc2cpg's own CFG does not model an implicit exceptional edge from an arbitrary
+      statement into its `catch` handler (only a real, explicit `throw` would create
+      one), so a try-nested assignment can spuriously PASS exit-dominance even though a
+      real exception during the assignment's own RHS evaluation (e.g. `require(...)`
+      itself throwing, exactly node-gyp-build's own real documented failure mode on an
+      unsupported platform) would leave the target unset at runtime -- CFG dominance
+      alone is not a sound proof for this specific shape, so it is rejected outright
+      rather than trusted.
+
+    Deliberately bounded, disclosed scope for the cross-function case: only a DIRECT
+    invocation found within `def_function_id` itself is checked (matches this project's
+    own established bounded-trace discipline, e.g. `LOADER_ALIAS_DEPTH` above). A
+    function invoked from OUTSIDE its own defining scope -- the common, safe "define,
+    then `module.exports`, invoked later by external code after the whole module has
+    finished loading" pattern -- is correctly NOT penalized here: no such invocation
+    site exists inside `def_function_id` to check, so only the (a) exit-dominance
+    requirement applies, which that pattern already satisfies."""
+    if assign_call_id in idx.try_nested_calls:
+        return False, 'DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE'
+    exit_id = idx.method_exit.get(def_function_id)
+    if exit_id is None:
+        return False, 'CFG_UNAVAILABLE'
+    dom_exit = cfg_dominates(idx.cfg_next, def_function_id, assign_call_id, exit_id)
+    if dom_exit is None:
+        return False, 'CFG_UNAVAILABLE'
+    if not dom_exit:
+        return False, 'DEFINITION_NOT_DOMINANT'
+    if use_function_id == def_function_id:
+        return True, None
+    invocation_sites = [c['id'] for c in idx.calls_by_id.values()
+                         if c.get('enclosing_function_id') == def_function_id
+                         and use_function_id in (c.get('candidate_target_ids') or [])]
+    for site_id in invocation_sites:
+        dom_site = cfg_dominates(idx.cfg_next, def_function_id, assign_call_id, site_id)
+        if not dom_site:  # False (proven not dominant) and None (unreachable) both reject
+            return False, 'INVOCATION_NOT_DOMINATED'
+    return True, None
 
 
 def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
@@ -242,10 +423,17 @@ def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
         return None
     # Case 2: X is a plain identifier -- an alias. Resolve its own single, unambiguous,
     # in-scope, unshadowed definition (real abstention -- not a guess -- on ambiguity,
-    # unresolved scope, or shadowing; see receiver_definition's own docstring).
-    next_rhs, reason = idx.receiver_definition(
+    # unresolved scope, or shadowing; see receiver_definition's own docstring), then
+    # (CROSSLANG-LINK-FIX01G) require the SAME real CFG-dominance proof this alias hop's
+    # own definition reaches this invocation -- an alias is exactly as capable of being
+    # defined in a dead branch or after this invocation as the top-level receiver is.
+    next_rhs, next_def_fn, next_assign_id, reason = idx.receiver_definition(
         callee_name, invocation_call.get('enclosing_function_id'))
     if next_rhs is None or next_rhs.get('kind') != 'CALL':
+        return None
+    dom_ok, _dom_reason = loader_definition_dominates(
+        idx, next_assign_id, next_def_fn, invocation_call.get('enclosing_function_id'))
+    if not dom_ok:
         return None
     next_rhs_call = idx.calls_by_id.get(next_rhs['id'])
     if next_rhs_call is None:
@@ -266,18 +454,29 @@ def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
 
 def resolve_loader_provenance(receiver_name, enclosing_function_id, idx, curated_packages,
                                 depth=LOADER_ALIAS_DEPTH):
-    """CANONICAL evidence (see module docstring) that `receiver_name`'s value, AS SEEN
-    FROM WITHIN `enclosing_function_id`'s own scope, originates from INVOKING one of
-    `curated_packages`. Returns (pkg, 'canonical') on proof, else (None, reason) --
-    `reason` is one of `JsCallIndex.receiver_definition`'s own disclosed abstention
-    codes, or `'NOT_AN_INVOCATION'`/`'BARE_LOADER_REFERENCE'`/`'CALLEE_NOT_REQUIRE'` for
-    a real, in-scope, unambiguous definition whose value simply isn't a loader
+    """Real evidence (see module docstring) that `receiver_name`'s value, AS SEEN FROM
+    WITHIN `enclosing_function_id`'s own scope, originates from INVOKING one of
+    `curated_packages` -- gated by BOTH SCOPE_UNIQUE reaching-definition evidence
+    (`JsCallIndex.receiver_definition`) AND real CFG-dominance proof
+    (CROSSLANG-LINK-FIX01G, `loader_definition_dominates`) that the definition reaches
+    the use with respect to execution order, not merely lexical scope. Returns
+    (pkg, 'dominance_proven') on full proof, else (None, reason) -- `reason` is one of
+    `JsCallIndex.receiver_definition`'s own disclosed abstention codes,
+    `loader_definition_dominates`'s own disclosed abstention codes, or
+    `'NOT_AN_INVOCATION'`/`'BARE_LOADER_REFERENCE'`/`'CALLEE_NOT_REQUIRE'` for a real,
+    in-scope, unambiguous, dominance-proven definition whose value simply isn't a loader
     invocation. Caller falls back to the explicitly-labeled, lower-confidence
-    marker-regex heuristic ONLY when a real reason is returned here, never presented as
-    silently equivalent to a genuine non-match."""
-    rhs, reason = idx.receiver_definition(receiver_name, enclosing_function_id)
+    marker-regex heuristic ONLY on `'CALLEE_NOT_REQUIRE'` -- which, by construction, is
+    reached ONLY after the dominance gate below has already passed, so the fallback
+    tier is automatically subject to the identical gate with no separate plumbing."""
+    rhs, def_function_id, assign_call_id, reason = idx.receiver_definition(
+        receiver_name, enclosing_function_id)
     if rhs is None:
         return None, reason
+    dom_ok, dom_reason = loader_definition_dominates(
+        idx, assign_call_id, def_function_id, enclosing_function_id)
+    if not dom_ok:
+        return None, dom_reason
     if rhs.get('kind') != 'CALL':
         return None, 'NOT_AN_INVOCATION'
     rhs_call = idx.calls_by_id.get(rhs['id'])
@@ -291,7 +490,7 @@ def resolve_loader_provenance(receiver_name, enclosing_function_id, idx, curated
     if rhs_call.get('name') == 'require':
         return None, 'BARE_LOADER_REFERENCE'
     pkg = _callee_resolves_to_require(rhs_call, idx, curated_packages, depth)
-    return (pkg, 'canonical') if pkg else (None, 'CALLEE_NOT_REQUIRE')
+    return (pkg, 'dominance_proven') if pkg else (None, 'CALLEE_NOT_REQUIRE')
 
 
 def _loader_invocation_pattern(pkg):
@@ -320,8 +519,11 @@ def _via_loader_invocation_fallback(call, pkg):
 
 def native_binding_receiver_evidence(call, idx):
     """Returns (matched: bool, tier: str|None, reason: str|None) for whether `call`'s
-    own receiver is a native-binding object. `tier` is `"canonical"` (the real,
-    ID-based, scope-checked graph walk -- tried FIRST, see below),
+    own receiver is a native-binding object. `tier` is `"dominance_proven"` (the real,
+    ID-based, scope-checked, CFG-dominance-proven graph walk -- tried FIRST, see below;
+    named `"dominance_proven"` rather than the earlier `"canonical"` because
+    CROSSLANG-LINK-FIX01G found scope-uniqueness alone does NOT establish provenance --
+    see module docstring),
     `"fallback_marker_regex"` (tried ONLY when canonical established a real, safe,
     unambiguous, unshadowed receiver definition but could not itself prove that
     definition's value is a loader invocation -- see below), `"build_path"` for a
@@ -362,7 +564,7 @@ def native_binding_receiver_evidence(call, idx):
         pkg, reason = resolve_loader_provenance(
             receiver_name, call.get('enclosing_function_id'), idx, NATIVE_LOADER_PACKAGES)
         if pkg:
-            return True, 'canonical', None
+            return True, 'dominance_proven', None
         if reason == 'CALLEE_NOT_REQUIRE':
             receiver_type = call.get('receiver_type')
             rt = receiver_type.strip() if receiver_type else ''
@@ -479,6 +681,10 @@ def main():
     NOTABLE_ABSTENTION_REASONS = {
         'MULTIPLE_DEFINITIONS_AMBIGUOUS', 'PARAMETER_SHADOWED', 'SCOPE_UNRESOLVED',
         'DEFINITION_NOT_IN_SCOPE', 'BARE_LOADER_REFERENCE', 'CALLEE_NOT_REQUIRE',
+        # CROSSLANG-LINK-FIX01G: real, disclosed dominance-check abstentions -- see
+        # `loader_definition_dominates()`'s own docstring for what each means.
+        'DEFINITION_NOT_DOMINANT', 'INVOCATION_NOT_DOMINATED', 'CFG_UNAVAILABLE',
+        'DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE',
     }
 
     def _plausibly_loader_related(receiver_type):
@@ -531,11 +737,11 @@ def main():
         'registrations': audit, 'linked_calls': linked, 'unlinked_calls': unlinked,
         'abstained_calls': abstained}
     json.dump(merged, open(a.out, 'w'), indent=1, sort_keys=True)
-    n_canonical = sum(1 for l in linked if l['evidence_tier'] == 'canonical')
+    n_dominance = sum(1 for l in linked if l['evidence_tier'] == 'dominance_proven')
     n_fallback = sum(1 for l in linked if l['evidence_tier'] == 'fallback_marker_regex')
     print(f"POLYGLOT registrations={len(table)} linked_js_calls={len(linked)} "
-          f"(canonical={n_canonical} fallback_regex={n_fallback} "
-          f"other={len(linked) - n_canonical - n_fallback}) unlinked={len(unlinked)} "
+          f"(dominance_proven={n_dominance} fallback_regex={n_fallback} "
+          f"other={len(linked) - n_dominance - n_fallback}) unlinked={len(unlinked)} "
           f"abstained={len(abstained)}")
 
 if __name__ == '__main__':
