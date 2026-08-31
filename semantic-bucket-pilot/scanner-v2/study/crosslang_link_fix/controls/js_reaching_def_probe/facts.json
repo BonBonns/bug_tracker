@@ -1,0 +1,6299 @@
+{
+  "calls": [
+    {
+      "arguments": [
+        {
+          "call_id": 30064771072,
+          "code": "native1",
+          "id": 68719476737,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771072,
+          "code": "1",
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 10,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Foo",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Foo"
+      ],
+      "candidate_target_ids": [
+        107374182416,
+        107374182417
+      ],
+      "canonical_targets": [
+        "node-gyp-build:Foo",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Foo"
+      ],
+      "code": "native1.Foo(1)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "reaching_def_probe.js",
+      "id": 30064771072,
+      "line": 10,
+      "method_full_name": "node-gyp-build:Foo",
+      "name": "Foo",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "node-gyp-build:Foo",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Foo"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771073,
+          "code": "native1",
+          "id": 68719476736,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771073,
+          "code": "Foo",
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 10,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native1.Foo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "reaching_def_probe.js",
+      "id": 30064771073,
+      "line": 10,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771086,
+          "code": "callFoo",
+          "id": 68719476752,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 10,
+          "name": "callFoo",
+          "type_full_name": "reaching_def_probe.js::program:callFoo"
+        },
+        {
+          "call_id": 30064771086,
+          "code": "callFoo",
+          "id": 120259084290,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 10,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:callFoo"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callFoo = function callFoo() { return native1.Foo(1); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771086,
+      "line": 10,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771087,
+          "code": "callBar",
+          "id": 68719476753,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 19,
+          "name": "callBar",
+          "type_full_name": "reaching_def_probe.js::program:callBar"
+        },
+        {
+          "call_id": 30064771087,
+          "code": "callBar",
+          "id": 120259084291,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 19,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:callBar"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callBar = function callBar() { return native2.Bar(2); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771087,
+      "line": 19,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771088,
+          "code": "makeWrapper",
+          "id": 68719476754,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 26,
+          "name": "makeWrapper",
+          "type_full_name": "reaching_def_probe.js::program:makeWrapper"
+        },
+        {
+          "call_id": 30064771088,
+          "code": "makeWrapper",
+          "id": 120259084292,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 26,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:makeWrapper"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function makeWrapper = function makeWrapper(native3) {\n  return function callBaz() { return native3.Baz(3); };\n}",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771088,
+      "line": 26,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771089,
+          "code": "callQux",
+          "id": 68719476755,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "callQux",
+          "type_full_name": "reaching_def_probe.js::program:callQux"
+        },
+        {
+          "call_id": 30064771089,
+          "code": "callQux",
+          "id": 120259084293,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 36,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:callQux"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callQux = function callQux() { return native4.Qux(4); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771089,
+      "line": 36,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771090,
+          "code": "someFunction",
+          "id": 68719476756,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 42,
+          "name": "someFunction",
+          "type_full_name": "reaching_def_probe.js::program:someFunction"
+        },
+        {
+          "call_id": 30064771090,
+          "code": "someFunction",
+          "id": 120259084294,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 42,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:someFunction"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function someFunction = function someFunction() { return { Corge: function (n) { return n; } }; }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771090,
+      "line": 42,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771091,
+          "code": "callCorge",
+          "id": 68719476757,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 47,
+          "name": "callCorge",
+          "type_full_name": "reaching_def_probe.js::program:callCorge"
+        },
+        {
+          "call_id": 30064771091,
+          "code": "callCorge",
+          "id": 120259084295,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 47,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:callCorge"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callCorge = function callCorge() { return native6.Corge(6); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771091,
+      "line": 47,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771092,
+          "code": "native1",
+          "id": 68719476758,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771092,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771084,
+          "index": 2,
+          "kind": "CALL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "let native1 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771092,
+      "line": 8,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771094,
+          "code": "native1",
+          "id": 68719476763,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771094,
+          "code": "{ Foo: function (n) { return n; } }",
+          "id": 25769803786,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 9,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native1 = { Foo: function (n) { return n; } }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771094,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771105,
+          "code": "native3",
+          "id": 68719476775,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771105,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771085,
+          "index": 2,
+          "kind": "CALL",
+          "line": 25,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const native3 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771105,
+      "line": 25,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771107,
+          "code": "wrappedBaz",
+          "id": 68719476780,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 29,
+          "name": "wrappedBaz",
+          "type_full_name": "() => ANY"
+        },
+        {
+          "call_id": 30064771107,
+          "code": "makeWrapper({ Baz: function (n) { return n; } })",
+          "id": 30064771108,
+          "index": 2,
+          "kind": "CALL",
+          "line": 29,
+          "name": "",
+          "type_full_name": "() => ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const wrappedBaz = makeWrapper({ Baz: function (n) { return n; } })",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771107,
+      "line": 29,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771111,
+          "code": "native4",
+          "id": 68719476785,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 38,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771111,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771112,
+          "index": 2,
+          "kind": "CALL",
+          "line": 38,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native4 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771111,
+      "line": 38,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771114,
+          "code": "x5",
+          "id": 68719476790,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 43,
+          "name": "x5",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771114,
+          "code": "someFunction",
+          "id": 68719476791,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 43,
+          "name": "someFunction",
+          "type_full_name": "reaching_def_probe.js::program:someFunction"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "let x5 = someFunction",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771114,
+      "line": 43,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771115,
+          "code": "y5",
+          "id": 68719476792,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 44,
+          "name": "y5",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771115,
+          "code": "x5",
+          "id": 68719476793,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 44,
+          "name": "x5",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "let y5 = x5",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771115,
+      "line": 44,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771116,
+          "code": "x5",
+          "id": 68719476794,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 45,
+          "name": "x5",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771116,
+          "code": "y5",
+          "id": 68719476795,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 45,
+          "name": "y5",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "x5 = y5",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771116,
+      "line": 45,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771117,
+          "code": "native6",
+          "id": 68719476796,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 46,
+          "name": "native6",
+          "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+        },
+        {
+          "call_id": 30064771117,
+          "code": "x5(__dirname)",
+          "id": 30064771118,
+          "index": 2,
+          "kind": "CALL",
+          "line": 46,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "const native6 = x5(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771117,
+      "line": 46,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771119,
+          "code": "module.exports",
+          "id": 30064771120,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771119,
+          "code": "{ callFoo, callBar, wrappedBaz, callQux, callCorge }",
+          "id": 25769803792,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "module.exports = { callFoo, callBar, wrappedBaz, callQux, callCorge }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771119,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771084,
+          "code": "this",
+          "id": 68719476761,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771084,
+          "code": "__dirname",
+          "id": 68719476762,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182426
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771084,
+      "line": 8,
+      "method_full_name": "reaching_def_probe.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771097,
+          "code": "typeof process",
+          "id": 30064771098,
+          "index": 1,
+          "kind": "CALL",
+          "line": 14,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771097,
+          "code": "\"undefined\"",
+          "id": 90194313222,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 14,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "typeof process !== 'undefined'",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771097,
+      "line": 14,
+      "method_full_name": "<operator>.notEquals",
+      "name": "<operator>.notEquals",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771085,
+          "code": "this",
+          "id": 68719476778,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771085,
+          "code": "__dirname",
+          "id": 68719476779,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182426
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771085,
+      "line": 25,
+      "method_full_name": "reaching_def_probe.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771108,
+          "code": "this",
+          "id": 68719476782,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 29,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771108,
+          "code": "{ Baz: function (n) { return n; } }",
+          "id": 25769803790,
+          "index": 1,
+          "kind": "BLOCK",
+          "line": 29,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:makeWrapper"
+      ],
+      "candidate_target_ids": [
+        107374182404
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:makeWrapper"
+      ],
+      "code": "makeWrapper({ Baz: function (n) { return n; } })",
+      "concrete_targets": [
+        "reaching_def_probe.js::program:makeWrapper"
+      ],
+      "corrected_targets": [
+        "reaching_def_probe.js::program:makeWrapper"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771108,
+      "line": 29,
+      "method_full_name": "reaching_def_probe.js::program:makeWrapper",
+      "name": "makeWrapper",
+      "receiver_owner_match": true,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "() => ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771112,
+          "code": "this",
+          "id": 68719476788,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 38,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771112,
+          "code": "__dirname",
+          "id": 68719476789,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 38,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182426
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771112,
+      "line": 38,
+      "method_full_name": "reaching_def_probe.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771118,
+          "code": "this",
+          "id": 68719476798,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 46,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771118,
+          "code": "__dirname",
+          "id": 68719476799,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 46,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:x5"
+      ],
+      "candidate_target_ids": [
+        107374182428
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:x5"
+      ],
+      "code": "x5(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771118,
+      "line": 46,
+      "method_full_name": "reaching_def_probe.js::program:x5",
+      "name": "x5",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:x5"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771120,
+          "code": "module",
+          "id": 68719476800,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "module",
+          "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js_reaching_def_probe/reaching_def_probe.js\"); }"
+        },
+        {
+          "call_id": 30064771120,
+          "code": "exports",
+          "id": 55834574857,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "module.exports",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771120,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771093,
+          "code": "this",
+          "id": 68719476760,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771093,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313221,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 8,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182427
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771093,
+      "line": 8,
+      "method_full_name": "reaching_def_probe.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771095,
+          "code": "_tmp_1.Foo",
+          "id": 30064771096,
+          "index": 1,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771095,
+          "code": "<lambda>1",
+          "id": 120259084296,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 9,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:<lambda>1"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_1.Foo = <lambda>1",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771095,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771098,
+          "code": "process",
+          "id": 68719476766,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "process",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "typeof process",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771098,
+      "line": 14,
+      "method_full_name": "<operator>.instanceOf",
+      "name": "<operator>.instanceOf",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771099,
+          "code": "native2",
+          "id": 68719476767,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771099,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771100,
+          "index": 2,
+          "kind": "CALL",
+          "line": 15,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native2 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771099,
+      "line": 15,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771102,
+          "code": "native2",
+          "id": 68719476772,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 17,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771102,
+          "code": "{ Bar: function (n) { return n; } }",
+          "id": 25769803788,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 17,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native2 = { Bar: function (n) { return n; } }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771102,
+      "line": 17,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771106,
+          "code": "this",
+          "id": 68719476777,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771106,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313224,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 25,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182427
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771106,
+      "line": 25,
+      "method_full_name": "reaching_def_probe.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771113,
+          "code": "this",
+          "id": 68719476787,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 38,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771113,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313225,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 38,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182427
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771113,
+      "line": 38,
+      "method_full_name": "reaching_def_probe.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771121,
+          "code": "_tmp_4.callFoo",
+          "id": 30064771122,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771121,
+          "code": "callFoo",
+          "id": 68719476802,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "callFoo",
+          "type_full_name": "reaching_def_probe.js::program:callFoo"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callFoo = callFoo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771121,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771123,
+          "code": "_tmp_4.callBar",
+          "id": 30064771124,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771123,
+          "code": "callBar",
+          "id": 68719476804,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "callBar",
+          "type_full_name": "reaching_def_probe.js::program:callBar"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callBar = callBar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771123,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771125,
+          "code": "_tmp_4.wrappedBaz",
+          "id": 30064771126,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771125,
+          "code": "wrappedBaz",
+          "id": 68719476806,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "wrappedBaz",
+          "type_full_name": "() => ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.wrappedBaz = wrappedBaz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771125,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771127,
+          "code": "_tmp_4.callQux",
+          "id": 30064771128,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771127,
+          "code": "callQux",
+          "id": 68719476808,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "callQux",
+          "type_full_name": "reaching_def_probe.js::program:callQux"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callQux = callQux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771127,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771129,
+          "code": "_tmp_4.callCorge",
+          "id": 30064771130,
+          "index": 1,
+          "kind": "CALL",
+          "line": 49,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771129,
+          "code": "callCorge",
+          "id": 68719476810,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "callCorge",
+          "type_full_name": "reaching_def_probe.js::program:callCorge"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callCorge = callCorge",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771129,
+      "line": 49,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771096,
+          "code": "_tmp_1",
+          "id": 68719476764,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "_tmp_1",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771096,
+          "code": "Foo",
+          "id": 55834574854,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 9,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_1.Foo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771096,
+      "line": 9,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771100,
+          "code": "this",
+          "id": 68719476770,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771100,
+          "code": "__dirname",
+          "id": 68719476771,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182426
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771100,
+      "line": 15,
+      "method_full_name": "reaching_def_probe.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771109,
+          "code": "_tmp_3.Baz",
+          "id": 30064771110,
+          "index": 1,
+          "kind": "CALL",
+          "line": 29,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771109,
+          "code": "<lambda>3",
+          "id": 120259084298,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 29,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:<lambda>3"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_3.Baz = <lambda>3",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771109,
+      "line": 29,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771122,
+          "code": "_tmp_4",
+          "id": 68719476801,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "_tmp_4",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771122,
+          "code": "callFoo",
+          "id": 55834574858,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callFoo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771122,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771124,
+          "code": "_tmp_4",
+          "id": 68719476803,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "_tmp_4",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771124,
+          "code": "callBar",
+          "id": 55834574859,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callBar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771124,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771126,
+          "code": "_tmp_4",
+          "id": 68719476805,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "_tmp_4",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771126,
+          "code": "wrappedBaz",
+          "id": 55834574860,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.wrappedBaz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771126,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771128,
+          "code": "_tmp_4",
+          "id": 68719476807,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "_tmp_4",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771128,
+          "code": "callQux",
+          "id": 55834574861,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callQux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771128,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771130,
+          "code": "_tmp_4",
+          "id": 68719476809,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 49,
+          "name": "_tmp_4",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771130,
+          "code": "callCorge",
+          "id": 55834574862,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 49,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_4.callCorge",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771130,
+      "line": 49,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771101,
+          "code": "this",
+          "id": 68719476769,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 15,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "call_id": 30064771101,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313223,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 15,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182427
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771101,
+      "line": 15,
+      "method_full_name": "reaching_def_probe.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "reaching_def_probe.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771103,
+          "code": "_tmp_2.Bar",
+          "id": 30064771104,
+          "index": 1,
+          "kind": "CALL",
+          "line": 17,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771103,
+          "code": "<lambda>2",
+          "id": 120259084297,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 17,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:<lambda>2"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_2.Bar = <lambda>2",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771103,
+      "line": 17,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771110,
+          "code": "_tmp_3",
+          "id": 68719476783,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 29,
+          "name": "_tmp_3",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771110,
+          "code": "Baz",
+          "id": 55834574856,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 29,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_3.Baz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771110,
+      "line": 29,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771104,
+          "code": "_tmp_2",
+          "id": 68719476773,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 17,
+          "name": "_tmp_2",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771104,
+          "code": "Bar",
+          "id": 55834574855,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 17,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_2.Bar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "reaching_def_probe.js",
+      "id": 30064771104,
+      "line": 17,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771074,
+          "code": "native2",
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 19,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771074,
+          "code": "2",
+          "id": 90194313217,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 19,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Bar",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Bar"
+      ],
+      "candidate_target_ids": [
+        107374182418,
+        107374182419
+      ],
+      "canonical_targets": [
+        "node-gyp-build:Bar",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Bar"
+      ],
+      "code": "native2.Bar(2)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "reaching_def_probe.js",
+      "id": 30064771074,
+      "line": 19,
+      "method_full_name": "node-gyp-build:Bar",
+      "name": "Bar",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "node-gyp-build:Bar",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Bar"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771075,
+          "code": "native2",
+          "id": 68719476738,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 19,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771075,
+          "code": "Bar",
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 19,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native2.Bar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "reaching_def_probe.js",
+      "id": 30064771075,
+      "line": 19,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771076,
+          "code": "native3",
+          "id": 68719476741,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 27,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771076,
+          "code": "3",
+          "id": 90194313218,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 27,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Baz",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Baz"
+      ],
+      "candidate_target_ids": [
+        107374182420,
+        107374182421
+      ],
+      "canonical_targets": [
+        "node-gyp-build:Baz",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Baz"
+      ],
+      "code": "native3.Baz(3)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "reaching_def_probe.js",
+      "id": 30064771076,
+      "line": 27,
+      "method_full_name": "node-gyp-build:Baz",
+      "name": "Baz",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "node-gyp-build:Baz",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Baz"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771077,
+          "code": "native3",
+          "id": 68719476740,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 27,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771077,
+          "code": "Baz",
+          "id": 55834574850,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 27,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native3.Baz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "reaching_def_probe.js",
+      "id": 30064771077,
+      "line": 27,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771078,
+          "code": "native4",
+          "id": 68719476743,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771078,
+          "code": "4",
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 36,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Qux",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Qux"
+      ],
+      "candidate_target_ids": [
+        107374182422,
+        107374182423
+      ],
+      "canonical_targets": [
+        "node-gyp-build:Qux",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Qux"
+      ],
+      "code": "native4.Qux(4)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "reaching_def_probe.js",
+      "id": 30064771078,
+      "line": 36,
+      "method_full_name": "node-gyp-build:Qux",
+      "name": "Qux",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "node-gyp-build:Qux",
+        "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Qux"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771079,
+          "code": "native4",
+          "id": 68719476742,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 36,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771079,
+          "code": "Qux",
+          "id": 55834574851,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 36,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native4.Qux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "reaching_def_probe.js",
+      "id": 30064771079,
+      "line": 36,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771080,
+          "code": "_tmp_0.Corge",
+          "id": 30064771081,
+          "index": 1,
+          "kind": "CALL",
+          "line": 42,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771080,
+          "code": "<lambda>0",
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 42,
+          "name": "",
+          "type_full_name": "reaching_def_probe.js::program:someFunction:<lambda>0"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.Corge = <lambda>0",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "reaching_def_probe.js",
+      "id": 30064771080,
+      "line": 42,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771081,
+          "code": "_tmp_0",
+          "id": 68719476745,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 42,
+          "name": "_tmp_0",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771081,
+          "code": "Corge",
+          "id": 55834574852,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 42,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.Corge",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182407,
+      "file": "reaching_def_probe.js",
+      "id": 30064771081,
+      "line": 42,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771082,
+          "code": "native6",
+          "id": 68719476748,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 47,
+          "name": "native6",
+          "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+        },
+        {
+          "call_id": 30064771082,
+          "code": "6",
+          "id": 90194313220,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 47,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "{ Corge: (n: ANY) => ANY; }:Corge",
+        "reaching_def_probe.js::program:x5:<returnValue>:Corge"
+      ],
+      "candidate_target_ids": [
+        107374182424,
+        107374182425
+      ],
+      "canonical_targets": [
+        "reaching_def_probe.js::program:x5:<returnValue>:Corge",
+        "{ Corge: (n: ANY) => ANY; }:Corge"
+      ],
+      "code": "native6.Corge(6)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "reaching_def_probe.js",
+      "id": 30064771082,
+      "line": 47,
+      "method_full_name": "{ Corge: (n: ANY) => ANY; }:Corge",
+      "name": "Corge",
+      "receiver_owner_match": false,
+      "receiver_type": "{ Corge: (n: ANY) => ANY; }",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "reaching_def_probe.js::program:x5:<returnValue>:Corge",
+        "{ Corge: (n: ANY) => ANY; }:Corge"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771083,
+          "code": "native6",
+          "id": 68719476747,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 47,
+          "name": "native6",
+          "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+        },
+        {
+          "call_id": 30064771083,
+          "code": "Corge",
+          "id": 55834574853,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 47,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native6.Corge",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182408,
+      "file": "reaching_def_probe.js",
+      "id": 30064771083,
+      "line": 47,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    }
+  ],
+  "cfg_edges": [
+    {
+      "from": 30064771072,
+      "owner": 107374182400,
+      "to": 141733920768
+    },
+    {
+      "from": 30064771073,
+      "owner": 107374182400,
+      "to": 68719476737
+    },
+    {
+      "from": 68719476737,
+      "owner": 107374182400,
+      "to": 90194313216
+    },
+    {
+      "from": 90194313216,
+      "owner": 107374182400,
+      "to": 30064771072
+    },
+    {
+      "from": 68719476736,
+      "owner": 107374182400,
+      "to": 55834574848
+    },
+    {
+      "from": 55834574848,
+      "owner": 107374182400,
+      "to": 30064771073
+    },
+    {
+      "from": 107374182400,
+      "owner": 107374182400,
+      "to": 68719476736
+    },
+    {
+      "from": 141733920768,
+      "owner": 107374182400,
+      "to": 124554051584
+    },
+    {
+      "from": 107374182400,
+      "owner": 107374182401,
+      "to": 68719476736
+    },
+    {
+      "from": 107374182402,
+      "owner": 107374182401,
+      "to": 68719476738
+    },
+    {
+      "from": 107374182404,
+      "owner": 107374182401,
+      "to": 120259084288
+    },
+    {
+      "from": 107374182405,
+      "owner": 107374182401,
+      "to": 68719476742
+    },
+    {
+      "from": 107374182407,
+      "owner": 107374182401,
+      "to": 68719476745
+    },
+    {
+      "from": 107374182408,
+      "owner": 107374182401,
+      "to": 68719476747
+    },
+    {
+      "from": 107374182409,
+      "owner": 107374182401,
+      "to": 68719476749
+    },
+    {
+      "from": 107374182410,
+      "owner": 107374182401,
+      "to": 68719476750
+    },
+    {
+      "from": 107374182411,
+      "owner": 107374182401,
+      "to": 68719476751
+    },
+    {
+      "from": 30064771086,
+      "owner": 107374182401,
+      "to": 68719476753
+    },
+    {
+      "from": 30064771087,
+      "owner": 107374182401,
+      "to": 68719476754
+    },
+    {
+      "from": 30064771088,
+      "owner": 107374182401,
+      "to": 68719476755
+    },
+    {
+      "from": 30064771089,
+      "owner": 107374182401,
+      "to": 68719476756
+    },
+    {
+      "from": 30064771090,
+      "owner": 107374182401,
+      "to": 68719476757
+    },
+    {
+      "from": 30064771091,
+      "owner": 107374182401,
+      "to": 68719476758
+    },
+    {
+      "from": 30064771092,
+      "owner": 107374182401,
+      "to": 68719476763
+    },
+    {
+      "from": 30064771094,
+      "owner": 107374182401,
+      "to": 68719476766
+    },
+    {
+      "from": 30064771105,
+      "owner": 107374182401,
+      "to": 68719476780
+    },
+    {
+      "from": 30064771107,
+      "owner": 107374182401,
+      "to": 68719476785
+    },
+    {
+      "from": 30064771111,
+      "owner": 107374182401,
+      "to": 68719476790
+    },
+    {
+      "from": 30064771114,
+      "owner": 107374182401,
+      "to": 68719476792
+    },
+    {
+      "from": 30064771115,
+      "owner": 107374182401,
+      "to": 68719476794
+    },
+    {
+      "from": 30064771116,
+      "owner": 107374182401,
+      "to": 68719476796
+    },
+    {
+      "from": 30064771117,
+      "owner": 107374182401,
+      "to": 68719476800
+    },
+    {
+      "from": 68719476752,
+      "owner": 107374182401,
+      "to": 120259084290
+    },
+    {
+      "from": 120259084290,
+      "owner": 107374182401,
+      "to": 30064771086
+    },
+    {
+      "from": 68719476753,
+      "owner": 107374182401,
+      "to": 120259084291
+    },
+    {
+      "from": 120259084291,
+      "owner": 107374182401,
+      "to": 30064771087
+    },
+    {
+      "from": 68719476754,
+      "owner": 107374182401,
+      "to": 120259084292
+    },
+    {
+      "from": 120259084292,
+      "owner": 107374182401,
+      "to": 30064771088
+    },
+    {
+      "from": 68719476755,
+      "owner": 107374182401,
+      "to": 120259084293
+    },
+    {
+      "from": 120259084293,
+      "owner": 107374182401,
+      "to": 30064771089
+    },
+    {
+      "from": 68719476756,
+      "owner": 107374182401,
+      "to": 120259084294
+    },
+    {
+      "from": 120259084294,
+      "owner": 107374182401,
+      "to": 30064771090
+    },
+    {
+      "from": 68719476757,
+      "owner": 107374182401,
+      "to": 120259084295
+    },
+    {
+      "from": 120259084295,
+      "owner": 107374182401,
+      "to": 30064771091
+    },
+    {
+      "from": 68719476758,
+      "owner": 107374182401,
+      "to": 68719476759
+    },
+    {
+      "from": 30064771084,
+      "owner": 107374182401,
+      "to": 30064771092
+    },
+    {
+      "from": 68719476763,
+      "owner": 107374182401,
+      "to": 68719476764
+    },
+    {
+      "from": 25769803786,
+      "owner": 107374182401,
+      "to": 30064771094
+    },
+    {
+      "from": 30064771097,
+      "owner": 107374182401,
+      "to": 68719476767
+    },
+    {
+      "from": 30064771097,
+      "owner": 107374182401,
+      "to": 68719476772
+    },
+    {
+      "from": 68719476775,
+      "owner": 107374182401,
+      "to": 68719476776
+    },
+    {
+      "from": 30064771085,
+      "owner": 107374182401,
+      "to": 30064771105
+    },
+    {
+      "from": 68719476780,
+      "owner": 107374182401,
+      "to": 68719476781
+    },
+    {
+      "from": 30064771108,
+      "owner": 107374182401,
+      "to": 30064771107
+    },
+    {
+      "from": 68719476785,
+      "owner": 107374182401,
+      "to": 68719476786
+    },
+    {
+      "from": 30064771112,
+      "owner": 107374182401,
+      "to": 30064771111
+    },
+    {
+      "from": 68719476790,
+      "owner": 107374182401,
+      "to": 68719476791
+    },
+    {
+      "from": 68719476791,
+      "owner": 107374182401,
+      "to": 30064771114
+    },
+    {
+      "from": 68719476792,
+      "owner": 107374182401,
+      "to": 68719476793
+    },
+    {
+      "from": 68719476793,
+      "owner": 107374182401,
+      "to": 30064771115
+    },
+    {
+      "from": 68719476794,
+      "owner": 107374182401,
+      "to": 68719476795
+    },
+    {
+      "from": 68719476795,
+      "owner": 107374182401,
+      "to": 30064771116
+    },
+    {
+      "from": 68719476796,
+      "owner": 107374182401,
+      "to": 68719476797
+    },
+    {
+      "from": 30064771118,
+      "owner": 107374182401,
+      "to": 30064771117
+    },
+    {
+      "from": 30064771120,
+      "owner": 107374182401,
+      "to": 68719476801
+    },
+    {
+      "from": 25769803792,
+      "owner": 107374182401,
+      "to": 30064771119
+    },
+    {
+      "from": 30064771093,
+      "owner": 107374182401,
+      "to": 68719476761
+    },
+    {
+      "from": 68719476761,
+      "owner": 107374182401,
+      "to": 68719476762
+    },
+    {
+      "from": 68719476762,
+      "owner": 107374182401,
+      "to": 30064771084
+    },
+    {
+      "from": 30064771095,
+      "owner": 107374182401,
+      "to": 68719476765
+    },
+    {
+      "from": 68719476765,
+      "owner": 107374182401,
+      "to": 25769803786
+    },
+    {
+      "from": 30064771098,
+      "owner": 107374182401,
+      "to": 90194313222
+    },
+    {
+      "from": 90194313222,
+      "owner": 107374182401,
+      "to": 30064771097
+    },
+    {
+      "from": 30064771099,
+      "owner": 107374182401,
+      "to": 68719476775
+    },
+    {
+      "from": 30064771102,
+      "owner": 107374182401,
+      "to": 68719476775
+    },
+    {
+      "from": 30064771106,
+      "owner": 107374182401,
+      "to": 68719476778
+    },
+    {
+      "from": 68719476778,
+      "owner": 107374182401,
+      "to": 68719476779
+    },
+    {
+      "from": 68719476779,
+      "owner": 107374182401,
+      "to": 30064771085
+    },
+    {
+      "from": 68719476781,
+      "owner": 107374182401,
+      "to": 68719476782
+    },
+    {
+      "from": 68719476782,
+      "owner": 107374182401,
+      "to": 68719476783
+    },
+    {
+      "from": 25769803790,
+      "owner": 107374182401,
+      "to": 30064771108
+    },
+    {
+      "from": 30064771113,
+      "owner": 107374182401,
+      "to": 68719476788
+    },
+    {
+      "from": 68719476788,
+      "owner": 107374182401,
+      "to": 68719476789
+    },
+    {
+      "from": 68719476789,
+      "owner": 107374182401,
+      "to": 30064771112
+    },
+    {
+      "from": 68719476797,
+      "owner": 107374182401,
+      "to": 68719476798
+    },
+    {
+      "from": 68719476798,
+      "owner": 107374182401,
+      "to": 68719476799
+    },
+    {
+      "from": 68719476799,
+      "owner": 107374182401,
+      "to": 30064771118
+    },
+    {
+      "from": 68719476800,
+      "owner": 107374182401,
+      "to": 55834574857
+    },
+    {
+      "from": 55834574857,
+      "owner": 107374182401,
+      "to": 30064771120
+    },
+    {
+      "from": 30064771121,
+      "owner": 107374182401,
+      "to": 68719476803
+    },
+    {
+      "from": 30064771123,
+      "owner": 107374182401,
+      "to": 68719476805
+    },
+    {
+      "from": 30064771125,
+      "owner": 107374182401,
+      "to": 68719476807
+    },
+    {
+      "from": 30064771127,
+      "owner": 107374182401,
+      "to": 68719476809
+    },
+    {
+      "from": 30064771129,
+      "owner": 107374182401,
+      "to": 68719476811
+    },
+    {
+      "from": 68719476811,
+      "owner": 107374182401,
+      "to": 25769803792
+    },
+    {
+      "from": 68719476759,
+      "owner": 107374182401,
+      "to": 68719476760
+    },
+    {
+      "from": 68719476760,
+      "owner": 107374182401,
+      "to": 90194313221
+    },
+    {
+      "from": 90194313221,
+      "owner": 107374182401,
+      "to": 30064771093
+    },
+    {
+      "from": 30064771096,
+      "owner": 107374182401,
+      "to": 120259084296
+    },
+    {
+      "from": 120259084296,
+      "owner": 107374182401,
+      "to": 30064771095
+    },
+    {
+      "from": 68719476766,
+      "owner": 107374182401,
+      "to": 30064771098
+    },
+    {
+      "from": 68719476767,
+      "owner": 107374182401,
+      "to": 68719476768
+    },
+    {
+      "from": 30064771100,
+      "owner": 107374182401,
+      "to": 30064771099
+    },
+    {
+      "from": 68719476772,
+      "owner": 107374182401,
+      "to": 68719476773
+    },
+    {
+      "from": 25769803788,
+      "owner": 107374182401,
+      "to": 30064771102
+    },
+    {
+      "from": 68719476776,
+      "owner": 107374182401,
+      "to": 68719476777
+    },
+    {
+      "from": 68719476777,
+      "owner": 107374182401,
+      "to": 90194313224
+    },
+    {
+      "from": 90194313224,
+      "owner": 107374182401,
+      "to": 30064771106
+    },
+    {
+      "from": 30064771109,
+      "owner": 107374182401,
+      "to": 68719476784
+    },
+    {
+      "from": 68719476784,
+      "owner": 107374182401,
+      "to": 25769803790
+    },
+    {
+      "from": 68719476786,
+      "owner": 107374182401,
+      "to": 68719476787
+    },
+    {
+      "from": 68719476787,
+      "owner": 107374182401,
+      "to": 90194313225
+    },
+    {
+      "from": 90194313225,
+      "owner": 107374182401,
+      "to": 30064771113
+    },
+    {
+      "from": 30064771122,
+      "owner": 107374182401,
+      "to": 68719476802
+    },
+    {
+      "from": 68719476802,
+      "owner": 107374182401,
+      "to": 30064771121
+    },
+    {
+      "from": 30064771124,
+      "owner": 107374182401,
+      "to": 68719476804
+    },
+    {
+      "from": 68719476804,
+      "owner": 107374182401,
+      "to": 30064771123
+    },
+    {
+      "from": 30064771126,
+      "owner": 107374182401,
+      "to": 68719476806
+    },
+    {
+      "from": 68719476806,
+      "owner": 107374182401,
+      "to": 30064771125
+    },
+    {
+      "from": 30064771128,
+      "owner": 107374182401,
+      "to": 68719476808
+    },
+    {
+      "from": 68719476808,
+      "owner": 107374182401,
+      "to": 30064771127
+    },
+    {
+      "from": 30064771130,
+      "owner": 107374182401,
+      "to": 68719476810
+    },
+    {
+      "from": 68719476810,
+      "owner": 107374182401,
+      "to": 30064771129
+    },
+    {
+      "from": 68719476764,
+      "owner": 107374182401,
+      "to": 55834574854
+    },
+    {
+      "from": 55834574854,
+      "owner": 107374182401,
+      "to": 30064771096
+    },
+    {
+      "from": 30064771101,
+      "owner": 107374182401,
+      "to": 68719476770
+    },
+    {
+      "from": 68719476770,
+      "owner": 107374182401,
+      "to": 68719476771
+    },
+    {
+      "from": 68719476771,
+      "owner": 107374182401,
+      "to": 30064771100
+    },
+    {
+      "from": 30064771103,
+      "owner": 107374182401,
+      "to": 68719476774
+    },
+    {
+      "from": 68719476774,
+      "owner": 107374182401,
+      "to": 25769803788
+    },
+    {
+      "from": 30064771110,
+      "owner": 107374182401,
+      "to": 120259084298
+    },
+    {
+      "from": 120259084298,
+      "owner": 107374182401,
+      "to": 30064771109
+    },
+    {
+      "from": 68719476801,
+      "owner": 107374182401,
+      "to": 55834574858
+    },
+    {
+      "from": 55834574858,
+      "owner": 107374182401,
+      "to": 30064771122
+    },
+    {
+      "from": 68719476803,
+      "owner": 107374182401,
+      "to": 55834574859
+    },
+    {
+      "from": 55834574859,
+      "owner": 107374182401,
+      "to": 30064771124
+    },
+    {
+      "from": 68719476805,
+      "owner": 107374182401,
+      "to": 55834574860
+    },
+    {
+      "from": 55834574860,
+      "owner": 107374182401,
+      "to": 30064771126
+    },
+    {
+      "from": 68719476807,
+      "owner": 107374182401,
+      "to": 55834574861
+    },
+    {
+      "from": 55834574861,
+      "owner": 107374182401,
+      "to": 30064771128
+    },
+    {
+      "from": 68719476809,
+      "owner": 107374182401,
+      "to": 55834574862
+    },
+    {
+      "from": 55834574862,
+      "owner": 107374182401,
+      "to": 30064771130
+    },
+    {
+      "from": 68719476768,
+      "owner": 107374182401,
+      "to": 68719476769
+    },
+    {
+      "from": 68719476769,
+      "owner": 107374182401,
+      "to": 90194313223
+    },
+    {
+      "from": 90194313223,
+      "owner": 107374182401,
+      "to": 30064771101
+    },
+    {
+      "from": 30064771104,
+      "owner": 107374182401,
+      "to": 120259084297
+    },
+    {
+      "from": 120259084297,
+      "owner": 107374182401,
+      "to": 30064771103
+    },
+    {
+      "from": 68719476783,
+      "owner": 107374182401,
+      "to": 55834574856
+    },
+    {
+      "from": 55834574856,
+      "owner": 107374182401,
+      "to": 30064771110
+    },
+    {
+      "from": 68719476773,
+      "owner": 107374182401,
+      "to": 55834574855
+    },
+    {
+      "from": 55834574855,
+      "owner": 107374182401,
+      "to": 30064771104
+    },
+    {
+      "from": 107374182401,
+      "owner": 107374182401,
+      "to": 68719476752
+    },
+    {
+      "from": 30064771119,
+      "owner": 107374182401,
+      "to": 124554051595
+    },
+    {
+      "from": 30064771074,
+      "owner": 107374182402,
+      "to": 141733920769
+    },
+    {
+      "from": 30064771075,
+      "owner": 107374182402,
+      "to": 68719476739
+    },
+    {
+      "from": 68719476739,
+      "owner": 107374182402,
+      "to": 90194313217
+    },
+    {
+      "from": 90194313217,
+      "owner": 107374182402,
+      "to": 30064771074
+    },
+    {
+      "from": 68719476738,
+      "owner": 107374182402,
+      "to": 55834574849
+    },
+    {
+      "from": 55834574849,
+      "owner": 107374182402,
+      "to": 30064771075
+    },
+    {
+      "from": 107374182402,
+      "owner": 107374182402,
+      "to": 68719476738
+    },
+    {
+      "from": 141733920769,
+      "owner": 107374182402,
+      "to": 124554051585
+    },
+    {
+      "from": 30064771076,
+      "owner": 107374182403,
+      "to": 141733920770
+    },
+    {
+      "from": 30064771077,
+      "owner": 107374182403,
+      "to": 68719476741
+    },
+    {
+      "from": 68719476741,
+      "owner": 107374182403,
+      "to": 90194313218
+    },
+    {
+      "from": 90194313218,
+      "owner": 107374182403,
+      "to": 30064771076
+    },
+    {
+      "from": 68719476740,
+      "owner": 107374182403,
+      "to": 55834574850
+    },
+    {
+      "from": 55834574850,
+      "owner": 107374182403,
+      "to": 30064771077
+    },
+    {
+      "from": 107374182403,
+      "owner": 107374182403,
+      "to": 68719476740
+    },
+    {
+      "from": 141733920770,
+      "owner": 107374182403,
+      "to": 124554051586
+    },
+    {
+      "from": 107374182403,
+      "owner": 107374182404,
+      "to": 68719476740
+    },
+    {
+      "from": 120259084288,
+      "owner": 107374182404,
+      "to": 141733920771
+    },
+    {
+      "from": 107374182404,
+      "owner": 107374182404,
+      "to": 120259084288
+    },
+    {
+      "from": 141733920771,
+      "owner": 107374182404,
+      "to": 124554051587
+    },
+    {
+      "from": 30064771078,
+      "owner": 107374182405,
+      "to": 141733920772
+    },
+    {
+      "from": 30064771079,
+      "owner": 107374182405,
+      "to": 68719476743
+    },
+    {
+      "from": 68719476743,
+      "owner": 107374182405,
+      "to": 90194313219
+    },
+    {
+      "from": 90194313219,
+      "owner": 107374182405,
+      "to": 30064771078
+    },
+    {
+      "from": 68719476742,
+      "owner": 107374182405,
+      "to": 55834574851
+    },
+    {
+      "from": 55834574851,
+      "owner": 107374182405,
+      "to": 30064771079
+    },
+    {
+      "from": 107374182405,
+      "owner": 107374182405,
+      "to": 68719476742
+    },
+    {
+      "from": 141733920772,
+      "owner": 107374182405,
+      "to": 124554051588
+    },
+    {
+      "from": 68719476744,
+      "owner": 107374182406,
+      "to": 141733920773
+    },
+    {
+      "from": 107374182406,
+      "owner": 107374182406,
+      "to": 68719476744
+    },
+    {
+      "from": 141733920773,
+      "owner": 107374182406,
+      "to": 124554051589
+    },
+    {
+      "from": 107374182406,
+      "owner": 107374182407,
+      "to": 68719476744
+    },
+    {
+      "from": 25769803782,
+      "owner": 107374182407,
+      "to": 141733920774
+    },
+    {
+      "from": 30064771080,
+      "owner": 107374182407,
+      "to": 68719476746
+    },
+    {
+      "from": 68719476746,
+      "owner": 107374182407,
+      "to": 25769803782
+    },
+    {
+      "from": 30064771081,
+      "owner": 107374182407,
+      "to": 120259084289
+    },
+    {
+      "from": 120259084289,
+      "owner": 107374182407,
+      "to": 30064771080
+    },
+    {
+      "from": 68719476745,
+      "owner": 107374182407,
+      "to": 55834574852
+    },
+    {
+      "from": 55834574852,
+      "owner": 107374182407,
+      "to": 30064771081
+    },
+    {
+      "from": 107374182407,
+      "owner": 107374182407,
+      "to": 68719476745
+    },
+    {
+      "from": 141733920774,
+      "owner": 107374182407,
+      "to": 124554051590
+    },
+    {
+      "from": 30064771082,
+      "owner": 107374182408,
+      "to": 141733920775
+    },
+    {
+      "from": 30064771083,
+      "owner": 107374182408,
+      "to": 68719476748
+    },
+    {
+      "from": 68719476748,
+      "owner": 107374182408,
+      "to": 90194313220
+    },
+    {
+      "from": 90194313220,
+      "owner": 107374182408,
+      "to": 30064771082
+    },
+    {
+      "from": 68719476747,
+      "owner": 107374182408,
+      "to": 55834574853
+    },
+    {
+      "from": 55834574853,
+      "owner": 107374182408,
+      "to": 30064771083
+    },
+    {
+      "from": 107374182408,
+      "owner": 107374182408,
+      "to": 68719476747
+    },
+    {
+      "from": 141733920775,
+      "owner": 107374182408,
+      "to": 124554051591
+    },
+    {
+      "from": 68719476749,
+      "owner": 107374182409,
+      "to": 141733920776
+    },
+    {
+      "from": 107374182409,
+      "owner": 107374182409,
+      "to": 68719476749
+    },
+    {
+      "from": 141733920776,
+      "owner": 107374182409,
+      "to": 124554051592
+    },
+    {
+      "from": 68719476750,
+      "owner": 107374182410,
+      "to": 141733920777
+    },
+    {
+      "from": 107374182410,
+      "owner": 107374182410,
+      "to": 68719476750
+    },
+    {
+      "from": 141733920777,
+      "owner": 107374182410,
+      "to": 124554051593
+    },
+    {
+      "from": 68719476751,
+      "owner": 107374182411,
+      "to": 141733920778
+    },
+    {
+      "from": 107374182411,
+      "owner": 107374182411,
+      "to": 68719476751
+    },
+    {
+      "from": 141733920778,
+      "owner": 107374182411,
+      "to": 124554051594
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:callFoo",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 10,
+      "line_end": 10,
+      "name": "callFoo",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149696,
+          "index": 0,
+          "line": 10,
+          "method_id": 107374182400,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "reaching_def_probe.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 50,
+      "name": ":program",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149712,
+          "index": 0,
+          "line": 1,
+          "method_id": 107374182401,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:callBar",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 19,
+      "line_end": 19,
+      "name": "callBar",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149697,
+          "index": 0,
+          "line": 19,
+          "method_id": 107374182402,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:makeWrapper:callBaz",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 27,
+      "line_end": 27,
+      "name": "callBaz",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149698,
+          "index": 0,
+          "line": 27,
+          "method_id": 107374182403,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:makeWrapper",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 26,
+      "line_end": 28,
+      "name": "makeWrapper",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149699,
+          "index": 0,
+          "line": 26,
+          "method_id": 107374182404,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "code": "native3",
+          "id": 111669149700,
+          "index": 1,
+          "line": 26,
+          "method_id": 107374182404,
+          "name": "native3",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:callQux",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 36,
+      "line_end": 36,
+      "name": "callQux",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149701,
+          "index": 0,
+          "line": 36,
+          "method_id": 107374182405,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:someFunction:Corge",
+      "id": 107374182406,
+      "is_external": false,
+      "line": 42,
+      "line_end": 42,
+      "name": "Corge",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149702,
+          "index": 0,
+          "line": 42,
+          "method_id": 107374182406,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "code": "n",
+          "id": 111669149703,
+          "index": 1,
+          "line": 42,
+          "method_id": 107374182406,
+          "name": "n",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:someFunction",
+      "id": 107374182407,
+      "is_external": false,
+      "line": 42,
+      "line_end": 42,
+      "name": "someFunction",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149704,
+          "index": 0,
+          "line": 42,
+          "method_id": 107374182407,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:callCorge",
+      "id": 107374182408,
+      "is_external": false,
+      "line": 47,
+      "line_end": 47,
+      "name": "callCorge",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149705,
+          "index": 0,
+          "line": 47,
+          "method_id": 107374182408,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:Foo",
+      "id": 107374182409,
+      "is_external": false,
+      "line": 9,
+      "line_end": 9,
+      "name": "Foo",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149706,
+          "index": 0,
+          "line": 9,
+          "method_id": 107374182409,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "code": "n",
+          "id": 111669149707,
+          "index": 1,
+          "line": 9,
+          "method_id": 107374182409,
+          "name": "n",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:Bar",
+      "id": 107374182410,
+      "is_external": false,
+      "line": 17,
+      "line_end": 17,
+      "name": "Bar",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149708,
+          "index": 0,
+          "line": 17,
+          "method_id": 107374182410,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "code": "n",
+          "id": 111669149709,
+          "index": 1,
+          "line": 17,
+          "method_id": 107374182410,
+          "name": "n",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "reaching_def_probe.js",
+      "full_name": "reaching_def_probe.js::program:Baz",
+      "id": 107374182411,
+      "is_external": false,
+      "line": 29,
+      "line_end": 29,
+      "name": "Baz",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149710,
+          "index": 0,
+          "line": 29,
+          "method_id": 107374182411,
+          "name": "this",
+          "type_full_name": "reaching_def_probe.js::program"
+        },
+        {
+          "code": "n",
+          "id": 111669149711,
+          "index": 1,
+          "line": 29,
+          "method_id": 107374182411,
+          "name": "n",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182412,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149713,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149714,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182412,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182413,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149715,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149716,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182413,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.notEquals",
+      "id": 107374182414,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.notEquals",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149717,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149718,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182414,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.instanceOf",
+      "id": 107374182415,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.instanceOf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149719,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Foo",
+      "id": 107374182416,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Foo",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149720,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149721,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149722,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Foo",
+      "id": 107374182417,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Foo",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149723,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149724,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149725,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Bar",
+      "id": 107374182418,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Bar",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149726,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149727,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149728,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Bar",
+      "id": 107374182419,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Bar",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149729,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149730,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149731,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Baz",
+      "id": 107374182420,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Baz",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149732,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149733,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149734,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Baz",
+      "id": 107374182421,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Baz",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149735,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149736,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149737,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Qux",
+      "id": 107374182422,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Qux",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149738,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182422,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149739,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182422,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149740,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182422,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require('node-gyp-build'):<returnValue>:Qux",
+      "id": 107374182423,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Qux",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149741,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182423,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149742,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182423,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149743,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182423,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "{ Corge: (n: ANY) => ANY; }:Corge",
+      "id": 107374182424,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Corge",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149744,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182424,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149745,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182424,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149746,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182424,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:x5:<returnValue>:Corge",
+      "id": 107374182425,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Corge",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149747,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182425,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149748,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182425,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149749,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182425,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "reaching_def_probe.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require('node-gyp-build')",
+      "id": 107374182426,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "require('node-gyp-build')",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149750,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182426,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149751,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182426,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149752,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182426,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "reaching_def_probe.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:require",
+      "id": 107374182427,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "require",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149753,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182427,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149754,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182427,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149755,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182427,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "reaching_def_probe.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "reaching_def_probe.js::program:x5",
+      "id": 107374182428,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "x5",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149756,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182428,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149757,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182428,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149758,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182428,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "native1",
+      "id": 68719476736,
+      "line": 10,
+      "method_id": 107374182400,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280539
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476737,
+      "line": 10,
+      "method_id": 107374182400,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280539
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476736,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280539
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476737,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280539
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476738,
+      "line": 19,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280538
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476739,
+      "line": 19,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280538
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476740,
+      "line": 27,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476741,
+      "line": 27,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476742,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280536
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476743,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280536
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "n",
+      "id": 68719476744,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476745,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476746,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native6",
+      "id": 68719476747,
+      "line": 47,
+      "method_id": 107374182401,
+      "name": "native6",
+      "ref_target_ids": [
+        94489280535
+      ],
+      "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+    },
+    {
+      "code": "native6",
+      "id": 68719476748,
+      "line": 47,
+      "method_id": 107374182401,
+      "name": "native6",
+      "ref_target_ids": [
+        94489280535
+      ],
+      "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+    },
+    {
+      "code": "n",
+      "id": 68719476749,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149707
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "n",
+      "id": 68719476750,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149709
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "n",
+      "id": 68719476751,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "n",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callFoo",
+      "id": 68719476752,
+      "line": 10,
+      "method_id": 107374182401,
+      "name": "callFoo",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callFoo"
+    },
+    {
+      "code": "callBar",
+      "id": 68719476753,
+      "line": 19,
+      "method_id": 107374182401,
+      "name": "callBar",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callBar"
+    },
+    {
+      "code": "makeWrapper",
+      "id": 68719476754,
+      "line": 26,
+      "method_id": 107374182401,
+      "name": "makeWrapper",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "reaching_def_probe.js::program:makeWrapper"
+    },
+    {
+      "code": "callQux",
+      "id": 68719476755,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "callQux",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callQux"
+    },
+    {
+      "code": "someFunction",
+      "id": 68719476756,
+      "line": 42,
+      "method_id": 107374182401,
+      "name": "someFunction",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "reaching_def_probe.js::program:someFunction"
+    },
+    {
+      "code": "callCorge",
+      "id": 68719476757,
+      "line": 47,
+      "method_id": 107374182401,
+      "name": "callCorge",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callCorge"
+    },
+    {
+      "code": "native1",
+      "id": 68719476758,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476759,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280533
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476760,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476761,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476762,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280532
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native1",
+      "id": 68719476763,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476764,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_1",
+      "id": 68719476765,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "_tmp_1",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "process",
+      "id": 68719476766,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "process",
+      "ref_target_ids": [
+        94489280534
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native2",
+      "id": 68719476767,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476768,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280533
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476769,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476770,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476771,
+      "line": 15,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280532
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native2",
+      "id": 68719476772,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280521
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476773,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_2",
+      "id": 68719476774,
+      "line": 17,
+      "method_id": 107374182401,
+      "name": "_tmp_2",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native3",
+      "id": 68719476775,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476776,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280533
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476777,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476778,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476779,
+      "line": 25,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280532
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "wrappedBaz",
+      "id": 68719476780,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "wrappedBaz",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "() => ANY"
+    },
+    {
+      "code": "makeWrapper",
+      "id": 68719476781,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "makeWrapper",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "reaching_def_probe.js::program:makeWrapper"
+    },
+    {
+      "code": "this",
+      "id": 68719476782,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476783,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "_tmp_3",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_3",
+      "id": 68719476784,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "_tmp_3",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native4",
+      "id": 68719476785,
+      "line": 38,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476786,
+      "line": 38,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280533
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476787,
+      "line": 38,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476788,
+      "line": 38,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476789,
+      "line": 38,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280532
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "x5",
+      "id": 68719476790,
+      "line": 43,
+      "method_id": 107374182401,
+      "name": "x5",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "someFunction",
+      "id": 68719476791,
+      "line": 43,
+      "method_id": 107374182401,
+      "name": "someFunction",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "reaching_def_probe.js::program:someFunction"
+    },
+    {
+      "code": "y5",
+      "id": 68719476792,
+      "line": 44,
+      "method_id": 107374182401,
+      "name": "y5",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "x5",
+      "id": 68719476793,
+      "line": 44,
+      "method_id": 107374182401,
+      "name": "x5",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "x5",
+      "id": 68719476794,
+      "line": 45,
+      "method_id": 107374182401,
+      "name": "x5",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "y5",
+      "id": 68719476795,
+      "line": 45,
+      "method_id": 107374182401,
+      "name": "y5",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native6",
+      "id": 68719476796,
+      "line": 46,
+      "method_id": 107374182401,
+      "name": "native6",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+    },
+    {
+      "code": "x5",
+      "id": 68719476797,
+      "line": 46,
+      "method_id": 107374182401,
+      "name": "x5",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476798,
+      "line": 46,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149712
+      ],
+      "type_full_name": "reaching_def_probe.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476799,
+      "line": 46,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280532
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "module",
+      "id": 68719476800,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "module",
+      "ref_target_ids": [
+        94489280531
+      ],
+      "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js_reaching_def_probe/reaching_def_probe.js\"); }"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476801,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callFoo",
+      "id": 68719476802,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "callFoo",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callFoo"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476803,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callBar",
+      "id": 68719476804,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "callBar",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callBar"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476805,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "wrappedBaz",
+      "id": 68719476806,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "wrappedBaz",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "() => ANY"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476807,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callQux",
+      "id": 68719476808,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "callQux",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callQux"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476809,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callCorge",
+      "id": 68719476810,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "callCorge",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "reaching_def_probe.js::program:callCorge"
+    },
+    {
+      "code": "_tmp_4",
+      "id": 68719476811,
+      "line": 49,
+      "method_id": 107374182401,
+      "name": "_tmp_4",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native2",
+      "id": 68719476738,
+      "line": 19,
+      "method_id": 107374182402,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280538
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476739,
+      "line": 19,
+      "method_id": 107374182402,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280538
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476740,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476741,
+      "line": 27,
+      "method_id": 107374182403,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476740,
+      "line": 27,
+      "method_id": 107374182404,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476741,
+      "line": 27,
+      "method_id": 107374182404,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280537
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476742,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280536
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476743,
+      "line": 36,
+      "method_id": 107374182405,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280536
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "n",
+      "id": 68719476744,
+      "line": 42,
+      "method_id": 107374182406,
+      "name": "n",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "n",
+      "id": 68719476744,
+      "line": 42,
+      "method_id": 107374182407,
+      "name": "n",
+      "ref_target_ids": [
+        111669149703
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476745,
+      "line": 42,
+      "method_id": 107374182407,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476746,
+      "line": 42,
+      "method_id": 107374182407,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native6",
+      "id": 68719476747,
+      "line": 47,
+      "method_id": 107374182408,
+      "name": "native6",
+      "ref_target_ids": [
+        94489280535
+      ],
+      "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+    },
+    {
+      "code": "native6",
+      "id": 68719476748,
+      "line": 47,
+      "method_id": 107374182408,
+      "name": "native6",
+      "ref_target_ids": [
+        94489280535
+      ],
+      "type_full_name": "{ Corge: (n: ANY) => ANY; }"
+    },
+    {
+      "code": "n",
+      "id": 68719476749,
+      "line": 9,
+      "method_id": 107374182409,
+      "name": "n",
+      "ref_target_ids": [
+        111669149707
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "n",
+      "id": 68719476750,
+      "line": 17,
+      "method_id": 107374182410,
+      "name": "n",
+      "ref_target_ids": [
+        111669149709
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "n",
+      "id": 68719476751,
+      "line": 29,
+      "method_id": 107374182411,
+      "name": "n",
+      "ref_target_ids": [
+        111669149711
+      ],
+      "type_full_name": "ANY"
+    }
+  ],
+  "locals": [
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callFoo:native1",
+      "id": 94489280539,
+      "method_id": 107374182400,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280512,
+      "method_id": 107374182401,
+      "name": "callFoo"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280513,
+      "method_id": 107374182401,
+      "name": "callBar"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280514,
+      "method_id": 107374182401,
+      "name": "makeWrapper"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280515,
+      "method_id": 107374182401,
+      "name": "callQux"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280516,
+      "method_id": 107374182401,
+      "name": "someFunction"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280518,
+      "method_id": 107374182401,
+      "name": "callCorge"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280519,
+      "method_id": 107374182401,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280521,
+      "method_id": 107374182401,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280523,
+      "method_id": 107374182401,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280524,
+      "method_id": 107374182401,
+      "name": "wrappedBaz"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280526,
+      "method_id": 107374182401,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280527,
+      "method_id": 107374182401,
+      "name": "x5"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280528,
+      "method_id": 107374182401,
+      "name": "y5"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280529,
+      "method_id": 107374182401,
+      "name": "native6"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280531,
+      "method_id": 107374182401,
+      "name": "module"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280532,
+      "method_id": 107374182401,
+      "name": "__dirname"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280533,
+      "method_id": 107374182401,
+      "name": "require"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280534,
+      "method_id": 107374182401,
+      "name": "process"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280520,
+      "method_id": 107374182401,
+      "name": "_tmp_1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280530,
+      "method_id": 107374182401,
+      "name": "_tmp_4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280525,
+      "method_id": 107374182401,
+      "name": "_tmp_3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280522,
+      "method_id": 107374182401,
+      "name": "_tmp_2"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callBar:native2",
+      "id": 94489280538,
+      "method_id": 107374182402,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:makeWrapper:callBaz:native3",
+      "id": 94489280537,
+      "method_id": 107374182403,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callQux:native4",
+      "id": 94489280536,
+      "method_id": 107374182405,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280517,
+      "method_id": 107374182407,
+      "name": "_tmp_0"
+    },
+    {
+      "closure_binding_id": "reaching_def_probe.js::program:callCorge:native6",
+      "id": 94489280535,
+      "method_id": 107374182408,
+      "name": "native6"
+    }
+  ],
+  "members": [],
+  "metadata": {
+    "cpg_version": "4.0.608",
+    "language": "JSSRC",
+    "root": "/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/js_reaching_def_probe"
+  },
+  "method_cfg_endpoints": [
+    {
+      "entry_id": 107374182400,
+      "exit_id": 124554051584,
+      "method_id": 107374182400
+    },
+    {
+      "entry_id": 107374182401,
+      "exit_id": 124554051595,
+      "method_id": 107374182401
+    },
+    {
+      "entry_id": 107374182402,
+      "exit_id": 124554051585,
+      "method_id": 107374182402
+    },
+    {
+      "entry_id": 107374182403,
+      "exit_id": 124554051586,
+      "method_id": 107374182403
+    },
+    {
+      "entry_id": 107374182404,
+      "exit_id": 124554051587,
+      "method_id": 107374182404
+    },
+    {
+      "entry_id": 107374182405,
+      "exit_id": 124554051588,
+      "method_id": 107374182405
+    },
+    {
+      "entry_id": 107374182406,
+      "exit_id": 124554051589,
+      "method_id": 107374182406
+    },
+    {
+      "entry_id": 107374182407,
+      "exit_id": 124554051590,
+      "method_id": 107374182407
+    },
+    {
+      "entry_id": 107374182408,
+      "exit_id": 124554051591,
+      "method_id": 107374182408
+    },
+    {
+      "entry_id": 107374182409,
+      "exit_id": 124554051592,
+      "method_id": 107374182409
+    },
+    {
+      "entry_id": 107374182410,
+      "exit_id": 124554051593,
+      "method_id": 107374182410
+    },
+    {
+      "entry_id": 107374182411,
+      "exit_id": 124554051594,
+      "method_id": 107374182411
+    }
+  ],
+  "method_returns": [],
+  "returns": [
+    {
+      "code": "return native1.Foo(1)",
+      "id": 141733920768,
+      "line": 10,
+      "method_id": 107374182400,
+      "returned_value_ids": [
+        30064771072
+      ]
+    },
+    {
+      "code": "return native1.Foo(1)",
+      "id": 141733920768,
+      "line": 10,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771072
+      ]
+    },
+    {
+      "code": "return native2.Bar(2)",
+      "id": 141733920769,
+      "line": 19,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771074
+      ]
+    },
+    {
+      "code": "return native3.Baz(3)",
+      "id": 141733920770,
+      "line": 27,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771076
+      ]
+    },
+    {
+      "code": "return function callBaz() { return native3.Baz(3); }",
+      "id": 141733920771,
+      "line": 27,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        120259084288
+      ]
+    },
+    {
+      "code": "return native4.Qux(4)",
+      "id": 141733920772,
+      "line": 36,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771078
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920773,
+      "line": 42,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        68719476744
+      ]
+    },
+    {
+      "code": "return { Corge: function (n) { return n; } }",
+      "id": 141733920774,
+      "line": 42,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        25769803782
+      ]
+    },
+    {
+      "code": "return native6.Corge(6)",
+      "id": 141733920775,
+      "line": 47,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771082
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920776,
+      "line": 9,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        68719476749
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920777,
+      "line": 17,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        68719476750
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920778,
+      "line": 29,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        68719476751
+      ]
+    },
+    {
+      "code": "return native2.Bar(2)",
+      "id": 141733920769,
+      "line": 19,
+      "method_id": 107374182402,
+      "returned_value_ids": [
+        30064771074
+      ]
+    },
+    {
+      "code": "return native3.Baz(3)",
+      "id": 141733920770,
+      "line": 27,
+      "method_id": 107374182403,
+      "returned_value_ids": [
+        30064771076
+      ]
+    },
+    {
+      "code": "return native3.Baz(3)",
+      "id": 141733920770,
+      "line": 27,
+      "method_id": 107374182404,
+      "returned_value_ids": [
+        30064771076
+      ]
+    },
+    {
+      "code": "return function callBaz() { return native3.Baz(3); }",
+      "id": 141733920771,
+      "line": 27,
+      "method_id": 107374182404,
+      "returned_value_ids": [
+        120259084288
+      ]
+    },
+    {
+      "code": "return native4.Qux(4)",
+      "id": 141733920772,
+      "line": 36,
+      "method_id": 107374182405,
+      "returned_value_ids": [
+        30064771078
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920773,
+      "line": 42,
+      "method_id": 107374182406,
+      "returned_value_ids": [
+        68719476744
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920773,
+      "line": 42,
+      "method_id": 107374182407,
+      "returned_value_ids": [
+        68719476744
+      ]
+    },
+    {
+      "code": "return { Corge: function (n) { return n; } }",
+      "id": 141733920774,
+      "line": 42,
+      "method_id": 107374182407,
+      "returned_value_ids": [
+        25769803782
+      ]
+    },
+    {
+      "code": "return native6.Corge(6)",
+      "id": 141733920775,
+      "line": 47,
+      "method_id": 107374182408,
+      "returned_value_ids": [
+        30064771082
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920776,
+      "line": 9,
+      "method_id": 107374182409,
+      "returned_value_ids": [
+        68719476749
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920777,
+      "line": 17,
+      "method_id": 107374182410,
+      "returned_value_ids": [
+        68719476750
+      ]
+    },
+    {
+      "code": "return n",
+      "id": 141733920778,
+      "line": 29,
+      "method_id": 107374182411,
+      "returned_value_ids": [
+        68719476751
+      ]
+    }
+  ],
+  "schema": "portable-program-facts/0.2",
+  "try_nested_calls": [],
+  "type_decls": []
+}
