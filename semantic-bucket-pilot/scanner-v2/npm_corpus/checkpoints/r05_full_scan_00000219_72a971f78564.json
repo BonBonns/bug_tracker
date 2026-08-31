@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"@flyskywhy/react-native-gcanvas\", \"version\": \"6.0.24\", \"stages\": {\"download\": {\"seconds\": 0.4836845397949219}, \"extract\": {\"seconds\": 0.8822653293609619}, \"header_staging\": {\"seconds\": 0.00010347366333007812, \"n_staged\": 0}, \"c2cpg\": {\"seconds\": 20.033848762512207, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 28.85192060470581, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 37.22975540161133, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 43.19623875617981, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 180.23560857772827}}, \"status\": \"RESOURCE_LIMIT\", \"detail\": \"cpp_normalize exceeded 180s (real, reproduced case: re2 took 127.6s on a full re-run outside this timeout -- large, genuinely bundled C++ codebases need the high-resource retry queue, not a silent drop)\", \"header_staging\": [{\"dep\": null, \"staged\": false, \"note\": \"package.json present but declares neither node-addon-api nor nan\"}], \"total_seconds\": 310.9239251613617}",
+  "name": "r05_full_scan",
+  "row_count": 219,
+  "sha256": "72a971f78564293456f7bff353ab4858dcc3519b3893256abc1caa25421cac6f",
+  "snapshot_path": "checkpoints/r05_full_scan_00000219_72a971f78564.tsv",
+  "snapshot_time_utc": "2026-08-31T02:27:17Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
