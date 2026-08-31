@@ -469,3 +469,72 @@ task **#44**, which now blocks #38 (`OOB_WRITE` enablement) in #30's place — #
 | `OOB_WRITE` | #38 — Enable in staged run | #32, #42, #44 | #35 satisfied; #30 resolved (was a false discrepancy, not a real blocker); #44 (new) tracks the real, diagnosed pointer+length-parameter capacity gap |
 
 No corpus run follows from this.
+
+### Task #44: PARAM-CAP-R01 — evidence-backed pointer-parameter + length-parameter capacity
+
+Real implementation on `claude/provenance-preservation-task35` (`tools/param_length_capacity.py`
++ additive wiring into `tools/oob_index_write_verdict.py`). Full design and required-control
+status below; **this task is NOT marked validated, and #38 (`OOB_WRITE` enablement) stays
+blocked on it** — the design carries real, disclosed scope limits, not full coverage.
+
+**Evidence model (not a "pointer followed by integer" heuristic):** pairing a pointer parameter
+`P` with its real length parameter `L` requires REAL evidence from two combined sources, both
+directly verified against real Tremor facts before being trusted:
+1. A bounded backward chase through the function's own real `assignments` facts, starting from
+   the write's index expression's own identifier tokens. Catches `vorbis_book_decodevs_add`'s
+   real chain `step=n/book->dim; o+=step`. `reachingdef.json` was checked directly on the real
+   Tremor bundle and found to cover only 3 narrow loop-counter locals (not `step`, not
+   parameters) — insufficient for this evidence, so `assignments` facts are used instead.
+2. A real, non-assert `<`/`<=` comparison, identity-matched (`value_ref.kind=='PARAMETER'`, not
+   text alone) to a real integer parameter — catches `for(i=0;i<n;)`-shaped loop bounds.
+
+Zero candidates → abstain (correctly excludes an unrelated adjacent integer parameter that the
+index never actually references). Two or more → abstain, explicitly ambiguous, never guessed.
+
+**Byte-vs-element:** an index-store write (`arr[idx]`) is inherently element-counted; a
+`sizeof(...)` scaling factor in the index expression abstains rather than risk a silent unit
+mismatch. **Pointer offsets:** one hop of `param + literal` pointer arithmetic reduces the real
+capacity by the literal; a non-literal offset abstains rather than guess. **Overflow:** an
+`L * sizeof(...)`-shaped expression is flagged untrustworthy when `L`'s own type isn't provably
+wide enough — gates call-site allocation-size corroboration so an overflow-prone product is never
+trusted as a sound capacity. **Interprocedural corroboration:** real, but honestly scoped —
+unambiguous call sites (`resolution=='EXACT'`, one `candidate_target_ids` entry) with a literal
+length argument, non-gating enrichment only. No cross-TU allocation-size tracing exists anywhere
+in this codebase's exported facts today (checked directly) — this module does not fabricate that
+capability.
+
+**Ownership decision (verified, not assumed):** this belongs to `OOB_INDEX_WRITE`
+(`oob_index_write_verdict.py`), not the memcpy-surface `OOB_WRITE`. Directly confirmed:
+`oob_write_verdict.py` produces 0 candidates on both real Tremor VULN and PATCHED bundles (no
+`memcpy`-family call exists at either site at all) — there is no duplicate-finding risk between
+the two producers for this shape.
+
+**Required controls (`tools/param_length_capacity_controls.py`, 13/13):** Tremor VULN (real,
+freshly rebuilt via `c2cpg` — `a[o+j]` correctly flagged, `length_param=n`) and PATCHED (real,
+correctly suppressed); OOB_WRITE non-duplication (real, both files); a correctly bounded
+pointer/length loop; an unrelated adjacent integer parameter (correctly excluded); byte length vs
+element count (correctly abstains); pointer arithmetic reducing capacity (literal resolved,
+non-literal correctly abstains); multiple possible length parameters (correctly ambiguous);
+overflow in `n*sizeof(*a)` (narrow flagged, wide not, no-multiplication not flagged).
+
+**Honest, disclosed scope limits — why this is not "validated" yet:**
+- Of Tremor's 3 real vulnerable sink functions, only `vorbis_book_decodevs_add` is detected
+  end-to-end (candidate on vuln, suppressed on patched).
+- `vorbis_book_decodev_add`'s real pairing (`a[i++]`, bounded by the OUTER `for(i=0;i<n;)`) is
+  correctly IDENTIFIED but the write abstains on BOTH vuln and patched: the outer loop's `i<n`
+  condition is textually unchanged between the two files (the real fix adds a bound inside the
+  nested INNER loop instead), and this producer's guard analysis remains
+  intraprocedural/heuristic, not dominator-based — the same tradeoff already documented for the
+  pre-existing fixed-array logic. Directly confirmed: treating the loop-bound comparison as a
+  SUPPRESSION signal (not just an identification signal) would suppress the real vulnerable
+  candidate too, since the same `i<n` text exists in both files.
+- `vorbis_book_decodevv_add`'s real vulnerability is on a NESTED/2D index (`a[chptr++][i]`, the
+  second dimension) — entirely outside this producer's existing single-level `indexAccess` model,
+  a limitation shared with the pre-existing fixed-array logic, not newly introduced here.
+
+**Net:** a real, substantive, evidence-backed capability now exists and correctly reproduces one
+of Tremor's three real sinks end-to-end, with the other two abstaining for clearly diagnosed,
+pre-existing-shaped reasons rather than silently. #44 remains open (not completed) pending review
+of these scope limits; #38 (`OOB_WRITE` enablement) stays blocked on it. No corpus run follows
+from this — a diagnostic-only run may still generate and preserve evidence once scheduled, but it
+cannot yet support a meaningful negative claim about pointer-parameter writes at corpus scale.
