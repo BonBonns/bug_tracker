@@ -835,3 +835,66 @@ into `run_pipeline_one.py`'s live pipeline** -- the capability is complete, real
 backed, but deciding what's ready to turn on and where is left to the enablement gate tasks
 (#36-40), each of which will need to make that call for its own property at the time it's
 enabled.
+
+## Task #42: restored the self-contained OOB Write/Read control gates
+
+`/tmp/cap_corpus` was operator-maintained and lost with no builder ever committed (see
+`tests/gates/guard-r01/FIXTURE_NOTE.md`), which meant `oob_write_controls.py`/
+`oob_read_controls.py` crashed with a raw `FileNotFoundError` rather than reporting `BLOCKED`
+(`docs/CODE_REVIEW_2026-08-24.md` finding #3). No source for it ever existed in the repository
+either, so this was a genuine rebuild from scratch, not a recovery.
+
+New, committed real C++ source (`tests/gates/guard-r01/fixtures/cap_corpus/{g,t3,t5}.cpp`)
+reproduces every function the ORIGINAL gate's own real assertions name — bounded/unbounded
+writes and reads, a reject-guard whose branch doesn't terminate, a guard that names the wrong
+buffer's capacity, source-bound-vs-dest-bound isolation, and the two isolated "hard teeth"
+fixtures. A new builder (`build_cap_corpus.sh`) runs the same real c2cpg → joern export →
+normalize pipeline `tests/gates/cpp-param-r01/run.sh` already established, deterministically
+reproducing `/tmp/cap_corpus`. `tools/oob_write_controls.py`/`tools/oob_read_controls.py` (and
+their `tests/gates/guard-r01/` mirrors — which also had a latent, never-exercised
+ROOT-computation bug, fixed alongside this) now self-heal: missing fixture → auto-rebuild;
+`joern` genuinely unavailable → a clear `BLOCKED` exit (code 20), never a bare crash again.
+
+Verified against the freshly rebuilt corpus, from both file locations: `OOB_WRITE_CONTROLS=
+11/11`, `OOB_READ_CONTROLS=10/10` — every original assertion passes, including both hard-teeth
+checks. `bound_controls.py` (pre-existing, already degraded gracefully rather than crashing)
+independently re-confirms the same corpus: `BOUND_CONTROLS=11/11`.
+
+Out of scope, disclosed in `FIXTURE_NOTE.md`: `/tmp/norm_scan`/`/tmp/sd_scan` (optional anchor
+inputs, already degrade gracefully) and `/tmp/pp2`/`/tmp/cmp2` (GUARD-R01's other ten scripts —
+`guard_controls.py`, `guard_r02.py`, etc.) remain lost and still block `run_all.py` gate 114 as
+a whole — a separate, larger fixture-recovery task, not attempted here.
+
+## Tasks #36/#37/#39: STAGED-ENABLE-R01 — LOCK_BALANCE, PROTECTED_FIELD, OOB_READ enabled
+
+New `semantic-bucket-pilot/scanner-v2/staged_enablement.py` — the mechanism for what "enabling"
+a property in a REAL (non-diagnostic-only) corpus run actually means, now that some of the six
+properties' own precondition tasks are individually complete while others are not. Two real
+gates, both required for a staged property's own finding to stay reportable:
+
+1. **Property-level**: the property is in `ENABLED_PROPERTIES` — currently
+   `lock_balance_findings` (#36), `protected_field_findings` (#37), `oob_read_candidates` (#39).
+   `oob_write_candidates`/`oob_index_write_candidates` stay out (#38, blocked on #44's still-
+   in-progress work), `oob_compare_candidates` stays out (#40, blocked on #33's still-open
+   question). `r04_findings`/`r05_findings` are never touched — Resource Guard keeps its own
+   separate lineage/gate (#41).
+2. **Finding-level**: the finding's own `reachability_status` (task #32) is present and
+   resolved, not `REACHABILITY_UNRESOLVED` — directly implements task #36's own instruction
+   that enabling a property must not mean every finding it emits becomes an automatic
+   demonstrated vulnerability without a reachability tier attached. This gate carries its own
+   distinct label (`REACHABILITY_REQUIRED_FOR_REPORTING`) so it's never confused with the
+   property-level gate (`STAGE_NOT_ENABLED`).
+
+Never flips a real `False` into `True` — only narrows what `provenance.py`'s own formula (#35)
+already computed, the same discipline `run_diagnostic_100.py`'s `enforce_diagnostic_only()`
+already established for the diagnostic run. `check_staged_enablement.py`: 14/14 passing,
+including a real end-to-end run combining this module with `reachability_tier.py` against re2's
+own evidence bundle from the overnight-diagnostic-100 run — OOB_READ's real current output (0
+candidates, following #29/#43's own fixes, itself a real disclosed result) runs cleanly through
+the mechanism; OOB_WRITE's real 2 candidates are confirmed correctly forced non-reportable with
+`STAGE_NOT_ENABLED`.
+
+With #36/#37/#39 done, the open staged-enablement work is #38 (blocked on #44) and #40
+(blocked on #33) — both substantive, not mechanical: the enablement *mechanism* itself is now
+complete for all five non-Resource-Guard properties, only their own individual property-level
+preconditions remain.
