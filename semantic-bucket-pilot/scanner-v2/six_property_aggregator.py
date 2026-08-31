@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""SIX-PROP-AGG-R01 (task #47, a precursor to task #34): combines all six properties -- Resource
+Guard (r04_findings/r05_findings/r06_findings) plus the five staged properties
+(LOCK_BALANCE/PROTECTED_FIELD/OOB_WRITE/OOB_INDEX_WRITE/OOB_READ/OOB_COMPARE) -- into one
+aggregate summary, per direct instruction:
+  - Resource Guard: enabled.
+  - Lock Balance: enabled.
+  - Protected Field: enabled.
+  - OOB Write / OOB Index Write: enabled ONLY for externally reachable tiers -- internal-
+    unregistered stays diagnostic. This is exactly what staged_enablement.py's own reachability
+    gate now enforces (task #47's own correction: TIER_INTERNAL_UNREGISTERED no longer clears
+    the gate, only TIER_JS_CALL_PROVEN/TIER_REGISTERED_NOT_JS_CALLED do) -- this module does not
+    re-implement that logic, it trusts the upstream result.
+  - OOB Read: enabled.
+  - OOB Compare: explicitly disabled, with its reason recorded (task #33's own real
+    investigation) -- never silently omitted, never silently enabled by this or a future step.
+
+THIS MODULE DOES NOT COMPUTE REPORTABILITY. It is a pure aggregation/summary step over a record
+that has ALREADY been through the real pipeline, in this exact order:
+  1. provenance.enrich_record()            (task #35 -- the reportable formula itself)
+  2. reachability_tier.classify_record_reachability()   (task #32 -- attaches reachability_status
+     to the five staged property keys, never r04/r05/r06)
+  3. staged_enablement.enforce_staged_enablement()       (tasks #36-40, #47 -- the corrected
+     reachability gate; never touches r04/r05/r06 either)
+Each property's own `reportable` field, once that pipeline has run, is already the real,
+authoritative answer -- this module only reads it and organizes it into one combined view,
+never recomputing or overriding it. "Enabled" here means "trusted and included in the combined
+count," not "forced reportable."
+
+HARD INVARIANT, verified not just claimed: a DISABLED property (currently only OOB_COMPARE)
+must NEVER contribute a reportable finding to the aggregate. aggregate_record() raises
+(never silently continues) if this is ever violated -- that would mean staged_enablement.py's
+own gate failed, a bug this module is specifically positioned to catch before it reaches a real
+report.
+"""
+DISABLED_PROPERTIES = {
+    "oob_compare_candidates": (
+        "task #33: a real positive-control fixture (oob_compare_controls.py, 10/10) proves the "
+        "detector itself correctly recognizes its own target shape when built to trigger it "
+        "(including the classic 'wrong sizeof' bug); a real corpus survey of 33 packages using "
+        "memcmp/strncmp/CRYPTO_memcmp found zero real candidates and root-caused why (24 "
+        "non-constant/variable extent, 15 string-literal operand, 7 sizeof() on something other "
+        "than a bare compared-operand name, 2 other). The detector is real and sound; the bug "
+        "shape it targets is genuinely rare in this corpus's own idiomatic C/C++. Deliberately "
+        "kept non-reportable pending a real corpus positive or a wider run -- not an open "
+        "precondition waiting to clear on its own, and not something this or a future "
+        "aggregation step may silently re-enable."
+    ),
+}
+
+# Resource Guard's own three lineage versions (task #41: R06 runs alongside R04/R05, never
+# replacing either) -- their own reportable field comes from provenance.py's formula (task #35)
+# plus whatever real applicability/adjudication evidence exists for them (task #41's own
+# promote_via_js_linkage.py, when wired in, corrects source_boundary_evidence but does not
+# itself flip applicability_status -- see check_provenance.py's own real node-libcurl
+# diagnostic: applicability_status still defaults to NOT_YET_DETERMINED for a real R06 finding
+# with no further evidence, so reportable stays False in practice until a real, separate,
+# affirmative applicability step exists). staged_enablement.py deliberately never touches these
+# three keys; this module trusts their own already-computed reportable field the same way.
+RESOURCE_GUARD_KEYS = ("r04_findings", "r05_findings", "r06_findings")
+
+STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
+               "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
+
+ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + STAGED_KEYS
+
+
+def aggregate_record(record, enabled_properties):
+    """Summarizes one already-fully-processed record (see module docstring for the required
+    upstream pipeline order) across all nine finding/candidate keys. `enabled_properties` is
+    passed in explicitly (the caller's own `staged_enablement.ENABLED_PROPERTIES`, or an
+    equivalent real set) rather than imported and used implicitly, so a caller auditing this
+    module's own behavior can see exactly what enablement state produced a given summary,
+    and so a test can exercise this function against a deliberately-different set without
+    monkeypatching a module-level import.
+
+    Returns {property_key: {"raw_count", "reportable_count", "enabled", "disabled_reason"}},
+    plus "_totals": {"total_raw", "total_reportable"}. Raises AssertionError if a DISABLED
+    property (per DISABLED_PROPERTIES) is found to have contributed ANY reportable finding --
+    a real, hard invariant violation, never silently absorbed into the totals."""
+    summary = {}
+    for key in ALL_PROPERTY_KEYS:
+        items = record.get(key) or []
+        reportable_count = sum(1 for f in items if f.get("reportable") is True)
+        if key in RESOURCE_GUARD_KEYS:
+            enabled, reason = True, None
+        elif key in DISABLED_PROPERTIES:
+            enabled, reason = False, DISABLED_PROPERTIES[key]
+            if reportable_count:
+                raise AssertionError(
+                    f"INVARIANT VIOLATION: {key} is a DISABLED property (reason: {reason!r}) "
+                    f"but has {reportable_count} real reportable finding(s) in this record -- "
+                    "this must never happen; staged_enablement.py's own gate did not correctly "
+                    "force it non-reportable, or this record was not actually run through it.")
+        else:
+            enabled = key in enabled_properties
+            reason = None if enabled else "not yet enabled (no disclosed reason on record)"
+        summary[key] = {"raw_count": len(items), "reportable_count": reportable_count,
+                         "enabled": enabled, "disabled_reason": reason}
+    summary["_totals"] = {
+        "total_raw": sum(e["raw_count"] for k, e in summary.items() if k != "_totals"),
+        "total_reportable": sum(e["reportable_count"] for k, e in summary.items()
+                                 if k != "_totals"),
+    }
+    return summary
+
+
+def format_summary(summary):
+    """Real, human-readable rendering of aggregate_record()'s own output -- for a smoke test's
+    own printed output or a future report, never a second source of truth (every number here is
+    read directly from the summary dict, nothing recomputed)."""
+    lines = []
+    for key in ALL_PROPERTY_KEYS:
+        e = summary[key]
+        tag = "ENABLED " if e["enabled"] else "DISABLED"
+        reason = f" -- {e['disabled_reason']}" if e["disabled_reason"] else ""
+        lines.append(f"  [{tag}] {key}: raw={e['raw_count']} reportable={e['reportable_count']}"
+                      f"{reason}")
+    t = summary["_totals"]
+    lines.append(f"  TOTAL: raw={t['total_raw']} reportable={t['total_reportable']}")
+    return "\n".join(lines)
