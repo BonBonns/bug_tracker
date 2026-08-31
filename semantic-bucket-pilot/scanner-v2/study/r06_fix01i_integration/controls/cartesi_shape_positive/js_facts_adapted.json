@@ -1,0 +1,47 @@
+{
+  "schema": "portable-program-facts/0.2",
+  "frontend": "synthetic-control (see this file's own module docstring)",
+  "calls": [
+    {
+      "id": 900000001,
+      "name": "readMemory",
+      "code": "machine.readMemory(address, length)",
+      "receiver_name": "bindings",
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "enclosing_function_id": 900000000,
+      "candidate_target_ids": [],
+      "candidate_target_full_names": [],
+      "arguments": [
+        {
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "code": "address",
+          "name": "address",
+          "id": 900000002,
+          "call_id": 900000001,
+          "type_full_name": "ANY",
+          "line": 1
+        },
+        {
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "code": "length",
+          "name": "length",
+          "id": 900000003,
+          "call_id": 900000001,
+          "type_full_name": "ANY",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "functions": [],
+  "identifiers": [],
+  "locals": [],
+  "members": [],
+  "method_returns": [],
+  "returns": [],
+  "type_decls": [],
+  "metadata": []
+}

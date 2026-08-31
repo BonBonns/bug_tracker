@@ -1,0 +1,4313 @@
+{
+  "calls": [
+    {
+      "arguments": [
+        {
+          "call_id": 30064771072,
+          "code": "native1",
+          "id": 68719476737,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771072,
+          "code": "1",
+          "id": 90194313216,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 7,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Foo",
+        "index.js::program:require('node-gyp-build'):<returnValue>:Foo"
+      ],
+      "candidate_target_ids": [
+        107374182412,
+        107374182413
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Foo",
+        "node-gyp-build:Foo"
+      ],
+      "code": "native1.Foo(1)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "index.js",
+      "id": 30064771072,
+      "line": 7,
+      "method_full_name": "node-gyp-build:Foo",
+      "name": "Foo",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Foo",
+        "node-gyp-build:Foo"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771073,
+          "code": "native1",
+          "id": 68719476736,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771073,
+          "code": "Foo",
+          "id": 55834574848,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 7,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native1.Foo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182400,
+      "file": "index.js",
+      "id": 30064771073,
+      "line": 7,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771081,
+          "code": "callFoo",
+          "id": 68719476744,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 7,
+          "name": "callFoo",
+          "type_full_name": "index.js::program:callFoo"
+        },
+        {
+          "call_id": 30064771081,
+          "code": "callFoo",
+          "id": 120259084288,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 7,
+          "name": "",
+          "type_full_name": "index.js::program:callFoo"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callFoo = function callFoo() { return native1.Foo(1); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771081,
+      "line": 7,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771082,
+          "code": "callBar",
+          "id": 68719476745,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 16,
+          "name": "callBar",
+          "type_full_name": "index.js::program:callBar"
+        },
+        {
+          "call_id": 30064771082,
+          "code": "callBar",
+          "id": 120259084289,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 16,
+          "name": "",
+          "type_full_name": "index.js::program:callBar"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callBar = function callBar() { return native2.Bar(2); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771082,
+      "line": 16,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771083,
+          "code": "callBaz",
+          "id": 68719476746,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 23,
+          "name": "callBaz",
+          "type_full_name": "index.js::program:callBaz"
+        },
+        {
+          "call_id": 30064771083,
+          "code": "callBaz",
+          "id": 120259084290,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 23,
+          "name": "",
+          "type_full_name": "index.js::program:callBaz"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callBaz = function callBaz() { return native3.Baz(3); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771083,
+      "line": 23,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771084,
+          "code": "callQux",
+          "id": 68719476747,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "callQux",
+          "type_full_name": "index.js::program:callQux"
+        },
+        {
+          "call_id": 30064771084,
+          "code": "callQux",
+          "id": 120259084291,
+          "index": 2,
+          "kind": "METHOD_REF",
+          "line": 32,
+          "name": "",
+          "type_full_name": "index.js::program:callQux"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "function callQux = function callQux() { return native4.Qux(4); }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771084,
+      "line": 32,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771085,
+          "code": "this",
+          "id": 68719476749,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 8,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:callFoo"
+      ],
+      "candidate_target_ids": [
+        107374182400
+      ],
+      "canonical_targets": [
+        "index.js::program:callFoo"
+      ],
+      "code": "callFoo()",
+      "concrete_targets": [
+        "index.js::program:callFoo"
+      ],
+      "corrected_targets": [
+        "index.js::program:callFoo"
+      ],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771085,
+      "line": 8,
+      "method_full_name": "index.js::program:callFoo",
+      "name": "callFoo",
+      "receiver_owner_match": true,
+      "receiver_type": "index.js::program",
+      "resolution": "EXACT",
+      "resolution_corrected": "EXACT",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNCHANGED",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771086,
+          "code": "native1",
+          "id": 68719476750,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "native1",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771086,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771080,
+          "index": 2,
+          "kind": "CALL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "var native1 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771086,
+      "line": 9,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771105,
+          "code": "module.exports",
+          "id": 30064771106,
+          "index": 1,
+          "kind": "CALL",
+          "line": 34,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771105,
+          "code": "{ callFoo, callBar, callBaz, callQux }",
+          "id": 25769803781,
+          "index": 2,
+          "kind": "BLOCK",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "module.exports = { callFoo, callBar, callBaz, callQux }",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771105,
+      "line": 34,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771080,
+          "code": "this",
+          "id": 68719476753,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771080,
+          "code": "__dirname",
+          "id": 68719476754,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182420
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771080,
+      "line": 9,
+      "method_full_name": "index.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771088,
+          "code": "typeof process !== 'undefined'",
+          "id": 30064771089,
+          "index": 1,
+          "kind": "CALL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771088,
+          "code": "process.env.SOME_FLAG",
+          "id": 30064771091,
+          "index": 2,
+          "kind": "CALL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "typeof process !== 'undefined' && process.env.SOME_FLAG",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771088,
+      "line": 13,
+      "method_full_name": "<operator>.logicalAnd",
+      "name": "<operator>.logicalAnd",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771096,
+          "code": "i",
+          "id": 68719476762,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 20,
+          "name": "i",
+          "type_full_name": "__ecma.Number"
+        },
+        {
+          "call_id": 30064771096,
+          "code": "0",
+          "id": 90194313223,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 20,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "let i = 0",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771096,
+      "line": 20,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771097,
+          "code": "i",
+          "id": 68719476763,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 20,
+          "name": "i",
+          "type_full_name": "__ecma.Number"
+        },
+        {
+          "call_id": 30064771097,
+          "code": "1",
+          "id": 90194313224,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 20,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "i < 1",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771097,
+      "line": 20,
+      "method_full_name": "<operator>.lessThan",
+      "name": "<operator>.lessThan",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771098,
+          "code": "i",
+          "id": 68719476764,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 20,
+          "name": "i",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "i++",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771098,
+      "line": 20,
+      "method_full_name": "<operator>.postIncrement",
+      "name": "<operator>.postIncrement",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771106,
+          "code": "module",
+          "id": 68719476776,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "module",
+          "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe/index.js\"); }"
+        },
+        {
+          "call_id": 30064771106,
+          "code": "exports",
+          "id": 55834574854,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "module.exports",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771106,
+      "line": 34,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771087,
+          "code": "this",
+          "id": 68719476752,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 9,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771087,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313220,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 9,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182421
+      ],
+      "canonical_targets": [
+        "index.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771087,
+      "line": 9,
+      "method_full_name": "index.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771089,
+          "code": "typeof process",
+          "id": 30064771090,
+          "index": 1,
+          "kind": "CALL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771089,
+          "code": "\"undefined\"",
+          "id": 90194313221,
+          "index": 2,
+          "kind": "LITERAL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "typeof process !== 'undefined'",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771089,
+      "line": 13,
+      "method_full_name": "<operator>.notEquals",
+      "name": "<operator>.notEquals",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771091,
+          "code": "process.env",
+          "id": 30064771092,
+          "index": 1,
+          "kind": "CALL",
+          "line": 13,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771091,
+          "code": "SOME_FLAG",
+          "id": 55834574853,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 13,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "process.env.SOME_FLAG",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771091,
+      "line": 13,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771093,
+          "code": "native2",
+          "id": 68719476757,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771093,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771094,
+          "index": 2,
+          "kind": "CALL",
+          "line": 14,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native2 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771093,
+      "line": 14,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771099,
+          "code": "native3",
+          "id": 68719476765,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 21,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771099,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771100,
+          "index": 2,
+          "kind": "CALL",
+          "line": 21,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native3 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771099,
+      "line": 21,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771102,
+          "code": "native4",
+          "id": 68719476770,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 28,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771102,
+          "code": "require('node-gyp-build')(__dirname)",
+          "id": 30064771103,
+          "index": 2,
+          "kind": "CALL",
+          "line": 28,
+          "name": "",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native4 = require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771102,
+      "line": 28,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771107,
+          "code": "_tmp_0.callFoo",
+          "id": 30064771108,
+          "index": 1,
+          "kind": "CALL",
+          "line": 34,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771107,
+          "code": "callFoo",
+          "id": 68719476778,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "callFoo",
+          "type_full_name": "index.js::program:callFoo"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callFoo = callFoo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771107,
+      "line": 34,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771109,
+          "code": "_tmp_0.callBar",
+          "id": 30064771110,
+          "index": 1,
+          "kind": "CALL",
+          "line": 34,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771109,
+          "code": "callBar",
+          "id": 68719476780,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "callBar",
+          "type_full_name": "index.js::program:callBar"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callBar = callBar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771109,
+      "line": 34,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771111,
+          "code": "_tmp_0.callBaz",
+          "id": 30064771112,
+          "index": 1,
+          "kind": "CALL",
+          "line": 34,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771111,
+          "code": "callBaz",
+          "id": 68719476782,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "callBaz",
+          "type_full_name": "index.js::program:callBaz"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callBaz = callBaz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771111,
+      "line": 34,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771113,
+          "code": "_tmp_0.callQux",
+          "id": 30064771114,
+          "index": 1,
+          "kind": "CALL",
+          "line": 34,
+          "name": "",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771113,
+          "code": "callQux",
+          "id": 68719476784,
+          "index": 2,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "callQux",
+          "type_full_name": "index.js::program:callQux"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callQux = callQux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771113,
+      "line": 34,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771090,
+          "code": "process",
+          "id": 68719476755,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "process",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "typeof process",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771090,
+      "line": 13,
+      "method_full_name": "<operator>.instanceOf",
+      "name": "<operator>.instanceOf",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771092,
+          "code": "process",
+          "id": 68719476756,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 13,
+          "name": "process",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771092,
+          "code": "env",
+          "id": 55834574852,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 13,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "process.env",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771092,
+      "line": 13,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771094,
+          "code": "this",
+          "id": 68719476760,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771094,
+          "code": "__dirname",
+          "id": 68719476761,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182420
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771094,
+      "line": 14,
+      "method_full_name": "index.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771100,
+          "code": "this",
+          "id": 68719476768,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 21,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771100,
+          "code": "__dirname",
+          "id": 68719476769,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 21,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182420
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771100,
+      "line": 21,
+      "method_full_name": "index.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771103,
+          "code": "this",
+          "id": 68719476773,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 28,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771103,
+          "code": "__dirname",
+          "id": 68719476774,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 28,
+          "name": "__dirname",
+          "type_full_name": "ANY"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "candidate_target_ids": [
+        107374182420
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "code": "require('node-gyp-build')(__dirname)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771103,
+      "line": 28,
+      "method_full_name": "index.js::program:require('node-gyp-build')",
+      "name": "require('node-gyp-build')",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build')"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771108,
+          "code": "_tmp_0",
+          "id": 68719476777,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "_tmp_0",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771108,
+          "code": "callFoo",
+          "id": 55834574855,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callFoo",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771108,
+      "line": 34,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771110,
+          "code": "_tmp_0",
+          "id": 68719476779,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "_tmp_0",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771110,
+          "code": "callBar",
+          "id": 55834574856,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callBar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771110,
+      "line": 34,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771112,
+          "code": "_tmp_0",
+          "id": 68719476781,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "_tmp_0",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771112,
+          "code": "callBaz",
+          "id": 55834574857,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callBaz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771112,
+      "line": 34,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771114,
+          "code": "_tmp_0",
+          "id": 68719476783,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 34,
+          "name": "_tmp_0",
+          "type_full_name": "ANY"
+        },
+        {
+          "call_id": 30064771114,
+          "code": "callQux",
+          "id": 55834574858,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 34,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "_tmp_0.callQux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771114,
+      "line": 34,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771095,
+          "code": "this",
+          "id": 68719476759,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 14,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771095,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313222,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 14,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182421
+      ],
+      "canonical_targets": [
+        "index.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771095,
+      "line": 14,
+      "method_full_name": "index.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771101,
+          "code": "this",
+          "id": 68719476767,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 21,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771101,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313225,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 21,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182421
+      ],
+      "canonical_targets": [
+        "index.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771101,
+      "line": 21,
+      "method_full_name": "index.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771104,
+          "code": "this",
+          "id": 68719476772,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 28,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        },
+        {
+          "call_id": 30064771104,
+          "code": "\"node-gyp-build\"",
+          "id": 90194313226,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 28,
+          "name": "",
+          "type_full_name": "__ecma.String"
+        }
+      ],
+      "candidate_target_full_names": [
+        "index.js::program:require"
+      ],
+      "candidate_target_ids": [
+        107374182421
+      ],
+      "canonical_targets": [
+        "index.js::program:require"
+      ],
+      "code": "require('node-gyp-build')",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182401,
+      "file": "index.js",
+      "id": 30064771104,
+      "line": 28,
+      "method_full_name": "index.js::program:require",
+      "name": "require",
+      "receiver_owner_match": false,
+      "receiver_type": "index.js::program",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771074,
+          "code": "native2",
+          "id": 68719476739,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 16,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771074,
+          "code": "2",
+          "id": 90194313217,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 16,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Bar",
+        "index.js::program:require('node-gyp-build'):<returnValue>:Bar"
+      ],
+      "candidate_target_ids": [
+        107374182414,
+        107374182415
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+        "node-gyp-build:Bar"
+      ],
+      "code": "native2.Bar(2)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "index.js",
+      "id": 30064771074,
+      "line": 16,
+      "method_full_name": "node-gyp-build:Bar",
+      "name": "Bar",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+        "node-gyp-build:Bar"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771075,
+          "code": "native2",
+          "id": 68719476738,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 16,
+          "name": "native2",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771075,
+          "code": "Bar",
+          "id": 55834574849,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 16,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native2.Bar",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182402,
+      "file": "index.js",
+      "id": 30064771075,
+      "line": 16,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771076,
+          "code": "native3",
+          "id": 68719476741,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 23,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771076,
+          "code": "3",
+          "id": 90194313218,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 23,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Baz",
+        "index.js::program:require('node-gyp-build'):<returnValue>:Baz"
+      ],
+      "candidate_target_ids": [
+        107374182416,
+        107374182417
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Baz",
+        "node-gyp-build:Baz"
+      ],
+      "code": "native3.Baz(3)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "index.js",
+      "id": 30064771076,
+      "line": 23,
+      "method_full_name": "node-gyp-build:Baz",
+      "name": "Baz",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Baz",
+        "node-gyp-build:Baz"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771077,
+          "code": "native3",
+          "id": 68719476740,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 23,
+          "name": "native3",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771077,
+          "code": "Baz",
+          "id": 55834574850,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 23,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native3.Baz",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182403,
+      "file": "index.js",
+      "id": 30064771077,
+      "line": 23,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771078,
+          "code": "native4",
+          "id": 68719476743,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771078,
+          "code": "4",
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 32,
+          "name": "",
+          "type_full_name": "__ecma.Number"
+        }
+      ],
+      "candidate_target_full_names": [
+        "node-gyp-build:Qux",
+        "index.js::program:require('node-gyp-build'):<returnValue>:Qux"
+      ],
+      "candidate_target_ids": [
+        107374182418,
+        107374182419
+      ],
+      "canonical_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Qux",
+        "node-gyp-build:Qux"
+      ],
+      "code": "native4.Qux(4)",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "DYNAMIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "index.js",
+      "id": 30064771078,
+      "line": 32,
+      "method_full_name": "node-gyp-build:Qux",
+      "name": "Qux",
+      "receiver_owner_match": false,
+      "receiver_type": "node-gyp-build",
+      "resolution": "HEURISTIC",
+      "resolution_corrected": "HEURISTIC",
+      "resolution_raw": "AMBIGUOUS",
+      "resolution_reason": "UNMAPPABLE_STUB_NOT_HARDENED",
+      "stub_targets": [
+        "index.js::program:require('node-gyp-build'):<returnValue>:Qux",
+        "node-gyp-build:Qux"
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "call_id": 30064771079,
+          "code": "native4",
+          "id": 68719476742,
+          "index": 1,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "native4",
+          "type_full_name": "node-gyp-build"
+        },
+        {
+          "call_id": 30064771079,
+          "code": "Qux",
+          "id": 55834574851,
+          "index": 2,
+          "kind": "FIELD_IDENTIFIER",
+          "line": 32,
+          "name": "",
+          "type_full_name": ""
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "canonical_targets": [],
+      "code": "native4.Qux",
+      "concrete_targets": [],
+      "corrected_targets": [],
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "index.js",
+      "id": 30064771079,
+      "line": 32,
+      "method_full_name": "<operator>.fieldAccess",
+      "name": "<operator>.fieldAccess",
+      "receiver_owner_match": false,
+      "receiver_type": null,
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "NOT_DISPATCH",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NOT_DISPATCH_CALL",
+      "stub_targets": [],
+      "type_full_name": "ANY"
+    }
+  ],
+  "cfg_edges": [
+    {
+      "from": 30064771072,
+      "owner": 107374182400,
+      "to": 141733920768
+    },
+    {
+      "from": 30064771073,
+      "owner": 107374182400,
+      "to": 68719476737
+    },
+    {
+      "from": 68719476737,
+      "owner": 107374182400,
+      "to": 90194313216
+    },
+    {
+      "from": 90194313216,
+      "owner": 107374182400,
+      "to": 30064771072
+    },
+    {
+      "from": 68719476736,
+      "owner": 107374182400,
+      "to": 55834574848
+    },
+    {
+      "from": 55834574848,
+      "owner": 107374182400,
+      "to": 30064771073
+    },
+    {
+      "from": 107374182400,
+      "owner": 107374182400,
+      "to": 68719476736
+    },
+    {
+      "from": 141733920768,
+      "owner": 107374182400,
+      "to": 124554051584
+    },
+    {
+      "from": 107374182400,
+      "owner": 107374182401,
+      "to": 68719476736
+    },
+    {
+      "from": 107374182402,
+      "owner": 107374182401,
+      "to": 68719476738
+    },
+    {
+      "from": 107374182403,
+      "owner": 107374182401,
+      "to": 68719476740
+    },
+    {
+      "from": 107374182404,
+      "owner": 107374182401,
+      "to": 68719476742
+    },
+    {
+      "from": 30064771081,
+      "owner": 107374182401,
+      "to": 68719476745
+    },
+    {
+      "from": 30064771082,
+      "owner": 107374182401,
+      "to": 68719476746
+    },
+    {
+      "from": 30064771083,
+      "owner": 107374182401,
+      "to": 68719476747
+    },
+    {
+      "from": 30064771084,
+      "owner": 107374182401,
+      "to": 68719476748
+    },
+    {
+      "from": 30064771085,
+      "owner": 107374182401,
+      "to": 68719476750
+    },
+    {
+      "from": 30064771086,
+      "owner": 107374182401,
+      "to": 68719476755
+    },
+    {
+      "from": 68719476744,
+      "owner": 107374182401,
+      "to": 120259084288
+    },
+    {
+      "from": 120259084288,
+      "owner": 107374182401,
+      "to": 30064771081
+    },
+    {
+      "from": 68719476745,
+      "owner": 107374182401,
+      "to": 120259084289
+    },
+    {
+      "from": 120259084289,
+      "owner": 107374182401,
+      "to": 30064771082
+    },
+    {
+      "from": 68719476746,
+      "owner": 107374182401,
+      "to": 120259084290
+    },
+    {
+      "from": 120259084290,
+      "owner": 107374182401,
+      "to": 30064771083
+    },
+    {
+      "from": 68719476747,
+      "owner": 107374182401,
+      "to": 120259084291
+    },
+    {
+      "from": 120259084291,
+      "owner": 107374182401,
+      "to": 30064771084
+    },
+    {
+      "from": 68719476748,
+      "owner": 107374182401,
+      "to": 68719476749
+    },
+    {
+      "from": 68719476749,
+      "owner": 107374182401,
+      "to": 30064771085
+    },
+    {
+      "from": 68719476750,
+      "owner": 107374182401,
+      "to": 68719476751
+    },
+    {
+      "from": 30064771080,
+      "owner": 107374182401,
+      "to": 30064771086
+    },
+    {
+      "from": 30064771088,
+      "owner": 107374182401,
+      "to": 68719476757
+    },
+    {
+      "from": 30064771088,
+      "owner": 107374182401,
+      "to": 68719476762
+    },
+    {
+      "from": 30064771096,
+      "owner": 107374182401,
+      "to": 68719476763
+    },
+    {
+      "from": 30064771097,
+      "owner": 107374182401,
+      "to": 68719476765
+    },
+    {
+      "from": 30064771097,
+      "owner": 107374182401,
+      "to": 68719476770
+    },
+    {
+      "from": 30064771098,
+      "owner": 107374182401,
+      "to": 68719476763
+    },
+    {
+      "from": 30064771106,
+      "owner": 107374182401,
+      "to": 68719476777
+    },
+    {
+      "from": 25769803781,
+      "owner": 107374182401,
+      "to": 30064771105
+    },
+    {
+      "from": 30064771087,
+      "owner": 107374182401,
+      "to": 68719476753
+    },
+    {
+      "from": 68719476753,
+      "owner": 107374182401,
+      "to": 68719476754
+    },
+    {
+      "from": 68719476754,
+      "owner": 107374182401,
+      "to": 30064771080
+    },
+    {
+      "from": 30064771089,
+      "owner": 107374182401,
+      "to": 68719476756
+    },
+    {
+      "from": 30064771089,
+      "owner": 107374182401,
+      "to": 30064771088
+    },
+    {
+      "from": 30064771091,
+      "owner": 107374182401,
+      "to": 30064771088
+    },
+    {
+      "from": 30064771093,
+      "owner": 107374182401,
+      "to": 68719476762
+    },
+    {
+      "from": 68719476762,
+      "owner": 107374182401,
+      "to": 90194313223
+    },
+    {
+      "from": 90194313223,
+      "owner": 107374182401,
+      "to": 30064771096
+    },
+    {
+      "from": 68719476763,
+      "owner": 107374182401,
+      "to": 90194313224
+    },
+    {
+      "from": 90194313224,
+      "owner": 107374182401,
+      "to": 30064771097
+    },
+    {
+      "from": 68719476764,
+      "owner": 107374182401,
+      "to": 30064771098
+    },
+    {
+      "from": 30064771099,
+      "owner": 107374182401,
+      "to": 68719476764
+    },
+    {
+      "from": 30064771102,
+      "owner": 107374182401,
+      "to": 68719476775
+    },
+    {
+      "from": 30064771102,
+      "owner": 107374182401,
+      "to": 68719476776
+    },
+    {
+      "from": 68719476776,
+      "owner": 107374182401,
+      "to": 55834574854
+    },
+    {
+      "from": 55834574854,
+      "owner": 107374182401,
+      "to": 30064771106
+    },
+    {
+      "from": 30064771107,
+      "owner": 107374182401,
+      "to": 68719476779
+    },
+    {
+      "from": 30064771109,
+      "owner": 107374182401,
+      "to": 68719476781
+    },
+    {
+      "from": 30064771111,
+      "owner": 107374182401,
+      "to": 68719476783
+    },
+    {
+      "from": 30064771113,
+      "owner": 107374182401,
+      "to": 68719476785
+    },
+    {
+      "from": 68719476785,
+      "owner": 107374182401,
+      "to": 25769803781
+    },
+    {
+      "from": 68719476751,
+      "owner": 107374182401,
+      "to": 68719476752
+    },
+    {
+      "from": 68719476752,
+      "owner": 107374182401,
+      "to": 90194313220
+    },
+    {
+      "from": 90194313220,
+      "owner": 107374182401,
+      "to": 30064771087
+    },
+    {
+      "from": 30064771090,
+      "owner": 107374182401,
+      "to": 90194313221
+    },
+    {
+      "from": 90194313221,
+      "owner": 107374182401,
+      "to": 30064771089
+    },
+    {
+      "from": 30064771092,
+      "owner": 107374182401,
+      "to": 55834574853
+    },
+    {
+      "from": 55834574853,
+      "owner": 107374182401,
+      "to": 30064771091
+    },
+    {
+      "from": 68719476757,
+      "owner": 107374182401,
+      "to": 68719476758
+    },
+    {
+      "from": 30064771094,
+      "owner": 107374182401,
+      "to": 30064771093
+    },
+    {
+      "from": 68719476765,
+      "owner": 107374182401,
+      "to": 68719476766
+    },
+    {
+      "from": 30064771100,
+      "owner": 107374182401,
+      "to": 30064771099
+    },
+    {
+      "from": 68719476770,
+      "owner": 107374182401,
+      "to": 68719476771
+    },
+    {
+      "from": 30064771103,
+      "owner": 107374182401,
+      "to": 30064771102
+    },
+    {
+      "from": 68719476775,
+      "owner": 107374182401,
+      "to": 68719476776
+    },
+    {
+      "from": 30064771108,
+      "owner": 107374182401,
+      "to": 68719476778
+    },
+    {
+      "from": 68719476778,
+      "owner": 107374182401,
+      "to": 30064771107
+    },
+    {
+      "from": 30064771110,
+      "owner": 107374182401,
+      "to": 68719476780
+    },
+    {
+      "from": 68719476780,
+      "owner": 107374182401,
+      "to": 30064771109
+    },
+    {
+      "from": 30064771112,
+      "owner": 107374182401,
+      "to": 68719476782
+    },
+    {
+      "from": 68719476782,
+      "owner": 107374182401,
+      "to": 30064771111
+    },
+    {
+      "from": 30064771114,
+      "owner": 107374182401,
+      "to": 68719476784
+    },
+    {
+      "from": 68719476784,
+      "owner": 107374182401,
+      "to": 30064771113
+    },
+    {
+      "from": 68719476755,
+      "owner": 107374182401,
+      "to": 30064771090
+    },
+    {
+      "from": 68719476756,
+      "owner": 107374182401,
+      "to": 55834574852
+    },
+    {
+      "from": 55834574852,
+      "owner": 107374182401,
+      "to": 30064771092
+    },
+    {
+      "from": 30064771095,
+      "owner": 107374182401,
+      "to": 68719476760
+    },
+    {
+      "from": 68719476760,
+      "owner": 107374182401,
+      "to": 68719476761
+    },
+    {
+      "from": 68719476761,
+      "owner": 107374182401,
+      "to": 30064771094
+    },
+    {
+      "from": 30064771101,
+      "owner": 107374182401,
+      "to": 68719476768
+    },
+    {
+      "from": 68719476768,
+      "owner": 107374182401,
+      "to": 68719476769
+    },
+    {
+      "from": 68719476769,
+      "owner": 107374182401,
+      "to": 30064771100
+    },
+    {
+      "from": 30064771104,
+      "owner": 107374182401,
+      "to": 68719476773
+    },
+    {
+      "from": 68719476773,
+      "owner": 107374182401,
+      "to": 68719476774
+    },
+    {
+      "from": 68719476774,
+      "owner": 107374182401,
+      "to": 30064771103
+    },
+    {
+      "from": 68719476777,
+      "owner": 107374182401,
+      "to": 55834574855
+    },
+    {
+      "from": 55834574855,
+      "owner": 107374182401,
+      "to": 30064771108
+    },
+    {
+      "from": 68719476779,
+      "owner": 107374182401,
+      "to": 55834574856
+    },
+    {
+      "from": 55834574856,
+      "owner": 107374182401,
+      "to": 30064771110
+    },
+    {
+      "from": 68719476781,
+      "owner": 107374182401,
+      "to": 55834574857
+    },
+    {
+      "from": 55834574857,
+      "owner": 107374182401,
+      "to": 30064771112
+    },
+    {
+      "from": 68719476783,
+      "owner": 107374182401,
+      "to": 55834574858
+    },
+    {
+      "from": 55834574858,
+      "owner": 107374182401,
+      "to": 30064771114
+    },
+    {
+      "from": 68719476758,
+      "owner": 107374182401,
+      "to": 68719476759
+    },
+    {
+      "from": 68719476759,
+      "owner": 107374182401,
+      "to": 90194313222
+    },
+    {
+      "from": 90194313222,
+      "owner": 107374182401,
+      "to": 30064771095
+    },
+    {
+      "from": 68719476766,
+      "owner": 107374182401,
+      "to": 68719476767
+    },
+    {
+      "from": 68719476767,
+      "owner": 107374182401,
+      "to": 90194313225
+    },
+    {
+      "from": 90194313225,
+      "owner": 107374182401,
+      "to": 30064771101
+    },
+    {
+      "from": 68719476771,
+      "owner": 107374182401,
+      "to": 68719476772
+    },
+    {
+      "from": 68719476772,
+      "owner": 107374182401,
+      "to": 90194313226
+    },
+    {
+      "from": 90194313226,
+      "owner": 107374182401,
+      "to": 30064771104
+    },
+    {
+      "from": 107374182401,
+      "owner": 107374182401,
+      "to": 68719476744
+    },
+    {
+      "from": 30064771105,
+      "owner": 107374182401,
+      "to": 124554051588
+    },
+    {
+      "from": 30064771074,
+      "owner": 107374182402,
+      "to": 141733920769
+    },
+    {
+      "from": 30064771075,
+      "owner": 107374182402,
+      "to": 68719476739
+    },
+    {
+      "from": 68719476739,
+      "owner": 107374182402,
+      "to": 90194313217
+    },
+    {
+      "from": 90194313217,
+      "owner": 107374182402,
+      "to": 30064771074
+    },
+    {
+      "from": 68719476738,
+      "owner": 107374182402,
+      "to": 55834574849
+    },
+    {
+      "from": 55834574849,
+      "owner": 107374182402,
+      "to": 30064771075
+    },
+    {
+      "from": 107374182402,
+      "owner": 107374182402,
+      "to": 68719476738
+    },
+    {
+      "from": 141733920769,
+      "owner": 107374182402,
+      "to": 124554051585
+    },
+    {
+      "from": 30064771076,
+      "owner": 107374182403,
+      "to": 141733920770
+    },
+    {
+      "from": 30064771077,
+      "owner": 107374182403,
+      "to": 68719476741
+    },
+    {
+      "from": 68719476741,
+      "owner": 107374182403,
+      "to": 90194313218
+    },
+    {
+      "from": 90194313218,
+      "owner": 107374182403,
+      "to": 30064771076
+    },
+    {
+      "from": 68719476740,
+      "owner": 107374182403,
+      "to": 55834574850
+    },
+    {
+      "from": 55834574850,
+      "owner": 107374182403,
+      "to": 30064771077
+    },
+    {
+      "from": 107374182403,
+      "owner": 107374182403,
+      "to": 68719476740
+    },
+    {
+      "from": 141733920770,
+      "owner": 107374182403,
+      "to": 124554051586
+    },
+    {
+      "from": 30064771078,
+      "owner": 107374182404,
+      "to": 141733920771
+    },
+    {
+      "from": 30064771079,
+      "owner": 107374182404,
+      "to": 68719476743
+    },
+    {
+      "from": 68719476743,
+      "owner": 107374182404,
+      "to": 90194313219
+    },
+    {
+      "from": 90194313219,
+      "owner": 107374182404,
+      "to": 30064771078
+    },
+    {
+      "from": 68719476742,
+      "owner": 107374182404,
+      "to": 55834574851
+    },
+    {
+      "from": 55834574851,
+      "owner": 107374182404,
+      "to": 30064771079
+    },
+    {
+      "from": 107374182404,
+      "owner": 107374182404,
+      "to": 68719476742
+    },
+    {
+      "from": 141733920771,
+      "owner": 107374182404,
+      "to": 124554051587
+    }
+  ],
+  "frontend": "joern-jssrc2cpg",
+  "functions": [
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "index.js",
+      "full_name": "index.js::program:callFoo",
+      "id": 107374182400,
+      "is_external": false,
+      "line": 7,
+      "line_end": 7,
+      "name": "callFoo",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149696,
+          "index": 0,
+          "line": 7,
+          "method_id": 107374182400,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "index.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "index.js",
+      "full_name": "index.js::program",
+      "id": 107374182401,
+      "is_external": false,
+      "line": 1,
+      "line_end": 35,
+      "name": ":program",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149700,
+          "index": 0,
+          "line": 1,
+          "method_id": 107374182401,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "index.js",
+      "full_name": "index.js::program:callBar",
+      "id": 107374182402,
+      "is_external": false,
+      "line": 16,
+      "line_end": 16,
+      "name": "callBar",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149697,
+          "index": 0,
+          "line": 16,
+          "method_id": 107374182402,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "index.js",
+      "full_name": "index.js::program:callBaz",
+      "id": 107374182403,
+      "is_external": false,
+      "line": 23,
+      "line_end": 23,
+      "name": "callBaz",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149698,
+          "index": 0,
+          "line": 23,
+          "method_id": 107374182403,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<empty>",
+      "ast_parent_type": "<empty>",
+      "file": "index.js",
+      "full_name": "index.js::program:callQux",
+      "id": 107374182404,
+      "is_external": false,
+      "line": 32,
+      "line_end": 32,
+      "name": "callQux",
+      "parameters": [
+        {
+          "code": "this",
+          "id": 111669149699,
+          "index": 0,
+          "line": 32,
+          "method_id": 107374182404,
+          "name": "this",
+          "type_full_name": "index.js::program"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.fieldAccess",
+      "id": 107374182405,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.fieldAccess",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149701,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182405,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149702,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182405,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.assignment",
+      "id": 107374182406,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.assignment",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149703,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182406,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149704,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182406,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.logicalAnd",
+      "id": 107374182407,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.logicalAnd",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149705,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182407,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149706,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182407,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.notEquals",
+      "id": 107374182408,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.notEquals",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149707,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182408,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149708,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182408,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.instanceOf",
+      "id": 107374182409,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.instanceOf",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149709,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182409,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.lessThan",
+      "id": 107374182410,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.lessThan",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149710,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182410,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149711,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182410,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<global>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "<operator>.postIncrement",
+      "id": 107374182411,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "<operator>.postIncrement",
+      "parameters": [
+        {
+          "code": "p1",
+          "id": 111669149712,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182411,
+          "name": "p1",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Foo",
+      "id": 107374182412,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Foo",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149713,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182412,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149714,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182412,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149715,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182412,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "index.js::program:require('node-gyp-build'):<returnValue>:Foo",
+      "id": 107374182413,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Foo",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149716,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182413,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149717,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182413,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149718,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182413,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Bar",
+      "id": 107374182414,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Bar",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149719,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182414,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149720,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182414,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149721,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182414,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "index.js::program:require('node-gyp-build'):<returnValue>:Bar",
+      "id": 107374182415,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Bar",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149722,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182415,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149723,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182415,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149724,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182415,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Baz",
+      "id": 107374182416,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Baz",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149725,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149726,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149727,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182416,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "index.js::program:require('node-gyp-build'):<returnValue>:Baz",
+      "id": 107374182417,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Baz",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149728,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149729,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149730,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182417,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "node-gyp-build:Qux",
+      "id": 107374182418,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Qux",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149731,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149732,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149733,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182418,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "<speculatedMethods>",
+      "ast_parent_type": "NAMESPACE_BLOCK",
+      "file": "<empty>",
+      "full_name": "index.js::program:require('node-gyp-build'):<returnValue>:Qux",
+      "id": 107374182419,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "Qux",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149734,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149735,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149736,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182419,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "index.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "index.js::program:require('node-gyp-build')",
+      "id": 107374182420,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "require('node-gyp-build')",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149737,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149738,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149739,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182420,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    },
+    {
+      "ast_parent_full_name": "index.js::program",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "<empty>",
+      "full_name": "index.js::program:require",
+      "id": 107374182421,
+      "is_external": true,
+      "line": null,
+      "line_end": null,
+      "name": "require",
+      "parameters": [
+        {
+          "code": "p0",
+          "id": 111669149740,
+          "index": 1,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p0",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p1",
+          "id": 111669149741,
+          "index": 2,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p1",
+          "type_full_name": "ANY"
+        },
+        {
+          "code": "p2",
+          "id": 111669149742,
+          "index": 3,
+          "line": null,
+          "method_id": 107374182421,
+          "name": "p2",
+          "type_full_name": "ANY"
+        }
+      ],
+      "signature": ""
+    }
+  ],
+  "identifiers": [
+    {
+      "code": "native1",
+      "id": 68719476736,
+      "line": 7,
+      "method_id": 107374182400,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280530
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476737,
+      "line": 7,
+      "method_id": 107374182400,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280530
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476736,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280530
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native1",
+      "id": 68719476737,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280530
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476738,
+      "line": 16,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476739,
+      "line": 16,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476740,
+      "line": 23,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476741,
+      "line": 23,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476742,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476743,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "callFoo",
+      "id": 68719476744,
+      "line": 7,
+      "method_id": 107374182401,
+      "name": "callFoo",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "index.js::program:callFoo"
+    },
+    {
+      "code": "callBar",
+      "id": 68719476745,
+      "line": 16,
+      "method_id": 107374182401,
+      "name": "callBar",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "index.js::program:callBar"
+    },
+    {
+      "code": "callBaz",
+      "id": 68719476746,
+      "line": 23,
+      "method_id": 107374182401,
+      "name": "callBaz",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "index.js::program:callBaz"
+    },
+    {
+      "code": "callQux",
+      "id": 68719476747,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "callQux",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "index.js::program:callQux"
+    },
+    {
+      "code": "callFoo",
+      "id": 68719476748,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "callFoo",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "index.js::program:callFoo"
+    },
+    {
+      "code": "this",
+      "id": 68719476749,
+      "line": 8,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "native1",
+      "id": 68719476750,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "native1",
+      "ref_target_ids": [
+        94489280516
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476751,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476752,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476753,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476754,
+      "line": 9,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "process",
+      "id": 68719476755,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "process",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "process",
+      "id": 68719476756,
+      "line": 13,
+      "method_id": 107374182401,
+      "name": "process",
+      "ref_target_ids": [
+        94489280526
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native2",
+      "id": 68719476757,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280517
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476758,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476759,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476760,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476761,
+      "line": 14,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "i",
+      "id": 68719476762,
+      "line": 20,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "__ecma.Number"
+    },
+    {
+      "code": "i",
+      "id": 68719476763,
+      "line": 20,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "__ecma.Number"
+    },
+    {
+      "code": "i",
+      "id": 68719476764,
+      "line": 20,
+      "method_id": 107374182401,
+      "name": "i",
+      "ref_target_ids": [
+        94489280519
+      ],
+      "type_full_name": "__ecma.Number"
+    },
+    {
+      "code": "native3",
+      "id": 68719476765,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280518
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476766,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476767,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476768,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476769,
+      "line": 21,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native4",
+      "id": 68719476770,
+      "line": 28,
+      "method_id": 107374182401,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280520
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "require",
+      "id": 68719476771,
+      "line": 28,
+      "method_id": 107374182401,
+      "name": "require",
+      "ref_target_ids": [
+        94489280525
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "this",
+      "id": 68719476772,
+      "line": 28,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "this",
+      "id": 68719476773,
+      "line": 28,
+      "method_id": 107374182401,
+      "name": "this",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "index.js::program"
+    },
+    {
+      "code": "__dirname",
+      "id": 68719476774,
+      "line": 28,
+      "method_id": 107374182401,
+      "name": "__dirname",
+      "ref_target_ids": [
+        94489280524
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "e",
+      "id": 68719476775,
+      "line": 29,
+      "method_id": 107374182401,
+      "name": "e",
+      "ref_target_ids": [
+        94489280523
+      ],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "module",
+      "id": 68719476776,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "module",
+      "ref_target_ids": [
+        94489280522
+      ],
+      "type_full_name": "{ exports: import(\"/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe/index.js\"); }"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476777,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callFoo",
+      "id": 68719476778,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "callFoo",
+      "ref_target_ids": [
+        94489280512
+      ],
+      "type_full_name": "index.js::program:callFoo"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476779,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callBar",
+      "id": 68719476780,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "callBar",
+      "ref_target_ids": [
+        94489280513
+      ],
+      "type_full_name": "index.js::program:callBar"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476781,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callBaz",
+      "id": 68719476782,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "callBaz",
+      "ref_target_ids": [
+        94489280514
+      ],
+      "type_full_name": "index.js::program:callBaz"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476783,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "callQux",
+      "id": 68719476784,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "callQux",
+      "ref_target_ids": [
+        94489280515
+      ],
+      "type_full_name": "index.js::program:callQux"
+    },
+    {
+      "code": "_tmp_0",
+      "id": 68719476785,
+      "line": 34,
+      "method_id": 107374182401,
+      "name": "_tmp_0",
+      "ref_target_ids": [],
+      "type_full_name": "ANY"
+    },
+    {
+      "code": "native2",
+      "id": 68719476738,
+      "line": 16,
+      "method_id": 107374182402,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native2",
+      "id": 68719476739,
+      "line": 16,
+      "method_id": 107374182402,
+      "name": "native2",
+      "ref_target_ids": [
+        94489280529
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476740,
+      "line": 23,
+      "method_id": 107374182403,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native3",
+      "id": 68719476741,
+      "line": 23,
+      "method_id": 107374182403,
+      "name": "native3",
+      "ref_target_ids": [
+        94489280528
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476742,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "node-gyp-build"
+    },
+    {
+      "code": "native4",
+      "id": 68719476743,
+      "line": 32,
+      "method_id": 107374182404,
+      "name": "native4",
+      "ref_target_ids": [
+        94489280527
+      ],
+      "type_full_name": "node-gyp-build"
+    }
+  ],
+  "locals": [
+    {
+      "closure_binding_id": "index.js::program:callFoo:native1",
+      "id": 94489280530,
+      "method_id": 107374182400,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280512,
+      "method_id": 107374182401,
+      "name": "callFoo"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280513,
+      "method_id": 107374182401,
+      "name": "callBar"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280514,
+      "method_id": 107374182401,
+      "name": "callBaz"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280515,
+      "method_id": 107374182401,
+      "name": "callQux"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280516,
+      "method_id": 107374182401,
+      "name": "native1"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280517,
+      "method_id": 107374182401,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280518,
+      "method_id": 107374182401,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280519,
+      "method_id": 107374182401,
+      "name": "i"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280520,
+      "method_id": 107374182401,
+      "name": "native4"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280522,
+      "method_id": 107374182401,
+      "name": "module"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280523,
+      "method_id": 107374182401,
+      "name": "e"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280524,
+      "method_id": 107374182401,
+      "name": "__dirname"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280525,
+      "method_id": 107374182401,
+      "name": "require"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280526,
+      "method_id": 107374182401,
+      "name": "process"
+    },
+    {
+      "closure_binding_id": null,
+      "id": 94489280521,
+      "method_id": 107374182401,
+      "name": "_tmp_0"
+    },
+    {
+      "closure_binding_id": "index.js::program:callBar:native2",
+      "id": 94489280529,
+      "method_id": 107374182402,
+      "name": "native2"
+    },
+    {
+      "closure_binding_id": "index.js::program:callBaz:native3",
+      "id": 94489280528,
+      "method_id": 107374182403,
+      "name": "native3"
+    },
+    {
+      "closure_binding_id": "index.js::program:callQux:native4",
+      "id": 94489280527,
+      "method_id": 107374182404,
+      "name": "native4"
+    }
+  ],
+  "members": [],
+  "metadata": {
+    "cpg_version": "4.0.608",
+    "language": "JSSRC",
+    "root": "/tmp/crosslang_wt/semantic-bucket-pilot/scanner-v2/study/crosslang_link_fix/controls/cfg_dominance_probe"
+  },
+  "method_cfg_endpoints": [
+    {
+      "entry_id": 107374182400,
+      "exit_id": 124554051584,
+      "method_id": 107374182400
+    },
+    {
+      "entry_id": 107374182401,
+      "exit_id": 124554051588,
+      "method_id": 107374182401
+    },
+    {
+      "entry_id": 107374182402,
+      "exit_id": 124554051585,
+      "method_id": 107374182402
+    },
+    {
+      "entry_id": 107374182403,
+      "exit_id": 124554051586,
+      "method_id": 107374182403
+    },
+    {
+      "entry_id": 107374182404,
+      "exit_id": 124554051587,
+      "method_id": 107374182404
+    }
+  ],
+  "method_returns": [],
+  "returns": [
+    {
+      "code": "return native1.Foo(1)",
+      "id": 141733920768,
+      "line": 7,
+      "method_id": 107374182400,
+      "returned_value_ids": [
+        30064771072
+      ]
+    },
+    {
+      "code": "return native1.Foo(1)",
+      "id": 141733920768,
+      "line": 7,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771072
+      ]
+    },
+    {
+      "code": "return native2.Bar(2)",
+      "id": 141733920769,
+      "line": 16,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771074
+      ]
+    },
+    {
+      "code": "return native3.Baz(3)",
+      "id": 141733920770,
+      "line": 23,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771076
+      ]
+    },
+    {
+      "code": "return native4.Qux(4)",
+      "id": 141733920771,
+      "line": 32,
+      "method_id": 107374182401,
+      "returned_value_ids": [
+        30064771078
+      ]
+    },
+    {
+      "code": "return native2.Bar(2)",
+      "id": 141733920769,
+      "line": 16,
+      "method_id": 107374182402,
+      "returned_value_ids": [
+        30064771074
+      ]
+    },
+    {
+      "code": "return native3.Baz(3)",
+      "id": 141733920770,
+      "line": 23,
+      "method_id": 107374182403,
+      "returned_value_ids": [
+        30064771076
+      ]
+    },
+    {
+      "code": "return native4.Qux(4)",
+      "id": 141733920771,
+      "line": 32,
+      "method_id": 107374182404,
+      "returned_value_ids": [
+        30064771078
+      ]
+    }
+  ],
+  "schema": "portable-program-facts/0.2",
+  "try_nested_calls": [
+    30064771102,
+    30064771103,
+    30064771104
+  ],
+  "type_decls": []
+}
