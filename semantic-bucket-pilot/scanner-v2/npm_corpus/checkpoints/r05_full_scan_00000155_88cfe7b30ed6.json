@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"@newrelic/native-metrics\", \"version\": \"13.1.0\", \"stages\": {\"download\": {\"seconds\": 0.11777210235595703}, \"extract\": {\"seconds\": 0.018846750259399414}, \"header_staging\": {\"seconds\": 0.19942522048950195, \"n_staged\": 1}, \"c2cpg\": {\"seconds\": 3.711148738861084, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 4.5967559814453125, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 11.444083213806152, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 10.98334288597107, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 0.11549258232116699}, \"js_normalize\": {\"seconds\": 0.07253623008728027}, \"polyglot_link\": {\"seconds\": 0.14020967483520508}, \"r04_scan\": {\"seconds\": 0.0484771728515625}, \"r05_scan\": {\"seconds\": 0.04380393028259277}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": \"nan\", \"declared_range\": \"^2.22.2\", \"resolved_version\": \"2.28.0\", \"staged\": true, \"note\": \"range '^2.22.2' resolved to 2.28.0 (highest satisfying release)\"}], \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 16, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 16}, \"r04_findings\": [], \"r05_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 16, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 16, \"R05_RECOVERY_CANDIDATE\": 5, \"R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED\": 5}, \"r05_findings\": [], \"total_seconds\": 31.494144916534424}",
+  "name": "r05_full_scan",
+  "row_count": 155,
+  "sha256": "88cfe7b30ed615a2305d279ddbb17a6cd69a602531c25b2f1ce8af92b1d2fc53",
+  "snapshot_path": "checkpoints/r05_full_scan_00000155_88cfe7b30ed6.tsv",
+  "snapshot_time_utc": "2026-08-31T01:25:25Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
