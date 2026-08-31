@@ -1,6 +1,21 @@
 # Repository-wide analyzer class inventory — normalized data model (v2)
 
-This is the authoritative document for this study. It corrects a real category error in
+**For the npm JS/TS↔C/C++ project itself (the ecosystem the stopped 494-package pipeline
+targets), read `NPM_JS_TS_CPP_ANALYZER_INVENTORY.md` instead.** This document is
+repository-wide and its 26/20-applicable/1-executed totals still correctly include the 6
+PHP/WordPress properties as part of the *repository's* full inventory — but PHP/WordPress is a
+separate project (different language, different Joern frontend, never invoked here) and does
+not belong in this project's own denominator. The npm-scoped document filters this same
+underlying data (`data/*.csv`, `WHERE npm_applicable == TRUE`) down to the 20 properties that
+actually apply, and adds the `READY_TO_WIRE_WITH_CURRENT_FACTS` / `NEEDS_SPECIALIZED_EXPORT` /
+`NEEDS_SOUNDNESS_WORK` / `UNVERIFIED` / `ALREADY_EXECUTED` readiness breakdown for that scope.
+Its central conclusion: **the stopped pipeline evaluated 1 of 20 npm-applicable properties, not
+1 of 26 repository-wide properties** — the number relevant to whether the npm dataset was
+comprehensively scanned.
+
+This document remains the authoritative repository-wide record (all 26 properties, including
+PHP/WordPress, general C/C++, and the npm-native-addon lineage together) and corrects a real
+category error in
 `ANALYZER_CLASS_INVENTORY.md` (kept in place for its research narrative, marked superseded at
 the top): that document mixed four different units of account into single lists and totals —
 
