@@ -153,6 +153,40 @@ def gate_const_cross_function_probe():
     return ok
 
 
+def gate_const_cross_function_escape_probe():
+    print('\n=== const cross-function escape probe (CROSSLANG-LINK-FIX01I) ===')
+    js = json.load(open(CONTROLS / 'const_cross_function_escape_probe/facts.json'))
+    idx = L.JsCallIndex(js)
+    expect = {
+        # (expected tier or None, expected reason or None)
+        'Foo': (None, 'INITIALIZER_NOT_UNCONDITIONAL'),   # ternary loader-vs-fake
+                                                            # initializer -- `const`
+                                                            # proves the binding can't be
+                                                            # reassigned, not which value
+                                                            # initialized it
+        'Bar': (None, 'CROSS_FUNCTION_ESCAPE_NOT_DOMINATED'),  # callback passed to
+                                                            # another function BEFORE
+                                                            # the assignment -- may be
+                                                            # invoked early
+        'Baz': ('closure_capture_proven', None),           # callback registered AFTER
+                                                            # the assignment -- safe,
+                                                            # the escape site IS
+                                                            # dominated
+        'Qux': (None, 'CROSS_FUNCTION_ESCAPE_NOT_DOMINATED'),  # exported/assigned
+                                                            # BEFORE the assignment
+    }
+    ok = True
+    for c in js['calls']:
+        if c['name'] not in expect:
+            continue
+        matched, tier, reason = L.native_binding_receiver_evidence(c, idx)
+        exp_tier, exp_reason = expect[c['name']]
+        ok &= check(f"{c['name']}: tier={exp_tier} reason={exp_reason}",
+                    tier == exp_tier and reason == exp_reason,
+                    f'got matched={matched} tier={tier} reason={reason}')
+    return ok
+
+
 def main():
     h = md5_of(POLYGLOT / 'link_napi_facts.py')
     print(f'link_napi_facts.py md5: {h}')
@@ -161,6 +195,7 @@ def main():
     ok &= gate_reaching_def_probe()
     ok &= gate_cfg_dominance_probe()
     ok &= gate_const_cross_function_probe()
+    ok &= gate_const_cross_function_escape_probe()
     print(f"\n{'PASS' if ok else 'FAIL'}")
     sys.exit(0 if ok else 1)
 

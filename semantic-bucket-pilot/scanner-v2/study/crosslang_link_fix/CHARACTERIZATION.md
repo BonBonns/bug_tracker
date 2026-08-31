@@ -742,6 +742,96 @@ invalidate the separate C/C++-side R05 corpus run in any way -- the C++ exporter
 normalizer and `resource_guard_verdict_r05.py` are untouched by this entire branch, and
 C++ facts (`normalize_c_cpp_facts_v03.py`'s own output) need no regeneration for this.
 
+## 6h. CROSSLANG-LINK-FIX01I: two further soundness gaps in FIX01H's closure evidence
+
+Direct review of FIX01H (not a spontaneously-failing fixture) identified two remaining
+gaps, both requested to be closed before merge:
+
+1. `const` only proves the BINDING cannot be reassigned; it does not prove which VALUE
+   initialized it.
+2. FIX01H's own invocation-dominance check missed INDIRECT early invocation --
+   escaping the closure function as a value (a callback argument, an assignment, an
+   export) before the capturing assignment runs. The safe, conservative rule requested:
+   the captured `const` initializer must dominate every USE OR ESCAPE of the closure
+   function in the enclosing scope, not only direct `wrapper()` calls.
+
+**Gap 1, the conditional initializer:**
+
+    const native = flag
+      ? require("node-gyp-build")(__dirname)
+      : fake;
+    function wrapper() { native.Foo(); }
+
+`_is_const_declaration` only reads the leading keyword off the assignment's own `code`
+field -- it says nothing about the RHS expression's own shape. Checked directly via
+Joern-REPL on this exact fixture: the ternary's own RHS call node has `name ==
+"<operator>.conditional"`, and -- the real, confirmed risk, not merely theoretical --
+jssrc2cpg's own `JavaScriptTypeRecovery` pass resolves EVERY real IDENTIFIER use of
+`nativeA` to `typeFullName == "node-gyp-build"`, the SAME as if the ternary's `fake`
+branch never existed. Had this gone unfixed, the marker-regex fallback tier (gated only
+behind `'CALLEE_NOT_REQUIRE'`) could have matched on that silently-collapsed type,
+completely bypassing the dominance/closure-capture machinery (which proves WHERE an
+assignment reaches, never WHAT value it evaluates to).
+
+Fixed by `_is_unconditional_invocation_shape()`: real JS operator constructs (ternary,
+`||`, `&&`, `??`, ...) are represented with a `name` that starts with the literal
+`"<operator>."` prefix, confirmed structurally distinct from every real invocation's own
+`name` (always the callee's own source text, e.g. `"require('node-gyp-build')"` or a
+plain identifier like `"loaderFn"`). Checked in `resolve_loader_provenance` BEFORE
+`_callee_resolves_to_require` is ever tried, rejecting with
+`'INITIALIZER_NOT_UNCONDITIONAL'` -- meaning `'CALLEE_NOT_REQUIRE'` (the only reason the
+fallback fires) can never be reached for this shape. Applied identically to every alias
+hop inside `_callee_resolves_to_require`.
+
+**Gap 2, indirect early invocation via escape:**
+
+    function invoke(callback) { callback(); }
+    invoke(wrapper);                 // may execute wrapper now
+    const native = load(__dirname);
+    function wrapper() { native.Foo(); }
+
+(Adapted in the real, committed fixture to use the actual curated loader,
+`require('node-gyp-build')(__dirname)`, so it exercises the FULL real resolution path,
+not just the closure/escape mechanics in isolation -- `load(...)` as literally written
+would already abstain at `CALLEE_NOT_REQUIRE` regardless of this fix, for an unrelated
+reason.)
+
+FIX01H's requirement (d) only searched for DIRECT calls whose own `candidate_target_ids`
+resolves to the closure function's id -- `invoke(wrapper)`'s own `candidate_target_ids`
+resolves to `invoke`, never to `wrapper`, so this call was structurally invisible to
+that check. Fixed by `escape_sites()`, a new requirement (e): every real IDENTIFIER
+reference to the closure function's own declared name, anywhere within the defining
+scope -- not only a direct call -- must ALSO be dominated by the assignment. Confirmed
+real via Joern-REPL on the committed fixture: `invoke(wrapperB)` produces a real
+IDENTIFIER node for `wrapperB` (id `68719476766`), a SEPARATE, later occurrence from the
+function's own hoisted-declaration LHS identifier (id `68719476750`, confirmed to be the
+SAME id as argument-index-1 of the declaring `<operator>.assignment`) -- the declaration
+LHS is excluded (`_declaration_lhs_identifier_id`) since merely declaring a hoisted
+function does not itself risk early invocation; every OTHER occurrence is a real
+candidate escape site whose dominance is checked exactly like a direct invocation site.
+
+**Four new, real, adversarial cases, all run through the real frontend
+(`controls/const_cross_function_escape_probe/index.js`):**
+
+| Case | Shape | Result |
+|---|---|---|
+| `Foo` (nativeA) | conditional (ternary) loader-vs-fake initializer | `INITIALIZER_NOT_UNCONDITIONAL` |
+| `Bar` (nativeB) | callback (`wrapperB`) passed to `invokeB(...)` BEFORE the assignment | `CROSS_FUNCTION_ESCAPE_NOT_DOMINATED` |
+| `Baz` (nativeC) | callback (`wrapperC`) passed to `invokeC(...)` AFTER the assignment -- the safe, common pattern | `closure_capture_proven` |
+| `Qux` (nativeD) | `module.exports = { wrapperD }` BEFORE the assignment | `CROSS_FUNCTION_ESCAPE_NOT_DOMINATED` |
+
+`Baz` is the deliberate positive control proving `escape_sites()` does not over-reject:
+registering the SAME kind of callback, in the SAME shape, merely reordered to AFTER the
+assignment, is correctly accepted -- the new check is about ORDER relative to the
+assignment, not about escapes being inherently unsafe.
+
+**All prior real controls, both real end-to-end corpus packages, and all three prior
+adversarial fixtures (reaching-def probe, cfg_dominance_probe, const_cross_function_probe)
+re-verified with zero regressions** -- identical linked/unlinked counts on the
+14-control suite (`8/0`), `memoryjs` (`15/25`), and `node-liblzma` (`6/0`); every prior
+fixture's own tier/reason unchanged. `gate_crosslang_link_fix.py` re-asserts all of the
+above plus the four new escape-probe cases in one script: PASS.
+
 ## 7. What happens next (after R05 is frozen -- not started yet)
 
 Per direct instruction: this branch stays unmerged until the R05 corpus rerun (main working

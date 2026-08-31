@@ -140,6 +140,50 @@ adversarial fixtures remain correctly rejected; the full existing control suite 
 real end-to-end corpus packages (`memoryjs`, `node-liblzma`) re-verified with zero
 regressions, re-run through the extended exporter so real `cfg_edges`/
 `method_cfg_endpoints`/`locals` (with closure-binding ids) data is present.
+
+CROSSLANG-LINK-FIX01I (this revision -- see CHARACTERIZATION.md's own addendum for the
+full, real account): two further, real soundness gaps in FIX01H's own closure-capture
+evidence, found by direct review, not by a spontaneously-failing fixture:
+
+1. `_is_const_declaration` proves the BINDING cannot be REASSIGNED; it proves NOTHING
+   about which VALUE initialized it. `const native = flag ? require(pkg)(...) : fake;`
+   passes every FIX01H check unchanged -- and confirmed real via Joern-REPL that this is
+   not merely theoretical: jssrc2cpg's own type-recovery pass can silently resolve the
+   ternary's `receiver_type` to the LOADER branch's type alone, discarding `fake`
+   entirely, meaning the marker-regex fallback could have matched right through this
+   design's own dominance/closure gates (which check WHERE the assignment reaches, never
+   WHAT value it evaluates to). Fixed by `_is_unconditional_invocation_shape()`: the
+   assignment's RHS call's own `name` field is checked against the real, structural
+   `"<operator>."` prefix convention (a ternary's own name is exactly
+   `"<operator>.conditional"`, confirmed via REPL) -- rejected with
+   `'INITIALIZER_NOT_UNCONDITIONAL'` BEFORE `_callee_resolves_to_require` is ever tried,
+   so the fallback (gated behind `'CALLEE_NOT_REQUIRE'` specifically) can never be
+   reached for this shape either. Applied identically to the top-level receiver and
+   every alias hop.
+
+2. FIX01H's own invocation-dominance check (part d) only looked for DIRECT
+   `wrapper()` calls whose own `candidate_target_ids` resolves to the closure function --
+   blind to the closure function being PASSED AS A VALUE to something else
+   (`invoke(wrapper)`), assigned, exported, or returned, BEFORE the capturing assignment
+   runs. Any of these "escapes" can result in the closure being invoked, via whatever
+   received the reference, at an uncontrolled later time with no guarantee the
+   assignment has run yet. Fixed by `escape_sites()`: every real IDENTIFIER reference to
+   the closure function's own declared name within the defining scope -- confirmed real
+   via Joern-REPL that `invoke(wrapper)` produces a real IDENTIFIER node for `wrapper`,
+   indistinguishable in kind from any other identifier reference, EXCLUDING the
+   function's own hoisted declaration LHS (`_declaration_lhs_identifier_id`) -- must
+   ALSO be dominated by the assignment, added as requirement (e) alongside (a)-(d).
+
+Verified real and correct on a new, dedicated fixture
+(`controls/const_cross_function_escape_probe`, four cases matching a direct review
+request): a conditional loader-versus-fake initializer now correctly abstains
+(`INITIALIZER_NOT_UNCONDITIONAL`); a callback passed to another function BEFORE
+initialization now correctly abstains (`CROSS_FUNCTION_ESCAPE_NOT_DOMINATED`); the SAME
+callback registration pattern AFTER initialization is correctly ACCEPTED
+(`closure_capture_proven`), confirming the new check does not over-reject the safe,
+common case; exporting/assigning the wrapper BEFORE initialization now correctly
+abstains. The full existing control suite, both real end-to-end corpus packages, and all
+three prior adversarial fixtures re-verified with zero regressions.
 """
 import json, re, sys, argparse
 from collections import defaultdict
@@ -295,6 +339,18 @@ class JsCallIndex:
             if loc.get('closure_binding_id')
         }
 
+        # CROSSLANG-LINK-FIX01I: real, per-scope IDENTIFIER occurrences, for escape-site
+        # detection in `escape_sites()` below -- every real reference to a captured
+        # closure FUNCTION's own name (an argument passed to some other call, the RHS of
+        # an assignment, a return value, an export -- any occurrence at all, not only a
+        # direct `wrapper()` call) shows up here, confirmed real via direct Joern-REPL
+        # query: `invoke(wrapper)` produces a real IDENTIFIER node for `wrapper`, owned
+        # by the SAME enclosing method as the call, indistinguishable in kind from any
+        # other identifier reference.
+        self.identifiers_by_method = defaultdict(list)
+        for ident in js.get('identifiers', []):
+            self.identifiers_by_method[ident.get('method_id')].append(ident)
+
     def function_ancestor_chain(self, function_id):
         """Real, structural lexical-nesting chain for the function with this id, from
         OUTERMOST to the function itself -- derived from the frontend's own colon-
@@ -418,6 +474,57 @@ def has_closure_binding_evidence(idx, use_function_id, receiver_name):
     return key in idx.closure_binding_keys
 
 
+def _declaration_lhs_identifier_id(idx, function_id):
+    """CROSSLANG-LINK-FIX01I -- the real id of the IDENTIFIER on the LEFT-hand side of
+    `use_function_id`'s own hoisted function-declaration statement (confirmed real via
+    Joern-REPL: `function wrapper(){...}` is represented as `<operator>.assignment`
+    `"function wrapper = function wrapper() {...}"`, whose argument-index-1 IDENTIFIER
+    has the SAME real id as one of the two real IDENTIFIER occurrences of `wrapper`'s
+    name found in `identifiers.tsv`). `escape_sites()` excludes this ONE id -- the
+    declaration merely makes the (hoisted) name available, it is not itself a use or
+    escape of the function VALUE. Returns None if the function's own name or declaring
+    assignment cannot be established unambiguously -- callers then conservatively
+    include EVERY occurrence as a potential escape site (fails closed: at worst
+    over-rejects a safe case, never silently drops a real escape from consideration)."""
+    func = idx.functions_by_id.get(function_id)
+    if func is None or not func.get('name'):
+        return None
+    assigns = idx.assignments_by_lhs.get(func['name'])
+    if not assigns or len(assigns) != 1:
+        return None
+    decl_call = idx.calls_by_id.get(assigns[0][2])
+    if decl_call is None:
+        return None
+    lhs = next((a for a in decl_call.get('arguments', []) if a.get('index') == 1), None)
+    return lhs.get('id') if lhs else None
+
+
+def escape_sites(idx, def_function_id, use_function_id):
+    """CROSSLANG-LINK-FIX01I -- real ids of every real IDENTIFIER reference to
+    `use_function_id`'s own declared name, occurring within `def_function_id`'s own
+    scope, that is NOT that function's own declaration LHS. Each one is a real point
+    where the closure FUNCTION ITSELF (not merely its return value) is used as a VALUE
+    -- passed as an argument (`invoke(wrapper)`), assigned or exported
+    (`module.exports.wrapper = wrapper`), returned, stored in a data structure, etc.
+    Confirmed real and necessary via direct Joern-REPL query on a dedicated fixture
+    (`controls/const_cross_function_escape_probe`, see CHARACTERIZATION.md): passing a
+    closure to another function BEFORE the closure's own captured `const` is assigned
+    can result in that closure being invoked (via whatever received the reference) at
+    ANY later, uncontrolled time -- checking only DIRECT `wrapper()` calls in the
+    defining scope (as CROSSLANG-LINK-FIX01H did) misses this entirely; a call like
+    `invoke(wrapper)` is not itself a call whose OWN `candidate_target_ids` resolves to
+    `use_function_id` (it resolves to `invoke`), so it was invisible to that check.
+    Every site returned here must be dominated by the assignment, exactly like a direct
+    invocation site, in `loader_definition_reaches_use()`."""
+    func = idx.functions_by_id.get(use_function_id)
+    if func is None or not func.get('name'):
+        return []
+    name = func['name']
+    exclude_id = _declaration_lhs_identifier_id(idx, use_function_id)
+    return [ident['id'] for ident in idx.identifiers_by_method.get(def_function_id, [])
+            if ident.get('name') == name and ident['id'] != exclude_id]
+
+
 def loader_definition_reaches_use(idx, assign_call_id, def_function_id, use_function_id,
                                     use_call_id, receiver_name):
     """CROSSLANG-LINK-FIX01H -- see module docstring for the full, real account of why
@@ -479,10 +586,27 @@ def loader_definition_reaches_use(idx, assign_call_id, def_function_id, use_func
          "define, then `module.exports`, invoked later by external code after the whole
          module has finished loading" pattern has no such call site to check, so only
          a/b/c apply to it.
+      e) CROSSLANG-LINK-FIX01I: every real ESCAPE site (`escape_sites()`) -- any
+         reference to the closure FUNCTION ITSELF as a value within `def_function_id`'s
+         own scope, not only a direct `wrapper()` call -- is ALSO dominated by the
+         assignment. `invoke(wrapper)` passes the function to another call BEFORE
+         `wrapper` is ever itself invoked directly; if that escape happens before the
+         assignment, `wrapper` could be invoked via whatever received it at ANY later,
+         uncontrolled time, with no guarantee the assignment has run yet. Requirement
+         (d) alone is blind to this: `invoke(wrapper)`'s own `candidate_target_ids`
+         resolves to `invoke`, never to `use_function_id`. Same bounded, disclosed
+         same-defining-scope-only discipline as (d).
       -> `DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE`, `CROSS_FUNCTION_NOT_CONST`,
          `CROSS_FUNCTION_NO_CLOSURE_EVIDENCE`, `CROSS_FUNCTION_CFG_UNAVAILABLE`,
-         `CROSS_FUNCTION_DEFINITION_NOT_DOMINANT`, or
-         `CROSS_FUNCTION_INVOCATION_NOT_DOMINATED` on failure."""
+         `CROSS_FUNCTION_DEFINITION_NOT_DOMINANT`, `CROSS_FUNCTION_INVOCATION_NOT_DOMINATED`,
+         or `CROSS_FUNCTION_ESCAPE_NOT_DOMINATED` on failure.
+
+    Separately (checked by the caller, `resolve_loader_provenance`/
+    `_callee_resolves_to_require`, not here): the assignment's own INITIALIZER
+    expression must itself be a single, unconditional invocation shape -- a `const`
+    declaration only proves the BINDING cannot be reassigned, never which VALUE
+    initialized it (CROSSLANG-LINK-FIX01I; see `resolve_loader_provenance`'s own
+    docstring for `INITIALIZER_NOT_UNCONDITIONAL`)."""
     if assign_call_id in idx.try_nested_calls:
         return None, 'DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE'
 
@@ -516,7 +640,42 @@ def loader_definition_reaches_use(idx, assign_call_id, def_function_id, use_func
         dom_site = cfg_dominates(idx.cfg_next, def_function_id, assign_call_id, site_id)
         if not dom_site:  # False (proven not dominant) and None (unreachable) both reject
             return None, 'CROSS_FUNCTION_INVOCATION_NOT_DOMINATED'
+    # CROSSLANG-LINK-FIX01I, requirement (e): every real escape of the closure function
+    # itself -- passed as a value, assigned, exported, returned -- not only a direct
+    # `wrapper()` call, must also be dominated by the assignment.
+    for site_id in escape_sites(idx, def_function_id, use_function_id):
+        dom_site = cfg_dominates(idx.cfg_next, def_function_id, assign_call_id, site_id)
+        if not dom_site:
+            return None, 'CROSS_FUNCTION_ESCAPE_NOT_DOMINATED'
     return 'closure_capture_proven', None
+
+
+def _is_unconditional_invocation_shape(call):
+    """CROSSLANG-LINK-FIX01I -- True iff `call`'s own `name` field shows it is a real,
+    single, unconditional INVOCATION (`require(pkg)(...)`, a plain alias `f(...)`, or a
+    bare `require(pkg)`) rather than some OTHER operator construct (a ternary
+    `cond ? a : b`, `a || b`, `a && b`, `a ?? b`, etc.) whose real runtime value could be
+    EITHER branch. Confirmed real and necessary via direct Joern-REPL query: a real
+    invocation's own `name` field is always the callee's own source text (e.g.
+    `"require('node-gyp-build')"`, or a plain identifier like `"loaderFn"`), while every
+    JS operator construct is represented with a `name` that starts with the literal
+    `"<operator>."` prefix (confirmed: a ternary's own `name` is exactly
+    `"<operator>.conditional"`) -- a real, structural, non-overlapping distinction, not
+    a guess. A `const` declaration only proves the BINDING cannot be reassigned; it says
+    NOTHING about which of several possible branches actually initialized it, so this
+    check runs BEFORE `_callee_resolves_to_require` is ever tried, and rejects with
+    `'INITIALIZER_NOT_UNCONDITIONAL'` before `'CALLEE_NOT_REQUIRE'` could ever be
+    reached -- critically, this means the marker-regex fallback (gated behind
+    `'CALLEE_NOT_REQUIRE'` specifically) is NEVER reached for this shape either. This
+    matters in practice, not just in theory: confirmed via REPL that jssrc2cpg's own
+    type-recovery pass can silently resolve a ternary's `receiver_type` to the LOADER
+    branch's type alone, discarding the other branch entirely (`flag ? require(pkg)
+    (...) : fake` produced `typeFullName == "node-gyp-build"` for every use of the
+    receiver) -- WITHOUT this check, the regex fallback could have matched on exactly
+    that silently-collapsed type, right through this design's own dominance/closure
+    gates, which check WHERE the assignment reaches, never WHAT value it evaluates to."""
+    name = call.get('name') or ''
+    return not name.startswith('<operator>.')
 
 
 def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
@@ -561,6 +720,12 @@ def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
         return None
     next_rhs_call = idx.calls_by_id.get(next_rhs['id'])
     if next_rhs_call is None:
+        return None
+    # CROSSLANG-LINK-FIX01I: the alias's own initializer must ALSO be a single,
+    # unconditional invocation shape -- see `_is_unconditional_invocation_shape`'s own
+    # docstring. An alias behind a ternary/logical-short-circuit is exactly as unsound
+    # as the top-level receiver being behind one.
+    if not _is_unconditional_invocation_shape(next_rhs_call):
         return None
     # Is the alias's OWN value directly require(pkg) (bare, unwrapped)? If so, CALLING
     # the alias (which is what got us here) IS invoking require(pkg) -- a real match.
@@ -610,6 +775,14 @@ def resolve_loader_provenance(receiver_name, enclosing_function_id, use_call_id,
     rhs_call = idx.calls_by_id.get(rhs['id'])
     if rhs_call is None:
         return None, 'NOT_AN_INVOCATION'
+    # CROSSLANG-LINK-FIX01I: `const` proves the BINDING cannot be reassigned; it proves
+    # NOTHING about which value initialized it. Reject BEFORE `_callee_resolves_to_
+    # require` (and therefore before `'CALLEE_NOT_REQUIRE'` -- the only reason the
+    # marker-regex fallback is ever tried -- can be reached) if the initializer is not a
+    # single, unconditional invocation shape. See `_is_unconditional_invocation_shape`'s
+    # own docstring for why this is a REAL, not merely theoretical, risk.
+    if not _is_unconditional_invocation_shape(rhs_call):
+        return None, 'INITIALIZER_NOT_UNCONDITIONAL'
     # receiver_name = rhs_call(...) -- receiver is the INVOCATION of rhs_call's own
     # callee. A BARE `receiver = require(pkg)` (rhs_call itself IS the require call, no
     # separate invocation wrapping it) is the loader-helper-itself case -- correctly NOT
@@ -821,6 +994,9 @@ def main():
         'CROSS_FUNCTION_NOT_CONST', 'CROSS_FUNCTION_NO_CLOSURE_EVIDENCE',
         'CROSS_FUNCTION_CFG_UNAVAILABLE', 'CROSS_FUNCTION_DEFINITION_NOT_DOMINANT',
         'CROSS_FUNCTION_INVOCATION_NOT_DOMINATED',
+        # CROSSLANG-LINK-FIX01I: real, disclosed abstentions -- see
+        # `_is_unconditional_invocation_shape`/`escape_sites`'s own docstrings.
+        'INITIALIZER_NOT_UNCONDITIONAL', 'CROSS_FUNCTION_ESCAPE_NOT_DOMINATED',
     }
 
     def _plausibly_loader_related(receiver_type):
