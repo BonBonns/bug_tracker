@@ -31,5 +31,6 @@ build_one() {
 build_one "$HERE/g.cpp" "g"
 build_one "$HERE/t3.cpp" "t3"
 build_one "$HERE/t5.cpp" "t5"
+build_one "$HERE/cmp.cpp" "cmp"
 
-echo "cap_corpus rebuilt at $OUT (g.json, t3.json, t5.json + sidecars)"
+echo "cap_corpus rebuilt at $OUT (g.json, t3.json, t5.json, cmp.json + sidecars)"
