@@ -749,3 +749,89 @@ future corpus report) can now call `vendored_attribution.attribute_record()` /
 `aggregate_vendored_dedup()` / `summarize()` to get classified, deduplicated vendored-exposure
 numbers rather than either an unqualified package-attribution error or a silently dropped
 finding.
+
+## Overnight 100-package frozen diagnostic run: completed
+
+Finished cleanly on its own (exit 0), no manual stop needed: 97/100 `ANALYZED`, 2
+`CPP_CPG_FAILED` (`@farcaster/rocksdb`, `duckdb`), 1 `EXPORT_FAILED` (`@driftlog/tree-sitter-
+dart`). 10/10 checkpoints written; no timeout/disk-floor/consecutive-failure stop condition was
+ever tripped. 3911 raw candidates/findings across all 6 properties, `reportable=false` on all
+3911 (verified, not sampled), `REACHABILITY_UNRESOLVED` on all 3911 (expected -- task #32 was
+not yet complete when this run launched). Full morning report (per-stage timing, evidence bundle
+disk usage, raw counts by property, diagnostic-label confirmation, provenance-hint distribution)
+committed to `claude/overnight-diagnostic-100`
+(`semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/MORNING_REPORT.md`, commit
+`d0ab955`) -- deliberately draws no vulnerability totals, no true-negative claims, and no
+corpus-prevalence claims, per the launch instruction. The remaining 394 packages were not
+launched.
+
+## Task #32: tiered JS/native reachability classification -- implemented
+
+New module `semantic-bucket-pilot/scanner-v2/reachability_tier.py` (`claude/provenance-
+preservation-task35`, commit `b80115d`; prerequisite `link_napi_facts.py` FIX01I sync in
+`e41be3b` -- the copy on this branch predated FIX01I entirely and was missing `JsCallIndex`/
+`native_binding_receiver_evidence` outright).
+
+**Four real tiers**, ranked strongest to weakest, never a guess between them:
+- `TIER_JS_CALL_PROVEN` -- the enclosing native function is a real registered export AND a real
+  call in this package's own bundled JS resolves to it, via `link_napi_facts.py`'s own real
+  dominance/closure-capture proof machinery (FIX01G-I), reused verbatim.
+- `TIER_REGISTERED_NOT_JS_CALLED` -- a real registered export, but no real call in this
+  package's own bundled JS was found to reach it. Not proof of unreachability -- a consumer of
+  the package could still call it directly by name -- only proof this package's own JS doesn't
+  demonstrate the reach itself.
+- `TIER_INTERNAL_UNREGISTERED` -- not a registered export under any recognized idiom at all. The
+  weakest real tier: a bug here is only reachable if some OTHER, registered function calls it --
+  this module does not attempt a transitive native call-graph walk. An honest, disclosed scope
+  limit, not a claim of unreachability -- the same discipline task #44 applied to leaving
+  `decodevv_add`'s nested index explicitly unsupported rather than ad hoc flattening it.
+- `REACHABILITY_UNRESOLVED` -- the JS or C++ facts themselves are too thin to decide (fails
+  closed, never guesses).
+
+**Three real registration idioms, unioned**:
+1. `exports.Set(Napi::String::New(env,"X"), Napi::Function::New(env, Fn))` -- reused verbatim
+   from `link_napi_facts.py`'s own frozen, gated `extract_napi_bindings`.
+2. `Napi::ObjectWrap<Class>::DefineClass(..., InstanceMethod<&Class::Method>("jsName"))` -- a
+   self-contained port of `promote_via_js_linkage.py`'s own function (task #22, verified real
+   against Cartesi's own facts), copied rather than imported so this module never drags in that
+   file's top-level `resource_guard_verdict_r06` dependency (task #41, not yet merged into this
+   lineage).
+3. `Nan::SetPrototypeMethod(tpl, "name", Fn)` / `Nan::Export(target, "name", Fn)` -- **added
+   after this module's own first real-corpus smoke test**, run against re2's own real facts
+   pulled directly from the overnight-diagnostic-100 run's own evidence bundle: re2 registers
+   every one of its methods (`test`, `exec`, `match`, `replace`, `search`, `split`, `toString`,
+   `getUtf8Length`, `getUtf16Length`) via NAN and *zero* via either idiom above. Without this
+   third idiom, every real NAN-based native function would have been wrongly bucketed into
+   `TIER_INTERNAL_UNREGISTERED` purely because the module didn't yet recognize its real
+   registration call -- confirmed as a real, not theoretical, gap: task #25's own contract-
+   family prevalence study had already flagged NAN as a dominant binding family in this corpus.
+   The same real smoke test also surfaced a genuine ambiguity re2 itself contains -- two
+   distinct C++ functions both literally named `Test` (one per wrapped class, `WrappedRE2` and
+   `MatchObject`) -- which this module correctly abstains on (name-based lookup finds 2
+   candidates, refuses to guess which) rather than silently picking one, matching the same
+   bare-name-collision discipline task #26 already established for Resource Guard's own
+   capability-registration matcher.
+
+`classify_record_reachability(record, js, cpp)` attaches `reachability_status`/
+`reachability_evidence` to every finding under `lock_balance_findings`, `protected_field_
+findings`, and all four `oob_*_candidates` keys -- and deliberately never touches `r04_findings`/
+`r05_findings`, which keep Resource Guard's own separate, narrower reachability mechanism
+(`promote_via_js_linkage.py`, tasks #21/#22, which answers "is this specific traced size
+attacker-controlled", not "is this function JS-reachable at all").
+
+`check_reachability_tier.py`: 17/17 passing -- real fixture checks against the
+`crosslang_link_fix` gate's own already-verified positive fixture (all 8 real `exports.Set`
+registrations recovered and proven JS-called; the fixture's own real `Init` function, the
+addon's entry point, never itself exported, correctly lands in `TIER_INTERNAL_UNREGISTERED`);
+NAN-idiom checks reproducing re2's own real, verified shape and its own real `Test`/`Test`
+ambiguity; the `InstanceMethod`/`DefineClass` idiom at unit level (Cartesi's own real shape);
+one disclosed synthetic `TIER_REGISTERED_NOT_JS_CALLED` case (the real fixture's own
+registration set happens to have 100% JS-call coverage, so no real corpus example of this tier
+exists in it); `REACHABILITY_UNRESOLVED` on empty facts; confirmation `r04_findings`/
+`r05_findings` are never touched.
+
+Does not decide reportability -- task #35's formula remains the sole authority. **Not yet wired
+into `run_pipeline_one.py`'s live pipeline** -- the capability is complete, real, and evidence-
+backed, but deciding what's ready to turn on and where is left to the enablement gate tasks
+(#36-40), each of which will need to make that call for its own property at the time it's
+enabled.
