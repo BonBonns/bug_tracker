@@ -985,3 +985,37 @@ loop. `check_oob_reportable_gate.py` extended to cover it: 17/17 (was 13/13). No
 `check_staged_enablement.py` 14/14. `reachability_tier.py`/`staged_enablement.py`/
 `vendored_attribution.py` were never affected by this gap — only `provenance.py` itself was
 missing the key.
+
+## Task #44 phase 3: nested/2D index reasoning formally bounded (decodevv_add)
+
+Closes task #44's last open item, per direct instruction to either finish or formally bound the
+third of three real Tremor CVE-2018-5147 sinks, `vorbis_book_decodevv_add`'s own real
+`a[chptr++][i]` write — a genuinely nested/2D index, outside what `param_length_capacity.py`'s
+existing single-parameter-identity model can bound (its real `i` capacity is a *derived* local,
+`m=offset+n`, not a bare sibling parameter).
+
+**A real bug was found and fixed in the process, not just a gap filled.** The pre-existing
+single-index parser silently mis-parsed a real chained access like `a[chptr++][i]` as if it were
+the 1D site `a[chptr++]` — discarding the real second index `i` entirely and examining the WRONG
+index for this exact vulnerability (Tremor's own real fix adds `i<m` to the *inner* loop's
+header). Confirmed via direct inspection of real Joern facts: a chained access produces TWO
+separate real `indirectIndexAccess` calls at the same line, and the outer one's own
+`arguments[0]` is a real, structural reference (by id) to the inner one — giving a sound,
+non-heuristic way to detect the chain.
+
+**Fix**: real structural detection excludes the inner sub-expression from ever being treated as
+its own site, and reports the outer/full chain as an explicit `ABSTAIN` entry
+(`reason: NESTED_INDEX_UNSUPPORTED`) via a new `emit_abstentions()` function — never a
+`CANDIDATE` (no capacity claim this producer can back), never silently dropped either.
+`emit_candidates()`'s own existing contract is fully unchanged (backward compatible with every
+real caller — `gate_oob_index_r01.py` 9/9, `cfg_loop_guard_controls.py` 9/9, both unaffected).
+
+`param_length_capacity_controls.py`: 21/21 (was 15/15) — the real abstention fires in BOTH VULN
+and PATCHED facts (the write expression itself doesn't change between revisions, only the loop
+headers do, so the report must not silently vanish just because a nearby guard changed);
+`decodevs_add`'s own real 2D *read* (`t[j][i]`) is also reported, consistent with the
+pre-existing 1D logic which likewise never discriminated read/write role; no inner sub-expression
+of any chain is ever separately emitted.
+
+**All 3 real Tremor vulnerable sinks are now accounted for, end to end** — 2 recovered as real
+candidates, 1 formally, explicitly bounded. No unbounded, silent gap remains. Unblocks #38.
