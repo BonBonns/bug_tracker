@@ -45,7 +45,17 @@ JOERN_HOME = "/home/user/bug_tracker/tchecker-research-complete/joern-install/jo
 CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/cpp-r06/frontend"
 JS_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/javascript-typescript/joern"
 POLYGLOT = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/polyglot/link_napi_facts.py"
-SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
+# SCANNER_V2 (task #41 fix): self-referential, not a hardcoded absolute path to the main
+# working tree. The previous hardcoded "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
+# silently invoked whatever scanner files happened to be on THAT tree's disk regardless of which
+# checkout's own copy of THIS file was actually running -- a real, reproducible bug found while
+# integrating resource_guard_verdict_r06.py (task #41): a fresh git worktree's own updated
+# resource_guard_verdict_r06.py was silently ignored in favor of the main tree's stale copy
+# (which didn't have the file at all, causing a real subprocess failure). This file always lives
+# at <scanner-v2>/npm_corpus/run_pipeline_one.py, so its own parent's parent IS scanner-v2/,
+# in every checkout, always -- no reason to hardcode a location this file can compute about
+# itself.
+SCANNER_V2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, SCANNER_V2)
 import provenance  # noqa: E402 -- task #35, pipeline-wide precondition, see its own docstring
@@ -548,6 +558,41 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"r05 scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
+
+    # RESOURCE-GUARD-R06 (task #41): run alongside R04/R05, not instead of either -- same
+    # keep-both-separately-keyed discipline as R04->R05 above. R06 corrects R05's own real
+    # overclaim (any reached parameter was reported as established attacker influence, with no
+    # check that the enclosing function is JS-reachable at all -- see
+    # resource_guard_verdict_r06.py's own module docstring for the full, real account, including
+    # the real node-libcurl Easy::ReadFunction false positive this was found on). Uses the SAME
+    # package-wide build_config.json this pipeline already builds above -- R06's own target-
+    # scoped build-config resolution (task #11/#17) falls back correctly to the package-wide
+    # value when no gyp_targets data is present (resolution_scope: 'package_wide_fallback'),
+    # exactly as gate_resource_guard_r06.py's own real fixtures already verify; wiring this
+    # pipeline's own build_config construction to emit real per-target gyp_targets data is
+    # further, disclosed follow-up work, not claimed here.
+    r06_out = os.path.join(work, "r06_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, f"{SCANNER_V2}/resource_guard_verdict_r06.py",
+                         cpp_raw, r06_out, "--real", "--build-config", build_config_path],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(r06_out) as f:
+            r06_doc = json.load(f)
+        record["r06_classification"] = r06_doc.get("classification", {})
+        record["r06_findings"] = r06_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"r06_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"r06 scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
 
     # PROV-R01 (task #35): attach real source_path/content_hash/provenance_hint to every
     # finding this package produced, using the SAME cpp_raw/methods.tsv this run already has in

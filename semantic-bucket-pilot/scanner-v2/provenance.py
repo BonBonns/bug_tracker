@@ -293,6 +293,10 @@ _R04_R05_CANDIDATE_VERDICTS = {"VALUE_ACQUISITION_GUARD_MISSING"}
 PROPERTY_CANDIDATE_RULES = {
     "r04_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
     "r05_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
+    # R06 (task #41): shares R05's own verdict-construction logic byte-for-byte (its own
+    # docstring: "NOT a rewrite of R04/R05's own... verdict-construction... logic"), confirmed
+    # directly against real output (gate_resource_guard_r06.py) -- same candidate verdict set.
+    "r06_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
     "lock_balance_findings": lambda f: True,
     "protected_field_findings": lambda f: True,
     "oob_write_candidates": lambda f: True,
@@ -336,6 +340,7 @@ def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) 
     for findings_key, id_field in (
         ("r04_findings", "method_id"),
         ("r05_findings", "method_id"),
+        ("r06_findings", "method_id"),
         ("lock_balance_findings", "method_id"),
         ("protected_field_findings", "method_id"),
     ):

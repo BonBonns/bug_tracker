@@ -241,6 +241,26 @@ def main():
                    "real source file", real_hash == f.get("provenance", {}).get("content_hash"))
             ck("real finding retains its own method_id (pre-existing node identity, untouched)",
                "method_id" in f)
+
+        # task #41 (R06/FIX01I merged into the driven lineage, real acceptance test): the SAME
+        # real pipeline run above now also runs resource_guard_verdict_r06.py alongside R04/R05
+        # -- its own real ReadFunction finding must reclassify from R05's own unconditional
+        # attacker-influence claim to a real, disclosed SOURCE_BOUNDARY_UNRESOLVED.
+        r06_findings = rec.get("r06_findings") or []
+        rf6 = [f for f in r06_findings if "ReadFunction" in (f.get("method_name") or "")]
+        ck("node-libcurl reproduces the real Easy::ReadFunction finding under R06 too "
+           "(task #41)", len(rf6) >= 1)
+        if rf6:
+            f6 = rf6[0]
+            sbe = f6.get("source_boundary_evidence")
+            ck("*** task #41's own named acceptance test: R06's real ReadFunction finding "
+               "reports source_boundary_evidence.source_boundary == 'SOURCE_BOUNDARY_UNRESOLVED' "
+               "and attacker_controlled: False (R05's own unconditional attacker-influence claim "
+               "for this exact site is corrected, post-integration, on a REAL pipeline run) ***",
+               bool(sbe) and sbe.get("source_boundary") == "SOURCE_BOUNDARY_UNRESOLVED"
+               and sbe.get("attacker_controlled") is False)
+            ck("real R06 finding: provenance.resolved=True (same enrichment as R04/R05)",
+               f6.get("provenance", {}).get("resolved") is True)
         shutil.rmtree(work_root, ignore_errors=True)
 
     # --- 5/6. LOCK_BALANCE and PROTECTED_FIELD: provenance resolves + scanner_candidate=True, --
