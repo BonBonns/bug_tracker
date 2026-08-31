@@ -48,6 +48,11 @@ corrected here.
 - **Full frozen-scanner run across all 494 eligible packages (item 7): COMPLETE.**
   473 ANALYZED, 18 RESOURCE_LIMIT (flagged, not yet retried), 3 CPP_CPG_FAILED. See
   `npm_pipeline_status.tsv` / `npm_pipeline_full_results.jsonl`.
+- **R04/R05 full corpus scan, post header-staging fix: STOPPED at 452/494 by explicit
+  instruction, not a failure.** 424 ANALYZED, 26 RESOURCE_LIMIT, 2 CPP_CPG_FAILED. One real
+  finding (`node-libcurl`'s `ReadFunction`), already independently confirmed as a false
+  positive before this scan even ran. See `R05_CORPUS_RESULTS.md` for the complete real
+  counts, the finding's own full account, and what this run does and does not establish.
 - **Finding review (item 5): COMPLETE -- with a major, corpus-wide caveat, see
   `FINDINGS_REVIEW.md`.** Zero raw R04 findings across all 473 ANALYZED packages -- traced
   to a real, confirmed, corpus-wide PIPELINE GAP (c2cpg is never given the packages'
@@ -55,8 +60,13 @@ corrected here.
   resolve ANY `Napi::` static-factory call -- confirmed by direct re-inspection of two real
   packages, 1,173/1,173 "New" calls unresolved). This is NOT evidence about real-world
   `Napi::Buffer::New()` prevalence; it is evidence of a gap in this pipeline specifically.
-  Not yet fixed -- flagged for a deliberate decision, per instruction not to make further
-  scanner/contract changes without direction.
+  **SUPERSEDED -- the header-staging gap this bullet describes was fixed
+  (`HDR_FIX_STATUS.md`) and the pipeline re-run post-fix as R04+R05 across 452/494 packages
+  before being stopped by explicit instruction (its own class already having substantial
+  evidence in hand). See `R05_CORPUS_RESULTS.md` for the real, current, final counts and the
+  one real finding produced (a confirmed false positive, already independently established
+  before this write-up) -- this bullet is kept for the historical record, not as the current
+  status.**
 
 ## Discovery provenance values (used from this point forward)
 
