@@ -192,3 +192,92 @@ not an unguarded allocation) and a DIFFERENT threat actor (the JS callback is
 application-developer-supplied code, not literally the same "attacker" model R04/R05
 target) -- it is NOT folded into the verdict above, and requires its own real controls and
 threat-model analysis before any classification. Recorded here so it is not lost.
+
+## R06 addendum: SOURCE_BOUNDARY_UNRESOLVED -- reaching a parameter is not attacker control
+
+Defect 1 (deferred in the sections above) is now fixed: `backward_attacker_trace` (both
+R04's and R05's own copy) treated reaching ANY real parameter of the call's own enclosing
+method as proof of "attacker influence" -- no check on whether that method is itself
+reachable from JS at all. `Easy::ReadFunction`'s own `size` parameter is a real, concrete
+case: libcurl-supplied, never JS-supplied, yet `attacker_influence_evidence:
+{"traced_to_parameter": "size", "hops": 3}` implied otherwise.
+
+**Fixed in a new `resource_guard_verdict_r06.py`** (a proper frozen copy of R05, matching
+this project's own established R01->R05 lineage discipline -- R05 itself is untouched):
+the reached parameter's own real `type_full_name` (already present in `parameters.tsv`,
+just not previously consulted) is checked against `JS_CALLBACK_ORIGIN_TYPES` --
+node-addon-api's real, canonical N-API entry-point parameter type, `Napi::CallbackInfo`
+(matched tolerant of the real rendering variance c2cpg itself produces -- both
+`"Napi::CallbackInfo"` and `"Napi.CallbackInfo&"` confirmed real, see below). A parameter
+of this type is N-API's own ONLY mechanism for JS-caller-supplied data to enter native
+code (`info[i]` access) -- real, structural, verified JS-linkage, tagged
+`"source_boundary": "JS_CALLBACK_INFO_PARAMETER", "attacker_controlled": true`. Any OTHER
+reached parameter is now reported `"source_boundary": "SOURCE_BOUNDARY_UNRESOLVED",
+"attacker_controlled": false` -- explicitly, never silently dropped, never claimed as
+attacker evidence. The finding's own field is renamed `source_boundary_evidence`
+(from `attacker_influence_evidence`, which itself overclaimed once a reached parameter
+could mean either proven linkage or an unresolved boundary). This corrects the EVIDENCE
+FIELD's own claimed meaning; it does not suppress or change the underlying
+`VALUE_ACQUISITION_GUARD_MISSING` verdict, which was never actually gated on
+`attacker_trace` succeeding in the first place (confirmed by reading R04/R05's own
+verdict-construction code directly) -- the contract's own failure predicate (an unguarded
+acquisition result) is a real, separate claim regardless of proven attacker influence on
+the size argument specifically.
+
+**Three real verifications, not synthetic assumptions:**
+
+1. **node-libcurl -- the required rejection case.** Ran the REAL published tarball through
+   the actual pipeline (`run_pipeline_one.run_one`, fully isolated `work_root` far outside
+   the live R05 scan's own index range, confirmed zero interference before and after) to
+   generate real, fresh C++ facts, then ran `resource_guard_verdict_r06.py` directly
+   against them: `ReadFunction`'s own finding now shows exactly `{"attacker_controlled":
+   False, "source_boundary": "SOURCE_BOUNDARY_UNRESOLVED", "parameter_type": "size_t",
+   "traced_to_parameter": "size", "hops": 3}` -- confirmed correct rejection on real,
+   live-generated data, not reasoned about abstractly.
+2. **`r05_controls`' own real, committed, compiled fixture -- the real positive
+   confirmation that `JS_CALLBACK_INFO_PARAMETER` actually fires.** `PositiveBufferNew`'s
+   own finding shows `{"attacker_controlled": True, "source_boundary":
+   "JS_CALLBACK_INFO_PARAMETER", "parameter_type": "Napi.CallbackInfo&",
+   "traced_to_parameter": "info", "hops": 5}` -- confirms the mechanism itself works on
+   real, compiled, real-`#include <napi.h>` code. This control's own `build_config.json`
+   is deliberately gitignored (`study/resource_guard_r05/.gitignore`, present only
+   locally from earlier session work, never tracked) -- respected as an existing,
+   deliberate policy rather than forced into git; `tests/test_source_boundary.py`
+   instead constructs the same, real, small config content inline (the fixture is
+   compiled with `-DNAPI_DISABLE_CPP_EXCEPTIONS`, confirmed from `fixture_source.cpp`),
+   so the test stays genuinely self-contained and reproducible from git alone without
+   overriding that policy. Note the real type string c2cpg
+   produces is `"Napi.CallbackInfo&"` (a DOT, not `::`) -- confirmed real via this exact
+   run, which is why `JS_CALLBACK_ORIGIN_TYPES` matches both forms; the dot form was not
+   an assumption, it is what real c2cpg output actually contains.
+3. **Cartesi -- requested as the positive development case; found, honestly, to NOT
+   exercise this specific code path at all, before or after this fix.** Ran R06 against
+   the real, cached Cartesi raw facts (`/tmp/cartesi_raw5`, same real data the original
+   R05 recovery used) with the real build-config used at the time: all 3 real findings
+   (`ReadMemory`, `ReadVirtualMemory`, `ReadConsoleOutput`) are UNCHANGED --
+   `source_boundary_evidence: None` under R06, exactly matching `attacker_influence_
+   evidence: None` under the original, unmodified R05 on the identical data. This is
+   NOT a regression: `backward_attacker_trace`'s own backward walk never reaches ANY
+   parameter for these three specific real acquisition sites at all (exhausted before
+   reaching one, or the size value's own real definition chain does not resolve to a
+   bare parameter name within the walk's structure) -- a real, pre-existing
+   characteristic of these sites, confirmed identical on both sides, unrelated to this
+   fix. Cartesi therefore serves as a real, valid REGRESSION check (proving the fix
+   changes nothing about Cartesi's own 3 real findings) but NOT as a working example of
+   the new `JS_CALLBACK_INFO_PARAMETER` path specifically -- `r05_controls` (2 above) is
+   the real fixture that demonstrates that. Reported precisely rather than silently
+   assumed to confirm what was asked.
+
+**Not done in this pass, per the agreed plan:** applying this same fix's logic to R04
+directly (R04 stays frozen, matching this lineage's own established discipline -- a
+package running ONLY R04, never reaching R05's recovery path, would still see the old,
+uncorrected `attacker_influence_evidence` field; out of scope for this pass, disclosed
+rather than silently left inconsistent); establishing real JS-source-to-native-argument
+linkage beyond the CallbackInfo-parameter case (e.g. joining `link_napi_facts.py`'s own
+real cross-language links once that work is merged) is a distinct, larger effort, not
+attempted here; rerunning R06 corpus-wide waits for R05 to finish, per the same resource-
+contention discipline as the build-config fix.
+
+`tests/test_source_boundary.py` (new, committed): direct unit checks of
+`_is_js_callback_origin_type` against real and synthetic type strings, plus the real,
+now-self-contained `r05_controls` regression check (verification #2 above) -- both PASS.
