@@ -1,0 +1,1918 @@
+{
+ "seed": 20260831,
+ "n": 100,
+ "packages": [
+  {
+   "package_name": "node-libcurl",
+   "version": "5.1.2",
+   "tarball_url": "https://registry.npmjs.org/node-libcurl/-/node-libcurl-5.1.2.tgz",
+   "n_cpp_files": "10",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "1c4527cd4be52a05acbb5868d171890b05d1c6058e16ea21bbdf7260ad89fb6b",
+   "tarball_sha256": "ef9498d87d8ec0381abf7876d6aa3e59efe76d5ed54d7947c0a3d7fec3a0900e",
+   "selection_reason": "forced_inclusion:node-libcurl"
+  },
+  {
+   "package_name": "node-crc16",
+   "version": "2.0.7",
+   "tarball_url": "https://registry.npmjs.org/node-crc16/-/node-crc16-2.0.7.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "385daaae8ca33c7246a23182855662dde60d0a3c03f96110110494334f5255b5",
+   "tarball_sha256": "e2bd055eba9e501cc2d1d078689ff8e0f2eb5ce9155a85320bcff3049002608f",
+   "selection_reason": "forced_inclusion:node-crc16"
+  },
+  {
+   "package_name": "re2",
+   "version": "1.26.1",
+   "tarball_url": "https://registry.npmjs.org/re2/-/re2-1.26.1.tgz",
+   "n_cpp_files": "551",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "27889bddc8d1e7508926c3fe24bb1e89835520cc0f9a9497f661855dd9f4bd67",
+   "tarball_sha256": "e4a55e62219be47a27941c3b3c84611d88c7fee8fda7dcf777b4a591499556b8",
+   "selection_reason": "forced_inclusion:re2"
+  },
+  {
+   "package_name": "@2060.io/ffi-napi",
+   "version": "4.0.9",
+   "tarball_url": "https://registry.npmjs.org/@2060.io/ffi-napi/-/ffi-napi-4.0.9.tgz",
+   "n_cpp_files": "327",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "e782c7f285cdde30cb91827694eba2781df955feb531f3caa5942a4a16e7740f",
+   "tarball_sha256": "d77fe2d83e2a047da7329259057469c7e9baf7ff50ade4dd98aff86d1208813b",
+   "selection_reason": "forced_inclusion:@2060.io/ffi-napi"
+  },
+  {
+   "package_name": "node-snap7",
+   "version": "1.0.9",
+   "tarball_url": "https://registry.npmjs.org/node-snap7/-/node-snap7-1.0.9.tgz",
+   "n_cpp_files": "16",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "56b7c57a259f83435325c0ce50255a3a92bf317ef13c0c716024a03ed9a014b5",
+   "tarball_sha256": "9f57bac2cf593e102e9a6fdb7eb7c42962413faeaf910259a891f420c46a62dd",
+   "selection_reason": "forced_inclusion:node-snap7"
+  },
+  {
+   "package_name": "audify",
+   "version": "1.10.1",
+   "tarball_url": "https://registry.npmjs.org/audify/-/audify-1.10.1.tgz",
+   "n_cpp_files": "276",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake",
+    "meson"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "cedb6fcbe73702f6fbaccdc8e93d02c22dfc1dfe130de048fb144225d188cee8",
+   "tarball_sha256": "b859789b43cfc5c5fe1b6c74a6c8f416b460a79282cf01080c4003961acf7522",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "@driftlog/tree-sitter-dart",
+   "version": "1.0.4",
+   "tarball_url": "https://registry.npmjs.org/@driftlog/tree-sitter-dart/-/tree-sitter-dart-1.0.4.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "8809f68a59847873364b03d71f710710c03d9057e9ebdb9f2e8525784aa71d64",
+   "tarball_sha256": "f29bd6093c2c451a674956432a6228dc82e106028cca55100301242585b1c1c2",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "@gjsify/napi",
+   "version": "0.44.0",
+   "tarball_url": "https://registry.npmjs.org/@gjsify/napi/-/napi-0.44.0.tgz",
+   "n_cpp_files": "12",
+   "binding_family": "raw-napi",
+   "size_bucket": "medium",
+   "build_systems": [
+    "meson"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "2f787815233661f291103fefb6f6618bcf9929ae24c9bc5bc50ab5832e52ed86",
+   "tarball_sha256": "52a217e29e00c4302fc01504c9effa0d5ab70c3ae09de9a5c9f94a195cfef6bf",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "yatag",
+   "version": "1.3.0",
+   "tarball_url": "https://registry.npmjs.org/yatag/-/yatag-1.3.0.tgz",
+   "n_cpp_files": "60",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "none"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "ff033a1e56530d183a54430f825c6faaa6f64118dd893ed296846fe7d3659bb0",
+   "tarball_sha256": "ed980bb7aea151d5c56e641392d0ea5898d0c13da9f5ab42b4435e260ec3413b",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "@farcaster/rocksdb",
+   "version": "5.5.0",
+   "tarball_url": "https://registry.npmjs.org/@farcaster/rocksdb/-/rocksdb-5.5.0.tgz",
+   "n_cpp_files": "529",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "CPP_CPG_FAILED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "4400b8d6a1f8f701a97895dccf26a2776de9cfadb82e085e6796f5e5f467e518",
+   "tarball_sha256": "cdc0e3e6cd625330831c0bb325a660cb3d4c535d042ac60bb5828d90e12908a9",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "nlpplus",
+   "version": "1.3.24",
+   "tarball_url": "https://registry.npmjs.org/nlpplus/-/nlpplus-1.3.24.tgz",
+   "n_cpp_files": "340",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "cmake",
+    "gn"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "510ce6c836b11e261e4e4668effc9d002a8bfe40b9b977a1c92c53a594f452ee",
+   "tarball_sha256": "5d3279a9a7d19ec823cc91766384056afbb9a895ab2ce7dbe8929776871847f6",
+   "selection_reason": "stratified_coverage"
+  },
+  {
+   "package_name": "@2060.io/ref-napi",
+   "version": "3.0.6",
+   "tarball_url": "https://registry.npmjs.org/@2060.io/ref-napi/-/ref-napi-3.0.6.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "c4a514eead12cbeddf2c798bed521cacbdf0521470b33201c2d074a3d09cca65",
+   "tarball_sha256": "2d1f646713c0c73495ec5593c983076c036775618f82abe2ac1f06986032bc82",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@8crafter/leveldb-zlib",
+   "version": "1.6.0",
+   "tarball_url": "https://registry.npmjs.org/@8crafter/leveldb-zlib/-/leveldb-zlib-1.6.0.tgz",
+   "n_cpp_files": "83",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "4e1f65952c186382731a6c12321d8c7a0a024b36283dce66b7b4ae534017692b",
+   "tarball_sha256": "8f2213a074ae4312a03ac9137811bdd3eaa07ccb8af48420b5a08edd02460412",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@abandonware/bluetooth-hci-socket",
+   "version": "0.5.3-12",
+   "tarball_url": "https://registry.npmjs.org/@abandonware/bluetooth-hci-socket/-/bluetooth-hci-socket-0.5.3-12.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "93e4754895fedd4fbbf3f73cf93937766b77b53c2e22f6742196cac92f593888",
+   "tarball_sha256": "f83c06e00c56963bdbd27a87f7a370ab217d0cf43609699eb31afbb4c2c3a106",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@acomsys/dash-utils",
+   "version": "0.0.17",
+   "tarball_url": "https://registry.npmjs.org/@acomsys/dash-utils/-/dash-utils-0.0.17.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "a5074873dc344795969bcd38535b9215463af730aba602f659cb87c101de4124",
+   "tarball_sha256": "f4b18b6911c403fd89f9779b5ae0d65099f5a754cb5c0271dbad117e4e7a4683",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@adhdev/ghostty-vt-node",
+   "version": "1.0.46",
+   "tarball_url": "https://registry.npmjs.org/@adhdev/ghostty-vt-node/-/ghostty-vt-node-1.0.46.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "abe81689d58133ef2ce883fb4dc81837dc43d0b9d16cb5ff9936efb159572caa",
+   "tarball_sha256": "259804474a1e77339df1d7ed660aa136cf2e1cb2b97512faf1f3e3f640f40838",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@ampretia/x509",
+   "version": "0.4.10",
+   "tarball_url": "https://registry.npmjs.org/@ampretia/x509/-/x509-0.4.10.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "782b64441ffe7ff58a3554e8c529d90c7ddcfc1b5100a9d490e9c95048be9f1f",
+   "tarball_sha256": "2b2371ce6a28a48b17c6d37d694c85c44735ee77780466119f1fe7cd984b33f3",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@antcube/capnp",
+   "version": "0.5.52",
+   "tarball_url": "https://registry.npmjs.org/@antcube/capnp/-/capnp-0.5.52.tgz",
+   "n_cpp_files": "6",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "5fa46dad3bb02e350ef62003761b062d54897922414551fb01bc8f1f55c71e5d",
+   "tarball_sha256": "c0f6a67cf0cd0107a82674aa66982ba4d0ecfbda81fb6c24962987cfeda0453a",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@appthreat/sqlite3",
+   "version": "9.0.1",
+   "tarball_url": "https://registry.npmjs.org/@appthreat/sqlite3/-/sqlite3-9.0.1.tgz",
+   "n_cpp_files": "10",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "036aab492cf559ef891f3b04e918893f5eab1e85928c89f99c4744aafe111f12",
+   "tarball_sha256": "9fdf8c792d6547595adb8cccf5148fc430590f4887eb447f63b0609a6f8769cd",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@archwayhq/keyring-go",
+   "version": "0.2.1",
+   "tarball_url": "https://registry.npmjs.org/@archwayhq/keyring-go/-/keyring-go-0.2.1.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "16b25e0775f25d087a4b6537d05076de8bc53a11a628a47a677e9cb2f42e26da",
+   "tarball_sha256": "9ac661e9b0882ef479ea089f74296793e79d86ff5225f8bf9f9d8f5f69484750",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@astronautlabs/webrtc",
+   "version": "0.6.1",
+   "tarball_url": "https://registry.npmjs.org/@astronautlabs/webrtc/-/webrtc-0.6.1.tgz",
+   "n_cpp_files": "91",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "5b8b4e25d5d377c777bc22b60b233ee9dcd3937f08d61c908b3cfb61ecc397a0",
+   "tarball_sha256": "e89540ead8bdd495ea1b855ea65b273102f88196f10bb7053d1c05cd9288c811",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@automattic/yara",
+   "version": "2.6.3",
+   "tarball_url": "https://registry.npmjs.org/@automattic/yara/-/yara-2.6.3.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "5cb3529895f37f167766e58da4f19beec227463e369c13837e7ec9e79741d6d7",
+   "tarball_sha256": "7ca6f43f7ce43068ce1b45bd5799125f82c1e673e1aff880a125b78604742f37",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@breush/ffi-napi",
+   "version": "4.0.13",
+   "tarball_url": "https://registry.npmjs.org/@breush/ffi-napi/-/ffi-napi-4.0.13.tgz",
+   "n_cpp_files": "325",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "d35f374baf49a700439a984fb5d7b9d5b3b9430e165552f945720b7d3c317bfc",
+   "tarball_sha256": "140a3b40474e219abe2c7c1ef836a95987ec52e4dcb670b242d1f5f125d32e6c",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@breush/ref-napi",
+   "version": "4.0.9",
+   "tarball_url": "https://registry.npmjs.org/@breush/ref-napi/-/ref-napi-4.0.9.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "4577f9a69a1260390ef33a53969ddedad2c26a7d7bc436e2cd903673ae5dd59d",
+   "tarball_sha256": "8fd187d801174394420f405c2f3ddbd136b27de54f0a39103a53e804f26fdb24",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@brick-a-brack/napi-canon-cameras",
+   "version": "0.1.5",
+   "tarball_url": "https://registry.npmjs.org/@brick-a-brack/napi-canon-cameras/-/napi-canon-cameras-0.1.5.tgz",
+   "n_cpp_files": "25",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "09bec5757e4413ea2e8a65dde3fe2377b8efc03e621bbc2a15ebbc6e9e9097db",
+   "tarball_sha256": "7b38a06b21a67ae27e64e2d43d8d29642d7d997c87b4667aa3d4d7598a68f5ec",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@camol/file-lock",
+   "version": "1.1.4",
+   "tarball_url": "https://registry.npmjs.org/@camol/file-lock/-/file-lock-1.1.4.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "cc69f81195ac881e7c25eb193dff51a68979c237b859cf1b47555c4a9d454c14",
+   "tarball_sha256": "fc9e6950426ee6fa38500a82f9c651df4305f2a69890d4b65e0984a8897000cd",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@cdktf/node-pty-prebuilt-multiarch",
+   "version": "0.10.2",
+   "tarball_url": "https://registry.npmjs.org/@cdktf/node-pty-prebuilt-multiarch/-/node-pty-prebuilt-multiarch-0.10.2.tgz",
+   "n_cpp_files": "87",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "3cc0561cfb66d8e0d5796f970ce95b32d4cc8db6ce8bfb0055d11b37c218b16e",
+   "tarball_sha256": "2e059252577870632030ac556c5ef8efc244fe5918b83a69c06a3058fb3f2f33",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@cerebruminc/i420-jpeg-encoder",
+   "version": "1.2.1",
+   "tarball_url": "https://registry.npmjs.org/@cerebruminc/i420-jpeg-encoder/-/i420-jpeg-encoder-1.2.1.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "a05593ae46e30d05d76730a0ff2325148f086d0611db415fb2c1006b12d2775e",
+   "tarball_sha256": "1fe6fb59e6db1bd093f669799de94a06d2a8f742f47ae377a4e0cd1bf3fec82c",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@cherrystudio/mac-system-ocr",
+   "version": "0.2.7",
+   "tarball_url": "https://registry.npmjs.org/@cherrystudio/mac-system-ocr/-/mac-system-ocr-0.2.7.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "7b4d971ea34739d07ed1f7ee0add7fb1c253afb697572d7f6dc13796ffc4bb0d",
+   "tarball_sha256": "b5981dcc539b7074fc8de029d72112c776cb9b9335df4deb47e901d04d52406a",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@choysen/mac-system-ocr",
+   "version": "0.2.8",
+   "tarball_url": "https://registry.npmjs.org/@choysen/mac-system-ocr/-/mac-system-ocr-0.2.8.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "0ccf0b7ebe00ae4b708a61e3f1f6f91e43804a4f12ab0135b1eecafdd51a321b",
+   "tarball_sha256": "843f11afd15deecd307d3842226d1921a4f15f2f389b64a7e8c079a9b1c94d6f",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@co_snow/hello",
+   "version": "0.0.57",
+   "tarball_url": "https://registry.npmjs.org/@co_snow/hello/-/hello-0.0.57.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "none"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "ba7841fbbe394b7a21e1f1c1f29d22e87a23b26aa79ca2d4d57396130680dc13",
+   "tarball_sha256": "ca67605c70222af97135c23bdc2b1d77824b4d9dc205860402cbf383d0e119e6",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@cocktailpeanut/node-pty-prebuilt-multiarch",
+   "version": "0.11.16",
+   "tarball_url": "https://registry.npmjs.org/@cocktailpeanut/node-pty-prebuilt-multiarch/-/node-pty-prebuilt-multiarch-0.11.16.tgz",
+   "n_cpp_files": "88",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "75b82a72b6566a13365095e55206b8e81ee7cc0abc6af8539e1d6d413ce9e4dc",
+   "tarball_sha256": "cf949df4cca97be47e6694577e75e9ba687f848c0818455c3dfa8c0c8f6cc86b",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@codeplaydata/dbc2dbf",
+   "version": "1.1.0",
+   "tarball_url": "https://registry.npmjs.org/@codeplaydata/dbc2dbf/-/dbc2dbf-1.1.0.tgz",
+   "n_cpp_files": "13",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "cdd6edbc5e302d7c6e6fcd94338de40fcd2932fa83e60b8dcf7cd3097464f866",
+   "tarball_sha256": "335f6d89967bc3c68000554cf69e2ba7426ed80352e58b3573eafa52b24bbb5f",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@codeporter/robotjs",
+   "version": "0.6.0",
+   "tarball_url": "https://registry.npmjs.org/@codeporter/robotjs/-/robotjs-0.6.0.tgz",
+   "n_cpp_files": "22",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "cf776883d5941d0231e4b812b03ffff3e61b81816ea599ebf2d53d3074174a7a",
+   "tarball_sha256": "223ecffff36de50a51820d926911d61bec709810ff47e24df25ef70ef1929d66",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@confluentinc/kafka-javascript",
+   "version": "1.10.0",
+   "tarball_url": "https://registry.npmjs.org/@confluentinc/kafka-javascript/-/kafka-javascript-1.10.0.tgz",
+   "n_cpp_files": "301",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "e6e52e3cf28a8b293e7a44f1a381e7684142595013bcfa13d050ff7722c1c8ae",
+   "tarball_sha256": "34a088e303707ea995d7453c832920bfd02106488cd055813b7c21fc9e6d337c",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@damonsmith/node-printer",
+   "version": "0.7.3",
+   "tarball_url": "https://registry.npmjs.org/@damonsmith/node-printer/-/node-printer-0.7.3.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "f253c5ff091d2226d60ef49aae57819b6f205923cee5997cf1bb423b4adb5145",
+   "tarball_sha256": "7d60b81ecdb8365460f85e3447af8de4a69767b8dac09beb35239ff4e8dcb293",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@deepfocus/get-windows",
+   "version": "1.0.21",
+   "tarball_url": "https://registry.npmjs.org/@deepfocus/get-windows/-/get-windows-1.0.21.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "ce1c37884bc611115991fa0bff554f0dcfce12a3b2e3468cfd6aa550fe7a6617",
+   "tarball_sha256": "d2214edfbc7254cde5381c5522f3af712fe139b654a66b9fc4c62e66e6dc0ec2",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@depup/node-addon-api",
+   "version": "8.9.2-depup.0",
+   "tarball_url": "https://registry.npmjs.org/@depup/node-addon-api/-/node-addon-api-8.9.2-depup.0.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "none"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "7ddb6662bde4aeaad331dc317da645825b532ecaa937a938f9605905776472cb",
+   "tarball_sha256": "2e2c78e395de7b9ab11b4df11999ab2dda6e0b11f8571e907f3f492926416e7d",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@discordjs/opus",
+   "version": "0.10.0",
+   "tarball_url": "https://registry.npmjs.org/@discordjs/opus/-/opus-0.10.0.tgz",
+   "n_cpp_files": "206",
+   "binding_family": "none",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "04d4f890c706a7715033489b6c9da363d48438eb53e237c17772c9f671deb6b5",
+   "tarball_sha256": "f1db4f4ed6df3e2e4ae06d9cf07c5ef1e447f76189777caa1e556bcf1bad4d3f",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@dolthub/doltlite",
+   "version": "0.11.55",
+   "tarball_url": "https://registry.npmjs.org/@dolthub/doltlite/-/doltlite-0.11.55.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "0b249cb387238ee13fec6425d0634356c9fa8f1ff0ac11c55392967a1a7dabf6",
+   "tarball_sha256": "33381515b5e51d689aada02c1edcdbd1a577ec1d40440872b64e4c9198d5d313",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@dwieeb/node-pty-prebuilt",
+   "version": "0.8.1",
+   "tarball_url": "https://registry.npmjs.org/@dwieeb/node-pty-prebuilt/-/node-pty-prebuilt-0.8.1.tgz",
+   "n_cpp_files": "87",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "3811e270d75b532c7e5fc920288cd5dbe4de12f5691421f20de500f0f995713e",
+   "tarball_sha256": "ebfbca68baecdef140465ec4e007d51d0c1c189abdd25f445790e8164eef0d30",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@elchetz/cld",
+   "version": "2.8.5",
+   "tarball_url": "https://registry.npmjs.org/@elchetz/cld/-/cld-2.8.5.tgz",
+   "n_cpp_files": "57",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "705b9483ee1068b3651d91688f187d3d2d5b3e29d8443834dffe2a5913dad045",
+   "tarball_sha256": "69ac97d6b4b734cd486f697dc931cca956f62499cc9fc34a4dc74fb072bc96c3",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@eliyya/sange",
+   "version": "1.2.0",
+   "tarball_url": "https://registry.npmjs.org/@eliyya/sange/-/sange-1.2.0.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "066706d2ebd1e6e32cf9512b35421783c6612f659f0d2581566045fc3ec2344a",
+   "tarball_sha256": "91bcb18e995599cfcee414a3e9922d3d9822e8c2bfc57f9250af582dd4b32774",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@eyevinn/srt",
+   "version": "0.8.3",
+   "tarball_url": "https://registry.npmjs.org/@eyevinn/srt/-/srt-0.8.3.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "7d135c7373b0a170c71215d1e3b845849f7cfac58c81e8c2577a64af884b3878",
+   "tarball_sha256": "d4a88efc336c2f614349309b4778c1611f922803a075b62bc537c6d19da2cc46",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@faressoft/node-pty-prebuilt",
+   "version": "0.9.0",
+   "tarball_url": "https://registry.npmjs.org/@faressoft/node-pty-prebuilt/-/node-pty-prebuilt-0.9.0.tgz",
+   "n_cpp_files": "87",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "bd1271ba26222c08135a8734860d33388348535e77417080eaf75d69bf87e543",
+   "tarball_sha256": "fb16b015d16c0939d5491336a00471d8e643a2a04ad8e9c9ee91a17593303bec",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@flovy/node-printer",
+   "version": "0.6.3",
+   "tarball_url": "https://registry.npmjs.org/@flovy/node-printer/-/node-printer-0.6.3.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "98a7550d5389da4bcc84d3517cd2c1c9bfc3ba77973bd1a22bad0dcf3c8c5e8a",
+   "tarball_sha256": "0dbc9d3c87db19165e2aee3adfa356f143a2be1c9f974666ecd8b1edc41f2596",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@flyskywhy/react-native-gcanvas",
+   "version": "6.0.24",
+   "tarball_url": "https://registry.npmjs.org/@flyskywhy/react-native-gcanvas/-/react-native-gcanvas-6.0.24.tgz",
+   "n_cpp_files": "362",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "cmake",
+    "meson"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "e88b1d7af9c245ae61d165d73bbf6f50ae764f1cdd5df3b73d16c74e43f9d0eb",
+   "tarball_sha256": "7ef8b8e428acd56e2899e3fd35b822abfe989ccd9e3ed2e93ed0d7cffef5767e",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@fqlan/add-example-prebuild",
+   "version": "1.0.1",
+   "tarball_url": "https://registry.npmjs.org/@fqlan/add-example-prebuild/-/add-example-prebuild-1.0.1.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "0762aae53e1e64f855b2a34e3e8ad398ee027760e886fc14d3f6b2c190a3525e",
+   "tarball_sha256": "9f0bdf583823065edcab9de19ead536b352096f76d77def61d0b64cb482a330e",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@fugood/whisper.node",
+   "version": "1.1.3",
+   "tarball_url": "https://registry.npmjs.org/@fugood/whisper.node/-/whisper.node-1.1.3.tgz",
+   "n_cpp_files": "81",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "dd1ac73f3d63834907f11b940cdd7c16b675e43d6ee0b936cb615b3cc96cae99",
+   "tarball_sha256": "e9ebb2ad201a7d55fedf9557faf95f8a98ea796cf83ad4fd8317ed32ba2f6b19",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@genee/dbus",
+   "version": "1.0.7-9",
+   "tarball_url": "https://registry.npmjs.org/@genee/dbus/-/dbus-1.0.7-9.tgz",
+   "n_cpp_files": "34",
+   "binding_family": "nan",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "12d0ffeff129eef2236135d7a8029c39a8ad3336576a9854ac91dd6e81862378",
+   "tarball_sha256": "751ded440f5f6a3623393087cded8d643dfac8de360e532a822464d2f417b5ce",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@github/keytar",
+   "version": "7.10.6",
+   "tarball_url": "https://registry.npmjs.org/@github/keytar/-/keytar-7.10.6.tgz",
+   "n_cpp_files": "5",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "72e673ee8c1d6accdea2a07ce9d212f325080fd36cc920ad0f57d72f1f22a20f",
+   "tarball_sha256": "6581f2c5a79c77ff0edd9f143d50e03c7ae2ec5b2d0781a8704b67fabeed55cf",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@gjsify/node-gi",
+   "version": "0.44.0",
+   "tarball_url": "https://registry.npmjs.org/@gjsify/node-gi/-/node-gi-0.44.0.tgz",
+   "n_cpp_files": "13",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "ba8b03bc468ba2f1b12d5ce2bb1c67e8b097fa280ba67ec4cfeec879d4d724bc",
+   "tarball_sha256": "1ed33ac1f78b3255fc958807d4d6de9ca79725f56380ad9f6791caea21e7f95a",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@grandchef/node-printer",
+   "version": "0.8.0",
+   "tarball_url": "https://registry.npmjs.org/@grandchef/node-printer/-/node-printer-0.8.0.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "8605423b6bfc220386a3951a96c4bb6163cd9307e3095efe069122545e7f04f7",
+   "tarball_sha256": "fc44ab3ce6f4bf9873c0c8262f851fae168efcc34b4696e8d46e109c12eed7b4",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@gristlabs/sqlite3",
+   "version": "6.0.1-grist.1",
+   "tarball_url": "https://registry.npmjs.org/@gristlabs/sqlite3/-/sqlite3-6.0.1-grist.1.tgz",
+   "n_cpp_files": "5",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "35b6f6e7b9ab748170a01730e62b25e987ea4311415553edef9437758ff53931",
+   "tarball_sha256": "b5d1d21ba79e0d708fd20257a20a8d2ee2671699ede7a984df6108c20425d90a",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@guilherme_souza/node-printer-updated-fork",
+   "version": "0.6.17",
+   "tarball_url": "https://registry.npmjs.org/@guilherme_souza/node-printer-updated-fork/-/node-printer-updated-fork-0.6.17.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "37ae9975925a05a789eba0867f9f0f834cd5f065f92a9e03976fc61cd8b2861b",
+   "tarball_sha256": "28c8ead029f3b5f5f2c39b4a92f83bf873dd305c4d68a124e1c5430dc141a748",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@h1x4dev/node-addon-api",
+   "version": "2.0.0",
+   "tarball_url": "https://registry.npmjs.org/@h1x4dev/node-addon-api/-/node-addon-api-2.0.0.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "6ef44b6b7d6263f6cc8c95fe235ad1dc724b84a9025743da1c373262a463b866",
+   "tarball_sha256": "a68c51357f2badd5cb4de86d8c5ecef77f7e901064ba396d4c9e841a44584864",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@huxinhai/mmkv",
+   "version": "0.1.7",
+   "tarball_url": "https://registry.npmjs.org/@huxinhai/mmkv/-/mmkv-0.1.7.tgz",
+   "n_cpp_files": "44",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "df411c7316555b0978b3b0843e587afe9ca1a55c68f1e05a575495d46e0a1bd4",
+   "tarball_sha256": "e4277eadf93e49426c656483ffac4973ca3025b99f23cd052a6fb560011842b4",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@ipshipyard/node-datachannel",
+   "version": "0.26.6",
+   "tarball_url": "https://registry.npmjs.org/@ipshipyard/node-datachannel/-/node-datachannel-0.26.6.tgz",
+   "n_cpp_files": "13",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "090705d525873458d10d1a1760f129f185f0f192683524a3481fdacebfb77223",
+   "tarball_sha256": "4040f27afe4ac1a2de524da96434fa003988ab1f3c931b44a6e568a20ec2da82",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jasonscheirer/native-progress-bar",
+   "version": "1.1.2",
+   "tarball_url": "https://registry.npmjs.org/@jasonscheirer/native-progress-bar/-/native-progress-bar-1.1.2.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "44331eb0fd4479a002a4d4db9cebb30186348ffe97cc35ac7f6651286dc89921",
+   "tarball_sha256": "b4d521684fa51e75b9ffae497e2ce2bf8c2648aa3e6d7f0009fbdd3cab863746",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jellybrick/ffi-napi",
+   "version": "4.0.18",
+   "tarball_url": "https://registry.npmjs.org/@jellybrick/ffi-napi/-/ffi-napi-4.0.18.tgz",
+   "n_cpp_files": "325",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "ac0f2f86c3b359d3fcc47f5b429ffa365c972d9576c44f8cd9ee10ca6a0c0c1e",
+   "tarball_sha256": "b489585f0577db0066769f913e9f8320ffb7250a14dc2d70075457b48ea5e2e2",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jellybrick/ref-napi",
+   "version": "4.0.10",
+   "tarball_url": "https://registry.npmjs.org/@jellybrick/ref-napi/-/ref-napi-4.0.10.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "51467f1c35288180e9510f941aeb8e435829421e84b3fe994adddf4a6b8451a2",
+   "tarball_sha256": "0e9b50d037a50dd3a6746f5a765e2985bcaacb8fca0b24dd81f94bcf265151e6",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-blit-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-blit-napi/-/plugin-blit-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "74d439e1b3f6ba530dd4ba380232e50f9a136b8d8b923bdb1c62d8274b4aff98",
+   "tarball_sha256": "c904dd5934c25a0d86dd3b80b4c101ab7ee643f221f2815db439a2b11674f384",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-blur-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-blur-napi/-/plugin-blur-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "8166c37d4ad04a9654253855e58847f756012c06179872a850cb0fa748b039d9",
+   "tarball_sha256": "76d2bf2326e11aeed492c54ff9861c4a6a67a85a4c76375ed13e58aa79787f31",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-circle-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-circle-napi/-/plugin-circle-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "06174f0fd156cbefaa50f90ecb070a48e676668501a9bcacdbb27dee581d9cfc",
+   "tarball_sha256": "aa31074695a0a88e423c4c5a184b1b1453882cef94e5e4b295203ccfd7b65adf",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-color-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-color-napi/-/plugin-color-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "288c611f34e22937a75d95571453c6b58460e395a5afd56f83cd47d694275feb",
+   "tarball_sha256": "e777ea761fbcd7e2a3d093d561ab12935b3c126f400d3b918518c6adb1f5840a",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-composite-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-composite-napi/-/plugin-composite-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "23efe3e82d623610d7b3ea5ef953b13f62fd31f0a03f97c831adaef70bb7490f",
+   "tarball_sha256": "9220274e0000c0391e24d7b2a28afb706ea5705b2a292ceb398a28af1bc050dd",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-crop-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-crop-napi/-/plugin-crop-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "e269733435413ecf23e621e2278737c76eb3ccbf7513285de1f8705cecd92a48",
+   "tarball_sha256": "7081d5a4543053650a5407075bebd3c1dd72a96d810fbb1ee63c2575858f86db",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-dither-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-dither-napi/-/plugin-dither-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "5a13ba98cb6386e23ecdb8bc3ca53c15a575e953cf5bb980d424567826a44264",
+   "tarball_sha256": "3b4d032f33bd1e03c174ba1191e40607fc5f92a4937ac2f5accae7f7db218879",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-flip-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-flip-napi/-/plugin-flip-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "dae96140438b4c1ddc5192a2be43675822a8bf133a8d05c17051be6340af5a31",
+   "tarball_sha256": "93c52bc8ad7782fa528ce798185f4c355042b3b7b40e4cf809429174c3018183",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-invert-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-invert-napi/-/plugin-invert-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "8a61e0576ba398f3727b99bb1d6faacee3bc4e830f75568e046165535f95fcc0",
+   "tarball_sha256": "fadd8be9ce93380760c370ee41273f40e06e2db6d82f3a205781ff9241b4f007",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-mask-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-mask-napi/-/plugin-mask-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "11824c26b126998dc27fd31504e563709c9b6418d3eecb92a216d8c921870f90",
+   "tarball_sha256": "7dd59e1e2a5d0e8b748c4c2952b37fbc4cd734e856ef42ea45031b9b51ba2ef1",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-resize-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-resize-napi/-/plugin-resize-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "ae5583482b6434549756884f99f7d77d1ee6add5863b590a5ca67861c18309fb",
+   "tarball_sha256": "dd37eaa66dda5fec0894afef60bd84493ac6e215ce2cd8416d93aeec939d1d0d",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@jimp-native/plugin-rotate-napi",
+   "version": "0.1.0",
+   "tarball_url": "https://registry.npmjs.org/@jimp-native/plugin-rotate-napi/-/plugin-rotate-napi-0.1.0.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "be1337099316ee3c6da4563968f774b27dc90229c1a5c4baf20b26532cf97913",
+   "tarball_sha256": "c0a1e233ca728d185af7e91dd0317830472a6fc6445786256b545e7a69425e4e",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@js-ak/watchdog",
+   "version": "1.5.0",
+   "tarball_url": "https://registry.npmjs.org/@js-ak/watchdog/-/watchdog-1.5.0.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "e9c88138ab8582543a7cdd8b74630f3c4f67d7f3ca22435073cc0b6c0857a904",
+   "tarball_sha256": "03999e67687924c55fc3055b9a8e4a194908082329dfebaa003a1c2f026f6ae1",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@julusian/segfault-raub",
+   "version": "2.3.3",
+   "tarball_url": "https://registry.npmjs.org/@julusian/segfault-raub/-/segfault-raub-2.3.3.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "61fd33fb6edce3baa9461f8e70c6cc9dd8cfbe17e543f07f8ff0057115526159",
+   "tarball_sha256": "cd7a28ba55f6610daec3244afb932d8ee96462974ae25600a66a8fe087522127",
+   "selection_reason": "stratified_fill"
+  },
+  {
+   "package_name": "@ssxv/node-printer",
+   "version": "1.1.1",
+   "tarball_url": "https://registry.npmjs.org/@ssxv/node-printer/-/node-printer-1.1.1.tgz",
+   "n_cpp_files": "6",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "78aba7fb38e2026c442d3eeddf688cedb061fa5b25202b5b2c022fb313967572",
+   "tarball_sha256": "4d02db5217350e9bc880a727a68b55a89c35936f29d6aa8a4ef67238e4a1b225",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "@sentry-internal/node-native-stacktrace",
+   "version": "0.5.0",
+   "tarball_url": "https://registry.npmjs.org/@sentry-internal/node-native-stacktrace/-/node-native-stacktrace-0.5.0.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "1cd2fa64d810d7e78c6367ac4b4183582f0e4acc2582a1645479a17ea3a7b6a0",
+   "tarball_sha256": "27d159c885bdf1d3678769cf69aff8276d24a8976896f6764feb3a95b234f7af",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "logosdb",
+   "version": "1.0.1",
+   "tarball_url": "https://registry.npmjs.org/logosdb/-/logosdb-1.0.1.tgz",
+   "n_cpp_files": "7",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "e01b80ebc8cb513d720688864e9c756f26c35912076f57caff4c0c535b03c369",
+   "tarball_sha256": "6b51889f600b639c1454555c9e5c388f9c446fd7c52a7d0206b3d4088c4b8123",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "@vlad-fresha/segfault-raub",
+   "version": "2.10.0",
+   "tarball_url": "https://registry.npmjs.org/@vlad-fresha/segfault-raub/-/segfault-raub-2.10.0.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "acac6ad04d9d9b621d57fa8460087f39b0985d0f6a348eadb29484697e08749b",
+   "tarball_sha256": "885d96176921b10e7efb1745bfd9dcffb4e73f16da2ac9e8f6ff18e7b287aaaa",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "indy-sdk",
+   "version": "1.16.0",
+   "tarball_url": "https://registry.npmjs.org/indy-sdk/-/indy-sdk-1.16.0.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "feb9fe6a1ee4f4ff46650aaa24c465f24ed24d077c1f0fe8ce224d166ffe94c0",
+   "tarball_sha256": "9280a1bb2fd6002525d25bbc0a9cbdfd56f58066cee56b8ab0fad2707935a839",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "os-dns-native",
+   "version": "2.0.1",
+   "tarball_url": "https://registry.npmjs.org/os-dns-native/-/os-dns-native-2.0.1.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "92568d4186b4ce07c459e968482a40169ab35ebf7d5f8943dafded5d0d6dc08c",
+   "tarball_sha256": "20199c29b82ca7576b6ede0540118803cf5cf3d162ed9b0e7e40be07170e93ef",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "@nodert-win10-cu/windows.ui.notifications",
+   "version": "0.4.4",
+   "tarball_url": "https://registry.npmjs.org/@nodert-win10-cu/windows.ui.notifications/-/windows.ui.notifications-0.4.4.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "nan",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "40f95439972cdcb8afb04e6bb92b3516fb962997da20674e6024c536084182a3",
+   "tarball_sha256": "5bbcb87f98d22da04c79138d4caa1c95d85b514759b1ce25b5581da3efcdac1f",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "hidraw-native",
+   "version": "0.2.2",
+   "tarball_url": "https://registry.npmjs.org/hidraw-native/-/hidraw-native-0.2.2.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "011b7cf5f565c544537fee7402029bd45a145d5606a5a729b2acf7328dfffcc1",
+   "tarball_sha256": "d7f91297a6b97780cdfc6066928ec28ad542baddfbcafc42df1dca63ae49da61",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "napi-addon-fdtd",
+   "version": "3.4.9",
+   "tarball_url": "https://registry.npmjs.org/napi-addon-fdtd/-/napi-addon-fdtd-3.4.9.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "node-addon-api",
+   "size_bucket": "small",
+   "build_systems": [
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "f2d698e6db9ca752eca7b8cc356c4b235e95b62fef6d9519bb693f1734fd9750",
+   "tarball_sha256": "e3a40430907167c2f1e122a0349cb217fe037b192634da1caff3185dda81766f",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "velociradix",
+   "version": "8.3.1",
+   "tarball_url": "https://registry.npmjs.org/velociradix/-/velociradix-8.3.1.tgz",
+   "n_cpp_files": "3",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "none"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "a591190714dbd257ab134d3c0a6e929e31169d7d0574e1236de7202baa38c006",
+   "tarball_sha256": "447da6c5739f9600c5150cbd50a20d76874a59ce0e12cac9dfc27899c400a2c0",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "win-export-certificate-and-key",
+   "version": "3.0.2",
+   "tarball_url": "https://registry.npmjs.org/win-export-certificate-and-key/-/win-export-certificate-and-key-3.0.2.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "5a020d6e691731df667c945dd2fe8f52d6e62b6d5c8c6d8830735c827eef2525",
+   "tarball_sha256": "7a46259816059b1694068e20c85b2b0371081ae423eeefa31fd2ec9b945eb65b",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "pqclean",
+   "version": "0.8.1",
+   "tarball_url": "https://registry.npmjs.org/pqclean/-/pqclean-0.8.1.tgz",
+   "n_cpp_files": "454",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "c178b971805a942b350676a17da4c6e06d7b8b3456a8502ff7163461b5357f62",
+   "tarball_sha256": "0ba5483b34b8d8dce03d569c8a8962049ff94723c26184fa84a0bc6b2b0f4a36",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "napi-ldap",
+   "version": "1.0.4",
+   "tarball_url": "https://registry.npmjs.org/napi-ldap/-/napi-ldap-1.0.4.tgz",
+   "n_cpp_files": "5",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "df691a0bbd063613c6930f1bc0235ff101ecd89a05e9bc62a51c523c20a703f3",
+   "tarball_sha256": "501f9f8092896ab56384964792229388fe0d25a78f25564846e8e16e756ee234",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "thunder-node-sdk-lite-m",
+   "version": "0.1.16",
+   "tarball_url": "https://registry.npmjs.org/thunder-node-sdk-lite-m/-/thunder-node-sdk-lite-m-0.1.16.tgz",
+   "n_cpp_files": "12",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "a841abc06cbf5d4be163f3e7346bee7835ddf4de2369813a1c0f7c8d96a75e79",
+   "tarball_sha256": "3dceb5b73a30568282f8a48291586b499b20815e6d5d9483644bb04ad753ba68",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "fullname-native",
+   "version": "3.0.0",
+   "tarball_url": "https://registry.npmjs.org/fullname-native/-/fullname-native-3.0.0.tgz",
+   "n_cpp_files": "1",
+   "binding_family": "nan",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "b99b08134cd90871823d38c5f093972b6594b5cf6db2a1197f2a80df91fc2d2c",
+   "tarball_sha256": "fc223cea121f130c902fae454b7578b0bd3b6619e7b9f5ecdfc3008af856262d",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "uiohook-napi",
+   "version": "1.5.5",
+   "tarball_url": "https://registry.npmjs.org/uiohook-napi/-/uiohook-napi-1.5.5.tgz",
+   "n_cpp_files": "16",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "ddd53c3d6eb57dec142cf3ff5763186086c043481b27efe901adb915f598c1b8",
+   "tarball_sha256": "21b489ee141e5d2e82ec595510e8b7dd6c2d9c91266f4094be3bfe04e0a33acd",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "node-pty",
+   "version": "1.1.0",
+   "tarball_url": "https://registry.npmjs.org/node-pty/-/node-pty-1.1.0.tgz",
+   "n_cpp_files": "88",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "625c9369ea3024f1107ca67a0f9c54602056589ee5658786b4af7917ff4095c4",
+   "tarball_sha256": "c7517f19083ddcb05f276904680eb2b11a6b5ecab778b8e4e5685a6d645b3f60",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "@nodert-win10-rs4/windows.data.xml.dom",
+   "version": "0.4.4",
+   "tarball_url": "https://registry.npmjs.org/@nodert-win10-rs4/windows.data.xml.dom/-/windows.data.xml.dom-0.4.4.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "nan",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "7adc7d7486c82b72871de526a7e0bc799eb21a37f30d093671b8bdc04b2d6d16",
+   "tarball_sha256": "3ccf4577327876c52fc3d25d27222f8df2f910c63e6609b070bfd7523e880db2",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "x509",
+   "version": "0.3.4",
+   "tarball_url": "https://registry.npmjs.org/x509/-/x509-0.3.4.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "8c6ff865437c219f77ccc36ff97e488c5e6ac7d62c26bcd6c983f0063bb0feca",
+   "tarball_sha256": "0b040b0fb27a8117461366ac4b9515a9b4675c4163d2cfc8753578b211bf25ff",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "duckdb",
+   "version": "1.4.4",
+   "tarball_url": "https://registry.npmjs.org/duckdb/-/duckdb-1.4.4.tgz",
+   "n_cpp_files": "2209",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "CPP_CPG_FAILED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "0d510443bce320bceec68c40036563510947c7493567526cae1a8efdf207382e",
+   "tarball_sha256": "5bb967dcbcd517670ba5f169f238fb9d6787e53752c60ebe24386169d76941ed",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "uriparser",
+   "version": "2.4.0",
+   "tarball_url": "https://registry.npmjs.org/uriparser/-/uriparser-2.4.0.tgz",
+   "n_cpp_files": "7",
+   "binding_family": "nan",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp",
+    "cmake"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "3641e2fc5837305a3db051cf9ba0dd430b54ebbf3ce7401ec3bd9e30509933f2",
+   "tarball_sha256": "00ef938b94678b11c22094d2c2970b31ded0a9dfd8368c96b6fa85ba64789cd9",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "smart-whisper",
+   "version": "0.8.1",
+   "tarball_url": "https://registry.npmjs.org/smart-whisper/-/smart-whisper-0.8.1.tgz",
+   "n_cpp_files": "84",
+   "binding_family": "node-addon-api",
+   "size_bucket": "large",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "RESOURCE_LIMIT",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": true,
+   "source_tree_sha256": "183f17e6bffbcdbd18bb0e3632bc2adbd6b7d1542e6987758114c9e8660331a2",
+   "tarball_sha256": "f02ab18b17fb75316b43172b82d50e4440d4b08f32f73ba708556065695beada",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "profoundjs-fibers",
+   "version": "2.7.5",
+   "tarball_url": "https://registry.npmjs.org/profoundjs-fibers/-/profoundjs-fibers-2.7.5.tgz",
+   "n_cpp_files": "4",
+   "binding_family": "none",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": true,
+   "has_write": true,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "13df294c03b1545634d88ad704127e2f0cdc31620319e38f845152739c870911",
+   "tarball_sha256": "2fb72a7c6ee14a30bca1277d38fe07568e1e250dc4f3fd894d548f36ae5dca2f",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "vsfragments_node",
+   "version": "0.0.42",
+   "tarball_url": "https://registry.npmjs.org/vsfragments_node/-/vsfragments_node-0.0.42.tgz",
+   "n_cpp_files": "2",
+   "binding_family": "none",
+   "size_bucket": "small",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": false,
+   "has_read": false,
+   "has_cmp": false,
+   "source_tree_sha256": "60a408fe8ce9e8364faca1f9aae183cbdf9ba810fdbac88e0fdb1f390e761454",
+   "tarball_sha256": "a472f0e9691fbed572f5ec1d72b7501a0e833c6fc4764682da304c5b2f74f9d0",
+   "selection_reason": "deterministic_random_control"
+  },
+  {
+   "package_name": "@zowe/db2-for-zowe-cli",
+   "version": "6.1.17",
+   "tarball_url": "https://registry.npmjs.org/@zowe/db2-for-zowe-cli/-/db2-for-zowe-cli-6.1.17.tgz",
+   "n_cpp_files": "7",
+   "binding_family": "node-addon-api",
+   "size_bucket": "medium",
+   "build_systems": [
+    "binding.gyp"
+   ],
+   "prior_status": "ANALYZED",
+   "has_lock": false,
+   "has_write": true,
+   "has_read": true,
+   "has_cmp": false,
+   "source_tree_sha256": "6739b73ef11b42727614b633d1597a5e5ef2432a34d9c053defc1c50eb17e4ed",
+   "tarball_sha256": "7795fdeeede05058ca3dcd6a9a76da8b45d73d9a09756fdf55325141b7829f91",
+   "selection_reason": "deterministic_random_control"
+  }
+ ]
+}
