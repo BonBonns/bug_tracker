@@ -898,3 +898,33 @@ With #36/#37/#39 done, the open staged-enablement work is #38 (blocked on #44) a
 (blocked on #33) — both substantive, not mechanical: the enablement *mechanism* itself is now
 complete for all five non-Resource-Guard properties, only their own individual property-level
 preconditions remain.
+
+## Task #33: OOB_COMPARE — validated, kept gated (not retired)
+
+Two independent real checks resolve the "validate or retire" question:
+
+1. **The detector works.** A new positive-control fixture
+   (`tests/gates/guard-r01/fixtures/cap_corpus/cmp.cpp`, built through the real c2cpg/joern/
+   normalize pipeline, same builder as task #42's `cap_corpus`) proves `oob_compare_verdict.py`
+   correctly recognizes its own real target shape — including the classic "wrong sizeof" bug
+   (comparing `sizeof(b)` bytes when `a` is the smaller buffer) — and correctly abstains on the
+   two shapes that dominate real code (a non-constant extent, an operand whose capacity can't be
+   resolved). `oob_compare_controls.py`: 10/10, both copies.
+2. **The real corpus doesn't exercise that shape.** Cross-referencing the overnight-100 run's
+   own real output against the corpus-wide primitive-coverage prescan: 33 of the 100 sampled
+   packages contain a real `memcmp`/`strncmp`/`CRYPTO_memcmp` call, 31 analyzed, **zero** real
+   candidates. Root-cause breakdown of the 48 real primitive occurrences (`study/
+   oob_compare_survey/`, both the survey document and the raw per-package JSONL are committed):
+   24 non-constant/variable extent, 15 string-literal operand, 7 `sizeof()` on something other
+   than a bare compared-operand name, 2 other. The single closest near-miss (`@fugood/
+   whisper.node`'s `memcmp(data, vorbis, 6)` inside its own bundled `stb_vorbis.c`) was manually
+   cross-verified against the package's own real `cpp_facts.json`: `data` is a genuinely
+   unresolvable `uint8*` parameter, `vorbis` a real `uint8[6]` local whose capacity exactly
+   matches the literal extent — a sound, conservative abstention on a real security-relevant
+   call site (stb_vorbis has its own CVE history), not a missed detection.
+
+**Conclusion**: the detector is real and sound; the bug shape it targets is genuinely rare in
+this corpus's own idiomatic C/C++. OOB_COMPARE stays gated — `staged_enablement.py`'s
+`ENABLED_PROPERTIES` does not include `oob_compare_candidates` (task #40) — pending either a
+real corpus positive or a wider run changing this picture. This is a disclosed, evidence-backed
+"not yet", not a permanent retirement of a broken detector.
