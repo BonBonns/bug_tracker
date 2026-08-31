@@ -36,7 +36,14 @@ def make_full_work_root(root):
     (work / "build_config.json").write_text(json.dumps({"exception_configuration": "disabled"}))
     (work / "r04_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
     (work / "r05_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
-    (work / "r06_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
+    # OVERNIGHT-DIAGNOSTIC-100: r06_out.json replaced by the five newly-wired scanners' own
+    # output files -- see BUNDLED_RELATIVE_PATHS's own comment for why r06 is absent here.
+    (work / "lock_balance_out.json").write_text(json.dumps({"findings": []}))
+    (work / "protected_field_out.json").write_text(json.dumps({"findings": []}))
+    (work / "oob_write_out.json").write_text(json.dumps({"candidates": []}))
+    (work / "oob_index_write_out.json").write_text(json.dumps({"candidates": []}))
+    (work / "oob_read_out.json").write_text(json.dumps({"candidates": []}))
+    (work / "oob_compare_out.json").write_text(json.dumps({"candidates": []}))
     (work / "merged.json").write_text(json.dumps({
         "cross_language_bindings": {"idiom": "napi-exports-set", "registrations": [{"a": 1}],
                                      "linked_calls": [], "unlinked_calls": []}
@@ -61,7 +68,7 @@ with tempfile.TemporaryDirectory() as td:
     ok &= check("bundle path returned, file exists", path is not None and os.path.isfile(path))
     ok &= check("atomic tmp file left no trace after rename",
                 not os.path.exists(os.path.join(bundle_dir, ".some-pkg@1.2.3.tar.gz.tmp")))
-    ok &= check("all 6 real facts included", set(BUNDLED_RELATIVE_PATHS) <= set(manifest["included"]),
+    ok &= check("all real facts included", set(BUNDLED_RELATIVE_PATHS) <= set(manifest["included"]),
                 f"included={manifest['included']}")
     ok &= check("cross_language_bindings.json included (from merged.json)",
                 "cross_language_bindings.json" in manifest["included"])
@@ -138,16 +145,21 @@ with tempfile.TemporaryDirectory() as td:
                                             pipeline_status="ANALYZED")
     ok &= check("schema_version recorded", manifest.get("schema_version") == SCHEMA_VERSION)
     ok &= check("tarball_sha256 passed through", manifest.get("tarball_sha256") == fake_tarball_hash)
-    ok &= check("analyzer_hashes has all 4 real analyzer files, none None",
+    ok &= check("analyzer_hashes has all real analyzer files this diagnostic run drives, none None",
                 set(manifest.get("analyzer_hashes", {})) == {
-                    "resource_guard_verdict_r06.py", "extract_build_config.py",
-                    "run_pipeline_one_r06.py", "evidence_bundle.py"}
+                    "resource_guard_verdict_r04.py", "resource_guard_verdict_r05.py",
+                    "extract_build_config.py", "evidence_bundle.py", "provenance.py",
+                    "lock_balance_verdict.py", "protected_field_verdict.py",
+                    "oob_write_verdict.py", "oob_index_write_verdict.py",
+                    "oob_read_verdict.py", "oob_compare_verdict.py"}
                 and all(manifest["analyzer_hashes"].values()),
                 str(manifest.get("analyzer_hashes")))
     ok &= check("artifact_hashes has a real sha256 for every flat included file",
                 all(manifest["artifact_hashes"].get(rel) for rel in
                     ("cpp_facts.json", "js_facts.json", "build_config.json",
-                     "r04_out.json", "r05_out.json", "r06_out.json")))
+                     "r04_out.json", "r05_out.json", "lock_balance_out.json",
+                     "protected_field_out.json", "oob_write_out.json",
+                     "oob_index_write_out.json", "oob_read_out.json", "oob_compare_out.json")))
     ok &= check("artifact_hashes for cpp_raw/ is a per-inner-file dict",
                 isinstance(manifest["artifact_hashes"].get("cpp_raw"), dict)
                 and "methods.tsv" in manifest["artifact_hashes"]["cpp_raw"])

@@ -88,13 +88,22 @@ import tarfile
 # Real per-package facts this bundle preserves -- see module docstring for why each is (or
 # is not) included. Paths are relative to work_root/work/ except cpp_raw/ which is a directory.
 BUNDLED_RELATIVE_PATHS = (
-    "cpp_raw",             # directory of raw TSVs -- required as-is by R04/R05/R06
+    "cpp_raw",             # directory of raw TSVs -- required as-is by R04/R05
     "cpp_facts.json",      # normalized C++ facts -- required by link_napi_facts.py (FIX01I)
     "js_facts.json",       # normalized JS facts -- required by link_napi_facts.py (FIX01I)
     "build_config.json",
     "r04_out.json",
     "r05_out.json",
-    "r06_out.json",
+    # OVERNIGHT-DIAGNOSTIC-100: adapted from the original R06 list (dropped r06_out.json --
+    # #41 has not merged R06/FIX01I into the driven r04/r05 lineage, so this diagnostic run
+    # does not produce it; see PRECISION_FIX_NOT_INTEGRATED in run_diagnostic_100.py) and added
+    # the five newly-wired diagnostic-only property scanners' own raw output files.
+    "lock_balance_out.json",
+    "protected_field_out.json",
+    "oob_write_out.json",
+    "oob_index_write_out.json",
+    "oob_read_out.json",
+    "oob_compare_out.json",
 )
 
 SCHEMA_VERSION = "evidence_bundle/2"
@@ -102,12 +111,27 @@ SCHEMA_VERSION = "evidence_bundle/2"
 # The real analyzer files whose content determines what evidence THIS bundle actually
 # contains -- hashed at bundle-write time so a downstream consumer can detect drift against
 # whichever revision it currently has checked out. Paths relative to this file's own directory.
+# OVERNIGHT-DIAGNOSTIC-100: adapted from the original R06 list to name the analyzers THIS
+# diagnostic run actually drives. resource_guard_verdict_r06.py is deliberately absent -- #41
+# (merging R06/FIX01I into the driven r04/r05 lineage) is not complete, so this run uses
+# resource_guard_verdict_r04.py/_r05.py (the already-driven, already-gated lineage) instead,
+# labeling Resource Guard PRECISION_FIX_NOT_INTEGRATED (see run_diagnostic_100.py) rather than
+# silently pulling in unintegrated logic. The five newly-wired property scanners are added so a
+# downstream consumer can detect drift against any of them too.
 _HERE = os.path.dirname(os.path.abspath(__file__))
+_TOOLS_DIR = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tools"
 ANALYZER_FILES = {
-    "resource_guard_verdict_r06.py": os.path.join(os.path.dirname(_HERE), "resource_guard_verdict_r06.py"),
+    "resource_guard_verdict_r04.py": os.path.join(os.path.dirname(_HERE), "resource_guard_verdict_r04.py"),
+    "resource_guard_verdict_r05.py": os.path.join(os.path.dirname(_HERE), "resource_guard_verdict_r05.py"),
     "extract_build_config.py": os.path.join(_HERE, "extract_build_config.py"),
-    "run_pipeline_one_r06.py": os.path.join(_HERE, "run_pipeline_one_r06.py"),
     "evidence_bundle.py": os.path.join(_HERE, "evidence_bundle.py"),
+    "provenance.py": os.path.join(os.path.dirname(_HERE), "provenance.py"),
+    "lock_balance_verdict.py": os.path.join(os.path.dirname(_HERE), "lock_balance_verdict.py"),
+    "protected_field_verdict.py": os.path.join(os.path.dirname(_HERE), "protected_field_verdict.py"),
+    "oob_write_verdict.py": os.path.join(_TOOLS_DIR, "oob_write_verdict.py"),
+    "oob_index_write_verdict.py": os.path.join(_TOOLS_DIR, "oob_index_write_verdict.py"),
+    "oob_read_verdict.py": os.path.join(_TOOLS_DIR, "oob_read_verdict.py"),
+    "oob_compare_verdict.py": os.path.join(_TOOLS_DIR, "oob_compare_verdict.py"),
 }
 
 
