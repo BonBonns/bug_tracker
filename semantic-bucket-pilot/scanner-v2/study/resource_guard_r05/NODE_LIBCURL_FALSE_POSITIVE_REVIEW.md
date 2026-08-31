@@ -102,6 +102,84 @@ wait until it finishes, so the two expensive jobs never compete for the same con
 - Rerun R04/R05 verdict generation only, over already-saved facts (no CPG rebuild).
 - Re-review all resulting findings.
 
+## R06 addendum: the 40% flip rate needed target-scoping verification -- it did NOT hold up unmodified
+
+Direct review flagged a real, un-checked risk in the section above: a single binding.gyp
+can define MULTIPLE gyp targets, each with its OWN, independently-resolved exception
+configuration (per-target cflags/cflags_cc/defines, OS-`conditions` branches, or
+per-target `dependencies`) -- the whole-package `classify_from_tarball()` fix above
+(Defect 2) still does FLAT, package-wide text matching, which can silently MERGE two
+genuinely different targets' evidence into one misleading verdict, or attribute evidence
+to a target that does not even compile the file the finding is actually in.
+
+**Fixed** (`extract_build_config.py`): `parse_gyp_targets()` -- a real, quote-and-comment-
+aware, bracket-matching parser (NOT another flat regex) that finds each real gyp target's
+own `{...}` block, its own `sources` list, and a real `target_defaults` block if present
+-- `classify_target_aware()` (per-target classification, scoped to each target's own real
+block span union `target_defaults`), and `resolve_build_config_for_file()` (the real,
+required entry point: given a finding's own source file, resolves EXACTLY the target that
+compiles it; zero or conflicting matches yield `BUILD_CONFIGURATION_UNRESOLVED`/
+`"conflict"`, NEVER a package-wide guess).
+
+A genuine parsing bug was found and fixed WHILE building this against real corpus text,
+not merely the synthetic fixtures: node-libcurl's own real binding.gyp contains a `#`
+comment reading "...because it doesn't start with a -..." -- a real, single, UNBALANCED
+apostrophe. Without skipping `#`-to-end-of-line comments FIRST, the quote-aware bracket
+matcher treated that apostrophe as opening a real string and silently consumed real gyp
+structure (including the actual closing bracket) scanning for a matching quote that was
+never there. Fixed via `_skip_gyp_comment()`, checked before string detection in every
+scanning loop. Caught by the real end-to-end node-libcurl regression check in
+`tests/test_target_scoping.py`, not by any synthetic fixture -- exactly the value of
+testing against real, not hand-typed, corpus text.
+
+**Five real, adversarial fixtures** (`tests/test_target_scoping.py`, all PASS): two
+targets with genuinely different real configs (one `enabled`, one `disabled`, each real
+source file resolves to its OWN target's own verdict, never the other's); a `cflags!`
+removal in an UNRELATED target correctly does NOT contaminate the real target that
+actually compiles the finding's file; a real OS-`conditions` branch (both branches
+statically visible, cannot resolve which OS applies) correctly yields `conflict`, never a
+guess; a removal immediately followed by a target-level re-add within the SAME target
+correctly yields `conflict` (both real signals present in the same scope); real
+`node_addon_api_except` vs. bare `node_addon_api` dependency correctly distinguishes
+`enabled` from `unresolved` (bare `node_addon_api` is deliberately NOT treated as disable
+evidence on its own -- a real, disclosed, conservative choice, not a proven-safe default).
+
+**The 40% flip-rate number from section 3 above needed re-verification, not blind
+trust, and it partially changed shape under target-aware resolution:**
+re-ran the SAME 20-package sample through `classify_target_aware()`. Of 19 packages with a
+real binding.gyp, **17 have exactly ONE real gyp target** -- for those, target-aware and
+package-wide resolution are, by construction, identical, so the original 40%-flip finding
+stands UNCHANGED for the single-target majority. But real, concrete divergence was found
+in the remaining two:
+
+- **`node-spdlog@0.1.5`**: the whole-package flat classifier reports `conflict` (both
+  disable and enable evidence found SOMEWHERE in the tarball's matched config files), but
+  its one real gyp target resolves CLEANLY to `enabled` on its own real scope -- the
+  package-wide "conflict" was itself a package-wide-merge artifact, not a genuine
+  ambiguity in the target that actually compiles the code. The section-3 table above
+  listed this package as "unaffected (SAME)" under the flat-vs-flat comparison; it is
+  NOT actually a safe, resolved case once scoped to the real compiling target.
+- **`node-snap7-micro-client@0.1.0`**: TWO real gyp targets
+  (`node_snap7_micro_client`, `snap7-micro-client`) with GENUINELY DIFFERENT real
+  configs (`enabled`, `unresolved`) -- the flat package-wide verdict (`conflict` before
+  this fix, `enabled` after Defect 2 alone) is only correct for whichever target
+  actually compiles the finding's own file, and WRONG (silently swallowing a real
+  `unresolved` target) for the other. Confirms, concretely, the exact real risk direct
+  review predicted, not merely a theoretical one.
+
+**Conclusion, stated precisely, not oversold:** the underlying Defect 2 fix (gyp
+`!`-list-removal polarity, `node_addon_api_except`) is real and correct at the SINGLE-
+TARGET-SCOPE level, confirmed by both the synthetic fixtures and the real regression
+cases. The 40% flip-rate number is NOT retracted, but it is NOT a corpus-wide-final
+statistic either: it was computed via flat, package-wide comparison, real multi-target
+packages exist in the corpus (2 of 19 real, gyp-based packages in this small sample
+alone), and package-wide merging is confirmed, concretely, to sometimes disagree with
+the real, correctly-scoped, per-target answer. The full corpus-wide re-extraction
+(deferred until R05 finishes, per the agreed plan) MUST use `resolve_build_config_for_
+file()` against each finding's own real source file, never the flat, package-wide
+`classify_from_tarball()` result, and any resulting corpus statistic must be reported
+target-resolved, not re-quoted from this preliminary flat-comparison number.
+
 ## Separate, NOT combined with this false positive: a real candidate needing its own review
 
 `Easy::ReadFunction`'s own downstream code: `returnValue` (the JS callback's own claimed
