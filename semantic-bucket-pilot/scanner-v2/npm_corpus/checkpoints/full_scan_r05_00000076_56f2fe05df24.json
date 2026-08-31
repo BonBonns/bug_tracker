@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"node-llama-cpp\", \"version\": \"3.20.0\", \"stages\": {\"download\": {\"seconds\": 0.6114015579223633}, \"extract\": {\"seconds\": 0.37271714210510254}, \"header_staging\": {\"seconds\": 0.18354177474975586, \"n_staged\": 1}, \"c2cpg\": {\"seconds\": 7.48613715171814, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 3.582721710205078, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 13.383677959442139, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 9.942720651626587, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 1.7186918258666992}, \"js_normalize\": {\"seconds\": 0.0385439395904541}, \"polyglot_link\": {\"seconds\": 1.1008930206298828}, \"r04_scan\": {\"seconds\": 0.1525421142578125}, \"r05_scan\": {\"seconds\": 0.16317152976989746}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": \"node-addon-api\", \"declared_range\": \"^8.9.1\", \"resolved_version\": \"8.9.2\", \"staged\": true, \"note\": \"range '^8.9.1' resolved to 8.9.2 (highest satisfying release)\"}], \"cross_language_bindings\": {\"n_registrations\": 8, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 177, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 177}, \"r04_findings\": [], \"r05_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 177, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 177, \"R05_RECOVERY_CANDIDATE\": 177, \"R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED\": 177}, \"r05_findings\": [], \"total_seconds\": 38.754833459854126}",
+  "name": "full_scan_r05",
+  "row_count": 76,
+  "sha256": "56f2fe05df245e89573d1af297f4da27f320961b841c1bb073d79bdde5ae3f48",
+  "snapshot_path": "checkpoints/full_scan_r05_00000076_56f2fe05df24.tsv",
+  "snapshot_time_utc": "2026-08-31T00:18:46Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
