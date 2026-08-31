@@ -85,9 +85,25 @@ se.enforce_staged_enablement(rec4)
 ck("enabled property + resolved (weaker) reachability tier + formula False: STAYS False "
    "(this module never turns False into True)",
    rec4["lock_balance_findings"][0]["reportable"] is False)
-ck("a weaker-but-resolved tier (TIER_REGISTERED_NOT_JS_CALLED, not just TIER_JS_CALL_PROVEN) "
-   "still clears the reachability gate -- STAGE_ENABLED, not REACHABILITY_REQUIRED",
+ck("TIER_REGISTERED_NOT_JS_CALLED (real export registration exists, even though this "
+   "package's own JS doesn't call it) DOES clear the reachability gate -- it is real, "
+   "disclosed export-reachability evidence, in _EXTERNALLY_REACHABLE_TIERS",
    rec4["lock_balance_findings"][0]["stage_status"] == "STAGE_ENABLED")
+
+# --- reachability gate CORRECTION: TIER_INTERNAL_UNREGISTERED must NOT clear the gate ---
+# (found during review) it proves only that the native function exists and was examined -- it
+# establishes nothing about whether JavaScript can ever reach it. Must stay diagnostic.
+rec4b = {"oob_read_candidates": [mk(True, "TIER_INTERNAL_UNREGISTERED")]}
+se.enforce_staged_enablement(rec4b)
+ck("*** REACHABILITY GATE CORRECTION: TIER_INTERNAL_UNREGISTERED does NOT clear the gate *** "
+   "-- forced non-reportable even though its own property is enabled and the formula said True",
+   rec4b["oob_read_candidates"][0]["reportable"] is False)
+ck("TIER_INTERNAL_UNREGISTERED: stage_status is REACHABILITY_REQUIRED_FOR_REPORTING, not "
+   "STAGE_ENABLED -- an internal, unregistered native function is not proven JS-reachable",
+   rec4b["oob_read_candidates"][0]["stage_status"] == "REACHABILITY_REQUIRED_FOR_REPORTING")
+ck("TIER_JS_CALL_PROVEN clears the gate (the strongest tier, a real proven JS call)",
+   se.enforce_staged_enablement({"oob_read_candidates": [mk(True, "TIER_JS_CALL_PROVEN")]}
+       )["oob_read_candidates"][0]["stage_status"] == "STAGE_ENABLED")
 
 # --- r04_findings/r05_findings never touched ---
 rec5 = {"r04_findings": [mk(True, "REACHABILITY_UNRESOLVED")],
@@ -138,17 +154,13 @@ if os.path.isfile(BUNDLE):
         # re2's real oob_write_out.json DOES have 2 real candidates (StrErrorInternal,
         # TrySymbolizeWithLimit, both inside vendored abseil-cpp). Now that task #38 has
         # enabled oob_write_candidates, both clear the property-level gate; their own real
-        # reachability_tier.py classification is TIER_INTERNAL_UNREGISTERED (the WEAKEST real
-        # tier -- neither function is registered as a JS-callable export under any recognized
-        # idiom) -- confirmed empirically, not assumed. Per task #32's own established design
-        # (a real, resolved tier of ANY strength clears the reachability gate -- the floor is
-        # "classified", not "strongest tier only", see check_reachability_tier.py's own
-        # TIER_REGISTERED_NOT_JS_CALLED control), this still reaches STAGE_ENABLED here. That
-        # design point is disclosed, not silently relied on: a real internal C++ helper deep
-        # inside a vendored dependency, with no proof it is ever JS-reachable at all, becoming
-        # reportable under this floor is a genuine, foreseeable consequence of the existing
-        # reachability-gate threshold -- worth a human's attention when this reaches a live,
-        # non-diagnostic run, not something this test papers over.
+        # reachability_tier.py classification is TIER_INTERNAL_UNREGISTERED -- confirmed
+        # empirically, not assumed. Per the reachability-gate CORRECTION (found during review):
+        # TIER_INTERNAL_UNREGISTERED proves the native function exists, never that JavaScript
+        # can reach it -- it must NOT clear the reachability gate, so these two real candidates
+        # correctly stay REACHABILITY_REQUIRED_FOR_REPORTING (diagnostic-only), not
+        # STAGE_ENABLED, even though their own property (OOB_WRITE) is enabled. They remain
+        # fully visible in the record (never dropped), just correctly non-reportable.
         n_write = len(record["oob_write_candidates"])
         ck(f"real re2 end-to-end (OOB_WRITE, ENABLED task #38): {n_write} real candidates all "
            "got a real stage_status, none silently skipped",
@@ -159,10 +171,12 @@ if os.path.isfile(BUNDLE):
            "export under any idiom this module recognizes)",
            n_write == 2 and all(f["reachability_status"] == "TIER_INTERNAL_UNREGISTERED"
                                  for f in record["oob_write_candidates"]))
-        ck("real re2 end-to-end (OOB_WRITE): reaches STAGE_ENABLED under the seeded baseline "
-           "(scanner_candidate=True) -- confirms the weakest real reachability tier still "
-           "clears the gate for OOB_WRITE too, consistent with task #32's own established floor",
-           all(f["stage_status"] == "STAGE_ENABLED" for f in record["oob_write_candidates"]))
+        ck("real re2 end-to-end (OOB_WRITE): correctly stays REACHABILITY_REQUIRED_FOR_REPORTING "
+           "(diagnostic-only), NOT STAGE_ENABLED -- TIER_INTERNAL_UNREGISTERED alone must never "
+           "make an internal vendored helper reportable, even though its own property is enabled",
+           all(f["stage_status"] == "REACHABILITY_REQUIRED_FOR_REPORTING"
+               and f["reportable"] is False
+               for f in record["oob_write_candidates"]))
 else:
     print("SKIP: re2's overnight-diagnostic-100 evidence bundle not present -- real end-to-end "
           "check skipped, all synthetic/unit checks above still ran")

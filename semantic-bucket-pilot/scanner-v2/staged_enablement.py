@@ -35,14 +35,32 @@ separate lineage/gate (task #41, not yet merged); this module has no opinion on 
 TWO REAL GATES, both required for one of the five staged properties' own finding to stay
 reportable:
   1. The property itself is in `ENABLED_PROPERTIES`.
-  2. The finding's own `reachability_status` (from `reachability_tier.py`, task #32) is present
-     and is NOT `REACHABILITY_UNRESOLVED` -- "the property is enabled" does not mean "every
-     finding this property ever emits is automatically a demonstrated npm-package
-     vulnerability" (task #36's own explicit instruction). A finding whose reachability was
-     never established stays non-reportable regardless of which stage its own property has
-     reached -- with a DISTINCT diagnostic label (`REACHABILITY_REQUIRED_FOR_REPORTING`) from
-     the property-level gate (`STAGE_NOT_ENABLED`), so the two reasons a finding stayed
-     non-reportable are never conflated into one.
+  2. The finding's own `reachability_status` (from `reachability_tier.py`, task #32) is one of
+     `_EXTERNALLY_REACHABLE_TIERS` -- real evidence of export, callback, helper, or module-load
+     reachability from JS, not merely that the native function exists. "The property is enabled"
+     does not mean "every finding this property ever emits is automatically a demonstrated
+     npm-package vulnerability" (task #36's own explicit instruction).
+
+     CORRECTION (found during review, applied here): this gate originally accepted ANY
+     resolved, non-`REACHABILITY_UNRESOLVED` tier, including `TIER_INTERNAL_UNREGISTERED`. That
+     was wrong for a JS-to-C/C++ reachability study: `TIER_INTERNAL_UNREGISTERED` proves only
+     that the native function exists and was examined -- it establishes NOTHING about whether
+     JavaScript can ever reach it (the opposite of `TIER_REGISTERED_NOT_JS_CALLED`, which at
+     least proves a real export registration exists, or `TIER_JS_CALL_PROVEN`, which proves an
+     actual real call). Confirmed as a real, not theoretical, consequence: re2's own real
+     OOB_WRITE candidates (`StrErrorInternal`, `TrySymbolizeWithLimit`, both internal helpers
+     deep inside vendored abseil-cpp) previously cleared this gate on exactly this tier. Now
+     `_EXTERNALLY_REACHABLE_TIERS` is an explicit ALLOWLIST (`TIER_JS_CALL_PROVEN`,
+     `TIER_REGISTERED_NOT_JS_CALLED` -- the two tiers that actually establish export/callback/
+     helper/module-load reachability), not a blocklist of what to exclude -- fails closed on any
+     tier this module doesn't yet know about, not just the ones named today.
+
+     A finding whose reachability was never established this way stays non-reportable
+     regardless of which stage its own property has reached -- with a DISTINCT diagnostic label
+     (`REACHABILITY_REQUIRED_FOR_REPORTING`) from the property-level gate (`STAGE_NOT_ENABLED`),
+     so the two reasons a finding stayed non-reportable are never conflated into one.
+     `TIER_INTERNAL_UNREGISTERED` findings remain fully visible in the record (never dropped),
+     just correctly diagnostic-only rather than reportable.
 
 Never turns a real `False` into `True` -- this module only ever narrows what
 `provenance.enrich_record()`'s own formula (task #35) already computed, exactly like
@@ -66,19 +84,25 @@ ENABLED_PROPERTIES = frozenset({
 _STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                 "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-_UNRESOLVED_REACHABILITY = {None, "REACHABILITY_UNRESOLVED"}
+# ALLOWLIST, not a blocklist (fails closed on any future/unrecognized tier): only these two
+# reachability_tier.py tiers establish real export/callback/helper/module-load evidence that
+# JavaScript can reach the native function at all. TIER_INTERNAL_UNREGISTERED and
+# REACHABILITY_UNRESOLVED (and anything else) do NOT clear this gate -- see module docstring.
+_EXTERNALLY_REACHABLE_TIERS = {"TIER_JS_CALL_PROVEN", "TIER_REGISTERED_NOT_JS_CALLED"}
 
 
 def enforce_staged_enablement(record):
     """Applied AFTER `provenance.enrich_record()` (and, when reachability has been computed,
     `reachability_tier.classify_record_reachability()`) on a REAL, non-diagnostic-only
     corpus-run record. For each of the five staged property keys (never `r04_findings`/
-    `r05_findings`):
+    `r05_findings`/`r06_findings`):
       - not in `ENABLED_PROPERTIES`: forces `reportable=False`, `stage_status=
         'STAGE_NOT_ENABLED'`.
-      - in `ENABLED_PROPERTIES` but `reachability_status` is unresolved/absent: forces
-        `reportable=False`, `stage_status='REACHABILITY_REQUIRED_FOR_REPORTING'`.
-      - in `ENABLED_PROPERTIES` with a real, resolved reachability tier attached: `reportable`
+      - in `ENABLED_PROPERTIES` but `reachability_status` is not one of
+        `_EXTERNALLY_REACHABLE_TIERS` (includes `TIER_INTERNAL_UNREGISTERED`,
+        `REACHABILITY_UNRESOLVED`, and absent): forces `reportable=False`,
+        `stage_status='REACHABILITY_REQUIRED_FOR_REPORTING'`.
+      - in `ENABLED_PROPERTIES` with a real, externally-reachable tier attached: `reportable`
         is left exactly as `provenance.py`'s own formula computed -- never flipped `False` ->
         `True`; `stage_status='STAGE_ENABLED'`.
     Returns `record` (mutated in place)."""
@@ -90,7 +114,7 @@ def enforce_staged_enablement(record):
                     f["reportable"] = False
                 f["stage_status"] = "STAGE_NOT_ENABLED"
                 continue
-            if f.get("reachability_status") in _UNRESOLVED_REACHABILITY:
+            if f.get("reachability_status") not in _EXTERNALLY_REACHABLE_TIERS:
                 if f.get("reportable"):
                     f["reportable"] = False
                 f["stage_status"] = "REACHABILITY_REQUIRED_FOR_REPORTING"
