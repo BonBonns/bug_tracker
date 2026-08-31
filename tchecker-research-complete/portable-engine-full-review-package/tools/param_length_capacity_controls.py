@@ -77,6 +77,31 @@ with tempfile.TemporaryDirectory() as td:
            c.get('length_param_name') == 'n' for c in v_idx))
     ck("2. Tremor PATCHED: the same site is suppressed (real, correctly-matched o+j<n guard)",
        not any(c.get('array') == 'a' and c.get('index_expr') == 'o+j' for c in p_idx))
+    # Phase 2 (real CFG dominance + loop-iteration reasoning, task #44 second review round):
+    # the SECOND real vulnerable sink, vorbis_book_decodev_add (a[i++]), is now also correctly
+    # discriminated -- plain textual guard existence could not (the outer for(i=0;i<n;) is
+    # unchanged between vuln and patched); real dominance + loop-header-containment can, because
+    # the real fix moves the check to the INNER loop's own header (re-evaluated every iteration)
+    # instead of only the outer loop's (checked once per outer pass).
+    ck("1b. Tremor VULN: SECOND real sink also found (a[i++] in vorbis_book_decodev_add, length_param=n)",
+       any(c.get('array') == 'a' and c.get('index_expr') == 'i++' and
+           c.get('length_param_name') == 'n' for c in v_idx))
+    ck("2b. Tremor PATCHED: the second sink is ALSO suppressed (real CFG dominance + "
+       "loop-iteration-safety proof on the inner loop's own new guard -- not textual matching, "
+       "which cannot distinguish this revision from the vulnerable one at all)",
+       not any(c.get('array') == 'a' and c.get('index_expr') == 'i++' for c in p_idx))
+    # decodevv_add: treated explicitly, per direct instruction -- its real vulnerability is on a
+    # NESTED/2D index (a[chptr++][i], the second dimension), entirely outside this producer's
+    # single-level indexAccess model. Verified: NO ad hoc flattening was added, so it correctly
+    # produces no candidate for its own real vulnerable line at all (an honest, disclosed
+    # UNSUPPORTED verdict via silent abstention, not a false claim of either safety or detection).
+    decodevv_fid = [f['id'] for f in json.load(open(vuln_facts))['functions']
+                    if f['name'] == 'vorbis_book_decodevv_add'][0]
+    ck("decodevv_add: real 2D vulnerability (a[chptr++][i]) correctly produces NO candidate -- "
+       "no ad hoc flattening rule was added; this is an explicit, disclosed unsupported case, "
+       "not a false negative introduced by this phase",
+       not any(c.get('function_id') == decodevv_fid for c in v_idx))
+
     ck("dedup: OOB_WRITE (memcpy-surface) never ALSO fires on this real site (VULN)",
        len(v_write) == 0)
     ck("dedup: OOB_WRITE (memcpy-surface) never ALSO fires on this real site (PATCHED)",

@@ -24,6 +24,7 @@ Never emits VULNERABLE; only CANDIDATE.
 """
 import json, re, sys
 import param_length_capacity as plc
+from cfg_loop_guard import build_cfg_index, loop_iteration_safe_dominates
 
 ASSERT_NAMES = ('MOZ_ASSERT', 'MOZ_RELEASE_ASSERT', 'assert', 'NS_ASSERTION', 'NS_ABORT_IF_FALSE',
                 'MOZ_DIAGNOSTIC_ASSERT', 'PORT_Assert', 'PR_ASSERT')
@@ -57,6 +58,11 @@ def emit_candidates(prefix):
     calls = d.get('calls', [])
     locals_ = d.get('locals', [])
     call_by_id = {c['id']: c for c in calls}
+    # PARAM-CAP-R01 phase 2 (task #44): real dominator-tree data, built once per file, used
+    # ONLY to CFG-verify PARAM-CAP-R01 guard suppression below -- the pre-existing fixed-array
+    # guard logic (guarded_arrays_by_fn/bounded_idx_by_fn) is untouched, its own established
+    # heuristic tradeoff unchanged.
+    cfg_index = build_cfg_index(d)
     # fixed-array locals -> element count N (opaque element types OK: count is syntactic).
     # Keyed by (declaring function, name), NOT name alone: two different functions in the same
     # file can each declare a same-named local array with a DIFFERENT size (this happens for
@@ -106,22 +112,27 @@ def emit_candidates(prefix):
     # IDENTITY-matched (value_ref.kind=='PARAMETER', value_ref.id==param id -- not text alone)
     # to a real integer parameter, keyed by (function, exact LHS index-expression text). Handles
     # COMPOUND index expressions (`o+j < n`), which the bare-identifier `bounded_idx_by_fn` above
-    # cannot (the real Tremor PATCHED guard is exactly `o+j<n` -- not a bare identifier). This is
-    # a strict SUPERSET of param_length_capacity.py's own
-    # `_names_bounded_by_params_via_comparison` (bare-LHS only, used there purely as EVIDENCE for
-    # identifying which parameter is meant to bound a name -- never as a suppression decision by
-    # itself: a name being referenced in SOME comparison somewhere in the function is legitimate
-    # evidence of intended pairing, but is NOT sound evidence that a given write site is actually
-    # gated by it, since the comparison may not control-flow-dominate that write. Confirmed
-    # concretely on the real Tremor `vorbis_book_decodev_add`: `for(i=0;i<n;)` exists in BOTH the
-    # vulnerable and patched source (unchanged by the fix), so treating it as a suppression
-    # signal would suppress the real vulnerable candidate too. Guard analysis in THIS producer
-    # remains intraprocedural/heuristic, not dominator-based -- the same documented tradeoff
-    # already in force for the fixed-array case (MOZ-OOB-R01-PREREG.md's own OOB-INDEX-R01 notes:
-    # "guard analysis is intraprocedural/heuristic, not dominator-based"), so `a[i++]` in
-    # `vorbis_book_decodev_add` correctly ABSTAINS in both vuln and patched here -- a disclosed,
-    # pre-existing-shaped limitation, not a new unsoundness introduced by PARAM-CAP-R01.
-    param_guarded_idx_by_fn = {}   # function_id -> {(idx_expr_text) -> set(param_id)}
+    # cannot (the real Tremor PATCHED guard is exactly `o+j<n` -- not a bare identifier).
+    #
+    # TEXTUAL EXISTENCE ALONE IS NOT SOUND (found and fixed in a second #44 phase, per direct
+    # review): a name being referenced in SOME `<`/`<=` comparison ANYWHERE in the function is
+    # necessary but not sufficient evidence that a given write is actually gated by it -- the
+    # comparison may not control-flow-DOMINATE the write on every execution. Confirmed concretely
+    # on the real Tremor `vorbis_book_decodev_add`: `for(i=0;i<n;)` exists, UNCHANGED, in BOTH the
+    # vulnerable and patched source -- it genuinely DOMINATES the write (nothing bypasses it
+    # structurally), yet the vulnerability is real: the write sits inside a NESTED inner loop that
+    # can re-execute many times per outer iteration without ever re-passing through the outer
+    # check. Plain dominance cannot see this; see cfg_loop_guard.py's
+    # `loop_iteration_safe_dominates()` (real dominator-tree machinery, reused from
+    # `allocation_extent.py`/`call_context_guard.py`, not a new algorithm) for the fix: a guard
+    # must dominate the write AND be at-or-inside the write's own innermost enclosing loop (so it
+    # is genuinely re-evaluated on every iteration, not checked once from outside and bypassed by
+    # the loop's own back-edge). Verified directly: the real fix's own new guard
+    # (`for (j=0;i<n && j<book->dim;)`, evaluated as part of the INNER loop's own header) passes
+    # this check; the pre-existing OUTER `i<n` does not, in EITHER file. This entry now stores the
+    # comparison's OWN node id (not just the matched parameter id) so the suppression check below
+    # can run this CFG proof, not just an existence check.
+    param_guarded_idx_by_fn = {}   # function_id -> {(idx_expr_text) -> set((param_id, cmp_call_id))}
     for c in calls:
         if c.get('name') not in CMP:
             continue
@@ -143,7 +154,8 @@ def emit_candidates(prefix):
                 if rvr.get('kind') == 'PARAMETER':
                     lhs_text = re.sub(r'\s+', '', (lhs.get('value_ref') or {}).get('code') or '')
                     if lhs_text:
-                        param_guarded_idx_by_fn.setdefault(fn, {}).setdefault(lhs_text, set()).add(rvr.get('id'))
+                        param_guarded_idx_by_fn.setdefault(fn, {}).setdefault(lhs_text, set()).add(
+                            (rvr.get('id'), c.get('id')))
 
     # find indexed STORES: indirectIndexAccess/indexAccess whose base is a fixed-array local,
     # used as a write destination (its result is assigned, possibly after a field access).
@@ -210,7 +222,25 @@ def emit_candidates(prefix):
         # `a[i++]`); a compound expression (`o+j`) is matched verbatim, unchanged.
         _idx_incdec = re.fullmatch(r'(?:\+\+|--)?([A-Za-z_]\w*)(?:\+\+|--)?', idx.strip())
         idx_guard_key = _idx_incdec.group(1) if _idx_incdec else re.sub(r'\s+', '', idx)
-        if L['id'] in param_guarded_idx_by_fn.get(fn, {}).get(idx_guard_key, set()):
+        # PARAM-CAP-R01 phase 2 (task #44): TEXTUAL match against L is necessary but NOT
+        # sufficient -- require a real CFG proof that the matched guard protects THIS write on
+        # every execution (dominance + loop-iteration-safety), not merely that a same-named
+        # comparison exists somewhere in the function. Fails CLOSED toward NOT suppressing (stays
+        # a candidate) whenever CFG data for this function/these nodes is missing -- the opposite
+        # fail-direction from the pre-existing fixed-array heuristic, deliberately: this is new,
+        # narrower machinery whose whole purpose is to stop crediting unproven guards, so an
+        # inability to prove protection must never silently become a suppression.
+        fg = cfg_index.get(fn)
+        write_node_id = c.get('id')
+        credited = False
+        for pid, cmp_id in param_guarded_idx_by_fn.get(fn, {}).get(idx_guard_key, set()):
+            if pid != L['id']:
+                continue
+            if fg and cmp_id in fg['nodes'] and write_node_id in fg['nodes']:
+                if loop_iteration_safe_dominates(fg, cmp_id, write_node_id):
+                    credited = True
+                    break
+        if credited:
             continue                                        # validly guarded against the real L -> suppress
         key = (fn, arr, idx, 'PARAM_LENGTH_PAIR')
         if key in seen:
