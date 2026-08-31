@@ -346,7 +346,8 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # big package) -- only a real summary; every individual finding still gets its own full
     # provenance block (source_path/content_hash/provenance_hint) attached below, after the
     # scanners run, via provenance.enrich_record.
-    record["provenance_summary"] = {"source_tree_hash": prov_manifest["source_tree_hash"],
+    record["provenance_summary"] = {"tarball_sha256": prov_manifest["tarball_sha256"],
+                                      "source_tree_sha256": prov_manifest["source_tree_sha256"],
                                       "n_files_hashed": len(prov_manifest["files"])}
 
     # NPM-CORPUS-HDR-FIX: stage this package's own declared node-addon-api/nan headers (see

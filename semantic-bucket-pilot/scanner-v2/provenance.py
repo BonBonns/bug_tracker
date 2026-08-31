@@ -13,8 +13,15 @@ must be captured here, at scan time, before any scanner runs.
 
 Captures exactly the six fields specified by direct instruction:
   1. package name and pinned version
-  2. a source-tree hash (sha256 of the ORIGINAL tarball bytes -- the single canonical artifact
-     the extracted tree came from, deterministic, no filesystem-walk-order dependency)
+  2. TWO source-tree-level hashes, kept distinct per direct correction -- a single tarball hash
+     was flagged as not being a real "source-tree hash": `tarball_sha256` (sha256 of the
+     original, compressed tarball bytes -- a real, useful, but non-canonical artifact hash, since
+     it is sensitive to gzip compression parameters, npm packaging metadata, and byte order, not
+     just to the source content) and `source_tree_sha256` (a real, deterministic hash computed
+     ONLY from each file's own normalized relative path and its own content hash, sorted by path
+     -- reproducible regardless of tarball compression, extraction order, or filesystem walk
+     order; two packages with byte-identical source content and layout, even if the tarball
+     itself is re-gzipped differently, get the SAME source_tree_sha256, unlike tarball_sha256)
   3. the exact relative source path of a finding's own site
   4. a content hash of that specific source file (sha256 of its own bytes at scan time)
   5. the finding's own line/node identity (already present in each property's own existing
@@ -26,6 +33,15 @@ Captures exactly the six fields specified by direct instruction:
 Does not itself decide whether a finding IS real, IS attributable, or IS reachable from JS --
 those are #31 (provenance classification) and #32 (reachability) respectively, both explicitly
 downstream of this module's own output.
+
+FAIL-CLOSED ACTIONABILITY (direct correction): a finding whose own node identity cannot be
+resolved to a real source_path + content_hash is NEVER treated as equivalent to a resolved one.
+Every enriched finding carries `provenance["resolved"]` (bool) and a mirrored top-level
+`finding["actionable"]` flag -- False whenever resolution failed for any reason. Such a finding
+may still be RETAINED for diagnostic purposes (its own real classification/reason fields are
+never deleted), but MUST NOT be reported, published, or counted as a demonstrated vulnerability
+while `actionable` is False. A caller building any future report/publish step MUST filter on
+this field explicitly -- this module does not do that filtering itself, only marks it.
 """
 import base64
 import hashlib
@@ -64,15 +80,34 @@ def classify_vendored_hint(relpath: str) -> str:
     return "PACKAGE_OWNED_HINT"
 
 
-def build_source_manifest(pkg_dir: str, tarball_bytes: bytes, pkg_name: str, version: str) -> dict:
-    """Walks the ALREADY-EXTRACTED package tree (pkg_dir) and returns a manifest with a
-    source-tree hash (of the original tarball, not a re-derived tree walk -- the tarball is the
-    single real artifact everything else was extracted from) plus a per-relative-path record of
-    content hash and a best-effort vendored hint. Call this BEFORE header staging / c2cpg, and
-    before anything under pkg_dir can be modified or deleted -- this is the one point in the
-    pipeline where every real source byte is still present and unmodified.
+def compute_source_tree_sha256(files: dict) -> str:
+    """A REAL, deterministic source-tree hash -- independent of tarball compression, extraction
+    order, or filesystem walk order. Built from each file's own normalized relative path (forward
+    slashes, so this is stable across OSes) and its own already-computed content hash, sorted by
+    path, joined into one canonical blob, then hashed. Files this run could not read (see
+    UNREADABLE_AT_SCAN_TIME below) contribute a fixed sentinel rather than being silently
+    skipped, so a tree missing a readable file hashes differently from one that has it.
     """
-    source_tree_hash = sha256_hex(tarball_bytes)
+    lines = []
+    for relpath in sorted(files.keys()):
+        norm = relpath.replace("\\", "/")
+        content_hash = files[relpath].get("content_hash") or "UNREADABLE"
+        lines.append(f"{norm}\t{content_hash}")
+    blob = "\n".join(lines).encode("utf-8")
+    return sha256_hex(blob)
+
+
+def build_source_manifest(pkg_dir: str, tarball_bytes: bytes, pkg_name: str, version: str) -> dict:
+    """Walks the ALREADY-EXTRACTED package tree (pkg_dir) and returns a manifest with TWO
+    source-tree-level hashes (tarball_sha256 -- the original compressed tarball's own bytes, a
+    real but non-canonical artifact hash; source_tree_sha256 -- a real, deterministic hash of
+    normalized relative paths + content hashes only, reproducible independent of tarball
+    compression/extraction/walk order) plus a per-relative-path record of content hash and a
+    best-effort vendored hint. Call this BEFORE header staging / c2cpg, and before anything
+    under pkg_dir can be modified or deleted -- this is the one point in the pipeline where
+    every real source byte is still present and unmodified.
+    """
+    tarball_sha256 = sha256_hex(tarball_bytes)
     files = {}
     for root, _dirs, filenames in os.walk(pkg_dir):
         for fn in filenames:
@@ -88,10 +123,11 @@ def build_source_manifest(pkg_dir: str, tarball_bytes: bytes, pkg_name: str, ver
             files[relpath] = {"content_hash": sha256_hex(content),
                                "provenance_hint": classify_vendored_hint(relpath)}
     return {
-        "schema": "source-provenance-manifest/0.1",
+        "schema": "source-provenance-manifest/0.2",
         "package_name": pkg_name,
         "version": version,
-        "source_tree_hash": source_tree_hash,
+        "tarball_sha256": tarball_sha256,
+        "source_tree_sha256": compute_source_tree_sha256(files),
         "files": files,
     }
 
@@ -131,6 +167,20 @@ def _relpath_from_absolute_or_raw(raw_file_field: str, pkg_dir: str) -> str:
     return raw_file_field.lstrip("./")
 
 
+def _unresolved(finding: dict, reason: str) -> dict:
+    """Marks a finding's provenance as unresolved, FAIL-CLOSED: source_path/content_hash stay
+    None, provenance_hint names the real reason, provenance["resolved"] and the mirrored
+    top-level finding["actionable"] are both explicitly False. A caller must check "actionable"
+    (or provenance["resolved"]) before ever reporting this finding as a demonstrated
+    vulnerability -- it may still be kept for diagnostic purposes, never silently promoted."""
+    finding["provenance"]["source_path"] = None
+    finding["provenance"]["content_hash"] = None
+    finding["provenance"]["provenance_hint"] = reason
+    finding["provenance"]["resolved"] = False
+    finding["actionable"] = False
+    return finding
+
+
 def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict, pkg_dir: str,
                     id_field_name: str) -> dict:
     """Attaches the six provenance fields to ONE finding/candidate dict, in place, and returns
@@ -139,36 +189,40 @@ def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict
     id_field_name is recorded so a reader can see which of the finding's own existing fields
     was used as the join key (e.g. "method_id" or "function_id") -- never silently ambiguous.
     Fields 5 (line/node identity) are the finding's own PRE-EXISTING fields, untouched here.
+
+    FAIL-CLOSED: finding["actionable"] (mirrored from provenance["resolved"]) is True ONLY when
+    a real source_path AND a real content_hash were both resolved. Any failure mode below sets
+    both False -- an unresolvable finding is never treated as equivalent to a resolved one.
     """
     finding["provenance"] = {
-        "schema": "source-provenance-finding/0.1",
+        "schema": "source-provenance-finding/0.2",
         "package_name": manifest.get("package_name"),
         "version": manifest.get("version"),
-        "source_tree_hash": manifest.get("source_tree_hash"),
+        "tarball_sha256": manifest.get("tarball_sha256"),
+        "source_tree_sha256": manifest.get("source_tree_sha256"),
         "joined_via_field": id_field_name,
     }
     if node_id is None:
-        finding["provenance"]["source_path"] = None
-        finding["provenance"]["content_hash"] = None
-        finding["provenance"]["provenance_hint"] = "UNRESOLVED_NODE_ID"
-        return finding
+        return _unresolved(finding, "UNRESOLVED_NODE_ID")
     raw_file = method_file_map.get(node_id)
     if not raw_file:
-        finding["provenance"]["source_path"] = None
-        finding["provenance"]["content_hash"] = None
-        finding["provenance"]["provenance_hint"] = "FILE_NOT_FOUND_IN_METHODS_TABLE"
-        return finding
+        return _unresolved(finding, "FILE_NOT_FOUND_IN_METHODS_TABLE")
     relpath = _relpath_from_absolute_or_raw(raw_file, pkg_dir)
     finding["provenance"]["source_path"] = relpath
     entry = manifest.get("files", {}).get(relpath)
     if entry is None:
         # a real, disclosed mismatch: the raw-fact file path didn't match anything the manifest
         # walk found -- record it as such rather than silently guessing or dropping the finding.
-        finding["provenance"]["content_hash"] = None
-        finding["provenance"]["provenance_hint"] = "PATH_NOT_IN_MANIFEST"
-        return finding
+        return _unresolved(finding, "PATH_NOT_IN_MANIFEST")
+    if entry.get("content_hash") is None:
+        # the manifest walk found this path but could not read it (UNREADABLE_AT_SCAN_TIME) --
+        # a real path match with no real content hash is still not a resolved finding.
+        finding["provenance"]["provenance_hint"] = entry["provenance_hint"]
+        return _unresolved(finding, "SOURCE_FILE_UNREADABLE_AT_SCAN_TIME")
     finding["provenance"]["content_hash"] = entry["content_hash"]
     finding["provenance"]["provenance_hint"] = entry["provenance_hint"]
+    finding["provenance"]["resolved"] = True
+    finding["actionable"] = True
     return finding
 
 
