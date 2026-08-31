@@ -1057,3 +1057,46 @@ All originally-listed substantive tasks (#31, #32, #33, #41, #42, #44) and enabl
 **#40** (OOB_COMPARE enablement — intentionally NOT done, per #33's own conclusion) and
 **#34** (the full six-property aggregator/494-package run — explicitly gated on direct
 instruction to launch it, not a technical blocker).
+
+## Task #47: reachability-gate correction + six-property aggregator (precursor to #34)
+
+Before treating any run as reportable, a real correctness issue was raised and fixed:
+`staged_enablement.py`'s own reachability gate previously accepted `TIER_INTERNAL_UNREGISTERED`
+as sufficient to clear it. That tier proves only that a native function exists and was
+examined — it establishes NOTHING about whether JavaScript can ever reach it, unlike
+`TIER_REGISTERED_NOT_JS_CALLED` (a real export registration exists) or `TIER_JS_CALL_PROVEN` (a
+real proven call). For a JS-to-C/C++ reachability study this distinction is load-bearing, not
+cosmetic — and it was a real, not theoretical, gap: re2's own real OOB_WRITE candidates
+(`StrErrorInternal`, `TrySymbolizeWithLimit`, internal helpers deep inside vendored abseil-cpp,
+never registered under any JS-binding idiom) had been clearing the gate on exactly this tier.
+
+**Fix**: `_EXTERNALLY_REACHABLE_TIERS` is now an explicit ALLOWLIST (`TIER_JS_CALL_PROVEN`,
+`TIER_REGISTERED_NOT_JS_CALLED` only) rather than a blocklist of what to exclude — fails closed
+on any tier this module doesn't yet recognize, not just the ones named today. This is a shared
+gate applied uniformly across all five staged properties (the underlying reachability claim is
+identical regardless of which property's finding carries it), even though the consequence was
+first observed on OOB_WRITE's own real data. `check_staged_enablement.py`: 23/23 (was 20/20),
+including a direct unit control that TIER_INTERNAL_UNREGISTERED does NOT clear the gate, and the
+real re2 end-to-end check updated to its now-correct expected outcome.
+
+**New `six_property_aggregator.py` (SIX-PROP-AGG-R01)**, a precursor to task #34 — implements
+the exact enablement matrix given directly: Resource Guard (r04/r05/r06_findings) always
+included, trusting each version's own already-correct `reportable` field; Lock Balance,
+Protected Field, and OOB Read enabled; OOB Write/OOB Index Write enabled only for externally
+reachable tiers (the corrected gate above, trusted rather than re-implemented); OOB Compare
+explicitly, unconditionally disabled with its real, specific task #33 reason recorded in the
+summary — never silently omitted, and never re-enabled even if a caller's own enabled-properties
+set wrongly includes it. A HARD INVARIANT (verified to actually fire, not just documented): a
+disabled property carrying any real `reportable=True` finding raises immediately rather than
+being silently absorbed into a totals count.
+
+`check_six_property_aggregator.py`: 18/18, including a REAL SMALL SMOKE TEST (per direct
+instruction, explicitly not a new corpus run) against two already-existing real evidence bundles
+from the completed overnight-diagnostic-100 run (re2, node-crc16) — the full real pipeline runs
+cleanly end to end, re2's real OOB_WRITE candidates correctly show `reportable=0` post-
+correction, and OOB_COMPARE's `reportable_count` is confirmed `0` on real data for both
+packages, not just the synthetic control.
+
+Task #34 itself remains untouched — reserved for the actual full-corpus-run launch decision, per
+its own standing rule (never marked in_progress/completed except by direct instruction to launch
+that specific run). No new corpus run was started as part of this task.
