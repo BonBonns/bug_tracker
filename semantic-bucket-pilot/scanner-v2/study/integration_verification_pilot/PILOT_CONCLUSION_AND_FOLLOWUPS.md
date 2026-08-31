@@ -538,3 +538,71 @@ pre-existing-shaped reasons rather than silently. #44 remains open (not complete
 of these scope limits; #38 (`OOB_WRITE` enablement) stays blocked on it. No corpus run follows
 from this — a diagnostic-only run may still generate and preserve evidence once scheduled, but it
 cannot yet support a meaningful negative claim about pointer-parameter writes at corpus scale.
+
+### Task #44 phase 2: real CFG dominance + loop-iteration reasoning for `vorbis_book_decodev_add`
+
+Direct follow-up on the review that phase 1 was "one of three vulnerable sinks recovered — not
+sufficient for promotion," and that textual guard matching cannot prove whether a guard dominates
+the dangerous index on all relevant loop paths. Confirmed exactly as predicted: plain textual
+existence AND plain CFG dominance were BOTH insufficient for `vorbis_book_decodev_add`'s real
+case — its outer `for(i=0;i<n;)` genuinely dominates the write in both the vulnerable and patched
+source (nothing bypasses it structurally), yet the vulnerability is real, because that check is
+evaluated only ONCE per outer iteration while the write executes repeatedly per outer pass via the
+inner loop's own back-edge, unprotected on every pass after the first. The real fix instead adds
+a check to the INNER loop's own header (`for (j=0;i<n && j<book->dim;)`), re-evaluated every
+iteration.
+
+**New module, real machinery reused, not reinvented:** `tools/cfg_loop_guard.py`'s
+`loop_iteration_safe_dominates()` builds on the SAME dominator-tree code already gated and used
+elsewhere in this repo (`allocation_extent.build_cfg_index`/`_dominates`, from
+`call_context_guard.py`'s real NSS CVE-2019-17006 work) — no new CFG algorithm, only a new
+composition of it. A guard protects a write on EVERY execution iff it dominates the write AND is
+at-or-inside the write's own innermost enclosing loop (dominated by, or equal to, that loop's own
+header — identified from real back-edges, `(u,v)` where `v` dominates `u`, computed from the same
+dominator data). Verified directly against the real Tremor bundles BEFORE being trusted (see
+`param_length_capacity_controls.py`): the outer `i<n` fails this check in both files; the real
+fix's new inner-loop guard passes it, in both files, correctly.
+
+**Polarity, honestly scoped, not oversold:** for a guard that IS (or feeds directly into) the
+loop's own header condition, C loop semantics themselves prove the polarity — no separate graph
+search re-derives that guarantee. Full control-dependence + branch-polarity proof for a guard
+merely somewhere INSIDE a loop body (not its own header) — the harder case `call_context_guard.py`
+solves for straight-line, pre-call guards — remains open here, disclosed rather than assumed
+sound. The caller additionally requires the comparison operator to be `<`/`<=` with the write's
+own index as the LHS (never a reversed operand order, never `>`/`>=`), ruling out an
+accidentally-reversed-polarity guard by construction rather than by a general proof.
+
+**Real re-verification:** `vorbis_book_decodev_add`'s real sink (`a[i++]`) is now detected
+end-to-end — candidate on VULN, suppressed on PATCHED — using the same real, freshly-rebuilt
+bundles as before. `vorbis_book_decodevv_add` is explicitly re-verified as still correctly
+abstaining, per direct instruction NOT to add an ad hoc flattening rule: its real vulnerability
+is on a nested/2D index (`a[chptr++][i]`), entirely outside this producer's single-level
+`indexAccess` model, and remains an honest, disclosed unsupported case rather than a guessed
+result.
+
+**Required controls (`tools/cfg_loop_guard_controls.py`, 9/9):** dominating vs non-dominating
+guards; branch polarity (structurally restricted to `<`/`<=` only, verified by inspecting the
+source); loop-entry vs loop-back paths (both directions, the exact `decodev_add` discriminator);
+an unrelated early-exit distractor branch not confusing the analysis; a guard occurring after the
+write not crediting it; a guard on the wrong index/object not suppressing (end-to-end, through the
+real matching key). `param_length_capacity_controls.py` is now 16/16 (both real Tremor sinks, the
+`decodevv_add` non-flattening check, and all phase-1 controls).
+
+**Current coverage on the Tremor development case, updated:**
+
+| Component | Status |
+|---|---|
+| Pointer/length pairing | Implemented and controlled |
+| `decodevs_add` | Vulnerable/patched differential recovered |
+| `decodev_add` | Vulnerable/patched differential now recovered (real CFG dominance + loop-iteration reasoning) |
+| `decodevv_add` | Unsupported (explicit) — nested/2D index, no ad hoc flattening added |
+| Duplicate ownership | Correctly assigned to `OOB_INDEX_WRITE`, verified (0 duplicate candidates on real Tremor bundle) |
+| Cross-TU capacity evidence | Unavailable; correctly abstains |
+
+**Two of three real vulnerable sinks now recovered end-to-end.** #44 remains open (not
+completed/validated) — `decodevv_add` is explicitly unsupported by design rather than silently
+missed, and full control-dependence/branch-polarity proof for loop-interior (non-header) guards
+remains a disclosed, unimplemented refinement. #38 (`OOB_WRITE` enablement) stays blocked until
+#44 is reviewed and its gate is reproducible per direct instruction — the 100-package overnight
+diagnostic run may proceed independently once scheduled, but `OOB_INDEX_WRITE` must remain
+non-reportable during it. No corpus run follows from this.
