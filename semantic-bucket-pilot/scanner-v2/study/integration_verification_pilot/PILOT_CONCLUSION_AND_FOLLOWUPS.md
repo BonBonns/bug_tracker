@@ -86,7 +86,7 @@ phase before corpus use, especially `OOB_READ` and `OOB_COMPARE`."**
 | 4 | #31 | Vendored-source **provenance classification and deduplication** (not exclusion) |
 | 5 | #33 | Find real positive-path evidence for `OOB_COMPARE`, **or formally retire it from promotion** if a genuine, bounded search finds none |
 
-## Property-specific blockers (revised again: #35 is universal, not OOB-only)
+## Property-specific blockers (revised again: #35 is universal — Resource Guard included)
 
 Per direct instruction, the blockers are property-specific rather than one all-or-nothing gate —
 a staged run can enable whichever properties have their own preconditions met, instead of every
@@ -94,9 +94,30 @@ property waiting for the weakest one. **Correction to the prior revision**: #35 
 to `OOB_WRITE`/`OOB_READ` only, on the reasoning that those were the only properties with real
 vendored findings observed so far. That was wrong — the underlying fact this pilot itself
 established is that **none of the six properties currently preserves source path or content
-hash**, so #35 must gate every property that emits findings, not just the two that happened to
-produce a vendored candidate first. Two explicit conditions govern when a task is genuinely
-non-gating for the overall run:
+hash, `FALLIBLE_BOUNDED_RESOURCE` (Resource Guard) included**, so #35 gates every property that
+emits findings, not just the two that happened to produce a vendored candidate first, and not
+just the five properties task #28 newly integrated.
+
+**#35 is now IMPLEMENTED and CLOSED** (`claude/provenance-preservation-task35`,
+`provenance.py` + a change to `run_pipeline_one.py` — the real orchestrator, not a side
+script): the source-provenance manifest is built immediately after extraction, before header
+staging/c2cpg/any scanner for any property runs, fail-CLOSED (a new `PROVENANCE_FAILED` status,
+zero scanner output) if it cannot be built. Verified with a real end-to-end run against
+`@fqlan/add-example-prebuild`: `r04_classification`/`r05_classification` came back byte-for-byte
+identical to the pre-#35 baseline (zero scanning-behavior regression), with real provenance
+fields (`source_tree_hash`, per-finding `source_path`/`content_hash`/`provenance_hint`) now
+present. `OOB_WRITE`/`OOB_READ`/`OOB_COMPARE`'s own candidates gained two small, additive join
+keys (`call_id`, `function_id`) so a future orchestrator can attach the same provenance once
+tasks #38-40 wire those scanners in — their own verdict logic is unchanged, both real OOB gates
+(`oob-write-r05-sizeof`, `oob-compare-r07`) still pass identically.
+
+**A real, disclosed gap #35's own implementation surfaced**: the already-collected R04/R05
+corpus data (the stopped 452/494-row `full_scan_r05_working.jsonl`) predates this fix and has no
+provenance fields at all. If a future run's output is ever merged with that historical data, the
+schema mismatch needs explicit handling (e.g. a `provenance: null` marker on old rows), not a
+silent assumption both halves look the same.
+
+Two explicit conditions govern when a task is genuinely non-gating for the overall run:
 
 - **#31 stays non-gating only if #35 (source path + content hash, at scan time, for every
   property) is done first.** Without that data captured before the source tree is deleted,
@@ -111,22 +132,21 @@ non-gating for the overall run:
   must never be reported as a meaningful negative while #33 is open — but #32 and #35 apply to it
   exactly as they apply to the other four properties.
 
-| Property | Task tracker gate | Blocked by |
-|---|---|---|
-| `LOCK_BALANCE` | #36 — Enable in staged run | #32, #35 |
-| `PROTECTED_FIELD` | #37 — Enable in staged run | #32, #35 |
-| `OOB_WRITE` | #38 — Enable in staged run | #30, #32, #35 |
-| `OOB_READ` | #39 — Enable in staged run | #29, #30, #32, #35 |
-| `OOB_COMPARE` | #40 — Enable in staged run | #33, #32, #35 |
+| Property | Task tracker gate | Blocked by | Status |
+|---|---|---|---|
+| `FALLIBLE_BOUNDED_RESOURCE` (Resource Guard) | #41 — Enable/realign in staged run | (none remaining — #35 satisfied) | **Effectively clear.** Its own reachability logic already comes from R06/FIX01I; #35 was its one real remaining gap, now closed. |
+| `LOCK_BALANCE` | #36 — Enable in staged run | #32, #35 | #35 satisfied; #32 (tiered reachability) still open |
+| `PROTECTED_FIELD` | #37 — Enable in staged run | #32, #35 | #35 satisfied; #32 still open |
+| `OOB_WRITE` | #38 — Enable in staged run | #30, #32, #35 | #35 satisfied; #30, #32 still open |
+| `OOB_READ` | #39 — Enable in staged run | #29, #30, #32, #35 | #35 satisfied; #29, #30, #32 still open |
+| `OOB_COMPARE` | #40 — Enable in staged run | #33, #32, #35 | #35 satisfied; #33, #32 still open |
 
-**#34 (the original blanket gate, kept for the case a FULL, all-five-properties-simultaneous run
-is specifically wanted) now requires #29 + #30 + #32 + #33 + #35 all resolved** — #33 and #35
-were added on this same correction, since the full run by definition includes `OOB_COMPARE`
-(gated by #33) and every property (gated by #35). **Equivalently**, #34 can be treated as an
-aggregator that is ready exactly when #36, #37, #38, #39, and #40 are all individually
-satisfied — the two framings describe the same underlying condition. The staged path (#36-#40)
-remains the recommended way to proceed: e.g. `LOCK_BALANCE` alone could be enabled via #36 once
-#32 and #35 both land, without waiting on #29/#30/#33 at all.
+**#34 is the SIX-property aggregator** (Resource Guard's own gate #41, plus #36-40), ready only
+when all six are individually satisfied — equivalently, in the #29/#30/#32/#33/#35 framing, #35
+is now satisfied, narrowing the remaining blanket condition to #29 + #30 + #32 + #33. The staged
+path remains the recommended way to proceed: e.g. `FALLIBLE_BOUNDED_RESOURCE` could effectively
+be considered enabled today (its own gate #41 has nothing left blocking it), and `LOCK_BALANCE`
+could be enabled via #36 once #32 alone lands, without waiting on #29/#30/#33 at all.
 
 ### What #35 must preserve, at scan time, per direct instruction
 
