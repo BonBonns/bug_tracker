@@ -1019,3 +1019,41 @@ of any chain is ever separately emitted.
 
 **All 3 real Tremor vulnerable sinks are now accounted for, end to end** — 2 recovered as real
 candidates, 1 formally, explicitly bounded. No unbounded, silent gap remains. Unblocks #38.
+
+## Task #38: OOB_WRITE enabled
+
+With #44 and #46 both complete, `oob_write_candidates` and `oob_index_write_candidates` were
+added to `staged_enablement.py`'s `ENABLED_PROPERTIES`. `check_staged_enablement.py`: 20/20
+(was 14/14).
+
+**A real, disclosed consequence found while re-verifying against re2's own evidence bundle**:
+both of re2's real OOB_WRITE candidates (`StrErrorInternal`, `TrySymbolizeWithLimit`, both
+inside vendored `abseil-cpp`) get `reachability_tier.py`'s own `TIER_INTERNAL_UNREGISTERED`
+classification — the *weakest* real tier, meaning neither function is proven registered as a
+JS-callable export under any recognized idiom at all. Per task #32's own already-established
+design (any real, resolved reachability tier clears the reachability gate — the floor is
+"classified", not "strongest tier only"), these still reach `STAGE_ENABLED`. This is not a new
+decision made here — it's the same floor task #32's own controls already tested and accepted —
+but it is worth stating plainly: a real internal C++ helper deep inside a vendored dependency,
+with no proof it is ever reachable from JS at all, becoming `reportable=True` once real
+applicability/adjudication evidence exists is a genuine, foreseeable consequence of that
+existing threshold. Flagged here for whoever next runs OOB_WRITE against a live, non-diagnostic
+corpus — not something to be surprised by later.
+
+`staged_enablement.py`'s own docstring now also states explicitly: OOB_COMPARE (task #40)
+staying out of `ENABLED_PROPERTIES` is a *deliberate, evidence-backed decision* from task #33's
+own real investigation (a working detector, zero real corpus positives found in a 33-package
+survey), not an open precondition waiting to clear — so a future task #34 (the six-property
+aggregator) must not silently flip it on just because every other property has cleared its own
+gate.
+
+No regressions: `check_reachability_tier.py` 17/17, `check_oob_reportable_gate.py` 17/17,
+`check_provenance.py` 43/43 (real end-to-end pipeline run).
+
+## Where this leaves the 12-task list
+
+All originally-listed substantive tasks (#31, #32, #33, #41, #42, #44) and enablement tasks
+(#36, #37, #38, #39) are now complete, plus #46 (a gap found along the way). Remaining:
+**#40** (OOB_COMPARE enablement — intentionally NOT done, per #33's own conclusion) and
+**#34** (the full six-property aggregator/494-package run — explicitly gated on direct
+instruction to launch it, not a technical blocker).
