@@ -137,6 +137,32 @@ BOOL_LITERALS_TRUE = {"true", "1"}
 
 VALID_EXCEPTION_CONFIGURATIONS = {"disabled", "enabled", "unresolved", "conflict"}
 
+# REPORTING-BOUNDARY FIX: the ONLY verdict this entire R01-R06 lineage has ever treated as a
+# real, actionable, candidate-vulnerability finding -- confirmed by reading every real
+# `findings.append(...)` site in this file (grep '"verdict":'): `CONTRACT_NOT_APPLICABLE`,
+# `BUILD_CONFIGURATION_CONFLICT`, `BUILD_CONFIGURATION_UNRESOLVED`, and
+# `VALUE_ACQUISITION_SEMANTICS_UNRESOLVED` are all real, disclosed ABSTENTIONS (the contract
+# could not be evaluated, or does not apply); `VALUE_ACQUISITION_GUARD_ESTABLISHED` is a real,
+# CONFIRMED-SAFE match (the guard IS present) -- neither is a candidate vulnerability. `main()`
+# keeps every one of these records in the real, full `findings` list (each carries its own
+# real diagnostic evidence -- e.g. a `CONTRACT_NOT_APPLICABLE` record still carries
+# `source_boundary_evidence` and per-target build-config evidence, fully inspectable) --
+# but `count_actionable_findings()` below is the required, real aggregator boundary: it counts
+# ONLY `VALUE_ACQUISITION_GUARD_MISSING` records, so a diagnostic/abstention record (e.g.
+# node-libcurl's own real `CONTRACT_NOT_APPLICABLE` record) can never be silently counted as
+# an actionable security finding just because `len(findings)` happens to include it.
+ACTIONABLE_VERDICTS = {"VALUE_ACQUISITION_GUARD_MISSING"}
+
+
+def count_actionable_findings(findings):
+    """The real, required aggregation boundary -- see `ACTIONABLE_VERDICTS`'s own comment for
+    the full account of why exactly this one verdict, and no other, counts. Never infers
+    actionability from a record's mere PRESENCE in `findings`, from `len(findings)`, or from
+    the presence of `source_boundary_evidence`/`build_config_evidence` sub-fields (a
+    diagnostic/abstention record legitimately carries both, as real supplementary evidence,
+    without itself being actionable)."""
+    return sum(1 for f in findings if f.get("verdict") in ACTIONABLE_VERDICTS)
+
 # The one real, structurally-recognizable shape R05 recovers from -- confirmed real, not
 # assumed, on two independent corpus packages plus the committed r05_controls fixture (see
 # module docstring). A call resolving to any OTHER, concrete qualifier is NOT this shape and
@@ -909,13 +935,17 @@ def main():
             evaluate_acquisition(method_id, call_ids, cid, c, recovered_contract,
                                   "r05_structural_recovery")
 
+    actionable = count_actionable_findings(findings)
     json.dump({"schema": "resource-guard-verdict-r05/0.1",
                "contract_pool": "real" if use_real else "synthetic",
                "build_config": build_config,
                "classification": dict(classification),
-               "findings": findings}, open(outp, "w"), indent=1, sort_keys=True)
+               "findings": findings,
+               "actionable_findings": actionable}, open(outp, "w"), indent=1, sort_keys=True)
     print(f"classification: {dict(classification)}")
-    print(f"findings: {len(findings)}")
+    print(f"findings: {len(findings)} (diagnostic records, includes abstentions)")
+    print(f"actionable_findings: {actionable} (VALUE_ACQUISITION_GUARD_MISSING only -- "
+          f"the real reporting-boundary aggregate)")
 
 
 if __name__ == "__main__":
