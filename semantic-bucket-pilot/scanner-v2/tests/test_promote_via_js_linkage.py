@@ -112,6 +112,11 @@ if all_present(CARTESI_RAW, CARTESI_CPP_FACTS, CARTESI_R06_OUT, SYNTH_JS_PATH):
                     "found and fixed)",
                     rm["evidence"]["callback_info_index"] == 1
                     and rm["evidence"]["js_argument_index"] == 2, str(rm["evidence"]))
+        ok &= check("promoted verdict is named JS_ARGUMENT_CONTROLLED (the required verdict "
+                    "name), with a real, R06-schema-shaped replacement source_boundary_evidence",
+                    rm["reason"] == "JS_ARGUMENT_CONTROLLED"
+                    and rm["evidence"]["source_boundary"] == "JS_ARGUMENT_CONTROLLED"
+                    and rm["evidence"]["attacker_controlled"] is True, str(rm))
 
     # Negative: same call, but missing the 'length' argument (info[1] would be undefined).
     js_missing = json.loads(json.dumps(js))
@@ -125,6 +130,33 @@ if all_present(CARTESI_RAW, CARTESI_CPP_FACTS, CARTESI_R06_OUT, SYNTH_JS_PATH):
 else:
     print("SKIP (real cached facts / synthetic control not present in this environment -- "
           f"run {SYNTH_JS_DIR}/build_js_control.py first)")
+
+# --- Adversarial synthetic: a JS-reachable method (real Napi::CallbackInfo parameter) whose
+# allocation size is INTERNALLY COMPUTED (length = width * height, no info[N] anywhere) --
+# must NEVER be promoted merely because the method is JS-reachable. Required negative: "do
+# not promote ... a linked function whose allocation size is literal or internally computed."
+print('=== Adversarial: JS-reachable method, internally-computed size -- must not promote ===')
+INTERNAL_DIR = os.path.join(os.path.dirname(HERE), "study", "r06_fix01i_integration",
+                             "controls", "internally_computed_negative")
+if all_present(os.path.join(INTERNAL_DIR, "calls.tsv")):
+    src = find_callback_info_index_source_for_acquisition(INTERNAL_DIR, 500000001, 500000014)
+    ok &= check("no real info[N]-via-out-parameter source found for an internally-computed "
+                "size (width * height, no info[N] access anywhere in the method) -- "
+                "'JS-reachable' alone is never sufficient", src is None, str(src))
+
+    # Even if we PRETEND a real FIX01I link exists for this method (worst case for the
+    # promotion logic), promote_findings must still refuse, since step (1) already failed.
+    fake_finding = {"method_id": 500000001, "acquisition_call_id": 500000014,
+                    "source_boundary_evidence": None}
+    fake_linked = [{"cpp_function_id": 500000001, "js_call": 1, "name": "allocateBuffer",
+                    "js_arguments": [{"index": 1, "code": "n"}, {"index": 2, "code": "m"}],
+                    "evidence_tier": "js_receiver_name"}]
+    results = promote_findings([fake_finding], INTERNAL_DIR, fake_linked)
+    ok &= check("promote_findings refuses even WITH a real (pretend) FIX01I link present, "
+                "since no structural info[N] source exists for this internally-computed size",
+                results[0]["promoted"] is False, str(results[0]))
+else:
+    print(f"SKIP (run {INTERNAL_DIR}/build_control.py first)")
 
 print()
 print('OVERALL:', 'PASS' if ok else 'FAIL')

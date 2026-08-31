@@ -373,8 +373,17 @@ def promote_findings(r06_findings, raw_dir, linked_calls):
             continue
         results.append({
             "finding": finding, "promoted": True,
-            "reason": "JS_ARGUMENT_VIA_CALLBACKINFO_INDEX",
+            "reason": "JS_ARGUMENT_CONTROLLED",
             "evidence": {
+                # Real replacement source_boundary_evidence -- a caller merging this back into
+                # the finding gets a properly-shaped record, same field names R06's own
+                # backward_attacker_trace uses, so downstream consumers don't need a second
+                # schema: source_boundary is now JS_ARGUMENT_CONTROLLED (was
+                # SOURCE_BOUNDARY_UNRESOLVED/untraced), attacker_controlled flips to True,
+                # ONLY because all three required conditions held (registration + FIX01I
+                # linkage + a real JS argument at the correct CallbackInfo index).
+                "source_boundary": "JS_ARGUMENT_CONTROLLED",
+                "attacker_controlled": True,
                 "js_call_id": promoted_via["js_call"],
                 "js_call_name": promoted_via["name"],
                 "callback_info_index": src["js_argument_index"],

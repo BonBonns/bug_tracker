@@ -63,17 +63,64 @@ does not currently expose in an inspectable form, so the FULL promotion chain ca
 correct end-to-end. The C++ side of that control is Cartesi's OWN real facts, unmodified --
 only the JS call site is synthetic, and it is never presented as a real Cartesi finding.
 
-## Real results (`tests/test_promote_via_js_linkage.py`, 10/10 PASS)
+## Required promotion boundary (explicit instruction, verified)
 
-| Package | Registration found? | Structural `info[N]` source? | Real JS linkage? | Promoted? |
+A cross-language link proves JavaScript CAN reach a native method; it does NOT by itself
+prove the SPECIFIC allocation size comes from a JS argument. Promotion to
+`JS_ARGUMENT_CONTROLLED` requires all three, none of which alone is sufficient:
+
+1. The C++ method is registered/exposed to JavaScript (`extract_napi_bindings`/
+   `extract_instancemethod_bindings`).
+2. FIX01I resolves the relevant JS/native method identity (a real entry in `linked_calls`).
+3. The internal native trace terminates at a specific `CallbackInfo[index]`/`args[index]`
+   value that feeds the allocation size (`find_callback_info_index_source_for_acquisition`).
+
+Explicitly verified NOT promoted, each for the SPECIFIC required reason (`tests/
+test_promote_via_js_linkage.py`, 12/12 PASS):
+
+| Case | Registration? | Structural `info[N]` source? | Real JS linkage? | Promoted? |
 |---|---|---|---|---|
-| node-libcurl (`Easy::ReadFunction`) | N/A -- no `Napi::CallbackInfo` param at all | No (correctly) | N/A | **No** -- rejected, exactly as required (a real libcurl-invoked callback, never JS-reachable) |
-| Cartesi, real data (`ReadMemory` etc.) | **Yes**, real (3/3) | **Yes**, real (3/3) | **No** -- 0 real linked calls in the real published package | **No** -- correctly NOT promoted; real data does not support it |
-| Cartesi, disclosed synthetic JS call | Yes, real | Yes, real | Yes, synthetic (1 call, 2 real args) | **Yes** -- `ReadMemory` promoted, `JS_ARGUMENT_VIA_CALLBACKINFO_INDEX`, citing `info[1]`/JS argument index 2 |
-| Cartesi, synthetic JS call missing 1 argument | Yes, real | Yes, real | Yes, synthetic (1 call, 1 real arg) | **No** -- correctly rejected (the real off-by-one regression) |
+| node-libcurl (`Easy::ReadFunction`) -- a native callback parameter, not JS-reachable | N/A -- no `Napi::CallbackInfo` param at all | No (correctly) | N/A | **No** |
+| Adversarial: JS-reachable method, size internally computed (`length = width * height`, no `info[N]` anywhere) -- even with a PRETEND real FIX01I link present | N/A (test bypasses this) | **No** (correctly) | N/A (pretend real link supplied, still refused) | **No** |
+| Cartesi, real data (`ReadMemory` etc.) -- registration real, structural source real, but no real JS call site exists in the published package | **Yes**, real (3/3) | **Yes**, real (3/3) | **No** -- 0 real linked calls | **No** |
+| Cartesi, disclosed synthetic JS call missing 1 argument -- `info[1]` would read an undefined JS value | Yes, real | Yes, real | Yes, synthetic (1 call, 1 real arg -- one short) | **No** |
 
-node-crc16 is unaffected by this integration (0 findings under R06 already -- nothing for
-`promote_via_js_linkage.py` to act on).
+And the one case where all three conditions genuinely hold:
+
+| Case | Registration? | Structural `info[N]` source? | Real JS linkage? | Promoted? |
+|---|---|---|---|---|
+| Cartesi, disclosed synthetic JS call (2 real args) | Yes, real | Yes, real | Yes, synthetic (1 call, 2 real args) | **Yes** -- `ReadMemory` promoted, verdict `JS_ARGUMENT_CONTROLLED`, evidence cites `info[1]` -> JS argument index 2 |
+
+node-crc16 is unaffected by this integration (0 findings under R06 already -- `SIZE_
+ATTACKER_INDEPENDENT` rejects its one recovered candidate before any trace/promotion logic
+runs at all -- a literal size is never even a promotion candidate).
+
+jpeg-turbo is unaffected too, for an honest, real, DIFFERENT reason than initially expected:
+it is a **`nan`-based** addon (confirmed via its own real `header_staging` evidence --
+`"dep": "nan"`, not `node-addon-api`), so its real acquisition calls never match the
+curated `Napi::Buffer::New` contract's own structural requirements at all (`R05_RECOVERY_
+RESULT_TYPE_UNRECOGNIZED` for all 28 real candidates, 0 findings) -- it never reaches R06's
+own applicability gate, so no `BUILD_CONFIGURATION_UNRESOLVED`/`CONTRACT_NOT_APPLICABLE`
+finding is literally reported for it. This is a real, disclosed scope boundary of the
+curated node-addon-api contracts (nan is a different, older native-addon API this project's
+contracts were never built for), not a gap in this integration -- reported here precisely
+rather than forced to match an initial expectation the real data does not support.
+
+## node-libcurl's finding now carries BOTH pieces of real evidence, independently
+
+A `claude/r06-precision-fix` refinement (merged into this branch) attaches
+`source_boundary_evidence` and the per-target build-config resolution metadata to EVERY
+applicability-gate finding, not only the final "disabled, established" one. node-libcurl's
+own real `CONTRACT_NOT_APPLICABLE` finding now carries, on the SAME record:
+`source_boundary_evidence.source_boundary == "SOURCE_BOUNDARY_UNRESOLVED"` (its `size`
+parameter is `size_t`, not `Napi::CallbackInfo`) AND the real exceptions-enabled evidence
+(`resolution_scope: "per_target"`, `resolved_target_name: "<(module_name)"`, the target's
+own real `enable_evidence`) -- an abstention and a source-boundary determination are
+independent real facts, and a reader can now see both regardless of which one this run
+reports as the primary verdict. `package_wide_diagnostic` is also present and shown to
+genuinely differ from the authoritative per-target result (package-wide `"unresolved"` vs.
+per-target `"enabled"`) -- confirming per-target resolution, not the package-wide value, is
+what was actually applied (`tests/test_target_scoping_e2e.py`, 16/16 PASS).
 
 ## Honest conclusion
 
