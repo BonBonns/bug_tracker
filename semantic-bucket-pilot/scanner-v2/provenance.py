@@ -296,6 +296,10 @@ PROPERTY_CANDIDATE_RULES = {
     "lock_balance_findings": lambda f: True,
     "protected_field_findings": lambda f: True,
     "oob_write_candidates": lambda f: True,
+    "oob_index_write_candidates": lambda f: True,  # overnight-diagnostic-100: task #44's own
+    # emit_candidates() was checked directly (same discipline as the other four OOB keys) --
+    # it only ever appends a real CANDIDATE, both for its pre-existing fixed-array path and the
+    # new PARAM-CAP-R01 path; abstentions never enter this list.
     "oob_read_candidates": lambda f: True,
     "oob_compare_candidates": lambda f: True,
 }
@@ -344,7 +348,8 @@ def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) 
             enrich_finding(f, f.get(id_field), method_file_map, manifest, pkg_dir, id_field)
             finalize_reportability(f, candidate_rule(f))
 
-    for candidates_key in ("oob_write_candidates", "oob_read_candidates", "oob_compare_candidates"):
+    for candidates_key in ("oob_write_candidates", "oob_index_write_candidates",
+                           "oob_read_candidates", "oob_compare_candidates"):
         candidate_rule = PROPERTY_CANDIDATE_RULES[candidates_key]
         for c in record.get(candidates_key) or []:
             enrich_finding(c, c.get("function_id"), method_file_map, manifest, pkg_dir, "function_id")

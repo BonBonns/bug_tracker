@@ -49,7 +49,8 @@ with tempfile.TemporaryDirectory() as td:
 
     manifest = provenance.build_source_manifest(pkg_dir, b"fake-tarball-bytes", "synthetic-pkg", "1.0.0")
 
-    for candidates_key in ("oob_write_candidates", "oob_read_candidates", "oob_compare_candidates"):
+    for candidates_key in ("oob_write_candidates", "oob_index_write_candidates",
+                           "oob_read_candidates", "oob_compare_candidates"):
         record = {candidates_key: [{
             "verdict": "CANDIDATE",
             "class": candidates_key.split("_candidates")[0].upper(),
