@@ -972,5 +972,16 @@ PASS, `check_reachability_tier` 17/17, `check_staged_enablement` 14/14,
 key (task #44's own OOB Index Write producer) was found to be ABSENT from this branch's
 `PROPERTY_CANDIDATE_RULES`/`enrich_record()` loop, despite an earlier summary claiming it had
 been added here — it appears that change only ever landed on `claude/overnight-diagnostic-100`
-(commit `9fbe0e6`), not on this driven lineage. Not fixed as part of this task (out of its own
-scope); flagged for whoever next touches OOB Index Write's own reportability wiring.
+(commit `9fbe0e6`), not on this driven lineage.
+
+## Task #46: closed
+
+Fixed directly: `oob_index_write_candidates` added to `provenance.py`'s `PROPERTY_CANDIDATE_RULES`
+(`scanner_candidate=True` unconditionally, confirmed real — both of `oob_index_write_verdict.py`'s
+own `candidates.append(...)` sites emit `'verdict': 'CANDIDATE'` unconditionally, same discipline
+already established for the other three OOB producers) and to `enrich_record()`'s own candidates
+loop. `check_oob_reportable_gate.py` extended to cover it: 17/17 (was 13/13). No regressions —
+`check_provenance.py` 43/43 (real end-to-end pipeline run), `check_reachability_tier.py` 17/17,
+`check_staged_enablement.py` 14/14. `reachability_tier.py`/`staged_enablement.py`/
+`vendored_attribution.py` were never affected by this gap — only `provenance.py` itself was
+missing the key.
