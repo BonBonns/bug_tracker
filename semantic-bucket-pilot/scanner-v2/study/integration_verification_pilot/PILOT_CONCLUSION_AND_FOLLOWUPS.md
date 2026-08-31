@@ -412,3 +412,55 @@ statically-safe candidates once it is enabled — but #39 remains blocked by #30
 `OOB_READ` still has zero reproduced real positives) and #32 (tiered reachability), and both #38
 and #39 remain blocked by #42 (the missing guard-r01 control-gate fixture) until that gate is
 either rebuilt or replaced with a fully self-contained equivalent. No corpus run follows from this.
+
+### Task #30: the Tremor CVE-2018-5147 "discrepancy" reconciled -- it was never a real discrepancy
+
+The original suspicion (Section 3.3 above): this pilot's own direct reproduction found 0
+candidates on the real Tremor VULN/PATCHED fixture, which "does not match the
+previously-documented `e2e-canonical/SUMMARY.txt` result" (`VULN dir -> candidates: 1`), with "a
+real difference in preprocessing mode" proposed as "the leading candidate explanation" -- stated
+as genuinely unresolved at the time.
+
+**Directly inspected the actual e2e-canonical artifacts** (`vuln.report.json`,
+`vuln.llm_input_1.json`) rather than trusting the `SUMMARY.txt` label. Result: **zero** references
+to `tremor`/`codebook`/`vorbis` anywhere in either report. The only file either report ever
+analyzed is `WinWebAuthnManager.cpp`; the one real candidate is `finding_id:
+oob-index-write:c_cpp#L298:rgExtension`, an `INDEXED_STORE_INTO_FIXED_CAPACITY_ARRAY` shape
+(`rgExtension[cExtensions]`) from `oob_index_write_verdict.py` -- and per
+`MOZ-OOB-R01-PREREG.md:249`, this is Mozilla bug **mfsa2022-13** (`WinWebAuthnManager::Register`),
+a *completely different, unrelated* Mozilla memory-safety CVE. The two data points the earlier
+pilot compared were never about the same fixture. There is no cross-run inconsistency to explain;
+the "preprocessing mode" theory was answering a question that didn't need asking.
+
+**Re-verified Tremor's own real result is reproducible and mechanically explained.** Freshly
+rebuilt the real VULN/PATCHED bundles this session (fresh `c2cpg` -> `export` -> `normalize`,
+not reused from before): both `oob_write_verdict.py` and `oob_index_write_verdict.py` still
+produce 0 candidates on both files, matching the earlier pilot exactly. Root cause, now precisely
+diagnosed rather than left as a gap: the real vulnerable buffer in
+`vorbis_book_decodevs_add`/`decodev_add`/`decodevv_add` is a **pointer parameter**
+(`ogg_int32_t *a`), whose true capacity is carried by a **separate runtime parameter** (`int n`) —
+not a fixed-size local array `T[N]`. Confirmed mechanically against the real facts: the whole
+file's `dest_capacities` count is 0, and no local variable named `a` exists at all (it is a
+parameter, invisible to the local-array-capacity deriver both current OOB_WRITE producers depend
+on). Neither `oob_write_verdict.py` (memcpy-family calls with a directly-typed destination) nor
+`oob_index_write_verdict.py` (fixed-size `T[N]` locals only) models a pointer-parameter buffer
+whose capacity is carried by a sibling parameter — the classic C "buffer + length pair" API
+convention, extremely common in codec/parser code exactly like this one.
+
+**The preprocessing theory was also directly, separately ruled out** on the correct fixture:
+`cpp -E` cannot even run on this standalone `.c` file (`ogg/ogg.h` is not part of this
+repository, never was — this file was never part of a buildable tree here), so
+`scan_repo.py --preprocess` would have *skipped* it entirely had it ever been pointed at Tremor.
+And even where preprocessing can run, it could not plausibly have changed this specific outcome:
+the vulnerable loop bounds (`o+j`, `n`, `book->dim`) contain zero macros.
+
+**Net: task #30 is genuinely reconciled.** No discrepancy exists to resolve; the real, standalone
+finding is that this repository's current `OOB_WRITE` implementation family has a real, precisely
+diagnosed capability gap (pointer-parameter + separate-length-parameter buffers), tracked as new
+task **#44**, which now blocks #38 (`OOB_WRITE` enablement) in #30's place — #30 itself is closed.
+
+| Property | Task tracker gate | Blocked by | Status (updated) |
+|---|---|---|---|
+| `OOB_WRITE` | #38 — Enable in staged run | #32, #42, #44 | #35 satisfied; #30 resolved (was a false discrepancy, not a real blocker); #44 (new) tracks the real, diagnosed pointer+length-parameter capacity gap |
+
+No corpus run follows from this.
