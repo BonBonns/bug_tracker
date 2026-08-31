@@ -372,3 +372,43 @@ they currently make.
 
 No corpus run follows from any of this — `OOB_READ` remains blocked by #30, #32, and #42;
 `OOB_WRITE` remains blocked by #30, #32, and #42.
+
+### Task #43: read-side numeric extent reasoning (STATIC_EXTENT_SAFE), implemented
+
+Direct follow-up from the round-2 correction above: `oob_read_verdict.py` had no equivalent of
+`oob_write_verdict.py`'s `STATIC_EXTENT_SAFE` check, so the confirmed-safe `RoundTripFloatToBuffer`
+site (`4 <= 5`) was still being reported as `verdict: CANDIDATE` even after the #29 join-key fix.
+
+Implemented `is_static_extent_safe(src_code, ext_code, ext_kind, capacity_bytes)` in
+`oob_read_verdict.py`, mirroring the write side's provenance-distinct-safety-reason architecture,
+with two conjoined-narrow forms:
+
+1. extent is exactly `sizeof(the read source)` — symmetric to the write side's `sizeof(dest)` case;
+2. extent is a compile-time integer literal, and the source's own capacity is a known compile-time
+   integer — safe iff `literal <= capacity`.
+
+Anything that doesn't cleanly match one of these two forms (an expression, a macro, a variable, a
+hex/suffixed literal) stays a `CANDIDATE` — conservative, no new false negatives. Re-verified
+against the real `re2` bundle: `OOB_READ CANDIDATES: 0` — `RoundTripFloatToBuffer:804` is now
+correctly excluded, since it was the only genuine candidate remaining after #29's fix. A new
+self-contained test, `oob_read_static_extent_safe_controls.py` (13/13), covers the boundary
+(`literal == capacity`, safe), the unsafe direction (`literal > capacity`, must stay a candidate),
+the `sizeof(src)` form and a mismatched-identifier `sizeof` (must not be suppressed), non-literal
+extents, and the conservative hex/suffixed non-matches — plus an end-to-end reconstruction of the
+real re2 shape alongside a genuinely-unsafe sibling site that correctly remains a candidate.
+
+**Combined-reporting guarantee, made explicit rather than assumed:** a new test,
+`check_oob_reportable_gate.py` (13/13, in `semantic-bucket-pilot/scanner-v2/`), verifies directly
+that a raw `CANDIDATE` record from any of the three OOB producers (`oob_write_candidates` /
+`oob_read_candidates` / `oob_compare_candidates`) never becomes `reportable=True` through
+`provenance.enrich_record()` merely because its source file resolved — for all three OOB
+candidate keys, not just OOB_READ — plus a positive control confirming the gate correctly opens
+once real, non-fabricated affirmative applicability evidence exists. This closes the same
+architectural risk `finalize_reportability()`'s formula was already designed to prevent (#35),
+now verified specifically for the OOB producers rather than assumed to hold by construction.
+
+Task #43 is complete. #39 (`OOB_READ` enablement) no longer risks reporting avoidable
+statically-safe candidates once it is enabled — but #39 remains blocked by #30 (Tremor —
+`OOB_READ` still has zero reproduced real positives) and #32 (tiered reachability), and both #38
+and #39 remain blocked by #42 (the missing guard-r01 control-gate fixture) until that gate is
+either rebuilt or replaced with a fully self-contained equivalent. No corpus run follows from this.
