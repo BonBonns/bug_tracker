@@ -64,6 +64,8 @@ def emit_candidates(fact_prefix):
         candidates.append({'verdict':'CANDIDATE','class':'OOB_COMPARE',
             'function':fns.get(c.get('enclosing_function_id')),'line':c.get('line'),
             'call':c['name'],'extent_bytes':n,'cap_A':A,'cap_B':B,'overruns':over,
+            # PROV-R01: additive orchestrator-only join keys, see oob_write_verdict.py.
+            'call_id':c['id'],'function_id':c.get('enclosing_function_id'),
             'site_id':f"{fns.get(c.get('enclosing_function_id'))}:{c.get('line')}:{c['name'].split('.')[-1]}"})
     return candidates
 

@@ -13,13 +13,22 @@ reaped so far, not a hardware-isolated per-process measurement, since no `/usr/b
 installed in this environment; still real, not fabricated).
 
 Every package ends with exactly one primary status from the required taxonomy: ANALYZED,
-DOWNLOAD_FAILED, EXTRACTION_FAILED, JS_CPG_FAILED, CPP_CPG_FAILED, EXPORT_FAILED,
-NORMALIZATION_FAILED, BINDING_UNRESOLVED, RESOURCE_LIMIT. (NO_JS_TS_SOURCE, NO_CPP_SOURCE,
-NO_PACKAGE_OWNED_NATIVE_BINDING, DOWNLOAD_FAILED, INTEGRITY_FAILED were already assigned by
-eligibility_filter.py for the non-eligible majority -- this script only runs for packages
-already marked ANALYZED there.) All intermediate artifacts (tarball, extracted tree, CPG
-binaries) are deleted after each package completes, regardless of outcome, so disk usage
+DOWNLOAD_FAILED, EXTRACTION_FAILED, PROVENANCE_FAILED, JS_CPG_FAILED, CPP_CPG_FAILED,
+EXPORT_FAILED, NORMALIZATION_FAILED, BINDING_UNRESOLVED, RESOURCE_LIMIT. (NO_JS_TS_SOURCE,
+NO_CPP_SOURCE, NO_PACKAGE_OWNED_NATIVE_BINDING, DOWNLOAD_FAILED, INTEGRITY_FAILED were already
+assigned by eligibility_filter.py for the non-eligible majority -- this script only runs for
+packages already marked ANALYZED there.) All intermediate artifacts (tarball, extracted tree,
+CPG binaries) are deleted after each package completes, regardless of outcome, so disk usage
 stays bounded across the corpus.
+
+PROV-R01 (task #35): a mandatory source-provenance manifest (see provenance.py) is built
+immediately after extraction, before ANY scanner for ANY property runs -- fail-CLOSED
+(PROVENANCE_FAILED, no scanner invoked) if it cannot be built. Every finding this run produces
+(currently only R04/R05's, the only properties this orchestrator invokes today; LOCK_BALANCE/
+PROTECTED_FIELD/OOB_WRITE/OOB_READ/OOB_COMPARE are not yet wired in -- see project tasks #36-40)
+is enriched with a real source path, a real content hash, and a best-effort vendored-vs-package-
+owned hint before this function returns -- captured while the source tree is still present,
+since it is deleted below regardless of outcome.
 """
 import json
 import os
@@ -37,6 +46,9 @@ CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engin
 JS_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/javascript-typescript/joern"
 POLYGLOT = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/polyglot/link_napi_facts.py"
 SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
+
+sys.path.insert(0, SCANNER_V2)
+import provenance  # noqa: E402 -- task #35, pipeline-wide precondition, see its own docstring
 
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
@@ -313,6 +325,30 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         return record
     record["stages"]["extract"] = {"seconds": time.time() - t0}
 
+    # PROV-R01 (task #35): pipeline-wide precondition, enforced BEFORE any scanner runs -- per
+    # direct instruction, this is not one property's own dependency, it gates the orchestrator
+    # itself. The source tree is fully present and unmodified at this exact point (right after
+    # extraction, before header staging/c2cpg ever touch it) -- the one place in this pipeline
+    # where every real source byte can still be hashed. Fail-CLOSED: if this cannot be built, no
+    # scanner runs at all, for any property, rather than silently producing findings that can
+    # never be traced back to their own real source once the source tree is deleted below.
+    t0 = time.time()
+    try:
+        prov_manifest = provenance.build_source_manifest(pkg_dir, tb, pkg_name, version)
+    except Exception as e:
+        record["stages"]["provenance_manifest"] = {"seconds": time.time() - t0}
+        record["status"] = "PROVENANCE_FAILED"
+        record["detail"] = f"{type(e).__name__}: {e}"
+        return record
+    record["stages"]["provenance_manifest"] = {"seconds": time.time() - t0,
+                                                 "n_files_hashed": len(prov_manifest["files"])}
+    # Not persisting the full per-file manifest in the final record (could be large for a
+    # big package) -- only a real summary; every individual finding still gets its own full
+    # provenance block (source_path/content_hash/provenance_hint) attached below, after the
+    # scanners run, via provenance.enrich_record.
+    record["provenance_summary"] = {"source_tree_hash": prov_manifest["source_tree_hash"],
+                                      "n_files_hashed": len(prov_manifest["files"])}
+
     # NPM-CORPUS-HDR-FIX: stage this package's own declared node-addon-api/nan headers (see
     # stage_native_dep_headers's docstring for the disclosed scope) before c2cpg runs, so
     # #include <napi.h> resolves instead of falling back to <unresolvedNamespace> for every
@@ -511,6 +547,15 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"r05 scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
+
+    # PROV-R01 (task #35): attach real source_path/content_hash/provenance_hint to every
+    # finding this package produced, using the SAME cpp_raw/methods.tsv this run already has in
+    # hand (not yet deleted) and the manifest built above -- BEFORE work_root is torn down by
+    # the caller. Only R04/R05 findings exist in this record today (LOCK_BALANCE/PROTECTED_
+    # FIELD/OOB_* are not yet wired into this orchestrator -- tasks #36-40); enrich_record is
+    # written to enrich whichever of the six properties' own finding keys are actually present,
+    # so no further change is needed here once those tasks wire the other scanners in.
+    provenance.enrich_record(record, cpp_raw, prov_manifest, pkg_dir)
 
     record["status"] = "ANALYZED"
     return record

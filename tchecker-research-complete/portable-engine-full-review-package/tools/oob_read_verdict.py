@@ -39,6 +39,8 @@ def emit_candidates(fact_prefix):
             'function':fns.get(c.get('enclosing_function_id')),'line':c.get('line'),
             'call':c['name'],'extent_value_id':evid,
             'src_capacity_bytes':scap[svid]['capacity_bytes'],
+            # PROV-R01: additive orchestrator-only join keys, see oob_write_verdict.py.
+            'call_id':c['id'],'function_id':c.get('enclosing_function_id'),
             'site_id':f"{fns.get(c.get('enclosing_function_id'))}:{c.get('line')}:{c['name']}"})
     return candidates
 

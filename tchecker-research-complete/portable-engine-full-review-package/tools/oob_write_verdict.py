@@ -83,6 +83,11 @@ def emit_candidates(fact_prefix):
             'function':fns.get(c.get('enclosing_function_id')),'line':c.get('line'),
             'call':c['name'],'extent_value_id':evid,
             'dest_capacity_bytes':_capfact['capacity_bytes'],
+            # PROV-R01: call_id/function_id are additive, orchestrator-only join keys (task
+            # #35) -- they let a caller attach real source-path/content-hash provenance to
+            # this candidate via the SAME functions/methods table this file already reads,
+            # without this producer's own verdict logic changing at all.
+            'call_id':c['id'],'function_id':c.get('enclosing_function_id'),
             'site_id':f"{fns.get(c.get('enclosing_function_id'))}:{c.get('line')}:{c['name']}"})
     return candidates
 
