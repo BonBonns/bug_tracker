@@ -7,3 +7,12 @@ __pycache__/
 
 # Local Joern install (bootstrap.sh downloads this; ~1.9GB, regenerable, never a deliverable)
 tchecker-research-complete/joern-install/
+
+# overnight-diagnostic-100: scratch smoke-test run outputs (large, regenerable, never meant to
+# be committed -- the runner script, sample files, and gate logs are the real deliverables)
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/smoke_bundles*/
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/smoke_work*.jsonl*
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/interrupt_bundles/
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/interrupt_work.jsonl*
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/evidence_bundles_100/
+semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/overnight_diagnostic_working.jsonl*

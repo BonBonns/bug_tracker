@@ -352,6 +352,16 @@ def load_exception_configs():
 STOP_REASONS = []
 _stop_lock = threading.Lock()
 
+# In-flight (pkg_name, version, work_root, bundle_dir) tuples, updated by process_one --
+# consulted by the SIGTERM/SIGINT handler below so a forced interruption still preserves
+# whatever real evidence exists for the package(s) currently being processed, as a PARTIAL
+# bundle, rather than losing it silently. "Preserve the current package's partial bundle and
+# checkpoint before stopping" (section 10) -- a signal handler is the only way to run cleanup
+# code at all once an external SIGTERM/SIGINT has been sent (a SIGKILL cannot be caught by
+# anything, ever -- that limit is disclosed, not silently assumed away).
+_in_flight = {}
+_in_flight_lock = threading.Lock()
+
 
 def request_stop(reason):
     with _stop_lock:
@@ -359,7 +369,36 @@ def request_stop(reason):
         print(f"[STOP CONDITION] {reason}", file=sys.stderr)
 
 
+def _emergency_partial_bundle_handler(signum, frame):
+    print(f"[SIGNAL {signum}] forced interruption -- writing emergency partial bundles for "
+          f"in-flight work before exiting", file=sys.stderr)
+    with _in_flight_lock:
+        items = list(_in_flight.items())
+    for (pkg, version), (work_root, bundle_dir) in items:
+        try:
+            bundle_path, manifest = evidence_bundle.write_evidence_bundle(
+                work_root, bundle_dir, pkg, version, pipeline_status="INTERRUPTED")
+            if bundle_path is None:
+                print(f"  {pkg}@{version}: interrupted before any real evidence existed yet "
+                      f"(no c2cpg/export output reached disk) -- nothing to bundle, no file "
+                      f"written (correct, not an error)", file=sys.stderr)
+            else:
+                print(f"  {pkg}@{version}: emergency bundle written, "
+                      f"completeness_status={manifest.get('completeness_status')}", file=sys.stderr)
+        except Exception as e:
+            print(f"  {pkg}@{version}: emergency bundle FAILED: {type(e).__name__}: {e}",
+                  file=sys.stderr)
+    sys.exit(143 if signum == 15 else 130)
+
+
+def install_signal_handlers():
+    import signal
+    signal.signal(signal.SIGTERM, _emergency_partial_bundle_handler)
+    signal.signal(signal.SIGINT, _emergency_partial_bundle_handler)
+
+
 def main():
+    install_signal_handlers()
     ap = argparse.ArgumentParser()
     ap.add_argument("--sample", required=True)
     ap.add_argument("--output", required=True)
@@ -434,6 +473,8 @@ def main():
                               f"{pkg}@{version}")
                 return None
 
+            with _in_flight_lock:
+                _in_flight[(pkg, version)] = (work_root, args.__dict__["bundle_dir"])
             t0 = time.time()
             try:
                 rec = run_one_diagnostic(pkg, version, tarball_url, expected_hash, exc_config,
@@ -442,6 +483,9 @@ def main():
                 rec = {"package_name": pkg, "version": version, "status": "RUNNER_ERROR",
                        "detail": f"{type(e).__name__}: {e}",
                        "traceback": traceback.format_exc(), "diagnostic_only": True}
+            finally:
+                with _in_flight_lock:
+                    _in_flight.pop((pkg, version), None)
             rec["total_seconds"] = time.time() - t0
             shutil.rmtree(work_root, ignore_errors=True)
             return rec
