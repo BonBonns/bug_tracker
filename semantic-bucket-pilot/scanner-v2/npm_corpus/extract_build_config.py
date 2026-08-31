@@ -10,9 +10,26 @@ r02c10_exceptions_enabled_try_catch control):
 
   disabled  -- NAPI_DISABLE_CPP_EXCEPTIONS and/or -fno-exceptions found, no enabling
                counter-evidence.
-  enabled   -- NAPI_CPP_EXCEPTIONS (not the DISABLE_ variant) and/or an explicit -fexceptions
-               flag found, no disabling counter-evidence.
+  enabled   -- NAPI_CPP_EXCEPTIONS (not the DISABLE_ variant), an explicit -fexceptions flag,
+               or a real `node_addon_api_except`/`node_addon_api_except_all` gyp target
+               dependency found, no disabling counter-evidence.
   conflict  -- both disabling and enabling evidence found in the same package's build config.
+
+REGRESSION FIX (node-libcurl@5.1.2 -- see study/resource_guard_r05/
+NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md for the full real account): two real, corpus-wide
+defects found and fixed here, both confirmed via direct manual verification against the
+real published tarball, not assumed:
+
+1. A flat text search cannot see gyp's own `<key>!` list-REMOVAL convention (e.g.
+   `'cflags!': ['-fno-exceptions']`, node-addon-api's own canonical `except.gypi` idiom,
+   copied inline by node-libcurl's own binding.gyp) -- a `-fno-exceptions` match INSIDE
+   such a removal list means the flag is being STRIPPED, i.e. exceptions ARE allowed, the
+   OPPOSITE of ordinary disable evidence. `_gyp_removal_spans()`/`_in_any_span()` detect
+   this and invert polarity only for matches genuinely inside a `<key>!` list body.
+2. A package can enable exceptions purely via node-addon-api's own gyp target-name
+   convention (depending on `node_addon_api_except`/`node_addon_api_except_all`) without
+   the literal text "NAPI_CPP_EXCEPTIONS" ever appearing in the package's OWN binding.gyp
+   at all -- added as a new, high-confidence enable pattern.
   unresolved -- no direct textual evidence either way. This is the SAFE DEFAULT: an automatic,
                bulk, per-package scan does not attempt the kind of one-off, manually-verified
                default-resolution reasoning RESOURCE_GUARD_R04.md applied to jpeg-turbo
@@ -41,7 +58,53 @@ DISABLE_PATTERNS = [
 ENABLE_PATTERNS = [
     (re.compile(rb'(?<!DISABLE_)NAPI_CPP_EXCEPTIONS'), "NAPI_CPP_EXCEPTIONS"),
     (re.compile(rb'(?<!-fno)-fexceptions'), "-fexceptions"),
+    # REGRESSION FIX (node-libcurl@5.1.2, see study/resource_guard_r05/
+    # NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md for the full real account): the real,
+    # documented node-addon-api gyp target-name convention
+    # (https://github.com/nodejs/node-addon-api/blob/main/doc/setup.md) -- depending on
+    # the `node_addon_api_except`/`node_addon_api_except_all` target is real,
+    # high-confidence enable evidence even when the literal text "NAPI_CPP_EXCEPTIONS"
+    # never appears anywhere in the PACKAGE's own binding.gyp. Confirmed real by
+    # directly reading node-addon-api 8.5.0's own `node_addon_api.gyp`: both targets
+    # `includes: ['except.gypi']`, which itself `'defines': ['NAPI_CPP_EXCEPTIONS']` --
+    # a real, multi-hop, externally-verified chain, not assumed. Matched as a real gyp
+    # `dependencies` entry, e.g. `"<!(node -p \"require('node-addon-api').targets\"):
+    # node_addon_api_except"` -- node-libcurl's own real, exact usage.
+    (re.compile(rb'node_addon_api_except'), "node_addon_api_except (gyp target dependency)"),
 ]
+
+# REGRESSION FIX (node-libcurl@5.1.2): gyp's own `<key>!` list convention REMOVES
+# entries from an inherited list rather than adding to it. Confirmed real and NOT a
+# one-off: this is node-addon-api's own canonical `except.gypi` idiom --
+# `'cflags!': ['-fno-exceptions']`, `'cflags_cc!': ['-fno-exceptions']` -- which
+# node-libcurl's own binding.gyp copies inline, verbatim, with its own comment
+# "# Allow C++ exceptions" directly above it. A flat text search cannot see this: it
+# found the substring "-fno-exceptions" and classified node-libcurl "disabled", the
+# OPPOSITE of the source's own explicit, commented intent -- confirmed as a real
+# regression by manual verification (fetching the real published tarball, tracing
+# `Easy::ReadFunction`'s real registration/callers, and reading node-addon-api 8.5.0's
+# own real source; see study/resource_guard_r05/NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md).
+# `_gyp_removal_spans()` finds the real byte ranges of every `'<key>!': [...]` /
+# `"<key>!": [...]` list body in a binding.gyp file, so a flag matched INSIDE one can be
+# classified with INVERTED polarity instead of the file's own naive, flat-search
+# polarity. Deliberately bounded, disclosed scope: only flat string lists (cflags,
+# cflags_cc, defines) are matched -- `[^\]]*` stops at the first `]`, so a list
+# containing a nested `[...]`/`{...}` would not be captured correctly; real cflags/
+# cflags_cc/defines lists in practice are always flat string lists, confirmed on every
+# real binding.gyp read during this fix's own verification. Only meaningful for
+# binding.gyp files -- gyp's `!`-suffix list-removal convention does not exist in
+# CMake/meson/GN/package.json, so it is never applied to those families.
+GYP_REMOVAL_LIST_RE = re.compile(rb'''["'][A-Za-z_]+!["']\s*:\s*\[([^\]]*)\]''')
+
+
+def _gyp_removal_spans(content):
+    """Real byte-offset spans of gyp `<key>!` (list-removal) bodies in `content` -- see
+    `GYP_REMOVAL_LIST_RE`'s own module-level comment."""
+    return [m.span(1) for m in GYP_REMOVAL_LIST_RE.finditer(content)]
+
+
+def _in_any_span(pos, spans):
+    return any(start <= pos < end for start, end in spans)
 
 CONFIG_FILE_SUFFIXES = {
     "binding.gyp": "binding.gyp",
@@ -102,12 +165,25 @@ def classify_from_tarball(tarball_bytes):
         except Exception:
             continue
         families.add(family)
+        removal_spans = _gyp_removal_spans(content) if family == "binding.gyp" else []
         for pat, label in DISABLE_PATTERNS:
-            if pat.search(content):
+            matches = list(pat.finditer(content))
+            if not matches:
+                continue
+            if any(not _in_any_span(m.start(), removal_spans) for m in matches):
                 disable_evidence.append(f"{name}: {label}")
+            if any(_in_any_span(m.start(), removal_spans) for m in matches):
+                enable_evidence.append(
+                    f"{name}: {label} (found inside a gyp `!`-list removal -- real enable evidence)")
         for pat, label in ENABLE_PATTERNS:
-            if pat.search(content):
+            matches = list(pat.finditer(content))
+            if not matches:
+                continue
+            if any(not _in_any_span(m.start(), removal_spans) for m in matches):
                 enable_evidence.append(f"{name}: {label}")
+            if any(_in_any_span(m.start(), removal_spans) for m in matches):
+                disable_evidence.append(
+                    f"{name}: {label} (found inside a gyp `!`-list removal -- real disable evidence)")
     tf.close()
 
     if disable_evidence and enable_evidence:
