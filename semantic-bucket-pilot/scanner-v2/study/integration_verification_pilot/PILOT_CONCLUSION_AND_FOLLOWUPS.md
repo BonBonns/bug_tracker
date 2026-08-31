@@ -606,3 +606,90 @@ remains a disclosed, unimplemented refinement. #38 (`OOB_WRITE` enablement) stay
 #44 is reviewed and its gate is reproducible per direct instruction — the 100-package overnight
 diagnostic run may proceed independently once scheduled, but `OOB_INDEX_WRITE` must remain
 non-reportable during it. No corpus run follows from this.
+
+## Overnight 100-package frozen diagnostic run: launched
+
+Real, non-fabricated launch record. Full implementation on `claude/overnight-diagnostic-100`
+(branched from `claude/provenance-preservation-task35` @ `40a447b`).
+
+**Integration branch composition** (cherry-picked, hashes recorded in each commit; never a blind
+merge that could reintroduce a stale scanner copy from another branch):
+- `evidence_bundle.py` + `run_pipeline_one_r06.py` (reference) + tests, from
+  `claude/r06-fix01i-integration` @ `0463bd6` — the real, tested, atomic-write, gzip-compressed
+  per-package evidence bundle capability (task #15).
+- `promote_via_js_linkage.py`, same source — cherry-picked for record, but **NOT used** in this
+  run's pipeline (hard, module-level import dependency on `resource_guard_verdict_r06.py`, which
+  this branch deliberately excludes since #41 has not merged R06/FIX01I into the driven r04/r05
+  lineage). Reachability defaults to `REACHABILITY_UNRESOLVED` for every finding this run
+  produces, consistent with task #32 not being complete.
+- FIX01I crosslang linker (`export_neutral.sc`, `normalize_joern_facts.py`,
+  `frontends/polyglot/link_napi_facts.py`), same source — the frozen, gated cross-language
+  revision. Re-verified on this branch: `gate_crosslang_link_fix.py` passes.
+- Explicitly **did not** take `resource_guard_verdict_r06.py` — Resource Guard on this run uses
+  the already-driven, already-gated r04/r05 lineage, labeled `PRECISION_FIX_NOT_INTEGRATED`.
+- Real corpus-wide primitive-coverage evidence (`primitive_search_results.jsonl`, all 494/494
+  eligible packages, task #28), cherry-picked from `claude/oob-lockbalance-integration-pilot` @
+  `94bf8c2` — used for real, non-fabricated stratified sample selection, never re-derived.
+
+**provenance.py extended**: `oob_index_write_candidates` (task #44's own producer, driven for
+the first time in this run) was never enriched by `provenance.enrich_record` before this —
+extended, verified (`check_oob_reportable_gate.py` now 17/17, `check_provenance.py` still 40/40).
+
+**Pre-launch gate battery**: every currently-reproducible gate passes (`prelaunch_gates.log`,
+committed) — `check_provenance` 40/40, `check_oob_reportable_gate` 17/17, the adapted
+`evidence_bundle` tests, `gate_crosslang_link_fix`, `oob_read_capkey_controls` 5/5,
+`oob_read_static_extent_safe_controls` 13/13, `param_length_capacity_controls` 16/16,
+`cfg_loop_guard_controls` 9/9, the frozen `oob-index-r01` gate 9/9, `oob-write-r05-sizeof`,
+`oob-compare-r07`, `check_lock_balance` 11/11, `check_protected_field` 11/11,
+`gate_resource_guard_r04` 12/12, `gate_resource_guard_r05` all pass. Explicitly recorded and
+NOT reproducible: guard-r01's OOB control gate (task #42, missing external fixture from an
+untracked prior-session process) — this is why OOB output stays diagnostic in this run.
+
+**100-package sample, frozen**: `select_overnight_sample.py` — 75 deterministic greedy
+stratified + 25 deterministic random (seed 20260831), built entirely from prior, already-
+completed pipeline evidence, never from this run's own output. Deduplicated by real, freshly-
+computed `source_tree_sha256` (100/100 unique, 0 replacements needed). All 5 forced-inclusion
+packages present (node-libcurl, node-crc16, re2, `@2060.io/ffi-napi`, node-snap7). All 19 real
+coverage strata covered.
+
+**`run_diagnostic_100.py`**: additively wires all six property scanners onto the real, proven
+`run_pipeline_one.py` stages (never modifies that file). `diagnostic_only` mode (always on):
+`enforce_diagnostic_only()` forces `reportable=False` on every finding across all six
+properties after `provenance.enrich_record()` runs, preserving `scanner_candidate`, raw verdict,
+evidence, `applicability_status`, `adjudication_status` untouched;
+`preflight_assert_non_reportable()` independently re-checks and aborts if any record is ever
+found with `reportable=True`. Real diagnostic labels: `PRECISION_FIX_NOT_INTEGRATED` (Resource
+Guard), `UNVALIDATED_PROPERTY` (`OOB_COMPARE`), `DEVELOPMENT_ONLY` (PARAM-CAP-R01 candidates
+specifically — the pre-existing `SYNTACTIC_ELEM_COUNT` fixed-array candidates are NOT labeled
+development-only), `REACHABILITY_UNRESOLVED` (all findings). Checkpointing: one record per
+line, flushed+fsynced immediately; immutable checkpoints every 10 packages; resume by
+`(package_name, version, source_tree_sha256)`; duplicate completed keys refused via a running
+`written_keys` set. Resource settings: `NPM_CORPUS_TIMEOUT_MULTIPLIER=5` set before importing
+`run_pipeline_one.py` so its own `STAGE_TIMEOUT`/`NORMALIZE_TIMEOUT` land on exactly 900s;
+`SCAN_TIMEOUT` overridden to exactly 300s; workers capped at 2; free-disk checked before/after
+each package (5GB floor). Stop conditions (>3 consecutive same-stage failures; free disk below
+floor) checked incrementally via a proper streaming worker loop
+(`concurrent.futures.wait(FIRST_COMPLETED)`, not a batching `.map()`), so in-flight work drains
+and a checkpoint is written before the run actually stops.
+
+**Forced-interruption handling**: `install_signal_handlers()` traps SIGTERM/SIGINT and writes an
+emergency partial `evidence_bundle` for whatever real evidence exists on disk for any in-flight
+package before exiting (SIGKILL cannot be caught by anything — disclosed, not assumed away).
+
+**Full 7-point smoke test (section 6), all real, all passed**: node-crc16 (small), node-libcurl
+(medium — reproduced its known real `r05` false-positive finding, `Easy::ReadFunction`, exactly
+as established earlier this session), re2 (large, 551 files) — all evidence bundles reopen;
+every scanner has independent output keys, no collisions; provenance paths/hashes resolve;
+`reportable=False` everywhere (0 across every finding in every smoke run); resume does not
+duplicate (0 reprocessed when nothing pending, exactly 1 when 1 was pending); a forced SIGTERM
+mid-package (node-snap7) produced a real `PARTIAL` bundle, correctly refused by
+`require_complete_bundle()`; resume correctly reprocessed the interrupted package fresh.
+
+**Launch**: real 100-package background run started, `--workers 2 --resume --diagnostic-only`,
+confirmed healthy in flight (2 packages already `ANALYZED` — node-crc16, node-libcurl — with re2
+and `@2060.io/ffi-napi` processing concurrently at the moment of this check). The remaining 394
+packages are explicitly NOT launched, per direct instruction. A morning report (completion
+status, per-stage timing, candidate counts by property, abstention counts, reachability-tier
+distribution, resource limits hit, and confirmation that every record remained
+`reportable=False`) will follow once the run completes or is next checked in — no vulnerability
+totals, true-negative claims, or corpus-prevalence claims will be drawn from this diagnostic run.
