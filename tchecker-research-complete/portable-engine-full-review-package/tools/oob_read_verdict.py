@@ -17,7 +17,25 @@ def emit_candidates(fact_prefix):
     fns={f['id']:f.get('name') for f in d.get('functions',[])}
     calls={c['id']:c for c in d['calls']}
     roles=json.load(open(fact_prefix+'.operandrole.json'))['operand_roles']
-    scap={f['storage_value_id']:f for f in json.load(open(fact_prefix+'.srccapacity.json'))['src_capacities']}
+    _src_facts=json.load(open(fact_prefix+'.srccapacity.json'))['src_capacities']
+    # CAP-KEY-R01 (task #29): join capacity to an operand by EXPLICIT identity kind, never
+    # by a sentinel storage id. A field access collapses storage_value_id to -1; -1 is NEVER
+    # a valid join key -- treating it as one made every read site whose own field-identity
+    # resolution failed (svid==-1) spuriously collide on whichever ONE unrelated FIELD fact
+    # happened to exist in the package (observed: a uniform, bogus src_capacity_bytes=5
+    # borrowed from an unrelated struct member, on 6 of 7 real re2 candidates). Mirrors the
+    # dcap/dcap_by_call split already correct in oob_write_verdict.py. VALUE_ID facts join
+    # by storage_value_id (>=0). FIELD facts join by call_id (unique per site).
+    scap={}                       # storage_value_id -> fact  (VALUE_ID only, sid>=0)
+    scap_by_call={}               # call_id -> fact           (FIELD facts)
+    for f in _src_facts:
+        kind=f.get('storage_identity_kind','VALUE_ID')
+        if kind=='FIELD':
+            scap_by_call[f['call_id']]=f
+        else:
+            sid=f['storage_value_id']
+            if sid is not None and sid>=0:      # sentinel/negative ids are not joinable
+                scap[sid]=f
     # ISOLATION: only SOURCE_CAPACITY bounds enter the read reader.
     all_bounds=json.load(open(fact_prefix+'.bound.json'))['bounds']
     src_bounds={(b['checked_value_id'],b['bound_side']) for b in all_bounds
@@ -33,12 +51,18 @@ def emit_candidates(fact_prefix):
         evid=(earg or {}).get('value_ref',{}).get('referenced_id') or (earg or {}).get('value_ref',{}).get('id')
         sarg=next((a for a in c.get('arguments',[]) if a['index']==o['READ_SRC']['operand_index']),None)
         svid=(sarg or {}).get('value_ref',{}).get('referenced_id') or (sarg or {}).get('value_ref',{}).get('id')
-        if evid is None or svid not in scap: continue             # not representable -> abstain
+        # resolve capacity by identity kind: VALUE_ID by sid (>=0), FIELD by call_id.
+        _capfact=None
+        if svid is not None and svid>=0 and svid in scap:
+            _capfact=scap[svid]
+        elif cid in scap_by_call:
+            _capfact=scap_by_call[cid]           # field fact for THIS site
+        if evid is None or _capfact is None: continue             # not representable -> abstain
         if (evid,'SOURCE_CAPACITY') in src_bounds: continue       # validly bounded -> no candidate
         candidates.append({'verdict':'CANDIDATE','class':'OOB_READ',
             'function':fns.get(c.get('enclosing_function_id')),'line':c.get('line'),
             'call':c['name'],'extent_value_id':evid,
-            'src_capacity_bytes':scap[svid]['capacity_bytes'],
+            'src_capacity_bytes':_capfact['capacity_bytes'],
             # PROV-R01: additive orchestrator-only join keys, see oob_write_verdict.py.
             'call_id':c['id'],'function_id':c.get('enclosing_function_id'),
             'site_id':f"{fns.get(c.get('enclosing_function_id'))}:{c.get('line')}:{c['name']}"})
