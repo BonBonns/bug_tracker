@@ -13,7 +13,9 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from evidence_bundle import write_evidence_bundle, BUNDLED_RELATIVE_PATHS
+from evidence_bundle import (write_evidence_bundle, BUNDLED_RELATIVE_PATHS, SCHEMA_VERSION,
+                              read_bundle_manifest, require_complete_bundle,
+                              IncompleteBundleError)
 
 
 def check(name, cond, detail=''):
@@ -34,6 +36,7 @@ def make_full_work_root(root):
     (work / "build_config.json").write_text(json.dumps({"exception_configuration": "disabled"}))
     (work / "r04_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
     (work / "r05_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
+    (work / "r06_out.json").write_text(json.dumps({"classification": {}, "findings": []}))
     (work / "merged.json").write_text(json.dumps({
         "cross_language_bindings": {"idiom": "napi-exports-set", "registrations": [{"a": 1}],
                                      "linked_calls": [], "unlinked_calls": []}
@@ -121,6 +124,81 @@ with tempfile.TemporaryDirectory() as td:
                 f"got path={path}")
     ok &= check("slash replaced in the filename itself", "@cartesi__machine" in os.path.basename(path),
                 f"got {os.path.basename(path)}")
+
+# --- Fixture 5: bundle integrity fields -- schema, tarball hash, analyzer hashes, artifact
+# hashes, completeness_status, for a COMPLETE (pipeline_status="ANALYZED") bundle ---
+print('=== Fixture 5: integrity fields on a complete bundle ===')
+with tempfile.TemporaryDirectory() as td:
+    work_root = os.path.join(td, "pkg_root")
+    make_full_work_root(work_root)
+    bundle_dir = os.path.join(td, "bundles")
+    fake_tarball_hash = "a" * 64
+    path, manifest = write_evidence_bundle(work_root, bundle_dir, "some-pkg", "1.2.3",
+                                            tarball_sha256=fake_tarball_hash,
+                                            pipeline_status="ANALYZED")
+    ok &= check("schema_version recorded", manifest.get("schema_version") == SCHEMA_VERSION)
+    ok &= check("tarball_sha256 passed through", manifest.get("tarball_sha256") == fake_tarball_hash)
+    ok &= check("analyzer_hashes has all 4 real analyzer files, none None",
+                set(manifest.get("analyzer_hashes", {})) == {
+                    "resource_guard_verdict_r06.py", "extract_build_config.py",
+                    "run_pipeline_one_r06.py", "evidence_bundle.py"}
+                and all(manifest["analyzer_hashes"].values()),
+                str(manifest.get("analyzer_hashes")))
+    ok &= check("artifact_hashes has a real sha256 for every flat included file",
+                all(manifest["artifact_hashes"].get(rel) for rel in
+                    ("cpp_facts.json", "js_facts.json", "build_config.json",
+                     "r04_out.json", "r05_out.json", "r06_out.json")))
+    ok &= check("artifact_hashes for cpp_raw/ is a per-inner-file dict",
+                isinstance(manifest["artifact_hashes"].get("cpp_raw"), dict)
+                and "methods.tsv" in manifest["artifact_hashes"]["cpp_raw"])
+    ok &= check("completeness_status == COMPLETE (nothing missing, status ANALYZED)",
+                manifest.get("completeness_status") == "COMPLETE")
+
+    # Loader-side guard: require_complete_bundle succeeds and returns the same manifest.
+    loaded = require_complete_bundle(path)
+    ok &= check("require_complete_bundle succeeds on a real complete bundle",
+                loaded.get("completeness_status") == "COMPLETE")
+    read_back = read_bundle_manifest(path)
+    ok &= check("read_bundle_manifest round-trips the real manifest embedded in the bundle",
+                read_back["package_name"] == "some-pkg"
+                and read_back["completeness_status"] == "COMPLETE"
+                and read_back["tarball_sha256"] == fake_tarball_hash,
+                str(read_back))
+
+# --- Fixture 6: PARTIAL bundle (real missing files, or a RESOURCE_LIMIT pipeline_status) --
+# must be marked PARTIAL and require_complete_bundle must refuse it. ---
+print('=== Fixture 6: partial/resource-limit bundle refused by the loader guard ===')
+with tempfile.TemporaryDirectory() as td:
+    work_root = os.path.join(td, "pkg_root")
+    work = Path(work_root) / "work"
+    work.mkdir(parents=True)
+    (work / "cpp_raw").mkdir()
+    (work / "cpp_raw" / "methods.tsv").write_text("1\towner\tfoo\n")
+    bundle_dir = os.path.join(td, "bundles")
+    path, manifest = write_evidence_bundle(work_root, bundle_dir, "limited-pkg", "0.9.0",
+                                            pipeline_status="RESOURCE_LIMIT")
+    ok &= check("completeness_status == PARTIAL (real files missing)",
+                manifest.get("completeness_status") == "PARTIAL")
+    raised = False
+    try:
+        require_complete_bundle(path)
+    except IncompleteBundleError:
+        raised = True
+    ok &= check("require_complete_bundle REFUSES a partial bundle (raises, never silently returns)",
+                raised)
+
+# --- Fixture 7: a bundle with EVERY file present but pipeline_status != ANALYZED is still
+# PARTIAL -- completeness is not just "nothing missing", the overall pipeline run matters too.
+print('=== Fixture 7: all files present but pipeline_status != ANALYZED -> still PARTIAL ===')
+with tempfile.TemporaryDirectory() as td:
+    work_root = os.path.join(td, "pkg_root")
+    make_full_work_root(work_root)
+    bundle_dir = os.path.join(td, "bundles")
+    path, manifest = write_evidence_bundle(work_root, bundle_dir, "weird-pkg", "1.0.0",
+                                            pipeline_status="RESOURCE_LIMIT")
+    ok &= check("nothing missing, but pipeline_status=RESOURCE_LIMIT -> PARTIAL, not COMPLETE",
+                not manifest["missing"] and manifest.get("completeness_status") == "PARTIAL",
+                str(manifest.get("completeness_status")))
 
 print()
 print('OVERALL:', 'PASS' if ok else 'FAIL')

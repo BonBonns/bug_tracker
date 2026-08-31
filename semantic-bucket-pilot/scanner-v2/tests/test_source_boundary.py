@@ -81,11 +81,19 @@ def gate_r05_controls_fixture():
     if finding is None:
         return ok
     sbe = finding.get('source_boundary_evidence') or {}
-    ok &= check('source_boundary == JS_CALLBACK_INFO_PARAMETER',
-                sbe.get('source_boundary') == 'JS_CALLBACK_INFO_PARAMETER', str(sbe))
-    ok &= check('attacker_controlled is True', sbe.get('attacker_controlled') is True, str(sbe))
-    ok &= check('parameter_type is a real CallbackInfo type',
+    # R06 correction (this revision): reaching ANY parameter -- including a real
+    # Napi::CallbackInfo-typed one -- is no longer auto-promoted to attacker-controlled.
+    # An earlier revision's promotion rule here was an overclaim (see module docstring's
+    # own account of the real Cartesi re-verification that caught it); real promotion,
+    # gated on actual FIX01I cross-language evidence, lives entirely outside this file.
+    ok &= check('source_boundary == SOURCE_BOUNDARY_UNRESOLVED (never auto-promoted here)',
+                sbe.get('source_boundary') == 'SOURCE_BOUNDARY_UNRESOLVED', str(sbe))
+    ok &= check('attacker_controlled is False', sbe.get('attacker_controlled') is False, str(sbe))
+    ok &= check('parameter_type is still recorded as a real CallbackInfo type '
+                '(informational -- consumed by the separate integration layer, not here)',
                 _is_js_callback_origin_type(sbe.get('parameter_type')), str(sbe))
+    ok &= check('is_js_callback_origin_type flag is True',
+                sbe.get('is_js_callback_origin_type') is True, str(sbe))
     ok &= check('field renamed from attacker_influence_evidence',
                 'attacker_influence_evidence' not in finding)
     return ok

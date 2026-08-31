@@ -32,6 +32,7 @@ silently deletes the only path to a verdict-only rerun (no saved raw facts for R
 to re-scan without a full Joern rebuild). CPG binaries and the extracted source tree are
 still deleted -- only real scanner-consumed evidence is kept, compressed, per package.
 """
+import hashlib
 import json
 import os
 import resource
@@ -41,6 +42,7 @@ import sys
 import tarfile
 
 from evidence_bundle import write_evidence_bundle
+from extract_build_config import classify_target_aware
 import time
 import urllib.error
 import urllib.request
@@ -291,6 +293,35 @@ def stage_native_dep_headers(pkg_dir, work_root):
     return include_dirs, evidence
 
 
+def find_and_classify_gyp_targets(pkg_dir):
+    """R06 TARGET-SCOPING FIX -- locates this package's own real binding.gyp (searched from
+    pkg_dir's root, shallowest match first -- real corpus packages observed so far keep it at
+    the package root; a bounded recursive search catches the rare nested case without an
+    unbounded walk) and returns (relative_gyp_path, per_target_list) via the real,
+    already-tested `classify_target_aware()` parser, or (None, None) if no real binding.gyp
+    exists in this package at all (a cmake/meson/gn-only package, or no native build file --
+    both real, disclosed cases; the caller/scanner then falls back to the package-wide
+    npm_build_configuration.tsv value, never guesses per-target)."""
+    matches = []
+    for dirpath, dirnames, filenames in os.walk(pkg_dir):
+        if "binding.gyp" in filenames:
+            rel_dir = os.path.relpath(dirpath, pkg_dir)
+            depth = 0 if rel_dir == "." else rel_dir.count(os.sep) + 1
+            matches.append((depth, os.path.join(dirpath, "binding.gyp")))
+    if not matches:
+        return None, None
+    matches.sort(key=lambda t: t[0])
+    gyp_path = matches[0][1]
+    try:
+        with open(gyp_path, "rb") as f:
+            content = f.read()
+    except Exception:
+        return None, None
+    per_target = classify_target_aware(content)
+    rel_path = os.path.relpath(gyp_path, pkg_dir)
+    return rel_path, (per_target or None)
+
+
 def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     record = {"package_name": pkg_name, "version": version, "stages": {}, "status": None,
               "detail": ""}
@@ -307,6 +338,10 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["status"] = "DOWNLOAD_FAILED"
         record["detail"] = err
         return record
+    # R06 BUNDLE INTEGRITY (item 4): real sha256 of the actual downloaded tarball bytes,
+    # carried through on the record so main()'s own write_evidence_bundle() call can cite it
+    # without re-fetching or re-hashing.
+    record["tarball_sha256"] = hashlib.sha256(tb).hexdigest()
 
     t0 = time.time()
     try:
@@ -469,10 +504,23 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         return record
     record["stages"]["polyglot_link"] = {"seconds": time.time() - t0}
 
+    # R06 TARGET-SCOPING FIX: capture this package's own real binding.gyp (already extracted
+    # into pkg_dir) and its real per-target classification, so the scanner can associate each
+    # finding's own source file with the SPECIFIC target that compiles it, rather than the
+    # package-wide npm_build_configuration.tsv value alone. package_wide is kept as the
+    # required fallback for a non-gyp (cmake/meson/gn) package, or if no binding.gyp was found
+    # -- never silently dropped, always present for that disclosed scope boundary.
+    t0 = time.time()
+    gyp_path, gyp_targets = find_and_classify_gyp_targets(pkg_dir)
+    record["stages"]["gyp_target_scoping"] = {"seconds": time.time() - t0,
+                                                "gyp_path": gyp_path,
+                                                "n_targets": len(gyp_targets) if gyp_targets else 0}
     build_config_path = os.path.join(work, "build_config.json")
     with open(build_config_path, "w") as f:
-        json.dump({"exception_configuration": exception_config or "unresolved",
-                    "evidence": [], "citation": "from npm_build_configuration.tsv"}, f)
+        json.dump({"schema": "build_config/2",
+                    "exception_configuration": exception_config or "unresolved",
+                    "evidence": [], "citation": "from npm_build_configuration.tsv",
+                    "gyp_path": gyp_path, "gyp_targets": gyp_targets}, f)
 
     r04_out = os.path.join(work, "r04_out.json")
     t0 = time.time()
@@ -524,6 +572,33 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"r05 scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["r05_scan"] = {"seconds": time.time() - t0}
+
+    # RESOURCE-GUARD-R06: run alongside R04/R05, not instead of them -- same A/B discipline.
+    # R06's own two corrections (target-scoped build config, source-boundary gate) are new,
+    # real behavior; keeping R04/R05's own outputs unchanged lets a reader see exactly what
+    # R06 adds/removes relative to both, never silently replacing prior numbers.
+    r06_out = os.path.join(work, "r06_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, f"{SCANNER_V2}/resource_guard_verdict_r06.py",
+                         cpp_raw, r06_out, "--real", "--build-config", build_config_path],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(r06_out) as f:
+            r06_doc = json.load(f)
+        record["r06_classification"] = r06_doc.get("classification", {})
+        record["r06_findings"] = r06_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"r06_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"r06 scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record
@@ -584,12 +659,16 @@ def main():
             # recorded, never silently swallowed, and never blocks the corpus loop from
             # continuing (a bundling bug must not turn into a lost package result).
             try:
-                bundle_path, bundle_manifest = write_evidence_bundle(work_root, bundle_dir, pkg, version)
+                bundle_path, bundle_manifest = write_evidence_bundle(
+                    work_root, bundle_dir, pkg, version,
+                    tarball_sha256=rec.get("tarball_sha256"),
+                    pipeline_status=rec.get("status"))
                 rec["evidence_bundle"] = {
                     "bundle_path": bundle_path,
                     "included": bundle_manifest["included"],
                     "missing": bundle_manifest["missing"],
                     "compressed_bytes": bundle_manifest.get("compressed_bytes"),
+                    "completeness_status": bundle_manifest.get("completeness_status"),
                 }
             except Exception as e:
                 rec["evidence_bundle"] = {"error": f"{type(e).__name__}: {e}"}

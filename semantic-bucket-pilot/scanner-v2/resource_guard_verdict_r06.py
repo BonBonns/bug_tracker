@@ -18,22 +18,45 @@ PARAMETER is not evidence of attacker/JS control on its own -- a real, corpus-wi
 defect, confirmed on this one real site but not specific to it.
 
 R06's one addition: `backward_attacker_trace` no longer reports a reached parameter as
-established attacker influence unconditionally. It checks the REACHED parameter's own real
-`type_full_name` (already present in the same `parameters.tsv` facts this file already
-loads, just not previously consulted) against `JS_CALLBACK_ORIGIN_TYPES` -- the real,
-canonical node-addon-api N-API entry-point parameter type, `Napi::CallbackInfo` (matched as
-a substring, tolerant of `const `/`&`/namespace-qualification variance, e.g.
-`"const Napi::CallbackInfo &"`). A value that traces back to a `Napi::CallbackInfo`-typed
-parameter has REAL, structural, verified JS-linkage -- N-API's own only mechanism for
-passing JS-caller-supplied data into native code is `info[i]` access on exactly this
-parameter type, confirmed real on Cartesi's own genuine, previously-recovered findings
-(the required positive development case for this fix). Any OTHER reached parameter (an
-ordinary C++ parameter of an internal helper or a native-library-invoked callback, exactly
-`Easy::ReadFunction`'s own real shape) is reported as `SOURCE_BOUNDARY_UNRESOLVED` --
-explicitly, not silently dropped -- rather than claimed as attacker-controlled evidence.
-node-libcurl's own real `ReadFunction` finding is the required rejection case for this fix:
-its `size` parameter is NOT `Napi::CallbackInfo`-typed, so it now correctly reports
-`SOURCE_BOUNDARY_UNRESOLVED` instead of implying attacker/JS control.
+established attacker influence unconditionally -- EVERY reached parameter, with NO
+exception, is now reported as `SOURCE_BOUNDARY_UNRESOLVED`, `attacker_controlled: False`.
+
+An EARLIER revision of this fix tried to draw a line here: a parameter whose own real
+`type_full_name` (`parameters.tsv`) matches `JS_CALLBACK_ORIGIN_TYPES` (`Napi::CallbackInfo`,
+node-addon-api's own real N-API entry-point parameter type) was auto-promoted to
+`attacker_controlled: True`, on the theory that reaching this ONE specific parameter type is
+itself real, structural, verified JS-linkage. Direct, real re-verification against Cartesi's
+own cached raw facts (`/tmp/cartesi_raw`, the SAME real corpus package this fix's own prior
+revision cited as already confirming that theory) found this claim was NOT actually true:
+Cartesi's 3 real `ReadMemory`/`ReadVirtualMemory`/`ReadConsoleOutput` findings all trace to
+`None` (the walk never reaches ANY parameter, `Napi::CallbackInfo`-typed or otherwise) --
+the real code path is `get_u64(env, info[1], "length", &length)`, an OUT-PARAMETER helper
+call (`&length` passed by address, populated internally by `get_u64` from `info[1]`), a
+dataflow shape `backward_attacker_trace`'s own identifier/call walk does not model at all.
+The prior revision's claim of a confirmed Cartesi positive case was therefore never actually
+exercised by real code -- an overclaim caught by direct re-verification, not by a failing
+fixture, and corrected here rather than left standing. More generally: even where a reached
+parameter genuinely IS `Napi::CallbackInfo`-typed, that alone proves the ENCLOSING FUNCTION
+is a real N-API entry point -- it does NOT by itself prove that THIS SPECIFIC traced value
+came from a JS-caller-supplied argument (the function could equally derive it from a fixed
+policy, an internal computation, or a `CallbackInfo`-typed parameter that is never actually
+indexed for this particular value) -- too permissive a promotion rule for what the evidence
+actually establishes. `JS_CALLBACK_ORIGIN_TYPES`/`_is_js_callback_origin_type` are kept in
+this file (the parameter's own real type is still recorded on every `SOURCE_BOUNDARY_
+UNRESOLVED` result, as `parameter_type`) because a real, separate, ADDITIONAL layer --
+implemented on `claude/r06-fix01i-integration`, never merged into this frozen R06 lineage --
+uses exactly this signal, combined with real cross-language linking evidence
+(`link_napi_facts.py`) and a real, structural check for the `info[N]`-plus-out-parameter
+call shape Cartesi's own code actually uses, to promote a specific finding only when a real
+JS argument demonstrably reaches the traced value. That promotion logic is explicitly out of
+scope for this file: R05/R06 operate on C++-only facts and have no JS facts loaded at all --
+a real, disclosed, bounded scope, not an oversight.
+
+node-libcurl's own real `ReadFunction` finding remains the required rejection case for this
+fix: its `size` parameter is an ordinary `size_t`, not `Napi::CallbackInfo`-typed, and
+`Easy::ReadFunction` is never called by JS at all (registered with libcurl via
+`curl_easy_setopt`) -- it correctly reports `SOURCE_BOUNDARY_UNRESOLVED` either way, now for
+the same reason every other reached parameter does.
 
 This gate corrects the EVIDENCE FIELD's own claimed meaning; it does not suppress or change
 the underlying `VALUE_ACQUISITION_GUARD_MISSING` (etc.) verdict itself, which was never
@@ -42,10 +65,6 @@ construction code: `attacker_trace` is attached to the finding as supplementary 
 never used as a precondition for reporting the finding at all) -- the contract's own failure
 predicate (an unguarded acquisition result) is a real, separate, still-valid claim
 regardless of whether attacker influence on the SIZE argument specifically is proven.
-Establishing real JS-source-to-native-argument linkage beyond the CallbackInfo-parameter
-case (e.g. via the separate cross-language linker, `link_napi_facts.py`) is explicitly out
-of scope for this file -- R05/R06 operate on C++-only facts and have no JS facts loaded at
-all; a real, disclosed, bounded scope, not an oversight.
 
 The original R05 docstring, describing the structural-recovery mechanism this file also
 still carries unchanged, follows below for the real, complete record:
@@ -95,6 +114,7 @@ Usage: resource_guard_verdict_r05.py RAW_DIR OUT.json [--real] [--build-config P
 """
 import base64
 import json
+import os
 import pathlib
 import sys
 from collections import defaultdict
@@ -102,6 +122,12 @@ from collections import defaultdict
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from resource_contracts_r04 import SYNTHETIC_CONTRACTS, REAL_CONTRACTS
 from resource_contracts_r05 import RECOVERY_CONTRACTS
+
+# R06 TARGET-SCOPING FIX: reuse npm_corpus/extract_build_config.py's own real, already-tested
+# per-target gyp matcher, rather than re-implementing it here -- single source of truth, no
+# drift risk between the pipeline's own extraction and this scanner's own resolution.
+sys.path.insert(0, os.path.join(__file__.rsplit("/", 1)[0], "npm_corpus"))
+from extract_build_config import resolve_build_config_for_targets
 
 LOGICAL_PASSTHROUGH = {"<operator>.logicalAnd", "<operator>.logicalOr", "LLVM_UNLIKELY",
                        "LLVM_LIKELY"}
@@ -201,19 +227,33 @@ def match_recovery_contract(call_name):
     return None
 
 
-# --- R04 APPLICABILITY GATE -- UNCHANGED from resource_guard_verdict_r04.py. ------------------
+# --- R04 APPLICABILITY GATE -- package-wide fields UNCHANGED from resource_guard_verdict_r04.py.
 def load_build_config(raw, explicit_path):
+    """R06 TARGET-SCOPING FIX: now also passes through `gyp_targets`/`gyp_path` (real,
+    per-target classification from run_pipeline_one_r06.py's own build_config.json, absent
+    on an older/non-gyp build_config.json -- both real, disclosed cases) alongside the
+    ORIGINAL package-wide `exception_configuration`/`evidence`/`citation` fields, which
+    remain the required fallback for a finding whose own source file cannot be resolved to
+    a specific gyp target (see `resolve_exc_config_for_method` below). `gyp_targets` is kept
+    even when the package-wide `exception_configuration` itself is invalid/unresolved --
+    per-target resolution can still give a DEFINITIVE per-finding answer even when the
+    flat, package-wide classifier could only report "unresolved"/"conflict" for the whole
+    package, which is exactly the real problem item 1 exists to fix."""
     path = pathlib.Path(explicit_path) if explicit_path else (pathlib.Path(raw) / "build_config.json")
     if not path.exists():
         return {"exception_configuration": "unresolved", "evidence": [],
                 "citation": f"no build_config.json found at {path} -- treated as unresolved, "
-                            "never defaulted to disabled"}
+                            "never defaulted to disabled",
+                "gyp_targets": None, "gyp_path": None}
     try:
         cfg = json.loads(path.read_text())
     except Exception as e:
         return {"exception_configuration": "unresolved", "evidence": [],
                 "citation": f"build_config.json at {path} failed to parse ({e}) -- treated as "
-                            "unresolved, never defaulted to disabled"}
+                            "unresolved, never defaulted to disabled",
+                "gyp_targets": None, "gyp_path": None}
+    gyp_targets = cfg.get("gyp_targets")
+    gyp_path = cfg.get("gyp_path")
     value = cfg.get("exception_configuration")
     if value not in VALID_EXCEPTION_CONFIGURATIONS:
         return {"exception_configuration": "unresolved",
@@ -221,10 +261,46 @@ def load_build_config(raw, explicit_path):
                 "citation": cfg.get("citation",
                                      f"build_config.json's exception_configuration value "
                                      f"({value!r}) is not one of {sorted(VALID_EXCEPTION_CONFIGURATIONS)} "
-                                     "-- treated as unresolved, never defaulted to disabled")}
+                                     "-- treated as unresolved, never defaulted to disabled"),
+                "gyp_targets": gyp_targets, "gyp_path": gyp_path}
     return {"exception_configuration": value,
             "evidence": cfg.get("evidence", []),
-            "citation": cfg.get("citation", path.as_posix())}
+            "citation": cfg.get("citation", path.as_posix()),
+            "gyp_targets": gyp_targets, "gyp_path": gyp_path}
+
+
+def resolve_exc_config_for_method(build_config, methods_filename, method_id):
+    """R06 TARGET-SCOPING FIX -- the real, required per-finding resolution: associates
+    THIS finding's own enclosing method's real source `filename` (from methods.tsv) with
+    the SPECIFIC real gyp target that compiles it, via `resolve_build_config_for_targets`.
+    FAILS CLOSED exactly per the standing requirement (never a package-wide guess):
+      - No `gyp_targets` at all (non-gyp build, or no binding.gyp found) -> falls back to
+        the package-wide `exception_configuration`/`evidence`/`citation`, the same real,
+        disclosed scope boundary `classify_target_aware`/`resolve_build_config_for_file`
+        already document (cmake/meson/gn packages are not target-scoped by this mechanism).
+      - `gyp_targets` present but this method's own `filename` is missing/empty, or no
+        real gyp target's own `sources` list names it, or multiple real targets name it
+        with DIFFERING configuration -> `BUILD_CONFIGURATION_UNRESOLVED`/`"conflict"`
+        (`resolve_build_config_for_targets`'s own fail-closed cases), NEVER the package-
+        wide value substituted in as a guess.
+    Returns (exception_configuration, evidence, citation)."""
+    gyp_targets = build_config.get("gyp_targets")
+    if not gyp_targets:
+        return (build_config["exception_configuration"], build_config["evidence"],
+                build_config["citation"])
+    filename = methods_filename.get(method_id)
+    if not filename:
+        return ("BUILD_CONFIGURATION_UNRESOLVED", [],
+                f"method {method_id} has no recorded source filename -- cannot resolve "
+                f"against this package's own real per-target gyp data "
+                f"({build_config.get('gyp_path')!r}); fails closed rather than falling "
+                f"back to the package-wide value")
+    result = resolve_build_config_for_targets(gyp_targets, filename)
+    citation = (f"target-resolved against {build_config.get('gyp_path')!r}: "
+                f"{result['reason']}" +
+                (f" (target={result['resolved_target_name']!r})"
+                 if result.get("resolved_target_name") else ""))
+    return result["exception_configuration"], result.get("matching_targets", []), citation
 # ---------------------------------------------------------------------------------------------
 
 
@@ -245,6 +321,9 @@ def main():
         return None
 
     methods = {int(r[0]): dec(r[1]) for r in rows(f"{raw}/methods.tsv", 10)}
+    # R06 TARGET-SCOPING FIX: real source filename per method (methods.tsv column 4), used to
+    # associate each finding with the SPECIFIC gyp target that compiles its enclosing method.
+    methods_filename = {int(r[0]): dec(r[4]) for r in rows(f"{raw}/methods.tsv", 10)}
 
     calls = {}
     calls_by_method = defaultdict(list)
@@ -356,18 +435,18 @@ def main():
         """RESOURCE-GUARD-R06 -- see module docstring for the full real account. Walks
         backward from `start_arg` exactly as R04/R05 always did; the ONLY change is what
         happens when the walk reaches a real parameter of `method_id`. Reaching a
-        parameter is no longer, by itself, reported as attacker influence: the
-        parameter's own real `type_full_name` (`param_types_by_method`) is checked
-        against `JS_CALLBACK_ORIGIN_TYPES` (node-addon-api's own real `Napi::
-        CallbackInfo` N-API entry-point convention -- the only real mechanism by which
-        JS-caller-supplied data enters native code at all). A `Napi::CallbackInfo`-typed
-        parameter is real, structural, verified JS-linkage -- `attacker_controlled:
-        True`. Any OTHER reached parameter (an ordinary C++ parameter of an internal
-        helper, or of a native-library-invoked callback such as libcurl's own
-        `ReadFunction(char*, size_t, size_t, void*)` -- none of these are `Napi::
-        CallbackInfo`) is reported explicitly as `SOURCE_BOUNDARY_UNRESOLVED`,
-        `attacker_controlled: False` -- never silently dropped, never claimed as
-        attacker evidence."""
+        parameter is no longer, by itself, reported as attacker influence, WITH NO
+        EXCEPTION -- every reached parameter is reported as `SOURCE_BOUNDARY_UNRESOLVED`,
+        `attacker_controlled: False`. The parameter's own real `type_full_name`
+        (`param_types_by_method`) is still recorded (`parameter_type`), including whether
+        it matches `JS_CALLBACK_ORIGIN_TYPES` (node-addon-api's own real `Napi::
+        CallbackInfo` N-API entry-point convention) -- but that signal ALONE is no longer
+        treated as sufficient proof this SPECIFIC traced value came from a JS-caller-
+        supplied argument (see module docstring for why a prior revision's promotion rule
+        here was an overclaim, caught by direct re-verification against Cartesi's own real
+        facts). Promoting a SOURCE_BOUNDARY_UNRESOLVED finding to attacker-controlled,
+        when real evidence supports it, is handled entirely OUTSIDE this file -- never
+        silently dropped, never claimed as attacker evidence here."""
         seen_names, seen_calls = set(), set()
         if start_arg["kind"] == "CALL":
             frontier = [("call", start_arg["node_id"], 0)]
@@ -383,13 +462,9 @@ def main():
                 seen_names.add(val)
                 if val in params_by_method.get(method_id, ()):
                     ptype = param_types_by_method.get(method_id, {}).get(val, "")
-                    if _is_js_callback_origin_type(ptype):
-                        return {"traced_to_parameter": val, "hops": hops,
-                                "parameter_type": ptype,
-                                "source_boundary": "JS_CALLBACK_INFO_PARAMETER",
-                                "attacker_controlled": True}
                     return {"traced_to_parameter": val, "hops": hops,
                             "parameter_type": ptype or None,
+                            "is_js_callback_origin_type": _is_js_callback_origin_type(ptype),
                             "source_boundary": "SOURCE_BOUNDARY_UNRESOLVED",
                             "attacker_controlled": False}
                 for cid in calls_by_method.get(method_id, ()):
@@ -570,8 +645,13 @@ def main():
                               "evidence_source": evidence_source})
             return
 
-        # --- R04 APPLICABILITY GATE -- UNCHANGED from resource_guard_verdict_r04.py. --------
-        exc_config = build_config["exception_configuration"]
+        # --- R06 TARGET-SCOPING FIX: exc_config/evidence/citation now resolved PER FINDING,
+        # against the specific gyp target that compiles THIS method's own source file, not a
+        # single package-wide value -- see resolve_exc_config_for_method's own docstring for
+        # the real fail-closed semantics. Falls back to the original package-wide R04
+        # behavior when this package has no real gyp_targets data at all (disclosed scope).
+        exc_config, cfg_evidence, cfg_citation = resolve_exc_config_for_method(
+            build_config, methods_filename, method_id)
         if exc_config == "enabled":
             classification["CONTRACT_NOT_APPLICABLE"] += 1
             findings.append({
@@ -580,8 +660,8 @@ def main():
                 "acquisition_call_id": cid, "acquisition_kind": contract["acquisition_kind"],
                 "result_type": contract["result_type"], "object": object_var,
                 "contract_citation": contract["citation"],
-                "build_config_evidence": build_config["evidence"],
-                "build_config_citation": build_config["citation"], "r03_would_be_verdict": state,
+                "build_config_evidence": cfg_evidence,
+                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
                     "under an exceptions-ENABLED build (established by this run's own "
@@ -600,8 +680,8 @@ def main():
                 "verdict": "BUILD_CONFIGURATION_CONFLICT", "method_id": method_id,
                 "method_name": methods.get(method_id), "acquisition_call_id": cid,
                 "result_type": contract["result_type"], "object": object_var,
-                "build_config_evidence": build_config["evidence"],
-                "build_config_citation": build_config["citation"], "r03_would_be_verdict": state,
+                "build_config_evidence": cfg_evidence,
+                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
                     "this run's build_config evidence contains contradictory signals -- "
@@ -616,17 +696,20 @@ def main():
                 "verdict": "BUILD_CONFIGURATION_UNRESOLVED", "method_id": method_id,
                 "method_name": methods.get(method_id), "acquisition_call_id": cid,
                 "result_type": contract["result_type"], "object": object_var,
-                "build_config_evidence": build_config["evidence"],
-                "build_config_citation": build_config["citation"], "r03_would_be_verdict": state,
+                "build_config_evidence": cfg_evidence,
+                "build_config_citation": cfg_citation, "r03_would_be_verdict": state,
                 "evidence_source": evidence_source,
                 "evidence_note": (
-                    "this run carries no usable build-configuration evidence -- "
-                    "applicability is not established, so no MISSING/ESTABLISHED verdict is "
-                    "reported. This is an abstention, never a default to 'disabled'."
+                    "this run carries no usable build-configuration evidence for the "
+                    "specific target compiling this finding's source file -- applicability "
+                    "is not established, so no MISSING/ESTABLISHED verdict is reported. "
+                    "This is an abstention, never a default to 'disabled', and never a "
+                    "package-wide guess when target identity could not be resolved."
                 ),
             })
             return
-        # exc_config == "disabled": premise established. Report exactly as R04 always did.
+        # exc_config == "disabled": premise established (for THIS finding's own target, or
+        # package-wide if no gyp_targets data exists). Report exactly as R04/R05 always did.
         # --------------------------------------------------------------------------------------
 
         classification[state] += 1
@@ -635,8 +718,8 @@ def main():
                    "acquisition_kind": contract["acquisition_kind"],
                    "result_type": contract["result_type"], "object": object_var,
                    "contract_citation": contract["citation"],
-                   "build_config_evidence": build_config["evidence"],
-                   "build_config_citation": build_config["citation"],
+                   "build_config_evidence": cfg_evidence,
+                   "build_config_citation": cfg_citation,
                    "evidence_source": evidence_source}
         if attacker_trace:
             # RESOURCE-GUARD-R06: renamed from R04/R05's own `attacker_influence_evidence`

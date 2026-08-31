@@ -363,22 +363,27 @@ def _source_file_matches(target_source, finding_source):
     return a == b or a.endswith('/' + b) or b.endswith('/' + a)
 
 
-def resolve_build_config_for_file(content, finding_source_file):
+def resolve_build_config_for_targets(per_target, finding_source_file):
     """R06 TARGET-SCOPING FIX -- the real, required entry point for associating a
     SPECIFIC finding's own source file with the SPECIFIC gyp target that compiles it,
-    rather than a package-wide flattened verdict. Returns a dict:
-    `{"exception_configuration", "resolved_target_name"|None, "matching_targets": [...],
-     "reason"}` where `exception_configuration` is one of `"enabled"`, `"disabled"`,
-    `"conflict"`, `"unresolved"`, or `"BUILD_CONFIGURATION_UNRESOLVED"` -- the last one
-    used specifically when target identity itself could not be established (zero or
-    more-than-one real target names the file, per `_source_file_matches`), matching the
-    same naming convention as `BUILD_CONFIGURATION_UNRESOLVED`/`_CONFLICT` used
-    elsewhere in this project's own R04/R05 applicability gates. NEVER falls back to a
-    package-wide guess: if target identity cannot be resolved, the returned
-    `exception_configuration` is always `BUILD_CONFIGURATION_UNRESOLVED` or
-    `"conflict"`, never a same-named single target's own `enabled`/`disabled` value
-    applied package-wide."""
-    per_target = classify_target_aware(content)
+    rather than a package-wide flattened verdict. Takes an ALREADY-PARSED per-target
+    list (`classify_target_aware()`'s own return shape) rather than raw file content,
+    so a caller holding many findings for the same package (e.g. the R06 scanner) can
+    parse the real binding.gyp ONCE and resolve every finding's own source file against
+    the same real per-target data, instead of re-parsing per finding.
+
+    Returns a dict: `{"exception_configuration", "resolved_target_name"|None,
+    "matching_targets": [...], "reason"}` where `exception_configuration` is one of
+    `"enabled"`, `"disabled"`, `"conflict"`, `"unresolved"`, or
+    `"BUILD_CONFIGURATION_UNRESOLVED"` -- the last one used specifically when target
+    identity itself could not be established (zero or more-than-one real target names
+    the file, per `_source_file_matches`), matching the same naming convention as
+    `BUILD_CONFIGURATION_UNRESOLVED`/`_CONFLICT` used elsewhere in this project's own
+    R04/R05 applicability gates. NEVER falls back to a package-wide guess: if target
+    identity cannot be resolved, the returned `exception_configuration` is always
+    `BUILD_CONFIGURATION_UNRESOLVED` or `"conflict"`, never a same-named single
+    target's own `enabled`/`disabled` value applied package-wide -- this is the FAIL-
+    CLOSED behavior required whenever source-to-target resolution is unavailable."""
     if not per_target:
         return {"exception_configuration": "BUILD_CONFIGURATION_UNRESOLVED",
                 "resolved_target_name": None, "matching_targets": [],
@@ -401,6 +406,15 @@ def resolve_build_config_for_file(content, finding_source_file):
     return {"exception_configuration": "conflict", "resolved_target_name": None,
             "matching_targets": matching,
             "reason": "multiple real targets compile this file with DIFFERING exception configuration"}
+
+
+def resolve_build_config_for_file(content, finding_source_file):
+    """Convenience wrapper over `resolve_build_config_for_targets` for a caller
+    (tests, one-off CLI use) that only has raw gyp file content, not an already-parsed
+    per-target list -- parses ONCE per call. See `resolve_build_config_for_targets`
+    for the real matching semantics; kept as a separate, stable entry point since
+    `tests/test_target_scoping.py` already calls it by this name."""
+    return resolve_build_config_for_targets(classify_target_aware(content), finding_source_file)
 
 
 CONFIG_FILE_SUFFIXES = {
