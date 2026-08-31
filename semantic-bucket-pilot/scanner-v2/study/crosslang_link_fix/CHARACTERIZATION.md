@@ -78,21 +78,27 @@ completely untouched; confirmed by direct diff against the frozen original.
 `controls/js/index.js` (real, run through `jssrc2cpg.sh` + `export_neutral.sc` +
 `normalize_joern_facts.py`) + `controls/cpp/addon.cc` (real, compile-checked against real
 node-addon-api + Node headers, run through `c2cpg.sh --include/--define` + export +
-`normalize_c_cpp_facts_v03.py`) -- three positive native-loading shapes, three negative:
+`normalize_c_cpp_facts_v03.py`) -- ten real controls, current as of FIX01D:
 
 | Control | Real shape | `receiver_type` | Result |
 |---|---|---|---|
 | Positive 1 | `require('./build/Release/addon1')` | `build/Release/addon1` | LINKED |
 | Positive 2 | `require('node-gyp-build')(__dirname)` | `node-gyp-build` | LINKED |
 | Positive 3 | `require('bindings')('addon3')` | `bindings` | LINKED |
+| Positive 4 (FIX01D) | `require("node-gyp-build")(__dirname)` -- SAME as #2, double-quoted | `node-gyp-build` | LINKED (proves the marker check is quote-style-independent) |
 | Negative 1 | `require('fs')` (Node core module) | `fs` | correctly NOT a candidate |
 | Negative 2 | `require('lodash')` (unrelated real npm package) | `lodash` | correctly NOT a candidate |
 | Negative 3 | `require('some-bindings-helper')` (lookalike name) | `some-bindings-helper` | correctly NOT a candidate (exact-membership discipline) |
+| Negative 4 (FIX01B) | `loader.path(x)` where `loader = require('node-gyp-build')`, never invoked | `node-gyp-build` | correctly NOT a candidate (no `<returnValue>` marker) |
+| Negative 5 (FIX01D) | `require('@mapbox/node-pre-gyp').find(path)` | `@mapbox/node-pre-gyp` | correctly NOT a candidate (package removed from the curated set, section 6b) |
+| Negative 6 (FIX01D) | `require("prebuild-install").download({})` (double-quoted) | `prebuild-install` | correctly NOT a candidate (package removed from the curated set, section 6b) |
 
-Real run: `POLYGLOT registrations=3 linked_js_calls=3 unlinked=0` -- all 3 positives linked,
-all 3 negatives verified (by direct field inspection, not just the aggregate count) to carry
-`resolution: "HEURISTIC"` (i.e. they WOULD have been candidates under a looser check) but a
-`receiver_type` that correctly fails the curated match.
+Real run: `POLYGLOT registrations=4 linked_js_calls=4 unlinked=0` -- all 4 positives linked
+(`Foo`, `Bar`, `Baz`, `Qux`), all 6 negatives excluded before ever reaching the `unlinked`
+bucket. The two newest negatives (5 and 6) verified by direct field inspection, same
+discipline as the first three: both carry `resolution: "HEURISTIC"` (the risk was real, not
+hypothetical -- they would have been candidates had those packages stayed in the curated
+set) but a `receiver_type` no longer present in `NATIVE_LOADER_PACKAGES` at all.
 
 ## 5. Real end-to-end validation on two independent real corpus packages (before/after)
 
@@ -196,19 +202,61 @@ package's own real, published source:
   node-pre-gyp usage (confirmed: removing them changed nothing in any regression re-run --
   `memoryjs`, `node-liblzma`, and the controls fixture all reproduce byte-identical results)
   -- inert, not actively wrong, but the "confirmed" claim did not hold for them.
-- **`prebuild-install`**: real published `package.json` has NO `main` field at all -- a
-  CLI-only install-time tool, never `require()`-able as a runtime library. This one was a
-  real error, not a disclosed approximation.
+- **`prebuild-install`**: CORRECTED below (6c) -- an earlier version of this section claimed
+  it has no `main` field and is therefore never `require()`-able. That was itself factually
+  wrong, caught on a follow-up review: absence of `main` does not mean unrequireable, and
+  the real disqualifying reason is the export SHAPE, not requireability.
 
 **Fix:** `NATIVE_LOADER_PACKAGES` narrowed to `{'bindings', 'node-gyp-build'}` -- the only
 two entries with real, per-package verification. All prior real controls and both real
-end-to-end packages re-verified unchanged after the removal (`registrations=3 linked=3
-unlinked=0`; `registrations=12 linked=15 unlinked=25`; `registrations=6 linked=6
-unlinked=0`) -- confirming the three removed entries contributed nothing real, only an
-overclaim in the documentation. If real coverage of `node-pre-gyp`-style two-step loaders is
-wanted later, it needs a genuinely different mechanism (tracking a helper-method-call ->
-dynamic-`require()` chain) -- not attempted here, and not implied to already work by this
-set's presence.
+end-to-end packages re-verified unchanged after the removal -- confirming the removed
+entries contributed nothing real, only an overclaim in the documentation. If real coverage
+of `node-pre-gyp`-style two-step loaders is wanted later, it needs a genuinely different
+mechanism (tracking a helper-method-call -> dynamic-`require()` chain) -- not attempted here,
+and not implied to already work by this set's presence.
+
+## 6c. CROSSLANG-LINK-FIX01D: two more real, found-on-review corrections
+
+Both prompted directly by review, neither found during the original work -- recorded exactly
+as found, including the fact that 6b's own `prebuild-install` reasoning was itself wrong.
+
+**1. `prebuild-install` IS require()-able -- the real disqualifying reason is its export
+shape, not requireability.** Node's own CommonJS resolution, absent a `main` field, defaults
+to the package root's `index.js` -- confirmed real:
+`prebuild-install@7.1.3`'s own published `index.js` exists and is exactly
+`exports.download = require('./download')`. So `require('prebuild-install')` resolves fine
+and returns `{ download: <function> }` -- an OBJECT exposing an install-time downloader
+HELPER, not a callable function that itself returns a loaded native addon. Calling
+`.download(...)` on it is a method call on that bare helper object -- structurally the SAME
+"helper, not the binding" shape `_via_loader_invocation` (6a/FIX01B) already exists to
+reject, now exercised as an explicit negative control (`checkPrebuildInstallDownload`,
+section 4) rather than just reasoned about. `node-pre-gyp`/`@mapbox/node-pre-gyp`'s own real
+export shape (6b) is confirmed to be the same kind of helper object, and now also has an
+explicit negative control (`checkNodePreGypFind`).
+
+**2. The `<returnValue>` marker preserves the source's own quote character verbatim -- a
+real bug, confirmed and fixed.** `_via_loader_invocation`'s marker check was hardcoded to
+single quotes (`f"require('{pkg}'):<returnValue>:"`). Regenerating a real fixture with
+`require("node-gyp-build")` (double-quoted) showed the frontend produces
+`require("node-gyp-build"):<returnValue>:...` -- a DIFFERENT literal string for the exact
+same real convention. The hardcoded check would have silently missed every double-quoted
+real `require()` call, corpus-wide, with no error at all -- a real, serious gap, not a
+theoretical one, given how common double-quoted JS source is. Fixed: `_via_loader_invocation`
+now matches via `_loader_invocation_pattern()`, a regex accepting either quote character
+(`require(['"]<pkg>['"]\):<returnValue>:`), so the linker's own behavior never depends on
+the analyzed package's source-formatting style. Verified directly (not just via the
+aggregate count): the double-quoted real fixture case now returns
+`is_native_binding_receiver() -> True`; the pre-existing single-quoted real case
+(`node-liblzma`'s `isXZ`) re-verified still `True` after the change.
+
+All prior controls, both new negative controls, and both real end-to-end packages
+re-verified after both fixes: `registrations=4 linked_js_calls=4 unlinked=0` (controls,
+now including the double-quoted `Qux` positive and the two removed-package negatives);
+`memoryjs`: `registrations=12 linked=15 unlinked=25`; `node-liblzma`: `registrations=6
+linked=6 unlinked=0` -- byte-identical to before both fixes on the two real end-to-end
+packages, since both happened to use single-quoted `require()` throughout; the quote-style
+fix matters for OTHER, not-yet-tested real corpus packages, which is exactly why it is
+fixed now rather than left as a latent, undetected gap.
 
 ## 7. What happens next (after R05 is frozen -- not started yet)
 

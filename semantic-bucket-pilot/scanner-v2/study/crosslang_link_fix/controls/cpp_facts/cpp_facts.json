@@ -13,7 +13,7 @@
       },
       "function_id": 107374182400,
       "id": 30064771072,
-      "line": 8,
+      "line": 9,
       "target_local_id": 94489280512,
       "value_ref": {
         "code": "info.Env()",
@@ -34,7 +34,7 @@
       },
       "function_id": 107374182402,
       "id": 30064771075,
-      "line": 13,
+      "line": 14,
       "target_local_id": 94489280513,
       "value_ref": {
         "code": "info.Env()",
@@ -55,11 +55,32 @@
       },
       "function_id": 107374182403,
       "id": 30064771078,
-      "line": 18,
+      "line": 19,
       "target_local_id": 94489280514,
       "value_ref": {
         "code": "info.Env()",
         "id": 30064771079,
+        "kind": "CALL"
+      }
+    },
+    {
+      "cfg_anchor": 30064771081,
+      "derivation": {
+        "origin": "FRONTEND_DERIVED",
+        "rule": "CPP_DIRECT_LOCAL_ASSIGNMENT",
+        "source_node_ids": [
+          30064771081,
+          68719476745,
+          30064771082
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 30064771081,
+      "line": 24,
+      "target_local_id": 94489280515,
+      "value_ref": {
+        "code": "info.Env()",
+        "id": 30064771082,
         "kind": "CALL"
       }
     }
@@ -79,7 +100,7 @@
           "id": 68719476736,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 8,
+          "line": 9,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -100,7 +121,7 @@
           "id": 30064771073,
           "index": 1,
           "kind": "CALL",
-          "line": 8,
+          "line": 9,
           "name": "",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -117,7 +138,7 @@
       "enclosing_function_id": 107374182400,
       "file": "addon.cc",
       "id": 30064771072,
-      "line": 8,
+      "line": 9,
       "method_full_name": "<operator>.assignment",
       "name": "<operator>.assignment",
       "resolution": "UNRESOLVED",
@@ -135,7 +156,7 @@
       "enclosing_function_id": 107374182400,
       "file": "addon.cc",
       "id": 30064771073,
-      "line": 8,
+      "line": 9,
       "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
       "name": "Env",
       "receiver_name": "info",
@@ -161,7 +182,7 @@
           "id": 68719476738,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 9,
+          "line": 10,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -182,7 +203,7 @@
           "id": 90194313216,
           "index": 1,
           "kind": "LITERAL",
-          "line": 9,
+          "line": 10,
           "name": "",
           "type_full_name": "int",
           "value_ref": {
@@ -199,7 +220,7 @@
       "enclosing_function_id": 107374182400,
       "file": "addon.cc",
       "id": 30064771074,
-      "line": 9,
+      "line": 10,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -222,7 +243,7 @@
           "id": 68719476739,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 13,
+          "line": 14,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -243,7 +264,7 @@
           "id": 30064771076,
           "index": 1,
           "kind": "CALL",
-          "line": 13,
+          "line": 14,
           "name": "",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -260,7 +281,7 @@
       "enclosing_function_id": 107374182402,
       "file": "addon.cc",
       "id": 30064771075,
-      "line": 13,
+      "line": 14,
       "method_full_name": "<operator>.assignment",
       "name": "<operator>.assignment",
       "resolution": "UNRESOLVED",
@@ -278,7 +299,7 @@
       "enclosing_function_id": 107374182402,
       "file": "addon.cc",
       "id": 30064771076,
-      "line": 13,
+      "line": 14,
       "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
       "name": "Env",
       "receiver_name": "info",
@@ -304,7 +325,7 @@
           "id": 68719476741,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 14,
+          "line": 15,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -325,7 +346,7 @@
           "id": 90194313217,
           "index": 1,
           "kind": "LITERAL",
-          "line": 14,
+          "line": 15,
           "name": "",
           "type_full_name": "int",
           "value_ref": {
@@ -342,7 +363,7 @@
       "enclosing_function_id": 107374182402,
       "file": "addon.cc",
       "id": 30064771077,
-      "line": 14,
+      "line": 15,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -365,7 +386,7 @@
           "id": 68719476742,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 18,
+          "line": 19,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -386,7 +407,7 @@
           "id": 30064771079,
           "index": 1,
           "kind": "CALL",
-          "line": 18,
+          "line": 19,
           "name": "",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -403,7 +424,7 @@
       "enclosing_function_id": 107374182403,
       "file": "addon.cc",
       "id": 30064771078,
-      "line": 18,
+      "line": 19,
       "method_full_name": "<operator>.assignment",
       "name": "<operator>.assignment",
       "resolution": "UNRESOLVED",
@@ -421,7 +442,7 @@
       "enclosing_function_id": 107374182403,
       "file": "addon.cc",
       "id": 30064771079,
-      "line": 18,
+      "line": 19,
       "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
       "name": "Env",
       "receiver_name": "info",
@@ -447,7 +468,7 @@
           "id": 68719476744,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 19,
+          "line": 20,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
@@ -468,7 +489,7 @@
           "id": 90194313218,
           "index": 1,
           "kind": "LITERAL",
-          "line": 19,
+          "line": 20,
           "name": "",
           "type_full_name": "int",
           "value_ref": {
@@ -485,7 +506,150 @@
       "enclosing_function_id": 107374182403,
       "file": "addon.cc",
       "id": 30064771080,
-      "line": 19,
+      "line": 20,
+      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+      "name": "New",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476745
+            ]
+          },
+          "id": 68719476745,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 24,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "info.Env()",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              30064771082
+            ]
+          },
+          "id": 30064771082,
+          "index": 1,
+          "kind": "CALL",
+          "line": 24,
+          "name": "",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "info.Env()",
+            "id": 30064771082,
+            "kind": "CALL"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "env = info.Env()",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "addon.cc",
+      "id": 30064771081,
+      "line": 24,
+      "method_full_name": "<operator>.assignment",
+      "name": "<operator>.assignment",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "NON_DISPATCH_OPERATOR",
+      "type_full_name": "void"
+    },
+    {
+      "arguments": [],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "info.Env()",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "addon.cc",
+      "id": 30064771082,
+      "line": 24,
+      "method_full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
+      "name": "Env",
+      "receiver_name": "info",
+      "receiver_node_id": 68719476746,
+      "receiver_type": "Napi.CallbackInfo&",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476747
+            ]
+          },
+          "id": 68719476747,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 25,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 94489280515,
+            "kind": "LOCAL"
+          }
+        },
+        {
+          "code": "4",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313219
+            ]
+          },
+          "id": 90194313219,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 25,
+          "name": "",
+          "type_full_name": "int",
+          "value_ref": {
+            "code": "4",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "Napi::Number::New(env, 4)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182404,
+      "file": "addon.cc",
+      "id": 30064771083,
+      "line": 25,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -502,18 +666,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771082
+              30064771085
             ]
           },
-          "id": 30064771082,
+          "id": 30064771085,
           "index": 0,
           "kind": "CALL",
-          "line": 23,
+          "line": 29,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::String::New(env, \"Foo\")",
-            "id": 30064771082,
+            "id": 30064771085,
             "kind": "CALL"
           }
         },
@@ -523,18 +687,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771083
+              30064771086
             ]
           },
-          "id": 30064771083,
+          "id": 30064771086,
           "index": 1,
           "kind": "CALL",
-          "line": 23,
+          "line": 29,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::Function::New(env, Foo)",
-            "id": 30064771083,
+            "id": 30064771086,
             "kind": "CALL"
           }
         }
@@ -543,14 +707,14 @@
       "candidate_target_ids": [],
       "code": "exports.Set(Napi::String::New(env, \"Foo\"), Napi::Function::New(env, Foo))",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
-      "id": 30064771081,
-      "line": 23,
+      "id": 30064771084,
+      "line": 29,
       "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
       "name": "Set",
       "receiver_name": "exports",
-      "receiver_node_id": 68719476745,
+      "receiver_node_id": 68719476748,
       "receiver_type": "Napi.Object",
       "resolution": "UNRESOLVED",
       "resolution_corrected": "UNRESOLVED",
@@ -566,18 +730,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771085
+              30064771088
             ]
           },
-          "id": 30064771085,
+          "id": 30064771088,
           "index": 0,
           "kind": "CALL",
-          "line": 24,
+          "line": 30,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::String::New(env, \"Bar\")",
-            "id": 30064771085,
+            "id": 30064771088,
             "kind": "CALL"
           }
         },
@@ -587,18 +751,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771086
+              30064771089
             ]
           },
-          "id": 30064771086,
+          "id": 30064771089,
           "index": 1,
           "kind": "CALL",
-          "line": 24,
+          "line": 30,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::Function::New(env, Bar)",
-            "id": 30064771086,
+            "id": 30064771089,
             "kind": "CALL"
           }
         }
@@ -607,14 +771,14 @@
       "candidate_target_ids": [],
       "code": "exports.Set(Napi::String::New(env, \"Bar\"), Napi::Function::New(env, Bar))",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
-      "id": 30064771084,
-      "line": 24,
+      "id": 30064771087,
+      "line": 30,
       "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
       "name": "Set",
       "receiver_name": "exports",
-      "receiver_node_id": 68719476748,
+      "receiver_node_id": 68719476751,
       "receiver_type": "Napi.Object",
       "resolution": "UNRESOLVED",
       "resolution_corrected": "UNRESOLVED",
@@ -630,18 +794,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771088
+              30064771091
             ]
           },
-          "id": 30064771088,
+          "id": 30064771091,
           "index": 0,
           "kind": "CALL",
-          "line": 25,
+          "line": 31,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::String::New(env, \"Baz\")",
-            "id": 30064771088,
+            "id": 30064771091,
             "kind": "CALL"
           }
         },
@@ -651,18 +815,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              30064771089
+              30064771092
             ]
           },
-          "id": 30064771089,
+          "id": 30064771092,
           "index": 1,
           "kind": "CALL",
-          "line": 25,
+          "line": 31,
           "name": "",
           "type_full_name": "ANY",
           "value_ref": {
             "code": "Napi::Function::New(env, Baz)",
-            "id": 30064771089,
+            "id": 30064771092,
             "kind": "CALL"
           }
         }
@@ -671,14 +835,14 @@
       "candidate_target_ids": [],
       "code": "exports.Set(Napi::String::New(env, \"Baz\"), Napi::Function::New(env, Baz))",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
-      "id": 30064771087,
-      "line": 25,
+      "id": 30064771090,
+      "line": 31,
       "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
       "name": "Set",
       "receiver_name": "exports",
-      "receiver_node_id": 68719476751,
+      "receiver_node_id": 68719476754,
       "receiver_type": "Napi.Object",
       "resolution": "UNRESOLVED",
       "resolution_corrected": "UNRESOLVED",
@@ -689,119 +853,61 @@
     {
       "arguments": [
         {
-          "code": "env",
+          "code": "Napi::String::New(env, \"Qux\")",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              68719476746
+              30064771094
             ]
           },
-          "id": 68719476746,
+          "id": 30064771094,
           "index": 0,
-          "kind": "IDENTIFIER",
-          "line": 23,
-          "name": "env",
-          "type_full_name": "Napi.Env",
+          "kind": "CALL",
+          "line": 32,
+          "name": "",
+          "type_full_name": "ANY",
           "value_ref": {
-            "code": "env",
-            "id": 111669149699,
-            "kind": "PARAMETER"
+            "code": "Napi::String::New(env, \"Qux\")",
+            "id": 30064771094,
+            "kind": "CALL"
           }
         },
         {
-          "code": "\"Foo\"",
+          "code": "Napi::Function::New(env, Qux)",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              90194313219
+              30064771095
             ]
           },
-          "id": 90194313219,
+          "id": 30064771095,
           "index": 1,
-          "kind": "LITERAL",
-          "line": 23,
+          "kind": "CALL",
+          "line": 32,
           "name": "",
-          "type_full_name": "char[4]",
+          "type_full_name": "ANY",
           "value_ref": {
-            "code": "\"Foo\"",
-            "id": -1,
-            "kind": "CONSTANT"
+            "code": "Napi::Function::New(env, Qux)",
+            "id": 30064771095,
+            "kind": "CALL"
           }
         }
       ],
       "candidate_target_full_names": [],
       "candidate_target_ids": [],
-      "code": "Napi::String::New(env, \"Foo\")",
+      "code": "exports.Set(Napi::String::New(env, \"Qux\"), Napi::Function::New(env, Qux))",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
-      "id": 30064771082,
-      "line": 23,
-      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
-      "name": "New",
-      "resolution": "UNRESOLVED",
-      "resolution_corrected": "UNRESOLVED",
-      "resolution_raw": "EXACT",
-      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
-      "type_full_name": "ANY"
-    },
-    {
-      "arguments": [
-        {
-          "code": "env",
-          "derivation": {
-            "origin": "FRONTEND_DIRECT",
-            "rule": "ARGUMENT_NODE_REF",
-            "source_node_ids": [
-              68719476747
-            ]
-          },
-          "id": 68719476747,
-          "index": 0,
-          "kind": "IDENTIFIER",
-          "line": 23,
-          "name": "env",
-          "type_full_name": "Napi.Env",
-          "value_ref": {
-            "code": "env",
-            "id": 111669149699,
-            "kind": "PARAMETER"
-          }
-        },
-        {
-          "code": "Foo",
-          "derivation": {
-            "origin": "FRONTEND_DIRECT",
-            "rule": "ARGUMENT_NODE_REF",
-            "source_node_ids": [
-              120259084288
-            ]
-          },
-          "id": 120259084288,
-          "index": 1,
-          "kind": "METHOD_REF",
-          "line": 23,
-          "name": "",
-          "type_full_name": "Value",
-          "value_ref": {
-            "code": "Foo",
-            "id": -1,
-            "kind": "UNKNOWN"
-          }
-        }
-      ],
-      "candidate_target_full_names": [],
-      "candidate_target_ids": [],
-      "code": "Napi::Function::New(env, Foo)",
-      "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
-      "file": "addon.cc",
-      "id": 30064771083,
-      "line": 23,
-      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
-      "name": "New",
+      "id": 30064771093,
+      "line": 32,
+      "method_full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
+      "name": "Set",
+      "receiver_name": "exports",
+      "receiver_node_id": 68719476757,
+      "receiver_type": "Napi.Object",
       "resolution": "UNRESOLVED",
       "resolution_corrected": "UNRESOLVED",
       "resolution_raw": "EXACT",
@@ -822,17 +928,17 @@
           "id": 68719476749,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 24,
+          "line": 29,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
             "code": "env",
-            "id": 111669149699,
+            "id": 111669149700,
             "kind": "PARAMETER"
           }
         },
         {
-          "code": "\"Bar\"",
+          "code": "\"Foo\"",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
@@ -843,11 +949,11 @@
           "id": 90194313220,
           "index": 1,
           "kind": "LITERAL",
-          "line": 24,
+          "line": 29,
           "name": "",
           "type_full_name": "char[4]",
           "value_ref": {
-            "code": "\"Bar\"",
+            "code": "\"Foo\"",
             "id": -1,
             "kind": "CONSTANT"
           }
@@ -855,12 +961,12 @@
       ],
       "candidate_target_full_names": [],
       "candidate_target_ids": [],
-      "code": "Napi::String::New(env, \"Bar\")",
+      "code": "Napi::String::New(env, \"Foo\")",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
       "id": 30064771085,
-      "line": 24,
+      "line": 29,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -883,32 +989,32 @@
           "id": 68719476750,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 24,
+          "line": 29,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
             "code": "env",
-            "id": 111669149699,
+            "id": 111669149700,
             "kind": "PARAMETER"
           }
         },
         {
-          "code": "Bar",
+          "code": "Foo",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              120259084289
+              120259084288
             ]
           },
-          "id": 120259084289,
+          "id": 120259084288,
           "index": 1,
           "kind": "METHOD_REF",
-          "line": 24,
+          "line": 29,
           "name": "",
           "type_full_name": "Value",
           "value_ref": {
-            "code": "Bar",
+            "code": "Foo",
             "id": -1,
             "kind": "UNKNOWN"
           }
@@ -916,12 +1022,12 @@
       ],
       "candidate_target_full_names": [],
       "candidate_target_ids": [],
-      "code": "Napi::Function::New(env, Bar)",
+      "code": "Napi::Function::New(env, Foo)",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
       "id": 30064771086,
-      "line": 24,
+      "line": 29,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -944,17 +1050,17 @@
           "id": 68719476752,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 25,
+          "line": 30,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
             "code": "env",
-            "id": 111669149699,
+            "id": 111669149700,
             "kind": "PARAMETER"
           }
         },
         {
-          "code": "\"Baz\"",
+          "code": "\"Bar\"",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
@@ -965,11 +1071,11 @@
           "id": 90194313221,
           "index": 1,
           "kind": "LITERAL",
-          "line": 25,
+          "line": 30,
           "name": "",
           "type_full_name": "char[4]",
           "value_ref": {
-            "code": "\"Baz\"",
+            "code": "\"Bar\"",
             "id": -1,
             "kind": "CONSTANT"
           }
@@ -977,12 +1083,12 @@
       ],
       "candidate_target_full_names": [],
       "candidate_target_ids": [],
-      "code": "Napi::String::New(env, \"Baz\")",
+      "code": "Napi::String::New(env, \"Bar\")",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
       "id": 30064771088,
-      "line": 25,
+      "line": 30,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -1005,32 +1111,32 @@
           "id": 68719476753,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 25,
+          "line": 30,
           "name": "env",
           "type_full_name": "Napi.Env",
           "value_ref": {
             "code": "env",
-            "id": 111669149699,
+            "id": 111669149700,
             "kind": "PARAMETER"
           }
         },
         {
-          "code": "Baz",
+          "code": "Bar",
           "derivation": {
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              120259084290
+              120259084289
             ]
           },
-          "id": 120259084290,
+          "id": 120259084289,
           "index": 1,
           "kind": "METHOD_REF",
-          "line": 25,
+          "line": 30,
           "name": "",
           "type_full_name": "Value",
           "value_ref": {
-            "code": "Baz",
+            "code": "Bar",
             "id": -1,
             "kind": "UNKNOWN"
           }
@@ -1038,12 +1144,12 @@
       ],
       "candidate_target_full_names": [],
       "candidate_target_ids": [],
-      "code": "Napi::Function::New(env, Baz)",
+      "code": "Napi::Function::New(env, Bar)",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182404,
+      "enclosing_function_id": 107374182405,
       "file": "addon.cc",
       "id": 30064771089,
-      "line": 25,
+      "line": 30,
       "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
       "name": "New",
       "resolution": "UNRESOLVED",
@@ -1066,12 +1172,256 @@
           "id": 68719476755,
           "index": 0,
           "kind": "IDENTIFIER",
-          "line": 29,
+          "line": 31,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "\"Baz\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313222
+            ]
+          },
+          "id": 90194313222,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 31,
+          "name": "",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "\"Baz\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "Napi::String::New(env, \"Baz\")",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "addon.cc",
+      "id": 30064771091,
+      "line": 31,
+      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+      "name": "New",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476756
+            ]
+          },
+          "id": 68719476756,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 31,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "Baz",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084290
+            ]
+          },
+          "id": 120259084290,
+          "index": 1,
+          "kind": "METHOD_REF",
+          "line": 31,
+          "name": "",
+          "type_full_name": "Value",
+          "value_ref": {
+            "code": "Baz",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "Napi::Function::New(env, Baz)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "addon.cc",
+      "id": 30064771092,
+      "line": 31,
+      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+      "name": "New",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476758
+            ]
+          },
+          "id": 68719476758,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "\"Qux\"",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              90194313223
+            ]
+          },
+          "id": 90194313223,
+          "index": 1,
+          "kind": "LITERAL",
+          "line": 32,
+          "name": "",
+          "type_full_name": "char[4]",
+          "value_ref": {
+            "code": "\"Qux\"",
+            "id": -1,
+            "kind": "CONSTANT"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "Napi::String::New(env, \"Qux\")",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "addon.cc",
+      "id": 30064771094,
+      "line": 32,
+      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+      "name": "New",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476759
+            ]
+          },
+          "id": 68719476759,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 32,
+          "name": "env",
+          "type_full_name": "Napi.Env",
+          "value_ref": {
+            "code": "env",
+            "id": 111669149700,
+            "kind": "PARAMETER"
+          }
+        },
+        {
+          "code": "Qux",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              120259084291
+            ]
+          },
+          "id": 120259084291,
+          "index": 1,
+          "kind": "METHOD_REF",
+          "line": 32,
+          "name": "",
+          "type_full_name": "Value",
+          "value_ref": {
+            "code": "Qux",
+            "id": -1,
+            "kind": "UNKNOWN"
+          }
+        }
+      ],
+      "candidate_target_full_names": [],
+      "candidate_target_ids": [],
+      "code": "Napi::Function::New(env, Qux)",
+      "dispatch_type": "STATIC_DISPATCH",
+      "enclosing_function_id": 107374182405,
+      "file": "addon.cc",
+      "id": 30064771095,
+      "line": 32,
+      "method_full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
+      "name": "New",
+      "resolution": "UNRESOLVED",
+      "resolution_corrected": "UNRESOLVED",
+      "resolution_raw": "EXACT",
+      "resolution_reason": "STATIC_NO_CONCRETE_TARGET",
+      "type_full_name": "ANY"
+    },
+    {
+      "arguments": [
+        {
+          "code": "env",
+          "derivation": {
+            "origin": "FRONTEND_DIRECT",
+            "rule": "ARGUMENT_NODE_REF",
+            "source_node_ids": [
+              68719476761
+            ]
+          },
+          "id": 68719476761,
+          "index": 0,
+          "kind": "IDENTIFIER",
+          "line": 36,
           "name": "env",
           "type_full_name": "napi_env",
           "value_ref": {
             "code": "env",
-            "id": 111669149701,
+            "id": 111669149702,
             "kind": "PARAMETER"
           }
         },
@@ -1081,18 +1431,18 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              68719476756
+              68719476762
             ]
           },
-          "id": 68719476756,
+          "id": 68719476762,
           "index": 1,
           "kind": "IDENTIFIER",
-          "line": 29,
+          "line": 36,
           "name": "exports",
           "type_full_name": "napi_value",
           "value_ref": {
             "code": "exports",
-            "id": 111669149702,
+            "id": 111669149703,
             "kind": "PARAMETER"
           }
         },
@@ -1102,13 +1452,13 @@
             "origin": "FRONTEND_DIRECT",
             "rule": "ARGUMENT_NODE_REF",
             "source_node_ids": [
-              120259084291
+              120259084292
             ]
           },
-          "id": 120259084291,
+          "id": 120259084292,
           "index": 2,
           "kind": "METHOD_REF",
-          "line": 29,
+          "line": 36,
           "name": "",
           "type_full_name": "Object",
           "value_ref": {
@@ -1122,10 +1472,10 @@
       "candidate_target_ids": [],
       "code": "Napi::RegisterModule(env, exports, Init)",
       "dispatch_type": "STATIC_DISPATCH",
-      "enclosing_function_id": 107374182405,
+      "enclosing_function_id": 107374182406,
       "file": "addon.cc",
-      "id": 30064771090,
-      "line": 29,
+      "id": 30064771096,
+      "line": 36,
       "method_full_name": "Napi.RegisterModule:ANY(ANY,ANY,Napi.Object(*)(Napi.Env,Napi.Object))",
       "name": "RegisterModule",
       "resolution": "UNRESOLVED",
@@ -1194,12 +1544,12 @@
     {
       "function_id": 107374182401,
       "node_id": 107374182405,
-      "successor_id": 68719476755
+      "successor_id": 68719476748
     },
     {
       "function_id": 107374182401,
-      "node_id": 120259084292,
-      "successor_id": 120259084293
+      "node_id": 107374182406,
+      "successor_id": 68719476761
     },
     {
       "function_id": 107374182401,
@@ -1219,6 +1569,16 @@
     {
       "function_id": 107374182401,
       "node_id": 120259084296,
+      "successor_id": 120259084297
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084297,
+      "successor_id": 120259084298
+    },
+    {
+      "function_id": 107374182401,
+      "node_id": 120259084298,
       "successor_id": 180388626432
     },
     {
@@ -1294,17 +1654,7 @@
     {
       "function_id": 107374182404,
       "node_id": 30064771081,
-      "successor_id": 68719476748
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771084,
-      "successor_id": 68719476751
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771087,
-      "successor_id": 68719476754
+      "successor_id": 68719476747
     },
     {
       "function_id": 107374182404,
@@ -1314,127 +1664,212 @@
     {
       "function_id": 107374182404,
       "node_id": 30064771082,
-      "successor_id": 68719476747
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771083,
       "successor_id": 30064771081
     },
     {
       "function_id": 107374182404,
-      "node_id": 68719476748,
-      "successor_id": 68719476749
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771085,
-      "successor_id": 68719476750
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771086,
-      "successor_id": 30064771084
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 68719476751,
-      "successor_id": 68719476752
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771088,
-      "successor_id": 68719476753
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 30064771089,
-      "successor_id": 30064771087
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 68719476754,
+      "node_id": 30064771083,
       "successor_id": 141733920771
     },
     {
       "function_id": 107374182404,
       "node_id": 68719476746,
-      "successor_id": 90194313219
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 90194313219,
       "successor_id": 30064771082
     },
     {
       "function_id": 107374182404,
       "node_id": 68719476747,
-      "successor_id": 120259084288
+      "successor_id": 90194313219
     },
     {
       "function_id": 107374182404,
-      "node_id": 120259084288,
+      "node_id": 90194313219,
       "successor_id": 30064771083
     },
     {
-      "function_id": 107374182404,
-      "node_id": 68719476749,
-      "successor_id": 90194313220
+      "function_id": 107374182405,
+      "node_id": 30064771084,
+      "successor_id": 68719476751
     },
     {
-      "function_id": 107374182404,
-      "node_id": 90194313220,
-      "successor_id": 30064771085
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 68719476750,
-      "successor_id": 120259084289
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 120259084289,
-      "successor_id": 30064771086
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 68719476752,
-      "successor_id": 90194313221
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 90194313221,
-      "successor_id": 30064771088
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 68719476753,
-      "successor_id": 120259084290
-    },
-    {
-      "function_id": 107374182404,
-      "node_id": 120259084290,
-      "successor_id": 30064771089
+      "function_id": 107374182405,
+      "node_id": 30064771087,
+      "successor_id": 68719476754
     },
     {
       "function_id": 107374182405,
       "node_id": 30064771090,
-      "successor_id": 141733920772
+      "successor_id": 68719476757
     },
     {
       "function_id": 107374182405,
-      "node_id": 68719476755,
+      "node_id": 30064771093,
+      "successor_id": 68719476760
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476748,
+      "successor_id": 68719476749
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771085,
+      "successor_id": 68719476750
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771086,
+      "successor_id": 30064771084
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476751,
+      "successor_id": 68719476752
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771088,
+      "successor_id": 68719476753
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771089,
+      "successor_id": 30064771087
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476754,
+      "successor_id": 68719476755
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771091,
       "successor_id": 68719476756
     },
     {
       "function_id": 107374182405,
+      "node_id": 30064771092,
+      "successor_id": 30064771090
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476757,
+      "successor_id": 68719476758
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771094,
+      "successor_id": 68719476759
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 30064771095,
+      "successor_id": 30064771093
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476760,
+      "successor_id": 141733920772
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476749,
+      "successor_id": 90194313220
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313220,
+      "successor_id": 30064771085
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476750,
+      "successor_id": 120259084288
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 120259084288,
+      "successor_id": 30064771086
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476752,
+      "successor_id": 90194313221
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313221,
+      "successor_id": 30064771088
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476753,
+      "successor_id": 120259084289
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 120259084289,
+      "successor_id": 30064771089
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476755,
+      "successor_id": 90194313222
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313222,
+      "successor_id": 30064771091
+    },
+    {
+      "function_id": 107374182405,
       "node_id": 68719476756,
+      "successor_id": 120259084290
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 120259084290,
+      "successor_id": 30064771092
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476758,
+      "successor_id": 90194313223
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 90194313223,
+      "successor_id": 30064771094
+    },
+    {
+      "function_id": 107374182405,
+      "node_id": 68719476759,
       "successor_id": 120259084291
     },
     {
       "function_id": 107374182405,
       "node_id": 120259084291,
-      "successor_id": 30064771090
+      "successor_id": 30064771095
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 30064771096,
+      "successor_id": 141733920773
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476761,
+      "successor_id": 68719476762
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 68719476762,
+      "successor_id": 120259084292
+    },
+    {
+      "function_id": 107374182406,
+      "node_id": 120259084292,
+      "successor_id": 30064771096
     }
   ],
   "cpp_memory": {
@@ -1454,13 +1889,13 @@
   "cpp_memory_locations": [],
   "frontend": "joern-c2cpg",
   "frontend_counters": {
-    "exported_calls": 19,
-    "exported_functions": 12,
-    "exported_identifiers": 42,
-    "exported_locals": 3,
-    "exported_returns": 5,
-    "exported_type_decls": 18,
-    "exported_value_returns": 5,
+    "exported_calls": 25,
+    "exported_functions": 13,
+    "exported_identifiers": 54,
+    "exported_locals": 4,
+    "exported_returns": 6,
+    "exported_type_decls": 19,
+    "exported_value_returns": 6,
     "exported_void_returns": 0
   },
   "functions": [
@@ -1471,15 +1906,15 @@
       "full_name": "Foo:Napi.Value(Napi.CallbackInfo&)",
       "id": 107374182400,
       "is_external": false,
-      "line": 7,
-      "line_end": 10,
+      "line": 8,
+      "line_end": 11,
       "name": "Foo",
       "parameters": [
         {
           "code": "const Napi::CallbackInfo &info",
           "id": 111669149696,
           "index": 0,
-          "line": 7,
+          "line": 8,
           "method_id": 107374182400,
           "name": "info",
           "type_full_name": "Napi.CallbackInfo&"
@@ -1495,7 +1930,7 @@
       "id": 107374182401,
       "is_external": false,
       "line": 1,
-      "line_end": 29,
+      "line_end": 36,
       "name": "<global>",
       "parameters": [],
       "signature": ""
@@ -1507,15 +1942,15 @@
       "full_name": "Bar:Napi.Value(Napi.CallbackInfo&)",
       "id": 107374182402,
       "is_external": false,
-      "line": 12,
-      "line_end": 15,
+      "line": 13,
+      "line_end": 16,
       "name": "Bar",
       "parameters": [
         {
           "code": "const Napi::CallbackInfo &info",
           "id": 111669149697,
           "index": 0,
-          "line": 12,
+          "line": 13,
           "method_id": 107374182402,
           "name": "info",
           "type_full_name": "Napi.CallbackInfo&"
@@ -1530,15 +1965,15 @@
       "full_name": "Baz:Napi.Value(Napi.CallbackInfo&)",
       "id": 107374182403,
       "is_external": false,
-      "line": 17,
-      "line_end": 20,
+      "line": 18,
+      "line_end": 21,
       "name": "Baz",
       "parameters": [
         {
           "code": "const Napi::CallbackInfo &info",
           "id": 111669149698,
           "index": 0,
-          "line": 17,
+          "line": 18,
           "method_id": 107374182403,
           "name": "info",
           "type_full_name": "Napi.CallbackInfo&"
@@ -1550,28 +1985,51 @@
       "ast_parent_full_name": "addon.cc:<global>",
       "ast_parent_type": "TYPE_DECL",
       "file": "addon.cc",
-      "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+      "full_name": "Qux:Napi.Value(Napi.CallbackInfo&)",
       "id": 107374182404,
       "is_external": false,
-      "line": 22,
-      "line_end": 27,
+      "line": 23,
+      "line_end": 26,
+      "name": "Qux",
+      "parameters": [
+        {
+          "code": "const Napi::CallbackInfo &info",
+          "id": 111669149699,
+          "index": 0,
+          "line": 23,
+          "method_id": 107374182404,
+          "name": "info",
+          "type_full_name": "Napi.CallbackInfo&"
+        }
+      ],
+      "signature": "Napi.Value(Napi.CallbackInfo&)"
+    },
+    {
+      "ast_parent_full_name": "addon.cc:<global>",
+      "ast_parent_type": "TYPE_DECL",
+      "file": "addon.cc",
+      "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+      "id": 107374182405,
+      "is_external": false,
+      "line": 28,
+      "line_end": 34,
       "name": "Init",
       "parameters": [
         {
           "code": "Napi::Env env",
-          "id": 111669149699,
+          "id": 111669149700,
           "index": 0,
-          "line": 22,
-          "method_id": 107374182404,
+          "line": 28,
+          "method_id": 107374182405,
           "name": "env",
           "type_full_name": "Napi.Env"
         },
         {
           "code": "Napi::Object exports",
-          "id": 111669149700,
+          "id": 111669149701,
           "index": 1,
-          "line": 22,
-          "method_id": 107374182404,
+          "line": 28,
+          "method_id": 107374182405,
           "name": "exports",
           "type_full_name": "Napi.Object"
         }
@@ -1583,27 +2041,27 @@
       "ast_parent_type": "TYPE_DECL",
       "file": "addon.cc",
       "full_name": "__napi_Init:napi_value(napi_env,napi_value)",
-      "id": 107374182405,
+      "id": 107374182406,
       "is_external": false,
-      "line": 29,
-      "line_end": 29,
+      "line": 36,
+      "line_end": 36,
       "name": "__napi_Init",
       "parameters": [
         {
           "code": "NODE_API_MODULE(addon, Init)",
-          "id": 111669149701,
+          "id": 111669149702,
           "index": 0,
-          "line": 29,
-          "method_id": 107374182405,
+          "line": 36,
+          "method_id": 107374182406,
           "name": "env",
           "type_full_name": "napi_env"
         },
         {
           "code": "NODE_API_MODULE(addon, Init)",
-          "id": 111669149702,
+          "id": 111669149703,
           "index": 1,
-          "line": 29,
-          "method_id": 107374182405,
+          "line": 36,
+          "method_id": 107374182406,
           "name": "exports",
           "type_full_name": "napi_value"
         }
@@ -1615,7 +2073,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<includes>",
       "full_name": "<includes>:<global>",
-      "id": 107374182406,
+      "id": 107374182407,
       "is_external": false,
       "line": 1,
       "line_end": 0,
@@ -1628,7 +2086,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<empty>",
       "full_name": "<operator>.assignment",
-      "id": 107374182407,
+      "id": 107374182408,
       "is_external": true,
       "line": 0,
       "line_end": 0,
@@ -1636,19 +2094,19 @@
       "parameters": [
         {
           "code": "p1",
-          "id": 111669149703,
+          "id": 111669149704,
           "index": 0,
           "line": 0,
-          "method_id": 107374182407,
+          "method_id": 107374182408,
           "name": "p1",
           "type_full_name": "ANY"
         },
         {
           "code": "p2",
-          "id": 111669149704,
+          "id": 111669149705,
           "index": 1,
           "line": 0,
-          "method_id": 107374182407,
+          "method_id": 107374182408,
           "name": "p2",
           "type_full_name": "ANY"
         }
@@ -1660,7 +2118,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<empty>",
       "full_name": "Napi.CallbackInfo.Env:Napi.Env()<const>",
-      "id": 107374182408,
+      "id": 107374182409,
       "is_external": true,
       "line": 0,
       "line_end": 0,
@@ -1673,7 +2131,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<empty>",
       "full_name": "<unresolvedNamespace>.New:<unresolvedSignature>(2)",
-      "id": 107374182409,
+      "id": 107374182410,
       "is_external": true,
       "line": 0,
       "line_end": 0,
@@ -1681,19 +2139,19 @@
       "parameters": [
         {
           "code": "p1",
-          "id": 111669149706,
+          "id": 111669149707,
           "index": 0,
           "line": 0,
-          "method_id": 107374182409,
+          "method_id": 107374182410,
           "name": "p1",
           "type_full_name": "ANY"
         },
         {
           "code": "p2",
-          "id": 111669149707,
+          "id": 111669149708,
           "index": 1,
           "line": 0,
-          "method_id": 107374182409,
+          "method_id": 107374182410,
           "name": "p2",
           "type_full_name": "ANY"
         }
@@ -1705,7 +2163,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<empty>",
       "full_name": "<unresolvedNamespace>.Set:<unresolvedSignature>(2)",
-      "id": 107374182410,
+      "id": 107374182411,
       "is_external": true,
       "line": 0,
       "line_end": 0,
@@ -1713,19 +2171,19 @@
       "parameters": [
         {
           "code": "p1",
-          "id": 111669149709,
+          "id": 111669149710,
           "index": 0,
           "line": 0,
-          "method_id": 107374182410,
+          "method_id": 107374182411,
           "name": "p1",
           "type_full_name": "ANY"
         },
         {
           "code": "p2",
-          "id": 111669149710,
+          "id": 111669149711,
           "index": 1,
           "line": 0,
-          "method_id": 107374182410,
+          "method_id": 107374182411,
           "name": "p2",
           "type_full_name": "ANY"
         }
@@ -1737,7 +2195,7 @@
       "ast_parent_type": "NAMESPACE_BLOCK",
       "file": "<empty>",
       "full_name": "Napi.RegisterModule:ANY(ANY,ANY,Napi.Object(*)(Napi.Env,Napi.Object))",
-      "id": 107374182411,
+      "id": 107374182412,
       "is_external": true,
       "line": 0,
       "line_end": 0,
@@ -1745,28 +2203,28 @@
       "parameters": [
         {
           "code": "p1",
-          "id": 111669149711,
+          "id": 111669149712,
           "index": 0,
           "line": 0,
-          "method_id": 107374182411,
+          "method_id": 107374182412,
           "name": "p1",
           "type_full_name": "ANY"
         },
         {
           "code": "p2",
-          "id": 111669149712,
+          "id": 111669149713,
           "index": 1,
           "line": 0,
-          "method_id": 107374182411,
+          "method_id": 107374182412,
           "name": "p2",
           "type_full_name": "ANY"
         },
         {
           "code": "p3",
-          "id": 111669149713,
+          "id": 111669149714,
           "index": 2,
           "line": 0,
-          "method_id": 107374182411,
+          "method_id": 107374182412,
           "name": "p3",
           "type_full_name": "ANY"
         }
@@ -1778,7 +2236,7 @@
     {
       "code": "env",
       "id": 68719476736,
-      "line": 8,
+      "line": 9,
       "method_id": 107374182400,
       "name": "env",
       "ref_target_ids": [
@@ -1789,7 +2247,7 @@
     {
       "code": "info",
       "id": 68719476737,
-      "line": 8,
+      "line": 9,
       "method_id": 107374182400,
       "name": "info",
       "ref_target_ids": [
@@ -1800,7 +2258,7 @@
     {
       "code": "env",
       "id": 68719476738,
-      "line": 9,
+      "line": 10,
       "method_id": 107374182400,
       "name": "env",
       "ref_target_ids": [
@@ -1811,7 +2269,7 @@
     {
       "code": "env",
       "id": 68719476736,
-      "line": 8,
+      "line": 9,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1822,7 +2280,7 @@
     {
       "code": "info",
       "id": 68719476737,
-      "line": 8,
+      "line": 9,
       "method_id": 107374182401,
       "name": "info",
       "ref_target_ids": [
@@ -1833,7 +2291,7 @@
     {
       "code": "env",
       "id": 68719476738,
-      "line": 9,
+      "line": 10,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1844,7 +2302,7 @@
     {
       "code": "env",
       "id": 68719476739,
-      "line": 13,
+      "line": 14,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1855,7 +2313,7 @@
     {
       "code": "info",
       "id": 68719476740,
-      "line": 13,
+      "line": 14,
       "method_id": 107374182401,
       "name": "info",
       "ref_target_ids": [
@@ -1866,7 +2324,7 @@
     {
       "code": "env",
       "id": 68719476741,
-      "line": 14,
+      "line": 15,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1877,7 +2335,7 @@
     {
       "code": "env",
       "id": 68719476742,
-      "line": 18,
+      "line": 19,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1888,7 +2346,7 @@
     {
       "code": "info",
       "id": 68719476743,
-      "line": 18,
+      "line": 19,
       "method_id": 107374182401,
       "name": "info",
       "ref_target_ids": [
@@ -1899,7 +2357,7 @@
     {
       "code": "env",
       "id": 68719476744,
-      "line": 19,
+      "line": 20,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
@@ -1908,141 +2366,207 @@
       "type_full_name": "Napi.Env"
     },
     {
-      "code": "exports",
-      "id": 68719476745,
-      "line": 23,
-      "method_id": 107374182401,
-      "name": "exports",
-      "ref_target_ids": [
-        111669149700
-      ],
-      "type_full_name": "Napi.Object"
-    },
-    {
       "code": "env",
-      "id": 68719476746,
-      "line": 23,
+      "id": 68719476745,
+      "line": 24,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        94489280515
       ],
       "type_full_name": "Napi.Env"
     },
     {
+      "code": "info",
+      "id": 68719476746,
+      "line": 24,
+      "method_id": 107374182401,
+      "name": "info",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "Napi.CallbackInfo&"
+    },
+    {
       "code": "env",
       "id": 68719476747,
-      "line": 23,
+      "line": 25,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        94489280515
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476748,
-      "line": 24,
+      "line": 29,
       "method_id": 107374182401,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476749,
-      "line": 24,
+      "line": 29,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "env",
       "id": 68719476750,
-      "line": 24,
+      "line": 29,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476751,
-      "line": 25,
+      "line": 30,
       "method_id": 107374182401,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476752,
-      "line": 25,
+      "line": 30,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "env",
       "id": 68719476753,
-      "line": 25,
+      "line": 30,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476754,
-      "line": 26,
+      "line": 31,
       "method_id": 107374182401,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476755,
-      "line": 29,
+      "line": 31,
       "method_id": 107374182401,
       "name": "env",
       "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "env",
+      "id": 68719476756,
+      "line": 31,
+      "method_id": 107374182401,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "exports",
+      "id": 68719476757,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "exports",
+      "ref_target_ids": [
         111669149701
+      ],
+      "type_full_name": "Napi.Object"
+    },
+    {
+      "code": "env",
+      "id": 68719476758,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "env",
+      "id": 68719476759,
+      "line": 32,
+      "method_id": 107374182401,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "exports",
+      "id": 68719476760,
+      "line": 33,
+      "method_id": 107374182401,
+      "name": "exports",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "Napi.Object"
+    },
+    {
+      "code": "env",
+      "id": 68719476761,
+      "line": 36,
+      "method_id": 107374182401,
+      "name": "env",
+      "ref_target_ids": [
+        111669149702
       ],
       "type_full_name": "napi_env"
     },
     {
       "code": "exports",
-      "id": 68719476756,
-      "line": 29,
+      "id": 68719476762,
+      "line": 36,
       "method_id": 107374182401,
       "name": "exports",
       "ref_target_ids": [
-        111669149702
+        111669149703
       ],
       "type_full_name": "napi_value"
     },
     {
       "code": "env",
       "id": 68719476739,
-      "line": 13,
+      "line": 14,
       "method_id": 107374182402,
       "name": "env",
       "ref_target_ids": [
@@ -2053,7 +2577,7 @@
     {
       "code": "info",
       "id": 68719476740,
-      "line": 13,
+      "line": 14,
       "method_id": 107374182402,
       "name": "info",
       "ref_target_ids": [
@@ -2064,7 +2588,7 @@
     {
       "code": "env",
       "id": 68719476741,
-      "line": 14,
+      "line": 15,
       "method_id": 107374182402,
       "name": "env",
       "ref_target_ids": [
@@ -2075,7 +2599,7 @@
     {
       "code": "env",
       "id": 68719476742,
-      "line": 18,
+      "line": 19,
       "method_id": 107374182403,
       "name": "env",
       "ref_target_ids": [
@@ -2086,7 +2610,7 @@
     {
       "code": "info",
       "id": 68719476743,
-      "line": 18,
+      "line": 19,
       "method_id": 107374182403,
       "name": "info",
       "ref_target_ids": [
@@ -2097,7 +2621,7 @@
     {
       "code": "env",
       "id": 68719476744,
-      "line": 19,
+      "line": 20,
       "method_id": 107374182403,
       "name": "env",
       "ref_target_ids": [
@@ -2106,134 +2630,200 @@
       "type_full_name": "Napi.Env"
     },
     {
-      "code": "exports",
-      "id": 68719476745,
-      "line": 23,
-      "method_id": 107374182404,
-      "name": "exports",
-      "ref_target_ids": [
-        111669149700
-      ],
-      "type_full_name": "Napi.Object"
-    },
-    {
       "code": "env",
-      "id": 68719476746,
-      "line": 23,
+      "id": 68719476745,
+      "line": 24,
       "method_id": 107374182404,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        94489280515
       ],
       "type_full_name": "Napi.Env"
     },
     {
+      "code": "info",
+      "id": 68719476746,
+      "line": 24,
+      "method_id": 107374182404,
+      "name": "info",
+      "ref_target_ids": [
+        111669149699
+      ],
+      "type_full_name": "Napi.CallbackInfo&"
+    },
+    {
       "code": "env",
       "id": 68719476747,
-      "line": 23,
+      "line": 25,
       "method_id": 107374182404,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        94489280515
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476748,
-      "line": 24,
-      "method_id": 107374182404,
+      "line": 29,
+      "method_id": 107374182405,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476749,
-      "line": 24,
-      "method_id": 107374182404,
+      "line": 29,
+      "method_id": 107374182405,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "env",
       "id": 68719476750,
-      "line": 24,
-      "method_id": 107374182404,
+      "line": 29,
+      "method_id": 107374182405,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476751,
-      "line": 25,
-      "method_id": 107374182404,
+      "line": 30,
+      "method_id": 107374182405,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476752,
-      "line": 25,
-      "method_id": 107374182404,
+      "line": 30,
+      "method_id": 107374182405,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "env",
       "id": 68719476753,
-      "line": 25,
-      "method_id": 107374182404,
+      "line": 30,
+      "method_id": 107374182405,
       "name": "env",
       "ref_target_ids": [
-        111669149699
+        111669149700
       ],
       "type_full_name": "Napi.Env"
     },
     {
       "code": "exports",
       "id": 68719476754,
-      "line": 26,
-      "method_id": 107374182404,
+      "line": 31,
+      "method_id": 107374182405,
       "name": "exports",
       "ref_target_ids": [
-        111669149700
+        111669149701
       ],
       "type_full_name": "Napi.Object"
     },
     {
       "code": "env",
       "id": 68719476755,
-      "line": 29,
+      "line": 31,
       "method_id": 107374182405,
       "name": "env",
       "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "env",
+      "id": 68719476756,
+      "line": 31,
+      "method_id": 107374182405,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "exports",
+      "id": 68719476757,
+      "line": 32,
+      "method_id": 107374182405,
+      "name": "exports",
+      "ref_target_ids": [
         111669149701
+      ],
+      "type_full_name": "Napi.Object"
+    },
+    {
+      "code": "env",
+      "id": 68719476758,
+      "line": 32,
+      "method_id": 107374182405,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "env",
+      "id": 68719476759,
+      "line": 32,
+      "method_id": 107374182405,
+      "name": "env",
+      "ref_target_ids": [
+        111669149700
+      ],
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "exports",
+      "id": 68719476760,
+      "line": 33,
+      "method_id": 107374182405,
+      "name": "exports",
+      "ref_target_ids": [
+        111669149701
+      ],
+      "type_full_name": "Napi.Object"
+    },
+    {
+      "code": "env",
+      "id": 68719476761,
+      "line": 36,
+      "method_id": 107374182406,
+      "name": "env",
+      "ref_target_ids": [
+        111669149702
       ],
       "type_full_name": "napi_env"
     },
     {
       "code": "exports",
-      "id": 68719476756,
-      "line": 29,
-      "method_id": 107374182405,
+      "id": 68719476762,
+      "line": 36,
+      "method_id": 107374182406,
       "name": "exports",
       "ref_target_ids": [
-        111669149702
+        111669149703
       ],
       "type_full_name": "napi_value"
     }
@@ -2242,7 +2832,7 @@
     {
       "code": "Napi::Env env",
       "id": 94489280512,
-      "line": 8,
+      "line": 9,
       "method_id": 107374182400,
       "name": "env",
       "type_full_name": "Napi.Env"
@@ -2250,7 +2840,7 @@
     {
       "code": "Napi::Env env",
       "id": 94489280513,
-      "line": 13,
+      "line": 14,
       "method_id": 107374182402,
       "name": "env",
       "type_full_name": "Napi.Env"
@@ -2258,8 +2848,16 @@
     {
       "code": "Napi::Env env",
       "id": 94489280514,
-      "line": 18,
+      "line": 19,
       "method_id": 107374182403,
+      "name": "env",
+      "type_full_name": "Napi.Env"
+    },
+    {
+      "code": "Napi::Env env",
+      "id": 94489280515,
+      "line": 24,
+      "method_id": 107374182404,
       "name": "env",
       "type_full_name": "Napi.Env"
     }
@@ -2276,13 +2874,13 @@
     {
       "code": "RET",
       "id": 124554051584,
-      "line": 7,
+      "line": 8,
       "method_id": 107374182400,
       "type_full_name": "Napi.Value"
     },
     {
       "code": "RET",
-      "id": 124554051589,
+      "id": 124554051590,
       "line": 1,
       "method_id": 107374182401,
       "type_full_name": "ANY"
@@ -2290,42 +2888,42 @@
     {
       "code": "RET",
       "id": 124554051585,
-      "line": 12,
+      "line": 13,
       "method_id": 107374182402,
       "type_full_name": "Napi.Value"
     },
     {
       "code": "RET",
       "id": 124554051586,
-      "line": 17,
+      "line": 18,
       "method_id": 107374182403,
       "type_full_name": "Napi.Value"
     },
     {
       "code": "RET",
       "id": 124554051587,
-      "line": 22,
+      "line": 23,
       "method_id": 107374182404,
-      "type_full_name": "Napi.Object"
+      "type_full_name": "Napi.Value"
     },
     {
       "code": "RET",
       "id": 124554051588,
-      "line": 29,
+      "line": 28,
       "method_id": 107374182405,
+      "type_full_name": "Napi.Object"
+    },
+    {
+      "code": "RET",
+      "id": 124554051589,
+      "line": 36,
+      "method_id": 107374182406,
       "type_full_name": "napi_value"
     },
     {
       "code": "RET",
-      "id": 124554051590,
-      "line": 1,
-      "method_id": 107374182406,
-      "type_full_name": "ANY"
-    },
-    {
-      "code": "RET",
       "id": 124554051591,
-      "line": 0,
+      "line": 1,
       "method_id": 107374182407,
       "type_full_name": "ANY"
     },
@@ -2356,6 +2954,13 @@
       "line": 0,
       "method_id": 107374182411,
       "type_full_name": "ANY"
+    },
+    {
+      "code": "RET",
+      "id": 124554051596,
+      "line": 0,
+      "method_id": 107374182412,
+      "type_full_name": "ANY"
     }
   ],
   "returns": [
@@ -2372,7 +2977,7 @@
       "function_id": 107374182400,
       "id": 141733920768,
       "is_void": false,
-      "line": 9,
+      "line": 10,
       "value_ref": {
         "code": "return Napi::Number::New(env, 1);",
         "id": 30064771074,
@@ -2392,7 +2997,7 @@
       "function_id": 107374182402,
       "id": 141733920769,
       "is_void": false,
-      "line": 14,
+      "line": 15,
       "value_ref": {
         "code": "return Napi::Number::New(env, 2);",
         "id": 30064771077,
@@ -2412,10 +3017,30 @@
       "function_id": 107374182403,
       "id": 141733920770,
       "is_void": false,
-      "line": 19,
+      "line": 20,
       "value_ref": {
         "code": "return Napi::Number::New(env, 3);",
         "id": 30064771080,
+        "kind": "CALL"
+      }
+    },
+    {
+      "code": "return Napi::Number::New(env, 4);",
+      "derivation": {
+        "origin": "FRONTEND_DIRECT",
+        "rule": "RETURN_AST_CHILD",
+        "source_node_ids": [
+          141733920771,
+          30064771083
+        ]
+      },
+      "function_id": 107374182404,
+      "id": 141733920771,
+      "is_void": false,
+      "line": 25,
+      "value_ref": {
+        "code": "return Napi::Number::New(env, 4);",
+        "id": 30064771083,
         "kind": "CALL"
       }
     },
@@ -2425,17 +3050,17 @@
         "origin": "FRONTEND_DIRECT",
         "rule": "RETURN_AST_CHILD",
         "source_node_ids": [
-          141733920771,
-          68719476754
+          141733920772,
+          68719476760
         ]
       },
-      "function_id": 107374182404,
-      "id": 141733920771,
+      "function_id": 107374182405,
+      "id": 141733920772,
       "is_void": false,
-      "line": 26,
+      "line": 33,
       "value_ref": {
         "code": "exports",
-        "id": 111669149700,
+        "id": 111669149701,
         "kind": "PARAMETER"
       }
     },
@@ -2445,17 +3070,17 @@
         "origin": "FRONTEND_DIRECT",
         "rule": "RETURN_AST_CHILD",
         "source_node_ids": [
-          141733920772,
-          30064771090
+          141733920773,
+          30064771096
         ]
       },
-      "function_id": 107374182405,
-      "id": 141733920772,
+      "function_id": 107374182406,
+      "id": 141733920773,
       "is_void": false,
-      "line": 29,
+      "line": 36,
       "value_ref": {
         "code": "NODE_API_MODULE(addon, Init)",
-        "id": 30064771090,
+        "id": 30064771096,
         "kind": "CALL"
       }
     }
@@ -2468,7 +3093,7 @@
       "id": 167503724544,
       "inherits_from": [],
       "is_external": false,
-      "line": 7,
+      "line": 8,
       "name": "Foo"
     },
     {
@@ -2477,7 +3102,7 @@
       "id": 167503724545,
       "inherits_from": [],
       "is_external": false,
-      "line": 12,
+      "line": 13,
       "name": "Bar"
     },
     {
@@ -2486,31 +3111,40 @@
       "id": 167503724546,
       "inherits_from": [],
       "is_external": false,
-      "line": 17,
+      "line": 18,
       "name": "Baz"
     },
     {
       "file": "addon.cc",
-      "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+      "full_name": "Qux:Napi.Value(Napi.CallbackInfo&)",
       "id": 167503724547,
       "inherits_from": [],
       "is_external": false,
-      "line": 22,
+      "line": 23,
+      "name": "Qux"
+    },
+    {
+      "file": "addon.cc",
+      "full_name": "Init:Napi.Object(Napi.Env,Napi.Object)",
+      "id": 167503724548,
+      "inherits_from": [],
+      "is_external": false,
+      "line": 28,
       "name": "Init"
     },
     {
       "file": "addon.cc",
       "full_name": "__napi_Init:napi_value(napi_env,napi_value)",
-      "id": 167503724548,
+      "id": 167503724549,
       "inherits_from": [],
       "is_external": false,
-      "line": 29,
+      "line": 36,
       "name": "__napi_Init"
     },
     {
       "file": "addon.cc",
       "full_name": "addon.cc:<global>",
-      "id": 167503724549,
+      "id": 167503724550,
       "inherits_from": [],
       "is_external": false,
       "line": 1,
@@ -2519,7 +3153,7 @@
     {
       "file": "<includes>",
       "full_name": "ANY",
-      "id": 167503724550,
+      "id": 167503724551,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2528,7 +3162,7 @@
     {
       "file": "<includes>",
       "full_name": "Napi.CallbackInfo&",
-      "id": 167503724551,
+      "id": 167503724552,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2537,7 +3171,7 @@
     {
       "file": "<includes>",
       "full_name": "Napi.Env",
-      "id": 167503724552,
+      "id": 167503724553,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2546,7 +3180,7 @@
     {
       "file": "<includes>",
       "full_name": "Napi.Object",
-      "id": 167503724553,
+      "id": 167503724554,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2555,7 +3189,7 @@
     {
       "file": "<includes>",
       "full_name": "Napi.Value",
-      "id": 167503724554,
+      "id": 167503724555,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2564,7 +3198,7 @@
     {
       "file": "<includes>",
       "full_name": "Object",
-      "id": 167503724555,
+      "id": 167503724556,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2573,7 +3207,7 @@
     {
       "file": "<includes>",
       "full_name": "Value",
-      "id": 167503724556,
+      "id": 167503724557,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2582,7 +3216,7 @@
     {
       "file": "<includes>",
       "full_name": "char[4]",
-      "id": 167503724557,
+      "id": 167503724558,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2591,7 +3225,7 @@
     {
       "file": "<includes>",
       "full_name": "int",
-      "id": 167503724558,
+      "id": 167503724559,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2600,7 +3234,7 @@
     {
       "file": "<includes>",
       "full_name": "napi_env",
-      "id": 167503724559,
+      "id": 167503724560,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2609,7 +3243,7 @@
     {
       "file": "<includes>",
       "full_name": "napi_value",
-      "id": 167503724560,
+      "id": 167503724561,
       "inherits_from": [],
       "is_external": true,
       "line": 0,
@@ -2618,7 +3252,7 @@
     {
       "file": "<includes>",
       "full_name": "void",
-      "id": 167503724561,
+      "id": 167503724562,
       "inherits_from": [],
       "is_external": true,
       "line": 0,

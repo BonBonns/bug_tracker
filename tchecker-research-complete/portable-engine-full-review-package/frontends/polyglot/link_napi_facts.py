@@ -40,7 +40,7 @@ discipline as `resource_contracts_r03.py`'s own qualifier-prefix fix. The OLD
 `receiver_name`/`--js-receiver` check is kept, unchanged, as an alternative match (never
 removed) in case some real, not-yet-observed JS/TS frontend path DOES populate it.
 """
-import json, sys, argparse
+import json, re, sys, argparse
 
 # CROSSLANG-LINK-FIX01C: only packages CONFIRMED to export a directly-callable loader
 # function -- `require(PKG)(args)` -- belong here, since that exact shape is what
@@ -64,10 +64,18 @@ import json, sys, argparse
 #     claim that this whole set was "confirmed against real require() targets" did not hold
 #     for these two -- corrected by removing them rather than leaving an unverified entry
 #     alongside verified ones.
-#   - "prebuild-install": confirmed via its own published package.json -- `main` is absent
-#     entirely (`bin` only). It is a CLI-only install-time tool, never `require()`-able as a
-#     runtime library at all -- including it here was a real error, not a disclosed
-#     approximation, and is removed rather than caveated.
+#   - "prebuild-install": CORRECTED, not what an earlier version of this comment said. Its
+#     published `package.json` has no `main` field, but that does NOT mean it cannot be
+#     `require()`'d -- absent `main`, Node's own CommonJS resolution defaults to the
+#     package root's `index.js` (confirmed: prebuild-install@7.1.3's real `index.js` exists
+#     and IS what `require('prebuild-install')` resolves to). The real, disqualifying reason
+#     is the SAME shape as `node-pre-gyp` above, not "unrequireable": that real `index.js`
+#     contains exactly `exports.download = require('./download')` -- an OBJECT exposing an
+#     install-time `.download` HELPER (for fetching prebuilt binaries), not a callable
+#     function that itself returns a loaded native addon. `require('prebuild-install').
+#     download(...)` is a method call on that bare helper object -- the same "helper, not
+#     the binding" case `_via_loader_invocation` exists to reject, exercised as an explicit
+#     negative control below, not just reasoned about.
 # Matched by EXACT membership, never a substring -- an unrelated package whose name merely
 # CONTAINS one of these (e.g. "some-bindings-helper") must NOT match; see
 # study/crosslang_link_fix/controls for the real, run fixture proving this.
@@ -75,6 +83,21 @@ NATIVE_LOADER_PACKAGES = {
     'bindings', 'node-gyp-build',
 }
 NATIVE_BUILD_PATH_MARKERS = ('build/Release/', 'build/Debug/')
+
+
+def _loader_invocation_pattern(pkg):
+    # CROSSLANG-LINK-FIX01D (real bug, found and fixed -- see module docstring and
+    # CHARACTERIZATION.md's own addendum): the frontend's <returnValue> marker preserves the
+    # SOURCE'S OWN quote character verbatim -- confirmed real: `require('node-gyp-build')`
+    # produces `require('node-gyp-build'):<returnValue>:...` (single quotes), but
+    # `require("node-gyp-build")` produces `require("node-gyp-build"):<returnValue>:...`
+    # (double quotes) -- a DIFFERENT literal string for the exact same real convention. A
+    # hardcoded single-quote-only check would silently miss every double-quoted real
+    # require() call, corpus-wide, with no error -- confirmed by direct regeneration of a
+    # double-quoted real fixture. Matched here via regex, accepting either quote character,
+    # so the linker's own behavior never depends on the analyzed package's source
+    # formatting style.
+    return re.compile(r"require\(['\"]" + re.escape(pkg) + r"['\"]\):<returnValue>:")
 
 
 def _via_loader_invocation(call, pkg):
@@ -86,15 +109,16 @@ def _via_loader_invocation(call, pkg):
     `const native = require('node-gyp-build')(x); native.Bar()` (the loader actually
     INVOKED, producing the real native binding). The frontend's own resolution DOES
     structurally distinguish them, though: only the invoked case's `candidate_target_
-    full_names`/`canonical_targets` contains a `require('<pkg>'):<returnValue>:` marker
-    (confirmed real on both node-liblzma's real `isXZ` call and a dedicated boundary
+    full_names`/`canonical_targets` contains a `require(<quote><pkg><quote>):<returnValue>:`
+    marker (confirmed real on both node-liblzma's real `isXZ` call and a dedicated boundary
     fixture) -- the bare, non-invoked loader reference never does. This checks for exactly
-    that marker, scoped to the SAME package name matched via receiver_type -- never a bare
-    "any <returnValue> marker", which could in principle belong to an unrelated require()."""
-    marker = f"require('{pkg}'):<returnValue>:"
+    that marker (either quote style -- see `_loader_invocation_pattern`), scoped to the SAME
+    package name matched via receiver_type -- never a bare "any <returnValue> marker", which
+    could in principle belong to an unrelated require()."""
+    pattern = _loader_invocation_pattern(pkg)
     targets = list(call.get('candidate_target_full_names') or []) + \
         list(call.get('canonical_targets') or [])
-    return any(marker in t for t in targets)
+    return any(pattern.search(t) for t in targets)
 
 
 def is_native_binding_receiver(call):
