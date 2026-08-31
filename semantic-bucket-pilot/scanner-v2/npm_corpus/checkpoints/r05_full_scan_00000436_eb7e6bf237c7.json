@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"raw-socket\", \"version\": \"1.8.1\", \"stages\": {\"download\": {\"seconds\": 0.10548925399780273}, \"extract\": {\"seconds\": 0.004506587982177734}, \"header_staging\": {\"seconds\": 0.21584177017211914, \"n_staged\": 1}, \"c2cpg\": {\"seconds\": 7.975216627120972, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 9.435435771942139, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 27.16599678993225, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 28.871074438095093, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 0.21566557884216309}, \"js_normalize\": {\"seconds\": 0.30192041397094727}, \"polyglot_link\": {\"seconds\": 0.4509134292602539}, \"r04_scan\": {\"seconds\": 0.07545328140258789}, \"r05_scan\": {\"seconds\": 0.05532956123352051}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": \"nan\", \"declared_range\": \"2.19.*\", \"resolved_version\": \"2.28.0\", \"staged\": true, \"note\": \"range '2.19.*' unresolvable/unsatisfied -- fell back to latest (2.28.0)\"}], \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 62, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 62}, \"r04_findings\": [], \"r05_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 62, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 62, \"R05_RECOVERY_CANDIDATE\": 37, \"R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED\": 37}, \"r05_findings\": [], \"total_seconds\": 74.87837958335876}",
+  "name": "r05_full_scan",
+  "row_count": 436,
+  "sha256": "eb7e6bf237c7d65edb0a71f56c74b8e25b16da4bfa20ea7b8496ec5a3a1d6685",
+  "snapshot_path": "checkpoints/r05_full_scan_00000436_eb7e6bf237c7.tsv",
+  "snapshot_time_utc": "2026-08-31T06:26:17Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
