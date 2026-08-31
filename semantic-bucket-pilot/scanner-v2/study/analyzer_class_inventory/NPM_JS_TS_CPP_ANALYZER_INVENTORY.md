@@ -39,6 +39,14 @@ eligible packages.
 This matches the breakdown you derived from the disclosed status list exactly: 18 sound / 1
 unverified (Path Traversal) / 1 unsound (Command Injection).
 
+**Wording discipline: "executed" is not "validated effective on this corpus."**
+`FALLIBLE_BOUNDED_RESOURCE` was executed by the stopped pipeline — but that run produced **zero
+verified true positives**. Its one raw finding (`node-libcurl`'s `Easy::ReadFunction`) is a
+confirmed false positive, independently established before this scan even ran
+(`R05_CORPUS_RESULTS.md`). So "1 of 20 executed" says only that the pipeline invoked this
+property's R04/R05 stages across 452/494 packages — it is not a claim that the property found
+anything real on this corpus, and must not be read or cited as one.
+
 ## Historical evidence, re-scoped: npm-corpus evidence vs. other-ecosystem validation
 
 The repository-wide document's "10 properties have historical corpus evidence" conflated real
@@ -68,13 +76,27 @@ count):
 
 | Status | Count | Properties |
 |---|---:|---|
-| **`ALREADY_EXECUTED`** | 1 | `FALLIBLE_BOUNDED_RESOURCE` |
-| **`READY_TO_WIRE_WITH_CURRENT_FACTS`** | 5 | `LOCK_BALANCE`, `PROTECTED_FIELD`, `OOB_WRITE`, `OOB_READ`, `OOB_COMPARE` — all consume `export_c_cpp_facts_v03.sc`, the same raw C/C++ fact table `run_pipeline_one.py` already generates for every package. This matches your own "four useful C/C++ properties" observation exactly: resource-guard (already executed) + lock-balance + protected-field + OOB(-write/read/compare, one property family) |
+| **`ALREADY_EXECUTED`** | 1 | `FALLIBLE_BOUNDED_RESOURCE` — executed, but see the wording-discipline note above: zero verified true positives, not "validated effective" |
+| **`READY_TO_WIRE_WITH_CURRENT_FACTS`** | 5 | `LOCK_BALANCE`, `PROTECTED_FIELD`, `OOB_WRITE`, `OOB_READ`, `OOB_COMPARE` — all consume `export_c_cpp_facts_v03.sc`, the same raw C/C++ fact table `run_pipeline_one.py` already generates for every package. This matches your own "four useful C/C++ properties" observation exactly: resource-guard (already executed) + lock-balance + protected-field + OOB(-write/read/compare, one property family). **This status is currently an inventory classification, not proven pipeline compatibility** — none of these 5 has been run against a real fact table the npm pipeline's own exporter produced. Task #28 (`Integration-verification pilot for the 5 READY_TO_WIRE C/C++ properties`) covers proving or disproving this for each of the 5, individually, before any corpus rerun. |
 | **`NEEDS_SPECIALIZED_EXPORT`** | 12 | `DENYLIST_PATTERN_BYPASS`, `GLOBAL_SINGLETON_MUTATION`, `GUARD_FALLTHROUGH`, `MALICIOUS_NPM_INSTALL_EXFIL`, `UNGUARDED_SERIALIZE_DOS`, `VALIDATION_BYPASS`, `SSRF`, `REDOS`, `NOSQLI`, `FAIL_OPEN_SECURITY_CONTROL`, `LLM_INSECURE_OUTPUT_HANDLING`, `LLM_PROMPT_INJECTION` — sound (or sound-with-a-disclosed-caveat, `NOSQLI`'s Stage3 gap), but each needs its own specialized Joern export the npm pipeline's generic `export_neutral.sc` stage doesn't produce |
 | **`NEEDS_SOUNDNESS_WORK`** | 1 | `COMMAND_INJECTION` — Stage 2B is self-described as an experiment, never wired to a promotion path; this is a soundness gap, not an export gap |
 | **`UNVERIFIED`** | 1 | `PATH_TRAVERSAL` — wired to the shared taint engine but no dedicated gate/freeze doc confirms its own soundness |
 
 Sums to 20, checked by assertion in `compute_npm_totals.py`.
+
+## Next step (not started)
+
+`READY_TO_WIRE_WITH_CURRENT_FACTS` is an inventory-level classification derived from reading each
+scanner's own stated input schema against `export_c_cpp_facts_v03.sc`'s own documented output —
+it is not the same claim as "this scanner was run against a real fact table the npm pipeline
+produced and behaved correctly." A separate integration-verification task
+(project task tracker #28) covers exactly that gap for these 5 properties: real per-scanner runs
+against one real npm evidence bundle each, input-schema compatibility confirmed rather than
+assumed, real positive/negative/abstention behavior recorded, independent output keys and
+timings added, and a small multi-class pilot before any corpus-scale rerun. If that pilot
+succeeds, the next pipeline run would evaluate **6** properties immediately — the existing
+resource-guard property plus these 5 — while the 12 `NEEDS_SPECIALIZED_EXPORT` JS/TS properties
+remain a separate, unstarted exporter-development phase.
 
 ## What this does not change
 
