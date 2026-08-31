@@ -329,6 +329,109 @@ rather than by accident.
 of its real links now resolves via the canonical mechanism, zero reliance on the fallback
 regex, where before this fix ALL SIX depended entirely on it.
 
+## 6e. CROSSLANG-LINK-FIX01F: "exactly one assignment by name" was not real reaching-def
+
+Direct review, correctly predicted before testing: FIX01E's `resolve_loader_provenance`
+matches "exactly one `<operator>.assignment` to this NAME, anywhere in the file" -- a blunt
+proxy for real reaching-definition, not the real thing. Five real, adversarial programs
+were built and run through the real frontend to check this precisely, matching the
+instruction's own list:
+
+| Case | Real shape | What FIX01E did (before this fix) |
+|---|---|---|
+| Overwrite-before-use | `native1 = require(pkg)(dir); native1 = fakeObject; native1.Foo();` | **FALSE POSITIVE** via the fallback tier -- canonical correctly abstained (2 assignments), but the regex fallback has no concept of reassignment and matched anyway. The real call at runtime invokes the fake object, not the native binding. |
+| Branch multi-definition | `if (c) { native2 = require(pkg)(dir); } else { native2 = fakeObject; } native2.Bar();` | **FALSE POSITIVE**, same mechanism -- canonical abstained, fallback matched regardless of which branch actually ran. |
+| Parameter shadowing | `const native3 = require(pkg)(dir); function wrap(native3) { return native3.Baz(); }` | **FALSE POSITIVE via the CANONICAL tier itself** -- the worst of the three: the inner function's own PARAMETER `native3` shadows the outer definition entirely, is bound to a real caller-supplied value at the actual call site, and the "exactly one assignment by name" check had zero awareness that parameters exist at all. |
+| Assignment-after-use | `function callQux() { return native4.Qux(); } var native4; native4 = require(pkg)(dir);` | Not decisively differentiated by this fixture (the function was never actually invoked before the assignment in the test) -- see the disclosed limitation below. |
+| Alias cycle | `let x5 = someFn; let y5 = x5; x5 = y5; const native6 = x5(dir);` (neither ever bottoms out at a real `require()`) | Correctly rejected, no hang or crash (the existing depth bound already handled this safely). |
+
+**Three of five real cases -- the two most operationally common (reassignment,
+conditional definition) plus the most security-relevant (parameter shadowing) -- would
+have produced a false link.** This confirms the review's diagnosis: name-based lookup
+across the WHOLE FILE, with no awareness of scope, shadowing, or multiplicity beyond a
+blunt count, is not real reaching-definition.
+
+**The real fix, as directed:** provenance is now keyed by DEFINITION node identity within a
+real, reconstructed LEXICAL SCOPE chain, not by name alone. `JsCallIndex.function_ancestor_
+chain()` derives a function's real, structural nesting path from the frontend's own
+colon-separated `full_name` convention (confirmed real and reliable: a function nested
+`program -> outer -> inner` gets `full_name` `"file::program:outer:inner"`, and EVERY
+successive colon-delimited prefix is independently a real function's own `full_name` in
+this schema -- verified directly, not assumed, before relying on it). `JsCallIndex.
+receiver_definition()` then requires ALL of:
+
+1. Exactly one real `<operator>.assignment` to the name anywhere in the file (unchanged
+   from FIX01E, but now the SOLE gate for identity, not a check only the canonical tier
+   respected).
+2. The assignment's own enclosing function is a REAL ancestor of (or equal to) the use
+   site's enclosing function in the reconstructed lexical chain -- an assignment in an
+   unrelated/sibling scope is `DEFINITION_NOT_IN_SCOPE`, not a match.
+3. No function strictly between the definition's scope and the use site (inclusive of the
+   use site's own function) declares a PARAMETER with the same name -- `PARAMETER_SHADOWED`
+   otherwise.
+
+Every real abstention reason (`MULTIPLE_DEFINITIONS_AMBIGUOUS`, `SCOPE_UNRESOLVED`,
+`DEFINITION_NOT_IN_SCOPE`, `PARAMETER_SHADOWED`, `BARE_LOADER_REFERENCE`,
+`CALLEE_NOT_REQUIRE`) is now explicit, not a silent `None` -- exactly as directed
+("ambiguous reaching definitions must abstain with an explicit reason"). This same,
+identical check is now used for the ALIAS-hop resolution inside `_callee_resolves_to_
+require()` too (an alias is exactly as capable of being ambiguous or shadowed as the
+top-level receiver, and was not checked this way before this fix).
+
+**CFG reachability, as the instruction also offered as an alternative:** the JS/TS
+program-facts schema does not currently export CFG edges at all (confirmed: `export_
+neutral.sc`'s own output has no `cfg_edges` key, unlike the C/C++ side) -- building real
+CFG-based reachability would require a genuine frontend/export change, not a Python-side
+fix. The lexical-scope + single-definition + shadow check above is the strongest provenance
+available from data already exported, and it is what actually falsified all three real bugs
+above -- stated precisely as what it is, not oversold as full dataflow reachability.
+
+**The regex fallback is now gated behind this SAME check, not tried independently** --
+confirmed necessary: without this, the fallback alone reproduces the overwrite/branch false
+positives (it matches on marker TEXT, which has no concept of reassignment at all). The
+fallback is now reached ONLY when `resolve_loader_provenance` returns the specific
+`'CALLEE_NOT_REQUIRE'` reason -- meaning the receiver's identity is ALREADY established as
+real, single, in-scope, and unshadowed; only the shape of its own value could not be
+canonically proven. Every other abstention reason is now a hard rejection the fallback
+never gets a chance to override.
+
+**Disclosed limitation, not silently left out:** assignment-AFTER-use in true execution
+order (a closure invoked before its capturing assignment actually runs -- possible in real
+JS via hoisting/event-loop timing) is NOT independently verified, because no CFG/execution-
+order data is available (same underlying gap as the CFG-reachability point above). This
+analysis assumes the standard, near-universal CommonJS pattern real native-addon packages
+follow: the whole module body (including the `require()` call that loads the binding) runs
+to completion synchronously before any function that uses the binding is ever invoked by an
+external consumer of the package. A pathological package that invokes its own callback
+before its `require()` line executes would not be caught by this check -- stated here as a
+real, disclosed boundary, not discovered as a surprise later.
+
+**Real audit-trail quality check, not just a design claim:** logging every real abstention
+reason unfiltered was tried first and found to swamp the audit trail on real data (`node-
+liblzma`: 220 entries, nearly all unrelated array/promise-method calls whose names happened
+to be reassigned elsewhere in the file for reasons having nothing to do with loaders --
+`resolve_loader_provenance` necessarily runs for EVERY identifier receiver, not only
+loader-shaped ones, to still catch the whitespace-degraded-`receiver_type` case). Narrowed
+to only log when the call's own `receiver_type` is at least PLAUSIBLY loader-related (a
+curated package name, a build-path/`.node` shape, or the degraded `"ANY"` this project's
+own whitespace fixture proved can still hide a real loader use) -- real result:
+`node-liblzma` 220 -> 29, `memoryjs` 90 -> 15, the controls fixture 9 -> 4. Some residual
+noise remains (generic method calls on an `ANY`-typed receiver still appear) -- a real,
+disclosed tradeoff: `"ANY"` cannot be dropped from the filter without losing the exact
+whitespace case this whole redesign exists to catch.
+
+**All prior real controls, all five reaching-definition probes, and both real end-to-end
+corpus packages re-verified after this fix:** the 14-control fixture and both end-to-end
+packages reproduce IDENTICAL `linked`/`unlinked` counts to before this fix (`registrations=8
+linked=8 unlinked=0`; `memoryjs`: `registrations=12 linked=15 unlinked=25`; `node-liblzma`:
+`registrations=6 linked=6 unlinked=0`) -- this fix closes real false-positive risk without
+losing any previously-correct real link. The five reaching-definition probes (a NEW real
+fixture, `controls/js_reaching_def_probe/reaching_def_probe.js`) now resolve exactly as
+intended: overwrite and
+branch cases -> `MULTIPLE_DEFINITIONS_AMBIGUOUS`; parameter shadowing ->
+`PARAMETER_SHADOWED`; the single, real, unambiguous definition case (`Qux`) -> still
+`canonical`, unaffected; the alias cycle -> `CALLEE_NOT_REQUIRE`, no hang or crash.
+
 ## 7. What happens next (after R05 is frozen -- not started yet)
 
 Per direct instruction: this branch stays unmerged until the R05 corpus rerun (main working

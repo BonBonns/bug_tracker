@@ -116,13 +116,20 @@ def _strip_literal_quotes(code):
 
 
 class JsCallIndex:
-    """Real, ID-keyed indices over a JS/TS program-facts doc's own `calls` list -- built
-    once per run, consumed by `resolve_loader_provenance()`. No new export/frontend
-    capability needed: every field used here (`id`, `name`, `code`, `arguments[].id`,
-    `arguments[].kind`, `arguments[].code`) was already present in the existing schema."""
+    """Real, ID-keyed indices over a JS/TS program-facts doc's own `calls`/`functions`
+    lists -- built once per run, consumed by `resolve_loader_provenance()`. No new
+    export/frontend capability needed: every field used here (`id`, `name`, `code`,
+    `full_name`, `parameters[].name`, `arguments[].id`, `arguments[].kind`,
+    `arguments[].code`, `enclosing_function_id`) was already present in the existing
+    schema."""
 
     def __init__(self, js):
         self.calls_by_id = {c['id']: c for c in js.get('calls', [])}
+        self.functions_by_id = {f['id']: f for f in js.get('functions', [])}
+        self.functions_by_full_name = {f['full_name']: f for f in js.get('functions', [])}
+        # assignments_by_lhs: name -> [(rhs_arg, enclosing_function_id), ...] -- tracks
+        # WHERE each real assignment lives, not just its value, so scope/shadowing can be
+        # checked (see CROSSLANG-LINK-FIX01F, module docstring).
         self.assignments_by_lhs = defaultdict(list)
         self.require_calls = []  # [(call_id, pkg_name)]
         for c in js.get('calls', []):
@@ -130,20 +137,98 @@ class JsCallIndex:
             if c.get('name') == '<operator>.assignment':
                 lhs, rhs = args.get(1), args.get(2)
                 if lhs and lhs.get('kind') == 'IDENTIFIER' and rhs:
-                    self.assignments_by_lhs[lhs['code']].append(rhs)
+                    self.assignments_by_lhs[lhs['code']].append(
+                        (rhs, c.get('enclosing_function_id')))
             if c.get('name') == 'require':
                 lit = args.get(1)
                 if lit and lit.get('kind') == 'LITERAL':
                     self.require_calls.append((c['id'], _strip_literal_quotes(lit['code'])))
 
+    def function_ancestor_chain(self, function_id):
+        """Real, structural lexical-nesting chain for the function with this id, from
+        OUTERMOST to the function itself -- derived from the frontend's own colon-
+        separated `full_name` convention (confirmed real on a dedicated fixture: a
+        function nested inside `outer` inside the top-level `program` gets full_name
+        `"file::program:outer:inner"`, and EVERY successive colon-delimited prefix is
+        itself a real function's own full_name in this schema). Returns [] if the
+        function id is unknown or its full_name doesn't reconstruct cleanly -- callers
+        treat that as "scope cannot be established safely" and abstain (fail closed),
+        never as "no shadowing risk"."""
+        func = self.functions_by_id.get(function_id)
+        if func is None:
+            return []
+        full_name = func.get('full_name', '')
+        if '::' not in full_name:
+            return []
+        file_part, rest = full_name.split('::', 1)
+        segments = rest.split(':')
+        chain = []
+        prefix = file_part + '::'
+        for i, seg in enumerate(segments):
+            prefix = prefix + seg if i == 0 else prefix + ':' + seg
+            f = self.functions_by_full_name.get(prefix)
+            if f is None:
+                return []
+            chain.append(f)
+        return chain
+
+    def receiver_definition(self, receiver_name, enclosing_function_id):
+        """CROSSLANG-LINK-FIX01F -- see module docstring for the full, real account of
+        why this exists. Returns (rhs_arg, None) for the single, unambiguous,
+        correctly-in-scope, unshadowed real definition of `receiver_name` reaching a
+        use inside the function identified by `enclosing_function_id`, or (None,
+        reason) with an explicit, disclosed abstention reason otherwise -- never a
+        guess. `reason` is one of:
+          NO_DEFINITION, MULTIPLE_DEFINITIONS_AMBIGUOUS (more than one real
+          `<operator>.assignment` to this name anywhere in the file -- reassignment,
+          branch-multi-definition, or genuine ambiguity are all indistinguishable
+          without real CFG/execution-order data, which this schema does not export, so
+          ALL are treated alike: abstain, never guess which one "wins"),
+          SCOPE_UNRESOLVED (the call's or the definition's own function context could
+          not be reconstructed via `function_ancestor_chain` -- fails closed),
+          DEFINITION_NOT_IN_SCOPE (the found assignment's own function is not a real
+          lexical ancestor of the call's function, nor the call's function itself -- an
+          unrelated/sibling scope's same-named variable, not a real closure capture),
+          PARAMETER_SHADOWED (some function strictly between the definition's own scope
+          and the call's scope, inclusive of the call's own function, declares a
+          PARAMETER with this exact name -- that parameter binds first at the call
+          site, and its real value cannot be established statically; confirmed real and
+          necessary via a dedicated fixture, see CHARACTERIZATION.md)."""
+        assigns = self.assignments_by_lhs.get(receiver_name)
+        if not assigns:
+            return None, 'NO_DEFINITION'
+        if len(assigns) > 1:
+            return None, 'MULTIPLE_DEFINITIONS_AMBIGUOUS'
+        rhs, def_function_id = assigns[0]
+        call_chain = self.function_ancestor_chain(enclosing_function_id)
+        def_func = self.functions_by_id.get(def_function_id)
+        if not call_chain or def_func is None:
+            return None, 'SCOPE_UNRESOLVED'
+        def_full_name = def_func.get('full_name')
+        def_index = next((i for i, f in enumerate(call_chain)
+                           if f.get('full_name') == def_full_name), None)
+        if def_index is None:
+            return None, 'DEFINITION_NOT_IN_SCOPE'
+        for f in call_chain[def_index + 1:]:
+            for p in f.get('parameters', []):
+                if p.get('name') == receiver_name:
+                    return None, 'PARAMETER_SHADOWED'
+        return rhs, None
+
 
 def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
     """`invocation_call` is a real CALL node (looked up by id, not text) representing
-    `X(...)` for some callee expression X. Returns the matched package name iff X --
-    possibly through up to `depth` hops of single-assignment variable aliasing -- IS a
-    real `require(pkg)` call for a curated `pkg`. Real, ID-based graph walk: every step
-    looks up a call or assignment by its own node id, never by parsing a flattened
-    target/marker string."""
+    `X(...)` for some callee expression X, invoked from WITHIN
+    `invocation_call['enclosing_function_id']`'s own scope. Returns the matched package
+    name iff X -- possibly through up to `depth` hops of single-assignment variable
+    aliasing -- IS a real `require(pkg)` call for a curated `pkg`. Real, ID-based graph
+    walk: every step looks up a call or assignment by its own node id, never by parsing
+    a flattened target/marker string. Every alias hop goes through the SAME
+    `JsCallIndex.receiver_definition()` scope/shadowing check as the top-level receiver
+    (CROSSLANG-LINK-FIX01F) -- an alias is exactly as capable of being ambiguously
+    reassigned or parameter-shadowed as the receiver itself, and was NOT checked this
+    way before that fix; confirmed real and necessary, not merely theoretical, since
+    real corpus code (`node-liblzma`) uses exactly this one-hop-alias shape."""
     callee_name = invocation_call.get('name')
     # Case 1: X's own callee text is a require(pkg) call chained directly:
     # require(pkg)(...). The frontend represents a chained call's callee-expression text
@@ -155,14 +240,12 @@ def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
             return pkg
     if depth <= 0:
         return None
-    # Case 2: X is a plain identifier -- an alias. Resolve its own single, unambiguous
-    # assignment (real, disclosed abstention if the name has more than one real
-    # assignment in the file -- genuinely ambiguous, not guessed at).
-    next_assigns = idx.assignments_by_lhs.get(callee_name)
-    if not next_assigns or len(next_assigns) != 1:
-        return None
-    next_rhs = next_assigns[0]
-    if next_rhs.get('kind') != 'CALL':
+    # Case 2: X is a plain identifier -- an alias. Resolve its own single, unambiguous,
+    # in-scope, unshadowed definition (real abstention -- not a guess -- on ambiguity,
+    # unresolved scope, or shadowing; see receiver_definition's own docstring).
+    next_rhs, reason = idx.receiver_definition(
+        callee_name, invocation_call.get('enclosing_function_id'))
+    if next_rhs is None or next_rhs.get('kind') != 'CALL':
         return None
     next_rhs_call = idx.calls_by_id.get(next_rhs['id'])
     if next_rhs_call is None:
@@ -181,30 +264,34 @@ def _callee_resolves_to_require(invocation_call, idx, curated_packages, depth):
     return _callee_resolves_to_require(next_rhs_call, idx, curated_packages, depth - 1)
 
 
-def resolve_loader_provenance(receiver_name, idx, curated_packages, depth=LOADER_ALIAS_DEPTH):
-    """CANONICAL evidence (see module docstring) that `receiver_name`'s value originates
-    from INVOKING one of `curated_packages`. Returns (pkg, 'canonical') on proof, else
-    (None, None) -- caller falls back to the explicitly-labeled, lower-confidence
-    marker-regex heuristic. A receiver with zero or MORE THAN ONE real assignment in the
-    file is a real abstention (ambiguous/shadowed), not a guess."""
-    assigns = idx.assignments_by_lhs.get(receiver_name)
-    if not assigns or len(assigns) != 1:
-        return None, None
-    rhs = assigns[0]
+def resolve_loader_provenance(receiver_name, enclosing_function_id, idx, curated_packages,
+                                depth=LOADER_ALIAS_DEPTH):
+    """CANONICAL evidence (see module docstring) that `receiver_name`'s value, AS SEEN
+    FROM WITHIN `enclosing_function_id`'s own scope, originates from INVOKING one of
+    `curated_packages`. Returns (pkg, 'canonical') on proof, else (None, reason) --
+    `reason` is one of `JsCallIndex.receiver_definition`'s own disclosed abstention
+    codes, or `'NOT_AN_INVOCATION'`/`'BARE_LOADER_REFERENCE'`/`'CALLEE_NOT_REQUIRE'` for
+    a real, in-scope, unambiguous definition whose value simply isn't a loader
+    invocation. Caller falls back to the explicitly-labeled, lower-confidence
+    marker-regex heuristic ONLY when a real reason is returned here, never presented as
+    silently equivalent to a genuine non-match."""
+    rhs, reason = idx.receiver_definition(receiver_name, enclosing_function_id)
+    if rhs is None:
+        return None, reason
     if rhs.get('kind') != 'CALL':
-        return None, None
+        return None, 'NOT_AN_INVOCATION'
     rhs_call = idx.calls_by_id.get(rhs['id'])
     if rhs_call is None:
-        return None, None
+        return None, 'NOT_AN_INVOCATION'
     # receiver_name = rhs_call(...) -- receiver is the INVOCATION of rhs_call's own
     # callee. A BARE `receiver = require(pkg)` (rhs_call itself IS the require call, no
     # separate invocation wrapping it) is the loader-helper-itself case -- correctly NOT
     # a match here (confirmed real: this is exactly `const loader = require('node-gyp-
     # build'); loader.path(x)`'s own shape).
     if rhs_call.get('name') == 'require':
-        return None, None
+        return None, 'BARE_LOADER_REFERENCE'
     pkg = _callee_resolves_to_require(rhs_call, idx, curated_packages, depth)
-    return (pkg, 'canonical') if pkg else (None, None)
+    return (pkg, 'canonical') if pkg else (None, 'CALLEE_NOT_REQUIRE')
 
 
 def _loader_invocation_pattern(pkg):
@@ -232,43 +319,65 @@ def _via_loader_invocation_fallback(call, pkg):
 
 
 def native_binding_receiver_evidence(call, idx):
-    """Returns (matched: bool, tier: str|None) for whether `call`'s own receiver is a
-    native-binding object. `tier` is `"canonical"` (the real, ID-based graph walk --
-    tried FIRST, see below), `"fallback_marker_regex"` (only if canonical could not
-    establish provenance), `"build_path"` for a direct build-path/`.node` match (no
-    loader-invocation ambiguity to resolve -- a single require() step already IS the
-    real module), or `None` if no match. None/empty `receiver_type` never matches for
-    the build-path branch (fails closed) -- but does NOT gate the canonical walk, see
-    below.
+    """Returns (matched: bool, tier: str|None, reason: str|None) for whether `call`'s
+    own receiver is a native-binding object. `tier` is `"canonical"` (the real,
+    ID-based, scope-checked graph walk -- tried FIRST, see below),
+    `"fallback_marker_regex"` (tried ONLY when canonical established a real, safe,
+    unambiguous, unshadowed receiver definition but could not itself prove that
+    definition's value is a loader invocation -- see below), `"build_path"` for a
+    direct build-path/`.node` match (no loader-invocation ambiguity to resolve -- a
+    single require() step already IS the real module), or `None` if no match. When
+    `matched` is False and `tier` is None, `reason` carries the real, disclosed
+    abstention code (from `JsCallIndex.receiver_definition`/`resolve_loader_provenance`)
+    -- an explicit reason, never a silent non-match indistinguishable from "not a
+    candidate at all".
 
     CROSSLANG-LINK-FIX01E: the canonical resolver is tried FIRST, using the receiver's
     own identifier NAME (from `arguments[0]`), independent of what `receiver_type`
     itself says -- confirmed real and necessary: a whitespace-containing
     `require( 'pkg' )` degrades `receiver_type` to `"ANY"` entirely, even though the
     underlying `<operator>.assignment`/`require()` call graph this file's own index
-    walks remains fully intact. Gating the canonical walk behind `receiver_type` would
-    silently lose exactly the real cases it exists to recover. `receiver_type` is
-    consulted only AFTER the canonical walk, for the build-path/`.node` branch (which
-    has no analogous ambiguity) and as the fallback tier's own gate."""
+    walks remains fully intact.
+
+    CROSSLANG-LINK-FIX01F: the fallback regex is now gated behind the SAME real
+    scope/ambiguity check the canonical resolver uses, not tried independently --
+    confirmed real and necessary: without this gate, a receiver reassigned after its
+    real `require()` call, or defined differently in two branches, still carried the
+    OLD `<returnValue>` marker text from its real-but-superseded (or merely one-of-
+    several-possible) definition, so the fallback alone would WRONGLY link a call whose
+    receiver's actual value at that point is NOT the native binding -- confirmed on
+    dedicated overwrite-before-use and branch-multi-definition fixtures, see
+    CHARACTERIZATION.md. The fallback is now reached ONLY when `resolve_loader_
+    provenance` returns the specific `'CALLEE_NOT_REQUIRE'` reason -- meaning the
+    receiver's OWN identity is already established as real, single, in-scope, and
+    unshadowed; only the shape of ITS OWN value could not be canonically proven to be a
+    loader invocation. Every other abstention reason (ambiguous, shadowed, unresolved,
+    out of scope, or a bare unwrapped loader reference) is a hard rejection -- the
+    fallback never gets a chance to override it."""
     args = {a['index']: a for a in call.get('arguments', [])}
     a0 = args.get(0)
     receiver_name = a0['code'] if a0 and a0.get('kind') == 'IDENTIFIER' else None
+    reason = None
     if receiver_name:
-        pkg, tier = resolve_loader_provenance(receiver_name, idx, NATIVE_LOADER_PACKAGES)
+        pkg, reason = resolve_loader_provenance(
+            receiver_name, call.get('enclosing_function_id'), idx, NATIVE_LOADER_PACKAGES)
         if pkg:
-            return True, tier
+            return True, 'canonical', None
+        if reason == 'CALLEE_NOT_REQUIRE':
+            receiver_type = call.get('receiver_type')
+            rt = receiver_type.strip() if receiver_type else ''
+            if rt in NATIVE_LOADER_PACKAGES and _via_loader_invocation_fallback(call, rt):
+                return True, 'fallback_marker_regex', None
 
     receiver_type = call.get('receiver_type')
     if not receiver_type:
-        return False, None
+        return False, None, reason
     rt = receiver_type.strip()
     if rt.endswith('.node'):
-        return True, 'build_path'
+        return True, 'build_path', None
     if any(marker in rt for marker in NATIVE_BUILD_PATH_MARKERS):
-        return True, 'build_path'
-    if rt in NATIVE_LOADER_PACKAGES and _via_loader_invocation_fallback(call, rt):
-        return True, 'fallback_marker_regex'
-    return False, None
+        return True, 'build_path', None
+    return False, None, reason
 
 
 OFFSET = 1 << 44  # far above any observed Joern id (~2^35); keeps both spaces disjoint
@@ -350,16 +459,48 @@ def main():
     cpp = offset_ids(cpp)  # AFTER extraction (table holds pre-offset ids; offset below)
     js_index = JsCallIndex(js)
 
-    linked, unlinked = [], []
+    # CROSSLANG-LINK-FIX01F: real, explicit abstention reasons that mean a receiver's
+    # identity itself was genuinely at risk (reassignment, branching, shadowing,
+    # unresolved/out-of-scope definitions, or a proven-bare unwrapped loader reference)
+    # are recorded here for audit -- never silently indistinguishable from "not a
+    # loader-shaped name at all" (`NO_DEFINITION`, the overwhelming majority of
+    # unrelated real calls, which is not logged as it carries no real signal).
+    #
+    # `resolve_loader_provenance` runs for EVERY call with an identifier receiver, not
+    # only loader-shaped ones (needed so the whitespace-degraded-`receiver_type` case
+    # is still caught -- see `native_binding_receiver_evidence`'s own docstring), so
+    # most real abstentions (a same-named variable reassigned or shadowed for reasons
+    # that have nothing to do with native bindings) carry no real audit signal -- logging
+    # ALL of them was confirmed, on real corpus data, to swamp the audit trail (220 real
+    # entries for node-liblzma alone, nearly all unrelated). Logging is therefore further
+    # restricted to calls whose OWN `receiver_type` is at least PLAUSIBLY loader-related:
+    # a curated loader package name, a build-path/`.node` shape, or the degraded `"ANY"`
+    # this project's own whitespace-fixture confirmed can still hide a real loader use.
+    NOTABLE_ABSTENTION_REASONS = {
+        'MULTIPLE_DEFINITIONS_AMBIGUOUS', 'PARAMETER_SHADOWED', 'SCOPE_UNRESOLVED',
+        'DEFINITION_NOT_IN_SCOPE', 'BARE_LOADER_REFERENCE', 'CALLEE_NOT_REQUIRE',
+    }
+
+    def _plausibly_loader_related(receiver_type):
+        if not receiver_type:
+            return False
+        rt = receiver_type.strip()
+        return (rt == 'ANY' or rt in NATIVE_LOADER_PACKAGES or rt.endswith('.node')
+                or any(marker in rt for marker in NATIVE_BUILD_PATH_MARKERS))
+
+    linked, unlinked, abstained = [], [], []
     for c in js['calls']:
         # CROSSLANG-LINK-FIX01: a candidate is either the ORIGINAL --js-receiver name match
         # (kept, unchanged, never removed -- see module docstring) OR the new, real,
         # structural receiver_type match. Tried independently, same as R05's own "a call CAN
         # match via more than one path" discipline -- either one qualifies, never double-
         # counted (a call can only be linked/unlinked once per run, since it's visited once).
-        receiver_matched, tier = native_binding_receiver_evidence(c, js_index)
+        receiver_matched, tier, reason = native_binding_receiver_evidence(c, js_index)
         is_candidate = ((c.get('receiver_name') == a.js_receiver or receiver_matched)
                          and c['resolution'] != 'EXACT')
+        if reason in NOTABLE_ABSTENTION_REASONS and _plausibly_loader_related(c.get('receiver_type')):
+            abstained.append({'js_call': c['id'], 'name': c['name'], 'reason': reason,
+                              'receiver_type': c.get('receiver_type')})
         if is_candidate:
             if c['name'] in table:
                 fid, full = table[c['name']]
@@ -387,13 +528,15 @@ def main():
     if 'cpp_memory_locations' in cpp: merged['cpp_memory_locations'] = cpp['cpp_memory_locations']
     merged['cross_language_bindings'] = {
         'idiom': 'napi-exports-set', 'js_receiver': a.js_receiver, 'id_offset': OFFSET,
-        'registrations': audit, 'linked_calls': linked, 'unlinked_calls': unlinked}
+        'registrations': audit, 'linked_calls': linked, 'unlinked_calls': unlinked,
+        'abstained_calls': abstained}
     json.dump(merged, open(a.out, 'w'), indent=1, sort_keys=True)
     n_canonical = sum(1 for l in linked if l['evidence_tier'] == 'canonical')
     n_fallback = sum(1 for l in linked if l['evidence_tier'] == 'fallback_marker_regex')
     print(f"POLYGLOT registrations={len(table)} linked_js_calls={len(linked)} "
           f"(canonical={n_canonical} fallback_regex={n_fallback} "
-          f"other={len(linked) - n_canonical - n_fallback}) unlinked={len(unlinked)}")
+          f"other={len(linked) - n_canonical - n_fallback}) unlinked={len(unlinked)} "
+          f"abstained={len(abstained)}")
 
 if __name__ == '__main__':
     main()
