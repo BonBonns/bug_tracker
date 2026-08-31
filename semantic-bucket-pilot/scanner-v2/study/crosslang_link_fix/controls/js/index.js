@@ -7,19 +7,22 @@
 // loader helper itself (require('node-gyp-build') referenced but never INVOKED) must not
 // be mistaken for a call on the actual native binding (require('node-gyp-build')(x), the
 // loader's return value) -- both share the exact same receiver_type ("node-gyp-build"),
-// so this is the one case receiver_type ALONE cannot distinguish; see
-// _via_loader_invocation()'s own docstring for the real, structural signal that does.
+// so this is the one case receiver_type ALONE cannot distinguish.
 //
 // CROSSLANG-LINK-FIX01D adds a fourth positive shape (the SAME node-gyp-build invocation,
-// but double-quoted -- the marker check must not depend on the analyzed package's own
-// source-formatting/quote-style convention) and two more negative shapes, structurally
-// identical to checkLoaderPath's own case but for the two real packages a prior version of
-// this fix incorrectly included in NATIVE_LOADER_PACKAGES: both export a plain HELPER
-// OBJECT, not a callable loader function --
-//   - require('@mapbox/node-pre-gyp').find(...) (node-pre-gyp@0.17.0's real export shape)
-//   - require("prebuild-install").download(...) (prebuild-install@7.1.3's real export
-//     shape -- resolved via Node's own root-index.js fallback despite no "main" field;
-//     double-quoted here deliberately, exercising FIX01D on a negative control too)
+// but double-quoted) and two more negative shapes for the two real packages a prior
+// version of this fix incorrectly included in NATIVE_LOADER_PACKAGES -- both export a
+// plain HELPER OBJECT, not a callable loader function.
+//
+// CROSSLANG-LINK-FIX01E: FIX01B/D's own marker-regex approach was ITSELF shown to be
+// source-formatting-fragile (see CHARACTERIZATION.md) -- a template literal, internal
+// whitespace/a comment, and an ALIASED two-statement loader each produced a DIFFERENT
+// decision than the plain chained case the regex was built from. Every one of those
+// syntax forms gets its OWN positive (loader properly invoked) AND bare-helper negative
+// (loader referenced but never invoked -- same object, same package, called directly)
+// pair here, real and regenerated through the real frontend, so the canonical resolver
+// (`resolve_loader_provenance`) is proven correct across all of them, not just the one
+// shape the original regex happened to be built from.
 
 const native1 = require('./build/Release/addon1');
 function callFoo() { return native1.Foo(1, 2); }
@@ -51,7 +54,33 @@ function checkNodePreGypFind() { return nodePreGyp.find('/tmp/package.json'); }
 const prebuildInstall = require("prebuild-install");
 function checkPrebuildInstallDownload() { return prebuildInstall.download({}); }
 
+// CROSSLANG-LINK-FIX01E: template-literal chain -- positive + bare-helper negative.
+const native5 = require(`node-gyp-build`)(__dirname);
+function callQuux() { return native5.Quux(5); }
+
+const loaderTemplate = require(`node-gyp-build`);
+function checkLoaderTemplatePath() { return loaderTemplate.path(__dirname); }
+
+// CROSSLANG-LINK-FIX01E: whitespace/comment chain -- positive + bare-helper negative.
+const native6 = require( 'node-gyp-build' )( __dirname );
+function callCorge() { return native6.Corge(6); }
+
+const loaderWhitespace = require( 'node-gyp-build' );
+function checkLoaderWhitespacePath() { return loaderWhitespace.path(__dirname); }
+
+const native7 = require('node-gyp-build') /* load the addon */ (__dirname);
+function callGrault() { return native7.Grault(7); }
+
+// CROSSLANG-LINK-FIX01E: aliased two-statement loader -- positive + bare-helper negative.
+const loaderFn = require('node-gyp-build');
+const native8 = loaderFn(__dirname);
+function callGarply() { return native8.Garply(8); }
+function checkLoaderFnPath() { return loaderFn.path(__dirname); }
+
 module.exports = {
   callFoo, callBar, callBaz, callQux, readIt, mapIt, helpIt,
   checkLoaderPath, checkNodePreGypFind, checkPrebuildInstallDownload,
+  callQuux, checkLoaderTemplatePath,
+  callCorge, checkLoaderWhitespacePath, callGrault,
+  callGarply, checkLoaderFnPath,
 };

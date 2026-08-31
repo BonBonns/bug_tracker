@@ -258,6 +258,77 @@ packages, since both happened to use single-quoted `require()` throughout; the q
 fix matters for OTHER, not-yet-tested real corpus packages, which is exactly why it is
 fixed now rather than left as a latent, undetected gap.
 
+## 6d. CROSSLANG-LINK-FIX01E: the regex itself was source-formatting-fragile -- replaced
+
+Direct review, correctly predicted before testing: "the quote fix exposed that
+`_via_loader_invocation()` still relies on source-formatted `candidate_target_full_names`."
+Tested four real, semantically-equivalent programs through the real frontend before
+deciding anything:
+
+| Form | Real source | What broke |
+|---|---|---|
+| Template literal | `` require(`node-gyp-build`)(dir) `` | Marker uses a backtick, not `'`/`"` -- the FIX01D regex's character class doesn't include it. |
+| Whitespace | `require( 'node-gyp-build' )( dir )` | `receiver_type` degrades to `"ANY"` entirely -- the FIRST gate fails before the marker regex is even reached. |
+| Comment | `require('node-gyp-build') /* load */ (dir)` | Worked, coincidentally (single-quoted, no interference). |
+| Aliased (two statements) | `const f = require('pkg'); const native = f(dir);` | `receiver_type` becomes `"pkg:<returnValue>"` DIRECTLY -- a completely different shape; no `"require("` substring exists anywhere for the regex to find. |
+
+**Three of four real, equivalent programs would have been silently mis-decided.** This
+confirmed the review's diagnosis precisely: matching on `candidate_target_full_names` text
+is fundamentally shaped by source formatting, not derived from real provenance.
+
+**The real fix, as directed:** `resolve_loader_provenance()` -- CANONICAL evidence walked
+from real CPG node IDENTITY (call ids, `<operator>.assignment` records, argument node ids),
+never a serialized target/marker string. For a candidate call's receiver identifier, it
+finds that identifier's own single, unambiguous `<operator>.assignment` (by real id, not
+text), and asks: is the RHS an INVOCATION of something that is -- directly, or through up
+to `LOADER_ALIAS_DEPTH` bounded hops of single-assignment variable aliasing -- a real
+`require(<literal-pkg>)` call for a curated package? The quote-style problem is sidestepped
+structurally, not patched around: a string LITERAL's own `code` field is already
+quote-NORMALIZED by the frontend to double quotes regardless of the real source's quote
+character (confirmed: single/double/backtick `require()` all produce a literal argument
+whose `code` is exactly `"node-gyp-build"`), so reading that field directly needs no
+per-quote-style branching at all. A BARE `receiver = require(pkg)` (no invocation
+wrapping it) is structurally distinguished from `receiver = f(pkg-args)` where `f` itself
+resolves to a bare `require(pkg)` (aliased invocation) by walking the real assignment
+graph, not by comparing text shapes.
+
+One further real fix inside this same change, found while wiring it in: the canonical
+resolver must run BEFORE, not behind, the `receiver_type` gate -- the whitespace case's
+`receiver_type` degrades to `"ANY"` even though the underlying `<operator>.assignment`/
+`require()` call graph the resolver walks remains fully intact, so gating the canonical
+walk behind `receiver_type` would have silently lost exactly the case it exists to
+recover. `receiver_type` is now consulted only AFTER the canonical walk, for the
+build-path/`.node` branch (no analogous ambiguity there) and as the fallback tier's own
+gate.
+
+**The old regex is KEPT, exactly as directed -- demoted to an explicitly labeled FALLBACK,
+never presented as established evidence.** Every linked call's own audit record now
+carries an `evidence_tier` field (`"canonical"`, `"fallback_marker_regex"`, `"build_path"`,
+or `"js_receiver_name"` for the original, untouched `--js-receiver` path) -- a reader can
+always tell which tier produced a given link; the merged output never blends them silently.
+
+**Real controls, all four syntax forms, each with its own positive AND bare-helper
+negative pair** (`controls/js/index.js`, regenerated through the real frontend):
+direct chain, double-quoted chain, template-literal chain, whitespace/comment chain,
+aliased two-statement chain -- 14 real controls total now (8 positive: `Foo`/`Bar`/`Baz`/
+`Qux`/`Quux`/`Corge`/`Grault`/`Garply`; 6 negative bare-helper/unrelated cases). Real run:
+`registrations=8 linked_js_calls=8 (canonical=7 fallback_regex=0 other=1) unlinked=0` --
+every real loader-package positive resolves via the CANONICAL tier now (the regex fallback
+contributed ZERO real links, across every form tested, including the two real end-to-end
+corpus packages below); `Foo` (build-path) is the one `"other"`/`build_path`-tier link, as
+designed. Every bare-helper negative verified by direct field inspection, not just the
+aggregate count: all six carry `resolution: "HEURISTIC"` (the risk was real in every one)
+but `native_binding_receiver_evidence()` correctly returns `(False, None)` -- including the
+whitespace case, whose `receiver_type` is `"ANY"`, rejected via the canonical resolver
+rather than by accident.
+
+**Both real end-to-end corpus packages re-verified, byte-identical:** `memoryjs`:
+`registrations=12 linked=15 (canonical=0 fallback_regex=0 other=15) unlinked=25` (all
+`build_path` tier, as expected -- memoryjs never uses a loader package); `node-liblzma`:
+`registrations=6 linked=6 (canonical=6 fallback_regex=0 other=0) unlinked=0` -- every one
+of its real links now resolves via the canonical mechanism, zero reliance on the fallback
+regex, where before this fix ALL SIX depended entirely on it.
+
 ## 7. What happens next (after R05 is frozen -- not started yet)
 
 Per direct instruction: this branch stays unmerged until the R05 corpus rerun (main working
