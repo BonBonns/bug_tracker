@@ -1,0 +1,33 @@
+494/494 packages successfully scanned (cheap text search)
+
+=== LOCK_BALANCE (69 real packages match) ===
+  FROZEN SELECTION (alphabetically first): @2060.io/ffi-napi@4.0.9
+    pthread_mutex_lock: package/deps/libffi/src/closures.c:272: pthread_mutex_lock (&ffi_trampoline_lock);
+    pthread_mutex_unlock: package/deps/libffi/src/closures.c:281: pthread_mutex_unlock (&ffi_trampoline_lock);
+  (all 69 matches: @2060.io/ffi-napi, @8crafter/leveldb-zlib, @appthreat/sqlite3, @breush/ffi-napi, @cdktf/node-pty-prebuilt-multiarch, @cocktailpeanut/node-pty-prebuilt-multiarch, @confluentinc/kafka-javascript, @dwieeb/node-pty-prebuilt, @eliyya/sange, @farcaster/rocksdb, @faressoft/node-pty-prebuilt, @flyskywhy/react-native-gcanvas, @fugood/whisper.node, @huxinhai/mmkv, @jellybrick/ffi-napi ...)
+
+=== PROTECTED_FIELD (69 real packages match) ===
+  FROZEN SELECTION (alphabetically first): @2060.io/ffi-napi@4.0.9
+    pthread_mutex_lock: package/deps/libffi/src/closures.c:272: pthread_mutex_lock (&ffi_trampoline_lock);
+    pthread_mutex_unlock: package/deps/libffi/src/closures.c:281: pthread_mutex_unlock (&ffi_trampoline_lock);
+  (all 69 matches: @2060.io/ffi-napi, @8crafter/leveldb-zlib, @appthreat/sqlite3, @breush/ffi-napi, @cdktf/node-pty-prebuilt-multiarch, @cocktailpeanut/node-pty-prebuilt-multiarch, @confluentinc/kafka-javascript, @dwieeb/node-pty-prebuilt, @eliyya/sange, @farcaster/rocksdb, @faressoft/node-pty-prebuilt, @flyskywhy/react-native-gcanvas, @fugood/whisper.node, @huxinhai/mmkv, @jellybrick/ffi-napi ...)
+
+=== OOB_WRITE (255 real packages match) ===
+  FROZEN SELECTION (alphabetically first): @2060.io/ffi-napi@4.0.9
+    memcpy: package/deps/libffi/src/closures.c:94: memcpy(dataseg, &rounded_size, sizeof(rounded_size));
+    memset: package/deps/libffi/src/closures.c:744: memset (buf, 0, page_size);
+    strncpy: package/test/ffi_tests.cc:236: strncpy(dst, src, len);
+  (all 255 matches: @2060.io/ffi-napi, @2060.io/ref-napi, @8crafter/leveldb-zlib, @abandonware/bluetooth-hci-socket, @antcube/capnp, @appthreat/sqlite3, @astronautlabs/webrtc, @automattic/yara, @breush/ffi-napi, @breush/ref-napi, @brick-a-brack/napi-canon-cameras, @cdktf/node-pty-prebuilt-multiarch, @cherrystudio/mac-system-ocr, @choysen/mac-system-ocr, @cocktailpeanut/node-pty-prebuilt-multiarch ...)
+
+=== OOB_READ (222 real packages match) ===
+  FROZEN SELECTION (alphabetically first): @2060.io/ffi-napi@4.0.9
+    memcpy: package/deps/libffi/src/closures.c:94: memcpy(dataseg, &rounded_size, sizeof(rounded_size));
+    strncpy: package/test/ffi_tests.cc:236: strncpy(dst, src, len);
+  (all 222 matches: @2060.io/ffi-napi, @8crafter/leveldb-zlib, @abandonware/bluetooth-hci-socket, @antcube/capnp, @appthreat/sqlite3, @astronautlabs/webrtc, @automattic/yara, @breush/ffi-napi, @cdktf/node-pty-prebuilt-multiarch, @cherrystudio/mac-system-ocr, @choysen/mac-system-ocr, @cocktailpeanut/node-pty-prebuilt-multiarch, @codeplaydata/dbc2dbf, @codeporter/robotjs, @confluentinc/kafka-javascript ...)
+
+=== OOB_COMPARE (124 real packages match) ===
+  FROZEN SELECTION (alphabetically first): @2060.io/ffi-napi@4.0.9
+    memcmp: package/deps/libffi/testsuite/libffi.call/closure_loc_fn0.c:86: CHECK(memcmp(pcl, codeloc, sizeof(*pcl)) == 0);
+    strncmp: package/deps/libffi/src/closures.c:429: if (strncmp (p + 1, "selinuxfs ", 10) == 0)
+  (all 124 matches: @2060.io/ffi-napi, @8crafter/leveldb-zlib, @antcube/capnp, @appthreat/sqlite3, @breush/ffi-napi, @cdktf/node-pty-prebuilt-multiarch, @cocktailpeanut/node-pty-prebuilt-multiarch, @codeporter/robotjs, @confluentinc/kafka-javascript, @discordjs/opus, @dwieeb/node-pty-prebuilt, @elchetz/cld, @farcaster/rocksdb, @faressoft/node-pty-prebuilt, @flyskywhy/react-native-gcanvas ...)
+

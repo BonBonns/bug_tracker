@@ -1,0 +1,27 @@
+{
+ "classification": {
+  "MISSING_LOCK_CANDIDATE": 2,
+  "PROTECTED_ACCESS": 2
+ },
+ "findings": [
+  {
+   "call_id": 30064771131,
+   "field_code": "ssl->dtls13Rtx.seenRecords",
+   "field_path": ".dtls13Rtx.seenRecords",
+   "inferred_protecting_lock": ".dtls13Rtx.mutex",
+   "method_id": 107374182402,
+   "method_name": "Dtls13RtxRemoveCurAck",
+   "reason": "FIELD_ACCESSED_OUTSIDE_ITS_INFERRED_LOCK"
+  },
+  {
+   "call_id": 30064771128,
+   "field_code": "ssl->dtls13Rtx.seenRecords",
+   "field_path": ".dtls13Rtx.seenRecords",
+   "inferred_protecting_lock": ".dtls13Rtx.mutex",
+   "method_id": 107374182402,
+   "method_name": "Dtls13RtxRemoveCurAck",
+   "reason": "FIELD_ACCESSED_OUTSIDE_ITS_INFERRED_LOCK"
+  }
+ ],
+ "schema": "protected-field-verdict/0.1"
+}
