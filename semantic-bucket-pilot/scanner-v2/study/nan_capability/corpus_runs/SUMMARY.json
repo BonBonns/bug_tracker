@@ -1,0 +1,380 @@
+{
+  "node-snap7": {
+    "package": "node-snap7",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 8.22919511795044,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 4.889426231384277,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 17.81929302215576,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 11.48844313621521,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.6782581806182861,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.23.0",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.23.0' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_COPYBUFFER_SOURCE_CAPACITY_JS_CALL_UNRESOLVED": 1,
+      "NAN_COPYBUFFER_SOURCE_CAPACITY_NAME_MATCH_CANDIDATE": 2,
+      "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 11,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 8
+    },
+    "n_findings": 13
+  },
+  "node-snap7-micro-client": {
+    "package": "node-snap7-micro-client",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 7.963785648345947,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 5.251862049102783,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 17.04399538040161,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 11.35800552368164,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.5666389465332031,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "~2.14.0",
+        "resolved_version": "2.14.2",
+        "staged": true,
+        "note": "range '~2.14.0' resolved to 2.14.2 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 10,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 7
+    },
+    "n_findings": 10
+  },
+  "murmurhash-native": {
+    "package": "murmurhash-native",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 4.6084606647491455,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 5.413255929946899,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 13.24960732460022,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 11.636107921600342,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.11474370956420898,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.14.1",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.14.1' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 3,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 3
+    },
+    "n_findings": 3
+  },
+  "msgpack": {
+    "package": "msgpack",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 13.64735722541809,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 4.94792366027832,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 20.908726692199707,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 11.052040338516235,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 1.3194313049316406,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.14.0",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.14.0' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+    },
+    "n_findings": 1
+  },
+  "kafka-javascript": {
+    "package": "kafka-javascript",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 32.87390351295471,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 8.85501503944397,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 60.16013979911804,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 16.018789768218994,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 12.601428985595703,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.22.0",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.22.0' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 4,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SIZE_LITERAL_NOT_APPLICABLE": 2,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 2
+    },
+    "n_findings": 2
+  },
+  "scrypt": {
+    "package": "scrypt",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 5.836203098297119,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 5.2078070640563965,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 15.780987977981567,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 12.202133893966675,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.2653226852416992,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.0.8",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.0.8' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 4,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NOT_JS_REGISTERED": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SIZE_LITERAL_NOT_APPLICABLE": 2,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+    },
+    "n_findings": 2
+  },
+  "libpq": {
+    "package": "libpq",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 4.653195381164551,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 4.998579740524292,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 12.583086013793945,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 11.772326231002808,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.11510443687438965,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "~2.26.2",
+        "resolved_version": "2.26.2",
+        "staged": true,
+        "note": "range '~2.26.2' resolved to 2.26.2 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+    },
+    "n_findings": 1
+  },
+  "phplike": {
+    "package": "phplike",
+    "status": "ANALYZED",
+    "stages": {
+      "c2cpg": {
+        "rc": 0,
+        "seconds": 5.265674829483032,
+        "err": null
+      },
+      "jssrc2cpg": {
+        "rc": 0,
+        "seconds": 6.22192120552063,
+        "err": null
+      },
+      "cpp_export": {
+        "rc": 0,
+        "seconds": 14.729345083236694,
+        "err": null
+      },
+      "js_export": {
+        "rc": 0,
+        "seconds": 13.70859956741333,
+        "err": null
+      },
+      "verdict": {
+        "rc": 0,
+        "seconds": 0.21520471572875977,
+        "err": null
+      }
+    },
+    "header_staging": [
+      {
+        "dep": "nan",
+        "declared_range": "^2.0.9",
+        "resolved_version": "2.28.0",
+        "staged": true,
+        "note": "range '^2.0.9' resolved to 2.28.0 (highest satisfying release)"
+      }
+    ],
+    "js_facts_available": true,
+    "classification": {
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+      "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+    },
+    "n_findings": 1
+  }
+}

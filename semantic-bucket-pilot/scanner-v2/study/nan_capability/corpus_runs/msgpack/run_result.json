@@ -1,0 +1,46 @@
+{
+  "package": "msgpack",
+  "status": "ANALYZED",
+  "stages": {
+    "c2cpg": {
+      "rc": 0,
+      "seconds": 13.64735722541809,
+      "err": null
+    },
+    "jssrc2cpg": {
+      "rc": 0,
+      "seconds": 4.94792366027832,
+      "err": null
+    },
+    "cpp_export": {
+      "rc": 0,
+      "seconds": 20.908726692199707,
+      "err": null
+    },
+    "js_export": {
+      "rc": 0,
+      "seconds": 11.052040338516235,
+      "err": null
+    },
+    "verdict": {
+      "rc": 0,
+      "seconds": 1.3194313049316406,
+      "err": null
+    }
+  },
+  "header_staging": [
+    {
+      "dep": "nan",
+      "declared_range": "^2.14.0",
+      "resolved_version": "2.28.0",
+      "staged": true,
+      "note": "range '^2.14.0' resolved to 2.28.0 (highest satisfying release)"
+    }
+  ],
+  "js_facts_available": true,
+  "classification": {
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+  },
+  "n_findings": 1
+}

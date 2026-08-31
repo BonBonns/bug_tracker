@@ -1,0 +1,51 @@
+{
+  "package": "node-snap7",
+  "status": "ANALYZED",
+  "stages": {
+    "c2cpg": {
+      "rc": 0,
+      "seconds": 8.22919511795044,
+      "err": null
+    },
+    "jssrc2cpg": {
+      "rc": 0,
+      "seconds": 4.889426231384277,
+      "err": null
+    },
+    "cpp_export": {
+      "rc": 0,
+      "seconds": 17.81929302215576,
+      "err": null
+    },
+    "js_export": {
+      "rc": 0,
+      "seconds": 11.48844313621521,
+      "err": null
+    },
+    "verdict": {
+      "rc": 0,
+      "seconds": 0.6782581806182861,
+      "err": null
+    }
+  },
+  "header_staging": [
+    {
+      "dep": "nan",
+      "declared_range": "^2.23.0",
+      "resolved_version": "2.28.0",
+      "staged": true,
+      "note": "range '^2.23.0' resolved to 2.28.0 (highest satisfying release)"
+    }
+  ],
+  "js_facts_available": true,
+  "classification": {
+    "NAN_COPYBUFFER_SOURCE_CAPACITY_JS_CALL_UNRESOLVED": 1,
+    "NAN_COPYBUFFER_SOURCE_CAPACITY_NAME_MATCH_CANDIDATE": 2,
+    "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED": 1,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 1,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_JS_CALL_UNRESOLVED": 2,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 11,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 8
+  },
+  "n_findings": 13
+}

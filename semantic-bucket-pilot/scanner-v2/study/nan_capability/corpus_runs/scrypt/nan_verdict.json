@@ -1,0 +1,38 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 4,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NOT_JS_REGISTERED": 1,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SIZE_LITERAL_NOT_APPLICABLE": 2,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064781956,
+   "acquisition_code": "Nan::NewBuffer(static_cast<uint32_t>(hash_size))",
+   "acquisition_line": "32",
+   "arity": 1,
+   "callback_info_index": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182523,
+   "method_name": "hashSync",
+   "reason": "a real info[N] source was found, but this method is never registered via SetPrototypeMethod/SetMethod -- not JS-reachable, not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NOT_JS_REGISTERED"
+  },
+  {
+   "acquisition_call_id": 30064782688,
+   "acquisition_code": "Nan::NewBuffer(static_cast<uint32_t>(hash_size))",
+   "acquisition_line": "43",
+   "arity": 1,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182603,
+   "method_name": "ScryptHashAsyncWorker",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [],
+ "registrations": {},
+ "schema": "resource-guard-verdict-nan/0.1"
+}
