@@ -48,9 +48,14 @@ phase before corpus use, especially `OOB_READ` and `OOB_COMPARE`."**
 
 ## Additional blockers, stated plainly
 
-- The committed Tremor CVE-2018-5147 fixture's previously-documented positive result could not
-  be reproduced through this pilot's own real pipeline invocation (0 candidates on both vuln and
-  patched) — task #30.
+- **[CORRECTED IN PLACE — task #30]** There never was a previously-documented positive result for
+  the Tremor CVE-2018-5147 fixture to fail to reproduce. This pilot's real pipeline invocation
+  correctly found 0 candidates on both vuln and patched — that IS the real, standalone result on
+  Tremor's own fixture, not a failure to reproduce something that existed elsewhere. The apparent
+  "previously-documented positive" was `e2e-canonical/SUMMARY.txt`'s "VULN dir -> candidates: 1",
+  which — directly verified — was computed on an unrelated Mozilla CVE (`WinWebAuthnManager.cpp`,
+  mfsa2022-13), never on Tremor. See the task #30 section below for the full reconciliation and
+  the real, newly diagnosed root cause of Tremor's own 0-candidate result (task #44).
 - A resolved destination capacity alone does not establish an OOB write; the actual write extent
   must be shown to exceed it — a framing correction to `BEHAVIORAL_VERIFICATION_RESULTS.md`
   Section 3.3, not a new defect, but real enough to restate here plainly.

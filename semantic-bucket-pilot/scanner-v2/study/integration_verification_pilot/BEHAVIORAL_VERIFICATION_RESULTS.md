@@ -91,8 +91,20 @@ evidence anywhere in this repository.
 
 ### 3.3 `OOB_WRITE`
 
-**Historical-case cross-check (per instruction #4), a real, disclosed discrepancy found**: the
-one real, disclosed CVE fixture already committed in-repo for this producer family
+**[CORRECTED IN PLACE -- task #30, not merely addended: the paragraph originally here claimed a
+"discrepancy" against `e2e-canonical/SUMMARY.txt` and proposed an unverified "preprocessing mode"
+theory to explain it. Neither was accurate. Directly inspecting the actual e2e-canonical artifacts
+(`vuln.report.json`, `vuln.llm_input_1.json`) shows that "VULN dir -> candidates: 1" result was
+computed entirely on `WinWebAuthnManager.cpp` -- Mozilla bug mfsa2022-13
+(`WinWebAuthnManager::Register`), per `MOZ-OOB-R01-PREREG.md`'s own ROW 3 -- never on the Tremor
+fixture. Zero references to `tremor`/`codebook`/`vorbis` exist in either report. There was never a
+discrepancy to reconcile: the two data points compared below were never about the same fixture, so
+they cannot corroborate or contradict each other. See `PILOT_CONCLUSION_AND_FOLLOWUPS.md`'s task
+#30 section for the full reconciliation and the newly diagnosed root cause. The text below is kept,
+corrected, rather than deleted, so the original mistake stays auditable.]**
+
+**Historical-case cross-check (per instruction #4)**: the one real, disclosed CVE fixture already
+committed in-repo for this producer family
 (`docs/moz-oob-r01/primary-artifacts/tremor_codebook_{VULN,PATCHED}.c`, Mozilla Tremor codec
 CVE-2018-5147, whose own `MOZ-POS-R01-SOURCING.md` names `oob_write_verdict.py` and
 `oob_read_verdict.py` -- the exact files under test -- as its candidate producers) was rebuilt
@@ -101,16 +113,15 @@ fresh through this pilot's own pipeline (c2cpg -> export -> normalize) and run d
 INDEX_STORE sibling `oob_index_write_verdict.py` (checked as a secondary, more targeted producer
 for this specific bug shape, confirmed by `diff`ing the two source files: the real fix adds a
 loop-bound check `o+j<n`/`i<m`, an INDEX-STORE pattern, not a `memcpy`-family call -- exactly
-`oob_index_write_verdict.py`'s own stated scope, not `oob_write_verdict.py`'s). **This does not
-match the previously-documented `e2e-canonical/SUMMARY.txt` result** ("VULN dir -> candidates:
-1"), which was produced by the fuller `scan_repo.py` adjudicator pipeline, not a direct call to
-either producer's own `emit_candidates()`. This pilot could not reconcile the discrepancy within
-its own scope (a real difference in preprocessing mode is the leading candidate explanation --
-`scan_repo.py` supports a `--preprocess` C-preprocessor pass this pilot's own single-file harness
-does not run, matching what the real npm pipeline itself also does not run) -- **disclosed as
-unresolved, not silently resolved either way**. Net: **no real historical positive-path evidence
-was actually reproduced for this specific implementation in this pilot**, despite one being
-documented to exist elsewhere.
+`oob_index_write_verdict.py`'s own stated scope, not `oob_write_verdict.py`'s). This is the real,
+standalone, mechanically-explained result on Tremor's own fixture -- re-verified against a
+freshly rebuilt bundle as part of task #30's reconciliation, with the root cause now precisely
+diagnosed (a pointer-parameter + separate-length-parameter buffer capacity, invisible to both
+current `OOB_WRITE` producers -- see `PILOT_CONCLUSION_AND_FOLLOWUPS.md` task #30 and the
+follow-up task #44). Net: **no real historical positive-path evidence has yet been reproduced for
+this specific implementation family**, on its own real, disclosed CVE fixture -- corrected from
+the prior "despite one being documented to exist elsewhere" framing, which relied on the same
+false attribution corrected above.
 
 | Path | Source | Real result |
 |---|---|---|
