@@ -1,0 +1,9 @@
+{
+  "last_package_key": "{\"package_name\": \"@nodert-win10-19h1/windows.globalization.numberformatting\", \"version\": \"0.1.6\", \"stages\": {\"download\": {\"seconds\": 0.30135679244995117}, \"extract\": {\"seconds\": 0.005922079086303711}, \"header_staging\": {\"seconds\": 0.19907784461975098, \"n_staged\": 1}, \"c2cpg\": {\"seconds\": 5.864459276199341, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"jssrc2cpg\": {\"seconds\": 5.012758493423462, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_export\": {\"seconds\": 14.181998491287231, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"js_export\": {\"seconds\": 11.912081480026245, \"maxrss_delta_kb\": 0, \"rc\": 0}, \"cpp_normalize\": {\"seconds\": 1.7417998313903809}, \"js_normalize\": {\"seconds\": 0.058957815170288086}, \"polyglot_link\": {\"seconds\": 1.1119604110717773}, \"r04_scan\": {\"seconds\": 0.15478920936584473}, \"r05_scan\": {\"seconds\": 0.2052462100982666}}, \"status\": \"ANALYZED\", \"detail\": \"\", \"header_staging\": [{\"dep\": \"nan\", \"declared_range\": \"latest\", \"resolved_version\": \"2.28.0\", \"staged\": true, \"note\": \"range 'latest' resolved to 2.28.0 (highest satisfying release)\"}], \"cross_language_bindings\": {\"n_registrations\": 0, \"n_linked_calls\": 0, \"n_unlinked_calls\": 0}, \"r04_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 319, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 319}, \"r04_findings\": [], \"r05_classification\": {\"ACQUISITION_NAME_MATCH_CANDIDATE\": 319, \"ACQUISITION_SIGNATURE_UNRECOGNIZED\": 319, \"R05_RECOVERY_CANDIDATE\": 317, \"R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED\": 317}, \"r05_findings\": [], \"total_seconds\": 40.76404881477356}",
+  "name": "r05_full_scan",
+  "row_count": 451,
+  "sha256": "1a326736275afbdcb744f94c104e9c4537f9e48a05479b51a73dea652e79ebbf",
+  "snapshot_path": "checkpoints/r05_full_scan_00000451_1a326736275a.tsv",
+  "snapshot_time_utc": "2026-08-31T06:41:03Z",
+  "source_path": "full_scan_r05_working.jsonl"
+}
