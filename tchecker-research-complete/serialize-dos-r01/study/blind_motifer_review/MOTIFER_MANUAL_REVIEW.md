@@ -160,21 +160,41 @@ models at all.
   analyzer code change -- settled by external verification (Express's own real,
   pinned-version source) showing a real framework-level catch boundary neutralizes the
   synchronous-throw-crashes-the-process concern for this exact call site.
-- **Size/structure: DOES genuinely apply. Confirmed on manual review** -- the
-  underlying dataflow fact is real and, once the correct node is examined, as direct as
-  a flow can be (argument IS the source). The AUTOMATED taint-engine run currently
-  reports the opposite (`NO_FLOW`) due to the disclosed `setup_candidate.sc`
-  first-occurrence limitation (Sec.3) -- a real gap in the current canonical
-  implementation for this exact shape, not evidence the finding is false. The
-  real-world severity of this genuine candidate is meaningfully bounded, in the
-  package's own documented default configuration, by a consumer-chosen (not
-  motifer-enforced) 100KB body-parser limit (Sec.4) -- disclosed, not treated as an
-  analyzer-verifiable guard.
+- **Size/structure: DOES genuinely apply, but "confirmed genuine" overstates it.**
+  What manual review actually establishes is narrower and is recorded as four separate
+  tags, none of them collapsed into one verdict:
+
+  ```
+  SIZE_STRUCTURE_FLOW_CONFIRMED
+  PACKAGE_LOCAL_BOUND_NOT_ESTABLISHED
+  EXTERNAL_CONFIGURABLE_BOUND_PRESENT
+  RESOURCE_CONSEQUENCE_NOT_ESTABLISHED
+  ```
+
+  - `SIZE_STRUCTURE_FLOW_CONFIRMED`: the source-to-serialization dataflow itself is
+    real -- once the correct node is examined (Sec.3), it is the most direct flow
+    shape possible (the argument IS the source). The AUTOMATED taint-engine run
+    currently reports the opposite (`NO_FLOW`) due to the disclosed
+    `setup_candidate.sc` first-occurrence limitation (Sec.3) -- a real gap in the
+    current canonical implementation for this exact shape, not evidence the flow is
+    false.
+  - `PACKAGE_LOCAL_BOUND_NOT_ESTABLISHED`: nothing in motifer's own code bounds the
+    size or structure of what reaches `JSON.stringify` at this call site (Sec.4).
+  - `EXTERNAL_CONFIGURABLE_BOUND_PRESENT`: the package's own documented usage path
+    (Sec.2, Sec.4) does route through a real, but consumer-chosen and
+    reconfigurable, 100KB `body-parser` default -- present in the documented path,
+    not guaranteed, not motifer-enforced, and not itself an analyzer-verifiable
+    guard.
+  - `RESOURCE_CONSEQUENCE_NOT_ESTABLISHED`: no resource cost (CPU, memory, latency,
+    event-loop blocking) was measured or observed anywhere in this review. A
+    confirmed flow with an externally-bounded, package-external limit is not the
+    same claim as a demonstrated resource consequence, and none is made here.
 
 ## Claims boundary (unchanged)
 
 Nothing above is an exploitability, severity, or impact claim. This is a
 serialization-handling classification (crash-safety: rejected on manual review) and a
-resource-bound classification (size/structure: a real, confirmed-on-manual-review
-candidate, not demonstrably bounded by anything in motifer's own code) -- not a
+resource-bound classification (size/structure: the four-tag record above -- a
+confirmed flow and an unestablished package-local bound, conditioned by a present but
+external and reconfigurable bound, with no resource consequence established) -- not a
 vulnerability determination.
