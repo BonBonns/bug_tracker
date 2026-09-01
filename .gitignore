@@ -21,9 +21,6 @@ semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/overnight_run.log
 semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/*.checkpoints/
 
 # roadmap step 7 (Track B): rerun_aggregator_trackb.py's own stdout capture is never a
-# deliverable. replay_records_v8.jsonl is excluded ONLY transiently while the background rerun
-# is still writing it (mid-write == not yet a meaningful result) -- removed from this list and
-# committed once complete, matching v1-v7's own already-committed precedent in the same dir.
+# deliverable -- replay_records_v8.jsonl/trackb_rerun_delta.json are complete and committed
+# (see TRACKB_RESULTS.md), matching v1-v7's own already-committed precedent in the same dir.
 semantic-bucket-pilot/scanner-v2/study/task34_replay/trackb_stdout.log
-semantic-bucket-pilot/scanner-v2/study/task34_replay/results/replay_records_v8.jsonl
-semantic-bucket-pilot/scanner-v2/study/task34_replay/results/trackb_rerun_delta.json

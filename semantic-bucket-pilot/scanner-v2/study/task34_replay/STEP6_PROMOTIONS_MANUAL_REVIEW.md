@@ -89,7 +89,24 @@ the earlier `if(len>=16) return;` guard (a control-flow fact, not a syntactic on
 these later offset computations -- a real, disclosed scanner limitation, not a real
 vulnerability in a well-known, widely-used Google-authored language-detection library.
 
-## 7-13. Three functions in vendored SQLite (`@appthreat/sqlite3@9.0.1`) -- 7 `oob_index_write_candidates`
+## 7-13. Two functions in vendored SQLite (4 sites) + a cross-scanner duplicate of #3-6 above (3 sites) -- 7 `oob_index_write_candidates`
+
+**Attribution CORRECTION (roadmap step 7, `TRACKB_RESULTS.md`):** this section's own original
+header ("Three functions in vendored SQLite... 7 `oob_index_write_candidates`") was WRONG.
+Direct enumeration of all 7 reportable `oob_index_write_candidates` in the live pipeline found
+only 4 are actually from SQLite (`sha1QueryFunc`:1, `lsModeFunc`:1, `sqlite3_get_table_cb`:2);
+the other 3 (lines 427/436/443, `array=temp`, `index_expr` matching `hyphen2_offset`/
+`hyphen1_offset + len2`/`hyphen1_offset`) are `@elchetz/cld`'s own `GetLanguageFromName` --
+confirmed to be the EXACT SAME real writes already reviewed and adjudicated in section 3-6
+above (`oob_write_candidates` lines 406/426/434/442), independently re-flagged a second time
+by the SEPARATE `oob_index_write_verdict.py` scanner under a different property key. Both
+scanners recognize the same real, in-bounds `temp[16]` writes; they simply anchor their own
+line numbers slightly differently (statement start vs. index-expression position) and were
+never cross-deduplicated because `oob_index_write_candidates` carries no `site_id` (see below)
+-- so the SAME already-correctly-adjudicated false positive shows up twice in this record,
+once suppressed (via `oob_write_candidates`' real adjudication) and once not (via
+`oob_index_write_candidates`' missing one). Not a new root cause, not a new false positive --
+the SQLite section below covers the genuinely distinct 4 sites.
 
 Real source (`deps/sqlite-amalgamation-3530400/{shell.c,sqlite3.c}`, confirmed against the
 package's own pinned, hash-verified tarball):
@@ -143,15 +160,23 @@ populated `site_id` field (confirmed directly: every one of these 7 candidates' 
 `oob_write_candidates`, which does populate `site_id`). Entering an adjudication keyed on a
 shared `None` site_identity would silently veto EVERY future `oob_index_write_candidates`
 finding for these two packages, not just the 7 actually reviewed here -- exactly the kind of
-fuzzy match `adjudication_registry.py`'s own docstring forbids. These 7 stay real, documented
-false positives in this review, `reportable=True` in the live pipeline (correctly, since no
-adjudication exists) until `oob_index_write_candidates` gets its own real, unique per-site
-identity field -- a real, separate, disclosed follow-up gap, not fixed here.
+fuzzy match `adjudication_registry.py`'s own docstring forbids. This gap is STILL not fixed as
+of roadmap step 7 (out of this round's own explicit scope -- see `TRACKB_RESULTS.md`) -- it is
+the reason `GetLanguageFromName`'s 3 duplicate `oob_index_write_candidates` sites (see the
+attribution correction above) stay `reportable=True` even though the SAME real writes are
+already `CONFIRMED_FALSE_POSITIVE` under `oob_write_candidates`.
 
-## Real result after adjudication
+## Real result after adjudication + roadmap step 7's own structural fixes
 
-6 of the 13 (both `lock_balance_findings`, all 4 `oob_write_candidates`) are suppressed via
-`adjudication_registry.py`'s own real, cited veto -- `reportable` correctly returns to `False`
-for those on any future replay. The remaining 7 (`oob_index_write_candidates`) stay
-`reportable=True`, correctly documented as false positives here but not (yet) mechanically
-suppressible -- disclosed explicitly, not silently left ambiguous.
+**Original (this review, before roadmap step 7):** 6 of the 13 (both `lock_balance_findings`,
+all 4 `oob_write_candidates`) were suppressed via `adjudication_registry.py`'s own real, cited
+veto. The remaining 7 (`oob_index_write_candidates`) stayed `reportable=True`, documented as
+false positives here but not mechanically suppressible.
+
+**After roadmap step 7's own two structural fixes (`TRACKB_RESULTS.md`, full detail):** both
+`lock_balance_findings` false positives are now gone STRUCTURALLY (WRAPPER-SITE-R01) -- the
+scanner itself no longer emits them, not merely adjudication suppressing them. Of the 7
+`oob_index_write_candidates`, `sqlite3_get_table_cb`'s own 2 sites are now gone STRUCTURALLY
+(OOB-EQUIV-R01). The remaining 5 (`sha1QueryFunc`:1, `lsModeFunc`:1, `GetLanguageFromName`'s
+cross-scanner duplicate:3) stay `reportable=True`, real and disclosed but not yet structurally
+fixed or adjudicated -- exactly the honest, bounded scope roadmap step 7 committed to.
