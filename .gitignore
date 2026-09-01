@@ -24,3 +24,10 @@ semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/*.checkpoints/
 # deliverable -- replay_records_v8.jsonl/trackb_rerun_delta.json are complete and committed
 # (see TRACKB_RESULTS.md), matching v1-v7's own already-committed precedent in the same dir.
 semantic-bucket-pilot/scanner-v2/study/task34_replay/trackb_stdout.log
+
+# ReDoS pilot25 (step 6): pilot25_results.json is written incrementally while
+# run_pilot25.py is still executing -- excluded ONLY transiently until the run
+# completes, then committed as the real, complete deliverable (removed from this
+# list at that point).
+semantic-bucket-pilot/scanner-v2/study/redos_npm/pilot25/pilot25_results.json
+semantic-bucket-pilot/scanner-v2/study/redos_npm/pilot25/run_pilot25_stdout.log
