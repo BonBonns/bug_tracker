@@ -1,6 +1,64 @@
 # The real, missing affirmative-applicability step -- defined, built, applied, and its own
 # first 5 real promotions manually validated
 
+## CORRECTIONS (applied after this round was first written -- read this before anything below)
+
+Two corrections, per direct instruction, both real and already fixed (not merely documented):
+
+1. **Scope-language error.** "0 reportable findings, corpus-wide" (below) is WRONG. This round
+   was the 97-bundle replay from the frozen 100-package diagnostic sample, never a corpus-wide
+   run. The accurate statement: **zero reportable findings among 97 successfully replayed
+   packages from the frozen 100-package diagnostic sample; 394 eligible packages were not
+   evaluated by this replay.**
+
+2. **A real node-libcurl applicability regression, now fixed at its root cause.** All 6
+   `APPLICABLE` determinations this round were checked, per direct instruction. One of them WAS
+   node-libcurl's own R06 `ReadFunction` finding -- the "SMOKE #3: ... the real premises DO
+   hold" line below is **retracted; the premises did NOT hold.** Root cause:
+   `npm_corpus/npm_build_configuration.tsv`'s node-libcurl row was itself STALE -- it recorded
+   `exception_configuration: disabled`, predating `extract_build_config.py`'s own real fixes
+   (gyp `!`-list-removal polarity; `node_addon_api_except` gyp-target dependency evidence). Live
+   re-verification against the real published tarball, and independent reruns of both
+   `resource_guard_verdict_r05.py` and `resource_guard_verdict_r06.py` against this real site
+   under the corrected value, all agree: the real, current, live-reproducible value is
+   **`enabled`**. Under `enabled`, node-libcurl's real Easy::ReadFunction verdict is
+   `CONTRACT_NOT_APPLICABLE`, not `VALUE_ACQUISITION_GUARD_MISSING` -- `scanner_candidate`
+   becomes `False`, and it never even reaches `applicability_gate.py`'s own condition 1. The
+   earlier, independently-established real evidence (exceptions enabled for node-libcurl's
+   actual build target; allocation failure throws and is caught; source boundary
+   unresolved/libcurl-supplied size -- see `NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md`) is exactly
+   what this correction restores; the pipeline's own stale data had drifted away from it.
+
+   **Fixed, not just documented:** `npm_corpus/npm_build_configuration.tsv`'s node-libcurl row
+   corrected in place (citing the live re-verification); `study/task34_replay/
+   fix_libcurl_build_config_regression.py` reruns R05+R06 against node-libcurl's preserved
+   `cpp_raw` under the corrected build config and produces `results/replay_records_v4.jsonl`
+   (v3 plus this one targeted correction -- no Joern rebuild, no new download beyond reusing
+   already-resolved provenance); `check_provenance.py`'s own central regression test (a REAL,
+   live, fresh pipeline rerun, not synthetic) and `check_applicability_gate.py`'s SMOKE #3 were
+   both updated to assert the corrected reality and to add **the specific invariant required**:
+   with `adjudication_status` stripped entirely (simulating "this site was never reviewed"),
+   node-libcurl's real R05 and R06 findings both still fail to become reportable, purely because
+   the corrected verdict makes `scanner_candidate=False` / `applicability_gate.py`'s own
+   condition 1 fail -- proving `adjudication_registry.py`'s real, separately-cited adjudication
+   is now a genuine SECOND, independent veto, never the only thing masking an incorrect
+   applicability grant. Full gate suite reran clean after the fix (see the bottom of this doc).
+
+   **Two systemic precision gaps, opened as structural follow-ups, required before expanding to
+   the remaining 394 packages** (their own regressions kept exactly as-is): LOCK_BALANCE needs
+   structural recognition of lock-primitive wrapper definitions (`mtx_lock`/`rwlock_rdlock`/
+   `Mutex::lock`-shaped functions), and OOB analysis needs type/extent equivalence reasoning
+   (e.g. `uint8_t[6]` vs. a 6-byte destination type like `bdaddr_t`) -- see "Recommendation" in
+   `TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md` and the "What remains open" section at the bottom of
+   this document. Callback/worker (124 candidates) and module-load (7) reachability also remain
+   unfinished under task #32, unchanged by this correction.
+
+   **Not audited, disclosed as an open risk, not assumed isolated to node-libcurl:** whether any
+   of the other 96 successfully-replayed packages' own `npm_build_configuration.tsv` rows are
+   similarly stale has not been checked. Nothing in this replay's own data suggests it (no other
+   package's R05/R06 finding changed), but this was never systematically audited -- a real,
+   disclosed gap, not a silent assumption of correctness.
+
 Per direct instruction: define `applicability_status` separately per property family, add the
 required controls, keep task #32 partially open (transitive reachability implemented; callback/
 worker and module-load stay diagnostic heuristics), and manually validate the five transitive
@@ -67,10 +125,17 @@ vulnerability.
 2. **Internal/unregistered, unresolved, disabled, ambiguous, and false-adjudicated records
    remain blocked** -- five separate real/synthetic controls, one per case, including an
    end-to-end chain reusing `reachability_tier.py`'s own real ambiguous-call rejection.
-3. **Node-libcurl remains non-reportable** -- real smoke test: its R06 copy becomes
+3. **Node-libcurl remains non-reportable** -- ~~real smoke test: its R06 copy becomes
    `APPLICABLE` (the real premises DO hold) but stays non-reportable, `CONFIRMED_FALSE_POSITIVE`
-   winning; its R05 copy stays `NOT_YET_DETERMINED` (no `source_boundary_evidence` to apply the
-   rule to at all, since R05 predates R06's own gate).
+   winning~~ **CORRECTED (see "CORRECTIONS" at the top of this document): this was itself a real
+   applicability regression caused by a stale `npm_build_configuration.tsv` row. Fixed at its
+   root cause -- under the corrected build config, node-libcurl's R06 copy never becomes
+   `APPLICABLE` at all (`scanner_candidate=False`, verdict `CONTRACT_NOT_APPLICABLE`); it stays
+   non-reportable for the RIGHT reason, with `CONFIRMED_FALSE_POSITIVE` adjudication now a real,
+   independently-cited second veto, not the only thing preventing an incorrect grant.** Its R05
+   copy stays `NOT_YET_DETERMINED`/non-candidate too (no `source_boundary_evidence` to apply the
+   rule to at all, since R05 predates R06's own gate -- unaffected by this correction either
+   way).
 4. **The four pqclean candidates remain NOT_YET_DETERMINED until individually adjudicated** --
    real smoke test: all 4 (`traced_to_parameter == "this"`) stay ungranted.
 
@@ -102,34 +167,58 @@ match on `(package, version, staged_key, site_identity)` -- `site_id` for OOB_*,
 for LOCK_BALANCE (never `method_id` alone, which `bindRaw` alone already proves can be shared by
 more than one real, distinct finding).
 
-## Final result, this replay
+## Final result, this replay (CORRECTED)
 
-**0 reportable findings, corpus-wide** (`rerun_aggregator_applicability.py`, over
-`results/replay_records_v3.jsonl`): 6 real `APPLICABLE` determinations (5 staged + node-libcurl's
-own R06 copy), 7 real `CONFIRMED_FALSE_POSITIVE` adjudications (the 5 staged sites +
-node-libcurl's R05 and R06 copies both), 4 pqclean candidates left genuinely open. Every
-fail-closed invariant re-verified directly against the real output. Full combined gate suite:
-ALL PASS (`check_provenance.py` 48/48, `check_oob_reportable_gate.py` 17/17,
-`check_vendored_attribution.py` 16/16, `check_reachability_tier.py` 25/25,
-`check_staged_enablement.py` 25/25, `check_six_property_aggregator.py` 18/18,
-`check_lock_balance.py` 11/11, `check_protected_field.py` 11/11,
-`check_adjudication_registry.py` 22/22, `check_applicability_gate.py` 23/23).
+**Zero reportable findings among 97 successfully replayed packages from the frozen 100-package
+diagnostic sample; 394 eligible packages were not evaluated by this replay.** (Not "0 reportable
+findings, corpus-wide" -- that earlier wording conflated a 97-package diagnostic replay with a
+corpus-wide result; see "CORRECTIONS" at the top of this document.)
+
+`rerun_aggregator_applicability.py` (`results/replay_records_v3.jsonl`) plus
+`fix_libcurl_build_config_regression.py`'s own targeted node-libcurl correction
+(`results/replay_records_v4.jsonl`, the current, corrected final state): **5** real `APPLICABLE`
+determinations (the 5 staged transitive-tier promotions only -- node-libcurl's own R06 copy no
+longer reaches `APPLICABLE` at all, its root-cause regression fixed), **7** real
+`CONFIRMED_FALSE_POSITIVE` adjudications (the 5 staged sites + node-libcurl's R05 and R06 copies
+both, the latter two now a genuine second, independent veto rather than the only thing masking an
+incorrect grant), 4 pqclean candidates left genuinely open. Every fail-closed invariant
+re-verified directly against the real output, including the new node-libcurl-applicability-
+before-adjudication invariant. Full combined gate suite: ALL PASS (`check_provenance.py` 51/51,
+`check_oob_reportable_gate.py` 17/17, `check_vendored_attribution.py` 16/16,
+`check_reachability_tier.py` 25/25, `check_staged_enablement.py` 25/25,
+`check_six_property_aggregator.py` 18/18, `check_lock_balance.py` 11/11,
+`check_protected_field.py` 11/11, `check_adjudication_registry.py` 22/22,
+`check_applicability_gate.py` 23/23).
 
 ## What remains open
 
 - **Task #32 stays partially open**, exactly as instructed: transitive reachability is
   implemented and validated; `CALLBACK_OR_WORKER_HEURISTIC` (124 real candidates) and
   `MODULE_LOAD_EXECUTION_HEURISTIC` (7) remain diagnostic-only, pending their own dedicated
-  positive/negative/ambiguity controls -- not built in this round.
-- A real, general LOCK_BALANCE detector-precision gap was found (primitive-defining functions
-  flagged as if they should self-balance) -- documented as a recommendation in
-  `TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md`, not fixed here; per direct instruction, this round
-  was validation, not a new capability build.
+  positive/negative/ambiguity controls -- not built in this round, unchanged by the node-libcurl
+  correction.
+- **Two structural precision follow-ups, opened (not built) per direct instruction, required
+  before expanding to the remaining 394 packages:**
+  1. LOCK_BALANCE needs structural recognition of lock-primitive wrapper function definitions
+     (`mtx_lock`/`rwlock_rdlock`/`Mutex::lock`-shaped: acquire-and-return by architecture, release
+     delegated elsewhere) -- otherwise every future package bundling a similar wrapper repeats
+     the same 3-candidate false-positive pattern already seen twice, independently, in this
+     round's own 97 packages.
+  2. OOB analysis needs type/extent equivalence reasoning (e.g. `uint8_t[6]` vs. a 6-byte
+     destination type like `bdaddr_t`) rather than purely syntactic/textual capacity matching --
+     otherwise similar cross-variable-`sizeof()` safe copies recur as false positives.
+  Their own 5 exact-match adjudications are kept as regressions, unchanged -- see
+  `TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md`'s own "Recommendation" section for the full account.
 - The 4 pqclean candidates stay genuinely open, pending an individual review of the same rigor
   as this one.
+- **Whether any of the other 96 successfully-replayed packages' own
+  `npm_build_configuration.tsv` rows are similarly stale has not been audited** -- disclosed as
+  an open risk, not assumed isolated to node-libcurl (see "CORRECTIONS" above).
 - The remaining 394 packages stay paused. OOB_COMPARE (task #40) stays disabled.
 
 ---
 *No new scanning. All changes are recomputation over already-preserved evidence
-(`results/replay_records_v2.jsonl` -> `results/replay_records_v3.jsonl`) plus real,
-individually-reviewed adjudications recorded against real published source.*
+(`results/replay_records_v2.jsonl` -> `results/replay_records_v3.jsonl` ->
+`results/replay_records_v4.jsonl`) plus real, individually-reviewed adjudications recorded
+against real published source, plus one targeted, preserved-facts-only rerun of node-libcurl's
+own R05/R06 verdict construction under a corrected build-configuration input.*

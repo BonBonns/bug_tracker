@@ -14,14 +14,22 @@ Checks, in order:
      vetoes it; adjudication_status=CONFIRMED_FALSE_POSITIVE vetoes it even when everything else
      says yes; only when ALL FOUR clauses hold does reportable become True.
   4. THE CENTRAL REGRESSION TEST for the exact defect found and corrected: node-libcurl@5.1.2's
-     real Easy::ReadFunction / VALUE_ACQUISITION_GUARD_MISSING finding (the one real finding the
-     frozen R04/R05 pipeline ever produced across the full 452-package corpus scan, and a site
-     independently confirmed elsewhere as a CONFIRMED FALSE POSITIVE) is reproduced fresh through
-     run_pipeline_one.py's real orchestrator. Its provenance resolves (scanner_candidate=True,
-     provenance.resolved=True, real source_path/content_hash verified against the real file) --
-     but reportable MUST be False, because applicability_status defaults to NOT_YET_DETERMINED
-     (R06/FIX01I is not yet integrated -- task #41). Provenance resolving must never, by itself,
-     make this reportable=True again.
+     real Easy::ReadFunction finding is reproduced fresh through run_pipeline_one.py's real
+     orchestrator. As of the applicability-gate round's own second correction,
+     npm_build_configuration.tsv's node-libcurl row was itself found stale ("disabled" -- predates
+     extract_build_config.py's real gyp `!`-list-removal-polarity and node_addon_api_except fixes;
+     live re-verification against the real published tarball, and independent reruns of both
+     resource_guard_verdict_r05.py and resource_guard_verdict_r06.py against this real finding
+     under the corrected value, confirm the real answer is "enabled"). With the TSV corrected,
+     this real finding's verdict is CONTRACT_NOT_APPLICABLE and scanner_candidate=False -- the
+     regression is fixed AT ITS ROOT CAUSE (the finding never becomes a candidate at all), not
+     merely masked by adjudication_registry.py's independent, separately-cited adjudication (which
+     still applies here too, on its own real merits, but is no longer the only thing standing
+     between this site and an incorrect reportable=True). Two dedicated invariants below prove
+     this is a real, independent double-veto, never a masking relationship: stripping the
+     adjudication entirely (simulating "never reviewed") from BOTH the real R05 finding and the
+     real R06 finding (run through applicability_gate.py directly) must still leave reportable
+     False on the corrected verdict's own merits alone.
   5/6. The same real per-finding join verified for LOCK_BALANCE and PROTECTED_FIELD (freshly
      rebuilt real wolfSSL fixtures, not the stale committed raw facts) -- provenance resolves and
      scanner_candidate=True for their own real positive findings, but reportable still correctly
@@ -41,6 +49,7 @@ HERE = pathlib.Path(__file__).parent
 sys.path.insert(0, str(HERE))
 import provenance  # noqa: E402
 import resource_guard_verdict_r06  # noqa: E402
+import applicability_gate  # noqa: E402
 
 JOERN_HOME = "/home/user/bug_tracker/tchecker-research-complete/joern-install/joern-cli"
 CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/cpp-r06/frontend"
@@ -237,24 +246,46 @@ def main():
         ck("node-libcurl reproduces the real Easy::ReadFunction finding", len(rf) >= 1)
         if rf:
             f = rf[0]
-            ck("real finding: verdict is the real candidate shape (VALUE_ACQUISITION_GUARD_MISSING)",
-               f.get("verdict") == "VALUE_ACQUISITION_GUARD_MISSING")
-            ck("real finding: scanner_candidate=True (real scanner verdict says so)",
-               f.get("scanner_candidate") is True)
+            ck("*** THE FIX ITSELF: with npm_build_configuration.tsv corrected, real finding's "
+               "verdict is CONTRACT_NOT_APPLICABLE, not the old stale-data-masked "
+               "VALUE_ACQUISITION_GUARD_MISSING ***",
+               f.get("verdict") == "CONTRACT_NOT_APPLICABLE")
+            ck("*** scanner_candidate is now False on its own real evidentiary merits -- this "
+               "site never becomes a candidate at all under the corrected build config, rather "
+               "than becoming one and being caught downstream ***",
+               f.get("scanner_candidate") is False)
             ck("real finding: provenance.resolved=True", f.get("provenance", {}).get("resolved") is True)
-            ck("real finding: applicability_status defaults to NOT_YET_DETERMINED, not APPLICABLE"
-               " (R06/FIX01I not yet integrated -- task #41)",
+            ck("real finding: applicability_status defaults to NOT_YET_DETERMINED, not APPLICABLE",
                f.get("applicability_status") == "NOT_YET_DETERMINED")
-            ck("*** THE REGRESSION ITSELF: reportable=False, even though provenance resolved ***"
+            ck("*** reportable=False, even though provenance resolved ***"
                " -- provenance resolving a known confirmed-false-positive's file must NEVER make"
                " it reportable", f.get("reportable") is False)
-            ck("*** ADJUDICATION-REGISTRY-R01, wired into the real pipeline (run_pipeline_one.py):"
-               " this real finding's adjudication_status is now CONFIRMED_FALSE_POSITIVE, with a"
-               " real citation -- the already-established adjudication is finally RECORDED, not"
-               " merely true in a doc nothing ever read ***",
+            ck("ADJUDICATION-REGISTRY-R01, wired into the real pipeline (run_pipeline_one.py):"
+               " this real finding's adjudication_status is ALSO CONFIRMED_FALSE_POSITIVE, with a"
+               " real citation -- still applied on its own independent real merits even though "
+               "it is no longer the only thing preventing reportable=True",
                f.get("adjudication_status") == "CONFIRMED_FALSE_POSITIVE"
                and f.get("adjudication_citation")
                == "study/resource_guard_r05/NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md")
+
+            # *** THE SPECIFIC INVARIANT REQUIRED BY DIRECT INSTRUCTION: "add an invariant that
+            # checks node-libcurl's applicability before adjudication" -- the adjudication
+            # registry must be a real, SECOND, INDEPENDENT veto, never the only thing masking an
+            # incorrect grant. Proven by stripping the adjudication from this SAME real finding
+            # entirely (simulating "never reviewed") and recomputing reportable: it must STILL be
+            # False, purely on the corrected verdict's own scanner_candidate=False merits.
+            unadjudicated = dict(f)
+            unadjudicated["provenance"] = dict(f["provenance"])
+            unadjudicated["adjudication_status"] = "NOT_ADJUDICATED"
+            unadjudicated.pop("adjudication_citation", None)
+            unadjudicated.pop("adjudication_reason", None)
+            provenance.finalize_reportability(unadjudicated, unadjudicated.get("scanner_candidate", False))
+            ck("*** THE REQUIRED INVARIANT (R05): with adjudication stripped entirely, as if this "
+               "site had never been individually reviewed, node-libcurl's real R05 finding STILL "
+               "does not become reportable -- the corrected build config, not the adjudication, "
+               "is what keeps this non-reportable; adjudication_registry.py is a real second, "
+               "independent veto here, never the only thing masking an incorrect applicability "
+               "grant ***", unadjudicated["reportable"] is False)
             src_path = f.get("provenance", {}).get("source_path")
             ck("real finding has a non-empty real source_path", bool(src_path))
             real_abs_path = os.path.join(work_root, "pkg", src_path) if src_path else None
@@ -302,6 +333,37 @@ def main():
                "-- proves the ported reporting-boundary helper does not resurrect the old "
                "verdict-only 'actionable' shortcut this real false-positive would have passed ***",
                reportable_r06 == 0)
+
+            # *** THE SPECIFIC INVARIANT REQUIRED BY DIRECT INSTRUCTION, R06 side: applicability_
+            # gate.py (not wired into run_pipeline_one.py itself -- applied by the later post-
+            # processing stage) must never grant node-libcurl's real R06 finding APPLICABLE at
+            # all under the corrected build config, independent of adjudication. Proven by
+            # running it directly against this SAME real finding with adjudication stripped
+            # (simulating "never reviewed") -- applicability_gate's own condition 1
+            # (verdict == VALUE_ACQUISITION_GUARD_MISSING) must fail on the corrected verdict's
+            # own merits, never reaching an adjudication veto at all.
+            f6_preadj = dict(f6)
+            f6_preadj["provenance"] = dict(f6["provenance"])
+            f6_preadj["adjudication_status"] = "NOT_ADJUDICATED"
+            f6_preadj.pop("adjudication_citation", None)
+            f6_preadj.pop("adjudication_reason", None)
+            f6_preadj["applicability_status"] = "NOT_YET_DETERMINED"
+            record_preadj = {"r06_findings": [f6_preadj]}
+            applicability_gate.apply_applicability(record_preadj)
+            # apply_applicability() only recomputes reportable for findings that clear its own
+            # preconditions -- explicitly re-finalize here too, so this check proves reportable is
+            # freshly False given the CURRENT field state, never a stale carryover value.
+            provenance.finalize_reportability(f6_preadj, f6_preadj.get("scanner_candidate", False))
+            ck("*** THE REQUIRED INVARIANT (R06): applicability_gate.py, run against node-"
+               "libcurl's real R06 finding under the CORRECTED build config with NO adjudication "
+               "applied at all, never grants applicability_status=APPLICABLE -- the corrected "
+               "verdict (CONTRACT_NOT_APPLICABLE, not VALUE_ACQUISITION_GUARD_MISSING) fails "
+               "applicability_gate's own condition 1 on its own real evidentiary merits, before "
+               "adjudication ever gets a chance to veto anything ***",
+               f6_preadj.get("applicability_status") != "APPLICABLE")
+            ck("*** and reportable correctly stays False with zero adjudication applied -- this "
+               "is the fix itself, not the adjudication registry masking a regression ***",
+               f6_preadj.get("reportable") is False)
         shutil.rmtree(work_root, ignore_errors=True)
 
     # --- 5/6. LOCK_BALANCE and PROTECTED_FIELD: provenance resolves + scanner_candidate=True, --

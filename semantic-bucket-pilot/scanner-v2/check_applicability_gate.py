@@ -17,7 +17,6 @@ sys.path.insert(0, HERE)
 import applicability_gate as ag  # noqa: E402
 import provenance  # noqa: E402
 import reachability_tier as rt  # noqa: E402
-import adjudication_registry as ar  # noqa: E402
 import staged_enablement as se  # noqa: E402
 
 ok = tot = 0
@@ -175,38 +174,58 @@ ck("*** FALSE-ADJUDICATED: this Resource Guard finding clears applicability (rea
 
 # =====================================================================================
 # 3 & 4. REAL SMOKE TEST: node-libcurl stays non-reportable; the four pqclean candidates stay
-# NOT_YET_DETERMINED -- reusing task #34's own real replay_records.jsonl (already reachability-
-# and adjudication-processed by rerun_aggregator_task32.py's own v2 output).
+# NOT_YET_DETERMINED -- reusing results/replay_records_v4.jsonl, the corrected chain (v3 plus
+# fix_libcurl_build_config_regression.py's own targeted rerun of node-libcurl's R05/R06 against
+# the corrected npm_build_configuration.tsv row -- v2/v3 still carry the STALE build-config-
+# derived verdict and must never be used for this control again).
 # =====================================================================================
-_v2_path = os.path.join(HERE, "study", "task34_replay", "results", "replay_records_v2.jsonl")
-if os.path.isfile(_v2_path):
-    with open(_v2_path) as fh:
-        v2_records = [json.loads(line) for line in fh
+_v4_path = os.path.join(HERE, "study", "task34_replay", "results", "replay_records_v4.jsonl")
+if os.path.isfile(_v4_path):
+    with open(_v4_path) as fh:
+        v4_records = [json.loads(line) for line in fh
                       if json.loads(line).get("outcome") == "REPLAYED"]
-    libcurl = next((r for r in v2_records if r["package_name"] == "node-libcurl"), None)
-    pqclean = next((r for r in v2_records if r["package_name"] == "pqclean"), None)
+    libcurl = next((r for r in v4_records if r["package_name"] == "node-libcurl"), None)
+    pqclean = next((r for r in v4_records if r["package_name"] == "pqclean"), None)
 
     if libcurl:
         r05 = [f for f in (libcurl.get("r05_findings") or []) if f.get("method_name") == "ReadFunction"]
         r06 = [f for f in (libcurl.get("r06_findings") or []) if f.get("method_name") == "ReadFunction"]
-        applied_libcurl = ag.apply_applicability(libcurl)
-        ck("SMOKE #3: applying applicability_gate to node-libcurl's real record applies to "
-           "EXACTLY its r06 ReadFunction copy (traces to real 'size' parameter) -- its r05 "
-           "copy correctly stays untouched, since R05 predates R06's own source_boundary_"
-           "evidence gate and never carries that key at all",
-           applied_libcurl == 1 and "source_boundary_evidence" not in r05[0]
-           and "source_boundary_evidence" in r06[0])
-        ar.apply_known_adjudications(libcurl)  # re-apply -- v2 already carries this, but this
-                                                  # confirms the ORDER (applicability then
-                                                  # adjudication) still ends with the veto
-        ck("SMOKE #3: node-libcurl's real r05 ReadFunction copy stays NOT_YET_DETERMINED "
-           "(no source_boundary_evidence to apply the rule to at all)",
-           r05[0]["applicability_status"] == "NOT_YET_DETERMINED" and r05[0]["reportable"] is False)
-        ck("SMOKE #3: node-libcurl's real r06 ReadFunction finding is APPLICABLE (the real "
-           "premises DO hold) but reportable stays False -- CONFIRMED_FALSE_POSITIVE wins",
-           r06[0]["applicability_status"] == "APPLICABLE" and r06[0]["reportable"] is False)
+        # Both copies already carry the CORRECTED verdict (CONTRACT_NOT_APPLICABLE, not the old
+        # stale-data VALUE_ACQUISITION_GUARD_MISSING). Re-run applicability_gate directly against
+        # a COPY with adjudication stripped entirely (simulating "never reviewed"), to prove --
+        # independent of adjudication_registry.py -- that applicability_gate never grants
+        # APPLICABLE for either copy any more, on the corrected verdict's own merits alone.
+        r05_copy = dict(r05[0]); r05_copy["provenance"] = dict(r05_copy["provenance"])
+        r05_copy["adjudication_status"] = "NOT_ADJUDICATED"
+        r06_copy = dict(r06[0]); r06_copy["provenance"] = dict(r06_copy["provenance"])
+        r06_copy["adjudication_status"] = "NOT_ADJUDICATED"
+        stripped = {"r05_findings": [r05_copy], "r06_findings": [r06_copy]}
+        applied_libcurl = ag.apply_applicability(stripped)
+        ck("SMOKE #3: *** THE FIX ITSELF, independent of adjudication *** -- applying "
+           "applicability_gate to node-libcurl's real record (adjudication stripped) applies to "
+           "NEITHER copy: R05 never carried source_boundary_evidence (predates R06's gate) and "
+           "R06's own corrected verdict is CONTRACT_NOT_APPLICABLE, not "
+           "VALUE_ACQUISITION_GUARD_MISSING -- condition 1 fails on the corrected verdict's real "
+           "merits, never even reaching an adjudication veto",
+           applied_libcurl == 0)
+        ck("SMOKE #3: node-libcurl's real r05 ReadFunction copy: scanner_candidate is False on "
+           "its own corrected-verdict merits, applicability_status stays NOT_YET_DETERMINED, "
+           "reportable stays False",
+           r05[0].get("scanner_candidate") is False
+           and r05[0]["applicability_status"] == "NOT_YET_DETERMINED"
+           and r05[0]["reportable"] is False)
+        ck("SMOKE #3: node-libcurl's real r06 ReadFunction copy: scanner_candidate is False on "
+           "its own corrected-verdict merits -- it never becomes a candidate at all, let alone "
+           "APPLICABLE (the old masked regression is fixed at its root cause). Still ALSO, "
+           "independently, CONFIRMED_FALSE_POSITIVE-adjudicated on its own real, separately-"
+           "cited merits -- a genuine second, independent veto, never the only thing standing "
+           "between this site and reportable=True",
+           r06[0].get("scanner_candidate") is False
+           and r06[0]["applicability_status"] == "NOT_YET_DETERMINED"
+           and r06[0]["reportable"] is False
+           and r06[0]["adjudication_status"] == "CONFIRMED_FALSE_POSITIVE")
     else:
-        print("SKIP: node-libcurl not found in v2 replay records")
+        print("SKIP: node-libcurl not found in v4 replay records")
 
     if pqclean:
         pq_findings = [f for f in (pqclean.get("r06_findings") or [])
@@ -223,9 +242,9 @@ if os.path.isfile(_v2_path):
                "reportable stays False -- genuinely open, never guessed at",
                f["applicability_status"] == "NOT_YET_DETERMINED" and f["reportable"] is False)
     else:
-        print("SKIP: pqclean not found in v2 replay records")
+        print("SKIP: pqclean not found in v4 replay records")
 else:
-    print("SKIP: task #32's own replay_records_v2.jsonl not present -- controls #3/#4's real "
+    print("SKIP: results/replay_records_v4.jsonl not present -- controls #3/#4's real "
           "smoke tests skipped")
 
 # =====================================================================================

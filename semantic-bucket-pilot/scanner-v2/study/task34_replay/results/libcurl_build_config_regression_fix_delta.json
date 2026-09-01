@@ -1,0 +1,25 @@
+{
+  "package": "node-libcurl@5.1.2",
+  "r05_after": {
+    "reportable": false,
+    "scanner_candidate": false,
+    "verdict": "CONTRACT_NOT_APPLICABLE"
+  },
+  "r05_before": {
+    "reportable": false,
+    "scanner_candidate": true,
+    "verdict": "VALUE_ACQUISITION_GUARD_MISSING"
+  },
+  "r06_after": {
+    "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+    "applicability_status": "NOT_YET_DETERMINED",
+    "reportable": false,
+    "verdict": "CONTRACT_NOT_APPLICABLE"
+  },
+  "r06_before": {
+    "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+    "applicability_status": "APPLICABLE",
+    "reportable": false,
+    "verdict": "VALUE_ACQUISITION_GUARD_MISSING"
+  }
+}

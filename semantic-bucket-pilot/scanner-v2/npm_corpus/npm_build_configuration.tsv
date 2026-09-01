@@ -99,7 +99,7 @@ hnswlib-node	3.0.0	disabled	binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gy
 @zerob13/nativekit	0.6.3	enabled		binding.gyp: -fexceptions	binding.gyp;cmake;package.json	OK	
 macos-alias	0.2.12	unresolved			binding.gyp;package.json	OK	
 @tensorflow/tfjs-node	4.22.0	unresolved			binding.gyp;package.json	OK	
-node-libcurl	5.1.2	disabled	binding.gyp: -fno-exceptions		binding.gyp;package.json	OK	
+node-libcurl	5.1.2	enabled		binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); binding.gyp: node_addon_api_except (gyp target dependency)	binding.gyp;package.json	OK	CORRECTED (was stale "disabled" -- predates extract_build_config.py's own real gyp `!`-list-removal-polarity and node_addon_api_except fixes; see study/resource_guard_r05/NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md and live re-verification via extract_build_config.classify_from_tarball() against the real published tarball
 fuse-napi	2.3.1	unresolved			binding.gyp;package.json	OK	
 ffi	2.3.0	unresolved			binding.gyp;package.json	OK	
 win-version-info	6.0.1	unresolved			binding.gyp;package.json	OK	
