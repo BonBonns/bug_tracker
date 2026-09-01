@@ -126,5 +126,68 @@ if not smoke_ran:
     print("SKIP: task #34's own replay_records.jsonl not present in this environment -- real "
           "smoke test skipped, all synthetic controls above still ran")
 
+# =====================================================================================
+# STAGED-PROPERTY ADJUDICATIONS: the 5 real transitive-tier promotions manually validated in
+# study/task34_replay/TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md -- all 5 confirmed false positives
+# (a real, structural LOCK_BALANCE scanner-design mismatch for 3, a real cross-variable sizeof
+# match for 2), now recorded here so they stay non-reportable on every future replay.
+# =====================================================================================
+staged_matching = {
+    "package_name": "@eliyya/sange", "version": "1.2.0",
+    "lock_balance_findings": [{
+        "method_id": 107374182564, "lock_call_id": 30064773906,
+        "scanner_candidate": True, "applicability_status": "APPLICABLE",
+        "adjudication_status": "NOT_ADJUDICATED", "reportable": True,
+        "provenance": {"resolved": True},
+    }],
+}
+n_staged = ar.apply_known_adjudications(staged_matching)
+ck("STAGED: exact (package, version, key, lock_call_id) match applies 1 real adjudication",
+   n_staged == 1)
+ck("STAGED: adjudication_status set to CONFIRMED_FALSE_POSITIVE, real citation recorded",
+   staged_matching["lock_balance_findings"][0]["adjudication_status"] == "CONFIRMED_FALSE_POSITIVE"
+   and staged_matching["lock_balance_findings"][0]["adjudication_citation"]
+   == "study/task34_replay/TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md")
+ck("*** STAGED: reportable is FORCED False by the veto, even though it was True before "
+   "adjudication was applied ***", staged_matching["lock_balance_findings"][0]["reportable"] is False)
+
+# a DIFFERENT lock_call_id at the same method_id must NOT match (site-level, not function-level)
+staged_different_site = {
+    "package_name": "@eliyya/sange", "version": "1.2.0",
+    "lock_balance_findings": [{
+        "method_id": 107374182564, "lock_call_id": 999999999,  # a different, hypothetical real
+                                                                   # call site at the SAME method
+        "scanner_candidate": True, "reportable": True,
+        "provenance": {"resolved": True},
+    }],
+}
+n_diff = ar.apply_known_adjudications(staged_different_site)
+ck("STAGED: a DIFFERENT lock_call_id at the SAME method_id does NOT match -- site-level exact "
+   "match, never a function-level pattern", n_diff == 0)
+
+if os.path.isfile(REPLAY_RECORDS):
+    v3_path = os.path.join(HERE, "study", "task34_replay", "results", "replay_records_v3.jsonl")
+    if os.path.isfile(v3_path):
+        found_bindraw = 0
+        with open(v3_path) as fh:
+            for line in fh:
+                d = json.loads(line)
+                if d.get("package_name") != "@abandonware/bluetooth-hci-socket":
+                    continue
+                for f in d.get("oob_write_candidates") or []:
+                    if f.get("site_id") in ("bindRaw:279:memset", "bindRaw:284:memcpy"):
+                        found_bindraw += 1
+                        real_finding = dict(f)
+                        real_finding["adjudication_status"] = "NOT_ADJUDICATED"  # simulate
+                                                                                    # pre-adjudication
+                        real_record = {"package_name": d["package_name"], "version": d["version"],
+                                        "oob_write_candidates": [real_finding]}
+                        ar.apply_known_adjudications(real_record)
+                        ck(f"SMOKE: real bluetooth-hci-socket {f.get('site_id')} finding is "
+                           "correctly adjudicated CONFIRMED_FALSE_POSITIVE on re-application",
+                           real_finding["adjudication_status"] == "CONFIRMED_FALSE_POSITIVE")
+        ck("SMOKE: both real bindRaw OOB_WRITE sites found in results/replay_records_v3.jsonl",
+           found_bindraw == 2)
+
 print(f"ADJUDICATION_REGISTRY_CONTROLS={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)
