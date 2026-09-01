@@ -1,0 +1,4 @@
+[test] db opened, one key put. Creating iterator (keyAsBuffer default true)...
+[test] calling it.next() -> real iterator_next -> NextWorker -> async_work -> HandleOKCallback -> napi_create_buffer_copy x2 (INTERPOSED)
+[test] it.next() RETURNED (no crash, no thrown JS exception): [ <Buffer 76 31>, <Buffer 6b 31> ]
+[test] RESULT: REACHED_NAPI_SET_ELEMENT_WITHOUT_CRASH

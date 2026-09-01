@@ -1,0 +1,20 @@
+Frozen call-site offsets (addon-relative, via dladdr against the rebuilt
+node-leveldb.node's own load base), discovered by one "map"-mode run
+against the real, unmodified code path -- never assumed to be "the first
+two calls".
+
+FROZEN CREATE OFFSETS (napi_create_buffer_copy):
+  0x26474  -- bindings.cpp:1440 (NextWorker::HandleOKCallback, key buffer;   map-mode seq=0)
+  0x264ad  -- bindings.cpp:1447 (NextWorker::HandleOKCallback, value buffer; map-mode seq=1)
+
+FROZEN SET_ELEMENT OFFSETS (napi_set_element), each the call immediately
+following the corresponding creation call in the same loop body:
+  0x264c4  -- bindings.cpp:1453 (sets index=1, the key;   map-mode seq=2)
+  0x264da  -- bindings.cpp:1454 (sets index=0, the value; map-mode seq=3)
+
+Correspondence (key -> key, value -> value) established by reading the
+source at these exact lines (both call sites are static and distinct;
+with the test's single key/value pair, each fires exactly once per run,
+so map-mode sequence order alone already matches source order):
+  0x26474 (create key)   --> 0x264c4 (set key,   index=1)
+  0x264ad (create value) --> 0x264da (set value, index=0)

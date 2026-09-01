@@ -267,39 +267,55 @@ the same suffix/basename; an unmatched field falls through to the existing
 `PATH_NOT_IN_MANIFEST` reason, unchanged. Both findings' provenance re-verified RESOLVED
 under this corrected, full-tree manifest (see `COMBINED_LEVELDB_RESULT.json`).
 
-## Real pinned-addon runtime test (v2, per review: prebuilt first, safe reach observation)
+## Real pinned-addon runtime test (v3, offset-verified interposition)
 
 **Correction applied: the earlier failure-injection result (hand-seeded stub, deterministic
 sentinel) is relabeled `MODEL_FAILURE_PATH_CONFIRMED`** -- a useful sanity check of the
 control-flow shape, not a runtime observation of the actual package. `REAL_ADDON_TEST_RESULT.md`
-(v2) redoes the real-addon test to the review's exact protocol -- identity recorded and
+(v3) redoes the real-addon test to the review's exact protocol -- identity recorded and
 independently re-verified (tarball/`.node` sha256, arch, Node version, ABI); the
 unmodified prebuilt confirmed to load and complete a real `iterator_next` baseline;
 `readelf -Ws` confirms both `napi_create_buffer_copy`/`napi_set_element` are dynamically
 imported; the SHIPPED PREBUILT tested FIRST via `LD_PRELOAD`, found and independently
 CONFIRMED unable to intercept either symbol (silent shim in both armed/unarmed states,
 plus `LD_DEBUG=bindings` showing direct binding to `node`) -- recorded plainly as
-**`PREBUILT_INTERPOSITION_UNAVAILABLE`**, never silently swapped for a rebuilt result.
+**`PREBUILT_INTERPOSITION_UNAVAILABLE`**, never silently swapped for a rebuilt result, and
+never relabeled as a statement about the shipped prebuilt's own runtime behavior (its
+failure path was never injected, so it stays unestablished).
 
-Per protocol, then attempted the equivalent test-only **link-time** interposition: built
-from the pinned source (the package's own `cmake-js`/CMake tooling) with
+Per protocol, then attempted the equivalent test-only **link-time** interposition, this
+time **offset-verified rather than unconditionally armed**: built from the pinned source
+(the package's own `cmake-js`/CMake tooling) with
 `-Wl,--wrap=napi_create_buffer_copy,--wrap=napi_set_element` and a small test-only
 wrapper source file (never committed to the package's own tree; removed and the original
-prebuilt restored, hash-verified, immediately after). `--wrap` is immune to the runtime
-symbol-scope behavior that defeated `LD_PRELOAD`, and was independently verified working
-(symbol table shows `__wrap_*` defined; unarmed run shows real, distinct created handles
-flowing through; the `napi_set_element` interceptor -- which records reach and returns
-safely WITHOUT dereferencing its value, per instruction -- fires exactly twice both
-unarmed and armed).
+prebuilt restored, hash-verified, immediately after). The wrapper has two modes: a "map"
+mode that delegates every call to the real implementation unmodified while recording each
+call's sequence number, thread id, return address, `dladdr`-resolved addon-relative
+offset, and whether an output pointer was supplied -- run first, against the real code
+path, to discover which offsets are the real target sites rather than assuming "the first
+two calls" are correct; and an "arm" mode that reads the two frozen creation-site offsets
+and their two corresponding `napi_set_element` offsets captured from that mapping run, and
+interposes ONLY at those exact offsets (any other offset delegates normally in both
+modes). The mapping run discovered exactly two distinct offsets per symbol, matching the
+source's two static call sites (`bindings.cpp:1440`/`:1447` for the key/value creations,
+`:1453`/`:1454` for the corresponding key/value `napi_set_element` calls). `--wrap` is
+immune to the runtime symbol-scope behavior that defeated `LD_PRELOAD`, and was
+independently verified working both by symbol table (`nm -D`/`readelf -Ws` show
+`__wrap_*` defined, real symbols still `UND`) and by call-site offset (armed-run log lines
+show `FROZEN OFFSET MATCH` at exactly the four mapped offsets, never elsewhere).
 
-**Result: with both real `napi_create_buffer_copy` calls forced to fail (their output
-never written), the real compiled code proceeds to call `napi_set_element` BOTH times
-anyway** -- reproduced across two armed runs, exit 0 (no crash needed to make the
-observation: reachability, not a particular pointer value, is what's meaningful). Status:
-**`ACTUAL_ADDON_FAILURE_PATH_CONFIRMED`**. See `REAL_ADDON_TEST_RESULT.md` for the full
-six-item record, all run logs, and the symbol-interposition verification evidence for
-both attempts. **No security impact, severity, or exploitability is inferred from this
-outcome** -- it is a bounded, reproducible control-flow observation only.
+**Result: with both frozen `napi_create_buffer_copy` offsets forced to fail (their output
+never written), the real compiled code proceeds to reach `napi_set_element` at both
+frozen, source-verified offsets anyway** -- reproduced across two armed runs, exit 0 (no
+crash needed to make the observation: reachability at a verified call site, not a
+particular pointer value, is what's meaningful). Status:
+**`SOURCE_BUILT_PINNED_ADDON_FAILURE_PATH_CONFIRMED`** -- named for the rebuilt,
+pinned-source addon under test, not for the shipped prebuilt, whose own failure path was
+never injected. See `REAL_ADDON_TEST_RESULT.md` for the full record, all run logs, the
+frozen offsets and their source-line correspondence, and the symbol-interposition
+verification evidence for both attempts. **No security impact, severity, or
+exploitability is inferred from this outcome** -- it is a bounded, reproducible
+control-flow observation only.
 
 ## Honest classification (updated)
 
@@ -311,13 +327,19 @@ Reportability:                                     yes (corrected, full-package-
 Modeled failure-path consequence:                  yes (MODEL_FAILURE_PATH_CONFIRMED)
 Shipped-prebuilt interposition:                    PREBUILT_INTERPOSITION_UNAVAILABLE
                                                     (LD_PRELOAD verified ineffective;
-                                                    disclosed, not silently bypassed)
-Actual pinned-addon failure-path consequence:      yes -- ACTUAL_ADDON_FAILURE_PATH_CONFIRMED
+                                                    disclosed, not silently bypassed;
+                                                    shipped prebuilt's own failure-path
+                                                    behavior stays unestablished)
+Source-built pinned-addon failure-path consequence: yes --
+                                                    SOURCE_BUILT_PINNED_ADDON_FAILURE_PATH_CONFIRMED
                                                     (source build from the pinned tarball,
-                                                    test-only linker --wrap interposition,
-                                                    independently verified; napi_set_element
-                                                    reached 2/2 after injected failures,
-                                                    reproduced across 2 armed runs, exit 0)
+                                                    offset-verified test-only linker --wrap
+                                                    interposition -- call sites discovered
+                                                    by an unmodified mapping run and frozen,
+                                                    never assumed; napi_set_element reached
+                                                    2/2 at the frozen offsets after injected
+                                                    failures, reproduced across 2 armed runs,
+                                                    exit 0)
 Confirmed vulnerability:                           no claim made
 ```
 
