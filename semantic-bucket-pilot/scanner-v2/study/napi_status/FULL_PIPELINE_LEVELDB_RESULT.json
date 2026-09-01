@@ -1,58 +1,70 @@
 {
-  "aggregate_napi_row": {
-    "enabled": true,
-    "raw_count": 3,
-    "reportable_count": 0
-  },
   "facts": {
     "cpp_calls": 31114,
     "cpp_functions": 3411,
     "js_calls": 1555,
     "js_functions": 191,
-    "note": "REAL js+native facts -- not empty; jssrc2cpg produced a 189KB CPG over the package own JS"
+    "note": "REAL js+native facts (jssrc2cpg produced a 189KB CPG over the package's own JS)"
   },
-  "interpretation": "Both API-handling discrepancies are real (STATUS_GUARD_MISSING/STATUS_DISCARDED, manually reviewed) and have RESOLVED provenance, but neither is reportable: with real JS+native facts the effective function (HandleOKCallback, an async-worker callback) classifies as TIER_INTERNAL_UNREGISTERED -- no proven JavaScript-to-native path was established, so the reachability gate (REACHABILITY_REQUIRED_FOR_REPORTING) holds them non-reportable. Manual API-handling confirmation is NOT equated with JS exposure. This is an API-handling classification, never a vulnerability or impact claim.",
+  "interpretation": "Two real, manually-reviewed API-handling discrepancies (STATUS_GUARD_MISSING/STATUS_DISCARDED) with RESOLVED provenance are held NON-REPORTABLE by the reachability gate: with real JS+native facts the effective function classifies TIER_INTERNAL_UNREGISTERED (no proven JS-to-native path). Manual API-handling confirmation is NOT equated with JS exposure. No runtime behavior or security impact is established or claimed.",
   "outcome": "BLOCKED_BY_REACHABILITY",
   "package": "@8crafter/leveldb-zlib",
-  "per_finding": [
-    {
-      "applicability_status": "NOT_YET_DETERMINED",
-      "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
-      "method": "HandleOKCallback",
-      "provenance_resolved": true,
-      "reachability_status": "TIER_INTERNAL_UNREGISTERED",
-      "reportable": false,
-      "scanner_candidate": true,
-      "site_line": "1440",
-      "source_path": "package/src/bindings.cpp",
-      "stage_status": "REACHABILITY_REQUIRED_FOR_REPORTING",
-      "use_line": "1453",
-      "use_variable": "returnKey"
+  "reported_separately": {
+    "1_raw_napi_candidates": {
+      "ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED": 1,
+      "STATUS_GUARD_MISSING": 2,
+      "sites": [
+        {
+          "line": "1440",
+          "method": "HandleOKCallback",
+          "sub_reason": "STATUS_DISCARDED",
+          "use_line": "1453",
+          "use_variable": "returnKey"
+        },
+        {
+          "line": "1447",
+          "method": "HandleOKCallback",
+          "sub_reason": "STATUS_DISCARDED",
+          "use_line": "1454",
+          "use_variable": "returnValue"
+        }
+      ],
+      "supported_call_sites": 3
     },
-    {
-      "applicability_status": "NOT_YET_DETERMINED",
+    "2_js_native_reachability": {
+      "both_findings": "TIER_INTERNAL_UNREGISTERED",
+      "effective_function": "HandleOKCallback (async-worker callback)",
+      "meaning": "function exists and was examined, but NO proven JavaScript-to-native path was established with the real JS+native facts (not merely absent JS facts)",
+      "tier": "TIER_INTERNAL_UNREGISTERED"
+    },
+    "3_provenance": {
+      "both_findings": "RESOLVED",
       "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
-      "method": "HandleOKCallback",
-      "provenance_resolved": true,
-      "reachability_status": "TIER_INTERNAL_UNREGISTERED",
+      "resolved": true,
+      "source_path": "package/src/bindings.cpp"
+    },
+    "4_applicability": {
+      "both_findings": "NOT_YET_DETERMINED",
+      "reason": "raw-N-API applicability requires an allowed reachability tier; TIER_INTERNAL_UNREGISTERED is not allowed, so applicability is never raised to APPLICABLE",
+      "status": "NOT_YET_DETERMINED"
+    },
+    "5_reportability": {
+      "aggregate_napi_row": {
+        "enabled": true,
+        "raw_count": 3,
+        "reportable_count": 0
+      },
+      "both_findings": false,
       "reportable": false,
-      "scanner_candidate": true,
-      "site_line": "1447",
-      "source_path": "package/src/bindings.cpp",
-      "stage_status": "REACHABILITY_REQUIRED_FOR_REPORTING",
-      "use_line": "1454",
-      "use_variable": "returnValue"
+      "stage_status": "REACHABILITY_REQUIRED_FOR_REPORTING"
     }
-  ],
-  "pipeline_order": [
-    "scanner(frozen R02)",
-    "provenance.enrich",
-    "reachability(real js+cpp)",
-    "applicability",
-    "adjudication",
-    "staged_enablement(enabled)",
-    "aggregate_record_r02"
-  ],
-  "toolchain": "pinned Joern v4.0.608 (Maven Central assembly) + c2cpg + jssrc2cpg (astgen 3.47.0 built from joernio/astgen-monorepo, node22) + export_c_cpp_facts_v03.sc / export_neutral.sc + normalizers",
+  },
+  "toolchain": {
+    "astgen_pin": "study/napi_status/ASTGEN_PIN.json (commit e456abfe, dist sha256 fddb57ca)",
+    "c2cpg": "io.joern.c2cpg.Main",
+    "joern": "4.0.608 (Maven Central assembly)",
+    "js_frontend_validated_first": "check_js_frontend.py 4/4 on the minimal fixture",
+    "jssrc2cpg": "io.joern.jssrc2cpg.Main + astgen 3.47.0 (source build, see ASTGEN_PIN.json)"
+  },
   "version": "1.6.0"
 }

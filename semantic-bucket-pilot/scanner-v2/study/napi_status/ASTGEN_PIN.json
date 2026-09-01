@@ -1,0 +1,28 @@
+{
+  "component": "astgen (JavaScript AST generator for jssrc2cpg)",
+  "required_by": "jssrc2cpg 4.0.608 (jssrc2cpg/src/main/resources/application.conf: jssrc2cpg.astgen_version = 3.47.0)",
+  "pinned_version": "3.47.0",
+  "npm_availability": "NOT ON NPM. @joernio/astgen on npm publishes only up to 2.0.4 (verified: `npm view @joernio/astgen@3.47.0` -> E404, versions end at 1.0.18/2.0.1..2.0.4). astgen 3.x is distributed only as GitHub source (joernio/astgen-monorepo) plus release binaries. An npm pin+integrity for 3.47.0 is therefore impossible; using npm's 2.0.4 would be a version MISMATCH against the pinned Joern and is deliberately NOT done.",
+  "integrity_anchor": {
+    "method": "source build pinned by git commit (the authoritative integrity anchor for a not-on-npm component)",
+    "repo": "https://github.com/joernio/astgen-monorepo",
+    "subdir": "javascript-astgen",
+    "commit_sha": "e456abfe3bfdfa44b610afef20116c59bd4355b7",
+    "package_json_version": "3.47.0",
+    "yarn_lock_sha256": "e8f3e44ba47eb1c030fc74fd7904078d151207ee672b42ba6ca862434ae2e048",
+    "built_dist_astgen_js_sha256": "fddb57ca08174a5560847f1cde105d661f9f1c3544f14401a2d51b6ef0a9a692"
+  },
+  "build_recipe": [
+    "git clone --depth 1 https://github.com/joernio/astgen-monorepo <somewhere>",
+    "cd <somewhere>/javascript-astgen   # package.json version must read 3.47.0",
+    "PATH=<node22>/bin:$PATH yarn install --ignore-engines   # engines want node>=24; tsc builds under node22",
+    "PATH=<node22>/bin:$PATH npx tsc --build                 # -> dist/astgen.js (sha256 above)"
+  ],
+  "astgen_bin_launcher": {
+    "note": "MACHINE-LOCAL, NOT COMMITTED. jssrc2cpg locates astgen via the ASTGEN_BIN env var (jssrc2cpg AstGenRunner: binEnvVar = ASTGEN_BIN). The machine-local jssrc2cpg.sh shim sets it explicitly.",
+    "wrapper_contract": "an executable that runs: <node22>/bin/node <clone>/javascript-astgen/dist/astgen.js \"$@\"",
+    "verified": "astgen --version prints 3.47.0"
+  },
+  "validation": "check_js_frontend.py validates this toolchain on study/napi_status/js_frontend_fixture/minimal.js BEFORE any real package (4/4: non-empty JS CPG, normalized facts, the fixture function present, non-empty calls).",
+  "claims_boundary": "toolchain provenance only; no runtime-behavior or security-impact claim."
+}

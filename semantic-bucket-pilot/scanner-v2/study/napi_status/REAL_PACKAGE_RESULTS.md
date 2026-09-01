@@ -178,16 +178,20 @@ package's own JavaScript), then: frozen R02 scanner -> provenance -> reachabilit
 `aggregate_record_r02`. Frozen record: `FULL_PIPELINE_LEVELDB_RESULT.json`; reproducer:
 `reproduce_full_pipeline_leveldb.py`.
 
-Result -- both `STATUS_GUARD_MISSING` findings:
+Result, reported SEPARATELY across the five stages (frozen in
+`FULL_PIPELINE_LEVELDB_RESULT.json`), for both `STATUS_GUARD_MISSING` findings:
 
-| stage | outcome |
-|---|---|
-| scanner_candidate | **True** (both) |
-| provenance | **RESOLVED** (`package/src/bindings.cpp`, real content hash) |
-| reachability | **TIER_INTERNAL_UNREGISTERED** (real JS+native facts: no proven JS-to-native path to `HandleOKCallback`) |
-| applicability | NOT_YET_DETERMINED |
-| staged enablement | REACHABILITY_REQUIRED_FOR_REPORTING |
-| **reportable** | **False** |
+| # | stage | outcome |
+|---|---|---|
+| 1 | raw N-API candidates | 3 supported sites: **2 STATUS_GUARD_MISSING / STATUS_DISCARDED** (returnKey@1440→1453, returnValue@1447→1454) + 1 ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED (`&argv[1]`) |
+| 2 | JS/native reachability | **TIER_INTERNAL_UNREGISTERED** -- with REAL js+native facts (191 JS fns / 1555 calls, 189KB CPG), no proven JavaScript-to-native path to `HandleOKCallback` was established |
+| 3 | provenance | **RESOLVED** -- `package/src/bindings.cpp`, real content hash |
+| 4 | applicability | **NOT_YET_DETERMINED** -- raw-N-API applicability requires an allowed reachability tier; TIER_INTERNAL_UNREGISTERED is not allowed |
+| 5 | reportability | **False** -- stage `REACHABILITY_REQUIRED_FOR_REPORTING`; aggregate napi row raw=3, reportable=0 |
+
+The JS frontend used here is the rigorously-pinned astgen 3.47.0 (source build, integrity
+anchored in `ASTGEN_PIN.json`: commit `e456abfe`, dist sha256 `fddb57ca`), validated
+FIRST on a minimal JS fixture (`check_js_frontend.py` 4/4) before this real run.
 
 **The two confirmed API-handling discrepancies do NOT become reportable -- they are
 blocked at the reachability gate.** With real JS and native facts, the effective

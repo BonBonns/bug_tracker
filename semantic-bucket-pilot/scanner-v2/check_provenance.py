@@ -67,14 +67,10 @@ def _resolve_joern_toolchain():
         return "sh", JOERN_HOME
     cp = os.environ.get("NAPI_JOERN_CP")
     if not cp:
-        candidates = [os.environ["NAPI_JOERN_CP_FILE"]] if os.environ.get(
-            "NAPI_JOERN_CP_FILE") else []
-        candidates += [os.path.expanduser("~/joern-mvn/cp.txt"),
-                       "/home/user/joern-mvn/cp.txt"]
-        for cp_file in candidates:
-            if os.path.isfile(cp_file):
-                cp = open(cp_file).read().strip()
-                break
+        cp_file = os.environ.get("NAPI_JOERN_CP_FILE",
+                                 os.path.expanduser("~/joern-mvn/cp.txt"))
+        if os.path.isfile(cp_file):
+            cp = open(cp_file).read().strip()
     if cp:
         return "mvn", cp
     return "none", None

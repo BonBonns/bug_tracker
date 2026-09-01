@@ -11,7 +11,7 @@
 Records whether each finding becomes reportable or is blocked by reachability."""
 import hashlib, io, json, os, subprocess, sys, tarfile, urllib.request
 
-SV = _os.path.dirname(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+SV = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, SV)
 import napi_status_integration as integ
 import provenance, reachability_tier, staged_enablement as se
@@ -19,8 +19,7 @@ import provenance, reachability_tier, staged_enablement as se
 # Point at a dir holding: cpp_raw_full/ (c2cpg export), cpp_facts_full.json and
 # js_facts_full.json (normalized), and pkg/ (extracted pinned tarball). Rebuild with
 # the pinned toolchain per ../../TOOLCHAIN_MAVEN_ASSEMBLY.md. Override via $LEVELDB_FACTS_DIR.
-import os as _os
-BASE = _os.environ.get("LEVELDB_FACTS_DIR", _os.path.expanduser("~/leveldb_facts"))
+BASE = os.environ.get("LEVELDB_FACTS_DIR", os.path.expanduser("~/leveldb_facts"))
 RAW = f"{BASE}/cpp_raw_full"
 PKG = f"{BASE}/pkg"
 CPP_FACTS = json.load(open(f"{BASE}/cpp_facts_full.json"))
