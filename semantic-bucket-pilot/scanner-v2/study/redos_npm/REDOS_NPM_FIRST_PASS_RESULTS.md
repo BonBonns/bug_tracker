@@ -153,29 +153,57 @@ frozen 25-package pilot below.
 ## Frozen 25-package discovery pilot (pre-registered, not manual selection)
 
 Full protocol, selection script, and frozen selection artifact: `study/redos_npm/pilot25/README.md`
-+ `pilot25_selection.json` (21 packages qualified against a 25 ceiling; selection committed BEFORE
-any of them was Joern-scanned). Full manual review: `pilot25/PILOT25_MANUAL_REVIEW.md`.
++ `pilot25_selection.json` + `pilot25_selection_provenance.json` (corpus/prefilter integrity
+hashes, selection criteria, and selected package/version identities -- see "Pre-registration
+integrity" below). 21 packages were **`PREFILTER_SELECTED`** against a 25 ceiling -- an input set
+for deeper analysis, never itself a ReDoS finding -- selection committed BEFORE any of them was
+Joern-scanned. Full categorized results and manual review: `pilot25/pilot25_categorized_results.json`,
+`pilot25/PILOT25_MANUAL_REVIEW.md`.
 
-**Real result**: 21/21 packages completed successfully through the frozen pipeline (a path bug in
-the orchestration script, not the analyzer, caused every package to fail on the first attempt --
-fixed, verified in isolation, re-run). **1 raw `PACKAGE_API_INPUT_REACHABLE` candidate**
-(`phplike@2.5.12`'s own `sprintf()`, `string.js:209`) -- manually reviewed by direct timing
-measurement (not reasoning alone, matching the property's own established discipline): confirmed
-LINEAR scaling up to 80,000 adversarial characters (sub-millisecond throughout, no quadratic or
-exponential growth) -- **a confirmed false positive**, not a real ReDoS. The pattern's own
-`%(\d+\$)?...` branch textually matches the frozen classifier's "alternation branch with
-quantifier followed by more content" rule (the same rule CVE-2025-5892's real `\s+:` case
-triggers), but differs in a real, measurable way: the dangerous branch requires a LITERAL `%` to
-even be entered, bounding each backtrack to its own local digit run rather than compounding across
-the whole string the way a COMMON character class like `\s` does. A real, distinct, disclosed
-refinement opportunity for the frozen Stage 2 classifier (not the same bug as the already-fixed
-suffix-delimiter false positive) -- not attempted here, since the analyzer was not modified after
-the pre-registered selection was committed, per direct instruction.
+**Real result, by category** (21 `PREFILTER_SELECTED` -> 21 `PIPELINE_ANALYZED`, 0
+`INFRASTRUCTURE_FAILURE` -- a path bug in the orchestration script, not the analyzer, caused every
+package to fail on the first attempt; fixed, verified in isolation, re-run -> 14
+`NO_COMPLEXITY_CANDIDATE`, 6 `COMPLEXITY_ONLY`, **1 `PACKAGE_API_INPUT_REACHABLE`**): the one
+record that reached `PACKAGE_API_INPUT_REACHABLE` (`phplike@2.5.12`'s own `sprintf()`,
+`string.js:209`) was the only one to proceed to manual review, per protocol. Reviewed by direct
+timing measurement (not reasoning alone, matching the property's own established discipline):
+confirmed LINEAR scaling up to 80,000 adversarial characters (sub-millisecond throughout, no
+quadratic or exponential growth) -- **`MANUALLY_REJECTED`**, a confirmed false positive, not a
+real ReDoS. The pattern's own `%(\d+\$)?...` branch textually matches the frozen classifier's
+"alternation branch with quantifier followed by more content" rule (the same rule CVE-2025-5892's
+real `\s+:` case triggers), but differs in a real, measurable way: the dangerous branch requires a
+LITERAL `%` to even be entered, bounding each backtrack to its own local digit run rather than
+compounding across the whole string the way a COMMON character class like `\s` does. A real,
+distinct, disclosed refinement opportunity for the frozen Stage 2 classifier (not the same bug as
+the already-fixed suffix-delimiter false positive) -- not attempted here, since the analyzer was
+not modified after the pre-registered selection was committed, per direct instruction. 0 records
+were `MANUALLY_CONFIRMED`; 0 were `ABSTAINED`.
 
-**No real candidate survived review** -- per direct instruction point 8, this is reported as the
-measured result, not silently absorbed. Pipeline wiring and `reportable` enablement (points 9-10)
-both stay out of scope for this round as a direct consequence: no candidate from this pilot cleared
-manual review to justify either.
+**No `PACKAGE_API_INPUT_REACHABLE` record was `MANUALLY_CONFIRMED`** -- per direct instruction
+point 8, this is reported as the measured result, not silently absorbed. Pipeline wiring and
+`reportable` enablement (points 9-10) both stay out of scope for this round as a direct
+consequence: no record from this pilot cleared manual review to justify either.
+
+### Pre-registration integrity (`pilot25_selection_provenance.json`)
+
+Added retroactively after the pilot completed, per direct instruction -- attests to the SAME
+already-frozen `pilot25_selection.json` (unmodified; its own `selected` list is unchanged),
+verified directly against git history rather than re-derived:
+
+- **Corpus identity**: `npm_corpus/eligible_packages.tsv`, sha256
+  `4ed7c11d3617f77af79fd6716e08fbc552ded0ced30390c4e5f739a83fa72680` (git blob
+  `b98837158497c1cc8c7d84c480598dcd8e50197e`), as of commit `04c0d5f6`. Verified directly (not
+  assumed): 495 total lines = 1 header + 494 data rows; 494 unique `package_name`+`version`
+  identities (zero duplicates); all 494 rows `status=ANALYZED`.
+- **Prefilter implementation identity**: `prefilter_select_25.py`, sha256
+  `b68616732cb95387aebbc24f4019d9861b572d1b55f78d0f47771d8fc358a866` (git blob
+  `561fbc0d65c21ac09237f7b0f3812376c912dec6`), as of the same commit.
+- **Exact selection criteria**: candidate pool = all 494 `ANALYZED` rows; required ALL of (an
+  exported-function-shaped statement; a regex literal; a DANGEROUS-shaped literal per a direct
+  Python port of the frozen Stage 2 classifier); score = count of DANGEROUS-shaped literals; max
+  25 selected; ties by ascending `row_index` (frozen corpus order).
+- **Selected package/version identities**: all 21, listed verbatim in
+  `pilot25_selection_provenance.json`.
 
 ## What remains, explicitly out of this pass's scope
 

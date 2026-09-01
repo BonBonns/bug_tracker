@@ -5,6 +5,18 @@ Don't continue selecting packages manually one at a time." This directory is tha
 pre-registration -- `prefilter_select_25.py` is the complete, deterministic selection
 mechanism, `pilot25_selection.json` is its frozen output, committed BEFORE any of the 21
 selected packages was run through the real Joern pipeline.
+`pilot25_selection_provenance.json` adds the corpus/prefilter integrity hashes and exact
+selection criteria (added retroactively, per direct instruction; attests to the same,
+unmodified frozen file).
+
+**Terminology, precise**: the 21 packages below are the pilot's own `PREFILTER_SELECTED` INPUT
+set -- packages chosen for deeper analysis, never ReDoS findings themselves, and unrelated to any
+other unresolved item elsewhere in this project. Only records that reach `PACKAGE_API_INPUT_
+REACHABLE` after the real pipeline runs proceed to manual review; see
+`PILOT25_MANUAL_REVIEW.md`/`pilot25_categorized_results.json` for the full category breakdown
+(`PREFILTER_SELECTED` -> `PIPELINE_ANALYZED`/`INFRASTRUCTURE_FAILURE` -> `NO_COMPLEXITY_CANDIDATE`/
+`COMPLEXITY_ONLY`/`PACKAGE_API_INPUT_REACHABLE` -> `MANUALLY_CONFIRMED`/`MANUALLY_REJECTED`/
+`ABSTAINED`).
 
 ## Protocol
 

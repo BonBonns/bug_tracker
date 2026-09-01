@@ -1,21 +1,44 @@
 # Frozen 25-package discovery pilot: manual review
 
-Per direct instruction, step 6 of the pre-registered protocol (see `README.md`): the frozen ReDoS
+Per direct instruction, step 6 of the pre-registered protocol (see `README.md` and
+`pilot25_selection_provenance.json` for corpus/prefilter integrity hashes): the frozen ReDoS
 pipeline (`export_redos_npm_integ.sc` -> `redos_verdict.py`, neither modified since the selection
-in `pilot25_selection.json` was committed) was run once over all 21 pre-registered packages.
-`pilot25_results.json` is the complete, real output.
+in `pilot25_selection.json` was committed) was run once over the 21 packages the prefilter
+selected. `pilot25_results.json` is the complete, real output;
+`pilot25_categorized_results.json` reclassifies it into the exact category taxonomy below.
 
-## Real run result
+## Terminology, precise
 
-**21/21 packages completed successfully** (`status: OK` on every one -- the first attempt hit a
-path bug in `run_pilot25.py`, the orchestration script, not the analyzer; fixed and confirmed
-by manually re-invoking `redos_verdict.py` standalone with identical arguments before touching
-anything else -- see the `run_pilot25.py` fix commit).
+A prefilter **`PREFILTER_SELECTED`** package (e.g. `node-addon-api`) is a package chosen for
+deeper analysis -- it is NOT itself a ReDoS finding, and the 21 packages below are the pilot's
+own INPUT set, not 21 findings and not 21 unresolved packages. Only a package that reaches
+`PACKAGE_API_INPUT_REACHABLE` proceeds to manual review at all.
 
-**1 raw `PACKAGE_API_INPUT_REACHABLE` candidate**, from `phplike@2.5.12`. All other 20 packages:
-zero raw candidates.
+## Real run result, by category (totals from `pilot25_categorized_results.json`)
 
-## Manual review of the one candidate
+| Category | Count | Meaning |
+|---|---|---|
+| `PREFILTER_SELECTED` | 21 | chosen by the cheap prefilter for deeper analysis |
+| `PIPELINE_ANALYZED` | 21 | the real frozen Joern pipeline completed successfully |
+| `INFRASTRUCTURE_FAILURE` | 0 | pipeline itself failed to complete (fetch/CPG/producer/reducer) |
+| `NO_COMPLEXITY_CANDIDATE` | 14 | zero DANGEROUS-classified regex operations found at all |
+| `COMPLEXITY_ONLY` | 6 | a DANGEROUS regex exists, but not reachable from any export |
+| `PACKAGE_API_INPUT_REACHABLE` | 1 | DANGEROUS regex reachable from an exported parameter -- the only category manually reviewed |
+| `MANUALLY_CONFIRMED` | 0 | -- |
+| `MANUALLY_REJECTED` | 1 | `phplike@2.5.12` (below) |
+| `ABSTAINED` | 0 | -- |
+
+**21/21 `PIPELINE_ANALYZED` = `PREFILTER_SELECTED`** (`status: OK` on every one -- the first
+attempt hit a path bug in `run_pilot25.py`, the orchestration script, not the analyzer; fixed and
+confirmed by manually re-invoking `redos_verdict.py` standalone with identical arguments before
+touching anything else -- see the `run_pilot25.py` fix commit). `COMPLEXITY_ONLY`'s own 6
+packages (`fuse-napi`, `node-addon-api`, `@depup/node-addon-api`, `@h1x4dev/node-addon-api`,
+`velociradix`, `koffi`) each have a real DANGEROUS-classified regex somewhere in their own source,
+but none of those sinks trace back to an exported function's own parameter -- correctly NOT
+promoted to `PACKAGE_API_INPUT_REACHABLE`, and correctly not manually reviewed (per direct
+instruction, only that one category proceeds to review).
+
+## Manual review of the one `PACKAGE_API_INPUT_REACHABLE` record
 
 **Site**: `phplike@2.5.12`, `src/js/string.js:209`, `exports.sprintf`'s own
 ```js
