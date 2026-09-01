@@ -41,6 +41,49 @@ modified after this read. All 32 gate checks re-verified green.
 3546835f9203c77e7e7db9b54cbfcf645865a51417229830738a1391b4396813  study/napi_status/fixture_source.c
 ```
 
-## Blind package: `@farcaster/rocksdb@5.5.0`
+## Blind package: `@farcaster/rocksdb@5.5.0` (single post-freeze run, reported as-is)
 
-(to be filled by the single post-freeze run; reported as-is)
+Pipeline: pinned tarball verified (sha256
+`cdc0e3e6cd625330831c0bb325a660cb3d4c535d042ac60bb5828d90e12908a9`) -> c2cpg v4.0.608
+-> export_c_cpp_facts_v03.sc -> the FROZEN napi_status_verdict.py (hash re-verified
+`45bf86bd...918` immediately before the run).
+
+Parse scope disclosure: the full-tree parse OOM-crashed c2cpg twice (6g, then 12g
+heap; ~1000 vendored C++ files). The parse was scoped with c2cpg's own `--exclude` to
+omit `package/deps/` (the vendored rocksdb C++ library) and `package/prebuilds/`
+(compiled binaries). Token triage over the verified sources shows
+`napi_create_buffer` appears in exactly one source file, `package/binding.cc`, and
+nowhere under `deps/` -- so the exclusion cannot add or remove any supported call
+site; its only possible effect is turning a provable wrapper into an abstention
+(the conservative direction). The analyzer itself was NOT modified.
+
+Result (verbatim):
+
+```
+classification: {'SUPPORTED_CREATION_CALL_FOUND': 1, 'NO_OUTPUT_USE': 1}
+```
+
+The one supported site: `napi_create_buffer_copy` at `package/binding.cc:344`,
+method `Convert` -- `napi_create_buffer_copy(env, s->size(), s->data(), NULL,
+result)`. Verdict `NO_OUTPUT_USE` (reason `USES_EXIST_BUT_NONE_REACHABLE_FROM_CALL`):
+the napi_status result is discarded, but no reference to either output is
+CFG-reachable after the call inside `Convert` -- the function ends immediately; the
+`result` output escapes through the forwarded caller-supplied pointer parameter, and
+`NULL` is passed for `result_data` (N-API's documented opt-out of that output). An
+API-handling classification only; no impact statement is made or implied.
+
+Findings-count summary: 0 STATUS_GUARD_MISSING, 0 abstentions, 1 NO_OUTPUT_USE, out
+of 1 supported creation call site.
+
+### Refinements surfaced by the blind run (NOT applied post-freeze; candidate R02 work)
+
+1. A literal `NULL` out-argument is currently resolved as a trackable "variable"
+   (CDT binds `NULL` to a synthetic same-named local). Correct verdict here, but the
+   cleaner classification is an explicit opted-out output role.
+2. Outputs escaping via forwarded pointer parameters place the real uses in CALLERS;
+   this revision is deliberately intraprocedural (NO_OUTPUT_USE is the honest
+   in-scope answer). Caller-side analysis of proven-propagating creation wrappers is
+   the natural next revision.
+3. `input_size_origin` labels a call-expression size argument (`s->size()`) as
+   `unresolved`; a `call_result` label would be more informative. Diagnostic field
+   only; no verdict depends on it.
