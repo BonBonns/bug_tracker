@@ -1,0 +1,58 @@
+{
+  "aggregate_napi_row": {
+    "enabled": true,
+    "raw_count": 3,
+    "reportable_count": 0
+  },
+  "facts": {
+    "cpp_calls": 31114,
+    "cpp_functions": 3411,
+    "js_calls": 1555,
+    "js_functions": 191,
+    "note": "REAL js+native facts -- not empty; jssrc2cpg produced a 189KB CPG over the package own JS"
+  },
+  "interpretation": "Both API-handling discrepancies are real (STATUS_GUARD_MISSING/STATUS_DISCARDED, manually reviewed) and have RESOLVED provenance, but neither is reportable: with real JS+native facts the effective function (HandleOKCallback, an async-worker callback) classifies as TIER_INTERNAL_UNREGISTERED -- no proven JavaScript-to-native path was established, so the reachability gate (REACHABILITY_REQUIRED_FOR_REPORTING) holds them non-reportable. Manual API-handling confirmation is NOT equated with JS exposure. This is an API-handling classification, never a vulnerability or impact claim.",
+  "outcome": "BLOCKED_BY_REACHABILITY",
+  "package": "@8crafter/leveldb-zlib",
+  "per_finding": [
+    {
+      "applicability_status": "NOT_YET_DETERMINED",
+      "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
+      "method": "HandleOKCallback",
+      "provenance_resolved": true,
+      "reachability_status": "TIER_INTERNAL_UNREGISTERED",
+      "reportable": false,
+      "scanner_candidate": true,
+      "site_line": "1440",
+      "source_path": "package/src/bindings.cpp",
+      "stage_status": "REACHABILITY_REQUIRED_FOR_REPORTING",
+      "use_line": "1453",
+      "use_variable": "returnKey"
+    },
+    {
+      "applicability_status": "NOT_YET_DETERMINED",
+      "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
+      "method": "HandleOKCallback",
+      "provenance_resolved": true,
+      "reachability_status": "TIER_INTERNAL_UNREGISTERED",
+      "reportable": false,
+      "scanner_candidate": true,
+      "site_line": "1447",
+      "source_path": "package/src/bindings.cpp",
+      "stage_status": "REACHABILITY_REQUIRED_FOR_REPORTING",
+      "use_line": "1454",
+      "use_variable": "returnValue"
+    }
+  ],
+  "pipeline_order": [
+    "scanner(frozen R02)",
+    "provenance.enrich",
+    "reachability(real js+cpp)",
+    "applicability",
+    "adjudication",
+    "staged_enablement(enabled)",
+    "aggregate_record_r02"
+  ],
+  "toolchain": "pinned Joern v4.0.608 (Maven Central assembly) + c2cpg + jssrc2cpg (astgen 3.47.0 built from joernio/astgen-monorepo, node22) + export_c_cpp_facts_v03.sc / export_neutral.sc + normalizers",
+  "version": "1.6.0"
+}

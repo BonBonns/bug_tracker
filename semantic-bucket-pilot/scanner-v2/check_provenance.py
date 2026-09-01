@@ -54,6 +54,31 @@ import applicability_gate  # noqa: E402
 JOERN_HOME = "/home/user/bug_tracker/tchecker-research-complete/joern-install/joern-cli"
 CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/cpp-r06/frontend"
 
+
+def _resolve_joern_toolchain():
+    """Returns ('sh', JOERN_HOME) when the pinned bootstrap install's own launchers are
+    present, else ('mvn', classpath) when the SAME pinned Joern v4.0.608 has been assembled
+    from Maven Central (bootstrap.sh's release zip is unreachable in some environments; the
+    Maven assembly is the identical version -- see check_napi_status.py's own recipe). The
+    classpath is read from $NAPI_JOERN_CP, or the file named by $NAPI_JOERN_CP_FILE, or
+    ~/joern-mvn/cp.txt. Returns ('none', None) if neither is available -- the gate then
+    reports a real environment failure rather than silently passing."""
+    if os.path.isfile(os.path.join(JOERN_HOME, "c2cpg.sh")):
+        return "sh", JOERN_HOME
+    cp = os.environ.get("NAPI_JOERN_CP")
+    if not cp:
+        candidates = [os.environ["NAPI_JOERN_CP_FILE"]] if os.environ.get(
+            "NAPI_JOERN_CP_FILE") else []
+        candidates += [os.path.expanduser("~/joern-mvn/cp.txt"),
+                       "/home/user/joern-mvn/cp.txt"]
+        for cp_file in candidates:
+            if os.path.isfile(cp_file):
+                cp = open(cp_file).read().strip()
+                break
+    if cp:
+        return "mvn", cp
+    return "none", None
+
 ok = 0
 total = 0
 
@@ -71,18 +96,34 @@ def build_single_file_bundle(src_path, work_dir):
     hand-built fixture)."""
     os.makedirs(work_dir, exist_ok=True)
     cpp_bin = os.path.join(work_dir, "cpp.cpg.bin")
-    r = subprocess.run([f"{JOERN_HOME}/c2cpg.sh", "-o", cpp_bin,
-                         "--define", "NAPI_DISABLE_CPP_EXCEPTIONS", src_path],
-                        capture_output=True, text=True, timeout=180)
-    if r.returncode != 0:
-        raise RuntimeError(f"c2cpg failed: {r.stdout[-2000:]} {r.stderr[-2000:]}")
     cpp_raw = os.path.join(work_dir, "cpp_raw")
-    r = subprocess.run([f"{JOERN_HOME}/joern", "--script",
-                         f"{CPP_FRONTEND}/export_c_cpp_facts_v03.sc",
-                         "--param", f"cpgFile={cpp_bin}", "--param", f"outDir={cpp_raw}"],
-                        capture_output=True, text=True, timeout=180)
-    if r.returncode != 0:
-        raise RuntimeError(f"export failed: {r.stdout[-2000:]}")
+    export_sc = f"{CPP_FRONTEND}/export_c_cpp_facts_v03.sc"
+    kind, tc = _resolve_joern_toolchain()
+    if kind == "none":
+        raise RuntimeError(
+            "no pinned Joern v4.0.608 toolchain available: neither the bootstrap install's "
+            f"{JOERN_HOME}/c2cpg.sh nor a Maven-assembled classpath ($NAPI_JOERN_CP / "
+            "$NAPI_JOERN_CP_FILE / ~/joern-mvn/cp.txt) was found")
+    if kind == "sh":
+        c2cpg = [f"{tc}/c2cpg.sh", "-o", cpp_bin,
+                 "--define", "NAPI_DISABLE_CPP_EXCEPTIONS", src_path]
+        export = [f"{tc}/joern", "--script", export_sc,
+                  "--param", f"cpgFile={cpp_bin}", "--param", f"outDir={cpp_raw}"]
+        run_cwd = None
+    else:  # 'mvn': invoke the identical Joern entry points directly off the classpath
+        open(os.path.join(work_dir, ".installation_root"), "w").close()  # ReplBridge marker
+        java = ["java", "-Xmx4g", "-cp", tc]
+        c2cpg = java + ["io.joern.c2cpg.Main", "-o", cpp_bin,
+                        "--define", "NAPI_DISABLE_CPP_EXCEPTIONS", src_path]
+        export = java + ["io.joern.joerncli.console.ReplBridge", "--script", export_sc,
+                         "--param", f"cpgFile={cpp_bin}", "--param", f"outDir={cpp_raw}"]
+        run_cwd = work_dir
+    r = subprocess.run(c2cpg, capture_output=True, text=True, timeout=300, cwd=run_cwd)
+    if not os.path.isfile(cpp_bin):
+        raise RuntimeError(f"c2cpg failed: {r.stdout[-2000:]} {r.stderr[-2000:]}")
+    r = subprocess.run(export, capture_output=True, text=True, timeout=300, cwd=run_cwd)
+    if not os.path.isfile(os.path.join(cpp_raw, "methods.tsv")):
+        raise RuntimeError(f"export failed: {r.stdout[-2000:]} {r.stderr[-2000:]}")
     return cpp_raw
 
 

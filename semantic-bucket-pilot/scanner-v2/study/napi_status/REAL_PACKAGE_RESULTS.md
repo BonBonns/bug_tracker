@@ -167,6 +167,61 @@ enabling lifts only the blanket diagnostic-only suppression. All gates re-run gr
 (R01 32/32, R02 16/16, integration 28/28 now testing enabled semantics, leveldb 7/7,
 six-property aggregator 11/11).
 
+## Full JS-to-native pipeline on @8crafter/leveldb-zlib -> BLOCKED BY REACHABILITY
+
+The complete pipeline was run on the positive-path package with REAL facts (not empty
+JS): pinned c2cpg + jssrc2cpg (astgen 3.47.0 built from source -- see
+`../TOOLCHAIN_MAVEN_ASSEMBLY.md`) produced real native facts (3411 functions / 31114
+calls) AND real JS facts (191 functions / 1555 calls, a 189 KB JS CPG over the
+package's own JavaScript), then: frozen R02 scanner -> provenance -> reachability
+(real JS + native) -> applicability -> adjudication -> staged enablement (enabled) ->
+`aggregate_record_r02`. Frozen record: `FULL_PIPELINE_LEVELDB_RESULT.json`; reproducer:
+`reproduce_full_pipeline_leveldb.py`.
+
+Result -- both `STATUS_GUARD_MISSING` findings:
+
+| stage | outcome |
+|---|---|
+| scanner_candidate | **True** (both) |
+| provenance | **RESOLVED** (`package/src/bindings.cpp`, real content hash) |
+| reachability | **TIER_INTERNAL_UNREGISTERED** (real JS+native facts: no proven JS-to-native path to `HandleOKCallback`) |
+| applicability | NOT_YET_DETERMINED |
+| staged enablement | REACHABILITY_REQUIRED_FOR_REPORTING |
+| **reportable** | **False** |
+
+**The two confirmed API-handling discrepancies do NOT become reportable -- they are
+blocked at the reachability gate.** With real JS and native facts, the effective
+function (`HandleOKCallback`, an async-worker callback) classifies as
+`TIER_INTERNAL_UNREGISTERED`: the analysis examined it but established no proven
+JavaScript-to-native path, so the reachability gate holds both findings non-reportable
+(the same fail-closed discipline that keeps re2's internal helpers non-reportable).
+Manual API-handling confirmation is explicitly NOT equated with JS exposure. These
+remain confirmed API return-handling discrepancies, not confirmed vulnerabilities.
+
+## Live provenance gate: REPAIRED and passing (51/51)
+
+`check_provenance.py` failed only because its hardcoded `JOERN_HOME` pointed at the
+bootstrap install the environment cannot download. Repaired at the toolchain level (no
+frozen-file edits): shim launchers at `joern-install/joern-cli/` exec the same
+Maven-assembled Joern 4.0.608 (plus source-built astgen 3.47.0) already used
+successfully, and `check_provenance.py` gained a `_resolve_joern_toolchain()` fallback
+to the Maven classpath. It now reaches a **real 51/51 pass** -- node-libcurl runs the
+full download->c2cpg->export->normalize->jssrc2cpg->export->link pipeline to ANALYZED
+and reproduces the real Easy::ReadFunction finding. Not waived -- genuinely run and
+recorded. Recipe: `../TOOLCHAIN_MAVEN_ASSEMBLY.md`.
+
+## Honest classification (updated)
+
+```
+Analyzer logic:                 validated
+Real supported-call recognition: validated
+Real positive API-handling path: validated (@8crafter/leveldb-zlib, frozen regression)
+Full JS-to-native pipeline:      RECORDED -- both findings blocked by reachability
+                                 (TIER_INTERNAL_UNREGISTERED), non-reportable
+Live provenance gate:            REPAIRED -- real 51/51 pass on the Maven toolchain
+Security impact:                 not assessed (out of scope)
+```
+
 ## Integration status (NAPI-STATUS-INTEGRATION-R01, per review)
 
 Wired additively in `napi_status_integration.py` (gate: `check_napi_status_
