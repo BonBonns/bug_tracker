@@ -61,8 +61,8 @@ The R01 fixture must classify identically under R02 (gated).
 |---|---|
 | fixture behavior | strong -- R01 32/32, R02 16/16, all controls compiled + real facts |
 | real site recognition | established (rocksdb site found, roles resolved, opt-out modeled) |
-| real positive-path behavior | **not yet established on a real package** -- the caller-side positive path is proven on compiled fixtures (w02/w03) only |
-| real blind portability | limited -- one analyzed site, whose honest classification is an abstention at the interprocedural boundary |
+| real positive-path behavior | **ESTABLISHED** -- @8crafter/leveldb-zlib@1.6.0, two real STATUS_GUARD_MISSING/STATUS_DISCARDED sites in HandleOKCallback, manually reviewed and frozen as a permanent regression (fixture_leveldb_real.cpp / raw_leveldb_real/ / check_napi_status_leveldb_regression.py); NAPI_STATUS_ENABLED flipped to True |
+| real blind + targeted portability | 10 token-selected packages analyzed once each: 1 positive-path package, 1 escape abstention (rocksdb), several other abstentions, and provider/no-site packages -- see study/napi_status/REAL_PACKAGE_RESULTS.md |
 
 ## Candidate vocabulary (CORRECTED -- the exact allowlist)
 
@@ -93,8 +93,10 @@ Integration now exists in `napi_status_integration.py` following the Nan-integra
 precedent (additive extension, own gate), with a NEW aggregator revision
 (`aggregate_record_r02`) that delegates the six frozen properties to
 `six_property_aggregator.aggregate_record` unchanged rather than rewriting the task
-#34 schema. The property is DIAGNOSTIC-ONLY at the enablement stage until a real
-package exercises its positive path -- fixtures establish mechanism, not portability.
+#34 schema. The property is now ENABLED (`NAPI_STATUS_ENABLED = True`) after a real
+package (@8crafter/leveldb-zlib) exercised and survived review of its positive path;
+the per-finding reachability + provenance + applicability gates still decide each
+finding's reportability.
 
 ## Claims boundary
 

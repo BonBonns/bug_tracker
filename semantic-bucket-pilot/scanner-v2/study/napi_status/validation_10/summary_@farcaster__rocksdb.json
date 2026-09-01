@@ -1,0 +1,46 @@
+{
+ "classification": {
+  "OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED": 1,
+  "SUPPORTED_CREATION_CALL_FOUND": 1
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064771305,
+   "creation_call_name": "napi_create_buffer_copy",
+   "escaping_roles": [
+    "result"
+   ],
+   "file": "package/binding.cc",
+   "input_size_origin": {
+    "code": "s->size()",
+    "kind": "unresolved"
+   },
+   "line": "344",
+   "method_id": 107374182422,
+   "method_name": "Convert",
+   "output_targets": [
+    {
+     "arg_code": "<unknown> NULL",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "escapes_via_parameter": true,
+     "referent_id": 111669149756,
+     "required": true,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "reason": "NO_CALLER_FACTS",
+   "verdict": "OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED"
+  }
+ ],
+ "outcome": "ANALYZED",
+ "package": "@farcaster/rocksdb",
+ "parse_scope": "scoped_excl_deps_prebuilds_build_node_modules",
+ "proven_wrappers": [],
+ "version": "5.5.0"
+}

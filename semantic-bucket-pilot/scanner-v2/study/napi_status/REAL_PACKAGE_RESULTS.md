@@ -113,6 +113,60 @@ the OPTIONAL raw-data pointer -- a different thing entirely). Under
 facts: `Convert` is an overloaded member, so call sites carry no single callee id),
 pinned by `check_napi_status_r02.py` as a permanent regression.
 
+## Targeted 10-package validation + FIRST REAL POSITIVE PATH -> property ENABLED
+
+`evidence_bundles_100/` was searched for machine-wide and is absent, so facts were
+rebuilt fresh for exactly the 10 mechanically token-selected packages
+(`VALIDATION_10_FROZEN.json`; token presence is only a selection mechanism, never
+evidence of a call site or of incorrect handling). The frozen R02 analyzer
+(`napi_status_verdict_r02.py`, sha256 `638eddd2...`) was run ONCE per package. All 10
+analyzed (only rocksdb needed the disclosed scoped parse; nine parsed in full).
+
+| package | supported sites | classification |
+|---|---|---|
+| @gjsify/napi (dev) | 0 | provider library -- defines, never calls |
+| @depup/node-addon-api | 0 | provider (node-addon-api fork) |
+| @h1x4dev/node-addon-api | 2 | 2 ABSTAIN_WRAPPER_UNRESOLVED |
+| @cocktailpeanut/node-pty-...@0.11.16 | 0 | no supported call site |
+| @fugood/whisper.node | 0 | no supported call site |
+| @zowe/db2-for-zowe-cli | 0 | no supported call site |
+| @farcaster/rocksdb (blind) | 1 | OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED |
+| napi-ldap | 1 | ABSTAIN_BRANCH_POLARITY_UNRESOLVED |
+| smart-whisper | 2 | 2 ABSTAIN_WRAPPER_UNRESOLVED |
+| **@8crafter/leveldb-zlib@1.6.0** | **3** | **2 STATUS_GUARD_MISSING + 1 abstention** |
+
+Separated as the review asked: provider-definitions-not-calls (2), unsupported/no
+site (3), ambiguous/unresolved abstentions (rocksdb escape, napi-ldap polarity,
+h1x4dev + smart-whisper wrapper), established handling (0), no-output-use (0), and
+one **genuine positive-path package**.
+
+### Manual review of the positive-path candidate (@8crafter/leveldb-zlib@1.6.0)
+
+`package/src/bindings.cpp`, `HandleOKCallback` (real lines 1440, 1447): two
+`napi_create_buffer_copy(env_, key.size(), key.data(), NULL, &returnKey)` /
+`(..., value.data(), NULL, &returnValue)` calls that DISCARD their `napi_status`
+(no assignment, no check), pass `NULL` for the optional `result_data`, and use the
+required outputs `returnKey`/`returnValue` immediately at `napi_set_element` (lines
+1453/1454) with no success established. The same file uses a `NAPI_STATUS_THROWS`
+status-checking idiom at other sites, so these two are a real handling discrepancy.
+Read against the real source: `STATUS_GUARD_MISSING / STATUS_DISCARDED` is CORRECT at
+both. The third site (line 950, `&argv[1]`) writes into an array element, so output
+identity is genuinely unresolvable -- `ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED` is CORRECT.
+An API-handling classification, not an impact claim.
+
+### Frozen regression + enablement
+
+`fixture_leveldb_real.cpp` copies those two real methods verbatim (types stubbed to
+compile hermetically); `raw_leveldb_real/` is its frozen real Joern v4.0.608 facts;
+`check_napi_status_leveldb_regression.py` (7/7) pins the exact classifications. With
+the first real package exercising the positive path (`STATUS_GUARD_MISSING`) and
+surviving manual review, `NAPI_STATUS_ENABLED` was flipped to **True** -- the class is
+no longer fixtures-only. The two real gates (allowed reachability tier + resolved
+provenance -> applicable) still decide each individual finding's reportability;
+enabling lifts only the blanket diagnostic-only suppression. All gates re-run green
+(R01 32/32, R02 16/16, integration 28/28 now testing enabled semantics, leveldb 7/7,
+six-property aggregator 11/11).
+
 ## Integration status (NAPI-STATUS-INTEGRATION-R01, per review)
 
 Wired additively in `napi_status_integration.py` (gate: `check_napi_status_

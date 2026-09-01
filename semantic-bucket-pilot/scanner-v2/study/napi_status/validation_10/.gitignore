@@ -1,0 +1,5 @@
+# per-package raw Joern facts are large + regenerable (validate_10 rebuilds them from
+# the pinned tarballs); only the analyzer outputs (out_*.json / summary_*.json /
+# rollup.json) are the committed evidence. The one exception -- the positive-path
+# package's facts -- is frozen separately as study/napi_status/raw_leveldb_real/.
+raw_*/

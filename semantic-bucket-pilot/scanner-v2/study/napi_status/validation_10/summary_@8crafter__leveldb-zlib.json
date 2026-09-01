@@ -1,0 +1,98 @@
+{
+ "classification": {
+  "ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED": 1,
+  "STATUS_GUARD_MISSING": 2,
+  "SUPPORTED_CREATION_CALL_FOUND": 3
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064799832,
+   "creation_call_name": "napi_create_buffer_copy",
+   "file": "package/src/bindings.cpp",
+   "input_size_origin": {
+    "code": "value_.size()",
+    "kind": "unresolved"
+   },
+   "line": "950",
+   "method_id": 107374184043,
+   "method_name": "HandleOKCallback",
+   "reason": "OUT_ARG_NOT_A_RESOLVABLE_VARIABLE",
+   "unresolved_arg_code": "&argv[1]",
+   "unresolved_role": "result",
+   "verdict": "ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED"
+  },
+  {
+   "creation_call_id": 30064800452,
+   "creation_call_name": "napi_create_buffer_copy",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "package/src/bindings.cpp",
+   "input_size_origin": {
+    "code": "key.size()",
+    "kind": "unresolved"
+   },
+   "line": "1440",
+   "method_id": 107374184082,
+   "method_name": "HandleOKCallback",
+   "output_targets": [
+    {
+     "arg_code": "<unknown> NULL",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489285476,
+     "required": true,
+     "role": "result",
+     "variable": "returnKey"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "STATUS_DISCARDED",
+   "unguarded_use_line": "1453",
+   "unguarded_use_node": 68719497795,
+   "unguarded_use_variable": "returnKey",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064800464,
+   "creation_call_name": "napi_create_buffer_copy",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "package/src/bindings.cpp",
+   "input_size_origin": {
+    "code": "value.size()",
+    "kind": "unresolved"
+   },
+   "line": "1447",
+   "method_id": 107374184082,
+   "method_name": "HandleOKCallback",
+   "output_targets": [
+    {
+     "arg_code": "<unknown> NULL",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489285477,
+     "required": true,
+     "role": "result",
+     "variable": "returnValue"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "STATUS_DISCARDED",
+   "unguarded_use_line": "1454",
+   "unguarded_use_node": 68719497800,
+   "unguarded_use_variable": "returnValue",
+   "verdict": "STATUS_GUARD_MISSING"
+  }
+ ],
+ "outcome": "ANALYZED",
+ "package": "@8crafter/leveldb-zlib",
+ "parse_scope": "full",
+ "proven_wrappers": [],
+ "version": "1.6.0"
+}

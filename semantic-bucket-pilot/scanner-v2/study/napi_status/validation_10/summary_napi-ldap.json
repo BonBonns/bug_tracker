@@ -1,0 +1,43 @@
+{
+ "classification": {
+  "ABSTAIN_BRANCH_POLARITY_UNRESOLVED": 1,
+  "SUPPORTED_CREATION_CALL_FOUND": 1
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064772248,
+   "creation_call_name": "napi_create_buffer",
+   "file": "package/cnx.c",
+   "input_size_origin": {
+    "code": "size",
+    "kind": "local_from_call_result"
+   },
+   "line": "1013",
+   "method_id": 107374182418,
+   "method_name": "handle_result_events",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280685,
+     "required": false,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280677,
+     "required": true,
+     "role": "result",
+     "variable": "js_val"
+    }
+   ],
+   "reason": "RELATED_CHECK_PRESENT_BUT_POLARITY_UNPROVEN",
+   "verdict": "ABSTAIN_BRANCH_POLARITY_UNRESOLVED"
+  }
+ ],
+ "outcome": "ANALYZED",
+ "package": "napi-ldap",
+ "parse_scope": "full",
+ "proven_wrappers": [],
+ "version": "1.0.4"
+}

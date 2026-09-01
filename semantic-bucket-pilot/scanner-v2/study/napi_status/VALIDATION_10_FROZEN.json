@@ -1,0 +1,19 @@
+{
+  "purpose": "Targeted real-package validation of NAPI-STATUS-R02. The 10 packages are the mechanically token-selected subset of the frozen 100-package sample (a C/C++ file containing the literal token napi_create_buffer). Token presence is ONLY a candidate-selection mechanism -- it is NOT evidence of a supported call site or of incorrect handling; the frozen analyzer over real Joern facts decides that, once per package.",
+  "original_evidence_bundles_100": "SEARCHED MACHINE-WIDE, ABSENT (gitignored scratch output; regenerating facts fresh from pinned tarballs instead)",
+  "frozen_analyzer": "napi_status_verdict_r02.py",
+  "frozen_analyzer_sha256": "638eddd2d8e70e4f8f8958cee948a7ddeb728bcee0f283af75423921012e470f",
+  "toolchain": "pinned Joern v4.0.608 (Maven Central assembly) + export_c_cpp_facts_v03.sc",
+  "packages": [
+    {"row": 7,  "name": "@gjsify/napi", "version": "0.44.0", "token_files": 2, "prior": "R01 dev package: provider library, zero call sites"},
+    {"row": 9,  "name": "@farcaster/rocksdb", "version": "5.5.0", "token_files": 1, "prior": "R01 blind package: 1 site, OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED"},
+    {"row": 12, "name": "@8crafter/leveldb-zlib", "version": "1.6.0", "token_files": 1, "prior": null},
+    {"row": 31, "name": "@cocktailpeanut/node-pty-prebuilt-multiarch", "version": "0.11.16", "token_files": 1, "prior": null},
+    {"row": 37, "name": "@depup/node-addon-api", "version": "8.9.2-depup.0", "token_files": 1, "prior": "likely a node-addon-api fork (provider)"},
+    {"row": 48, "name": "@fugood/whisper.node", "version": "1.1.3", "token_files": 1, "prior": null},
+    {"row": 55, "name": "@h1x4dev/node-addon-api", "version": "2.0.0", "token_files": 1, "prior": "likely a node-addon-api fork (provider)"},
+    {"row": 87, "name": "napi-ldap", "version": "1.0.4", "token_files": 1, "prior": null},
+    {"row": 96, "name": "smart-whisper", "version": "0.8.1", "token_files": 3, "prior": null},
+    {"row": 99, "name": "@zowe/db2-for-zowe-cli", "version": "6.1.17", "token_files": 1, "prior": null}
+  ]
+}

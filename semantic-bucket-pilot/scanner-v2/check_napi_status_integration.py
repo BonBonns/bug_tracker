@@ -177,39 +177,47 @@ finally:
 wfill["adjudication_status"] = "NOT_ADJUDICATED"
 provenance.finalize_reportability(wfill, wfill.get("scanner_candidate", False))
 
-# --- enablement: diagnostic-only forces everything back down, disclosed ---
+# --- enablement: property is ENABLED (a real package exercised the positive path);
+# the two real gates still decide each finding, and the abstention still can't pass ---
+reportable_before = {id(f): f.get("reportable") for f in F}
 integ.enforce_napi_status_enablement(record)
-ck("enablement: DIAGNOSTIC-ONLY -- every finding forced reportable=False with "
-   "stage_status STAGE_NOT_ENABLED_DIAGNOSTIC_ONLY",
-   integ.NAPI_STATUS_ENABLED is False
-   and all(f.get("reportable") is False for f in F)
-   and all(f.get("stage_status") == "STAGE_NOT_ENABLED_DIAGNOSTIC_ONLY" for f in F))
+ck("enablement: property is ENABLED (real positive path established)",
+   integ.NAPI_STATUS_ENABLED is True)
+ck("enablement: candidates that cleared provenance+applicability+allowed-tier stay "
+   "reportable=True with stage_status STAGE_ENABLED (w05, w_fill, w02)",
+   all(one(F, n, derived=d).get("reportable") is True
+       and one(F, n, derived=d).get("stage_status") == "STAGE_ENABLED"
+       for n, d in (("w05_null_optout", False), ("w_fill", False),
+                    ("w02_caller_unchecked", True))))
+ck("enablement: the escape abstention (w_convert) is NOT reportable even when enabled "
+   "-- it never became a candidate",
+   one(F, "w_convert").get("reportable") is False)
+ck("enablement: enabling never flips a formula-False finding to True (established/"
+   "propagated/no-use records stay reportable=False)",
+   all(one(F, n, derived=d).get("reportable") is False
+       for n, d in (("w01_caller_checked", True), ("w_make", False),
+                    ("w_ignore", False))))
 
 # --- aggregator revision ---
 summary = integ.aggregate_record_r02(record, se.ENABLED_PROPERTIES)
 six_only = agg6.aggregate_record(record, se.ENABLED_PROPERTIES)
+n_reportable = sum(1 for f in F if f.get("reportable") is True)
 ck("aggregator r02: six frozen properties' sub-summary is IDENTICAL to "
    "six_property_aggregator's own output (schema untouched)",
    all(summary[k] == six_only[k] for k in agg6.ALL_PROPERTY_KEYS))
-ck("aggregator r02: napi_status row present, diagnostic-only, 0 reportable, "
-   "disclosed reason",
-   summary["napi_status_findings"]["enabled"] is False
-   and summary["napi_status_findings"]["reportable_count"] == 0
+ck("aggregator r02: napi_status row present, enabled, counts the real reportable "
+   "candidates (>=3 in this fixture), no disabled_reason",
+   summary["napi_status_findings"]["enabled"] is True
+   and summary["napi_status_findings"]["reportable_count"] == n_reportable
+   and n_reportable >= 3
    and summary["napi_status_findings"]["raw_count"] == len(F)
-   and "diagnostic-only" in summary["napi_status_findings"]["disabled_reason"])
+   and summary["napi_status_findings"]["disabled_reason"] is None)
 ck("aggregator r02: totals include the napi row and the revision tag is recorded",
    summary["_totals"]["total_raw"]
    == six_only["_totals"]["total_raw"] + len(F)
+   and summary["_totals"]["total_reportable"]
+   == six_only["_totals"]["total_reportable"] + n_reportable
    and summary["_aggregator_revision"] == integ.AGGREGATOR_REVISION)
-bad_record = copy.deepcopy(record)
-bad_record["napi_status_findings"][0]["reportable"] = True
-raised = False
-try:
-    integ.aggregate_record_r02(bad_record, se.ENABLED_PROPERTIES)
-except AssertionError:
-    raised = True
-ck("aggregator r02: HARD INVARIANT -- a reportable napi finding while diagnostic-"
-   "only RAISES (never silently absorbed)", raised)
 
 # =========================================================================
 # 2. Vocabulary fail-closed control (synthetic unknown sub_reason).
@@ -248,11 +256,26 @@ ck("rocksdb: the real escape abstention is a NON-candidate and cannot become "
    and conv.get("scanner_candidate") is False and conv.get("reportable") is False
    and conv.get("applicability_status") != "APPLICABLE")
 summary = integ.aggregate_record_r02(rec_rdb, se.ENABLED_PROPERTIES)
-ck("rocksdb: aggregates as 1 raw, 0 reportable under the r02 aggregator",
-   summary["napi_status_findings"] == {
-       "raw_count": 1, "reportable_count": 0, "enabled": False,
-       "disabled_reason": summary["napi_status_findings"]["disabled_reason"]}
-   and summary["napi_status_findings"]["disabled_reason"] is not None)
+ck("rocksdb: aggregates as 1 raw, 0 reportable under the r02 aggregator (the sole "
+   "site is an abstention, so enabling the property changes nothing for it)",
+   summary["napi_status_findings"]["raw_count"] == 1
+   and summary["napi_status_findings"]["reportable_count"] == 0)
+
+# --- dormant diagnostic-only invariant: still correct if the property is ever
+# returned to diagnostic-only (monkeypatched here, restored immediately) ---
+_saved = integ.NAPI_STATUS_ENABLED
+try:
+    integ.NAPI_STATUS_ENABLED = False
+    bad = {"napi_status_findings": [{"reportable": True, "verdict": "STATUS_GUARD_MISSING"}]}
+    raised = False
+    try:
+        integ.aggregate_record_r02(bad, se.ENABLED_PROPERTIES)
+    except AssertionError:
+        raised = True
+    ck("aggregator r02: the diagnostic-only HARD INVARIANT remains correct when "
+       "disabled (a reportable finding while disabled RAISES)", raised)
+finally:
+    integ.NAPI_STATUS_ENABLED = _saved
 
 # =========================================================================
 # 4. Unsupported napi_create_external_buffer: no record exists to integrate.

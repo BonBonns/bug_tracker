@@ -86,9 +86,21 @@ CANDIDATE_SUB_REASONS = frozenset({
     "STATUS_DISCARDED_OUTPUT_USED_IN_CALLER",
 })
 
-NAPI_STATUS_ENABLED = False  # diagnostic-only until a real package exercises the
-                              # positive path -- see module docstring / R02 evidence
-                              # table. Flip only with a cited real-package positive.
+NAPI_STATUS_ENABLED = True   # ENABLED. Flipped from diagnostic-only after the targeted
+                              # 10-package validation (study/napi_status/
+                              # VALIDATION_10_FROZEN.json) produced the first REAL
+                              # package to exercise the positive path: @8crafter/
+                              # leveldb-zlib@1.6.0, two STATUS_GUARD_MISSING /
+                              # STATUS_DISCARDED sites in HandleOKCallback, MANUALLY
+                              # REVIEWED against the real pinned source and frozen as a
+                              # permanent regression (fixture_leveldb_real.cpp /
+                              # raw_leveldb_real/, check_napi_status_leveldb_
+                              # regression.py). The property is no longer fixtures-only.
+                              # The two real gates (allowed reachability tier +
+                              # resolved provenance + applicable) still govern whether
+                              # any individual finding becomes reportable -- enabling
+                              # the property flips no per-finding logic, it only lifts
+                              # the blanket diagnostic-only suppression.
 
 # Empty EXACT-MATCH adjudication registry section, same discipline as
 # adjudication_registry.py: entries require a real, individually-documented manual

@@ -1,0 +1,73 @@
+{
+ "classification": {
+  "ABSTAIN_WRAPPER_UNRESOLVED": 2,
+  "SUPPORTED_CREATION_CALL_FOUND": 2
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064980627,
+   "creation_call_name": "napi_create_buffer",
+   "file": "package/whisper.cpp/examples/addon.node/node_modules/node-addon-api/napi-inl.h",
+   "input_size_origin": {
+    "code": "length * sizeof(T)",
+    "kind": "unresolved"
+   },
+   "line": "2419",
+   "method_id": 107374188467,
+   "method_name": "New",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489316724,
+     "required": false,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489316723,
+     "required": true,
+     "role": "result",
+     "variable": "value"
+    }
+   ],
+   "reason": "STATUS_CONSUMED_BY_UNPROVEN_CALLEE_BEFORE_USE",
+   "verdict": "ABSTAIN_WRAPPER_UNRESOLVED"
+  },
+  {
+   "creation_call_id": 30064980705,
+   "creation_call_name": "napi_create_buffer_copy",
+   "file": "package/whisper.cpp/examples/addon.node/node_modules/node-addon-api/napi-inl.h",
+   "input_size_origin": {
+    "code": "length * sizeof(T)",
+    "kind": "unresolved"
+   },
+   "line": "2486",
+   "method_id": 107374188471,
+   "method_name": "Copy",
+   "output_targets": [
+    {
+     "arg_code": "nullptr",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489316734,
+     "required": true,
+     "role": "result",
+     "variable": "value"
+    }
+   ],
+   "reason": "STATUS_CONSUMED_BY_UNPROVEN_CALLEE_BEFORE_USE",
+   "verdict": "ABSTAIN_WRAPPER_UNRESOLVED"
+  }
+ ],
+ "proven_propagating_wrappers": [],
+ "schema": "napi-status-verdict/0.2",
+ "supported_calls": [
+  "napi_create_buffer",
+  "napi_create_buffer_copy"
+ ]
+}
