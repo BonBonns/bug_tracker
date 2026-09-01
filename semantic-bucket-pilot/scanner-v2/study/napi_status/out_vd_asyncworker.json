@@ -1,0 +1,39 @@
+{
+ "abstained": [],
+ "promoted": {
+  "107374182406": {
+   "allocation": "worker = new NextWorker(env, cb)",
+   "callback": "BaseWorker.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "BaseWorker",
+   "cast_receiver": "self",
+   "concrete_type": "NextWorker",
+   "function": "BaseWorker.DoComplete:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771073,
+   "resolved_via": {
+    "call_code": "self->DoComplete()",
+    "resolved_for_concrete_type": "NextWorker",
+    "via_call_id": 30064771083
+   },
+   "root_entry": "iterator_next:napi_value__*(napi_env,void*)"
+  },
+  "107374182412": {
+   "allocation": "worker = new NextWorker(env, cb)",
+   "callback": "BaseWorker.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "BaseWorker",
+   "cast_receiver": "self",
+   "concrete_type": "NextWorker",
+   "function": "NextWorker.HandleOKCallback:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771073,
+   "resolved_via": {
+    "call_code": "HandleOKCallback()",
+    "resolved_for_concrete_type": "NextWorker",
+    "via_call_id": 30064771085
+   },
+   "root_entry": "iterator_next:napi_value__*(napi_env,void*)"
+  }
+ },
+ "schema": "virtual-dispatch-reachability/0.1",
+ "tier": "TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN"
+}

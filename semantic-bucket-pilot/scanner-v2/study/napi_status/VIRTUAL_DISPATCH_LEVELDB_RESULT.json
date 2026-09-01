@@ -1,0 +1,27 @@
+{
+  "all_promoted_overrides": [
+    "ApproximateSizeWorker.HandleOKCallback:void()",
+    "EndWorker.HandleOKCallback:void()",
+    "GetWorker.HandleOKCallback:void()",
+    "NextWorker.HandleOKCallback:void()"
+  ],
+  "failure_injection": "NOT performed. The full JS-to-native chain is not established end to end (the export root is unproven on these facts), so per the review's gate no bounded failure-injection test is run. These remain two confirmed API return-code handling discrepancies, not confirmed vulnerabilities. No runtime behavior or security impact is established or claimed.",
+  "next_gap": "Recognize the export idiom / rebuild leveldb facts WITH node+napi-macros headers staged so NAPI_EXPORT_FUNCTION expands and iterator_next becomes a recognized export. If then iterator_next is externally reachable, promote_gated_by_root elevates NextWorker::HandleOKCallback to TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN and the findings' reportability re-evaluates.",
+  "nextworker_handleokcallback_evidence": [
+    {
+      "callback": "BaseWorker.Complete:void(napi_env,napi_status,void*)",
+      "cast_base": "BaseWorker",
+      "cast_receiver": "self",
+      "concrete_type": "NextWorker",
+      "function": "NextWorker.HandleOKCallback:void()",
+      "registration_api": "napi_create_async_work",
+      "root_entry": "iterator_next:napi_value(napi_env,napi_callback_info)"
+    }
+  ],
+  "reportability_outcome": "The two STATUS_GUARD_MISSING findings do NOT yet become reportable. The virtual-dispatch gap is closed, but a SEPARATE gap now dominates: the JS-export ROOT (iterator_next) is not established on these facts. Blocked now at export-root recognition, not at virtual dispatch.",
+  "root_entry_status_on_these_facts": "iterator_next is TIER_INTERNAL_UNREGISTERED and 0 exports are recognized -- because these facts were built by a standalone c2cpg WITHOUT node/napi headers staged, so the NAPI_EXPORT_FUNCTION(iterator_next) macro in NAPI_INIT never expanded. iterator_next IS genuinely exported in source (bindings.cpp:1761); the export is simply not visible in header-less facts.",
+  "root_gate": "SOUND. The override is elevated to TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN only when its root entry (iterator_next) is itself externally reachable. Virtual dispatch resolves the object-flow hop; it never invents a JS entry point.",
+  "shared_infrastructure": "virtual_dispatch_reachability is property-agnostic: it returns reachable native function ids, so Lock Balance / Protected Field / OOB / N-API status all benefit identically. New revision; reachability_tier.py and the normalizer are unmodified.",
+  "subject": "VIRTUAL_DISPATCH_REACHABILITY_R01 on the REAL @8crafter/leveldb-zlib@1.6.0 cpp facts",
+  "virtual_dispatch_hop": "SOLVED. NextWorker::HandleOKCallback is proven virtual-dispatch-reachable from iterator_next via the full chain: new NextWorker (concrete type) -> napi_create_async_work(data=this) -> Complete trampoline -> (BaseWorker*)data cast -> DoComplete -> virtual HandleOKCallback resolved by MRO to NextWorker's unique override."
+}

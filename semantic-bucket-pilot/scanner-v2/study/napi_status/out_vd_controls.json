@@ -1,0 +1,118 @@
+{
+ "abstained": [
+  {
+   "function": "c2_export:napi_value__*(napi_env,void*,int)",
+   "local": "w",
+   "reason": "UNRESOLVED_FACTORY_CONSTRUCTION"
+  },
+  {
+   "concrete_type": "W1Next",
+   "function": "c2_export:napi_value__*(napi_env,void*,int)",
+   "local": "w",
+   "reason": "RECEIVER_REASSIGNED"
+  },
+  {
+   "concrete_type": "W2Next",
+   "function": "c2_export:napi_value__*(napi_env,void*,int)",
+   "local": "w",
+   "reason": "RECEIVER_REASSIGNED"
+  },
+  {
+   "api": "napi_create_async_work",
+   "concrete_type": "W4Next",
+   "reason": "REGISTRATION_DATA_NOT_THIS"
+  },
+  {
+   "concrete_type": "W1Next",
+   "function": "c5_export:napi_value__*(napi_env,void*,W1Base*)",
+   "local": "w",
+   "reason": "RECEIVER_REASSIGNED"
+  },
+  {
+   "function": "c5_export:napi_value__*(napi_env,void*,W1Base*)",
+   "local": "w",
+   "reason": "UNRESOLVED_FACTORY_CONSTRUCTION"
+  },
+  {
+   "function": "c6_export:napi_value__*(napi_env,void*)",
+   "local": "w",
+   "reason": "UNRESOLVED_FACTORY_CONSTRUCTION"
+  },
+  {
+   "concrete_types": [
+    "W1Next",
+    "W7Next"
+   ],
+   "function": "W1Base.DoComplete:void()",
+   "reason": "MULTIPLE_CONCRETE_OVERRIDES"
+  }
+ ],
+ "promoted": {
+  "107374182407": {
+   "allocation": "w = new W7Next(env)",
+   "callback": "W1Base.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "W1Base",
+   "cast_receiver": "self",
+   "concrete_type": "W7Next",
+   "function": "W1Base.HandleOKCallback:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771073,
+   "resolved_via": {
+    "call_code": "HandleOKCallback()",
+    "resolved_for_concrete_type": "W7Next",
+    "via_call_id": 30064771084
+   },
+   "root_entry": "c7_export:napi_value__*(napi_env,void*)"
+  },
+  "107374182411": {
+   "allocation": "w = new W1Next(env)",
+   "callback": "W1Base.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "W1Base",
+   "cast_receiver": "self",
+   "concrete_type": "W1Next",
+   "function": "W1Next.HandleOKCallback:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771073,
+   "resolved_via": {
+    "call_code": "HandleOKCallback()",
+    "resolved_for_concrete_type": "W1Next",
+    "via_call_id": 30064771084
+   },
+   "root_entry": "c1_export:napi_value__*(napi_env,void*)"
+  },
+  "107374182421": {
+   "allocation": "w = new W3Base(env)",
+   "callback": "W3Base.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "W3Base",
+   "cast_receiver": "self",
+   "concrete_type": "W3Base",
+   "function": "W3Base.DoComplete:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771120,
+   "resolved_via": {
+    "call_code": "self->DoComplete()",
+    "resolved_for_concrete_type": "W3Base",
+    "via_call_id": 30064771127
+   },
+   "root_entry": "c3_export:napi_value__*(napi_env,void*)"
+  },
+  "107374182422": {
+   "allocation": "w = new W3Base(env)",
+   "callback": "W3Base.Complete:void(napi_env,napi_status,void*)",
+   "cast_base": "W3Base",
+   "cast_receiver": "self",
+   "concrete_type": "W3Base",
+   "function": "W3Base.HandleOKCallback:void()",
+   "registration_api": "napi_create_async_work",
+   "registration_call_id": 30064771120,
+   "resolved_via": {
+    "call_code": "HandleOKCallback()",
+    "resolved_for_concrete_type": "W3Base",
+    "via_call_id": 30064771129
+   },
+   "root_entry": "c3_export:napi_value__*(napi_env,void*)"
+  }
+ },
+ "schema": "virtual-dispatch-reachability/0.1",
+ "tier": "TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN"
+}
