@@ -1,0 +1,103 @@
+{
+ "package_name": "re2",
+ "version": "1.26.1",
+ "bundle": {
+  "status": "BUNDLE_READY",
+  "stages": {
+   "download": {
+    "seconds": 0.10930562019348145
+   },
+   "extract": {
+    "seconds": 0.485198974609375
+   },
+   "header_staging": {
+    "seconds": 0.23983526229858398,
+    "n_staged": 1
+   },
+   "c2cpg": {
+    "seconds": 82.7646849155426,
+    "maxrss_delta_kb": 2123312,
+    "rc": 0
+   },
+   "cpp_export": {
+    "seconds": 59.78014349937439,
+    "maxrss_delta_kb": 0,
+    "rc": 0
+   },
+   "cpp_normalize": {
+    "seconds": 331.96189188957214,
+    "maxrss_delta_kb": 1897892
+   }
+  },
+  "real_scale": {
+   "n_calls_tsv_rows": 166207
+  },
+  "bundle_seconds": 475.38823914527893
+ },
+ "scanners": {
+  "r04": {
+   "seconds": 6.742748498916626,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "classification": {
+    "ACQUISITION_NAME_MATCH_CANDIDATE": 158,
+    "ACQUISITION_SIGNATURE_UNRECOGNIZED": 158
+   },
+   "n_findings": 0
+  },
+  "r05": {
+   "seconds": 6.794055223464966,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "classification": {
+    "ACQUISITION_NAME_MATCH_CANDIDATE": 158,
+    "ACQUISITION_SIGNATURE_UNRECOGNIZED": 158,
+    "R05_RECOVERY_CANDIDATE": 76,
+    "R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED": 76
+   },
+   "n_findings": 0
+  },
+  "lock_balance": {
+   "seconds": 5.0414879322052,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "classification": {
+    "LOCK_CALL_FOUND": 1,
+    "LOCK_NO_MATCHING_UNLOCK_IN_FUNCTION": 1
+   },
+   "n_findings": 0
+  },
+  "protected_field": {
+   "seconds": 5.134837627410889,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "classification": {},
+   "n_findings": 0
+  },
+  "oob_write": {
+   "seconds": 8.524397611618042,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "n_candidates": 2
+  },
+  "oob_read": {
+   "seconds": 8.28076982498169,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "n_candidates": 7
+  },
+  "oob_compare": {
+   "seconds": 8.152908086776733,
+   "maxrss_delta_kb": 0,
+   "rc": 0,
+   "error": null,
+   "n_candidates": 0
+  }
+ }
+}

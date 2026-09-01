@@ -1,0 +1,20 @@
+{
+ "classification": {
+  "LEAK_CANDIDATE_UNSAFE_RETURN": 1,
+  "LOCK_CALL_FOUND": 1
+ },
+ "findings": [
+  {
+   "lock_call_id": 30064771074,
+   "lock_object": "&ssl->dtls13Rtx.mutex",
+   "method_id": 107374182401,
+   "method_name": "Dtls13RtxAddAck",
+   "reason": "RETURN_REACHABLE_WITHOUT_MATCHING_UNLOCK",
+   "unsafe_return_ids": [
+    141733920768,
+    141733920769
+   ]
+  }
+ ],
+ "schema": "lock-balance-verdict/0.1"
+}
