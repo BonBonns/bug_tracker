@@ -117,10 +117,21 @@ def attribute_finding(finding, package_name):
     return finding
 
 
-ALL_FINDING_KEYS = ("r04_findings", "r05_findings", "lock_balance_findings",
+ALL_FINDING_KEYS = ("r04_findings", "r05_findings", "nan_findings", "lock_balance_findings",
                      "protected_field_findings", "oob_write_candidates",
                      "oob_index_write_candidates", "oob_read_candidates",
                      "oob_compare_candidates")
+# NAN-REPLAY-TASK4 addition: "nan_findings" was missing here (a real, disclosed pre-existing
+# gap -- Nan Resource Guard's own wiring into provenance.py/applicability_gate.py never touched
+# this module). A Nan finding sitting inside genuinely vendored third-party source bundled by a
+# package (provenance_hint == VENDORED_HINT, e.g. a Nan-based addon vendoring another package's
+# C++ source directly) must get the same attribution/dedup treatment every other property
+# already gets -- attribute_finding()'s own gate on provenance_hint/resolved makes this
+# unconditionally safe to add (a PACKAGE_OWNED_HINT finding, e.g. node-snap7's own ReadArea/
+# Upload/FullUpload, is untouched by this addition either way). "r06_findings" remains absent
+# here too -- a real, separate, still-open gap this round does not touch (r06 has carried zero
+# corpus-wide reportable findings so far, so it was never exercised): not fixed here to keep
+# this change minimal and in scope.
 
 
 def attribute_record(record):

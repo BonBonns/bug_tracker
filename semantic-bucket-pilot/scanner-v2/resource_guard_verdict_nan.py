@@ -156,6 +156,41 @@ def load_js_raw(js_raw_dir):
     return {"calls": calls, "calls_by_name": calls_by_name, "args_by_call": args_by_call}
 
 
+# NAN-REPLAY-TASK4 addition: an adapter from the NORMALIZED js_facts.json shape (the only JS-side
+# artifact the 100-package evidence bundles ever preserve -- evidence_bundle.py's own module
+# docstring never keeps the raw jssrc2cpg TSV export `load_js_raw()` above reads) into the SAME
+# `{"calls", "calls_by_name", "args_by_call"}` dict shape `load_js_raw()` returns. This is a real
+# adapter, not a reimplementation: confirmed directly against a real bundle
+# (node-libcurl@5.1.2's own js_facts.json) that js_facts.json's own `calls` array already carries
+# per-call `id`/`name`/`code` and per-argument `call_id`/`index`/`kind`/`code` -- the exact same
+# neutral-frontend schema `load_js_raw()`'s own module comment already documents (8-col
+# arguments.tsv / 10-11-col calls.tsv, 1-based argument indexing, index 0 reserved for the
+# receiver), just already parsed into JSON instead of raw TSV rows, because js_facts.json IS the
+# normalized form of the same raw jssrc2cpg export -- not a different, lossy summary of it for
+# the fields this file actually reads (name, code, arguments/index/kind/code). Every downstream
+# consumer of the returned dict (`is_native_module_directly_exported`, `find_js_call_confirming_
+# index`) only ever reads exactly these fields, confirmed by direct code inspection above.
+def load_js_raw_from_facts_json(js_facts_path):
+    if not js_facts_path or js_facts_path == "-":
+        return None
+    with open(js_facts_path) as f:
+        facts = json.load(f)
+    calls = {}
+    calls_by_name = defaultdict(list)
+    args_by_call = defaultdict(dict)
+    for c in facts.get("calls", []):
+        cid = int(c["id"])
+        name = c.get("name") or ""
+        calls[cid] = {"id": cid, "name": name, "code": c.get("code") or ""}
+        calls_by_name[name].append(cid)
+        for a in c.get("arguments", []):
+            idx = a.get("index")
+            if idx is None:
+                continue
+            args_by_call[cid][int(idx)] = {"kind": a.get("kind") or "", "code": a.get("code") or ""}
+    return {"calls": calls, "calls_by_name": calls_by_name, "args_by_call": args_by_call}
+
+
 # RESOURCE-GUARD-NAN real-corpus fix (found via direct user challenge to node-snap7's own real
 # `Upload`/`FullUpload` abstentions, then independently verified against real facts, not
 # conceded on principle alone): requiring a CONFIRMED real JS call site (the strongest
@@ -615,10 +650,14 @@ NON_VULN_DISCLAIMER_COPY = (
     "capacity, only that the two values are structurally independent.")
 
 
-def main():
-    cpp_raw_dir, js_raw_dir, outp = sys.argv[1], sys.argv[2], sys.argv[3]
-    cpp = load_cpp_raw(cpp_raw_dir)
-    js = load_js_raw(js_raw_dir)
+def compute_findings(cpp, js):
+    """The full verdict loop, factored out of main() (NAN-REPLAY-TASK4) so a caller with
+    already-loaded facts (e.g. a bundle replay using `load_js_raw_from_facts_json()` instead of
+    `load_js_raw()`) can reuse the EXACT SAME logic main() uses -- never a second, drifting copy.
+    Byte-for-byte the same code that lived inline in main() before this refactor; behavior
+    verified unchanged via check_nan_integration.py's own 23 synthetic + real live-smoke
+    controls, all still passing after this extraction. Returns
+    (registrations, registration_audit, classification, findings)."""
     registrations, registration_audit = extract_registrations(cpp)
     js_name_by_function = {}
     for name, fids in registrations.items():
@@ -788,12 +827,21 @@ def main():
                                      "copy_size_arg_code": size_arg["code"],
                                      "evidence_note": NON_VULN_DISCLAIMER_COPY})
 
+    return registrations, registration_audit, dict(classification), findings
+
+
+def main():
+    cpp_raw_dir, js_raw_dir, outp = sys.argv[1], sys.argv[2], sys.argv[3]
+    cpp = load_cpp_raw(cpp_raw_dir)
+    js = load_js_raw(js_raw_dir)
+    registrations, registration_audit, classification, findings = compute_findings(cpp, js)
+
     json.dump({"schema": "resource-guard-verdict-nan/0.1",
                "registrations": {k: v for k, v in registrations.items()},
                "registration_audit": registration_audit,
-               "classification": dict(classification),
+               "classification": classification,
                "findings": findings}, open(outp, "w"), indent=1, sort_keys=True)
-    print(f"classification: {dict(classification)}")
+    print(f"classification: {classification}")
     print(f"findings: {len(findings)}")
 
 
