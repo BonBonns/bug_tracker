@@ -107,13 +107,30 @@ def _analyze(prefix):
         return hits
 
     # collect assert-argument node ids (to exclude assert-only comparisons) — a comparison is
-    # "in an assert" if its code is contained in an assert call's code (single-file, same fn).
-    assert_codes = [ (c.get('code') or '') for c in calls
-                     if c.get('name') in ASSERT_NAMES or (c.get('code','').split('(')[0].strip() in ASSERT_NAMES) ]
-    def _in_assert(cmp_code):
+    # "in an assert" if its code is contained in an assert call's code, SAME FUNCTION (this
+    # module's own comment already documented "single-file, same fn" as the real intent; the
+    # implementation below never actually enforced it -- OOB-EQUIV-R01, roadmap step 7, found
+    # and fixed the real gap: assert_codes was built file-WIDE with no function scoping at all,
+    # so a comparison's own code text merely needing to be a SUBSTRING of ANY assert-macro
+    # invocation ANYWHERE in the whole translation unit was sufficient to suppress it -- a real,
+    # confirmed false match on @appthreat/sqlite3's own real sqlite3.c amalgamation (212,493
+    # real calls in one file): `sqlite3_get_table_cb`'s own genuine, real `i<nCol` bound
+    # comparison (function_id 107374185042) was wrongly treated as "compiled out" because an
+    # UNRELATED `assert( i<nCol )` exists somewhere else in the SAME giant file, in a different
+    # function -- confirmed directly, not assumed (only 1 of 5,692 real assert-code strings in
+    # the file contains that substring, and it is not this function's own). Scoping
+    # assert_codes per-function closes this exactly, with no behavior change for any assert and
+    # comparison that already share a function (the overwhelmingly common real case an assert
+    # guards its own function's own logic).
+    assert_codes_by_fn = {}
+    for c in calls:
+        if c.get('name') in ASSERT_NAMES or (c.get('code', '').split('(')[0].strip() in ASSERT_NAMES):
+            assert_codes_by_fn.setdefault(c.get('enclosing_function_id'), []).append(c.get('code') or '')
+    def _in_assert(cmp_code, fn=None):
         cc = (cmp_code or '').strip()
         if not cc:
             return False
+        assert_codes = assert_codes_by_fn.get(fn, [])
         return any(cc in ac for ac in assert_codes)
 
     # (b) COUNT GUARD per function: a non-assert comparison referencing the array's own
@@ -152,9 +169,9 @@ def _analyze(prefix):
         if c.get('name') not in CMP:
             continue
         code = c.get('code') or ''
-        if _in_assert(code):
-            continue    # assert-only comparison -> does NOT gate (compiled out in release)
         fn = c.get('enclosing_function_id')
+        if _in_assert(code, fn):
+            continue    # assert-only comparison -> does NOT gate (compiled out in release)
         arrs = _cap_guard_arrays(code, fn)
         if arrs:
             guarded_arrays_by_fn.setdefault(fn, set()).update(arrs)

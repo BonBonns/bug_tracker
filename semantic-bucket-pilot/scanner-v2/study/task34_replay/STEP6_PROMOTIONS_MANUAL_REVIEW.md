@@ -96,21 +96,46 @@ package's own pinned, hash-verified tarball):
 
 - **`sha1QueryFunc`** (`shell.c:5515-5616`, `array=x[9]`, `index_expr="j"`): `unsigned char
   x[9]; ... for(j=8; j>=1; j--){ x[j] = ...; }` -- `j` ranges `[1,8]`, always in-bounds for
-  `x[9]` (valid indices `0..8`). A trivially provable, small, decrementing-loop bound the
-  scanner's own static extent reasoning did not resolve.
+  `x[9]` (valid indices `0..8`). Real, distinct root cause (confirmed, not merged with the
+  other two): the scanner's own direct-index-bound check only recognizes an UPPER-bound
+  comparison shape (`idx < K`/`idx <= K`); this loop's own real bound comes from its
+  DECREMENTING initializer (`j=8`, itself already `< 9`) combined with a LOWER-bound guard
+  (`j>=1`) -- a shape the scanner does not model at all. Remains a real, disclosed,
+  structurally-unfixed false positive (roadmap step 7 fixed a different, higher-value real bug
+  first -- see the correction note below -- this one needs new capability, not built here).
 - **`lsModeFunc`** (`shell.c:10257-10284`, `array=z[16]`, `index_expr="1 + i*3"`): `char z[16];
   ... for(i=0; i<3; i++){ char *a = &z[1+i*3]; a[0]=...; a[1]=...; a[2]=...; }` -- for
   `i=0,1,2`: writes at offsets `1..3`, `4..6`, `7..9`, all `< 16`; `z[10]='\0'` also in-bounds.
-  Same class of gap: a small, compile-time-constant loop bound (`i<3`) not propagated.
+  Real, distinct root cause: the scanner's own fixed-array bound check only credits a BARE
+  index identifier (`idx < K` protecting a write `arr[idx]`) -- this write's own index is the
+  COMPOUND linear expression `1+i*3`, not `i` alone, so the real `i<3` guard is never matched to
+  it at all (PARAM-CAP-R01's own compound-expression support, built for pointer-parameter
+  capacity, was never extended to the fixed-local-array branch). Also remains real, disclosed,
+  structurally-unfixed -- needs genuine linear-expression bound arithmetic, not built here.
 - **`sqlite3_get_table_cb`** (`sqlite3.c:158023-158085`, `array`s `colv`/`argv`,
   `index_expr="i"`, `length_param_name="nCol"`): `for(i=0; i<nCol; i++){ ... colv[i] ...
   argv[i] ... }` -- `nCol` is the EXACT real parameter documented by the `sqlite3_exec()`
   callback API's own standard contract as the length of both `argv` and `colv`; `i` is directly
   bounded by it. This is precisely the well-formed case `CPP_PARAM_LENGTH_PAIR_INDEX_UNBOUNDED`'s
   own `PARAM_LENGTH_PAIR` rule is meant to recognize as safe, yet it was promoted as an
-  unresolved `CANDIDATE` here -- a real, disclosed precision gap in that rule specifically
-  (worth a closer look as part of roadmap step 7's own OOB-precision work), not a real defect
-  in one of the most heavily-audited, fuzzed C codebases in existence.
+  unresolved `CANDIDATE` here -- not a real defect in one of the most heavily-audited, fuzzed C
+  codebases in existence.
+
+  **Root-cause CORRECTION (roadmap step 7, `TRACKB_RESULTS.md`):** this section's own original
+  guess ("a precision gap in the PARAM_LENGTH_PAIR rule itself, propagation-related") was WRONG
+  -- direct instrumentation of `oob_index_write_verdict.py` found the REAL cause: its own
+  `_in_assert()` helper (whose own comment already documented the INTENDED scope as "single-
+  file, same fn") was never actually scoped to the enclosing function at all -- it checked
+  whether a comparison's code text is a SUBSTRING of ANY assert-macro invocation ANYWHERE in the
+  whole translation unit. `@appthreat/sqlite3`'s real `sqlite3.c` amalgamation is 212,493 real
+  calls in ONE file; a real, unrelated `assert( i<nCol )` exists SOMEWHERE else in that file, in
+  a different function, and its own code text happens to CONTAIN this function's own genuine
+  `i<nCol` loop-bound comparison as a substring -- so the real guard was wrongly treated as
+  "compiled out," never even reaching the (correctly-designed, already-working)
+  `PARAM_LENGTH_PAIR` dominance check at all. Fixed by scoping `_in_assert()` to the comparison's
+  own real `enclosing_function_id`, confirmed directly: both `colv[i]`/`argv[i]` candidates are
+  now gone STRUCTURALLY (0 candidates emitted for this function), and all 9 of the pre-existing
+  frozen `tests/gates/oob-index-r01/` regression fixtures are byte-for-byte unaffected.
 
 **Not entered into `adjudication_registry.py`.** `oob_index_write_candidates` findings carry no
 populated `site_id` field (confirmed directly: every one of these 7 candidates' own `site_id` is
