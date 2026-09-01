@@ -24,10 +24,3 @@ semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/*.checkpoints/
 # deliverable -- replay_records_v8.jsonl/trackb_rerun_delta.json are complete and committed
 # (see TRACKB_RESULTS.md), matching v1-v7's own already-committed precedent in the same dir.
 semantic-bucket-pilot/scanner-v2/study/task34_replay/trackb_stdout.log
-
-# ReDoS R02 adapter: a background agent is still building/validating this (5 source/dataflow
-# capabilities + regression fixtures); not yet reviewed against real evidence, so not committed
-# yet -- temporary, matching the same in-progress convention used earlier for pilot25's own
-# results/log files. Remove this entry once reviewed and ready to commit.
-tchecker-research-complete/tchecker-property-adjudicator/producers/export_redos_npm_integ_r02.sc
-semantic-bucket-pilot/scanner-v2/study/redos_npm/r02_fixtures/
