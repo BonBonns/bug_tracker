@@ -1,0 +1,108 @@
+{
+  "funnel_v1": {
+    "lock_balance_findings": {
+      "raw": 12,
+      "reportable": 0
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3290,
+      "reportable": 0
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "funnel_v2": {
+    "lock_balance_findings": {
+      "raw": 12,
+      "reportable": 0
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3290,
+      "reportable": 0
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "newly_reportable_findings": [],
+  "per_property_transitions": {
+    "lock_balance_findings": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 1,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 8,
+      "TIER_INTERNAL_UNREGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 3
+    },
+    "oob_index_write_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 125,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 3165
+    },
+    "oob_read_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 2,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 113
+    },
+    "oob_write_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 8,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 242,
+      "TIER_INTERNAL_UNREGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 2
+    },
+    "protected_field_findings": {
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 233
+    }
+  },
+  "tier_transitions": {
+    "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 136,
+    "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 3761,
+    "TIER_INTERNAL_UNREGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 5
+  },
+  "total_adjudications_applied": 2
+}
