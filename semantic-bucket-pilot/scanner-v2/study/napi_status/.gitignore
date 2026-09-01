@@ -1,0 +1,4 @@
+# Regenerable normalizer side-car files (normalize_c_cpp_facts_v03.py emits these
+# alongside the main cpp_facts JSON: .bound/.source/.reachingdef/... ). Only the main
+# cpp_facts_*.json is committed and read by the gates; these are byproducts.
+cpp_facts_*.json.*.json
