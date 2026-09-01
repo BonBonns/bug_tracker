@@ -168,6 +168,21 @@ RUN_LIVE = os.environ.get("NAN_INTEGRATION_LIVE_SMOKE", "1") != "0"
 if RUN_LIVE:
     npm_corpus = os.path.join(HERE, "npm_corpus")
     sys.path.insert(0, npm_corpus)
+    # NAN-FINALIZE-TASK1 fix: root-caused directly (real per-stage timing, not guessed) --
+    # @confluentinc/kafka-javascript's own real bottleneck is `cpp_normalize` (330.1s on its
+    # exceptionally large bundled deps/librdkafka C library), NOT resource_guard_verdict_nan.py's
+    # own scan logic (9.7s, unremarkable at this size) -- the same class of large-bundled-
+    # codebase normalize cost already known from re2 (127.6s), just further along that spectrum,
+    # past the DEFAULT NORMALIZE_TIMEOUT=180s margin. Raised ONLY for this smoke test's own
+    # subprocess calls (an env var scoped to this process) -- the production
+    # NPM_CORPUS_TIMEOUT_MULTIPLIER default (used by the real corpus-wide pipeline) is
+    # deliberately left untouched here; that is a separate, repo-wide capacity/cost decision for
+    # the eventual 494-package run (roadmap step 9), not one to smuggle in via one negative
+    # control's own gate. See NAN_INTEGRATION_RESULTS.md's own "Task 1" update for the full
+    # real-evidence account (real successful ANALYZED run, 2 raw findings, 0 reportable,
+    # confirmed byte-for-byte matching NAN_REPLAY_TASK4_RESULTS.md's own independent bundle-
+    # replay result for the same package).
+    os.environ.setdefault("NPM_CORPUS_TIMEOUT_MULTIPLIER", "6")
     import run_pipeline_one as P  # noqa: E402
 
     eligible = {}

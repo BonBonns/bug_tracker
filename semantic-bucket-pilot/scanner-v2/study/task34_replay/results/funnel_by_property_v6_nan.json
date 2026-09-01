@@ -1,0 +1,97 @@
+{
+  "funnel_by_property": {
+    "lock_balance_findings": {
+      "raw_count": 12,
+      "reportable_count": 0
+    },
+    "nan_findings": {
+      "raw_count": 22,
+      "reportable_count": 3
+    },
+    "oob_compare_candidates": {
+      "raw_count": 0,
+      "reportable_count": 0
+    },
+    "oob_index_write_candidates": {
+      "raw_count": 3290,
+      "reportable_count": 0
+    },
+    "oob_read_candidates": {
+      "raw_count": 115,
+      "reportable_count": 0
+    },
+    "oob_write_candidates": {
+      "raw_count": 252,
+      "reportable_count": 0
+    },
+    "protected_field_findings": {
+      "raw_count": 233,
+      "reportable_count": 0
+    },
+    "r04_findings": {
+      "raw_count": 2,
+      "reportable_count": 0
+    },
+    "r05_findings": {
+      "raw_count": 7,
+      "reportable_count": 0
+    },
+    "r06_findings": {
+      "raw_count": 7,
+      "reportable_count": 0
+    }
+  },
+  "packages_inherited_upstream_failure": 3,
+  "packages_replayed": 97,
+  "packages_total": 100,
+  "packages_with_any_raw_nan_finding": [
+    {
+      "nan_raw": 13,
+      "nan_reportable": 3,
+      "nan_verdicts": [
+        "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED",
+        "NAN_COPYBUFFER_SOURCE_CAPACITY_UNRESOLVED",
+        "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+        "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+      ],
+      "package_name": "node-snap7",
+      "version": "1.0.9"
+    },
+    {
+      "nan_raw": 5,
+      "nan_reportable": 0,
+      "nan_verdicts": [
+        "NAN_COPYBUFFER_SOURCE_CAPACITY_SOURCE_BOUNDARY_UNRESOLVED"
+      ],
+      "package_name": "re2",
+      "version": "1.26.1"
+    },
+    {
+      "nan_raw": 2,
+      "nan_reportable": 0,
+      "nan_verdicts": [
+        "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+      ],
+      "package_name": "@confluentinc/kafka-javascript",
+      "version": "1.10.0"
+    },
+    {
+      "nan_raw": 1,
+      "nan_reportable": 0,
+      "nan_verdicts": [
+        "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+      ],
+      "package_name": "@automattic/yara",
+      "version": "2.6.3"
+    },
+    {
+      "nan_raw": 1,
+      "nan_reportable": 0,
+      "nan_verdicts": [
+        "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+      ],
+      "package_name": "@codeporter/robotjs",
+      "version": "0.6.0"
+    }
+  ]
+}

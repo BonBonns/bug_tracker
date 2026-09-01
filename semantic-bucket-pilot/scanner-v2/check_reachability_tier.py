@@ -285,6 +285,146 @@ else:
     print("SKIP: @eliyya/sange's real bundle not present in this environment -- smoke test "
           "skipped, all synthetic/real-shape controls above still ran")
 
+# =====================================================================================
+# ROADMAP-STEP6-R01: TIER_CALLBACK_OR_WORKER_PROVEN. Real per-candidate audit
+# (study/task34_replay/callback_worker_classifier_audit.py) confirmed 118 of 124 real
+# CALLBACK_OR_WORKER_HEURISTIC-classified staged candidates were pure structural noise (a
+# function pointer appearing as an operand of `<operator>.arrayInitializer`/`.cast`/
+# `.assignment`/`.addressOf`, never a real registration) -- these controls prove the NEW,
+# narrower tier correctly separates the 6 real matches from that noise.
+# =====================================================================================
+cbw_functions = [
+    {"id": 900001, "name": "sha1QueryFunc", "full_name": "sha1QueryFunc:void(sqlite3_context*)"},
+    {"id": 900002, "name": "NoiseTarget", "full_name": "NoiseTarget:void()"},
+    {"id": 900003, "name": "UnlistedApiTarget", "full_name": "UnlistedApiTarget:void()"},
+]
+cbw_calls_positive = [
+    # Real shape, copied from @appthreat/sqlite3@9.0.1's own real cpp_facts.json:
+    # sqlite3_create_function(..., xFunc=sha1QueryFunc, ...) -- a real METHOD_REF argument to a
+    # real, allowlisted callback-registration API.
+    {"id": 900010, "name": "sqlite3_create_function", "enclosing_function_id": 999,
+     "arguments": [{"index": 5, "kind": "METHOD_REF", "code": "sha1QueryFunc"}]},
+]
+cbw_refs_positive = rt.resolve_method_ref_targets({"functions": cbw_functions, "calls": cbw_calls_positive})
+res_cbw_pos = rt.classify_function_reachability(
+    900001, {}, [], facts_available=True, clean_edges={},
+    method_ref_targets=cbw_refs_positive)
+ck("POSITIVE (real shape, @appthreat/sqlite3's own sqlite3_create_function/sha1QueryFunc): "
+   "TIER_CALLBACK_OR_WORKER_PROVEN", res_cbw_pos["reachability_status"] == rt.TIER_CALLBACK_OR_WORKER_PROVEN)
+ck("POSITIVE: real evidence names the real registration API",
+   res_cbw_pos["reachability_evidence"]["registration_api_name"] == "sqlite3_create_function")
+
+cbw_calls_noise = [
+    # The REAL, dominant noise shape the audit found: a function pointer appearing as an
+    # operand of a generic operator, NOT a real registration call.
+    {"id": 900011, "name": "<operator>.arrayInitializer", "enclosing_function_id": 999,
+     "arguments": [{"index": 1, "kind": "METHOD_REF", "code": "NoiseTarget"}]},
+]
+cbw_refs_noise = rt.resolve_method_ref_targets({"functions": cbw_functions, "calls": cbw_calls_noise})
+res_cbw_noise = rt.classify_function_reachability(
+    900002, {}, [], facts_available=True, clean_edges={},
+    method_ref_targets=cbw_refs_noise)
+ck("*** NEGATIVE (real structural-noise shape, the 118/124 majority the audit found): a "
+   "METHOD_REF argument to <operator>.arrayInitializer stays TIER_INTERNAL_UNREGISTERED, "
+   "never promoted -- exactly the false-positive shape this tier exists to reject ***",
+   res_cbw_noise["reachability_status"] == rt.TIER_INTERNAL_UNREGISTERED)
+
+cbw_calls_unlisted = [
+    # An unlisted-but-real API name (same real shape the audit found for rd_kafka_assignor_add,
+    # deliberately NOT added to the allowlist -- single-sighting, not individually verified).
+    {"id": 900012, "name": "rd_kafka_assignor_add", "enclosing_function_id": 999,
+     "arguments": [{"index": 1, "kind": "METHOD_REF", "code": "UnlistedApiTarget"}]},
+]
+cbw_refs_unlisted = rt.resolve_method_ref_targets({"functions": cbw_functions, "calls": cbw_calls_unlisted})
+res_cbw_unlisted = rt.classify_function_reachability(
+    900003, {}, [], facts_available=True, clean_edges={},
+    method_ref_targets=cbw_refs_unlisted)
+ck("AMBIGUITY: an unlisted (not individually verified) real API name never promotes either -- "
+   "deliberately conservative, same discipline as Nan::SetMethod elsewhere in this module",
+   res_cbw_unlisted["reachability_status"] == rt.TIER_INTERNAL_UNREGISTERED)
+
+# --- REAL SMOKE TEST: @appthreat/sqlite3's own real bundle, sha1QueryFunc/sqlite3_create_
+# function (function_id 107374182492, confirmed via callback_worker_classifier_audit.py). ---
+_sqlite3_bundle = os.path.join(_HERE, "npm_corpus", "overnight_100", "evidence_bundles_100",
+                                "@appthreat__sqlite3@9.0.1.tar.gz")
+if os.path.isfile(_sqlite3_bundle):
+    import tarfile
+    with tarfile.open(_sqlite3_bundle, "r:gz") as tf:
+        sqlite3_cpp = json.load(tf.extractfile("cpp_facts.json"))
+        sqlite3_js = json.load(tf.extractfile("js_facts.json"))
+    sqlite3_record = {"oob_index_write_candidates": [{"function_id": 107374182492}]}
+    rt.classify_record_reachability(sqlite3_record, sqlite3_js, sqlite3_cpp)
+    real_cbw_status = sqlite3_record["oob_index_write_candidates"][0]["reachability_status"]
+    ck("SMOKE: @appthreat/sqlite3's real sha1QueryFunc -- previously TIER_INTERNAL_UNREGISTERED, "
+       "now correctly TIER_CALLBACK_OR_WORKER_PROVEN on the SAME real bundle evidence, no new "
+       "Joern run", real_cbw_status == rt.TIER_CALLBACK_OR_WORKER_PROVEN)
+else:
+    print("SKIP: @appthreat/sqlite3's real bundle not present -- smoke test skipped")
+
+# =====================================================================================
+# ROADMAP-STEP6-R01: TIER_MODULE_LOAD_EXECUTION_PROVEN. Real per-candidate audit
+# (study/task34_replay/module_load_classifier_audit.py) directly, hop-by-hop verified
+# @elchetz/cld@2.8.5's own real GetLanguageFromName -- a genuine, clean, single-target-resolved
+# 5-hop chain from the addon's own Init function (Init -> Constants::getInstance() ->
+# Constants::Constants() -> init() -> initLanguages() -> CLD2::GetLanguageFromName).
+# =====================================================================================
+ml_functions = [
+    {"id": 910001, "name": "Init", "full_name": "Init:void(Napi.Env,Napi.Object)",
+     "is_external": False},
+    {"id": 910002, "name": "getInstance", "full_name": "Constants.getInstance:Constants*()",
+     "is_external": False},
+    {"id": 910003, "name": "GetLanguageFromName",
+     "full_name": "CLD2.GetLanguageFromName:int(char*)", "is_external": False},
+    {"id": 910004, "name": "NeverReached", "full_name": "NeverReached:void()",
+     "is_external": False},
+]
+ml_cpp = {
+    "functions": ml_functions,
+    "calls": [
+        {"id": 910010, "name": "getInstance", "enclosing_function_id": 910001,
+         "candidate_target_ids": [910002]},
+        {"id": 910011, "name": "GetLanguageFromName", "enclosing_function_id": 910002,
+         "candidate_target_ids": [910003]},
+    ],
+}
+ml_table = rt.build_registration_table(ml_cpp)  # empty -- Init is never itself an exported
+                                                   # binding, confirmed same as the sange smoke
+                                                   # test's own real fixture above.
+ml_clean_edges = rt.build_clean_call_edges(ml_cpp)
+ml_init_ids = {910001}
+res_ml_pos = rt.classify_function_reachability(
+    910003, ml_table, [], facts_available=True, clean_edges=ml_clean_edges,
+    fn_names={f["id"]: f["full_name"] for f in ml_functions}, init_ids=ml_init_ids)
+ck("POSITIVE (real shape, @elchetz/cld's own Init -> getInstance -> GetLanguageFromName clean "
+   "chain): TIER_MODULE_LOAD_EXECUTION_PROVEN", res_ml_pos["reachability_status"] == rt.TIER_MODULE_LOAD_EXECUTION_PROVEN)
+ck("POSITIVE: real evidence's root is the real Init function id",
+   res_ml_pos["reachability_evidence"]["root_init_function_id"] == 910001)
+
+res_ml_neg = rt.classify_function_reachability(
+    910004, ml_table, [], facts_available=True, clean_edges=ml_clean_edges,
+    fn_names={f["id"]: f["full_name"] for f in ml_functions}, init_ids=ml_init_ids)
+ck("NEGATIVE: a genuinely disconnected function (no real call edge from Init reaches it) stays "
+   "TIER_INTERNAL_UNREGISTERED, not fabricated as module-load-reachable",
+   res_ml_neg["reachability_status"] == rt.TIER_INTERNAL_UNREGISTERED)
+
+# --- REAL SMOKE TEST: @elchetz/cld's own real bundle, GetLanguageFromName (function_id
+# 107374182685, confirmed via module_load_classifier_audit.py). ---
+_cld_bundle = os.path.join(_HERE, "npm_corpus", "overnight_100", "evidence_bundles_100",
+                            "@elchetz__cld@2.8.5.tar.gz")
+if os.path.isfile(_cld_bundle):
+    import tarfile
+    with tarfile.open(_cld_bundle, "r:gz") as tf:
+        cld_cpp = json.load(tf.extractfile("cpp_facts.json"))
+        cld_js = json.load(tf.extractfile("js_facts.json"))
+    cld_record = {"oob_write_candidates": [{"function_id": 107374182685}]}
+    rt.classify_record_reachability(cld_record, cld_js, cld_cpp)
+    real_ml_status = cld_record["oob_write_candidates"][0]["reachability_status"]
+    ck("SMOKE: @elchetz/cld's real GetLanguageFromName -- previously TIER_INTERNAL_UNREGISTERED, "
+       "now correctly TIER_MODULE_LOAD_EXECUTION_PROVEN on the SAME real bundle evidence, no new "
+       "Joern run", real_ml_status == rt.TIER_MODULE_LOAD_EXECUTION_PROVEN)
+else:
+    print("SKIP: @elchetz/cld's real bundle not present -- smoke test skipped")
+
 # --- classify_record_reachability: applies to the 6 real target keys, never to r04/r05 ---
 record = {
     "lock_balance_findings": [{"method_id": init_fn["id"]}],

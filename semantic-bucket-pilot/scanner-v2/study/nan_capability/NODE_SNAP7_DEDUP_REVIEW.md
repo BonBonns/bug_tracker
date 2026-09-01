@@ -88,6 +88,29 @@ genuinely different `acquisition_code` never falsely collapses; (4) a record wit
 node-snap7's own findings (one shared `acquisition_code`, three distinct `method_name`s) that
 justify the key's own shape.
 
+## 5. Report: unique code issues vs. package exposures, kept separate
+
+Per direct instruction ("report one unique code issue and the number of affected package
+exposures separately"), running `dedup_nan_reportable()` over node-snap7's own real replayed
+`nan_findings` plus a record carrying node-snap7-micro-client's real package identity (section 4
+above -- the real, confirmed-identical site evidence used as the sound proxy for the pairing,
+since node-snap7-micro-client was never itself live-scanned this round):
+
+| Unique code issue (deduplicated) | Package exposures | Packages |
+|---|---|---|
+| `ReadArea` -- unbounded `amount * byteCount` allocation, `NAN_NEWBUFFER_UNBOUNDED_ALLOCATION` | 2 | `node-snap7`, `node-snap7-micro-client` |
+| `Upload` -- unbounded `info[2]` allocation, `NAN_NEWBUFFER_UNBOUNDED_ALLOCATION` | 2 | `node-snap7`, `node-snap7-micro-client` |
+| `FullUpload` -- unbounded `info[2]` allocation, `NAN_NEWBUFFER_UNBOUNDED_ALLOCATION` | 2 | `node-snap7`, `node-snap7-micro-client` |
+| **Total** | **3 unique code issues** | **6 raw package exposures (3 issues x 2 packages)** |
+
+Kept deliberately separate, as instructed: **3**, not 6, is the real count of distinct code
+defects that exist in the world (the same S7Client codebase has exactly 3 real unbounded-
+allocation sites); **6** is the real count of npm packages an application could depend on and
+inherit one of those 3 defects from. Neither number substitutes for the other -- a report that
+said "6 findings" without this distinction would double-count the same underlying bug; a report
+that said "3 findings" without the exposure count would understate how many real npm install
+targets carry it.
+
 ## What this leaves open, disclosed
 
 `dedup_nan_reportable()` is not yet wired into any live pipeline stage or into `six_property_

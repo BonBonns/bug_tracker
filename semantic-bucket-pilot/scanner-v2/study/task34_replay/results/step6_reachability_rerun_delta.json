@@ -1,0 +1,179 @@
+{
+  "funnel_after": {
+    "lock_balance_findings": {
+      "raw": 12,
+      "reportable": 0
+    },
+    "nan_findings": {
+      "raw": 22,
+      "reportable": 3
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3290,
+      "reportable": 7
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "funnel_before": {
+    "lock_balance_findings": {
+      "raw": 12,
+      "reportable": 0
+    },
+    "nan_findings": {
+      "raw": 22,
+      "reportable": 3
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3290,
+      "reportable": 0
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "newly_reportable_findings": [
+    {
+      "after_tier": "TIER_CALLBACK_OR_WORKER_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "sha1QueryFunc",
+      "package_name": "@appthreat/sqlite3",
+      "property": "oob_index_write_candidates",
+      "version": "9.0.1"
+    },
+    {
+      "after_tier": "TIER_CALLBACK_OR_WORKER_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "lsModeFunc",
+      "package_name": "@appthreat/sqlite3",
+      "property": "oob_index_write_candidates",
+      "version": "9.0.1"
+    },
+    {
+      "after_tier": "TIER_CALLBACK_OR_WORKER_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "sqlite3_get_table_cb",
+      "package_name": "@appthreat/sqlite3",
+      "property": "oob_index_write_candidates",
+      "version": "9.0.1"
+    },
+    {
+      "after_tier": "TIER_CALLBACK_OR_WORKER_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "sqlite3_get_table_cb",
+      "package_name": "@appthreat/sqlite3",
+      "property": "oob_index_write_candidates",
+      "version": "9.0.1"
+    },
+    {
+      "after_tier": "TIER_MODULE_LOAD_EXECUTION_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "CLD2.GetLanguageFromName:ANY(char*)",
+      "package_name": "@elchetz/cld",
+      "property": "oob_index_write_candidates",
+      "version": "2.8.5"
+    },
+    {
+      "after_tier": "TIER_MODULE_LOAD_EXECUTION_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "CLD2.GetLanguageFromName:ANY(char*)",
+      "package_name": "@elchetz/cld",
+      "property": "oob_index_write_candidates",
+      "version": "2.8.5"
+    },
+    {
+      "after_tier": "TIER_MODULE_LOAD_EXECUTION_PROVEN",
+      "before_tier": "TIER_INTERNAL_UNREGISTERED",
+      "function": "CLD2.GetLanguageFromName:ANY(char*)",
+      "package_name": "@elchetz/cld",
+      "property": "oob_index_write_candidates",
+      "version": "2.8.5"
+    }
+  ],
+  "per_property_transitions": {
+    "lock_balance_findings": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 1,
+      "TIER_INTERNAL_UNREGISTERED->TIER_CALLBACK_OR_WORKER_PROVEN": 2,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 6,
+      "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 3
+    },
+    "oob_index_write_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 125,
+      "TIER_INTERNAL_UNREGISTERED->TIER_CALLBACK_OR_WORKER_PROVEN": 4,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 3158,
+      "TIER_INTERNAL_UNREGISTERED->TIER_MODULE_LOAD_EXECUTION_PROVEN": 3
+    },
+    "oob_read_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 2,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 113
+    },
+    "oob_write_candidates": {
+      "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 8,
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 238,
+      "TIER_INTERNAL_UNREGISTERED->TIER_MODULE_LOAD_EXECUTION_PROVEN": 4,
+      "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 2
+    },
+    "protected_field_findings": {
+      "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 233
+    }
+  },
+  "tier_transitions": {
+    "REACHABILITY_UNRESOLVED->REACHABILITY_UNRESOLVED": 136,
+    "TIER_INTERNAL_UNREGISTERED->TIER_CALLBACK_OR_WORKER_PROVEN": 6,
+    "TIER_INTERNAL_UNREGISTERED->TIER_INTERNAL_UNREGISTERED": 3748,
+    "TIER_INTERNAL_UNREGISTERED->TIER_MODULE_LOAD_EXECUTION_PROVEN": 7,
+    "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED->TIER_TRANSITIVELY_CALLED_FROM_REGISTERED": 5
+  },
+  "total_adjudications_applied": 13
+}

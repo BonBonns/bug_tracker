@@ -41,36 +41,55 @@ exploitability).
 candidates, matching `NAN_CAPABILITY_FREEZE.md`'s own real result, now reconfirmed through the
 fully-integrated live pipeline rather than the capability's own standalone dev/test harness.
 
-**1 of 6 negative controls -- real, disclosed gap, not a correctness defect**:
-`@confluentinc/kafka-javascript@1.10.0`'s real live run hit `RESOURCE_LIMIT` at 259.2s wall
-time -- the `nan_scan` stage exceeded the pipeline's own `SCAN_TIMEOUT` (90s at the default
-`NPM_CORPUS_TIMEOUT_MULTIPLIER=1`) on this exceptionally large real codebase (301 C++ files,
-including the full bundled `deps/librdkafka` C library) -- a real performance characteristic of
-`resource_guard_verdict_nan.py`'s own per-call, per-contract backward-trace loop at this scale,
-never stress-tested at this size during the capability's original 8-package development. The
-"zero false positives" conclusion for this SPECIFIC record still trivially holds (no
-`nan_findings` key exists on a `RESOURCE_LIMIT` record, so zero candidates were ever asserted
-either way) -- but the real, positive claim "kafka-javascript was fully scanned and confirmed
-negative under the now-integrated pipeline" is **NOT confirmed** by this run; only the original
-capability's own standalone-harness validation (`NAN_CAPABILITY_FREEZE.md`) reached that
-conclusion for this package. Not fixed in this round -- a performance tuning question
-(raising `SCAN_TIMEOUT` or `NPM_CORPUS_TIMEOUT_MULTIPLIER` for a future rerun of this one
-package specifically), explicitly out of scope for this integration step, disclosed rather than
-silently left ambiguous.
+## Update: kafka-javascript's own real, live run now CONFIRMED (Task 1 of 5, Nan-integration finalization)
+
+The original round above left `@confluentinc/kafka-javascript@1.10.0` as a real, disclosed gap
+(`RESOURCE_LIMIT` at 259.2s under the default `NPM_CORPUS_TIMEOUT_MULTIPLIER=1`). Per direct
+instruction ("complete or formally resource-limit the kafka-javascript negative control"), this
+was root-caused and RESOLVED, not merely re-disclosed:
+
+**Root cause, confirmed directly via per-stage timing, not guessed:** a real live rerun with
+`NPM_CORPUS_TIMEOUT_MULTIPLIER=6` (raising `SCAN_TIMEOUT` to 540s and `NORMALIZE_TIMEOUT` to
+1080s) reached `ANALYZED` in 498.8s total wall time. Per-stage breakdown: `c2cpg` 23.0s,
+`jssrc2cpg` 6.4s, `cpp_export` 36.2s, `js_export` 11.1s, **`cpp_normalize` 330.1s** (the real
+bottleneck -- exceeds the DEFAULT `NORMALIZE_TIMEOUT` of 180s by itself), `js_normalize` 3.6s,
+`polyglot_link` 48.5s, `r04_scan` 7.9s, `r05_scan` 11.2s, `r06_scan` 9.2s, **`nan_scan` 9.7s**.
+
+The real, disclosed finding: `nan_scan` itself is fast (9.7s, unremarkable at this codebase
+size) -- the ORIGINAL `RESOURCE_LIMIT` was never actually about `resource_guard_verdict_nan.py`'s
+own per-call backward-trace loop being slow at scale (the concern the first round's own
+disclosure speculated). It was `cpp_normalize` (`normalize_c_cpp_facts_v03.py`, a stage that
+existed and ran for every OTHER property long before Nan was integrated) exceeding its own
+DEFAULT 180s budget on this exceptionally large real codebase (301 C++ files, the full bundled
+`deps/librdkafka` C library) -- the exact same class of issue `run_pipeline_one.py`'s own
+`NORMALIZE_TIMEOUT` comment already documents for `re2` (127.6s real, hence the existing 180s
+default margin) -- kafka-javascript simply sits further along that same real spectrum (330.1s),
+past that margin. Not a Nan-specific defect; a pipeline-wide normalize-stage capacity question
+that happens to have blocked Nan's own negative-control confirmation as a side effect.
+
+**Real result: `nan_scan` produces 2 raw findings, ZERO reportable candidates.** Both raw
+findings are real `NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED` abstentions
+(the traced size argument's own `info[N]` origin could not be structurally resolved -- a real,
+disclosed abstention, never silently promoted). **This matches, byte-for-byte in verdict shape,
+kafka-javascript's own independent result from task 4's 97-package bundle replay**
+(`NAN_REPLAY_TASK4_RESULTS.md`: 2 raw findings, 0 reportable, same verdict) -- two independently-
+computed real results (a fresh live c2cpg/jssrc2cpg run here, vs. a bundle replay over
+previously-preserved facts there) agreeing exactly is real corroborating evidence for both.
+
+**Negative control status: 6/6 confirmed, 0 false positives.** No fix to
+`resource_guard_verdict_nan.py` itself was needed or made -- the capability's own logic was
+never the bottleneck.
 
 ## What this establishes
 
 - The wiring is real and correct: provenance, applicability, adjudication, and aggregation all
   correctly process `nan_findings`, proven against real corpus data, not just synthetic fixtures.
-- Node-snap7's 3 real candidates now flow end to end to `reportable=True` -- a real, novel
-  finding population this pipeline has never produced before, requiring the SAME rigor of manual
-  review the 5 staged transitive promotions already received (task #34's own
-  `TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md` precedent) before any claim beyond "eligible for
-  manual review" is made about them.
-- 5/6 negative controls reconfirmed clean; the 6th (`kafka-javascript`) remains unconfirmed under
-  the integrated pipeline due to a real, disclosed timeout, not a correctness gap.
+- Node-snap7's 3 real candidates now flow end to end to `reportable=True` -- since manually
+  adjudicated true positives, not merely eligible for review (`NODE_SNAP7_NAN_MANUAL_REVIEW.md`).
+- **All 6/6 negative controls are now confirmed clean** under the fully-integrated live
+  pipeline, including kafka-javascript -- the one remaining real gap from the original
+  integration round is closed.
 
 ---
-*Live validation only -- no Joern rebuild of the 100-package bundle sample (js_raw was never
-preserved in those bundles; a future replay of the 100-package sample under Nan, per roadmap
-step 5, will require either preserving js_raw in newly-generated bundles or a fresh live run).*
+*Live validation here; the preserved 97-package sample's own Nan replay (no Joern rebuild) is
+covered separately in `study/task34_replay/NAN_REPLAY_TASK4_RESULTS.md`.*

@@ -125,6 +125,71 @@ KNOWN_STAGED_ADJUDICATIONS = {
                    "primitive-wrapper shape as kafka-javascript's own mtx_lock/rwlock_rdlock, "
                    "confirmed independently on a second, unrelated real codebase."),
     },
+
+    # ROADMAP-STEP6-R01: the 13 real candidates newly promoted to reportable=True by
+    # TIER_CALLBACK_OR_WORKER_PROVEN/TIER_MODULE_LOAD_EXECUTION_PROVEN (study/task34_replay/
+    # rerun_aggregator_step6.py) -- manually reviewed per the SAME precedent as the 5 transitive
+    # promotions above, before any further work. Full account:
+    # study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md. All confirmed false positives; only
+    # the 6 with a real, unique site_identity (lock_call_id / oob_write's own site_id) are
+    # entered here -- oob_index_write_candidates has no populated site_id field (a real,
+    # disclosed, separate gap -- see the review doc's own "what this leaves open" section), so
+    # its own 7 candidates are documented as false positives there but deliberately NOT entered
+    # here (entering them keyed on a shared `None` site_identity would silently veto EVERY
+    # future oob_index_write_candidates finding for these two packages, not just the ones
+    # actually reviewed -- exactly the fuzzy-match this registry's own docstring forbids).
+    ("@fugood/whisper.node", "1.1.3", "lock_balance_findings", 30064821233): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("ggml_graph_compute_secondary_thread (whisper.cpp/ggml/src/ggml-cpu/"
+                   "ggml-cpu.c:3206), the real pthread_create worker entry point. The flagged "
+                   "pthread_mutex_lock(&threadpool->mutex) at :3219 sits inside an inner "
+                   "`while(threadpool->pause){...}` loop and is unconditionally matched by "
+                   "ggml_mutex_unlock_shared at :3225, the last statement before that loop's "
+                   "own closing brace -- every real path through the loop unlocks before the "
+                   "outer `if(threadpool->stop) break;`/`return` that follows it. A real CFG-"
+                   "precision gap (a nested nested-loop-then-break-then-return shape), not a "
+                   "missing unlock."),
+    },
+    ("smart-whisper", "0.8.1", "lock_balance_findings", 30064962166): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("The identical real function/shape as @fugood/whisper.node's own "
+                   "ggml_graph_compute_secondary_thread above (this package's own separate "
+                   "vendored copy of ggml, whisper.cpp/ggml/src/ggml.c) -- same real, confirmed "
+                   "CFG-precision false positive, independently re-verified against this "
+                   "package's own pinned source."),
+    },
+    ("@elchetz/cld", "2.8.5", "oob_write_candidates", "GetLanguageFromName:406:memcpy"): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("deps/cld/internal/lang_script.cc's own GetLanguageFromName: `char "
+                   "temp[16]`, guarded immediately above by `int len = strlen(src); if(len>=16) "
+                   "return UNKNOWN_LANGUAGE;`, so len < 16 always holds at every memcpy/offset "
+                   "write below it. `hyphen1_offset`/`hyphen2_offset` are `strchr()`-derived "
+                   "pointer offsets INTO src, so both are provably < len < 16. Real, in-bounds."),
+    },
+    ("@elchetz/cld", "2.8.5", "oob_write_candidates", "GetLanguageFromName:426:memcpy"): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("Same real len<16 guard and same-function analysis as :406 above -- "
+                   "`temp[hyphen2_offset] = '\\0'` with hyphen2_offset < len < 16."),
+    },
+    ("@elchetz/cld", "2.8.5", "oob_write_candidates", "GetLanguageFromName:434:memcpy"): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("Same real len<16 guard as :406/:426 above. `memcpy(&temp[hyphen1_offset], "
+                   "hyphen2, len2)` then `temp[hyphen1_offset+len2] = '\\0'` -- since "
+                   "hyphen2_offset > hyphen1_offset by construction (hyphen2 is found searching "
+                   "FROM hyphen1+1) and len2 = len - hyphen2_offset, hyphen1_offset + len2 < "
+                   "len < 16 always. Real, in-bounds."),
+    },
+    ("@elchetz/cld", "2.8.5", "oob_write_candidates", "GetLanguageFromName:442:memcpy"): {
+        "adjudication_status": "CONFIRMED_FALSE_POSITIVE",
+        "citation": "study/task34_replay/STEP6_PROMOTIONS_MANUAL_REVIEW.md",
+        "reason": ("Same real len<16 guard and same-function analysis as :406 above -- "
+                   "`temp[hyphen1_offset] = '\\0'` with hyphen1_offset < len < 16."),
+    },
 }
 
 _STAGED_SITE_ID_FIELD = {

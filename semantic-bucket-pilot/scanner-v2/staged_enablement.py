@@ -104,12 +104,41 @@ _STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_
 # candidates were independently re-derived hop-by-hop and confirmed clean before this tier was
 # implemented (study/task34_replay/validate_transitive_paths.py).
 #
-# TIER_CALLBACK_OR_WORKER_HEURISTIC and TIER_MODULE_LOAD_EXECUTION_HEURISTIC (task #34's own
-# reachability_deep_dive.py) are deliberately NOT added here -- per direct instruction, they
-# stay diagnostic-only until they have their own dedicated positive/negative/ambiguity controls,
-# not built as part of this change.
+# TIER_CALLBACK_OR_WORKER_PROVEN added here (ROADMAP-STEP6-R01, closing the deferral below).
+# reachability_deep_dive.py's own diagnostic-only CALLBACK_OR_WORKER_HEURISTIC bucket matched
+# ANY call with a function-reference argument -- confirmed, at real per-candidate granularity
+# (study/task34_replay/callback_worker_classifier_audit.py), that 118 of its own 124 real
+# matches (95%) were pure structural noise (a function pointer appearing as an operand of
+# `<operator>.arrayInitializer`/`.cast`/`.assignment`/`.addressOf`, never a real registration).
+# reachability_tier.TIER_CALLBACK_OR_WORKER_PROVEN is a NEW, narrower tier built from that same
+# audit's real evidence: it only fires when the function-reference argument's own outer call is
+# a real, cited, well-documented callback/worker-registration API (`reachability_tier.
+# CALLBACK_OR_WORKER_REGISTRATION_APIS` -- pthread_create, uv_queue_work, napi_create_async_work,
+# sqlite3_create_function/_v2/_create_window_function, sqlite3_exec, CreateThread, thrd_create),
+# never "any function-reference argument, any outer call." check_reachability_tier.py's own
+# positive/negative/ambiguity controls (added alongside this) prove: a real pthread_create-
+# shaped call promotes; the exact same shape with an unlisted outer call name (the structural-
+# noise pattern the audit found) does NOT promote; an unlisted-but-plausible-looking API name
+# also does NOT promote (never guessed at, same discipline as Nan::SetMethod elsewhere).
+#
+# TIER_MODULE_LOAD_EXECUTION_PROVEN added here too (ROADMAP-STEP6-R01). Same "clean edge"
+# rigor as TIER_TRANSITIVELY_CALLED_FROM_REGISTERED, rooted at the addon's own real `Init`
+# function(s) instead of registered exports (`reachability_tier.find_clean_transitive_path` is
+# reused verbatim -- it was already root-set-agnostic). Real per-candidate audit (study/
+# task34_replay/module_load_classifier_audit.py) directly, hop-by-hop verified all 7 of the
+# original heuristic's own real occurrences (all one function, @elchetz/cld@2.8.5's own
+# GetLanguageFromName -- this round's only real corpus example of this tier in the current
+# 97-package sample): `Init -> Constants::getInstance() -> Constants::Constants() -> init() ->
+# initLanguages() -> CLD2::GetLanguageFromName(name)`, EVERY hop's own `candidate_target_ids`
+# resolving to exactly one real function id. This is a genuine lazy-singleton module-load-time
+# initialization chain -- NOT a static lookup table or any other structural false match (an
+# earlier draft of this comment wrongly assumed the latter before the hop-by-hop trace was
+# actually run; corrected here, not left standing). check_reachability_tier.py's own real smoke
+# test against this exact package confirms it end to end.
 _EXTERNALLY_REACHABLE_TIERS = {"TIER_JS_CALL_PROVEN", "TIER_REGISTERED_NOT_JS_CALLED",
-                                "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED"}
+                                "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED",
+                                "TIER_CALLBACK_OR_WORKER_PROVEN",
+                                "TIER_MODULE_LOAD_EXECUTION_PROVEN"}
 
 
 def enforce_staged_enablement(record):

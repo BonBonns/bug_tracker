@@ -119,8 +119,68 @@ from link_napi_facts import extract_napi_bindings, JsCallIndex, native_binding_r
 TIER_JS_CALL_PROVEN = "TIER_JS_CALL_PROVEN"
 TIER_REGISTERED_NOT_JS_CALLED = "TIER_REGISTERED_NOT_JS_CALLED"
 TIER_TRANSITIVELY_CALLED_FROM_REGISTERED = "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED"
+TIER_CALLBACK_OR_WORKER_PROVEN = "TIER_CALLBACK_OR_WORKER_PROVEN"
+TIER_MODULE_LOAD_EXECUTION_PROVEN = "TIER_MODULE_LOAD_EXECUTION_PROVEN"
 TIER_INTERNAL_UNREGISTERED = "TIER_INTERNAL_UNREGISTERED"
 REACHABILITY_UNRESOLVED = "REACHABILITY_UNRESOLVED"
+
+# ROADMAP-STEP6-R01 (validates and closes the "callback/worker" heuristic task #32's own
+# docstring left explicitly deferred -- see the TASK #32 REOPENED note above). Real audit, not
+# assumed: `study/task34_replay/callback_worker_classifier_audit.py` recomputed reachability_
+# deep_dive.py's own CALLBACK_OR_WORKER_HEURISTIC bucket at PER-CANDIDATE granularity (not the
+# corpus-wide Counter over every METHOD_REF anywhere, which mixes in non-candidate matches) --
+# of the 124 real staged candidates that bucket matched, 118 (95%) matched ONLY via a generic
+# operator (`<operator>.arrayInitializer` 62, `<operator>.cast` 29, `<operator>.assignment` 12,
+# `<operator>.addressOf` 7, `<operator>.conditional`/`<operator>.multiplication`/`<operator>.
+# notEquals` 2 each) -- a function pointer merely appearing as an OPERAND (a static dispatch
+# table entry, a cast, an assignment), never a real callback/worker registration. This confirms,
+# with real per-candidate evidence, why the original module deferred this heuristic rather than
+# trusting it wholesale. Only 6 real candidates matched a genuine, well-documented callback/
+# worker-registration API -- `CALLBACK_OR_WORKER_REGISTRATION_APIS` below is exactly that
+# allowlist, each entry a real, standard, cited API whose own documented contract is "the
+# referenced function IS invoked later, by this API's own real machinery" -- never assumed,
+# never broadened to "any call with a function-reference argument" (that broader shape is
+# EXACTLY the false-positive-prone heuristic this fixes). An unlisted outer-call name (even a
+# single-occurrence one seen in the real audit, e.g. `rd_kafka_assignor_add`, `New`, `getindex`,
+# `thread`, `get_apple_string`, `get_win_string`) is deliberately left OUT rather than guessed
+# at -- same discipline this module's own docstring already applies to `Nan::SetMethod`.
+CALLBACK_OR_WORKER_REGISTRATION_APIS = {
+    # POSIX/C11 threading -- the `start_routine`/`func` argument is the new thread's own real
+    # entry point, invoked unconditionally by the OS/runtime the moment the thread starts.
+    "pthread_create", "thrd_create",
+    # libuv -- `uv_queue_work(loop, req, work_cb, after_work_cb)` genuinely invokes `work_cb` on
+    # a worker thread and `after_work_cb` on the event loop once it completes; this is libuv's
+    # own core, documented async-work contract, not an app-specific idiom.
+    "uv_queue_work",
+    # N-API's own async-work API -- the direct N-API analogue of uv_queue_work, same real
+    # contract (`execute`/`complete` callbacks genuinely invoked).
+    "napi_create_async_work", "napi_create_threadsafe_function",
+    # SQLite's own public C API -- `xFunc`/`xStep`/`xFinal` registered via `sqlite3_create_
+    # function[_v2]`/`sqlite3_create_window_function` are genuinely invoked by SQLite's query
+    # engine whenever the registered SQL function name appears in a query; `sqlite3_exec`'s own
+    # `callback` argument is genuinely invoked once per result row -- both real, standard,
+    # documented SQLite C API contracts (confirmed directly against 2 real corpus sightings each
+    # of sqlite3_create_function/sqlite3_exec, @appthreat/sqlite3's own vendored SQLite
+    # amalgamation, in the audit above).
+    "sqlite3_create_function", "sqlite3_create_function_v2", "sqlite3_create_window_function",
+    "sqlite3_exec",
+    # Win32 -- `CreateThread`'s own `lpStartAddress` is the new thread's real entry point, same
+    # real contract as pthread_create for the POSIX side.
+    "CreateThread",
+}
+
+# ROADMAP-STEP6-R01, module-load execution: `study/task34_replay/module_load_classifier_audit.py`
+# re-derived reachability_deep_dive.py's own MODULE_LOAD_EXECUTION_HEURISTIC bucket with the
+# SAME "clean edge" rigor `find_clean_transitive_path` already applies for registered-export
+# roots -- here applied with the addon's own `Init` function(s) as the root set instead. Real
+# result, directly hop-by-hop verified against @elchetz/cld@2.8.5's own real cpp_facts.json (the
+# bucket's only real occurrence in the current 97-package sample, 7 candidate rows all the same
+# one real function): `Init -> Constants::getInstance() -> Constants::Constants() -> init() ->
+# initLanguages() -> CLD2::GetLanguageFromName(name)`, EVERY hop's own `candidate_target_ids`
+# resolving to exactly one real function id (confirmed, not assumed) -- a genuine lazy-singleton
+# module-load-time initialization chain, not a static lookup table or any other structural false
+# match. `find_clean_transitive_path` (below) is reused verbatim with `init_ids` as the root set
+# -- it is already root-set-agnostic, so no new BFS implementation is needed.
 
 # Real preference order among native_binding_receiver_evidence's own real tiers, strongest
 # first -- used only to pick which linked call is reported as the SAMPLE evidence when more
@@ -277,6 +337,55 @@ def build_clean_call_edges(cpp):
     return edges
 
 
+def resolve_method_ref_targets(cpp):
+    """Self-contained port of `study/task34_replay/reachability_deep_dive.
+    resolve_method_ref_targets` (ROADMAP-STEP6-R01) -- copied rather than imported for the same
+    reason `extract_instancemethod_bindings()` above is a self-contained port, not an import:
+    this module must not pull in a `study/` script as a runtime dependency. Best-effort
+    resolution of METHOD_REF-kind call arguments (a function referenced BY NAME, passed as a
+    value -- e.g. to a worker/callback-registration API) to a real function id in this same
+    package, matched by bare name, preferring a same-file candidate to disambiguate a common
+    short name. Zero or multiple candidates -> left unresolved, never guessed. Returns
+    {referenced_function_id: [(caller_call_id, outer_call_name), ...]}."""
+    fns_by_name = {}
+    for f in cpp.get("functions", []):
+        fns_by_name.setdefault(f["name"], []).append(f)
+
+    refs = {}
+    for c in cpp.get("calls", []):
+        for a in c.get("arguments") or []:
+            if a.get("kind") != "METHOD_REF":
+                continue
+            bare = (a.get("code") or a.get("name") or "").strip()
+            if not bare:
+                continue
+            candidates = fns_by_name.get(bare, [])
+            if len(candidates) == 1:
+                target = candidates[0]
+            elif len(candidates) > 1:
+                same_file = [f for f in candidates if f.get("file") == c.get("file")]
+                target = same_file[0] if len(same_file) == 1 else None
+            else:
+                target = None
+            if target is not None:
+                refs.setdefault(target["id"], []).append((c.get("id"), c.get("name")))
+    return refs
+
+
+def find_callback_or_worker_registration(method_ref_targets, function_id):
+    """Real, narrow check (ROADMAP-STEP6-R01): does `function_id` appear as a METHOD_REF
+    argument to a call whose own name is in the disclosed `CALLBACK_OR_WORKER_REGISTRATION_
+    APIS` allowlist? Returns (call_id, outer_call_name) for the first such match (deterministic:
+    `method_ref_targets`'s own list order, itself `cpp['calls']`'s own real iteration order), or
+    None. Deliberately does NOT match an unlisted outer call name, however plausible-looking --
+    see the allowlist's own module-level comment for why "any call with a function-reference
+    argument" is exactly the false-positive-prone shape this function refuses to be."""
+    for call_id, outer_name in method_ref_targets.get(function_id, ()):
+        if outer_name in CALLBACK_OR_WORKER_REGISTRATION_APIS:
+            return call_id, outer_name
+    return None
+
+
 def find_clean_transitive_path(clean_edges, registered_ids, function_id):
     """Real BFS shortest path, over ONLY clean_call_edges, from any id in `registered_ids` to
     `function_id`. Returns the real path as a list of {caller_id, caller_name, callee_id,
@@ -309,7 +418,8 @@ def find_clean_transitive_path(clean_edges, registered_ids, function_id):
 
 
 def classify_function_reachability(function_id, table, linked, facts_available,
-                                    clean_edges=None, fn_names=None):
+                                    clean_edges=None, fn_names=None, method_ref_targets=None,
+                                    init_ids=None):
     """Core tier decision for ONE native function id. `table` (from
     `build_registration_table`), `linked` (from `link_js_calls`), and `facts_available` (False
     iff the package's own js/cpp facts were themselves too thin to classify at all -- e.g. no
@@ -318,8 +428,17 @@ def classify_function_reachability(function_id, table, linked, facts_available,
     and `fn_names` (function_id -> full_name, for real evidence, never required -- both default
     to empty/None so existing callers that only care about the first three tiers keep working
     unchanged) enable the TIER_TRANSITIVELY_CALLED_FROM_REGISTERED check (task #32's reopened
-    scope). Returns {"reachability_status", "reachability_evidence"} -- the latter is None for
-    the tiers that carry no additional real evidence beyond the tier itself."""
+    scope). `init_ids` (the addon's own real `Init` function id(s), also optional/None-default)
+    enables TIER_MODULE_LOAD_EXECUTION_PROVEN via the SAME `clean_edges`/`find_clean_transitive_
+    path` machinery, just rooted at `init_ids` instead of `registered_ids` -- checked BEFORE
+    the callback/worker tier: a clean, single-target-resolved call chain proves the function
+    genuinely, unconditionally executes once at module load, a stronger claim than "referenced
+    by a callback/worker-registration API" (which only proves eventual invocation, not that it
+    already happened). `method_ref_targets` (from `resolve_method_ref_targets`, also optional/
+    None-default) enables TIER_CALLBACK_OR_WORKER_PROVEN (ROADMAP-STEP6-R01), checked last,
+    before falling back to TIER_INTERNAL_UNREGISTERED. Returns {"reachability_status",
+    "reachability_evidence"} -- the latter is None for the tiers that carry no additional real
+    evidence beyond the tier itself."""
     if not facts_available:
         return {"reachability_status": REACHABILITY_UNRESOLVED, "reachability_evidence": None}
 
@@ -340,6 +459,25 @@ def classify_function_reachability(function_id, table, linked, facts_available,
                             "root_registered_function_id": root_id,
                             "root_js_binding_name": root_binding_name,
                             "path_length_hops": len(path), "path": path}}
+        if clean_edges is not None and init_ids:
+            path = find_clean_transitive_path(clean_edges, init_ids, function_id)
+            if path is not None:
+                fn_names = fn_names or {}
+                for hop in path:
+                    hop["caller_name"] = fn_names.get(hop["caller_id"])
+                    hop["callee_name"] = fn_names.get(hop["callee_id"])
+                return {"reachability_status": TIER_MODULE_LOAD_EXECUTION_PROVEN,
+                        "reachability_evidence": {
+                            "root_init_function_id": path[0]["caller_id"],
+                            "path_length_hops": len(path), "path": path}}
+        if method_ref_targets is not None:
+            hit = find_callback_or_worker_registration(method_ref_targets, function_id)
+            if hit is not None:
+                call_id, outer_name = hit
+                return {"reachability_status": TIER_CALLBACK_OR_WORKER_PROVEN,
+                        "reachability_evidence": {
+                            "registration_call_id": call_id,
+                            "registration_api_name": outer_name}}
         return {"reachability_status": TIER_INTERNAL_UNREGISTERED, "reachability_evidence": None}
 
     matches = [l for l in linked if l["cpp_function_id"] == function_id]
@@ -378,6 +516,9 @@ def classify_record_reachability(record, js, cpp):
     linked, _unlinked = link_js_calls(js, cpp, table) if facts_available else ([], [])
     clean_edges = build_clean_call_edges(cpp) if facts_available else {}
     fn_names = {f["id"]: f.get("full_name") for f in cpp.get("functions", [])} if facts_available else {}
+    method_ref_targets = resolve_method_ref_targets(cpp) if facts_available else {}
+    init_ids = ({f["id"] for f in cpp.get("functions", []) if f.get("name") == "Init"}
+                if facts_available else set())
 
     for key, id_field in _ID_FIELD_BY_KEY.items():
         for f in record.get(key) or []:
@@ -387,5 +528,6 @@ def classify_record_reachability(record, js, cpp):
                 f["reachability_evidence"] = None
                 continue
             f.update(classify_function_reachability(
-                fid, table, linked, facts_available, clean_edges, fn_names))
+                fid, table, linked, facts_available, clean_edges, fn_names,
+                method_ref_targets, init_ids))
     return record

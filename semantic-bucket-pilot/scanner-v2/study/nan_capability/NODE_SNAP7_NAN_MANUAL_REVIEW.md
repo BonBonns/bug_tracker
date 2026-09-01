@@ -110,6 +110,51 @@ out-of-bounds write beyond that allocation.
 **Verdict: TRUE for both. Real static candidates**, correctly reported at the weaker
 `exported_registration` tier (disclosed as such, never conflated with a confirmed call).
 
+## 4. Nan's own allocation-failure behavior -- confirmed directly against `nan.h`, not trusted from prior design notes
+
+`node-snap7@1.0.9` declares `"nan": "^2.23.0"` in its own `package.json` `dependencies`. Fetched
+`nan@2.23.0` directly from the npm registry (hash-verified against its own real `shasum`,
+`24aa4ddffcc37613a2d2935b97683c1ec96093c6`) and read the exact `Nan::NewBuffer(char*, size_t,
+FreeCallback, void*)` overload all three findings call (`nan.h:903-921`):
+
+```cpp
+inline MaybeLocal<v8::Object> NewBuffer(
+    char *data, size_t length, node::Buffer::FreeCallback callback, void *hint) {
+  assert(length <= imp::kMaxLength && "too large buffer");   // kMaxLength = 0x3fffffff (~1.07GB)
+  return node::Buffer::New(v8::Isolate::GetCurrent(), data, length, callback, hint);
+}
+```
+
+Two real, confirmed facts about this exact code: (1) the `assert()` is a standard C `assert` --
+compiled out entirely under `NDEBUG`, which is what a normal, non-debug `node-gyp build`
+(the standard install path for a published npm package) defines, so it provides **zero real
+protection** in the deployment that matters; (2) even when compiled in, it only rejects lengths
+above `~1.07GB` -- it would not catch a moderately large (e.g. 50MB) unwanted allocation at all.
+Beyond that point, `node::Buffer::New()` itself is the real, final arbiter: on an allocation it
+cannot satisfy, it returns an EMPTY `MaybeLocal`, and node-snap7's own call site
+(`node_snap7_client.cpp:1278` etc.) immediately calls `.ToLocalChecked()` on that result --
+V8's own real, documented `MaybeLocal::ToLocalChecked()` contract is to fatally abort the
+process when the `Maybe` is empty. **Practical impact, confirmed rather than assumed:** a
+caller-controlled `amount`/`info[2]` large enough to make the underlying allocation fail (well
+below `INT32_MAX`, and with no assert to catch it in a real release build) crashes the Node.js
+process hosting node-snap7 -- a real, unauthenticated (from the library's own perspective; the
+actual trust boundary is whatever passes `size` into `DBRead`/`Upload`/etc.) denial-of-service,
+not merely a theoretical one.
+
+## 5. Classification (confirmed candidate / false positive / unresolved)
+
+| Method | JS exposure & argument control | Size bound present? | Nan failure behavior | Classification |
+|---|---|---|---|---|
+| `ReadArea` | Confirmed: reachable via `DBRead`/`MBRead`/`EBRead`/`ABRead`/`TMRead`/`CTRead`, all of which forward their own caller-supplied `size` unvalidated | None -- only `IsInt32()` (any sign, any magnitude) | Real DoS on failed/oversized allocation (section 4) | **CONFIRMED CANDIDATE** |
+| `Upload` | Confirmed (weaker tier): reachable via the package's own unconditional `module.exports = require('bindings')(...)` whole-binding re-export; no internal caller uses it | None -- `info[2]` used directly as the allocation size, only `IsInt32()` checked | Same as above | **CONFIRMED CANDIDATE** |
+| `FullUpload` | Same as `Upload` | Same as `Upload` | Same as above | **CONFIRMED CANDIDATE** |
+
+All three: **CONFIRMED CANDIDATE**, zero **FALSE POSITIVE**s, zero left **UNRESOLVED**. Each
+criterion above (JS exposure/argument control, size bounds, Nan allocation-failure behavior and
+practical impact) was independently verified against the real, current pinned source and the
+real, current pinned `nan` dependency -- not inferred from the scanner's own structural output
+or from this session's earlier capability-design notes alone.
+
 ## Conclusion
 
 All three findings represent a real, consistent, structural gap in node-snap7@1.0.9: JS-
