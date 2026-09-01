@@ -1,0 +1,40 @@
+{
+  "subject": "Why @8crafter/leveldb-zlib@1.6.0 NextWorker::HandleOKCallback (the two STATUS_GUARD_MISSING sites, bindings.cpp:1440/1447) is classified TIER_INTERNAL_UNREGISTERED",
+  "method": "structural trace over the REAL normalized cpp facts (3411 functions / 31114 calls), not source reading; reproduced as a permanent regression on the distilled fixture_asyncworker_reach.cpp (frozen facts cpp_facts_asyncworker_reach.json, gate check_napi_status_reachability_asyncworker.py 9/9)",
+  "trace": {
+    "1_method_refs_to_HandleOKCallback": {
+      "count": 0,
+      "finding": "HandleOKCallback is NEVER passed as a METHOD_REF/address-of anywhere; it is only ever reached by virtual dispatch by name."
+    },
+    "2_worker_and_registration": {
+      "worker_class": "NextWorker (final, extends BaseWorker)",
+      "registration_call": "napi_create_async_work in BaseWorker::BaseWorker (bindings.cpp:279)",
+      "registered_callbacks": ["BaseWorker::Execute (METHOD_REF)", "BaseWorker::Complete (METHOD_REF)"],
+      "finding": "The registered async-work callbacks are the STATIC trampolines Execute/Complete -- NOT HandleOKCallback."
+    },
+    "3_construction_and_queue": {
+      "constructed_by": "NAPI_METHOD(iterator_next) at bindings.cpp:1493 (new NextWorker) + :1496 (worker->Queue())",
+      "queue_call": "napi_queue_async_work",
+      "finding": "iterator_next constructs and queues NextWorker, but the construct/Queue call nodes carry 0 candidate_target_ids in the facts (unresolved constructor/method targets) -- not clean single-target edges."
+    },
+    "4_registered_export": {
+      "export": "iterator_next (JS-facing NAPI_METHOD), registered in Init",
+      "note": "In the distilled fixture the simplified registration idiom is not matched by build_registration_table, but this does not change the conclusion: the chain breaks downstream regardless."
+    },
+    "5_exact_chain_and_the_break": {
+      "source_chain": "JS binding.iteratorNext -> iterator_next (export) -> new NextWorker + Queue -> napi_queue_async_work -> [async] BaseWorker::Complete (trampoline) -> DoComplete -> VIRTUAL HandleOKCallback -> the two napi_create_buffer_copy sites",
+      "fact_resolution_of_the_virtual_hop": "the call DoComplete -> HandleOKCallback resolves in the facts to a SINGLE, STATIC candidate: BaseWorker::HandleOKCallback (the BASE, bindings.cpp:332) -- NOT the derived NextWorker override",
+      "incoming_edges_to_NextWorker_HandleOKCallback": 0,
+      "break": "The polymorphic dispatch from the shared static trampoline to the SPECIFIC derived override is invisible to the frontend's call resolution. NextWorker::HandleOKCallback has no incoming call edge, so no clean transitive path from any registered root reaches it."
+    },
+    "6_abstention_categories_hit": [
+      "second-order callback handoff (HandleOKCallback is reached only THROUGH the Complete trampoline, not registered directly)",
+      "ambiguous/unmodeled virtual dispatch (DoComplete's virtual call binds to the base; the 5 overrides are not connected as derived-target edges)",
+      "unresolved callback storage / construction edges (new NextWorker and Queue carry 0 candidate targets)"
+    ]
+  },
+  "controlled_contrast": "On the frozen fixture facts: the async-work registration IS recognized -- Execute and Complete both classify TIER_CALLBACK_OR_WORKER_PROVEN -- yet NextWorker::HandleOKCallback (and even BaseWorker::HandleOKCallback) stay TIER_INTERNAL_UNREGISTERED. So the classification is specifically the second-order/virtual-dispatch break, not a failure to recognize napi_create_async_work.",
+  "verdict": "The facts CANNOT prove a unique JS-to-native chain to the finding site. Per the reachability tier's own discipline (exclude multi-candidate / unresolved edges; do not guess virtual targets) and the review's explicit instruction, NextWorker::HandleOKCallback stays TIER_INTERNAL_UNREGISTERED. NO reclassification to the callback/worker tier. It remains non-reportable.",
+  "next_step_gate": "Because reachability is NOT established, no controlled failure injection is performed. These remain two confirmed API return-code handling discrepancies, NOT confirmed vulnerabilities. No runtime behavior or security impact is established or claimed.",
+  "reproduce": "check_napi_status_reachability_asyncworker.py (9/9) over the frozen fixture facts; the real-package trace is reproducible with trace_handleok over regenerated leveldb cpp facts (see reproduce_full_pipeline_leveldb.py for the fact-build recipe)."
+}

@@ -1,0 +1,82 @@
+{
+ "classification": {
+  "STATUS_GUARD_MISSING": 2,
+  "SUPPORTED_CREATION_CALL_FOUND": 2
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064771097,
+   "creation_call_name": "napi_create_buffer_copy",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_asyncworker_reach.cpp",
+   "input_size_origin": {
+    "code": "key_.size()",
+    "kind": "unresolved"
+   },
+   "line": "76",
+   "method_id": 107374182412,
+   "method_name": "HandleOKCallback",
+   "output_targets": [
+    {
+     "arg_code": "0",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489280516,
+     "required": true,
+     "role": "result",
+     "variable": "returnKey"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "STATUS_DISCARDED",
+   "unguarded_use_line": "79",
+   "unguarded_use_node": 68719476767,
+   "unguarded_use_variable": "returnKey",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771104,
+   "creation_call_name": "napi_create_buffer_copy",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_asyncworker_reach.cpp",
+   "input_size_origin": {
+    "code": "value_.size()",
+    "kind": "unresolved"
+   },
+   "line": "78",
+   "method_id": 107374182412,
+   "method_name": "HandleOKCallback",
+   "output_targets": [
+    {
+     "arg_code": "0",
+     "arg_index": 4,
+     "opted_out": true,
+     "role": "result_data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489280517,
+     "required": true,
+     "role": "result",
+     "variable": "returnValue"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "STATUS_DISCARDED",
+   "unguarded_use_line": "80",
+   "unguarded_use_node": 68719476770,
+   "unguarded_use_variable": "returnValue",
+   "verdict": "STATUS_GUARD_MISSING"
+  }
+ ],
+ "proven_propagating_wrappers": [],
+ "schema": "napi-status-verdict/0.2",
+ "supported_calls": [
+  "napi_create_buffer",
+  "napi_create_buffer_copy"
+ ]
+}

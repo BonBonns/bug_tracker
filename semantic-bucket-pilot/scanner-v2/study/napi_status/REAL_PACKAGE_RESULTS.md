@@ -202,6 +202,43 @@ JavaScript-to-native path, so the reachability gate holds both findings non-repo
 Manual API-handling confirmation is explicitly NOT equated with JS exposure. These
 remain confirmed API return-handling discrepancies, not confirmed vulnerabilities.
 
+## Why HandleOKCallback is TIER_INTERNAL_UNREGISTERED (structural trace) -> stays unresolved
+
+The `TIER_INTERNAL_UNREGISTERED` classification was traced structurally over the real
+cpp facts (`HANDLEOK_REACHABILITY_TRACE.json`; reproduced as a permanent regression on
+`fixture_asyncworker_reach.cpp` / `raw_asyncworker_reach/` /
+`check_napi_status_reachability_asyncworker.py`, 9/9). The finding site is
+`NextWorker::HandleOKCallback` (a NAN/napi async-worker override). The source chain is
+real: `iteratorNext` (JS) -> `iterator_next` export -> `new NextWorker` + `Queue()` ->
+`napi_queue_async_work` -> [async] `BaseWorker::Complete` (static trampoline) ->
+`DoComplete` -> **virtual** `HandleOKCallback` -> the two sites. But the facts cannot
+prove it:
+
+1. **Zero** METHOD_REF/address-of references to `HandleOKCallback` -- it is never a
+   callback reference; only the static trampolines `Execute`/`Complete` are.
+2. `napi_create_async_work` registers `Execute`/`Complete`, **not** `HandleOKCallback`.
+3. `new NextWorker` and `Queue()` carry **0** candidate targets (unresolved edges).
+4. **The break:** `DoComplete -> HandleOKCallback` resolves in the facts to a **single,
+   static candidate -- the BASE `BaseWorker::HandleOKCallback`**, not the derived
+   override. `NextWorker::HandleOKCallback` has **no incoming call edge at all**; the
+   polymorphic hop to the derived override is invisible to the frontend.
+5. Abstention categories hit: second-order callback handoff (reached only through the
+   `Complete` trampoline), ambiguous/unmodeled virtual dispatch (base-bound), and
+   unresolved construction/queue edges.
+
+**Controlled contrast (frozen fixture):** the async-work registration IS recognized --
+`Execute`/`Complete` both classify `TIER_CALLBACK_OR_WORKER_PROVEN` -- yet
+`NextWorker::HandleOKCallback` stays `TIER_INTERNAL_UNREGISTERED`. So the classification
+is specifically the second-order/virtual-dispatch break, not a failure to see
+`napi_create_async_work`.
+
+**Verdict:** the facts cannot prove a unique JS-to-native chain to the site, so it
+**stays internal/unresolved** -- no reclassification to the callback/worker tier, and
+it remains non-reportable. **Because reachability is not established, no controlled
+failure injection is performed:** these remain two confirmed API return-code handling
+discrepancies, NOT confirmed vulnerabilities. No runtime behavior or security impact is
+established or claimed.
+
 ## Live provenance gate: REPAIRED and passing (51/51)
 
 `check_provenance.py` failed only because its hardcoded `JOERN_HOME` pointed at the
