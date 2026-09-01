@@ -18,7 +18,7 @@ import time
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SCANNER_V2 = os.path.dirname(os.path.dirname(HERE))
+SCANNER_V2 = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 SELECTION_PATH = os.path.join(HERE, "pilot25_selection.json")
 RESULTS_PATH = os.path.join(HERE, "pilot25_results.json")
 
