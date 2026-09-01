@@ -251,16 +251,55 @@ full download->c2cpg->export->normalize->jssrc2cpg->export->link pipeline to ANA
 and reproduces the real Easy::ReadFunction finding. Not waived -- genuinely run and
 recorded. Recipe: `../TOOLCHAIN_MAVEN_ASSEMBLY.md`.
 
+## Provenance correction: full package-root manifest, conservative suffix reconciliation
+
+**Correction applied (per review): an earlier pass narrowed `pkg_dir` to `src/` to make
+the raw `bindings.cpp` field match trivially -- this silently changed the MEANING of
+`source_tree_sha256` (no longer the complete package tree) and is wrong.** Fixed
+properly: `pkg_dir`/the provenance manifest are always the FULL extracted package root
+(208 real files; `source_tree_sha256` computed over the complete tree, unchanged by this
+fix everywhere else in the pipeline). `napi_status_integration.reconcile_source_path`
+(gate: `check_provenance_reconciliation.py`, 13/13) reconciles a raw methods.tsv file
+field against the full manifest conservatively: exact path first; else a unique
+path-suffix match (canonicalized to the real manifest path, e.g. `src/bindings.cpp`);
+**abstains as `AMBIGUOUS_SOURCE_PATH`** (never guesses) when two or more real files share
+the same suffix/basename; an unmatched field falls through to the existing
+`PATH_NOT_IN_MANIFEST` reason, unchanged. Both findings' provenance re-verified RESOLVED
+under this corrected, full-tree manifest (see `COMBINED_LEVELDB_RESULT.json`).
+
+## Real pinned-addon runtime test (per review: build the real addon, real interposition)
+
+**Correction applied: the earlier failure-injection result (hand-seeded stub, deterministic
+sentinel) is relabeled `MODEL_FAILURE_PATH_CONFIRMED`** -- a useful sanity check of the
+control-flow shape, not a runtime observation of the actual package. The harder proof was
+then completed: the REAL pinned `linux-6-x64` prebuilt addon, loaded and driven through
+the package's real public JS API (`db.open()` -> `db.put()` -> `db.getIterator()` ->
+`it.next()`, the real `iterator_next` path), with `napi_create_buffer_copy` forced to fail
+via test-only `LD_AUDIT` symbol-bind interposition (LD_PRELOAD was tried first and found
+ineffective against this specific node binary, documented honestly).
+
+**Result: the real addon reproducibly CRASHES (SIGSEGV, exit 139)** when the two flagged
+sites' `napi_create_buffer_copy` calls fail -- baseline and a pass-through audit-machinery
+control both exit 0, isolating the forced failure as the cause. A bounded `gdb -batch`
+backtrace shows the exact real chain: `NextWorker::HandleOKCallback` ->
+`napi_set_element` -> V8's `Object::Set`/`AddDataProperty`/`AddDataElement`, crashing
+where the unavailable output is used. See `REAL_ADDON_TEST_RESULT.md` for the full setup,
+all four run logs, and the backtrace. **No security impact, severity, or exploitability
+is inferred from this outcome** -- it is a bounded, reproducible reliability/crash
+observation only.
+
 ## Honest classification (updated)
 
 ```
-Analyzer logic:                 validated
-Real supported-call recognition: validated
-Real positive API-handling path: validated (@8crafter/leveldb-zlib, frozen regression)
-Full JS-to-native pipeline:      RECORDED -- both findings blocked by reachability
-                                 (TIER_INTERNAL_UNREGISTERED), non-reportable
-Live provenance gate:            REPAIRED -- real 51/51 pass on the Maven toolchain
-Security impact:                 not assessed (out of scope)
+Confirmed static API-handling discrepancies:      yes
+Complete JS-to-native reachability:                yes (three-proof virtual tier)
+Reportability:                                     yes (corrected, full-package-root
+                                                    provenance; both findings resolved)
+Modeled failure-path consequence:                  yes (MODEL_FAILURE_PATH_CONFIRMED)
+Actual pinned-addon failure-path consequence:      yes -- reproducible SIGSEGV (exit 139)
+                                                    in the real addon, real JS path,
+                                                    bounded LD_AUDIT interposition
+Confirmed vulnerability:                           no claim made
 ```
 
 ## Integration status (NAPI-STATUS-INTEGRATION-R01, per review)

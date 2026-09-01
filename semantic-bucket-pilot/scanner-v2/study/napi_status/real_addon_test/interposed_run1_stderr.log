@@ -1,0 +1,21 @@
+[audit] la_version v=2
+[audit] la_objopen: (main)
+[audit] la_objopen: /lib64/ld-linux-x86-64.so.2
+[audit] la_objopen: linux-vdso.so.1
+[audit] la_objopen: /lib/x86_64-linux-gnu/libc.so.6
+[audit] la_version v=2
+[audit] la_objopen: (main)
+[audit] la_objopen: /lib64/ld-linux-x86-64.so.2
+[audit] la_objopen: linux-vdso.so.1
+[audit] la_objopen: /lib/x86_64-linux-gnu/libdl.so.2
+[audit] la_objopen: /lib/x86_64-linux-gnu/libstdc++.so.6
+[audit] la_objopen: /lib/x86_64-linux-gnu/libm.so.6
+[audit] la_objopen: /lib/x86_64-linux-gnu/libgcc_s.so.1
+[audit] la_objopen: /lib/x86_64-linux-gnu/libpthread.so.0
+[audit] la_objopen: /lib/x86_64-linux-gnu/libc.so.6
+[audit] la_objopen: /tmp/claude-0/-home-user-bug-tracker/63b70e5a-75d3-5da2-ae81-e00961287c6e/scratchpad/val10/@8crafter__leveldb-zlib/pkg/package/prebuilds/linux-6-x64/node-leveldb.node
+[audit] la_objopen: /lib/x86_64-linux-gnu/libz.so.1
+[audit] symbind: napi_create_buffer_copy -> 0xf52d90
+[audit-interpose] redirecting napi_create_buffer_copy bind (orig addr 0xf52d90) -> forced_fail_buffer_copy
+[audit-interpose] napi_create_buffer_copy(length=2) FORCED FAILURE (output left untouched)
+[audit-interpose] napi_create_buffer_copy(length=2) FORCED FAILURE (output left untouched)

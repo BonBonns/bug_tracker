@@ -1,8 +1,8 @@
 {
-  "claims_boundary": "reportable=True means eligible gated scanner candidate, never a confirmed vulnerability or impact claim. Reachability establishes a JS-to-native path exists; it does not establish runtime harm.",
-  "composition_note": "Combined by feeding napi_export_root's root_reachable predicate into the FROZEN promote_gated_by_root. Nothing frozen modified; promote_gated_by_root not weakened. New revision defines its own EXTENDED reachable-tier set.",
-  "facts": "raw_leveldb_export_hdr (bindings.cpp compiled WITH node headers staged so NAPI_EXPORT_FUNCTION expands; both the export chain and the async-worker chain present)",
-  "outcome": "BOTH findings clear provenance + reachability (via the three-proof virtual tier) + applicability + adjudication, and are reportable-eligible. The precondition for bounded failure injection is met.",
+  "claims_boundary": "reportable=True means eligible gated scanner candidate, never a confirmed vulnerability or impact claim.",
+  "correction_applied": "pkg_dir/manifest are the FULL extracted package root (208 real files; source_tree_sha256 computed over the complete tree), never narrowed to src/. methods.tsv's raw file field ('bindings.cpp') is reconciled against the full manifest by conservative suffix matching (napi_status_integration.reconcile_source_path, PROV_RECONCILE_R01 gate 13/13) -> uniquely resolves to the real 'src/bindings.cpp', stored as the canonical source_path. A duplicate-basename match would abstain as AMBIGUOUS_SOURCE_PATH instead of guessing.",
+  "manifest_file_count": 208,
+  "outcome": "BOTH findings clear provenance (RESOLVED under the full-package-root manifest, canonical path src/bindings.cpp) + reachability (three-proof virtual tier) + applicability + adjudication, and are reportable-eligible.",
   "per_finding": [
     {
       "adjudication_status": "NOT_ADJUDICATED",
@@ -10,11 +10,12 @@
       "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
       "line": "1440",
       "method": "HandleOKCallback",
+      "provenance_hint": "PACKAGE_OWNED_HINT",
       "provenance_resolved": true,
       "reachability_status": "TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN",
       "reportable": true,
       "scanner_candidate": true,
-      "source_path": "bindings.cpp",
+      "source_path": "src/bindings.cpp",
       "use_line": "1453",
       "use_variable": "returnKey"
     },
@@ -24,16 +25,18 @@
       "content_hash": "72211d5076c554ec43f2e53dd1c4a827d0f6d219222cafae55c18ca45cbde511",
       "line": "1447",
       "method": "HandleOKCallback",
+      "provenance_hint": "PACKAGE_OWNED_HINT",
       "provenance_resolved": true,
       "reachability_status": "TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN",
       "reportable": true,
       "scanner_candidate": true,
-      "source_path": "bindings.cpp",
+      "source_path": "src/bindings.cpp",
       "use_line": "1454",
       "use_variable": "returnValue"
     }
   ],
-  "subject": "NAPI-REACHABILITY-COMBINED-R01: three-proof final promotion on real header-expanded @8crafter/leveldb-zlib@1.6.0",
+  "source_tree_sha256": "4e1f65952c186382...(full package-root hash)",
+  "subject": "NAPI-REACHABILITY-COMBINED-R01: three-proof final promotion, CORRECTED to the full package-root provenance manifest",
   "three_proofs_required": [
     "export root established (napi_export_root)",
     "async registration/object identity established (virtual_dispatch, frozen)",

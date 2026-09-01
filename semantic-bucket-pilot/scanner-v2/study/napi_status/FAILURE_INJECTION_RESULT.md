@@ -1,4 +1,17 @@
-# Bounded failure-injection result — @8crafter/leveldb-zlib NextWorker::HandleOKCallback
+# Model failure-path result — @8crafter/leveldb-zlib NextWorker::HandleOKCallback
+
+**Correction applied (per review): this section's original claim was overstated.**
+Seeding the stub's output with a disclosed sentinel and using a hand-written stub for
+`napi_create_buffer_copy` proves the CONTROL-FLOW MODEL's behavior on failure — it does
+**not** run the real pinned addon, and it observes a known sentinel rather than an actual
+indeterminate stack value. The correct classification is:
+
+```
+MODEL_FAILURE_PATH_CONFIRMED
+```
+
+— not "actual package runtime consequence confirmed." See "Real pinned-addon test" below
+for the separate, harder proof that classification calls for.
 
 Run ONLY after the two `napi_create_buffer_copy` `STATUS_GUARD_MISSING` findings cleared
 every gate — provenance, reachability (three-proof `TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN`),
@@ -34,9 +47,21 @@ succeeded.
 
 ## Claims boundary (unchanged, load-bearing)
 
-This is a **runtime observation of return-code handling only**. It is NOT an exploit, and
+This is a **model observation of return-code handling only**. It is NOT an exploit, and
 NO security impact, severity, exploitability, or attacker-control claim is made or
-established. The two sites remain **confirmed API return-code handling discrepancies**,
-now with a confirmed runtime control-flow consequence (an unavailable output is used on
-the failure path) — not confirmed vulnerabilities. Whether any real-world harm follows is
-a separate, unestablished question outside this reliability analysis.
+established. The result is `MODEL_FAILURE_PATH_CONFIRMED`: the hand-written stub, under
+a disclosed seeded sentinel, shows the modeled control-flow shape uses an unavailable
+output on the failure path — a useful, deterministic sanity check of the static finding's
+shape, but not yet a runtime observation of the actual pinned addon.
+
+## Real pinned-addon test (attempted; see outcome below)
+
+To reach an actual "runtime consequence confirmed in the real addon" classification, the
+review specifies: build the pinned `@8crafter/leveldb-zlib@1.6.0` native addon; use
+test-only interposition at the N-API boundary to force ONLY the two relevant
+`napi_create_buffer_copy` call sites to fail without writing their output; invoke the
+real exported `iterator_next` from JavaScript; observe whether the real code proceeds to
+`napi_set_element`; keep the run bounded and record exit status / emitted N-API error /
+assertion / sanitizer output; infer no security impact from the outcome. See
+`REAL_ADDON_TEST_RESULT.md` for what was attempted and the honest outcome in this
+environment.

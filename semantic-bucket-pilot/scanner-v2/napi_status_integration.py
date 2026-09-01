@@ -116,6 +116,70 @@ def effective_function_id(f):
     return f.get("caller_method_id", f.get("method_id"))
 
 
+def _norm_sep(p):
+    return (p or "").replace("\\", "/").lstrip("./")
+
+
+def reconcile_source_path(raw_file_field, manifest_files):
+    """PROV-RECONCILE-R01: conservative path reconciliation over the FULL package-root
+    manifest (never a narrowed pkg_dir -- source_tree_sha256 must cover the complete
+    extracted tree, so the manifest passed in here is always built from the real package
+    root). Joern's own methods.tsv filename field is sometimes the full package-relative
+    path, sometimes only a basename or a shortened suffix (observed real behavior, not
+    assumed) -- this never guesses among several candidates:
+
+      1. Exact package-relative path match (normalized separators) -> use it.
+      2. Else: every manifest path whose OWN trailing path components equal the field's
+         (a "suffix match" -- 'bindings.cpp' matches '.../src/bindings.cpp', not
+         '.../other/bindings.cpp' with extra components in between).
+      3. Exactly one suffix match -> resolved to that manifest path (canonical, e.g.
+         'src/bindings.cpp').
+      4. Zero matches -> unresolved (falls through to provenance.enrich_finding's own
+         PATH_NOT_IN_MANIFEST/FILE_NOT_FOUND reasons -- nothing invented here).
+      5. Two or more matches sharing the same basename/suffix -> ABSTAIN
+         (AMBIGUOUS_SOURCE_PATH), never resolved to any one of them.
+
+    Returns (resolved_relpath_or_None, ambiguous: bool).
+    """
+    field = _norm_sep(raw_file_field)
+    if not field:
+        return None, False
+    if field in manifest_files:
+        return field, False
+    field_parts = tuple(p for p in field.split("/") if p)
+    matches = []
+    for mpath in manifest_files:
+        mparts = tuple(p for p in _norm_sep(mpath).split("/") if p)
+        if 0 < len(field_parts) <= len(mparts) and mparts[-len(field_parts):] == field_parts:
+            matches.append(mpath)
+    if len(matches) == 1:
+        return matches[0], False
+    if len(matches) > 1:
+        return None, True
+    return None, False
+
+
+def _reconcile_method_file_map(method_file_map, manifest_files):
+    """Returns (reconciled_map, ambiguous_ids). reconciled_map replaces a raw file field
+    with its resolved canonical manifest path where reconciliation found exactly one
+    match; fields that already match exactly, or that match nothing, pass through
+    unchanged (provenance.enrich_finding's own existing reasons apply to the latter).
+    `ambiguous_ids` names every function id whose field matched MORE than one real file
+    -- the caller must force those unresolved with AMBIGUOUS_SOURCE_PATH."""
+    reconciled = {}
+    ambiguous_ids = set()
+    for fid, raw_field in method_file_map.items():
+        resolved, ambiguous = reconcile_source_path(raw_field, manifest_files)
+        if ambiguous:
+            ambiguous_ids.add(fid)
+            reconciled[fid] = raw_field  # unchanged; overridden to unresolved by caller
+        elif resolved is not None:
+            reconciled[fid] = resolved
+        else:
+            reconciled[fid] = raw_field
+    return reconciled, ambiguous_ids
+
+
 def _site_id(f):
     base = (f"{f.get('method_name')}:{f.get('file')}:{f.get('line')}:"
             f"{f.get('creation_call_name')}")
@@ -146,9 +210,16 @@ def enrich_napi_status(record, cpp_raw_dir, manifest, pkg_dir):
     enter provenance enrichment). Uses the EFFECTIVE function id, so a caller-side
     finding's source_path/content_hash are the caller's -- where the cited use is.
     Attaches site_id (stable textual identity) and candidate_vocabulary (the loud
-    fail-closed classification). Returns the count of vocabulary-unrecognized
-    records so a driver can gate on zero."""
+    fail-closed classification). PROV-RECONCILE-R01: `pkg_dir`/`manifest` MUST be the
+    full extracted package root (never narrowed to a subdirectory -- source_tree_sha256
+    must cover the complete tree); a raw methods.tsv file field that doesn't match the
+    manifest exactly is reconciled against it by conservative suffix matching
+    (`reconcile_source_path`), abstaining as AMBIGUOUS_SOURCE_PATH when more than one
+    real file shares the same suffix, rather than guessing. Returns the count of
+    vocabulary-unrecognized records so a driver can gate on zero."""
     method_file_map = provenance.load_method_file_map(cpp_raw_dir)
+    reconciled_map, ambiguous_ids = _reconcile_method_file_map(
+        method_file_map, manifest.get("files", {}))
     unrecognized = 0
     for f in record.get(NAPI_STATUS_KEY) or []:
         vocab = classify_candidate(f)
@@ -156,8 +227,14 @@ def enrich_napi_status(record, cpp_raw_dir, manifest, pkg_dir):
         if vocab == "CANDIDATE_VOCABULARY_UNRECOGNIZED":
             unrecognized += 1
         f["site_id"] = _site_id(f)
-        provenance.enrich_finding(f, effective_function_id(f), method_file_map,
-                                   manifest, pkg_dir, "effective_function_id")
+        fid = effective_function_id(f)
+        provenance.enrich_finding(f, fid, reconciled_map, manifest, pkg_dir,
+                                   "effective_function_id")
+        if fid in ambiguous_ids:
+            f["provenance"]["source_path"] = None
+            f["provenance"]["content_hash"] = None
+            f["provenance"]["provenance_hint"] = "AMBIGUOUS_SOURCE_PATH"
+            f["provenance"]["resolved"] = False
         provenance.finalize_reportability(f, vocab == "CANDIDATE")
     return unrecognized
 
