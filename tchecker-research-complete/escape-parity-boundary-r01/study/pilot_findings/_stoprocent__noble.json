@@ -1,0 +1,1057 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/lib/dbus/bindings.js",
+   "package": "package",
+   "method": "package/lib/dbus/bindings.js::program:normalizeId",
+   "method_node_id": "107374182452",
+   "line": "55",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313261",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/bindings.js",
+      "method": "package/lib/dbus/bindings.js::program:normalizeId",
+      "line": "55",
+      "node_id": "30064771381",
+      "regex_node_id": "90194313261",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313262",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:normalizeUuid",
+   "method_node_id": "107374182537",
+   "line": "13",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313521",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/uuid.js",
+      "method": "package/lib/dbus/uuid.js::program:normalizeUuid",
+      "line": "13",
+      "node_id": "30064773282",
+      "regex_node_id": "90194313521",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313522",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:expandUuid",
+   "method_node_id": "107374182539",
+   "line": "18",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313523",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/uuid.js",
+      "method": "package/lib/dbus/uuid.js::program:expandUuid",
+      "line": "18",
+      "node_id": "30064773286",
+      "regex_node_id": "90194313523",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313524",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:addressToId",
+   "method_node_id": "107374182540",
+   "line": "32",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313547",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/uuid.js",
+      "method": "package/lib/dbus/uuid.js::program:addressToId",
+      "line": "32",
+      "node_id": "30064773315",
+      "regex_node_id": "90194313547",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313548",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:idToAddress",
+   "method_node_id": "107374182541",
+   "line": "36",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313549",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:devicePathToAddress",
+   "method_node_id": "107374182542",
+   "line": "40",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313551",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "dev_([0-9A-Fa-f_]+)$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:devicePathToAddress",
+   "method_node_id": "107374182542",
+   "line": "42",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313554",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "_",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/uuid.js",
+      "method": "package/lib/dbus/uuid.js::program:devicePathToAddress",
+      "line": "42",
+      "node_id": "30064773332",
+      "regex_node_id": "90194313554",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313555",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/dbus/uuid.js",
+   "package": "package",
+   "method": "package/lib/dbus/uuid.js::program:devicePathFromAddress",
+   "method_node_id": "107374182544",
+   "line": "51",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313559",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/dbus/uuid.js",
+      "method": "package/lib/dbus/uuid.js::program:devicePathFromAddress",
+      "line": "51",
+      "node_id": "30064773341",
+      "regex_node_id": "90194313559",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313560",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/bindings.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/bindings.js::program:<lambda>7",
+   "method_node_id": "107374182576",
+   "line": "131",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313621",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/bindings.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/bindings.js::program:<lambda>61",
+   "method_node_id": "107374182629",
+   "line": "930",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313752",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/hci-socket/bindings.js",
+      "method": "package/lib/hci-socket/bindings.js::program:<lambda>61",
+      "line": "930",
+      "node_id": "30064774714",
+      "regex_node_id": "90194313752",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313753",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gap.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gap.js::program:<lambda>10",
+   "method_node_id": "107374182649",
+   "line": "313",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313855",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gap.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gap.js::program:<lambda>10",
+   "method_node_id": "107374182649",
+   "line": "351",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313875",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gap.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gap.js::program:<lambda>10",
+   "method_node_id": "107374182649",
+   "line": "389",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313893",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gatt.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gatt.js::program:<lambda>23:callback",
+   "method_node_id": "107374182674",
+   "line": "371",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314049",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gatt.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gatt.js::program:<lambda>25:callback",
+   "method_node_id": "107374182676",
+   "line": "413",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314078",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gatt.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gatt.js::program:<lambda>28:callback",
+   "method_node_id": "107374182679",
+   "line": "466",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314103",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/gatt.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/gatt.js::program:<lambda>45:callback",
+   "method_node_id": "107374182696",
+   "line": "713",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314203",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>43",
+   "method_node_id": "107374182751",
+   "line": "1195",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314933",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>46",
+   "method_node_id": "107374182755",
+   "line": "1303",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315010",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>46",
+   "method_node_id": "107374182755",
+   "line": "1325",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315036",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/hci-socket/hci.js",
+      "method": "package/lib/hci-socket/hci.js::program:<lambda>46",
+      "line": "1325",
+      "node_id": "30064778936",
+      "regex_node_id": "90194315036",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315037",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>46",
+   "method_node_id": "107374182755",
+   "line": "1326",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315038",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/hci-socket/hci.js",
+      "method": "package/lib/hci-socket/hci.js::program:<lambda>46",
+      "line": "1326",
+      "node_id": "30064778944",
+      "regex_node_id": "90194315038",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315039",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>48:<lambda>50",
+   "method_node_id": "107374182758",
+   "line": "1409",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315044",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/hci-socket/hci.js",
+      "method": "package/lib/hci-socket/hci.js::program:<lambda>48:<lambda>50",
+      "line": "1409",
+      "node_id": "30064778994",
+      "regex_node_id": "90194315044",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315045",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>48",
+   "method_node_id": "107374182757",
+   "line": "1368",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315059",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>48",
+   "method_node_id": "107374182757",
+   "line": "1374",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315064",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>48",
+   "method_node_id": "107374182757",
+   "line": "1380",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315069",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>48",
+   "method_node_id": "107374182757",
+   "line": "1410",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315099",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/hci-socket/hci.js",
+      "method": "package/lib/hci-socket/hci.js::program:<lambda>48",
+      "line": "1410",
+      "node_id": "30064779122",
+      "regex_node_id": "90194315099",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315100",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>51",
+   "method_node_id": "107374182759",
+   "line": "1446",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315113",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>52",
+   "method_node_id": "107374182760",
+   "line": "1500",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315147",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/hci-socket/hci.js",
+   "package": "package",
+   "method": "package/lib/hci-socket/hci.js::program:<lambda>52",
+   "method_node_id": "107374182760",
+   "line": "1514",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315162",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".{1,2}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/noble.js",
+   "package": "package",
+   "method": "package/lib/noble.js::program:Noble:_getPeripheralId",
+   "method_node_id": "107374182842",
+   "line": "382",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315635",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[0-9A-Fa-f]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

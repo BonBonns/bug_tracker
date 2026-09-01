@@ -1,0 +1,949 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/component/navigator-demo.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/component/navigator-demo.js::program:<lambda>224:<lambda>225:created",
+   "method_node_id": "107374184311",
+   "line": "2176",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194319126",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/component/tabbar/tabbar-demo.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/component/tabbar/tabbar-demo.js::program:<lambda>303:<lambda>304:created",
+   "method_node_id": "107374185681",
+   "line": "2998",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194322733",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/index.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/index.js::program:<lambda>322:<lambda>323:created",
+   "method_node_id": "107374187124",
+   "line": "3133",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194326637",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/coupon.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/coupon.js::program:<lambda>8:<lambda>9",
+   "method_node_id": "107374189558",
+   "line": "188",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194333394",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "AliApp\\((?:tb|tm)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/index.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/index.js::program:<lambda>304:<lambda>305:created",
+   "method_node_id": "107374190090",
+   "line": "3107",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194334596",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/main.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/main.js::program:<lambda>383:<lambda>384",
+   "method_node_id": "107374190545",
+   "line": "4045",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194336061",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "AliApp\\((?:tb|tm)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/syntax/index.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/syntax/index.js::program:<lambda>316:<lambda>317:created",
+   "method_node_id": "107374192623",
+   "line": "3107",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194342395",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/components/navigator.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/components/navigator.js::program:<lambda>22:getBaseURL",
+   "method_node_id": "107374193330",
+   "line": "533",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194344795",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/components/tabbar.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/components/tabbar.js::program:<lambda>4:getBaseURL",
+   "method_node_id": "107374193423",
+   "line": "104",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194345354",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/index.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/vue/index.js::program:<lambda>4:getBaseURL",
+   "method_node_id": "107374193548",
+   "line": "104",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194346049",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\/([^\\/]+?)\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/bridge/weex.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/bridge/weex.js::program",
+   "method_node_id": "107374194400",
+   "line": "4",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351371",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "ios",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+   "method_node_id": "107374194441",
+   "line": "536",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351446",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "!",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+      "line": "536",
+      "node_id": "30064950179",
+      "regex_node_id": "90194351446",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351447",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+   "method_node_id": "107374194441",
+   "line": "537",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351448",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ",",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+      "line": "537",
+      "node_id": "30064950182",
+      "regex_node_id": "90194351448",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351449",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+   "method_node_id": "107374194441",
+   "line": "538",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351450",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ";",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:<init>:<lambda>2",
+      "line": "538",
+      "node_id": "30064950185",
+      "regex_node_id": "90194351450",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351451",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+   "method_node_id": "107374194507",
+   "line": "529",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351765",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "!",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+      "line": "529",
+      "node_id": "30064951226",
+      "regex_node_id": "90194351765",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351766",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+   "method_node_id": "107374194507",
+   "line": "530",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351767",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ",",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+      "line": "530",
+      "node_id": "30064951229",
+      "regex_node_id": "90194351767",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351768",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+   "method_node_id": "107374194507",
+   "line": "531",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194351769",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ";",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/2d/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/2d/RenderingContext.js::program:CanvasRenderingContext2D:fillText",
+      "line": "531",
+      "node_id": "30064951232",
+      "regex_node_id": "90194351769",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194351770",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>65",
+   "method_node_id": "107374194607",
+   "line": "693",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194352709",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ".,",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>65",
+      "line": "693",
+      "node_id": "30064954243",
+      "regex_node_id": "90194352709",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194352710",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74:<lambda>75",
+   "method_node_id": "107374194616",
+   "line": "802",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194352743",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^GL_",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74:<lambda>75",
+      "line": "802",
+      "node_id": "30064954434",
+      "regex_node_id": "90194352743",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194352744",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74",
+   "method_node_id": "107374194617",
+   "line": "807",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194352749",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^.*OpenGL ES ",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74",
+      "line": "807",
+      "node_id": "30064954459",
+      "regex_node_id": "90194352749",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194352750",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74",
+   "method_node_id": "107374194617",
+   "line": "807",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194352751",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": " .*$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/packages/gcanvas/src/context/webgl/RenderingContext.js",
+      "method": "package/packages/gcanvas/src/context/webgl/RenderingContext.js::program:WebGLRenderingContext:<init>:<lambda>74",
+      "line": "807",
+      "node_id": "30064954456",
+      "regex_node_id": "90194352751",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194352752",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/env/canvas.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/env/canvas.js::program:GCanvas:getContext",
+   "method_node_id": "107374194717",
+   "line": "132",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194353178",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "webgl",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [
+    {
+     "kind": "SCHEDULED_INTERVAL",
+     "node_id": "30064956184",
+     "line": "148"
+    }
+   ],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/env/canvas.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/env/canvas.js::program:GCanvas:getContext",
+   "method_node_id": "107374194717",
+   "line": "169",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194353186",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "2d",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [
+    {
+     "kind": "SCHEDULED_INTERVAL",
+     "node_id": "30064956184",
+     "line": "148"
+    }
+   ],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/env/off-screen-canvas.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/env/off-screen-canvas.js::program:GOffScreenCanvas:getContext",
+   "method_node_id": "107374194732",
+   "line": "28",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194353234",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "webgl",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [
+    {
+     "kind": "SCHEDULED_INTERVAL",
+     "node_id": "30064956449",
+     "line": "39"
+    }
+   ],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/packages/gcanvas/src/env/off-screen-canvas.js",
+   "package": "package",
+   "method": "package/packages/gcanvas/src/env/off-screen-canvas.js::program:GOffScreenCanvas:getContext",
+   "method_node_id": "107374194732",
+   "line": "48",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194353239",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "2d",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [
+    {
+     "kind": "SCHEDULED_INTERVAL",
+     "node_id": "30064956449",
+     "line": "39"
+    }
+   ],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/main.js",
+   "package": "package",
+   "method": "package/bridges/weex-gcanvas/android/weex_playground/src/main/assets/showcase/new-fashion/main.js::program:<lambda>529:<lambda>530:_initUtil:httpurl:<lambda>533",
+   "method_node_id": "107374190718",
+   "line": "5973",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064880832",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  }
+ ]
+}

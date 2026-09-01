@@ -1,0 +1,323 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/scripts/create.mjs",
+   "package": "package",
+   "method": "package/scripts/create.mjs::program:readPipeAnswers",
+   "method_node_id": "107374182405",
+   "line": "19",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313220",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\r?\\n",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/create.mjs",
+   "package": "package",
+   "method": "package/scripts/create.mjs::program:toCppSymbolName",
+   "method_node_id": "107374182410",
+   "line": "48",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313225",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[^A-Za-z0-9_]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/create.mjs",
+      "method": "package/scripts/create.mjs::program:toCppSymbolName",
+      "line": "48",
+      "node_id": "30064771158",
+      "regex_node_id": "90194313225",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313226",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/create.mjs",
+   "package": "package",
+   "method": "package/scripts/create.mjs::program:toCppSymbolName",
+   "method_node_id": "107374182410",
+   "line": "49",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313227",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[0-9]",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/prepare-headers.mjs",
+   "package": "package",
+   "method": "package/scripts/prepare-headers.mjs::program:maybeRewriteIncludeGuard",
+   "method_node_id": "107374182421",
+   "line": "184",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313321",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "#ifndef\\s+([A-Z0-9_]+)[ \\t]*\\r?\\n#define\\s+([A-Z0-9_]+)",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/prepare-headers.mjs",
+      "method": "package/scripts/prepare-headers.mjs::program:maybeRewriteIncludeGuard",
+      "line": "192",
+      "node_id": "30064771654",
+      "regex_node_id": "90194313321",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "120259084302",
+       "kind": "METHOD_REF",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/prepare-headers.mjs",
+   "package": "package",
+   "method": "package/scripts/prepare-headers.mjs::program:processFile",
+   "method_node_id": "107374182428",
+   "line": "439",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313458",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "#\\s*include\\s*<node_api\\.h>",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/prepare-headers.mjs",
+      "method": "package/scripts/prepare-headers.mjs::program:processFile",
+      "line": "439",
+      "node_id": "30064771856",
+      "regex_node_id": "90194313458",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313459",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/prepare-headers.mjs",
+   "package": "package",
+   "method": "package/scripts/prepare-headers.mjs::program:processFile",
+   "method_node_id": "107374182428",
+   "line": "443",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313460",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "#\\s*include\\s*<node_api\\.h>",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/prepare-headers.mjs",
+      "method": "package/scripts/prepare-headers.mjs::program:processFile",
+      "line": "443",
+      "node_id": "30064771859",
+      "regex_node_id": "90194313460",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313461",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/prepare-headers.mjs",
+   "package": "package",
+   "method": "package/scripts/prepare-headers.mjs::program:processFile",
+   "method_node_id": "107374182428",
+   "line": "459",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313473",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\bNAPI_EXTERN\\b",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/prepare-headers.mjs",
+      "method": "package/scripts/prepare-headers.mjs::program:processFile",
+      "line": "459",
+      "node_id": "30064771891",
+      "regex_node_id": "90194313473",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313474",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/prepare-headers.mjs",
+   "package": "package",
+   "method": "package/scripts/prepare-headers.mjs::program:processFile",
+   "method_node_id": "107374182428",
+   "line": "448",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064771879",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  }
+ ]
+}
