@@ -1,0 +1,34 @@
+{
+  "analyzed_count": 97,
+  "analyzed_missing_bundle": [],
+  "bundle_file_count": 97,
+  "bundle_identities_equal_analyzed": true,
+  "cpp_cpg_failed_count": 2,
+  "export_failed_count": 1,
+  "inherited_failures": [
+    {
+      "detail": "cpp export rc=1",
+      "package_name": "@driftlog/tree-sitter-dart",
+      "status": "EXPORT_FAILED",
+      "version": "1.0.4"
+    },
+    {
+      "detail": "c2cpg rc=1",
+      "package_name": "@farcaster/rocksdb",
+      "status": "CPP_CPG_FAILED",
+      "version": "5.5.0"
+    },
+    {
+      "detail": "c2cpg rc=1",
+      "package_name": "duckdb",
+      "status": "CPP_CPG_FAILED",
+      "version": "1.4.4"
+    }
+  ],
+  "missing_matches_cpp_cpg_failed_union_export_failed": true,
+  "ok": true,
+  "other_status_counts": {},
+  "reconciled_at": "2026-09-01T00:26:09Z",
+  "total_frozen_identities": 100,
+  "unexpected_extra_bundles": []
+}

@@ -1,0 +1,79 @@
+=== check_provenance.py (cwd=scanner-v2) === rc=0
+PASS PROTECTED_FIELD: has real distinct tarball_sha256/source_tree_sha256
+
+PROVENANCE_CONTROLS=47/47
+
+=== check_oob_reportable_gate.py (cwd=scanner-v2) === rc=0
+PASS oob_compare_candidates: *** reportable=False despite scanner_candidate=True AND provenance.resolved=True *** -- a raw CANDIDATE must never be counted as a reportable finding by default
+PASS control: with an existing, real APPLICABLE status (never fabricated by this module) reportable=True
+OOB_REPORTABLE_GATE_CONTROLS=17/17
+
+=== check_vendored_attribution.py (cwd=scanner-v2) === rc=0
+PASS no false dedup: same relpath, DIFFERENT content_hash (a different vendored version) -> TWO deduplicated entries, not incorrectly collapsed to one
+PASS two distinct real sites in the SAME vendored file (different line+call) stay TWO separate deduplicated entries
+VENDOR_ATTR_R01_CONTROLS=16/16
+
+=== check_reachability_tier.py (cwd=scanner-v2) === rc=0
+PASS classify_record_reachability: r04_findings is NEVER touched (Resource Guard owns its own reachability field, task #21/#22)
+PASS classify_record_reachability: r05_findings is NEVER touched
+REACH_TIER_R01_CONTROLS=17/17
+
+=== check_staged_enablement.py (cwd=scanner-v2) === rc=0
+PASS real re2 end-to-end (OOB_WRITE): both real candidates' own reachability_tier.py classification is TIER_INTERNAL_UNREGISTERED (real, empirically confirmed -- neither StrErrorInternal nor TrySymbolizeWithLimit is a registered JS-callable export under any idiom this module recognizes)
+PASS real re2 end-to-end (OOB_WRITE): correctly stays REACHABILITY_REQUIRED_FOR_REPORTING (diagnostic-only), NOT STAGE_ENABLED -- TIER_INTERNAL_UNREGISTERED alone must never make an internal vendored helper reportable, even though its own property is enabled
+STAGED_ENABLE_R01_CONTROLS=23/23
+
+=== check_six_property_aggregator.py (cwd=scanner-v2) === rc=0
+  TOTAL: raw=4 reportable=0
+PASS SMOKE: ran against 2/2 real evidence bundles (a small smoke test, not a new corpus run)
+SIX_PROPERTY_AGGREGATOR_CONTROLS=18/18
+
+=== gate_resource_guard_r06.py (cwd=scanner-v2) === rc=0
+PASS: node-libcurl's real Easy::ReadFunction finding correctly reports SOURCE_BOUNDARY_UNRESOLVED / attacker_controlled=False under R06 -- task #41's own named acceptance test
+PASS: all 3 real Cartesi findings (ReadMemory/ReadVirtualMemory/ReadConsoleOutput) correctly report source_boundary_evidence=None under R06 -- no fabricated evidence where the walk found nothing
+ALL PASS
+
+=== gate_resource_guard_r04.py (cwd=scanner-v2) === rc=0
+PASS every CONTRACT_NOT_APPLICABLE finding explicitly disclaims a vulnerability/CWE-787/exploit claim in its own evidence_note
+PASS every BUILD_CONFIGURATION_UNRESOLVED/CONFLICT finding states it is an abstention, never a default
+RESOURCE_GUARD_R04_GATE=12/12
+
+=== gate_resource_guard_r05.py (cwd=scanner-v2) === rc=0
+PASS: AutoDeducedLocal correctly NOT recovered (expected rejection: R05_RECOVERY_RESULT_TYPE_UNRECOGNIZED)
+PASS: exactly 1 real recovered acquisition across the fixture (the other 5 are real, distinct negative controls)
+ALL PASS
+
+=== check_lock_balance.py (cwd=scanner-v2) === rc=0
+PASS real FIXED Dtls13RtxAddAck: zero findings (no false positive on the real fix)
+PASS real FIXED Dtls13RtxAddAck: the lock call is recognized and correctly classified balanced
+LOCK_SAFE_R01=11/11
+
+=== check_protected_field.py (cwd=scanner-v2) === rc=0
+PASS two-different-locks field: zero findings on EITHER access (ambiguity control -- abstain rather than guess which lock is real)
+PASS two-different-locks field: classified AMBIGUOUS_MULTIPLE_PROTECTORS, not silently dropped
+LOCK_SAFE_R02=11/11
+
+=== oob_write_controls.py (cwd=../tchecker-research-complete/portable-engine-full-review-package/tools) === rc=0
+PASS teeth: source bounds exist in corpus but write reader emitted independently
+PASS teeth-hard: source bound on write extent does NOT suppress OOB_WRITE candidate
+OOB_WRITE_CONTROLS=11/11
+
+=== oob_read_controls.py (cwd=../tchecker-research-complete/portable-engine-full-review-package/tools) === rc=0
+PASS NC-R4/R7: teeth_read (DEST bound on read extent) IS a candidate (guard didn't clear)
+PASS NC-R7 teeth FLIP: defective any-side reader suppresses teeth_read
+OOB_READ_CONTROLS=10/10
+
+=== oob_compare_controls.py (cwd=../tchecker-research-complete/portable-engine-full-review-package/tools) === rc=0
+PASS live: cmp_abstain_var (non-constant extent) NOT a candidate -- ABSTAIN, not a guess
+PASS live: cmp_abstain_pointer (unresolved side-B capacity) NOT a candidate -- ABSTAIN
+OOB_COMPARE_CONTROLS=10/10
+
+=== param_length_capacity_controls.py (cwd=../tchecker-research-complete/portable-engine-full-review-package/tools) === rc=0
+PASS 8b. size_t (wide) length param * sizeof(...) -> NOT flagged (provably safe width)
+PASS 8c. no multiplication at all -> not flagged
+PARAM_LENGTH_CAPACITY_CONTROLS=21/21
+
+=== cfg_loop_guard_controls.py (cwd=../tchecker-research-complete/portable-engine-full-review-package/tools) === rc=0
+PASS a comparison occurring AFTER the write in the CFG does not dominate it -> NOT credited
+PASS wrong index/object: a real, dominating, loop-safe guard on a DIFFERENT variable ('other', not 'k') does not suppress buf[k] -- it remains a candidate
+CFG_LOOP_GUARD_CONTROLS=9/9
