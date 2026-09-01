@@ -267,26 +267,39 @@ the same suffix/basename; an unmatched field falls through to the existing
 `PATH_NOT_IN_MANIFEST` reason, unchanged. Both findings' provenance re-verified RESOLVED
 under this corrected, full-tree manifest (see `COMBINED_LEVELDB_RESULT.json`).
 
-## Real pinned-addon runtime test (per review: build the real addon, real interposition)
+## Real pinned-addon runtime test (v2, per review: prebuilt first, safe reach observation)
 
 **Correction applied: the earlier failure-injection result (hand-seeded stub, deterministic
 sentinel) is relabeled `MODEL_FAILURE_PATH_CONFIRMED`** -- a useful sanity check of the
-control-flow shape, not a runtime observation of the actual package. The harder proof was
-then completed: the REAL pinned `linux-6-x64` prebuilt addon, loaded and driven through
-the package's real public JS API (`db.open()` -> `db.put()` -> `db.getIterator()` ->
-`it.next()`, the real `iterator_next` path), with `napi_create_buffer_copy` forced to fail
-via test-only `LD_AUDIT` symbol-bind interposition (LD_PRELOAD was tried first and found
-ineffective against this specific node binary, documented honestly).
+control-flow shape, not a runtime observation of the actual package. `REAL_ADDON_TEST_RESULT.md`
+(v2) redoes the real-addon test to the review's exact protocol -- identity recorded and
+independently re-verified (tarball/`.node` sha256, arch, Node version, ABI); the
+unmodified prebuilt confirmed to load and complete a real `iterator_next` baseline;
+`readelf -Ws` confirms both `napi_create_buffer_copy`/`napi_set_element` are dynamically
+imported; the SHIPPED PREBUILT tested FIRST via `LD_PRELOAD`, found and independently
+CONFIRMED unable to intercept either symbol (silent shim in both armed/unarmed states,
+plus `LD_DEBUG=bindings` showing direct binding to `node`) -- recorded plainly as
+**`PREBUILT_INTERPOSITION_UNAVAILABLE`**, never silently swapped for a rebuilt result.
 
-**Result: the real addon reproducibly CRASHES (SIGSEGV, exit 139)** when the two flagged
-sites' `napi_create_buffer_copy` calls fail -- baseline and a pass-through audit-machinery
-control both exit 0, isolating the forced failure as the cause. A bounded `gdb -batch`
-backtrace shows the exact real chain: `NextWorker::HandleOKCallback` ->
-`napi_set_element` -> V8's `Object::Set`/`AddDataProperty`/`AddDataElement`, crashing
-where the unavailable output is used. See `REAL_ADDON_TEST_RESULT.md` for the full setup,
-all four run logs, and the backtrace. **No security impact, severity, or exploitability
-is inferred from this outcome** -- it is a bounded, reproducible reliability/crash
-observation only.
+Per protocol, then attempted the equivalent test-only **link-time** interposition: built
+from the pinned source (the package's own `cmake-js`/CMake tooling) with
+`-Wl,--wrap=napi_create_buffer_copy,--wrap=napi_set_element` and a small test-only
+wrapper source file (never committed to the package's own tree; removed and the original
+prebuilt restored, hash-verified, immediately after). `--wrap` is immune to the runtime
+symbol-scope behavior that defeated `LD_PRELOAD`, and was independently verified working
+(symbol table shows `__wrap_*` defined; unarmed run shows real, distinct created handles
+flowing through; the `napi_set_element` interceptor -- which records reach and returns
+safely WITHOUT dereferencing its value, per instruction -- fires exactly twice both
+unarmed and armed).
+
+**Result: with both real `napi_create_buffer_copy` calls forced to fail (their output
+never written), the real compiled code proceeds to call `napi_set_element` BOTH times
+anyway** -- reproduced across two armed runs, exit 0 (no crash needed to make the
+observation: reachability, not a particular pointer value, is what's meaningful). Status:
+**`ACTUAL_ADDON_FAILURE_PATH_CONFIRMED`**. See `REAL_ADDON_TEST_RESULT.md` for the full
+six-item record, all run logs, and the symbol-interposition verification evidence for
+both attempts. **No security impact, severity, or exploitability is inferred from this
+outcome** -- it is a bounded, reproducible control-flow observation only.
 
 ## Honest classification (updated)
 
@@ -296,9 +309,15 @@ Complete JS-to-native reachability:                yes (three-proof virtual tier
 Reportability:                                     yes (corrected, full-package-root
                                                     provenance; both findings resolved)
 Modeled failure-path consequence:                  yes (MODEL_FAILURE_PATH_CONFIRMED)
-Actual pinned-addon failure-path consequence:      yes -- reproducible SIGSEGV (exit 139)
-                                                    in the real addon, real JS path,
-                                                    bounded LD_AUDIT interposition
+Shipped-prebuilt interposition:                    PREBUILT_INTERPOSITION_UNAVAILABLE
+                                                    (LD_PRELOAD verified ineffective;
+                                                    disclosed, not silently bypassed)
+Actual pinned-addon failure-path consequence:      yes -- ACTUAL_ADDON_FAILURE_PATH_CONFIRMED
+                                                    (source build from the pinned tarball,
+                                                    test-only linker --wrap interposition,
+                                                    independently verified; napi_set_element
+                                                    reached 2/2 after injected failures,
+                                                    reproduced across 2 armed runs, exit 0)
 Confirmed vulnerability:                           no claim made
 ```
 

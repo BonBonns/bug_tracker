@@ -139,6 +139,21 @@ def reconcile_source_path(raw_file_field, manifest_files):
       5. Two or more matches sharing the same basename/suffix -> ABSTAIN
          (AMBIGUOUS_SOURCE_PATH), never resolved to any one of them.
 
+    SHARED-INFRASTRUCTURE TRACKING NOTE (not yet done, deliberately out of scope for
+    this revision): this exact basename-vs-suffix ambiguity is not napi_status-
+    specific -- Lock Balance, Protected Field, and every OOB_* producer join their own
+    findings back to a source path through the SAME `provenance.load_method_file_map`
+    -> `provenance.enrich_finding` path, with no reconciliation step at all, so any of
+    them can hit the identical raw-field-doesn't-match-the-manifest problem this
+    function was built to fix. Moving `reconcile_source_path`/
+    `_reconcile_method_file_map` (or their equivalent) into `provenance.py` itself as
+    a shared, property-agnostic step -- applied uniformly before every property's
+    existing `enrich_finding` call, not just napi_status's -- is real, valuable future
+    work. Deliberately NOT done here: `provenance.py` is frozen (task #35) and every
+    other property's regression fixtures assume today's un-reconciled behavior;
+    changing it is a separate revision with its own freeze and controls, not a rider
+    on this one.
+
     Returns (resolved_relpath_or_None, ambiguous: bool).
     """
     field = _norm_sep(raw_file_field)

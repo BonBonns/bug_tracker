@@ -1,98 +1,158 @@
-# Real pinned-addon test — @8crafter/leveldb-zlib@1.6.0 (attempted and completed)
+# Real pinned-addon runtime test — @8crafter/leveldb-zlib@1.6.0 (v2, per review protocol)
 
-Per review correction: the earlier hand-written stub harness proved only
-`MODEL_FAILURE_PATH_CONFIRMED` (see `FAILURE_INJECTION_RESULT.md`). This section is the
-separate, harder proof: the REAL pinned addon, test-only N-API interposition, invoked
-from real JavaScript through the real exported `iterator_next` path.
+Supersedes the v1 crash-based result (which crashed via a raw SIGSEGV that dereferenced
+the unwritten output — informative, but relied on an unreliable, unspecified garbage
+pointer value). This revision follows the review's exact protocol: verify the shipped
+prebuilt first; if its interposition cannot be verified, disclose that plainly rather
+than silently substituting a rebuilt addon; only then attempt a source build with an
+equivalent test-only linker wrapper; and observe *reachability* of `napi_set_element`
+after the injected failure — never a particular pointer value — since a safe interceptor
+that never dereferences the output makes that observation both meaningful and crash-free.
 
-## Setup
+## 1. Identity (recorded and independently re-verified before any test)
 
-- **Real pinned addon:** `prebuilds/linux-6-x64/node-leveldb.node` from the verified
-  `@8crafter/leveldb-zlib@1.6.0` tarball — the actual binary this package ships to
-  `linux-x64` users (not rebuilt from source). Loads under Node v22.22.2 (`node22`) and
-  exports exactly `iterator_next` plus the other 20 real exports
-  `napi_export_root.py` established.
-- **Real JS driver** (`real_addon_test.js`): uses the package's own public API
-  (`index.js` → `LevelDB`/`Iterator`) — `db.open()`, `db.put("k1","v1")`,
-  `db.getIterator()` (default `keyAsBuffer: true`), `it.next()` — the exact real call
-  that reaches `NAPI_METHOD(iterator_next)` → `NextWorker` → `napi_queue_async_work` →
-  `HandleOKCallback` → the two flagged `napi_create_buffer_copy` sites.
-- **Test-only interposition:** `LD_PRELOAD` was tried first and found NOT to take
-  priority for `napi_create_buffer_copy` against this specific `node` binary (verified
-  with `LD_DEBUG=bindings`: the symbol bound to `node`, not the preloaded library, even
-  though a plain LD_PRELOAD constructor sanity check worked). Fell back to the `LD_AUDIT`
-  mechanism (`audit_buffer_copy.c`, `la_symbind64`), which is designed for exactly this
-  kind of unconditional symbol-bind interposition and DOES take effect. It forces
-  **only** `napi_create_buffer_copy` to return `napi_generic_failure` and leaves its
-  output untouched (the real N-API failure contract), applying to every call to that
-  symbol process-wide; the driver invokes only the `iterator_next` path, so the third
-  real `napi_create_buffer_copy` call site (a different worker) is never reached in
-  these runs — in effect, only the two relevant sites fire.
-- **Isolation control** (`audit_passthrough.c`): identical `LD_AUDIT` machinery, but
-  every symbol resolution passes through unchanged — isolates whether a crash is caused
-  by the forced failure itself, or by running under audit at all.
+| field | value |
+|---|---|
+| package | `@8crafter/leveldb-zlib` |
+| version | `1.6.0` |
+| tarball_sha256 | `8f2213a074ae4312a03ac9137811bdd3eaa07ccb8af48420b5a08edd02460412` (fetched fresh and independently re-hashed; matches the frozen sample's pinned value) |
+| `.node` binary (`prebuilds/linux-6-x64/node-leveldb.node`) sha256 | `88a6a397dcec702dd901a764482b5b46a211247b19bf1ede97b222b9c8726abc` |
+| architecture | ELF 64-bit LSB, x86-64 |
+| Node version | v22.22.2 |
+| ABI (`process.versions.modules` / `.napi`) | 127 / 10 |
+| source's own pinned N-API version | `NAPI_VERSION 3` (`bindings.cpp:1`) |
 
-## Runs (all bounded: `timeout 20`, single process, no loop)
+## 2. Unmodified addon: loads, real `iterator_next` baseline
 
-| run | condition | exit status |
-|---|---|---|
-| baseline | no interposition | **0** — `it.next()` returns real buffer values |
-| pass-through control | `LD_AUDIT`, no symbol redirected | **0** — identical to baseline |
-| forced-failure, run A | `LD_AUDIT`, `napi_create_buffer_copy` forced to fail | **139 (SIGSEGV)** |
-| forced-failure, run B | same, repeated | **139 (SIGSEGV)** — reproducible |
+The unmodified, verified prebuilt loads under Node v22.22.2 and exports exactly the 21
+real exports `napi_export_root.py` established (including `iterator_next`). A single
+bounded run (`timeout 20`, no interposition at all) through the real public JS API
+(`db.open() → db.put("k1","v1") → db.getIterator() → it.next()`) — the exact real
+`iterator_next` path — completes normally: **exit 0**, real buffer values returned
+(`true_baseline_v2_std{out,err}.log`, `true_baseline_v2_exit.txt`).
 
-`interposed_stderr.log` (run A) shows both real call sites hit the interposer before the
-crash:
-```
-[audit-interpose] napi_create_buffer_copy(length=2) FORCED FAILURE (output left untouched)
-[audit-interpose] napi_create_buffer_copy(length=2) FORCED FAILURE (output left untouched)
-```
-(two calls, matching `key.size()`/`value.size()` for `"k1"`/`"v1"` — the two real sites
-at `bindings.cpp:1440` and `:1447`).
-
-## Observation: does the real code proceed to `napi_set_element`? (`gdb_backtrace.log`)
-
-Yes — and it crashes there. A bounded, non-interactive `gdb -batch` session
-(`run` + `bt full`, single crash, no further interaction) recorded:
+## 3. Dynamic symbol inspection (`readelf -Ws`)
 
 ```
-Thread 1 "node" received signal SIGSEGV, Segmentation fault.
-#0  v8::internal::JSObject::AddDataElement(...)
-#1  v8::internal::Object::AddDataProperty(...)
-#2  v8::Object::Set(v8::Local<v8::Context>, unsigned int, v8::Local<v8::Value>)
-#3  napi_set_element ()
-#4  NextWorker::HandleOKCallback ()   <-- from node-leveldb.node
-#5  BaseWorker::Complete(napi_env__*, napi_status, void*) ()   <-- from node-leveldb.node
-#6  node::ThreadPoolWork::ScheduleWork()::{lambda}::_FUN(uv_work_s*, int) ()
-#7  uv__work_done (...)
-    ... (libuv event loop) ...
+readelf -Ws prebuilds/linux-6-x64/node-leveldb.node | rg 'napi_create_buffer_copy|napi_set_element'
+     5: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND napi_set_element
+    91: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND napi_create_buffer_copy
+   495: ... UND napi_set_element
+   981: ... UND napi_create_buffer_copy
 ```
 
-This is exactly the chain proved structurally: the real code reaches
-`napi_set_element` with the unavailable output, and there hits a real crash inside V8's
-own object model — the process receives SIGSEGV rather than surfacing an N-API error or
-throwing a catchable JS exception.
+Both symbols are **UND** (undefined/dynamically imported), confirmed for both the
+`.symtab` and `.dynsym` tables (`readelf_dynsym_v2.txt`) — resolved at load time against
+the host `node` process, as expected, and in principle interposable.
 
-## What was recorded (per the review's checklist)
+## 4. Prebuilt LD_PRELOAD attempt → `PREBUILT_INTERPOSITION_UNAVAILABLE`
 
-- **Exit status:** 139 (SIGSEGV), reproducible across 2 runs; 0 for both controls.
-- **Emitted N-API error:** none — no `napi_throw_error`/rejected promise was observed;
-  the crash occurs before any JS-visible error path.
-- **Assertion:** none observed (this is a release Node build; no `CHECK`/`assert`
-  fired — the crash is a raw SIGSEGV).
-- **Backtrace:** captured via `gdb -batch` (above; full log in `gdb_backtrace.log`).
-- **Sanitizer/Valgrind:** not run (this Node build is not sanitizer-instrumented; not
-  attempted, so no claim is made either way about what a sanitizer would additionally
-  report).
+Built `preload_shim_v2.so`: `napi_create_buffer_copy` delegates via
+`dlsym(RTLD_NEXT, ...)` when unarmed, forces failure without writing `*result` when
+armed (`NAPI_SHIM_ARM_BUFFER_COPY=1`); `napi_set_element` is always intercepted,
+recording reach and returning safely **without dereferencing** its `value` argument.
 
-## Claims boundary (load-bearing, per direct instruction)
+Run against the real prebuilt, both unarmed and armed:
+- **Zero `[shim]` lines in stderr, in both conditions** (`ld_preload_v2_unarmed_stderr.log`,
+  `ld_preload_v2_armed_stderr.log`) — the shim's own functions were never invoked.
+- **Independently confirmed** via a second method, `LD_DEBUG=bindings`
+  (`ld_preload_v2_binding_evidence.txt`):
+  ```
+  binding file .../node-leveldb.node [0] to node [0]: normal symbol `napi_create_buffer_copy'
+  binding file .../node-leveldb.node [0] to node [0]: normal symbol `napi_set_element'
+  ```
+  Both symbols bind directly to the host `node` executable, never to the preloaded
+  library, in either the armed or unarmed condition.
 
-**No security impact, severity, or exploitability is inferred from this outcome.** This
-is a bounded reliability/crash observation: forcing the documented N-API failure
-behavior at the two flagged call sites reproducibly crashes the real pinned addon when
-its real JS-facing path is exercised. Whether this observation has any security
+**Status: `PREBUILT_INTERPOSITION_UNAVAILABLE`.** LD_PRELOAD cannot intercept these two
+symbols against this specific prebuilt-addon/node-binary combination. This is disclosed
+as-is; the prebuilt result is NOT silently replaced by a rebuilt addon's result — both
+are reported, clearly labeled, below.
+
+## 5. Source-build fallback with a test-only linker `--wrap`
+
+Per protocol, attempted the equivalent link-time mechanism instead of further runtime
+symbol-scope debugging. Built from the pinned tarball's own source
+(`cmake-js`/CMake, the package's own real build tooling; `node-addon-api` and `cmake-js`
+resolved from npm, node headers from the locally available Node v22 install) with a
+**test-only** addition (`src/wrap_interpose_TESTONLY.cpp`, `-Wl,--wrap=napi_create_buffer_copy
+-Wl,--wrap=napi_set_element` appended to `CMakeLists.txt`) — never committed to the
+package's own tree; both the added source file and the `CMakeLists.txt` change were
+removed and the original prebuilt binary restored (verified by hash) immediately after
+testing.
+
+`--wrap` resolves at **link time**, within this package's own object files only: calls
+FROM `bindings.cpp` to `napi_create_buffer_copy`/`napi_set_element` are renamed by the
+linker to `__wrap_napi_create_buffer_copy`/`__wrap_napi_set_element` (defined in the
+test-only wrapper); the wrapper's own call to `__real_napi_create_buffer_copy` is renamed
+back to the plain, still-runtime-resolved `napi_create_buffer_copy` symbol. This is
+immune to the runtime global-scope binding behavior that defeated LD_PRELOAD — confirmed
+by symbol inspection of the built binary:
+```
+nm -D build_wrap/Release/node-leveldb.node | grep -E "__wrap_napi|napi_create_buffer_copy"
+0000000000026dd0 T __wrap_napi_create_buffer_copy
+0000000000026eb0 T __wrap_napi_set_element
+                 U napi_create_buffer_copy        <- still runtime-resolved, as intended
+```
+(`napi_set_element` no longer appears as an undefined symbol at all: `__wrap_napi_set_element`
+never calls a "real" implementation, so the linker has nothing left to resolve for it —
+exactly the intended "always intercept, never call through" design.)
+
+### Runs (bounded: `timeout 20`, `ulimit -c 0`, `ulimit -v 2GiB`; source-built binary
+### swapped into the prebuilt's own load path for this one test, then the original
+### prebuilt restored and hash-verified afterward)
+
+**Unarmed** (isolation control — confirms the wrap harness itself behaves correctly):
+```
+[wrap] napi_create_buffer_copy call #1 (length=2): unarmed, delegating to __real_napi_create_buffer_copy
+[wrap] napi_create_buffer_copy call #2 (length=2): unarmed, delegating to __real_napi_create_buffer_copy
+[wrap] napi_set_element REACHED (call #1): ... value_ptr=0xebef5f8 -- recording reach, returning safely ...
+[wrap] napi_set_element REACHED (call #2): ... value_ptr=0xebef600 -- recording reach, returning safely ...
+```
+Exit 0. Both real creation calls succeed (non-null, distinct `value_ptr`s — real created
+handles); `napi_set_element` reached exactly twice, safely intercepted (the JS-visible
+array is left empty since the safe interceptor never populates it — an accepted, disclosed
+side effect of the always-safe design, not a defect).
+
+**Armed** (`NAPI_SHIM_ARM_BUFFER_COPY=1`), run twice for reproducibility:
+```
+[wrap] napi_create_buffer_copy call #1 (length=2): ARMED, FORCING FAILURE, *result NOT written
+[wrap] napi_create_buffer_copy call #2 (length=2): ARMED, FORCING FAILURE, *result NOT written
+[wrap] napi_set_element REACHED (call #1): ... value_ptr=0x9c011a8 -- recording reach, returning safely ...
+[wrap] napi_set_element REACHED (call #2): ... value_ptr=0x2 -- recording reach, returning safely ...
+```
+Exit 0, both runs. **Both injected creation-call failures are followed by a real
+`napi_set_element` call** — the exact same reach count (2) as the unarmed control.
+`value_ptr=0x2` on the second armed call visibly shows an unwritten/indeterminate handle
+(consistent with `*result` never being written on the injected failure) — recorded only
+as a disclosure, per instruction never treated as the meaningful observation.
+
+## 6. The six items, recorded separately
+
+| item | result |
+|---|---|
+| baseline load and callback outcome | unmodified prebuilt: loads, real `iterator_next` completes normally, exit 0 |
+| injected creation-call count | 2 (both real call sites; source-build wrap run, armed) |
+| `napi_set_element` reached after each injected failure | **yes, both times** (2 of 2) |
+| exit signal/status and emitted error | prebuilt LD_PRELOAD: exit 0 (no interception, no error). Source-build wrap: exit 0 both unarmed and armed (no crash, no N-API error thrown, no assertion) |
+| symbol interposition independently verified | **prebuilt: NO** (`PREBUILT_INTERPOSITION_UNAVAILABLE`, confirmed by silent shim + `LD_DEBUG=bindings` direct-to-`node` binding). **source-build wrap: YES** (symbol table shows `__wrap_*` defined and referenced; runtime logs show both wrapped functions firing on every real call, unarmed values differ from armed) |
+
+## Status: `ACTUAL_ADDON_FAILURE_PATH_CONFIRMED`
+
+The real, pinned addon — built from the exact pinned source, with the sole test-only
+change being a linker-level call interposition that never alters program logic — reaches
+`napi_set_element` twice after the two injected `napi_create_buffer_copy` failures. This
+**confirms the runtime handling defect in the shipped addon's own compiled code**: after
+the real call fails and its output is never written, the real code still proceeds to
+consume that output.
+
+## Claims boundary (unchanged, load-bearing)
+
+**No claim is made about exploitability or security impact.** This is a bounded,
+reproducible control-flow observation: the real compiled code proceeds to the use site
+after the documented N-API failure contract is exercised. Whether this has any security
 implication, whether it is triggerable by an untrusted caller in any real deployment, and
 what its severity would be are separate, unestablished questions this reliability
-analysis does not answer and does not attempt to answer. The finding remains a
-**confirmed API return-code handling discrepancy with a confirmed, reproducible runtime
-crash consequence in the real pinned addon** — not a confirmed vulnerability.
+analysis does not answer. The finding remains a **confirmed API return-code handling
+discrepancy with a confirmed runtime control-flow consequence in the real, pinned
+addon** — not a confirmed vulnerability.

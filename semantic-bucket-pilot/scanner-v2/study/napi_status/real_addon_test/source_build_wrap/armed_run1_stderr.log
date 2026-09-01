@@ -1,0 +1,4 @@
+[wrap] napi_create_buffer_copy call #1 (length=2): ARMED, FORCING FAILURE, *result NOT written
+[wrap] napi_create_buffer_copy call #2 (length=2): ARMED, FORCING FAILURE, *result NOT written
+[wrap] napi_set_element REACHED (call #1): env=0x9bb87e0 object=0x9b6f5e8 index=1 value_ptr=0x9c011a8 -- recording reach, returning safely WITHOUT dereferencing value or calling the real implementation
+[wrap] napi_set_element REACHED (call #2): env=0x9bb87e0 object=0x9b6f5e8 index=0 value_ptr=0x2 -- recording reach, returning safely WITHOUT dereferencing value or calling the real implementation
