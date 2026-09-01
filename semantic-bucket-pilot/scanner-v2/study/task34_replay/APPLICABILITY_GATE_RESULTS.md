@@ -221,7 +221,17 @@ only audit, no Joern rebuild anywhere:
    single R06 finding was already independently confirmed (in the earlier regression fix) to
    resolve against its own correct, specific target.
 
-## The 54 unresolved packages: triaged, not resolved (`UNRESOLVED_CATEGORIZATION.md`)
+## The 54 unresolved packages: triaged, then actually reconstructed
+## (`UNRESOLVED_CATEGORIZATION.md` -> `BUILD_CONFIG_RECONSTRUCTION_RESULTS.md`)
+
+**UPDATE (superseding the "triaged, not resolved" framing below):** a later round, per direct
+follow-up instruction, went further than triage -- real node-gyp/cmake-js compiler-command
+reconstruction plus upstream-repository tracing resolved **50/54 (93%)** with real, non-guessed
+evidence: 34 structurally `not_applicable` (most of these packages never use node-addon-api's own
+C++ exception-config convention at all -- Nan, raw N-API, legacy raw-V8, and pure-C addons all
+have no such concept), 16 real `enabled`/`disabled` answers, only 4 genuinely
+`irreducible_unresolved`. Zero impact on the reportability funnel either way (still 0 of the 54
+have any R04/R05/R06 finding). Full account: `BUILD_CONFIG_RECONSTRUCTION_RESULTS.md`.
 
 Follow-up per direct instruction: all 54 packages this audit left `unresolved` were split by
 relevance and their unresolved REASON was categorized -- full account in

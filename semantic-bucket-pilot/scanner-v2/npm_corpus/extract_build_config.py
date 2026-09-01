@@ -80,10 +80,23 @@ import urllib.request
 DISABLE_PATTERNS = [
     (re.compile(rb'NAPI_DISABLE_CPP_EXCEPTIONS'), "NAPI_DISABLE_CPP_EXCEPTIONS"),
     (re.compile(rb'-fno-exceptions'), "-fno-exceptions"),
+    # REGRESSION FIX (task #34's own real build-config-reconstruction round --
+    # @astronautlabs/webrtc's own real cmake-js compile command): node-addon-api 8.x renamed its
+    # own canonical macro from NAPI_CPP_EXCEPTIONS to NODE_ADDON_API_CPP_EXCEPTIONS/
+    # NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS, confirmed directly against node-addon-api@8.9.2's
+    # own real napi.h (NAPI_CPP_EXCEPTIONS kept ONLY as a backward-compat alias that sets the
+    # new macro too) -- AND that header now #errors if NEITHER new-style macro is defined at
+    # all (no more silent compiler-default fallback for recent node-addon-api versions). A real
+    # compile command carrying the modern macro name would otherwise be silently missed by the
+    # legacy-only patterns above.
+    (re.compile(rb'NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS'), "NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS"),
 ]
 ENABLE_PATTERNS = [
     (re.compile(rb'(?<!DISABLE_)NAPI_CPP_EXCEPTIONS'), "NAPI_CPP_EXCEPTIONS"),
     (re.compile(rb'(?<!-fno)-fexceptions'), "-fexceptions"),
+    # see the modern-macro DISABLE_PATTERNS entry above for the real, cited evidence this is
+    # based on -- the same node-addon-api 8.x rename, enable side.
+    (re.compile(rb'(?<!DISABLE_)NODE_ADDON_API_CPP_EXCEPTIONS'), "NODE_ADDON_API_CPP_EXCEPTIONS"),
     # REGRESSION FIX (node-libcurl@5.1.2, see study/resource_guard_r05/
     # NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md for the full real account): the real,
     # documented node-addon-api gyp target-name convention

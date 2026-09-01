@@ -1,0 +1,683 @@
+{
+  "@8crafter/leveldb-zlib@1.6.0": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "leveldb-mcpe/db/c_test.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 80,
+    "cpp_files_sample": [
+      "leveldb-mcpe/util/arena_test.cc",
+      "leveldb-mcpe/util/arena.cc",
+      "leveldb-mcpe/db/autocompact_test.cc",
+      "leveldb-mcpe/table/block_builder.cc",
+      "leveldb-mcpe/table/block.cc"
+    ],
+    "status": "OK"
+  },
+  "@abandonware/bluetooth-hci-socket@0.5.3-12": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "src/BluetoothHciSocket.cpp"
+    ],
+    "status": "OK"
+  },
+  "@acomsys/dash-utils@0.0.17": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 4,
+    "cpp_files_sample": [
+      "src/native/greeter/greeter.cc",
+      "src/native/hello/hello_test.cc",
+      "src/native/hello/hello.cc",
+      "src/native/module.cc"
+    ],
+    "status": "OK"
+  },
+  "@ampretia/x509@0.4.10": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cc",
+      "src/x509.cc"
+    ],
+    "status": "OK"
+  },
+  "@antcube/capnp@0.5.52": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 64,
+    "cpp_files_sample": [
+      "src/node-capnp/capnp.cc",
+      "src/node-capnp/capnp/compat/json-test.c++",
+      "src/node-capnp/capnp/compat/json-test.capnp.c++",
+      "src/node-capnp/capnp/compat/json.capnp.c++",
+      "src/node-capnp/capnp/compat/json.cc"
+    ],
+    "status": "OK"
+  },
+  "@astronautlabs/webrtc@0.6.1": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 89,
+    "cpp_files_sample": [
+      "src/node/async_context_releaser.cc",
+      "src/enums/node_webrtc/binary_type.cc",
+      "src/enums/webrtc/bundle_policy.cc",
+      "src/interfaces/rtc_peer_connection/create_session_description_observer.cc",
+      "src/dictionaries/webrtc/data_channel_init.cc"
+    ],
+    "status": "OK"
+  },
+  "@cdktf/node-pty-prebuilt-multiarch@0.10.2": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 85,
+    "cpp_files_sample": [
+      "deps/winpty/src/agent/Agent.cc",
+      "deps/winpty/src/agent/AgentCreateDesktop.cc",
+      "deps/winpty/src/libwinpty/AgentLocation.cc",
+      "deps/winpty/src/shared/BackgroundDesktop.cc",
+      "deps/winpty/src/shared/Buffer.cc"
+    ],
+    "status": "OK"
+  },
+  "@cherrystudio/mac-system-ocr@0.2.7": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "lib/binding.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "@choysen/mac-system-ocr@0.2.8": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "lib/binding.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "@co_snow/hello@0.0.57": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "configure.cc"
+    ],
+    "status": "OK"
+  },
+  "@codeporter/robotjs@0.6.0": {
+    "c_file_count": 21,
+    "c_files_sample": [
+      "src/alert.c",
+      "src/base64.c",
+      "src/bitmap_find.c",
+      "src/bmp_io.c",
+      "src/color_find.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "src/robotjs.cc"
+    ],
+    "status": "OK"
+  },
+  "@confluentinc/kafka-javascript@1.10.0": {
+    "c_file_count": 97,
+    "c_files_sample": [
+      "deps/librdkafka/src/cJSON.c",
+      "deps/librdkafka/src/opentelemetry/common.pb.c",
+      "deps/librdkafka/src/crc32c.c",
+      "deps/librdkafka/src/lz4.c",
+      "deps/librdkafka/src/lz4frame.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 25,
+    "cpp_files_sample": [
+      "src/admin.cc",
+      "src/binding.cc",
+      "src/callbacks.cc",
+      "src/common.cc",
+      "src/config.cc"
+    ],
+    "status": "OK"
+  },
+  "@damonsmith/node-printer@0.7.3": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/node_printer_posix.cc",
+      "src/node_printer_win.cc",
+      "src/node_printer.cc"
+    ],
+    "status": "OK"
+  },
+  "@depup/node-addon-api@8.9.2-depup.0": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "nothing.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "@dwieeb/node-pty-prebuilt@0.8.1": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 85,
+    "cpp_files_sample": [
+      "deps/winpty/misc/BufferResizeTests.cc",
+      "deps/winpty/misc/ChangeScreenBuffer.cc",
+      "deps/winpty/misc/ClearConsole.cc",
+      "deps/winpty/misc/ConinMode.cc",
+      "deps/winpty/misc/ConoutMode.cc"
+    ],
+    "status": "OK"
+  },
+  "@eliyya/sange@1.2.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 4,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/message.cpp",
+      "src/player.cpp",
+      "src/wrapper.cpp"
+    ],
+    "status": "OK"
+  },
+  "@faressoft/node-pty-prebuilt@0.9.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 85,
+    "cpp_files_sample": [
+      "deps/winpty/misc/BufferResizeTests.cc",
+      "deps/winpty/misc/ChangeScreenBuffer.cc",
+      "deps/winpty/misc/ClearConsole.cc",
+      "deps/winpty/misc/ConinMode.cc",
+      "deps/winpty/misc/ConoutMode.cc"
+    ],
+    "status": "OK"
+  },
+  "@flovy/node-printer@0.6.3": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/node_printer_posix.cc",
+      "src/node_printer_win.cc",
+      "src/node_printer.cc"
+    ],
+    "status": "OK"
+  },
+  "@fugood/whisper.node@1.1.3": {
+    "c_file_count": 10,
+    "c_files_sample": [
+      "whisper.cpp/ggml/src/ggml-cpu/ggml-cpu.c",
+      "whisper.cpp/ggml/src/ggml-cpu/arch/arm/quants.c",
+      "whisper.cpp/ggml/src/ggml-cpu/arch/loongarch/quants.c",
+      "whisper.cpp/ggml/src/ggml-cpu/arch/powerpc/quants.c",
+      "whisper.cpp/ggml/src/ggml-cpu/arch/riscv/quants.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 38,
+    "cpp_files_sample": [
+      "src/addons.cc",
+      "whisper.cpp/ggml/src/ggml-cpu/amx/amx.cpp",
+      "whisper.cpp/ggml/src/ggml-cpu/binary-ops.cpp",
+      "src/common.cpp",
+      "whisper.cpp/ggml/src/ggml-cpu/arch/arm/cpu-feats.cpp"
+    ],
+    "status": "OK"
+  },
+  "@genee/dbus@1.0.7-9": {
+    "c_file_count": 19,
+    "c_files_sample": [
+      "deps/libexpat/xmlwf/codepage.c",
+      "deps/libexpat/xmlwf/ct.c",
+      "deps/libexpat/amiga/expat_68k_handler_stubs.c",
+      "deps/libexpat/amiga/expat_68k.c",
+      "deps/libexpat/amiga/expat_lib.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 8,
+    "cpp_files_sample": [
+      "src/connection.cc",
+      "src/dbus.cc",
+      "src/decoder.cc",
+      "src/encoder.cc",
+      "src/introspect.cc"
+    ],
+    "status": "OK"
+  },
+  "@grandchef/node-printer@0.8.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/node_printer_posix.cc",
+      "src/node_printer_win.cc",
+      "src/node_printer.cc"
+    ],
+    "status": "OK"
+  },
+  "@guilherme_souza/node-printer-updated-fork@0.6.17": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/node_printer_posix.cc",
+      "src/node_printer_win.cc",
+      "src/node_printer.cc"
+    ],
+    "status": "OK"
+  },
+  "@h1x4dev/node-addon-api@2.0.0": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "nothing.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "benchmark/function_args.cc",
+      "benchmark/property_descriptor.cc"
+    ],
+    "status": "OK"
+  },
+  "@ipshipyard/node-datachannel@0.26.6": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 13,
+    "cpp_files_sample": [
+      "src/cpp/data-channel-wrapper.cpp",
+      "src/cpp/ice-udp-mux-listener-wrapper.cpp",
+      "src/cpp/main.cpp",
+      "src/cpp/media-audio-wrapper.cpp",
+      "src/cpp/media-direction.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jasonscheirer/native-progress-bar@1.1.2": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/progress_bar.cpp",
+      "src/progress_bar_linux.cpp",
+      "src/progress_bar_windows.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-blit-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapBlit.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-blur-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapBlur.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-circle-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapCircle.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-color-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapColor.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-composite-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapComposite.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-crop-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapCrop.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-dither-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapDither.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-flip-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapFlip.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-invert-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapInvert.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-mask-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapMask.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-resize-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapResize.cpp"
+    ],
+    "status": "OK"
+  },
+  "@jimp-native/plugin-rotate-napi@0.1.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/wrapRotate.cpp"
+    ],
+    "status": "OK"
+  },
+  "@nodert-win10-cu/windows.ui.notifications@0.4.4": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 4,
+    "cpp_files_sample": [
+      "_nodert_generated.cpp",
+      "CollectionsConverterUtils.cpp",
+      "NodeRtUtils.cpp",
+      "OpaqueWrapper.cpp"
+    ],
+    "status": "OK"
+  },
+  "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 4,
+    "cpp_files_sample": [
+      "_nodert_generated.cpp",
+      "CollectionsConverterUtils.cpp",
+      "NodeRtUtils.cpp",
+      "OpaqueWrapper.cpp"
+    ],
+    "status": "OK"
+  },
+  "@sentry-internal/node-native-stacktrace@0.5.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "module.cc"
+    ],
+    "status": "OK"
+  },
+  "audify@1.10.1": {
+    "c_file_count": 236,
+    "c_files_sample": [
+      "vendor/opus/silk/A2NLSF.c",
+      "vendor/opus/dnn/adaconvtest.c",
+      "vendor/opus/silk/ana_filt_bank_1.c",
+      "vendor/opus/src/analysis.c",
+      "vendor/opus/silk/fixed/apply_sine_window_FIX.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 13,
+    "cpp_files_sample": [
+      "vendor/rtaudio/include/asio.cpp",
+      "vendor/rtaudio/include/asiodrivers.cpp",
+      "vendor/rtaudio/include/asiolist.cpp",
+      "src/audify.cpp",
+      "vendor/rtaudio/include/iasiothiscallresolver.cpp"
+    ],
+    "status": "OK"
+  },
+  "fullname-native@3.0.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "binding.cc"
+    ],
+    "status": "OK"
+  },
+  "hidraw-native@0.2.2": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "index.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "indy-sdk@1.16.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "src/indy.cc"
+    ],
+    "status": "OK"
+  },
+  "napi-addon-fdtd@3.4.9": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/fdtd/1d-pml/fdtd-pml-1d.cpp",
+      "src/fdtd/2d-pml/fdtd-pml-2d.cpp",
+      "src/index.cpp"
+    ],
+    "status": "OK"
+  },
+  "napi-ldap@1.0.4": {
+    "c_file_count": 5,
+    "c_files_sample": [
+      "cnx.c",
+      "cookie.c",
+      "main.c",
+      "sasl.c",
+      "saslx.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "profoundjs-fibers@2.7.5": {
+    "c_file_count": 2,
+    "c_files_sample": [
+      "src/libcoro/conftest.c",
+      "src/libcoro/coro.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/coroutine.cc",
+      "src/fibers.cc"
+    ],
+    "status": "OK"
+  },
+  "re2@1.26.1": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "vendor/abseil-cpp/absl/base/c_header_test.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 512,
+    "cpp_files_sample": [
+      "vendor/re2/app/_re2.cc",
+      "vendor/re2/python/_re2.cc",
+      "vendor/abseil-cpp/absl/log/absl_check_test.cc",
+      "vendor/abseil-cpp/absl/log/absl_log_basic_test.cc",
+      "lib/accessors.cc"
+    ],
+    "status": "OK"
+  },
+  "thunder-node-sdk-lite-m@0.1.16": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 12,
+    "cpp_files_sample": [
+      "src/eventhandler.cpp",
+      "src/node_task_caller.cpp",
+      "src/node_task_queue.cpp",
+      "src/platform_utils_posix.cpp",
+      "src/thunder_engine_node.cpp"
+    ],
+    "status": "OK"
+  },
+  "uiohook-napi@1.5.5": {
+    "c_file_count": 16,
+    "c_files_sample": [
+      "src/lib/addon.c",
+      "libuiohook/src/darwin/input_helper.c",
+      "libuiohook/src/windows/input_helper.c",
+      "libuiohook/src/x11/input_helper.c",
+      "libuiohook/src/darwin/input_hook.c"
+    ],
+    "classification": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  },
+  "uriparser@2.4.0": {
+    "c_file_count": 1,
+    "c_files_sample": [
+      "deps/ngx_url_parser/ngx_url_parser.c"
+    ],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 1,
+    "cpp_files_sample": [
+      "src/node-uriparser.cc"
+    ],
+    "status": "OK"
+  },
+  "velociradix@8.3.1": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 3,
+    "cpp_files_sample": [
+      "src/addon.cpp",
+      "src/main.cpp",
+      "src/velociradix.cpp"
+    ],
+    "status": "OK"
+  },
+  "x509@0.3.4": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "HAS_REAL_CPP_SOURCES",
+    "cpp_file_count": 2,
+    "cpp_files_sample": [
+      "src/addon.cc",
+      "src/x509.cc"
+    ],
+    "status": "OK"
+  },
+  "yatag@1.3.0": {
+    "c_file_count": 0,
+    "c_files_sample": [],
+    "classification": "NO_C_OR_CPP_SOURCE_FOUND",
+    "cpp_file_count": 0,
+    "cpp_files_sample": [],
+    "status": "OK"
+  }
+}

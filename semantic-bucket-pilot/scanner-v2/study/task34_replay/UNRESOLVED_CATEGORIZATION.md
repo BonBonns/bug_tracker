@@ -1,3 +1,16 @@
+## SUPERSEDED (real reconstruction, not just triage): see `BUILD_CONFIG_RECONSTRUCTION_RESULTS.md`
+
+This document's own "no mechanically resolvable category" conclusion (Section 3) stood only for
+promoting a package based on the ABSENCE of textual evidence alone -- per direct follow-up
+instruction, a later round went further: reconstructing each package's REAL compiler command via
+node-gyp/cmake-js and, where needed, tracing to the real upstream repository. That round resolved
+50/54 (93%) with real, non-guessed evidence -- 34 structurally `not_applicable` (a real,
+generalizable finding: most of the 42 "no textual evidence" packages simply never use
+node-addon-api's own C++ exception-config convention at all -- Nan, raw N-API, legacy raw-V8, and
+pure-C addons all have no such concept), 16 real `enabled`/`disabled` answers, and only 4
+genuinely `irreducible_unresolved`. See that document for the full account; the categorization
+below remains accurate as a description of the TEXTUAL layer alone, not the final, real outcome.
+
 # The 54 unresolved build configurations: relevance split, reason categorization, and the real,
 # honest limit of what was mechanically safe to fix
 

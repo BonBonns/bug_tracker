@@ -1,0 +1,332 @@
+{
+  "@8crafter/leveldb-zlib@1.6.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+    "relevant_defines": null
+  },
+  "@abandonware/bluetooth-hci-socket@0.5.3-12": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@ampretia/x509@0.4.10": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@antcube/capnp@0.5.52": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+    "relevant_defines": null
+  },
+  "@cdktf/node-pty-prebuilt-multiarch@0.10.2": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@cherrystudio/mac-system-ocr@0.2.7": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['lib/binding.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "@choysen/mac-system-ocr@0.2.8": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['lib/binding.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "@codeporter/robotjs@0.6.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@confluentinc/kafka-javascript@1.10.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@damonsmith/node-printer@0.7.3": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@depup/node-addon-api@8.9.2-depup.0": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['nothing.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "@dwieeb/node-pty-prebuilt@0.8.1": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@faressoft/node-pty-prebuilt@0.9.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@flovy/node-printer@0.6.3": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@genee/dbus@1.0.7-9": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@grandchef/node-printer@0.8.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@guilherme_souza/node-printer-updated-fork@0.6.17": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@jasonscheirer/native-progress-bar@1.1.2": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+    "relevant_defines": null
+  },
+  "@nodert-win10-cu/windows.ui.notifications@0.4.4": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "@sentry-internal/node-native-stacktrace@0.5.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+    "relevant_defines": null
+  },
+  "fullname-native@3.0.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "hidraw-native@0.2.2": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['index.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "indy-sdk@1.16.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "napi-ldap@1.0.4": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 5 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['cnx.c', 'cookie.c', 'main.c', 'sasl.c', 'saslx.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "profoundjs-fibers@2.7.5": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+    "relevant_defines": null
+  },
+  "re2@1.26.1": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "thunder-node-sdk-lite-m@0.1.16": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+    "relevant_defines": null
+  },
+  "uiohook-napi@1.5.5": {
+    "build_system": "n/a (pure C addon)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real tarball inspection: 16 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['src/lib/addon.c', 'libuiohook/src/darwin/input_helper.c', 'libuiohook/src/windows/input_helper.c', 'libuiohook/src/x11/input_helper.c', 'libuiohook/src/darwin/input_hook.c'])",
+    "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+    "final_status": "not_applicable",
+    "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+    "relevant_defines": null
+  },
+  "uriparser@2.4.0": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "velociradix@8.3.1": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+    "relevant_defines": null
+  },
+  "x509@0.3.4": {
+    "build_system": "n/a (question does not apply to this binding family)",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+    "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+    "final_status": "not_applicable",
+    "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+    "relevant_defines": null
+  },
+  "yatag@1.3.0": {
+    "build_system": "n/a",
+    "build_system_version": null,
+    "compiler_flags": null,
+    "evidence_citation": "real package.json inspection: no nan/node-addon-api/bindings dependency, no gypfile/binary field; the only real .cpp/.hpp files present are node-gdal-async's own vendored test/ fixtures, never compiled by this package's own build (it has none)",
+    "exact_target": "n/a -- no native addon exists in this package",
+    "final_status": "not_applicable",
+    "final_status_reason": "NOT_A_NATIVE_ADDON_PACKAGE",
+    "relevant_defines": null
+  }
+}

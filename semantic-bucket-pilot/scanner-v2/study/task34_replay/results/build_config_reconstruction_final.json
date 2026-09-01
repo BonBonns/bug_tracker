@@ -1,0 +1,680 @@
+{
+  "final_status_counts": {
+    "disabled": 2,
+    "enabled": 14,
+    "irreducible_unresolved": 4,
+    "not_applicable": 34
+  },
+  "final_status_reason_counts": {
+    "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING": 4,
+    "LIBRARY_PACKAGE_NO_OWN_NATIVE_BUILD": 1,
+    "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED": 19,
+    "NOT_A_NATIVE_ADDON_PACKAGE": 1,
+    "NO_REASON_RECORDED": 19,
+    "NO_TRACEABLE_UPSTREAM_SOURCE": 1,
+    "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES": 6,
+    "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT": 3
+  },
+  "per_package": {
+    "@8crafter/leveldb-zlib@1.6.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+      "relevant_defines": null
+    },
+    "@abandonware/bluetooth-hci-socket@0.5.3-12": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@acomsys/dash-utils@0.0.17": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "compiler_probe": null,
+      "evidence_citation": "cmake-js configure (network-isolated) failed: n/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring incomplete, errors occurred!\ninfo TOOL Using Ninja generator, because ninja is available.\ninfo CMD CONFIGURE\ninfo RUN [\ninfo RUN   'cmake',\ninfo RUN   '/tmp/cmakejs_reconstruct_1om30y3q/package',\ninfo RUN   '--no-warn-unused-cli',\ninfo RUN   '-G',\ninfo RUN   'Ninja',\ninfo RUN   '-DCMAKE_JS_VERSION=6.3.2',\ninfo RUN   '-DCMAKE_BUILD_TYPE=Release',\ninfo RUN   '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/tmp/cmakejs_reconstruct_1om30y3q/package/build/Release',\ninfo RUN   '-DCMAKE_JS_INC=/root/.cmake-js/node-x64/v22.22.2/include/node',\ninfo RUN   '-DCMAKE_JS_SRC=',\ninfo RUN   '-DNODE_RUNTIME=node',\ninfo RUN   '-DNODE_RUNTIMEVERSION=22.22.2',\ninfo RUN   '-DNODE_ARCH=x64',\ninfo RUN   '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',\ninfo RUN   '-DNODE_ADDON_INC=/tmp/cmakejs_reconstruct_1om30y3q/package/node_modules/node-addon-api'\ninfo RUN ]\nCMake Error at CMakeLists.txt:12 (include):\n  include could not find requested file:\n\n    ./cmake/napi.cmake\n\n\nCMake Error at CMakeLists.txt:13 (include):\n  include could not find requested file:\n\n    ./cmake/gtest.cmake\n\n\nCMake Error at CMakeLists.txt:14 (include):\n  include could not find requested file:\n\n    ./cmake/fmt.cmake\n\n\nERR! OMG Process terminated: 1\n",
+      "exact_target": null,
+      "final_status": "irreducible_unresolved",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@ampretia/x509@0.4.10": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@antcube/capnp@0.5.52": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+      "relevant_defines": null
+    },
+    "@astronautlabs/webrtc@0.6.1": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": [
+        "/usr/bin/clang++ -DNAPI_VERSION=9 -DNODE_ADDON_API_CPP_EXCEPTIONS=1 -DNODE_ADDON_API_CPP_EXCEPTIONS_ALL=1 -DUSE_BUILTIN_SW_CODECS -DWEBRTC_LINUX -DWEBRTC_POSIX=1 -D_LIBCPP_ABI_NAMESPACE=Cr -D_LIBCPP_ABI_VERSION=2 -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -Dwrtc_EXPORTS -I/tmp/cmakejs_reconstruct_iyhmo_nq/package -isystem /root/.cmake-js/node-x64/v22.22.2/include/node -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/node_modules/nan -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/node_modules -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc/third_party/abseil-cpp -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc/third_party/libyuv/include -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc/third_party/libc++/src/include -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc/buildtools/third_party/libc++ -isystem /tmp/cmakejs_reconstruct_iyhmo_nq/package/build/external/webrtc/include/webrtc/third_party/libc++abi/src/include -DBUILDING_NODE_EXTENSION -O3 -DNDEBUG -std=gnu++23 -fPIC -Xclang -nostdinc++ -fpermissive -fno-rtti -fvisibility=hidden -fsafe-buffer-usage-suggestions -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -Wno-uninitialized -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-deprecated-declarations -Wno-unused-variable -nostdlib++ -nostdinc++ -nodefaultlibs -o CMakeFiles/wrtc.dir/src/converters/napi.cc.o -c /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/converters/napi.cc"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real cmake-js@^8.0.0 configure + real compile_commands.json (node-addon-api@8.9.2)",
+      "exact_target": "/tmp/cmakejs_reconstruct_iyhmo_nq/package/src/converters/napi.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/converters/null.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/converters/undefined.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/converters/webrtc.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/extended_rtc_configuration.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/image_data.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_answer_options.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_dtls_fingerprint.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_media_stream_init.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_offer_options.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_on_data_event_dict.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_outh_credential.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_session_description_init.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/rtc_video_source_init.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/some_error.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/node_webrtc/unsigned_short_range.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/data_channel_init.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/ice_candidate_interface.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/ice_server.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtc_configuration.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtc_error.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtc_stats.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtc_stats_member_interface.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtc_stats_report.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtcp_parameters.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_capabilities.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_codec_capability.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_codec_parameters.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_encoding_parameters.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_header_extension_capability.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_header_extension_parameters.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_parameters.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_source.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/rtp_transceiver_init.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/video_frame.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/dictionaries/webrtc/video_frame_buffer.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/binary_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_dtx_status.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_ice_candidate_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_ice_component.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_ice_credential_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_priority_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/node_webrtc/rtc_sdp_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/bundle_policy.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/data_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/degradation_preference.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/dtls_transport_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/ice_connection_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/ice_gathering_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/ice_role.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/ice_transport_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/ice_transports_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/media_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/peer_connection_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/rtcp_mux_policy.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/rtp_transceiver_direction.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/sctp_transport_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/sdp_semantics.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/signaling_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/track_state.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/enums/webrtc/video_frame_buffer_type.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/media_stream.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/media_stream_track.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_audio_sink.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_audio_source.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_data_channel.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_dtls_transport.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_ice_candidate.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_ice_transport.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_peer_connection.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_peer_connection/create_session_description_observer.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_peer_connection/peer_connection_factory.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_peer_connection/rtc_stats_collector.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_peer_connection/set_session_description_observer.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_rtp_receiver.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_rtp_sender.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_rtp_transceiver.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_sctp_transport.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_session_description.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_video_sink.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/interfaces/rtc_video_source.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/methods/get_display_media.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/methods/get_user_media.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/methods/i420_helpers.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/node/async_context_releaser.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/node/error_factory.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/test.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/utilities/log.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/utilities/task.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/webrtc/test_audio_device_module.cc, /tmp/cmakejs_reconstruct_iyhmo_nq/package/src/webrtc_addon.cc",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@cdktf/node-pty-prebuilt-multiarch@0.10.2": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@cherrystudio/mac-system-ocr@0.2.7": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['lib/binding.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "@choysen/mac-system-ocr@0.2.8": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['lib/binding.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "@co_snow/hello@0.0.57": {
+      "build_system": "unknown (install script references node-gyp rebuild, but no binding.gyp exists anywhere in the published tarball)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "npm registry metadata for this exact pinned version carries no `repository` and no `gitHead` field at all -- there is no real upstream commit to trace to. The published tarball's own `prebuildify --napi` build script and empty binding.gyp search suggest this package ships prebuilt binaries only, with its real build source (if any still exists) never published to npm or linked from it.",
+      "exact_target": "n/a -- no build file found, upstream untraceable",
+      "final_status": "irreducible_unresolved",
+      "final_status_reason": "NO_TRACEABLE_UPSTREAM_SOURCE",
+      "relevant_defines": null
+    },
+    "@codeporter/robotjs@0.6.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@confluentinc/kafka-javascript@1.10.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@damonsmith/node-printer@0.7.3": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@depup/node-addon-api@8.9.2-depup.0": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['nothing.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "@dwieeb/node-pty-prebuilt@0.8.1": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@eliyya/sange@1.2.0": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": [
+        "/usr/bin/c++ -Dsange_EXPORTS -I/root/.cmake-js/node-x64/v22.22.2/include/node -I/tmp/cmakejs_reconstruct_7swx_1bn/package/node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/sange.dir/src/message.cpp.o -c /tmp/cmakejs_reconstruct_7swx_1bn/package/src/message.cpp"
+      ],
+      "compiler_probe": {
+        "detail": "real compiler probe (g++ -E) against node-addon-api's own pinned napi.h",
+        "node_addon_api_version": "8.5.0",
+        "status": "disabled"
+      },
+      "evidence_citation": "no exception flag/macro in the real, fully-resolved cmake-js compile command; real compiler probe (g++ -E) against node-addon-api's own pinned napi.h (node-addon-api@8.5.0)",
+      "exact_target": "/tmp/cmakejs_reconstruct_7swx_1bn/package/src/addon.cpp, /tmp/cmakejs_reconstruct_7swx_1bn/package/src/message.cpp, /tmp/cmakejs_reconstruct_7swx_1bn/package/src/player.cpp, /tmp/cmakejs_reconstruct_7swx_1bn/package/src/wrapper.cpp",
+      "final_status": "disabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@faressoft/node-pty-prebuilt@0.9.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@flovy/node-printer@0.6.3": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@fugood/whisper.node@1.1.3": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "compiler_probe": null,
+      "evidence_citation": "cmake-js configure (network-isolated) failed:  features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring incomplete, errors occurred!\ninfo TOOL Using Ninja generator, because ninja is available.\ninfo CMD CONFIGURE\ninfo RUN [\ninfo RUN   'cmake',\ninfo RUN   '/tmp/cmakejs_reconstruct_hf1xwewn/package',\ninfo RUN   '--no-warn-unused-cli',\ninfo RUN   '-G',\ninfo RUN   'Ninja',\ninfo RUN   '-DCMAKE_JS_VERSION=7.4.0',\ninfo RUN   '-DCMAKE_BUILD_TYPE=Release',\ninfo RUN   '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/tmp/cmakejs_reconstruct_hf1xwewn/package/build/Release',\ninfo RUN   '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>',\ninfo RUN   '-DCMAKE_JS_INC=/tmp/cmakejs_reconstruct_hf1xwewn/package/node_modules/node-api-headers/include;/tmp/cmakejs_reconstruct_hf1xwewn/package/node_modules/node-addon-api',\ninfo RUN   '-DCMAKE_JS_SRC=',\ninfo RUN   '-DNODE_RUNTIME=node',\ninfo RUN   '-DNODE_RUNTIMEVERSION=22.22.2',\ninfo RUN   '-DNODE_ARCH=x64',\ninfo RUN   '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',\ninfo RUN   '-DNODE_ADDON_INC=/tmp/cmakejs_reconstruct_hf1xwewn/package/node_modules/node-addon-api',\ninfo RUN   '-DCMAKE_JS_LIB=',\ninfo RUN   '-DCMAKE_CXX_FLAGS=-DBUILDING_NODE_EXTENSION'\ninfo RUN ]\nCMake Error at CMakeLists.txt:41 (message):\n  scripts/whisper.cpp.patch cannot be applied to the current whisper.cpp\n  checkout\n\n\nERR! OMG Process terminated: 1\n",
+      "exact_target": null,
+      "final_status": "irreducible_unresolved",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@genee/dbus@1.0.7-9": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@grandchef/node-printer@0.8.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@guilherme_souza/node-printer-updated-fork@0.6.17": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@h1x4dev/node-addon-api@2.0.0": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "compiler_probe": null,
+      "evidence_citation": "real package.json: gypfile=false, no root-level binding.gyp -- this package (a header-only node-addon-api-family library) never builds a native addon of its own when installed as a normal npm dependency",
+      "exact_target": null,
+      "final_status": "not_applicable",
+      "final_status_reason": "LIBRARY_PACKAGE_NO_OWN_NATIVE_BUILD",
+      "relevant_defines": null
+    },
+    "@ipshipyard/node-datachannel@0.26.6": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "compiler_probe": null,
+      "evidence_citation": "cmake-js configure (network-isolated) failed: ERSION=22.22.2',\ninfo RUN   '-DNODE_ARCH=x64',\ninfo RUN   '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',\ninfo RUN   '-DNODE_ADDON_INC=/tmp/cmakejs_reconstruct_5ucde61l/package/node_modules/node-addon-api',\ninfo RUN   '-DCMAKE_JS_LIB=',\ninfo RUN   '-DCMAKE_CXX_FLAGS=-DBUILDING_NODE_EXTENSION'\ninfo RUN ]\nCloning into 'libdatachannel-src'...\nfatal: unable to access 'https://github.com/achingbrain/libdatachannel.git/': Failed to connect to 127.0.0.1 port 40187 after 0 ms: Couldn't connect to server\nCloning into 'libdatachannel-src'...\nfatal: unable to access 'https://github.com/achingbrain/libdatachannel.git/': Failed to connect to 127.0.0.1 port 40187 after 0 ms: Couldn't connect to server\nCloning into 'libdatachannel-src'...\nfatal: unable to access 'https://github.com/achingbrain/libdatachannel.git/': Failed to connect to 127.0.0.1 port 40187 after 0 ms: Couldn't connect to server\nCMake Error at libdatachannel-subbuild/libdatachannel-populate-prefix/tmp/libdatachannel-populate-gitclone.cmake:39 (message):\n  Failed to clone repository:\n  'https://github.com/achingbrain/libdatachannel.git'\n\n\nCMake Error at /usr/share/cmake-3.28/Modules/FetchContent.cmake:1679 (message):\n  Build step for libdatachannel failed: 1\nCall Stack (most recent call first):\n  /usr/share/cmake-3.28/Modules/FetchContent.cmake:1819:EVAL:2 (__FetchContent_directPopulate)\n  /usr/share/cmake-3.28/Modules/FetchContent.cmake:1819 (cmake_language)\n  CMakeLists.txt:47 (FetchContent_Populate)\n\n\nERR! OMG Process terminated: 1\n",
+      "exact_target": null,
+      "final_status": "irreducible_unresolved",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jasonscheirer/native-progress-bar@1.1.2": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-blit-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-blit-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-blit-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/plugin-blit-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blit-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapBlit.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-blur-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-blur-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-blur-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/plugin-blur-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blur-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapBlur.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-circle-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-circle-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-circle-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/plugin-circle-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-circle-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapCircle.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-color-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-color-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-color-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-color-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapColor.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-composite-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-composite-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-composite-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-composite-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-composite-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapComposite.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-crop-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-crop-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-crop-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/plugin-crop-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-crop-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapCrop.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-dither-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-dither-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-dither-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/plugin-dither-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-dither-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapDither.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-flip-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-flip-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-flip-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/plugin-flip-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-flip-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapFlip.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-invert-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-invert-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-invert-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/plugin-invert-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-invert-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapInvert.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-mask-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-mask-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-mask-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/plugin-mask-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-mask-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapMask.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-resize-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-resize-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-resize-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/plugin-resize-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-resize-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapResize.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@jimp-native/plugin-rotate-napi@0.1.0": {
+      "build_system": "node-gyp/gyp",
+      "build_system_version": null,
+      "compiler_flags": [
+        "g++ -o Release/obj.target/plugin-rotate-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-rotate-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/plugin-rotate-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-rotate-napi/src/addon.o.d.raw   -c"
+      ],
+      "compiler_probe": null,
+      "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+      "exact_target": "../src/addon.cpp, ../src/wrapRotate.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "@nodert-win10-cu/windows.ui.notifications@0.4.4": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "@sentry-internal/node-native-stacktrace@0.5.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+      "relevant_defines": null
+    },
+    "audify@1.10.1": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": [
+        "/usr/bin/c++ -Daudify_EXPORTS -I/tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/include -I/tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/rtaudio -I/tmp/cmakejs_reconstruct_3yvnafnu/package/node_modules/node-api-headers/include -I/tmp/cmakejs_reconstruct_3yvnafnu/package/node_modules/node-addon-api -DBUILDING_NODE_EXTENSION -O3 -DNDEBUG -std=gnu++20 -fPIC -o CMakeFiles/audify.dir/src/audify.cpp.o -c /tmp/cmakejs_reconstruct_3yvnafnu/package/src/audify.cpp"
+      ],
+      "compiler_probe": {
+        "detail": "real compiler probe (g++ -E) against node-addon-api's own pinned napi.h",
+        "node_addon_api_version": "8.9.2",
+        "status": "disabled"
+      },
+      "evidence_citation": "no exception flag/macro in the real, fully-resolved cmake-js compile command; real compiler probe (g++ -E) against node-addon-api's own pinned napi.h (node-addon-api@8.9.2)",
+      "exact_target": "/tmp/cmakejs_reconstruct_3yvnafnu/package/src/audify.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/src/opus_decoder.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/src/opus_encoder.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/src/rt_audio.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/src/rt_audio_converter.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/bands.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/celt.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/celt_decoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/celt_encoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/celt_lpc.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/cwrs.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/entcode.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/entdec.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/entenc.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/kiss_fft.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/laplace.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/mathops.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/mdct.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/modes.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/pitch.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/quant_bands.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/rate.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/vq.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/celt_lpc_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/pitch_avx.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/pitch_sse.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/pitch_sse2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/pitch_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/vq_sse2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/x86_celt_map.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/celt/x86/x86cpu.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/A2NLSF.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/CNG.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/HP_variable_cutoff.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/LPC_analysis_filter.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/LPC_fit.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/LPC_inv_pred_gain.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/LP_variable_cutoff.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF2A.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_VQ.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_VQ_weights_laroia.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_decode.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_del_dec_quant.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_encode.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_stabilize.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NLSF_unpack.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NSQ.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/NSQ_del_dec.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/PLC.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/VAD.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/VQ_WMat_EC.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/ana_filt_bank_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/biquad_alt.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/bwexpander.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/bwexpander_32.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/check_control_input.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/code_signs.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/control_SNR.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/control_audio_bandwidth.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/control_codec.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/debug.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/dec_API.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_core.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_frame.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_indices.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_parameters.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_pitch.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decode_pulses.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/decoder_set_fs.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/enc_API.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/encode_indices.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/encode_pulses.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/LPC_analysis_filter_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/LPC_inv_pred_gain_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/LTP_analysis_filter_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/LTP_scale_ctrl_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/apply_sine_window_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/autocorrelation_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/burg_modified_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/bwexpander_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/corrMatrix_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/encode_frame_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/energy_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/find_LPC_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/find_LTP_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/find_pitch_lags_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/find_pred_coefs_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/inner_product_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/k2a_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/noise_shape_analysis_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/pitch_analysis_core_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/process_gains_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/regularize_correlations_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/residual_energy_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/scale_copy_vector_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/scale_vector_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/schur_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/sort_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/warped_autocorrelation_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/wrappers_FLP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/float/x86/inner_product_FLP_avx2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/gain_quant.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/init_decoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/init_encoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/inner_prod_aligned.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/interpolate.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/lin2log.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/log2lin.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/pitch_est_tables.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/process_NLSFs.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/quant_LTP_gains.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_down2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_down2_3.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_private_AR2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_private_IIR_FIR.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_private_down_FIR.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_private_up2_HQ.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/resampler_rom.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/shell_coder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/sigm_Q15.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/sort.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_LR_to_MS.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_MS_to_LR.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_decode_pred.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_encode_pred.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_find_predictor.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/stereo_quant_pred.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/sum_sqr_shift.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/table_LSF_cos.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_LTP.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_NLSF_CB_NB_MB.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_NLSF_CB_WB.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_gain.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_other.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_pitch_lag.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/tables_pulses_per_block.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/NSQ_del_dec_avx2.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/NSQ_del_dec_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/NSQ_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/VAD_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/VQ_WMat_EC_sse4_1.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/silk/x86/x86_silk_map.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/analysis.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/extensions.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/mapping_matrix.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/mlp.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/mlp_data.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_decoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_encoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_multistream.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_multistream_decoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_multistream_encoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_projection_decoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/opus_projection_encoder.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/opus/src/repacketizer.c, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/rtaudio/RtAudio.cpp, /tmp/cmakejs_reconstruct_3yvnafnu/package/vendor/rtaudio/rtaudio_c.cpp",
+      "final_status": "disabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "fullname-native@3.0.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "hidraw-native@0.2.2": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 1 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['index.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "indy-sdk@1.16.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "napi-addon-fdtd@3.4.9": {
+      "build_system": "cmake-js",
+      "build_system_version": null,
+      "compiler_flags": [
+        "/usr/bin/c++ -DNAPI_VERSION=3 -Dnapi_addon_fdtd_EXPORTS -I/root/.cmake-js/node-x64/v22.22.2/include/node -I/tmp/cmakejs_reconstruct_f6npj1xu/package/node_modules/node-addon-api -O3 -DNDEBUG -std=gnu++17 -fPIC -o CMakeFiles/napi-addon-fdtd.dir/src/fdtd/1d-pml/fdtd-pml-1d.cpp.o -c /tmp/cmakejs_reconstruct_f6npj1xu/package/src/fdtd/1d-pml/fdtd-pml-1d.cpp"
+      ],
+      "compiler_probe": {
+        "detail": "real compiler probe (g++ -E) against node-addon-api's own pinned napi.h",
+        "node_addon_api_version": "3.2.1",
+        "status": "enabled"
+      },
+      "evidence_citation": "no exception flag/macro in the real, fully-resolved cmake-js compile command; real compiler probe (g++ -E) against node-addon-api's own pinned napi.h (node-addon-api@3.2.1)",
+      "exact_target": "/tmp/cmakejs_reconstruct_f6npj1xu/package/src/fdtd/1d-pml/fdtd-pml-1d.cpp, /tmp/cmakejs_reconstruct_f6npj1xu/package/src/fdtd/2d-pml/fdtd-pml-2d.cpp, /tmp/cmakejs_reconstruct_f6npj1xu/package/src/index.cpp",
+      "final_status": "enabled",
+      "final_status_reason": null,
+      "relevant_defines": null
+    },
+    "napi-ldap@1.0.4": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 5 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['cnx.c', 'cookie.c', 'main.c', 'sasl.c', 'saslx.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "profoundjs-fibers@2.7.5": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+      "relevant_defines": null
+    },
+    "re2@1.26.1": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "thunder-node-sdk-lite-m@0.1.16": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node.h>/<node_object_wrap.h>/<node_buffer.h> confirmed directly, no napi.h/nan.h anywhere in this package's own tarball -- a legacy, pre-N-API/pre-Nan direct-V8 addon",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "LEGACY_RAW_V8_EXCEPTION_CONFIG_HAS_NO_MEANING",
+      "relevant_defines": null
+    },
+    "uiohook-napi@1.5.5": {
+      "build_system": "n/a (pure C addon)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real tarball inspection: 16 real .c file(s), 0 real .cc/.cpp/.cxx files (sample: ['src/lib/addon.c', 'libuiohook/src/darwin/input_helper.c', 'libuiohook/src/windows/input_helper.c', 'libuiohook/src/x11/input_helper.c', 'libuiohook/src/darwin/input_hook.c'])",
+      "exact_target": "ALL (package-wide -- no C++ translation unit exists)",
+      "final_status": "not_applicable",
+      "final_status_reason": "PURE_C_NO_EXCEPTION_CONCEPT_APPLIES",
+      "relevant_defines": null
+    },
+    "uriparser@2.4.0": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "velociradix@8.3.1": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <node_api.h> confirmed directly, never napi.h/napi-inl.h anywhere in this package's own tarball -- raw N-API (C-style, status-code error handling), never node-addon-api's own C++ exception-aware wrapper",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "RAW_NAPI_C_STYLE_NO_EXCEPTION_CONCEPT",
+      "relevant_defines": null
+    },
+    "x509@0.3.4": {
+      "build_system": "n/a (question does not apply to this binding family)",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real #include <nan.h> confirmed directly in this package's own tarball (napi_include=False); package.json declares nan=True",
+      "exact_target": "ALL (package-wide -- no NAPI_CPP_EXCEPTIONS convention exists for this binding family)",
+      "final_status": "not_applicable",
+      "final_status_reason": "NAN_FAMILY_EXCEPTION_CONFIG_NEVER_CONSULTED",
+      "relevant_defines": null
+    },
+    "yatag@1.3.0": {
+      "build_system": "n/a",
+      "build_system_version": null,
+      "compiler_flags": null,
+      "evidence_citation": "real package.json inspection: no nan/node-addon-api/bindings dependency, no gypfile/binary field; the only real .cpp/.hpp files present are node-gdal-async's own vendored test/ fixtures, never compiled by this package's own build (it has none)",
+      "exact_target": "n/a -- no native addon exists in this package",
+      "final_status": "not_applicable",
+      "final_status_reason": "NOT_A_NATIVE_ADDON_PACKAGE",
+      "relevant_defines": null
+    }
+  },
+  "source_used": {
+    "@8crafter/leveldb-zlib@1.6.0": "structural_moot",
+    "@abandonware/bluetooth-hci-socket@0.5.3-12": "structural_moot",
+    "@acomsys/dash-utils@0.0.17": "cmakejs_reconstruction",
+    "@ampretia/x509@0.4.10": "structural_moot",
+    "@antcube/capnp@0.5.52": "structural_moot",
+    "@astronautlabs/webrtc@0.6.1": "cmakejs_reconstruction",
+    "@cdktf/node-pty-prebuilt-multiarch@0.10.2": "structural_moot",
+    "@cherrystudio/mac-system-ocr@0.2.7": "structural_moot",
+    "@choysen/mac-system-ocr@0.2.8": "structural_moot",
+    "@co_snow/hello@0.0.57": "upstream_tracing",
+    "@codeporter/robotjs@0.6.0": "structural_moot",
+    "@confluentinc/kafka-javascript@1.10.0": "structural_moot",
+    "@damonsmith/node-printer@0.7.3": "structural_moot",
+    "@depup/node-addon-api@8.9.2-depup.0": "structural_moot",
+    "@dwieeb/node-pty-prebuilt@0.8.1": "structural_moot",
+    "@eliyya/sange@1.2.0": "cmakejs_reconstruction",
+    "@faressoft/node-pty-prebuilt@0.9.0": "structural_moot",
+    "@flovy/node-printer@0.6.3": "structural_moot",
+    "@fugood/whisper.node@1.1.3": "cmakejs_reconstruction",
+    "@genee/dbus@1.0.7-9": "structural_moot",
+    "@grandchef/node-printer@0.8.0": "structural_moot",
+    "@guilherme_souza/node-printer-updated-fork@0.6.17": "structural_moot",
+    "@h1x4dev/node-addon-api@2.0.0": "gyp_reconstruction",
+    "@ipshipyard/node-datachannel@0.26.6": "cmakejs_reconstruction",
+    "@jasonscheirer/native-progress-bar@1.1.2": "structural_moot",
+    "@jimp-native/plugin-blit-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-blur-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-circle-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-color-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-composite-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-crop-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-dither-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-flip-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-invert-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-mask-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-resize-napi@0.1.0": "gyp_reconstruction",
+    "@jimp-native/plugin-rotate-napi@0.1.0": "gyp_reconstruction",
+    "@nodert-win10-cu/windows.ui.notifications@0.4.4": "structural_moot",
+    "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": "structural_moot",
+    "@sentry-internal/node-native-stacktrace@0.5.0": "structural_moot",
+    "audify@1.10.1": "cmakejs_reconstruction",
+    "fullname-native@3.0.0": "structural_moot",
+    "hidraw-native@0.2.2": "structural_moot",
+    "indy-sdk@1.16.0": "structural_moot",
+    "napi-addon-fdtd@3.4.9": "cmakejs_reconstruction",
+    "napi-ldap@1.0.4": "structural_moot",
+    "profoundjs-fibers@2.7.5": "structural_moot",
+    "re2@1.26.1": "structural_moot",
+    "thunder-node-sdk-lite-m@0.1.16": "structural_moot",
+    "uiohook-napi@1.5.5": "structural_moot",
+    "uriparser@2.4.0": "structural_moot",
+    "velociradix@8.3.1": "structural_moot",
+    "x509@0.3.4": "structural_moot",
+    "yatag@1.3.0": "structural_moot"
+  }
+}

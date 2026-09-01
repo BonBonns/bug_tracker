@@ -1,0 +1,232 @@
+{
+  "@h1x4dev/node-addon-api@2.0.0": {
+    "evidence_citation": "real package.json: gypfile=false, no root-level binding.gyp -- this package (a header-only node-addon-api-family library) never builds a native addon of its own when installed as a normal npm dependency",
+    "final_status": "not_applicable",
+    "final_status_reason": "LIBRARY_PACKAGE_NO_OWN_NATIVE_BUILD",
+    "package": "@h1x4dev/node-addon-api@2.0.0",
+    "targets": []
+  },
+  "@jasonscheirer/native-progress-bar@1.1.2": {
+    "final_status": "irreducible_unresolved",
+    "install_strategy": "npm install --ignore-scripts --omit=dev",
+    "package": "@jasonscheirer/native-progress-bar@1.1.2",
+    "reason": "node-gyp configure failed: =/root/.cache/node-gyp/22.22.2/<(target_arch)/node.lib',\ngyp info spawn args '-Dmodule_root_dir=/tmp/gyp_reconstruct__dul9qdb/package',\ngyp info spawn args '-Dnode_engine=v8',\ngyp info spawn args '--depth=.',\ngyp info spawn args '--no-parallel',\ngyp info spawn args '--generator-output',\ngyp info spawn args 'build',\ngyp info spawn args '-Goutput_dir=.'\ngyp info spawn args ]\nPackage gtk4 was not found in the pkg-config search path.\nPerhaps you should add the directory containing `gtk4.pc'\nto the PKG_CONFIG_PATH environment variable\nPackage 'gtk4', required by 'virtual:world', not found\nPackage 'libadwaita-1', required by 'virtual:world', not found\ngyp: Call to 'pkg-config --cflags gtk4 libadwaita-1' returned exit status 1 while in binding.gyp. while trying to load binding.gyp\ngyp ERR! configure error \ngyp ERR! stack Error: `gyp` failed with exit code: 1\ngyp ERR! stack at ChildProcess.<anonymous> (/root/.npm/_npx/c463d28440264a05/node_modules/node-gyp/lib/configure.js:317:18)\ngyp ERR! stack at ChildProcess.emit (node:events:519:28)\ngyp ERR! stack at ChildProcess._handle.onexit (node:internal/child_process:293:12)\ngyp ERR! System Linux 6.18.44-fc-v22\ngyp ERR! command \"/opt/node22/bin/node\" \"/root/.npm/_npx/c463d28440264a05/node_modules/.bin/node-gyp\" \"configure\"\ngyp ERR! cwd /tmp/gyp_reconstruct__dul9qdb/package\ngyp ERR! node -v v22.22.2\ngyp ERR! node-gyp -v v13.0.2\ngyp ERR! $npm_package_name @jasonscheirer/native-progress-bar\ngyp ERR! $npm_package_version 1.1.2\ngyp ERR! not ok \n",
+    "targets": []
+  },
+  "@jimp-native/plugin-blit-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-blit-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-blit-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-blit-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/plugin-blit-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blit-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-blit-napi/src/wrapBlit.o ../src/wrapBlit.cpp '-DNODE_GYP_MODULE_NAME=plugin-blit-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_yivc6qre/package/node_modules/@jimp-native/plugin-blit-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blit-napi/src/wrapBlit.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapBlit.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-blur-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-blur-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-blur-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-blur-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/plugin-blur-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blur-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-blur-napi/src/wrapBlur.o ../src/wrapBlur.cpp '-DNODE_GYP_MODULE_NAME=plugin-blur-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_oo6helur/package/node_modules/@jimp-native/plugin-blur-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-blur-napi/src/wrapBlur.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapBlur.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-circle-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-circle-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-circle-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-circle-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/plugin-circle-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-circle-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-circle-napi/src/wrapCircle.o ../src/wrapCircle.cpp '-DNODE_GYP_MODULE_NAME=plugin-circle-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_0ev4u51x/package/node_modules/@jimp-native/plugin-circle-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-circle-napi/src/wrapCircle.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapCircle.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-color-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-color-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-color-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-color-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-color-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-color-napi/src/wrapColor.o ../src/wrapColor.cpp '-DNODE_GYP_MODULE_NAME=plugin-color-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_thvrxn35/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-color-napi/src/wrapColor.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapColor.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-composite-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-composite-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-composite-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-composite-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-composite-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-composite-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-composite-napi/src/wrapComposite.o ../src/wrapComposite.cpp '-DNODE_GYP_MODULE_NAME=plugin-composite-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-composite-cpp/src -I/tmp/gyp_reconstruct_cv6bq7su/package/node_modules/@jimp-native/plugin-color-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-composite-napi/src/wrapComposite.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapComposite.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-crop-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-crop-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-crop-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-crop-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/plugin-crop-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-crop-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-crop-napi/src/wrapCrop.o ../src/wrapCrop.cpp '-DNODE_GYP_MODULE_NAME=plugin-crop-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3ce76wmb/package/node_modules/@jimp-native/plugin-crop-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-crop-napi/src/wrapCrop.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapCrop.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-dither-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-dither-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-dither-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-dither-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/plugin-dither-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-dither-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-dither-napi/src/wrapDither.o ../src/wrapDither.cpp '-DNODE_GYP_MODULE_NAME=plugin-dither-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_8xscxkfv/package/node_modules/@jimp-native/plugin-dither-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-dither-napi/src/wrapDither.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapDither.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-flip-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-flip-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-flip-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-flip-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/plugin-flip-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-flip-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-flip-napi/src/wrapFlip.o ../src/wrapFlip.cpp '-DNODE_GYP_MODULE_NAME=plugin-flip-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_3oviajdw/package/node_modules/@jimp-native/plugin-flip-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-flip-napi/src/wrapFlip.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapFlip.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-invert-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-invert-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-invert-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-invert-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/plugin-invert-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-invert-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-invert-napi/src/wrapInvert.o ../src/wrapInvert.cpp '-DNODE_GYP_MODULE_NAME=plugin-invert-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_gjwalwnr/package/node_modules/@jimp-native/plugin-invert-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-invert-napi/src/wrapInvert.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapInvert.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-mask-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-mask-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-mask-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-mask-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/plugin-mask-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-mask-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-mask-napi/src/wrapMask.o ../src/wrapMask.cpp '-DNODE_GYP_MODULE_NAME=plugin-mask-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_970i85k6/package/node_modules/@jimp-native/plugin-mask-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-mask-napi/src/wrapMask.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapMask.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-resize-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-resize-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-resize-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-resize-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/plugin-resize-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-resize-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-resize-napi/src/wrapResize.o ../src/wrapResize.cpp '-DNODE_GYP_MODULE_NAME=plugin-resize-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_apq9n7iy/package/node_modules/@jimp-native/plugin-resize-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-resize-napi/src/wrapResize.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapResize.cpp"
+      }
+    ]
+  },
+  "@jimp-native/plugin-rotate-napi@0.1.0": {
+    "evidence_citation": "real node-gyp configure + make -n dry-run compile command (node-addon-api@6.1.0, node v22.22.2 headers via node-gyp's own auto-fetch)",
+    "final_status": "enabled",
+    "install_strategy": "npm install --ignore-scripts (devDependencies stripped after a real E404 on a genuinely unpublished dev-only dependency)",
+    "package": "@jimp-native/plugin-rotate-napi@0.1.0",
+    "targets": [
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-rotate-napi/src/addon.o ../src/addon.cpp '-DNODE_GYP_MODULE_NAME=plugin-rotate-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/plugin-rotate-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-rotate-napi/src/addon.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/addon.cpp"
+      },
+      {
+        "compile_command": "g++ -o Release/obj.target/plugin-rotate-napi/src/wrapRotate.o ../src/wrapRotate.cpp '-DNODE_GYP_MODULE_NAME=plugin-rotate-napi' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-D_HAS_EXCEPTIONS=1' '-D_LARGEFILE_SOURCE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DBUILDING_NODE_EXTENSION' -I/root/.cache/node-gyp/22.22.2/include/node -I/root/.cache/node-gyp/22.22.2/src -I/root/.cache/node-gyp/22.22.2/deps/openssl/config -I/root/.cache/node-gyp/22.22.2/deps/openssl/openssl/include -I/root/.cache/node-gyp/22.22.2/deps/uv/include -I/root/.cache/node-gyp/22.22.2/deps/zlib -I/root/.cache/node-gyp/22.22.2/deps/v8/include -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/node-addon-api -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-cpp/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/utils-napi/src -I/tmp/gyp_reconstruct_habv73vp/package/node_modules/@jimp-native/plugin-rotate-cpp/src  -fexceptions -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-frame-pointer -std=c++17 -fexceptions -fno-rtti -fno-strict-aliasing -std=gnu++17 -MMD -MF ./Release/.deps/Release/obj.target/plugin-rotate-napi/src/wrapRotate.o.d.raw   -c",
+        "flag_status": "enabled",
+        "source_file": "../src/wrapRotate.cpp"
+      }
+    ]
+  }
+}

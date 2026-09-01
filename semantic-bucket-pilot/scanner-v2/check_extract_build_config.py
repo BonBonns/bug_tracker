@@ -184,5 +184,50 @@ else:
     print("SKIP: results/unresolved_investigation.json not present -- real smoke tests skipped, "
           "all synthetic controls above still ran")
 
+# =====================================================================================
+# 8. NEWLY-SUPPORTED BUILD PATTERN (task #34's own build-config-reconstruction round): node-
+#    addon-api 8.x renamed its own canonical macro from NAPI_CPP_EXCEPTIONS to
+#    NODE_ADDON_API_CPP_EXCEPTIONS/NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS -- confirmed directly
+#    against node-addon-api@8.9.2's own real napi.h (NAPI_CPP_EXCEPTIONS kept only as a
+#    backward-compat alias) via @astronautlabs/webrtc's own real cmake-js compile command, which
+#    carried the modern macro explicitly and was silently missed by the legacy-only patterns
+#    before this fix. POSITIVE (each new pattern, enable and disable sides), NEGATIVE (the
+#    legacy alias still recognized, unaffected), CONFLICT (both eras present together still
+#    resolves to a real "conflict", never silently prefers one).
+# =====================================================================================
+modern_enable_tb = make_tarball({
+    "binding.gyp": '{"targets": [{"target_name": "t", "defines": ["NODE_ADDON_API_CPP_EXCEPTIONS"]}]}',
+    "package.json": '{"name": "x"}',
+})
+r = ebc.classify_from_tarball(modern_enable_tb)
+ck("POSITIVE (modern macro, enable side): NODE_ADDON_API_CPP_EXCEPTIONS alone resolves to "
+   "'enabled'", r["exception_configuration"] == "enabled")
+
+modern_disable_tb = make_tarball({
+    "binding.gyp": '{"targets": [{"target_name": "t", "defines": ["NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS"]}]}',
+    "package.json": '{"name": "x"}',
+})
+r = ebc.classify_from_tarball(modern_disable_tb)
+ck("POSITIVE (modern macro, disable side): NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS alone "
+   "resolves to 'disabled'", r["exception_configuration"] == "disabled")
+
+legacy_alias_tb = make_tarball({
+    "binding.gyp": '{"targets": [{"target_name": "t", "defines": ["NAPI_CPP_EXCEPTIONS"]}]}',
+    "package.json": '{"name": "x"}',
+})
+r = ebc.classify_from_tarball(legacy_alias_tb)
+ck("NEGATIVE: the legacy NAPI_CPP_EXCEPTIONS alias is still recognized on its own, unaffected "
+   "by the new modern-macro patterns", r["exception_configuration"] == "enabled")
+
+both_eras_conflict_tb = make_tarball({
+    "binding.gyp": ('{"targets": [{"target_name": "t", "defines": '
+                     '["NODE_ADDON_API_CPP_EXCEPTIONS", "NAPI_DISABLE_CPP_EXCEPTIONS"]}]}'),
+    "package.json": '{"name": "x"}',
+})
+r = ebc.classify_from_tarball(both_eras_conflict_tb)
+ck("CONFLICT: a modern enable macro alongside a legacy disable macro correctly resolves to "
+   "'conflict', never silently preferring either era",
+   r["exception_configuration"] == "conflict")
+
 print(f"EXTRACT_BUILD_CONFIG_CONTROLS={ok}/{tot}")
 sys.exit(0 if ok == tot else 1)
