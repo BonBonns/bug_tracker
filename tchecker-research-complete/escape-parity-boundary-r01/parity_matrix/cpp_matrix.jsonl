@@ -1,0 +1,28 @@
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":0,"parity":"even","matches_parity_rule":true,"recovered":["abc","next"]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":0,"parity":"even","matches_parity_rule":true,"recovered":["abc","next"]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":0,"parity":"even","matches_parity_rule":true,"recovered":["abc","next"]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":0,"parity":"even","matches_parity_rule":true,"recovered":["abc","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":1,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":1,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\', "]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":1,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\', "]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":1,"parity":"odd","matches_parity_rule":false,"recovered":["abc\\","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":2,"parity":"even","matches_parity_rule":false,"recovered":["abc\\\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":2,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\","next"]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":2,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\","next"]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":2,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":3,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":3,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\', "]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":3,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\', "]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":3,"parity":"odd","matches_parity_rule":false,"recovered":["abc\\\\\\","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":4,"parity":"even","matches_parity_rule":false,"recovered":["abc\\\\\\\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":4,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\","next"]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":4,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\","next"]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":4,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":5,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":5,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\', "]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":5,"parity":"odd","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\', "]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":5,"parity":"odd","matches_parity_rule":false,"recovered":["abc\\\\\\\\\\","next"]}
+{"rule_id":"cpp_onechar_subscript","language":"C_CPP","engine":"g++","run_length":6,"parity":"even","matches_parity_rule":false,"recovered":["abc\\\\\\\\\\\\', "]}
+{"rule_id":"cpp_explicit_counting","language":"C_CPP","engine":"g++","run_length":6,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\\\","next"]}
+{"rule_id":"cpp_parity_toggle","language":"C_CPP","engine":"g++","run_length":6,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\\\","next"]}
+{"rule_id":"cpp_no_escape_aware","language":"C_CPP","engine":"g++","run_length":6,"parity":"even","matches_parity_rule":true,"recovered":["abc\\\\\\\\\\\\","next"]}
