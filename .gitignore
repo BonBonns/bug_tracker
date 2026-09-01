@@ -24,3 +24,11 @@ semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/*.checkpoints/
 # deliverable -- replay_records_v8.jsonl/trackb_rerun_delta.json are complete and committed
 # (see TRACKB_RESULTS.md), matching v1-v7's own already-committed precedent in the same dir.
 semantic-bucket-pilot/scanner-v2/study/task34_replay/trackb_stdout.log
+
+# Path Traversal R01: a background agent is still building/validating the corrected producer
+# (5-way sink split, structural import recognition, corrected containment proofs, PACKAGE_API_INPUT
+# source model, 12 required regression controls); not yet reviewed against real evidence, so not
+# committed yet -- temporary, matching the same in-progress convention used for ReDoS's own R02
+# adapter. Remove this entry once reviewed and ready to commit.
+tchecker-research-complete/tchecker-property-adjudicator/producers/export_path_traversal_integ_r01.sc
+tchecker-research-complete/tchecker-property-adjudicator/fixtures/path_traversal_r01/
