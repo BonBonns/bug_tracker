@@ -145,18 +145,29 @@ def attribute_record(record):
     return record
 
 
-def aggregate_vendored_dedup(records):
+def aggregate_vendored_dedup(records, keys=None):
     """Cross-package deduplication across a whole run's worth of records (already
     attribute_record()-processed, or processed here on the fly). Returns
     {property_key: {dedup_key: {"vendored_library_id", "relpath_within_vendor_dir",
     "raw_exposure_count", "deduplicated": True, "packages": [sorted, unique package names],
     "sample_attribution": str}}} -- the deduplicated_count for a property is simply
     len(that property's dict); raw_exposure_count per entry is how many (package, finding) pairs
-    mapped to it, i.e. the real corpus exposure before deduplication."""
-    out = {k: {} for k in ALL_FINDING_KEYS}
+    mapped to it, i.e. the real corpus exposure before deduplication.
+
+    `keys` (NPM-SOURCE-IDENTITY-R01, task #52, additive): the finding/candidate-list keys to scan
+    on each record, defaulting to `None` -> `ALL_FINDING_KEYS` unchanged, so every existing C/C++
+    caller (which never passes this argument) gets byte-identical behavior to before this
+    parameter existed. A caller whose own records carry finding lists under OTHER keys (e.g. a
+    JS/npm property reducer's own `npm_source_identity_findings`, never one of the C/C++-only
+    `ALL_FINDING_KEYS` names) passes its own key tuple here instead of being silently ignored by
+    the hard-coded default -- this is the ONLY change this task made to this file; `attribute_finding`
+    itself required zero changes (it already operates on a single finding dict + package_name with
+    no dependency on `ALL_FINDING_KEYS` at all)."""
+    scan_keys = ALL_FINDING_KEYS if keys is None else tuple(keys)
+    out = {k: {} for k in scan_keys}
     for record in records:
         pkg = record.get("package_name")
-        for key in ALL_FINDING_KEYS:
+        for key in scan_keys:
             for f in record.get(key) or []:
                 va = f.get("vendored_attribution")
                 if not va or va.get("status") != "ATTRIBUTED":
