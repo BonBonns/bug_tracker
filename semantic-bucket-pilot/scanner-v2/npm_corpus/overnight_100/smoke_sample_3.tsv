@@ -1,0 +1,4 @@
+package_name	version	tarball_url	source_tree_sha256	tarball_sha256	selection_reason	binding_family	size_bucket	prior_status	n_cpp_files
+node-crc16	2.0.7	https://registry.npmjs.org/node-crc16/-/node-crc16-2.0.7.tgz	385daaae8ca33c7246a23182855662dde60d0a3c03f96110110494334f5255b5	e2bd055eba9e501cc2d1d078689ff8e0f2eb5ce9155a85320bcff3049002608f	forced_inclusion:node-crc16	node-addon-api	small	ANALYZED	2
+node-libcurl	5.1.2	https://registry.npmjs.org/node-libcurl/-/node-libcurl-5.1.2.tgz	1c4527cd4be52a05acbb5868d171890b05d1c6058e16ea21bbdf7260ad89fb6b	ef9498d87d8ec0381abf7876d6aa3e59efe76d5ed54d7947c0a3d7fec3a0900e	forced_inclusion:node-libcurl	node-addon-api	medium	ANALYZED	10
+re2	1.26.1	https://registry.npmjs.org/re2/-/re2-1.26.1.tgz	27889bddc8d1e7508926c3fe24bb1e89835520cc0f9a9497f661855dd9f4bd67	e4a55e62219be47a27941c3b3c84611d88c7fee8fda7dcf777b4a591499556b8	forced_inclusion:re2	nan	large	ANALYZED	551

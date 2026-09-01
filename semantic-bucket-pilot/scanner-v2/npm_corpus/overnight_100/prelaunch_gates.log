@@ -1,0 +1,235 @@
+PASS re2 vendored abseil path -> VENDORED_HINT
+PASS ffi-napi vendored libffi path -> VENDORED_HINT
+PASS package-owned path -> PACKAGE_OWNED_HINT
+PASS tarball_sha256 differs when tarball bytes differ
+PASS source_tree_sha256 is IDENTICAL when only tarball bytes differ (same real file content)
+PASS tarball_sha256 != source_tree_sha256 (two real, distinct hashes, not aliases)
+PASS source_tree_sha256 changes when real file content changes (same tarball bytes as m1)
+PASS unresolved provenance -> reportable=False, even with scanner_candidate=True and applicability_status=APPLICABLE forced (the one-way rule)
+PASS unresolved provenance: provenance['resolved']=False
+PASS resolved provenance + APPLICABLE forced, but scanner_candidate=False -> reportable=False
+PASS resolved + real candidate, but applicability_status defaults to NOT_YET_DETERMINED (never APPLICABLE by construction) -> reportable=False
+PASS resolved + candidate + APPLICABLE, but adjudication_status=CONFIRMED_FALSE_POSITIVE -> reportable=False (the adjudication veto)
+PASS resolved + scanner_candidate + APPLICABLE + not confirmed-false-positive -> reportable=True (the only positive path)
+  node-libcurl run: ANALYZED in 32.7s
+PASS node-libcurl real run reaches ANALYZED
+PASS node-libcurl reproduces the real Easy::ReadFunction finding
+PASS real finding: verdict is the real candidate shape (VALUE_ACQUISITION_GUARD_MISSING)
+PASS real finding: scanner_candidate=True (real scanner verdict says so)
+PASS real finding: provenance.resolved=True
+PASS real finding: applicability_status defaults to NOT_YET_DETERMINED, not APPLICABLE (R06/FIX01I not yet integrated -- task #41)
+PASS *** THE REGRESSION ITSELF: reportable=False, even though provenance resolved *** -- provenance resolving a known confirmed-false-positive's file must NEVER make it reportable
+PASS real finding has a non-empty real source_path
+PASS real finding's source_path resolves to an actual file on disk (checked before work_root cleanup)
+PASS real finding's content_hash matches independently recomputed hash of the real source file
+PASS real finding retains its own method_id (pre-existing node identity, untouched)
+PASS LOCK_BALANCE: fresh real c2cpg build succeeds
+PASS LOCK_BALANCE: real fixture produces its own real positive finding
+PASS LOCK_BALANCE: real finding's provenance resolves via method_id join, no scanner-file change needed
+PASS LOCK_BALANCE: scanner_candidate=True
+PASS LOCK_BALANCE: reportable=False by default (no applicability/adjudication evidence exists yet -- task #32) even though provenance resolved
+PASS LOCK_BALANCE: resolved source_path is real 'fixture_source.c'
+PASS LOCK_BALANCE: content_hash matches independently recomputed real file hash
+PASS LOCK_BALANCE: has real distinct tarball_sha256/source_tree_sha256
+PASS PROTECTED_FIELD: fresh real c2cpg build succeeds
+PASS PROTECTED_FIELD: real fixture produces its own real positive finding
+PASS PROTECTED_FIELD: real finding's provenance resolves via method_id join, no scanner-file change needed
+PASS PROTECTED_FIELD: scanner_candidate=True
+PASS PROTECTED_FIELD: reportable=False by default (no applicability/adjudication evidence exists yet -- task #32) even though provenance resolved
+PASS PROTECTED_FIELD: resolved source_path is real 'fixture_source.c'
+PASS PROTECTED_FIELD: content_hash matches independently recomputed real file hash
+PASS PROTECTED_FIELD: has real distinct tarball_sha256/source_tree_sha256
+
+PROVENANCE_CONTROLS=40/40
+GATE_RESULT PASS check_provenance (40/40)
+PASS oob_write_candidates: scanner_candidate=True (this producer's own verdict vocabulary is unconditionally real)
+PASS oob_write_candidates: provenance.resolved=True (real file, real content hash)
+PASS oob_write_candidates: applicability_status defaults to NOT_YET_DETERMINED, never fabricated APPLICABLE
+PASS oob_write_candidates: *** reportable=False despite scanner_candidate=True AND provenance.resolved=True *** -- a raw CANDIDATE must never be counted as a reportable finding by default
+PASS oob_read_candidates: scanner_candidate=True (this producer's own verdict vocabulary is unconditionally real)
+PASS oob_read_candidates: provenance.resolved=True (real file, real content hash)
+PASS oob_read_candidates: applicability_status defaults to NOT_YET_DETERMINED, never fabricated APPLICABLE
+PASS oob_read_candidates: *** reportable=False despite scanner_candidate=True AND provenance.resolved=True *** -- a raw CANDIDATE must never be counted as a reportable finding by default
+PASS oob_compare_candidates: scanner_candidate=True (this producer's own verdict vocabulary is unconditionally real)
+PASS oob_compare_candidates: provenance.resolved=True (real file, real content hash)
+PASS oob_compare_candidates: applicability_status defaults to NOT_YET_DETERMINED, never fabricated APPLICABLE
+PASS oob_compare_candidates: *** reportable=False despite scanner_candidate=True AND provenance.resolved=True *** -- a raw CANDIDATE must never be counted as a reportable finding by default
+PASS control: with an existing, real APPLICABLE status (never fabricated by this module) reportable=True
+OOB_REPORTABLE_GATE_CONTROLS=13/13
+GATE_RESULT PASS check_oob_reportable_gate (13/13)
+=== Fixture 1: full work dir ===
+[PASS] bundle path returned, file exists
+[PASS] atomic tmp file left no trace after rename
+[PASS] all real facts included
+[PASS] cross_language_bindings.json included (from merged.json)
+[PASS] nothing missing
+[PASS] cpp.cpg.bin NOT in the bundle (large, excluded)
+[PASS] js.cpg.bin NOT in the bundle (large, excluded)
+[PASS] js_raw/ NOT in the bundle (not currently consumed, disclosed scope boundary)
+[PASS] merged.json NOT in the bundle (superseded by the smaller extract)
+[PASS] manifest.json present inside the bundle itself
+[PASS] extracted cross_language_bindings has real registration data
+[PASS] compressed_bytes recorded and > 0
+=== Fixture 2: partial work dir (early failure) ===
+[PASS] bundle still written for the one real thing that exists
+[PASS] cpp_raw correctly included
+[PASS] cpp_facts.json correctly disclosed as missing, not silently skipped
+[PASS] cross_language_bindings.json correctly disclosed as missing
+=== Fixture 3: nothing to bundle ===
+[PASS] returns None, no file written
+[PASS] manifest reports everything missing
+=== Fixture 4: scoped package name (contains /) ===
+[PASS] scoped package name doesn't create a stray subdirectory
+[PASS] slash replaced in the filename itself
+=== Fixture 5: integrity fields on a complete bundle ===
+[PASS] schema_version recorded
+[PASS] tarball_sha256 passed through
+[PASS] analyzer_hashes has all real analyzer files this diagnostic run drives, none None
+[PASS] artifact_hashes has a real sha256 for every flat included file
+[PASS] artifact_hashes for cpp_raw/ is a per-inner-file dict
+[PASS] completeness_status == COMPLETE (nothing missing, status ANALYZED)
+[PASS] require_complete_bundle succeeds on a real complete bundle
+[PASS] read_bundle_manifest round-trips the real manifest embedded in the bundle
+=== Fixture 6: partial/resource-limit bundle refused by the loader guard ===
+[PASS] completeness_status == PARTIAL (real files missing)
+[PASS] require_complete_bundle REFUSES a partial bundle (raises, never silently returns)
+=== Fixture 7: all files present but pipeline_status != ANALYZED -> still PARTIAL ===
+[PASS] nothing missing, but pipeline_status=RESOURCE_LIMIT -> PARTIAL, not COMPLETE
+
+OVERALL: PASS
+GATE_RESULT PASS evidence_bundle tests (adapted analyzer list)
+link_napi_facts.py md5: 14b9e39d0d0c00feeba2dea799ba2887
+
+=== 14-control suite (8 real positive, 6 real negative shapes) ===
+[PASS] 8 real positive controls all link
+[PASS] 0 real negative controls link
+
+=== 5-case reaching-definition adversarial probe ===
+[PASS] Foo: matched=False reason=MULTIPLE_DEFINITIONS_AMBIGUOUS
+[PASS] Bar: matched=False reason=MULTIPLE_DEFINITIONS_AMBIGUOUS
+[PASS] Baz: matched=False reason=PARAMETER_SHADOWED
+[PASS] Qux: matched=False reason=CROSS_FUNCTION_NOT_CONST
+[PASS] Corge: matched=False reason=CALLEE_NOT_REQUIRE
+
+=== 4-case CFG-dominance adversarial probe (CROSSLANG-LINK-FIX01G) ===
+[PASS] Foo: rejected, reason=CROSS_FUNCTION_NOT_CONST
+[PASS] Bar: rejected, reason=CROSS_FUNCTION_NOT_CONST
+[PASS] Baz: rejected, reason=CROSS_FUNCTION_NOT_CONST
+[PASS] Qux: rejected, reason=DEFINITION_IN_TRY_BLOCK_UNVERIFIABLE
+
+=== const cross-function closure-capture probe (CROSSLANG-LINK-FIX01H) ===
+[PASS] Direct: tier=closure_capture_proven reason=None
+[PASS] Foo: tier=closure_capture_proven reason=None
+[PASS] Bar: tier=None reason=CROSS_FUNCTION_DEFINITION_NOT_DOMINANT
+[PASS] Baz: tier=None reason=CROSS_FUNCTION_INVOCATION_NOT_DOMINATED
+[PASS] SameFn: tier=dominance_proven reason=None
+
+=== const cross-function escape probe (CROSSLANG-LINK-FIX01I) ===
+[PASS] Foo: tier=None reason=INITIALIZER_NOT_UNCONDITIONAL
+[PASS] Bar: tier=None reason=CROSS_FUNCTION_ESCAPE_NOT_DOMINATED
+[PASS] Baz: tier=closure_capture_proven reason=None
+[PASS] Qux: tier=None reason=CROSS_FUNCTION_ESCAPE_NOT_DOMINATED
+
+PASS
+GATE_RESULT PASS crosslang_link_fix gate (FIX01I)
+PASS VALUE_ID join still works (regression check): line 10 candidate, src_cap=16
+PASS FIELD join at matching call_id (line 20) is a candidate, src_cap=5
+PASS FIELD sentinel no longer spuriously matches a DIFFERENT call_id (line 30 abstains)
+PASS VALUE_ID site with a valid SOURCE_CAPACITY bound on extent is suppressed (line 40 not a candidate)
+PASS total candidates == 2 (lines 10 and 20 only)
+OOB_READ_CAPKEY_CONTROLS=5/5
+GATE_RESULT PASS oob_read_capkey_controls (task29, 5/5)
+PASS unit: literal 4 <= capacity 5 -> safe
+PASS unit: literal 5 == capacity 5 (boundary) -> safe
+PASS unit: literal 6 > capacity 5 -> NOT safe (no false negative)
+PASS unit: sizeof(src) matching source identifier -> safe
+PASS unit: sizeof(other) NOT matching source identifier -> NOT safe
+PASS unit: non-literal, non-sizeof extent (variable) -> NOT safe
+PASS unit: hex literal '0x4' -> conservatively NOT recognized (stays candidate)
+PASS unit: suffixed literal '4u' -> conservatively NOT recognized (stays candidate)
+PASS unit: kind is not LITERAL even though code looks numeric -> NOT safe
+PASS unit: capacity_bytes is None -> NOT safe (no crash, no false suppression)
+PASS e2e: real re2 shape (4<=5) is suppressed, not a candidate
+PASS e2e: sibling unsafe site (6>5) remains a real candidate
+PASS e2e: total candidates == 1 (only the genuinely unsafe site)
+OOB_READ_STATIC_EXTENT_SAFE_CONTROLS=13/13
+GATE_RESULT PASS oob_read_static_extent_safe_controls (task43, 13/13)
+PASS 1. Tremor VULN: real param-length-pair candidate found (a[o+j], length_param=n)
+PASS 2. Tremor PATCHED: the same site is suppressed (real, correctly-matched o+j<n guard)
+PASS 1b. Tremor VULN: SECOND real sink also found (a[i++] in vorbis_book_decodev_add, length_param=n)
+PASS 2b. Tremor PATCHED: the second sink is ALSO suppressed (real CFG dominance + loop-iteration-safety proof on the inner loop's own new guard -- not textual matching, which cannot distinguish this revision from the vulnerable one at all)
+PASS decodevv_add: real 2D vulnerability (a[chptr++][i]) correctly produces NO candidate -- no ad hoc flattening rule was added; this is an explicit, disclosed unsupported case, not a false negative introduced by this phase
+PASS dedup: OOB_WRITE (memcpy-surface) never ALSO fires on this real site (VULN)
+PASS dedup: OOB_WRITE (memcpy-surface) never ALSO fires on this real site (PATCHED)
+PASS 3. correctly bounded pointer/length loop: length param resolved for a real guard candidate
+PASS 4. unrelated adjacent integer parameter: NOT used as capacity (abstain, no evidence)
+PASS 5. byte-vs-element scaling in the index expression: abstain rather than silently mismatch units
+PASS 6. pointer arithmetic (literal offset) resolved: base=buf, offset=5
+PASS 6b. pointer arithmetic (non-literal offset) correctly UNRESOLVED, not guessed
+PASS 7. multiple possible length parameters (both n1 and n2 reach the index): ambiguous abstention
+PASS 8a. narrow int length param * sizeof(...) -> flagged as overflow risk
+PASS 8b. size_t (wide) length param * sizeof(...) -> NOT flagged (provably safe width)
+PASS 8c. no multiplication at all -> not flagged
+PARAM_LENGTH_CAPACITY_CONTROLS=16/16
+GATE_RESULT PASS param_length_capacity_controls (task44, 16/16)
+PASS dominating vs non-dominating: guard on only one of two independent paths -> NOT credited
+PASS dominating vs non-dominating: sole path through the guard -> credited (no loop involved)
+PASS loop-entry path (outer guard, checked once per outer pass): NOT credited -- matches the real Tremor decodev_add VULN shape (outer i<n unchanged between vuln/patched)
+PASS loop-back path (inner header, re-checked every iteration): credited -- matches the real Tremor decodev_add PATCHED shape (the new guard is part of the inner loop's own header)
+PASS branch polarity: guard population is structurally restricted to lessThan/lessEqualsThan only (never >, >=, or a reversed operand order) -- an accidentally-reversed-polarity comparison can never even become a candidate guard
+PASS early exits: an unrelated distractor early-return branch elsewhere does not prevent a genuinely protecting guard from being correctly credited
+PASS early exits: the distractor's own dead-end node is correctly NOT treated as protecting the write (it can't -- it's unreachable from the real guard at all)
+PASS a comparison occurring AFTER the write in the CFG does not dominate it -> NOT credited
+PASS wrong index/object: a real, dominating, loop-safe guard on a DIFFERENT variable ('other', not 'k') does not suppress buf[k] -- it remains a candidate
+CFG_LOOP_GUARD_CONTROLS=9/9
+GATE_RESULT PASS cfg_loop_guard_controls (task44 phase2, 9/9)
+PASS controls: exactly 1 candidate
+PASS controls: the flagged write is rg[c] in bad_unbounded (unbounded)
+PASS row3 VULN (CVE-2022-28281) FLAGS rgExtension[cExtensions]
+PASS row3 FIXED suppressed (real sizeof guard credited, MOZ_ASSERT ignored)
+PASS row1 (libtremor, pointer-param) no FP
+PASS row2 (WebGL memcpy read) no FP
+PASS same-name capacity: 2 candidates (one per function)
+PASS same-name capacity: fn_small's sh[] keeps its own capacity 3 (not borrowed 9)
+PASS same-name capacity: fn_big's sh[] keeps its own capacity 9 (not borrowed 3)
+OOB_INDEX_R01=9/9
+GATE_RESULT PASS frozen oob-index-r01 gate (9/9)
+PASS NC safe_local: suppressed
+PASS NC safe_global: suppressed
+PASS NC wrong_buffer: stays candidate
+PASS NC sizeof_plus_one: stays candidate
+PASS NC variable_extent: stays candidate
+PASS NC pointer_sizeof: not falsely suppressed (abstained)
+STATIC_EXTENT_SAFE_CONTROLS=PASS
+GATE_RESULT PASS oob-write-r05-sizeof gate
+PASS NC unsafe_sizeof_a: candidate (wrong-side overrun caught)
+PASS NC unsafe_strncmp_b: candidate (wrong-side overrun caught)
+PASS NC unsafe_on_b: candidate (wrong-side overrun caught)
+PASS NC safe_min: not flagged (safe or abstain)
+PASS NC variable_n: not flagged (safe or abstain)
+PASS NC safe_both: not flagged (safe or abstain)
+PASS NC safe_strncmp: not flagged (safe or abstain)
+PASS NC ptr_operand: not flagged (safe or abstain)
+OOB_COMPARE_CONTROLS=PASS
+GATE_RESULT PASS oob-compare-r07 gate
+
+=== additional gates (lock_balance / protected_field / R04 / R05) ===
+check_lock_balance.py: LOCK_SAFE_R01=11/11 PASS
+check_protected_field.py: LOCK_SAFE_R02=11/11 PASS
+gate_resource_guard_r04.py: RESOURCE_GUARD_R04_GATE=12/12 PASS
+gate_resource_guard_r05.py: ALL PASS
+
+=== known, disclosed non-reproducible gate (task #42) ===
+tools/oob_read_controls.py and tools/oob_write_controls.py (guard-r01) depend on an external
+/tmp/cap_corpus/*.json fixture from an untracked process in a prior session that no longer
+exists in this container. NOT reproducible here, confirmed identical for both the read and
+write siblings. This is the reason OOB_WRITE/OOB_INDEX_WRITE/OOB_READ output stays diagnostic
+in this run -- task #42 remains open. Substitute self-contained regression tests
+(oob_read_capkey_controls.py, oob_read_static_extent_safe_controls.py,
+param_length_capacity_controls.py, cfg_loop_guard_controls.py) cover the specific fixes made
+this session and all pass (see above); they are not a substitute for #42's own full historical
+gate.
+
+=== decision: promote_via_js_linkage.py not used this run (see note above) ===
+
+GATE BATTERY RESULT: ALL REPRODUCIBLE GATES PASS. LAUNCH MAY PROCEED TO SAMPLE SELECTION.
