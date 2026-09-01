@@ -1,0 +1,337 @@
+{
+  "funnel": {
+    "lock_balance_findings": {
+      "INSUFFICIENT_REACHABILITY": 12
+    },
+    "oob_compare_candidates": {},
+    "oob_index_write_candidates": {
+      "INSUFFICIENT_REACHABILITY": 3290
+    },
+    "oob_read_candidates": {
+      "INSUFFICIENT_REACHABILITY": 115
+    },
+    "oob_write_candidates": {
+      "INSUFFICIENT_REACHABILITY": 252
+    },
+    "protected_field_findings": {
+      "INSUFFICIENT_REACHABILITY": 233
+    },
+    "r04_findings": {
+      "NOT_A_CANDIDATE": 2
+    },
+    "r05_findings": {
+      "APPLICABILITY_NOT_DETERMINED": 5,
+      "NOT_A_CANDIDATE": 2
+    },
+    "r06_findings": {
+      "APPLICABILITY_NOT_DETERMINED": 5,
+      "NOT_A_CANDIDATE": 2
+    }
+  },
+  "funnel_detail": {
+    "lock_balance_findings": {
+      "INSUFFICIENT_REACHABILITY": {
+        "REACHABILITY_UNRESOLVED": 1,
+        "TIER_INTERNAL_UNREGISTERED": 11
+      }
+    },
+    "oob_compare_candidates": {},
+    "oob_index_write_candidates": {
+      "INSUFFICIENT_REACHABILITY": {
+        "REACHABILITY_UNRESOLVED": 125,
+        "TIER_INTERNAL_UNREGISTERED": 3165
+      }
+    },
+    "oob_read_candidates": {
+      "INSUFFICIENT_REACHABILITY": {
+        "REACHABILITY_UNRESOLVED": 2,
+        "TIER_INTERNAL_UNREGISTERED": 113
+      }
+    },
+    "oob_write_candidates": {
+      "INSUFFICIENT_REACHABILITY": {
+        "REACHABILITY_UNRESOLVED": 8,
+        "TIER_INTERNAL_UNREGISTERED": 244
+      }
+    },
+    "protected_field_findings": {
+      "INSUFFICIENT_REACHABILITY": {
+        "TIER_INTERNAL_UNREGISTERED": 233
+      }
+    },
+    "r04_findings": {
+      "NOT_A_CANDIDATE": {
+        "VALUE_ACQUISITION_SEMANTICS_UNRESOLVED": 2
+      }
+    },
+    "r05_findings": {
+      "APPLICABILITY_NOT_DETERMINED": {
+        "NOT_YET_DETERMINED": 5
+      },
+      "NOT_A_CANDIDATE": {
+        "VALUE_ACQUISITION_SEMANTICS_UNRESOLVED": 2
+      }
+    },
+    "r06_findings": {
+      "APPLICABILITY_NOT_DETERMINED": {
+        "NOT_YET_DETERMINED": 5
+      },
+      "NOT_A_CANDIDATE": {
+        "VALUE_ACQUISITION_SEMANTICS_UNRESOLVED": 2
+      }
+    }
+  },
+  "oob_index_write_stratified_audit": {
+    "capacity_source_distribution": {
+      "PARAM_LENGTH_PAIR": 1310,
+      "SYNTACTIC_ELEM_COUNT": 1980
+    },
+    "derivation_rule_distribution": {
+      "CPP_FIXED_ARRAY_INDEX_UNBOUNDED": 1980,
+      "CPP_PARAM_LENGTH_PAIR_INDEX_UNBOUNDED": 1310
+    },
+    "distinct_files": 518,
+    "distinct_function_sites": 1254,
+    "distinct_packages": 34,
+    "mean_findings_per_function_site": 2.62,
+    "package_owned_raw_count": 1160,
+    "provenance_hint_distribution": {
+      "PACKAGE_OWNED_HINT": 1160,
+      "VENDORED_HINT": 2130
+    },
+    "raw_total": 3290,
+    "reachability_distribution": {
+      "REACHABILITY_UNRESOLVED": 125,
+      "TIER_INTERNAL_UNREGISTERED": 3165
+    },
+    "top_10_packages_by_raw_count": [
+      [
+        "audify",
+        457
+      ],
+      [
+        "@appthreat/sqlite3",
+        456
+      ],
+      [
+        "@flyskywhy/react-native-gcanvas",
+        451
+      ],
+      [
+        "pqclean",
+        441
+      ],
+      [
+        "smart-whisper",
+        377
+      ],
+      [
+        "@discordjs/opus",
+        343
+      ],
+      [
+        "@fugood/whisper.node",
+        246
+      ],
+      [
+        "@huxinhai/mmkv",
+        124
+      ],
+      [
+        "re2",
+        101
+      ],
+      [
+        "nlpplus",
+        62
+      ]
+    ],
+    "top_15_function_sites": [
+      {
+        "array_names_in_this_function": [
+          "block"
+        ],
+        "file": "deps/sqlite-amalgamation-3530400/shell.c",
+        "function": "SHA1Transform",
+        "function_id": 107374182486,
+        "package": "@appthreat/sqlite3",
+        "raw_finding_count": 256
+      },
+      {
+        "array_names_in_this_function": [
+          "Te0",
+          "Te1",
+          "Te2",
+          "Te3"
+        ],
+        "file": "MMKV/Core/aes/openssl/openssl_aes_core.cpp",
+        "function": "openssl.AES_encrypt:void(uint8_t*,uint8_t*,openssl.AES_KEY*)",
+        "function_id": 107374182785,
+        "package": "@huxinhai/mmkv",
+        "raw_finding_count": 48
+      },
+      {
+        "array_names_in_this_function": [
+          "Td0",
+          "Td1",
+          "Td2",
+          "Td3",
+          "Td4"
+        ],
+        "file": "MMKV/Core/aes/openssl/openssl_aes_core.cpp",
+        "function": "openssl.AES_decrypt:void(uint8_t*,uint8_t*,openssl.AES_KEY*)",
+        "function_id": 107374182786,
+        "package": "@huxinhai/mmkv",
+        "raw_finding_count": 48
+      },
+      {
+        "array_names_in_this_function": [
+          "out"
+        ],
+        "file": "core/android/png/thirdparty/lodepng.c",
+        "function": "rgba8ToPixel",
+        "function_id": 107374185884,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 24
+      },
+      {
+        "array_names_in_this_function": [
+          "out"
+        ],
+        "file": "node/third_party/lodepng.cc",
+        "function": "rgba8ToPixel:unsigned int(unsigned char*,size_t,LodePNGColorMode*,ColorTree*,unsigned char,unsigned char,unsigned char,unsigned char)",
+        "function_id": 107374186895,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 24
+      },
+      {
+        "array_names_in_this_function": [
+          "out"
+        ],
+        "file": "core/android/png/thirdparty/lodepng.c",
+        "function": "rgba16ToPixel",
+        "function_id": 107374185885,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "in"
+        ],
+        "file": "core/android/png/thirdparty/lodepng.c",
+        "function": "getPixelColorRGBA8",
+        "function_id": 107374185886,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "in"
+        ],
+        "file": "core/android/png/thirdparty/lodepng.c",
+        "function": "getPixelColorsRGBA8",
+        "function_id": 107374185887,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "in"
+        ],
+        "file": "core/android/png/thirdparty/lodepng.c",
+        "function": "getPixelColorRGBA16",
+        "function_id": 107374185888,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "out"
+        ],
+        "file": "node/third_party/lodepng.cc",
+        "function": "rgba16ToPixel:void(unsigned char*,size_t,LodePNGColorMode*,shortunsigned,shortunsigned,shortunsigned,shortunsigned)",
+        "function_id": 107374186896,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "in"
+        ],
+        "file": "node/third_party/lodepng.cc",
+        "function": "getPixelColorRGBA8:void(unsigned char*,unsigned char*,unsigned char*,unsigned char*,unsigned char*,size_t,LodePNGColorMode*)",
+        "function_id": 107374186897,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "in"
+        ],
+        "file": "node/third_party/lodepng.cc",
+        "function": "getPixelColorRGBA16:void(shortunsigned*,shortunsigned*,shortunsigned*,shortunsigned*,unsigned char*,size_t,LodePNGColorMode*)",
+        "function_id": 107374186900,
+        "package": "@flyskywhy/react-native-gcanvas",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "Td0",
+          "Td1",
+          "Td2",
+          "Td3",
+          "Te1"
+        ],
+        "file": "MMKV/Core/aes/openssl/openssl_aes_core.cpp",
+        "function": "openssl.AES_set_decrypt_key:int(uint8_t*,int,openssl.AES_KEY*)",
+        "function_id": 107374182784,
+        "package": "@huxinhai/mmkv",
+        "raw_finding_count": 20
+      },
+      {
+        "array_names_in_this_function": [
+          "te0",
+          "te1",
+          "te2",
+          "te3"
+        ],
+        "file": "vendor/abseil-cpp/absl/random/internal/randen_slow.cc",
+        "function": "AesRound:Vector128(Vector128&,Vector128&)",
+        "function_id": 107374186465,
+        "package": "re2",
+        "raw_finding_count": 16
+      },
+      {
+        "array_names_in_this_function": [
+          "jsonIsOk",
+          "sqlite3CtypeMap"
+        ],
+        "file": "deps/sqlite-amalgamation-3530400/sqlite3.c",
+        "function": "jsonTranslateTextToBlob",
+        "function_id": 107374185542,
+        "package": "@appthreat/sqlite3",
+        "raw_finding_count": 14
+      }
+    ],
+    "vendored_dedup_this_property": {
+      "deduplicated_count": 2036,
+      "raw_exposure_count": 2130
+    },
+    "vendored_library_id_distribution": {
+      "PQClean": 441,
+      "abseil-cpp": 76,
+      "cld": 58,
+      "core": 3,
+      "libffi": 6,
+      "librdkafka": 61,
+      "lodepng.cc": 151,
+      "opus": 795,
+      "re2": 21,
+      "rtaudio": 5,
+      "snap7": 7,
+      "sqlite-amalgamation-3530400": 456,
+      "winpty": 50
+    },
+    "vendored_raw_count": 2130
+  }
+}

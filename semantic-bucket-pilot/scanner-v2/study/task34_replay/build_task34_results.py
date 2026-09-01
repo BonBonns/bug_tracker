@@ -120,9 +120,18 @@ def build_timing_disk_summary(replayed, failures):
     bundle_bytes = sum(
         os.path.getsize(os.path.join(bundle_dir, f))
         for f in os.listdir(bundle_dir) if f.endswith(".tar.gz"))
+    # "failures" here (this function's own parameter, from load_records()'s own split) is every
+    # non-REPLAYED record -- which, in this replay, is exclusively the 3 INHERITED_UPSTREAM_
+    # FAILURE entries (0 packages ever reached replay_one_package() and then genuinely failed
+    # it -- confirmed directly, not assumed, by counting outcome=="REPLAY_FAILURE" separately).
+    # Reported as two distinct counts so "packages_failed_at_replay" is never misread as "the
+    # replay itself failed on 3 packages" when the real number of replay failures is 0.
+    n_replay_failures = sum(1 for r in failures if r.get("outcome") == "REPLAY_FAILURE")
+    n_inherited = sum(1 for r in failures if r.get("outcome") == "INHERITED_UPSTREAM_FAILURE")
     return {
         "packages_replayed": len(replayed),
-        "packages_failed_at_replay": len(failures),
+        "packages_with_replay_failure": n_replay_failures,
+        "packages_with_inherited_upstream_failure": n_inherited,
         "total_seconds_all_packages": round(total_seconds, 2),
         "mean_seconds_per_package": round(total_seconds / len(replayed), 2) if replayed else None,
         "stage_totals_seconds": {k: round(v, 2) for k, v in stage_totals.items()},
@@ -403,8 +412,10 @@ def write_results_md(replayed, failures, recon, funnel, reach_dist, prov_dist, o
     a("")
 
     a("## Timing and disk-usage summary\n")
-    a(f"- Packages replayed: {timing['packages_replayed']}, failed at replay: "
-      f"{timing['packages_failed_at_replay']}")
+    a(f"- Packages replayed: {timing['packages_replayed']}, "
+      f"replay failures: {timing['packages_with_replay_failure']}, "
+      f"inherited upstream failures: {timing['packages_with_inherited_upstream_failure']} "
+      "(never attempted -- no usable bundle was ever produced for these, not a corrupt one).")
     a(f"- Total wall time (sum across packages): {timing['total_seconds_all_packages']}s, "
       f"mean per package: {timing['mean_seconds_per_package']}s")
     a("- Stage totals (seconds): " +
@@ -432,13 +443,21 @@ def write_results_md(replayed, failures, recon, funnel, reach_dist, prov_dist, o
       f"({len(replayed)} replayed + {len(failures)} inherited, 0 silently omitted).")
     a("- [x] No duplicate package records.")
     a("- [x] Every fail-closed invariant passes (see above).")
-    a("- [x] Rerunning the aggregator produces byte-identical semantic results -- this replay "
-      "is a pure function of its inputs (frozen bundles + frozen JSONL manifest + this "
-      "develop commit's own analyzer code); the one non-deterministic input is the re-fetched "
-      "tarball bytes, which are hash-verified against the frozen tarball_sha256/"
-      "source_tree_sha256 before being trusted, so a re-run either reproduces the identical "
-      "per-file provenance or explicitly fails the same hash check -- never a silent semantic "
-      "drift.")
+    determinism_path = os.path.join(RESULTS_DIR, "determinism_verification.json")
+    if os.path.isfile(determinism_path):
+        det = json.load(open(determinism_path))
+        status = "x" if det["all_deterministic"] else " "
+        a(f"- [{status}] Rerunning the aggregator produces byte-identical semantic results -- "
+          f"ACTUALLY VERIFIED, not merely asserted from design: a full independent second replay "
+          f"of all {det['total_packages']} packages was run (see "
+          f"`results/determinism_verification.json`); **{det['matched']}/{det['total_packages']} "
+          f"produced an identical semantic digest** (sha256 of each record with only the "
+          f"real, expected-to-vary wall-clock timing fields excluded), "
+          f"{det['mismatched']} mismatched, {det['rerun_failures']} rerun failures.")
+    else:
+        a("- [ ] Rerunning the aggregator produces byte-identical semantic results -- NOT YET "
+          "independently verified by an actual second run; see "
+          "`verify_determinism.py`, not yet executed for this build.")
     a("- [x] Results and documentation committed and pushed to `develop`.\n")
 
     a("---\n*No new corpus run was launched. Task #34 is the 97-bundle replay only, per its own "
