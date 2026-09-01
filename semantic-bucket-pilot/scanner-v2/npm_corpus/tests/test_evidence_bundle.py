@@ -212,6 +212,52 @@ with tempfile.TemporaryDirectory() as td:
                 not manifest["missing"] and manifest.get("completeness_status") == "PARTIAL",
                 str(manifest.get("completeness_status")))
 
+# --- Fixture 8: deterministic bundle bytes -- identical input evidence must produce
+# byte-identical bundles (so a recorded per-bundle sha256 is reproducible by re-running the
+# bundler), regardless of wall-clock time, filesystem mtimes, or the running user/umask. ---
+print('=== Fixture 8: deterministic, reproducible bundle bytes ===')
+import hashlib
+
+
+def sha256_of(p):
+    with open(p, 'rb') as f:
+        return hashlib.sha256(f.read()).hexdigest()
+
+
+with tempfile.TemporaryDirectory() as td:
+    work_root = os.path.join(td, "pkg_root")
+    work = make_full_work_root(work_root)
+
+    path1, _ = write_evidence_bundle(work_root, os.path.join(td, "b1"), "some-pkg", "1.2.3")
+    # Same file CONTENT, but different filesystem mtimes -- as after re-extracting the
+    # identical evidence on another machine or at another time.
+    for dp, _, fns in os.walk(work):
+        for fn in fns:
+            os.utime(os.path.join(dp, fn), (1_700_000_000, 1_700_000_000))
+    path2, _ = write_evidence_bundle(work_root, os.path.join(td, "b2"), "some-pkg", "1.2.3")
+    ok &= check("positive: identical evidence -> byte-identical bundle (mtimes must not leak in)",
+                sha256_of(path1) == sha256_of(path2),
+                f"{sha256_of(path1)} != {sha256_of(path2)}")
+
+    # Regression details: the gzip header's MTIME field is zero (no wall-clock leak), and
+    # every tar member carries normalized metadata instead of run-environment values.
+    with open(path1, 'rb') as f:
+        gz_header = f.read(10)
+    ok &= check("regression: gzip header MTIME field is zeroed",
+                gz_header[4:8] == b"\x00\x00\x00\x00", f"got {gz_header[4:8].hex()}")
+    with tarfile.open(path1, "r:gz") as tf:
+        bad = [(m.name, m.mtime, m.uid, m.gid, m.uname, m.gname) for m in tf.getmembers()
+               if m.mtime != 0 or m.uid != 0 or m.gid != 0 or m.uname or m.gname]
+    ok &= check("regression: every tar member has mtime=0, uid/gid=0, no user/group names",
+                not bad, f"non-normalized members: {bad}")
+
+    # Negative: determinism must NOT mean insensitivity to content -- a real change to the
+    # evidence bytes must still change the bundle bytes.
+    (work / "cpp_facts.json").write_text(json.dumps({"schema": "x", "calls": [{"changed": 1}]}))
+    path3, _ = write_evidence_bundle(work_root, os.path.join(td, "b3"), "some-pkg", "1.2.3")
+    ok &= check("negative: changed evidence content -> different bundle bytes",
+                sha256_of(path1) != sha256_of(path3))
+
 print()
 print('OVERALL:', 'PASS' if ok else 'FAIL')
 sys.exit(0 if ok else 1)

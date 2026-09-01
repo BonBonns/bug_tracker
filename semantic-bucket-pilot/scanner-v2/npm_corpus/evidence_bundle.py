@@ -79,6 +79,7 @@ BUNDLE INTEGRITY (item 4): every manifest records, alongside `included`/`missing
     cannot mistake it for complete evidence. See `require_complete_bundle()` below for the
     loader-side guard that enforces this.
 """
+import gzip
 import hashlib
 import io
 import json
@@ -159,6 +160,18 @@ def _real_analyzer_hashes():
     return {name: _sha256_file(path) for name, path in ANALYZER_FILES.items()}
 
 
+def _deterministic_member(info):
+    """Strips run-environment metadata (filesystem mtime, uid/gid, user/group names,
+    umask-dependent mode bits) from a tar member so the same input evidence bytes always
+    produce the same bundle bytes -- a re-run over identical evidence must reproduce the
+    recorded per-bundle sha256 exactly."""
+    info.mtime = 0
+    info.uid = info.gid = 0
+    info.uname = info.gname = ""
+    info.mode = 0o755 if info.isdir() else 0o644
+    return info
+
+
 def _extract_cross_language_bindings(work_dir):
     """Pulls just the registration/link evidence out of merged.json, if it exists, without
     keeping the whole merged document (which would duplicate cpp_facts.json/js_facts.json)."""
@@ -210,8 +223,12 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
 
     # Build the whole tar in memory first so a crash mid-build can never leave a partial file
     # at tmp_path -- only the final, atomic os.replace touches the real filesystem path.
+    # gzip is opened explicitly with mtime=0 (and no embedded filename): the default
+    # "w:gz" path stamps the current wall-clock time into the gzip header, making two
+    # bundles of identical evidence differ byte-for-byte.
     buf = io.BytesIO()
-    with tarfile.open(fileobj=buf, mode="w:gz") as tf:
+    with gzip.GzipFile(filename="", fileobj=buf, mode="wb", mtime=0) as gz, \
+            tarfile.open(fileobj=gz, mode="w") as tf:
         for rel in BUNDLED_RELATIVE_PATHS:
             src = os.path.join(work_dir, rel)
             if os.path.isdir(src):
@@ -220,7 +237,7 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
                     for dp, _, fns in os.walk(src) for fn in fns
                 )
                 if inner_files:
-                    tf.add(src, arcname=rel)
+                    tf.add(src, arcname=rel, filter=_deterministic_member)
                     manifest["included"].append(rel)
                     manifest["artifact_hashes"][rel] = {
                         inner: _sha256_file(os.path.join(src, inner)) for inner in inner_files
@@ -228,7 +245,7 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
                 else:
                     manifest["missing"].append(rel)
             elif os.path.isfile(src):
-                tf.add(src, arcname=rel)
+                tf.add(src, arcname=rel, filter=_deterministic_member)
                 manifest["included"].append(rel)
                 manifest["artifact_hashes"][rel] = _sha256_file(src)
             else:
