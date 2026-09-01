@@ -1,0 +1,46 @@
+impl_id,property_id,file_path,revision_label,status,gate_evidence,notes
+FBR_R01,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict.py,R01,SOUND,19/19,"frozen"
+FBR_R02,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_r02.py,R02,SOUND,"20/20 + blindtest 6/6",frozen
+FBR_R03,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_r03.py,R03,SOUND,"33/33 + blindtest 6/6",frozen
+FBR_R04,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_r04.py,R04,SOUND,12/12,"frozen; driven by the stopped 494-package pipeline"
+FBR_R05,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_r05.py,R05,SOUND,"6/6 real controls + R01-R04 hash regression",frozen; driven by the stopped 494-package pipeline
+FBR_R06,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_r06.py,R06 (precision-fix / source-boundary gate),SOUND,"own isolated-branch test suite",frozen on claude/r06-precision-fix; NOT merged into the driven lineage
+FBR_FIX01I,FALLIBLE_BOUNDED_RESOURCE,resource_contracts.py+fix01i,FIX01I (JS-argument promotion boundary),SOUND,"own isolated-branch test suite",frozen on claude/r06-fix01i-integration; NOT merged into the driven lineage
+FBR_NAN,FALLIBLE_BOUNDED_RESOURCE,resource_guard_verdict_nan.py,Nan capability (NAN_NEWBUFFER_UNBOUNDED_ALLOCATION / NAN_COPYBUFFER_SOURCE_CAPACITY),SOUND,"25/25 fixture + 0 false positives on 6 real negative controls",frozen on claude/nan-capability; real corpus runs on individually-fetched packages, see historical_runs.csv
+LB_01,LOCK_BALANCE,lock_balance_verdict.py,R01,SOUND,11/11,"real wolfSSL CVE-2026-5264 recovery, see historical_runs.csv"
+PF_01,PROTECTED_FIELD,protected_field_verdict.py,R01,SOUND,11/11,""
+OOBW_BASE,OOB_WRITE,oob_write_verdict.py,"B4.5, frozen base",SOUND,"own gate suite",""
+OOBW_INDEX,OOB_WRITE,oob_index_write_verdict.py,INDEX_STORE,SOUND,oob-index-r01,"wired for corpus adjudication via adjudicate_oob.py"
+OOBW_PTRINC,OOB_WRITE,oob_pointer_increment_verdict.py,POINTER_INCREMENT,SOUND,oob-ptrinc-r01,"motivated by real mozjpeg/Debian#768369"
+OOBW_CURSOR,OOB_WRITE,oob_cursor_write_verdict.py,CURSOR,SOUND,oob-cursor-r01,"explicitly frozen as of round 5"
+OOBW_COPYLEN,OOB_WRITE,oob_copy_length_verdict.py,COPY_LENGTH,SOUND,oob-copylen-r01,""
+OOBW_CALLSINK,OOB_WRITE,oob_call_sink_verdict.py,CALL_SINK,SOUND,oob-callsink-r01,"built to reach real NSS CVE-2019-11759"
+OOBW_INTERPROC,OOB_WRITE,oob_interprocedural_verdict.py,INTERPROCEDURAL,SOUND,oob-interproc-r01,"single-hop cross-function propagation"
+OOBW_RUNTIMECAP,OOB_WRITE,oob_runtime_capacity_verdict.py,RUNTIME_CAPACITY,SOUND,oob-runtimecap-r01=18/18,"v1 base for OOBW_RUNTIMECAP_V2's post-pass"
+OOBW_CAPADDR,OOB_WRITE,cap_addr_indexed.py,"v2 Capability 1 (address-of indexed dest)",SOUND,"own gate suite",scanner-v2 extension layer
+OOBW_RUNTIMECAP_V2,OOB_WRITE,oob_runtime_capacity_v2.py,"v2 post-pass over OOBW_RUNTIMECAP",SOUND,"gate_stack_capacity_v2.py=15/15",""
+OOBW_SINGLEOBJ,OOB_WRITE,single_object_pass.py,"v2 third representation-shape attempt",UNSOUND,"own CAPABILITY_REVIEW.md: not sound as written",EXPLICITLY REJECTED -- must not be promoted; does not affect OOB_WRITE's own promotability since other implementations are sound
+OOBW_HEAPEXT,OOB_WRITE,heap_extent_check.py,"v2 Level-3 heap-capacity check",SOUND,"own gate suite",""
+OOBR_01,OOB_READ,oob_read_verdict.py,"B4.6",SOUND,guard-r01,""
+OOBC_01,OOB_COMPARE,oob_compare_verdict.py,"TOR-B2a",SOUND,oob-compare-r07,""
+WPACL_01,WPACL,core/provenance/PHPCGFactory.java (~L2856),,UNVERIFIED,"no dedicated gate directory found",research-grade hand-tuned; not confirmed sound, not confirmed rejected
+WPCSRF_01,WPCSRF,core/provenance/PHPCGFactory.java (~L2891),,UNVERIFIED,"no dedicated gate directory found",research-grade hand-tuned
+WPIDOR_01,WPIDOR,core/provenance/PHPCGFactory.java (~L2798),,UNVERIFIED,"no dedicated gate directory found",research-grade hand-tuned
+WPOPT_01,WPOPT,core/provenance/PHPCGFactory.java (~L2907),,UNVERIFIED,"no dedicated gate directory found",research-grade hand-tuned
+WPSQLI_01,WP_SQLI,core/provenance/StaticAnalysis.java (SQLI_ONLY mode),,SOUND,"run_recall.sh FIRE/NOFIRE recall suite",""
+WPXSS_01,WP_XSS,core/provenance/StaticAnalysis.java (XSS_ONLY mode),,SOUND,"run_recall.sh FIRE/NOFIRE recall suite",""
+DENYLIST_01,DENYLIST_PATTERN_BYPASS,denylist_bypass_verdict.py,,SOUND,"D1-D6 self-reported PASS",not independently re-verified this pass
+GLOBALMUT_01,GLOBAL_SINGLETON_MUTATION,globalmut_verdict.py,,SOUND,"G1-G6 self-reported PASS",not independently re-verified this pass
+GUARDFT_01,GUARD_FALLTHROUGH,guard_fallthrough_verdict.py,,SOUND,6/6,"confirmed actually run, see historical_runs.csv"
+MALNPM_01,MALICIOUS_NPM_INSTALL_EXFIL,malicious_npm_verdict.py,,SOUND,M1-M13,"confirmed actually run, see historical_runs.csv"
+SERDOS_A,UNGUARDED_SERIALIZE_DOS,serialize_dos_verdict.py,"5a, gates/ implementation",SOUND,"S1-S9 self-reported PASS","real run confirmed via .pyc cache"
+SERDOS_B,UNGUARDED_SERIALIZE_DOS,adjudicate_js.py (default/hardcoded config),"5b, tchecker-property-adjudicator implementation",SOUND,"end-to-end + real-corpus replay + held-out TS generalization test",FROZEN/production; the most heavily-validated single implementation in this whole inventory -- see historical_runs.csv
+VALBYPASS_01,VALIDATION_BYPASS,validation_bypass_verdict.py,,SOUND,"V1-V6 self-reported PASS",not independently re-verified this pass
+SSRF_01,SSRF,adjudicate_js.py + property_configs/ssrf_host.json (+3 WebExtension source-variant producers),,SOUND,"3 gates: 9/9 10/10 10/10",""
+PATHTRAV_01,PATH_TRAVERSAL,adjudicate_js.py + property_configs/path_traversal_host.json,,UNVERIFIED,"no dedicated frozen/gate doc found in scope",wired but not freshly re-verified this pass
+REDOS_01,REDOS,adjudicate_js.py + property_configs/redos_complexity.json,"Stage1-2",SOUND,"Stage1=9/9 Stage2=7/7",FROZEN; real corpus scan, see historical_runs.csv
+NOSQLI_01,NOSQLI,adjudicate_js.py + property_configs/nosqli_query_op.json,"Stage1-2",SOUND,"Stage1=10/10 Stage2=9/9",frozen at unit/gate scale; Stage3 corpus-scale sweep incomplete/abandoned with a known unfixed AJV-schema classifier gap -- NOT sound at corpus scale, see historical_runs.csv
+CMDINJ_01,COMMAND_INJECTION,"Stage1/2A/2B characterization scripts",,UNSOUND,"no property_configs/*.json, no wiring producer",Stage2A caveated-but-reasonable; Stage2B explicitly self-described as a characterization EXPERIMENT not trusted sanitizer semantics; never promoted to a full adjudicated property
+FAILOPEN_01,FAIL_OPEN_SECURITY_CONTROL,adjudicate_fail_open.py,,SOUND,"F1-F8, frozen live-CPG gate",candidate-only by explicit design
+LLMOUT_01,LLM_INSECURE_OUTPUT_HANDLING,llm_input_verdict.py,,SOUND,L1-L7,"real-world validated on a deployed RocketChat plugin, see historical_runs.csv"
+LLMINJ_01,LLM_PROMPT_INJECTION,llm_input_verdict.py,,SOUND,L1-L7,"same file and gate as LLMOUT_01 -- one implementation file serving two distinct properties"

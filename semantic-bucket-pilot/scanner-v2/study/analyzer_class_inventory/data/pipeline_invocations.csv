@@ -1,0 +1,2 @@
+property_id,pipeline_name,stages,packages_processed,evidence
+FALLIBLE_BOUNDED_RESOURCE,stopped_494_package_pipeline,R04+R05,452 of 494 (stopped by explicit instruction),"run_pipeline_one.py; r04_classification/r04_findings/r05_classification/r05_findings are the only classification/finding keys present anywhere in full_scan_r05_working.jsonl (452/452 records checked)"
