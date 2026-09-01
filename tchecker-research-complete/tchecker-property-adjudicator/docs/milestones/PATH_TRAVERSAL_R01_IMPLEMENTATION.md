@@ -281,3 +281,170 @@ Both fixes' fixtures were folded into the SAME frozen `fixtures/path_traversal_r
 20 source files, 22 `FILESYSTEM_SINK_CANDIDATE`s, up from 18); `check_path_traversal_verdict.py`
 was updated with the new real totals and two new explicit assertions (FIX01, FIX02), all 12
 original controls re-verified unaffected: `PATH_TRAVERSAL_VERDICT_R01=25/25`.
+
+## 9. Correction round 2 (PATH-TRAV-R01-FIX03/FIX04) — 2 more real gaps closed, per direct instruction
+
+A second, direct-instruction review of section 8's own two fixes found both still short of sound:
+FIX01's binary read/write split still silently defaulted an UNRESOLVED `flags` argument to
+`FS_READ` ("still a guess"), and FIX02's line-number-order approximation could accept a
+canonicalizing assignment on an unrelated control-flow branch ("may appear earlier while never
+reaching the boundary check"). Both are now closed with real, fixture-first mechanisms — no guess,
+no approximation.
+
+### 9.1 `open()`/`openSync()` flags — real 4-value resolution (FIX03)
+
+**Real CPG probe evidence** (`joern --script` against a throwaway probe fixture,
+`fs.open(p, fs.constants.O_RDONLY, cb)` / `O_WRONLY` / `O_RDWR` / bare `0`/`1`/`2` / an OR-chain /
+a bare variable), verbatim:
+```
+=== open call id=... in method=a ===
+  arg idx=2 nodeType=Call name=<operator>.fieldAccess code=fs.constants.O_RDONLY
+=== open call id=... in method=d ===
+  arg idx=2 nodeType=Literal name=N/A code=0
+=== open call id=... in method=h ===
+  arg idx=2 nodeType=Call name=<operator>.or code=fs.constants.O_WRONLY | fs.constants.O_CREAT
+=== or call id=... code=fs.constants.O_WRONLY | fs.constants.O_CREAT ===
+  arg idx=1 type=Call code=fs.constants.O_WRONLY
+  arg idx=2 type=Call code=fs.constants.O_CREAT
+=== open call id=... in method=j ===
+  arg idx=2 nodeType=Identifier name=N/A code=flagsVar
+```
+Confirmed real, decisive findings: js2cpg's own type recovery does **not** fold
+`fs.constants.O_WRONLY` into a numeric literal — it stays a real `<operator>.fieldAccess` Call
+whose own `.code` ends in the constant's name (recognized structurally, by name, never guessed);
+bare numeric literals `0`/`1`/`2` are real `Literal` nodes; a bitwise-OR chain is a real
+`<operator>.or` Call with 1-indexed `argument(1)`/`argument(2)` operands (same 1-indexing
+convention already confirmed for `<operator>.addition` in round 1); an unresolvable flags argument
+(a bare variable) is a bare `Identifier`, structurally distinguishable from all of the above.
+
+**Corrected rule** (`classifyOpenFlags`/`resolveFlagsExpr`/`resolveFlagsOperand`): a literal string
+resolves directly against Node's own 3 documented flag groups (read-only / write-only-or-append /
+combined read+write — the read+write group is the **new 6th sink family, `FS_READ_WRITE`**). A
+numeric/constants expression resolves when EVERY operand of a (possibly single, possibly OR-chained)
+expression is itself one of: `O_RDONLY`/`O_WRONLY`/`O_RDWR` (an access-mode constant), another
+recognized modifier constant (`O_CREAT`/`O_TRUNC`/`O_APPEND`/`O_EXCL`/`O_SYNC`), or a numeric
+literal — the base access mode is taken from whichever access-mode constant (if any) is present
+(POSIX's own real default: unset access-mode bits = `O_RDONLY`). ANY operand that is not one of
+these — a bare variable, a function call, an unrecognized field access — makes the WHOLE expression
+`FS_OPEN_MODE_UNRESOLVED`: a real, logged `sinkAbstentions` entry, **zero** `SinkTarget` emitted in
+any family, never a guessed default. The one genuinely non-guessing default kept: `flags` OMITTED
+ENTIRELY (no `argumentIndex==2` at all) resolves `FS_READ` — this is Node's own real, literal
+documented default value for a real language-level omission, not an unresolvable expression.
+
+**Real before/after evidence**, same combined CPG, same real sink node ids, OLD (round-1-committed)
+producer vs. NEW (this round) producer:
+
+| Control | Old producer, real output | New producer, real output |
+|---|---|---|
+| ctrl16 `'r+'` (sink `30064771258`, L7) | `sinkFamily=FS_READ` (round 1's binary split had no combined-mode case at all) | `sinkFamily=FS_READ_WRITE` |
+| ctrl17 `'w+'` (sink `30064771266`, L7) | `sinkFamily=FS_WRITE` (round 1's `OPEN_WRITE_FLAG_LITERALS` wrongly included `'w+'` as write-only) | `sinkFamily=FS_READ_WRITE` |
+| ctrl18 `O_WRONLY\|O_CREAT` (sink `30064771274`, L12) | `sinkFamily=FS_READ` (round 1 only inspected `Literal` args; a `Call` fell through to the FS_READ default) | `sinkFamily=FS_WRITE` |
+| ctrl18 bare `O_RDWR` (sink `30064771281`, L15) | `sinkFamily=FS_READ` (same reason) | `sinkFamily=FS_READ_WRITE` |
+| ctrl19 `O_WRONLY\|extraFlags` (sink `30064771293`, L12) | `sinkFamily=FS_READ`, `outcome=ESTABLISHED` — **a real guess**, round 1 silently treated the unresolved OR-chain as FS_READ | **zero rows** — `ABSTAIN: open at L12: flags argument (fs.constants.O_WRONLY \| extraFlags) not structurally resolvable ... FS_OPEN_MODE_UNRESOLVED` |
+| ctrl14 `openUnresolvedFlag` bare var (sink `30064771228`, L15, round 1's own fixture) | `sinkFamily=FS_READ`, `outcome=ESTABLISHED` — the exact guess named in the correction instruction | **zero rows** — `ABSTAIN: open at L15: flags argument (flagsVar) ... FS_OPEN_MODE_UNRESOLVED` |
+
+### 9.2 True CFG dominance for canonicalization ordering (FIX04)
+
+**Mechanism used, stated precisely**: real CFG dominance — specification mechanism 1, "a direct
+dominance query" — not a bounded-reachability approximation and not the
+`CANONICALIZATION_DOMINANCE_UNPROVEN` abstention fallback (that fallback exists only as a defensive
+diagnostic for the rare case the dominance query itself cannot be evaluated for a node). The pinned
+Joern 4.0.608 build's own `CfgDominatorPass` (visible in every real run's own pass log, e.g.
+`fixtures/path_traversal_r01/raw/run_summary.log`: `Pass io.joern.x2cpg.passes.controlflow.
+cfgdominator.CfgDominatorPass completed...`) populates real `DOMINATE`/`POST_DOMINATE` edges,
+decompiled and confirmed present on `io.shiftleft.semanticcpg`'s own `CfgNodeMethods` extension
+(`javap` on `io.joern.semanticcpg-4.0.608.jar`): `dominatedBy`/`dominates`/`postDominatedBy`/
+`postDominates`, all real, public methods on any `CfgNode`. `hasDominatingCanonicalization` calls
+`checkNode.dominatedBy` directly and checks whether the canonicalizing assignment's own CALL node
+is a member — genuine, whole-CFG dominance, not an approximation.
+
+**Real probe evidence it discriminates the wrong-branch case from the genuine-dominance case**
+(two-function throwaway probe fixture, `joern --script`, verbatim):
+```
+=== startsWith call id=... line=8 method=f ===        // if/else: only ONE branch canonicalizes
+  dominatedBy (11 nodes):
+    id=... line=1 label=METHOD ...
+    id=... line=3 label=IDENTIFIER code=someUnrelatedCondition
+    id=... line=8 label=IDENTIFIER code=resolved
+    ...                                                  // NEITHER branch's own assignment (L4, L6) present
+=== startsWith call id=... line=16 method=g ===        // genuinely dominating assignment + intervening stmt
+  dominatedBy (22 nodes):
+    id=... line=13 label=METHOD ...
+    id=... line=14 label=CALL code=const resolved = path.resolve('/safe/base', userPath)   // PRESENT
+    id=... line=15 label=CALL code=const x = 1                                              // intervening stmt
+    id=... line=16 label=CALL code=resolved.startsWith
+    ...
+```
+For `f` (the wrong-branch shape), `sw.dominatedBy.l` (11 nodes) does **not** include either
+branch's own `resolved = ...` assignment (ids not present) — neither truly dominates, correctly
+rejected. For `g` (a genuinely dominating assignment, with an intervening non-branching statement),
+`sw.dominatedBy.l` (22 nodes) **does** include the assignment's own CALL node, transitively through
+the intervening `const x = 1` statement — correctly accepted, and not overly narrow.
+
+**Def-use soundness beyond dominance alone**: real CFG dominance proves the assignment's CFG node is
+control-flow-prior to the check on every path, but not by itself that no LATER same-variable
+reassignment also dominates the check and clobbers the canonicalized value first (the
+specification's own def-use requirement — "the value read at the boundary-check operand must
+actually be the SAME definition instance"). This is closed with a same-variable
+reaching-definition check built from the SAME real dominance primitive (no separate API): a
+canonicalizing assignment `a` is credited only when no other same-variable assignment `a2` both
+dominates the check AND is itself dominated by `a` (i.e. `a2` sits strictly between `a` and the
+check on every dominating path). Named precisely, per the honesty requirement: this is a **real,
+working CFG dominance proof augmented with a dominance-derived reaching-definition check** — not a
+"bounded reachability approximation" and not (for the general case) the honest-abstention fallback.
+The fallback (`CANONICALIZATION_DOMINANCE_UNPROVEN`, a `weak_diagnostic_guards`-style note) is
+still emitted whenever a canonicalizing assignment exists in the method but is not credited,
+whether because it genuinely fails to dominate (the common case, e.g. ctrl20 below) or because the
+dominance query itself could not be evaluated (a defensive `Try`-wrapped edge case) — a reviewer
+sees which, by name, without needing to re-derive it.
+
+**Real before/after evidence for the wrong-branch fixture (item 5), same combined CPG, same real
+sink node id, OLD (round-1-committed, line-number-order) producer vs. NEW (true-dominance) producer**
+— this is the concrete case the correction instruction was worried about, and it reproduces live:
+
+```
+ctrl20_wrong_branch_canonicalization.js, sink 30064771313 (L20, fs.readFile(resolved, ...)):
+
+OLD (line-order approximation):
+  EMIT sink=30064771313(L20) src=...(L15:userPath) outcome=BROKEN
+    note=canonicalized boundary-aware check: resolved.startsWith('/safe' + path.sep)
+  EMIT sink=30064771313(L20) src=...(L17:userPath) outcome=BROKEN
+    note=canonicalized boundary-aware check: resolved.startsWith('/safe' + path.sep)
+  -- WRONG: the if-branch's own `resolved = path.resolve('/safe', userPath)` (L4) sits BEFORE the
+  check (L8) in plain line order, so the old approximation credited it, even though the check runs
+  regardless of which branch executed and the else-branch never canonicalizes at all.
+
+NEW (true CFG dominance):
+  EMIT sink=30064771313(L20) src=...(L15:userPath) outcome=ESTABLISHED
+    weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: ...
+    | CANONICALIZATION_DOMINANCE_UNPROVEN: a canonicalizing assignment to 'resolved' exists in
+      this method (resolved = path.resolve('/safe', userPath)) but does not provably CFG-dominate
+      this check on every control-flow path: resolved.startsWith('/safe' + path.sep)
+  EMIT sink=30064771313(L20) src=...(L17:userPath) outcome=ESTABLISHED  (same notes)
+  -- CORRECT: never BROKEN; the exact reason is named explicitly.
+```
+This is a genuine, reproduced false-`BROKEN` bug in round 1's own line-number-order approximation,
+closed by the true-dominance mechanism — not a hypothetical.
+
+**Real positive-control evidence (item 6, dominance proof is not overly narrow)**: ctrl21's own
+sink `30064771333` (L15, a canonicalizing assignment with an intervening `const unrelatedStatement
+= 1` statement before the check) is `BROKEN` in BOTH the old and the new producer — the stricter
+true-dominance mechanism does not regress a genuinely-safe case, and dominance is confirmed
+transitive through the intervening statement, not merely direct-adjacency-only. The pre-existing
+`ctrl13_boundary_aware_safe.js` direct-adjacency positive control (sink `30064771215`) is also
+re-verified `BROKEN` under the new mechanism, unaffected.
+
+### 9.3 Fixtures, reducer, and full regression result
+
+Six new real fixtures (`ctrl16_open_flags_rplus.js` through
+`ctrl21_dominating_canonicalization_intervening.js`) were built, folded into the SAME frozen
+`fixtures/path_traversal_r01/raw/` set via a real combined-CPG `jssrc2cpg`+`joern --script` run
+(now 26 source files, `FILESYSTEM_SINK_CANDIDATE=27`, up from 22).
+`semantic-bucket-pilot/scanner-v2/path_traversal_verdict.py` needed no logic changes — it already
+reads `sink_family` from `source_facts.tsv` generically and never hardcoded the family set in code
+(only descriptively, in its own docstring, now updated to mention `FS_READ_WRITE`).
+`check_path_traversal_verdict.py` was updated with the new real totals (`FILESYSTEM_SINK_CANDIDATE
+== 27`, `ALTERNATIVES_BROKEN_EXCLUDED == 4`, `APPLICATION_INGRESS_REACHABLE == 25`) and 9 new
+explicit assertions (items 1-6 of the specification, FIX01/FIX02 re-verified, and the item-4
+regression fix on ctrl14's own bare-variable case), all 25 previously-existing checks re-verified
+passing unaffected: **`PATH_TRAVERSAL_VERDICT_R01=34/34`**.

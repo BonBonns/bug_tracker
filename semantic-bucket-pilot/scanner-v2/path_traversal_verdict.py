@@ -13,11 +13,18 @@ Real design (three-tier classification, adapted from ReDoS's own REGEX_COMPLEXIT
 PACKAGE_API_INPUT_REACHABLE / APPLICATION_INGRESS_REACHABLE shape to this property):
 
   FILESYSTEM_SINK_CANDIDATE      -- export_path_traversal_integ_r01.sc's own Stage-1 sink-family
-                                     recognition (FS_READ/FS_WRITE/FS_DELETE/EXPRESS_SEND_FILE/
-                                     EXPRESS_DOWNLOAD, structurally import-binding-aware, see the
+                                     recognition (FS_READ/FS_WRITE/FS_READ_WRITE/FS_DELETE/
+                                     EXPRESS_SEND_FILE/EXPRESS_DOWNLOAD -- FS_READ_WRITE added in
+                                     correction round 2 for open()/openSync() flags that
+                                     structurally resolve to a combined read+write mode, e.g. 'r+'/
+                                     'w+'/O_RDWR -- structurally import-binding-aware, see the
                                      producer's own header comment) identified a real sink AND at
                                      least one source alternative reaches it (source_facts.tsv row
-                                     with status ESTABLISHED for that sink_id).
+                                     with status ESTABLISHED for that sink_id). This module never
+                                     hardcodes the family set anywhere in its own LOGIC (only in
+                                     this docstring, for a reader's benefit) -- `sink_family` is
+                                     read from source_facts.tsv column 5 and carried through
+                                     verbatim, so a 6th (or Nth) family needs no code change here.
   PACKAGE_API_INPUT_REACHABLE    -- a value from THIS package's own exported (CommonJS/ESM)
                                      function parameter reaches the sink -- "externally supplied
                                      package input", never "attacker-controlled" or "a vulnerability".

@@ -17,6 +17,16 @@ Covers, per direct instruction:
      ESTABLISHED alternatives both ARE (neither is "safe").
   5. A synthetic negative control for families_by_sink-equivalent alternatives_by_sink(), same
      shape as check_redos_verdict.py's own synthetic dual-family test.
+  6. FIX01/FIX02 (round 1 post-review hardening): open()/openSync() flags-based read/write split
+     (superseded by correction round 2's own 4-way resolution, re-verified below) and the
+     canonicalize-after-check ordering bug.
+  7. Correction round 2 (6 new fixtures, ctrl16-ctrl21): open()/openSync() flags now resolve to a
+     genuine 4-value outcome (FS_READ/FS_WRITE/FS_READ_WRITE/an explicit abstention, never a
+     guessed default) including real numeric/constants flags resolution; boundary-check
+     canonicalization now requires REAL CFG dominance (Joern's own `.dominatedBy`/`.dominates`
+     CfgNode API) plus a same-variable reaching-definition check, replacing round 1's disclosed
+     line-number-order approximation -- confirmed via a real wrong-branch negative control (item 5)
+     and a genuine-dominance-with-intervening-statement positive control (item 6).
 """
 import json
 import pathlib
@@ -58,13 +68,20 @@ ck("every finding has reportable hardcoded False",
    findings and all(f["reportable"] is False for f in findings))
 ck("no BROKEN alternative is ever surfaced as a finding (genuinely proven containment is excluded)",
    all(f["containment_status"] != "BROKEN" for f in findings))
-ck("ALTERNATIVES_BROKEN_EXCLUDED == 3 (ctrl11 wrapper-proven x2 alternatives + ctrl13 direct "
-   "boundary-aware x1)", cls.get("ALTERNATIVES_BROKEN_EXCLUDED") == 3)
+ck("ALTERNATIVES_BROKEN_EXCLUDED == 4 (ctrl11 wrapper-proven x2 alternatives + ctrl13 direct "
+   "boundary-aware x1 + ctrl21 dominating-with-intervening-statement x1, added by correction "
+   "round 2 item 6)", cls.get("ALTERNATIVES_BROKEN_EXCLUDED") == 4)
 ck("PACKAGE_API_INPUT_REACHABLE == 2 (package_api_basic.js + package_api_named_exports.js)",
    cls.get("PACKAGE_API_INPUT_REACHABLE") == 2)
-ck("APPLICATION_INGRESS_REACHABLE == 20 (every other real candidate sink, including ctrl14's 3 "
-   "open()/openSync() sites and ctrl15's own single site, added by FIX01/FIX02)",
-   cls.get("APPLICATION_INGRESS_REACHABLE") == 20)
+ck("APPLICATION_INGRESS_REACHABLE == 25 (every other real candidate sink -- 20 from round 1 "
+   "plus 5 new correction-round-2 sinks: ctrl16 r+, ctrl17 w+, ctrl18's own 2 numeric-constants "
+   "sites, ctrl20 wrong-branch; ctrl19 abstains with zero sink target and ctrl21 is BROKEN-"
+   "excluded, so neither adds a REACHABLE-counted sink)",
+   cls.get("APPLICATION_INGRESS_REACHABLE") == 25)
+ck("FILESYSTEM_SINK_CANDIDATE == 27 (22 from round 1 + 5 new correction-round-2 sinks: ctrl16, "
+   "ctrl17, ctrl18 x2, ctrl20 -- ctrl19 abstains entirely and ctrl21 still counts as a candidate "
+   "sink even though its own alternative is BROKEN-excluded from findings)",
+   cls.get("FILESYSTEM_SINK_CANDIDATE") == 27)
 
 # --- Control-by-control mapping. Sink LINE NUMBERS are per-file, not globally unique across this
 # multi-file fixture (e.g. ctrl02's L6 collides with ctrl07's own L6) -- so controls are looked up
@@ -82,8 +99,20 @@ SINK = {
     "ctrl12_wrapper_unresolved": "30064771197",
     "ctrl14_open_write_flag": "30064771224",     # fs.open(userPath, 'w', cb) at L9
     "ctrl14_open_read_flag_explicit": "30064771226",  # fs.openSync(userPath, 'r') at L12
-    "ctrl14_open_unresolved_flag": "30064771228",     # fs.open(userPath, flagsVar, cb) at L15
+    "ctrl14_open_unresolved_flag": "30064771228",     # fs.open(userPath, flagsVar, cb) at L15 --
+                                                       # correction round 2 now ABSTAINS here (was
+                                                       # wrongly FS_READ under round 1's own logic);
+                                                       # this id is kept only to assert its ABSENCE.
     "ctrl15_canonicalize_after_check": "30064771246",  # fs.readFile(resolved, ...) at L14
+    # Correction round 2 (items 1-6, ctrl16-ctrl21):
+    "ctrl16_open_flags_rplus": "30064771258",             # fs.open(userPath, 'r+', cb) at L7
+    "ctrl17_open_flags_wplus": "30064771266",             # fs.openSync(userPath, 'w+') at L7
+    "ctrl18_open_flags_numeric_write": "30064771274",     # O_WRONLY|O_CREAT at L12
+    "ctrl18_open_flags_numeric_readwrite": "30064771281",  # bare O_RDWR at L15
+    "ctrl19_open_flags_numeric_unresolved": "30064771293",  # O_WRONLY|extraFlags at L12 (abstains
+                                                              # -- id kept only to assert ABSENCE)
+    "ctrl20_wrong_branch_canonicalization": "30064771313",  # resolved.startsWith(...) at L20
+    "ctrl21_dominating_canonicalization_intervening": "30064771333",  # readFile(resolved) at L15
 }
 by_sink_id = {}
 for f in findings:
@@ -111,9 +140,9 @@ ck("Control 5 (aliased fs import): a finding exists -- the audited producer's ow
    SINK["ctrl05_aliased_fs_import"] in by_sink_id and
    all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl05_aliased_fs_import"]]))
 ck("Control 6 (unrelated object literally named fs): its call is never even counted as a "
-   "FILESYSTEM_SINK_CANDIDATE at all -- confirmed structurally: total candidates (22) matches the "
+   "FILESYSTEM_SINK_CANDIDATE at all -- confirmed structurally: total candidates (27) matches the "
    "hand-verified count of REAL fs sinks across the fixture set, which excludes ctrl06 entirely",
-   cls.get("FILESYSTEM_SINK_CANDIDATE") == 22)
+   cls.get("FILESYSTEM_SINK_CANDIDATE") == 27)
 ck("Control 7 (family split): all three of FS_READ/FS_WRITE/FS_DELETE appear as distinct "
    "sink_family tags", {"FS_READ", "FS_WRITE", "FS_DELETE"}.issubset({f["sink_family"] for f in findings}))
 ck("Control 8 (Windows/POSIX separator): a finding exists, never BROKEN, weak '.includes' "
@@ -128,7 +157,7 @@ ck("Control 9 (repeated traversal / single-pass replace strip): a finding exists
    any("replace" in n for f in by_sink_id[SINK["ctrl09_repeated_traversal"]] for n in f["weak_diagnostic_guards"]))
 ck("Control 10 (unresolved options object): NO finding at all -- abstained, not guessed",
    not any(f["origin_code"] == "opts" for f in findings) and
-   cls.get("FILESYSTEM_SINK_CANDIDATE") == 22)  # would be 23 if ctrl10 had guessed no-root
+   cls.get("FILESYSTEM_SINK_CANDIDATE") == 27)  # would be 28 if ctrl10 had guessed no-root
 ck("Control 11 (proven containment wrapper): EXCLUDED as BROKEN -- confirmed via the "
    "ALTERNATIVES_BROKEN_EXCLUDED count above (2 of the 3 are this sink's own two source-reference "
    "alternatives) rather than appearing in findings",
@@ -137,22 +166,80 @@ ck("Control 12 (unresolvable wrapper): a finding exists with containment_status 
    "never assumed safe",
    SINK["ctrl12_wrapper_unresolved"] in by_sink_id and
    all(f["containment_status"] == "OPEN" for f in by_sink_id[SINK["ctrl12_wrapper_unresolved"]]))
-ck("FIX01 (open()/openSync() flags-based read/write split): a literal write-mode flag ('w') "
-   "produces FS_WRITE, an explicit read-mode flag ('r') and an UNRESOLVED flags argument both "
-   "stay FS_READ -- the fix only ever narrows the conservative default, never guesses toward write",
+ck("FIX01 (open()/openSync() flags-based read/write split, round 1): a literal write-mode flag "
+   "('w') produces FS_WRITE and an explicit read-mode flag ('r') stays FS_READ",
    SINK["ctrl14_open_write_flag"] in by_sink_id and
    all(f["sink_family"] == "FS_WRITE" for f in by_sink_id[SINK["ctrl14_open_write_flag"]]) and
    SINK["ctrl14_open_read_flag_explicit"] in by_sink_id and
-   all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl14_open_read_flag_explicit"]]) and
-   SINK["ctrl14_open_unresolved_flag"] in by_sink_id and
-   all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl14_open_unresolved_flag"]]))
-ck("FIX02 (canonicalize-after-check ordering): a canonicalizing assignment written AFTER the "
-   "boundary check it would otherwise 'justify' must NOT retroactively prove containment -- a "
-   "finding exists here, never BROKEN, with the same weak-startsWith diagnostic a bare check gets",
+   all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl14_open_read_flag_explicit"]]))
+ck("Correction round 2, item 4 (regression fix on ctrl14's own unresolved-flag case): an "
+   "UNRESOLVED (variable) flags argument now produces NO finding at all -- round 1's FIX01 "
+   "wrongly defaulted this to FS_READ (a guess); it is now a real, logged abstention "
+   "(FS_OPEN_MODE_UNRESOLVED), the same non-guessing discipline every other abstention in this "
+   "producer already uses",
+   SINK["ctrl14_open_unresolved_flag"] not in by_sink_id)
+ck("FIX02 (round 1, canonicalize-after-check ordering) re-verified under the correction-round-2 "
+   "TRUE-dominance mechanism: a canonicalizing assignment written AFTER the boundary check it "
+   "would otherwise 'justify' must NOT retroactively prove containment -- a finding exists here, "
+   "never BROKEN, with the same weak-startsWith diagnostic a bare check gets, PLUS the new "
+   "CANONICALIZATION_DOMINANCE_UNPROVEN diagnostic (real dominance correctly finds the "
+   "later-line assignment can never dominate the earlier check, same conclusion the old "
+   "line-order approximation reached, now via a real proof instead of an approximation)",
    SINK["ctrl15_canonicalize_after_check"] in by_sink_id and
    all(f["containment_status"] != "BROKEN" for f in by_sink_id[SINK["ctrl15_canonicalize_after_check"]]) and
    any("startsWith" in n for f in by_sink_id[SINK["ctrl15_canonicalize_after_check"]]
+       for n in f["weak_diagnostic_guards"]) and
+   any("CANONICALIZATION_DOMINANCE_UNPROVEN" in n for f in by_sink_id[SINK["ctrl15_canonicalize_after_check"]]
        for n in f["weak_diagnostic_guards"]))
+
+# --- Correction round 2 (items 1-6), real fixture-verified assertions. ---
+ck("Correction round 2, item 1: 'r+' flags literal resolves to the NEW FS_READ_WRITE family "
+   "(ctrl16), not FS_READ and not FS_WRITE",
+   SINK["ctrl16_open_flags_rplus"] in by_sink_id and
+   all(f["sink_family"] == "FS_READ_WRITE" for f in by_sink_id[SINK["ctrl16_open_flags_rplus"]]))
+ck("Correction round 2, item 2: 'w+' flags literal also resolves to FS_READ_WRITE (ctrl17), "
+   "confirming every combined-mode literal in Node's own documented set is recognized, not just "
+   "'r+'",
+   SINK["ctrl17_open_flags_wplus"] in by_sink_id and
+   all(f["sink_family"] == "FS_READ_WRITE" for f in by_sink_id[SINK["ctrl17_open_flags_wplus"]]))
+ck("Correction round 2, item 3: numeric/constants flags that DO structurally resolve -- "
+   "fs.constants.O_WRONLY | fs.constants.O_CREAT -> FS_WRITE (ctrl18's own OR-chain case) and a "
+   "bare fs.constants.O_RDWR -> FS_READ_WRITE (ctrl18's own single-constant case)",
+   SINK["ctrl18_open_flags_numeric_write"] in by_sink_id and
+   all(f["sink_family"] == "FS_WRITE" for f in by_sink_id[SINK["ctrl18_open_flags_numeric_write"]]) and
+   SINK["ctrl18_open_flags_numeric_readwrite"] in by_sink_id and
+   all(f["sink_family"] == "FS_READ_WRITE" for f in by_sink_id[SINK["ctrl18_open_flags_numeric_readwrite"]]))
+ck("Correction round 2, item 4: an OR-chain flags expression with ONE unresolvable operand (a "
+   "bare variable mixed with a real fs.constants.O_WRONLY, ctrl19) produces NO finding at all -- "
+   "the whole expression abstains rather than guessing a base access mode from the operand that "
+   "happens to resolve; this generalizes the ctrl14 bare-variable regression fix above to the "
+   "OR-chain shape",
+   SINK["ctrl19_open_flags_numeric_unresolved"] not in by_sink_id)
+ck("Correction round 2, item 5 (real before/after evidence, the core soundness fix): a "
+   "canonicalizing assignment on ONE if/else branch (ctrl20) is NOT credited toward a boundary "
+   "check that runs regardless of which branch executed -- round 1's own line-number-order "
+   "approximation would have WRONGLY accepted this (the assignment's line precedes the check's "
+   "line in straight top-to-bottom reading); the corrected TRUE-CFG-dominance mechanism correctly "
+   "rejects it: containment_status is never BROKEN, the weak startsWith note fires, AND the new "
+   "CANONICALIZATION_DOMINANCE_UNPROVEN note names the exact reason (neither branch's own "
+   "assignment CFG-dominates the check)",
+   SINK["ctrl20_wrong_branch_canonicalization"] in by_sink_id and
+   all(f["containment_status"] != "BROKEN" for f in by_sink_id[SINK["ctrl20_wrong_branch_canonicalization"]]) and
+   any("startsWith" in n for f in by_sink_id[SINK["ctrl20_wrong_branch_canonicalization"]]
+       for n in f["weak_diagnostic_guards"]) and
+   any("CANONICALIZATION_DOMINANCE_UNPROVEN" in n for f in by_sink_id[SINK["ctrl20_wrong_branch_canonicalization"]]
+       for n in f["weak_diagnostic_guards"]))
+ck("Correction round 2, item 6 (positive control -- the dominance proof is not overly narrow): a "
+   "canonicalizing assignment that TRULY, unconditionally dominates the boundary check, with a "
+   "real intervening non-branching statement in between (ctrl21), is still recognized as genuine "
+   "containment -- EXCLUDED as BROKEN (confirmed via the ALTERNATIVES_BROKEN_EXCLUDED count above, "
+   "now 4, and via this sink's own absence from findings), same as the pre-existing "
+   "ctrl13_boundary_aware_safe.js direct-adjacency positive control re-verified passing below",
+   SINK["ctrl21_dominating_canonicalization_intervening"] not in by_sink_id)
+ck("Correction round 2, item 6 continued: the pre-existing ctrl13_boundary_aware_safe.js direct "
+   "(non-intervening) positive control still correctly recognizes genuine dominance after the "
+   "TRUE-CFG-dominance rewrite -- EXCLUDED as BROKEN, not regressed by the stricter mechanism",
+   "30064771215" not in by_sink_id)
 
 # --- Import recognition coverage: ESM (4 shapes) + destructured CommonJS, all reachable. Counted
 # structurally rather than by line/id (avoids re-encoding 5 more fixture-specific ids): every
