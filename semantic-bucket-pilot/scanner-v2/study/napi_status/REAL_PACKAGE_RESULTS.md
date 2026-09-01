@@ -75,15 +75,53 @@ API-handling classification only; no impact statement is made or implied.
 Findings-count summary: 0 STATUS_GUARD_MISSING, 0 abstentions, 1 NO_OUTPUT_USE, out
 of 1 supported creation call site.
 
-### Refinements surfaced by the blind run (NOT applied post-freeze; candidate R02 work)
+### Outcome classification (per review; the three permitted categories)
 
-1. A literal `NULL` out-argument is currently resolved as a trackable "variable"
-   (CDT binds `NULL` to a synthetic same-named local). Correct verdict here, but the
-   cleaner classification is an explicit opted-out output role.
-2. Outputs escaping via forwarded pointer parameters place the real uses in CALLERS;
-   this revision is deliberately intraprocedural (NO_OUTPUT_USE is the honest
-   in-scope answer). Caller-side analysis of proven-propagating creation wrappers is
-   the natural next revision.
+`@farcaster/rocksdb@5.5.0` is reported as **ANALYZED with zero guard-missing
+findings** -- not an infrastructure failure: the two full-tree c2cpg OOMs were an
+infrastructure HAZARD, but the disclosed scoped parse recovered usable facts, the
+supported site was recognized, and the frozen analyzer ran once. Task #34's earlier
+`CPP_CPG_FAILED` for this package is consistent with that hazard being real. The
+caveats stand: this is LIMITED blind semantic evidence (one site, whose honest
+classification under R02 is a caller-analysis abstention, see below), and it is NOT
+real positive-path evidence -- positive-path behavior remains established on compiled
+fixtures only (R02's w01/w02/w03 controls).
+
+### Pre-registered fallback rule (for any future package run in this protocol)
+
+If a selected package fails before producing usable facts (CPG generation or fact
+export fails; a scoped parse per the disclosed rule above also failing), it is
+recorded as an INFRASTRUCTURE FAILURE -- never as a scanner negative and never as
+blind semantic evidence -- and the replacement is selected mechanically: among the
+remaining frozen-sample packages, excluding all previously reviewed packages (rows
+0-9 above, and any prior study's reviewed set), produce facts for each candidate with
+the same pinned toolchain and select the one with the HIGHEST count of
+`napi_create_buffer`/`napi_create_buffer_copy` call rows in its own `calls.tsv`
+(structural count, no source reading before selection). Ties break by frozen-sample
+row order. Only an analyzed result counts as the blind portability test.
+
+### R02 correction of this site (see NAPI_STATUS_R02.md)
+
+The `NO_OUTPUT_USE` above is R01's frozen verdict and stands AS the R01 record; it
+is also exactly the boundary the review identified: the required `napi_value*
+result` output escapes through a caller-provided pointer, so intraprocedural
+analysis cannot prove it unused (`result_data == NULL` is the documented opt-out of
+the OPTIONAL raw-data pointer -- a different thing entirely). Under
+`napi_status_verdict_r02.py` this real site -- its facts now frozen at
+`raw_blind_rocksdb/` -- classifies as
+**`OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED`** (callers unresolvable from these
+facts: `Convert` is an overloaded member, so call sites carry no single callee id),
+pinned by `check_napi_status_r02.py` as a permanent regression.
+
+### Refinements surfaced by the blind run (addressed in R02 except where noted)
+
+1. A literal `NULL` out-argument was resolved as a trackable "variable" (CDT binds
+   `NULL` to a synthetic same-named local). ADDRESSED IN R02: optional roles record
+   an explicit `opted_out`; NULL in a required role abstains.
+2. Outputs escaping via forwarded pointer parameters place the real uses in CALLERS.
+   ADDRESSED IN R02: escape detection, one-level caller analysis, derived
+   proven-wrapper sites, and the `OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED`
+   abstention (this site's corrected classification).
 3. `input_size_origin` labels a call-expression size argument (`s->size()`) as
-   `unresolved`; a `call_result` label would be more informative. Diagnostic field
-   only; no verdict depends on it.
+   `unresolved`; a `call_result` label would be more informative. NOT addressed in
+   R02 (diagnostic field only; no verdict depends on it) -- candidate R03 polish.
