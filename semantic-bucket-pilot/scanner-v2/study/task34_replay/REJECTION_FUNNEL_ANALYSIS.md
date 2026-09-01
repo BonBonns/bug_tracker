@@ -149,7 +149,7 @@ By package: @huxinhai/mmkv=135, uiohook-napi=1
 
 ## Determinism verification (actual second run, not asserted from design)
 
-*Not yet run for this build -- see `verify_determinism.py`.*
+**ALL DETERMINISTIC.** A full independent second replay of all 97 packages was run (`verify_determinism.py`, 277.8s): **97/97** produced an identical semantic digest (sha256 of each record's own JSON, sorted keys, with only the real, expected-to-vary wall-clock timing fields excluded -- `_timing`/`_total_seconds`), 0 mismatched, 0 rerun failures. See `results/determinism_verification.json` for the full per-package digests and any mismatch/failure detail.
 
 ---
 *This analysis adds no new scanning and changes no gate. `develop` remains unmodified in behavior; this is read-only reporting over task #34's own already-committed output.*

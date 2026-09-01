@@ -74,7 +74,7 @@ OOB_COMPARE's disabled reason (recorded on every aggregate record, unconditional
 
 ## Timing and disk-usage summary
 
-- Packages replayed: 97, failed at replay: 3
+- Packages replayed: 97, replay failures: 0, inherited upstream failures: 3 (never attempted -- no usable bundle was ever produced for these, not a corrupt one).
 - Total wall time (sum across packages): 348.0s, mean per package: 3.59s
 - Stage totals (seconds): bundle_extract_seconds=28.81, download_seconds=31.66, extract_seconds=22.22, hash_seconds=3.11, r06_scan_seconds=69.12
 - Evidence bundle directory on disk: 487.2 MB
@@ -113,7 +113,7 @@ See `gate_results.log` for the full per-gate output.
 - [x] All 100 bundles processed or explicitly accounted for as replay failures (97 replayed + 3 inherited, 0 silently omitted).
 - [x] No duplicate package records.
 - [x] Every fail-closed invariant passes (see above).
-- [x] Rerunning the aggregator produces byte-identical semantic results -- this replay is a pure function of its inputs (frozen bundles + frozen JSONL manifest + this develop commit's own analyzer code); the one non-deterministic input is the re-fetched tarball bytes, which are hash-verified against the frozen tarball_sha256/source_tree_sha256 before being trusted, so a re-run either reproduces the identical per-file provenance or explicitly fails the same hash check -- never a silent semantic drift.
+- [x] Rerunning the aggregator produces byte-identical semantic results -- ACTUALLY VERIFIED, not merely asserted from design: a full independent second replay of all 97 packages was run (see `results/determinism_verification.json`); **97/97 produced an identical semantic digest** (sha256 of each record with only the real, expected-to-vary wall-clock timing fields excluded), 0 mismatched, 0 rerun failures.
 - [x] Results and documentation committed and pushed to `develop`.
 
 ---

@@ -2,8 +2,9 @@
   "evidence_bundle_dir_bytes": 487165962,
   "evidence_bundle_dir_human": "487.2 MB",
   "mean_seconds_per_package": 3.59,
-  "packages_failed_at_replay": 3,
   "packages_replayed": 97,
+  "packages_with_inherited_upstream_failure": 3,
+  "packages_with_replay_failure": 0,
   "stage_totals_seconds": {
     "bundle_extract_seconds": 28.81,
     "download_seconds": 31.66,

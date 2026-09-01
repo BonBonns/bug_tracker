@@ -333,9 +333,11 @@ def write_results_md(replayed, failures, recon, funnel, reach_dist, prov_dist, o
       "are kept strictly separate throughout.\n")
 
     a("## Identity reconciliation (performed BEFORE any replay work)\n")
+    other_desc = (", ".join(f"{k}={v}" for k, v in recon["other_status_counts"].items())
+                  if recon["other_status_counts"] else "0")
     a(f"- 100 frozen package identities, {recon['analyzed_count']} ANALYZED, "
       f"{recon['cpp_cpg_failed_count']} CPP_CPG_FAILED, {recon['export_failed_count']} "
-      f"EXPORT_FAILED, {recon['other_status_counts'] or '{}'} other.")
+      f"EXPORT_FAILED, {other_desc} other statuses.")
     a(f"- Bundle identities == ANALYZED identities: **{recon['bundle_identities_equal_analyzed']}**")
     a(f"- Missing-3 == CPP_CPG_FAILED ∪ EXPORT_FAILED: "
       f"**{recon['missing_matches_cpp_cpg_failed_union_export_failed']}**")
