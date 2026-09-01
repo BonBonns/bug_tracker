@@ -1,0 +1,28 @@
+[r01_fixture] APPLICATION_INGRESS_INPUT source candidates: 31
+[r01_fixture] PACKAGE_API_INPUT exported functions resolved: 2 (writePackageFile@writePackageFile,module.exports@readPackageFile)
+[r01_fixture] PACKAGE_API_INPUT export ABSTENTIONS: module.exports[key]=DYNAMIC_COMPUTED_EXPORT_KEY | module.exports.reexported=UNRESOLVED_IDENTIFIER_NO_METHODREF_ASSIGNMENT | module.exports.SomeClass=CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+[r01_fixture] PACKAGE_API_INPUT source candidates: 2
+[r01_fixture] sink targets found: 20 (FS_READ=16, FS_WRITE=2, FS_DELETE=1, EXPRESS_SEND_FILE=1, EXPRESS_DOWNLOAD=0)
+[r01_fixture] ABSTAIN: EXPRESS_SEND_FILE at L4: options argument not statically resolved to an object literal (opts) -- ABSTAIN on root-presence, no sink target emitted
+[r01_fixture] EMIT sink=30064771079(L11) src=68719476739(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe')
+[r01_fixture] EMIT sink=30064771087(L6) src=30064771093(L6:req.body.root) origin=APPLICATION_INGRESS_INPUT sinkFamily=EXPRESS_SEND_FILE outcome=ESTABLISHED note= weak_diagnostic_guards=root itself is source-tainted -- root is the real attacker-controlled operand, not contained
+[r01_fixture] EMIT sink=30064771113(L8) src=68719476779(L8:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771132(L6) src=68719476804(L6:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771134(L9) src=68719476807(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771136(L12) src=68719476810(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_DELETE outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771151(L10) src=68719476821(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak includes check without proven canonicalization+boundary: userPath.includes('../')
+[r01_fixture] EMIT sink=30064771151(L10) src=68719476824(L10:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak includes check without proven canonicalization+boundary: userPath.includes('../')
+[r01_fixture] EMIT sink=30064771162(L9) src=68719476834(L8:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=unrecognized call: replace weak_diagnostic_guards=literal '..' strip via .replace (never treated as containment proof): userPath.replace(/\.\./, '')
+[r01_fixture] EMIT sink=30064771186(L13) src=68719476860(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=structurally proven containment wrapper: isContained(userPath) (internally: resolved.startsWith('/safe/base' + path.sep))
+[r01_fixture] EMIT sink=30064771186(L13) src=68719476863(L13:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=structurally proven containment wrapper: isContained(userPath) (internally: resolved.startsWith('/safe/base' + path.sep))
+[r01_fixture] EMIT sink=30064771197(L7) src=68719476877(L6:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=UNVERIFIED_WRAPPER_GUARD: isSafeSomehow(userPath) (callee body unresolved or does not itself prove containment) -- abstaining
+[r01_fixture] EMIT sink=30064771197(L7) src=68719476880(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=UNVERIFIED_WRAPPER_GUARD: isSafeSomehow(userPath) (callee body unresolved or does not itself prove containment) -- abstaining
+[r01_fixture] EMIT sink=30064771215(L9) src=68719476891(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=canonicalized boundary-aware check: resolved.startsWith('/safe/base' + path.sep)
+[r01_fixture] EMIT sink=30064771224(L7) src=68719476911(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771236(L10) src=68719476924(L10:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771238(L13) src=68719476927(L13:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771240(L16) src=68719476930(L16:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771241(L19) src=68719476933(L19:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771280(L6) src=68719476980(L6:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[r01_fixture] EMIT sink=30064771287(L5) src=68719476989(L5:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[r01_fixture] PATH_TRAV_R01_COMPLETE rows=21 (BROKEN=3, OPEN=3, ESTABLISHED=15)
