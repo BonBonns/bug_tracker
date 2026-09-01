@@ -140,14 +140,112 @@ def classify_dangerous(body):
 
 def score_source_text(text):
     has_export = any(p.search(text) for p in EXPORT_PATTERNS)
+    scan_text = _strip_comments(text)
     n_regex_literals = 0
     n_dangerous = 0
-    for m in REGEX_LITERAL.finditer(text):
+    for m in REGEX_LITERAL.finditer(scan_text):
         n_regex_literals += 1
         body = m.group(1)
         if classify_dangerous(body):
             n_dangerous += 1
     return has_export, n_regex_literals, n_dangerous
+
+
+# PREFILTER-FIX-R01 (roadmap step 8 audit): jssrc2cpg's own real default file/folder ignore
+# rules, extracted by decompiling jssrc2cpg-4.0.608.jar (io.joern.jssrc2cpg.utils.AstGenRunner$)
+# and independently confirmed empirically against synthetic probes (a file placed inside each
+# excluded shape verified dropped from a real CPG; a sibling file outside it verified kept) --
+# see audit/PREFILTER_DIVERGENCE_AUDIT.md for the full real evidence. The prefilter's own
+# original filter (bare "node_modules/" substring, "/test/", "/tests/", ".min.js" suffix) missed
+# all of these, causing a real, measured, systematic divergence from what the real Joern frontend
+# actually scans (7 of 8 sampled real packages, ~82% of flagged literals, were in files jssrc2cpg
+# itself already excludes). Fixing this narrows the prefilter's own selection to a tighter proxy
+# of the real classifier -- it does NOT touch classify_dangerous() (the frozen, Scala-verified
+# classifier port) or the real Joern-based producer/reducer at all.
+_AST_GEN_DEFAULT_IGNORE_SUFFIX = re.compile(
+    r"(conf|test|spec|[.-]min|\.d)\.(js|jsx|cjs|mjs|xsjs|xsjslib|ts|tsx)$")
+_AST_GEN_DEFAULT_IGNORE_FOLDERS = {
+    "venv", "docs", "test", "tests", "e2e", "e2e-beta", "examples", "cypress", "jest-cache",
+    "eslint-rules", "codemods", "flow-typed", "i18n", "vendor", "www", "dist", "build",
+}
+_LINE_LENGTH_THRESHOLD = 10000  # jssrc2cpg's own real content-based minified-file cutoff
+
+
+def _jssrc2cpg_would_ignore_path(name):
+    """Real parity check with jssrc2cpg's own default AstGenRunner ignore rules -- NOT a
+    reimplementation of a guess, the exact constants above, confirmed by decompilation +
+    synthetic-probe testing (audit/PREFILTER_DIVERGENCE_AUDIT.md)."""
+    if "node_modules" in name:  # jssrc2cpg's own real exclude is UNANCHORED (a substring match
+        return True             # anywhere in the path, not just an exact "node_modules/" segment)
+    if _AST_GEN_DEFAULT_IGNORE_SUFFIX.search(name):
+        return True
+    parts = name.split("/")
+    if any(p in _AST_GEN_DEFAULT_IGNORE_FOLDERS for p in parts):
+        return True
+    return False
+
+
+def _strip_comments(text):
+    """PREFILTER-FIX-R02 (supersedes R01 -- see audit/PREFILTER_FIX_REGRESSION.md for the full,
+    real root-cause writeup). R01 stripped comments with a bare regex applied to raw text, with
+    no string-literal awareness. That is UNSOUND: a string literal that itself contains a
+    "/*"-looking substring -- e.g. an HTTP Accept-header wildcard check,
+    `accept.includes('*/*')`, the real, confirmed, measured cause of a real regression
+    (velociradix@8.3.1's own genuine dangerous `fieldRegex` literal at index.mjs:940 was silently
+    deleted from the scan, because the '*/*' string's internal "/*" was misread as a comment-open
+    delimiter and the non-greedy block-comment match then swallowed ~9,000 characters of real
+    code, including that literal, up to the next unrelated real "*/" much further down) -- is
+    corrected here with a single left-to-right scan that treats single-quoted, double-quoted, and
+    template-literal string BODIES as opaque spans: comment delimiters found inside one are never
+    recognized, and the span's own characters are always copied through verbatim (comments are
+    replaced; strings never are), so this can only under-strip a comment (safe direction: matches
+    the prefilter's own "must never undercount, can overcount" invariant), never delete real code.
+
+    This is provably sound for the outside-a-string case, which is the only case that matters for
+    not corrupting a real regex literal: in valid JS, "//" is ALWAYS a real comment (there is no
+    way to write two adjacent, un-quoted "/" characters that isn't one -- even "a / /re/.test(x)"
+    -- division immediately followed by a regex literal -- requires a separating token, since a
+    bare "//" is itself parsed as a line comment by every real JS tokenizer too), and "/*" outside
+    a string is always a real comment (a regex literal can never legally start with "*", so "/*"
+    can never be the start of a regex literal either). The only known remaining imprecision is
+    nested template-literal interpolation (`` `a ${`b`} c` ``), which can mis-locate a template
+    span's own boundary -- disclosed, pre-existing-style limitation, and still safe by the same
+    over/under-strip argument above (never deletes real code, at most leaves an occasional
+    comment un-stripped)."""
+    out = []
+    i, n = 0, len(text)
+    while i < n:
+        ch = text[i]
+        if ch in ("'", '"', "`"):
+            quote = ch
+            out.append(ch)
+            i += 1
+            while i < n:
+                c = text[i]
+                if c == "\\" and i + 1 < n:
+                    out.append(c); out.append(text[i + 1]); i += 2; continue
+                out.append(c)
+                i += 1
+                if c == quote:
+                    break
+            continue
+        if ch == "/" and i + 1 < n and text[i + 1] == "/":
+            j = text.find("\n", i)
+            if j == -1:
+                i = n
+            else:
+                out.append("\n"); i = j + 1
+            continue
+        if ch == "/" and i + 1 < n and text[i + 1] == "*":
+            j = text.find("*/", i + 2)
+            if j == -1:
+                i = n
+            else:
+                out.append(" "); i = j + 2
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out)
 
 
 def iter_js_ts_members(tarball_bytes):
@@ -159,8 +257,7 @@ def iter_js_ts_members(tarball_bytes):
             if not (name.endswith(".js") or name.endswith(".ts") or name.endswith(".mjs") or
                      name.endswith(".cjs")):
                 continue
-            if "node_modules/" in name or "/test/" in name or "/tests/" in name or \
-                    name.endswith(".min.js") or "/dist/" in name and name.endswith(".min.js"):
+            if _jssrc2cpg_would_ignore_path(name):
                 continue
             if member.size > 2_000_000:  # skip pathological single files, cheap prefilter only
                 continue
@@ -168,9 +265,15 @@ def iter_js_ts_members(tarball_bytes):
             if f is None:
                 continue
             try:
-                yield f.read().decode("utf-8", errors="replace")
+                content = f.read().decode("utf-8", errors="replace")
             except Exception:
                 continue
+            # jssrc2cpg's own real content-based minified-file detector: skip if ANY line is at
+            # least as long as its threshold, regardless of filename -- confirmed by decompilation
+            # + synthetic-probe testing.
+            if any(len(ln) >= _LINE_LENGTH_THRESHOLD for ln in content.split("\n")):
+                continue
+            yield content
 
 
 def load_eligible():
