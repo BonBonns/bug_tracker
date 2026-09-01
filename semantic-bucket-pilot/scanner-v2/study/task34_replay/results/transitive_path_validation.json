@@ -1,0 +1,175 @@
+{
+  "detail": [
+    {
+      "clean_path_exists": true,
+      "function": "bindRaw",
+      "function_id": 107374182414,
+      "hops": [
+        {
+          "call_id": 30064771926,
+          "call_site_name": "bindRaw",
+          "callee_id": 107374182414,
+          "callee_name": "BluetoothHciSocket.bindRaw:int(int*)",
+          "caller_id": 107374182430,
+          "caller_name": "BluetoothHciSocket.BindRaw:void(Nan.NAN_METHOD_ARGS_TYPE)"
+        }
+      ],
+      "package": "@abandonware/bluetooth-hci-socket",
+      "path_length_hops": 1,
+      "root_js_binding_name": "bindRaw",
+      "root_registered_function_id": 107374182430,
+      "version": "0.5.3-12"
+    },
+    {
+      "clean_path_exists": true,
+      "function": "mtx_lock",
+      "function_id": 107374186150,
+      "hops": [
+        {
+          "call_id": 30065066272,
+          "call_site_name": "rd_kafka_topic_partition_list_destroy",
+          "callee_id": 107374184931,
+          "callee_name": "rd_kafka_topic_partition_list_destroy",
+          "caller_id": 107374186226,
+          "caller_name": "NodeKafka.AdminClient.NodeListConsumerGroupOffsets:void(Nan.NAN_METHOD_ARGS_TYPE)"
+        },
+        {
+          "call_id": 30064989370,
+          "call_site_name": "rd_kafka_topic_partition_destroy0",
+          "callee_id": 107374184919,
+          "callee_name": "rd_kafka_topic_partition_destroy0",
+          "caller_id": 107374184931,
+          "caller_name": "rd_kafka_topic_partition_list_destroy"
+        },
+        {
+          "call_id": 30064989292,
+          "call_site_name": "rd_kafka_topic_partition_private_destroy",
+          "callee_id": 107374184918,
+          "callee_name": "rd_kafka_topic_partition_private_destroy",
+          "caller_id": 107374184919,
+          "caller_name": "rd_kafka_topic_partition_destroy0"
+        },
+        {
+          "call_id": 30064989283,
+          "call_site_name": "rd_kafka_toppar_destroy0",
+          "callee_id": 107374187167,
+          "callee_name": "rd_kafka_toppar_destroy0",
+          "caller_id": 107374184918,
+          "caller_name": "rd_kafka_topic_partition_private_destroy"
+        },
+        {
+          "call_id": 30065079973,
+          "call_site_name": "rd_refcnt_sub0",
+          "callee_id": 107374186931,
+          "callee_name": "rd_refcnt_sub0",
+          "caller_id": 107374187167,
+          "caller_name": "rd_kafka_toppar_destroy0"
+        },
+        {
+          "call_id": 30065077467,
+          "call_site_name": "mtx_lock",
+          "callee_id": 107374186150,
+          "callee_name": "mtx_lock",
+          "caller_id": 107374186931,
+          "caller_name": "rd_refcnt_sub0"
+        }
+      ],
+      "package": "@confluentinc/kafka-javascript",
+      "path_length_hops": 6,
+      "root_js_binding_name": "listConsumerGroupOffsets",
+      "root_registered_function_id": 107374186226,
+      "version": "1.10.0"
+    },
+    {
+      "clean_path_exists": true,
+      "function": "rwlock_rdlock",
+      "function_id": 107374186183,
+      "hops": [
+        {
+          "call_id": 30065066348,
+          "call_site_name": "rd_kafka_DeleteRecords_new",
+          "callee_id": 107374183379,
+          "callee_name": "rd_kafka_DeleteRecords_new",
+          "caller_id": 107374186227,
+          "caller_name": "NodeKafka.AdminClient.NodeDeleteRecords:void(Nan.NAN_METHOD_ARGS_TYPE)"
+        },
+        {
+          "call_id": 30064817141,
+          "call_site_name": "rd_kafka_topic_partition_list_copy",
+          "callee_id": 107374184940,
+          "callee_name": "rd_kafka_topic_partition_list_copy",
+          "caller_id": 107374183379,
+          "caller_name": "rd_kafka_DeleteRecords_new"
+        },
+        {
+          "call_id": 30064989472,
+          "call_site_name": "rd_kafka_topic_partition_list_add_copy",
+          "callee_id": 107374184939,
+          "callee_name": "rd_kafka_topic_partition_list_add_copy",
+          "caller_id": 107374184940,
+          "caller_name": "rd_kafka_topic_partition_list_copy"
+        },
+        {
+          "call_id": 30064989459,
+          "call_site_name": "rd_kafka_topic_partition_list_add0",
+          "callee_id": 107374184933,
+          "callee_name": "rd_kafka_topic_partition_list_add0",
+          "caller_id": 107374184939,
+          "caller_name": "rd_kafka_topic_partition_list_add_copy"
+        },
+        {
+          "call_id": 30064989390,
+          "call_site_name": "rd_kafka_crash",
+          "callee_id": 107374183231,
+          "callee_name": "rd_kafka_crash",
+          "caller_id": 107374184933,
+          "caller_name": "rd_kafka_topic_partition_list_add0"
+        },
+        {
+          "call_id": 30064799418,
+          "call_site_name": "rd_kafka_dump0",
+          "callee_id": 107374183216,
+          "callee_name": "rd_kafka_dump0",
+          "caller_id": 107374183231,
+          "caller_name": "rd_kafka_crash"
+        },
+        {
+          "call_id": 30064799041,
+          "call_site_name": "rwlock_rdlock",
+          "callee_id": 107374186183,
+          "callee_name": "rwlock_rdlock",
+          "caller_id": 107374183216,
+          "caller_name": "rd_kafka_dump0"
+        }
+      ],
+      "package": "@confluentinc/kafka-javascript",
+      "path_length_hops": 7,
+      "root_js_binding_name": "deleteRecords",
+      "root_registered_function_id": 107374186227,
+      "version": "1.10.0"
+    },
+    {
+      "clean_path_exists": true,
+      "function": "lock",
+      "function_id": 107374182564,
+      "hops": [
+        {
+          "call_id": 30064773135,
+          "call_site_name": "lock",
+          "callee_id": 107374182564,
+          "callee_name": "Mutex.lock:int()",
+          "caller_id": 107374182510,
+          "caller_name": "PlayerWrapper.setSecretBox:Napi.Value(Napi.CallbackInfo&)"
+        }
+      ],
+      "package": "@eliyya/sange",
+      "path_length_hops": 1,
+      "root_js_binding_name": "setSecretBox",
+      "root_registered_function_id": 107374182510,
+      "version": "1.2.0"
+    }
+  ],
+  "not_validated": 0,
+  "targets_checked": 4,
+  "validated": 4
+}

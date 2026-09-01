@@ -12,7 +12,7 @@ from this package's own bundled JS at all -- independent of whether any particul
 attacker-controlled. This module answers exactly that, tiered rather than binary, and does not
 touch R04/R05's own reachability fields.
 
-FOUR REAL TIERS, never a guess between them:
+FIVE REAL TIERS, never a guess between them:
   TIER_JS_CALL_PROVEN          -- the enclosing function is registered as a real N-API binding
                                    AND a real call in this package's OWN bundled JS resolves to
                                    it (`native_binding_receiver_evidence`, reused verbatim from
@@ -24,18 +24,49 @@ FOUR REAL TIERS, never a guess between them:
                                    proof of unreachability -- a consumer of the package could
                                    still call it directly -- only proof this package's own JS
                                    doesn't demonstrate the reach itself.
-  TIER_INTERNAL_UNREGISTERED    -- the function is not a registered export under EITHER real
-                                   registration idiom this module recognizes at all (e.g. a
-                                   helper only ever called from other C++). Real, but the
+  TIER_TRANSITIVELY_CALLED_FROM_REGISTERED (task #34's own rejection-funnel analysis, reopening
+                                   this module's own previously-disclosed scope limit below) --
+                                   the function is NOT itself registered, but a real, CLEAN
+                                   native call-graph path exists from some registered export to
+                                   it, walked over `cpp['calls']`'s own already-resolved
+                                   `candidate_target_ids` edges. "Clean" is load-bearing: an edge
+                                   is used ONLY when its own call resolves to EXACTLY ONE real
+                                   target id -- confirmed real and NOT vanishingly rare (6 of
+                                   508,350 real calls sampled across 20 corpus packages carry
+                                   MORE than one candidate_target_ids entry, e.g. a virtual
+                                   dispatch through several real derived-class overrides) --
+                                   never a guess among several candidates, per direct
+                                   instruction ("promote only if every edge resolves by node
+                                   identity"). The real path (every hop's own caller/callee
+                                   id+name and the real call site) is attached as
+                                   `reachability_evidence` -- never asserted without it.
+  TIER_INTERNAL_UNREGISTERED    -- the function is not a registered export under any real
+                                   registration idiom this module recognizes, AND no clean
+                                   transitive call-graph path from a registered export reaches
+                                   it either (a genuinely ambiguous-only path, per the tier
+                                   above, does NOT count -- it stays here). Real, but the
                                    WEAKEST tier: a bug here is only reachable if some OTHER,
-                                   registered function calls it -- this module does not attempt
-                                   a transitive native call-graph walk (an honest scope limit,
+                                   registered function calls it through a path this module could
+                                   not cleanly resolve, or a path that genuinely doesn't exist
+                                   in this package's own real call graph -- honest scope limit,
                                    not a claim of unreachability, exactly as decodevv_add's own
                                    nested-index case was left explicitly unsupported in task #44
-                                   rather than silently flattened).
+                                   rather than silently flattened.
   REACHABILITY_UNRESOLVED       -- the JS or C++ facts needed to decide are themselves absent or
                                    empty (fails closed, never guesses; the same code/label
                                    `resource_guard_verdict_r06.py` already established).
+
+TASK #32 REOPENED (task #34's own rejection-funnel analysis found: staged_enablement.py's
+allowlist only ever recognized the first two tiers above, leaving three tiers -- transitive
+call, callback/worker, module-load -- this module's OWN earlier docstring had already disclosed
+as an honest, un-implemented scope limit, not a closed question). Direct instruction on how to
+close it: validate the transitive-call tier structurally (every edge single-target-resolved,
+per direct instruction) and promote ONLY it into staged_enablement.py's own allowlist by exact
+name -- never by loosening its "any non-internal tier" logic into something broader. The
+callback/worker and module-load heuristics (`study/task34_replay/reachability_deep_dive.py`'s
+own `CALLBACK_OR_WORKER_HEURISTIC`/`MODULE_LOAD_EXECUTION_HEURISTIC` buckets) stay OUT of this
+module and OUT of `staged_enablement.py`'s allowlist -- explicitly deferred, per direct
+instruction, pending their own dedicated positive/negative/ambiguity controls, not built here.
 
 THREE REAL REGISTRATION IDIOMS, unioned (never one substituting for another):
   1. `exports.Set(Napi::String::New(env,"X"), Napi::Function::New(env, Fn))` -- reused verbatim
@@ -76,6 +107,7 @@ evidence.
 import os
 import re
 import sys
+from collections import deque
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _POLYGLOT_DIR = os.path.join(
@@ -86,6 +118,7 @@ from link_napi_facts import extract_napi_bindings, JsCallIndex, native_binding_r
 
 TIER_JS_CALL_PROVEN = "TIER_JS_CALL_PROVEN"
 TIER_REGISTERED_NOT_JS_CALLED = "TIER_REGISTERED_NOT_JS_CALLED"
+TIER_TRANSITIVELY_CALLED_FROM_REGISTERED = "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED"
 TIER_INTERNAL_UNREGISTERED = "TIER_INTERNAL_UNREGISTERED"
 REACHABILITY_UNRESOLVED = "REACHABILITY_UNRESOLVED"
 
@@ -226,19 +259,87 @@ def link_js_calls(js, cpp, table, js_receiver="bindings"):
     return linked, unlinked
 
 
-def classify_function_reachability(function_id, table, linked, facts_available):
+def build_clean_call_edges(cpp):
+    """caller_function_id -> [(callee_function_id, call_id, call_name), ...], using ONLY calls
+    whose own `candidate_target_ids` resolves to EXACTLY ONE real function id. An edge from a
+    call with MORE than one candidate (a real, confirmed-not-rare shape -- 6 of 508,350 real
+    calls sampled across 20 real corpus packages, e.g. a virtual dispatch resolving to several
+    real derived-class overrides) is excluded entirely, never included as a clean edge even
+    though its own real target id technically sits inside the union -- per direct instruction,
+    a transitive claim is promoted "only if every edge resolves by node identity.\""""
+    edges = {}
+    for c in cpp.get("calls", []):
+        targets = c.get("candidate_target_ids") or []
+        if len(targets) != 1:
+            continue
+        edges.setdefault(c.get("enclosing_function_id"), []).append(
+            (targets[0], c.get("id"), c.get("name")))
+    return edges
+
+
+def find_clean_transitive_path(clean_edges, registered_ids, function_id):
+    """Real BFS shortest path, over ONLY clean_call_edges, from any id in `registered_ids` to
+    `function_id`. Returns the real path as a list of {caller_id, caller_name, callee_id,
+    callee_name, call_id, call_site_name} hop dicts (needs `cpp['functions']` for names -- see
+    caller), or None if no such clean path exists. `function_id` itself being in
+    `registered_ids` is the caller's own responsibility to check first (this function does not
+    special-case it)."""
+    parent = {}
+    seen = set(registered_ids)
+    q = deque(registered_ids)
+    while q:
+        cur = q.popleft()
+        for callee, call_id, call_name in clean_edges.get(cur, ()):
+            if callee in seen:
+                continue
+            seen.add(callee)
+            parent[callee] = (cur, call_id, call_name)
+            if callee == function_id:
+                path = []
+                node = callee
+                while node in parent:
+                    p, cid, cname = parent[node]
+                    path.append({"caller_id": p, "callee_id": node,
+                                 "call_id": cid, "call_site_name": cname})
+                    node = p
+                path.reverse()
+                return path
+            q.append(callee)
+    return None
+
+
+def classify_function_reachability(function_id, table, linked, facts_available,
+                                    clean_edges=None, fn_names=None):
     """Core tier decision for ONE native function id. `table` (from
     `build_registration_table`), `linked` (from `link_js_calls`), and `facts_available` (False
     iff the package's own js/cpp facts were themselves too thin to classify at all -- e.g. no
     real `functions`/`calls` at all on either side) are all real, already-computed inputs; this
-    function makes no I/O decisions of its own. Returns
-    {"reachability_status", "reachability_evidence"} -- the latter is None for the two tiers
-    that carry no additional real evidence beyond the tier itself."""
+    function makes no I/O decisions of its own. `clean_edges` (from `build_clean_call_edges`)
+    and `fn_names` (function_id -> full_name, for real evidence, never required -- both default
+    to empty/None so existing callers that only care about the first three tiers keep working
+    unchanged) enable the TIER_TRANSITIVELY_CALLED_FROM_REGISTERED check (task #32's reopened
+    scope). Returns {"reachability_status", "reachability_evidence"} -- the latter is None for
+    the tiers that carry no additional real evidence beyond the tier itself."""
     if not facts_available:
         return {"reachability_status": REACHABILITY_UNRESOLVED, "reachability_evidence": None}
 
     registered_ids = {fid for fid, _full in table.values()}
     if function_id not in registered_ids:
+        if clean_edges is not None:
+            path = find_clean_transitive_path(clean_edges, registered_ids, function_id)
+            if path is not None:
+                fn_names = fn_names or {}
+                for hop in path:
+                    hop["caller_name"] = fn_names.get(hop["caller_id"])
+                    hop["callee_name"] = fn_names.get(hop["callee_id"])
+                root_id = path[0]["caller_id"]
+                root_binding_name = next(
+                    (name for name, (fid, _f) in table.items() if fid == root_id), None)
+                return {"reachability_status": TIER_TRANSITIVELY_CALLED_FROM_REGISTERED,
+                        "reachability_evidence": {
+                            "root_registered_function_id": root_id,
+                            "root_js_binding_name": root_binding_name,
+                            "path_length_hops": len(path), "path": path}}
         return {"reachability_status": TIER_INTERNAL_UNREGISTERED, "reachability_evidence": None}
 
     matches = [l for l in linked if l["cpp_function_id"] == function_id]
@@ -275,6 +376,8 @@ def classify_record_reachability(record, js, cpp):
     facts_available = bool(js.get("calls")) and bool(cpp.get("functions"))
     table = build_registration_table(cpp) if facts_available else {}
     linked, _unlinked = link_js_calls(js, cpp, table) if facts_available else ([], [])
+    clean_edges = build_clean_call_edges(cpp) if facts_available else {}
+    fn_names = {f["id"]: f.get("full_name") for f in cpp.get("functions", [])} if facts_available else {}
 
     for key, id_field in _ID_FIELD_BY_KEY.items():
         for f in record.get(key) or []:
@@ -283,5 +386,6 @@ def classify_record_reachability(record, js, cpp):
                 f["reachability_status"] = REACHABILITY_UNRESOLVED
                 f["reachability_evidence"] = None
                 continue
-            f.update(classify_function_reachability(fid, table, linked, facts_available))
+            f.update(classify_function_reachability(
+                fid, table, linked, facts_available, clean_edges, fn_names))
     return record

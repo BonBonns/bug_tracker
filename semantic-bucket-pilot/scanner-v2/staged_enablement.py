@@ -84,11 +84,32 @@ ENABLED_PROPERTIES = frozenset({
 _STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                 "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-# ALLOWLIST, not a blocklist (fails closed on any future/unrecognized tier): only these two
+# ALLOWLIST, not a blocklist (fails closed on any future/unrecognized tier): only these THREE
 # reachability_tier.py tiers establish real export/callback/helper/module-load evidence that
 # JavaScript can reach the native function at all. TIER_INTERNAL_UNREGISTERED and
 # REACHABILITY_UNRESOLVED (and anything else) do NOT clear this gate -- see module docstring.
-_EXTERNALLY_REACHABLE_TIERS = {"TIER_JS_CALL_PROVEN", "TIER_REGISTERED_NOT_JS_CALLED"}
+#
+# TIER_TRANSITIVELY_CALLED_FROM_REGISTERED added here per task #34's own rejection-funnel
+# analysis reopening task #32's own previously-disclosed scope limit (a transitive native call-
+# graph walk). Added by EXACT NAME, never by broadening this set's own "any non-internal tier"
+# logic into something looser -- per direct instruction. Validated before being added, not
+# assumed: reachability_tier.py's own find_clean_transitive_path() promotes a candidate only
+# when EVERY edge on its real path resolves to a single, unambiguous target
+# (build_clean_call_edges() -- a call with more than one candidate_target_ids entry, a real,
+# confirmed-not-rare shape, e.g. a virtual dispatch through several real derived-class
+# overrides, is excluded from the walk entirely, never treated as a clean edge); a synthetic
+# ambiguity control in check_reachability_tier.py, copied verbatim from a real 3-candidate call
+# in @fugood/whisper.node's own real cpp_facts.json, confirms such a path is correctly rejected,
+# not promoted. All 4 of task #34's own real, staged-property TRANSITIVELY_CALLED_FROM_REGISTERED
+# candidates were independently re-derived hop-by-hop and confirmed clean before this tier was
+# implemented (study/task34_replay/validate_transitive_paths.py).
+#
+# TIER_CALLBACK_OR_WORKER_HEURISTIC and TIER_MODULE_LOAD_EXECUTION_HEURISTIC (task #34's own
+# reachability_deep_dive.py) are deliberately NOT added here -- per direct instruction, they
+# stay diagnostic-only until they have their own dedicated positive/negative/ambiguity controls,
+# not built as part of this change.
+_EXTERNALLY_REACHABLE_TIERS = {"TIER_JS_CALL_PROVEN", "TIER_REGISTERED_NOT_JS_CALLED",
+                                "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED"}
 
 
 def enforce_staged_enablement(record):

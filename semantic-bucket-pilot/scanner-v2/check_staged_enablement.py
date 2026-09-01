@@ -104,6 +104,16 @@ ck("TIER_INTERNAL_UNREGISTERED: stage_status is REACHABILITY_REQUIRED_FOR_REPORT
 ck("TIER_JS_CALL_PROVEN clears the gate (the strongest tier, a real proven JS call)",
    se.enforce_staged_enablement({"oob_read_candidates": [mk(True, "TIER_JS_CALL_PROVEN")]}
        )["oob_read_candidates"][0]["stage_status"] == "STAGE_ENABLED")
+ck("*** TASK #32 REOPENED: TIER_TRANSITIVELY_CALLED_FROM_REGISTERED now clears the gate *** "
+   "(task #34's own rejection-funnel analysis -- validated, exact-name allowlist addition, "
+   "never a broadened 'any non-internal tier' rule)",
+   se.enforce_staged_enablement(
+       {"lock_balance_findings": [mk(True, "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED")]}
+       )["lock_balance_findings"][0]["stage_status"] == "STAGE_ENABLED")
+ck("the two still-deferred deep-dive buckets (callback/worker, module-load heuristics) are NOT "
+   "real reachability_tier.py tier names and are correctly absent from _EXTERNALLY_REACHABLE_TIERS",
+   "TIER_CALLBACK_OR_WORKER_HEURISTIC" not in se._EXTERNALLY_REACHABLE_TIERS
+   and "TIER_MODULE_LOAD_EXECUTION_HEURISTIC" not in se._EXTERNALLY_REACHABLE_TIERS)
 
 # --- r04_findings/r05_findings never touched ---
 rec5 = {"r04_findings": [mk(True, "REACHABILITY_UNRESOLVED")],

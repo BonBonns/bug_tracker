@@ -150,6 +150,141 @@ ck("NAN idiom: real name collision (two distinct C++ functions both literally na
 ck("NAN idiom: the collision is disclosed in the audit trail, not silently dropped",
    any(a.get("skipped", "").startswith("2 candidate") for a in nan_audit))
 
+# =====================================================================================
+# TASK #32 REOPENED: TIER_TRANSITIVELY_CALLED_FROM_REGISTERED (task #34's own rejection-funnel
+# analysis). Positive (a real, clean 2-hop chain), ambiguity (REAL 3-candidate call shape,
+# copied verbatim from @fugood/whisper.node's own real cpp_facts.json --
+# ggml.cpu.*.extra_buffer_type.get_tensor_traits, a real virtual-dispatch-shaped call c2cpg
+# itself left with 3 real candidate targets -- never invented), negative (no path exists at
+# all), and a real smoke test against @eliyya/sange's own real bundle evidence.
+# =====================================================================================
+trans_cpp = {
+    "functions": [
+        {"id": 800001, "name": "RegisteredEntry",
+         "full_name": "RegisteredEntry:Napi.Value(Napi.CallbackInfo&)", "is_external": False},
+        {"id": 800002, "name": "IntermediateHelper", "full_name": "IntermediateHelper:void()",
+         "is_external": False},
+        {"id": 800003, "name": "TargetInternal", "full_name": "TargetInternal:void()",
+         "is_external": False},
+        {"id": 800004, "name": "UnreachableInternal", "full_name": "UnreachableInternal:void()",
+         "is_external": False},
+    ],
+    "calls": [
+        {"id": 800010, "name": "New", "receiver_name": None,
+         "arguments": [{"index": 1, "value_ref": {"kind": "CONSTANT", "code": "\"env\""}}]},
+        {"id": 800011, "name": "New", "receiver_name": None,
+         "arguments": [{"index": 1, "code": "RegisteredEntry",
+                        "value_ref": {"kind": "IDENTIFIER", "code": "RegisteredEntry"}}]},
+        {"id": 800012, "name": "New", "receiver_name": None,
+         "arguments": [{"index": 1, "value_ref": {"kind": "CONSTANT", "code": '"registeredEntry"'}}]},
+        {"id": 800013, "name": "Set", "receiver_name": "exports",
+         "arguments": [
+             {"index": 1, "value_ref": {"kind": "CALL", "id": 800012}},
+             {"index": 2, "value_ref": {"kind": "CALL", "id": 800011}}]},
+        # RegisteredEntry -> IntermediateHelper -> TargetInternal, both edges CLEAN
+        # (single-target-resolved) -- a real, structurally clean transitive chain.
+        {"id": 800020, "name": "IntermediateHelper", "enclosing_function_id": 800001,
+         "candidate_target_ids": [800002]},
+        {"id": 800021, "name": "TargetInternal", "enclosing_function_id": 800002,
+         "candidate_target_ids": [800003]},
+        # RegisteredEntry ALSO calls a real, unresolved-shape ambiguous call (copied verbatim
+        # from @fugood/whisper.node@1.1.3's own real cpp_facts.json, whisper.cpp/ggml/src/
+        # ggml-cpu/traits.cpp:16 -- a real virtual dispatch through 3 real derived-class
+        # overrides c2cpg itself could not disambiguate to one) -- its own real 3-candidate
+        # shape must NOT be treated as a clean edge, even though UnreachableInternal is NOT
+        # actually one of its 3 real candidates here (it's the classify_function_reachability
+        # target below, reached ONLY through this ambiguous call in this synthetic scenario --
+        # see the ambiguous-only test below, which points the ambiguous call's own candidates
+        # AT the target instead).
+        {"id": 30064881177, "name": "get_tensor_traits", "enclosing_function_id": 800001,
+         "candidate_target_ids": [107374184414, 107374184859, 107374184889],
+         "candidate_target_full_names": [
+             "ggml.cpu.kleidiai.extra_buffer_type.get_tensor_traits:ggml.cpu.tensor_traits*(ggml_tensor*)",
+             "ggml.cpu.repack.extra_buffer_type.get_tensor_traits:ggml.cpu.tensor_traits*(ggml_tensor*)",
+             "ggml.cpu.riscv64_spacemit.extra_buffer_type.get_tensor_traits:ggml.cpu.tensor_traits*(ggml_tensor*)"],
+         "file": "whisper.cpp/ggml/src/ggml-cpu/traits.cpp", "line": 16},
+    ],
+}
+trans_table = rt.build_registration_table(trans_cpp)
+trans_clean_edges = rt.build_clean_call_edges(trans_cpp)
+trans_fn_names = {f["id"]: f["full_name"] for f in trans_cpp["functions"]}
+
+res_trans = rt.classify_function_reachability(
+    800003, trans_table, [], facts_available=True,
+    clean_edges=trans_clean_edges, fn_names=trans_fn_names)
+ck("POSITIVE: a real, clean 2-hop chain (RegisteredEntry -> IntermediateHelper -> "
+   "TargetInternal, both edges single-target-resolved) -> "
+   "TIER_TRANSITIVELY_CALLED_FROM_REGISTERED",
+   res_trans["reachability_status"] == rt.TIER_TRANSITIVELY_CALLED_FROM_REGISTERED)
+ck("POSITIVE: real evidence names the real root registered binding (registeredEntry)",
+   res_trans["reachability_evidence"]["root_js_binding_name"] == "registeredEntry")
+ck("POSITIVE: real evidence carries the real 2-hop path, both hops named",
+   res_trans["reachability_evidence"]["path_length_hops"] == 2
+   and res_trans["reachability_evidence"]["path"][0]["callee_name"] == "IntermediateHelper:void()"
+   and res_trans["reachability_evidence"]["path"][1]["callee_name"] == "TargetInternal:void()")
+
+# --- AMBIGUITY: a target reachable ONLY through the real 3-candidate ambiguous call above
+# (repointed at the target) must NOT be promoted -- stays TIER_INTERNAL_UNREGISTERED ---
+ambiguous_only_cpp = dict(trans_cpp)
+ambiguous_only_cpp["calls"] = [c for c in trans_cpp["calls"] if c["id"] != 30064881177] + [
+    {"id": 30064881177, "name": "get_tensor_traits", "enclosing_function_id": 800001,
+     "candidate_target_ids": [800004, 107374184859, 107374184889]},  # target IS one of 3
+                                                                       # real candidates, but
+                                                                       # NOT the only one
+]
+amb_clean_edges = rt.build_clean_call_edges(ambiguous_only_cpp)
+ck("real ambiguous call (3 candidates, same shape as @fugood/whisper.node's own real "
+   "get_tensor_traits virtual dispatch) is excluded from clean_edges entirely",
+   800001 not in amb_clean_edges or all(t != 800004 for t, _cid, _cn in amb_clean_edges.get(800001, [])))
+res_amb = rt.classify_function_reachability(
+    800004, trans_table, [], facts_available=True,
+    clean_edges=amb_clean_edges, fn_names=trans_fn_names)
+ck("*** AMBIGUITY REJECTED: a target reachable ONLY through a real multi-candidate "
+   "(ambiguous) call stays TIER_INTERNAL_UNREGISTERED -- never promoted on an unclean edge, "
+   "even though the target IS technically inside that call's own candidate_target_ids union ***",
+   res_amb["reachability_status"] == rt.TIER_INTERNAL_UNREGISTERED)
+
+# --- NEGATIVE: no path exists at all (genuinely disconnected) -- stays TIER_INTERNAL_UNREGISTERED
+disconnected_cpp = {
+    "functions": trans_cpp["functions"],
+    "calls": trans_cpp["calls"][:4],  # only the registration calls -- no call edges at all
+}
+disc_clean_edges = rt.build_clean_call_edges(disconnected_cpp)
+res_disc = rt.classify_function_reachability(
+    800004, trans_table, [], facts_available=True,
+    clean_edges=disc_clean_edges, fn_names=trans_fn_names)
+ck("NEGATIVE: a genuinely disconnected function (no real call edge reaches it from any "
+   "registered export) stays TIER_INTERNAL_UNREGISTERED, not fabricated as reachable",
+   res_disc["reachability_status"] == rt.TIER_INTERNAL_UNREGISTERED
+   and res_disc["reachability_evidence"] is None)
+
+# --- REAL SMOKE TEST: @eliyya/sange's own real bundle (task #34's own already-preserved
+# evidence) -- "lock" (Mutex.lock), reached in exactly 1 real clean hop from a real registered
+# Napi entry point (setSecretBox), independently confirmed in
+# study/task34_replay/validate_transitive_paths.py before this tier was wired in.
+_sange_bundle = os.path.join(_HERE, "npm_corpus", "overnight_100", "evidence_bundles_100",
+                              "@eliyya__sange@1.2.0.tar.gz")
+if os.path.isfile(_sange_bundle):
+    import tarfile
+    with tarfile.open(_sange_bundle, "r:gz") as tf:
+        sange_cpp = json.load(tf.extractfile("cpp_facts.json"))
+        sange_js = json.load(tf.extractfile("js_facts.json"))
+    sange_record = {"lock_balance_findings": [{"method_id": 107374182564}]}  # real "lock" fid,
+                                                                               # from task #34's
+                                                                               # own replay data
+    rt.classify_record_reachability(sange_record, sange_js, sange_cpp)
+    real_status = sange_record["lock_balance_findings"][0]["reachability_status"]
+    ck("SMOKE: @eliyya/sange's real 'lock' (Mutex.lock) -- previously TIER_INTERNAL_UNREGISTERED "
+       "in task #34's own replay, now correctly TIER_TRANSITIVELY_CALLED_FROM_REGISTERED on the "
+       "SAME real bundle evidence, no new Joern run", real_status == rt.TIER_TRANSITIVELY_CALLED_FROM_REGISTERED)
+    if real_status == rt.TIER_TRANSITIVELY_CALLED_FROM_REGISTERED:
+        real_ev = sange_record["lock_balance_findings"][0]["reachability_evidence"]
+        ck("SMOKE: real evidence's root binding is the real registered N-API entry point",
+           real_ev["root_js_binding_name"] is not None)
+else:
+    print("SKIP: @eliyya/sange's real bundle not present in this environment -- smoke test "
+          "skipped, all synthetic/real-shape controls above still ran")
+
 # --- classify_record_reachability: applies to the 6 real target keys, never to r04/r05 ---
 record = {
     "lock_balance_findings": [{"method_id": init_fn["id"]}],
