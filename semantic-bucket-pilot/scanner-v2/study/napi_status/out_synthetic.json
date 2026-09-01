@@ -1,0 +1,509 @@
+{
+ "classification": {
+  "ABSTAIN_BRANCH_POLARITY_UNRESOLVED": 1,
+  "ABSTAIN_CALL_IDENTITY_UNRESOLVED": 1,
+  "ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED": 1,
+  "ABSTAIN_WRAPPER_UNRESOLVED": 1,
+  "NO_OUTPUT_USE": 1,
+  "STATUS_GUARD_ESTABLISHED": 5,
+  "STATUS_GUARD_MISSING": 5,
+  "STATUS_PROPAGATED_BEFORE_USE": 2,
+  "SUPPORTED_CREATION_CALL_FOUND": 17
+ },
+ "findings": [
+  {
+   "creation_call_id": 30064771074,
+   "creation_call_name": "napi_create_buffer",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "41",
+   "method_id": 107374182402,
+   "method_name": "c01_unchecked_use",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280513,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280514,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "NO_RELATED_CHECK",
+   "unguarded_use_line": "42",
+   "unguarded_use_node": 68719476741,
+   "unguarded_use_variable": "data",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771079,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "guard_evidence_nodes": [
+    30064771082
+   ],
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "50",
+   "method_id": 107374182403,
+   "method_name": "c02_checked_terminating",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280516,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280517,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "STATUS_GUARD_ESTABLISHED"
+  },
+  {
+   "creation_call_id": 30064771085,
+   "creation_call_name": "napi_create_buffer",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "62",
+   "method_id": 107374182404,
+   "method_name": "c03_check_after_use",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280519,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280520,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "related_check_nodes": [
+    30064771089
+   ],
+   "sub_reason": "RELATED_CHECK_AFTER_USE",
+   "unguarded_use_line": "63",
+   "unguarded_use_node": 68719476755,
+   "unguarded_use_variable": "data",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771091,
+   "creation_call_name": "napi_create_buffer",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "74",
+   "method_id": 107374182405,
+   "method_name": "c04_unrelated_status",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280522,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280523,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "UNRELATED_CHECK_ONLY",
+   "unguarded_use_line": "78",
+   "unguarded_use_node": 68719476765,
+   "unguarded_use_variable": "data",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771097,
+   "creation_call_name": "napi_create_buffer",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "86",
+   "method_id": 107374182406,
+   "method_name": "c05_nonterminating_failure",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280525,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280526,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "related_check_nodes": [
+    30064771100
+   ],
+   "sub_reason": "NON_TERMINATING_OR_BYPASSED_FAILURE_PATH",
+   "unguarded_use_line": "90",
+   "unguarded_use_node": 68719476773,
+   "unguarded_use_variable": "data",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771104,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "97",
+   "method_id": 107374182407,
+   "method_name": "c06_propagates",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280528,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 111669149703,
+     "role": "result",
+     "variable": "out"
+    }
+   ],
+   "reason": "STATUS_RETURNED_OUTPUTS_UNUSED_LOCALLY",
+   "verdict": "STATUS_PROPAGATED_BEFORE_USE"
+  },
+  {
+   "creation_call_id": 30064771106,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "104",
+   "method_id": 107374182408,
+   "method_name": "c06b_propagates_direct",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280530,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 111669149705,
+     "role": "result",
+     "variable": "out"
+    }
+   ],
+   "reason": "CREATION_CALL_RETURNED_DIRECTLY",
+   "verdict": "STATUS_PROPAGATED_BEFORE_USE"
+  },
+  {
+   "creation_call_id": 30064771109,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "guard_evidence_nodes": [
+    30064771112
+   ],
+   "input_size_origin": {
+    "code": "128",
+    "kind": "literal"
+   },
+   "line": "111",
+   "method_id": 107374182409,
+   "method_name": "c07_use_in_success_branch",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280531,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280532,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "STATUS_GUARD_ESTABLISHED"
+  },
+  {
+   "creation_call_id": 30064771116,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "123",
+   "method_id": 107374182410,
+   "method_name": "c08_ambiguous_output",
+   "reason": "OUT_ARG_NOT_A_RESOLVABLE_VARIABLE",
+   "unresolved_arg_code": "&slots[i]",
+   "unresolved_role": "result",
+   "verdict": "ABSTAIN_OUTPUT_IDENTITY_UNRESOLVED"
+  },
+  {
+   "creation_call_id": 30064771125,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "guard_evidence_nodes": [
+    30064771128
+   ],
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "150",
+   "method_id": 107374182413,
+   "method_name": "c10_known_wrapper",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280537,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280538,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "STATUS_GUARD_ESTABLISHED"
+  },
+  {
+   "creation_call_id": 30064771132,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "165",
+   "method_id": 107374182414,
+   "method_name": "c11_unknown_wrapper",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280540,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280541,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "reason": "STATUS_CONSUMED_BY_UNPROVEN_CALLEE_BEFORE_USE",
+   "verdict": "ABSTAIN_WRAPPER_UNRESOLVED"
+  },
+  {
+   "creation_call_id": 30064771144,
+   "creation_call_name": "napi_create_buffer_copy",
+   "evidence_note": "API-handling classification only: an output of this fallible call is CFG-reachable at the cited use without a proven napi_ok result on every incoming path. No claim is made about runtime impact, severity, or exploitability, and none should be inferred from this record.",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "n",
+    "kind": "parameter"
+   },
+   "line": "197",
+   "method_id": 107374182417,
+   "method_name": "p02_copy_unchecked",
+   "output_targets": [
+    {
+     "arg_index": 4,
+     "referent_id": 94489280543,
+     "role": "result_data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 5,
+     "referent_id": 94489280544,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "related_check_nodes": [],
+   "sub_reason": "STATUS_DISCARDED",
+   "unguarded_use_line": "198",
+   "unguarded_use_node": 68719476829,
+   "unguarded_use_variable": "result",
+   "verdict": "STATUS_GUARD_MISSING"
+  },
+  {
+   "creation_call_id": 30064771150,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "guard_evidence_nodes": [
+    30064771153
+   ],
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "212",
+   "method_id": 107374182419,
+   "method_name": "p03_known_terminating_wrapper",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280545,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280546,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "STATUS_GUARD_ESTABLISHED"
+  },
+  {
+   "creation_call_id": 30064771156,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "guard_evidence_nodes": [
+    30064771160
+   ],
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "224",
+   "method_id": 107374182420,
+   "method_name": "p04_compound_and",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280548,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280549,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "STATUS_GUARD_ESTABLISHED"
+  },
+  {
+   "creation_call_id": 30064771163,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "64",
+    "kind": "literal"
+   },
+   "line": "238",
+   "method_id": 107374182421,
+   "method_name": "p05_compound_or_ambiguous",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280551,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280552,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "reason": "RELATED_CHECK_PRESENT_BUT_POLARITY_UNPROVEN",
+   "verdict": "ABSTAIN_BRANCH_POLARITY_UNRESOLVED"
+  },
+  {
+   "creation_call_id": 30064771170,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "input_size_origin": {
+    "code": "8",
+    "kind": "literal"
+   },
+   "line": "250",
+   "method_id": 107374182422,
+   "method_name": "p06_no_use",
+   "output_targets": [
+    {
+     "arg_index": 3,
+     "referent_id": 94489280554,
+     "role": "data",
+     "variable": "data"
+    },
+    {
+     "arg_index": 4,
+     "referent_id": 94489280555,
+     "role": "result",
+     "variable": "result"
+    }
+   ],
+   "verdict": "NO_OUTPUT_USE"
+  },
+  {
+   "creation_call_id": 30064771173,
+   "creation_call_name": "napi_create_buffer",
+   "file": "fixture_source.c",
+   "line": "259",
+   "method_id": 107374182423,
+   "method_name": "p07_wrong_arity",
+   "observed_arg_indices": [
+    1,
+    2,
+    3
+   ],
+   "reason": "ARITY_OR_DISPATCH_MISMATCH",
+   "verdict": "ABSTAIN_CALL_IDENTITY_UNRESOLVED"
+  }
+ ],
+ "schema": "napi-status-verdict/0.1",
+ "supported_calls": [
+  "napi_create_buffer",
+  "napi_create_buffer_copy"
+ ]
+}
