@@ -1,0 +1,23 @@
+Mechanical blind-package selection for R04 (recorded before any inspection):
+
+1. Candidate list source: npm registry search API,
+   https://registry.npmjs.org/-/v1/search?text=keywords:data-model&size=20
+   -- an external, live, non-cherry-picked ranking (20 real published packages),
+   a fourth distinct keyword from R01/R02/R03's own draws
+   (express-middleware / request-logging / http-logger). Two earlier keyword
+   attempts this round (npm-package-utility: 0 results; validation-schema: only
+   7 results, too few for the %20 index formula) were discarded for genuinely
+   returning too few real candidates, before any package was read -- not a
+   disguised re-roll toward a preferred outcome.
+2. Index formula: int(sha256(serialize_dos_r04.py)[:8], 16) % 20, using the FROZEN
+   R04 implementation hash
+   (b285bc5bab7cd1deb44668fe672593cf887cb2a963aab1faa8a7bca9c7d9e251).
+3. Computed index: 15.
+4. Selected package (list position 15, 0-indexed): "miniml" 1.0.19.
+
+Per instruction, this round's blind selection only needs to contain supported
+serializer sites and public exports (mechanical scan only) -- manual review and
+establishing any resource consequence for a genuine finding is explicit future
+work, not performed in this round. reportable stays false regardless of outcome.
+This selection is mechanical: no package was read, downloaded, or otherwise
+inspected before this file was written.

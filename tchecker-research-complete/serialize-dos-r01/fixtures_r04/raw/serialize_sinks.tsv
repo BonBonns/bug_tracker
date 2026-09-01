@@ -1,0 +1,10 @@
+r4-ambiguous-export/index.js	r4-ambiguous-export/index.js::program:A	3	JSON.stringify	x	false	false	false
+r4-ambiguous-export/index.js	r4-ambiguous-export/index.js::program:B	6	JSON.stringify	x	false	false	false
+r4-internal-only/index.js	r4-internal-only/index.js::program:internal	3	JSON.stringify	secret	false	false	false
+r4-obj-shorthand/index.js	r4-obj-shorthand/index.js::program:foo	3	JSON.stringify	input	false	false	false
+r4-param-direct/index.js	r4-param-direct/index.js::program:process	3	JSON.stringify	input	false	false	false
+r4-param-helper/index.js	r4-param-helper/index.js::program:process	7	JSON.stringify	w	false	false	false
+r4-proven-bound/index.js	r4-proven-bound/index.js::program:safe	5	JSON.stringify	bounded	false	false	false
+r4-same-name-unrelated/index.js	r4-same-name-unrelated/index.js::program:exported	3	JSON.stringify	input	false	false	false
+r4-this-field/index.js	r4-this-field/index.js::program:Handler:process	7	JSON.stringify	this.req	false	false	false
+r4-unknown-transform/index.js	r4-unknown-transform/index.js::program:Processor:process	12	JSON.stringify	cleaned	false	false	false

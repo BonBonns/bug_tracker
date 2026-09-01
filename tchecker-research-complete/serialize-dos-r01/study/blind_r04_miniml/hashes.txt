@@ -1,0 +1,21 @@
+package: miniml 1.0.19
+tarball sha256 (fetched, this container): 841abae5149f3caf44a80927c833918c26282589b4e6c4c06c6c3167fe52f0d7
+registry-recorded dist.shasum (sha1): 4e1ec4fbc10515554a55a0043230767098692fdb
+compiled CPG sha256: 0f7c74bc978f60453387c3ebc3cacf4299a0baca1f87223148a165d2cdbf2513
+source compiled: index.js, command.js, lib/*.js (12 files, 795 lines total --
+type:module/ESM package, export * from "./lib/x.js" re-export shape; excluded
+non-source content shipped in the tarball: documentation/, .eval/, .plan/, .claude/,
+*.d.ts type-declaration files -- none are JS source jssrc2cpg parses or that this
+property's model targets)
+serialize_sinks.tsv: 1 real JSON.stringify call site found (command.js:44, CLI
+entrypoint's own catch(err) block -- err is a local exception variable, not a
+parameter of any exported function or method)
+R04 PACKAGE_API_INPUT source candidates considered: 192 (22 exported functions +
+5 exported classes' this-fields, across lib/dialect.js, lib/query.js, lib/parse.js,
+lib/common.js, lib/validation.js, lib/yaml.js, lib/load.js, lib/jinja.js,
+lib/utilities.js)
+R04 APPLICATION_INGRESS_INPUT source candidates found: 0 (a CLI tool; no req.body-
+style ingress pattern present anywhere in the compiled source)
+flowing (ESTABLISHED) rows in source_facts.tsv: 0 -- real mechanical negative on
+both families
+
