@@ -1,0 +1,8 @@
+SUCCESS path: napi_set_element received 0x1000 (a real created handle)
+FAILURE path: napi_set_element received 0xdeadbeefdeadbeef (the unavailable/uninitialized output)
+
+OBSERVED RUNTIME BEHAVIOR:
+  - success: the created handle flows to the use site: yes
+  - injected failure: the output is USED on the failure path without a success check, carrying an unavailable/indeterminate value (not a created handle): yes
+
+This is a runtime observation of return-code handling only. No security impact, severity, or exploitability is claimed or established.
