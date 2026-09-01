@@ -31,6 +31,15 @@ this pipeline: the frozen version bounds disk usage by deleting EVERYTHING, whic
 silently deletes the only path to a verdict-only rerun (no saved raw facts for R04/R05/R06
 to re-scan without a full Joern rebuild). CPG binaries and the extracted source tree are
 still deleted -- only real scanner-consumed evidence is kept, compressed, per package.
+
+REDOS INTEGRATION (roadmap step 8, first of 4 JS/TS classes): after the Nan stage, this file also
+runs ReDoS (frozen, merged: export_redos_npm_integ_r02.sc + redos_verdict.py) as part of this same
+per-package chain, reusing the js_bin CPG and pkg_dir this function already builds/extracts above
+rather than the standalone study/redos_npm/pilot25/run_pilot25_r02.py's own from-scratch
+download+build. Ports that script's own real run_one() algorithm (entrypoint-coverage correction
+via frontend_coverage_check.py, imported and never modified, then the R02 producer, then the
+frozen reducer) in place -- see the inline comments at the ReDoS stage block below for the one
+real structural difference (pass 1 is never rebuilt: js_bin already IS it).
 """
 import hashlib
 import json
@@ -52,6 +61,14 @@ CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engin
 JS_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/javascript-typescript/joern"
 POLYGLOT = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/polyglot/link_napi_facts.py"
 SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
+
+# REDOS INTEGRATION (roadmap step 8): the frozen R02 producer + reducer, and the audit dir
+# holding frontend_coverage_check.py -- all reused verbatim from
+# study/redos_npm/pilot25/run_pilot25_r02.py's own already-validated paths, never modified here.
+R02_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/"
+                "producers/export_redos_npm_integ_r02.sc")
+REDOS_VERDICT = os.path.join(SCANNER_V2, "redos_verdict.py")
+REDOS_FCC_AUDIT_DIR = os.path.join(SCANNER_V2, "study", "redos_npm", "pilot25", "audit")
 
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
@@ -629,6 +646,130 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"nan scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["nan_scan"] = {"seconds": time.time() - t0}
+
+    # REDOS INTEGRATION (roadmap step 8, first of 4 JS/TS classes): ReDoS is fully frozen/merged
+    # (R02, export_redos_npm_integ_r02.sc + redos_verdict.py) and already validated standalone by
+    # study/redos_npm/pilot25/run_pilot25_r02.py -- this ports that script's own real run_one()
+    # algorithm in place, reusing pkg_dir and js_bin (both already built above) instead of
+    # re-downloading/re-building a separate JS-only CPG. Never modifies frontend_coverage_check.py,
+    # export_redos_npm_integ_r02.sc, or redos_verdict.py -- orchestration only, exactly as
+    # run_pilot25_r02.py's own module docstring states about itself.
+    #
+    # Entrypoint-coverage correction (the real reason this exists: jssrc2cpg's own default ignore
+    # rules -- a folder-name list including "dist", a filename-suffix regex, or an unanchored
+    # node_modules substring match -- can silently drop a package.json-resolved entrypoint before
+    # a single CPG node for it ever exists; frontend_coverage_check.py's own module docstring has
+    # the full, evidence-backed story). run_pilot25_r02.py always builds its own CPG as "pass 1"
+    # then checks it; here js_bin ALREADY IS that pass-1 CPG (built above, before cpp/js export),
+    # so pass 1 is never rebuilt -- fcc.list_cpg_files() is checked directly against js_bin, and a
+    # pass-2 rebuild (fcc.stage_recovered_source + fcc.build_cpg, identical to run_pilot25_r02.py's
+    # own pass-2 logic) only happens if something resolved is genuinely missing. In the common
+    # case (nothing missing) js_bin is reused as-is, with zero extra CPG build.
+    t0 = time.time()
+    try:
+        sys.path.insert(0, REDOS_FCC_AUDIT_DIR)
+        import frontend_coverage_check as fcc  # noqa: E402 -- reused, never modified
+
+        final_cpg = js_bin
+        redos_frontend_coverage = {"resolved_entrypoints": [], "n_missing_entrypoints": 0,
+                                    "missing_entrypoints": [], "correction_applied": False}
+        pkg_json_path = fcc.find_package_json(pkg_dir)
+        if pkg_json_path is not None:
+            with open(pkg_json_path) as f:
+                pkg_doc = json.load(f)
+            entrypoints = fcc.resolve_entrypoints(pkg_doc)
+            # pkg_dir is ALREADY flattened (the npm tarball's own "package/" wrapper was stripped
+            # above, unlike run_pilot25_r02.py's own src_dir, which keeps it) -- pkg_root_rel is
+            # therefore "" here in the common case, so entrypoint relpaths need no prefix; this is
+            # exactly the pkg_root_rel == "." case run_pilot25_r02.py's own logic already handles,
+            # just the common case here instead of the exception there.
+            pkg_root_rel = os.path.relpath(os.path.dirname(pkg_json_path), pkg_dir).replace(os.sep, "/")
+            if pkg_root_rel == ".":
+                pkg_root_rel = ""
+
+            def to_pkg_dir_rel(ep, _prefix=pkg_root_rel):
+                return (_prefix + "/" + ep) if _prefix else ep
+
+            cpg1_files_set = set(fcc.list_cpg_files(js_bin)[0])
+            missing = []
+            for ep in entrypoints:
+                relpath = to_pkg_dir_rel(ep)
+                if relpath in cpg1_files_set:
+                    continue
+                abspath = os.path.join(pkg_dir, *relpath.split("/"))
+                if not os.path.isfile(abspath):
+                    continue
+                reason = fcc.classify_ignore_reason(relpath, abspath)
+                if reason:
+                    missing.append((relpath, reason))
+            redos_frontend_coverage["resolved_entrypoints"] = entrypoints
+            redos_frontend_coverage["n_missing_entrypoints"] = len(missing)
+            redos_frontend_coverage["missing_entrypoints"] = [
+                {"relpath": r, "reason": rs} for r, rs in missing]
+            if missing:
+                staged_dir, recovered_map = fcc.stage_recovered_source(pkg_dir, missing)
+                cpg2 = os.path.join(work, "redos_pass2.cpg.bin")
+                ok2, log2 = fcc.build_cpg(staged_dir, cpg2)
+                if ok2:
+                    cpg2_files_set = set(fcc.list_cpg_files(cpg2)[0])
+                    still_missing = [(r, rs) for r, rs in missing
+                                      if recovered_map.get(r) not in cpg2_files_set]
+                    redos_frontend_coverage["correction_applied"] = True
+                    redos_frontend_coverage["recovered_path_map"] = recovered_map
+                    redos_frontend_coverage["still_missing_after_correction"] = still_missing
+                    final_cpg = cpg2
+                else:
+                    redos_frontend_coverage["correction_applied"] = False
+                    redos_frontend_coverage["correction_error"] = log2[-1000:]
+        record["redos_frontend_coverage"] = redos_frontend_coverage
+    except Exception as e:
+        record["stages"]["redos_frontend_coverage"] = {"seconds": time.time() - t0}
+        record["status"] = "EXPORT_FAILED"
+        record["detail"] = f"redos frontend coverage check failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["redos_frontend_coverage"] = {"seconds": time.time() - t0}
+
+    # R02 producer -- same joern-script shape as cpp_export/js_export above (run_stage, checked
+    # via rc/err). redos_raw and pkg_dir (passed to the reducer next) are both already absolute
+    # (work_root is built from an absolute "/tmp/npm_corpus_pilot/<i>" literal in main() below,
+    # and pkg_dir/work are os.path.join()'d from it) -- required by redos_verdict.py's own
+    # subprocess.run(..., cwd=ADJUDICATOR_DIR, ...) call to adjudicate_js.py, which silently
+    # produces ADJUDICATOR_RUN_FAILED on every sink if handed a relative path instead.
+    redos_raw = os.path.join(work, "redos_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", R02_PRODUCER,
+         "--param", f"cpgFile={final_cpg}", "--param", f"rawDir={redos_raw}",
+         "--param", f"srcLabel={pkg_name}"],
+        os.path.join(work, "redos_producer.log"))
+    record["stages"]["redos_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"redos producer rc={rc}"
+        return record
+
+    # Reducer (frozen, unmodified): exactly 3 positional args, both redos_raw and pkg_dir passed
+    # absolute (see comment above).
+    redos_out = os.path.join(work, "redos_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, REDOS_VERDICT, redos_raw, pkg_dir, redos_out],
+                         check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.PIPE)
+        with open(redos_out) as f:
+            redos_doc = json.load(f)
+        record["redos_classification"] = redos_doc.get("classification", {})
+        record["redos_findings"] = redos_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["redos_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"redos_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["redos_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"redos scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["redos_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

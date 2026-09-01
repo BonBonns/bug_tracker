@@ -40,6 +40,32 @@ ck("Resource Guard's own reportable_count is read directly, never recomputed",
    and summary1["r05_findings"]["reportable_count"] == 0
    and summary1["r06_findings"]["reportable_count"] == 1)
 
+# --- ReDoS (roadmap step 8): always included/trusted, same as Resource Guard/Nan, never gated
+# by staged_enablement's own set. redos_verdict.py hardcodes reportable=False on every finding
+# it emits -- exercise that real shape (not a synthetic reportable=True) so this control also
+# proves the "trust its own reportable field" design is sound in the one real case that occurs.
+record1b = {"redos_findings": [mk(False), mk(False)]}
+summary1b = agg.aggregate_record(record1b, enabled_properties=frozenset())
+ck("redos_findings is in ALL_PROPERTY_KEYS", "redos_findings" in agg.ALL_PROPERTY_KEYS)
+ck("redos_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1b["redos_findings"]["enabled"] is True
+   and summary1b["redos_findings"]["disabled_reason"] is None)
+ck("redos_findings raw/reportable counts are read directly, never recomputed -- both findings "
+   "carry redos_verdict.py's own real hardcoded reportable=False",
+   summary1b["redos_findings"]["raw_count"] == 2
+   and summary1b["redos_findings"]["reportable_count"] == 0)
+
+# --- redos_findings: the common case is zero findings for most packages -- must still produce a
+# correct, non-crashing summary (an absent key, exactly like a package with no ReDoS candidate) ---
+record1c = {"r04_findings": [mk(True)]}  # no "redos_findings" key at all, the common real case
+summary1c = agg.aggregate_record(record1c, enabled_properties=frozenset())
+ck("a record with no redos_findings key at all (the common case for most packages) still "
+   "produces a correct, non-crashing summary: enabled=True, raw=0, reportable=0",
+   summary1c["redos_findings"]["enabled"] is True
+   and summary1c["redos_findings"]["raw_count"] == 0
+   and summary1c["redos_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -129,6 +155,11 @@ def load_bundle_record(bundle_path):
                 record[key] = doc.get("findings", doc.get("candidates", doc if isinstance(doc, list) else []))
         record["r06_findings"] = []  # this run's own bundles predate task #41's r06 wiring into
                                        # run_pipeline_one.py -- real, disclosed, not fabricated
+        record["redos_findings"] = []  # this run's own bundles predate roadmap step 8's redos
+                                         # wiring into run_pipeline_one_r06.py -- real, disclosed,
+                                         # not fabricated (record1b/record1c above already cover
+                                         # a real non-empty and a real absent-key redos_findings
+                                         # case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

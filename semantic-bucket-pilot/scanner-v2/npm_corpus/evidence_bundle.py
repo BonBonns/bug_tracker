@@ -37,6 +37,14 @@ What is kept (deliberately NOT "normalized only" -- see below) vs. what stays de
                                js_facts.json's own bulk with no new information.
   - `r04_out.json`, `r05_out.json`, `r06_out.json` -- the scanner outputs already computed
                                for this package.
+  - `redos_raw`             -- RAW exported ReDoS facts (export_redos_npm_integ_r02.sc's own
+                               source_facts.tsv/propagation_relations.tsv/property_outcome.tsv/
+                               transform_identity.tsv output), same real requirement and same
+                               treatment as `cpp_raw` above: redos_verdict.py reads this
+                               directory directly, so a bundle without it could not support a
+                               verdict-only ReDoS rerun either.
+  - `redos_out.json`        -- the ReDoS scanner output already computed for this package
+                               (roadmap step 8's run_pipeline_one_r06.py wiring).
 
   NOT kept (stays deleted, per the explicit instruction to keep deleting large CPG/work dirs):
   - `cpp.cpg.bin`, `js.cpg.bin` -- the large Joern CPG binaries.
@@ -105,6 +113,11 @@ BUNDLED_RELATIVE_PATHS = (
     "oob_index_write_out.json",
     "oob_read_out.json",
     "oob_compare_out.json",
+    # REDOS INTEGRATION (roadmap step 8): redos_raw follows the exact same "bundle the raw-
+    # output directory as-is" precedent as cpp_raw above; redos_out.json follows the exact same
+    # precedent as r04_out.json/r05_out.json/r06_out.json.
+    "redos_raw",
+    "redos_out.json",
 )
 
 SCHEMA_VERSION = "evidence_bundle/2"
@@ -133,6 +146,11 @@ ANALYZER_FILES = {
     "oob_index_write_verdict.py": os.path.join(_TOOLS_DIR, "oob_index_write_verdict.py"),
     "oob_read_verdict.py": os.path.join(_TOOLS_DIR, "oob_read_verdict.py"),
     "oob_compare_verdict.py": os.path.join(_TOOLS_DIR, "oob_compare_verdict.py"),
+    # REDOS INTEGRATION (roadmap step 8): redos_verdict.py (frozen) is the analyzer that produces
+    # redos_out.json -- same real path-construction convention as resource_guard_verdict_r04.py/
+    # _r05.py above (SCANNER_V2-root-relative, via os.path.dirname(_HERE) since _HERE is the
+    # npm_corpus/ subdirectory).
+    "redos_verdict.py": os.path.join(os.path.dirname(_HERE), "redos_verdict.py"),
 }
 
 

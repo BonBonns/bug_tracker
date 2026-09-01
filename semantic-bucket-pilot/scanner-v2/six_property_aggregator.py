@@ -39,6 +39,20 @@ Resource Guard's own three keys -- always "enabled," never gated by staged_enabl
 only ever touches STAGED_KEYS). Its own applicability rule lives in applicability_gate.py,
 distinct from R04/R05/R06's build-configuration premise (Nan's own module docstring: that
 premise "does not hold for `Nan::NewBuffer`/`Nan::CopyBuffer`'s real `.ToLocalChecked()` idiom").
+
+ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
+into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
+like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
+staged_enablement.py's reachability-tier mechanism, which is specific to the five C/C++ staged
+properties and has no bearing on ReDoS's own, separate JS-side reachability model
+(PACKAGE_API_INPUT_REACHABLE / APPLICATION_INGRESS_REACHABLE, computed entirely inside
+redos_verdict.py itself). This is safe regardless of gating: redos_verdict.py already hardcodes
+every finding's own `"reportable": False` unconditionally (per direct instruction, until a real
+npm package exercises the complete exported-input-to-regex path and survives manual review), so
+this module's own `f.get("reportable") is True` check can never count a ReDoS finding as
+reportable no matter how "enabled" is set here. provenance.py's reportable formula is
+deliberately NOT extended to redos_findings by this change -- ReDoS keeps computing its own
+reportable field exactly as it already does; out of scope here.
 """
 DISABLED_PROPERTIES = {
     "oob_compare_candidates": (
@@ -75,10 +89,18 @@ RESOURCE_GUARD_KEYS = ("r04_findings", "r05_findings", "r06_findings")
 # applicability_gate.py's own rule for it is real and distinct, not merely R04/R05/R06 reused.
 NAN_KEYS = ("nan_findings",)
 
+# REDOS (roadmap step 8): a real, standalone JS/TS-side property, wired into the shared
+# per-package pipeline via run_pipeline_one_r06.py (never sharing R04/R05/R06/Nan's own C/C++
+# build-configuration or Nan-idiom applicability premises, and never routed through
+# staged_enablement.py's reachability-tier mechanism -- see module docstring ADDENDUM above).
+# Kept in its own tuple, same discipline as NAN_KEYS: always "enabled" here, but a distinct real
+# rule from RESOURCE_GUARD_KEYS/NAN_KEYS, not merely reused.
+REDOS_KEYS = ("redos_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + STAGED_KEYS
+ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + STAGED_KEYS
 
 
 def aggregate_record(record, enabled_properties):
@@ -99,7 +121,7 @@ def aggregate_record(record, enabled_properties):
     for key in ALL_PROPERTY_KEYS:
         items = record.get(key) or []
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
-        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS:
+        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS:
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]
