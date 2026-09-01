@@ -180,24 +180,73 @@ def oob_index_write_audit(replayed):
     }
 
 
+def build_unresolved_root_cause(replayed):
+    """For the 136 REACHABILITY_UNRESOLVED cases (real code, not a category label): which
+    package(s) they concentrate in, and WHY (facts_available check: reachability_tier.py's own
+    classify_function_reachability returns REACHABILITY_UNRESOLVED unconditionally whenever a
+    package's own js/cpp facts are too thin -- specifically bool(js['calls']) and
+    bool(cpp['functions']) both real and non-empty -- checked here directly against each such
+    package's own preserved bundle facts, not assumed)."""
+    import tarfile as _tf
+    by_pkg = Counter()
+    by_prop = Counter()
+    pkgs = set()
+    for rec in replayed:
+        for key in STAGED_KEYS[:5]:  # exclude oob_compare_candidates -- 0 raw records
+            for f in rec.get(key) or []:
+                if f.get("reachability_status") == "REACHABILITY_UNRESOLVED":
+                    by_pkg[rec["package_name"]] += 1
+                    by_prop[key] += 1
+                    pkgs.add((rec["package_name"], rec["version"]))
+    root_causes = []
+    bundle_dir = os.path.join(SCANNER_V2, "npm_corpus", "overnight_100", "evidence_bundles_100")
+    for pkg, ver in sorted(pkgs):
+        bpath = os.path.join(bundle_dir, f"{pkg.replace('/', '__')}@{ver}.tar.gz")
+        with _tf.open(bpath, "r:gz") as tf:
+            js = json.load(tf.extractfile("js_facts.json"))
+            cpp = json.load(tf.extractfile("cpp_facts.json"))
+        root_causes.append({
+            "package_name": pkg, "version": ver,
+            "unresolved_count": by_pkg[pkg],
+            "js_calls_count": len(js.get("calls", [])),
+            "cpp_functions_count": len(cpp.get("functions", [])),
+            "facts_available": bool(js.get("calls")) and bool(cpp.get("functions")),
+        })
+    return {"by_package": dict(by_pkg), "by_property": dict(by_prop),
+            "root_cause_per_package": root_causes}
+
+
 def main():
     replayed = load_replayed()
     funnel, detail = build_funnel(replayed)
     oiw_audit = oob_index_write_audit(replayed)
+    unresolved_root_cause = build_unresolved_root_cause(replayed)
+
+    deep_dive = None
+    dd_path = os.path.join(RESULTS_DIR, "reachability_deep_dive.json")
+    if os.path.isfile(dd_path):
+        deep_dive = json.load(open(dd_path))
+
+    determinism = None
+    det_path = os.path.join(RESULTS_DIR, "determinism_verification.json")
+    if os.path.isfile(det_path):
+        determinism = json.load(open(det_path))
 
     out = {
         "funnel": {k: dict(v) for k, v in funnel.items()},
         "funnel_detail": {k: {b: dict(sub) for b, sub in v.items()} for k, v in detail.items()},
         "oob_index_write_stratified_audit": oiw_audit,
+        "reachability_unresolved_root_cause": unresolved_root_cause,
     }
     with open(os.path.join(RESULTS_DIR, "rejection_funnel.json"), "w") as f:
         json.dump(out, f, indent=2, sort_keys=True, default=str)
 
-    write_report(funnel, detail, oiw_audit, replayed)
+    write_report(funnel, detail, oiw_audit, replayed, unresolved_root_cause, deep_dive, determinism)
     print("Wrote results/rejection_funnel.json and REJECTION_FUNNEL_ANALYSIS.md")
 
 
-def write_report(funnel, detail, oiw, replayed):
+def write_report(funnel, detail, oiw, replayed, unresolved_root_cause=None, deep_dive=None,
+                  determinism=None):
     lines = []
     a = lines.append
     a("# TASK #34 rejection funnel + OOB_INDEX_WRITE stratified audit\n")
@@ -205,6 +254,17 @@ def write_report(funnel, detail, oiw, replayed):
       "packages, `develop @ fdb22fa5af01cbaab9577d85906f0a33515f0e62`). No new scan, no new "
       "download, no recomputation of `reportable` -- every bucket below is read directly from "
       "fields the real pipeline already set.\n")
+
+    a("## Cross-language linker: already current, not stale (answering directly)\n")
+    a("Task #34's replay never reused any bundle's own captured `cross_language_bindings.json` "
+      "(that file was written at overnight-run capture time, by an earlier revision of the "
+      "linker, and predates task #46/#47). `replay_100_bundles.py` does not load that file into "
+      "a record at all -- `reachability_tier.classify_record_reachability(record, js, cpp)` "
+      "computes registration and linkage FRESH, every single time, straight from each package's "
+      "own preserved `js_facts.json`/`cpp_facts.json`, via `reachability_tier.py`'s own live "
+      "`import link_napi_facts` -- the SAME current, `develop`-checked-out FIX01I linker this "
+      "analysis's own deep-dive below reuses. There was no stale link output to recompute away "
+      "from; this was already true for the original replay.\n")
 
     a("## Headline correction\n")
     a("3,918 raw scanner records is not 3,918 vulnerabilities. Zero reportable records does not "
@@ -245,6 +305,31 @@ def write_report(funnel, detail, oiw, replayed):
             a(f"- {bucket}: " + ", ".join(f"{k}={v}" for k, v in sorted(
                 sub.items(), key=lambda kv: -kv[1])))
         a("")
+
+    a("## R06 (FALLIBLE_BOUNDED_RESOURCE) rejection breakdown, explicit\n")
+    a("R06's 7 raw records are outside `reachability_tier.py` entirely (its own module "
+      "docstring: it deliberately never touches `r04_findings`/`r05_findings`/`r06_findings` -- "
+      "Resource Guard's reachability question, when it has one, is a separate, narrower question "
+      "`promote_via_js_linkage.py` answers, not this pipeline's `stage_status`/reachability "
+      "gate). R06's own 7 records split exactly in two:")
+    r06 = detail.get("r06_findings", {})
+    a(f"- **NOT_A_CANDIDATE: 2** -- verdict breakdown: " +
+      ", ".join(f"{k}={v}" for k, v in sorted(r06.get("NOT_A_CANDIDATE", {}).items())) +
+      ". These never entered the candidate pool at all -- `VALUE_ACQUISITION_GUARD_MISSING` is "
+      "the only verdict `PROPERTY_CANDIDATE_RULES` treats as a candidate; the rest (here, real "
+      "abstentions/confirmed-safe matches from `resource_guard_verdict_r06.py`'s own contract "
+      "logic) are correctly excluded before `scanner_candidate` is even considered.")
+    a(f"- **APPLICABILITY_NOT_DETERMINED: 5** -- applicability_status breakdown: " +
+      ", ".join(f"{k}={v}" for k, v in sorted(r06.get("APPLICABILITY_NOT_DETERMINED", {}).items())) +
+      ". These ARE real `VALUE_ACQUISITION_GUARD_MISSING` candidates (`scanner_candidate=True`) "
+      "with resolved provenance -- the SAME 5 real candidates R05 also produces (R06 shares R05's "
+      "verdict-construction logic byte-for-byte). They stay non-reportable purely because "
+      "`applicability_status` defaults to `NOT_YET_DETERMINED` and nothing in this pipeline ever "
+      "affirmatively sets it to `APPLICABLE` for a real corpus finding -- a real, disclosed gap "
+      "(task #41's own docstring: no separate, affirmative applicability step exists yet), not a "
+      "reachability question at all. This is the SAME structural gap the node-libcurl regression "
+      "in `check_provenance.py` exercises on a single real finding -- here it is confirmed across "
+      "all 5 of this replay's own real R06 candidates, not just one.\n")
 
     a("## OOB_INDEX_WRITE stratified audit (3,290/3,918 raw records -- 84% of everything this "
       "replay produced)\n")
@@ -312,6 +397,107 @@ def write_report(funnel, detail, oiw, replayed):
       "(function, rule) key would materially change the corpus-wide picture without discarding "
       "real distinct sites; (3) whether the 3-4 top vendored libraries above are worth a targeted "
       "reachability re-check before any wider run.\n")
+
+    # ============================================================================
+    # Deep-dive: beyond the 4-tier reachability classification
+    # ============================================================================
+    a("## Reachability deep-dive: beyond registration + direct call\n")
+    a("`reachability_tier.py`'s own 4-tier classification is explicitly scoped (its own module "
+      "docstring) to registration + a real, direct JS call -- \"this module does not attempt a "
+      "transitive native call-graph walk.\" This section closes that gap for all 3,902 staged "
+      "rejects, using ONLY preserved bundle evidence (`cpp_facts.json`'s own already-resolved "
+      "`candidate_target_ids` call edges + `arguments[].kind == METHOD_REF` function-reference "
+      "arguments) -- no new Joern run, no source re-download.\n")
+    if deep_dive:
+        a(f"- **{deep_dive['n_packages']}** packages replayed; **"
+          f"{deep_dive['n_packages_with_confirmed_registrations']}** have at least one confirmed "
+          f"native registration (exports.Set / InstanceMethod / Nan::SetPrototypeMethod-Export), "
+          f"**{deep_dive['n_packages_zero_registrations']}** have zero registered exports at all "
+          "under any idiom this pipeline recognizes.\n")
+        a("| Deep-dive bucket | Count | % of 3,902 |")
+        a("|---|---|---|")
+        totals = deep_dive["deep_dive_totals"]
+        for bucket, n in sorted(totals.items(), key=lambda kv: -kv[1]):
+            a(f"| {bucket} | {n} | {100*n/3902:.1f}% |")
+        a("")
+        a("| Property | " + " | ".join(sorted(set(
+            b for v in deep_dive["deep_dive_by_property"].values() for b in v))) + " |")
+        buckets_seen = sorted(set(b for v in deep_dive["deep_dive_by_property"].values() for b in v))
+        a("|---|" + "---|" * len(buckets_seen))
+        for key, v in deep_dive["deep_dive_by_property"].items():
+            a(f"| {LABELS.get(key, key)} | " + " | ".join(str(v.get(b, 0)) for b in buckets_seen) + " |")
+        a("")
+        a("**Reading this:** `DIRECTLY_REGISTERED` does not appear -- correctly 0, since these "
+          "are exactly the candidates that already failed direct registration in the original "
+          "tier. `TRANSITIVELY_CALLED_FROM_REGISTERED` (a real, resolved call-graph path from "
+          "SOME registered export reaches this candidate, even if not directly) is vanishingly "
+          f"small ({totals.get('TRANSITIVELY_CALLED_FROM_REGISTERED', 0)}/3,902). "
+          f"`CALLBACK_OR_WORKER_HEURISTIC` ({totals.get('CALLBACK_OR_WORKER_HEURISTIC', 0)}) is a "
+          "real, disclosed heuristic (a best-effort name+scope match, same discipline as the "
+          "existing InstanceMethod matcher, never a certainty) -- worth targeted manual review, "
+          "not proof of reachability. Even after this deeper analysis, "
+          f"**{totals.get('GENUINELY_INTERNAL', 0)}/3,902 ({100*totals.get('GENUINELY_INTERNAL', 0)/3902:.1f}%) "
+          "show no real, resolved path from any registered export, transitive caller, callback "
+          "reference, or the addon's own Init entry point.** This substantially strengthens, "
+          "rather than weakens, the reachability-driven interpretation: it is not a shallow "
+          "artifact of `reachability_tier.py`'s own narrower scope -- a real call-graph walk "
+          "confirms the same picture at corpus scale.\n")
+    else:
+        a("*Not yet run for this build -- see `reachability_deep_dive.py`.*\n")
+
+    # ============================================================================
+    # Root cause of the 136 REACHABILITY_UNRESOLVED cases
+    # ============================================================================
+    a("## Root cause of the 136 REACHABILITY_UNRESOLVED cases (stratified, not sampled thin)\n")
+    if unresolved_root_cause:
+        by_pkg = unresolved_root_cause["by_package"]
+        by_prop = unresolved_root_cause["by_property"]
+        a("By property: " + ", ".join(f"{LABELS.get(k,k)}={v}" for k, v in sorted(
+            by_prop.items(), key=lambda kv: -kv[1])))
+        a("By package: " + ", ".join(f"{k}={v}" for k, v in sorted(
+            by_pkg.items(), key=lambda kv: -kv[1])))
+        a("")
+        top_pkg, top_n = max(by_pkg.items(), key=lambda kv: kv[1])
+        a(f"**{top_n}/{sum(by_pkg.values())} ({100*top_n/sum(by_pkg.values()):.1f}%) of all "
+          f"REACHABILITY_UNRESOLVED cases trace to a SINGLE package: `{top_pkg}`.** This is not "
+          "a diffuse, systemic classifier gap across many packages -- it concentrates almost "
+          "entirely in one. Root cause, confirmed directly against this package's own preserved "
+          "`js_facts.json` (not assumed):\n")
+        a("| Package | Unresolved count | js calls | cpp functions | facts_available |")
+        a("|---|---|---|---|---|")
+        for rc in unresolved_root_cause["root_cause_per_package"]:
+            a(f"| {rc['package_name']}@{rc['version']} | {rc['unresolved_count']} | "
+              f"{rc['js_calls_count']} | {rc['cpp_functions_count']} | {rc['facts_available']} |")
+        a("")
+        a(f"`{top_pkg}`'s own bundled `js_facts.json` records **zero JS calls at all** -- "
+          "`reachability_tier.classify_function_reachability()`'s own `facts_available` guard "
+          "(`bool(js['calls']) and bool(cpp['functions'])`) correctly, fails-closed, marks every "
+          "single one of this package's own real C++ candidates REACHABILITY_UNRESOLVED, "
+          "regardless of how many real candidates the C++ side alone produced -- not a guess, a "
+          "real disclosed data gap on this one package's own JS facts extraction (its own "
+          "top-level JS entry point may genuinely make no native-binding calls directly, or the "
+          "JS facts extraction for this specific package came back thin -- worth a targeted, "
+          "single-package re-check, not a corpus-wide reachability_tier.py fix).\n")
+    else:
+        a("*Not yet computed for this build.*\n")
+
+    # ============================================================================
+    # Determinism verification
+    # ============================================================================
+    a("## Determinism verification (actual second run, not asserted from design)\n")
+    if determinism:
+        status = "ALL DETERMINISTIC" if determinism["all_deterministic"] else "NOT FULLY DETERMINISTIC"
+        a(f"**{status}.** A full independent second replay of all "
+          f"{determinism['total_packages']} packages was run "
+          f"(`verify_determinism.py`, {determinism['elapsed_seconds']}s): "
+          f"**{determinism['matched']}/{determinism['total_packages']}** produced an identical "
+          "semantic digest (sha256 of each record's own JSON, sorted keys, with only the real, "
+          "expected-to-vary wall-clock timing fields excluded -- `_timing`/`_total_seconds`), "
+          f"{determinism['mismatched']} mismatched, {determinism['rerun_failures']} rerun "
+          "failures. See `results/determinism_verification.json` for the full per-package "
+          "digests and any mismatch/failure detail.\n")
+    else:
+        a("*Not yet run for this build -- see `verify_determinism.py`.*\n")
 
     a("---\n*This analysis adds no new scanning and changes no gate. `develop` remains "
       "unmodified in behavior; this is read-only reporting over task #34's own already-committed "

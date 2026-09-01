@@ -42,6 +42,19 @@ import reachability_tier as rt  # noqa: E402
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates")
 
+# The real per-property id-field, exactly as provenance.enrich_record() itself joins each key
+# (task #35's own mapping) -- LOCK_BALANCE/PROTECTED_FIELD via method_id, the OOB_* producers via
+# the additive function_id field. Using function_id uniformly here would silently misclassify
+# every LOCK_BALANCE/PROTECTED_FIELD candidate (caught and fixed: an earlier run of this exact
+# script put all 245 of them into a spurious NO_FUNCTION_ID bucket).
+ID_FIELD_BY_KEY = {
+    "lock_balance_findings": "method_id",
+    "protected_field_findings": "method_id",
+    "oob_write_candidates": "function_id",
+    "oob_index_write_candidates": "function_id",
+    "oob_read_candidates": "function_id",
+}
+
 CALLBACK_TAKING_APIS_SEEN = Counter()  # real, observed outer-call names a callback-shaped
                                         # argument was passed to -- reported, not assumed ahead
                                         # of time.
@@ -157,16 +170,21 @@ def main():
         for key in STAGED_KEYS:
             for f in rec.get(key) or []:
                 per_package_candidates[key_tuple].append(
-                    (key, f.get("function_id"), f.get("reachability_status"), f))
+                    (key, f.get(ID_FIELD_BY_KEY[key]), f.get("reachability_status"), f))
 
-    registration_stats = []  # per-package n_registrations, for "packages with confirmed
-                              # native registrations" (request item 2)
+    # registration_stats covers ALL 97 replayed packages (request item 2: "identify packages in
+    # the 100-package sample with confirmed native registrations" is a package-level question,
+    # independent of whether that package happened to produce any staged raw candidate) -- the
+    # heavier call-graph classification below only runs for the 40 packages that actually have
+    # at least one staged candidate to classify.
+    registration_stats = []
     deep = Counter()
     deep_by_property = defaultdict(Counter)
     deep_detail_examples = defaultdict(list)
     unresolved_sample_pool = []  # for the manual stratified sample of the 136
 
-    for (pkg_name, version), items in per_package_candidates.items():
+    for rec in replayed:
+        pkg_name, version = rec["package_name"], rec["version"]
         bpath = os.path.join(BUNDLE_DIR, bundle_filename(pkg_name, version))
         with tarfile.open(bpath, "r:gz") as tf:
             cpp = json.load(tf.extractfile("cpp_facts.json"))
@@ -179,6 +197,10 @@ def main():
             "n_registrations": len(table),
             "n_registered_function_ids": len(registered_ids),
         })
+
+        items = per_package_candidates.get((pkg_name, version))
+        if not items:
+            continue
 
         fids = sorted(set(fid for _k, fid, _t, _f in items if fid is not None))
         classified = classify_package(pkg_name, version, fids, cpp, js)
