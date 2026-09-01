@@ -248,6 +248,13 @@ def main():
             ck("*** THE REGRESSION ITSELF: reportable=False, even though provenance resolved ***"
                " -- provenance resolving a known confirmed-false-positive's file must NEVER make"
                " it reportable", f.get("reportable") is False)
+            ck("*** ADJUDICATION-REGISTRY-R01, wired into the real pipeline (run_pipeline_one.py):"
+               " this real finding's adjudication_status is now CONFIRMED_FALSE_POSITIVE, with a"
+               " real citation -- the already-established adjudication is finally RECORDED, not"
+               " merely true in a doc nothing ever read ***",
+               f.get("adjudication_status") == "CONFIRMED_FALSE_POSITIVE"
+               and f.get("adjudication_citation")
+               == "study/resource_guard_r05/NODE_LIBCURL_FALSE_POSITIVE_REVIEW.md")
             src_path = f.get("provenance", {}).get("source_path")
             ck("real finding has a non-empty real source_path", bool(src_path))
             real_abs_path = os.path.join(work_root, "pkg", src_path) if src_path else None

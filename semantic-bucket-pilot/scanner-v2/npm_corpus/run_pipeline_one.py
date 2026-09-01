@@ -59,6 +59,7 @@ SCANNER_V2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, SCANNER_V2)
 import provenance  # noqa: E402 -- task #35, pipeline-wide precondition, see its own docstring
+import adjudication_registry  # noqa: E402 -- real, cited, individually-reviewed adjudications
 
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
@@ -602,6 +603,13 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # written to enrich whichever of the six properties' own finding keys are actually present,
     # so no further change is needed here once those tasks wire the other scanners in.
     provenance.enrich_record(record, cpp_raw, prov_manifest, pkg_dir)
+
+    # ADJUDICATION-REGISTRY-R01: applies any REAL, individually-reviewed, already-established
+    # adjudication (e.g. node-libcurl's own Easy::ReadFunction, see adjudication_registry.py's
+    # own module docstring) -- exact-match only, never a guess. Must run AFTER enrich_record()
+    # (needs each finding's own resolved source_path to match on) and recomputes reportable
+    # through the veto immediately for any real match.
+    adjudication_registry.apply_known_adjudications(record)
 
     record["status"] = "ANALYZED"
     return record
