@@ -236,3 +236,48 @@ against the same fixtures, and confirmed to never produce a `BROKEN`/safe result
 producer. The `res.download` root asymmetry and the unresolved-options guessing gap are two
 *additional*, newly-discovered soundness issues (beyond the audit's original 3) found live while
 building these regression fixtures, and both are closed in the new producer.
+
+## 8. Post-review hardening (FIX01, FIX02) — 2 more real gaps found and closed
+
+Independent review of this file after the above was built found two further real gaps, neither
+previously disclosed. Both are now fixed, each with its own real fixture and matched-sink-id
+before/after evidence (same combined CPG, same real sink node id in both runs):
+
+**FIX01 — `open()`/`openSync()` were always tagged `FS_READ`, ignoring their own `flags`
+argument.** The original design disclosed this as a "conservative default," but never actually
+inspected `flags` to narrow it. Now: a literal write-intent flag (`'w'`, `'wx'`, `'w+'`, `'wx+'`,
+`'a'`, `'ax'`, `'a+'`, `'ax+'`, `'as'`, `'as+'`) reclassifies the sink `FS_WRITE`; the documented
+default `'r'` and any UNRESOLVED flags expression (a variable, not a literal) both stay `FS_READ`
+-- the fix only ever narrows the existing conservative default, never guesses toward write.
+Fixture: `fixtures/path_traversal_r01/src/ctrl14_open_flags_write.js`. Real, sink-id-matched
+before/after (same sink `30064771224`, `fs.open(userPath, 'w', ...)` at L9):
+```
+pre-fix:  EMIT sink=30064771224(L9) ... sinkFamily=FS_READ  outcome=ESTABLISHED
+post-fix: EMIT sink=30064771224(L9) ... sinkFamily=FS_WRITE outcome=ESTABLISHED
+```
+Explicit read-mode (`'r'`) and unresolved-flags subcases (sinks `30064771226`/`30064771228`)
+confirmed to correctly stay `FS_READ` in both runs -- the fix narrows, it does not widen.
+
+**FIX02 — `hasCanonicalizationAssignment` never checked that the canonicalizing assignment
+happens BEFORE the boundary check it's meant to justify**, only that one exists somewhere in the
+method. A canonicalizing assignment written AFTER a boundary check (a real, if unusual, ordering
+bug in the code being analyzed) was wrongly credited toward that earlier check. Fixed with a
+disclosed, conservative LINE-NUMBER-ORDER approximation (not full CFG-dominance, which this file
+has no query for) -- the canonicalizing assignment's own line must be `<=` the check's own line.
+This can only ever REMOVE previously-accepted canonicalization evidence, never add new false
+containment, matching this whole file's own safe-failure-direction discipline. Fixture:
+`fixtures/path_traversal_r01/src/ctrl15_canonicalize_after_check.js` (`resolved` checked while
+still raw, only canonicalized via `path.resolve()` on a LATER line). Real, sink-id-matched
+before/after (same sink `30064771246`, `fs.readFile(resolved, ...)` at L14):
+```
+pre-fix:  EMIT sink=30064771246(L14) ... outcome=BROKEN     note=canonicalized boundary-aware check: resolved.startsWith('/safe' + path.sep)
+post-fix: EMIT sink=30064771246(L14) ... outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe' + path.sep)
+```
+The already-existing `ctrl13_boundary_aware_safe.js` positive control (canonicalize-then-check in
+the CORRECT order) was re-run and still correctly classifies `BROKEN` after this fix -- confirming
+the ordering requirement narrows only the unsound case, without regressing the legitimate one.
+
+Both fixes' fixtures were folded into the SAME frozen `fixtures/path_traversal_r01/raw/` set (now
+20 source files, 22 `FILESYSTEM_SINK_CANDIDATE`s, up from 18); `check_path_traversal_verdict.py`
+was updated with the new real totals and two new explicit assertions (FIX01, FIX02), all 12
+original controls re-verified unaffected: `PATH_TRAVERSAL_VERDICT_R01=25/25`.

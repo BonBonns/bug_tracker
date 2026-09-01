@@ -62,8 +62,9 @@ ck("ALTERNATIVES_BROKEN_EXCLUDED == 3 (ctrl11 wrapper-proven x2 alternatives + c
    "boundary-aware x1)", cls.get("ALTERNATIVES_BROKEN_EXCLUDED") == 3)
 ck("PACKAGE_API_INPUT_REACHABLE == 2 (package_api_basic.js + package_api_named_exports.js)",
    cls.get("PACKAGE_API_INPUT_REACHABLE") == 2)
-ck("APPLICATION_INGRESS_REACHABLE == 16 (every other real candidate sink)",
-   cls.get("APPLICATION_INGRESS_REACHABLE") == 16)
+ck("APPLICATION_INGRESS_REACHABLE == 20 (every other real candidate sink, including ctrl14's 3 "
+   "open()/openSync() sites and ctrl15's own single site, added by FIX01/FIX02)",
+   cls.get("APPLICATION_INGRESS_REACHABLE") == 20)
 
 # --- Control-by-control mapping. Sink LINE NUMBERS are per-file, not globally unique across this
 # multi-file fixture (e.g. ctrl02's L6 collides with ctrl07's own L6) -- so controls are looked up
@@ -79,6 +80,10 @@ SINK = {
     "ctrl09_repeated_traversal": "30064771162",
     "ctrl11_wrapper_proven": "30064771186",
     "ctrl12_wrapper_unresolved": "30064771197",
+    "ctrl14_open_write_flag": "30064771224",     # fs.open(userPath, 'w', cb) at L9
+    "ctrl14_open_read_flag_explicit": "30064771226",  # fs.openSync(userPath, 'r') at L12
+    "ctrl14_open_unresolved_flag": "30064771228",     # fs.open(userPath, flagsVar, cb) at L15
+    "ctrl15_canonicalize_after_check": "30064771246",  # fs.readFile(resolved, ...) at L14
 }
 by_sink_id = {}
 for f in findings:
@@ -106,9 +111,9 @@ ck("Control 5 (aliased fs import): a finding exists -- the audited producer's ow
    SINK["ctrl05_aliased_fs_import"] in by_sink_id and
    all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl05_aliased_fs_import"]]))
 ck("Control 6 (unrelated object literally named fs): its call is never even counted as a "
-   "FILESYSTEM_SINK_CANDIDATE at all -- confirmed structurally: total candidates (18) matches the "
+   "FILESYSTEM_SINK_CANDIDATE at all -- confirmed structurally: total candidates (22) matches the "
    "hand-verified count of REAL fs sinks across the fixture set, which excludes ctrl06 entirely",
-   cls.get("FILESYSTEM_SINK_CANDIDATE") == 18)
+   cls.get("FILESYSTEM_SINK_CANDIDATE") == 22)
 ck("Control 7 (family split): all three of FS_READ/FS_WRITE/FS_DELETE appear as distinct "
    "sink_family tags", {"FS_READ", "FS_WRITE", "FS_DELETE"}.issubset({f["sink_family"] for f in findings}))
 ck("Control 8 (Windows/POSIX separator): a finding exists, never BROKEN, weak '.includes' "
@@ -123,7 +128,7 @@ ck("Control 9 (repeated traversal / single-pass replace strip): a finding exists
    any("replace" in n for f in by_sink_id[SINK["ctrl09_repeated_traversal"]] for n in f["weak_diagnostic_guards"]))
 ck("Control 10 (unresolved options object): NO finding at all -- abstained, not guessed",
    not any(f["origin_code"] == "opts" for f in findings) and
-   cls.get("FILESYSTEM_SINK_CANDIDATE") == 18)  # would be 19 if ctrl10 had guessed no-root
+   cls.get("FILESYSTEM_SINK_CANDIDATE") == 22)  # would be 23 if ctrl10 had guessed no-root
 ck("Control 11 (proven containment wrapper): EXCLUDED as BROKEN -- confirmed via the "
    "ALTERNATIVES_BROKEN_EXCLUDED count above (2 of the 3 are this sink's own two source-reference "
    "alternatives) rather than appearing in findings",
@@ -132,6 +137,22 @@ ck("Control 12 (unresolvable wrapper): a finding exists with containment_status 
    "never assumed safe",
    SINK["ctrl12_wrapper_unresolved"] in by_sink_id and
    all(f["containment_status"] == "OPEN" for f in by_sink_id[SINK["ctrl12_wrapper_unresolved"]]))
+ck("FIX01 (open()/openSync() flags-based read/write split): a literal write-mode flag ('w') "
+   "produces FS_WRITE, an explicit read-mode flag ('r') and an UNRESOLVED flags argument both "
+   "stay FS_READ -- the fix only ever narrows the conservative default, never guesses toward write",
+   SINK["ctrl14_open_write_flag"] in by_sink_id and
+   all(f["sink_family"] == "FS_WRITE" for f in by_sink_id[SINK["ctrl14_open_write_flag"]]) and
+   SINK["ctrl14_open_read_flag_explicit"] in by_sink_id and
+   all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl14_open_read_flag_explicit"]]) and
+   SINK["ctrl14_open_unresolved_flag"] in by_sink_id and
+   all(f["sink_family"] == "FS_READ" for f in by_sink_id[SINK["ctrl14_open_unresolved_flag"]]))
+ck("FIX02 (canonicalize-after-check ordering): a canonicalizing assignment written AFTER the "
+   "boundary check it would otherwise 'justify' must NOT retroactively prove containment -- a "
+   "finding exists here, never BROKEN, with the same weak-startsWith diagnostic a bare check gets",
+   SINK["ctrl15_canonicalize_after_check"] in by_sink_id and
+   all(f["containment_status"] != "BROKEN" for f in by_sink_id[SINK["ctrl15_canonicalize_after_check"]]) and
+   any("startsWith" in n for f in by_sink_id[SINK["ctrl15_canonicalize_after_check"]]
+       for n in f["weak_diagnostic_guards"]))
 
 # --- Import recognition coverage: ESM (4 shapes) + destructured CommonJS, all reachable. Counted
 # structurally rather than by line/id (avoids re-encoding 5 more fixture-specific ids): every
@@ -143,7 +164,10 @@ plain_fs_read_findings = [f for f in findings if f["sink_family"] == "FS_READ" a
                            not f["weak_diagnostic_guards"]]
 # ctrl07's own plain read (1) + ctrl13's plain read is BROKEN-excluded (0) + import_destructured (1)
 # + import_esm x4 (4) + package_api_basic (1) + package_api_abstentions' 2 real-but-unreachable
-# sinks never appear at all (0, no source reaches them) = 1+1+4+1 = 7 distinct plain FS_READ sinks.
+# sinks never appear at all (0, no source reaches them) = 1+1+4+1 = 7 distinct plain FS_READ sinks
+# (ctrl14's own two plain reads -- explicit 'r' flag, unresolved flags arg -- are excluded from
+# this count via `other_named_ids`, since they're separately, explicitly asserted by the FIX01
+# check above; this count intentionally stays scoped to import-recognition coverage only).
 ck("Import recognition: ESM (4 shapes) + destructured CommonJS + ctrl07's own plain read + "
    "package_api_basic's own plain read all produce plain (non-weak) FS_READ findings (7 distinct "
    "sinks total)", len({f["sink_node_id"] for f in plain_fs_read_findings}) == 7)

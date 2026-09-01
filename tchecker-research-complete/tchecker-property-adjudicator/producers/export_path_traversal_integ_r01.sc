@@ -78,11 +78,6 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
   val FS_WRITE_NAMES = Set("writeFile", "writeFileSync", "createWriteStream")
   val FS_DELETE_NAMES = Set("unlink", "unlinkSync")
   val FS_ALL_NAMES = FS_READ_NAMES ++ FS_WRITE_NAMES ++ FS_DELETE_NAMES
-  def fsFamilyOfName(n: String): Option[String] =
-    if (FS_READ_NAMES.contains(n)) Some("FS_READ")
-    else if (FS_WRITE_NAMES.contains(n)) Some("FS_WRITE")
-    else if (FS_DELETE_NAMES.contains(n)) Some("FS_DELETE")
-    else None
 
   // ===== Capability 2: structural (not literal-text) fs import/require recognition =====
   val FS_MODULE_METHODFULLNAME_PREFIXES = Seq("fs:", "node:fs:", "fs/promises:", "node:fs/promises:")
@@ -90,6 +85,26 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
 
   def unquote(s: String): String = s.trim.stripPrefix("\"").stripPrefix("'").stripSuffix("\"").stripSuffix("'")
   def fileOf(n: nodes.AstNode): String = n.file.name.headOption.getOrElse("")
+
+  // PATH-TRAV-R01-FIX01: `open`/`openSync`'s own `flags` argument (argumentIndex 2) determines
+  // read vs. write intent -- inspected explicitly now rather than left at the disclosed FS_READ
+  // default. Real Node write-intent flag literals (fs docs): 'w'/'wx'/'w+'/'wx+' (create/truncate),
+  // 'a'/'ax'/'a+'/'ax+' (append), 'as'/'as+' (sync append). Everything else (including the
+  // documented default 'r' and any UNRESOLVED flags expression) stays FS_READ -- an unresolved
+  // flags argument is never guessed toward FS_WRITE, matching this whole file's abstain-don't-guess
+  // discipline; it only ever narrows the ALREADY-conservative default, never widens it.
+  val OPEN_WRITE_FLAG_LITERALS = Set("w", "wx", "w+", "wx+", "a", "ax", "a+", "ax+", "as", "as+")
+  def openCallIndicatesWrite(c: nodes.Call): Boolean =
+    c.argument.l.find(_.argumentIndex == 2).exists {
+      case lit: nodes.Literal => OPEN_WRITE_FLAG_LITERALS.contains(unquote(lit.code))
+      case _ => false
+    }
+  def fsFamilyOfCall(c: nodes.Call, n: String): Option[String] =
+    if ((n == "open" || n == "openSync") && openCallIndicatesWrite(c)) Some("FS_WRITE")
+    else if (FS_READ_NAMES.contains(n)) Some("FS_READ")
+    else if (FS_WRITE_NAMES.contains(n)) Some("FS_WRITE")
+    else if (FS_DELETE_NAMES.contains(n)) Some("FS_DELETE")
+    else None
 
   // Direct case: this call's OWN methodFullName (assigned by js2cpg's real type-recovery pass)
   // already carries the fs-module identity as a structural prefix -- covers plain `fs.readFile`,
@@ -303,7 +318,7 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
   cpg.call.l.foreach { c =>
     val fsMember = realFsMemberName(c)
     if (fsMember.exists(FS_ALL_NAMES.contains)) {
-      fsFamilyOfName(fsMember.get).foreach { fam =>
+      fsFamilyOfCall(c, fsMember.get).foreach { fam =>
         val args = c.argument.l.filter(_.argumentIndex >= 1)
         args.headOption.foreach { a0 => sinkTargets += SinkTarget(c, fam, a0) }
       }
@@ -372,17 +387,33 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
   // A candidate is "canonicalized" when, in the SAME method, it is assigned the result of
   // path.resolve(...) or path.normalize(...) -- required BEFORE any boundary check on it counts,
   // per direct instruction ("a value that has gone through a REAL normalization/resolution step").
-  def hasCanonicalizationAssignment(m: nodes.Method, varName: String): Boolean =
+  //
+  // PATH-TRAV-R01-FIX02: the original version of this check only confirmed a canonicalizing
+  // assignment exists SOMEWHERE in the method, with no requirement that it happen before the
+  // boundary check it's meant to justify -- a real looseness (found on review, not fixture-
+  // reproduced as an actual false-safe yet, but a genuine gap: nothing structurally prevented a
+  // canonicalizing assignment written AFTER the check from being credited toward it). This file
+  // does not have a full CFG-dominance query available for straight-line ordering, so the fix is a
+  // disclosed, conservative LINE-NUMBER-ORDER approximation: the canonicalizing assignment's own
+  // line must be <= the check call's own line. This is not a claim of true CFG-precedes (a loop or
+  // unusual control flow could defeat a pure line-order comparison), but it correctly rejects the
+  // straightforwardly-nonsensical case (canonicalize-after-check in linear code) that the original,
+  // fully order-agnostic version accepted, and it can only ever REMOVE previously-accepted
+  // canonicalization evidence, never add new false containment -- the safe direction for this
+  // property's own "abstain/stay attacker-controlled rather than guess safe" discipline.
+  def hasCanonicalizationAssignment(m: nodes.Method, varName: String, beforeLine: Int): Boolean =
     m.ast.isCall.name("<operator>.assignment").l.exists { a =>
       val lhsMatches = a.argument.l.find(_.argumentIndex == 1).exists {
         case id: nodes.Identifier => id.code.trim == varName; case _ => false
       }
-      lhsMatches && a.argument.l.find(_.argumentIndex == 2).exists {
+      val isCanonicalizingCall = a.argument.l.find(_.argumentIndex == 2).exists {
         case rc: nodes.Call =>
           val short = if (rc.name == "<operator>.fieldAccess") rc.code.split("\\.").lastOption.getOrElse("") else rc.name
           short == "resolve" || short == "normalize"
         case _ => false
       }
+      val precedesCheck = a.lineNumber.getOrElse(Int.MaxValue) <= beforeLine
+      lhsMatches && isCanonicalizingCall && precedesCheck
     }
 
   def isPathSepOperand(e: nodes.Expression): Boolean = e match {
@@ -407,13 +438,15 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
   // `trackedCodes` AND itself canonicalized in `m`. Returns the matched code snippet.
   def findGenuineBoundaryCheck(root: nodes.AstNode, m: nodes.Method, trackedCodes: Set[String]): Option[String] = {
     val startsWithHit = root.ast.isCall.name("startsWith").l.find { sw =>
+      val checkLine = sw.lineNumber.getOrElse(Int.MinValue)
       val recv = sw.argument.l.find(_.argumentIndex == 0)
       val arg = sw.argument.l.find(_.argumentIndex == 1)
-      recv.exists(r => trackedCodes.contains(r.code.trim) && hasCanonicalizationAssignment(m, r.code.trim)) &&
+      recv.exists(r => trackedCodes.contains(r.code.trim) && hasCanonicalizationAssignment(m, r.code.trim, checkLine)) &&
         arg.exists(isBoundarySafeStartsWithArg)
     }
     val equalsHit = root.ast.isCall.filter(cc => COMPARISON_OPS.contains(cc.name)).l.find { cc =>
-      cc.argument.l.exists(o => trackedCodes.contains(o.code.trim) && hasCanonicalizationAssignment(m, o.code.trim))
+      val checkLine = cc.lineNumber.getOrElse(Int.MinValue)
+      cc.argument.l.exists(o => trackedCodes.contains(o.code.trim) && hasCanonicalizationAssignment(m, o.code.trim, checkLine))
     }
     startsWithHit.map(_.code).orElse(equalsHit.map(_.code))
   }
