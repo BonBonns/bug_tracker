@@ -134,5 +134,35 @@ ck("root-gate: with the root entry externally reachable, NextWorker::HandleOKCal
        and v["reachability_status"] == V.TIER_CALLBACK_OR_WORKER_VIRTUAL_PROVEN
        for k, v in gated_ok.items()))
 
+# --- Focused ANCESTRY controls for the callback-cast direction rule (a cast of the
+# recovered data pointer is valid iff cast_target == concrete_type OR cast_target is an
+# ANCESTOR of concrete_type; never the reverse). Tested as the pure function it is, over
+# a synthetic hierarchy, so each direction is unambiguous and name-agnostic. The real
+# upcast (NextWorker -> BaseWorker) is exercised end-to-end by C9. ---
+FA = V.Facts(str(STUDY / "raw_asyncworker_reach"))
+FA.bases = {"Base": [], "D1": ["Base"], "D2": ["Base"], "GC": ["D1"], "NS::D": ["NS::B"],
+            "NS::B": []}
+
+
+def anc(concrete, target):
+    return FA.cast_ancestry_check(concrete, target)[0]
+
+
+ck("A1 same concrete/cast type -> ALLOWED", anc("D1", "D1") == V.CAST_ALLOW)
+ck("A2 concrete derived, cast to base -> ALLOWED (upcast)",
+   anc("D1", "Base") == V.CAST_ALLOW and anc("GC", "Base") == V.CAST_ALLOW)
+ck("A3 concrete base, cast to derived -> ABSTAIN (downcast)",
+   anc("Base", "D1") == V.CAST_ABSTAIN)
+ck("A4 concrete sibling, cast to sibling -> ABSTAIN",
+   anc("D1", "D2") == V.CAST_ABSTAIN)
+ck("A5 missing hierarchy edge -> ABSTAIN",
+   anc("UnknownX", "UnknownY") == V.CAST_ABSTAIN)
+ck("A6 pointer/qualified spelling differences resolve identically "
+   "(const/struct/*/& stripped, namespaces preserved)",
+   anc("D1", "const struct Base *") == V.CAST_ALLOW
+   and anc("NS::D", "NS::B") == V.CAST_ALLOW
+   and V._strip_ptr("const NS::D *") == "NS::D"
+   and V._strip_ptr("NS::D") != "D")
+
 print(f"VIRTUAL_DISPATCH_REACHABILITY_R01={ok}/{total}")
 sys.exit(0 if ok == total else 1)

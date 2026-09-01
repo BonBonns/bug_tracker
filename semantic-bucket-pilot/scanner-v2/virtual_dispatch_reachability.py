@@ -91,8 +91,24 @@ def _rows(path):
     return out
 
 
+_TYPE_QUALIFIER_WORDS = ("const", "volatile", "class", "struct", "enum", "union")
+
+
 def _strip_ptr(t):
-    return (t or "").replace("*", "").replace("&", "").strip()
+    """Normalize a C++ type spelling to a stable class identity: drop pointer/reference
+    markers, `const`/`volatile` qualifiers, and leading `class`/`struct`/`enum`/`union`
+    keywords -- while PRESERVING namespaces (`ns::Cls`) and template arguments
+    (`Tmpl<T>`), which are part of the real identity. So `const NextWorker*`,
+    `struct NextWorker &`, and `NextWorker` all normalize to `NextWorker`; `a::B` stays
+    `a::B` and never collapses to `B`."""
+    s = (t or "").replace("*", " ").replace("&", " ")
+    # remove qualifier keywords as whole tokens (not as substrings of an identifier)
+    toks = [w for w in s.split() if w not in _TYPE_QUALIFIER_WORDS]
+    return " ".join(toks).strip()
+
+
+# explicit ancestry-direction outcomes for a callback cast
+CAST_ALLOW, CAST_ABSTAIN = "ALLOW", "ABSTAIN"
 
 
 def _split_full_name(full_name):
@@ -182,6 +198,37 @@ class Facts:
 
     def is_subtype(self, sub, sup):
         return _strip_ptr(sup) in self.mro(sub)
+
+    def cast_ancestry_check(self, concrete_type, cast_target):
+        """The EXPLICIT callback-cast ancestry rule. A `(cast_target)data` recovery of an
+        object whose real concrete type is `concrete_type` is valid iff:
+              cast_target == concrete_type            (same type), OR
+              cast_target is an ANCESTOR of concrete_type   (an upcast).
+        It is NEVER valid to require the concrete type to be an ancestor of the cast
+        target. Returns (CAST_ALLOW|CAST_ABSTAIN, reason). Downcasts (cast_target is a
+        descendant), sibling casts, and a missing/ambiguous inheritance path all ABSTAIN.
+        Names are normalized (pointers/refs/const/volatile/class-struct stripped,
+        namespaces + templates preserved) before comparison."""
+        c = _strip_ptr(concrete_type)
+        t = _strip_ptr(cast_target)
+        if not t:
+            return (CAST_ALLOW, "NO_CAST_TARGET")  # nothing to validate
+        if c == t:
+            return (CAST_ALLOW, "SAME_TYPE")
+        c_mro = self.mro(c)
+        if t in c_mro:
+            return (CAST_ALLOW, "UPCAST_TO_ANCESTOR")
+        # not same, not an ancestor. Distinguish the abstain reasons for evidence.
+        if c in self.mro(t):
+            return (CAST_ABSTAIN, "DOWNCAST_TO_DESCENDANT")
+        # neither is an ancestor of the other: sibling, unrelated, or a missing edge.
+        # If either type is entirely unknown to the hierarchy, call it a missing edge.
+        if c not in self.bases and t not in self.bases:
+            return (CAST_ABSTAIN, "HIERARCHY_EDGE_MISSING")
+        # shared ancestor -> siblings; else unrelated. Both abstain.
+        if set(c_mro) & set(self.mro(t)) - {c, t}:
+            return (CAST_ABSTAIN, "SIBLING_CAST")
+        return (CAST_ABSTAIN, "UNRELATED_OR_MISSING_EDGE")
 
 
 def _local_assignments(F, owner, local_code):
@@ -429,9 +476,11 @@ def compute(raw):
                 if cast is None:
                     continue
                 receiver_code, base_type = cast
-                if base_type and not F.is_subtype(T, base_type):
-                    abstained.append({"reason": "CAST_TO_UNRELATED_TYPE",
-                                      "concrete_type": T, "cast_base": base_type})
+                verdict, why = F.cast_ancestry_check(T, base_type)
+                if verdict == CAST_ABSTAIN:
+                    abstained.append({"reason": "CAST_ANCESTRY_INVALID",
+                                      "detail": why, "concrete_type": T,
+                                      "cast_base": _strip_ptr(base_type)})
                     continue
                 any_cast = True
                 targets = _typestate_targets(F, cb_fn_id, receiver_code, T)

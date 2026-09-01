@@ -35,7 +35,21 @@ VIRTUAL_DISPATCH_LEVELDB_RESULT.json` (the real-package outcome).
    override). Two concrete types resolving the same site to different overrides → both
    abstained.
 
-## Controls (all compiled, frozen facts, gate 16/16)
+## Callback-cast ancestry rule (explicit)
+
+A `(cast_target)data` recovery of an object whose real concrete type is `concrete_type`
+is valid **iff `cast_target == concrete_type` OR `cast_target` is an ANCESTOR of
+`concrete_type`** (an upcast). It never requires the concrete type to be an ancestor of
+the cast target. `cast_ancestry_check` returns `(ALLOW|ABSTAIN, reason)`:
+same-type/upcast → ALLOW; downcast / sibling / missing-or-ambiguous edge → ABSTAIN.
+Type names are normalized first — pointers, references, `const`/`volatile`, and leading
+`class`/`struct`/`enum`/`union` are stripped, while **namespaces and template arguments
+are preserved** (`a::B` never collapses to `B`); a pointer-type `TypeDecl` (`Foo*`)
+never overwrites the real class's inheritance. On the real leveldb facts the cast
+`self = (BaseWorker*)data` of a concrete `NextWorker` resolves to
+`(ALLOW, UPCAST_TO_ANCESTOR)`.
+
+## Controls (compiled + frozen facts + explicit ancestry unit tests, gate 22/22)
 
 | # | shape | outcome |
 |---|---|---|
@@ -49,6 +63,15 @@ VIRTUAL_DISPATCH_LEVELDB_RESULT.json` (the real-package outcome).
 | 8 | callback not registered | no promotion |
 | 9 | leveldb pattern (distilled) | worker override **promoted** for the unique concrete type |
 | + | root-gate | promoted to the reportable tier **only when the root entry is externally reachable** |
+| A1 | same concrete/cast type | cast ALLOWED |
+| A2 | concrete derived, cast to base | cast ALLOWED (upcast, incl. multi-level) |
+| A3 | concrete base, cast to derived | cast ABSTAIN (downcast) |
+| A4 | concrete sibling, cast to sibling | cast ABSTAIN |
+| A5 | missing hierarchy edge | cast ABSTAIN |
+| A6 | pointer/qualified spelling differences | resolve identically (namespaces preserved) |
+
+Frozen implementation: `virtual_dispatch_reachability.py` sha256
+`b375e291583d32b00a08b7759ae3418261f59756db64736c26077ce4e3fba606`.
 
 ## Real leveldb-zlib result — virtual-dispatch hop SOLVED; findings still non-reportable
 
