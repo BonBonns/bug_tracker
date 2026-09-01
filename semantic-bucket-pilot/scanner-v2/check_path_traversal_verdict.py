@@ -27,6 +27,10 @@ Covers, per direct instruction:
      CfgNode API) plus a same-variable reaching-definition check, replacing round 1's disclosed
      line-number-order approximation -- confirmed via a real wrong-branch negative control (item 5)
      and a genuine-dominance-with-intervening-statement positive control (item 6).
+  8. Final freeze verification: FS_OPEN_MODE_UNRESOLVED / EXPRESS_ROOT_OPTIONS_UNRESOLVED
+     abstentions are a persisted, machine-readable record (sink_abstentions.tsv: call/site
+     identity, path operand, source path, reason) -- not stderr-log-only, not a bare count that
+     silently disappears when no sink target is emitted.
 """
 import json
 import pathlib
@@ -240,6 +244,38 @@ ck("Correction round 2, item 6 continued: the pre-existing ctrl13_boundary_aware
    "(non-intervening) positive control still correctly recognizes genuine dominance after the "
    "TRUE-CFG-dominance rewrite -- EXCLUDED as BROKEN, not regressed by the stricter mechanism",
    "30064771215" not in by_sink_id)
+
+# --- Final verification (per direct instruction): FS_OPEN_MODE_UNRESOLVED (and its sibling
+# EXPRESS_ROOT_OPTIONS_UNRESOLVED) must be a persisted, machine-readable abstention record --
+# call/site identity, path operand, source path, and unresolved-flags reason -- never only
+# stderr logging or a bare count silently absent because no SinkTarget was emitted. Read
+# sink_abstentions.tsv directly (real output from export_path_traversal_integ_r01.sc's own
+# sinkAbstentions writer) rather than through the reducer, since abstentions are deliberately
+# never turned into findings.
+abstentions_path = FIXTURES / "raw" / "sink_abstentions.tsv"
+abstention_rows = [ln.split("\t") for ln in abstentions_path.read_text().splitlines() if ln.strip()]
+abstentions_by_file = {row[2]: row for row in abstention_rows if len(row) == 7}
+ck("sink_abstentions.tsv is persisted in the frozen raw/ fixture output and is not empty",
+   abstentions_path.is_file() and len(abstention_rows) > 0)
+ck("Every abstention row carries all 7 required fields (callNodeId, line, file, reasonCode, "
+   "pathOperandCode, callCode, reasonDetail) -- not log-only, not a bare count",
+   len(abstention_rows) == 3 and all(len(row) == 7 for row in abstention_rows))
+ck("ctrl10_unresolved_options.js's EXPRESS_ROOT_OPTIONS_UNRESOLVED abstention is persisted with "
+   "real call/site identity and the actual path operand (req.params.name), not just a log line",
+   abstentions_by_file.get("ctrl10_unresolved_options.js", ["", ""])[3] == "EXPRESS_ROOT_OPTIONS_UNRESOLVED" and
+   abstentions_by_file["ctrl10_unresolved_options.js"][4] == "req.params.name" and
+   abstentions_by_file["ctrl10_unresolved_options.js"][1] == "4")
+ck("ctrl14_open_flags_write.js's FS_OPEN_MODE_UNRESOLVED abstention (variable flags argument) is "
+   "persisted with the real unresolved flags reason, not defaulted to FS_READ or FS_WRITE",
+   abstentions_by_file.get("ctrl14_open_flags_write.js", ["", ""])[3] == "FS_OPEN_MODE_UNRESOLVED" and
+   "flagsVar" in abstentions_by_file["ctrl14_open_flags_write.js"][6])
+ck("ctrl19_open_flags_numeric_unresolved.js's FS_OPEN_MODE_UNRESOLVED abstention (numeric/constants "
+   "OR-chain with an unresolvable operand) is persisted with the real unresolved reason",
+   abstentions_by_file.get("ctrl19_open_flags_numeric_unresolved.js", ["", ""])[3] == "FS_OPEN_MODE_UNRESOLVED" and
+   "extraFlags" in abstentions_by_file["ctrl19_open_flags_numeric_unresolved.js"][6])
+ck("None of the 3 abstained sink call ids ever produced a FILESYSTEM_SINK_CANDIDATE finding -- "
+   "the abstention genuinely suppressed sink-target emission rather than merely annotating it",
+   all(row[0] not in by_sink_id for row in abstention_rows))
 
 # --- Import recognition coverage: ESM (4 shapes) + destructured CommonJS, all reachable. Counted
 # structurally rather than by line/id (avoids re-encoding 5 more fixture-specific ids): every

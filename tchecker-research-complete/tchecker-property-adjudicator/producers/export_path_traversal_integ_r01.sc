@@ -291,7 +291,16 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
   case class SinkTarget(sinkCall: nodes.Call, family: String, destExpr: nodes.Expression,
                          rootTaintNote: String = "")
   val sinkTargets = scala.collection.mutable.ListBuffer[SinkTarget]()
-  val sinkAbstentions = scala.collection.mutable.ListBuffer[String]()
+  // Machine-readable abstention record (per direct instruction: FS_OPEN_MODE_UNRESOLVED -- and
+  // every other sink-family-level abstention -- must be a persisted, structured record, never
+  // console-log-only or silently absent just because no SinkTarget was emitted). callNodeId/line/
+  // file identify the exact call site; callCode is the sink call's own full text; pathOperandCode
+  // is the destination/path argument's own text (the operand this abstention concerns); reasonCode
+  // is a fixed vocabulary string (FS_OPEN_MODE_UNRESOLVED / EXPRESS_ROOT_OPTIONS_UNRESOLVED);
+  // reasonDetail is the free-text explanation (kept for human review, never the ONLY record).
+  case class SinkAbstention(callNodeId: Long, line: Int, file: String, callCode: String,
+                             pathOperandCode: String, reasonCode: String, reasonDetail: String)
+  val sinkAbstentions = scala.collection.mutable.ListBuffer[SinkAbstention]()
 
   // ===================================================================================
   // ===== Capability 3: two independently-tagged source families =====
@@ -421,11 +430,17 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
         case FsFamilyAbstainUnresolvedFlags =>
           // Correction round 2, item 4: an open/openSync flags argument that cannot be
           // structurally resolved to a read/write/read-write mode is an ABSTENTION, never a
-          // FS_READ guess -- no SinkTarget is emitted in any family for this call at all.
+          // FS_READ guess -- no SinkTarget is emitted in any family for this call at all. Per
+          // direct instruction this must be a persisted, machine-readable record (not log-only):
+          // the path operand (argumentIndex 1, the call's own first real argument -- the same
+          // operand a resolved call would have tracked as destExpr) is captured explicitly here,
+          // since it is exactly what a reviewer/consumer needs to locate and reason about this
+          // abstained site, even though no SinkTarget carries it forward.
           val flagsCode = c.argument.l.find(_.argumentIndex == 2).map(_.code).getOrElse("<omitted>")
-          sinkAbstentions += s"${fsMember.getOrElse(c.name)} at L${c.lineNumber.getOrElse(-1)}: " +
-            s"flags argument ($flagsCode) not structurally resolvable to a read/write/read-write " +
-            s"mode -- ABSTAIN on sink family (FS_OPEN_MODE_UNRESOLVED), no sink target emitted"
+          val pathOperandCode = c.argument.l.find(_.argumentIndex == 1).map(_.code).getOrElse("<unknown>")
+          sinkAbstentions += SinkAbstention(c.id, c.lineNumber.getOrElse(-1), fileOf(c), c.code,
+            pathOperandCode, "FS_OPEN_MODE_UNRESOLVED",
+            s"flags argument ($flagsCode) not structurally resolvable to a read/write/read-write mode")
       }
     } else if (c.name == "sendFile" || c.name == "download") {
       val fam = if (c.name == "sendFile") "EXPRESS_SEND_FILE" else "EXPRESS_DOWNLOAD"
@@ -455,8 +470,11 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
               sinkTargets += SinkTarget(c, fam, pathArg)
             case RootUnresolvedOptions =>
               // Control #10: options arg present but not statically an object literal -- abstain,
-              // never guess whether a 'root' key exists.
-              sinkAbstentions += s"${fam} at L${c.lineNumber.getOrElse(-1)}: options argument not statically resolved to an object literal (${opt.code}) -- ABSTAIN on root-presence, no sink target emitted"
+              // never guess whether a 'root' key exists. pathOperandCode captures the real path
+              // argument for the same reviewer-facing reason as the FS_OPEN_MODE_UNRESOLVED case.
+              sinkAbstentions += SinkAbstention(c.id, c.lineNumber.getOrElse(-1), fileOf(c), c.code,
+                pathArg.code, "EXPRESS_ROOT_OPTIONS_UNRESOLVED",
+                s"options argument not statically resolved to an object literal (${opt.code})")
           }
         case (Some(pathArg), None) =>
           sinkTargets += SinkTarget(c, fam, pathArg)
@@ -469,7 +487,9 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
     s"FS_READ_WRITE=${sinkTargets.count(_.family == "FS_READ_WRITE")}, " +
     s"FS_DELETE=${sinkTargets.count(_.family == "FS_DELETE")}, EXPRESS_SEND_FILE=${sinkTargets.count(_.family == "EXPRESS_SEND_FILE")}, " +
     s"EXPRESS_DOWNLOAD=${sinkTargets.count(_.family == "EXPRESS_DOWNLOAD")})")
-  if (sinkAbstentions.nonEmpty) sinkAbstentions.foreach(a => System.err.println(s"[$srcLabel] ABSTAIN: $a"))
+  if (sinkAbstentions.nonEmpty) sinkAbstentions.foreach(a =>
+    System.err.println(s"[$srcLabel] ABSTAIN: ${a.reasonCode} at ${a.file}:L${a.line} " +
+      s"call=${a.callCode} pathOperand=${a.pathOperandCode} detail=${a.reasonDetail}"))
 
   // ===================================================================================
   // ===== Capability 4/5: corrected containment idioms =====
@@ -839,6 +859,20 @@ import io.joern.dataflowengineoss.queryengine.EngineContext
       (if (r.weakDiagnostics.nonEmpty) s" weak_diagnostic_guards=${r.weakDiagnostics.mkString("; ")}" else ""))
   }
   sf.close(); pr.close(); po.close(); ti.close()
+
+  // PATH-TRAV-R01-FIX05: FS_OPEN_MODE_UNRESOLVED (and every other sink-family abstention) is now
+  // persisted as its own machine-readable TSV, not merely System.err text plus a bare count in the
+  // summary JSON. Columns: call_node_id, line, file, reason_code, path_operand_code, call_code,
+  // reason_detail -- exactly the fields a downstream consumer needs to locate and act on an
+  // abstained site (call/site identity, the path operand it concerns, the source file, and why),
+  // per direct instruction.
+  val sa = new java.io.PrintWriter(new java.io.FileWriter(s"$rawDir/sink_abstentions.tsv", true))
+  sinkAbstentions.foreach { a =>
+    sa.println(Seq(a.callNodeId.toString, a.line.toString, a.file, a.reasonCode,
+      a.pathOperandCode, a.callCode, a.reasonDetail).mkString("\t"))
+  }
+  sa.close()
+
   System.err.println(s"[$srcLabel] PATH_TRAV_R01_COMPLETE rows=${outRows.size} " +
     s"(BROKEN=${outRows.count(_.outcome == "BROKEN")}, OPEN=${outRows.count(_.outcome == "OPEN")}, " +
     s"ESTABLISHED=${outRows.count(_.outcome == "ESTABLISHED")})")

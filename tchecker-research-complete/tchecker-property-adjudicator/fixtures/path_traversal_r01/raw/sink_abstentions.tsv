@@ -1,0 +1,3 @@
+30064771169	4	ctrl10_unresolved_options.js	EXPRESS_ROOT_OPTIONS_UNRESOLVED	req.params.name	res.sendFile(req.params.name, opts)	options argument not statically resolved to an object literal (opts)
+30064771228	15	ctrl14_open_flags_write.js	FS_OPEN_MODE_UNRESOLVED	userPath	fs.open(userPath, flagsVar, (err, fd) => {})	flags argument (flagsVar) not structurally resolvable to a read/write/read-write mode
+30064771293	12	ctrl19_open_flags_numeric_unresolved.js	FS_OPEN_MODE_UNRESOLVED	userPath	fs.open(userPath, fs.constants.O_WRONLY | extraFlags, (err, fd) => {})	flags argument (fs.constants.O_WRONLY | extraFlags) not structurally resolvable to a read/write/read-write mode

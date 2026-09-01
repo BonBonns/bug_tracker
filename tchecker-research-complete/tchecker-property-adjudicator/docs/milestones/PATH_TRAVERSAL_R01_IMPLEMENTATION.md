@@ -448,3 +448,60 @@ reads `sink_family` from `source_facts.tsv` generically and never hardcoded the 
 explicit assertions (items 1-6 of the specification, FIX01/FIX02 re-verified, and the item-4
 regression fix on ctrl14's own bare-variable case), all 25 previously-existing checks re-verified
 passing unaffected: **`PATH_TRAVERSAL_VERDICT_R01=34/34`**.
+
+## 10. Freeze verification — machine-readable abstention persistence (`sink_abstentions.tsv`)
+
+Per direct instruction, before declaring the source-independent layer frozen: `FS_OPEN_MODE_UNRESOLVED`
+(and its sibling `EXPRESS_ROOT_OPTIONS_UNRESOLVED`) had to be checked for whether it was a genuine,
+persisted, machine-readable abstention record — call/site identity, path operand, source path, and
+reason — or only `System.err` logging that would silently disappear because no sink target is ever
+emitted for an abstained call.
+
+**Confirmed log-only before the fix**: `grep` on `export_path_traversal_integ_r01.sc` showed
+`sinkAbstentions` was a bare `ListBuffer[String]`, printed only via `System.err.println`, with only
+`sinkAbstentions.size` (an integer count) written into `path_traversal_r01_summary.json`. No raw
+output file carried the abstention's own call id, line, file, path operand, or reason — exactly the
+case the instruction anticipated and required fixing.
+
+**Fix**: `sinkAbstentions` is now `ListBuffer[SinkAbstention]`, a case class carrying `callNodeId`,
+`line`, `file`, `callCode` (the sink call's own text), `pathOperandCode` (the destination/path
+argument's own text), `reasonCode` (fixed vocabulary: `FS_OPEN_MODE_UNRESOLVED` /
+`EXPRESS_ROOT_OPTIONS_UNRESOLVED`), and `reasonDetail` (free text, kept for human review but never
+the only record). Both abstention construction sites (`FsFamilyAbstainUnresolvedFlags` and
+`RootUnresolvedOptions`) now populate every field, including the real path operand pulled directly
+from the call's own argument nodes. A new writer appends every record, tab-separated, to a new
+persisted raw-output file, `sink_abstentions.tsv`, alongside the existing `source_facts.tsv` /
+`propagation_relations.tsv` / `property_outcome.tsv` / `transform_identity.tsv`. The stderr line is
+now rendered FROM the structured record (kept for human console review, no longer the primary
+record).
+
+**Real regenerated output** (full 26-file fixture CPG, rerun end-to-end):
+```
+30064771169  4   ctrl10_unresolved_options.js  EXPRESS_ROOT_OPTIONS_UNRESOLVED  req.params.name  res.sendFile(req.params.name, opts)  options argument not statically resolved to an object literal (opts)
+30064771228  15  ctrl14_open_flags_write.js    FS_OPEN_MODE_UNRESOLVED          userPath         fs.open(userPath, flagsVar, (err, fd) => {})  flags argument (flagsVar) not structurally resolvable to a read/write/read-write mode
+30064771293  12  ctrl19_open_flags_numeric_unresolved.js  FS_OPEN_MODE_UNRESOLVED  userPath  fs.open(userPath, fs.constants.O_WRONLY | extraFlags, (err, fd) => {})  flags argument (fs.constants.O_WRONLY | extraFlags) not structurally resolvable to a read/write/read-write mode
+```
+The full `raw/` output (including this new file) was regenerated and committed into
+`fixtures/path_traversal_r01/raw/`, replacing the version frozen at `2aff3c0`.
+
+**New regression assertions** (`check_path_traversal_verdict.py`): read `sink_abstentions.tsv`
+directly (abstentions are deliberately never turned into reducer findings, so this is checked at
+the raw-output layer, not through `path_traversal_verdict.py`) and assert: the file is persisted
+and non-empty; all 3 real rows carry all 7 required fields; each of the 3 known abstention sites
+(`ctrl10`, `ctrl14`, `ctrl19`) is present with its real reason code and real path operand /
+unresolved-reason text (not a placeholder); and none of the 3 abstained call ids ever produced a
+`FILESYSTEM_SINK_CANDIDATE` — confirming the abstention genuinely suppresses sink-target emission
+rather than merely annotating a finding that still got produced. Independently re-run:
+**`PATH_TRAVERSAL_VERDICT_R01=40/40`** (up from 34/34; +5 abstention-persistence assertions +1
+raw-file-not-empty assertion).
+
+Audited producer, its frozen siblings, the property config, `adjudicate_js.py`, and
+`raw_old_baseline_for_regression_only/` remain byte-for-byte untouched. `reportable` stays
+hardcoded `False`. No pipeline wiring, no npm-source-identity logic added.
+
+**This closes the freeze checkpoint.** The Path Traversal source-independent sink/containment
+layer is frozen at this commit. Per explicit instruction, this branch (`feature/path-traversal-r01`)
+is held here — not merged into `develop` — until the shared `feature/npm-source-identity-r01`
+revision lands and is gated; the next Path Traversal revision will branch fresh from updated
+`develop`, carry these frozen commits forward, and consume the shared npm-source facts without
+re-deriving that logic.
