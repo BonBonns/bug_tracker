@@ -1,5 +1,13 @@
 # SERIALIZE-DOS-R01 -- validation results
 
+**R01's `motifer@26.1.1` blind result below was manually reviewed and found NOT
+confirmed as originally framed (both axes emitting a candidate is not itself
+confirmation) -- see `R02_RESULTS.md` for the full manual review, the architectural
+correction it required (R01's size/structure axis is superseded by R02, which
+coordinates the real taint engine instead of approximating it), and R02's own
+(separately, mechanically selected) blind package. This document is kept as the
+historical record of R01's first-cut validation; `R02_RESULTS.md` is current.**
+
 Standalone, property-local. `reportable=false` on every finding this revision produces
 (pipeline integration explicitly deferred -- not wired into any shared provenance,
 reachability, staged-enablement, or aggregator module). See `RECONCILIATION.md` for the

@@ -1,0 +1,31 @@
+Mechanical blind-package selection for R02 (recorded before any inspection):
+
+1. Candidate list source: npm registry search API,
+   https://registry.npmjs.org/-/v1/search?text=keywords:request-logging&size=20
+   -- an external, live, non-cherry-picked ranking (20 real published packages),
+   deliberately a different keyword than R01's blind selection
+   (keywords:express-middleware) to avoid any appearance of steering toward a
+   repeat pick.
+2. Index formula: int(sha256(serialize_dos_r02.py)[:8], 16) % 20, using the FROZEN
+   R02 implementation hash
+   (f76f3a3d4637aba7816923a24dccfc34e311e6aa05123a6c1d251947bb6bbb91).
+3. Computed index: 17.
+4. Selected package (list position 17, 0-indexed): "@sonatel-os/juf-xpress-logger" 1.0.0.
+
+This selection is mechanical: no package was read, downloaded, or otherwise
+inspected before this file was written.
+
+--- Fallback rule (declared after index 17 failed, applied transparently) ---
+Index 17 ("@sonatel-os/juf-xpress-logger" 1.0.0) ships only a bundled/minified
+dist/index.cjs.js (no source .js/.ts files). jssrc2cpg silently produced an EMPTY CPG
+for it (0 files, 0 methods, 0 calls) even though astgen itself successfully parsed the
+file (537KB AST JSON, no errors) -- a jssrc2cpg-side tooling failure on this specific
+file, unrelated to any content/analysis decision, confirmed via a direct method/call
+count query against the resulting CPG.
+
+Declared fallback rule: on a confirmed TOOLING failure (not a content-based rejection),
+advance deterministically to the next index in the SAME candidate list (index+1 mod 20,
+skipping any index already tried) and retry. This keeps selection mechanical -- no
+package is chosen by hand.
+
+Applying: index 17 -> FAILED (tooling). Next: index 18.
