@@ -1,0 +1,1025 @@
+{
+  "audited_count": 97,
+  "changed_packages": [
+    "@2060.io/ffi-napi@4.0.9",
+    "@2060.io/ref-napi@3.0.6",
+    "@appthreat/sqlite3@9.0.1",
+    "@archwayhq/keyring-go@0.2.1",
+    "@automattic/yara@2.6.3",
+    "@breush/ffi-napi@4.0.13",
+    "@breush/ref-napi@4.0.9",
+    "@brick-a-brack/napi-canon-cameras@0.1.5",
+    "@camol/file-lock@1.1.4",
+    "@cocktailpeanut/node-pty-prebuilt-multiarch@0.11.16",
+    "@codeplaydata/dbc2dbf@1.1.0",
+    "@deepfocus/get-windows@1.0.21",
+    "@discordjs/opus@0.10.0",
+    "@elchetz/cld@2.8.5",
+    "@eyevinn/srt@0.8.3",
+    "@flyskywhy/react-native-gcanvas@6.0.24",
+    "@fqlan/add-example-prebuild@1.0.1",
+    "@github/keytar@7.10.6",
+    "@gristlabs/sqlite3@6.0.1-grist.1",
+    "@jellybrick/ffi-napi@4.0.18",
+    "@jellybrick/ref-napi@4.0.10",
+    "@js-ak/watchdog@1.5.0",
+    "@ssxv/node-printer@1.1.1",
+    "logosdb@1.0.1",
+    "nlpplus@1.3.24",
+    "node-crc16@2.0.7",
+    "node-pty@1.1.0",
+    "node-snap7@1.0.9",
+    "os-dns-native@2.0.1",
+    "smart-whisper@0.8.1",
+    "vsfragments_node@0.0.42",
+    "win-export-certificate-and-key@3.0.2"
+  ],
+  "counts": {
+    "CHANGED": 20,
+    "CONFLICT": 12,
+    "UNCHANGED": 11,
+    "UNRESOLVED": 54
+  },
+  "per_package": {
+    "@2060.io/ffi-napi@4.0.9": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); test/binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@2060.io/ref-napi@3.0.6": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@8crafter/leveldb-zlib@1.6.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@abandonware/bluetooth-hci-socket@0.5.3-12": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@acomsys/dash-utils@0.0.17": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@adhdev/ghostty-vt-node@1.0.46": {
+      "category": "UNCHANGED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "CMakeLists.txt: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@ampretia/x509@0.4.10": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@antcube/capnp@0.5.52": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@appthreat/sqlite3@9.0.1": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@archwayhq/keyring-go@0.2.1": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@astronautlabs/webrtc@0.6.1": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@automattic/yara@2.6.3": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": [
+        "enabled",
+        "unresolved"
+      ]
+    },
+    "@breush/ffi-napi@4.0.13": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@breush/ref-napi@4.0.9": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@brick-a-brack/napi-canon-cameras@0.1.5": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); binding.gyp: NAPI_CPP_EXCEPTIONS",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "conflict",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@camol/file-lock@1.1.4": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@cdktf/node-pty-prebuilt-multiarch@0.10.2": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@cerebruminc/i420-jpeg-encoder@1.2.1": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@cherrystudio/mac-system-ocr@0.2.7": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@choysen/mac-system-ocr@0.2.8": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@co_snow/hello@0.0.57": {
+      "category": "UNRESOLVED",
+      "config_file_families": "package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@cocktailpeanut/node-pty-prebuilt-multiarch@0.11.16": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: node_addon_api_except (gyp target dependency)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@codeplaydata/dbc2dbf@1.1.0": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@codeporter/robotjs@0.6.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@confluentinc/kafka-javascript@1.10.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@damonsmith/node-printer@0.7.3": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@deepfocus/get-windows@1.0.21": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@depup/node-addon-api@8.9.2-depup.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@discordjs/opus@0.10.0": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@dolthub/doltlite@0.11.55": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@dwieeb/node-pty-prebuilt@0.8.1": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@elchetz/cld@2.8.5": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@eliyya/sange@1.2.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@eyevinn/srt@0.8.3": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@faressoft/node-pty-prebuilt@0.9.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@flovy/node-printer@0.6.3": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@flyskywhy/react-native-gcanvas@6.0.24": {
+      "category": "CONFLICT",
+      "config_file_families": "cmake;meson;package.json",
+      "disable_evidence": "core/CMakeLists.txt: -fno-exceptions",
+      "enable_evidence": "core/test/linux/CMakeLists.txt: -fexceptions; node/CMakeLists.txt: -fexceptions",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "conflict",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@fqlan/add-example-prebuild@1.0.1": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@fugood/whisper.node@1.1.3": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@genee/dbus@1.0.7-9": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@github/keytar@7.10.6": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@gjsify/napi@0.44.0": {
+      "category": "UNCHANGED",
+      "config_file_families": "meson;package.json",
+      "disable_evidence": "meson.build: -fno-exceptions",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@gjsify/node-gi@0.44.0": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@grandchef/node-printer@0.8.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@gristlabs/sqlite3@6.0.1-grist.1": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@guilherme_souza/node-printer-updated-fork@0.6.17": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@h1x4dev/node-addon-api@2.0.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@huxinhai/mmkv@0.1.7": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "enabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@ipshipyard/node-datachannel@0.26.6": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jasonscheirer/native-progress-bar@1.1.2": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jellybrick/ffi-napi@4.0.18": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jellybrick/ref-napi@4.0.10": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-blit-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-blur-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-circle-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-color-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-composite-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-crop-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-dither-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-flip-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-invert-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-mask-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-resize-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@jimp-native/plugin-rotate-napi@0.1.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@js-ak/watchdog@1.5.0": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@julusian/segfault-raub@2.3.3": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: -fno-exceptions",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@nodert-win10-cu/windows.ui.notifications@0.4.4": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@sentry-internal/node-native-stacktrace@0.5.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@ssxv/node-printer@1.1.1": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@vlad-fresha/segfault-raub@2.10.0": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: -fno-exceptions",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "@zowe/db2-for-zowe-cli@6.1.17": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "node_modules/ibm_db/binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "audify@1.10.1": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;meson;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "fullname-native@3.0.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "hidraw-native@0.2.2": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "indy-sdk@1.16.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "logosdb@1.0.1": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); binding.gyp: NAPI_CPP_EXCEPTIONS; binding.gyp: -fexceptions",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "conflict",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "napi-addon-fdtd@3.4.9": {
+      "category": "UNRESOLVED",
+      "config_file_families": "cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "napi-ldap@1.0.4": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "nlpplus@1.3.24": {
+      "category": "CONFLICT",
+      "config_file_families": "cmake;gn;package.json",
+      "disable_evidence": "nlp-engine/vcpkg/ports/irrlicht/CMakeLists.txt: -fno-exceptions",
+      "enable_evidence": "CMakeLists.txt: NAPI_CPP_EXCEPTIONS",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "conflict",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "node-crc16@2.0.7": {
+      "category": "CONFLICT",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS; binding.gyp: -fno-exceptions",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "conflict",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "node-libcurl@5.1.2": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); binding.gyp: node_addon_api_except (gyp target dependency)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "enabled",
+      "status": "OK",
+      "target_level_internal_disagreement": [
+        "enabled",
+        "unresolved"
+      ]
+    },
+    "node-pty@1.1.0": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: node_addon_api_except (gyp target dependency)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "node-snap7@1.0.9": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence); binding.gyp: -fexceptions",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "conflict",
+      "status": "OK",
+      "target_level_internal_disagreement": [
+        "enabled",
+        "unresolved"
+      ]
+    },
+    "os-dns-native@2.0.1": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "pqclean@0.8.1": {
+      "category": "UNCHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "binding.gyp: NAPI_DISABLE_CPP_EXCEPTIONS",
+      "enable_evidence": "",
+      "exception_configuration": "disabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "profoundjs-fibers@2.7.5": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "re2@1.26.1": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "smart-whisper@0.8.1": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "thunder-node-sdk-lite-m@0.1.16": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "uiohook-napi@1.5.5": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "uriparser@2.4.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;cmake;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "velociradix@8.3.1": {
+      "category": "UNRESOLVED",
+      "config_file_families": "package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "vsfragments_node@0.0.42": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "win-export-certificate-and-key@3.0.2": {
+      "category": "CHANGED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "binding.gyp: -fno-exceptions (found inside a gyp `!`-list removal -- real enable evidence)",
+      "exception_configuration": "enabled",
+      "old_exception_configuration": "disabled",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "x509@0.3.4": {
+      "category": "UNRESOLVED",
+      "config_file_families": "binding.gyp;package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    },
+    "yatag@1.3.0": {
+      "category": "UNRESOLVED",
+      "config_file_families": "package.json",
+      "disable_evidence": "",
+      "enable_evidence": "",
+      "exception_configuration": "unresolved",
+      "old_exception_configuration": "unresolved",
+      "status": "OK",
+      "target_level_internal_disagreement": null
+    }
+  },
+  "v5_written": true
+}

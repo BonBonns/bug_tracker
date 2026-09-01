@@ -174,14 +174,17 @@ ck("*** FALSE-ADJUDICATED: this Resource Guard finding clears applicability (rea
 
 # =====================================================================================
 # 3 & 4. REAL SMOKE TEST: node-libcurl stays non-reportable; the four pqclean candidates stay
-# NOT_YET_DETERMINED -- reusing results/replay_records_v4.jsonl, the corrected chain (v3 plus
-# fix_libcurl_build_config_regression.py's own targeted rerun of node-libcurl's R05/R06 against
-# the corrected npm_build_configuration.tsv row -- v2/v3 still carry the STALE build-config-
-# derived verdict and must never be used for this control again).
+# NOT_YET_DETERMINED -- reusing results/replay_records_v5.jsonl, the current corrected chain
+# (v4 -- node-libcurl's own targeted build-config fix -- plus
+# audit_build_config_staleness.py's own corpus-wide staleness audit and its 32 targeted R06
+# reruns; v2/v3/v4 are all superseded here -- v5 is the only file this control ever reads).
+# Falls back to v4 only if v5 is not present in this environment.
 # =====================================================================================
+_v5_path = os.path.join(HERE, "study", "task34_replay", "results", "replay_records_v5.jsonl")
 _v4_path = os.path.join(HERE, "study", "task34_replay", "results", "replay_records_v4.jsonl")
-if os.path.isfile(_v4_path):
-    with open(_v4_path) as fh:
+_records_path = _v5_path if os.path.isfile(_v5_path) else _v4_path
+if os.path.isfile(_records_path):
+    with open(_records_path) as fh:
         v4_records = [json.loads(line) for line in fh
                       if json.loads(line).get("outcome") == "REPLAYED"]
     libcurl = next((r for r in v4_records if r["package_name"] == "node-libcurl"), None)
@@ -244,8 +247,8 @@ if os.path.isfile(_v4_path):
     else:
         print("SKIP: pqclean not found in v4 replay records")
 else:
-    print("SKIP: results/replay_records_v4.jsonl not present -- controls #3/#4's real "
-          "smoke tests skipped")
+    print("SKIP: neither results/replay_records_v5.jsonl nor replay_records_v4.jsonl is "
+          "present -- controls #3/#4's real smoke tests skipped")
 
 # =====================================================================================
 # Synthetic Resource Guard positive (no real corpus example exists today where Resource Guard's

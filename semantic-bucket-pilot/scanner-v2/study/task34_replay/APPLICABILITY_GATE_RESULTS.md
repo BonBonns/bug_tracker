@@ -53,11 +53,19 @@ Two corrections, per direct instruction, both real and already fixed (not merely
    this document. Callback/worker (124 candidates) and module-load (7) reachability also remain
    unfinished under task #32, unchanged by this correction.
 
-   **Not audited, disclosed as an open risk, not assumed isolated to node-libcurl:** whether any
-   of the other 96 successfully-replayed packages' own `npm_build_configuration.tsv` rows are
-   similarly stale has not been checked. Nothing in this replay's own data suggests it (no other
-   package's R05/R06 finding changed), but this was never systematically audited -- a real,
-   disclosed gap, not a silent assumption of correctness.
+   **Now audited, closed -- see "Build-configuration staleness audit" below.** The disclosed risk
+   that other packages' `npm_build_configuration.tsv` rows might be similarly stale was real: 32
+   of the other 96 successfully-replayed packages' rows WERE stale by the same class of defect.
+   None of the 32 affected any actual R06 finding (none of them had any R06 finding at all, at
+   any build-config value) -- node-libcurl remains the only package in this 97-package sample
+   where stale build-config data produced an incorrect candidate. Fixed at the data layer for all
+   32 regardless, and reconfirmed via a targeted rerun for each. Full account, per-package
+   breakdown, and the reconfirmed final funnel are in the dedicated section below.
+
+3. **Wording nit.** "Corpus-wide APPLICABLE count" (used loosely in chat, never committed to this
+   document) should read "97-package replay APPLICABLE count" -- this document's own "Final
+   result" section already used the correctly-scoped wording throughout; noted here only so the
+   correction is on the record.
 
 Per direct instruction: define `applicability_status` separately per property family, add the
 required controls, keep task #32 partially open (transitive reachability implemented; callback/
@@ -167,6 +175,52 @@ match on `(package, version, staged_key, site_identity)` -- `site_id` for OOB_*,
 for LOCK_BALANCE (never `method_id` alone, which `bindRaw` alone already proves can be shared by
 more than one real, distinct finding).
 
+## Build-configuration staleness audit (`audit_build_config_staleness.py`)
+
+Closes the "not audited" risk this document previously disclosed after the node-libcurl fix: if
+one frozen `npm_build_configuration.tsv` row was stale, Resource Guard results for the other 96
+successfully-replayed packages could not yet be assumed current either. A cheap, configuration-
+only audit, no Joern rebuild anywhere:
+
+1. Re-ran the fixed build-configuration extractor (`extract_build_config.py` -- both real
+   regression fixes present) against all 97 already-pinned tarballs, by the SAME
+   `tarball_url`/`tarball_sha256` identity already recorded in `overnight_sample_100.json` --
+   continuing task #34's own narrow download exception, never a new package or URL. Nothing
+   touched disk: `classify_from_tarball()` operates on in-memory bytes; each package's own real
+   `tarball_sha256` is re-verified before classification, exactly as the original narrow
+   exception required.
+2. Compared every new result against its frozen TSV row.
+3. Counts, over all 97: **UNCHANGED 11, CHANGED 20, CONFLICT 12, UNRESOLVED 54** (full
+   per-package detail: `results/build_config_staleness_audit.json`).
+4. Reran R06 for every package in CHANGED **or** CONFLICT (32 total) -- not just CHANGED. Reason,
+   found while scoping step 4, not assumed from the instruction's own wording: R06's own verdict-
+   construction logic (`resource_guard_verdict_r06.py`) only proceeds to a real candidate state
+   when `exc_config == "disabled"`; a CONFLICT-bucket package whose frozen TSV row ALSO said
+   `disabled` carries the exact same regression risk as a CHANGED one -- a real candidate built
+   on a premise (a clean `"disabled"`) the corrected, authoritative extraction shows was never
+   actually true (real ambiguity, not a clean value). 25 of the 32 rerun packages had this exact
+   shape (old value `disabled`, new value something else); the other 7 were already non-candidate
+   abstentions before and after (harmless to rerun, done anyway for a uniform rule). Checked and
+   ruled out the mirror-image risk too: zero packages flipped the other direction (old value not
+   `disabled`, new value `disabled`) -- no package's build config newly BECOMES `disabled` under
+   the fix, so there is no missed-candidate risk to chase here.
+5. **Result: zero net change.** All 32 rerun packages had **zero R06 findings in
+   `results/replay_records_v4.jsonl` to begin with, at any build-config value** -- R06's own
+   contract-matching never found a matching acquisition-call pattern in any of them, so the stale
+   config, real as it was, never actually gated anything for these 32. `results/
+   replay_records_v5.jsonl` (v4 plus this audit's 32 R06 reruns) is now the current, corrected
+   final state; every reportable/candidate/applicable count in this document is unchanged by it.
+   Node-libcurl remains the ONE package in this 97-package sample where stale build-config data
+   produced an incorrect candidate.
+6. Diagnostic-only side finding (never used for the CHANGED/CONFLICT/UNCHANGED decision, since
+   `npm_build_configuration.tsv` is itself package-wide): `classify_target_aware()` was also run
+   against every real, unambiguous `binding.gyp` found, to check whether a package-wide flat
+   verdict was ever papering over real, disagreeing per-target results. 3 packages showed this
+   (`@automattic/yara`, `node-libcurl`, `node-snap7` -- real per-target values `enabled` on one
+   target, `unresolved` on another). None change this audit's own conclusion: node-libcurl's own
+   single R06 finding was already independently confirmed (in the earlier regression fix) to
+   resolve against its own correct, specific target.
+
 ## Final result, this replay (CORRECTED)
 
 **Zero reportable findings among 97 successfully replayed packages from the frozen 100-package
@@ -175,20 +229,21 @@ findings, corpus-wide" -- that earlier wording conflated a 97-package diagnostic
 corpus-wide result; see "CORRECTIONS" at the top of this document.)
 
 `rerun_aggregator_applicability.py` (`results/replay_records_v3.jsonl`) plus
-`fix_libcurl_build_config_regression.py`'s own targeted node-libcurl correction
-(`results/replay_records_v4.jsonl`, the current, corrected final state): **5** real `APPLICABLE`
-determinations (the 5 staged transitive-tier promotions only -- node-libcurl's own R06 copy no
-longer reaches `APPLICABLE` at all, its root-cause regression fixed), **7** real
-`CONFIRMED_FALSE_POSITIVE` adjudications (the 5 staged sites + node-libcurl's R05 and R06 copies
-both, the latter two now a genuine second, independent veto rather than the only thing masking an
-incorrect grant), 4 pqclean candidates left genuinely open. Every fail-closed invariant
-re-verified directly against the real output, including the new node-libcurl-applicability-
-before-adjudication invariant. Full combined gate suite: ALL PASS (`check_provenance.py` 51/51,
-`check_oob_reportable_gate.py` 17/17, `check_vendored_attribution.py` 16/16,
-`check_reachability_tier.py` 25/25, `check_staged_enablement.py` 25/25,
-`check_six_property_aggregator.py` 18/18, `check_lock_balance.py` 11/11,
-`check_protected_field.py` 11/11, `check_adjudication_registry.py` 22/22,
-`check_applicability_gate.py` 23/23).
+`fix_libcurl_build_config_regression.py`'s node-libcurl correction (`v4`) plus
+`audit_build_config_staleness.py`'s corpus-wide staleness audit and its 32 targeted R06 reruns
+(`results/replay_records_v5.jsonl`, the current, corrected final state -- superseding v2/v3/v4):
+**5** real `APPLICABLE` determinations (the 5 staged transitive-tier promotions only --
+node-libcurl's own R06 copy no longer reaches `APPLICABLE` at all, its root-cause regression
+fixed), **7** real `CONFIRMED_FALSE_POSITIVE` adjudications (the 5 staged sites + node-libcurl's
+R05 and R06 copies both, the latter two now a genuine second, independent veto rather than the
+only thing masking an incorrect grant), 4 pqclean candidates left genuinely open. Every
+fail-closed invariant re-verified directly against the real output, including the new
+node-libcurl-applicability-before-adjudication invariant. Full combined gate suite: ALL PASS
+(`check_provenance.py` 51/51, `check_oob_reportable_gate.py` 17/17,
+`check_vendored_attribution.py` 16/16, `check_reachability_tier.py` 25/25,
+`check_staged_enablement.py` 25/25, `check_six_property_aggregator.py` 18/18,
+`check_lock_balance.py` 11/11, `check_protected_field.py` 11/11,
+`check_adjudication_registry.py` 22/22, `check_applicability_gate.py` 23/23).
 
 ## What remains open
 
@@ -211,14 +266,24 @@ before-adjudication invariant. Full combined gate suite: ALL PASS (`check_proven
   `TRANSITIVE_PROMOTIONS_MANUAL_REVIEW.md`'s own "Recommendation" section for the full account.
 - The 4 pqclean candidates stay genuinely open, pending an individual review of the same rigor
   as this one.
-- **Whether any of the other 96 successfully-replayed packages' own
-  `npm_build_configuration.tsv` rows are similarly stale has not been audited** -- disclosed as
-  an open risk, not assumed isolated to node-libcurl (see "CORRECTIONS" above).
+- ~~Whether any of the other 96 successfully-replayed packages' own `npm_build_configuration.tsv`
+  rows are similarly stale has not been audited~~ **CLOSED -- see "Build-configuration staleness
+  audit" above.** 32 were stale; none affected any real R06 finding; `results/
+  replay_records_v5.jsonl` is the reconfirmed current state.
+- **Remaining blockers before expanding to the 394 unevaluated packages, unchanged by this
+  audit** (all four must clear, not just one): (1) LOCK_BALANCE structural primitive-wrapper
+  recognition; (2) OOB type/extent equivalence; (3) callback/worker reachability
+  (`CALLBACK_OR_WORKER_HEURISTIC`, 124 candidates, diagnostic-only); (4) module-load reachability
+  (`MODULE_LOAD_EXECUTION_HEURISTIC`, 7 candidates, diagnostic-only). The current 5 `APPLICABLE`
+  staged findings remain useful regression cases (`adjudication_registry.py`'s
+  `KNOWN_STAGED_ADJUDICATIONS`), but all 5 are manually confirmed false positives, not evidence
+  any of the four blockers above is already resolved.
 - The remaining 394 packages stay paused. OOB_COMPARE (task #40) stays disabled.
 
 ---
 *No new scanning. All changes are recomputation over already-preserved evidence
 (`results/replay_records_v2.jsonl` -> `results/replay_records_v3.jsonl` ->
-`results/replay_records_v4.jsonl`) plus real, individually-reviewed adjudications recorded
-against real published source, plus one targeted, preserved-facts-only rerun of node-libcurl's
-own R05/R06 verdict construction under a corrected build-configuration input.*
+`results/replay_records_v4.jsonl` -> `results/replay_records_v5.jsonl`) plus real,
+individually-reviewed adjudications recorded against real published source, plus two rounds of
+targeted, preserved-facts-only R06 reruns (node-libcurl's own fix, then the 32-package
+build-configuration staleness audit) under corrected build-configuration inputs.*
