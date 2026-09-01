@@ -1,0 +1,35 @@
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":1,"parity":"odd","recovered":["abc\\', "],"matches_parity_rule":true}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":2,"parity":"even","recovered":["abc\\\\', "],"matches_parity_rule":false}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":3,"parity":"odd","recovered":["abc\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":4,"parity":"even","recovered":["abc\\\\\\\\', "],"matches_parity_rule":false}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_one_char_lookbehind","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\', "],"matches_parity_rule":false}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":1,"parity":"odd","recovered":["abc\\', "],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":2,"parity":"even","recovered":["abc\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":3,"parity":"odd","recovered":["abc\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":4,"parity":"even","recovered":["abc\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_classic_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":1,"parity":"odd","recovered":["abc\\', "],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":2,"parity":"even","recovered":["abc\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":3,"parity":"odd","recovered":["abc\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":4,"parity":"even","recovered":["abc\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"es_unrolled_parity","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":0,"parity":"even","recovered":["abc', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":1,"parity":"odd","recovered":["abc\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":2,"parity":"even","recovered":["abc\\\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":3,"parity":"odd","recovered":["abc\\\\\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":4,"parity":"even","recovered":["abc\\\\\\\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_negclass_one_char","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\', 'nex"],"matches_parity_rule":false}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":1,"parity":"odd","recovered":["abc\\","next"],"matches_parity_rule":false}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":2,"parity":"even","recovered":["abc\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":3,"parity":"odd","recovered":["abc\\\\\\","next"],"matches_parity_rule":false}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":4,"parity":"even","recovered":["abc\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\","next"],"matches_parity_rule":false}
+{"rule_id":"es_no_escape_awareness","dialect":"ECMASCRIPT","engine":"node-regexp","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\","next"],"matches_parity_rule":true}
