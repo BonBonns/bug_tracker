@@ -37,10 +37,18 @@ required checks:
    - **Crash-safety: adjudicated REJECTED**, without any analyzer code change --
      Express's own dispatch layer catches the synchronous throw; it does not crash the
      process.
-   - **Size/structure: confirmed on manual review** -- the true dataflow is real and
-     maximally direct, though the automated taint-engine pipeline currently
-     misreports it (item 3), and its real-world severity is meaningfully (but not
-     guaranteed-package-independently) bounded by a consumer-chosen 100KB default.
+   - **Size/structure: applies, recorded as four separate tags, not one verdict**
+     (see `MOTIFER_MANUAL_REVIEW.md` Sec.6 for the full reasoning behind each):
+     `SIZE_STRUCTURE_FLOW_CONFIRMED` (the dataflow is real and maximally direct, once
+     the correct node is examined -- the automated pipeline currently misreports it,
+     item 3), `PACKAGE_LOCAL_BOUND_NOT_ESTABLISHED` (nothing in motifer's own code
+     bounds it), `EXTERNAL_CONFIGURABLE_BOUND_PRESENT` (the documented usage path
+     does route through a real but consumer-chosen, reconfigurable 100KB
+     `body-parser` default), `RESOURCE_CONSEQUENCE_NOT_ESTABLISHED` (no CPU/memory/
+     latency cost was measured or observed). **"Confirmed genuine" overstates this --
+     what is confirmed is the flow and the absence of a package-local bound; the
+     resource-risk classification stays conditional on the external bound and is not
+     itself a demonstrated consequence.**
 
 **R01's original two-candidate result is not treated as confirmed.** Per instruction,
 both axes emitting a candidate is not itself confirmation.
@@ -134,6 +142,8 @@ work examines.
 
 Nothing in this document is an exploitability, severity, or impact claim.
 `reportable=false` on every finding this revision produces, throughout. The motifer
-crash-safety adjudication (rejected) and size/structure confirmation (a real,
-manually-verified candidate, not demonstrably bounded by anything in motifer's own
-code) are serialization-handling and resource-bound classifications only.
+crash-safety adjudication (rejected) and size/structure record (the four-tag
+classification: a confirmed flow and an unestablished package-local bound, conditioned
+by a present-but-external, reconfigurable bound, with no resource consequence
+established) are serialization-handling and resource-bound classifications only -- not
+a vulnerability determination, and not a confirmed resource-exhaustion outcome.

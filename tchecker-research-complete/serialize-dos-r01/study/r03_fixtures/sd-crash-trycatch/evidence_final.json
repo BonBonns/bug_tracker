@@ -1,0 +1,117 @@
+{
+  "schema": "canonical-evidence-set/js-ts/1.1",
+  "finding_id": "serialize-dos:sd-crash-trycatch#sink30064771074",
+  "note": "JS/TS candidate on real CPG + production fact producers",
+  "sink": {
+    "node_id": "30064771074",
+    "line": 6,
+    "kind": "JSON.stringify",
+    "sink_model": "DIRECT_SERIALIZATION",
+    "class": "serialize-dos",
+    "downstream_primitive": "JSON.stringify"
+  },
+  "deterministic_coverage": "SEMANTICALLY_CLOSED",
+  "disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+  "value_preservation": "ESTABLISHED",
+  "security_property": "ATTACKER_CONTROL_OF_SERIALIZED_SIZE_OR_STRUCTURE",
+  "property_outcome": "ESTABLISHED",
+  "property_vs_vulnerability": {
+    "established": "modeled security property only (not a confirmed DoS)",
+    "residual_vulnerability_questions": [
+      "effective request-size bounds (e.g. body-parser limits)",
+      "reachability of the handler",
+      "repeatability",
+      "actual resource impact"
+    ]
+  },
+  "structural__ESTABLISHED_BY_STATIC_ANALYSIS": {
+    "origin": {
+      "origin_family": "req.body",
+      "source_node_id": "30064771073",
+      "established_by": "STATIC_PROVENANCE",
+      "qualification": "ESTABLISHED_DATAFLOW(may; not proven necessary)"
+    },
+    "n_alternatives": 1,
+    "n_open_alternatives": 0,
+    "transform_chain": []
+  },
+  "source_to_sink_paths": [
+    {
+      "origin": {
+        "origin_family": "req.body",
+        "source_node_id": "30064771073",
+        "source_code": "req.body",
+        "source_line": 4,
+        "source_containing_statement": null,
+        "source_containing_function": null,
+        "established_by": "STATIC_PROVENANCE"
+      },
+      "steps": [],
+      "sink": {
+        "node_id": "30064771074",
+        "line": 6,
+        "kind": "JSON.stringify",
+        "sink_model": "DIRECT_SERIALIZATION",
+        "class": "serialize-dos",
+        "downstream_primitive": "JSON.stringify"
+      },
+      "qualification": "ESTABLISHED_DATAFLOW",
+      "necessity": "MAY_NOT_MUST"
+    }
+  ],
+  "path_code_context": [
+    {
+      "origin_source_node_id": "30064771073",
+      "source": {
+        "node_id": "30064771073",
+        "expression": null,
+        "containing_statement": null,
+        "containing_function": null
+      },
+      "steps": [],
+      "sink": {
+        "node_id": "30064771074",
+        "expression": null,
+        "containing_statement": null,
+        "containing_function": null
+      }
+    }
+  ],
+  "path_flow_context": [
+    {
+      "origin_source_node_id": "30064771073",
+      "transitions": [],
+      "transitions_status": "NOT_PRODUCED",
+      "note": "optional flow-context enrichment not produced for this run; path membership is asserted in SOURCE_TO_SINK_PATHS"
+    }
+  ],
+  "semantically_unresolved__SEMANTICALLY_UNRESOLVED": [],
+  "not_applicable__NOT_APPLICABLE": [
+    {
+      "field": "control_effect",
+      "reason": "no iteration/validation-control governs this sink"
+    },
+    {
+      "field": "matcher_kind / domain_containment",
+      "reason": "no denylist/predicate comparison"
+    },
+    {
+      "field": "aliasing_scope",
+      "reason": "no shared-object mutation"
+    },
+    {
+      "field": "guard_disposition",
+      "reason": "no control-flow guard dominates this sink"
+    }
+  ],
+  "relevant_code__RELEVANT_CODE": [
+    {
+      "ref": "sink",
+      "line": 6,
+      "node_id": "30064771074",
+      "kind": "JSON.stringify",
+      "sink_model": "DIRECT_SERIALIZATION",
+      "downstream_primitive": "JSON.stringify"
+    }
+  ]
+}
