@@ -1,0 +1,13 @@
+Mechanical blind-package selection procedure (recorded before any inspection):
+
+1. Candidate list source: npm registry search API,
+   https://registry.npmjs.org/-/v1/search?text=keywords:express-middleware&size=20
+   -- an external, live, non-cherry-picked ranking (20 real published packages).
+2. Index formula: int(sha256(serialize_dos_r01.py)[:8], 16) % 20, using the FROZEN
+   implementation hash recorded at freeze time
+   (b4429f6c8fb257786321d0627b7908caa87eac5f95fe29ea70b86a98ba9a9f9a).
+3. Computed index: 8.
+4. Selected package (list position 8, 0-indexed): "motifer" 26.1.1.
+
+This selection is mechanical: no package was read, downloaded, or otherwise
+inspected before this file was written.
