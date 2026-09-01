@@ -64,20 +64,37 @@ The R01 fixture must classify identically under R02 (gated).
 | real positive-path behavior | **not yet established on a real package** -- the caller-side positive path is proven on compiled fixtures (w02/w03) only |
 | real blind portability | limited -- one analyzed site, whose honest classification is an abstention at the interprocedural boundary |
 
-## Pipeline wiring (explicit decision, not an oversight)
+## Candidate vocabulary (CORRECTED -- the exact allowlist)
 
-NAPI-STATUS remains a STANDALONE property in both revisions. Wiring it into the live
-pipeline requires extending per-property vocabularies in frozen modules --
-`provenance.py`'s PROPERTY_CANDIDATE_RULES, `reachability_tier.py`,
-`applicability_gate.py`, `adjudication_registry.py`, and the six-property aggregator
-whose schema task #34's replay artifacts pin -- i.e., the same staged-enablement path
-(staged_enablement.py) every previously integrated property went through, with its
-own gates. Finding records already carry the fields that path consumes (file, line,
-method/call node ids, verdict vocabulary with an explicit candidate subset:
-`STATUS_GUARD_MISSING` is the only candidate-shaped verdict; every `ABSTAIN_*`,
-`OUTPUT_ESCAPES_*`, `NO_OUTPUT_USE*`, `STATUS_PROPAGATED*`, `*_ESTABLISHED` record is
-a non-candidate). Integration is deliberately a separate change with its own
-freeze/controls, not a rider on this revision.
+An earlier draft of this section said "`STATUS_GUARD_MISSING` is the only
+candidate-shaped verdict" without naming the caller-side identifier -- a vocabulary
+mismatch that would let an integration recognizing only the intraprocedural shapes
+silently discard R02's STRONGEST caller-side finding. The corrected, exact candidate
+allowlist (implemented and gated in `napi_status_integration.py`):
+
+  - `STATUS_GUARD_MISSING` with an intraprocedural sub_reason (`NO_RELATED_CHECK`,
+    `STATUS_DISCARDED`, `RELATED_CHECK_AFTER_USE`,
+    `NON_TERMINATING_OR_BYPASSED_FAILURE_PATH`, `UNRELATED_CHECK_ONLY`);
+  - `STATUS_GUARD_MISSING` / **`STATUS_DISCARDED_OUTPUT_USED_IN_CALLER`** -- the
+    caller-side finding. It satisfies the property's candidate definition just as
+    strongly: the status was discarded, the required output escaped, and the caller
+    used that output afterward.
+
+Both are candidates. Every abstention -- `OUTPUT_ESCAPES_CALLER_ANALYSIS_REQUIRED`
+included -- and every `NO_OUTPUT_USE*`, `STATUS_PROPAGATED*`, `*_ESTABLISHED` record
+is a NON-candidate. The allowlist is exact-match and fails closed: a
+`STATUS_GUARD_MISSING` record carrying an unrecognized sub_reason is counted loudly
+as `CANDIDATE_VOCABULARY_UNRECOGNIZED` (gated to zero) rather than silently dropped
+OR silently admitted.
+
+## Pipeline wiring (integrated additively -- see NAPI_STATUS_INTEGRATION.md)
+
+Integration now exists in `napi_status_integration.py` following the Nan-integration
+precedent (additive extension, own gate), with a NEW aggregator revision
+(`aggregate_record_r02`) that delegates the six frozen properties to
+`six_property_aggregator.aggregate_record` unchanged rather than rewriting the task
+#34 schema. The property is DIAGNOSTIC-ONLY at the enablement stage until a real
+package exercises its positive path -- fixtures establish mechanism, not portability.
 
 ## Claims boundary
 

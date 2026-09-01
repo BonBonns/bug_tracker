@@ -1,0 +1,5 @@
+{
+ "status": "INFRASTRUCTURE_FAILURE",
+ "reason": "PRESERVED_BUNDLES_ABSENT",
+ "detail": "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/evidence_bundles_100 does not exist in this checkout -- the evidence bundles are gitignored scratch outputs that only exist on the machine that ran the overnight corpus pass. Per the pre-registered rule this is an infrastructure result: NOT a scanner negative and NOT semantic evidence. Run this driver where the preserved bundles exist."
+}
