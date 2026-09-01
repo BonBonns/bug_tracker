@@ -1,0 +1,33 @@
+DEFS_Release := \
+	'-DNODE_GYP_MODULE_NAME=node_snap7' \
+	'-DUSING_UV_SHARED=1' \
+	'-DUSING_V8_SHARED=1' \
+	'-DV8_DEPRECATION_WARNINGS=1' \
+	'-D_GLIBCXX_USE_CXX11_ABI=1' \
+	'-D_FILE_OFFSET_BITS=64' \
+	'-D_LARGEFILE_SOURCE' \
+	'-D__STDC_FORMAT_MACROS' \
+	'-DOPENSSL_NO_PINSHARED' \
+	'-DOPENSSL_THREADS' \
+	'-DBUILDING_NODE_EXTENSION'
+
+# Flags passed to all source files.
+CFLAGS_Release := \
+	-fPIC \
+	-pthread \
+	-Wall \
+	-Wextra \
+	-Wno-unused-parameter \
+	-m64 \
+	-O3 \
+	-fno-omit-frame-pointer
+
+# Flags passed to only C files.
+CFLAGS_C_Release :=
+
+# Flags passed to only C++ files.
+CFLAGS_CC_Release := \
+	-fno-rtti \
+	-fno-exceptions \
+	-fno-strict-aliasing \
+	-std=gnu++17

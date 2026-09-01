@@ -1,0 +1,15 @@
+[harness] method=ReadArea size=629145600 pid=27180
+[harness] resident memory before call: 47575040 bytes
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+exit=134
+[harness] method=Upload size=629145600 pid=27188
+[harness] resident memory before call: 47505408 bytes
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+exit=134
+[harness] method=FullUpload size=629145600 pid=27196
+[harness] resident memory before call: 47443968 bytes
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+exit=134

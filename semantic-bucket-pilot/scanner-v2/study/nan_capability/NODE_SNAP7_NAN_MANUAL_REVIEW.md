@@ -126,20 +126,27 @@ inline MaybeLocal<v8::Object> NewBuffer(
 ```
 
 Two real, confirmed facts about this exact code: (1) the `assert()` is a standard C `assert` --
-compiled out entirely under `NDEBUG`, which is what a normal, non-debug `node-gyp build`
-(the standard install path for a published npm package) defines, so it provides **zero real
-protection** in the deployment that matters; (2) even when compiled in, it only rejects lengths
-above `~1.07GB` -- it would not catch a moderately large (e.g. 50MB) unwanted allocation at all.
-Beyond that point, `node::Buffer::New()` itself is the real, final arbiter: on an allocation it
-cannot satisfy, it returns an EMPTY `MaybeLocal`, and node-snap7's own call site
-(`node_snap7_client.cpp:1278` etc.) immediately calls `.ToLocalChecked()` on that result --
-V8's own real, documented `MaybeLocal::ToLocalChecked()` contract is to fatally abort the
-process when the `Maybe` is empty. **Practical impact, confirmed rather than assumed:** a
-caller-controlled `amount`/`info[2]` large enough to make the underlying allocation fail (well
-below `INT32_MAX`, and with no assert to catch it in a real release build) crashes the Node.js
-process hosting node-snap7 -- a real, unauthenticated (from the library's own perspective; the
-actual trust boundary is whatever passes `size` into `DBRead`/`Upload`/etc.) denial-of-service,
-not merely a theoretical one.
+compiled out entirely under `NDEBUG`; (2) even when compiled in, it only rejects lengths above
+`~1.07GB` -- it would not catch a moderately large (e.g. 50MB) unwanted allocation at all. Beyond
+that point, `node::Buffer::New()` itself is the real, final arbiter: on an allocation it cannot
+satisfy, it returns an EMPTY `MaybeLocal`, and node-snap7's own call site
+(`node_snap7_client.cpp:1278` etc.) immediately calls `.ToLocalChecked()` on that result -- V8's
+own real, documented `MaybeLocal::ToLocalChecked()` contract is to fatally abort the process when
+the `Maybe` is empty.
+
+**Correction (`NODE_SNAP7_RUNTIME_VALIDATION.md`, Track A):** this section's own earlier claim
+that a normal `node-gyp` Release build defines `NDEBUG` was WRONG -- directly checked against the
+real, generated `build/node_snap7.target.mk` from an actual local `node-gyp rebuild`: node-gyp's
+own default `DEFS_Release` does NOT include `-DNDEBUG`. The `assert()` above is very likely
+compiled IN for a real node-snap7 build, not out -- meaning it (or its own `~1.07GB` gate) is
+plausibly NOT the operative failure path this document originally described. **What runtime
+validation found instead:** the same Release build sets `-fno-exceptions`, and the real,
+reproduced crash mechanism is `new char[size]` (the allocation BEFORE `Nan::NewBuffer` is even
+reached) throwing an uncaught `std::bad_alloc`, `std::terminate()`, `SIGABRT` -- confirmed by
+directly running the compiled binary under a real, bounded memory limit for all three sites (exit
+code 134, every time). The PRACTICAL CONCLUSION below stands (a caller-controlled size large
+enough to exceed available memory crashes the process) -- the exact mechanism is corrected, not
+re-guessed a second time. See `NODE_SNAP7_RUNTIME_VALIDATION.md` for the full, real transcript.
 
 ## 5. Classification (confirmed candidate / false positive / unresolved)
 
