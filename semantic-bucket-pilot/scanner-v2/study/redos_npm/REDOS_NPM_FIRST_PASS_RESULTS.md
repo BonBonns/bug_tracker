@@ -169,15 +169,16 @@ record that reached `PACKAGE_API_INPUT_REACHABLE` (`phplike@2.5.12`'s own `sprin
 timing measurement (not reasoning alone, matching the property's own established discipline):
 confirmed LINEAR scaling up to 80,000 adversarial characters (sub-millisecond throughout, no
 quadratic or exponential growth) -- **`MANUALLY_REJECTED`**, a confirmed false positive, not a
-real ReDoS. The pattern's own `%(\d+\$)?...` branch textually matches the frozen classifier's
-"alternation branch with quantifier followed by more content" rule (the same rule CVE-2025-5892's
-real `\s+:` case triggers), but differs in a real, measurable way: the dangerous branch requires a
-LITERAL `%` to even be entered, bounding each backtrack to its own local digit run rather than
-compounding across the whole string the way a COMMON character class like `\s` does. A real,
-distinct, disclosed refinement opportunity for the frozen Stage 2 classifier (not the same bug as
-the already-fixed suffix-delimiter false positive) -- not attempted here, since the analyzer was
-not modified after the pre-registered selection was committed, per direct instruction. 0 records
-were `MANUALLY_CONFIRMED`; 0 were `ABSTAINED`.
+real ReDoS. Root cause formalized and stress-tested
+(`pilot25/phplike_review/ROOT_CAUSE_AND_DECISION.md`): the dangerous branch's own quantifier is
+gated behind a LITERAL `%` that is character-class-DISJOINT from what it quantifies (`\d`) --
+confirmed decisive by direct timing proof that an OVERLAPPING gating literal (common or not)
+reproduces the same real quadratic blowup CVE-2025-5892 shows. **Fix-vs-adjudicate decision:
+ADJUDICATION** -- a safe general fix needs real character-class disjointness analysis (a
+genuinely new capability, not a small patch; an unsafe shortcut has been directly shown to risk
+real false negatives) -- not attempted here, since the analyzer was not modified after the
+pre-registered selection was committed, per direct instruction. 0 records were
+`MANUALLY_CONFIRMED`; 0 were `ABSTAINED`.
 
 **No `PACKAGE_API_INPUT_REACHABLE` record was `MANUALLY_CONFIRMED`** -- per direct instruction
 point 8, this is reported as the measured result, not silently absorbed. Pipeline wiring and

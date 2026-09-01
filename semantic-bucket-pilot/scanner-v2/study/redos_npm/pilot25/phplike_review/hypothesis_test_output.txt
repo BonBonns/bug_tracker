@@ -1,0 +1,9 @@
+OK: CVE-2025-5892 branch: quantifier is the branch's own first element -> UNGATED, must stay flagged
+    branch='\\s+:'
+    gated=False (expected False)
+OK: autotranslate.ts branch: only a zero-width anchor before the quantifier -> UNGATED, must stay flagged
+    branch='^\\s*<p>'
+    gated=False (expected False)
+OK: phplike branch: literal % precedes the first quantifier -> GATED, should become SAFE-from-this-rule
+    branch="%(\\d+\\$)?([-+\\'#0 ]*)(\\*\\d+\\$|\\*|\\d+)?(\\.(\\*\\d+\\$|\\*|\\d+))?([scboxXuidfegEG])"
+    gated=True (expected True)

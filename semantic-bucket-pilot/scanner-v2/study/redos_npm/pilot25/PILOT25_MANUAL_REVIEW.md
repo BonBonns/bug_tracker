@@ -72,18 +72,23 @@ own real `\s+:` pattern showed on equivalent input.
 **Why this differs from the CVE-2025-5892 case, precisely**: `\s` (whitespace) is a COMMON
 character -- a long run of it means the regex engine's own per-position match attempts backtrack
 at EVERY position within that run, compounding quadratically across the whole string. Here, the
-dangerous branch requires a LITERAL `%` to even be entered; each `%` occurrence's own backtrack
-is bounded to its own local digit run and never compounds with other `%` occurrences elsewhere in
-the string (confirmed directly: Test 2's 1904-segment case, spreading the same total backtracking
-work across many independent `%`-anchored segments, is NOT dramatically slower than Test 1's
-single-segment case of comparable total length). This is a real, distinct root cause from the
-already-documented and already-fixed suffix-delimited-nested-quantifier false positive
-(`REDOS_STAGE2_SUFFIX_DELIMITER_FIX.md`) -- not the same bug re-appearing, a genuinely different
-gap in the SAME "alternation branch with quantifier followed by more content" rule: that rule does
-not currently distinguish a branch requiring a RARE bounding literal (safe, as demonstrated here)
-from one reachable via a COMMON character class (the real CVE-2025-5892 shape).
+dangerous branch requires a LITERAL `%` to even be entered before its own quantifier is reached;
+each `%` occurrence's own backtrack is bounded to its own local digit run. **Root cause,
+formalized and stress-tested, full writeup in `phplike_review/ROOT_CAUSE_AND_DECISION.md`**: the
+real distinguishing structural condition is NOT the gating literal's real-world frequency (an
+earlier, now-superseded framing) -- it is whether the gating literal is character-class-DISJOINT
+from the quantified atom it precedes. Direct timing proof: a gating literal that OVERLAPS the
+quantified class (`a([a-z]+Q)` on all-`a` input, where `a` is common) reproduces the SAME
+quadratic blowup CVE-2025-5892 shows (`phplike_review/overlap_test_output.txt`: ~1040x time for
+40x input); phplike's own disjoint case (`%` vs `\d`) stays flat regardless of scale. This is a
+real, distinct root cause from the already-documented and already-fixed suffix-delimited-nested-
+quantifier false positive (`REDOS_STAGE2_SUFFIX_DELIMITER_FIX.md`) -- not the same bug
+re-appearing, a genuinely different gap in the SAME "alternation branch with quantifier followed
+by more content" rule, which currently has no disjointness check at all (the property's own
+EXISTING prefix/suffix-delimiter fixes already require exactly this kind of disjointness check,
+just for a different, nested-quantifier shape -- never yet extended to this rule).
 
-## Decision, per direct instruction point 8
+## Decision, per direct instruction point 8 and the fix-vs-adjudicate question
 
 **No real candidate survived manual review.** The measured result is a genuine, disclosed zero,
 not glossed over: 21/21 packages scanned successfully; the single raw candidate found is a
@@ -91,12 +96,16 @@ confirmed false positive by direct timing evidence, not by assumption. Per direc
 *"If no real candidate appears, report the measured zero and decide whether the frozen complexity
 model is too narrow before integrating it"* -- the finding here is not that the model is too
 NARROW, but that its existing alternation-branch rule is, in this one confirmed instance, too
-WIDE: it does not yet distinguish a bounding literal's own real frequency/rarity in typical input,
-the exact structural distinction that made the difference here. This is a real, disclosed,
-actionable refinement opportunity for the frozen Stage 2 classifier -- NOT built or attempted in
-this pass (the analyzer was not modified after the pre-registered selection was committed, per
-direct instruction, and refining Stage 2 itself is a separate, future decision, not implied by
-this pilot's own scope).
+WIDE.
+
+**Fix-vs-adjudicate: ADJUDICATION, not a structural fix, decided and justified in
+`phplike_review/ROOT_CAUSE_AND_DECISION.md`.** A safe general fix needs real character-class
+disjointness analysis (proven necessary, not optional, by the overlap stress test above) -- a
+genuinely new capability, not a small patch, and an unsafe shortcut version has now been directly
+shown to introduce real false negatives. This documented review record stands as the adjudication
+(no live `adjudication_registry.py`-style table exists for REDOS yet, since it is not wired into
+the npm pipeline). NOT built or attempted in this pass (the analyzer was not modified after the
+pre-registered selection was committed, per direct instruction).
 
 **Consequence: pipeline wiring and `reportable` enablement both remain out of scope for this
 round.** Per direct instruction point 10, `reportable` stays disabled until a real, integrated
