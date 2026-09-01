@@ -24,12 +24,12 @@ by hand against the frozen Scala `classifyPattern()` source in `export_redos_npm
 
 | Package | Real `sink_targets` / `dangerous_sinks` | Prefilter hit (pre-registration-time, unfixed prefilter) | Root cause | Bucket |
 |---|---|---|---|---|
-| `argon2@0.45.1` | 0 / 0 | 2 dangerous ("regex literals") | Both "literals" are JSDoc comments (`/** @enum {...\|...} */`); no real regex, no real sink call exists anywhere in the package's one real JS file | **GENUINELY_SAFE** |
+| `argon2@0.45.1` | 0 / 0 | 2 dangerous ("regex literals") | Both "literals" are JSDoc comments (`/** @enum {...\|...} */`); no real regex, no real sink call exists anywhere in the package's one real JS file | **SAFE_UNDER_FROZEN_COMPLEXITY_MODEL** |
 | `ssh2@1.17.0` | 29 / 0 | 1 dangerous (`RE_HEADER`) | Regex is real, genuinely nested-quantifier-shaped, and IS reached by a real `.exec()` call -- but Stage 1's `resolvePattern` only searches the calling `Method`'s own AST for the assignment, and the `const RE_HEADER = /.../gm` lives in the *enclosing module scope*, a different CPG `Method`, so Stage 1 correctly abstains (`UNRESOLVED_IDENTIFIER`) instead of guessing | **UNSUPPORTED_REGEX_CONSTRUCTION** |
-| `x11-dri@0.6.0` | 3 / 0 | 1 dangerous (JSDoc-comment misparse) | Flagged text is a JSDoc comment (`/** Bracket CPU writes with \`START \| WRITE\`... */`) inside `index.d.ts`, a non-executable `.d.ts` type file also excluded by jssrc2cpg's own default ignore rule; the package's 3 *real* sink calls all resolve to genuinely non-dangerous patterns | **GENUINELY_SAFE** |
+| `x11-dri@0.6.0` | 3 / 0 | 1 dangerous (JSDoc-comment misparse) | Flagged text is a JSDoc comment (`/** Bracket CPU writes with \`START \| WRITE\`... */`) inside `index.d.ts`, a non-executable `.d.ts` type file also excluded by jssrc2cpg's own default ignore rule; the package's 3 *real* sink calls all resolve to genuinely non-dangerous patterns | **SAFE_UNDER_FROZEN_COMPLEXITY_MODEL** |
 | `multi-spec-parser@0.4.2` | 3 / 0 | 1 dangerous (`isHtml`'s alternation regex) | The flagged regex is real, reachable, and genuinely dangerous-shaped, in `dist/src/spec-validation.js:57` -- but `dist/` is the package's *entire, sole, `package.json`-designated* runtime source (`"main": "./dist/src/index.js"`), and jssrc2cpg's default folder-ignore list drops the whole `dist/` tree, so **every real `.js` file in this package is invisible to the CPG** except two unrelated native-addon build scripts | **JOERN_PARSING_GAP** |
 | `mariasql@0.2.6` | 2 / 0 | 1 dangerous (`RE_PARAM`) | Identical mechanism to `ssh2`: `var RE_PARAM = /.../g` is declared at module scope, used inside a different, nested function-expression `Method` (`Client.prototype.prepare`); Stage 1's same-method-only assignment search cannot cross that boundary | **UNSUPPORTED_REGEX_CONSTRUCTION** |
-| `tree-sitter-4dm@2.11.0` | 0 / 0 | 1 dangerous (`grammar.js` comment regex) | The flagged regex is real JS syntax and does structurally match the nested-quantifier rule, but it is `tree-sitter` grammar-DSL data (an argument inside `seq(...)`, consumed by tree-sitter's own external code generator) -- it is never passed to any real `.test`/`.exec`/`.match`/`.search`/`.replace`/`.replaceAll` call anywhere in the package | **GENUINELY_SAFE** |
+| `tree-sitter-4dm@2.11.0` | 0 / 0 | 1 dangerous (`grammar.js` comment regex) | The flagged regex is real JS syntax and does structurally match the nested-quantifier rule, but it is `tree-sitter` grammar-DSL data (an argument inside `seq(...)`, consumed by tree-sitter's own external code generator) -- it is never passed to any real `.test`/`.exec`/`.match`/`.search`/`.replace`/`.replaceAll` call anywhere in the package | **SAFE_UNDER_FROZEN_COMPLEXITY_MODEL** |
 
 **No `CLASSIFIER_DISAGREEMENT` found in any of the 6.** Every resolved pattern that Stage 1 handed
 to Stage 2 was checked by hand against the frozen `classifyPattern()` source and the classification
@@ -44,7 +44,7 @@ distinction, which is called out explicitly below rather than silently folded in
 
 ---
 
-## 1. `argon2@0.45.1` -- GENUINELY_SAFE
+## 1. `argon2@0.45.1` -- SAFE_UNDER_FROZEN_COMPLEXITY_MODEL
 
 Real Joern rerun: `sink_targets: 0, dangerous_sinks: 0` (matches `pilot25_results.json` exactly).
 
@@ -159,7 +159,7 @@ construction" that it is called out here in case a finer-grained bucket is ever 
 
 ---
 
-## 3. `x11-dri@0.6.0` -- GENUINELY_SAFE
+## 3. `x11-dri@0.6.0` -- SAFE_UNDER_FROZEN_COMPLEXITY_MODEL
 
 Real Joern rerun: `sink_targets: 3, dangerous_sinks: 0` (matches `pilot25_results.json` exactly).
 
@@ -330,7 +330,7 @@ a literal pattern), not a truly dynamic `new RegExp(...)` construction, and expl
 
 ---
 
-## 6. `tree-sitter-4dm@2.11.0` -- GENUINELY_SAFE
+## 6. `tree-sitter-4dm@2.11.0` -- SAFE_UNDER_FROZEN_COMPLEXITY_MODEL
 
 Real Joern rerun: `sink_targets: 0, dangerous_sinks: 0` (matches `pilot25_results.json` exactly).
 
@@ -378,7 +378,7 @@ $ grep -rn '\.test(\|\.exec(\|\.match(\|\.matchAll(\|\.search(\|\.replace(\|\.re
 ```
 This fully and independently explains the real `sink_targets: 0` (there is no sink call to find,
 not merely no dangerous one). The pattern is real and genuinely dangerous-shaped, but it is inert
-grammar data, never JS-regex-engine-executed code -- `GENUINELY_SAFE` is the correct bucket per the
+grammar data, never JS-regex-engine-executed code -- `SAFE_UNDER_FROZEN_COMPLEXITY_MODEL` is the correct bucket per the
 task's own definition ("no genuinely dangerous-shaped regex literal exists ... reachable from a
 sink call at all"; here the literal exists and is dangerous-shaped, but there is no sink call for
 it, or any other pattern in this package, to reach).
@@ -387,7 +387,7 @@ it, or any other pattern in this package, to reach).
 
 ## Consequence
 
-Across these 6 packages: 3 `GENUINELY_SAFE` (2 of which trace to the same already-disclosed,
+Across these 6 packages: 3 `SAFE_UNDER_FROZEN_COMPLEXITY_MODEL` (2 of which trace to the same already-disclosed,
 already-fixed JSDoc-comment-misparse prefilter bug documented in `PREFILTER_DIVERGENCE_AUDIT.md`/
 `PREFILTER_FIX.md`; the third is real dangerous-shaped grammar-DSL data that is provably never
 regex-engine-executed), 2 `UNSUPPORTED_REGEX_CONSTRUCTION` (both the *same*, single, previously
