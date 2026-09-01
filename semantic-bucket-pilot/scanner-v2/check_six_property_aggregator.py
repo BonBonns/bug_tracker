@@ -87,14 +87,14 @@ ck("the raised error names the real property key and the real violation, not a g
 record5 = {"r04_findings": [mk(True)], "lock_balance_findings": [mk(True), mk(False)],
            "oob_compare_candidates": [mk(False)]}
 summary5 = agg.aggregate_record(record5, enabled_properties=frozenset({"lock_balance_findings"}))
-ck("_totals.total_raw is the real sum across all 9 keys",
+ck("_totals.total_raw is the real sum across all real keys (ALL_PROPERTY_KEYS)",
    summary5["_totals"]["total_raw"] == 1 + 2 + 1)
-ck("_totals.total_reportable is the real sum of reportable_count across all 9 keys",
+ck("_totals.total_reportable is the real sum of reportable_count across all real keys (ALL_PROPERTY_KEYS)",
    summary5["_totals"]["total_reportable"] == 1 + 1 + 0)
 
 # --- format_summary: real rendering, not a second source of truth ---
 rendered = agg.format_summary(summary5)
-ck("format_summary renders every one of the 9 real keys plus a TOTAL line",
+ck("format_summary renders every one of the real ALL_PROPERTY_KEYS plus a TOTAL line",
    all(k in rendered for k in agg.ALL_PROPERTY_KEYS) and "TOTAL:" in rendered)
 
 # =====================================================================================

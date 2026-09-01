@@ -293,6 +293,17 @@ def enrich_finding(finding: dict, node_id, method_file_map: dict, manifest: dict
 #     emit `'verdict': 'CANDIDATE'` unconditionally, never anything else.
 _R04_R05_CANDIDATE_VERDICTS = {"VALUE_ACQUISITION_GUARD_MISSING"}
 
+# NAN CAPABILITY (frozen, study/nan_capability/NAN_CAPABILITY_FREEZE.md): resource_guard_
+# verdict_nan.py's own real positive verdicts are EXACTLY the two contract_id strings
+# themselves (resource_contracts_nan.py's CONTRACTS -- "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+# "NAN_COPYBUFFER_SOURCE_CAPACITY") -- confirmed directly against that module's own findings.
+# append() call sites: every OTHER verdict it ever produces carries a real suffix
+# (_ARITY_UNRECOGNIZED/_SOURCE_BOUNDARY_UNRESOLVED/_NOT_JS_REGISTERED/_JS_CALL_UNRESOLVED/
+# _UPPER_BOUND_CHECK_PRESENT/_UNRESOLVED), so a plain "not in the abstention set" membership
+# test is unnecessary -- exact-match on the two bare contract_id strings is precise and never
+# accidentally matches a same-prefixed abstention verdict.
+_NAN_CANDIDATE_VERDICTS = {"NAN_NEWBUFFER_UNBOUNDED_ALLOCATION", "NAN_COPYBUFFER_SOURCE_CAPACITY"}
+
 PROPERTY_CANDIDATE_RULES = {
     "r04_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
     "r05_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
@@ -300,6 +311,7 @@ PROPERTY_CANDIDATE_RULES = {
     # docstring: "NOT a rewrite of R04/R05's own... verdict-construction... logic"), confirmed
     # directly against real output (gate_resource_guard_r06.py) -- same candidate verdict set.
     "r06_findings": lambda f: f.get("verdict") in _R04_R05_CANDIDATE_VERDICTS,
+    "nan_findings": lambda f: f.get("verdict") in _NAN_CANDIDATE_VERDICTS,
     "lock_balance_findings": lambda f: True,
     "protected_field_findings": lambda f: True,
     "oob_write_candidates": lambda f: True,
@@ -334,7 +346,7 @@ def finalize_reportability(finding: dict, is_scanner_candidate: bool) -> dict:
 
 
 def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) -> dict:
-    """Enriches every finding/candidate across all six properties' own output keys already
+    """Enriches every finding/candidate across all properties' own output keys already
     present in `record` (whichever are present -- silently skips a key that isn't in this
     record, so this is safe to call regardless of which properties actually ran). Attaches
     provenance, then computes reportability per PROPERTY_CANDIDATE_RULES -- never the reverse
@@ -345,6 +357,7 @@ def enrich_record(record: dict, cpp_raw_dir: str, manifest: dict, pkg_dir: str) 
         ("r04_findings", "method_id"),
         ("r05_findings", "method_id"),
         ("r06_findings", "method_id"),
+        ("nan_findings", "method_id"),
         ("lock_balance_findings", "method_id"),
         ("protected_field_findings", "method_id"),
     ):

@@ -32,6 +32,13 @@ must NEVER contribute a reportable finding to the aggregate. aggregate_record() 
 (never silently continues) if this is ever violated -- that would mean staged_enablement.py's
 own gate failed, a bug this module is specifically positioned to catch before it reaches a real
 report.
+
+ADDENDUM (Nan Resource Guard integration): `nan_findings` (resource_guard_verdict_nan.py, frozen
+per study/nan_capability/NAN_CAPABILITY_FREEZE.md) is now included too, treated the same as
+Resource Guard's own three keys -- always "enabled," never gated by staged_enablement.py (which
+only ever touches STAGED_KEYS). Its own applicability rule lives in applicability_gate.py,
+distinct from R04/R05/R06's build-configuration premise (Nan's own module docstring: that
+premise "does not hold for `Nan::NewBuffer`/`Nan::CopyBuffer`'s real `.ToLocalChecked()` idiom").
 """
 DISABLED_PROPERTIES = {
     "oob_compare_candidates": (
@@ -59,15 +66,25 @@ DISABLED_PROPERTIES = {
 # three keys; this module trusts their own already-computed reportable field the same way.
 RESOURCE_GUARD_KEYS = ("r04_findings", "r05_findings", "r06_findings")
 
+# NAN CAPABILITY (frozen, study/nan_capability/NAN_CAPABILITY_FREEZE.md): a real, standalone
+# Resource Guard variant for the Nan binding family, never sharing R04/R05/R06's own build-
+# configuration applicability premise (that gate's whole premise does not hold for Nan's
+# `.ToLocalChecked()` idiom -- see resource_guard_verdict_nan.py's own module docstring).
+# Treated the same as RESOURCE_GUARD_KEYS here (always "enabled" -- never gated by
+# staged_enablement.py, which only ever touches STAGED_KEYS below), kept in its own tuple since
+# applicability_gate.py's own rule for it is real and distinct, not merely R04/R05/R06 reused.
+NAN_KEYS = ("nan_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + STAGED_KEYS
+ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + STAGED_KEYS
 
 
 def aggregate_record(record, enabled_properties):
     """Summarizes one already-fully-processed record (see module docstring for the required
-    upstream pipeline order) across all nine finding/candidate keys. `enabled_properties` is
+    upstream pipeline order) across all real finding/candidate keys (`ALL_PROPERTY_KEYS`).
+    `enabled_properties` is
     passed in explicitly (the caller's own `staged_enablement.ENABLED_PROPERTIES`, or an
     equivalent real set) rather than imported and used implicitly, so a caller auditing this
     module's own behavior can see exactly what enablement state produced a given summary,
@@ -82,7 +99,7 @@ def aggregate_record(record, enabled_properties):
     for key in ALL_PROPERTY_KEYS:
         items = record.get(key) or []
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
-        if key in RESOURCE_GUARD_KEYS:
+        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS:
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]

@@ -153,7 +153,13 @@ def apply_known_adjudications(record):
     pkg = record.get("package_name")
     ver = record.get("version")
     applied = 0
-    for key in ("r04_findings", "r05_findings", "r06_findings"):
+    # nan_findings shares this SAME table/loop -- resource_guard_verdict_nan.py's own findings
+    # carry the same real (method_name, source_path) site-identity shape as R04/R05/R06's own
+    # (see its base_evidence construction), and a real site a human has individually adjudicated
+    # is the same real site regardless of which scanner variant (node-addon-api vs. Nan lineage)
+    # flagged it -- matching this table's own already-established, lineage-agnostic precedent for
+    # R04/R05/R06 sharing one table (see this function's own docstring/module docstring).
+    for key in ("r04_findings", "r05_findings", "r06_findings", "nan_findings"):
         for f in record.get(key) or []:
             method_name = f.get("method_name")
             source_path = (f.get("provenance") or {}).get("source_path")

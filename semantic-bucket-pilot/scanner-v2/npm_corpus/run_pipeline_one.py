@@ -595,13 +595,42 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         return record
     record["stages"]["r06_scan"] = {"seconds": time.time() - t0}
 
+    # NAN CAPABILITY (frozen, study/nan_capability/NAN_CAPABILITY_FREEZE.md): a real, standalone
+    # Resource Guard variant for the Nan binding family -- run alongside R04/R05/R06, never
+    # replacing them (imports nothing from that lineage, carries no build-config applicability
+    # premise of its own; see resource_guard_verdict_nan.py's own module docstring). Uses
+    # js_raw directly (the raw jssrc2cpg export this function already built above, before any
+    # cleanup) -- never js_facts.json, which is a normalized summary this scanner's own
+    # load_js_raw() does not read. Never gated on `exception_config`/build_config_path at all.
+    nan_out = os.path.join(work, "nan_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, f"{SCANNER_V2}/resource_guard_verdict_nan.py",
+                         cpp_raw, js_raw, nan_out],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(nan_out) as f:
+            nan_doc = json.load(f)
+        record["nan_classification"] = nan_doc.get("classification", {})
+        record["nan_findings"] = nan_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["nan_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"nan_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["nan_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"nan scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["nan_scan"] = {"seconds": time.time() - t0}
+
     # PROV-R01 (task #35): attach real source_path/content_hash/provenance_hint to every
     # finding this package produced, using the SAME cpp_raw/methods.tsv this run already has in
     # hand (not yet deleted) and the manifest built above -- BEFORE work_root is torn down by
-    # the caller. Only R04/R05 findings exist in this record today (LOCK_BALANCE/PROTECTED_
-    # FIELD/OOB_* are not yet wired into this orchestrator -- tasks #36-40); enrich_record is
-    # written to enrich whichever of the six properties' own finding keys are actually present,
-    # so no further change is needed here once those tasks wire the other scanners in.
+    # the caller. enrich_record is written to enrich whichever of the real property finding keys
+    # are actually present, so no further change is needed here once a new scanner is wired in
+    # above (task #34 roadmap step 1: nan_findings, wired in just above).
     provenance.enrich_record(record, cpp_raw, prov_manifest, pkg_dir)
 
     # ADJUDICATION-REGISTRY-R01: applies any REAL, individually-reviewed, already-established

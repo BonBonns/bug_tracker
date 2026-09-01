@@ -50,6 +50,27 @@ requirements, adds nothing new:
   premises to hold, not proof of exploitability that no part of this pipeline can currently
   produce.
 
+NAN RESOURCE GUARD (task #34's own roadmap step 1, integrating the frozen, standalone
+`resource_guard_verdict_nan.py` -- study/nan_capability/NAN_CAPABILITY_FREEZE.md): NEVER shares
+R04/R05/R06's build-configuration premise -- that module's own docstring is explicit that the
+premise "does not hold for `Nan::NewBuffer`/`Nan::CopyBuffer`'s real `.ToLocalChecked()` idiom."
+Its own real candidate verdicts (exactly the two contract_id strings, per
+`provenance._NAN_CANDIDATE_VERDICTS`) are ONLY ever emitted once its own verdict-construction
+logic has ALREADY required real JS reachability (a confirmed real JS call, or the package's own
+JS entry point unconditionally re-exporting its whole native binding) and the absence of a
+detected upper-bound check -- so, unlike Resource Guard's own R04-R06 lineage, there is no
+separate structural condition left for this module to add beyond candidate-ness + provenance:
+  1. scanner_candidate is True (provenance.PROPERTY_CANDIDATE_RULES' own exact-match on the two
+     real contract_id verdict strings, reused here for clarity, not redefined).
+  2. provenance.resolved is True.
+  3. `js_reachability_tier` is one of the two real values resource_guard_verdict_nan.py's own
+     verdict-construction logic can ever produce (`"confirmed_call"`/`"exported_registration"`)
+     -- belt-and-braces: by construction every real candidate already satisfies this, but an
+     explicit, reused-not-redefined check here guards against a future change to that module
+     silently widening what counts as reachable.
+  This makes the record eligible for manual review -- it does NOT declare a memory-safety
+  vulnerability, per the module's own NON_VULN_DISCLAIMER/NON_VULN_DISCLAIMER_COPY, unchanged.
+
 STAGED PROPERTIES -- LOCK_BALANCE / PROTECTED_FIELD / OOB_WRITE / OOB_INDEX_WRITE / OOB_READ:
   Determined (real evidence, not assumed): `provenance.PROPERTY_CANDIDATE_RULES` already
   confirms, per its own comment, that every item these five keys' own findings/candidates lists
@@ -84,6 +105,7 @@ import provenance  # noqa: E402
 import staged_enablement as se  # noqa: E402
 
 RESOURCE_GUARD_KEYS = ("r04_findings", "r05_findings", "r06_findings")
+NAN_KEYS = ("nan_findings",)
 STAGED_APPLICABILITY_KEYS = ("lock_balance_findings", "protected_field_findings",
                              "oob_write_candidates", "oob_index_write_candidates",
                              "oob_read_candidates")
@@ -91,6 +113,15 @@ STAGED_APPLICABILITY_KEYS = ("lock_balance_findings", "protected_field_findings"
 # even considers it.
 
 _EXCLUDED_TRACE_TARGETS = {"this"}
+
+# The two REAL js_reachability_tier values resource_guard_verdict_nan.py's own findings ever
+# carry (its own two literal assignment sites -- "confirmed_call" for a real JS call supplying
+# the required argument, "exported_registration" for the weaker-but-still-structural "whole
+# native binding unconditionally re-exported" tier, see NAN_CAPABILITY_FREEZE.md). Both are
+# already REQUIRED by resource_guard_verdict_nan.py's own verdict-construction logic before a
+# real candidate verdict is ever emitted -- reused here explicitly, belt-and-braces (matching
+# this module's own established discipline elsewhere), never redefined or loosened.
+_NAN_REACHABILITY_TIERS = {"confirmed_call", "exported_registration"}
 
 
 def _resource_guard_applicable(f):
@@ -106,6 +137,17 @@ def _resource_guard_applicable(f):
     if not traced or traced in _EXCLUDED_TRACE_TARGETS:
         return False, traced
     return True, traced
+
+
+def _nan_applicable(f):
+    if not f.get("scanner_candidate"):
+        return False
+    prov = f.get("provenance") or {}
+    if not prov.get("resolved"):
+        return False
+    if f.get("js_reachability_tier") not in _NAN_REACHABILITY_TIERS:
+        return False
+    return True
 
 
 def _staged_applicable(key, f):
@@ -134,6 +176,15 @@ def apply_applicability(record):
         for f in record.get(key) or []:
             ok, _traced = _resource_guard_applicable(f)
             if not ok:
+                continue
+            if f.get("applicability_status") == "APPLICABLE":
+                continue
+            f["applicability_status"] = "APPLICABLE"
+            provenance.finalize_reportability(f, f.get("scanner_candidate", False))
+            applied += 1
+    for key in NAN_KEYS:
+        for f in record.get(key) or []:
+            if not _nan_applicable(f):
                 continue
             if f.get("applicability_status") == "APPLICABLE":
                 continue
