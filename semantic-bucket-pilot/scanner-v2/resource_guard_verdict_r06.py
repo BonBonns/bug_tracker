@@ -137,6 +137,38 @@ BOOL_LITERALS_TRUE = {"true", "1"}
 
 VALID_EXCEPTION_CONFIGURATIONS = {"disabled", "enabled", "unresolved", "conflict"}
 
+# REPORTING-BOUNDARY HELPER (ported from an earlier lineage revision's own
+# count_actionable_findings()/ACTIONABLE_VERDICTS, NOT merged verbatim): that revision predates
+# provenance.py's own fail-closed `reportable` formula (task #35) and defined "actionable"
+# purely from a finding's own `verdict` value -- a shortcut that duplicated, and could drift
+# from, the real formula. The real reporting boundary this lineage now uses is
+# provenance.finalize_reportability()'s own one-way rule: `reportable` is True only when ALL
+# FOUR of `scanner_candidate`, `provenance.resolved`, `applicability_status == "APPLICABLE"`,
+# and `adjudication_status != "CONFIRMED_FALSE_POSITIVE"` hold (see provenance.py's own module
+# docstring). `count_reportable_findings()` below counts exactly that field, nothing else --
+# it does NOT re-derive actionability from `verdict`, and does NOT treat `len(findings)` (which
+# legitimately includes diagnostic/abstention records such as `CONTRACT_NOT_APPLICABLE`,
+# `BUILD_CONFIGURATION_CONFLICT/UNRESOLVED`, or `VALUE_ACQUISITION_SEMANTICS_UNRESOLVED`, each
+# retained with its own real evidence, never actionable on its own) as an actionable count.
+#
+# IMPORTANT: this file's own raw findings (as produced by main() below) predate
+# provenance.enrich_record() -- `reportable` is not yet set at that point, so calling this
+# function directly on this module's own JSON output before enrichment correctly returns 0,
+# not an error. It is meant to be called AFTER the real pipeline
+# (provenance.enrich_record() -> reachability_tier.py -> staged_enablement.py for the staged
+# properties; r06_findings itself is a Resource Guard key and is never staged-gated) has run --
+# six_property_aggregator.py's own aggregate_record() already performs the same real count for
+# every property key at once; this function exists for callers (and regression tests) that want
+# the R06-specific count in isolation, without pulling in the whole six-property aggregate.
+def count_reportable_findings(findings):
+    """The real, current reporting-boundary aggregate for a list of (already provenance-
+    enriched) r06_findings: counts only records with reportable is True. Never infers
+    actionability from `verdict`, `len(findings)`, or the mere presence of
+    `source_boundary_evidence`/`build_config_evidence` (a diagnostic/abstention record
+    legitimately carries both as real supplementary evidence without itself being
+    actionable) -- see this function's own preceding comment for the full account."""
+    return sum(1 for f in findings if f.get("reportable") is True)
+
 # The one real, structurally-recognizable shape R05 recovers from -- confirmed real, not
 # assumed, on two independent corpus packages plus the committed r05_controls fixture (see
 # module docstring). A call resolving to any OTHER, concrete qualifier is NOT this shape and

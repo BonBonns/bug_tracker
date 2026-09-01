@@ -40,6 +40,7 @@ import time
 HERE = pathlib.Path(__file__).parent
 sys.path.insert(0, str(HERE))
 import provenance  # noqa: E402
+import resource_guard_verdict_r06  # noqa: E402
 
 JOERN_HOME = "/home/user/bug_tracker/tchecker-research-complete/joern-install/joern-cli"
 CPP_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/tests/gates/cpp-r06/frontend"
@@ -178,6 +179,24 @@ def main():
        "-> reportable=True (the only positive path)", genuinely_reportable["reportable"] is True)
     shutil.rmtree(scratch_dir, ignore_errors=True)
 
+    # --- 3f. count_reportable_findings() (resource_guard_verdict_r06.py): synthetic, network-
+    #         independent regression for the ported reporting-boundary helper, using the SAME
+    #         four already-enriched findings from 3c/3d/3e above (a real CONTRACT_NOT_APPLICABLE-
+    #         shaped abstention, an applicability veto, an adjudication veto, and the one genuine
+    #         positive) -- covers the real defect this replaces an earlier lineage revision's own
+    #         count_actionable_findings()/ACTIONABLE_VERDICTS for, without requiring network
+    #         access or a real corpus run (section 4 below adds the real, non-synthetic version
+    #         of this same check against node-libcurl's own real finding).
+    synthetic_r06_findings = [default_applicability, vetoed, genuinely_reportable,
+                               {"reportable": False}, {}]
+    reportable_count = resource_guard_verdict_r06.count_reportable_findings(synthetic_r06_findings)
+    ck("count_reportable_findings(): counts exactly the one genuinely reportable=True finding, "
+       "never the applicability-veto, adjudication-veto, bare reportable=False, or a finding "
+       "missing the field entirely (all default to excluded, never counted by len() or verdict "
+       "alone)", reportable_count == 1)
+    ck("count_reportable_findings([]) == 0 (empty list handled, not an error)",
+       resource_guard_verdict_r06.count_reportable_findings([]) == 0)
+
     # --- 4. THE CENTRAL REGRESSION TEST: node-libcurl / Easy::ReadFunction (Resource Guard) ---
     npm_corpus = HERE / "npm_corpus"
     sys.path.insert(0, str(npm_corpus))
@@ -261,6 +280,21 @@ def main():
                and sbe.get("attacker_controlled") is False)
             ck("real R06 finding: provenance.resolved=True (same enrichment as R04/R05)",
                f6.get("provenance", {}).get("resolved") is True)
+            ck("real R06 finding: reportable stays False (no real, separate, affirmative "
+               "applicability step exists yet for this site -- applicability_status defaults "
+               "to NOT_YET_DETERMINED, never APPLICABLE by construction)",
+               f6.get("reportable") is False)
+            # count_reportable_findings() (resource_guard_verdict_r06.py) is the current,
+            # ported replacement for an earlier lineage revision's own count_actionable_findings()
+            # -- verifies on this SAME real pipeline run that node-libcurl's own real
+            # Easy::ReadFunction R06 finding, despite provenance resolving and carrying real
+            # source_boundary_evidence, is correctly EXCLUDED from the reportable count.
+            reportable_r06 = resource_guard_verdict_r06.count_reportable_findings(r06_findings)
+            ck("*** count_reportable_findings() PORT REGRESSION: node-libcurl's real R06 "
+               "findings (including Easy::ReadFunction) contribute 0 to the reportable count "
+               "-- proves the ported reporting-boundary helper does not resurrect the old "
+               "verdict-only 'actionable' shortcut this real false-positive would have passed ***",
+               reportable_r06 == 0)
         shutil.rmtree(work_root, ignore_errors=True)
 
     # --- 5/6. LOCK_BALANCE and PROTECTED_FIELD: provenance resolves + scanner_candidate=True, --
