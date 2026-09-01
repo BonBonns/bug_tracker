@@ -1,0 +1,5 @@
+c01_full_chain.cpp	import_dump:void(char*,sqlite3*)	30	30064771126	sqlite3_exec	DATABASE_IMPORT	RESOLVED_EXTERNAL
+c02_log_only.cpp	audit_dump:void(char*)	24	30064771180	fprintf	LOGGING_ONLY	RESOLVED_EXTERNAL
+c04_scheduled_timing.cpp	nightly_restore:void(char*,sqlite3*)	27	30064771266	sqlite3_exec	DATABASE_IMPORT	RESOLVED_EXTERNAL
+c05_full_chain_string.cpp	import_one:void(char*,sqlite3*)	29	30064771312	sqlite3_exec	DATABASE_IMPORT	RESOLVED_EXTERNAL
+c06_log_only_string.cpp	audit_one:void(char*)	21	30064771351	fprintf	LOGGING_ONLY	RESOLVED_EXTERNAL

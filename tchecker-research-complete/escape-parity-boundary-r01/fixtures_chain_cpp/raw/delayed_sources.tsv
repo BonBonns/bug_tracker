@@ -1,0 +1,10 @@
+c01_full_chain.cpp	import_dump:void(char*,sqlite3*)	23	30064771101	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c01_full_chain.cpp	import_dump:void(char*,sqlite3*)	25	30064771105	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+c02_log_only.cpp	audit_dump:void(char*)	19	30064771158	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c02_log_only.cpp	audit_dump:void(char*)	21	30064771162	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+c04_scheduled_timing.cpp	nightly_restore:void(char*,sqlite3*)	22	30064771249	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c04_scheduled_timing.cpp	nightly_restore:void(char*,sqlite3*)	24	30064771253	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+c05_full_chain_string.cpp	import_one:void(char*,sqlite3*)	22	30064771295	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c05_full_chain_string.cpp	import_one:void(char*,sqlite3*)	24	30064771299	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+c06_log_only_string.cpp	audit_one:void(char*)	16	30064771338	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c06_log_only_string.cpp	audit_one:void(char*)	18	30064771342	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
