@@ -1,0 +1,23 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064810539,
+   "acquisition_code": "Nan::NewBuffer(\n        sb->data, sb->size, _free_sbuf, (void *)sb\n    )",
+   "acquisition_line": "290",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374187465,
+   "method_name": "pack",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [],
+ "registrations": {},
+ "schema": "resource-guard-verdict-nan/0.1"
+}

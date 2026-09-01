@@ -1,0 +1,597 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION": 3,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 10,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 7
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064785715,
+   "acquisition_code": "Nan::NewBuffer(\n          static_cast<char*>(pData)\n        , int4 * s7client->GetByteCountFromWordLen(int5)\n        , S7Client::FreeCallback,\n        NULL)",
+   "acquisition_line": "1057",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183037,
+   "method_name": "HandleOKCallback",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064785890,
+   "acquisition_code": "Nan::NewBuffer(\n            static_cast<char*>(pData)\n          , int2\n          , S7Client::FreeCallback\n          , NULL)",
+   "acquisition_line": "1165",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183037,
+   "method_name": "HandleOKCallback",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064785908,
+   "acquisition_code": "Nan::NewBuffer(\n            static_cast<char*>(pData)\n          , int3\n          , S7Client::FreeCallback\n          , NULL)",
+   "acquisition_line": "1180",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183037,
+   "method_name": "HandleOKCallback",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064786011,
+   "acquisition_code": "Nan::NewBuffer(\n            reinterpret_cast<char*>(static_cast<PS7SZL>(pData))\n          , int3\n          , S7Client::FreeCallbackSZL\n          , NULL)",
+   "acquisition_line": "1241",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183037,
+   "method_name": "HandleOKCallback",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064786093,
+   "acquisition_code": "Nan::NewBuffer(\n          bufferData\n        , size\n        , S7Client::FreeCallback\n        , NULL)",
+   "acquisition_line": "1278",
+   "arity": 4,
+   "callback_info_index": 3,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "evidence_note": "STATIC CANDIDATE, not a vulnerability or CWE claim. This finding establishes: (1) the allocation length is demonstrably JS-argument-controlled via a real registration + info[N] chain + confirmed JS call; (2) no structural upper-bound check was found on that value before the acquisition call. It does NOT evaluate runtime reachability of any specific consequence. Two real, disclosed, structurally-grounded consequences are possible depending on the value supplied and the platform's available memory -- (a) node::Buffer::New/Copy internally rejects an oversized or failed allocation, and .ToLocalChecked() on that empty MaybeLocal triggers V8's own fatal-error path, terminating the process (a real denial-of-service shape, not a crash-safety guess -- see NAN_CAPABILITY_DESIGN.md Section 3, confirmed by reading nan.h's own source); (b) a successful allocation of attacker-influenced size with no detected application-level cap risks excessive memory consumption, and where the size is computed as a product of two JS-controlled factors (as in the ReadArea-shaped case), integer overflow could yield a SMALL allocated size while a later native call still writes the FULL uncapped amount -- a real, disclosed, but NOT independently verified-in-this-pass downstream write-mismatch risk; this file does not trace the downstream native write call to confirm it actually happens.",
+   "js_argument_index": 4,
+   "js_call_id": 30064771073,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "ReadArea",
+   "js_reachability_tier": "confirmed_call",
+   "method_id": 107374183038,
+   "method_name": "ReadArea",
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION"
+  },
+  {
+   "acquisition_call_id": 30064786492,
+   "acquisition_code": "Nan::NewBuffer(\n              static_cast<char*>(Items[i].pdata)\n            , size\n            , S7Client::FreeCallback\n            , NULL)",
+   "acquisition_line": "1438",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183041,
+   "method_name": "S7DataItemToArray",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064787144,
+   "acquisition_code": "Nan::NewBuffer(\n          bufferData\n        , size\n        , S7Client::FreeCallback\n        , NULL)",
+   "acquisition_line": "1742",
+   "arity": 4,
+   "callback_info_index": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "evidence_note": "STATIC CANDIDATE, not a vulnerability or CWE claim. This finding establishes: (1) the allocation length is demonstrably JS-argument-controlled via a real registration + info[N] chain + confirmed JS call; (2) no structural upper-bound check was found on that value before the acquisition call. It does NOT evaluate runtime reachability of any specific consequence. Two real, disclosed, structurally-grounded consequences are possible depending on the value supplied and the platform's available memory -- (a) node::Buffer::New/Copy internally rejects an oversized or failed allocation, and .ToLocalChecked() on that empty MaybeLocal triggers V8's own fatal-error path, terminating the process (a real denial-of-service shape, not a crash-safety guess -- see NAN_CAPABILITY_DESIGN.md Section 3, confirmed by reading nan.h's own source); (b) a successful allocation of attacker-influenced size with no detected application-level cap risks excessive memory consumption, and where the size is computed as a product of two JS-controlled factors (as in the ReadArea-shaped case), integer overflow could yield a SMALL allocated size while a later native call still writes the FULL uncapped amount -- a real, disclosed, but NOT independently verified-in-this-pass downstream write-mismatch risk; this file does not trace the downstream native write call to confirm it actually happens.",
+   "js_argument_index": 3,
+   "js_call_id": null,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "Upload",
+   "js_reachability_evidence": "no specific real JS call observed supplying argument 3, but the package's own JS entry point unconditionally re-exports its whole native binding (module.exports = require(<loader>)(...) shape) -- registration alone establishes public reachability with an attacker-chosen argument at this index; weaker than a confirmed call, still real and disclosed as such, never silently equated with it",
+   "js_reachability_tier": "exported_registration",
+   "method_id": 107374183050,
+   "method_name": "Upload",
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION"
+  },
+  {
+   "acquisition_call_id": 30064787218,
+   "acquisition_code": "Nan::NewBuffer(\n          bufferData\n        , size\n        , S7Client::FreeCallback\n        , NULL)",
+   "acquisition_line": "1775",
+   "arity": 4,
+   "callback_info_index": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "evidence_note": "STATIC CANDIDATE, not a vulnerability or CWE claim. This finding establishes: (1) the allocation length is demonstrably JS-argument-controlled via a real registration + info[N] chain + confirmed JS call; (2) no structural upper-bound check was found on that value before the acquisition call. It does NOT evaluate runtime reachability of any specific consequence. Two real, disclosed, structurally-grounded consequences are possible depending on the value supplied and the platform's available memory -- (a) node::Buffer::New/Copy internally rejects an oversized or failed allocation, and .ToLocalChecked() on that empty MaybeLocal triggers V8's own fatal-error path, terminating the process (a real denial-of-service shape, not a crash-safety guess -- see NAN_CAPABILITY_DESIGN.md Section 3, confirmed by reading nan.h's own source); (b) a successful allocation of attacker-influenced size with no detected application-level cap risks excessive memory consumption, and where the size is computed as a product of two JS-controlled factors (as in the ReadArea-shaped case), integer overflow could yield a SMALL allocated size while a later native call still writes the FULL uncapped amount -- a real, disclosed, but NOT independently verified-in-this-pass downstream write-mismatch risk; this file does not trace the downstream native write call to confirm it actually happens.",
+   "js_argument_index": 3,
+   "js_call_id": null,
+   "js_linkage_shape": "direct_chain",
+   "js_name": "FullUpload",
+   "js_reachability_evidence": "no specific real JS call observed supplying argument 3, but the package's own JS entry point unconditionally re-exports its whole native binding (module.exports = require(<loader>)(...) shape) -- registration alone establishes public reachability with an attacker-chosen argument at this index; weaker than a confirmed call, still real and disclosed as such, never silently equated with it",
+   "js_reachability_tier": "exported_registration",
+   "method_id": 107374183051,
+   "method_name": "FullUpload",
+   "source_boundary": "JS_ARGUMENT_CONTROLLED",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION"
+  },
+  {
+   "acquisition_call_id": 30064787379,
+   "acquisition_code": "Nan::NewBuffer(\n          bufferData\n        , size\n        , S7Client::FreeCallback\n        , NULL)",
+   "acquisition_line": "1846",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183054,
+   "method_name": "DBGet",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064787947,
+   "acquisition_code": "Nan::NewBuffer(\n          reinterpret_cast<char*>(SZL)\n        , size\n        , S7Client::FreeCallbackSZL\n        , NULL)",
+   "acquisition_line": "2101",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374183065,
+   "method_name": "ReadSZL",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [
+  {
+   "call": 30064784646,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Connect",
+   "linked_function_id": 107374183029,
+   "name": "Connect"
+  },
+  {
+   "call": 30064784647,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ConnectTo",
+   "linked_function_id": 107374183030,
+   "name": "ConnectTo"
+  },
+  {
+   "call": 30064784648,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetConnectionParams",
+   "linked_function_id": 107374183031,
+   "name": "SetConnectionParams"
+  },
+  {
+   "call": 30064784649,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetConnectionType",
+   "linked_function_id": 107374183032,
+   "name": "SetConnectionType"
+  },
+  {
+   "call": 30064784650,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Disconnect",
+   "linked_function_id": 107374183033,
+   "name": "Disconnect"
+  },
+  {
+   "call": 30064784651,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetParam",
+   "linked_function_id": 107374183034,
+   "name": "GetParam"
+  },
+  {
+   "call": 30064784652,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetParam",
+   "linked_function_id": 107374183035,
+   "name": "SetParam"
+  },
+  {
+   "call": 30064784653,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ReadArea",
+   "linked_function_id": 107374183038,
+   "name": "ReadArea"
+  },
+  {
+   "call": 30064784654,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "WriteArea",
+   "linked_function_id": 107374183039,
+   "name": "WriteArea"
+  },
+  {
+   "call": 30064784655,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ReadMultiVars",
+   "linked_function_id": 107374183040,
+   "name": "ReadMultiVars"
+  },
+  {
+   "call": 30064784656,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "WriteMultiVars",
+   "linked_function_id": 107374183042,
+   "name": "WriteMultiVars"
+  },
+  {
+   "call": 30064784657,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ListBlocks",
+   "linked_function_id": 107374183043,
+   "name": "ListBlocks"
+  },
+  {
+   "call": 30064784658,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetAgBlockInfo",
+   "linked_function_id": 107374183045,
+   "name": "GetAgBlockInfo"
+  },
+  {
+   "call": 30064784659,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetPgBlockInfo",
+   "linked_function_id": 107374183046,
+   "name": "GetPgBlockInfo"
+  },
+  {
+   "call": 30064784660,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ListBlocksOfType",
+   "linked_function_id": 107374183048,
+   "name": "ListBlocksOfType"
+  },
+  {
+   "call": 30064784661,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Upload",
+   "linked_function_id": 107374183050,
+   "name": "Upload"
+  },
+  {
+   "call": 30064784662,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "FullUpload",
+   "linked_function_id": 107374183051,
+   "name": "FullUpload"
+  },
+  {
+   "call": 30064784663,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Download",
+   "linked_function_id": 107374183052,
+   "name": "Download"
+  },
+  {
+   "call": 30064784664,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Delete",
+   "linked_function_id": 107374183053,
+   "name": "Delete"
+  },
+  {
+   "call": 30064784665,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "DBGet",
+   "linked_function_id": 107374183054,
+   "name": "DBGet"
+  },
+  {
+   "call": 30064784666,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "DBFill",
+   "linked_function_id": 107374183055,
+   "name": "DBFill"
+  },
+  {
+   "call": 30064784667,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetPlcDateTime",
+   "linked_function_id": 107374183056,
+   "name": "GetPlcDateTime"
+  },
+  {
+   "call": 30064784668,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetPlcDateTime",
+   "linked_function_id": 107374183057,
+   "name": "SetPlcDateTime"
+  },
+  {
+   "call": 30064784669,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetPlcSystemDateTime",
+   "linked_function_id": 107374183058,
+   "name": "SetPlcSystemDateTime"
+  },
+  {
+   "call": 30064784670,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetOrderCode",
+   "linked_function_id": 107374183059,
+   "name": "GetOrderCode"
+  },
+  {
+   "call": 30064784671,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetCpuInfo",
+   "linked_function_id": 107374183061,
+   "name": "GetCpuInfo"
+  },
+  {
+   "call": 30064784672,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetCpInfo",
+   "linked_function_id": 107374183063,
+   "name": "GetCpInfo"
+  },
+  {
+   "call": 30064784673,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ReadSZL",
+   "linked_function_id": 107374183065,
+   "name": "ReadSZL"
+  },
+  {
+   "call": 30064784674,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ReadSZLList",
+   "linked_function_id": 107374183066,
+   "name": "ReadSZLList"
+  },
+  {
+   "call": 30064784675,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PlcHotStart",
+   "linked_function_id": 107374183068,
+   "name": "PlcHotStart"
+  },
+  {
+   "call": 30064784676,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PlcColdStart",
+   "linked_function_id": 107374183069,
+   "name": "PlcColdStart"
+  },
+  {
+   "call": 30064784677,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PlcStop",
+   "linked_function_id": 107374183070,
+   "name": "PlcStop"
+  },
+  {
+   "call": 30064784678,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "CopyRamToRom",
+   "linked_function_id": 107374183071,
+   "name": "CopyRamToRom"
+  },
+  {
+   "call": 30064784679,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Compress",
+   "linked_function_id": 107374183072,
+   "name": "Compress"
+  },
+  {
+   "call": 30064784680,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "GetProtection",
+   "linked_function_id": 107374183073,
+   "name": "GetProtection"
+  },
+  {
+   "call": 30064784681,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "SetSessionPassword",
+   "linked_function_id": 107374183075,
+   "name": "SetSessionPassword"
+  },
+  {
+   "call": 30064784682,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ClearSessionPassword",
+   "linked_function_id": 107374183076,
+   "name": "ClearSessionPassword"
+  },
+  {
+   "call": 30064784683,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ExecTime",
+   "linked_function_id": 107374183077,
+   "name": "ExecTime"
+  },
+  {
+   "call": 30064784684,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "LastError",
+   "linked_function_id": 107374183078,
+   "name": "LastError"
+  },
+  {
+   "call": 30064784685,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PDURequested",
+   "linked_function_id": 107374183079,
+   "name": "PDURequested"
+  },
+  {
+   "call": 30064784686,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PDULength",
+   "linked_function_id": 107374183080,
+   "name": "PDULength"
+  },
+  {
+   "call": 30064784687,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "PlcStatus",
+   "linked_function_id": 107374183081,
+   "name": "PlcStatus"
+  },
+  {
+   "call": 30064784688,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "Connected",
+   "linked_function_id": 107374183082,
+   "name": "Connected"
+  },
+  {
+   "call": 30064784689,
+   "class_prefix": "node_snap7.S7Client",
+   "fn": "ErrorText",
+   "linked_function_id": 107374183083,
+   "name": "ErrorText"
+  }
+ ],
+ "registrations": {
+  "ClearSessionPassword": [
+   107374183076
+  ],
+  "Compress": [
+   107374183072
+  ],
+  "Connect": [
+   107374183029
+  ],
+  "ConnectTo": [
+   107374183030
+  ],
+  "Connected": [
+   107374183082
+  ],
+  "CopyRamToRom": [
+   107374183071
+  ],
+  "DBFill": [
+   107374183055
+  ],
+  "DBGet": [
+   107374183054
+  ],
+  "Delete": [
+   107374183053
+  ],
+  "Disconnect": [
+   107374183033
+  ],
+  "Download": [
+   107374183052
+  ],
+  "ErrorText": [
+   107374183083
+  ],
+  "ExecTime": [
+   107374183077
+  ],
+  "FullUpload": [
+   107374183051
+  ],
+  "GetAgBlockInfo": [
+   107374183045
+  ],
+  "GetCpInfo": [
+   107374183063
+  ],
+  "GetCpuInfo": [
+   107374183061
+  ],
+  "GetOrderCode": [
+   107374183059
+  ],
+  "GetParam": [
+   107374183034
+  ],
+  "GetPgBlockInfo": [
+   107374183046
+  ],
+  "GetPlcDateTime": [
+   107374183056
+  ],
+  "GetProtection": [
+   107374183073
+  ],
+  "LastError": [
+   107374183078
+  ],
+  "ListBlocks": [
+   107374183043
+  ],
+  "ListBlocksOfType": [
+   107374183048
+  ],
+  "PDULength": [
+   107374183080
+  ],
+  "PDURequested": [
+   107374183079
+  ],
+  "PlcColdStart": [
+   107374183069
+  ],
+  "PlcHotStart": [
+   107374183068
+  ],
+  "PlcStatus": [
+   107374183081
+  ],
+  "PlcStop": [
+   107374183070
+  ],
+  "ReadArea": [
+   107374183038
+  ],
+  "ReadMultiVars": [
+   107374183040
+  ],
+  "ReadSZL": [
+   107374183065
+  ],
+  "ReadSZLList": [
+   107374183066
+  ],
+  "SetConnectionParams": [
+   107374183031
+  ],
+  "SetConnectionType": [
+   107374183032
+  ],
+  "SetParam": [
+   107374183035
+  ],
+  "SetPlcDateTime": [
+   107374183057
+  ],
+  "SetPlcSystemDateTime": [
+   107374183058
+  ],
+  "SetSessionPassword": [
+   107374183075
+  ],
+  "Upload": [
+   107374183050
+  ],
+  "WriteArea": [
+   107374183039
+  ],
+  "WriteMultiVars": [
+   107374183042
+  ]
+ },
+ "schema": "resource-guard-verdict-nan/0.1"
+}

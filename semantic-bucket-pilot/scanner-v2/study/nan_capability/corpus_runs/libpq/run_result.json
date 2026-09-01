@@ -1,0 +1,46 @@
+{
+  "package": "libpq",
+  "status": "ANALYZED",
+  "stages": {
+    "c2cpg": {
+      "rc": 0,
+      "seconds": 4.653195381164551,
+      "err": null
+    },
+    "jssrc2cpg": {
+      "rc": 0,
+      "seconds": 4.998579740524292,
+      "err": null
+    },
+    "cpp_export": {
+      "rc": 0,
+      "seconds": 12.583086013793945,
+      "err": null
+    },
+    "js_export": {
+      "rc": 0,
+      "seconds": 11.772326231002808,
+      "err": null
+    },
+    "verdict": {
+      "rc": 0,
+      "seconds": 0.11510443687438965,
+      "err": null
+    }
+  },
+  "header_staging": [
+    {
+      "dep": "nan",
+      "declared_range": "~2.26.2",
+      "resolved_version": "2.26.2",
+      "staged": true,
+      "note": "range '~2.26.2' resolved to 2.26.2 (highest satisfying release)"
+    }
+  ],
+  "js_facts_available": true,
+  "classification": {
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+    "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+  },
+  "n_findings": 1
+}

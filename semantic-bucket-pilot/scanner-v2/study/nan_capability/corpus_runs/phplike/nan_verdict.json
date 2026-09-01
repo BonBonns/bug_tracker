@@ -1,0 +1,135 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064776146,
+   "acquisition_code": "Nan::NewBuffer(buf, resLength)",
+   "acquisition_line": "58",
+   "arity": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182642,
+   "method_name": "nodeSocketReceive",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [
+  {
+   "call": 30064775817,
+   "class_prefix": null,
+   "fn": "node_usleep",
+   "linked_function_id": 107374182631,
+   "name": "usleep"
+  },
+  {
+   "call": 30064775818,
+   "class_prefix": null,
+   "fn": "node_exec",
+   "linked_function_id": 107374182633,
+   "name": "exec"
+  },
+  {
+   "call": 30064775819,
+   "class_prefix": null,
+   "fn": "node_curl_request",
+   "linked_function_id": 107374182636,
+   "name": "request"
+  },
+  {
+   "call": 30064775820,
+   "class_prefix": null,
+   "fn": "nodeCurlGetHeader",
+   "linked_function_id": 107374182638,
+   "name": "nodeCurlGetHeader"
+  },
+  {
+   "call": 30064775821,
+   "class_prefix": null,
+   "fn": "node_md5",
+   "linked_function_id": 107374182634,
+   "name": "md5"
+  },
+  {
+   "call": 30064775822,
+   "class_prefix": null,
+   "fn": "nodeSocketConnect",
+   "linked_function_id": 107374182639,
+   "name": "nodeSocketConnect"
+  },
+  {
+   "call": 30064775823,
+   "class_prefix": null,
+   "fn": "nodeSocketSend",
+   "linked_function_id": 107374182641,
+   "name": "nodeSocketSend"
+  },
+  {
+   "call": 30064775824,
+   "class_prefix": null,
+   "fn": "nodeSocketReceive",
+   "linked_function_id": 107374182642,
+   "name": "nodeSocketReceive"
+  },
+  {
+   "call": 30064775825,
+   "class_prefix": null,
+   "fn": "nodeSocketClose",
+   "linked_function_id": 107374182643,
+   "name": "nodeSocketClose"
+  },
+  {
+   "call": 30064776177,
+   "class_prefix": "phpXMLDocument",
+   "fn": "load",
+   "linked_function_id": 107374182647,
+   "name": "load"
+  },
+  {
+   "call": 30064776178,
+   "class_prefix": "phpXMLDocument",
+   "fn": "loadXML",
+   "linked_function_id": 107374182648,
+   "name": "loadXML"
+  }
+ ],
+ "registrations": {
+  "exec": [
+   107374182633
+  ],
+  "load": [
+   107374182647
+  ],
+  "loadXML": [
+   107374182648
+  ],
+  "md5": [
+   107374182634
+  ],
+  "nodeCurlGetHeader": [
+   107374182638
+  ],
+  "nodeSocketClose": [
+   107374182643
+  ],
+  "nodeSocketConnect": [
+   107374182639
+  ],
+  "nodeSocketReceive": [
+   107374182642
+  ],
+  "nodeSocketSend": [
+   107374182641
+  ],
+  "request": [
+   107374182636
+  ],
+  "usleep": [
+   107374182631
+  ]
+ },
+ "schema": "resource-guard-verdict-nan/0.1"
+}

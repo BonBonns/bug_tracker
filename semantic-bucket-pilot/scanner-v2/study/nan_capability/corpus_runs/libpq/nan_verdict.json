@@ -1,0 +1,346 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 1,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 1
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064772041,
+   "acquisition_code": "Nan::NewBuffer(buffer, length, FreeBuffer, NULL)",
+   "acquisition_line": "710",
+   "arity": 4,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182455,
+   "method_name": "GetCopyData",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [
+  {
+   "call": 30064771083,
+   "class_prefix": null,
+   "fn": "ConnectSync",
+   "name": "$connectSync",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771084,
+   "class_prefix": null,
+   "fn": "Connect",
+   "name": "$connect",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771085,
+   "class_prefix": null,
+   "fn": "Finish",
+   "name": "$finish",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771086,
+   "class_prefix": null,
+   "fn": "GetLastErrorMessage",
+   "name": "$getLastErrorMessage",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771087,
+   "class_prefix": null,
+   "fn": "ResultErrorFields",
+   "name": "$resultErrorFields",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771088,
+   "class_prefix": null,
+   "fn": "Socket",
+   "name": "$socket",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771089,
+   "class_prefix": null,
+   "fn": "ServerVersion",
+   "name": "$serverVersion",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771090,
+   "class_prefix": null,
+   "fn": "TransactionStatus",
+   "name": "$transactionStatus",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771091,
+   "class_prefix": null,
+   "fn": "Exec",
+   "name": "$exec",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771092,
+   "class_prefix": null,
+   "fn": "ExecParams",
+   "name": "$execParams",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771093,
+   "class_prefix": null,
+   "fn": "Prepare",
+   "name": "$prepare",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771094,
+   "class_prefix": null,
+   "fn": "ExecPrepared",
+   "name": "$execPrepared",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771095,
+   "class_prefix": null,
+   "fn": "DescribePrepared",
+   "name": "$describePrepared",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771096,
+   "class_prefix": null,
+   "fn": "SendQuery",
+   "name": "$sendQuery",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771097,
+   "class_prefix": null,
+   "fn": "SendQueryParams",
+   "name": "$sendQueryParams",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771098,
+   "class_prefix": null,
+   "fn": "SendPrepare",
+   "name": "$sendPrepare",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771099,
+   "class_prefix": null,
+   "fn": "SendQueryPrepared",
+   "name": "$sendQueryPrepared",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771100,
+   "class_prefix": null,
+   "fn": "GetResult",
+   "name": "$getResult",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771101,
+   "class_prefix": null,
+   "fn": "StartRead",
+   "name": "$startRead",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771102,
+   "class_prefix": null,
+   "fn": "StopRead",
+   "name": "$stopRead",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771103,
+   "class_prefix": null,
+   "fn": "StartWrite",
+   "name": "$startWrite",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771104,
+   "class_prefix": null,
+   "fn": "ConsumeInput",
+   "name": "$consumeInput",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771105,
+   "class_prefix": null,
+   "fn": "IsBusy",
+   "name": "$isBusy",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771106,
+   "class_prefix": null,
+   "fn": "SetNonBlocking",
+   "name": "$setNonBlocking",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771107,
+   "class_prefix": null,
+   "fn": "IsNonBlocking",
+   "name": "$isNonBlocking",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771108,
+   "class_prefix": null,
+   "fn": "Flush",
+   "name": "$flush",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771109,
+   "class_prefix": null,
+   "fn": "Clear",
+   "name": "$clear",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771110,
+   "class_prefix": null,
+   "fn": "Ntuples",
+   "name": "$ntuples",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771111,
+   "class_prefix": null,
+   "fn": "Nfields",
+   "name": "$nfields",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771112,
+   "class_prefix": null,
+   "fn": "Fname",
+   "name": "$fname",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771113,
+   "class_prefix": null,
+   "fn": "Ftable",
+   "name": "$ftable",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771114,
+   "class_prefix": null,
+   "fn": "Ftablecol",
+   "name": "$ftablecol",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771115,
+   "class_prefix": null,
+   "fn": "Ftype",
+   "name": "$ftype",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771116,
+   "class_prefix": null,
+   "fn": "Getvalue",
+   "name": "$getvalue",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771117,
+   "class_prefix": null,
+   "fn": "Getisnull",
+   "name": "$getisnull",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771118,
+   "class_prefix": null,
+   "fn": "Nparams",
+   "name": "$nparams",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771119,
+   "class_prefix": null,
+   "fn": "Paramtype",
+   "name": "$paramtype",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771120,
+   "class_prefix": null,
+   "fn": "CmdStatus",
+   "name": "$cmdStatus",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771121,
+   "class_prefix": null,
+   "fn": "CmdTuples",
+   "name": "$cmdTuples",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771122,
+   "class_prefix": null,
+   "fn": "ResultStatus",
+   "name": "$resultStatus",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771123,
+   "class_prefix": null,
+   "fn": "ResultErrorMessage",
+   "name": "$resultErrorMessage",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771124,
+   "class_prefix": null,
+   "fn": "Notifies",
+   "name": "$notifies",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771125,
+   "class_prefix": null,
+   "fn": "PutCopyData",
+   "name": "$putCopyData",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771126,
+   "class_prefix": null,
+   "fn": "PutCopyEnd",
+   "name": "$putCopyEnd",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771127,
+   "class_prefix": null,
+   "fn": "GetCopyData",
+   "name": "$getCopyData",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30064771128,
+   "class_prefix": null,
+   "fn": "Cancel",
+   "name": "$cancel",
+   "skipped": "no class-scoped candidate"
+  }
+ ],
+ "registrations": {},
+ "schema": "resource-guard-verdict-nan/0.1"
+}

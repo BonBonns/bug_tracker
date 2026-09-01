@@ -1,0 +1,107 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 3,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 3
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30064771525,
+   "acquisition_code": "Nan::NewBuffer( HashSize )",
+   "acquisition_line": "484",
+   "arity": 1,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182413,
+   "method_name": "Output",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064773383,
+   "acquisition_code": "Nan::NewBuffer( HashSize )",
+   "acquisition_line": "253",
+   "arity": 1,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182460,
+   "method_name": "MurmurHash",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30064773537,
+   "acquisition_code": "Nan::NewBuffer( HashSize )",
+   "acquisition_line": "92",
+   "arity": 1,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374182468,
+   "method_name": "HandleOKCallback",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [
+  {
+   "call": 30064771671,
+   "class_prefix": "MurmurHash.IncrementalHasher",
+   "fn": "Copy",
+   "linked_function_id": 107374182401,
+   "name": "copy"
+  },
+  {
+   "call": 30064771672,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064771673,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064771674,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064771675,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773422,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773423,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773424,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773425,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773426,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773427,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773428,
+   "skipped": "arg 3 is not a METHOD_REF"
+  },
+  {
+   "call": 30064773429,
+   "skipped": "arg 3 is not a METHOD_REF"
+  }
+ ],
+ "registrations": {
+  "copy": [
+   107374182401
+  ]
+ },
+ "schema": "resource-guard-verdict-nan/0.1"
+}

@@ -1,0 +1,663 @@
+{
+ "classification": {
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_NAME_MATCH_CANDIDATE": 4,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SIZE_LITERAL_NOT_APPLICABLE": 2,
+  "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED": 2
+ },
+ "findings": [
+  {
+   "acquisition_call_id": 30065067040,
+   "acquisition_code": "Nan::NewBuffer(\n        static_cast<char*>(event.key),\n        static_cast<int>(event.key_len))",
+   "acquisition_line": "320",
+   "arity": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374186260,
+   "method_name": "Flush",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  },
+  {
+   "acquisition_call_id": 30065067080,
+   "acquisition_code": "Nan::NewBuffer(\n          static_cast<char*>(event.payload),\n          static_cast<int>(event.len))",
+   "acquisition_line": "350",
+   "arity": 2,
+   "contract_citation": "nan@2.28.0/2.26.2/2.14.2 nan.h -- Nan::NewBuffer(...), all real overloads wrap node::Buffer::New(...) and return v8::MaybeLocal<v8::Object>; every real corpus call site found by PREVALENCE_STUDY.md calls .ToLocalChecked() on the result (fatal V8-level abort on empty, not a catchable exception).",
+   "contract_id": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION",
+   "method_id": 107374186260,
+   "method_name": "Flush",
+   "reason": "no real info[N] source found reachable from the size argument -- not promoted",
+   "verdict": "NAN_NEWBUFFER_UNBOUNDED_ALLOCATION_SOURCE_BOUNDARY_UNRESOLVED"
+  }
+ ],
+ "registration_audit": [
+  {
+   "call": 30065064930,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeConfigureCallbacks",
+   "name": "configureCallbacks",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065064931,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeName",
+   "name": "name",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065064932,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeCreateTopic",
+   "linked_function_id": 107374186220,
+   "name": "createTopic"
+  },
+  {
+   "call": 30065064933,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDeleteTopic",
+   "linked_function_id": 107374186221,
+   "name": "deleteTopic"
+  },
+  {
+   "call": 30065064934,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeCreatePartitions",
+   "linked_function_id": 107374186222,
+   "name": "createPartitions"
+  },
+  {
+   "call": 30065064935,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDeleteRecords",
+   "linked_function_id": 107374186227,
+   "name": "deleteRecords"
+  },
+  {
+   "call": 30065064936,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDescribeTopics",
+   "linked_function_id": 107374186228,
+   "name": "describeTopics"
+  },
+  {
+   "call": 30065064937,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeListOffsets",
+   "linked_function_id": 107374186229,
+   "name": "listOffsets"
+  },
+  {
+   "call": 30065064938,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeListGroups",
+   "linked_function_id": 107374186223,
+   "name": "listGroups"
+  },
+  {
+   "call": 30065064939,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDescribeGroups",
+   "linked_function_id": 107374186224,
+   "name": "describeGroups"
+  },
+  {
+   "call": 30065064940,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDeleteGroups",
+   "linked_function_id": 107374186225,
+   "name": "deleteGroups"
+  },
+  {
+   "call": 30065064941,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeListConsumerGroupOffsets",
+   "linked_function_id": 107374186226,
+   "name": "listConsumerGroupOffsets"
+  },
+  {
+   "call": 30065064942,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeConnect",
+   "linked_function_id": 107374186218,
+   "name": "connect"
+  },
+  {
+   "call": 30065064943,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeDisconnect",
+   "linked_function_id": 107374186219,
+   "name": "disconnect"
+  },
+  {
+   "call": 30065064944,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeSetSaslCredentials",
+   "name": "setSaslCredentials",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065064945,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeGetMetadata",
+   "name": "getMetadata",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065064946,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeSetOAuthBearerToken",
+   "name": "setOAuthBearerToken",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065064947,
+   "class_prefix": "NodeKafka.AdminClient",
+   "fn": "NodeSetOAuthBearerTokenFailure",
+   "name": "setOAuthBearerTokenFailure",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070894,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeConfigureCallbacks",
+   "name": "configureCallbacks",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070895,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeConnect",
+   "linked_function_id": 107374186449,
+   "name": "connect"
+  },
+  {
+   "call": 30065070896,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeDisconnect",
+   "linked_function_id": 107374186450,
+   "name": "disconnect"
+  },
+  {
+   "call": 30065070897,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeGetMetadata",
+   "name": "getMetadata",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070898,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeQueryWatermarkOffsets",
+   "name": "queryWatermarkOffsets",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070899,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeOffsetsForTimes",
+   "name": "offsetsForTimes",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070900,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeGetWatermarkOffsets",
+   "linked_function_id": 107374186451,
+   "name": "getWatermarkOffsets"
+  },
+  {
+   "call": 30065070901,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSetSaslCredentials",
+   "name": "setSaslCredentials",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070902,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSetOAuthBearerToken",
+   "name": "setOAuthBearerToken",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070903,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSetOAuthBearerTokenFailure",
+   "name": "setOAuthBearerTokenFailure",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065070904,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSubscription",
+   "linked_function_id": 107374186428,
+   "name": "subscription"
+  },
+  {
+   "call": 30065070905,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSubscribe",
+   "linked_function_id": 107374186441,
+   "name": "subscribe"
+  },
+  {
+   "call": 30065070906,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeUnsubscribe",
+   "linked_function_id": 107374186437,
+   "name": "unsubscribe"
+  },
+  {
+   "call": 30065070907,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeConsumeLoop",
+   "linked_function_id": 107374186447,
+   "name": "consumeLoop"
+  },
+  {
+   "call": 30065070908,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeConsume",
+   "linked_function_id": 107374186448,
+   "name": "consume"
+  },
+  {
+   "call": 30065070909,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeSeek",
+   "linked_function_id": 107374186442,
+   "name": "seek"
+  },
+  {
+   "call": 30065070910,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodePause",
+   "linked_function_id": 107374186445,
+   "name": "pause"
+  },
+  {
+   "call": 30065070911,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeResume",
+   "linked_function_id": 107374186446,
+   "name": "resume"
+  },
+  {
+   "call": 30065070912,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeCommitted",
+   "linked_function_id": 107374186427,
+   "name": "committed"
+  },
+  {
+   "call": 30065070913,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodePosition",
+   "linked_function_id": 107374186429,
+   "name": "position"
+  },
+  {
+   "call": 30065070914,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeAssign",
+   "linked_function_id": 107374186433,
+   "name": "assign"
+  },
+  {
+   "call": 30065070915,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeUnassign",
+   "linked_function_id": 107374186434,
+   "name": "unassign"
+  },
+  {
+   "call": 30065070916,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeIncrementalAssign",
+   "linked_function_id": 107374186435,
+   "name": "incrementalAssign"
+  },
+  {
+   "call": 30065070917,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeIncrementalUnassign",
+   "linked_function_id": 107374186436,
+   "name": "incrementalUnassign"
+  },
+  {
+   "call": 30065070918,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeAssignments",
+   "linked_function_id": 107374186430,
+   "name": "assignments"
+  },
+  {
+   "call": 30065070919,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeAssignmentLost",
+   "linked_function_id": 107374186431,
+   "name": "assignmentLost"
+  },
+  {
+   "call": 30065070920,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeRebalanceProtocol",
+   "linked_function_id": 107374186432,
+   "name": "rebalanceProtocol"
+  },
+  {
+   "call": 30065070921,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeCommit",
+   "linked_function_id": 107374186438,
+   "name": "commit"
+  },
+  {
+   "call": 30065070922,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeCommitSync",
+   "linked_function_id": 107374186439,
+   "name": "commitSync"
+  },
+  {
+   "call": 30065070923,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeCommitCb",
+   "linked_function_id": 107374186440,
+   "name": "commitCb"
+  },
+  {
+   "call": 30065070924,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeOffsetsStore",
+   "linked_function_id": 107374186443,
+   "name": "offsetsStore"
+  },
+  {
+   "call": 30065070925,
+   "class_prefix": "NodeKafka.KafkaConsumer",
+   "fn": "NodeOffsetsStoreSingle",
+   "linked_function_id": 107374186444,
+   "name": "offsetsStoreSingle"
+  },
+  {
+   "call": 30065072216,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeConfigureCallbacks",
+   "name": "configureCallbacks",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072217,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeConnect",
+   "linked_function_id": 107374186474,
+   "name": "connect"
+  },
+  {
+   "call": 30065072218,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeDisconnect",
+   "linked_function_id": 107374186479,
+   "name": "disconnect"
+  },
+  {
+   "call": 30065072219,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeGetMetadata",
+   "name": "getMetadata",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072220,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeQueryWatermarkOffsets",
+   "name": "queryWatermarkOffsets",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072221,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodePoll",
+   "linked_function_id": 107374186475,
+   "name": "poll"
+  },
+  {
+   "call": 30065072222,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSetPollInBackground",
+   "linked_function_id": 107374186476,
+   "name": "setPollInBackground"
+  },
+  {
+   "call": 30065072223,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSetSaslCredentials",
+   "name": "setSaslCredentials",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072224,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSetOAuthBearerToken",
+   "name": "setOAuthBearerToken",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072225,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSetOAuthBearerTokenFailure",
+   "name": "setOAuthBearerTokenFailure",
+   "skipped": "no class-scoped candidate"
+  },
+  {
+   "call": 30065072226,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSetPartitioner",
+   "linked_function_id": 107374186473,
+   "name": "setPartitioner"
+  },
+  {
+   "call": 30065072227,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeProduce",
+   "linked_function_id": 107374186472,
+   "name": "produce"
+  },
+  {
+   "call": 30065072228,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeFlush",
+   "linked_function_id": 107374186478,
+   "name": "flush"
+  },
+  {
+   "call": 30065072229,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeInitTransactions",
+   "linked_function_id": 107374186480,
+   "name": "initTransactions"
+  },
+  {
+   "call": 30065072230,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeBeginTransaction",
+   "linked_function_id": 107374186481,
+   "name": "beginTransaction"
+  },
+  {
+   "call": 30065072231,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeCommitTransaction",
+   "linked_function_id": 107374186482,
+   "name": "commitTransaction"
+  },
+  {
+   "call": 30065072232,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeAbortTransaction",
+   "linked_function_id": 107374186483,
+   "name": "abortTransaction"
+  },
+  {
+   "call": 30065072233,
+   "class_prefix": "NodeKafka.Producer",
+   "fn": "NodeSendOffsetsToTransaction",
+   "linked_function_id": 107374186484,
+   "name": "sendOffsetsToTransaction"
+  },
+  {
+   "call": 30065073308,
+   "class_prefix": "NodeKafka.Topic",
+   "fn": "NodeGetName",
+   "linked_function_id": 107374186493,
+   "name": "name"
+  }
+ ],
+ "registrations": {
+  "abortTransaction": [
+   107374186483
+  ],
+  "assign": [
+   107374186433
+  ],
+  "assignmentLost": [
+   107374186431
+  ],
+  "assignments": [
+   107374186430
+  ],
+  "beginTransaction": [
+   107374186481
+  ],
+  "commit": [
+   107374186438
+  ],
+  "commitCb": [
+   107374186440
+  ],
+  "commitSync": [
+   107374186439
+  ],
+  "commitTransaction": [
+   107374186482
+  ],
+  "committed": [
+   107374186427
+  ],
+  "connect": [
+   107374186218,
+   107374186449,
+   107374186474
+  ],
+  "consume": [
+   107374186448
+  ],
+  "consumeLoop": [
+   107374186447
+  ],
+  "createPartitions": [
+   107374186222
+  ],
+  "createTopic": [
+   107374186220
+  ],
+  "deleteGroups": [
+   107374186225
+  ],
+  "deleteRecords": [
+   107374186227
+  ],
+  "deleteTopic": [
+   107374186221
+  ],
+  "describeGroups": [
+   107374186224
+  ],
+  "describeTopics": [
+   107374186228
+  ],
+  "disconnect": [
+   107374186219,
+   107374186450,
+   107374186479
+  ],
+  "flush": [
+   107374186478
+  ],
+  "getWatermarkOffsets": [
+   107374186451
+  ],
+  "incrementalAssign": [
+   107374186435
+  ],
+  "incrementalUnassign": [
+   107374186436
+  ],
+  "initTransactions": [
+   107374186480
+  ],
+  "listConsumerGroupOffsets": [
+   107374186226
+  ],
+  "listGroups": [
+   107374186223
+  ],
+  "listOffsets": [
+   107374186229
+  ],
+  "name": [
+   107374186493
+  ],
+  "offsetsStore": [
+   107374186443
+  ],
+  "offsetsStoreSingle": [
+   107374186444
+  ],
+  "pause": [
+   107374186445
+  ],
+  "poll": [
+   107374186475
+  ],
+  "position": [
+   107374186429
+  ],
+  "produce": [
+   107374186472
+  ],
+  "rebalanceProtocol": [
+   107374186432
+  ],
+  "resume": [
+   107374186446
+  ],
+  "seek": [
+   107374186442
+  ],
+  "sendOffsetsToTransaction": [
+   107374186484
+  ],
+  "setPartitioner": [
+   107374186473
+  ],
+  "setPollInBackground": [
+   107374186476
+  ],
+  "subscribe": [
+   107374186441
+  ],
+  "subscription": [
+   107374186428
+  ],
+  "unassign": [
+   107374186434
+  ],
+  "unsubscribe": [
+   107374186437
+  ]
+ },
+ "schema": "resource-guard-verdict-nan/0.1"
+}
