@@ -58,7 +58,8 @@
 //   target_method_id       -- resolved Method node id, or empty if ABSTAINED
 //   target_method_full_name -- resolved Method's own fullName, or empty if ABSTAINED
 //   abstain_reason  -- one of: CLASS_CONSTRUCTOR_NOT_PUBLIC_API, METHODREF_TARGET_NOT_FOUND,
-//                       MULTIPLE_CANDIDATE_CONSTRUCTORS, DYNAMIC_COMPUTED_EXPORT_KEY,
+//                       MULTIPLE_CANDIDATE_CONSTRUCTORS, AMBIGUOUS_METHODREF_TARGET_MULTIPLE_METHODS,
+//                       DYNAMIC_COMPUTED_EXPORT_KEY,
 //                       COMPUTED_OBJECT_LITERAL_PROPERTY_KEY, REEXPORT_UNRESOLVED,
 //                       UNRESOLVED_IDENTIFIER_NO_METHODREF_ASSIGNMENT,
 //                       AMBIGUOUS_IDENTIFIER_MULTIPLE_METHODREF_ASSIGNMENTS,
@@ -235,7 +236,12 @@ import io.shiftleft.codepropertygraph.generated.nodes
           case _ => List((fallbackName, "CLASS_CONSTRUCTOR", Left("MULTIPLE_CANDIDATE_CONSTRUCTORS")))
         }
       case m :: Nil => List((fallbackName, "MODULE_EXPORTS_ASSIGN", Right(m)))
-      case _ => List((fallbackName, "MODULE_EXPORTS_ASSIGN", Left("MULTIPLE_CANDIDATE_CONSTRUCTORS")))
+      // NOT a constructor case (that's handled above) -- more than one Method shares this exact
+      // methodFullName, an unrelated ambiguity. Own distinct reason code: reusing
+      // MULTIPLE_CANDIDATE_CONSTRUCTORS here would mislead a future consumer grepping abstain
+      // reasons into thinking every such row is a real constructor ambiguity (pre-merge polish,
+      // never reachable as RESOLVED either way -- always an abstain, so purely a labeling fix).
+      case _ => List((fallbackName, "MODULE_EXPORTS_ASSIGN", Left("AMBIGUOUS_METHODREF_TARGET_MULTIPLE_METHODS")))
     }
   }
 
