@@ -1,0 +1,20 @@
+node=v22.22.2 v8=12.4.254.21-node.39
+regex=<!doctype\s+html|<html[\s>] flags=i
+--- many "<!doctype" + long whitespace run (no html terminator), single occurrence ---
+n=1000 len=1009 min=0.001ms median=0.002ms max=0.125ms matched=false
+n=5000 len=5009 min=0.004ms median=0.004ms max=0.009ms matched=false
+n=10000 len=10009 min=0.007ms median=0.008ms max=0.015ms matched=false
+n=20000 len=20009 min=0.014ms median=0.015ms max=0.023ms matched=false
+n=40000 len=40009 min=0.029ms median=0.029ms max=0.048ms matched=false
+n=80000 len=80009 min=0.057ms median=0.059ms max=0.091ms matched=false
+--- repeated "<!doctype"+50-space blocks (no html terminator), many occurrences ---
+n=200 len=11800 min=0.015ms median=0.015ms max=0.020ms matched=false
+n=1000 len=59000 min=0.074ms median=0.075ms max=0.098ms matched=false
+n=2000 len=118000 min=0.148ms median=0.156ms max=0.193ms matched=false
+n=4000 len=236000 min=0.299ms median=0.301ms max=0.489ms matched=false
+n=8000 len=472000 min=0.605ms median=0.643ms max=0.819ms matched=false
+n=16000 len=944000 min=1.228ms median=1.261ms max=2.220ms matched=false
+
+--- REAL bounded size (isHtml only ever sees text.slice(0, 4096)) ---
+--- capped-at-4096 worst case: "<!doctype" + spaces filling the real 4096-char cap ---
+n=4096 len=4096 min=0.003ms median=0.003ms max=0.012ms matched=false

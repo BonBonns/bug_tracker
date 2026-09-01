@@ -1,0 +1,16 @@
+node=v22.22.2 v8=12.4.254.21-node.39
+regex=(?:macfuse|libfuse3(?:\.\d+)*\.dylib) flags=i
+--- libfuse3 prefix + many .digit segments, no .dylib terminator ---
+n=1000 len=2008 min=0.003ms median=0.004ms max=0.120ms matched=false
+n=5000 len=10008 min=0.014ms median=0.015ms max=0.053ms matched=false
+n=10000 len=20008 min=0.027ms median=0.031ms max=0.170ms matched=false
+n=20000 len=40008 min=0.053ms median=0.058ms max=0.316ms matched=false
+n=40000 len=80008 min=0.116ms median=0.210ms max=0.787ms matched=false
+n=80000 len=160008 min=0.223ms median=0.280ms max=1.687ms matched=false
+--- libfuse3 prefix + many .digit segments + X (not .dylib) ---
+n=1000 len=2009 min=0.003ms median=0.007ms max=0.142ms matched=false
+n=5000 len=10009 min=0.013ms median=0.013ms max=0.064ms matched=false
+n=10000 len=20009 min=0.027ms median=0.038ms max=0.095ms matched=false
+n=20000 len=40009 min=0.058ms median=0.081ms max=0.280ms matched=false
+n=40000 len=80009 min=0.131ms median=0.155ms max=0.632ms matched=false
+n=80000 len=160009 min=0.236ms median=0.395ms max=2.031ms matched=false

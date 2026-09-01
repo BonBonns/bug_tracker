@@ -24,8 +24,3 @@ semantic-bucket-pilot/scanner-v2/npm_corpus/overnight_100/*.checkpoints/
 # deliverable -- replay_records_v8.jsonl/trackb_rerun_delta.json are complete and committed
 # (see TRACKB_RESULTS.md), matching v1-v7's own already-committed precedent in the same dir.
 semantic-bucket-pilot/scanner-v2/study/task34_replay/trackb_stdout.log
-
-# ReDoS R02 regression run (run_pilot25_r02.py) still in progress against all 21 packages --
-# incomplete results file, not a deliverable yet. Remove this entry once the run finishes and
-# the complete pilot25_r02_results.json is ready to commit.
-semantic-bucket-pilot/scanner-v2/study/redos_npm/pilot25/pilot25_r02_results.json
