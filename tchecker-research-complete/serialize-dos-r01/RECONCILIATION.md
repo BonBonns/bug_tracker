@@ -77,11 +77,20 @@ comparison predicts and the two implementations' own vocabularies confirm.
 
 ## 4. Decision
 
-Preserve both subproperties. The canonical property-local revision built in this
-directory (`serialize_dos_r01.py`) computes **two independent classification axes per
-finding** — `crash_dos_classification` (reusing the direct implementation's proven
-guard model) and `size_structure_dos_classification` (a new, deterministic-only,
-conservative structural approximation of the taint-engine's question, explicitly
-**not** a reimplementation of its interprocedural transform-chain engine — see
-`serialize_dos_r01.py`'s own docstring for the exact, disclosed scope reduction) — never
-merged into one flat verdict, and reports both.
+Preserve both subproperties. **Superseded by R02, see `R02_RESULTS.md`.** R01's first
+cut (`serialize_dos_r01.py`) computed both axes itself, including a new, self-contained
+approximation of the size/structure question. Manual review of R01's frozen
+`motifer@26.1.1` blind result found that approximation was not architecturally
+defensible: it never actually consulted the real taint engine. The corrected structure,
+built as R02:
+
+- `gates/serialize_dos_verdict.py` (direct, fact-based) → canonical **crash-safety**
+  subproperty. Unchanged.
+- The existing taint engine (`adjudicate_js.py` + its producers) → canonical
+  **size/structure-flow** subproperty. Consulted, never reimplemented.
+- `serialize_dos_r02.py` → reducer/**coordinator** over those two real results, not a
+  weaker replacement for either. R01's old approximation survives only as an
+  explicitly non-authoritative pre-filter signal.
+
+R01 is kept in this directory as the first-cut implementation this correction was
+built from — `R02_RESULTS.md` is the current, active document.
