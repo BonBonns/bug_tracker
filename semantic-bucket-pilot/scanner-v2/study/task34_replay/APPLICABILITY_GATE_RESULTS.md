@@ -221,6 +221,29 @@ only audit, no Joern rebuild anywhere:
    single R06 finding was already independently confirmed (in the earlier regression fix) to
    resolve against its own correct, specific target.
 
+## The 54 unresolved packages: triaged, not resolved (`UNRESOLVED_CATEGORIZATION.md`)
+
+Follow-up per direct instruction: all 54 packages this audit left `unresolved` were split by
+relevance and their unresolved REASON was categorized -- full account in
+`UNRESOLVED_CATEGORIZATION.md`. Two decisive, real findings:
+
+- **Zero of the 54 have any R04/R05/R06 finding at all**, at any build-config value -- R06's own
+  contract-matching never found a matching acquisition pattern in any of them. This round's own
+  work therefore changes nothing in the current reportability funnel, exactly like the 32-package
+  staleness audit before it.
+- **None of the three real unresolved-reason categories found
+  (`NO_TEXTUAL_EVIDENCE` 42, `CMAKE_JS_EXTERNAL_DEFAULT` 8, `NO_RECOGNIZED_BUILD_FILE` 4) could be
+  safely promoted to a decisive value without guessing** -- doing so would repeat the exact class
+  of regression node-libcurl's own fix and the staleness audit both just corrected. What WAS
+  mechanically, safely added: `extract_build_config.classify_unresolved_reason()`, a new,
+  purely diagnostic function (never changes `exception_configuration`, checked by an explicit
+  zero-incorrect-promotion invariant, `check_extract_build_config.py` 18/18) that makes a future
+  individual review faster to triage before the 394-package expansion.
+- Required report block, confirmed programmatically (`rerun_extraction_with_unresolved_reasons.py`):
+  `unresolved before: 54, unresolved after: 54, resolved correctly: 20, conflicts preserved: 12,
+  incorrect promotions: 0`. Step 6 (rerun R06 for changed-configuration packages): **zero**
+  packages -- confirmed, not assumed; `replay_records_v5.jsonl` remains the current final state.
+
 ## Final result, this replay (CORRECTED)
 
 **Zero reportable findings among 97 successfully replayed packages from the frozen 100-package

@@ -447,6 +447,89 @@ def fetch_bytes(url, timeout=60, retries=4):
     return None, "exhausted retries"
 
 
+# UNRESOLVED-REASON DIAGNOSTIC (task #34's own build-configuration staleness audit follow-up):
+# a real, mechanical investigation of the 54 packages classify_from_tarball() left "unresolved"
+# in the 97-package replay sample found NO signal that could safely promote any of them to a
+# decisive enabled/disabled/conflict value without guessing (this module's own docstring already
+# deliberately reserves default-resolution reasoning for individual manual review, e.g.
+# jpeg-turbo -- never a bulk, automatic rule). What the investigation DID find: a real, textual,
+# mechanically-checkable reason WHY each package stayed unresolved, falling into exactly three
+# real, disjoint buckets (see study/task34_replay/UNRESOLVED_CATEGORIZATION.md for the full,
+# real per-package account): no recognized build-config file exists in the tarball at all; a
+# recognized build-config file exists but references `cmake-js` (whose own tooling injects the
+# exception-configuration define OUTSIDE the package's own repo at build time -- the package's
+# own CMakeLists.txt/binding.gyp genuinely cannot carry this evidence textually, a real,
+# structural limit, not a bug); or a recognized build-config file exists and carries neither
+# pattern anywhere in its own real text. `classify_unresolved_reason()` is PURELY DIAGNOSTIC: it
+# NEVER changes exception_configuration (always still "unresolved" when called -- this function
+# is meaningless/not called otherwise), so it cannot cause an incorrect promotion by
+# construction. It exists to make a future individual review (before the 394-package expansion)
+# faster to triage, not to resolve anything automatically.
+CMAKE_JS_RE = re.compile(rb'cmake-js')
+
+
+def classify_unresolved_reason(tarball_bytes):
+    """Real, bounded, in-memory-only re-scan of the SAME tarball bytes classify_from_tarball()
+    already read -- never a second real download, never writes to disk. Returns one of:
+      "NO_RECOGNIZED_BUILD_FILE" -- no binding.gyp/CMakeLists.txt/*.cmake/meson.build/*.gn(i)
+        found at all (a bare package.json, if anything, is not itself build-config evidence).
+      "CMAKE_JS_EXTERNAL_DEFAULT" -- a real config file exists, and `cmake-js` is referenced
+        somewhere in the tarball's own real text (its package.json dependency entry, or a
+        CMakeLists.txt comment referencing it) -- real, disclosed evidence that cmake-js's own
+        external tooling, not the package's own repo text, is what determines the actual
+        exception-configuration default; this tool cannot see that default from tarball content
+        alone, and does not guess at cmake-js's own version-specific behavior.
+      "NO_TEXTUAL_EVIDENCE" -- a real config file exists, is NOT cmake-js-driven, and simply
+        never references any of DISABLE_PATTERNS/ENABLE_PATTERNS anywhere in its own real text --
+        the genuinely-unresolved default case, unchanged from before this diagnostic existed.
+    Returns None if given tarball bytes classify_from_tarball() itself could not read (caller's
+    own responsibility to check "error" first, same as classify_from_tarball())."""
+    try:
+        tf = tarfile.open(fileobj=io.BytesIO(tarball_bytes), mode="r:gz")
+    except Exception:
+        return None
+    found_any_config_file = False
+    has_cmake_js = False
+    has_any_pattern = False
+    for m in tf.getmembers():
+        if not m.isfile():
+            continue
+        name = m.name.split("/", 1)[1] if "/" in m.name else m.name
+        lower = name.lower()
+        family = None
+        for suffix, fam in CONFIG_FILE_SUFFIXES.items():
+            if lower.endswith(suffix):
+                family = fam
+                break
+        if family is None:
+            continue
+        f = tf.extractfile(m)
+        if f is None:
+            continue
+        try:
+            content = f.read()
+        except Exception:
+            continue
+        if family != "package.json":
+            found_any_config_file = True
+        if CMAKE_JS_RE.search(content):
+            has_cmake_js = True
+        for pat, _label in DISABLE_PATTERNS + ENABLE_PATTERNS:
+            if pat.search(content):
+                has_any_pattern = True
+    tf.close()
+    if has_any_pattern:
+        # classify_from_tarball() would already have resolved this (enabled/disabled/conflict)
+        # -- this function is only ever meaningful when the caller already confirmed "unresolved".
+        return "NO_TEXTUAL_EVIDENCE"  # defensive fallback; never expected to be reached when
+                                        # the caller's own contract (only call on "unresolved") holds
+    if not found_any_config_file:
+        return "NO_RECOGNIZED_BUILD_FILE"
+    if has_cmake_js:
+        return "CMAKE_JS_EXTERNAL_DEFAULT"
+    return "NO_TEXTUAL_EVIDENCE"
+
+
 def classify_from_tarball(tarball_bytes):
     try:
         tf = tarfile.open(fileobj=io.BytesIO(tarball_bytes), mode="r:gz")

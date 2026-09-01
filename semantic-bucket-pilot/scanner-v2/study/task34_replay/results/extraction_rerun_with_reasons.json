@@ -1,0 +1,651 @@
+{
+  "config_changed_packages": [],
+  "conflicts_preserved": 12,
+  "incorrect_promotions": 0,
+  "per_package": {
+    "@2060.io/ffi-napi@4.0.9": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@2060.io/ref-napi@3.0.6": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@8crafter/leveldb-zlib@1.6.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@abandonware/bluetooth-hci-socket@0.5.3-12": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@acomsys/dash-utils@0.0.17": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@adhdev/ghostty-vt-node@1.0.46": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@ampretia/x509@0.4.10": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@antcube/capnp@0.5.52": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@appthreat/sqlite3@9.0.1": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@archwayhq/keyring-go@0.2.1": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@astronautlabs/webrtc@0.6.1": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@automattic/yara@2.6.3": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@breush/ffi-napi@4.0.13": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@breush/ref-napi@4.0.9": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@brick-a-brack/napi-canon-cameras@0.1.5": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@camol/file-lock@1.1.4": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@cdktf/node-pty-prebuilt-multiarch@0.10.2": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@cerebruminc/i420-jpeg-encoder@1.2.1": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@cherrystudio/mac-system-ocr@0.2.7": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@choysen/mac-system-ocr@0.2.8": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@co_snow/hello@0.0.57": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_RECOGNIZED_BUILD_FILE"
+    },
+    "@cocktailpeanut/node-pty-prebuilt-multiarch@0.11.16": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@codeplaydata/dbc2dbf@1.1.0": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@codeporter/robotjs@0.6.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@confluentinc/kafka-javascript@1.10.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@damonsmith/node-printer@0.7.3": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@deepfocus/get-windows@1.0.21": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@depup/node-addon-api@8.9.2-depup.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_RECOGNIZED_BUILD_FILE"
+    },
+    "@discordjs/opus@0.10.0": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@dolthub/doltlite@0.11.55": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@dwieeb/node-pty-prebuilt@0.8.1": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@elchetz/cld@2.8.5": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@eliyya/sange@1.2.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@eyevinn/srt@0.8.3": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@faressoft/node-pty-prebuilt@0.9.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@flovy/node-printer@0.6.3": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@flyskywhy/react-native-gcanvas@6.0.24": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@fqlan/add-example-prebuild@1.0.1": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@fugood/whisper.node@1.1.3": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@genee/dbus@1.0.7-9": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@github/keytar@7.10.6": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@gjsify/napi@0.44.0": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@gjsify/node-gi@0.44.0": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@grandchef/node-printer@0.8.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@gristlabs/sqlite3@6.0.1-grist.1": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@guilherme_souza/node-printer-updated-fork@0.6.17": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@h1x4dev/node-addon-api@2.0.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@huxinhai/mmkv@0.1.7": {
+      "exception_configuration": "enabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@ipshipyard/node-datachannel@0.26.6": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "@jasonscheirer/native-progress-bar@1.1.2": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jellybrick/ffi-napi@4.0.18": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@jellybrick/ref-napi@4.0.10": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@jimp-native/plugin-blit-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-blur-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-circle-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-color-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-composite-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-crop-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-dither-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-flip-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-invert-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-mask-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-resize-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@jimp-native/plugin-rotate-napi@0.1.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@js-ak/watchdog@1.5.0": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "@julusian/segfault-raub@2.3.3": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@nodert-win10-cu/windows.ui.notifications@0.4.4": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@nodert-win10-rs4/windows.data.xml.dom@0.4.4": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@sentry-internal/node-native-stacktrace@0.5.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "@ssxv/node-printer@1.1.1": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "@vlad-fresha/segfault-raub@2.10.0": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "@zowe/db2-for-zowe-cli@6.1.17": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "audify@1.10.1": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "fullname-native@3.0.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "hidraw-native@0.2.2": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "indy-sdk@1.16.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "logosdb@1.0.1": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "napi-addon-fdtd@3.4.9": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "CMAKE_JS_EXTERNAL_DEFAULT"
+    },
+    "napi-ldap@1.0.4": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "nlpplus@1.3.24": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "node-crc16@2.0.7": {
+      "exception_configuration": "conflict",
+      "prior_category": "CONFLICT",
+      "prior_exception_configuration": "conflict",
+      "status": "OK"
+    },
+    "node-libcurl@5.1.2": {
+      "exception_configuration": "enabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "node-pty@1.1.0": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "node-snap7@1.0.9": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "os-dns-native@2.0.1": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "pqclean@0.8.1": {
+      "exception_configuration": "disabled",
+      "prior_category": "UNCHANGED",
+      "prior_exception_configuration": "disabled",
+      "status": "OK"
+    },
+    "profoundjs-fibers@2.7.5": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "re2@1.26.1": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "smart-whisper@0.8.1": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "thunder-node-sdk-lite-m@0.1.16": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "uiohook-napi@1.5.5": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "uriparser@2.4.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "velociradix@8.3.1": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_RECOGNIZED_BUILD_FILE"
+    },
+    "vsfragments_node@0.0.42": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "win-export-certificate-and-key@3.0.2": {
+      "exception_configuration": "enabled",
+      "prior_category": "CHANGED",
+      "prior_exception_configuration": "enabled",
+      "status": "OK"
+    },
+    "x509@0.3.4": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_TEXTUAL_EVIDENCE"
+    },
+    "yatag@1.3.0": {
+      "exception_configuration": "unresolved",
+      "prior_category": "UNRESOLVED",
+      "prior_exception_configuration": "unresolved",
+      "status": "OK",
+      "unresolved_reason": "NO_RECOGNIZED_BUILD_FILE"
+    }
+  },
+  "resolved_correctly": 20,
+  "unresolved_after": 54,
+  "unresolved_before": 54,
+  "unresolved_reason_breakdown": {
+    "CMAKE_JS_EXTERNAL_DEFAULT": 8,
+    "NO_RECOGNIZED_BUILD_FILE": 4,
+    "NO_TEXTUAL_EVIDENCE": 42
+  }
+}
