@@ -223,3 +223,65 @@ verified directly against git history rather than re-derived:
 - A genuine "wild" real npm positive (DANGEROUS regex + real PACKAGE_API_INPUT reachability on an
   UNMODIFIED real package) was searched for but not found in this pass's four-package sample --
   real future work, not silently deferred.
+
+## Bounded precision/coverage audit, before pipeline integration
+
+Per direct instruction: root-cause `phplike`'s rejection, categorize the pilot's own 6
+`COMPLEXITY_ONLY` and 14 `NO_COMPLEXITY_CANDIDATE` records, fix the prefilter if justified using
+the 21 pilot packages strictly as the development/regression set, freeze, then select a genuinely
+new blind package set before viewing outcomes. Full detail in `pilot25/audit/`.
+
+**1. `phplike` root cause** (`pilot25/phplike_review/ROOT_CAUSE_AND_DECISION.md`): the real
+variable is character-class DISJOINTNESS between a branch's gating literal and its quantified
+atom, not literal rarity/frequency as first (wrongly) framed -- corrected explicitly after a
+stress test (`overlap_test.js`) showed an OVERLAPPING gating literal reproduces real quadratic
+blowup even when common. Decision: **ADJUDICATION**, not a structural fix -- a safe fix needs a
+genuinely new character-class-disjointness capability; an unsafe shortcut was shown, not assumed,
+to risk false negatives.
+
+**2. `COMPLEXITY_ONLY` categorization** (`pilot25/audit/COMPLEXITY_ONLY_CATEGORIZATION.md`): 5 of
+6 `GENUINELY_INTERNAL_REGEX` (install-lifecycle/CLI scripts never reachable from the real runtime
+entrypoint, or internal subprocess-output parsing); 1 `PUBLIC_EXPORT_RESOLUTION_GAP`
+(`velociradix`'s `Context.graphql()` -- a real, disclosed, unattempted design gap: the adapter has
+no path to resolve a class's own instance methods as export sources, nor to trace `this`-field
+taint from a constructor's real parameters -- future work, not attempted in this bounded pass).
+
+**3. Prefilter/classifier divergence** (`pilot25/audit/PREFILTER_DIVERGENCE_AUDIT.md`): ~82% of
+the 14-package divergence traces to jssrc2cpg's own real default file/folder exclusions
+(decompiled from `jssrc2cpg-4.0.608.jar`, confirmed by synthetic-probe testing) that the
+prefilter's own file filter never replicated; the remainder to a JSDoc-comment misparse. This is a
+**prefilter-only** precision issue -- the real Joern classifier was correct throughout, it simply
+never saw these excluded files either.
+
+**4-5. Fix, regression, and freeze** (`pilot25/audit/PREFILTER_FIX.md`): implemented file-exclusion
+parity + comment stripping in `prefilter_select_25.py`. The first comment-stripper version
+introduced a real regression -- caught by its own regression test
+(`pilot25/audit/validate_prefilter_fix.py`) before anything was frozen: a string literal
+containing `'*/*'` (an Accept-header wildcard check) in `velociradix`'s real source was misread as
+a comment-open delimiter, silently deleting ~9,000 characters of real code including its own
+genuine dangerous regex literal. Root-caused precisely and fixed with a provably-sound
+string-literal-aware linear scanner. Re-validated: **7/7 real positives detected, zero
+regressions**. Two pre-existing, disclosed false positives (`ssh2`, `mariasql`) left unfixed --
+real def-use/call-target resolution is out of this cheap prefilter's documented scope, and
+over-counting is its accepted-safe direction. `prefilter_select_25.py` at this state is frozen.
+
+**6. New blind package set** (`pilot25/select_blind2.py`, `pilot25/pilot_blind2_selection.json`):
+ran the corrected prefilter over the same frozen 494-package corpus, package NAMES from the 21
+already used as the development/regression set excluded (473 rows scanned). **Result: 0
+qualifying packages, 0 selected -- all 473 rows processed cleanly (zero fetch/extract failures).**
+A real, measured zero, not silently absorbed, matching the discipline instruction B point 8 set
+out in advance ("if no real candidate appears, report the measured zero"). With the file-exclusion
+and string-literal-aware fixes in place, the corrected prefilter finds no export-reachable
+DANGEROUS-shaped regex literal anywhere in the remaining corpus -- consistent with the divergence
+audit's own finding that most of the original pilot's proxy-positive score came from now-excluded
+files. Whether the frozen Stage 2 complexity model itself is too narrow (as instruction B point 8
+anticipates as a live possibility) is a real, open question this bounded audit does not resolve --
+flagged for the next phase, not integration.
+
+**Net state after this audit**: the ReDoS property remains fully implemented, historically
+validated (real CVE-2025-5892 differential), and precision-audited (both the 21-package pilot's
+own imperfections and the prefilter's own imperfections are root-caused and either fixed or
+disclosed). **No real npm package has yet produced a `MANUALLY_CONFIRMED` finding.**
+`reportable` stays hardcoded `false`; no pipeline wiring has been touched. Real-corpus precision
+validation is measurably further along; production pipeline integration remains explicitly not
+started.
