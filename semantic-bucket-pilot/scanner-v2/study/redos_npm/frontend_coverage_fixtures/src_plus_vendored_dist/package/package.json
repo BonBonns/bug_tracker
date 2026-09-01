@@ -1,0 +1,6 @@
+{
+  "name": "fc-fixture-src-plus-vendored-dist",
+  "version": "1.0.0",
+  "description": "Normal case the default jssrc2cpg dist ignore rule is CORRECT for: a real, non-ignored src/ is the declared entrypoint, and a separate dist/ build-output folder is also shipped but is NOT referenced by any package.json entrypoint field.",
+  "main": "./src/index.js"
+}

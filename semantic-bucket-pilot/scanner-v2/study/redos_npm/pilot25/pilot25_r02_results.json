@@ -1,0 +1,1246 @@
+{
+  "selection_schema": "redos-pilot25-selection/1.0",
+  "n_packages": 21,
+  "results": [
+    {
+      "package_name": "ember-one-way-controls",
+      "version": "3.1.0",
+      "row_index": 50,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 4,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 2,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 52,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 24.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "row_index": 106,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "lib/sqlite3.d.ts",
+          "lib/sqlite3.js"
+        ],
+        "n_missing_entrypoints": 1,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/lib/sqlite3.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/lib/sqlite3.d.ts": "package/lib/sqlite3.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 9,
+        "dangerous_sinks": 0,
+        "package_api_sources": 96,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 30,
+        "exported_classes_resolved": 3,
+        "this_field_sources": 2,
+        "export_abstentions": 61,
+        "this_field_abstentions": 7,
+        "pattern_abstentions": 2,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 42.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "realm",
+      "version": "20.2.0",
+      "row_index": 220,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "dist/platform/node/index.js",
+          "dist/public-types/index.d.ts",
+          "dist/scripts/submit-analytics.js",
+          "index.react-native.js",
+          "react-native.config.js"
+        ],
+        "n_missing_entrypoints": 3,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/dist/platform/node/index.js",
+            "reason": "FOLDER_IGNORE"
+          },
+          {
+            "relpath": "package/dist/public-types/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist/scripts/submit-analytics.js",
+            "reason": "FOLDER_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/dist/platform/node/index.js": "package/_redos_included_dist/platform/node/index.js",
+          "package/dist/scripts/submit-analytics.js": "package/_redos_included_dist/scripts/submit-analytics.js",
+          "package/dist/public-types/index.d.ts": "package/_redos_included_dist/public-types/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 2,
+        "dangerous_sinks": 0,
+        "package_api_sources": 952,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 279,
+        "exported_classes_resolved": 30,
+        "this_field_sources": 9,
+        "export_abstentions": 212,
+        "this_field_abstentions": 24,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 48.5,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "linux-device",
+      "version": "2.1.4",
+      "row_index": 104,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 43,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 28,
+        "exported_classes_resolved": 2,
+        "this_field_sources": 0,
+        "export_abstentions": 6,
+        "this_field_abstentions": 1,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 22.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "numbl",
+      "version": "0.4.19",
+      "row_index": 177,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "dist-browser/browser.js",
+          "dist-browser/browser/index.d.ts",
+          "dist-graphics/graphics-lib.d.ts",
+          "dist-graphics/index.js",
+          "dist-lib/lib.d.ts",
+          "dist-lib/lib.js",
+          "dist-lib/node.d.ts",
+          "dist-lib/node.js"
+        ],
+        "n_missing_entrypoints": 7,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/dist-browser/browser.js",
+            "reason": "LINE_LENGTH_MINIFIED"
+          },
+          {
+            "relpath": "package/dist-browser/browser/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist-graphics/graphics-lib.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist-graphics/index.js",
+            "reason": "LINE_LENGTH_MINIFIED"
+          },
+          {
+            "relpath": "package/dist-lib/lib.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist-lib/lib.js",
+            "reason": "LINE_LENGTH_MINIFIED"
+          },
+          {
+            "relpath": "package/dist-lib/node.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/dist-browser/browser/index.d.ts": "package/dist-browser/browser/index.d_redosinc.ts",
+          "package/dist-graphics/graphics-lib.d.ts": "package/dist-graphics/graphics-lib.d_redosinc.ts",
+          "package/dist-lib/lib.d.ts": "package/dist-lib/lib.d_redosinc.ts",
+          "package/dist-lib/node.d.ts": "package/dist-lib/node.d_redosinc.ts"
+        },
+        "still_missing_after_correction": [
+          [
+            "package/dist-browser/browser.js",
+            "LINE_LENGTH_MINIFIED"
+          ],
+          [
+            "package/dist-graphics/index.js",
+            "LINE_LENGTH_MINIFIED"
+          ],
+          [
+            "package/dist-lib/lib.js",
+            "LINE_LENGTH_MINIFIED"
+          ]
+        ]
+      },
+      "producer_summary": {
+        "sink_targets": 2,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 1,
+        "exported_functions_resolved": 0,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 64,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 34.1,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "sdenv",
+      "version": "1.1.3",
+      "row_index": 322,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 6,
+        "dangerous_sinks": 0,
+        "package_api_sources": 102,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 30,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 16,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 1,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 25.0,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "uplink-nodejs",
+      "version": "1.2.6",
+      "row_index": 275,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "dist/uplink.js"
+        ],
+        "n_missing_entrypoints": 1,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/dist/uplink.js",
+            "reason": "FOLDER_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/dist/uplink.js": "package/_redos_included_dist/uplink.js"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 154,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 58,
+        "exported_classes_resolved": 54,
+        "this_field_sources": 48,
+        "export_abstentions": 19,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 40.3,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "fuse-napi",
+      "version": "2.3.1",
+      "row_index": 101,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.d.ts",
+          "index.js"
+        ],
+        "n_missing_entrypoints": 1,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/index.d.ts": "package/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 16,
+        "dangerous_sinks": 2,
+        "package_api_sources": 471,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 83,
+        "exported_classes_resolved": 2,
+        "this_field_sources": 0,
+        "export_abstentions": 23,
+        "this_field_abstentions": 20,
+        "pattern_abstentions": 0,
+        "rows_emitted": 2
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 1,
+        "PACKAGE_API_INPUT_REACHABLE": 1,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [
+        {
+          "property": "REDOS",
+          "sink_node_id": "30064777006",
+          "sink_line": 5,
+          "finding_id": "redos:redos_npm_candidate.js#sink30064777006",
+          "classification": "PACKAGE_API_INPUT_REACHABLE",
+          "regex_complexity": "CANDIDATE",
+          "source_boundary": "EXPORTED_FUNCTION_PARAMETER",
+          "application_ingress": "NOT_ESTABLISHED",
+          "adjudicator_disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+          "adjudicator_property_outcome": "ESTABLISHED",
+          "reportable": false
+        }
+      ],
+      "elapsed_seconds": 44.1,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 2,
+        "r02_dangerous_sinks": 2,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 1,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 1,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "jsmeow",
+      "version": "1.0.9",
+      "row_index": 392,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "dist/index.commonjs.js",
+          "dist/index.esm.mjs",
+          "types/index.d.ts"
+        ],
+        "n_missing_entrypoints": 3,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/dist/index.commonjs.js",
+            "reason": "FOLDER_IGNORE"
+          },
+          {
+            "relpath": "package/dist/index.esm.mjs",
+            "reason": "FOLDER_IGNORE"
+          },
+          {
+            "relpath": "package/types/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/dist/index.commonjs.js": "package/_redos_included_dist/index.commonjs.js",
+          "package/dist/index.esm.mjs": "package/_redos_included_dist/index.esm.mjs",
+          "package/types/index.d.ts": "package/types/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 4,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 1,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 32,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 33.2,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "argon2",
+      "version": "0.45.1",
+      "row_index": 425,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "argon2.cjs",
+          "argon2.d.cts"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 13,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 3,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 3,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 20.8,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "node-addon-api",
+      "version": "8.9.2",
+      "row_index": 0,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 7,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 7,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 22.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "@depup/node-addon-api",
+      "version": "8.9.2-depup.0",
+      "row_index": 12,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 7,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 7,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 23.9,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "ssh2",
+      "version": "1.17.0",
+      "row_index": 35,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "lib/index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 29,
+        "dangerous_sinks": 1,
+        "package_api_sources": 1512,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 215,
+        "exported_classes_resolved": 18,
+        "this_field_sources": 33,
+        "export_abstentions": 81,
+        "this_field_abstentions": 126,
+        "pattern_abstentions": 16,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 38.2,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "x11-dri",
+      "version": "0.6.0",
+      "row_index": 84,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.d.ts",
+          "index.js"
+        ],
+        "n_missing_entrypoints": 1,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/index.d.ts": "package/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 3,
+        "dangerous_sinks": 0,
+        "package_api_sources": 10,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 15,
+        "exported_classes_resolved": 3,
+        "this_field_sources": 0,
+        "export_abstentions": 44,
+        "this_field_abstentions": 8,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 37.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "multi-spec-parser",
+      "version": "0.4.2",
+      "row_index": 108,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "dist/src/index.d.ts",
+          "dist/src/index.js",
+          "dist/src/standard-schema.d.ts",
+          "dist/src/standard-schema.js"
+        ],
+        "n_missing_entrypoints": 4,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/dist/src/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist/src/index.js",
+            "reason": "FOLDER_IGNORE"
+          },
+          {
+            "relpath": "package/dist/src/standard-schema.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/dist/src/standard-schema.js",
+            "reason": "FOLDER_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/dist/src/index.js": "package/_redos_included_dist/src/index.js",
+          "package/dist/src/standard-schema.js": "package/_redos_included_dist/src/standard-schema.js",
+          "package/dist/src/index.d.ts": "package/_redos_included_dist/src/index.d_redosinc.ts",
+          "package/dist/src/standard-schema.d.ts": "package/_redos_included_dist/src/standard-schema.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 50,
+        "dangerous_sinks": 1,
+        "package_api_sources": 496,
+        "application_ingress_sources": 13,
+        "exported_functions_resolved": 71,
+        "exported_classes_resolved": 2,
+        "this_field_sources": 1,
+        "export_abstentions": 86,
+        "this_field_abstentions": 12,
+        "pattern_abstentions": 0,
+        "rows_emitted": 4
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 1,
+        "PACKAGE_API_INPUT_REACHABLE": 1,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [
+        {
+          "property": "REDOS",
+          "sink_node_id": "30064779210",
+          "sink_line": 57,
+          "finding_id": "redos:redos_npm_candidate.js#sink30064779210",
+          "classification": "PACKAGE_API_INPUT_REACHABLE",
+          "regex_complexity": "CANDIDATE",
+          "source_boundary": "EXPORTED_FUNCTION_PARAMETER",
+          "application_ingress": "NOT_ESTABLISHED",
+          "adjudicator_disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+          "adjudicator_property_outcome": "ESTABLISHED",
+          "reportable": false
+        }
+      ],
+      "elapsed_seconds": 40.3,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 1,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 1,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "@h1x4dev/node-addon-api",
+      "version": "2.0.0",
+      "row_index": 117,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 8,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 4,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 24.2,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "velociradix",
+      "version": "8.3.1",
+      "row_index": 121,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "client.d.ts",
+          "client.mjs",
+          "decorators.d.ts",
+          "decorators.mjs",
+          "express.d.ts",
+          "express.mjs",
+          "index.d.ts",
+          "index.mjs"
+        ],
+        "n_missing_entrypoints": 4,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/client.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/decorators.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/express.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          },
+          {
+            "relpath": "package/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/client.d.ts": "package/client.d_redosinc.ts",
+          "package/decorators.d.ts": "package/decorators.d_redosinc.ts",
+          "package/express.d.ts": "package/express.d_redosinc.ts",
+          "package/index.d.ts": "package/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 86,
+        "dangerous_sinks": 1,
+        "package_api_sources": 489,
+        "application_ingress_sources": 49,
+        "exported_functions_resolved": 122,
+        "exported_classes_resolved": 28,
+        "this_field_sources": 0,
+        "export_abstentions": 247,
+        "this_field_abstentions": 32,
+        "pattern_abstentions": 6,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 50.5,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "koffi",
+      "version": "3.1.6",
+      "row_index": 202,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.cjs",
+          "index.d.ts",
+          "index.js",
+          "indirect.cjs",
+          "indirect.js"
+        ],
+        "n_missing_entrypoints": 1,
+        "missing_entrypoints": [
+          {
+            "relpath": "package/index.d.ts",
+            "reason": "SUFFIX_IGNORE"
+          }
+        ],
+        "correction_applied": true,
+        "recovered_path_map": {
+          "package/index.d.ts": "package/index.d_redosinc.ts"
+        },
+        "still_missing_after_correction": []
+      },
+      "producer_summary": {
+        "sink_targets": 10,
+        "dangerous_sinks": 1,
+        "package_api_sources": 30,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 8,
+        "exported_classes_resolved": 2,
+        "this_field_sources": 0,
+        "export_abstentions": 248,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 40.9,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "mariasql",
+      "version": "0.2.6",
+      "row_index": 249,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 2,
+        "dangerous_sinks": 2,
+        "package_api_sources": 4,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 1,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 0,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 23.0,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 2,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "tree-sitter-4dm",
+      "version": "2.11.0",
+      "row_index": 429,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 4,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 23.6,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 0,
+        "r02_dangerous_sinks": 0,
+        "baseline_n_findings": 0,
+        "r02_n_findings": 0,
+        "baseline_pkg_api_reachable": 0,
+        "r02_pkg_api_reachable": 0,
+        "regression_flag": false
+      }
+    },
+    {
+      "package_name": "phplike",
+      "version": "2.5.12",
+      "row_index": 455,
+      "frontend_coverage": {
+        "resolved_entrypoints": [
+          "index.js"
+        ],
+        "n_missing_entrypoints": 0,
+        "missing_entrypoints": [],
+        "correction_applied": false
+      },
+      "producer_summary": {
+        "sink_targets": 21,
+        "dangerous_sinks": 1,
+        "package_api_sources": 426,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 82,
+        "exported_classes_resolved": 0,
+        "this_field_sources": 0,
+        "export_abstentions": 42,
+        "this_field_abstentions": 0,
+        "pattern_abstentions": 9,
+        "rows_emitted": 23
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 1,
+        "PACKAGE_API_INPUT_REACHABLE": 1,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [
+        {
+          "property": "REDOS",
+          "sink_node_id": "30064773793",
+          "sink_line": 209,
+          "finding_id": "redos:redos_npm_candidate.js#sink30064773793",
+          "classification": "PACKAGE_API_INPUT_REACHABLE",
+          "regex_complexity": "CANDIDATE",
+          "source_boundary": "EXPORTED_FUNCTION_PARAMETER",
+          "application_ingress": "NOT_ESTABLISHED",
+          "adjudicator_disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+          "adjudicator_property_outcome": "ESTABLISHED",
+          "reportable": false
+        }
+      ],
+      "elapsed_seconds": 26.4,
+      "comparison_to_r01_baseline": {
+        "comparable": true,
+        "baseline_status": "OK",
+        "r02_status": "OK",
+        "baseline_dangerous_sinks": 1,
+        "r02_dangerous_sinks": 1,
+        "baseline_n_findings": 1,
+        "r02_n_findings": 1,
+        "baseline_pkg_api_reachable": 1,
+        "r02_pkg_api_reachable": 1,
+        "regression_flag": false
+      }
+    }
+  ]
+}

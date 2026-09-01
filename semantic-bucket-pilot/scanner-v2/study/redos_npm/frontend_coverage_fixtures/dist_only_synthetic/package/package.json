@@ -1,0 +1,13 @@
+{
+  "name": "fc-fixture-dist-only-synthetic",
+  "version": "1.0.0",
+  "description": "Mimics multi-spec-parser@0.4.2's real shape: main/exports/types all point into dist/, no parallel src/ ships in the tarball.",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  }
+}

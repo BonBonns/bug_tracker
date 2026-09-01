@@ -1,0 +1,673 @@
+eligible corpus rows (frozen order): 494
+[1/494] node-addon-api@8.9.2: export=True regex_literals=148 dangerous=1 qualifies=True
+[2/494] @kooper-ai/yskip-embeddings@1.0.29: export=True regex_literals=0 dangerous=0 qualifies=False
+[3/494] napi-addon-spdlog@0.0.17: export=True regex_literals=0 dangerous=0 qualifies=False
+[4/494] @brick-a-brack/napi-canon-cameras@0.1.5: export=True regex_literals=6 dangerous=0 qualifies=False
+[5/494] ultimate-tictactoe-ai@0.4.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[6/494] node-spdlog@0.1.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[7/494] napi-addon-fdtd@3.4.9: export=True regex_literals=0 dangerous=0 qualifies=False
+[8/494] morfeusz2-node-bindings@0.1.4: export=True regex_literals=1 dangerous=0 qualifies=False
+[9/494] @jimp-native/plugin-resize-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[10/494] @jimp-native/plugin-color-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[11/494] win-macro@2.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[12/494] @jimp-native/plugin-mask-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[13/494] @depup/node-addon-api@8.9.2-depup.0: export=True regex_literals=148 dangerous=1 qualifies=True
+[14/494] @jimp-native/plugin-blit-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[15/494] @jimp-native/plugin-crop-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[16/494] @jimp-native/plugin-blur-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[17/494] @jimp-native/plugin-circle-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[18/494] @jimp-native/plugin-composite-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[19/494] @jimp-native/plugin-dither-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[20/494] @matteogheza/node-eventlog@2.0.9: export=True regex_literals=0 dangerous=0 qualifies=False
+[21/494] @jimp-native/plugin-rotate-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[22/494] @jimp-native/plugin-flip-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[23/494] emnapi@1.11.3: export=True regex_literals=27 dangerous=0 qualifies=False
+[24/494] @jimp-native/plugin-invert-napi@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[25/494] @mapbox/node-cpp-skel@0.2.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[26/494] odbc@2.5.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[27/494] electron-nspanel@0.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[28/494] xxhash-addon@2.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[29/494] @eliyya/sange@1.2.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[30/494] re2@1.26.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[31/494] @theia/ffmpeg@1.75.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[32/494] @lynx-js/weak-node-api@0.1.0: export=False regex_literals=12 dangerous=0 qualifies=False
+[33/494] @nodriverai/mavjs@0.1.2: export=True regex_literals=31 dangerous=0 qualifies=False
+[34/494] pqclean@0.8.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[35/494] ffi-napi@4.0.3: export=True regex_literals=4 dangerous=0 qualifies=False
+[36/494] ssh2@1.17.0: export=True regex_literals=27 dangerous=1 qualifies=True
+[37/494] @simon-shd/libltc-napi-limited@0.2.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[38/494] zstd-napi@0.0.13: export=True regex_literals=28 dangerous=0 qualifies=False
+[39/494] pulsar-client@1.18.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[40/494] roaring@2.7.0: export=True regex_literals=5 dangerous=0 qualifies=False
+[41/494] eiows@11.1.1: export=True regex_literals=7 dangerous=0 qualifies=False
+[42/494] @camol/file-lock@1.1.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[43/494] sqlite3@6.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[44/494] node-pty@1.1.0: export=True regex_literals=35 dangerous=0 qualifies=False
+[45/494] @lukaselmer/odbc@2.7.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[46/494] @jasonscheirer/native-progress-bar@1.1.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[47/494] secp256k1@5.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[48/494] node-snap7@1.0.9: export=True regex_literals=0 dangerous=0 qualifies=False
+[49/494] @2060.io/ffi-napi@4.0.9: export=True regex_literals=12 dangerous=0 qualifies=False
+[50/494] highs-addon@0.10.3: export=True regex_literals=6 dangerous=0 qualifies=False
+[51/494] ember-one-way-controls@3.1.0: export=True regex_literals=8611 dangerous=89 qualifies=True
+[52/494] joulescope_driver@2.4.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[53/494] scrypt@6.0.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[54/494] fast-find-in-files@1.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[55/494] naudiodon2@2.5.0: export=True regex_literals=5 dangerous=0 qualifies=False
+[56/494] @gjsify/napi@0.44.0: export=True regex_literals=3 dangerous=0 qualifies=False
+[57/494] @primno/dpapi@2.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[58/494] node-liblzma@5.1.1: export=True regex_literals=206 dangerous=0 qualifies=False
+[59/494] keytar@7.9.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[60/494] node-hid@3.4.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[61/494] @vscode/sqlite3@5.1.14-vscode: export=True regex_literals=1 dangerous=0 qualifies=False
+[62/494] sharp@0.35.4: export=True regex_literals=279 dangerous=0 qualifies=False
+[63/494] libpq@1.11.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[64/494] unix-dgram@2.0.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[65/494] @openzim/libzim@4.5.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[66/494] fontnik@0.7.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[67/494] libxmljs4@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[68/494] openzwave-shared@1.7.2: export=True regex_literals=20 dangerous=0 qualifies=False
+[69/494] nlpplus@1.3.24: export=True regex_literals=40 dangerous=0 qualifies=False
+[70/494] @mongodb-js/zstd@7.0.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[71/494] react-native-node-api@1.1.1: export=True regex_literals=10 dangerous=0 qualifies=False
+[72/494] msgpack@1.0.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[73/494] tdl@8.1.0: export=True regex_literals=15 dangerous=0 qualifies=False
+[74/494] @serialport/bindings-cpp@13.0.1: export=True regex_literals=13 dangerous=0 qualifies=False
+[75/494] node-crc16@2.0.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[76/494] @julusian/segfault-raub@2.3.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[77/494] node-llama-cpp@3.20.0: export=True regex_literals=402 dangerous=0 qualifies=False
+[78/494] @confluentinc/kafka-javascript@1.10.0: export=True regex_literals=353 dangerous=0 qualifies=False
+[79/494] @adhdev/ghostty-vt-node@1.0.46: export=True regex_literals=1 dangerous=0 qualifies=False
+[80/494] @stdlib/ndarray-base-napi-addon-arguments@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[81/494] macos-export-certificate-and-key@2.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[82/494] rabin-bindings@1.7.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[83/494] great-big-file-reader@1.0.4: export=False regex_literals=0 dangerous=0 qualifies=False
+[84/494] microtime@3.1.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[85/494] x11-dri@0.6.0: export=True regex_literals=75 dangerous=1 qualifies=True
+[86/494] yatag@1.3.0: export=True regex_literals=5 dangerous=0 qualifies=False
+[87/494] bcrypt@6.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[88/494] eccrypto@1.1.6: export=True regex_literals=3 dangerous=0 qualifies=False
+[89/494] libsamplerate@2.1.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[90/494] ibm_db@4.0.1: export=True regex_literals=7 dangerous=0 qualifies=False
+[91/494] @makeomatic/ffi-napi@4.2.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[92/494] @gjsify/node-gi@0.44.0: export=True regex_literals=130 dangerous=0 qualifies=False
+[93/494] @kiran.kk.phonpe/node-native-ocr@0.3.9: export=True regex_literals=2 dangerous=0 qualifies=False
+[94/494] naudiodon@2.3.6: export=True regex_literals=5 dangerous=0 qualifies=False
+[95/494] napi-snap7@1.2.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[96/494] win-export-certificate-and-key@3.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[97/494] hnswlib-node@3.0.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[98/494] @zerob13/nativekit@0.6.3: export=True regex_literals=7 dangerous=0 qualifies=False
+[99/494] macos-alias@0.2.12: export=True regex_literals=0 dangerous=0 qualifies=False
+[100/494] @tensorflow/tfjs-node@4.22.0: export=True regex_literals=668 dangerous=0 qualifies=False
+[101/494] node-libcurl@5.1.2: export=True regex_literals=117 dangerous=0 qualifies=False
+[102/494] fuse-napi@2.3.1: export=True regex_literals=45 dangerous=2 qualifies=True
+[103/494] ffi@2.3.0: export=True regex_literals=3 dangerous=0 qualifies=False
+[104/494] win-version-info@6.0.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[105/494] linux-device@2.1.4: export=True regex_literals=79 dangerous=8 qualifies=True
+[106/494] windows-foreground-love@0.6.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[107/494] @appthreat/sqlite3@9.0.1: export=True regex_literals=650 dangerous=29 qualifies=True
+[108/494] keyring_js@1.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[109/494] multi-spec-parser@0.4.2: export=True regex_literals=120 dangerous=1 qualifies=True
+[110/494] @cdktf/node-pty-prebuilt-multiarch@0.10.2: export=True regex_literals=30 dangerous=0 qualifies=False
+[111/494] duckdb@1.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[112/494] @stdlib/strided-napi-addon-arguments@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[113/494] node-firebird-native-api@3.3.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[114/494] murmurhash-native@3.5.1: export=True regex_literals=10 dangerous=0 qualifies=False
+[115/494] wework-chat-node@1.3.0: export=True regex_literals=6 dangerous=0 qualifies=False
+[116/494] faiss-node@0.5.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[117/494] @cerebruminc/i420-jpeg-encoder@1.2.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[118/494] @h1x4dev/node-addon-api@2.0.0: export=True regex_literals=148 dangerous=1 qualifies=True
+[119/494] weak-napi@2.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[120/494] zip-node-addon@0.0.11: export=True regex_literals=0 dangerous=0 qualifies=False
+[121/494] node-quirc@2.3.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[122/494] velociradix@8.3.1: export=True regex_literals=408 dangerous=1 qualifies=True
+[123/494] ffi-napi-v22@0.0.1: export=True regex_literals=4 dangerous=0 qualifies=False
+[124/494] libcec@8.1.6: export=True regex_literals=48 dangerous=0 qualifies=False
+[125/494] @vlad-fresha/segfault-raub@2.10.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[126/494] pdfium-native@0.9.1: export=True regex_literals=378 dangerous=0 qualifies=False
+[127/494] windows-notification-state@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[128/494] deasync@0.1.31: export=True regex_literals=4 dangerous=0 qualifies=False
+[129/494] node-postal@1.3.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[130/494] @stdlib/math-base-napi-binary@0.3.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[131/494] @stdlib/math-base-napi-unary@0.2.7: export=True regex_literals=1 dangerous=0 qualifies=False
+[132/494] @xan105/remote-thread@1.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[133/494] @stdlib/napi@0.4.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[134/494] @stdlib/napi-argv-float@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[135/494] @stdlib/napi-argv-double@0.2.2: export=True regex_literals=1 dangerous=0 qualifies=False
+[136/494] @stdlib/napi-create-int32@0.0.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[137/494] @stdlib/assert-napi-equal-types@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[138/494] @stdlib/assert-napi-is-type@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[139/494] @stdlib/napi-argv-int32@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[140/494] ref-napi@3.0.3: export=True regex_literals=3 dangerous=0 qualifies=False
+[141/494] nice-napi@1.0.2: export=True regex_literals=1 dangerous=0 qualifies=False
+[142/494] @stdlib/napi-create-double@0.0.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[143/494] @stdlib/assert-napi-is-typedarray@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[144/494] @stdlib/assert-napi-equal-typedarray-types@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[145/494] @stdlib/napi-argv-float64array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[146/494] @stdlib/napi-argv-bool@0.1.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[147/494] @stdlib/math-base-napi-ternary@0.3.2: export=True regex_literals=1 dangerous=0 qualifies=False
+[148/494] napi-thread-safe-callback@0.0.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[149/494] @stdlib/napi-argv-int64@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[150/494] uiohook-napi@1.5.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[151/494] @rclnodejs/ref-napi@4.0.0: export=True regex_literals=3 dangerous=0 qualifies=False
+[152/494] @stdlib/napi-argv-strided-float64array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[153/494] @2060.io/ref-napi@3.0.6: export=True regex_literals=34 dangerous=0 qualifies=False
+[154/494] @rclnodejs/ref-array-di@1.2.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[155/494] @stdlib/napi-argv-float32array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[156/494] @newrelic/native-metrics@13.1.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[157/494] @stdlib/napi-argv-strided-float32array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[158/494] @napi-ffi/ffi-napi@4.0.7: export=True regex_literals=4 dangerous=0 qualifies=False
+[159/494] nftables-napi@0.7.1: export=True regex_literals=16 dangerous=0 qualifies=False
+[160/494] @stdlib/math-base-napi-quaternary@0.2.4: export=True regex_literals=1 dangerous=0 qualifies=False
+[161/494] @jellybrick/ffi-napi@4.0.18: export=True regex_literals=31 dangerous=0 qualifies=False
+[162/494] @breush/ffi-napi@4.0.13: export=True regex_literals=4 dangerous=0 qualifies=False
+[163/494] ref-array-di@1.2.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[164/494] selection-hook@2.1.0: export=True regex_literals=37 dangerous=0 qualifies=False
+[165/494] napi-thread-safe-callback-cancellable@0.0.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[166/494] smart-whisper@0.8.1: export=True regex_literals=14 dangerous=0 qualifies=False
+[167/494] @lwahonen/ffi-napi@4.0.12: export=True regex_literals=4 dangerous=0 qualifies=False
+[168/494] @makeomatic/ref-napi@3.0.6: export=True regex_literals=3 dangerous=0 qualifies=False
+[169/494] @stdlib/napi-argv-strided-complex64array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[170/494] @stdlib/napi-argv-strided-complex128array@0.3.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[171/494] @stdlib/assert-napi-has-property@0.0.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[172/494] @stdlib/napi-argv-complex64@0.0.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[173/494] @stdlib/napi-argv-complex128@0.1.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[174/494] @sentry/node-native-stacktrace@0.5.2: export=True regex_literals=2 dangerous=0 qualifies=False
+[175/494] @stdlib/napi-argv-uint8array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[176/494] napi-ldap@1.0.4: export=True regex_literals=3 dangerous=0 qualifies=False
+[177/494] interruptor@2.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[178/494] numbl@0.4.19: export=True regex_literals=1765 dangerous=6 qualifies=True
+[179/494] @breush/ref-napi@4.0.9: export=True regex_literals=3 dangerous=0 qualifies=False
+[180/494] @sentry-internal/node-native-stacktrace@0.5.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[181/494] @stdlib/napi-argv-strided-uint8array@0.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[182/494] ref-union-di@1.0.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[183/494] ref-array-napi@1.2.2: export=True regex_literals=1 dangerous=0 qualifies=False
+[184/494] @tigerconnect/ffi-napi@4.0.3-tc3: export=True regex_literals=40 dangerous=0 qualifies=False
+[185/494] native-machine-id@0.3.11: export=True regex_literals=2 dangerous=0 qualifies=False
+[186/494] @jellybrick/ref-napi@4.0.10: export=True regex_literals=3 dangerous=0 qualifies=False
+[187/494] @louislam/sqlite3@15.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[188/494] @stdlib/napi-argv-strided-float64array2d@0.1.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[189/494] @stdlib/napi-argv-strided-float32array2d@0.1.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[190/494] @stdlib/napi-create-complex-like@0.1.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[191/494] @stagetimerio/grandiose@0.2.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[192/494] @cherrystudio/mac-system-ocr@0.2.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[193/494] node-lzma7z@0.1.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[194/494] @ssxv/node-printer@1.1.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[195/494] memcore@1.0.2: export=True regex_literals=6 dangerous=0 qualifies=False
+[196/494] hidraw-native@0.2.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[197/494] fast-etag-crc32@0.1.0: export=True regex_literals=5 dangerous=0 qualifies=False
+[198/494] mongodb-client-encryption@7.2.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[199/494] @choysen/mac-system-ocr@0.2.8: export=True regex_literals=0 dangerous=0 qualifies=False
+[200/494] ioctl-native@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[201/494] zeromq@6.6.0: export=True regex_literals=28 dangerous=0 qualifies=False
+[202/494] native-hdr-histogram@1.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[203/494] koffi@3.1.6: export=True regex_literals=30 dangerous=1 qualifies=True
+[204/494] kerberos@7.0.0: export=True regex_literals=11 dangerous=0 qualifies=False
+[205/494] fuse-native@2.2.6: export=True regex_literals=2 dangerous=0 qualifies=False
+[206/494] @nexusmods/fomod-installer-native@0.13.3: export=True regex_literals=54 dangerous=0 qualifies=False
+[207/494] @stoprocent/bluetooth-hci-socket@2.3.0: export=True regex_literals=11 dangerous=0 qualifies=False
+[208/494] native-is-elevated@0.9.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[209/494] audify@1.10.1: export=True regex_literals=43 dangerous=0 qualifies=False
+[210/494] @samyok/annoy@1.1.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[211/494] native-reg@1.1.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[212/494] os-dns-native@2.0.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[213/494] @gristlabs/sqlite3@6.0.1-grist.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[214/494] rsa-keypair@2.0.2: export=False regex_literals=0 dangerous=0 qualifies=False
+[215/494] @zkochan/fuse-native@0.1.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[216/494] utp-native@2.5.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[217/494] qpdf-compress@0.7.1: export=True regex_literals=17 dangerous=0 qualifies=False
+[218/494] @ipshipyard/node-datachannel@0.26.6: export=True regex_literals=20 dangerous=0 qualifies=False
+[219/494] @stoprocent/noble@2.8.0: export=True regex_literals=40 dangerous=0 qualifies=False
+[220/494] @flyskywhy/react-native-gcanvas@6.0.24: export=True regex_literals=11208 dangerous=0 qualifies=False
+[221/494] realm@20.2.0: export=True regex_literals=330 dangerous=16 qualifies=True
+[222/494] ibmmq@2.1.9: export=True regex_literals=170 dangerous=0 qualifies=False
+[223/494] cpu-features@0.0.10: export=True regex_literals=0 dangerous=0 qualifies=False
+[224/494] pprof@5.0.0: export=True regex_literals=130 dangerous=0 qualifies=False
+[225/494] @abandonware/bluetooth-hci-socket@0.5.3-12: export=True regex_literals=7 dangerous=0 qualifies=False
+[226/494] java@0.18.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[227/494] native-watchdog@1.4.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[228/494] @vscode/native-watchdog@1.4.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[229/494] @kaciras/deasync@1.1.0: export=True regex_literals=3 dangerous=0 qualifies=False
+[230/494] node-calls-python@1.13.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[231/494] lzma-native@8.0.6: export=True regex_literals=3 dangerous=0 qualifies=False
+[232/494] @pokusew/pcsclite@0.6.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[233/494] execSync@1.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[234/494] lru-native2@1.2.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[235/494] krb5@0.5.5: export=True regex_literals=1 dangerous=0 qualifies=False
+[236/494] zlib-sync@0.1.10: export=True regex_literals=0 dangerous=0 qualifies=False
+[237/494] contextify@1.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[238/494] blake2@5.0.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[239/494] bluetooth-hci-socket@0.5.1: export=True regex_literals=3 dangerous=0 qualifies=False
+[240/494] tree-sitter-gdscript@6.1.0: export=True regex_literals=16 dangerous=0 qualifies=False
+[241/494] dbus@1.0.7: export=True regex_literals=1 dangerous=0 qualifies=False
+[242/494] @port-labs/jq-node-bindings@1.0.6: export=True regex_literals=4 dangerous=0 qualifies=False
+[243/494] png-img@5.0.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[244/494] node-cmake@2.5.1: export=True regex_literals=4 dangerous=0 qualifies=False
+[245/494] fibers_node_v8@3.1.5: export=True regex_literals=4 dangerous=0 qualifies=False
+[246/494] @meza/curseforge-fingerprint@1.1.43: export=True regex_literals=0 dangerous=0 qualifies=False
+[247/494] fibers@5.0.3: export=True regex_literals=3 dangerous=0 qualifies=False
+[248/494] node-zopfli-es@2.0.6: export=True regex_literals=2 dangerous=0 qualifies=False
+[249/494] @automattic/yara@2.6.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[250/494] mariasql@0.2.6: export=True regex_literals=1 dangerous=1 qualifies=True
+[251/494] hypertube-binaries@3.1.8: export=True regex_literals=0 dangerous=0 qualifies=False
+[252/494] midi@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[253/494] nbind@0.3.15: export=True regex_literals=32 dangerous=0 qualifies=False
+[254/494] inotify@1.4.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[255/494] webworker-threads@0.7.17: export=True regex_literals=1 dangerous=0 qualifies=False
+[256/494] talib@2.0.5: export=True regex_literals=1 dangerous=0 qualifies=False
+[257/494] @snyk/node-dump-stacks@1.8.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[258/494] mfpdev-cli@8.0.2022100206: export=True regex_literals=2 dangerous=0 qualifies=False
+[259/494] genx@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[260/494] cue-sdk@4.0.84: export=True regex_literals=0 dangerous=0 qualifies=False
+[261/494] infinitysqlite@1.3.10: export=True regex_literals=0 dangerous=0 qualifies=False
+[262/494] gdal-async@3.12.3: export=True regex_literals=10 dangerous=0 qualifies=False
+[263/494] muhammara@6.0.6: export=True regex_literals=18 dangerous=0 qualifies=False
+[264/494] @ronomon/quoted-printable@3.2.1: export=True regex_literals=3 dangerous=0 qualifies=False
+[265/494] vscode-sqlite3@4.0.11: export=True regex_literals=0 dangerous=0 qualifies=False
+[266/494] node-openjtalk-binding@1.3.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[267/494] pwuid@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[268/494] giac@1.23.69823: export=False regex_literals=1 dangerous=0 qualifies=False
+[269/494] fuse-shared-library-linux-arm@1.0.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[270/494] heapdump@0.3.15: export=True regex_literals=1 dangerous=0 qualifies=False
+[271/494] memoryjs@3.5.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[272/494] yencode@1.2.4: export=True regex_literals=4 dangerous=0 qualifies=False
+[273/494] buffertools@2.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[274/494] node-libgpiod@0.6.0: export=True regex_literals=60 dangerous=0 qualifies=False
+[275/494] @super-protocol/uplink-nodejs@1.2.20: export=True regex_literals=7 dangerous=0 qualifies=False
+[276/494] uplink-nodejs@1.2.6: export=True regex_literals=138 dangerous=3 qualifies=True
+[277/494] fuse-shared-library-darwin@1.1.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[278/494] @polarsignals/custom-labels@0.3.9: export=True regex_literals=0 dangerous=0 qualifies=False
+[279/494] node-zopfli@2.1.4: export=True regex_literals=4 dangerous=0 qualifies=False
+[280/494] @nodert-win10-au/windows.applicationmodel@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[281/494] node-pty-prebuilt-multiarch@0.10.0-test.3: export=True regex_literals=30 dangerous=0 qualifies=False
+[282/494] swisseph@0.5.17: export=True regex_literals=6 dangerous=0 qualifies=False
+[283/494] nodehun@3.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[284/494] nobind17@2.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[285/494] sleep@6.3.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[286/494] node-lmdb@0.10.1: export=True regex_literals=17 dangerous=0 qualifies=False
+[287/494] electron-edge-js@44.0.0: export=True regex_literals=5 dangerous=0 qualifies=False
+[288/494] @nodert-win10-21h1/windows.devices.geolocation@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[289/494] leveldown-prebuilt@1.0.8: export=True regex_literals=0 dangerous=0 qualifies=False
+[290/494] cracklib@3.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[291/494] @nodert-win10-au/windows.foundation@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[292/494] @node-lightning/secp256k1@0.28.0: export=True regex_literals=6 dangerous=0 qualifies=False
+[293/494] ced@2.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[294/494] @langateam/sqlite3@3.1.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[295/494] @nodert-win10-au/windows.data.xml.dom@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[296/494] @nodert-win10-rs4/windows.security.credentials.ui@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[297/494] nodencl@1.4.2: export=True regex_literals=6 dangerous=0 qualifies=False
+[298/494] @astronautlabs/webrtc@0.6.1: export=True regex_literals=10 dangerous=0 qualifies=False
+[299/494] @nodert-win10-au/windows.ui.notifications@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[300/494] indy-sdk@1.16.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[301/494] @nodert-win10-au/windows.ui.startscreen@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[302/494] cdt-gdb-adapter@1.10.0: export=True regex_literals=128 dangerous=0 qualifies=False
+[303/494] mishiro-core@6.3.7: export=True regex_literals=1 dangerous=0 qualifies=False
+[304/494] gst-kit@0.3.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[305/494] nosql-leveldb@3.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[306/494] @vigcoin/cryptonote-util@0.2.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[307/494] libyang@0.13.13: export=True regex_literals=0 dangerous=0 qualifies=False
+[308/494] @vlasky/quoted-printable@3.2.2: export=True regex_literals=3 dangerous=0 qualifies=False
+[309/494] @wireapp/node-addressbook@3.3.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[310/494] @nodert-win10/windows.foundation@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[311/494] gdal@0.11.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[312/494] ogg@1.2.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[313/494] @nodert-win10-rs4/windows.data.xml.dom@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[314/494] @eyevinn/srt@0.8.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[315/494] waitpid2@2.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[316/494] @fugood/whisper.node@1.1.3: export=True regex_literals=9 dangerous=0 qualifies=False
+[317/494] text-similarity-node@1.2.0: export=True regex_literals=30 dangerous=0 qualifies=False
+[318/494] node-gyp-hw@1.1.21: export=True regex_literals=0 dangerous=0 qualifies=False
+[319/494] node-ulaw@1.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[320/494] @huxinhai/mmkv@0.1.7: export=True regex_literals=0 dangerous=0 qualifies=False
+[321/494] @pgql/parse@13.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[322/494] nwm@1.3.0: export=True regex_literals=23 dangerous=0 qualifies=False
+[323/494] sdenv@1.1.3: export=True regex_literals=44 dangerous=4 qualifies=True
+[324/494] @genee/dbus@1.0.7-9: export=True regex_literals=1 dangerous=0 qualifies=False
+[325/494] @nodert-win10/windows.storage.streams@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[326/494] macadam@2.0.18: export=True regex_literals=28 dangerous=0 qualifies=False
+[327/494] @realtimex/node-llama-cpp@0.283.0: export=True regex_literals=379 dangerous=0 qualifies=False
+[328/494] node-webcodecs@1.3.0: export=True regex_literals=11 dangerous=0 qualifies=False
+[329/494] get-console-process-list@1.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[330/494] canvas@3.2.3: export=True regex_literals=8 dangerous=0 qualifies=False
+[331/494] electron-application-desktop-toolbar@1.2.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[332/494] @nodert-win10-rs4/windows.ui.notifications@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[333/494] caeneus-native@0.1.3: export=True regex_literals=6 dangerous=0 qualifies=False
+[334/494] @nodert-win10-20h1/windows.media.speechrecognition@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[335/494] uriparser@2.4.0: export=False regex_literals=1 dangerous=0 qualifies=False
+[336/494] @co_snow/hello@0.0.57: export=True regex_literals=1 dangerous=0 qualifies=False
+[337/494] librsvg@0.7.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[338/494] rocksdb-lite@1.1.6: export=True regex_literals=1 dangerous=0 qualifies=False
+[339/494] libwebview-nodejs@0.12.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[340/494] @nodert-win10/windows.media.playback@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[341/494] @zowe/db2-for-zowe-cli@6.1.17: export=True regex_literals=0 dangerous=0 qualifies=False
+[342/494] @zkochan/fuse-shared-library-darwin@0.0.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[343/494] tree-sitter-fsharp@0.3.11: export=True regex_literals=0 dangerous=0 qualifies=False
+[344/494] @plasosdk/mouse_position_reporter@1.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[345/494] @nodert-win10-cu/windows.ui.startscreen@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[346/494] mecab-gyp@1.2.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[347/494] @nodert-win10-cu/windows.ui.notifications@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[348/494] @nodert-win10/windows.media@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[349/494] @nodert-win10-cu/windows.applicationmodel@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[350/494] netlinkwrapper@2.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[351/494] fullname-native@3.0.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[352/494] @antcube/capnp@0.5.52: export=True regex_literals=7 dangerous=0 qualifies=False
+[353/494] node-syslog@1.2.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[354/494] @nodert-win11-22h2/windows.security.credentials.ui@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[355/494] @nodert-win10-cu/windows.data.xml.dom@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[356/494] kepmon@0.4.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[357/494] @sentry/node-cpu-profiler@2.4.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[358/494] @discordjs/opus@0.10.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[359/494] @trufflesuite/bigint-buffer@1.1.10: export=True regex_literals=1 dangerous=0 qualifies=False
+[360/494] mountutils@2.0.8: export=True regex_literals=2 dangerous=0 qualifies=False
+[361/494] usb-detection@4.14.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[362/494] @thiagoelg/node-printer@0.6.2: export=True regex_literals=2 dangerous=0 qualifies=False
+[363/494] node-pty-prebuilt@0.7.6: export=True regex_literals=16 dangerous=0 qualifies=False
+[364/494] @timokunze/node-printer@0.6.34: export=True regex_literals=1 dangerous=0 qualifies=False
+[365/494] raknet-native@1.2.3: export=True regex_literals=1 dangerous=0 qualifies=False
+[366/494] @farcaster/rocksdb@5.5.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[367/494] @grandchef/node-printer@0.8.0: export=True regex_literals=1 dangerous=0 qualifies=False
+[368/494] lzo-decompress@1.0.11: export=True regex_literals=0 dangerous=0 qualifies=False
+[369/494] webbluetooth@3.7.0: export=True regex_literals=30 dangerous=0 qualifies=False
+[370/494] @u4/opencv4nodejs@7.1.2: export=True regex_literals=20 dangerous=0 qualifies=False
+[371/494] @archwayhq/keyring-go@0.2.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[372/494] logosdb@1.0.1: export=True regex_literals=15 dangerous=0 qualifies=False
+[373/494] @lastapp/node-printer@0.8.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[374/494] @js-ak/watchdog@1.5.0: export=True regex_literals=22 dangerous=0 qualifies=False
+[375/494] heapdump-prebuild@0.0.6: export=True regex_literals=1 dangerous=0 qualifies=False
+[376/494] @woovi/node-printer@1.0.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[377/494] leveldb-zlib@1.2.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[378/494] @driftlog/tree-sitter-dart@1.0.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[379/494] ldap-native@0.1.4: export=True regex_literals=9 dangerous=0 qualifies=False
+[380/494] @elchetz/cld@2.8.5: export=True regex_literals=1 dangerous=0 qualifies=False
+[381/494] @codeplaydata/dbc2dbf@1.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[382/494] @luckykiet/node-printer@1.0.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[383/494] @acomsys/dash-utils@0.0.17: export=True regex_literals=0 dangerous=0 qualifies=False
+[384/494] vsfragments_node@0.0.42: export=True regex_literals=0 dangerous=0 qualifies=False
+[385/494] @8crafter/leveldb-zlib@1.6.0: export=True regex_literals=2 dangerous=0 qualifies=False
+[386/494] node-snap7-micro-client@0.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[387/494] @guilherme_souza/node-printer-updated-fork@0.6.17: export=True regex_literals=5 dangerous=0 qualifies=False
+[388/494] inkdrop-keyboard-layout@3.0.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[389/494] @trkyshorty/node-lzf@1.1.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[390/494] spellchecker-prebuild@3.7.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[391/494] @mgarnier11/my-canvas@1.0.3: export=True regex_literals=9 dangerous=0 qualifies=False
+[392/494] font-ls@0.6.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[393/494] jsmeow@1.0.9: export=True regex_literals=2 dangerous=2 qualifies=True
+[394/494] @dwieeb/node-pty-prebuilt@0.8.1: export=True regex_literals=18 dangerous=0 qualifies=False
+[395/494] @faressoft/node-pty-prebuilt@0.9.0: export=True regex_literals=25 dangerous=0 qualifies=False
+[396/494] @tbalegas/node-printer@1.0.2: export=True regex_literals=2 dangerous=0 qualifies=False
+[397/494] native-recorder-nodejs@1.2.0: export=True regex_literals=14 dangerous=0 qualifies=False
+[398/494] cquant@0.1.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[399/494] @todesktop/robotjs-prebuild@0.6.28: export=True regex_literals=1 dangerous=0 qualifies=False
+[400/494] @cocktailpeanut/node-pty-prebuilt-multiarch@0.11.16: export=True regex_literals=32 dangerous=0 qualifies=False
+[401/494] @codeporter/robotjs@0.6.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[402/494] @zhuolinho/babel-preset-abc@0.3.13: export=True regex_literals=131 dangerous=0 qualifies=False
+[403/494] ingescape@4.6.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[404/494] @damonsmith/node-printer@0.7.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[405/494] @tachyon-ipc/core@0.5.1: export=True regex_literals=33 dangerous=0 qualifies=False
+[406/494] mongodb-js-zstd-wuc656@2.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[407/494] w.process.tree.windows@0.3.78: export=True regex_literals=0 dangerous=0 qualifies=False
+[408/494] glome-deasync@1.0.10: export=True regex_literals=3 dangerous=0 qualifies=False
+[409/494] @flovy/node-printer@0.6.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[410/494] @niick555/node-printer@1.0.2: export=True regex_literals=1 dangerous=0 qualifies=False
+[411/494] @fqlan/add-example-prebuild@1.0.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[412/494] @oleavr/prebuild@6.2.0: export=True regex_literals=4 dangerous=0 qualifies=False
+[413/494] @lemonbread/node-printer@0.6.3: export=True regex_literals=2 dangerous=0 qualifies=False
+[414/494] encore.hdf5.binding@0.3.55: export=True regex_literals=49 dangerous=0 qualifies=False
+[415/494] @s-h-a-d-o-w/speech-recorder@2.1.12: export=True regex_literals=0 dangerous=0 qualifies=False
+[416/494] javonet-binaries@2.6.16: export=True regex_literals=0 dangerous=0 qualifies=False
+[417/494] @lgeiger/napi-prebuild-starter@0.3.1: export=False regex_literals=0 dangerous=0 qualifies=False
+[418/494] node-addon-example@0.1.5: export=False regex_literals=0 dangerous=0 qualifies=False
+[419/494] mk-node-addon-example@0.1.8: export=False regex_literals=0 dangerous=0 qualifies=False
+[420/494] node-addon-example2@0.1.3: export=False regex_literals=0 dangerous=0 qualifies=False
+[421/494] workspace-publishing@2.0.3: export=False regex_literals=0 dangerous=0 qualifies=False
+[422/494] @deepfocus/get-windows@1.0.21: export=True regex_literals=0 dangerous=0 qualifies=False
+[423/494] hello_publishing-native-pre-gyp@1.0.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[424/494] @ladvace/get-windows@2.0.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[425/494] tree-sitter@0.25.1: export=True regex_literals=61 dangerous=0 qualifies=False
+[426/494] argon2@0.45.1: export=True regex_literals=3 dangerous=2 qualifies=True
+[427/494] arkime-iptrie@0.0.10: export=True regex_literals=0 dangerous=0 qualifies=False
+[428/494] keysender@2.4.0: export=True regex_literals=43 dangerous=0 qualifies=False
+[429/494] electron-printer@0.0.5: export=True regex_literals=2 dangerous=0 qualifies=False
+[430/494] tree-sitter-4dm@2.11.0: export=True regex_literals=48 dangerous=1 qualifies=True
+[431/494] @nodert-win10-rs4/windows.devices.printers@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[432/494] @ampretia/x509@0.4.10: export=True regex_literals=1 dangerous=0 qualifies=False
+[433/494] @nodert-win10-rs4/windows.foundation@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[434/494] @nodert-win10/windows.data.xml.dom@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[435/494] cppunitlite@1.0.0: export=False regex_literals=0 dangerous=0 qualifies=False
+[436/494] sqlite3_wins@3.3.15: export=True regex_literals=0 dangerous=0 qualifies=False
+[437/494] raw-socket@1.8.1: export=True regex_literals=0 dangerous=0 qualifies=False
+[438/494] autostock-simulation-tools@2.7.2: export=True regex_literals=95 dangerous=0 qualifies=False
+[439/494] @nodert-win10/windows.applicationmodel@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[440/494] jpeg-turbo@0.4.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[441/494] @nodert-win10/windows.ui.startscreen@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[442/494] @plugos-org/node-llama-cpp@3.15.1: export=True regex_literals=349 dangerous=0 qualifies=False
+[443/494] @nodert-win10-au/windows.storage.streams@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[444/494] ms-flakeless@4.7.2: export=True regex_literals=0 dangerous=0 qualifies=False
+[445/494] @nodert-win11-22h2/windows.gaming.xboxlive.storage@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[446/494] win-audio@3.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[447/494] @nodert-win10/windows.ui.notifications@0.2.96: export=True regex_literals=0 dangerous=0 qualifies=False
+[448/494] xprofiler@3.1.0: export=True regex_literals=12 dangerous=0 qualifies=False
+[449/494] @nodert-win11-22h2/windows.applicationmodel.datatransfer.sharetarget@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[450/494] @nodert-win10-au/windows.media.playback@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[451/494] @sentry-internal/node-cpu-profiler@2.4.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[452/494] @nodert-win10-19h1/windows.globalization.numberformatting@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[453/494] @nodert-win11-22h2/windows.management.policies@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[454/494] nodejs-java@1.0.16: export=True regex_literals=5 dangerous=0 qualifies=False
+[455/494] @nodert-win11-22h2/windows.media.miracast@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[456/494] phplike@2.5.12: export=True regex_literals=27 dangerous=1 qualifies=True
+[457/494] abletonlink@0.1.3: export=True regex_literals=0 dangerous=0 qualifies=False
+[458/494] profoundjs-fibers@2.7.5: export=True regex_literals=3 dangerous=0 qualifies=False
+[459/494] iconv@3.0.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[460/494] guetzli-js@1.0.9: export=True regex_literals=25 dangerous=0 qualifies=False
+[461/494] @nodert-win10-au/windows.media@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[462/494] cryptonote-util-bbscoin-gcc6@1.0.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[463/494] detect-character-encoding@0.9.0: export=True regex_literals=0 dangerous=0 qualifies=False
+[464/494] @nodert-win11-22h2/windows.phone.system@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[465/494] @dolthub/doltlite@0.11.55: export=True regex_literals=5 dangerous=0 qualifies=False
+[466/494] @nodert-win11-22h2/windows.applicationmodel.userdatatasks@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[467/494] @nodert-win10-cu/windows.foundation@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[468/494] @github/keytar@7.10.6: export=True regex_literals=1 dangerous=0 qualifies=False
+[469/494] @nodert-win10-rs4/windows.ui.shell@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[470/494] node-hmd@0.2.1: export=True regex_literals=2 dangerous=0 qualifies=False
+[471/494] node-datachannel@0.33.2: export=True regex_literals=22 dangerous=0 qualifies=False
+[472/494] @nodert-win10-rs4/windows.devices.lights@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[473/494] x509@0.3.4: export=True regex_literals=1 dangerous=0 qualifies=False
+[474/494] @nodert-win10-rs3/windows.applicationmodel@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[475/494] @nodert-win11-22h2/windows.ui.composition@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[476/494] @nodert-win11-22h2/windows.media.capture@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[477/494] thunder-node-sdk-lite-m@0.1.16: export=True regex_literals=0 dangerous=0 qualifies=False
+[478/494] @nodert-win10-rs4/windows.storage.streams@0.4.4: export=True regex_literals=0 dangerous=0 qualifies=False
+[479/494] native-keymap@3.3.9: export=True regex_literals=0 dangerous=0 qualifies=False
+[480/494] zlib@1.0.5: export=True regex_literals=0 dangerous=0 qualifies=False
+[481/494] cld@2.10.1: export=True regex_literals=1 dangerous=0 qualifies=False
+[482/494] @nebula-contrib/nebula-nodejs@3.0.3: export=True regex_literals=19 dangerous=0 qualifies=False
+[483/494] @nodert-win11-22h2/windows.ui.notifications@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[484/494] @nodert-win11-22h2/windows.ui.input.spatial@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[485/494] @nodert-win11-22h2/windows.media.protection.playready@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[486/494] @nodert-win11-22h2/windows.networking.pushnotifications@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[487/494] @nodert-win11-22h2/windows.phone.system.userprofile.gameservices.core@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[488/494] @nodert-win11-22h2/windows.applicationmodel.calls.background@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[489/494] @nodert-win11-22h2/windows.media.import@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[490/494] @nodert-win11-22h2/windows.applicationmodel.calls@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[491/494] @nodert-win11-22h2/windows.applicationmodel.userdatatasks.dataprovider@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[492/494] contarejavalinux@0.11.17: export=True regex_literals=5 dangerous=0 qualifies=False
+[493/494] @nodert-win11-22h2/windows.ui.text.core@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+[494/494] @nodert-win11-22h2/windows.security.authentication.web.core@0.1.6: export=True regex_literals=0 dangerous=0 qualifies=False
+{
+  "schema": "redos-pilot25-selection/1.0",
+  "corpus_source": "npm_corpus/eligible_packages.tsv (frozen, 494-package corpus, ANALYZED rows only)",
+  "n_eligible_rows_scanned": 494,
+  "n_qualifying_packages": 21,
+  "n_selected": 21,
+  "selection_rule": "descending supported_sink_count (cheap text-level proxy for the frozen Stage 2 DANGEROUS shape), ties by ascending row_index in eligible_packages.tsv",
+  "selected": [
+    {
+      "row_index": 50,
+      "package_name": "ember-one-way-controls",
+      "version": "3.1.0",
+      "tarball_url": "https://registry.npmjs.org/ember-one-way-controls/-/ember-one-way-controls-3.1.0.tgz",
+      "supported_sink_count": 89,
+      "regex_literals_seen": 8611
+    },
+    {
+      "row_index": 106,
+      "package_name": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "tarball_url": "https://registry.npmjs.org/@appthreat/sqlite3/-/sqlite3-9.0.1.tgz",
+      "supported_sink_count": 29,
+      "regex_literals_seen": 650
+    },
+    {
+      "row_index": 220,
+      "package_name": "realm",
+      "version": "20.2.0",
+      "tarball_url": "https://registry.npmjs.org/realm/-/realm-20.2.0.tgz",
+      "supported_sink_count": 16,
+      "regex_literals_seen": 330
+    },
+    {
+      "row_index": 104,
+      "package_name": "linux-device",
+      "version": "2.1.4",
+      "tarball_url": "https://registry.npmjs.org/linux-device/-/linux-device-2.1.4.tgz",
+      "supported_sink_count": 8,
+      "regex_literals_seen": 79
+    },
+    {
+      "row_index": 177,
+      "package_name": "numbl",
+      "version": "0.4.19",
+      "tarball_url": "https://registry.npmjs.org/numbl/-/numbl-0.4.19.tgz",
+      "supported_sink_count": 6,
+      "regex_literals_seen": 1765
+    },
+    {
+      "row_index": 322,
+      "package_name": "sdenv",
+      "version": "1.1.3",
+      "tarball_url": "https://registry.npmjs.org/sdenv/-/sdenv-1.1.3.tgz",
+      "supported_sink_count": 4,
+      "regex_literals_seen": 44
+    },
+    {
+      "row_index": 275,
+      "package_name": "uplink-nodejs",
+      "version": "1.2.6",
+      "tarball_url": "https://registry.npmjs.org/uplink-nodejs/-/uplink-nodejs-1.2.6.tgz",
+      "supported_sink_count": 3,
+      "regex_literals_seen": 138
+    },
+    {
+      "row_index": 101,
+      "package_name": "fuse-napi",
+      "version": "2.3.1",
+      "tarball_url": "https://registry.npmjs.org/fuse-napi/-/fuse-napi-2.3.1.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 45
+    },
+    {
+      "row_index": 392,
+      "package_name": "jsmeow",
+      "version": "1.0.9",
+      "tarball_url": "https://registry.npmjs.org/jsmeow/-/jsmeow-1.0.9.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 2
+    },
+    {
+      "row_index": 425,
+      "package_name": "argon2",
+      "version": "0.45.1",
+      "tarball_url": "https://registry.npmjs.org/argon2/-/argon2-0.45.1.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 3
+    },
+    {
+      "row_index": 0,
+      "package_name": "node-addon-api",
+      "version": "8.9.2",
+      "tarball_url": "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.9.2.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 12,
+      "package_name": "@depup/node-addon-api",
+      "version": "8.9.2-depup.0",
+      "tarball_url": "https://registry.npmjs.org/@depup/node-addon-api/-/node-addon-api-8.9.2-depup.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 35,
+      "package_name": "ssh2",
+      "version": "1.17.0",
+      "tarball_url": "https://registry.npmjs.org/ssh2/-/ssh2-1.17.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 27
+    },
+    {
+      "row_index": 84,
+      "package_name": "x11-dri",
+      "version": "0.6.0",
+      "tarball_url": "https://registry.npmjs.org/x11-dri/-/x11-dri-0.6.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 75
+    },
+    {
+      "row_index": 108,
+      "package_name": "multi-spec-parser",
+      "version": "0.4.2",
+      "tarball_url": "https://registry.npmjs.org/multi-spec-parser/-/multi-spec-parser-0.4.2.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 120
+    },
+    {
+      "row_index": 117,
+      "package_name": "@h1x4dev/node-addon-api",
+      "version": "2.0.0",
+      "tarball_url": "https://registry.npmjs.org/@h1x4dev/node-addon-api/-/node-addon-api-2.0.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 121,
+      "package_name": "velociradix",
+      "version": "8.3.1",
+      "tarball_url": "https://registry.npmjs.org/velociradix/-/velociradix-8.3.1.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 408
+    },
+    {
+      "row_index": 202,
+      "package_name": "koffi",
+      "version": "3.1.6",
+      "tarball_url": "https://registry.npmjs.org/koffi/-/koffi-3.1.6.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 30
+    },
+    {
+      "row_index": 249,
+      "package_name": "mariasql",
+      "version": "0.2.6",
+      "tarball_url": "https://registry.npmjs.org/mariasql/-/mariasql-0.2.6.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 1
+    },
+    {
+      "row_index": 429,
+      "package_name": "tree-sitter-4dm",
+      "version": "2.11.0",
+      "tarball_url": "https://registry.npmjs.org/tree-sitter-4dm/-/tree-sitter-4dm-2.11.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 48
+    },
+    {
+      "row_index": 455,
+      "package_name": "phplike",
+      "version": "2.5.12",
+      "tarball_url": "https://registry.npmjs.org/phplike/-/phplike-2.5.12.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 27
+    }
+  ]
+}

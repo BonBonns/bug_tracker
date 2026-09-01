@@ -24,6 +24,40 @@ unregistered lock-shaped function name is invisible to this capability entirely 
 by a negative control (see lockcap_probe.c, negUnregisteredLockName) -- same "negative
 control proves the registration table is load-bearing" pattern as PORT_Memcpy's own control.
 
+WRAPPER-SITE-R01 (roadmap step 7, closing STEP6_PROMOTIONS_MANUAL_REVIEW.md's own "lock-
+primitive wrapper recognition" gap -- a REAL, direct CFG bug, confirmed hop-by-hop against
+@fugood/whisper.node's own real cpp_facts.json, not guessed): c2cpg represents a `static
+inline` wrapper call (e.g. `ggml_mutex_unlock_shared(&threadpool->mutex)`, itself a one-line
+call to `pthread_mutex_unlock`) as TWO real, distinct call nodes at the SAME source line with
+the SAME first-argument code text -- the outer wrapper name and an inlined-duplicate inner
+primitive-name node -- but only ONE of the two is actually threaded into the real CFG's own
+linear flow for that specific call site; the other is a disconnected/parallel node this
+capability's own forward BFS never reaches. WHICH of the two is CFG-connected is not
+consistent even within one function: confirmed real on ggml_graph_compute_secondary_thread,
+the INNER `pthread_mutex_lock` node is the CFG-connected one for the lock call at :3219, while
+the OUTER `ggml_mutex_unlock_shared` node (not `pthread_mutex_unlock`) is the CFG-connected
+one for the matching unlock at :3224 -- so a barriers set built by literal LOCK_FUNCS/
+UNLOCK_FUNCS name-matching alone misses the real, CFG-connected unlock entirely (its own name,
+`ggml_mutex_unlock_shared`, is not and cannot practically be a complete, closed allowlist --
+every project can define its own wrapper name), producing a real false
+RETURN_REACHABLE_WITHOUT_MATCHING_UNLOCK.
+
+Fix, evidence-based rather than a growing wrapper-name allowlist: `same_site_calls()` groups
+EVERY real call by (owner, line, first-argument code text) -- the SAME "text-only object
+identity" discipline this module already applies to the lock/unlock OBJECT argument, now also
+applied to the call SITE itself. Two calls sharing (owner, line, arg0) are, by direct
+construction, real, alternate Joern representations of the SAME source statement -- confirmed,
+not assumed, on the real fixture above (`ggml_mutex_lock_shared`/`pthread_mutex_lock` both at
+:3219 with `arg0="&threadpool->mutex"`; `ggml_mutex_unlock_shared`/`pthread_mutex_unlock` both
+at :3224 with the same arg0). Whenever ANY member of such a group is a real, recognized
+LOCK_FUNCS/UNLOCK_FUNCS call, EVERY member of that group is treated as the same real
+lock/unlock operation -- for barrier detection (a wrapper node reached in the CFG now correctly
+clears the path even though its own bare name is unrecognized) AND, symmetrically, for lock-
+site discovery (a wrapper-named lock call whose own sibling is a recognized primitive is
+analyzed the same as if its own name matched directly) -- the same real mechanism, applied
+uniformly rather than one-sidedly, since nothing in the real evidence says the asymmetry (lock
+vs. unlock) is the only direction this can occur in real code.
+
 Usage: lock_balance_verdict.py RAW_DIR OUT.json
 """
 import base64
@@ -189,14 +223,33 @@ def main():
     calls = {}
     calls_by_method = defaultdict(list)
     for r in rows(f"{raw}/calls.tsv", 11):
-        cid, owner, name, code = int(r[0]), int(r[1]), dec(r[2]), dec(r[6])
-        calls[cid] = {"id": cid, "owner": owner, "name": name, "code": code}
+        cid, owner, name, code, line = int(r[0]), int(r[1]), dec(r[2]), dec(r[6]), r[8]
+        calls[cid] = {"id": cid, "owner": owner, "name": name, "code": code, "line": line}
         calls_by_method[owner].append(cid)
 
     args_by_call = defaultdict(list)
     for r in rows(f"{raw}/arguments.tsv", 8):
         call_id, idx, code = int(r[1]), int(r[2]), dec(r[4])
         args_by_call[call_id].append((idx, code))
+
+    def first_arg_code(cid):
+        a = sorted(args_by_call.get(cid, []))
+        return a[0][1].strip() if a else None
+
+    # WRAPPER-SITE-R01: real (owner, line, first-arg-code) equivalence classes -- see module
+    # docstring for the real, confirmed evidence this grouping is built from. Two calls in the
+    # same group are, by direct construction, alternate Joern representations of the SAME real
+    # source statement (a wrapper call and its own inlined-duplicate primitive call), never a
+    # guess about two merely-similar-looking different statements.
+    site_group = defaultdict(set)
+    for gid, gc in calls.items():
+        a0 = first_arg_code(gid)
+        if a0:
+            site_group[(gc["owner"], gc["line"], a0)].add(gid)
+
+    def wrapper_group(cid, obj_code):
+        gc = calls[cid]
+        return site_group.get((gc["owner"], gc["line"], obj_code), {cid})
 
     # RETURNS-R01 (pre-existing exporter quirk, worked around here, not fixed at the
     # source): export_c_cpp_facts_v03.sc's `cpg.method.l.foreach { owner => owner.ast.
@@ -234,6 +287,12 @@ def main():
                 continue
 
             # Barriers: unlock calls in the SAME method on the textually-identical object.
+            # WRAPPER-SITE-R01: also include every real (owner, line, obj_code) sibling of a
+            # recognized unlock call -- the call node Joern actually threads into the CFG for
+            # that source statement may be the WRAPPER (unrecognized by bare name), not the
+            # primitive found here; both are barriers for the SAME real release, confirmed
+            # real on @fugood/whisper.node's own ggml_graph_compute_secondary_thread (module
+            # docstring).
             barriers = set()
             for oc in call_ids:
                 oc_info = calls[oc]
@@ -242,6 +301,7 @@ def main():
                 oargs = sorted(args_by_call.get(oc, []))
                 if oargs and oargs[0][1].strip() == obj_code:
                     barriers.add(oc)
+                    barriers.update(wrapper_group(oc, obj_code))
             if not barriers:
                 classification["LOCK_NO_MATCHING_UNLOCK_IN_FUNCTION"] += 1
                 # still worth flagging: EVERY return is a leak candidate if there is no

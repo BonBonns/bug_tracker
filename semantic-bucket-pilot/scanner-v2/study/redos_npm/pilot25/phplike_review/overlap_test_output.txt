@@ -1,0 +1,22 @@
+=== Overlap case: gating literal "a" is a MEMBER of the quantified class [a-z] ===
+    pattern: a([a-z]+X)   (X = literal not in input, forces backtrack to exhaustion)
+n=1000: len=1000 time=0.617ms
+n=5000: len=5000 time=10.408ms
+n=10000: len=10000 time=40.507ms
+n=20000: len=20000 time=185.296ms
+n=40000: len=40000 time=643.381ms
+
+=== Disjoint case (control): gating literal "%" is NOT a member of [0-9] ===
+n=1000: len=1001 time=0.078ms
+n=5000: len=5001 time=0.011ms
+n=10000: len=10001 time=0.016ms
+n=20000: len=20001 time=0.033ms
+n=40000: len=40001 time=0.068ms
+
+=== Overlap, unanchored, MANY starting positions (worst case) ===
+    pattern: a([a-z]+X), input = all "a" repeated (every position is a valid gate AND fill)
+n=1000: len=1000 time=0.425ms
+n=2000: len=2000 time=1.656ms
+n=4000: len=4000 time=6.381ms
+n=8000: len=8000 time=25.203ms
+n=16000: len=16000 time=101.259ms

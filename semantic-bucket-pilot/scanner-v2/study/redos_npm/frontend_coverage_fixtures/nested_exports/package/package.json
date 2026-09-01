@@ -1,0 +1,11 @@
+{
+  "name": "fc-fixture-nested-exports",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "import": "./dist/x.mjs",
+      "require": "./dist/x.cjs"
+    },
+    "./sub": "./dist/sub.js"
+  }
+}

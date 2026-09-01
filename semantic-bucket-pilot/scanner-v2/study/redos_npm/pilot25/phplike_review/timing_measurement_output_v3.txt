@@ -1,0 +1,27 @@
+node=v22.22.2 v8=12.4.254.21-node.39
+regex=%%|%(\d+\$)?([-+\'#0 ]*)(\*\d+\$|\*|\d+)?(\.(\*\d+\$|\*|\d+))?([scboxXuidfegEG]) flags=g
+
+--- Test 1: single "%" + N digits, no terminator (targets \d+\$ backtrack) ---
+n=1000 len=1001 reps=5 min=0.009ms median=0.009ms max=0.125ms matches=0
+n=5000 len=5001 reps=5 min=0.041ms median=0.046ms max=0.048ms matches=0
+n=10000 len=10001 reps=5 min=0.072ms median=0.082ms max=0.120ms matches=0
+n=20000 len=20001 reps=5 min=0.134ms median=0.158ms max=0.224ms matches=0
+n=40000 len=40001 reps=5 min=0.309ms median=0.328ms max=0.351ms matches=0
+n=80000 len=80001 reps=5 min=0.558ms median=0.666ms max=0.720ms matches=0
+
+--- Test 2: many "%"+digit-run pairs spread across string (cumulative-backtrack worst case) ---
+n=1000 len=987 reps=5 min=0.010ms median=0.011ms max=0.016ms matches=0
+n=5000 len=4998 reps=5 min=0.052ms median=0.053ms max=0.056ms matches=0
+n=10000 len=9996 reps=5 min=0.104ms median=0.106ms max=0.134ms matches=0
+n=20000 len=19992 reps=5 min=0.217ms median=0.230ms max=0.254ms matches=0
+n=40000 len=39984 reps=5 min=0.400ms median=0.429ms max=0.462ms matches=0
+n=80000 len=79989 reps=5 min=0.850ms median=0.893ms max=0.910ms matches=0
+
+--- Test 3: digits, dot, more digits (targets the second optional (\.(\*\d+\$|\*|\d+))? group) ---
+n=1000 len=2002 reps=5 min=0.011ms median=0.012ms max=0.019ms matches=0
+n=5000 len=10002 reps=5 min=0.055ms median=0.056ms max=0.067ms matches=0
+n=10000 len=20002 reps=5 min=0.101ms median=0.123ms max=0.146ms matches=0
+n=20000 len=40002 reps=5 min=0.210ms median=0.233ms max=0.244ms matches=0
+n=40000 len=80002 reps=5 min=0.430ms median=0.447ms max=0.533ms matches=0
+n=80000 len=160002 reps=5 min=0.924ms median=1.057ms max=1.104ms matches=0
+exit_code=0 (124 would mean the 10s external timeout was hit)

@@ -1,0 +1,238 @@
+{
+  "schema": "redos-pilot25-categorized-results/1.0",
+  "category_definitions": {
+    "PREFILTER_SELECTED": "chosen by the cheap text-level prefilter for deeper analysis -- NOT a ReDoS finding",
+    "PIPELINE_ANALYZED": "the real frozen Joern pipeline completed successfully for this package",
+    "INFRASTRUCTURE_FAILURE": "the pipeline itself failed to complete (fetch/extract/CPG-build/producer/reducer failure)",
+    "NO_COMPLEXITY_CANDIDATE": "analyzed successfully; zero DANGEROUS-classified regex operations found at all",
+    "COMPLEXITY_ONLY": "a DANGEROUS-classified regex exists, but not reachable from any exported-function parameter",
+    "PACKAGE_API_INPUT_REACHABLE": "a DANGEROUS-classified regex IS reachable from an exported-function parameter -- the only category that proceeds to manual review",
+    "MANUALLY_CONFIRMED": "a PACKAGE_API_INPUT_REACHABLE record manually reviewed and confirmed as a real, exploitable complexity issue",
+    "MANUALLY_REJECTED": "a PACKAGE_API_INPUT_REACHABLE record manually reviewed and confirmed as a false positive (this pilot: phplike, by direct timing measurement)",
+    "ABSTAINED": "a PACKAGE_API_INPUT_REACHABLE record manual review could not reach a definitive confirm/reject verdict"
+  },
+  "totals": {
+    "PREFILTER_SELECTED": 21,
+    "PIPELINE_ANALYZED": 21,
+    "INFRASTRUCTURE_FAILURE": 0,
+    "NO_COMPLEXITY_CANDIDATE": 14,
+    "COMPLEXITY_ONLY": 6,
+    "PACKAGE_API_INPUT_REACHABLE": 1,
+    "MANUALLY_CONFIRMED": 0,
+    "MANUALLY_REJECTED": 1,
+    "ABSTAINED": 0
+  },
+  "per_package": [
+    {
+      "package_name": "ember-one-way-controls",
+      "version": "3.1.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "realm",
+      "version": "20.2.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "linux-device",
+      "version": "2.1.4",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "numbl",
+      "version": "0.4.19",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "sdenv",
+      "version": "1.1.3",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "uplink-nodejs",
+      "version": "1.2.6",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "fuse-napi",
+      "version": "2.3.1",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 2,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "jsmeow",
+      "version": "1.0.9",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "argon2",
+      "version": "0.45.1",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "node-addon-api",
+      "version": "8.9.2",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "@depup/node-addon-api",
+      "version": "8.9.2-depup.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "ssh2",
+      "version": "1.17.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "x11-dri",
+      "version": "0.6.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "multi-spec-parser",
+      "version": "0.4.2",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "@h1x4dev/node-addon-api",
+      "version": "2.0.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "velociradix",
+      "version": "8.3.1",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "koffi",
+      "version": "3.1.6",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 0,
+      "category": "COMPLEXITY_ONLY"
+    },
+    {
+      "package_name": "mariasql",
+      "version": "0.2.6",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "tree-sitter-4dm",
+      "version": "2.11.0",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 0,
+      "package_api_input_reachable_count": 0,
+      "category": "NO_COMPLEXITY_CANDIDATE"
+    },
+    {
+      "package_name": "phplike",
+      "version": "2.5.12",
+      "PREFILTER_SELECTED": true,
+      "PIPELINE_ANALYZED": true,
+      "INFRASTRUCTURE_FAILURE": false,
+      "dangerous_sinks": 1,
+      "package_api_input_reachable_count": 1,
+      "category": "PACKAGE_API_INPUT_REACHABLE",
+      "manual_review": "MANUALLY_REJECTED"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "n_packages": 21,
+  "n_real_no_complexity_candidate": 14,
+  "n_now_correctly_zero": 12,
+  "n_still_falsely_nonzero": 2,
+  "n_real_positives": 7,
+  "n_real_positives_still_detected": 7,
+  "n_real_positives_now_missed_REGRESSION": 0,
+  "rows": [
+    {
+      "package": "ember-one-way-controls@3.1.0",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "@appthreat/sqlite3@9.0.1",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 7
+    },
+    {
+      "package": "realm@20.2.0",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "linux-device@2.1.4",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "numbl@0.4.19",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 13
+    },
+    {
+      "package": "sdenv@1.1.3",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 7
+    },
+    {
+      "package": "uplink-nodejs@1.2.6",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "fuse-napi@2.3.1",
+      "real_dangerous_sinks": 2,
+      "corrected_prefilter_score": 2,
+      "corrected_regex_literals_seen": 19
+    },
+    {
+      "package": "jsmeow@1.0.9",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "argon2@0.45.1",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 0
+    },
+    {
+      "package": "node-addon-api@8.9.2",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 147
+    },
+    {
+      "package": "@depup/node-addon-api@8.9.2-depup.0",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 147
+    },
+    {
+      "package": "ssh2@1.17.0",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 25
+    },
+    {
+      "package": "x11-dri@0.6.0",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 5
+    },
+    {
+      "package": "multi-spec-parser@0.4.2",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 2
+    },
+    {
+      "package": "@h1x4dev/node-addon-api@2.0.0",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 148
+    },
+    {
+      "package": "velociradix@8.3.1",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 83
+    },
+    {
+      "package": "koffi@3.1.6",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 12
+    },
+    {
+      "package": "mariasql@0.2.6",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 1
+    },
+    {
+      "package": "tree-sitter-4dm@2.11.0",
+      "real_dangerous_sinks": 0,
+      "corrected_prefilter_score": 0,
+      "corrected_regex_literals_seen": 44
+    },
+    {
+      "package": "phplike@2.5.12",
+      "real_dangerous_sinks": 1,
+      "corrected_prefilter_score": 1,
+      "corrected_regex_literals_seen": 21
+    }
+  ]
+}

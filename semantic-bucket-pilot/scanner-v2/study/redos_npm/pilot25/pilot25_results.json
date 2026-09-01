@@ -1,0 +1,524 @@
+{
+  "selection_schema": "redos-pilot25-selection/1.0",
+  "n_packages": 21,
+  "results": [
+    {
+      "package_name": "ember-one-way-controls",
+      "version": "3.1.0",
+      "row_index": 50,
+      "supported_sink_count_prefilter": 89,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 4,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 2,
+        "export_abstentions": 52,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 16.3
+    },
+    {
+      "package_name": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "row_index": 106,
+      "supported_sink_count_prefilter": 29,
+      "producer_summary": {
+        "sink_targets": 9,
+        "dangerous_sinks": 0,
+        "package_api_sources": 34,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 6,
+        "export_abstentions": 13,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 17.9
+    },
+    {
+      "package_name": "realm",
+      "version": "20.2.0",
+      "row_index": 220,
+      "supported_sink_count_prefilter": 16,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 3,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 18.3
+    },
+    {
+      "package_name": "linux-device",
+      "version": "2.1.4",
+      "row_index": 104,
+      "supported_sink_count_prefilter": 8,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 6,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 2,
+        "export_abstentions": 8,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 13.5
+    },
+    {
+      "package_name": "numbl",
+      "version": "0.4.19",
+      "row_index": 177,
+      "supported_sink_count_prefilter": 6,
+      "producer_summary": {
+        "sink_targets": 2,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 1,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 13.5
+    },
+    {
+      "package_name": "sdenv",
+      "version": "1.1.3",
+      "row_index": 322,
+      "supported_sink_count_prefilter": 4,
+      "producer_summary": {
+        "sink_targets": 6,
+        "dangerous_sinks": 0,
+        "package_api_sources": 88,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 26,
+        "export_abstentions": 8,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.8
+    },
+    {
+      "package_name": "uplink-nodejs",
+      "version": "1.2.6",
+      "row_index": 275,
+      "supported_sink_count_prefilter": 3,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 18,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.8
+    },
+    {
+      "package_name": "fuse-napi",
+      "version": "2.3.1",
+      "row_index": 101,
+      "supported_sink_count_prefilter": 2,
+      "producer_summary": {
+        "sink_targets": 16,
+        "dangerous_sinks": 2,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 6,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 16.7
+    },
+    {
+      "package_name": "jsmeow",
+      "version": "1.0.9",
+      "row_index": 392,
+      "supported_sink_count_prefilter": 2,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 11.5
+    },
+    {
+      "package_name": "argon2",
+      "version": "0.45.1",
+      "row_index": 425,
+      "supported_sink_count_prefilter": 2,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 13,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 3,
+        "export_abstentions": 3,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 13.2
+    },
+    {
+      "package_name": "node-addon-api",
+      "version": "8.9.2",
+      "row_index": 0,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 7,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 1,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 15.0
+    },
+    {
+      "package_name": "@depup/node-addon-api",
+      "version": "8.9.2-depup.0",
+      "row_index": 12,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 7,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 1,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 15.3
+    },
+    {
+      "package_name": "ssh2",
+      "version": "1.17.0",
+      "row_index": 35,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 29,
+        "dangerous_sinks": 0,
+        "package_api_sources": 3,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 1,
+        "export_abstentions": 23,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 24.1
+    },
+    {
+      "package_name": "x11-dri",
+      "version": "0.6.0",
+      "row_index": 84,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 3,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 1,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 15.5
+    },
+    {
+      "package_name": "multi-spec-parser",
+      "version": "0.4.2",
+      "row_index": 108,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 3,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.3
+    },
+    {
+      "package_name": "@h1x4dev/node-addon-api",
+      "version": "2.0.0",
+      "row_index": 117,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 8,
+        "dangerous_sinks": 1,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 1,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.5
+    },
+    {
+      "package_name": "velociradix",
+      "version": "8.3.1",
+      "row_index": 121,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 86,
+        "dangerous_sinks": 1,
+        "package_api_sources": 272,
+        "application_ingress_sources": 49,
+        "exported_functions_resolved": 52,
+        "export_abstentions": 63,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 19.8
+    },
+    {
+      "package_name": "koffi",
+      "version": "3.1.6",
+      "row_index": 202,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 10,
+        "dangerous_sinks": 1,
+        "package_api_sources": 15,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 1,
+        "export_abstentions": 93,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 16.1
+    },
+    {
+      "package_name": "mariasql",
+      "version": "0.2.6",
+      "row_index": 249,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 2,
+        "dangerous_sinks": 0,
+        "package_api_sources": 4,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 1,
+        "export_abstentions": 0,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.3
+    },
+    {
+      "package_name": "tree-sitter-4dm",
+      "version": "2.11.0",
+      "row_index": 429,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 0,
+        "dangerous_sinks": 0,
+        "package_api_sources": 0,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 0,
+        "export_abstentions": 4,
+        "rows_emitted": 0
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 0,
+        "PACKAGE_API_INPUT_REACHABLE": 0,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [],
+      "elapsed_seconds": 14.6
+    },
+    {
+      "package_name": "phplike",
+      "version": "2.5.12",
+      "row_index": 455,
+      "supported_sink_count_prefilter": 1,
+      "producer_summary": {
+        "sink_targets": 21,
+        "dangerous_sinks": 1,
+        "package_api_sources": 426,
+        "application_ingress_sources": 0,
+        "exported_functions_resolved": 82,
+        "export_abstentions": 42,
+        "rows_emitted": 23
+      },
+      "status": "OK",
+      "classification": {
+        "SINKS_WITH_ANY_ESTABLISHED_SOURCE": 1,
+        "PACKAGE_API_INPUT_REACHABLE": 1,
+        "APPLICATION_INGRESS_ONLY_NOT_PROMOTED": 0,
+        "ADJUDICATOR_RUN_FAILED": 0
+      },
+      "findings": [
+        {
+          "property": "REDOS",
+          "sink_node_id": "30064773793",
+          "sink_line": 209,
+          "finding_id": "redos:redos_npm_candidate.js#sink30064773793",
+          "classification": "PACKAGE_API_INPUT_REACHABLE",
+          "regex_complexity": "CANDIDATE",
+          "source_boundary": "EXPORTED_FUNCTION_PARAMETER",
+          "application_ingress": "NOT_ESTABLISHED",
+          "adjudicator_disposition": "RESOLVED_CANDIDATE_BY_PROPERTY_ANALYSIS",
+          "adjudicator_property_outcome": "ESTABLISHED",
+          "reportable": false
+        }
+      ],
+      "elapsed_seconds": 16.2
+    }
+  ]
+}

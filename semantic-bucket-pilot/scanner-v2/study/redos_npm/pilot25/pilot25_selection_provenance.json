@@ -1,0 +1,62 @@
+{
+  "schema": "redos-pilot25-selection-provenance/1.0",
+  "note": "Retroactive integrity annotation added after the fact (per direct instruction) -- the underlying selection itself was already frozen and committed BEFORE any Joern scan ran (commit 04c0d5f6a1cf249e90ad1b73d393d868b15b648c, 2026-09-01T08:50:43Z); this manifest attests to that same, unmodified frozen artifact with the hashes that actually governed it, verified directly against git history -- it does not alter the selected list, which is unchanged from pilot25_selection.json.",
+  "frozen_selection_commit": "04c0d5f6a1cf249e90ad1b73d393d868b15b648c",
+  "frozen_selection_commit_timestamp": "2026-09-01T08:50:43+00:00",
+  "frozen_selection_file": "pilot25_selection.json",
+  "frozen_selection_file_sha256_current": "1748f4b669c1b3c0a2885792c4dd32ee66676303f11715a4b1042c1eb595a893",
+  "corpus_identity": {
+    "file": "npm_corpus/eligible_packages.tsv",
+    "sha256": "4ed7c11d3617f77af79fd6716e08fbc552ded0ced30390c4e5f739a83fa72680",
+    "git_blob_sha1": "b98837158497c1cc8c7d84c480598dcd8e50197e",
+    "as_of_commit": "04c0d5f6a1cf249e90ad1b73d393d868b15b648c",
+    "total_lines": 495,
+    "header": "package_name\tversion\tstatus\t...",
+    "data_rows": 494,
+    "unique_package_version_identities": 494,
+    "all_rows_status_analyzed": true,
+    "verified_by": "wc -l, tail -n +2 | wc -l, cut -f1,2 | sort -u | wc -l, cut -f3 | sort | uniq -c -- run directly, not assumed"
+  },
+  "prefilter_implementation": {
+    "file": "study/redos_npm/pilot25/prefilter_select_25.py",
+    "sha256": "b68616732cb95387aebbc24f4019d9861b572d1b55f78d0f47771d8fc358a866",
+    "git_blob_sha1": "561fbc0d65c21ac09237f7b0f3812376c912dec6",
+    "as_of_commit": "04c0d5f6a1cf249e90ad1b73d393d868b15b648c"
+  },
+  "selection_criteria": {
+    "candidate_pool": "npm_corpus/eligible_packages.tsv, ANALYZED rows only (all 494 rows, confirmed)",
+    "required_all_of": [
+      "at least one exported-function-shaped statement (module.exports=/module.exports.NAME=/exports.NAME=/export function/export default/export const NAME = (...) =>)",
+      "at least one regex literal",
+      "among those literals, at least one matching the frozen Stage 2 classifier DANGEROUS shape (nested quantifier, OR alternation branch with quantifier followed by more content) -- a direct Python port of export_redos_npm_integ.sc, verified byte-identical against 6 already-Scala-validated patterns before use"
+    ],
+    "score": "count of DANGEROUS-shaped regex literals found (supported_sink_count)",
+    "max_selected": 25,
+    "tie_break": "ascending row_index in eligible_packages.tsv (frozen corpus order)"
+  },
+  "n_qualifying_packages": 21,
+  "n_selected": 21,
+  "selected_package_version_identities": [
+    "ember-one-way-controls@3.1.0",
+    "@appthreat/sqlite3@9.0.1",
+    "realm@20.2.0",
+    "linux-device@2.1.4",
+    "numbl@0.4.19",
+    "sdenv@1.1.3",
+    "uplink-nodejs@1.2.6",
+    "fuse-napi@2.3.1",
+    "jsmeow@1.0.9",
+    "argon2@0.45.1",
+    "node-addon-api@8.9.2",
+    "@depup/node-addon-api@8.9.2-depup.0",
+    "ssh2@1.17.0",
+    "x11-dri@0.6.0",
+    "multi-spec-parser@0.4.2",
+    "@h1x4dev/node-addon-api@2.0.0",
+    "velociradix@8.3.1",
+    "koffi@3.1.6",
+    "mariasql@0.2.6",
+    "tree-sitter-4dm@2.11.0",
+    "phplike@2.5.12"
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "funnel_after": {
+    "lock_balance_findings": {
+      "raw": 8,
+      "reportable": 0
+    },
+    "nan_findings": {
+      "raw": 22,
+      "reportable": 3
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3247,
+      "reportable": 5
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "funnel_before": {
+    "lock_balance_findings": {
+      "raw": 12,
+      "reportable": 0
+    },
+    "nan_findings": {
+      "raw": 22,
+      "reportable": 3
+    },
+    "oob_compare_candidates": {
+      "raw": 0,
+      "reportable": 0
+    },
+    "oob_index_write_candidates": {
+      "raw": 3290,
+      "reportable": 7
+    },
+    "oob_read_candidates": {
+      "raw": 115,
+      "reportable": 0
+    },
+    "oob_write_candidates": {
+      "raw": 252,
+      "reportable": 0
+    },
+    "protected_field_findings": {
+      "raw": 233,
+      "reportable": 0
+    },
+    "r04_findings": {
+      "raw": 2,
+      "reportable": 0
+    },
+    "r05_findings": {
+      "raw": 7,
+      "reportable": 0
+    },
+    "r06_findings": {
+      "raw": 7,
+      "reportable": 0
+    }
+  },
+  "lock_balance_raw_after": 8,
+  "lock_balance_raw_before": 12,
+  "oob_index_write_raw_after": 3247,
+  "oob_index_write_raw_before": 3290,
+  "provenance_reuse_coverage": {
+    "n_fell_back_to_fresh_enrich_finding": 0,
+    "n_reused_from_same_record": 3255
+  },
+  "structural_status_of_track_b_targets": [
+    {
+      "function": "ggml_graph_compute_secondary_thread",
+      "key": "lock_balance_findings",
+      "package": "@fugood/whisper.node",
+      "remaining_raw_findings": 0,
+      "status": "STRUCTURALLY_GONE",
+      "version": "1.1.3"
+    },
+    {
+      "function": "ggml_graph_compute_secondary_thread",
+      "key": "lock_balance_findings",
+      "package": "smart-whisper",
+      "remaining_raw_findings": 0,
+      "status": "STRUCTURALLY_GONE",
+      "version": "0.8.1"
+    },
+    {
+      "function": "sha1QueryFunc",
+      "key": "oob_index_write_candidates",
+      "package": "@appthreat/sqlite3",
+      "remaining_raw_findings": 1,
+      "status": "STILL_PRESENT_STRUCTURALLY",
+      "version": "9.0.1"
+    },
+    {
+      "function": "lsModeFunc",
+      "key": "oob_index_write_candidates",
+      "package": "@appthreat/sqlite3",
+      "remaining_raw_findings": 1,
+      "status": "STILL_PRESENT_STRUCTURALLY",
+      "version": "9.0.1"
+    },
+    {
+      "function": "sqlite3_get_table_cb",
+      "key": "oob_index_write_candidates",
+      "package": "@appthreat/sqlite3",
+      "remaining_raw_findings": 0,
+      "status": "STRUCTURALLY_GONE",
+      "version": "9.0.1"
+    }
+  ]
+}
