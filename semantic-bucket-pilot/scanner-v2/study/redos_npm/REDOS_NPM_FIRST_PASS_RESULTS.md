@@ -152,8 +152,30 @@ frozen 25-package pilot below.
 
 ## Frozen 25-package discovery pilot (pre-registered, not manual selection)
 
-See `study/redos_npm/pilot25/` for the full pre-registration protocol, selection script, frozen
-selection artifact, and manual review of every candidate the real pipeline produced.
+Full protocol, selection script, and frozen selection artifact: `study/redos_npm/pilot25/README.md`
++ `pilot25_selection.json` (21 packages qualified against a 25 ceiling; selection committed BEFORE
+any of them was Joern-scanned). Full manual review: `pilot25/PILOT25_MANUAL_REVIEW.md`.
+
+**Real result**: 21/21 packages completed successfully through the frozen pipeline (a path bug in
+the orchestration script, not the analyzer, caused every package to fail on the first attempt --
+fixed, verified in isolation, re-run). **1 raw `PACKAGE_API_INPUT_REACHABLE` candidate**
+(`phplike@2.5.12`'s own `sprintf()`, `string.js:209`) -- manually reviewed by direct timing
+measurement (not reasoning alone, matching the property's own established discipline): confirmed
+LINEAR scaling up to 80,000 adversarial characters (sub-millisecond throughout, no quadratic or
+exponential growth) -- **a confirmed false positive**, not a real ReDoS. The pattern's own
+`%(\d+\$)?...` branch textually matches the frozen classifier's "alternation branch with
+quantifier followed by more content" rule (the same rule CVE-2025-5892's real `\s+:` case
+triggers), but differs in a real, measurable way: the dangerous branch requires a LITERAL `%` to
+even be entered, bounding each backtrack to its own local digit run rather than compounding across
+the whole string the way a COMMON character class like `\s` does. A real, distinct, disclosed
+refinement opportunity for the frozen Stage 2 classifier (not the same bug as the already-fixed
+suffix-delimiter false positive) -- not attempted here, since the analyzer was not modified after
+the pre-registered selection was committed, per direct instruction.
+
+**No real candidate survived review** -- per direct instruction point 8, this is reported as the
+measured result, not silently absorbed. Pipeline wiring and `reportable` enablement (points 9-10)
+both stay out of scope for this round as a direct consequence: no candidate from this pilot cleared
+manual review to justify either.
 
 ## What remains, explicitly out of this pass's scope
 

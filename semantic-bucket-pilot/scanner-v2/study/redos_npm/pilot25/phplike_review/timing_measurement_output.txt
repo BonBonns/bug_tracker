@@ -1,0 +1,20 @@
+=== Test 1: single "%" + many digits, no terminator (targets \d+\$ backtrack) ===
+n=1000: len=1001 time=0.178ms matches=0
+n=5000: len=5001 time=0.060ms matches=0
+n=10000: len=10001 time=0.110ms matches=0
+n=20000: len=20001 time=0.225ms matches=0
+n=40000: len=40001 time=0.465ms matches=0
+
+=== Test 2: many "%" + digit-run pairs spread across string (worst case for cumulative backtrack) ===
+n=987 (47 segments): len=987 time=0.017ms matches=0
+n=4998 (238 segments): len=4998 time=0.103ms matches=0
+n=9996 (476 segments): len=9996 time=0.113ms matches=0
+n=19992 (952 segments): len=19992 time=0.239ms matches=0
+n=39984 (1904 segments): len=39984 time=0.580ms matches=0
+
+=== Test 3: adversarial nested-ish - digits then dot then more digits (targets the (\.(\*\d+\$|\*|\d+))? group too) ===
+n=1000: len=2002 time=0.023ms matches=0
+n=5000: len=10002 time=0.090ms matches=0
+n=10000: len=20002 time=0.176ms matches=0
+n=20000: len=40002 time=0.363ms matches=0
+n=40000: len=80002 time=0.517ms matches=0
