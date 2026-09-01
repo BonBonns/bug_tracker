@@ -31,9 +31,26 @@ this one finding. It authorizes no rule change.
 |---|---|
 | Declaration site | `src/js/string.js:86`, inside `exports.sprintf` (declared `src/js/string.js:85`) |
 | Sink call site (real, Joern-resolved) | `src/js/string.js:209`, `return format.replace(regex, doFormat);` |
-| Pilot run's own sink node id | `sink_node_id: 30064773793` (from the real Joern-based producer's `pilot25_results.json` record for this package) |
 | Tainted argument | `format` = `arguments[0]`, `exports.sprintf`'s own real first parameter -- correctly `EXPORTED_FUNCTION_PARAMETER` per `source_boundary` |
 | Sink method | `String.prototype.replace`, one of the frozen Stage 1 sink set |
+
+### Persistent adjudication key
+
+Per direct instruction, Joern's own `sink_node_id` is **not** used as the persistent key --
+node IDs are assigned by the CPG builder and are not guaranteed stable across a rebuild of the
+same source (a different Joern/js2cpg version, a different build order). The stable key is
+derived instead purely from source-identity facts (`audit/finding_id.py`, `make_finding_key`):
+
+```
+composite_key = redos-finding::phplike@2.5.12::src/js/string.js::01af1055c7d1690658813c1655fbd7dc6ebd2a6c9ba7ecb3e8874f49d03ef5f0::L209
+key_hash       = 6b6ce4cf2503a5cfb9e3da6217dbb999f098a1de4b3ba881ca454d809bf41791
+```
+
+(`01af1055...` is this record's own full-literal regex fingerprint, below; `L209` is the sink
+call line in the canonical source.) **`sink_node_id: 30064773793`** (from the real Joern-based
+producer's `pilot25_results.json` record for this package, matching the original pilot run) is
+retained below as supporting evidence for that one specific analysis run -- never as this
+record's own key.
 
 ## Exact regex fingerprint
 
@@ -69,14 +86,79 @@ here for the record:
   `%` is character-class-**disjoint** from `\d` (the quantified atom) -- a run of digits can never
   itself contain a `%`, so each `%`'s own backtrack search is bounded to its own local digit run;
   there is no cross-position compounding.
-- **Positive control (this exact regex, adversarial timing)**: `phplike_review/time_sprintf_regex.js`,
-  re-run fresh for this record (`phplike_review/timing_measurement_output_v2.txt`) on
-  **Node.js v22.22.2, V8 12.4.254.21-node.39**:
-  - single `%` + N digits, no terminator, n=40,000 chars: 0.365ms
-  - many `%`+digit-run pairs across the string, n=39,984 chars (1,904 segments): 0.419ms
-  - digits + dot + more digits (second optional group), n=80,002 chars: 0.488ms
-  - **Linear scaling confirmed at every measured size** (roughly doubling input roughly doubles
-    time; no quadratic or exponential growth up to 80,002 characters).
+- **Positive control (this exact regex, adversarial timing), complete benchmark record**:
+
+  | Field | Value |
+  |---|---|
+  | Script (complete, verbatim, reproduced below) | `phplike_review/time_sprintf_regex_v3.js` |
+  | Raw output | `phplike_review/timing_measurement_output_v3.txt` |
+  | Runtime | Node.js `v22.22.2`, V8 `12.4.254.21-node.39` (captured by the script itself via `process.version`/`process.versions.v8`, not asserted separately) |
+  | Input family | 3 adversarial shapes targeting the flagged branch's own worst case (below) |
+  | Input sizes | 1,000 / 5,000 / 10,000 / 20,000 / 40,000 / 80,000 (base `n`; actual string length varies by shape, up to 160,002 chars for shape 3 at `n=80,000`) |
+  | Repetitions | 5 per (shape, size) pair; min/median/max reported, not a single sample |
+  | Timeout policy | entire process bounded by an external `timeout 10s` wrapper (Unix `timeout` command, enforced outside the Node process, not merely an in-script guard); **not reached** -- exit code `0`, largest single measurement 1.104ms, ~9,000x inside the 10,000ms bound |
+
+  **Script, complete, verbatim (49 lines, reproduced in full so the exact benchmark is part of
+  this record rather than referenced only by path):**
+
+  ```javascript
+  // Complete, repeatable benchmark for the phplike@2.5.12 sprintf() regex adjudication record.
+  // Regex is the exact literal at src/js/string.js:86 (canonical path within the tarball), copied
+  // verbatim -- never retyped from a description.
+  'use strict';
+  const regex = /%%|%(\d+\$)?([-+\'#0 ]*)(\*\d+\$|\*|\d+)?(\.(\*\d+\$|\*|\d+))?([scboxXuidfegEG])/g;
+
+  const REPETITIONS = 5; // per input size, per test family
+  const SIZES = [1000, 5000, 10000, 20000, 40000, 80000];
+
+  function timeOnce(input) {
+    const t0 = process.hrtime.bigint();
+    const matches = input.match(regex);
+    const t1 = process.hrtime.bigint();
+    return { ms: Number(t1 - t0) / 1e6, matchCount: matches ? matches.length : 0 };
+  }
+
+  function bench(label, buildInput) {
+    console.log(`--- ${label} ---`);
+    for (const n of SIZES) {
+      const input = buildInput(n);
+      const trials = [];
+      for (let r = 0; r < REPETITIONS; r++) trials.push(timeOnce(input));
+      const times = trials.map(t => t.ms).sort((a, b) => a - b);
+      const min = times[0], max = times[times.length - 1];
+      const median = times[Math.floor(times.length / 2)];
+      console.log(`n=${n} len=${input.length} reps=${REPETITIONS} ` +
+        `min=${min.toFixed(3)}ms median=${median.toFixed(3)}ms max=${max.toFixed(3)}ms ` +
+        `matches=${trials[0].matchCount}`);
+    }
+  }
+
+  console.log(`node=${process.version} v8=${process.versions.v8}`);
+  console.log(`regex=${regex.source} flags=${regex.flags}`);
+  console.log();
+
+  bench('Test 1: single "%" + N digits, no terminator (targets \\d+\\$ backtrack)',
+    n => '%' + '1'.repeat(n));
+
+  console.log();
+  bench('Test 2: many "%"+digit-run pairs spread across string (cumulative-backtrack worst case)',
+    n => {
+      const segLen = 20;
+      const nSegs = Math.floor(n / (segLen + 1));
+      return ('%' + '1'.repeat(segLen)).repeat(nSegs);
+    });
+
+  console.log();
+  bench('Test 3: digits, dot, more digits (targets the second optional (\\.(\\*\\d+\\$|\\*|\\d+))? group)',
+    n => '%' + '1'.repeat(n) + '.' + '1'.repeat(n));
+  ```
+
+  **Result summary** (full output, all 5 repetitions per size, in `timing_measurement_output_v3.txt`):
+  - Test 1 (single `%` + N digits, no terminator): n=80,000 chars -> min 0.558ms / median 0.666ms / max 0.720ms
+  - Test 2 (many `%`+digit-run pairs, cumulative-backtrack worst case): n=79,989 chars (largest) -> min 0.850ms / median 0.893ms / max 0.910ms
+  - Test 3 (digits + dot + more digits, second optional group): n=160,002 chars (largest) -> min 0.924ms / median 1.057ms / max 1.104ms
+  - **Linear scaling confirmed at every measured size, across all 5 repetitions per point** (roughly
+    doubling input roughly doubles time; no quadratic or exponential growth up to 160,002 characters).
 - **Negative control (disproves a general "leading literal" suppression)**:
   `phplike_review/overlap_test.js` -- a synthetic regex `a([a-z]+Q)` where the gating literal `a`
   **overlaps** (is a member of) the quantified class `[a-z]`, run on all-`a` adversarial input.
