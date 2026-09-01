@@ -75,7 +75,7 @@ FIRST source alternative's family (`srcf[0][3]`) into its own output, confirmed 
 inspection; a sink reached by both families would silently lose the second family's membership if
 the reducer relied on `evidence_final.json` alone.
 
-## Gate: `check_redos_verdict.py` -- 14/14
+## Gate: `check_redos_verdict.py` -- 19/19 (14 synthetic + 5 real historical differential, below)
 
 Runs against FROZEN real Joern output (`study/redos_npm/fixtures/raw/`, produced by
 `export_redos_npm_integ.sc` over `fixtures/src/`'s own 10 files -- reproduces without needing
@@ -97,52 +97,63 @@ Joern again, same convention as `study/lockcap/`). Covers all four required cont
 - Plus a synthetic (non-corpus) Python-level control on `families_by_sink()` itself, proving a
   sink reached by BOTH families keeps both tags rather than collapsing to one.
 
-## Historical known-positive validation
+## Historical known-positive validation -- two levels
 
-The frozen Stage 1/2 logic's own COPY (inside the new file) was run against the exact two real,
-disclosed regex patterns the property was originally built from -- confirming the copy-paste
-preserved the frozen logic's behavior exactly, not just re-deriving analytically:
+**Level 1, copy fidelity** (pattern-only): the frozen Stage 1/2 logic's own COPY (inside the new
+file) was run against the exact two real, disclosed regex patterns the property was originally
+built from, wrapped in a realistic-but-synthetic npm export shape
+(`study/redos_npm/historical_check/`) -- confirming the copy-paste preserved the frozen logic's
+behavior exactly, not just re-deriving analytically. This level alone does NOT prove end-to-end
+behavior on the actual historical package, and is not claimed to.
 
-    CVE-2025-5892 (RocketChat, disclosed):  /^:|\s+:/                    -> DANGEROUS (confirmed)
-    autotranslate.ts (RocketChat):          /^\s*<p>|<\/p>\s*$/gm        -> DANGEROUS (confirmed)
-    a fully-anchored allowlist (stand-in for "the fixed version"):
-                                             /^(https?:\/\/)?[a-z0-9.-]+$/ -> SAFE (confirmed)
+    CVE-2025-5892 pattern (isolated):  /^:|\s+:/               -> DANGEROUS (confirmed)
+    autotranslate.ts pattern (isolated): /^\s*<p>|<\/p>\s*$/gm  -> DANGEROUS (confirmed)
+    a fully-anchored allowlist (negative control): /^(https?:\/\/)?[a-z0-9.-]+$/ -> SAFE (confirmed)
 
-Both real patterns wrapped in a realistic npm export shape (`module.exports.NAME = function...`)
-were also confirmed reachable end-to-end (`PACKAGE_API_INPUT` family, 2/2 rows emitted) --
-`study/redos_npm/` -- proving the full real chain (frozen classification + new source adapter)
-on the exact real ground truth this property claims to catch.
+**Level 2, the real historical package differential** (`study/redos_npm/historical_real/` --
+the actual next deliverable, not the pattern-only check above): the ACTUAL vulnerable and fixed
+versions of the file CVE-2025-5892 was assigned against, run through the complete real
+producer -> `adjudicate_js.py` -> `redos_verdict.py` chain.
 
-## Development package, blind package, and small sample: real search, honestly reported
+**Real target**: RocketChat/Rocket.Chat,
+`apps/meteor/app/irc/server/servers/RFC2813/parseMessage.js`, CVE-2025-5892, fixed in
+[PR #35711](https://github.com/RocketChat/Rocket.Chat/pull/35711). Vulnerable file fetched at the
+real parent commit `72725d391e79b44e7380ee2fe640e2e4426c77ca`; fixed file fetched at the real fix
+commit `cd5c60eeb5b68ec5a57b6a7e579def9abbfd79ab`. Real change confirmed directly in the fetched
+files: `line.search(/^:|\s+:/)` -> `line.search(/^:(?<!\s)\s+:/)` (negative lookbehind added).
+Both use the real export shape `module.exports = function parseMessage(line) { ... }`.
 
-**What was actually done, not glossed over**: four real, substantial npm packages were fetched
-fresh from the real npm registry and run through the COMPLETE real pipeline (`jssrc2cpg` ->
-`export_redos_npm_integ.sc`, real Joern CPGs built and queried, not simulated):
+| | sink targets | DANGEROUS | `redos_verdict.py` result |
+|---|---|---|---|
+| **vulnerable** (`72725d3`) | 7 | 1 (L52) | **1 finding, `PACKAGE_API_INPUT_REACHABLE`, `reportable=false`** |
+| **fixed** (`cd5c60e`, PR #35711) | 7 | 0 | **0 findings** |
+
+Exactly the required result: the vulnerable version produces `PACKAGE_API_INPUT_REACHABLE`; the
+fixed version does not -- on the real file, real commits, real CVE, through the complete chain.
+Frozen as `check_redos_verdict.py` regression controls (`REDOS_VERDICT_R01=19/19`, up from 14/14).
+
+## Correction: the four-package search was exploratory, not a pre-registered protocol
+
+**The four packages below (validator, marked, braces, ms) were selected manually, one at a time,
+each after seeing the prior package's own result influence the next choice -- this does NOT
+satisfy a disclosed-development/frozen-blind sequence, and this document originally described it
+as though it did. Corrected here explicitly, not silently rewritten.** They remain useful as
+export-adapter validation on real, structurally-diverse production code (Babel/ESM-interop
+exports, a UMD/IIFE wrapper, a plain anonymous-function export) -- that finding stands -- but they
+are relabeled EXPLORATORY, and are superseded as the pre-registered discovery mechanism by the
+frozen 25-package pilot below.
 
 | Package | Real shape exercised | Sinks | DANGEROUS | Exports resolved | Result |
 |---|---|---|---|---|---|
-| `ms@0.7.3` | `module.exports = function(...)` | 1 | 0 | -- | pattern IS fully-anchored, no alternation -- correctly SAFE per this heuristic's own disclosed narrow scope (CVE-2015-8315's real severity came from a different mechanism this heuristic explicitly doesn't model) |
-| `validator@5.0.0` | Babel-transpiled `exports.default = <identifier>`, real production code | 61 | 0 | **59 real exports correctly resolved** (+ 66 correct abstentions on the package's own SECOND `module.exports = exports['default']` indexAccess-RHS line -- a real shape not yet handled, honestly abstained rather than guessed) | no DANGEROUS pattern present in this library's own regexes |
+| `ms@0.7.3` | `module.exports = function(...)` | 1 | 0 | -- | pattern IS fully-anchored, no alternation -- correctly SAFE per this heuristic's own disclosed narrow scope |
+| `validator@5.0.0` | Babel-transpiled `exports.default = <identifier>`, real production code | 61 | 0 | 59 real exports correctly resolved (+ 66 correct abstentions on the package's own second `module.exports = exports['default']` indexAccess-RHS line) | no DANGEROUS pattern present |
 | `marked@0.3.19` | `module.exports = marked` inside a real UMD wrapper/IIFE | 110 | 0 | 1/1 correctly resolved through the IIFE scope | no DANGEROUS pattern present |
 | `braces@1.8.5` | `module.exports = function(...)` (anonymous) | 9 | 0 | 1/1 correctly resolved | no DANGEROUS pattern present |
 
-**Honest conclusion, not overclaimed**: none of these four real packages happened to ALSO contain
-a regex matching this property's own narrow, disclosed heuristic shape (nested quantifier;
-alternation branch with trailing content) -- a real, low base rate given the property's original
-1477-file RocketChat corpus study itself only found 2 real matches. This is a genuine, disclosed
-non-result for the "wild positive on npm" search, NOT a validation failure -- the actual thing at
-risk in this pass (the NEW `PACKAGE_API_INPUT_REACHABLE` source adapter) was thoroughly, positively
-validated on real, structurally-diverse production code across all four: Babel/ESM-interop exports
-(59 of them, one real package), a UMD/IIFE-wrapped default export, and a plain anonymous-function
-export -- proving the resolver itself works correctly on real npm code, independent of whether any
-particular package happens to trip the classifier.
+## Frozen 25-package discovery pilot (pre-registered, not manual selection)
 
-Given no real wild positive was found, the strongest available "development case" validation
-combines the REAL historical CVE patterns (not fabricated) with a REALISTIC npm export wrapper
-(`study/redos_npm/` historical check, above) -- disclosed explicitly as constructed-from-real-
-patterns, not claimed to be an as-found wild positive. `validator@5.0.0` stands as the blind
-package (chosen, then run, with no prior knowledge of its result) and is part of the small sample
-above, together with `marked`/`braces`/`ms`.
+See `study/redos_npm/pilot25/` for the full pre-registration protocol, selection script, frozen
+selection artifact, and manual review of every candidate the real pipeline produced.
 
 ## What remains, explicitly out of this pass's scope
 

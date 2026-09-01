@@ -1,0 +1,178 @@
+{
+  "schema": "redos-pilot25-selection/1.0",
+  "corpus_source": "npm_corpus/eligible_packages.tsv (frozen, 494-package corpus, ANALYZED rows only)",
+  "n_eligible_rows_scanned": 494,
+  "n_qualifying_packages": 21,
+  "n_selected": 21,
+  "selection_rule": "descending supported_sink_count (cheap text-level proxy for the frozen Stage 2 DANGEROUS shape), ties by ascending row_index in eligible_packages.tsv",
+  "selected": [
+    {
+      "row_index": 50,
+      "package_name": "ember-one-way-controls",
+      "version": "3.1.0",
+      "tarball_url": "https://registry.npmjs.org/ember-one-way-controls/-/ember-one-way-controls-3.1.0.tgz",
+      "supported_sink_count": 89,
+      "regex_literals_seen": 8611
+    },
+    {
+      "row_index": 106,
+      "package_name": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "tarball_url": "https://registry.npmjs.org/@appthreat/sqlite3/-/sqlite3-9.0.1.tgz",
+      "supported_sink_count": 29,
+      "regex_literals_seen": 650
+    },
+    {
+      "row_index": 220,
+      "package_name": "realm",
+      "version": "20.2.0",
+      "tarball_url": "https://registry.npmjs.org/realm/-/realm-20.2.0.tgz",
+      "supported_sink_count": 16,
+      "regex_literals_seen": 330
+    },
+    {
+      "row_index": 104,
+      "package_name": "linux-device",
+      "version": "2.1.4",
+      "tarball_url": "https://registry.npmjs.org/linux-device/-/linux-device-2.1.4.tgz",
+      "supported_sink_count": 8,
+      "regex_literals_seen": 79
+    },
+    {
+      "row_index": 177,
+      "package_name": "numbl",
+      "version": "0.4.19",
+      "tarball_url": "https://registry.npmjs.org/numbl/-/numbl-0.4.19.tgz",
+      "supported_sink_count": 6,
+      "regex_literals_seen": 1765
+    },
+    {
+      "row_index": 322,
+      "package_name": "sdenv",
+      "version": "1.1.3",
+      "tarball_url": "https://registry.npmjs.org/sdenv/-/sdenv-1.1.3.tgz",
+      "supported_sink_count": 4,
+      "regex_literals_seen": 44
+    },
+    {
+      "row_index": 275,
+      "package_name": "uplink-nodejs",
+      "version": "1.2.6",
+      "tarball_url": "https://registry.npmjs.org/uplink-nodejs/-/uplink-nodejs-1.2.6.tgz",
+      "supported_sink_count": 3,
+      "regex_literals_seen": 138
+    },
+    {
+      "row_index": 101,
+      "package_name": "fuse-napi",
+      "version": "2.3.1",
+      "tarball_url": "https://registry.npmjs.org/fuse-napi/-/fuse-napi-2.3.1.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 45
+    },
+    {
+      "row_index": 392,
+      "package_name": "jsmeow",
+      "version": "1.0.9",
+      "tarball_url": "https://registry.npmjs.org/jsmeow/-/jsmeow-1.0.9.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 2
+    },
+    {
+      "row_index": 425,
+      "package_name": "argon2",
+      "version": "0.45.1",
+      "tarball_url": "https://registry.npmjs.org/argon2/-/argon2-0.45.1.tgz",
+      "supported_sink_count": 2,
+      "regex_literals_seen": 3
+    },
+    {
+      "row_index": 0,
+      "package_name": "node-addon-api",
+      "version": "8.9.2",
+      "tarball_url": "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.9.2.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 12,
+      "package_name": "@depup/node-addon-api",
+      "version": "8.9.2-depup.0",
+      "tarball_url": "https://registry.npmjs.org/@depup/node-addon-api/-/node-addon-api-8.9.2-depup.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 35,
+      "package_name": "ssh2",
+      "version": "1.17.0",
+      "tarball_url": "https://registry.npmjs.org/ssh2/-/ssh2-1.17.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 27
+    },
+    {
+      "row_index": 84,
+      "package_name": "x11-dri",
+      "version": "0.6.0",
+      "tarball_url": "https://registry.npmjs.org/x11-dri/-/x11-dri-0.6.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 75
+    },
+    {
+      "row_index": 108,
+      "package_name": "multi-spec-parser",
+      "version": "0.4.2",
+      "tarball_url": "https://registry.npmjs.org/multi-spec-parser/-/multi-spec-parser-0.4.2.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 120
+    },
+    {
+      "row_index": 117,
+      "package_name": "@h1x4dev/node-addon-api",
+      "version": "2.0.0",
+      "tarball_url": "https://registry.npmjs.org/@h1x4dev/node-addon-api/-/node-addon-api-2.0.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 148
+    },
+    {
+      "row_index": 121,
+      "package_name": "velociradix",
+      "version": "8.3.1",
+      "tarball_url": "https://registry.npmjs.org/velociradix/-/velociradix-8.3.1.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 408
+    },
+    {
+      "row_index": 202,
+      "package_name": "koffi",
+      "version": "3.1.6",
+      "tarball_url": "https://registry.npmjs.org/koffi/-/koffi-3.1.6.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 30
+    },
+    {
+      "row_index": 249,
+      "package_name": "mariasql",
+      "version": "0.2.6",
+      "tarball_url": "https://registry.npmjs.org/mariasql/-/mariasql-0.2.6.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 1
+    },
+    {
+      "row_index": 429,
+      "package_name": "tree-sitter-4dm",
+      "version": "2.11.0",
+      "tarball_url": "https://registry.npmjs.org/tree-sitter-4dm/-/tree-sitter-4dm-2.11.0.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 48
+    },
+    {
+      "row_index": 455,
+      "package_name": "phplike",
+      "version": "2.5.12",
+      "tarball_url": "https://registry.npmjs.org/phplike/-/phplike-2.5.12.tgz",
+      "supported_sink_count": 1,
+      "regex_literals_seen": 27
+    }
+  ]
+}

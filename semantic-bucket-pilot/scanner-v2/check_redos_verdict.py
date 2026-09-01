@@ -110,5 +110,36 @@ ck("SYNTHETIC: sink 9002 (APPLICATION_INGRESS only) carries only that one tag --
    "correctly preserves per-sink family membership rather than collapsing to one",
    fams.get("9002") == {"APPLICATION_INGRESS"})
 
+# --- 3. Real historical vulnerable/fixed differential (CVE-2025-5892, RocketChat's real
+# apps/meteor/app/irc/server/servers/RFC2813/parseMessage.js -- see historical_real/README.md).
+# The ACTUAL file at the ACTUAL pre-fix and post-fix commits, not a synthetic pattern-in-a-
+# wrapper -- run through the complete producer -> adjudicator -> reducer chain.
+HIST = HERE / "study" / "redos_npm" / "historical_real"
+
+for kind, expect_finding in (("vuln", True), ("fixed", False)):
+    hout_path = HERE / f"out_redos_hist_{kind}.json"
+    hwork_dir = HERE / f"out_redos_hist_{kind}.json.work"
+    if hwork_dir.is_dir():
+        shutil.rmtree(hwork_dir)
+    r = subprocess.run([sys.executable, str(VERDICT), str(HIST / kind / "raw"),
+                         str(HIST / kind / "src"), str(hout_path)],
+                        capture_output=True, text=True)
+    ck(f"REAL HISTORICAL ({kind}): redos_verdict.py exits 0", r.returncode == 0)
+    hdoc = json.loads(hout_path.read_text())
+    hfindings = hdoc["findings"]
+    if expect_finding:
+        ck("REAL HISTORICAL (vulnerable, CVE-2025-5892 parseMessage.js): exactly 1 finding, "
+           "PACKAGE_API_INPUT_REACHABLE, on the REAL pre-fix file (not a synthetic wrapper)",
+           len(hfindings) == 1 and hfindings[0]["classification"] == "PACKAGE_API_INPUT_REACHABLE")
+        ck("REAL HISTORICAL (vulnerable): reportable is still hardcoded False",
+           hfindings and hfindings[0]["reportable"] is False)
+    else:
+        ck("REAL HISTORICAL (fixed, PR #35711's own real patch): ZERO findings on the REAL "
+           "post-fix file -- the lookbehind-hardened pattern no longer matches the frozen "
+           "DANGEROUS shape at all",
+           len(hfindings) == 0)
+    shutil.rmtree(hwork_dir, ignore_errors=True)
+    hout_path.unlink(missing_ok=True)
+
 print(f"REDOS_VERDICT_R01={ok}/{total}")
 sys.exit(0 if ok == total else 1)
