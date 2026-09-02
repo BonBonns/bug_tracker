@@ -25,6 +25,14 @@ CANDIDATE and the chain records why it could not be established.
 EXECUTION TIMING (scheduled, deferred, administrative) is carried as evidence only. It
 never promotes and never demotes a verdict.
 
+A chain that fails to establish records the SEARCH SPACE it failed within: how many
+modelled sources and structured consumers existed in the analysed unit at all. A unit
+containing none of them cannot produce a traced negative, only a vacuous one, and the
+reason strings keep those apart -- NO_SOURCE_API_MODELLED_IN_UNIT and
+NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT say the model does not cover this codebase,
+where NO_DELAYED_SOURCE_REACHES_PARSER and NO_STRUCTURED_TEXT_CONSUMER_REACHED say
+flows were computed and did not connect.
+
 Both languages use this one reducer, over the same fact schema.
 """
 import json
@@ -36,6 +44,12 @@ sys.path.insert(0, str(HERE))
 from escape_parity_sites import derive as derive_sites, _rows, CANDIDATE, NEGATIVE, ABSTAINED  # noqa: E402
 
 REACHABLE = "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+
+# A negative that could never have come out any other way is not a finding
+# about the code -- it is a finding about the model's coverage of the code. The
+# two must not share a reason string.
+NO_SOURCE_MODELLED = "NO_SOURCE_API_MODELLED_IN_UNIT"
+NO_CONSUMER_MODELLED = "NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT"
 
 BLOCKING = ("UNRESOLVED_SOURCE_IDENTITY", "AMBIGUOUS_LOCAL_DEFINITION",
             "AMBIGUOUS_PARSER_LINKAGE", "UNRESOLVED_CONSUMER_IDENTITY",
@@ -180,10 +194,32 @@ def derive(raw_dir, language=None):
                     timing.append(t)
         rec["execution_timing_evidence"] = timing
 
-        if not chain["delayed_sources"]:
-            chain["reasons"].append("NO_DELAYED_SOURCE_REACHES_PARSER")
-        if not chain["consumers"]:
-            chain["reasons"].append("NO_STRUCTURED_TEXT_CONSUMER_REACHED")
+        # What was actually available to search. Without this a reader cannot tell
+        # a traced negative from a vacuous one, and the two look identical.
+        chain["search_space"] = {
+            "resolved_sources_in_unit": len(sources),
+            "unresolved_sources_in_unit": len(src_abstentions),
+            "structured_consumers_in_unit": len(consumers),
+            "logging_only_consumers_in_unit": len(logging_only),
+            "parser_call_sites": len(calls),
+            "flow_edges_in_unit": sum(len(v) for kind in edges.values()
+                                      for v in kind.values()),
+        }
+
+        if not calls:
+            # With no call site there is nothing to trace from, so neither of the
+            # reasons below would mean anything. PARSER_NEVER_CALLED_IN_ANALYSED_
+            # SOURCE, already recorded above, is the whole story.
+            pass
+        else:
+            if not chain["delayed_sources"]:
+                chain["reasons"].append(
+                    NO_SOURCE_MODELLED if not sources
+                    else "NO_DELAYED_SOURCE_REACHES_PARSER")
+            if not chain["consumers"]:
+                chain["reasons"].append(
+                    NO_CONSUMER_MODELLED if not consumers
+                    else "NO_STRUCTURED_TEXT_CONSUMER_REACHED")
 
         blocking = [r for r in chain["reasons"] if r in BLOCKING]
         if chain["delayed_sources"] and chain["consumers"] and not blocking:

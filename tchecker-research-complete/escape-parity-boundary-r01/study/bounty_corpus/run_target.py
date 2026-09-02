@@ -183,6 +183,23 @@ def main():
     rec["reachability_line"] = next(
         (l for l in rr.stdout.splitlines() if "REACHABILITY_FACTS" in l), "")
 
+    # The anchor table enumerates every anchor the producer considered -- 31,863
+    # rows and 5 MB on the Firefox run -- but only rows keyed to a finding's site
+    # or method matter to the chain. Earlier this was deleted outright to keep
+    # the archive small, which meant the stored facts no longer reproduced the
+    # stored findings: re-deriving reported PARSER_NEVER_CALLED_IN_ANALYSED_SOURCE
+    # for a parser that was in fact called. Prune to the rows that carry meaning
+    # instead, so the archive stays both small and faithful.
+    anchors_path = raw / "parser_anchors.tsv"
+    if anchors_path.exists():
+        keys = {k for f in sites["findings"]
+                for k in (f.get("site_node_id"), f.get("method_node_id")) if k}
+        kept = [ln for ln in anchors_path.read_text().splitlines()
+                if ln.split("\t")[2:3] and ln.split("\t")[2] in keys]
+        rec["anchor_rows_total"] = sum(1 for _ in anchors_path.open())
+        rec["anchor_rows_kept"] = len(kept)
+        anchors_path.write_text("".join(l + "\n" for l in kept))
+
     final = escape_parity_chain.derive(raw, lang)
     final["target"] = doc["target"]
     final["commit"] = doc["commit"]

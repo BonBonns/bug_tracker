@@ -22,11 +22,13 @@ SUPERSEDED = {
     ("CROSS_LANGUAGE_FREEZE.txt", "escape_parity_sites.py"): "R05",
     ("DELIMITER_IDENTITY_FREEZE.txt", "producers/escape_parity_facts.sc"): "R06",
     ("DELIMITER_IDENTITY_FREEZE.txt", "producers/cpp_escape_parity_facts.sc"): "R06",
+    ("REACHABILITY_FREEZE.txt", "escape_parity_chain.py"): "R07",
 }
 
 FREEZES = ["FREEZE_HASHES.txt", "PARSER_MODEL_FREEZE.txt",
            "CROSS_LANGUAGE_FREEZE.txt", "REACHABILITY_FREEZE.txt",
-           "DELIMITER_IDENTITY_FREEZE.txt", "SEARCH_POSITION_FREEZE.txt"]
+           "DELIMITER_IDENTITY_FREEZE.txt", "SEARCH_POSITION_FREEZE.txt",
+           "SEARCH_SPACE_FREEZE.txt"]
 
 problems = []
 for name in FREEZES:

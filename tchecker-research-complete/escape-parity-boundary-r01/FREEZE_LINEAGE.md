@@ -13,9 +13,10 @@ match byte for byte.
 | `FREEZE_HASHES.txt` | R01 parser layer | 1 entry superseded by R05 |
 | `PARSER_MODEL_FREEZE.txt` | R02 dialect-separated regex model | intact |
 | `CROSS_LANGUAGE_FREEZE.txt` | R03 JavaScript + C/C++ | 2 entries superseded by R05 |
-| `REACHABILITY_FREEZE.txt` | R04 stored-source → transform → consumer | intact |
+| `REACHABILITY_FREEZE.txt` | R04 stored-source → transform → consumer | 1 entry superseded by R07 |
 | `DELIMITER_IDENTITY_FREEZE.txt` | R05 delimiter identity | 2 entries superseded by R06 |
-| `SEARCH_POSITION_FREEZE.txt` | R06 search-established positions | current |
+| `SEARCH_POSITION_FREEZE.txt` | R06 search-established positions | intact |
+| `SEARCH_SPACE_FREEZE.txt` | R07 traced vs. vacuous chain negatives | current |
 
 ## What R05 supersedes, and why
 
@@ -46,11 +47,18 @@ The same discipline applies: `fixtures_delim/PRE_R06_VERDICTS.json` pins all 38
 per-site verdicts the R05 code produced across four corpora, read from the R05
 commit's own fact tables, and control S5 fails if one moves.
 
+## What R07 supersedes, and why
+
+R07 changed `escape_parity_chain.py`, frozen by R04, so that a chain records the
+search space it failed within and its reasons distinguish a traced negative from
+one the model could never have produced otherwise. No verdict moves: the change
+is to what the record *says*, and the R04 gate still passes on its own controls.
+
 ## Results produced under each revision
 
 Corpus results are labelled by the revision that produced them:
-`study/bounty_corpus/results/` predates R05, `results_r05/` is R05, and
-`results_r06/` is R06. They are kept side by
+`study/bounty_corpus/results/` predates R05, `results_r05/` is R05,
+`results_r06/` is R06 and `results_r07/` is R07. They are kept side by
 side because the difference between them is itself the evidence that R05 does
 what it claims — nothing is overwritten to make the current revision look like
 it was always right.
