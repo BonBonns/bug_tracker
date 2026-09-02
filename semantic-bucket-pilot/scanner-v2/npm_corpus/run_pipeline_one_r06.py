@@ -70,6 +70,21 @@ R02_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/tchecker-prop
 REDOS_VERDICT = os.path.join(SCANNER_V2, "redos_verdict.py")
 REDOS_FCC_AUDIT_DIR = os.path.join(SCANNER_V2, "study", "redos_npm", "pilot25", "audit")
 
+# PATH TRAVERSAL INTEGRATION (roadmap step 8, second of 4 JS/TS classes): the frozen, merged
+# shared npm-source-identity producer (its own latest revision, R02 -- restores Meteor.methods/
+# message-item ingress recognition, see NPM_SOURCE_IDENTITY_R02_IMPLEMENTATION.md) MUST run
+# against the SAME js_bin BEFORE Path Traversal's own R02 producer, writing source_origin_facts.tsv
+# into the SAME rawDir Path Traversal's own producer reads from -- both required upstream steps,
+# never invoked by Path Traversal's own producer itself (see that file's own header comment for
+# the full disclosure of this dependency). All three files (frozen; never modified here).
+NPM_SOURCE_IDENTITY_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                                 "tchecker-property-adjudicator/producers/"
+                                 "export_npm_source_identity_r02.sc")
+PATH_TRAVERSAL_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                            "tchecker-property-adjudicator/producers/"
+                            "export_path_traversal_integ_r02.sc")
+PATH_TRAVERSAL_VERDICT = os.path.join(SCANNER_V2, "path_traversal_verdict.py")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -770,6 +785,62 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"redos scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["redos_scan"] = {"seconds": time.time() - t0}
+
+    # PATH TRAVERSAL INTEGRATION (roadmap step 8, second of 4 JS/TS classes): two producers, in
+    # order, into the SAME rawDir -- the shared npm-source-identity producer first (writes
+    # source_origin_facts.tsv), then Path Traversal's own R02 producer (reads it, writes
+    # source_facts.tsv/sink_abstentions.tsv/etc.). Reuses js_bin (already built above) -- Path
+    # Traversal's own sink identification is structural and needs no entrypoint-coverage
+    # correction of its own (unlike ReDoS, it never re-derives export/source logic that depends on
+    # jssrc2cpg's own default-ignore rules the way ReDoS's frontend_coverage_check.py corrects for).
+    pt_raw = os.path.join(work, "pt_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", NPM_SOURCE_IDENTITY_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={pt_raw}",
+         "--param", f"srcLabel={pkg_name}"],
+        os.path.join(work, "npm_source_identity_producer.log"))
+    record["stages"]["npm_source_identity_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"npm_source_identity producer rc={rc}"
+        return record
+
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", PATH_TRAVERSAL_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={pt_raw}",
+         "--param", f"srcLabel={pkg_name}"],
+        os.path.join(work, "path_traversal_producer.log"))
+    record["stages"]["path_traversal_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"path_traversal producer rc={rc}"
+        return record
+
+    # Reducer (frozen except for the sink_abstentions consumption fix): 3 positional args, both
+    # pt_raw and pkg_dir passed absolute (same real landmine as redos_verdict.py -- a relative
+    # path here silently produces ADJUDICATOR_RUN_FAILED on every sink instead of a real error).
+    pt_out = os.path.join(work, "path_traversal_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, PATH_TRAVERSAL_VERDICT, pt_raw, pkg_dir, pt_out],
+                         check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.PIPE)
+        with open(pt_out) as f:
+            pt_doc = json.load(f)
+        record["path_traversal_classification"] = pt_doc.get("classification", {})
+        record["path_traversal_findings"] = pt_doc.get("findings", [])
+        record["path_traversal_abstentions"] = pt_doc.get("abstentions", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["path_traversal_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"path_traversal_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["path_traversal_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"path_traversal scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["path_traversal_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

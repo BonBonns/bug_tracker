@@ -45,6 +45,17 @@ What is kept (deliberately NOT "normalized only" -- see below) vs. what stays de
                                verdict-only ReDoS rerun either.
   - `redos_out.json`        -- the ReDoS scanner output already computed for this package
                                (roadmap step 8's run_pipeline_one_r06.py wiring).
+  - `pt_raw`                 -- RAW exported Path Traversal facts (export_path_traversal_integ_r02
+                               .sc's own source_facts.tsv/propagation_relations.tsv/
+                               property_outcome.tsv/transform_identity.tsv/sink_abstentions.tsv
+                               output, PLUS export_npm_source_identity_r02.sc's own
+                               source_origin_facts.tsv/export_surface.tsv/closure_identity.tsv --
+                               both producers write into this SAME directory, and
+                               path_traversal_verdict.py reads it directly), same real
+                               requirement and treatment as `redos_raw` above.
+  - `path_traversal_out.json` -- the Path Traversal scanner output already computed for this
+                               package (roadmap step 8's run_pipeline_one_r06.py wiring, second
+                               JS/TS class).
 
   NOT kept (stays deleted, per the explicit instruction to keep deleting large CPG/work dirs):
   - `cpp.cpg.bin`, `js.cpg.bin` -- the large Joern CPG binaries.
@@ -118,6 +129,12 @@ BUNDLED_RELATIVE_PATHS = (
     # precedent as r04_out.json/r05_out.json/r06_out.json.
     "redos_raw",
     "redos_out.json",
+    # PATH TRAVERSAL INTEGRATION (roadmap step 8): pt_raw follows the exact same "bundle the raw-
+    # output directory as-is" precedent as cpp_raw/redos_raw above (it holds BOTH producers' own
+    # output, written into the same directory); path_traversal_out.json follows the exact same
+    # precedent as redos_out.json.
+    "pt_raw",
+    "path_traversal_out.json",
 )
 
 SCHEMA_VERSION = "evidence_bundle/2"
@@ -151,6 +168,10 @@ ANALYZER_FILES = {
     # _r05.py above (SCANNER_V2-root-relative, via os.path.dirname(_HERE) since _HERE is the
     # npm_corpus/ subdirectory).
     "redos_verdict.py": os.path.join(os.path.dirname(_HERE), "redos_verdict.py"),
+    # PATH TRAVERSAL INTEGRATION (roadmap step 8): path_traversal_verdict.py is the analyzer that
+    # produces path_traversal_out.json -- same real path-construction convention as
+    # redos_verdict.py above.
+    "path_traversal_verdict.py": os.path.join(os.path.dirname(_HERE), "path_traversal_verdict.py"),
 }
 
 

@@ -66,6 +66,28 @@ ck("a record with no redos_findings key at all (the common case for most package
    and summary1c["redos_findings"]["raw_count"] == 0
    and summary1c["redos_findings"]["reportable_count"] == 0)
 
+# --- Path Traversal (roadmap step 8, second JS/TS class): same discipline as redos_findings --
+# always enabled, never gated by staged_enablement.py. path_traversal_verdict.py also hardcodes
+# reportable=False on every finding it emits.
+record1d = {"path_traversal_findings": [mk(False), mk(False), mk(False)]}
+summary1d = agg.aggregate_record(record1d, enabled_properties=frozenset())
+ck("path_traversal_findings is in ALL_PROPERTY_KEYS", "path_traversal_findings" in agg.ALL_PROPERTY_KEYS)
+ck("path_traversal_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1d["path_traversal_findings"]["enabled"] is True
+   and summary1d["path_traversal_findings"]["disabled_reason"] is None)
+ck("path_traversal_findings raw/reportable counts are read directly, never recomputed -- all "
+   "three findings carry path_traversal_verdict.py's own real hardcoded reportable=False",
+   summary1d["path_traversal_findings"]["raw_count"] == 3
+   and summary1d["path_traversal_findings"]["reportable_count"] == 0)
+record1e = {"r04_findings": [mk(True)]}  # no "path_traversal_findings" key at all, the common case
+summary1e = agg.aggregate_record(record1e, enabled_properties=frozenset())
+ck("a record with no path_traversal_findings key at all still produces a correct, non-crashing "
+   "summary: enabled=True, raw=0, reportable=0",
+   summary1e["path_traversal_findings"]["enabled"] is True
+   and summary1e["path_traversal_findings"]["raw_count"] == 0
+   and summary1e["path_traversal_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -160,6 +182,10 @@ def load_bundle_record(bundle_path):
                                          # not fabricated (record1b/record1c above already cover
                                          # a real non-empty and a real absent-key redos_findings
                                          # case directly)
+        record["path_traversal_findings"] = []  # same reason -- these bundles predate roadmap
+                                         # step 8's path traversal wiring (record1d/record1e above
+                                         # already cover a real non-empty and a real absent-key
+                                         # path_traversal_findings case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

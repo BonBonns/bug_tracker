@@ -97,10 +97,18 @@ NAN_KEYS = ("nan_findings",)
 # rule from RESOURCE_GUARD_KEYS/NAN_KEYS, not merely reused.
 REDOS_KEYS = ("redos_findings",)
 
+# PATH TRAVERSAL (roadmap step 8, second JS/TS class): same discipline as REDOS_KEYS -- a real,
+# standalone JS/TS-side property, wired into the shared per-package pipeline via
+# run_pipeline_one_r06.py, never routed through staged_enablement.py's reachability-tier mechanism
+# (that mechanism is C/C++-specific). Always "enabled" here; safe regardless, since
+# path_traversal_verdict.py already hardcodes every finding's own "reportable": False
+# unconditionally, same as ReDoS's own reducer.
+PATH_TRAVERSAL_KEYS = ("path_traversal_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + STAGED_KEYS
+ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS + STAGED_KEYS
 
 
 def aggregate_record(record, enabled_properties):
@@ -121,7 +129,7 @@ def aggregate_record(record, enabled_properties):
     for key in ALL_PROPERTY_KEYS:
         items = record.get(key) or []
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
-        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS:
+        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS or key in PATH_TRAVERSAL_KEYS:
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]
