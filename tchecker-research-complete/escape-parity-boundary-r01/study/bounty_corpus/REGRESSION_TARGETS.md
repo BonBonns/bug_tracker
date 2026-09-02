@@ -82,12 +82,20 @@ that a codebase has no such rule.** It is evidence about regex-literal
 boundary rules only. The Mozilla C/C++ result is unaffected — Gecko's scanners
 use character literals, the sites were seen, and 26 of them were classified.
 
-This is what the regression targets are for, and it is the next revision's
-work: resolve a variable operand to its quote/escape value where a unique
-constant initialiser exists, abstain where it does not, and add controls
-covering the parameterised-delimiter shape. That change is not made here —
-the analyser stays frozen, and everything above was produced by the frozen
-version.
+This is what the regression targets are for. **It has since been fixed** —
+see `../../DELIMITER_IDENTITY_R05.md`. R05 resolves a delimiter variable to its
+literal value when every assignment reaching it is a literal, and abstains when
+any is not. Under R05 `papaparse.js:1506` is recorded as
+`UNRESOLVED_DELIMITER_IDENTITY` → `ABSTAINED`, along with three more sites in
+the same parser loop, and no new candidate appears anywhere in the corpus.
+Abstaining is the correct verdict: PapaParse's quote and escape characters are
+user configuration, so the rule's parity cannot be decided statically. The
+revision converts silence into a stated abstention rather than manufacturing a
+finding.
+
+Everything in the tables above was produced by the pre-R05 analyser and is kept
+as the record of what the gap looked like. Post-R05 results are in
+`results_r05/`.
 
 ## Manifest note
 

@@ -1,0 +1,205 @@
+{
+ "note": "Per-site verdicts produced by the revision IMMEDIATELY BEFORE delimiter-identity resolution (R05), derived from the pre-revision fact tables. R05 widens what the analyser can SEE; it must not move any verdict that was already reachable, and this baseline is what proves that rather than a hand-typed count.",
+ "baselines": {
+  "fixtures_r01/raw": [
+   {
+    "file": "c01-lookbehind-even/index.js",
+    "line": "3",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c02-lookbehind-odd/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c03-explicit-count/index.js",
+    "line": "7",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD"
+   },
+   {
+    "file": "c03b-custom-onechar/index.js",
+    "line": "9",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   },
+   {
+    "file": "c04-parity-state-machine/index.js",
+    "line": "10",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD"
+   },
+   {
+    "file": "c05-delayed-source/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c06-immediate/index.js",
+    "line": "3",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c07-full-chain/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c08-log-only/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c09-dynamic-regex/index.js",
+    "line": "4",
+    "site_kind": "REGEX_CONSTRUCTED",
+    "classification": "ABSTAINED",
+    "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION"
+   },
+   {
+    "file": "c10-unresolved-callback/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c11-correct-with-other-defect/index.js",
+    "line": "10",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD"
+   },
+   {
+    "file": "c12-ambiguous-consumer/index.js",
+    "line": "4",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c12-ambiguous-consumer/index.js",
+    "line": "5",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c13-same-text-two-sites/index.js",
+    "line": "10",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c13-same-text-two-sites/index.js",
+    "line": "6",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c14a-historical-faulty/index.js",
+    "line": "3",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_CHAR_LOOKBEHIND"
+   },
+   {
+    "file": "c14b-historical-corrected/index.js",
+    "line": "3",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ABSTAINED",
+    "boundary_rule": "FOREIGN_DIALECT_SYNTAX"
+   }
+  ],
+  "fixtures_cpp/raw": [
+   {
+    "file": "q01_index_onechar.cpp",
+    "line": "10",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   },
+   {
+    "file": "q02_pointer_onechar.cpp",
+    "line": "6",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   },
+   {
+    "file": "q03_at_onechar.cpp",
+    "line": "6",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   },
+   {
+    "file": "q04_counting_negative.cpp",
+    "line": "9",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD"
+   },
+   {
+    "file": "q05_toggle_negative.cpp",
+    "line": "13",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD"
+   },
+   {
+    "file": "q06_no_escape_awareness.cpp",
+    "line": "10",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "NEGATIVE",
+    "boundary_rule": "NO_ESCAPE_AWARENESS"
+   },
+   {
+    "file": "q07_std_regex.cpp",
+    "line": "6",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "NEGATED_CLASS_ONE_CHAR"
+   },
+   {
+    "file": "q07_std_regex.cpp",
+    "line": "7",
+    "site_kind": "REGEX_LITERAL",
+    "classification": "NEGATIVE",
+    "boundary_rule": "PARITY_ESTABLISHED"
+   },
+   {
+    "file": "q08_guarded_onechar.cpp",
+    "line": "10",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   },
+   {
+    "file": "q09_quote_state_toggle.cpp",
+    "line": "19",
+    "site_kind": "CHARACTER_SCANNER",
+    "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "boundary_rule": "SINGLE_POSITION_INDEX_CHECK"
+   }
+  ]
+ }
+}

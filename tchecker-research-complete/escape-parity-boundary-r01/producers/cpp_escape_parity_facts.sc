@@ -27,7 +27,8 @@
 // Fact files (identical schema to the JS producer):
 //   regex_sites.tsv          file, method, method_id, line, node_id, resolution,
 //                            pattern_body, flags, detail
-//   parser_quote_sites.tsv   file, method, method_id, line, cmp_id, other_id, access_kind
+//   parser_quote_sites.tsv   file, method, method_id, line, cmp_id, other_id,
+//                            access_kind, delimiter_resolution
 //   parser_index_checks.tsv  file, method, method_id, line, check_id, quote_cmp_id,
 //                            esc_cmp_id, index_expr_id, offset, base_name, index_name
 //   parity_mechanisms.tsv    file, method, method_id, line, node_id, mechanism
@@ -108,6 +109,94 @@ import io.shiftleft.codepropertygraph.generated.nodes
   def isQuoteLiteral(n: nodes.AstNode): Boolean = charLiteralValue(n).exists(QUOTE_CHARS.contains)
   def isEscapeLiteral(n: nodes.AstNode): Boolean = charLiteralValue(n).contains("\\")
 
+  // ---------------------------------------------------- delimiter identity
+  // C parsers parameterise their delimiters too -- `const char q = cfg.quote;`
+  // then `s[i] == q`. Requiring a character literal on one side made every such
+  // site invisible. Resolution is all-or-nothing: a name counts as a delimiter
+  // only when EVERY assignment or initialiser reaching it in the file is a
+  // character literal. Anything else leaves the identity unresolved, and an
+  // unresolved delimiter abstains rather than guessing.
+  val LITERAL = "LITERAL"; val RESOLVED = "RESOLVED"; val UNRESOLVED = "UNRESOLVED"
+  val ROLE_QUOTE = "QUOTE"; val ROLE_ESCAPE = "ESCAPE"; val ROLE_OTHER = "OTHER"
+
+  val assignedValues = scala.collection.mutable.Map[(String, String), List[Option[String]]]()
+  var aliasEdges = List.empty[((String, String), (String, String))]
+  cpg.call.nameExact("<operator>.assignment").l.foreach { a =>
+    for {
+      nm <- argAt(a, 1).collect { case i: nodes.Identifier => i.name }
+      rhs <- argAt(a, 2)
+    } {
+      val k = (fileOf(a), nm)
+      assignedValues(k) = assignedValues.getOrElse(k, Nil) :+ charLiteralValue(rhs)
+      rhs match {
+        case i: nodes.Identifier => aliasEdges = aliasEdges :+ (k, (fileOf(a), i.name))
+        case _ => ()
+      }
+    }
+  }
+
+  def resolveIdent(file: String, name: String): Option[Set[String]] =
+    assignedValues.get((file, name)) match {
+      case Some(vs) if vs.nonEmpty && vs.forall(_.isDefined) => Some(vs.flatten.toSet)
+      case _ => None
+    }
+
+  // An unresolved name is a delimiter only when it PROVABLY holds a quote or
+  // escape character on at least one path. Without this, any `x == y` between
+  // two identifiers inside a method that indexes a container looked like a
+  // quote-boundary site, which in real C++ means hundreds of records from
+  // methods that parse nothing. The relation is transitive by one alias step
+  // (`escapeChar = quoteChar` before `escapeChar = config.escapeChar`), which
+  // is exactly the shape real parsers use to default one delimiter to another.
+  def delimiterLike(): Set[(String, String)] = {
+    // .iterator is load-bearing: collecting a PAIR out of a Map rebuilds a Map
+    // keyed by the pair's first element, so every delimiter in a file but the
+    // last silently vanished. Collect over the iterator to get a plain Set.
+    var known = assignedValues.iterator.collect {
+      case (k, vs) if vs.flatten.exists(v => QUOTE_CHARS.contains(v) || v == "\\") => k
+    }.toSet
+    var changed = true
+    var rounds = 0
+    while (changed && rounds < 4) {
+      rounds += 1
+      val next = known ++ aliasEdges.collect { case (k, src) if known.contains(src) => k }
+      changed = next.size != known.size
+      known = next
+    }
+    known
+  }
+
+  lazy val DELIMITER_LIKE = delimiterLike()
+
+  def roleOfValues(vs: Set[String]): String =
+    if (vs.nonEmpty && vs.forall(QUOTE_CHARS.contains)) ROLE_QUOTE
+    else if (vs.nonEmpty && vs.forall(_ == "\\")) ROLE_ESCAPE
+    else ROLE_OTHER
+
+  def delimRole(n: nodes.AstNode): Option[(String, String)] = charLiteralValue(n) match {
+    case Some(v) =>
+      val r = if (QUOTE_CHARS.contains(v)) ROLE_QUOTE
+              else if (v == "\\") ROLE_ESCAPE else ROLE_OTHER
+      Some((r, LITERAL))
+    case None => n match {
+      case i: nodes.Identifier =>
+        resolveIdent(fileOf(i), i.name) match {
+          case Some(vs) => Some((roleOfValues(vs), RESOLVED))
+          case None =>
+            if (DELIMITER_LIKE.contains((fileOf(i), i.name))) Some((ROLE_QUOTE, UNRESOLVED))
+            else None
+        }
+      case _ => None
+    }
+  }
+
+  def isQuoteDelim(n: nodes.AstNode): Boolean =
+    delimRole(n).exists { case (r, res) => r == ROLE_QUOTE && res != UNRESOLVED }
+  def isEscapeDelim(n: nodes.AstNode): Boolean =
+    delimRole(n).exists { case (r, res) => r == ROLE_ESCAPE && res != UNRESOLVED }
+  def isUnresolvedDelim(n: nodes.AstNode): Boolean =
+    delimRole(n).exists { case (_, res) => res == UNRESOLVED }
+
   def args(c: nodes.Call): List[nodes.Expression] = c.argument.l.sortBy(_.argumentIndex)
   def argAt(c: nodes.Call, i: Int): Option[nodes.Expression] = c.argument.l.find(_.argumentIndex == i)
 
@@ -160,35 +249,6 @@ import io.shiftleft.codepropertygraph.generated.nodes
     }.headOption
   }
 
-  // ------------------------------------------------------- quote scanner sites
-  val pqs = w("parser_quote_sites.tsv")
-  try {
-    val methodsWithAccess = cpg.call.l.filter { c =>
-      c.name == "<operator>.indexAccess" || c.name == "<operator>.indirectIndexAccess" ||
-      c.name == "<operator>.indirection" || c.name == "at"
-    }.flatMap(methOf).map(_.id).toSet
-    cpg.call.l.foreach { c =>
-      if (comparisonOps.contains(c.name)) {
-        val as = args(c)
-        val q = as.find(isQuoteLiteral)
-        val other = as.find(a => !isQuoteLiteral(a))
-        (q, other) match {
-          case (Some(_), Some(o)) =>
-            val m = methOf(c)
-            val mId = m.map(_.id).getOrElse(-1L)
-            if (methodsWithAccess.contains(mId)) {
-              val direct = indexParts(o).isDefined
-              pqs.println(List(fileOf(c), m.map(_.fullName).getOrElse("?"), mId, ln(c), c.id,
-                o.id, if (direct) "ACCESSED_CHAR" else "EXTRACTED_CHAR").mkString("\t"))
-            }
-          case _ => ()
-        }
-      }
-    }
-  } finally pqs.close()
-
-  // ---------------------------------------------------- one-position index checks
-
   // Real parsers usually extract the character first (`char c = s[i];`) and compare the
   // VARIABLE against the quote, while still testing `s[i-1]` against the escape directly.
   // Map such a variable back to the (base, index) it was read from, at offset zero, so the
@@ -205,6 +265,53 @@ import io.shiftleft.codepropertygraph.generated.nodes
       if off == 0
     } charVarOrigin((mId, nm)) = (b, idxName)
   }
+
+  // ------------------------------------------------------- quote scanner sites
+  val pqs = w("parser_quote_sites.tsv")
+  try {
+    val methodsWithAccess = cpg.call.l.filter { c =>
+      c.name == "<operator>.indexAccess" || c.name == "<operator>.indirectIndexAccess" ||
+      c.name == "<operator>.indirection" || c.name == "at"
+    }.flatMap(methOf).map(_.id).toSet
+    cpg.call.l.foreach { c =>
+      if (comparisonOps.contains(c.name)) {
+        val as = args(c)
+        val q = as.find(isQuoteDelim)
+        val other = q.flatMap(qq => as.find(_.id != qq.id))
+        // An accessed character compared against a delimiter whose identity is
+        // unresolved is still a quote-boundary site. Recording it as such makes
+        // it an abstention downstream instead of disappearing entirely.
+        val unresolvedPair = {
+          val pairs = List((as.lift(0), as.lift(1)), (as.lift(1), as.lift(0)))
+          pairs.collectFirst {
+            case (Some(x), Some(y))
+              if isUnresolvedDelim(y) &&
+                 (indexParts(x).isDefined ||
+                  charVarOrigin.contains((methOf(c).map(_.id).getOrElse(-1L),
+                                          x match { case i: nodes.Identifier => i.name
+                                                    case _ => "" }))) => x
+          }
+        }
+        val chosen: Option[(nodes.Expression, String)] = (q, other) match {
+          case (Some(qq), Some(o)) => Some((o, delimRole(qq).map(_._2).getOrElse(LITERAL)))
+          case _ => unresolvedPair.map(x => (x, UNRESOLVED))
+        }
+        chosen.foreach { case (o, resolution) =>
+          val m = methOf(c)
+          val mId = m.map(_.id).getOrElse(-1L)
+          if (methodsWithAccess.contains(mId)) {
+            val direct = indexParts(o).isDefined
+            pqs.println(List(fileOf(c), m.map(_.fullName).getOrElse("?"), mId, ln(c), c.id,
+              o.id, if (direct) "ACCESSED_CHAR" else "EXTRACTED_CHAR",
+              resolution).mkString("\t"))
+          }
+        }
+      }
+    }
+  } finally pqs.close()
+
+  // ---------------------------------------------------- one-position index checks
+
   /** A comparison of a quote literal against an EXTRACTED character variable. */
   def extractedQuoteCmp(c: nodes.Call): Option[(String, String, Int, Long)] = {
     if (!comparisonOps.contains(c.name)) return None
@@ -212,7 +319,7 @@ import io.shiftleft.codepropertygraph.generated.nodes
     val mId = methOf(c).map(_.id).getOrElse(-1L)
     val pairs = List((as.lift(0), as.lift(1)), (as.lift(1), as.lift(0)))
     pairs.flatMap {
-      case (Some(x: nodes.Identifier), Some(y)) if isQuoteLiteral(y) =>
+      case (Some(x: nodes.Identifier), Some(y)) if isQuoteDelim(y) =>
         charVarOrigin.get((mId, x.name)).map { case (b, idx) => (b, idx, 0, x.id) }
       case _ => None
     }.headOption
@@ -221,8 +328,8 @@ import io.shiftleft.codepropertygraph.generated.nodes
   val pic = w("parser_index_checks.tsv")
   try {
     val quoteCmps = cpg.call.l.flatMap(c =>
-      indexedCharCmp(c, isQuoteLiteral).orElse(extractedQuoteCmp(c)).map(r => (c, r)))
-    val escCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isEscapeLiteral).map(r => (c, r)))
+      indexedCharCmp(c, isQuoteDelim).orElse(extractedQuoteCmp(c)).map(r => (c, r)))
+    val escCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isEscapeDelim).map(r => (c, r)))
     escCmps.foreach { case (ec, (eBase, eIdx, eOff, eIdxExprId)) =>
       if (eOff != 0) {
         val em = methOf(ec)

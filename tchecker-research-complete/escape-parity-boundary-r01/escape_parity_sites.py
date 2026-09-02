@@ -42,6 +42,7 @@ ABSTAINED = "ABSTAINED"
 SINGLE_POSITION_INDEX_CHECK = "SINGLE_POSITION_INDEX_CHECK"
 PARITY_ESTABLISHED_IN_METHOD = "PARITY_ESTABLISHED_IN_METHOD"
 UNRESOLVED_REGEX_CONSTRUCTION = "UNRESOLVED_REGEX_CONSTRUCTION"
+UNRESOLVED_DELIMITER_IDENTITY = "UNRESOLVED_DELIMITER_IDENTITY"
 
 LANGUAGES = {"JAVASCRIPT": "jssrc2cpg", "C_CPP": "c2cpg"}
 
@@ -76,7 +77,7 @@ def derive(raw_dir, language=None):
     frontend = LANGUAGES.get(language, "?")
 
     regex_sites = _rows(raw / "regex_sites.tsv", 9)
-    quote_sites = _rows(raw / "parser_quote_sites.tsv", 7)
+    quote_sites = _rows(raw / "parser_quote_sites.tsv", 8)
     index_checks = _rows(raw / "parser_index_checks.tsv", 11)
     parity_rows = _rows(raw / "parity_mechanisms.tsv", 6)
 
@@ -129,13 +130,30 @@ def derive(raw_dir, language=None):
         findings.append(rec)
 
     # --- hand-written character-scanning parsers (JS and C/C++ alike) ---------
-    for f_, meth, mid, line, cmp_id, other_id, access_kind in quote_sites:
+    # A boundary rule is decided per method, so one unresolved delimiter blocks
+    # the whole method: a quote comparison against a literal is not evidence of
+    # a parity-correct parser when the escape character it is paired with is
+    # configurable. Without this, a method like d05 would report one abstention
+    # and one confident NO_ESCAPE_AWARENESS negative about the same rule.
+    methods_with_unresolved = {row[2] for row in quote_sites if row[7] == "UNRESOLVED"}
+
+    for f_, meth, mid, line, cmp_id, other_id, access_kind, delim_res in quote_sites:
         rec = base(f_, meth, mid, line, cmp_id, "CHARACTER_SCANNER")
         rec.update(compared_expr_node_id=other_id, char_access_kind=access_kind,
+                   delimiter_resolution=delim_res or "LITERAL",
                    pattern_resolution="N/A", pattern="", flags="",
                    regex_dialect=None, evidence_role=CORPUS_ANALYSIS)
         my_checks = checks_by_method.get(mid, [])
-        if mid in parity_methods:
+        if delim_res == "UNRESOLVED" or mid in methods_with_unresolved:
+            # The scanner compares a character against a delimiter whose value
+            # cannot be pinned down -- a configurable quote or escape character.
+            # Neither verdict is available: the site cannot be cleared, and it
+            # cannot be called a candidate either. It abstains, which is still
+            # far better than the site being invisible.
+            rec.update(boundary_rule=UNRESOLVED_DELIMITER_IDENTITY,
+                       classification=ABSTAINED,
+                       abstention_reason=UNRESOLVED_DELIMITER_IDENTITY)
+        elif mid in parity_methods:
             rec["parity_mechanisms"] = parity_methods[mid]
             rec.update(boundary_rule=PARITY_ESTABLISHED_IN_METHOD,
                        classification=NEGATIVE, negative_reason=PARITY_ESTABLISHED_IN_METHOD)
