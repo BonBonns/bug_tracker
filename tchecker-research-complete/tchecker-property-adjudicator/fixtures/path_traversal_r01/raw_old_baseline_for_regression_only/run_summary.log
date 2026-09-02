@@ -1,0 +1,22 @@
+[old_baseline] sink targets found: 19
+[old_baseline] overload-bridged sources added: 0
+[old_baseline] property-assignment-bridged sources added: 12
+[old_baseline] source candidates found: 32 (field-access: 10, ingress-param refs: 21, overload-bridged: 0)
+[old_baseline] EMIT sink=30064771079(L11) src=68719476739(L9:userPath) outcome=BROKEN note=guarded by: resolved.startsWith('/safe')
+[old_baseline] EMIT sink=30064771087(L6) src=30064771093(L6:req.body.root) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771105(L5) src=30064771107(L5:req.params.name) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771121(L6) src=68719476793(L6:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771132(L6) src=68719476804(L6:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771134(L9) src=68719476807(L9:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771136(L12) src=68719476810(L12:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771151(L10) src=68719476821(L9:userPath) outcome=BROKEN note=guarded by: userPath.includes('../')
+[old_baseline] EMIT sink=30064771151(L10) src=68719476824(L10:userPath) outcome=BROKEN note=guarded by: userPath.includes('../')
+[old_baseline] EMIT sink=30064771162(L9) src=68719476834(L8:userPath) outcome=BROKEN note=literal '..' strip: userPath.replace(/\.\./, '')
+[old_baseline] EMIT sink=30064771169(L4) src=30064771171(L4:req.params.name) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771186(L13) src=68719476860(L12:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771186(L13) src=68719476863(L13:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771197(L7) src=68719476877(L6:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771197(L7) src=68719476880(L7:userPath) outcome=ESTABLISHED note=
+[old_baseline] EMIT sink=30064771215(L9) src=68719476891(L7:userPath) outcome=BROKEN note=guarded by: resolved === '/safe/base'
+[old_baseline] EMIT sink=30064771236(L10) src=68719476924(L10:userPath) outcome=ESTABLISHED note=
+[old_baseline] PATH_TRAV_INTEG_COMPLETE rows=17

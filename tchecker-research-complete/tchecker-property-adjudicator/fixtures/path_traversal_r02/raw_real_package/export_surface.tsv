@@ -1,0 +1,33 @@
+30064771192#0	index.js	1	exports.common.js	common.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771196#0	index.js	2	exports.load.js	load.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771200#0	index.js	3	exports.query.js	query.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771288#0	lib/common.js	1	exports.SqlValidationError	SqlValidationError.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064771291#0	lib/common.js	11	exports.extractFieldReferencesFromNode	extractFieldReferencesFromNode	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182405	lib/common.js::program:extractFieldReferencesFromNode	
+30064771447#0	lib/dialect.js	1	exports.constructCurrentTimeOffsetExpression	constructCurrentTimeOffsetExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182408	lib/dialect.js::program:constructCurrentTimeOffsetExpression	
+30064771450#0	lib/dialect.js	11	exports.constructDateRangeExpression	constructDateRangeExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182409	lib/dialect.js::program:constructDateRangeExpression	
+30064771453#0	lib/dialect.js	17	exports.constructDateTruncExpression	constructDateTruncExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182410	lib/dialect.js::program:constructDateTruncExpression	
+30064771456#0	lib/dialect.js	29	exports.constructDateAddExpression	constructDateAddExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182411	lib/dialect.js::program:constructDateAddExpression	
+30064771459#0	lib/dialect.js	38	exports.constructDateSubExpression	constructDateSubExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182412	lib/dialect.js::program:constructDateSubExpression	
+30064771462#0	lib/dialect.js	47	exports.constructTodayAtMidnightExpression	constructTodayAtMidnightExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182413	lib/dialect.js::program:constructTodayAtMidnightExpression	
+30064771465#0	lib/dialect.js	57	exports.normalizeQuotesForBigQuery	normalizeQuotesForBigQuery	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182414	lib/dialect.js::program:normalizeQuotesForBigQuery	
+30064771469#0	lib/index.js	1	exports.common.js	common.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771473#0	lib/index.js	2	exports.load.js	load.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771477#0	lib/index.js	3	exports.query.js	query.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
+30064771502#0	lib/jinja.js	3	exports.renderJinjaTemplate	renderJinjaTemplate	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182417	lib/jinja.js::program:renderJinjaTemplate	
+30064771864#0	lib/load.js	3	exports.createModel	createModel	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182434	lib/load.js::program:createModel	
+30064771867#0	lib/load.js	34	exports.loadModel	loadModel	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182435	lib/load.js::program:loadModel	
+30064771870#0	lib/load.js	38	exports.loadModelSync	loadModelSync	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182436	lib/load.js::program:loadModelSync	
+30064771921#0	lib/parse.js	4	exports.extractFieldReferences	extractFieldReferences	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182438	lib/parse.js::program:extractFieldReferences	
+30064772598#0	lib/query.js	5	exports.renderQuery	renderQuery	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182449	lib/query.js::program:renderQuery	
+30064772658#0	lib/utilities.js	1	exports.collapseWhitespace	collapseWhitespace	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182462	lib/utilities.js::program:collapseWhitespace	
+30064773061#0	lib/validation.js	4	exports.SqlValidationError	SqlValidationError.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064773064#0	lib/validation.js	14	exports.UnsafeConstructError	UnsafeConstructError.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064773067#0	lib/validation.js	16	exports.UnknownColumnError	UnknownColumnError.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064773070#0	lib/validation.js	18	exports.ComplexityLimitError	ComplexityLimitError.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064773195#0	lib/validation.js	42	exports.validateSqlExpression	validateSqlExpression	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182474	lib/validation.js::program:validateSqlExpression	
+30064773198#0	lib/validation.js	78	exports.validateWhereClause	validateWhereClause	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182475	lib/validation.js::program:validateWhereClause	
+30064773201#0	lib/validation.js	81	exports.validateHavingClause	validateHavingClause	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182476	lib/validation.js::program:validateHavingClause	
+30064773204#0	lib/validation.js	84	exports.validateDateInput	validateDateInput	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182477	lib/validation.js::program:validateDateInput	
+30064773231#0	lib/yaml.js	4	exports.loadYamlFile	loadYamlFile	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182479	lib/yaml.js::program:loadYamlFile	
+30064773234#0	lib/yaml.js	8	exports.loadYamlFileSync	loadYamlFileSync	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182480	lib/yaml.js::program:loadYamlFileSync	
+30064773237#0	lib/yaml.js	12	exports.parseYAML	parseYAML	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182481	lib/yaml.js::program:parseYAML	
