@@ -36,10 +36,25 @@ REDOS INTEGRATION (roadmap step 8, first of 4 JS/TS classes): after the Nan stag
 runs ReDoS (frozen, merged: export_redos_npm_integ_r02.sc + redos_verdict.py) as part of this same
 per-package chain, reusing the js_bin CPG and pkg_dir this function already builds/extracts above
 rather than the standalone study/redos_npm/pilot25/run_pilot25_r02.py's own from-scratch
-download+build. Ports that script's own real run_one() algorithm (entrypoint-coverage correction
-via frontend_coverage_check.py, imported and never modified, then the R02 producer, then the
-frozen reducer) in place -- see the inline comments at the ReDoS stage block below for the one
-real structural difference (pass 1 is never rebuilt: js_bin already IS it).
+download+build.
+
+JS FRONTEND ENTRYPOINT-COVERAGE CORRECTION (shared, applies to js_bin itself): ported from
+study/redos_npm/pilot25/run_pilot25_r02.py's own real run_one() algorithm (entrypoint-coverage
+correction via frontend_coverage_check.py, imported and never modified) -- but, unlike its
+original ReDoS-only placement, now applied directly to js_bin right after the initial jssrc2cpg
+build, BEFORE js_export/js_facts.json or any downstream stage runs, so every stage that reuses
+js_bin (js_facts.json, Nan capability detection, ReDoS, Path Traversal, Serialize DoS -- all of
+them) gets the correction, not only ReDoS. This was a real, confirmed gap: jssrc2cpg's own
+default ignore rules (a folder-name list including "dist", a .d.ts-style filename-suffix regex,
+an unanchored node_modules substring match) silently drop a package.json-resolved entrypoint
+before a single CPG node for it exists -- and shipping compiled dist/ output as the real runtime
+code is the standard convention for a published TypeScript library, not an edge case. Confirmed
+severe on two real packages: multi-spec-parser (uncorrected CPG: 3 ReDoS sink targets, 0
+dangerous; corrected: 50 sink targets, 1 REAL dangerous candidate the uncorrected scan never
+saw) and node-llama-cpp (uncorrected js_bin: 0 functions/0 calls parsed from 560 real on-disk
+JS/TS files; corrected: 280 files/4573 methods/91378 calls). See the inline comments at the
+correction block below for the one real structural difference from frontend_coverage_check.py's
+own check_package(): pass 1 is never rebuilt, since js_bin already IS it.
 """
 import hashlib
 import json
@@ -62,12 +77,14 @@ JS_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine
 POLYGLOT = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/polyglot/link_napi_facts.py"
 SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
 
-# REDOS INTEGRATION (roadmap step 8): the frozen R02 producer + reducer, and the audit dir
-# holding frontend_coverage_check.py -- all reused verbatim from
+# REDOS INTEGRATION (roadmap step 8): the frozen R02 producer + reducer, reused verbatim from
 # study/redos_npm/pilot25/run_pilot25_r02.py's own already-validated paths, never modified here.
 R02_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/"
                 "producers/export_redos_npm_integ_r02.sc")
 REDOS_VERDICT = os.path.join(SCANNER_V2, "redos_verdict.py")
+# JS FRONTEND ENTRYPOINT-COVERAGE CORRECTION: frontend_coverage_check.py's own audit dir --
+# this used to be ReDoS-only (hence the name), now used earlier and shared by every JS/TS
+# stage (see the module docstring and the correction block right after the jssrc2cpg build).
 REDOS_FCC_AUDIT_DIR = os.path.join(SCANNER_V2, "study", "redos_npm", "pilot25", "audit")
 
 # PATH TRAVERSAL INTEGRATION (roadmap step 8, second of 4 JS/TS classes): the frozen, merged
@@ -483,6 +500,84 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = err or f"jssrc2cpg rc={rc}"
         return record
 
+    # JS FRONTEND ENTRYPOINT-COVERAGE CORRECTION (see module docstring for the full, evidence-
+    # backed story -- real, confirmed severe on multi-spec-parser and node-llama-cpp). Runs here,
+    # immediately after the initial jssrc2cpg build and before js_export/js_facts.json or any
+    # downstream stage, and reassigns js_bin itself when a correction is applied -- every stage
+    # below that reuses js_bin (js_facts.json, Nan, ReDoS, Path Traversal, Serialize DoS) then
+    # transparently gets the corrected CPG, with no per-stage fix needed.
+    #
+    # frontend_coverage_check.py (frozen, reused verbatim, never modified) already implements and
+    # validates this exact mechanism -- see its own module docstring for jssrc2cpg's own real
+    # ignore-rule constants (decompiled and probe-confirmed there). js_bin ALREADY IS the "pass 1"
+    # CPG its own check_package() would otherwise build itself, so pass 1 is never rebuilt here --
+    # fcc.list_cpg_files() is checked directly against js_bin, and a pass-2 rebuild
+    # (fcc.stage_recovered_source + fcc.build_cpg) only happens if something package.json-resolved
+    # is genuinely missing. In the common case (nothing missing) js_bin is left exactly as the
+    # jssrc2cpg.sh call above already built it, with zero extra CPG build.
+    t0 = time.time()
+    try:
+        sys.path.insert(0, REDOS_FCC_AUDIT_DIR)
+        import frontend_coverage_check as fcc  # noqa: E402 -- reused, never modified
+
+        js_frontend_coverage = {"resolved_entrypoints": [], "n_missing_entrypoints": 0,
+                                 "missing_entrypoints": [], "correction_applied": False}
+        pkg_json_path = fcc.find_package_json(pkg_dir)
+        if pkg_json_path is not None:
+            with open(pkg_json_path) as f:
+                pkg_doc = json.load(f)
+            entrypoints = fcc.resolve_entrypoints(pkg_doc)
+            # pkg_dir is ALREADY flattened (the npm tarball's own "package/" wrapper was stripped
+            # above) -- pkg_root_rel is therefore "" in the common case, so entrypoint relpaths
+            # need no prefix; matches frontend_coverage_check.py's own check_package() logic for
+            # the pkg_root_rel == "." case.
+            pkg_root_rel = os.path.relpath(os.path.dirname(pkg_json_path), pkg_dir).replace(os.sep, "/")
+            if pkg_root_rel == ".":
+                pkg_root_rel = ""
+
+            def to_pkg_dir_rel(ep, _prefix=pkg_root_rel):
+                return (_prefix + "/" + ep) if _prefix else ep
+
+            cpg1_files_set = set(fcc.list_cpg_files(js_bin)[0])
+            missing = []
+            for ep in entrypoints:
+                relpath = to_pkg_dir_rel(ep)
+                if relpath in cpg1_files_set:
+                    continue
+                abspath = os.path.join(pkg_dir, *relpath.split("/"))
+                if not os.path.isfile(abspath):
+                    continue
+                reason = fcc.classify_ignore_reason(relpath, abspath)
+                if reason:
+                    missing.append((relpath, reason))
+            js_frontend_coverage["resolved_entrypoints"] = entrypoints
+            js_frontend_coverage["n_missing_entrypoints"] = len(missing)
+            js_frontend_coverage["missing_entrypoints"] = [
+                {"relpath": r, "reason": rs} for r, rs in missing]
+            if missing:
+                staged_dir, recovered_map = fcc.stage_recovered_source(pkg_dir, missing)
+                js_bin_corrected = os.path.join(work, "js_pass2_corrected.cpg.bin")
+                ok2, log2 = fcc.build_cpg(staged_dir, js_bin_corrected)
+                if ok2:
+                    cpg2_files_set = set(fcc.list_cpg_files(js_bin_corrected)[0])
+                    still_missing = [(r, rs) for r, rs in missing
+                                      if recovered_map.get(r) not in cpg2_files_set]
+                    js_frontend_coverage["correction_applied"] = True
+                    js_frontend_coverage["recovered_path_map"] = recovered_map
+                    js_frontend_coverage["still_missing_after_correction"] = still_missing
+                    js_bin = js_bin_corrected  # the whole point: every stage below that reuses
+                                                # js_bin now gets the corrected CPG.
+                else:
+                    js_frontend_coverage["correction_applied"] = False
+                    js_frontend_coverage["correction_error"] = log2[-1000:]
+        record["js_frontend_coverage"] = js_frontend_coverage
+    except Exception as e:
+        record["stages"]["js_frontend_coverage"] = {"seconds": time.time() - t0}
+        record["status"] = "EXPORT_FAILED"
+        record["detail"] = f"js frontend coverage check failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["js_frontend_coverage"] = {"seconds": time.time() - t0}
+
     cpp_raw = os.path.join(work, "cpp_raw")
     rc, secs, mem, err = run_stage(
         [f"{JOERN_HOME}/joern", "--script", f"{CPP_FRONTEND}/export_c_cpp_facts_v03.sc",
@@ -706,81 +801,10 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # algorithm in place, reusing pkg_dir and js_bin (both already built above) instead of
     # re-downloading/re-building a separate JS-only CPG. Never modifies frontend_coverage_check.py,
     # export_redos_npm_integ_r02.sc, or redos_verdict.py -- orchestration only, exactly as
-    # run_pilot25_r02.py's own module docstring states about itself.
-    #
-    # Entrypoint-coverage correction (the real reason this exists: jssrc2cpg's own default ignore
-    # rules -- a folder-name list including "dist", a filename-suffix regex, or an unanchored
-    # node_modules substring match -- can silently drop a package.json-resolved entrypoint before
-    # a single CPG node for it ever exists; frontend_coverage_check.py's own module docstring has
-    # the full, evidence-backed story). run_pilot25_r02.py always builds its own CPG as "pass 1"
-    # then checks it; here js_bin ALREADY IS that pass-1 CPG (built above, before cpp/js export),
-    # so pass 1 is never rebuilt -- fcc.list_cpg_files() is checked directly against js_bin, and a
-    # pass-2 rebuild (fcc.stage_recovered_source + fcc.build_cpg, identical to run_pilot25_r02.py's
-    # own pass-2 logic) only happens if something resolved is genuinely missing. In the common
-    # case (nothing missing) js_bin is reused as-is, with zero extra CPG build.
-    t0 = time.time()
-    try:
-        sys.path.insert(0, REDOS_FCC_AUDIT_DIR)
-        import frontend_coverage_check as fcc  # noqa: E402 -- reused, never modified
-
-        final_cpg = js_bin
-        redos_frontend_coverage = {"resolved_entrypoints": [], "n_missing_entrypoints": 0,
-                                    "missing_entrypoints": [], "correction_applied": False}
-        pkg_json_path = fcc.find_package_json(pkg_dir)
-        if pkg_json_path is not None:
-            with open(pkg_json_path) as f:
-                pkg_doc = json.load(f)
-            entrypoints = fcc.resolve_entrypoints(pkg_doc)
-            # pkg_dir is ALREADY flattened (the npm tarball's own "package/" wrapper was stripped
-            # above, unlike run_pilot25_r02.py's own src_dir, which keeps it) -- pkg_root_rel is
-            # therefore "" here in the common case, so entrypoint relpaths need no prefix; this is
-            # exactly the pkg_root_rel == "." case run_pilot25_r02.py's own logic already handles,
-            # just the common case here instead of the exception there.
-            pkg_root_rel = os.path.relpath(os.path.dirname(pkg_json_path), pkg_dir).replace(os.sep, "/")
-            if pkg_root_rel == ".":
-                pkg_root_rel = ""
-
-            def to_pkg_dir_rel(ep, _prefix=pkg_root_rel):
-                return (_prefix + "/" + ep) if _prefix else ep
-
-            cpg1_files_set = set(fcc.list_cpg_files(js_bin)[0])
-            missing = []
-            for ep in entrypoints:
-                relpath = to_pkg_dir_rel(ep)
-                if relpath in cpg1_files_set:
-                    continue
-                abspath = os.path.join(pkg_dir, *relpath.split("/"))
-                if not os.path.isfile(abspath):
-                    continue
-                reason = fcc.classify_ignore_reason(relpath, abspath)
-                if reason:
-                    missing.append((relpath, reason))
-            redos_frontend_coverage["resolved_entrypoints"] = entrypoints
-            redos_frontend_coverage["n_missing_entrypoints"] = len(missing)
-            redos_frontend_coverage["missing_entrypoints"] = [
-                {"relpath": r, "reason": rs} for r, rs in missing]
-            if missing:
-                staged_dir, recovered_map = fcc.stage_recovered_source(pkg_dir, missing)
-                cpg2 = os.path.join(work, "redos_pass2.cpg.bin")
-                ok2, log2 = fcc.build_cpg(staged_dir, cpg2)
-                if ok2:
-                    cpg2_files_set = set(fcc.list_cpg_files(cpg2)[0])
-                    still_missing = [(r, rs) for r, rs in missing
-                                      if recovered_map.get(r) not in cpg2_files_set]
-                    redos_frontend_coverage["correction_applied"] = True
-                    redos_frontend_coverage["recovered_path_map"] = recovered_map
-                    redos_frontend_coverage["still_missing_after_correction"] = still_missing
-                    final_cpg = cpg2
-                else:
-                    redos_frontend_coverage["correction_applied"] = False
-                    redos_frontend_coverage["correction_error"] = log2[-1000:]
-        record["redos_frontend_coverage"] = redos_frontend_coverage
-    except Exception as e:
-        record["stages"]["redos_frontend_coverage"] = {"seconds": time.time() - t0}
-        record["status"] = "EXPORT_FAILED"
-        record["detail"] = f"redos frontend coverage check failed: {type(e).__name__}: {e}"
-        return record
-    record["stages"]["redos_frontend_coverage"] = {"seconds": time.time() - t0}
+    # run_pilot25_r02.py's own module docstring states about itself. The entrypoint-coverage
+    # correction run_pilot25_r02.py's own algorithm performs at this point now happens earlier,
+    # shared across every JS/TS stage (see the js_frontend_coverage block right after the initial
+    # jssrc2cpg build, above) -- js_bin here already reflects it.
 
     # R02 producer -- same joern-script shape as cpp_export/js_export above (run_stage, checked
     # via rc/err). redos_raw and pkg_dir (passed to the reducer next) are both already absolute
@@ -791,7 +815,7 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     redos_raw = os.path.join(work, "redos_raw")
     rc, secs, mem, err = run_stage(
         [f"{JOERN_HOME}/joern", "--script", R02_PRODUCER,
-         "--param", f"cpgFile={final_cpg}", "--param", f"rawDir={redos_raw}",
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={redos_raw}",
          "--param", f"srcLabel={pkg_name}"],
         os.path.join(work, "redos_producer.log"))
     record["stages"]["redos_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
@@ -827,10 +851,14 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # PATH TRAVERSAL INTEGRATION (roadmap step 8, second of 4 JS/TS classes): two producers, in
     # order, into the SAME rawDir -- the shared npm-source-identity producer first (writes
     # source_origin_facts.tsv), then Path Traversal's own R02 producer (reads it, writes
-    # source_facts.tsv/sink_abstentions.tsv/etc.). Reuses js_bin (already built above) -- Path
-    # Traversal's own sink identification is structural and needs no entrypoint-coverage
-    # correction of its own (unlike ReDoS, it never re-derives export/source logic that depends on
-    # jssrc2cpg's own default-ignore rules the way ReDoS's frontend_coverage_check.py corrects for).
+    # source_facts.tsv/sink_abstentions.tsv/etc.). Reuses js_bin (already built above), which now
+    # already reflects the shared entrypoint-coverage correction (see js_frontend_coverage above)
+    # -- an earlier version of this comment claimed Path Traversal needed no such correction of
+    # its own, which was WRONG: it operates over the exact same CPG ReDoS does, so a package whose
+    # real code jssrc2cpg would otherwise have silently dropped (e.g. multi-spec-parser, whose
+    # main resolves into dist/) was just as coverage-blind here as it was for ReDoS before this
+    # fix -- confirmed real: this session's own earlier "multi-spec-parser: zero findings,
+    # correctly" claim for Path Traversal was a coverage blackout, not a genuine negative.
     pt_raw = os.path.join(work, "pt_raw")
     rc, secs, mem, err = run_stage(
         [f"{JOERN_HOME}/joern", "--script", NPM_SOURCE_IDENTITY_PRODUCER,
