@@ -71,6 +71,15 @@ same discipline as the others above: `nosqli_verdict.py` hardcodes every finding
 `f.get("reportable") is True` check can never count a NoSQLi finding as reportable no matter how
 "enabled" is set here.
 
+ADDENDUM 4 (SSRF integration, discovered alongside LLM-input/NoSQLi -- the third already-built,
+never-wired property, not part of the originally-tracked 4 JS/TS classes): `ssrf_findings`
+(ssrf_verdict.py's own `emit_findings()`, new this session, following path_traversal_verdict.py's
+own template -- export_ssrf_integ.sc already computes real per-alternative BROKEN/OPEN/ESTABLISHED
+containment tiering itself, the same shape Path Traversal's own producer uses) is a 12th key, same
+discipline as the others above: `ssrf_verdict.py` hardcodes every finding's own
+`"reportable": False` unconditionally, so this module's `f.get("reportable") is True` check can
+never count an SSRF finding as reportable no matter how "enabled" is set here.
+
 ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
 into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
 like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
@@ -170,11 +179,22 @@ LLM_INPUT_KEYS = ("llm_input_findings",)
 # later" precedent -- see that reducer's own module docstring.
 NOSQLI_KEYS = ("nosqli_findings",)
 
+# SSRF (roadmap step 8 successor, discovered alongside LLM-input/NoSQLi -- the third already-built,
+# never-wired class: ATTACKER_CONTROL_OF_REQUEST_HOST, see
+# tchecker-property-adjudicator/docs/milestones/JS_SSRF_SOURCE_R01_WEBEXT_BRIDGE.md and siblings).
+# Same discipline as REDOS_KEYS/PATH_TRAVERSAL_KEYS/SERIALIZE_DOS_KEYS/LLM_INPUT_KEYS/NOSQLI_KEYS
+# -- wired into the shared per-package pipeline via run_pipeline_one_r06.py, never routed through
+# staged_enablement.py's reachability-tier mechanism (C/C++-specific). Always "enabled" here; safe
+# regardless, since ssrf_verdict.py (new this session, following path_traversal_verdict.py's own
+# template) already hardcodes every finding's own "reportable": False unconditionally -- see that
+# reducer's own module docstring.
+SSRF_KEYS = ("ssrf_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
 ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
-                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + STAGED_KEYS)
+                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + SSRF_KEYS + STAGED_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -197,7 +217,7 @@ def aggregate_record(record, enabled_properties):
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
         if (key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS
                 or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS
-                or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS):
+                or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS or key in SSRF_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]

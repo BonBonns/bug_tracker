@@ -159,6 +159,28 @@ ck("a record with no nosqli_findings key at all still produces a correct, non-cr
    and summary1k["nosqli_findings"]["raw_count"] == 0
    and summary1k["nosqli_findings"]["reportable_count"] == 0)
 
+# --- SSRF: same discipline as the other roadmap-step-8 JS/TS properties -- always enabled, never
+# gated by staged_enablement.py. ssrf_verdict.py hardcodes reportable=False itself, matching
+# ReDoS/Path Traversal/Serialize DoS/NoSQLi, not LLM-input's own predates-the-convention shape.
+record1l = {"ssrf_findings": [mk(False)]}
+summary1l = agg.aggregate_record(record1l, enabled_properties=frozenset())
+ck("ssrf_findings is in ALL_PROPERTY_KEYS", "ssrf_findings" in agg.ALL_PROPERTY_KEYS)
+ck("ssrf_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1l["ssrf_findings"]["enabled"] is True
+   and summary1l["ssrf_findings"]["disabled_reason"] is None)
+ck("ssrf_findings raw/reportable counts are read directly, never recomputed -- the one finding "
+   "carries reportable=False (as ssrf_verdict.py itself hardcodes)",
+   summary1l["ssrf_findings"]["raw_count"] == 1
+   and summary1l["ssrf_findings"]["reportable_count"] == 0)
+record1m = {"r04_findings": [mk(True)]}  # no "ssrf_findings" key at all, the common case
+summary1m = agg.aggregate_record(record1m, enabled_properties=frozenset())
+ck("a record with no ssrf_findings key at all still produces a correct, non-crashing "
+   "summary: enabled=True, raw=0, reportable=0",
+   summary1m["ssrf_findings"]["enabled"] is True
+   and summary1m["ssrf_findings"]["raw_count"] == 0
+   and summary1m["ssrf_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -268,6 +290,9 @@ def load_bundle_record(bundle_path):
         record["nosqli_findings"] = []  # same reason -- these bundles predate the NoSQLi wiring
                                          # (record1j/record1k above already cover a real non-empty
                                          # and a real absent-key nosqli_findings case directly)
+        record["ssrf_findings"] = []  # same reason -- these bundles predate the SSRF wiring
+                                         # (record1l/record1m above already cover a real non-empty
+                                         # and a real absent-key ssrf_findings case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

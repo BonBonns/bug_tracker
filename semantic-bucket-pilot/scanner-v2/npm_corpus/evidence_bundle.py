@@ -194,6 +194,12 @@ BUNDLED_RELATIVE_PATHS = (
     # *_out.json entries.
     "nosqli_raw",
     "nosqli_out.json",
+    # SSRF INTEGRATION: ssrf_raw follows the exact same "bundle the raw-output directory as-is,
+    # required" precedent as nosqli_raw/llm_raw/sd_facts/redos_raw/pt_raw above (this producer
+    # always runs unconditionally on every successful run); ssrf_out.json follows the exact same
+    # precedent as the other *_out.json entries.
+    "ssrf_raw",
+    "ssrf_out.json",
 )
 
 # Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
@@ -263,6 +269,10 @@ ANALYZER_FILES = {
     # nosqli_out.json -- same real path-construction convention as redos_verdict.py/
     # path_traversal_verdict.py above (SCANNER_V2-root-relative).
     "nosqli_verdict.py": os.path.join(os.path.dirname(_HERE), "nosqli_verdict.py"),
+    # SSRF INTEGRATION: ssrf_verdict.py (new this session) is the analyzer that produces
+    # ssrf_out.json -- same real path-construction convention as nosqli_verdict.py/
+    # redos_verdict.py/path_traversal_verdict.py above (SCANNER_V2-root-relative).
+    "ssrf_verdict.py": os.path.join(os.path.dirname(_HERE), "ssrf_verdict.py"),
 }
 
 

@@ -1,0 +1,6 @@
+30064771072	68719476736	ESTABLISHED		-1
+30064771079	68719476741	BROKEN	host overwritten by literal assignment: u.hostname = 'fixed.example'	-1
+30064771080	68719476745	BROKEN	fixed-origin prefix closes host: 'https://fixed.example/' + attackerPath	-1
+30064771083	68719476746	OPEN	guard-dominance candidate (v1 syntactic approximation, not confirmed): userHost === 'allowed.example'	-1
+30064771083	68719476747	OPEN	guard-dominance candidate (v1 syntactic approximation, not confirmed): userHost === 'allowed.example'	-1
+30064771086	68719476751	OPEN	unrecognized call: someExternalNormalizer	-1

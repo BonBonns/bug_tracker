@@ -179,6 +179,46 @@ NOSQLI_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
                     "tchecker-property-adjudicator/producers/export_nosqli_integ.sc")
 NOSQLI_VERDICT = os.path.join(SCANNER_V2, "nosqli_verdict.py")
 
+# SSRF INTEGRATION (roadmap step 8 successor, discovered alongside LLM-input/NoSQLi: the third
+# already-built, never-wired class -- ATTACKER_CONTROL_OF_REQUEST_HOST, see
+# tchecker-property-adjudicator/docs/milestones/JS_SSRF_SOURCE_R01_WEBEXT_BRIDGE.md and siblings).
+# Stage 1 (sink semantics) + Stage 2 (property effects) were already frozen and integrated into
+# export_ssrf_integ.sc before this session -- that producer ALSO already computes real
+# BROKEN/OPEN/ESTABLISHED per-alternative containment tiering itself (unlike NoSQLi's producer,
+# which only ever emits already-guard-filtered rows), the same shape Path Traversal's own producer
+# uses -- so ssrf_verdict.py (new) follows path_traversal_verdict.py's own template, not
+# nosqli_verdict.py's. What was genuinely missing here, same as NoSQLi: any Python reducer at all,
+# and any pipeline wiring.
+#
+# export_ssrf_integ.sc's own signature is (cpgFile, rawDir, srcLabel, browserSourceTsv = "") --
+# the same rawDir/srcLabel convention as ReDoS/Path Traversal/NoSQLi, plus one OPTIONAL parameter
+# (browserSourceTsv) that bridges a separate, frozen WebExtension-tab/external-message source
+# class (JS-SSRF-SOURCE-R01/R02, gated 16/16 + 10/10) into the source pool. That bridge is
+# browser-extension-specific (tabs.onCreated/onUpdated, runtime.onMessageExternal) -- structurally
+# irrelevant to a generic npm-library corpus, so this wiring deliberately never passes it (default
+# ""), matching how the corpus scan never builds a browser-extension host environment for any
+# other property either. The source model actually exercised here is the SAME
+# req.*/message.*/Meteor.methods application-ingress boundary every other property in this
+# pipeline already uses (SOURCE_PATTERN = "(req|request)\\.(body|query|params|headers|payload|
+# url)(\\..*)?") -- there is no separate npm-package-own-exported-function-parameter source
+# family for this property at all (unlike ReDoS's PACKAGE_API_INPUT_REACHABLE), so on a generic
+# npm library (no Express/Meteor-shaped request handling of its own) this stage will very likely
+# find zero source candidates, same real-world caveat NoSQLi's own req.*-based source model has.
+#
+# SSRF-INTEG-R01-FIX01 (this session, in export_ssrf_integ.sc): `note` -- WHY a given (sink,
+# origin) alternative was classified BROKEN/OPEN ("host overwritten by literal assignment: ...",
+# "guard-dominance candidate: ...", "unrecognized call: ...") -- was already computed per row but
+# only ever printed to the producer's own stderr; property_outcome.tsv's own trailing two columns
+# were always the literal placeholder "-1","-1". Confirmed adjudicate_js.py only ever reads
+# columns 0/1/2 of this file, so it was fixed to write `note` into column 3 (column 4 stays "-1",
+# row width unchanged at 5 columns). A same-fixture regression run before/after the fix produced
+# byte-identical row counts; all four of this producer's own pre-existing WebExtension regression
+# gates (PORTABLE_SSRF_BRIDGE_CONTROLS, WEBEXT_SSRF_BRIDGE, WEBEXT_EXTERNAL_SSRF_BRIDGE,
+# WEBEXT_SSRF_LLM_HANDOFF) still pass unchanged after this fix.
+SSRF_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                  "tchecker-property-adjudicator/producers/export_ssrf_integ.sc")
+SSRF_VERDICT = os.path.join(SCANNER_V2, "ssrf_verdict.py")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -1213,6 +1253,48 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"nosqli scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["nosqli_scan"] = {"seconds": time.time() - t0}
+
+    # SSRF INTEGRATION: producer (frozen except SSRF-INTEG-R01-FIX01's additive column fix, see
+    # the module-level comment above) against js_bin -- already reflects the shared entrypoint-
+    # coverage correction, same as every other JS/TS stage. browserSourceTsv deliberately omitted
+    # (default "") -- see the module-level comment for why the WebExtension bridge is out of
+    # scope for a generic npm-library corpus scan.
+    ssrf_raw = os.path.join(work, "ssrf_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", SSRF_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={ssrf_raw}",
+         "--param", f"srcLabel={pkg_name}"],
+        os.path.join(work, "ssrf_producer.log"))
+    record["stages"]["ssrf_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"ssrf producer rc={rc}"
+        return record
+
+    # Reducer: 3 positional args, both ssrf_raw and pkg_dir passed absolute (same real landmine
+    # as every other reducer in this pipeline -- a relative path here silently produces
+    # ADJUDICATOR_RUN_FAILED on every sink instead of a real error).
+    ssrf_out = os.path.join(work, "ssrf_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, SSRF_VERDICT, ssrf_raw, pkg_dir, ssrf_out],
+                         check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.PIPE)
+        with open(ssrf_out) as f:
+            ssrf_doc = json.load(f)
+        record["ssrf_classification"] = ssrf_doc.get("classification", {})
+        record["ssrf_findings"] = ssrf_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["ssrf_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"ssrf_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["ssrf_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"ssrf scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["ssrf_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record
