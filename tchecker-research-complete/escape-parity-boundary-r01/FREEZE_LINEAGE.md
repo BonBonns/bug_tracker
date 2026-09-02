@@ -14,7 +14,8 @@ match byte for byte.
 | `PARSER_MODEL_FREEZE.txt` | R02 dialect-separated regex model | intact |
 | `CROSS_LANGUAGE_FREEZE.txt` | R03 JavaScript + C/C++ | 2 entries superseded by R05 |
 | `REACHABILITY_FREEZE.txt` | R04 stored-source → transform → consumer | intact |
-| `DELIMITER_IDENTITY_FREEZE.txt` | R05 delimiter identity | current |
+| `DELIMITER_IDENTITY_FREEZE.txt` | R05 delimiter identity | 2 entries superseded by R06 |
+| `SEARCH_POSITION_FREEZE.txt` | R06 search-established positions | current |
 
 ## What R05 supersedes, and why
 
@@ -36,11 +37,20 @@ the pre-R05 code over the R01 and C/C++ fixture corpora — 28 sites — and gat
 control D11 fails if any one of them moves. The R01, R02, R03 and R04 gates all
 still pass against their own controls.
 
+## What R06 supersedes, and why
+
+R06 changed both producers again, to let a resolved search position stand in for
+a quote comparison at offset zero. `escape_parity_sites.py` is unchanged by R06.
+
+The same discipline applies: `fixtures_delim/PRE_R06_VERDICTS.json` pins all 38
+per-site verdicts the R05 code produced across four corpora, read from the R05
+commit's own fact tables, and control S5 fails if one moves.
+
 ## Results produced under each revision
 
-Corpus results are labelled by the revision that produced them. Results under
-`study/bounty_corpus/results/` were produced before R05; results under
-`study/bounty_corpus/results_r05/` were produced after. They are kept side by
+Corpus results are labelled by the revision that produced them:
+`study/bounty_corpus/results/` predates R05, `results_r05/` is R05, and
+`results_r06/` is R06. They are kept side by
 side because the difference between them is itself the evidence that R05 does
 what it claims — nothing is overwritten to make the current revision look like
 it was always right.

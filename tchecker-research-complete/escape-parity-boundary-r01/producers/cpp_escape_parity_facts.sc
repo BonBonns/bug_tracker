@@ -266,6 +266,41 @@ import io.shiftleft.codepropertygraph.generated.nodes
     } charVarOrigin((mId, nm)) = (b, idxName)
   }
 
+  // ------------------------------------------- search-established positions
+  // A scanner often establishes "position p holds a quote" with a SEARCH rather
+  // than a comparison: `p = s.find(quote, cursor)` or `q = strchr(s, quote)`.
+  // The pairing below looked only for comparisons, so the quote half of a
+  // one-position rule written this way was never found.
+  //
+  // Only BACKWARD offsets pair (`s[p - 1]`). A forward look (`s[p + 1]`) is the
+  // doubled-delimiter idiom, which consumes the pair and is parity-correct, so
+  // it must never feed the candidate path. offsetParts recognises subtraction
+  // only, which is what keeps that true.
+  val MEMBER_SEARCH = Set("find", "find_first_of", "rfind")
+  val FREE_SEARCH = Set("strchr", "strrchr", "memchr")
+  case class SearchPos(callId: Long, base: String, posVar: String, methodId: Long,
+                       resolution: String, line: Int, file: String, method: String)
+  val searchPositions = cpg.call.nameExact("<operator>.assignment").l.flatMap { a =>
+    val posVar = argAt(a, 1).collect { case i: nodes.Identifier => i.name }
+    val call = argAt(a, 2).collect { case c: nodes.Call => c }
+    val found = for {
+      pv <- posVar
+      c <- call
+      (baseNode, needle) <-
+        if (MEMBER_SEARCH.contains(c.name))
+          for { r <- c.receiver.headOption; n <- argAt(c, 1) } yield (r, n)
+        else if (FREE_SEARCH.contains(c.name))
+          for { b <- argAt(c, 1); n <- argAt(c, 2) } yield (b, n)
+        else None
+      (role, res) <- delimRole(needle)
+      if role == ROLE_QUOTE
+    } yield SearchPos(c.id,
+                      Option(baseNode.code).getOrElse(""),
+                      pv, methOf(a).map(_.id).getOrElse(-1L), res, ln(a),
+                      fileOf(a), methOf(a).map(_.fullName).getOrElse("?"))
+    found
+  }
+
   // ------------------------------------------------------- quote scanner sites
   val pqs = w("parser_quote_sites.tsv")
   try {
@@ -308,6 +343,12 @@ import io.shiftleft.codepropertygraph.generated.nodes
         }
       }
     }
+    // A parser whose quote position comes from a search still has a boundary
+    // rule, so it gets a site of its own rather than being an absent record.
+    searchPositions.foreach { sp =>
+      pqs.println(List(sp.file, sp.method, sp.methodId, sp.line, sp.callId, sp.callId,
+        "SEARCH_POSITION", sp.resolution).mkString("\t"))
+    }
   } finally pqs.close()
 
   // ---------------------------------------------------- one-position index checks
@@ -330,19 +371,30 @@ import io.shiftleft.codepropertygraph.generated.nodes
     val quoteCmps = cpg.call.l.flatMap(c =>
       indexedCharCmp(c, isQuoteDelim).orElse(extractedQuoteCmp(c)).map(r => (c, r)))
     val escCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isEscapeDelim).map(r => (c, r)))
+    // A resolved search position stands in for a quote comparison at offset 0.
+    // An unresolved delimiter does not: the method abstains on identity and must
+    // not reach a verdict here.
+    val searchQuotePos = searchPositions.filter(_.resolution != UNRESOLVED)
     escCmps.foreach { case (ec, (eBase, eIdx, eOff, eIdxExprId)) =>
       if (eOff != 0) {
         val em = methOf(ec)
-        quoteCmps.filter { case (qc, (qBase, qIdx, qOff, _)) =>
-          qBase == eBase && qIdx == eIdx && qOff == 0 && methOf(qc).map(_.id) == em.map(_.id)
-        }.foreach { case (qc, _) =>
+        val cmpMatches = quoteCmps.collect {
+          case (qc, (qBase, qIdx, qOff, _))
+            if qBase == eBase && qIdx == eIdx && qOff == 0 &&
+               methOf(qc).map(_.id) == em.map(_.id) => qc.id
+        }
+        val searchMatches = searchQuotePos.collect {
+          case sp if sp.base == eBase && sp.posVar == eIdx &&
+                     Some(sp.methodId) == em.map(_.id) => sp.callId
+        }
+        (cmpMatches ++ searchMatches).distinct.foreach { qcId =>
           val check = ec.astParent match {
             case p: nodes.Call if p.name == "<operator>.logicalAnd" ||
                                   p.name == "<operator>.logicalOr" => p.id
             case _ => ec.id
           }
           pic.println(List(fileOf(ec), em.map(_.fullName).getOrElse("?"),
-            em.map(_.id).getOrElse(-1L), ln(ec), check, qc.id, ec.id, eIdxExprId, eOff,
+            em.map(_.id).getOrElse(-1L), ln(ec), check, qcId, ec.id, eIdxExprId, eOff,
             eBase, eIdx).mkString("\t"))
         }
       }
