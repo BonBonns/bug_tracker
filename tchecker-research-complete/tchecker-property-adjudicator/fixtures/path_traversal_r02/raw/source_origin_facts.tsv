@@ -1,0 +1,58 @@
+30064771097	ctrl02_user_controlled_root.js	6	req.params.name	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771098	ctrl02_user_controlled_root.js	6	req.params	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771101	ctrl02_user_controlled_root.js	6	req.body.root	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771102	ctrl02_user_controlled_root.js	6	req.body	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771108	ctrl03_fixed_root_sendfile.js	4	req.params.name	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771109	ctrl03_fixed_root_sendfile.js	4	req.params	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771115	ctrl04_fixed_root_download.js	5	req.params.name	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771116	ctrl04_fixed_root_download.js	5	req.params	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771179	ctrl10_unresolved_options.js	4	req.params.name	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771180	ctrl10_unresolved_options.js	4	req.params	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+68719476738	closure_capture_fs_sink.js	20	userPath	PACKAGE_API_INPUT	exported_param makeReader.userPath	false	1
+68719476748	ctrl01_sibling_prefix.js	9	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476766	ctrl02_user_controlled_root.js	6	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476768	ctrl02_user_controlled_root.js	6	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476776	ctrl03_fixed_root_sendfile.js	4	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476782	ctrl04_fixed_root_download.js	5	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476788	ctrl05_aliased_fs_import.js	8	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476802	ctrl06_unrelated_object_named_fs.js	6	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476813	ctrl07_family_split.js	6	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476816	ctrl07_family_split.js	9	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476819	ctrl07_family_split.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476829	ctrl08_windows_separator.js	9	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476830	ctrl08_windows_separator.js	9	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476833	ctrl08_windows_separator.js	10	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476842	ctrl09_repeated_traversal.js	8	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476843	ctrl09_repeated_traversal.js	8	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476856	ctrl10_unresolved_options.js	4	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476869	ctrl11_wrapper_proven.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476872	ctrl11_wrapper_proven.js	13	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476886	ctrl12_wrapper_unresolved.js	6	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476889	ctrl12_wrapper_unresolved.js	7	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476900	ctrl13_boundary_aware_safe.js	7	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476920	ctrl14_open_flags_write.js	9	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476923	ctrl14_open_flags_write.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476926	ctrl14_open_flags_write.js	15	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476927	ctrl14_open_flags_write.js	15	flagsVar	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter flagsVar	false	1
+68719476938	ctrl15_canonicalize_after_check.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476948	ctrl15_canonicalize_after_check.js	16	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476961	ctrl16_open_flags_rplus.js	7	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476971	ctrl17_open_flags_wplus.js	7	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476981	ctrl18_open_flags_numeric_resolved.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476986	ctrl18_open_flags_numeric_resolved.js	15	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476998	ctrl19_open_flags_numeric_unresolved.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477000	ctrl19_open_flags_numeric_unresolved.js	12	extraFlags	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter extraFlags	false	1
+68719477012	ctrl20_wrong_branch_canonicalization.js	15	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477014	ctrl20_wrong_branch_canonicalization.js	17	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477034	ctrl21_dominating_canonicalization_intervening.js	12	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477055	import_destructured_fs.js	7	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477068	import_esm.mjs	10	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477071	import_esm.mjs	13	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477074	import_esm.mjs	16	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477077	import_esm.mjs	19	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719477099	multi_origin_fs_sink.js	18	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	true	2
+68719477099	multi_origin_fs_sink.js	18	req	PACKAGE_API_INPUT	exported_param handleRequest.req	true	2
+68719477133	package_api_basic.js	6	userPath	PACKAGE_API_INPUT	exported_param module.exports.userPath	false	1
+68719477142	package_api_named_exports.js	5	userPath	PACKAGE_API_INPUT	exported_param writePackageFile.userPath	false	1
+68719477167	shadow_same_name_params_fs.js	15	userPath	PACKAGE_API_INPUT	exported_param readAlpha.userPath	false	1
+68719477170	shadow_same_name_params_fs.js	19	userPath	PACKAGE_API_INPUT	exported_param readBeta.userPath	false	1

@@ -1,0 +1,986 @@
+=== jssrc2cpg build ===
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/root/.ccr/java-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=39355 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+=== export_npm_source_identity_r02.sc ===
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/root/.ccr/java-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=39355 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/root/.ccr/java-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=39355 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+executing producers/export_npm_source_identity_r02.sc with params=Map(cpgFile -> /tmp/pt_r02_regen/pt_r02_v2.cpg.bin, rawDir -> /tmp/pt_r02_regen/raw2, srcLabel -> path_traversal_r02)
+Creating project `pt_r02_v2.cpg.bin` for CPG at `/tmp/pt_r02_regen/pt_r02_v2.cpg.bin`
+Creating working copy of CPG to be safe
+Loading base CPG from: /home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp
+[INFO ] initialising from existing storage (/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp)
+Adding default overlays to base CPG
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.FileCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.base.FileCreationPass completed in 36 ms (61% on mutations). 243 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.NamespaceCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.NamespaceCreator completed in 27 ms (65% on mutations). 31 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeDeclStubCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeDeclStubCreator completed in 19 ms (27% on mutations). 5 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodStubCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodStubCreator completed in 78 ms (12% on mutations). 70 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ParameterIndexCompatPass
+[INFO ] Pass io.joern.x2cpg.passes.base.ParameterIndexCompatPass completed in 4 ms (42% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodDecoratorPass
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodDecoratorPass completed in 13 ms (41% on mutations). 555 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.AstLinkerPass
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182506
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182507
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182508
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182509
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182510
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182511
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182512
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182513
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724651
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724652
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724653
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724654
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724655
+[INFO ] Pass io.joern.x2cpg.passes.base.AstLinkerPass completed in 12 ms (17% on mutations). 76 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ContainsEdgePass
+[INFO ] Pass io.joern.x2cpg.passes.base.ContainsEdgePass completed in 19 ms (31% on mutations). 1494 + 0 changes committed from 256 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeRefPass
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeRefPass completed in 10 ms (32% on mutations). 112 + 0 changes committed from 2 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeEvalPass
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeEvalPass completed in 22 ms (20% on mutations). 1797 + 0 changes committed from 18 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 6 ms (33% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.CfgCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.CfgCreationPass completed in 64 ms (8% on mutations). 1274 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass completed in 67 ms (12% on mutations). 2524 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass completed in 12 ms (30% on mutations). 98 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 2 ms (88% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.TypeHierarchyPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.TypeHierarchyPass completed in 4 ms (27% on mutations). 106 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.AliasLinkerPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.AliasLinkerPass completed in 2 ms (38% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771073, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771078, dstNodeType=MEMBER, dstFullName=ANY.makeReader
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771079, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771084, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771086, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771088, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771092, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771094, dstNodeType=MEMBER, dstFullName=ANY.siblingPrefixBug
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771096, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771097, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771098, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771100, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771101, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771102, dstNodeType=MEMBER, dstFullName=ANY.body
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771105, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771107, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771108, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771109, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771111, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771114, dstNodeType=MEMBER, dstFullName=ANY.download
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771115, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771116, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771118, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771122, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771125, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771127, dstNodeType=MEMBER, dstFullName=ANY.aliasedRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771130, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771134, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771136, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771138, dstNodeType=MEMBER, dstFullName=ANY.notARealSink
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771141, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771143, dstNodeType=MEMBER, dstFullName=ANY.writeFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771145, dstNodeType=MEMBER, dstFullName=ANY.unlink
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771148, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771150, dstNodeType=MEMBER, dstFullName=ANY.familyRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771152, dstNodeType=MEMBER, dstFullName=ANY.familyWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771154, dstNodeType=MEMBER, dstFullName=ANY.familyDelete
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771158, dstNodeType=MEMBER, dstFullName=ANY.includes
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771160, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771163, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771165, dstNodeType=MEMBER, dstFullName=ANY.weakSeparatorCheck
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771169, dstNodeType=MEMBER, dstFullName=ANY.replace
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771171, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771174, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771176, dstNodeType=MEMBER, dstFullName=ANY.nonGlobalStrip
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771178, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771179, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771180, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771184, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771188, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771190, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771195, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771200, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771202, dstNodeType=MEMBER, dstFullName=ANY.wrapperProven
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771206, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771209, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771211, dstNodeType=MEMBER, dstFullName=ANY.wrapperUnresolved
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771216, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771220, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771222, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771224, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771228, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771230, dstNodeType=MEMBER, dstFullName=ANY.boundaryAware
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771233, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771235, dstNodeType=MEMBER, dstFullName=ANY.openSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771237, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771240, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771242, dstNodeType=MEMBER, dstFullName=ANY.openWriteFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771244, dstNodeType=MEMBER, dstFullName=ANY.openReadFlagExplicit
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771246, dstNodeType=MEMBER, dstFullName=ANY.openUnresolvedFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771251, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771253, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771255, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771258, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771262, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771264, dstNodeType=MEMBER, dstFullName=ANY.canonicalizeAfterCheckBug
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771267, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771270, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771272, dstNodeType=MEMBER, dstFullName=ANY.openReadWriteRPlus
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771275, dstNodeType=MEMBER, dstFullName=ANY.openSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771278, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771280, dstNodeType=MEMBER, dstFullName=ANY.openReadWriteWPlus
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771283, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771285, dstNodeType=MEMBER, dstFullName=ANY.O_WRONLY
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771286, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771287, dstNodeType=MEMBER, dstFullName=ANY.O_CREAT
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771288, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771290, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771291, dstNodeType=MEMBER, dstFullName=ANY.O_RDWR
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771292, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771295, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771297, dstNodeType=MEMBER, dstFullName=ANY.openNumericConstantsWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771299, dstNodeType=MEMBER, dstFullName=ANY.openNumericConstantsReadWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771302, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771304, dstNodeType=MEMBER, dstFullName=ANY.O_WRONLY
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771305, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771308, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771310, dstNodeType=MEMBER, dstFullName=ANY.openNumericOrUnresolvedFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771315, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771318, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771320, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771322, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771326, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771328, dstNodeType=MEMBER, dstFullName=ANY.wrongBranchCanonicalization
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771333, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771338, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771340, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771342, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771346, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771348, dstNodeType=MEMBER, dstFullName=ANY.dominatingWithIntervening
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771353, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771355, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771357, dstNodeType=MEMBER, dstFullName=ANY.destructuredRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771363, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771365, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771371, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771373, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771375, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771377, dstNodeType=MEMBER, dstFullName=ANY.esmDefault
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771379, dstNodeType=MEMBER, dstFullName=ANY.esmNamespace
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771381, dstNodeType=MEMBER, dstFullName=ANY.esmAliasedNamed
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771383, dstNodeType=MEMBER, dstFullName=ANY.esmNodeSpecifier
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771385, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771390, dstNodeType=MEMBER, dstFullName=ANY.handleRequest
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771391, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771393, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771397, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771405, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771408, dstNodeType=MEMBER, dstFullName=ANY.reexported
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771409, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771412, dstNodeType=MEMBER, dstFullName=ANY.SomeClass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771413, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771415, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771420, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771422, dstNodeType=MEMBER, dstFullName=ANY.writeFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771427, dstNodeType=MEMBER, dstFullName=ANY.writePackageFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771428, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771432, dstNodeType=MEMBER, dstFullName=ANY.writeFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771440, dstNodeType=MEMBER, dstFullName=ANY.readGamma
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771441, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771443, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771445, dstNodeType=MEMBER, dstFullName=ANY.writeFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771451, dstNodeType=MEMBER, dstFullName=ANY.readAlpha
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771452, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771454, dstNodeType=MEMBER, dstFullName=ANY.readBeta
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771455, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass completed in 67 ms (1% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (77% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.MethodRefLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.MethodRefLinker completed in 2 ms (49% on mutations). 76 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.StaticCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.StaticCallLinker completed in 3 ms (30% on mutations). 269 + 0 changes committed from 4 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.DynamicCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.DynamicCallLinker completed in 9 ms (7% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (66% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening:<lambda>0 in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:isContained in ctrl11_wrapper_proven.js
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program:aliasedRead in ctrl05_aliased_fs_import.js
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openUnresolvedFlag:<lambda>1 in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening:<lambda>0: 1
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openUnresolvedFlag:<lambda>1: 3
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program:aliasedRead: 5
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:isContained: 18
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening: 23
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:myCustomThing in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:myCustomThing: 3
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program in ctrl06_unrelated_object_named_fs.js
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openUnresolvedFlag in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openUnresolvedFlag: 7
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program in ctrl15_canonicalize_after_check.js
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program: 15
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:<lambda>0 in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:<lambda>0: 7
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:notARealSink:<lambda>1 in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:notARealSink:<lambda>1: 1
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:notARealSink in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:notARealSink: 5
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program: 14
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program in import_destructured_fs.js
+[INFO ] Number of definitions for import_destructured_fs.js::program: 13
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program in ctrl11_wrapper_proven.js
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyRead:<lambda>0 in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyRead:<lambda>0: 1
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program: 17
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyRead in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyRead: 5
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyWrite:<lambda>1 in ctrl07_family_split.js
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug:<lambda>0 in ctrl15_canonicalize_after_check.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyWrite:<lambda>1: 1
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program:destructuredRead:<lambda>0 in import_destructured_fs.js
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyWrite in ctrl07_family_split.js
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug in ctrl15_canonicalize_after_check.js
+[INFO ] Number of definitions for import_destructured_fs.js::program:destructuredRead:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program:destructuredRead in import_destructured_fs.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyWrite: 5
+[INFO ] Number of definitions for import_destructured_fs.js::program:destructuredRead: 5
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:wrapperProven:<lambda>0 in ctrl11_wrapper_proven.js
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug: 19
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:wrapperProven:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:wrapperProven in ctrl11_wrapper_proven.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyDelete:<lambda>2 in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyDelete:<lambda>2: 1
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyDelete in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyDelete: 5
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:wrapperProven: 8
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program in ctrl12_wrapper_unresolved.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program in ctrl16_open_flags_rplus.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program:wrapperUnresolved:<lambda>0 in ctrl12_wrapper_unresolved.js
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program:openReadWriteRPlus:<lambda>0 in ctrl16_open_flags_rplus.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program:openReadWriteRPlus:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program:openReadWriteRPlus in ctrl16_open_flags_rplus.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program:openReadWriteRPlus: 5
+[INFO ] Calculating reaching definitions for: ctrl02_user_controlled_root.js::program in ctrl02_user_controlled_root.js
+[INFO ] Number of definitions for ctrl02_user_controlled_root.js::program: 5
+[INFO ] Calculating reaching definitions for: ctrl03_fixed_root_sendfile.js::program:fixedRootSendFile in ctrl03_fixed_root_sendfile.js
+[INFO ] Number of definitions for ctrl03_fixed_root_sendfile.js::program:fixedRootSendFile: 8
+[INFO ] Number of definitions for import_esm.mjs::program: 31
+[INFO ] Calculating reaching definitions for: ctrl03_fixed_root_sendfile.js::program in ctrl03_fixed_root_sendfile.js
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program in ctrl13_boundary_aware_safe.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program:wrapperUnresolved:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program:wrapperUnresolved in ctrl12_wrapper_unresolved.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program:wrapperUnresolved: 8
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program:weakSeparatorCheck:<lambda>0 in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program:weakSeparatorCheck:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program:weakSeparatorCheck in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program:weakSeparatorCheck: 9
+[INFO ] Number of definitions for ctrl03_fixed_root_sendfile.js::program: 3
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program: 15
+[INFO ] Calculating reaching definitions for: ctrl04_fixed_root_download.js::program:fixedRootDownload in ctrl04_fixed_root_download.js
+[INFO ] Number of definitions for ctrl04_fixed_root_download.js::program:fixedRootDownload: 8
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program in ctrl09_repeated_traversal.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program:nonGlobalStrip:<lambda>0 in ctrl09_repeated_traversal.js
+[INFO ] Calculating reaching definitions for: ctrl04_fixed_root_download.js::program in ctrl04_fixed_root_download.js
+[INFO ] Number of definitions for ctrl04_fixed_root_download.js::program: 3
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmDefault:<lambda>0 in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program:boundaryAware:<lambda>0 in ctrl13_boundary_aware_safe.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program:nonGlobalStrip:<lambda>0: 1
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program:boundaryAware:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program:nonGlobalStrip in ctrl09_repeated_traversal.js
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program:boundaryAware in ctrl13_boundary_aware_safe.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program:nonGlobalStrip: 10
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program:boundaryAware: 21
+[INFO ] Calculating reaching definitions for: ctrl10_unresolved_options.js::program:unresolvedOptions in ctrl10_unresolved_options.js
+[INFO ] Number of definitions for import_esm.mjs::program:esmDefault:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmDefault in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmDefault: 5
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program in ctrl14_open_flags_write.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNamespace:<lambda>1 in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmNamespace:<lambda>1: 1
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program: 14
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNamespace in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program in ctrl05_aliased_fs_import.js
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program:aliasedRead:<lambda>0 in ctrl05_aliased_fs_import.js
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program:aliasedRead:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program:makeReader:readIt in closure_capture_fs_sink.js
+[INFO ] Number of definitions for ctrl10_unresolved_options.js::program:unresolvedOptions: 8
+[INFO ] Calculating reaching definitions for: ctrl10_unresolved_options.js::program in ctrl10_unresolved_options.js
+[INFO ] Number of definitions for ctrl10_unresolved_options.js::program: 3
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:helperTrustedPath in shadow_nested_scope_fs.js
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:helperTrustedPath: 1
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program:makeReader:readIt: 4
+[INFO ] Number of definitions for import_esm.mjs::program:esmNamespace: 5
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openWriteFlag:<lambda>0 in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openWriteFlag:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmAliasedNamed:<lambda>2 in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openWriteFlag in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openWriteFlag: 5
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program in shadow_nested_scope_fs.js
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program:makeReader in closure_capture_fs_sink.js
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program:makeReader: 2
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program in closure_capture_fs_sink.js
+[INFO ] Number of definitions for import_esm.mjs::program:esmAliasedNamed:<lambda>2: 1
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmAliasedNamed in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmAliasedNamed: 5
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openReadFlagExplicit in ctrl14_open_flags_write.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNodeSpecifier:<lambda>3 in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmNodeSpecifier:<lambda>3: 1
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program: 11
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openReadFlagExplicit: 5
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program in ctrl01_sibling_prefix.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNodeSpecifier in import_esm.mjs
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:SomeClass:<init> in package_api_abstentions.js
+[INFO ] Number of definitions for import_esm.mjs::program:esmNodeSpecifier: 5
+[INFO ] Number of definitions for package_api_abstentions.js::program:SomeClass:<init>: 5
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program: 13
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program:readPackageFile:<lambda>0 in package_api_basic.js
+[INFO ] Number of definitions for package_api_basic.js::program:readPackageFile:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program:readPackageFile in package_api_basic.js
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program: 10
+[INFO ] Number of definitions for package_api_basic.js::program:readPackageFile: 5
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program: 15
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program in package_api_basic.js
+[INFO ] Number of definitions for package_api_basic.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag:<lambda>0 in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag: 10
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program:writePackageFile:<lambda>0 in package_api_named_exports.js
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:readGamma:helper in shadow_nested_scope_fs.js
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program:siblingPrefixBug:<lambda>0 in ctrl01_sibling_prefix.js
+[INFO ] Number of definitions for package_api_named_exports.js::program:writePackageFile:<lambda>0: 1
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program:siblingPrefixBug:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program:writePackageFile in package_api_named_exports.js
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:readGamma:helper: 9
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program:siblingPrefixBug in ctrl01_sibling_prefix.js
+[INFO ] Number of definitions for package_api_named_exports.js::program:writePackageFile: 5
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program:siblingPrefixBug: 13
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program in package_api_named_exports.js
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:readGamma in shadow_nested_scope_fs.js
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:readGamma: 6
+[INFO ] Number of definitions for package_api_named_exports.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl02_user_controlled_root.js::program:userControlledRoot in ctrl02_user_controlled_root.js
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program:readAlpha in shadow_same_name_params_fs.js
+[INFO ] Number of definitions for ctrl02_user_controlled_root.js::program:userControlledRoot: 9
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program:readAlpha: 5
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program in shadow_same_name_params_fs.js
+[INFO ] Calculating reaching definitions for: <operator>.fieldAccess in <empty>
+[INFO ] Number of definitions for <operator>.fieldAccess: 2
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program: 16
+[INFO ] Calculating reaching definitions for: <operator>.assignment in <empty>
+[INFO ] Number of definitions for <operator>.assignment: 2
+[INFO ] Calculating reaching definitions for: <operator>.logicalNot in <empty>
+[INFO ] Number of definitions for <operator>.logicalNot: 1
+[INFO ] Calculating reaching definitions for: <operator>.logicalOr in <empty>
+[INFO ] Number of definitions for <operator>.logicalOr: 2
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program:readBeta in shadow_same_name_params_fs.js
+[INFO ] Calculating reaching definitions for: <operator>.equals in <empty>
+[INFO ] Calculating reaching definitions for: multi_origin_fs_sink.js::program:handleRequest in multi_origin_fs_sink.js
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program: 15
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program:readBeta: 5
+[INFO ] Number of definitions for multi_origin_fs_sink.js::program:handleRequest: 5
+[INFO ] Calculating reaching definitions for: ctrl17_open_flags_wplus.js::program in ctrl17_open_flags_wplus.js
+[INFO ] Calculating reaching definitions for: multi_origin_fs_sink.js::program in multi_origin_fs_sink.js
+[INFO ] Number of definitions for ctrl17_open_flags_wplus.js::program: 10
+[INFO ] Number of definitions for multi_origin_fs_sink.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization:<lambda>0 in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Calculating reaching definitions for: ctrl17_open_flags_wplus.js::program:openReadWriteWPlus in ctrl17_open_flags_wplus.js
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:dynamicExportTarget:<lambda>0 in package_api_abstentions.js
+[INFO ] Number of definitions for <operator>.equals: 2
+[INFO ] Number of definitions for ctrl17_open_flags_wplus.js::program:openReadWriteWPlus: 5
+[INFO ] Number of definitions for package_api_abstentions.js::program:dynamicExportTarget:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: <operator>.addition in <empty>
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:dynamicExportTarget in package_api_abstentions.js
+[INFO ] Number of definitions for <operator>.addition: 2
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Calculating reaching definitions for: <operator>.or in <empty>
+[INFO ] Number of definitions for package_api_abstentions.js::program:dynamicExportTarget: 5
+[INFO ] Number of definitions for <operator>.or: 2
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program: 12
+[INFO ] Calculating reaching definitions for: <operator>.indexAccess in <empty>
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program in package_api_abstentions.js
+[INFO ] Number of definitions for <operator>.indexAccess: 2
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite:<lambda>0 in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization: 19
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite: 9
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program: 15
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite:<lambda>1 in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite:<lambda>1: 3
+[INFO ] Number of definitions for package_api_abstentions.js::program: 31
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite: 6
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:computeKey in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:computeKey: 1
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:SomeClass:<init>:<lambda>1 in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:SomeClass:<init>:<lambda>1: 1
+[INFO ] Pass io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass completed in 224 ms (3% on mutations). 2941 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (72% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass completed in 2 ms (26% on mutations). 0 + 0 changes committed from 0 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass completed in 16 ms (9% on mutations). 84 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass completed in 40 ms (11% on mutations). 264 + 0 changes committed from 66 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 119 ms (4% on mutations). 1004 + 0 changes committed from 30 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 58 ms (5% on mutations). 559 + 0 changes committed from 30 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker completed in 28 ms (13% on mutations). 755 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker completed in 6 ms (7% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.NaiveCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.NaiveCallLinker completed in 5 ms (9% on mutations). 0 + 0 changes committed from 1 parts.
+[path_traversal_r02] export_surface rows: 10 (resolved=7, abstained=3)
+[path_traversal_r02] closure_identity rows: 383 (DIRECT=279, CAPTURED=94, AMBIGUOUS=10, UNRESOLVED=0)
+[path_traversal_r02] source_origin_facts rows: 58 (sites=57, multi_origin_sites=1)
+[path_traversal_r02] NPM_SOURCE_IDENTITY_COMPLETE export_rows=10 identity_rows=383 origin_rows=58
+[INFO ] writing to storage at `/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp`
+[INFO ] closed graph at /home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp
+closing/saving project `pt_r02_v2.cpg.bin`
+=== export_path_traversal_integ_r02.sc ===
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/root/.ccr/java-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=39355 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/root/.ccr/java-truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStoreType=PKCS12 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=39355 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+executing producers/export_path_traversal_integ_r02.sc with params=Map(cpgFile -> /tmp/pt_r02_regen/pt_r02_v2.cpg.bin, rawDir -> /tmp/pt_r02_regen/raw2, srcLabel -> path_traversal_r02)
+Creating project `pt_r02_v2.cpg.bin` for CPG at `/tmp/pt_r02_regen/pt_r02_v2.cpg.bin`
+Project with name pt_r02_v2.cpg.bin already exists - overwriting
+Creating working copy of CPG to be safe
+Loading base CPG from: /home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp
+[INFO ] initialising from existing storage (/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp)
+Adding default overlays to base CPG
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.FileCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.base.FileCreationPass completed in 62 ms (78% on mutations). 243 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.NamespaceCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.NamespaceCreator completed in 21 ms (60% on mutations). 31 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeDeclStubCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeDeclStubCreator completed in 13 ms (29% on mutations). 5 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodStubCreator
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodStubCreator completed in 41 ms (11% on mutations). 70 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ParameterIndexCompatPass
+[INFO ] Pass io.joern.x2cpg.passes.base.ParameterIndexCompatPass completed in 3 ms (43% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.MethodDecoratorPass
+[INFO ] Pass io.joern.x2cpg.passes.base.MethodDecoratorPass completed in 13 ms (43% on mutations). 555 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.AstLinkerPass
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182506
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182507
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182508
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182509
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182510
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182511
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182512
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=METHOD, dstNodeId=107374182513
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724651
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724652
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724653
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724654
+[INFO ] Could not create edge. Source lookup failed. edgeType=AST, srcNodeType=NAMESPACE_BLOCK, srcFullName=<global>, dstNodeType=TYPE_DECL, dstNodeId=167503724655
+[INFO ] Pass io.joern.x2cpg.passes.base.AstLinkerPass completed in 10 ms (12% on mutations). 76 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.ContainsEdgePass
+[INFO ] Pass io.joern.x2cpg.passes.base.ContainsEdgePass completed in 18 ms (24% on mutations). 1494 + 0 changes committed from 256 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeRefPass
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeRefPass completed in 7 ms (30% on mutations). 112 + 0 changes committed from 2 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.base.TypeEvalPass
+[INFO ] Pass io.joern.x2cpg.passes.base.TypeEvalPass completed in 15 ms (21% on mutations). 1797 + 0 changes committed from 18 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 5 ms (33% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.CfgCreationPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.CfgCreationPass completed in 63 ms (6% on mutations). 1274 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.cfgdominator.CfgDominatorPass completed in 46 ms (12% on mutations). 2524 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass
+[INFO ] Pass io.joern.x2cpg.passes.controlflow.codepencegraph.CdgPass completed in 12 ms (32% on mutations). 98 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (73% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.TypeHierarchyPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.TypeHierarchyPass completed in 5 ms (23% on mutations). 106 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.AliasLinkerPass
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.AliasLinkerPass completed in 2 ms (29% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771073, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771078, dstNodeType=MEMBER, dstFullName=ANY.makeReader
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771079, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771084, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771086, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771088, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771092, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771094, dstNodeType=MEMBER, dstFullName=ANY.siblingPrefixBug
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771096, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771097, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771098, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771100, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771101, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771102, dstNodeType=MEMBER, dstFullName=ANY.body
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771105, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771107, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771108, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771109, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771111, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771114, dstNodeType=MEMBER, dstFullName=ANY.download
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771115, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771116, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771118, dstNodeType=MEMBER, dstFullName=ANY.root
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771122, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771125, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771127, dstNodeType=MEMBER, dstFullName=ANY.aliasedRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771130, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771134, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771136, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771138, dstNodeType=MEMBER, dstFullName=ANY.notARealSink
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771141, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771143, dstNodeType=MEMBER, dstFullName=ANY.writeFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771145, dstNodeType=MEMBER, dstFullName=ANY.unlink
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771148, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771150, dstNodeType=MEMBER, dstFullName=ANY.familyRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771152, dstNodeType=MEMBER, dstFullName=ANY.familyWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771154, dstNodeType=MEMBER, dstFullName=ANY.familyDelete
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771158, dstNodeType=MEMBER, dstFullName=ANY.includes
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771160, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771163, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771165, dstNodeType=MEMBER, dstFullName=ANY.weakSeparatorCheck
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771169, dstNodeType=MEMBER, dstFullName=ANY.replace
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771171, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771174, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771176, dstNodeType=MEMBER, dstFullName=ANY.nonGlobalStrip
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771178, dstNodeType=MEMBER, dstFullName=ANY.sendFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771179, dstNodeType=MEMBER, dstFullName=ANY.name
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771180, dstNodeType=MEMBER, dstFullName=ANY.params
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771184, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771188, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771190, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771195, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771200, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771202, dstNodeType=MEMBER, dstFullName=ANY.wrapperProven
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771206, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771209, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771211, dstNodeType=MEMBER, dstFullName=ANY.wrapperUnresolved
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771216, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771220, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771222, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771224, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771228, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771230, dstNodeType=MEMBER, dstFullName=ANY.boundaryAware
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771233, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771235, dstNodeType=MEMBER, dstFullName=ANY.openSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771237, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771240, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771242, dstNodeType=MEMBER, dstFullName=ANY.openWriteFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771244, dstNodeType=MEMBER, dstFullName=ANY.openReadFlagExplicit
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771246, dstNodeType=MEMBER, dstFullName=ANY.openUnresolvedFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771251, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771253, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771255, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771258, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771262, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771264, dstNodeType=MEMBER, dstFullName=ANY.canonicalizeAfterCheckBug
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771267, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771270, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771272, dstNodeType=MEMBER, dstFullName=ANY.openReadWriteRPlus
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771275, dstNodeType=MEMBER, dstFullName=ANY.openSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771278, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771280, dstNodeType=MEMBER, dstFullName=ANY.openReadWriteWPlus
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771283, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771285, dstNodeType=MEMBER, dstFullName=ANY.O_WRONLY
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771286, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771287, dstNodeType=MEMBER, dstFullName=ANY.O_CREAT
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771288, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771290, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771291, dstNodeType=MEMBER, dstFullName=ANY.O_RDWR
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771292, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771295, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771297, dstNodeType=MEMBER, dstFullName=ANY.openNumericConstantsWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771299, dstNodeType=MEMBER, dstFullName=ANY.openNumericConstantsReadWrite
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771302, dstNodeType=MEMBER, dstFullName=ANY.open
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771304, dstNodeType=MEMBER, dstFullName=ANY.O_WRONLY
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771305, dstNodeType=MEMBER, dstFullName=ANY.constants
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771308, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771310, dstNodeType=MEMBER, dstFullName=ANY.openNumericOrUnresolvedFlag
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771315, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771318, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771320, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771322, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771326, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771328, dstNodeType=MEMBER, dstFullName=ANY.wrongBranchCanonicalization
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771333, dstNodeType=MEMBER, dstFullName=ANY.resolve
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771338, dstNodeType=MEMBER, dstFullName=ANY.startsWith
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771340, dstNodeType=MEMBER, dstFullName=ANY.sep
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771342, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771346, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771348, dstNodeType=MEMBER, dstFullName=ANY.dominatingWithIntervening
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771353, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771355, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771357, dstNodeType=MEMBER, dstFullName=ANY.destructuredRead
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771363, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771365, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771371, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771373, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771375, dstNodeType=MEMBER, dstFullName=ANY.methods
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771377, dstNodeType=MEMBER, dstFullName=ANY.esmDefault
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771379, dstNodeType=MEMBER, dstFullName=ANY.esmNamespace
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771381, dstNodeType=MEMBER, dstFullName=ANY.esmAliasedNamed
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771383, dstNodeType=MEMBER, dstFullName=ANY.esmNodeSpecifier
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771385, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771390, dstNodeType=MEMBER, dstFullName=ANY.handleRequest
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771391, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771393, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771397, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771405, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771408, dstNodeType=MEMBER, dstFullName=ANY.reexported
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771409, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771412, dstNodeType=MEMBER, dstFullName=ANY.SomeClass
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771413, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771415, dstNodeType=MEMBER, dstFullName=ANY.readFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771420, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771422, dstNodeType=MEMBER, dstFullName=ANY.writeFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771427, dstNodeType=MEMBER, dstFullName=ANY.writePackageFile
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771428, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771432, dstNodeType=MEMBER, dstFullName=ANY.writeFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771440, dstNodeType=MEMBER, dstFullName=ANY.readGamma
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771441, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771443, dstNodeType=MEMBER, dstFullName=ANY.readFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771445, dstNodeType=MEMBER, dstFullName=ANY.writeFileSync
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771451, dstNodeType=MEMBER, dstFullName=ANY.readAlpha
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771452, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771454, dstNodeType=MEMBER, dstFullName=ANY.readBeta
+[INFO ] Could not create edge. Destination lookup failed. edgeType=REF, srcNodeType=CALL, srcNodeId=30064771455, dstNodeType=MEMBER, dstFullName=ANY.exports
+[INFO ] Pass io.joern.x2cpg.passes.typerelations.FieldAccessLinkerPass completed in 56 ms (1% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (71% on mutations). 1 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.MethodRefLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.MethodRefLinker completed in 2 ms (44% on mutations). 76 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.StaticCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.StaticCallLinker completed in 4 ms (29% on mutations). 269 + 0 changes committed from 4 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.DynamicCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.DynamicCallLinker completed in 9 ms (6% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (64% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening:<lambda>0 in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:isContained in ctrl11_wrapper_proven.js
+[INFO ] Calculating reaching definitions for: ctrl02_user_controlled_root.js::program in ctrl02_user_controlled_root.js
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program:aliasedRead in ctrl05_aliased_fs_import.js
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening:<lambda>0: 1
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program:aliasedRead: 5
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:isContained: 18
+[INFO ] Number of definitions for ctrl02_user_controlled_root.js::program: 5
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program:dominatingWithIntervening: 23
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:myCustomThing in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:myCustomThing: 3
+[INFO ] Calculating reaching definitions for: ctrl03_fixed_root_sendfile.js::program:fixedRootSendFile in ctrl03_fixed_root_sendfile.js
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program in import_destructured_fs.js
+[INFO ] Number of definitions for ctrl03_fixed_root_sendfile.js::program:fixedRootSendFile: 8
+[INFO ] Number of definitions for import_destructured_fs.js::program: 13
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program in ctrl11_wrapper_proven.js
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program: 17
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl03_fixed_root_sendfile.js::program in ctrl03_fixed_root_sendfile.js
+[INFO ] Number of definitions for ctrl03_fixed_root_sendfile.js::program: 3
+[INFO ] Calculating reaching definitions for: ctrl04_fixed_root_download.js::program:fixedRootDownload in ctrl04_fixed_root_download.js
+[INFO ] Number of definitions for ctrl04_fixed_root_download.js::program:fixedRootDownload: 8
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:<lambda>0 in ctrl06_unrelated_object_named_fs.js
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:wrapperProven:<lambda>0 in ctrl11_wrapper_proven.js
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:wrapperProven:<lambda>0: 1
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:<lambda>0: 7
+[INFO ] Calculating reaching definitions for: ctrl11_wrapper_proven.js::program:wrapperProven in ctrl11_wrapper_proven.js
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:notARealSink:<lambda>1 in ctrl06_unrelated_object_named_fs.js
+[INFO ] Number of definitions for ctrl11_wrapper_proven.js::program:wrapperProven: 8
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:notARealSink:<lambda>1: 1
+[INFO ] Calculating reaching definitions for: ctrl06_unrelated_object_named_fs.js::program:notARealSink in ctrl06_unrelated_object_named_fs.js
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program in ctrl12_wrapper_unresolved.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program: 10
+[INFO ] Number of definitions for ctrl06_unrelated_object_named_fs.js::program:notARealSink: 5
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program:destructuredRead:<lambda>0 in import_destructured_fs.js
+[INFO ] Number of definitions for import_destructured_fs.js::program:destructuredRead:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: import_destructured_fs.js::program:destructuredRead in import_destructured_fs.js
+[INFO ] Number of definitions for import_destructured_fs.js::program:destructuredRead: 5
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program in ctrl07_family_split.js
+[INFO ] Calculating reaching definitions for: ctrl04_fixed_root_download.js::program in ctrl04_fixed_root_download.js
+[INFO ] Number of definitions for ctrl04_fixed_root_download.js::program: 3
+[INFO ] Number of definitions for ctrl07_family_split.js::program: 14
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program in ctrl05_aliased_fs_import.js
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program:wrapperUnresolved:<lambda>0 in ctrl12_wrapper_unresolved.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program:wrapperUnresolved:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl12_wrapper_unresolved.js::program:wrapperUnresolved in ctrl12_wrapper_unresolved.js
+[INFO ] Number of definitions for ctrl12_wrapper_unresolved.js::program:wrapperUnresolved: 8
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program:weakSeparatorCheck:<lambda>0 in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyRead:<lambda>0 in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyRead:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyRead in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program:weakSeparatorCheck:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program:weakSeparatorCheck in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program:weakSeparatorCheck: 9
+[INFO ] Calculating reaching definitions for: ctrl05_aliased_fs_import.js::program:aliasedRead:<lambda>0 in ctrl05_aliased_fs_import.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyRead: 5
+[INFO ] Number of definitions for ctrl05_aliased_fs_import.js::program:aliasedRead:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program:makeReader:readIt in closure_capture_fs_sink.js
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program:makeReader:readIt: 4
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyWrite:<lambda>1 in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyWrite:<lambda>1: 1
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyWrite in ctrl07_family_split.js
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program in ctrl09_repeated_traversal.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program: 10
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyWrite: 5
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyDelete:<lambda>2 in ctrl07_family_split.js
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program:makeReader in closure_capture_fs_sink.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyDelete:<lambda>2: 1
+[INFO ] Number of definitions for import_esm.mjs::program: 31
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program:makeReader: 2
+[INFO ] Calculating reaching definitions for: closure_capture_fs_sink.js::program in closure_capture_fs_sink.js
+[INFO ] Number of definitions for closure_capture_fs_sink.js::program: 11
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program:nonGlobalStrip:<lambda>0 in ctrl09_repeated_traversal.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program:nonGlobalStrip:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program in ctrl01_sibling_prefix.js
+[INFO ] Calculating reaching definitions for: ctrl09_repeated_traversal.js::program:nonGlobalStrip in ctrl09_repeated_traversal.js
+[INFO ] Number of definitions for ctrl09_repeated_traversal.js::program:nonGlobalStrip: 10
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program: 15
+[INFO ] Calculating reaching definitions for: ctrl07_family_split.js::program:familyDelete in ctrl07_family_split.js
+[INFO ] Number of definitions for ctrl07_family_split.js::program:familyDelete: 5
+[INFO ] Calculating reaching definitions for: ctrl08_windows_separator.js::program in ctrl08_windows_separator.js
+[INFO ] Number of definitions for ctrl08_windows_separator.js::program: 10
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program:siblingPrefixBug:<lambda>0 in ctrl01_sibling_prefix.js
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program:siblingPrefixBug:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl01_sibling_prefix.js::program:siblingPrefixBug in ctrl01_sibling_prefix.js
+[INFO ] Number of definitions for ctrl01_sibling_prefix.js::program:siblingPrefixBug: 13
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmDefault:<lambda>0 in import_esm.mjs
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openUnresolvedFlag:<lambda>1 in ctrl14_open_flags_write.js
+[INFO ] Calculating reaching definitions for: ctrl02_user_controlled_root.js::program:userControlledRoot in ctrl02_user_controlled_root.js
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openUnresolvedFlag:<lambda>1: 3
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openUnresolvedFlag in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl02_user_controlled_root.js::program:userControlledRoot: 9
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openUnresolvedFlag: 7
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program in ctrl15_canonicalize_after_check.js
+[INFO ] Calculating reaching definitions for: ctrl10_unresolved_options.js::program:unresolvedOptions in ctrl10_unresolved_options.js
+[INFO ] Number of definitions for import_esm.mjs::program:esmDefault:<lambda>0: 1
+[INFO ] Number of definitions for ctrl10_unresolved_options.js::program:unresolvedOptions: 8
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmDefault in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmDefault: 5
+[INFO ] Calculating reaching definitions for: ctrl10_unresolved_options.js::program in ctrl10_unresolved_options.js
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program in ctrl13_boundary_aware_safe.js
+[INFO ] Number of definitions for ctrl10_unresolved_options.js::program: 3
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program: 15
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNamespace:<lambda>1 in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmNamespace:<lambda>1: 1
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNamespace in import_esm.mjs
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:helperTrustedPath in shadow_nested_scope_fs.js
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:helperTrustedPath: 1
+[INFO ] Number of definitions for import_esm.mjs::program:esmNamespace: 5
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program in shadow_nested_scope_fs.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmAliasedNamed:<lambda>2 in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmAliasedNamed:<lambda>2: 1
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmAliasedNamed in import_esm.mjs
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program: 13
+[INFO ] Number of definitions for import_esm.mjs::program:esmAliasedNamed: 5
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNodeSpecifier:<lambda>3 in import_esm.mjs
+[INFO ] Number of definitions for import_esm.mjs::program:esmNodeSpecifier:<lambda>3: 1
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program: 15
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program:boundaryAware:<lambda>0 in ctrl13_boundary_aware_safe.js
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program:boundaryAware:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl13_boundary_aware_safe.js::program:boundaryAware in ctrl13_boundary_aware_safe.js
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug:<lambda>0 in ctrl15_canonicalize_after_check.js
+[INFO ] Calculating reaching definitions for: import_esm.mjs::program:esmNodeSpecifier in import_esm.mjs
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug in ctrl15_canonicalize_after_check.js
+[INFO ] Number of definitions for ctrl13_boundary_aware_safe.js::program:boundaryAware: 21
+[INFO ] Number of definitions for import_esm.mjs::program:esmNodeSpecifier: 5
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program: 10
+[INFO ] Number of definitions for ctrl15_canonicalize_after_check.js::program:canonicalizeAfterCheckBug: 19
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag:<lambda>0 in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program in ctrl14_open_flags_write.js
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:readGamma:helper in shadow_nested_scope_fs.js
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag:<lambda>0: 3
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:readGamma:helper: 9
+[INFO ] Calculating reaching definitions for: ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag in ctrl19_open_flags_numeric_unresolved.js
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program: 14
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program in ctrl16_open_flags_rplus.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program: 10
+[INFO ] Number of definitions for ctrl19_open_flags_numeric_unresolved.js::program:openNumericOrUnresolvedFlag: 10
+[INFO ] Calculating reaching definitions for: shadow_nested_scope_fs.js::program:readGamma in shadow_nested_scope_fs.js
+[INFO ] Number of definitions for shadow_nested_scope_fs.js::program:readGamma: 6
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program:readAlpha in shadow_same_name_params_fs.js
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program:readAlpha: 5
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program in shadow_same_name_params_fs.js
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program: 16
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program:openReadWriteRPlus:<lambda>0 in ctrl16_open_flags_rplus.js
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openWriteFlag:<lambda>0 in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program:openReadWriteRPlus:<lambda>0: 3
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openWriteFlag:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: ctrl16_open_flags_rplus.js::program:openReadWriteRPlus in ctrl16_open_flags_rplus.js
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openWriteFlag in ctrl14_open_flags_write.js
+[INFO ] Number of definitions for ctrl16_open_flags_rplus.js::program:openReadWriteRPlus: 5
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openWriteFlag: 5
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program: 15
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:SomeClass:<init> in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:SomeClass:<init>: 5
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization:<lambda>0 in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program:readPackageFile:<lambda>0 in package_api_basic.js
+[INFO ] Calculating reaching definitions for: shadow_same_name_params_fs.js::program:readBeta in shadow_same_name_params_fs.js
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: ctrl14_open_flags_write.js::program:openReadFlagExplicit in ctrl14_open_flags_write.js
+[INFO ] Calculating reaching definitions for: ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization in ctrl20_wrong_branch_canonicalization.js
+[INFO ] Number of definitions for shadow_same_name_params_fs.js::program:readBeta: 5
+[INFO ] Number of definitions for ctrl20_wrong_branch_canonicalization.js::program:wrongBranchCanonicalization: 19
+[INFO ] Calculating reaching definitions for: <operator>.fieldAccess in <empty>
+[INFO ] Number of definitions for <operator>.fieldAccess: 2
+[INFO ] Number of definitions for ctrl14_open_flags_write.js::program:openReadFlagExplicit: 5
+[INFO ] Number of definitions for package_api_basic.js::program:readPackageFile:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program:readPackageFile in package_api_basic.js
+[INFO ] Calculating reaching definitions for: multi_origin_fs_sink.js::program:handleRequest in multi_origin_fs_sink.js
+[INFO ] Number of definitions for package_api_basic.js::program:readPackageFile: 5
+[INFO ] Number of definitions for multi_origin_fs_sink.js::program:handleRequest: 5
+[INFO ] Calculating reaching definitions for: package_api_basic.js::program in package_api_basic.js
+[INFO ] Calculating reaching definitions for: multi_origin_fs_sink.js::program in multi_origin_fs_sink.js
+[INFO ] Number of definitions for package_api_basic.js::program: 11
+[INFO ] Number of definitions for multi_origin_fs_sink.js::program: 11
+[INFO ] Calculating reaching definitions for: <operator>.assignment in <empty>
+[INFO ] Number of definitions for <operator>.assignment: 2
+[INFO ] Calculating reaching definitions for: <operator>.logicalNot in <empty>
+[INFO ] Number of definitions for <operator>.logicalNot: 1
+[INFO ] Calculating reaching definitions for: <operator>.logicalOr in <empty>
+[INFO ] Number of definitions for <operator>.logicalOr: 2
+[INFO ] Calculating reaching definitions for: ctrl21_dominating_canonicalization_intervening.js::program in ctrl21_dominating_canonicalization_intervening.js
+[INFO ] Calculating reaching definitions for: <operator>.equals in <empty>
+[INFO ] Number of definitions for <operator>.equals: 2
+[INFO ] Calculating reaching definitions for: <operator>.addition in <empty>
+[INFO ] Number of definitions for ctrl21_dominating_canonicalization_intervening.js::program: 15
+[INFO ] Number of definitions for <operator>.addition: 2
+[INFO ] Calculating reaching definitions for: <operator>.or in <empty>
+[INFO ] Number of definitions for <operator>.or: 2
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:dynamicExportTarget:<lambda>0 in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:dynamicExportTarget:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:dynamicExportTarget in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:dynamicExportTarget: 5
+[INFO ] Calculating reaching definitions for: ctrl17_open_flags_wplus.js::program in ctrl17_open_flags_wplus.js
+[INFO ] Calculating reaching definitions for: <operator>.indexAccess in <empty>
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program:writePackageFile:<lambda>0 in package_api_named_exports.js
+[INFO ] Number of definitions for package_api_named_exports.js::program:writePackageFile:<lambda>0: 1
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program in package_api_abstentions.js
+[INFO ] Number of definitions for <operator>.indexAccess: 2
+[INFO ] Number of definitions for ctrl17_open_flags_wplus.js::program: 10
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program:writePackageFile in package_api_named_exports.js
+[INFO ] Number of definitions for package_api_named_exports.js::program:writePackageFile: 5
+[INFO ] Number of definitions for package_api_abstentions.js::program: 31
+[INFO ] Calculating reaching definitions for: ctrl17_open_flags_wplus.js::program:openReadWriteWPlus in ctrl17_open_flags_wplus.js
+[INFO ] Calculating reaching definitions for: package_api_named_exports.js::program in package_api_named_exports.js
+[INFO ] Number of definitions for ctrl17_open_flags_wplus.js::program:openReadWriteWPlus: 5
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for package_api_named_exports.js::program: 11
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program: 12
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:computeKey in package_api_abstentions.js
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite:<lambda>0 in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite:<lambda>0: 3
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:computeKey: 1
+[INFO ] Calculating reaching definitions for: package_api_abstentions.js::program:SomeClass:<init>:<lambda>1 in package_api_abstentions.js
+[INFO ] Number of definitions for package_api_abstentions.js::program:SomeClass:<init>:<lambda>1: 1
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsWrite: 9
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite:<lambda>1 in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite:<lambda>1: 3
+[INFO ] Calculating reaching definitions for: ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite in ctrl18_open_flags_numeric_resolved.js
+[INFO ] Number of definitions for ctrl18_open_flags_numeric_resolved.js::program:openNumericConstantsReadWrite: 6
+[INFO ] Pass io.joern.dataflowengineoss.passes.reachingdef.ReachingDefPass completed in 292 ms (2% on mutations). 2941 + 0 changes committed from 114 parts.
+[INFO ] Start of pass: io.shiftleft.semanticcpg.Overlays$$anon$1
+[INFO ] Pass io.shiftleft.semanticcpg.Overlays$$anon$1 completed in 1 ms (71% on mutations). 1 + 0 changes committed from 1 parts.
+The graph has been modified. You may want to use the `save` command to persist changes to disk.  All changes will also be saved collectively on exit
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptInheritanceNamePass completed in 2 ms (24% on mutations). 0 + 0 changes committed from 0 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ConstClosurePass completed in 15 ms (10% on mutations). 84 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptImportResolverPass completed in 27 ms (8% on mutations). 264 + 0 changes committed from 66 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 128 ms (4% on mutations). 1004 + 0 changes committed from 30 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeRecovery completed in 67 ms (4% on mutations). 559 + 0 changes committed from 30 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.JavaScriptTypeHintCallLinker completed in 27 ms (13% on mutations). 755 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker
+[INFO ] Pass io.joern.x2cpg.frontendspecific.jssrc2cpg.ObjectPropertyCallLinker completed in 6 ms (7% on mutations). 0 + 0 changes committed from 1 parts.
+[INFO ] Start of pass: io.joern.x2cpg.passes.callgraph.NaiveCallLinker
+[INFO ] Pass io.joern.x2cpg.passes.callgraph.NaiveCallLinker completed in 5 ms (8% on mutations). 0 + 0 changes committed from 1 parts.
+[path_traversal_r02] source_origin_facts.tsv present=true rows_read=58 (PACKAGE_API_INPUT=6, APPLICATION_INGRESS_INPUT=52, multi_origin_sites=1)
+[path_traversal_r02] PACKAGE_API_INPUT source candidates (from source_origin_facts.tsv): 6
+[path_traversal_r02] APPLICATION_INGRESS_INPUT source candidates (from source_origin_facts.tsv): 52
+[path_traversal_r02] sources carrying MULTIPLE origin families (never collapsed): 1
+[path_traversal_r02] sink targets found: 34 (FS_READ=23, FS_WRITE=6, FS_READ_WRITE=3, FS_DELETE=1, EXPRESS_SEND_FILE=1, EXPRESS_DOWNLOAD=0)
+[path_traversal_r02] ABSTAIN: EXPRESS_ROOT_OPTIONS_UNRESOLVED at ctrl10_unresolved_options.js:L4 call=res.sendFile(req.params.name, opts) pathOperand=req.params.name detail=options argument not statically resolved to an object literal (opts)
+[path_traversal_r02] ABSTAIN: FS_OPEN_MODE_UNRESOLVED at ctrl14_open_flags_write.js:L15 call=fs.open(userPath, flagsVar, (err, fd) => {}) pathOperand=userPath detail=flags argument (flagsVar) not structurally resolvable to a read/write/read-write mode
+[path_traversal_r02] ABSTAIN: FS_OPEN_MODE_UNRESOLVED at ctrl19_open_flags_numeric_unresolved.js:L12 call=fs.open(userPath, fs.constants.O_WRONLY | extraFlags, (err, fd) => {}) pathOperand=userPath detail=flags argument (fs.constants.O_WRONLY | extraFlags) not structurally resolvable to a read/write/read-write mode
+[path_traversal_r02] EMIT sink=30064771072(L20) src=68719476738(L20:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771087(L11) src=68719476748(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe')
+[path_traversal_r02] EMIT sink=30064771095(L6) src=30064771101(L6:req.body.root) origin=APPLICATION_INGRESS_INPUT sinkFamily=EXPRESS_SEND_FILE outcome=ESTABLISHED note= weak_diagnostic_guards=root itself is source-tainted -- root is the real attacker-controlled operand, not contained
+[path_traversal_r02] EMIT sink=30064771121(L8) src=68719476788(L8:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771140(L6) src=68719476813(L6:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771142(L9) src=68719476816(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771144(L12) src=68719476819(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_DELETE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771159(L10) src=68719476830(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak includes check without proven canonicalization+boundary: userPath.includes('../')
+[path_traversal_r02] EMIT sink=30064771159(L10) src=68719476833(L10:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak includes check without proven canonicalization+boundary: userPath.includes('../')
+[path_traversal_r02] EMIT sink=30064771170(L9) src=68719476843(L8:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=unrecognized call: replace weak_diagnostic_guards=literal '..' strip via .replace (never treated as containment proof): userPath.replace(/\.\./, '')
+[path_traversal_r02] EMIT sink=30064771194(L13) src=68719476869(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=structurally proven containment wrapper: isContained(userPath) (internally: resolved.startsWith('/safe/base' + path.sep))
+[path_traversal_r02] EMIT sink=30064771194(L13) src=68719476872(L13:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=structurally proven containment wrapper: isContained(userPath) (internally: resolved.startsWith('/safe/base' + path.sep))
+[path_traversal_r02] EMIT sink=30064771205(L7) src=68719476886(L6:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=UNVERIFIED_WRAPPER_GUARD: isSafeSomehow(userPath) (callee body unresolved or does not itself prove containment) -- abstaining
+[path_traversal_r02] EMIT sink=30064771205(L7) src=68719476889(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=OPEN note=UNVERIFIED_WRAPPER_GUARD: isSafeSomehow(userPath) (callee body unresolved or does not itself prove containment) -- abstaining
+[path_traversal_r02] EMIT sink=30064771223(L9) src=68719476900(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=canonicalized boundary-aware check: resolved.startsWith('/safe/base' + path.sep)
+[path_traversal_r02] EMIT sink=30064771232(L9) src=68719476920(L9:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771234(L12) src=68719476923(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771254(L14) src=68719476938(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe' + path.sep); CANONICALIZATION_DOMINANCE_UNPROVEN: a canonicalizing assignment to 'resolved' exists in this method (resolved = path.resolve('/safe', userPath)) but does not provably CFG-dominate this check on every control-flow path: resolved.startsWith('/safe' + path.sep)
+[path_traversal_r02] EMIT sink=30064771266(L7) src=68719476961(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771274(L7) src=68719476971(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771282(L12) src=68719476981(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771289(L15) src=68719476986(L15:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771321(L20) src=68719477012(L15:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe' + path.sep); CANONICALIZATION_DOMINANCE_UNPROVEN: a canonicalizing assignment to 'resolved' exists in this method (resolved = path.resolve('/safe', userPath)) but does not provably CFG-dominate this check on every control-flow path: resolved.startsWith('/safe' + path.sep)
+[path_traversal_r02] EMIT sink=30064771321(L20) src=68719477014(L17:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note= weak_diagnostic_guards=weak startsWith check without proven canonicalization+boundary: resolved.startsWith('/safe' + path.sep); CANONICALIZATION_DOMINANCE_UNPROVEN: a canonicalizing assignment to 'resolved' exists in this method (resolved = path.resolve('/safe', userPath)) but does not provably CFG-dominate this check on every control-flow path: resolved.startsWith('/safe' + path.sep)
+[path_traversal_r02] EMIT sink=30064771341(L15) src=68719477034(L12:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=BROKEN note=canonicalized boundary-aware check: resolved.startsWith('/safe/base' + path.sep)
+[path_traversal_r02] EMIT sink=30064771350(L7) src=68719477055(L7:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771362(L10) src=68719477068(L10:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771364(L13) src=68719477071(L13:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771366(L16) src=68719477074(L16:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771367(L19) src=68719477077(L19:userPath) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771384(L18) src=68719477099(L18:req) origin=APPLICATION_INGRESS_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771384(L18) src=68719477099(L18:req) origin=PACKAGE_API_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771414(L6) src=68719477133(L6:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771421(L5) src=68719477142(L5:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771442(L15) src=68719477167(L15:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_READ outcome=ESTABLISHED note=
+[path_traversal_r02] EMIT sink=30064771444(L19) src=68719477170(L19:userPath) origin=PACKAGE_API_INPUT sinkFamily=FS_WRITE outcome=ESTABLISHED note=
+[path_traversal_r02] PATH_TRAV_R02_COMPLETE rows=36 (BROKEN=4, OPEN=3, ESTABLISHED=29, MULTIPLE_ORIGINS_sink_src_pairs=1)
+[INFO ] writing to storage at `/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp`
+closing/saving project `pt_r02_v2.cpg.bin`
+[INFO ] closed graph at /home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/workspace/pt_r02_v2.cpg.bin/cpg.bin.tmp

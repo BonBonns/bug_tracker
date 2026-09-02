@@ -59,10 +59,17 @@ never silently promote a finding away from "not proven safe").
 
 Input contract:
   path_traversal_verdict.py <raw_dir> <src_dir> <out.json>
-    raw_dir  -- already produced by export_path_traversal_integ_r01.sc: source_facts.tsv,
-                propagation_relations.tsv, property_outcome.tsv, transform_identity.tsv.
+    raw_dir  -- already produced by export_path_traversal_integ_r01.sc (or, unchanged for this
+                reducer, export_path_traversal_integ_r02.sc -- same 12/9/5/8-column raw schema,
+                see that producer's own header comment): source_facts.tsv,
+                propagation_relations.tsv, property_outcome.tsv, transform_identity.tsv,
+                sink_abstentions.tsv.
     src_dir  -- the package's own pristine source tree (adjudicate_js.py's own TCH_SRC).
-    out.json -- written: {"classification": {...counts...}, "findings": [...]}.
+    out.json -- written: {"classification": {...counts...}, "findings": [...],
+                "abstentions": [...]} -- "abstentions" (PATH-TRAV-REDUCE-R02, new) is every
+                sink_abstentions.tsv row read back verbatim (call_node_id, line, file, reason_code,
+                path_operand_code, call_code, reason_detail), so a consumer of ONLY this reducer's
+                own final output can never silently lose an abstained site.
 
 reportable is HARDCODED False in every finding this reduces, per direct instruction ("keep it
 non-reportable initially ... this phase stops at a standalone, frozen property + real-package
@@ -89,6 +96,16 @@ SF_COLS = 12   # source_facts.tsv: sink_id, sink_line, src_id, origin_family, st
                # weak_diagnostic_guards, then 5 reserved-blank columns (see the producer's own
                # emission comment -- adjudicate_js.py itself only ever reads columns 0-4).
 PO_COLS = 5    # property_outcome.tsv: sink_id, origin_id, outcome, -1, -1
+SA_COLS = 7    # sink_abstentions.tsv: callNodeId, line, file, reasonCode, pathOperandCode, callCode,
+               # reasonDetail (see export_path_traversal_integ_r01.sc's own PATH-TRAV-R01-FIX05
+               # comment) -- PATH-TRAV-REDUCE-R02: this reducer now reads this file directly and
+               # preserves every abstention record in its own final JSON output (under the top-level
+               # "abstentions" key), per direct instruction ("the next Path Traversal reducer must
+               # actually consume sink_abstentions.tsv and preserve those records in its final
+               # classification output") -- previously this file was written by the producer but
+               # never read back by any reducer, so a production aggregator reading ONLY this
+               # reducer's own final output could silently lose every abstained site. This is the
+               # ONLY change made to this module in this round -- no other logic is restructured.
 
 
 def _read_tsv(path, n):
@@ -144,6 +161,28 @@ def containment_status(raw_dir):
     for r in rows:
         out[(r[0], r[1])] = r[2]
     return out
+
+
+def read_sink_abstentions(raw_dir):
+    """Every persisted abstention record from sink_abstentions.tsv (call/site identity, the path
+    operand it concerns, the source file, and why) -- read back and preserved verbatim, never
+    dropped. Returns a list of dicts, one per abstention row; [] when the file is absent/empty
+    (never an error -- a package that genuinely abstained zero times looks identical to one whose
+    producer never ran this far, which is fine here since sink_targets/sink_abstentions counts are
+    already surfaced separately by the producer's own summary JSON, not by this reducer)."""
+    rows = _read_tsv(os.path.join(raw_dir, "sink_abstentions.tsv"), SA_COLS)
+    return [
+        {
+            "call_node_id": r[0],
+            "line": int(r[1]) if r[1].lstrip("-").isdigit() else -1,
+            "file": r[2],
+            "reason_code": r[3],
+            "path_operand_code": r[4],
+            "call_code": r[5],
+            "reason_detail": r[6],
+        }
+        for r in rows
+    ]
 
 
 def run_adjudicate_one_sink(raw_dir, src_dir, sink_id, out_dir):
@@ -241,9 +280,17 @@ def main():
     os.makedirs(work_dir, exist_ok=True)
     run_adjudicator = os.environ.get("PT_VERDICT_SKIP_ADJUDICATOR") != "1"
     classification, findings = emit_findings(raw_dir, src_dir, work_dir, run_adjudicator=run_adjudicator)
+    # PATH-TRAV-REDUCE-R02: sink_abstentions.tsv is now read back and preserved verbatim in this
+    # reducer's own final JSON output (a new top-level "abstentions" key, alongside the pre-existing
+    # "classification"/"findings" keys) -- previously written by the producer but never consumed by
+    # any reducer, so a production aggregator reading ONLY this file's own output could silently
+    # lose every abstained site (FS_OPEN_MODE_UNRESOLVED, EXPRESS_ROOT_OPTIONS_UNRESOLVED, etc.).
+    abstentions = read_sink_abstentions(raw_dir)
     with open(out_path, "w") as f:
-        json.dump({"classification": classification, "findings": findings}, f, indent=2)
-    print(json.dumps({"classification": classification, "n_findings": len(findings)}, indent=2))
+        json.dump({"classification": classification, "findings": findings,
+                    "abstentions": abstentions}, f, indent=2)
+    print(json.dumps({"classification": classification, "n_findings": len(findings),
+                       "n_abstentions": len(abstentions)}, indent=2))
 
 
 if __name__ == "__main__":
