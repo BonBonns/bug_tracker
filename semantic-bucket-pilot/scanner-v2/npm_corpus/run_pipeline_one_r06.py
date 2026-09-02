@@ -106,6 +106,20 @@ ADJUDICATOR_DIR = ("/home/user/bug_tracker/tchecker-research-complete/"
                     "tchecker-property-adjudicator/adjudicator")
 SERIALIZE_DOS_PROPERTY_CONFIG = ("/home/user/bug_tracker/tchecker-research-complete/"
                                   "tchecker-property-adjudicator/property_configs/serialize_dos.json")
+# NO_HINTS: same real, empty ({}) hints file redos_verdict.py/path_traversal_verdict.py's own
+# run_adjudicate_one_sink() already passes as TCH_HINTS -- deliberately, never an unset TCH_HINTS.
+# Without it, adjudicate_js.py falls back to ITS OWN hardcoded fixture-only canned hints
+# (keyed "xf0.<property_id_suffix>"/"xf1.<property_id_suffix>", meant only for its own dev-time
+# fixtures) instead of cleanly stopping at round 1 with a real, disclosed llm_input_1.json for
+# semantic review -- confirmed by direct A/B repro against the serialize-dos-r01 fixture
+# demo_member_transform.js (a genuine CANDIDATE_OPEN case): unset TCH_HINTS still lands on the
+# same disposition here (this fixture's real subject_transform name never collides with "xf0"/
+# "xf1"), but only after an extra, unnecessary internal round checking membership in a canned-hint
+# dict that has nothing to do with the real code being adjudicated -- and a package whose own real
+# transform genuinely happens to be named "xf0"/"xf1" would silently inject that fixture's
+# unrelated rationale instead of correctly stopping for real review. TCH_HINTS=NO_HINTS removes
+# both the actual and the latent risk, matching the two other reducers' own established precedent.
+NO_HINTS = os.path.join(ADJUDICATOR_DIR, "no_hints.json")
 # srcPattern="req.body": the same real, already-validated value every fixture and the real
 # motifer@26.1.1 validation in the whole R01-R03 lineage uses (setup_candidate_multisource.sc's
 # own module docstring / check_setup_candidate_multisource.py's M7 control).
@@ -987,6 +1001,7 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
             "TCH_SRC": pkg_dir,
             "TCH_OUT": taint_out_dir,
             "TCH_PROPERTY_CONFIG": SERIALIZE_DOS_PROPERTY_CONFIG,
+            "TCH_HINTS": NO_HINTS,
         })
         try:
             subprocess.run([sys.executable, "adjudicate_js.py"], cwd=ADJUDICATOR_DIR, env=env,
