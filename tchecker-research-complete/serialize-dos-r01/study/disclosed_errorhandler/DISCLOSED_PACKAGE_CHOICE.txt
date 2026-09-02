@@ -1,0 +1,8 @@
+Pre-registered BEFORE reading any source or result:
+Package: errorhandler (npm)
+Rationale: a small, real, actively-used Express error-handling middleware whose whole
+purpose is rendering error/request detail back out -- a plausible, but not
+pre-verified, real-world site for the serialize-DoS pattern. Not previously used as
+evidence by either existing implementation (Unleash / mozilla-fxa), satisfying the
+"select before reading" and "not reused evidence" requirements.
+Timestamp: recorded before fetch.

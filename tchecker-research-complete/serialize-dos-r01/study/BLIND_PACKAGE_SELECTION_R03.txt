@@ -1,0 +1,35 @@
+Mechanical blind-package selection for R03 (recorded before any inspection):
+
+1. Candidate list source: npm registry search API,
+   https://registry.npmjs.org/-/v1/search?text=keywords:http-logger&size=20
+   -- an external, live, non-cherry-picked ranking (20 real published packages), a
+   third distinct keyword from R01's (keywords:express-middleware) and R02's
+   (keywords:request-logging) draws.
+2. Index formula: int(sha256(serialize_dos_r03.py)[:8], 16) % 20, using the FROZEN
+   R03 implementation hash
+   (dfdd4e4719f5c4ae6b8c4826ed29d7811438b8f95c094a380946d35b6a69a41b).
+3. Computed index: 3.
+4. Selected package (list position 3, 0-indexed): "@rasla/logify" 5.2.2.
+
+This selection is mechanical: no package was read, downloaded, or otherwise
+inspected before this file was written. Per instruction, the objective this round is
+a package containing at least one supported serialization site (positive-path
+portability evidence, unlike @ashkiani/mongo-logger's real but empty negative) -- the
+same declared tooling-failure fallback rule from R02's draw (advance to the next
+index on a confirmed jssrc2cpg/astgen tooling failure, never a by-hand pick) applies
+again if needed. A package that compiles cleanly but genuinely contains no
+serialization call is NOT a tooling failure and is not grounds for the fallback --
+that outcome would simply be reported and, if it recurs, is itself real evidence
+about how rare this shape is in the wild.
+
+--- Correction to the advance condition, made before fetching index 3 ---
+On reflection, the instruction's own framing ("select another blind package
+CONTAINING AT LEAST ONE supported serialization site") is a requirement on this
+round's outcome, not merely an aspiration -- unlike R01/R02, where any real result
+(including a confirmed-empty negative like mongo-logger) was itself the valid,
+reportable outcome. So for THIS round, in addition to the tooling-failure fallback,
+a package that compiles cleanly but is confirmed (via the real crash-DoS producer,
+not a grep guess) to contain ZERO JSON.stringify/util.inspect calls ALSO triggers
+the same declared advance-to-next-index rule -- mechanical, never a by-hand pick,
+and every skipped index is disclosed with its reason (tooling failure vs. confirmed
+empty) in the final results doc.
