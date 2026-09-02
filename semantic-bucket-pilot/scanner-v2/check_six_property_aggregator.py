@@ -134,6 +134,31 @@ ck("a record with no llm_input_findings key at all still produces a correct, non
    and summary1i["llm_input_findings"]["raw_count"] == 0
    and summary1i["llm_input_findings"]["reportable_count"] == 0)
 
+# --- NoSQLi: same discipline as redos_findings/path_traversal_findings/serialize_dos_findings/
+# llm_input_findings -- always enabled, never gated by staged_enablement.py. Unlike LLM-input,
+# nosqli_verdict.py's own emit_findings() DOES hardcode reportable=False itself (matching ReDoS/
+# Path Traversal/Serialize DoS, not LLM-input's own predates-the-convention shape) -- these
+# findings simulate that already-set state, matching what the real reducer's own output actually
+# contains.
+record1j = {"nosqli_findings": [mk(False), mk(False)]}
+summary1j = agg.aggregate_record(record1j, enabled_properties=frozenset())
+ck("nosqli_findings is in ALL_PROPERTY_KEYS", "nosqli_findings" in agg.ALL_PROPERTY_KEYS)
+ck("nosqli_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1j["nosqli_findings"]["enabled"] is True
+   and summary1j["nosqli_findings"]["disabled_reason"] is None)
+ck("nosqli_findings raw/reportable counts are read directly, never recomputed -- both findings "
+   "carry reportable=False (as nosqli_verdict.py itself hardcodes)",
+   summary1j["nosqli_findings"]["raw_count"] == 2
+   and summary1j["nosqli_findings"]["reportable_count"] == 0)
+record1k = {"r04_findings": [mk(True)]}  # no "nosqli_findings" key at all, the common case
+summary1k = agg.aggregate_record(record1k, enabled_properties=frozenset())
+ck("a record with no nosqli_findings key at all still produces a correct, non-crashing "
+   "summary: enabled=True, raw=0, reportable=0",
+   summary1k["nosqli_findings"]["enabled"] is True
+   and summary1k["nosqli_findings"]["raw_count"] == 0
+   and summary1k["nosqli_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -240,6 +265,9 @@ def load_bundle_record(bundle_path):
                                          # wiring (record1h/record1i above already cover a real
                                          # non-empty and a real absent-key llm_input_findings
                                          # case directly)
+        record["nosqli_findings"] = []  # same reason -- these bundles predate the NoSQLi wiring
+                                         # (record1j/record1k above already cover a real non-empty
+                                         # and a real absent-key nosqli_findings case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp
