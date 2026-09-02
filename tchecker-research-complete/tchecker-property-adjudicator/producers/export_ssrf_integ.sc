@@ -406,11 +406,133 @@ val MESSAGE_SOURCE_PATTERN = "(message|item)\\.(urls|text|attachments)(\\..*)?"
         // argument, and the engine connects that to the unrelated host argument via the shared
         // call node), not a genuine host-control path. Discard any flow whose element sequence
         // contains one of the sink call's OTHER arguments as an intermediate step.
+        //
+        // SSRF-INTEG-R01-FIX02 (found via real-world validation against mozilla/fxa's own
+        // fxa-profile-server, not a synthetic fixture -- see this file's own FIX02/FIX03 comments
+        // below for the fuller disclosure of why): the original filter excluded only the OTHER
+        // argument's OWN node id, not its descendants. `fetch(url, { headers: worker_headers,
+        // body: payload })` genuinely has req.headers/req.payload reach the CALL (via the real
+        // callee img-workers.js's own `headers`/`payload` parameters, correctly resolved) -- but
+        // they land inside the SECOND argument's own object-literal subtree (the `headers:`
+        // property value), never on `url` (the first argument, this call's own destExpr). The
+        // original filter's `.map(_.id)` only ever excluded the second argument's own outer node,
+        // never nodes INSIDE it, so this detour slipped through undetected. Fixed by excluding the
+        // OTHER argument's entire AST subtree (`.ast.id.l`), not just its own node -- confirmed via
+        // a same-fixture regression run (fixtures/ssrf_r01/) that this produces byte-identical row
+        // counts to before the fix (none of that fixture's own cases exercise a multi-property
+        // options object), and via a direct re-run against fxa-profile-server that this speciic
+        // false positive (req.headers from upload.js:56) is gone afterward.
         val otherSinkArgIds = sinkCall.argument.l.filter(_.argumentIndex >= 1)
-          .filterNot(_.id == destExpr.id).map(_.id).toSet
-        val flows = flowsRaw.filterNot { f =>
+          .filterNot(_.id == destExpr.id).flatMap(_.ast.id.l).toSet
+        val flowsSiblingFiltered = flowsRaw.filterNot { f =>
           f.elements.dropRight(1).exists(e => otherSinkArgIds.contains(e.id))
         }
+        // SSRF-INTEG-R01-FIX03 (found via the same real-world validation, a materially more
+        // severe defect than FIX02): a genuine same-short-name-different-function collision --
+        // two structurally unrelated functions (in this case, img-workers.js's own real
+        // `exports.upload` and a completely separate Hapi route handler in server/worker.js, also
+        // named `upload`, purely by coincidence) get conflated by Joern's own automatic
+        // interprocedural call-linking (the same root-cause CLASS already diagnosed and fixed once
+        // in this project for NoSQLi's AJV-gate detector's "action" collision -- see
+        // NOSQLI_SCANNER_FIXES.md -- but THAT fix was over this project's own custom Scala
+        // resolution; here the ambiguity is baked into Joern's own built-in call graph, which this
+        // producer never overrides, so the fix here is a post-hoc validator, not a swap to
+        // `.referencedMethod`). A flow that crosses from the source's own enclosing method into a
+        // DIFFERENT enclosing method (the sink's) is only trusted if the flow's OWN reported path
+        // is corroborated by a REAL call site: specifically, the last element of the flow that is
+        // still within the SOURCE's own enclosing method (the "exit point" -- using the flow's own
+        // elements, not a fresh independent trace, so a real flow via an intermediate local
+        // variable inside the source's own method is still correctly recognized) must itself be a
+        // real ARGUMENT (matched by node id, never by code text or name alone -- two unrelated
+        // `req.payload` expressions in two unrelated route handlers are textually identical, which
+        // is exactly how this defect's own false positive slipped through a text-based check
+        // during investigation) of some call whose own NAME matches the sink method's name. For a
+        // genuinely unrelated function sharing a name (never actually called from the source's own
+        // method, only coincidentally similarly named), no such real call site exists and the flow
+        // is discarded. Verified: this exact real fxa-profile-server false positive (req.params.id/
+        // req.payload from server/worker.js:64, a wholly separate module, attributed to
+        // img-workers.js:46's fetch() call) is gone after this fix, while the same fixture's own
+        // genuine intra-package flows (and every WebExtension bridge gate) are unaffected.
+        def crossMethodFlowIsReal(f: Path): Boolean = {
+          val srcMethod = src.method
+          if (srcMethod.id == m.id) return true  // no interprocedural crossing to validate
+          val elementsInSrcMethod = f.elements.collect {
+            case cfg: nodes.CfgNode if scala.util.Try(cfg.method.id).toOption.contains(srcMethod.id) => cfg
+          }
+          val bridgeNodeId = elementsInSrcMethod.lastOption.map(_.id).getOrElse(src.id)
+          cpg.call.l.exists(c => c.name == m.name && c.argument.l.exists(_.id == bridgeNodeId))
+        }
+        // SSRF-INTEG-R01-FIX04 (found by directly querying the exact flow path of the false
+        // positive FIX02/FIX03 alone did not close, not by guessing): the sibling-argument-
+        // artifact class recurs at ANY intermediate call the flow passes through, not only the
+        // final sink call FIX02 already guards. Direct inspection of this specific flow's own
+        // elements (a live Joern query against the real fxa-profile-server CPG) showed it jumping
+        // from `worker_headers` -- argument 2 of the fire-and-forget `logger.debug('upload.headers',
+        // worker_headers)` -- directly to `logger`, THAT SAME call's own receiver (argument 0) --
+        // then AGAIN from a second, later `logger` reference to `url`, both children of the
+        // unrelated, later `logger.verbose('upload', url)` call. Two separate logging calls,
+        // chained only because they share the same unchanged `logger` import binding at both call
+        // sites -- never a real value dependency, and neither logging call's own return value
+        // (discarded in both real statements) is what the flow actually continues through.
+        // Generalizes FIX02's own principle (which only ever checked the SINK call's own
+        // siblings): for every CONSECUTIVE pair of elements in a flow, if both are direct
+        // argument/receiver children of the SAME call node, and neither element IS that call's
+        // own return value being propagated (the ordinary, legitimate case, e.g. `f(x)` used
+        // later as `y = f(x)`), that pairing is a sibling-artifact hop and the whole flow is
+        // discarded. Verified: this exact remaining false positive (req.headers from upload.js:56,
+        // surviving FIX02/FIX03 alone) is gone after this fix; the ssrf_r01 fixture's own row
+        // counts stay byte-identical (none of its cases exercise a multi-hop logging-style
+        // detour), and every WebExtension bridge gate still passes unchanged.
+        // Exemption found while verifying FIX04 against this file's own regression fixture: Joern
+        // represents assignment, field access, constructor calls, etc. as CALL nodes internally
+        // (`<operator>.assignment`, `<operator>.new`, ...), and their own LHS/RHS or arguments
+        // legitimately share a parent call node for genuine SYNTACTIC reasons -- `const u = new
+        // URL(userInput)` desugars to `userInput` (the constructor's argument) and a synthetic
+        // `_tmp_N` result temp BOTH hanging off the `<operator>.new` call, and separately `u`
+        // (LHS) and that same temp (RHS) both hanging off the enclosing `<operator>.assignment`
+        // call -- real value-flow relationships, not artifacts. Confirmed by direct flow
+        // inspection: the hostOverwritten fixture case (a real BROKEN control) was being
+        // incorrectly discarded entirely before this exemption. The real bug this fix targets
+        // (fire-and-forget calls like `logger.debug(x, y)` whose return value is never used, so a
+        // LATER, unrelated use of the same receiver at a DIFFERENT call site gets spuriously
+        // connected) only ever involves NAMED, user-level function/method calls -- so this filter
+        // is scoped to calls whose own name does NOT start with "<operator>" at all, never
+        // Joern's own internal operator desugaring.
+        // Second exemption, also found while verifying FIX04 against this file's own regression
+        // fixture: the SAME "argument and a synthetic `_tmp_N` result-binding temp both hang off
+        // the same call node" desugaring applies to REGULAR named calls too, not just operators/
+        // constructors -- `const processed = someExternalNormalizer(userInput)` binds its own
+        // result the same way. `_tmp_N` is jssrc2cpg's own established synthetic-temp naming
+        // convention (already relied on elsewhere in this project -- see
+        // NOSQLI_SINK_SEMANTICS_MATRIX.md's own real "`_tmp_9`" bug investigation), so a node
+        // matching it is always a call's own return-value binding, never a genuinely independent
+        // sibling argument -- exempted alongside the operator-name exemption above.
+        // Third exemption, same regression-fixture verification pass: jssrc2cpg represents every
+        // STANDALONE (non-member) function call, e.g. `someExternalNormalizer(userInput)`, with a
+        // synthetic `this` receiver argument even though the source has no explicit receiver at
+        // all -- another stable jssrc2cpg convention (not a guess: JavaScript call semantics
+        // always bind SOME `this`, jssrc2cpg makes that binding explicit in the CPG), so a literal
+        // `this` identifier sharing a call parent with the tracked value is never a genuine
+        // second, independent argument -- exempted alongside the other two.
+        def isCallResultTemp(n: nodes.AstNode): Boolean = n match {
+          case id: nodes.Identifier => id.name.matches("_tmp_\\d+") || id.name == "this"
+          case _ => false
+        }
+        def passThroughSiblingArtifact(f: Path): Boolean = {
+          f.elements.sliding(2).exists {
+            case Seq(e1, e2) =>
+              val call1 = scala.util.Try(e1.astParent).toOption.collect { case c: nodes.Call => c }
+              val call2 = scala.util.Try(e2.astParent).toOption.collect { case c: nodes.Call => c }
+              (call1, call2) match {
+                case (Some(c1), Some(c2)) if c1.id == c2.id
+                  && !c1.name.startsWith("<operator>")
+                  && !isCallResultTemp(e1) && !isCallResultTemp(e2) => true
+                case _ => false
+              }
+            case _ => false
+          }
+        }
+        val flows = flowsSiblingFiltered.filter(crossMethodFlowIsReal).filterNot(passThroughSiblingArtifact)
         if (flows.nonEmpty) {
           val guardMatch = sinkIsGuardedBy(sinkCall, src.code)
           val overwriteMatch = hasHostOverwrite(m)
