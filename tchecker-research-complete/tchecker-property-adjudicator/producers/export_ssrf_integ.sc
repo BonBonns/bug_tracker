@@ -523,6 +523,18 @@ val MESSAGE_SOURCE_PATTERN = "(message|item)\\.(urls|text|attachments)(\\..*)?"
   }
 
   // ===== emit standard fact tables, SAME schema as export_property_propagation.sc =====
+  // SSRF-INTEG-R01-FIX01 (found while wiring a Python reducer on top of this file, unmodified
+  // otherwise): `r.note` (WHY a given (sink, origin) alternative was classified BROKEN/OPEN --
+  // e.g. "host overwritten by literal assignment: ...", "guard-dominance candidate: ...",
+  // "unrecognized call: ...") was already computed per row but only ever printed to stderr
+  // (the EMIT line below) -- property_outcome.tsv's own trailing two columns were always the
+  // literal placeholder "-1","-1", never carrying it. adjudicate_js.py itself confirmed (by
+  // direct inspection) to only ever read columns 0/1/2 of this file (`rows("property_outcome.tsv",
+  // 5)`, then only `r[0]`/`r[1]`/`r[2]`), so writing real text into column 3 is additive and safe
+  // -- column 4 stays the literal "-1" placeholder, and the row stays exactly 5 columns wide
+  // (changing that count would silently drop every row past adjudicate_js.py's own strict
+  // len(parts)==5 filter, a far worse bug than the one being fixed here).
+  def tsvSafe(s: String): String = s.replaceAll("[\\t\\n\\r]+", " ")
   new java.io.File(rawDir).mkdirs()
   val sf = new java.io.PrintWriter(new java.io.FileWriter(s"$rawDir/source_facts.tsv", true))
   val pr = new java.io.PrintWriter(new java.io.FileWriter(s"$rawDir/propagation_relations.tsv", true))
@@ -532,7 +544,7 @@ val MESSAGE_SOURCE_PATTERN = "(message|item)\\.(urls|text|attachments)(\\..*)?"
     val originFamily = portableFamilyByNode.getOrElse(r.srcId.toLong, "HTTP_HOST_INPUT")
     sf.println(Seq(r.sinkId, r.sinkLine, r.srcId, originFamily, "ESTABLISHED", "","","","","","","").mkString("\t"))
     pr.println(Seq(r.sinkId, "", "", r.srcId, r.srcLine, r.srcCode, "", "", "").mkString("\t"))
-    po.println(Seq(r.sinkId, r.srcId, r.outcome, "-1", "-1").mkString("\t"))
+    po.println(Seq(r.sinkId, r.srcId, r.outcome, tsvSafe(r.note), "-1").mkString("\t"))
     r.transformChain.zipWithIndex.foreach { case ((c, kind), order) =>
       ti.println(Seq("x", r.srcId, order.toString, c.id.toString, kind, "", "", "UNKNOWN").mkString("\t"))
     }
