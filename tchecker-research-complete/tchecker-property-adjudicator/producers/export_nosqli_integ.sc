@@ -4,6 +4,19 @@
 // (explicit source families, genuine Meteor.methods ingress-boundary detection, real
 // interprocedural tracing, the batched multi-source query fix) unmodified -- only the sink family,
 // per-field operand identification, and type-guard property-effect rules are new to this property.
+//
+// NOSQLI-INTEG-R01-FIX01 (found while wiring a Python reducer on top of this file, unmodified
+// otherwise): sinkId is the enclosing CALL's own node ID, shared by every field operand of a
+// multi-field selector (`findOne({email, statusFlag})` emits two SinkTargets, same sinkCall.id).
+// target.fieldKind/target.fieldName/target.valueExpr.code were already computed per-target (see
+// the EMIT stderr line below) but never written to source_facts.tsv -- only sinkId/sinkLine/srcId/
+// family/status were, using 5 of the row's 12 columns and leaving 7 blank. A downstream reducer
+// reading this file back could not tell WHICH field at a multi-field call a given row concerns --
+// exactly the reviewer-facing information this property exists to report. Fixed by writing field
+// identity into three of the previously-always-blank reserved columns (5/6/7); adjudicate_js.py
+// itself only ever reads columns 0-4 (confirmed by direct inspection, same fact already relied on
+// by path_traversal_verdict.py's own use of this schema's reserved columns), so this is additive
+// and does not change anything an existing consumer of columns 0-4 observes.
 import io.shiftleft.semanticcpg.language._
 import io.shiftleft.codepropertygraph.generated.nodes
 import io.joern.dataflowengineoss.language._
@@ -274,7 +287,14 @@ def detectApiRouteSchemaGate(sinkMethod: nodes.Method): Option[String] = {
           val srcLine = origin.lineNumber.getOrElse(-1)
           val note = s"field='${target.fieldName}' value operand='${target.valueExpr.code}' -- no type guard, " +
             "no coercion, no Meteor.check(String) found on this path"
-          sf.println(Seq(sinkId, sinkLine, srcId, "QUERY_FIELD_VALUE", "ESTABLISHED", "","","","","","","").mkString("\t"))
+          // NOSQLI-INTEG-R01-FIX01: sanitize -- a field name or value-operand code containing a
+          // literal tab or newline would otherwise corrupt this TSV's own column structure. Field
+          // names are normally identifiers; the value-operand code is arbitrary source text (could
+          // contain a template literal spanning lines), so this matters for that column specifically.
+          def tsvSafe(s: String): String = s.replaceAll("[\\t\\n\\r]+", " ")
+          sf.println(Seq(sinkId, sinkLine, srcId, "QUERY_FIELD_VALUE", "ESTABLISHED",
+            tsvSafe(target.fieldKind), tsvSafe(target.fieldName), tsvSafe(target.valueExpr.code),
+            "","","","").mkString("\t"))
           pr.println(Seq(sinkId, "", "", srcId, srcLine, origin.code, "", "", "").mkString("\t"))
           po.println(Seq(sinkId, srcId, "ESTABLISHED", "-1", "-1").mkString("\t"))
           System.err.println(s"[$srcLabel] EMIT sink=$sinkId(L$sinkLine) field=${target.fieldKind}:${target.fieldName} src=$srcId(L$srcLine:${origin.code}) note=$note")

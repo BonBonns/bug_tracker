@@ -60,6 +60,17 @@ False on every finding right after calling `derive()`, orchestration-only, never
 frozen reducer. Same net effect: this module's `f.get("reportable") is True` check can never
 count an LLM-input finding as reportable no matter how "enabled" is set here.
 
+ADDENDUM 3 (NoSQLi integration, discovered alongside LLM-input -- another already-built,
+never-wired property, not part of the originally-tracked 4 JS/TS classes): `nosqli_findings`
+(nosqli_verdict.py's own `emit_findings()`, new this session -- unlike Serialize DoS/LLM-input's
+own already-frozen reducers, this reducer itself is new, but it only orchestrates around
+export_nosqli_integ.sc's own frozen Stage 1/2/3 classification logic and adjudicate_js.py's own
+frozen semantic review, exactly as redos_verdict.py/path_traversal_verdict.py do) is an 11th key,
+same discipline as the others above: `nosqli_verdict.py` hardcodes every finding's own
+`"reportable": False` unconditionally (see that module's own docstring), so this module's
+`f.get("reportable") is True` check can never count a NoSQLi finding as reportable no matter how
+"enabled" is set here.
+
 ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
 into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
 like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
@@ -146,11 +157,24 @@ SERIALIZE_DOS_KEYS = ("serialize_dos_findings",)
 # attachment).
 LLM_INPUT_KEYS = ("llm_input_findings",)
 
+# NOSQLI (roadmap step 8 successor, discovered alongside LLM-input -- another already-built,
+# never-wired class: ATTACKER_CONTROL_OF_QUERY_OPERATOR_STRUCTURE, grounded in RocketChat's own
+# repeated, disclosed CVE history -- see NOSQLI_SINK_SEMANTICS_MATRIX.md/
+# NOSQLI_STAGE2_PROPERTY_EFFECTS.md/NOSQLI_SCANNER_FIXES.md/NOSQLI_STAGE3_RESULT_AND_AJV_GAP.md).
+# Same discipline as REDOS_KEYS/PATH_TRAVERSAL_KEYS/SERIALIZE_DOS_KEYS/LLM_INPUT_KEYS -- wired
+# into the shared per-package pipeline via run_pipeline_one_r06.py, never routed through
+# staged_enablement.py's reachability-tier mechanism (C/C++-specific). Always "enabled" here;
+# safe regardless, since nosqli_verdict.py (new this session, unlike the other four properties'
+# already-frozen reducers) already hardcodes every finding's own "reportable": False
+# unconditionally, matching every other property's own "validate first, decide reportability
+# later" precedent -- see that reducer's own module docstring.
+NOSQLI_KEYS = ("nosqli_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
 ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
-                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + STAGED_KEYS)
+                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + STAGED_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -173,7 +197,7 @@ def aggregate_record(record, enabled_properties):
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
         if (key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS
                 or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS
-                or key in LLM_INPUT_KEYS):
+                or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]

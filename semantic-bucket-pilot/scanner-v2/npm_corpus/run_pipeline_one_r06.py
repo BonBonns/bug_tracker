@@ -153,6 +153,32 @@ SERIALIZE_DOS_SRC_PATTERN = "req.body"
 LLM_FACTS_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
                        "tchecker-property-adjudicator/producers/export_llm_facts.sc")
 
+# NOSQLI INTEGRATION (roadmap step 8 successor, discovered alongside LLM-input: another
+# already-built, never-wired class -- ATTACKER_CONTROL_OF_QUERY_OPERATOR_STRUCTURE, grounded in
+# RocketChat's own repeated, disclosed history -- CVE-2021-22911, HackerOne #3564655/
+# CVE-2026-29198, GHSA-hgq6-9jg2-wf3f/CVE-2026-30833 -- see NOSQLI_SINK_SEMANTICS_MATRIX.md/
+# NOSQLI_STAGE2_PROPERTY_EFFECTS.md/NOSQLI_SCANNER_FIXES.md/NOSQLI_STAGE3_RESULT_AND_AJV_GAP.md).
+# Stage 1 (sink semantics, 10/10) + Stage 2 (property effects, 9/9) + Stage 3 (AJV route-schema-
+# gate detection, 4/4 + the header/AJV false-lead fixes) were all already frozen and fixture-
+# verified in export_nosqli_integ.sc before this pipeline existed -- what was genuinely missing
+# was any reducer at all (unlike ReDoS/Path Traversal/Serialize DoS, which already had one) and
+# any pipeline wiring. export_nosqli_integ.sc's own signature is (cpgFile, rawDir, srcLabel,
+# skipCount) -- same rawDir/srcLabel convention as ReDoS/Path Traversal, not LLM-input's
+# cpgFile/outDir. NOSQLI-INTEG-R01-FIX01 (this session): the producer already computed each query
+# call's own field identity (fieldKind/fieldName/value-operand code) per target, but only ever
+# printed it to stderr -- source_facts.tsv itself carried 7 permanently-blank reserved columns and
+# never persisted it, so two DISTINCT fields at the SAME call (`findOne({email, statusFlag})`)
+# were indistinguishable to any reducer reading that file back. Confirmed structurally (not
+# hypothetical) via a constructed two-distinct-field fixture. Fixed by writing field identity into
+# three of those reserved columns (5/6/7); adjudicate_js.py itself only ever reads columns 0-4, so
+# this is additive, and a same-fixture regression run before/after the fix produced byte-identical
+# row counts, confirming nothing else changed. nosqli_verdict.py (new, matching redos_verdict.py's/
+# path_traversal_verdict.py's own <raw_dir> <src_dir> <out.json> CLI contract) is the new reducer;
+# the producer itself received only the FIX01 column addition above, nothing else.
+NOSQLI_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                    "tchecker-property-adjudicator/producers/export_nosqli_integ.sc")
+NOSQLI_VERDICT = os.path.join(SCANNER_V2, "nosqli_verdict.py")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -1144,6 +1170,49 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"llm_input_verdict.derive() failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["llm_input_reduce"] = {"seconds": time.time() - t0}
+
+    # NOSQLI INTEGRATION: producer (frozen except NOSQLI-INTEG-R01-FIX01's additive column fix,
+    # see the module-level comment above) against js_bin -- already reflects the shared
+    # entrypoint-coverage correction, same as every other JS/TS stage -- then the reducer (new
+    # this session, orchestration-only: imports adjudicate_iterative exactly as redos_verdict.py/
+    # path_traversal_verdict.py do, never reimplements adjudicate_js.py or the producer's own
+    # Stage 1/2/3 logic).
+    nosqli_raw = os.path.join(work, "nosqli_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", NOSQLI_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={nosqli_raw}",
+         "--param", f"srcLabel={pkg_name}"],
+        os.path.join(work, "nosqli_producer.log"))
+    record["stages"]["nosqli_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"nosqli producer rc={rc}"
+        return record
+
+    # Reducer: 3 positional args, both nosqli_raw and pkg_dir passed absolute (same real landmine
+    # as redos_verdict.py/path_traversal_verdict.py -- a relative path here silently produces
+    # ADJUDICATOR_RUN_FAILED on every sink instead of a real error).
+    nosqli_out = os.path.join(work, "nosqli_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, NOSQLI_VERDICT, nosqli_raw, pkg_dir, nosqli_out],
+                         check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.PIPE)
+        with open(nosqli_out) as f:
+            nosqli_doc = json.load(f)
+        record["nosqli_classification"] = nosqli_doc.get("classification", {})
+        record["nosqli_findings"] = nosqli_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["nosqli_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"nosqli_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["nosqli_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"nosqli scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["nosqli_scan"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

@@ -187,6 +187,13 @@ BUNDLED_RELATIVE_PATHS = (
     # llm_input_out.json follows the exact same precedent as the other *_out.json entries.
     "llm_raw",
     "llm_input_out.json",
+    # NOSQLI INTEGRATION: nosqli_raw follows the exact same "bundle the raw-output directory
+    # as-is, required" precedent as llm_raw/sd_facts/redos_raw/pt_raw above -- this producer,
+    # like LLM-input's own, always runs unconditionally on every successful run (no conditional
+    # sub-pipeline shape); nosqli_out.json follows the exact same precedent as the other
+    # *_out.json entries.
+    "nosqli_raw",
+    "nosqli_out.json",
 )
 
 # Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
@@ -252,6 +259,10 @@ ANALYZER_FILES = {
     # SCANNER_V2, same "real absolute path used directly" treatment as serialize_dos_r03.py above.
     "llm_input_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
                               "tchecker-property-adjudicator/adjudicator/llm_input_verdict.py"),
+    # NOSQLI INTEGRATION: nosqli_verdict.py (new this session) is the analyzer that produces
+    # nosqli_out.json -- same real path-construction convention as redos_verdict.py/
+    # path_traversal_verdict.py above (SCANNER_V2-root-relative).
+    "nosqli_verdict.py": os.path.join(os.path.dirname(_HERE), "nosqli_verdict.py"),
 }
 
 
