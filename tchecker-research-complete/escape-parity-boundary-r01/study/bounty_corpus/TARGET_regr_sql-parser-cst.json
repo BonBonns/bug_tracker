@@ -1,0 +1,1380 @@
+{
+ "target": "regr-sql-parser-cst",
+ "frozen_at_utc": "2026-09-02T09:48:29Z",
+ "repo_remote": "https://github.com/nene/sql-parser-cst",
+ "commit": "3e049312f3d0c1ec1fb9f8f2a6010ceb02d83103",
+ "commit_date": "2026-08-23T21:00:39+03:00",
+ "checkout_mode": "full",
+ "sparse_paths": [],
+ "excluded_dir_names": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "crashtests",
+  "dist",
+  "docs",
+  "examples",
+  "expat",
+  "gtest",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "player",
+  "reftests",
+  "test",
+  "tests",
+  "third_party",
+  "vendor"
+ ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "dist",
+  "docs",
+  "examples",
+  "player"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "TYPESCRIPT": 128
+ },
+ "excluded_file_count": 134,
+ "analysed_file_count": 128,
+ "file_set_sha256": "839cc74424c811599f42c037bcdb2ee9871af90c0f8c2a292c726a008b54dac1",
+ "files": [
+  {
+   "path": "perf/perf-test.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "e951259a373e1f0478a3feedbf19e6ec48e471475743b77c3eaf3df9cc5ec48f"
+  },
+  {
+   "path": "scripts/add-keyword.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9f5a7d5665018c3c018addd52a56fca205e1e6c547e6a35b2e6ae619feb9af26"
+  },
+  {
+   "path": "scripts/add-template.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0a7a8bde38816403e61de890f60596cc870381e6c7a002ae8ddb070e522a707b"
+  },
+  {
+   "path": "scripts/disable-recusion-check.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "f83a607a23155593f69cde7ba25cc16062094c233996af9ffede8f4ac3e7287d"
+  },
+  {
+   "path": "scripts/generate.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "35aae596b56bc5e238d5e7d1a0697af724dd75369715d385aa095633822dbdd4"
+  },
+  {
+   "path": "scripts/move-imports.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8be439f602d8648f03eb42e0e5a24eb15690e45912eef14b932a0110e5563a5e"
+  },
+  {
+   "path": "scripts/rule-templates.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2a1754b1fb42e8435d987a655b487e4d69dbe6bf3540fb76df568eb989b3207d"
+  },
+  {
+   "path": "scripts/utils.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "7dcfab71735e89c46131afc87089dd02296b951df4eb8ed61c038b3be6456516"
+  },
+  {
+   "path": "src/FormattedSyntaxError.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b5ffc9a7ca8e31b9908570859873b81ccfd17d15f273ebb6f2877d33212560b3"
+  },
+  {
+   "path": "src/ParserOptions.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b0ada5842bb2563aca3d15781d830d0d3e8a259a2e70de0523d3aa850f83ae59"
+  },
+  {
+   "path": "src/cst/Alias.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9d709d0580bf1c42098bc7982372fe4d3da9245ddb1337249fe626d6b935a500"
+  },
+  {
+   "path": "src/cst/AlterAction.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "86ff9b1b7536d70ebd28a4ac575a3870aaa2120683801a2bf965e2ea1971c964"
+  },
+  {
+   "path": "src/cst/AlterTable.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "990f780fcf159d6b16477e76a08a01cebafff08765afda427402c348aabdf5b1"
+  },
+  {
+   "path": "src/cst/Analyze.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8b2042c9565aeaa82dfa629f3249fdd69819046a2a7bdc3cd96a56ec34a3e08c"
+  },
+  {
+   "path": "src/cst/Base.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "115b27bea3e59ee9fadec7bf9e13d1074dd9343752c197f1ee7cc3ceaac3b004"
+  },
+  {
+   "path": "src/cst/Cast.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "66cc6150b25cadfbee15a96d7cd29624d5cc63d70807b932e98ca97988cda34d"
+  },
+  {
+   "path": "src/cst/Comment.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "439d4d95a0e965b2da2b1a23f5e324c0feefd379189f80559aca2db27404c9cd"
+  },
+  {
+   "path": "src/cst/Constraint.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "618759641d08decce0ff7f3f4f6f598cd2df573b3e374a5bddbca1bb27404beb"
+  },
+  {
+   "path": "src/cst/CreateTable.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "fc81ddc1f1e92dec4f0eef395a94d31a2ce22ed38c77aeb1b16ea88338ad5115"
+  },
+  {
+   "path": "src/cst/DataType.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "14ecbbc1468552c193d4082103195978f16af413b8853de41082b9e92f58ccb1"
+  },
+  {
+   "path": "src/cst/Dcl.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2145d01128f0a2c7a2a7391d893b8cf8032747ecd8e349857c09a58e1f1636f6"
+  },
+  {
+   "path": "src/cst/Delete.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8ac1e6784d2106071014f1ab26777ba09764643ddf0d137f67888ccc356b62fe"
+  },
+  {
+   "path": "src/cst/Do.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "7cdd2fdd650fcc82af870075c48cd2577f5ec32771e7c68033aeed0954b044dd"
+  },
+  {
+   "path": "src/cst/Domain.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "6a786be7f468646884d9cf4805f2dbebbc8eb3c79929c7bc228526a0a101a25a"
+  },
+  {
+   "path": "src/cst/DropTable.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "007787a17244c3a208fe4a91cc10f80cd27bc025e4f65dc6e30964cc67c06865"
+  },
+  {
+   "path": "src/cst/Explain.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "277c1d3add63ee8e3cdd1dbf60e1e278cb0b04faef08f84c3e94869613580933"
+  },
+  {
+   "path": "src/cst/Expr.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "1c3145862770ed992115e752652f2040ef86dd8728a1cd85934658f5fae7a825"
+  },
+  {
+   "path": "src/cst/Extension.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0281f2032a26ecd8b3e39aa5e52d7422317b84087a646d7b107f75bdbb538c49"
+  },
+  {
+   "path": "src/cst/Function.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "3ba21e249de1efd6dc6330b8681396a606116e44a07c4f123dee8140e302c4f2"
+  },
+  {
+   "path": "src/cst/Index.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "958727bafdb8fabcdd3784d3e3653a1bda5e5f6d21f99c14490127849066dd48"
+  },
+  {
+   "path": "src/cst/Insert.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2a620cf1738d1747df2eda83d734b8c77890edc5a9dd8c7fb1c8662b724ab22a"
+  },
+  {
+   "path": "src/cst/Literal.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "57eada55524ab02938cc424cc661dd384a6e27393f6bda602e728fae03e30e21"
+  },
+  {
+   "path": "src/cst/Merge.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "1f5165d6d4849f007d6fbeb20d6dd47edf2e3064f018542b0a280db1ee23dbaa"
+  },
+  {
+   "path": "src/cst/Node.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "ed94423567245f461f437d0e83027757d2a70f592fe809643c9650b3b38b090f"
+  },
+  {
+   "path": "src/cst/OtherClauses.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "c02f8e56ca60019097a4f65c6afe0cd9009bb2fa169a29760ccf6b2e532232ea"
+  },
+  {
+   "path": "src/cst/Parameter.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "dea4f9ef57cd37e1f4509efa2d8434e4828f700f4300539e4dac7aa4d4a85f5d"
+  },
+  {
+   "path": "src/cst/Policy.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "bb2bd3e4a5b5709f9e891ccb3aed292dee605d1ad9635e10d2c46eef90507354"
+  },
+  {
+   "path": "src/cst/PreparedStatements.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "963ef78eae2bea984e60ca8c40e0067648b0e77d9317526d8d7390a9b0ab08b6"
+  },
+  {
+   "path": "src/cst/ProcClause.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "a185c5d09248c4bd4a9c236c81e5aef8a5b49e2ea6e1a48919cf2a9179a3a860"
+  },
+  {
+   "path": "src/cst/ProceduralLanguage.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b342a2ec575ab43cd138d4b84be60b6d73913a8324f95c5bb7a7c209082ba7ce"
+  },
+  {
+   "path": "src/cst/Procedure.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "64d4c8016f5beb5503204331be11237aeaf5a2f0ea87cfee2263fa5b76219693"
+  },
+  {
+   "path": "src/cst/Program.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9531d7ff305fd555b6da485f13930fa45885c8da161bae00d0e071b799e7791f"
+  },
+  {
+   "path": "src/cst/Publication.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "a15bae2e163adc98819bcf9927d401748657f758921b2adfb47c6092e408839b"
+  },
+  {
+   "path": "src/cst/RenameTable.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2c3781f4746f75053b3d3dc7646a6e7c173321e8ce6ff25df3f078d9ecf8994c"
+  },
+  {
+   "path": "src/cst/Role.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "41519a4e56835bb6dba0cecef5c501e25f046f0727881b735577cac89207d5a8"
+  },
+  {
+   "path": "src/cst/Schema.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "6e7bb7986136e9033ae8a650ecc80d09041d2ba21d2781e17b764aadece04a04"
+  },
+  {
+   "path": "src/cst/Select.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b98283a826b5c0c96f2aff374af21c2b6a434b2483516c0a9be92cbea13d7102"
+  },
+  {
+   "path": "src/cst/Sequence.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "d1117cd3e1a2fbbfba26a504ffab0dae9efa0e35c9957d7f6a8896b50e18acdd"
+  },
+  {
+   "path": "src/cst/Statement.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "77f8165c04693bbc9f00ca8489d0186d10946f1bb5b68646e1526e17abb385ec"
+  },
+  {
+   "path": "src/cst/Subscription.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2bbbd1bdc04aec97780a7706438345aba25320a61ffe65220ec06862704ed990"
+  },
+  {
+   "path": "src/cst/Transaction.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0f587d41f2b04a99897c22e4ae9b61e7765c9254749e7eab4bce3874e4cf5478"
+  },
+  {
+   "path": "src/cst/Trigger.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "c7d3a9048bc4086c01ae877560f67ec6793c75e5678df28a6b71a28aff9539e1"
+  },
+  {
+   "path": "src/cst/Truncate.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b6643c9977cbc4bdfe6d82eef5e2d0ef15401c1e61e9b0b426128acea84dc754"
+  },
+  {
+   "path": "src/cst/Type.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0aa348533aed876528c171949a7a95e0ad0976911203bccde28e7328db84d51c"
+  },
+  {
+   "path": "src/cst/Update.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "29a0a9b7c4e4b2128b687877a511b0def682a05bd71f9490543def3729ea12ba"
+  },
+  {
+   "path": "src/cst/View.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "664cbdd888a1bf269564101a5818f389a641c015c9174613df4813f3a0a16f9d"
+  },
+  {
+   "path": "src/cst/WindowFrame.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "f1f2667b836617e2844e5283243c4a37494fe3f1f5a65e2e9287bf3f4ce9bd20"
+  },
+  {
+   "path": "src/cst/dialects/Bigquery.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "38237a2c67a82b8d867f118307c11c1b71a6dfb9b73a010cf3284a75a6d2ed59"
+  },
+  {
+   "path": "src/cst/dialects/Mysql.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "a375ef5a8c1255ba6992fc691168cd2e6e143fd13d2ea5cde4e5895384143b67"
+  },
+  {
+   "path": "src/cst/dialects/Postgresql.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "33afeb79c88118ca6b2e37d0dbf6d6a4281ecb258b35ee45bed443730b4e63c8"
+  },
+  {
+   "path": "src/cst/dialects/Sqlite.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "400a8a369302e249766ec59a10287bee81b6a1e67e578787961c22d1cbfb7e80"
+  },
+  {
+   "path": "src/cstTransformer.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "bf8ca49cd8e2b330f0b19648c4ac21760bb644fb20118422f3fb4a7de6ae606e"
+  },
+  {
+   "path": "src/cstVisitor.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "37f0b111259d795afde730977ac8cad296d2351bd1e822907da5610af801b408"
+  },
+  {
+   "path": "src/keywords/bigquery.keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "00013e16f78e946faf8d7b28b031c2909dce248b2081b3600f0e41800fd2340d"
+  },
+  {
+   "path": "src/keywords/index.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0e59eac723440448d0b8a07a1f408be1db08b84dc0bb01e6a28aa8a395314e9f"
+  },
+  {
+   "path": "src/keywords/mariadb.keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "f581d863641325ce7859fc4a4a5b27c9dd20c644f4163cba3bfedfc5882e7e97"
+  },
+  {
+   "path": "src/keywords/mysql.keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "46f2e5e231e37029e7528b3b9e09290d97408e5170c78e3987718af2f1d15a8a"
+  },
+  {
+   "path": "src/keywords/postgresql.keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "526fc565231451efa3e03d9d7242bab311e261656a6a24593e0606009a2f7872"
+  },
+  {
+   "path": "src/keywords/sqlite.keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "33e7a2e0f27a567ee77a9aba947e3f1e676470298f91a4f8599c5752629f5ec6"
+  },
+  {
+   "path": "src/main.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "f7dd686401a20b96504386b70a008875d9c5752eae2c51f8fa71b0f3b297f932"
+  },
+  {
+   "path": "src/show.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "037667ccc1c6d365e4d538f11bc5ae412e737f4fe77e62206cecc859b0eb597e"
+  },
+  {
+   "path": "src/showNode/alter_action.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "14baa99d31fbb593fc41c93e8f3364fb3ec1348ecabb33d03f305412f5cfb0c6"
+  },
+  {
+   "path": "src/showNode/alter_table.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "2bd6551181d6d1a448fb5a89588e505c5d3fbf3adeca0528fb658718afd3bad7"
+  },
+  {
+   "path": "src/showNode/analyze.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "1182733a32a85a9ccda13c62c1e876dcd7f5559dbb94b099fbcbae050e035911"
+  },
+  {
+   "path": "src/showNode/base.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "cb9215a6b96ef4773b48fe56cce42591a92379f098b80719664c950f80a9308d"
+  },
+  {
+   "path": "src/showNode/cast.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9eeba7a4d826239bba88e5735e59dc0b4007241277bef71cd758d86e89f83d4f"
+  },
+  {
+   "path": "src/showNode/comment.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "e5cf536183e934747e7d4d33851d54214c4dffd2b5dc8ed80961640cd5702fcb"
+  },
+  {
+   "path": "src/showNode/constraint.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "7c8f1987595cdf8a1fd859a6328ee9fe5653f981eada9e6b50ecf7bde429952e"
+  },
+  {
+   "path": "src/showNode/create_table.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b830666e0afd585c7f319dc99d26a929fe0bf222433351030c6570742eac287d"
+  },
+  {
+   "path": "src/showNode/data_type.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9e39af0125a3d66f5fc072b3fa370aecca4cc2a07870a55803bd85fcbf47d627"
+  },
+  {
+   "path": "src/showNode/dcl.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "e37ea72e7aedea13d16c17910dec5467917a9ed50cb29fdee276827b9660dfc4"
+  },
+  {
+   "path": "src/showNode/delete.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "daee739e46178910ce23552725b9f381fc68638ec9f9a85e55aab9ecbeedfd9e"
+  },
+  {
+   "path": "src/showNode/dialects/bigquery.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8108247b1566155d94ec8435fbe072cb27d7016862483aaef1800f67b2b6d02e"
+  },
+  {
+   "path": "src/showNode/dialects/mysql.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "60d484d7540aa4db3b28f571c1ff68d93d3fd264c05ed1e5e6920f81e676ef05"
+  },
+  {
+   "path": "src/showNode/dialects/postgresql.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "df6adc57cf91e7295b13347352121954fd621753b762e16a96117352fc17fd47"
+  },
+  {
+   "path": "src/showNode/dialects/sqlite.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "264c82c08d1dece9633f4c803a5d4bed071351e0fc50d51e76ab502f8233d0c1"
+  },
+  {
+   "path": "src/showNode/do.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "3eefcbc67cbd13a27ced757d3716ee33b50704e712014fadc401ae41bc63b13d"
+  },
+  {
+   "path": "src/showNode/domain.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "6155d450fced47c04b19c4fd3faad5f12399832b63366b1141916660bd11b7d6"
+  },
+  {
+   "path": "src/showNode/drop_table.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0cbda2950e34360c98ba64ba42660e28f1213f25960b7a2944b1d5240bd174bd"
+  },
+  {
+   "path": "src/showNode/explain.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "41d3e174dc60647db66b50d18990719aaa439efacf28f110c3f1de8c96fd7efd"
+  },
+  {
+   "path": "src/showNode/expr.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "94775d1896ef6b833631ac329e06f0feac5f53ffe09700735c740d64d313feeb"
+  },
+  {
+   "path": "src/showNode/extension.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "5607e75acd38efe43524b3a7796cac62c60dfb6c478489b42f7cf50a916ac60f"
+  },
+  {
+   "path": "src/showNode/function.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "65d1e4eeeacee59e5009ee7b67912a01386454854596291fa813853102bf5dab"
+  },
+  {
+   "path": "src/showNode/index.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "e4a1642f703b96cbcf1ec862d7895aee625125d30beeba041747f4fb732eea9e"
+  },
+  {
+   "path": "src/showNode/insert.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "09746e71d89db50bd3b0e5c5dd1471ca1a8104a258b40a1918f354138a0decb2"
+  },
+  {
+   "path": "src/showNode/merge.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "379d1f05022d483455646c482995c9aeffd200c51ff929030fc444b2c33e3fa0"
+  },
+  {
+   "path": "src/showNode/other_clauses.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "eee9745723701ecd4ff7189592cacc1a10d53bd57b453e516bcad41c7c899d3b"
+  },
+  {
+   "path": "src/showNode/parameter.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "5369fa97e3c1f49259778a99756cc615c8f3e33584036752201c84843848ed37"
+  },
+  {
+   "path": "src/showNode/policy.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "6f0edb12cef59b7f43d32528d75c9b6403ef548a89d714a3c323b13a19327481"
+  },
+  {
+   "path": "src/showNode/prepared_statements.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "19dbbc2e037d2662e821b27d44cf42bd73fce925e25df925a03559e96187529b"
+  },
+  {
+   "path": "src/showNode/proc_clause.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0a33b286edf98962c8572e1ba63915d778207d6f9c272b2cff5f9a30fae8eeec"
+  },
+  {
+   "path": "src/showNode/procedural_language.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "059b5ae72e0fcec6758cc65832d7f05dffcdc904e93d6d7bde18785c457f9aa5"
+  },
+  {
+   "path": "src/showNode/procedure.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8cef21a8b75ef868c02c4fe9bcd73bce4e963da3399b487f1d5e397e6d52260d"
+  },
+  {
+   "path": "src/showNode/publication.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "6e85de10b1f32c64edeca63474106a575d795ae8a4832789259b74a93d37ac7d"
+  },
+  {
+   "path": "src/showNode/rename_table.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "5f5ac96a9c6e2c7f76b3a545fee43caa873181f3a3840a25136915194e8bd563"
+  },
+  {
+   "path": "src/showNode/role.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "7e05020fd7362729bd942bb1b1d9d159ab61a47d485d9a3875d1e33d336e37ef"
+  },
+  {
+   "path": "src/showNode/schema.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0bc921308d5ce4d4182645ff9225e476af6136a779d8facf3774d8aa8fc7df46"
+  },
+  {
+   "path": "src/showNode/select.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "cff795cc15477fb85ca3419bd8e0acef55b5a71df2ff245d27d302dc17ba0d88"
+  },
+  {
+   "path": "src/showNode/sequence.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b31a38ae5e513531511d39e59bf41ebad0448bd1b076b7af9aca1e10dfc02157"
+  },
+  {
+   "path": "src/showNode/subscription.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "b0505203cdf25a15d085d910598983b413254218f4b73a06a9e5b9a44c1c1030"
+  },
+  {
+   "path": "src/showNode/transaction.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "bf12a73618bec991dcf7cb34660a3cc8a6d338a6e1c4f69368a1c09ff49ca66a"
+  },
+  {
+   "path": "src/showNode/transformMap.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "e36382de24a5864ef2ae15e9a93a7899843973129405bc4f6f2daefa802308ac"
+  },
+  {
+   "path": "src/showNode/trigger.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "4dd6805454ac627844165078b9e67ffd15a18b1329a2e288cd25a39b58933c2b"
+  },
+  {
+   "path": "src/showNode/truncate.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "22602e21780b93ce017dbf073db071d2a9a32cb0fa9e3915e68b7c13a73e96eb"
+  },
+  {
+   "path": "src/showNode/type.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "bc198ddc287dffb02ca274aef4f89dcfee04cc3c6f995278af16f908379d4ac6"
+  },
+  {
+   "path": "src/showNode/update.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "dab9a634dd0a7c8a0582bfac9d32d5eed2d2f0f8dde9edf2a5f8f7faac73224f"
+  },
+  {
+   "path": "src/showNode/view.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "37ebfcbe198d869a3b2272a2c33a2d1733c32e55205f3562a3ba311188cb52c1"
+  },
+  {
+   "path": "src/showNode/window_frame.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "7bad1492a185586a0643cf07b63f8c0a003c957351d67d08f9238bcedc0d34c4"
+  },
+  {
+   "path": "src/utils/blob.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "df243f9f2ffe1e8a6caffae9f2bf6755200355031d207c491e0a631705081f8b"
+  },
+  {
+   "path": "src/utils/generic.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "dd5a8fbe32fc6cbb32f8c1a470f7cc9bf09edfe52d7fc2ca340c255e66f51020"
+  },
+  {
+   "path": "src/utils/keywords.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "19c1311189b346f95fd64b241e85c48c9b04524f57b4c56430a13a34607b95a8"
+  },
+  {
+   "path": "src/utils/list.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "eb02b75a8d38c73c472abc81f5cd41257d3b8753f91c58e163c6134cb8e60d58"
+  },
+  {
+   "path": "src/utils/loc.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "05877ce9e74f8500bfee7ce4526f1845ec6b71542a3563bfe60fa625460064de"
+  },
+  {
+   "path": "src/utils/node.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "09e0e4dbfe5c5e71e2d57b5e76539e3f735f2472d930a6211b0ce1ce3f5edac3"
+  },
+  {
+   "path": "src/utils/parserState.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "3322298546e5c34342df93170e966cad0ac9bee9dbd9811460ade2be5f05bfd7"
+  },
+  {
+   "path": "src/utils/pgOperators.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8f42ae091a3f300b492495925020dcf84e3646f94cfff9d4c0fec3333ac32126"
+  },
+  {
+   "path": "src/utils/read.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "8ec8f43dbdf62bc269c0f181ff6a09c67d524608abc380935babb99defcb7ca6"
+  },
+  {
+   "path": "src/utils/whitespace.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0a1fd5f38e50a12784f8be8d4bf836db604a4312e570e85ade0103f022f994a5"
+  }
+ ],
+ "excluded_files": [
+  {
+   "path": "test/analyze.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/bigquery/bigquery.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/bigquery/export_data.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/bigquery/load_data.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/bigquery/row_access_policy.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/cstVisitor.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dcl/alter_default_privileges.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dcl/grant.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dcl/revoke.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/alter_func_proc.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/alter_table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/constraints_column.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/constraints_table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/create_table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/create_table_bigquery.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/create_table_mysql.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/create_table_postgresql.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/create_table_sqlite.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/data_types.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/domain.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/drop_table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/function.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/index.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/policy.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/procedure.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/rename_table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/role.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/schema.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/sequence.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/trigger.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/type.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/ddl/view.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dml/delete.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dml/insert.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dml/merge.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dml/truncate.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/dml/update.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/explain.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/array.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/array_access.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/at_time_zone.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/builtin_functions.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/case.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/cast.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/exists.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/extract.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/func_call.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/member_expr.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_arithm.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_binary.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_collate.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_comparison.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_json.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_logic.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_postgres.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_precedence.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/op_string.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/paren.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/raise.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/row.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/struct.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/expr/window_func.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/identifier.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/blob.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/boolean.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/datetime.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/interval.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/json.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/jsonb.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/null.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/number.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/numeric.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/literal/string.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/location.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/parameters.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/parse.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/comment.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/do.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/extension.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/parameter.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/publication.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgresql/subscription.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/prepared_statements.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/assert.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/assignment.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/begin_end.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/call.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/case.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/declare.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/declare_block.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/exception_block.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/exit_block.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/for.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/foreach.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/if.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/loop.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/null.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/raise.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/repeat.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/return.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/set.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/proc/while.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/compound.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/for.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/dual.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/inheritance.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/pivot.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/system_time.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/tablesample.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/from/unnest.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/group_by.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/having.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/into.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/join.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/limiting.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/lock_in_share_mode.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/order_by.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/perform.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/qualify.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/select.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/table.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/values.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/where.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/window.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select/with.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/sqlite.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/statement.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/table_name.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/test_utils.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/transactions.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/variable.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/whitespace.test.ts",
+   "kind": "TYPESCRIPT",
+   "reason": "test"
+  }
+ ]
+}

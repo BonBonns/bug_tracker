@@ -39,9 +39,12 @@ REACH_SC = {"JAVASCRIPT": "js_reachability_facts.sc",
 # Measuring 665 sources against 1,531 CPG files would have read as 230%
 # coverage -- a ratio between two differently-defined populations, not a
 # measurement -- so coverage is computed as a set intersection instead.
-COVERED_KINDS = {"JAVASCRIPT": {"JAVASCRIPT"},
+# jssrc2cpg handles JavaScript and TypeScript through one frontend, so both
+# kinds count as executable source for the JAVASCRIPT language.
+COVERED_KINDS = {"JAVASCRIPT": {"JAVASCRIPT", "TYPESCRIPT"},
                  "C_CPP": {"C_CPP_SOURCE", "C_CPP_HEADER"}}
-EXEC_KINDS = {"JAVASCRIPT": {"JAVASCRIPT"}, "C_CPP": {"C_CPP_SOURCE"}}
+EXEC_KINDS = {"JAVASCRIPT": {"JAVASCRIPT", "TYPESCRIPT"},
+              "C_CPP": {"C_CPP_SOURCE"}}
 
 
 def run(cmd, timeout):

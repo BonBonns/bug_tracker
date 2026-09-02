@@ -131,6 +131,15 @@ scope freeze applies to them, and nothing found in them is submitted:
 | mholt/PapaParse | regression |
 | nodemailer/mailparser | regression |
 
+All four have been run; see `REGRESSION_TARGETS.md`. No false positives across
+74 records, every abstention correct — and one real detector gap surfaced: the
+JavaScript layer records a quote site only when the comparison names a quote
+*literal*, so `input[quoteSearch - 1] === escapeChar` in PapaParse — the same
+one-position shape the property flagged in Gecko — was never even considered.
+A "0 candidates" result from the JavaScript layer therefore says nothing about
+hand-written character scanners with parameterised delimiters. That is the
+next revision's work.
+
 They are dense in quoted-string boundary handling, which makes them good at
 exposing detector defects — the same way real Gecko code exposed two of them
 (the `BOOLEAN_TOGGLE` over-acceptance and the extracted-char pairing gap). Use

@@ -10,7 +10,11 @@ additional third party software" and for patch gaps against vendored
 libraries -- so they are outside this corpus by the program's own terms, not
 by our preference.
 
-usage: freeze_target.py <repo_root> <target_key> <out.json>
+usage: freeze_target.py <repo_root> <target_key> <out.json> [--exclude a,b,c]
+
+`--exclude` adds directory names to the exclusion set for this freeze only.
+It is additive and recorded in the manifest, so a target that ships generated
+bundles can leave them out without changing what any earlier freeze meant.
 """
 import hashlib
 import json
@@ -22,6 +26,9 @@ from datetime import datetime, timezone
 C_EXT = (".c", ".cc", ".cpp", ".cxx")
 H_EXT = (".h", ".hh", ".hpp")
 JS_EXT = (".js", ".mjs", ".jsm")
+# jssrc2cpg parses TypeScript too. Declaration files carry no executable code,
+# so they are not source for this purpose and are counted as neither.
+TS_EXT = (".ts", ".mts", ".cts")
 
 # Directory names that mark vendored or generated trees.  Anything under one
 # of these is excluded from the analysed set and counted separately.
@@ -29,6 +36,28 @@ EXCLUDED_DIRS = {
     ".git", "third_party", "nss", "expat", "vendor", "node_modules",
     "test", "tests", "gtest", "mochitest", "crashtests", "reftests",
 }
+
+# Files that live beside a library's source without being any of it: tool
+# configuration, build scripts, and generated bundles. They are excluded as a
+# uniform rule about what counts as source, decided before any finding is
+# looked at -- never as a per-file exception to make a coverage number pass.
+# A generated bundle in particular is its own source compiled, so analysing it
+# would double-count the same code in an unreadable form.
+EXCLUDED_BASENAMES = {
+    "gruntfile.js", "gulpfile.js", "webpack.config.js", "rollup.config.js",
+    "karma.conf.js", "jest.config.js", "babel.config.js",
+}
+GENERATED_SUFFIXES = (".min.js", ".bundle.js", ".min.mjs")
+
+
+def is_source(name):
+    """True when a file is library source rather than tooling or output."""
+    low = name.lower()
+    if low.startswith("."):          # .eslintrc.js, .prettierrc.js, .ncurc.js
+        return False
+    if low in EXCLUDED_BASENAMES:
+        return False
+    return not low.endswith(GENERATED_SUFFIXES)
 
 
 def git(root, *args):
@@ -44,16 +73,22 @@ def classify(path):
         return "C_CPP_HEADER"
     if low.endswith(JS_EXT):
         return "JAVASCRIPT"
+    if low.endswith(TS_EXT) and not low.endswith(".d.ts"):
+        return "TYPESCRIPT"
     return None
 
 
 def main():
     root, key, out_path = sys.argv[1], sys.argv[2], sys.argv[3]
+    extra = set()
+    if len(sys.argv) > 5 and sys.argv[4] == "--exclude":
+        extra = {d.strip() for d in sys.argv[5].split(",") if d.strip()}
+    excluded_dirs = EXCLUDED_DIRS | extra
     analysed, excluded = [], []
     for dirpath, dirnames, filenames in os.walk(root):
         rel_dir = os.path.relpath(dirpath, root)
         parts = set([] if rel_dir == "." else rel_dir.split(os.sep))
-        skipped = parts & EXCLUDED_DIRS
+        skipped = parts & excluded_dirs
         # Only .git is pruned from the walk.  Everything else is still visited
         # so that excluded files are *counted*, not silently invisible: a
         # scan that analyses 655 of 655 files and one that analyses 655 of
@@ -64,6 +99,10 @@ def main():
             if kind is None:
                 continue
             rel = os.path.normpath(os.path.join(rel_dir, fn))
+            if not is_source(fn):
+                excluded.append({"path": rel, "kind": kind,
+                                 "reason": "not-library-source"})
+                continue
             if skipped:
                 excluded.append({"path": rel, "kind": kind,
                                  "reason": sorted(skipped)[0]})
@@ -91,7 +130,11 @@ def main():
         "commit_date": git(root, "log", "-1", "--format=%cI"),
         "checkout_mode": "sparse" if sparse else "full",
         "sparse_paths": sparse.splitlines(),
-        "excluded_dir_names": sorted(EXCLUDED_DIRS - {".git"}),
+        "excluded_dir_names": sorted(excluded_dirs - {".git"}),
+        "excluded_basenames": sorted(EXCLUDED_BASENAMES),
+        "excluded_suffixes": sorted(GENERATED_SUFFIXES),
+        "excluded_dotfiles": True,
+        "extra_exclusions": sorted(extra),
         "exclusion_rationale": (
             "Vendored/third-party and test trees are outside the analysed set. "
             "The frozen program policy declines bounties for bugs in or caused "

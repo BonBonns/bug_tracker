@@ -14,19 +14,31 @@ with no change to the analyser between them.
 | repository | mozilla/gecko-dev | mozilla-firefox/firefox |
 | commit | `5836a062` | `8a99ef92` |
 | commit date | 2025-07-08 | 2026-09-01 |
-| file set sha256 | `2e0313a8…` | `8cee96d9…` |
+| file set sha256 | `7fea6f9d…` | `8d44d240…` |
 | C/C++ files analysed | 1,504 | 1,528 |
 | C/C++ parse coverage | **1.00** | **1.00** |
 | parser-layer records | 26 | 26 |
 | **candidates** | **1** | **0** |
 
-JavaScript was run separately over the live tree: 29 of 33 files covered
-(0.879), 9 records, 0 candidates, 1 abstention
+JavaScript was run separately over the live tree: 29 of 29 files covered
+(1.00), 9 records, 0 candidates, 1 abstention
 (`UNRESOLVED_REGEX_CONSTRUCTION` in `netwerk/base/ascii_pac_utils.js`).
 
 Coverage is measured as a set intersection between the frozen manifest and
 the FILE nodes in the CPG, not as a ratio of two independently-counted
-populations. Both C/C++ runs covered every file in their manifest.
+populations. Every run above covered every file in its manifest.
+
+The manifests were re-frozen once, and every number in this document comes
+from the re-run. The first pass counted four tooling dotfiles
+(`.prettierrc.js`, `.stylelintrc.js`, `.babel-eslint.rc.js`,
+`security/.eslintrc.mjs`) as JavaScript source, which put JS coverage at
+0.879 — the frontend had correctly ignored them. `freeze_target.py` now
+excludes dotfile configs, named build scripts and generated bundles as a
+uniform rule about what counts as library source, applied to every target
+alike and decided before any finding was looked at. The C/C++ analysed file
+set is byte-identical across the two freezes, and all three runs reproduced
+their earlier classifications exactly; only the manifest hashes and the JS
+coverage figure changed.
 
 ## The one candidate, and what happened to it
 

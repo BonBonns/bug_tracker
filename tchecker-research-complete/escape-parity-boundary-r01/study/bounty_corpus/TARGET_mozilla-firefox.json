@@ -1,6 +1,6 @@
 {
  "target": "mozilla-firefox",
- "frozen_at_utc": "2026-09-02T04:59:44Z",
+ "frozen_at_utc": "2026-09-02T09:48:28Z",
  "repo_remote": "https://github.com/mozilla-firefox/firefox",
  "commit": "8a99ef927ea16827f2089e2bdf6a1188ddf645e7",
  "commit_date": "2026-09-01T21:50:16+00:00",
@@ -35,31 +35,32 @@
   "third_party",
   "vendor"
  ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [],
  "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
  "file_counts": {
-  "JAVASCRIPT": 33,
   "C_CPP_SOURCE": 665,
-  "C_CPP_HEADER": 863
+  "C_CPP_HEADER": 863,
+  "JAVASCRIPT": 29
  },
- "excluded_file_count": 591,
- "analysed_file_count": 1561,
- "file_set_sha256": "8cee96d9ba91fc54f77c9fe4eeceeaeee22c1a16fa00202042aa0e32e84153c9",
+ "excluded_file_count": 595,
+ "analysed_file_count": 1557,
+ "file_set_sha256": "8d44d240524adfddd93468da29a8d358928a99488b9c1868d35a79a49a3d0d09",
  "files": [
-  {
-   "path": ".babel-eslint.rc.js",
-   "kind": "JAVASCRIPT",
-   "sha256": "7d024e6e76140907de276569cdacdd6311fde63b11d458a4789e76f122f15476"
-  },
-  {
-   "path": ".prettierrc.js",
-   "kind": "JAVASCRIPT",
-   "sha256": "457a225a2b173eba66b6d10c9588ee8fee1eeaeff1c8a3361efae2d101a5174e"
-  },
-  {
-   "path": ".stylelintrc.js",
-   "kind": "JAVASCRIPT",
-   "sha256": "9000333bc573b1fdcedda282de1b1b7468094067db50146b62628beed97858ab"
-  },
   {
    "path": "dom/base/AbstractRange.cpp",
    "kind": "C_CPP_SOURCE",
@@ -6536,11 +6537,6 @@
    "sha256": "3e797e6583177e40cb05250ea630cc30a16cf6ba224c01e3b77d361fecc3b5c6"
   },
   {
-   "path": "security/.eslintrc.mjs",
-   "kind": "JAVASCRIPT",
-   "sha256": "41c94d8700c618814203307d102aa59c64df2c8f813dd4897abf6bd1cf78b287"
-  },
-  {
    "path": "security/manager/ssl/AppSignatureVerification.cpp",
    "kind": "C_CPP_SOURCE",
    "sha256": "b69346fd5f037036e333451a8e26b48a026886b7583e3f08db2a1857eeba328f"
@@ -7853,6 +7849,21 @@
  ],
  "excluded_files": [
   {
+   "path": ".babel-eslint.rc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": ".prettierrc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": ".stylelintrc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
    "path": "dom/base/crashtests/1822717-module.js",
    "kind": "JAVASCRIPT",
    "reason": "crashtests"
@@ -8540,7 +8551,7 @@
   {
    "path": "dom/base/test/jsmodules/.eslintrc.mjs",
    "kind": "JAVASCRIPT",
-   "reason": "test"
+   "reason": "not-library-source"
   },
   {
    "path": "dom/base/test/jsmodules/ambiguous_export.mjs",
@@ -10013,9 +10024,14 @@
    "reason": "tests"
   },
   {
+   "path": "security/.eslintrc.mjs",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
    "path": "security/manager/ssl/tests/.eslintrc.mjs",
    "kind": "JAVASCRIPT",
-   "reason": "tests"
+   "reason": "not-library-source"
   },
   {
    "path": "security/manager/ssl/tests/gtest/CertificateCompressionTest.cpp",
