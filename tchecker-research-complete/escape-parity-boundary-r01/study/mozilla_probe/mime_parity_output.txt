@@ -1,0 +1,14 @@
+run  input                          mozilla   parity    agree
+0    text/plain;p="v",text/html     2         2         yes
+1    text/plain;p="v\",text/html    1         1         yes
+2    text/plain;p="v\\",text/html   1         2         NO
+3    text/plain;p="v\\\",text/html  1         1         yes
+4    text/plain;p="v\\\\",text/html 1         2         NO
+5    text/plain;p="v\\\\\",text/html 1         1         yes
+6    text/plain;p="v\\\\\\",text/html 1         2         NO
+
+worked example, escape run = 2 (an escaped backslash, so the quote closes):
+  input           text/plain;p="v\\",text/html
+  mozilla part    [text/plain;p="v\\",text/html]
+  parity  part    [text/plain;p="v\\"]
+  parity  part    [text/html]

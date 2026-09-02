@@ -207,9 +207,40 @@ import io.shiftleft.codepropertygraph.generated.nodes
     }.headOption
   }
 
+
+  // Real parsers usually extract the character first (`char c = s[i];`) and compare the
+  // VARIABLE against the quote, while still testing `s[i-1]` against the escape directly.
+  // Map such a variable back to the (base, index) it was read from, at offset zero, so the
+  // two halves of a one-position rule can still be paired.
+  val charVarOrigin = scala.collection.mutable.Map[(Long, String), (String, String)]()
+  cpg.call.nameExact("<operator>.assignment").l.foreach { a =>
+    val mId = methOf(a).map(_.id).getOrElse(-1L)
+    val lhs = argAt(a, 1).collect { case i: nodes.Identifier => i.name }
+    for {
+      nm <- lhs
+      rhs <- argAt(a, 2)
+      (b, idxNode) <- indexParts(rhs)
+      (idxName, off) <- offsetParts(idxNode)
+      if off == 0
+    } charVarOrigin((mId, nm)) = (b, idxName)
+  }
+  /** A comparison of a quote literal against an EXTRACTED character variable. */
+  def extractedQuoteCmp(c: nodes.Call): Option[(String, String, Int, Long)] = {
+    if (!comparisonOps.contains(c.name)) return None
+    val as = args(c)
+    val mId = methOf(c).map(_.id).getOrElse(-1L)
+    val pairs = List((as.lift(0), as.lift(1)), (as.lift(1), as.lift(0)))
+    pairs.flatMap {
+      case (Some(x: nodes.Identifier), Some(y)) if isQuoteLiteral(y) =>
+        charVarOrigin.get((mId, x.name)).map { case (b, idx) => (b, idx, 0, x.id) }
+      case _ => None
+    }.headOption
+  }
+
   val pic = w("parser_index_checks.tsv")
   try {
-    val quoteCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isQuoteLiteral).map(r => (c, r)))
+    val quoteCmps = cpg.call.l.flatMap(c =>
+      indexedCharCmp(c, isQuoteLiteral).orElse(extractedQuoteCmp(c)).map(r => (c, r)))
     val escCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isEscapeLiteral).map(r => (c, r)))
     escCmps.foreach { case (ec, (eBase, eIdx, eOff, eIdxExprId)) =>
       if (eOff != 0) {
@@ -274,16 +305,71 @@ import io.shiftleft.codepropertygraph.generated.nodes
       }
     }
     // (b) a boolean toggle: X = !X
+    // (b) a boolean toggle that is genuinely ESCAPE-driven: X = !X where some
+    //     controlling condition tests the CURRENT character for EQUALITY against the
+    //     escape character. A toggle driven by a QUOTE comparison (`inQuotes = !inQuotes`
+    //     under `if (c == '"' && ...)`) tracks string state, not escape-run parity, and
+    //     must not exonerate a one-position boundary rule. Requiring EQUALITY at offset
+    //     zero also excludes the `s[i-1] != ESCAPE` test that is itself the defect.
+    def isEscapeEqualityAtZero(n: nodes.AstNode): Boolean = {
+      val stack = scala.collection.mutable.Stack[nodes.AstNode](n)
+      var found = false
+      var guard = 0
+      while (stack.nonEmpty && !found && guard < 5000) {
+        val cur = stack.pop()
+        guard += 1
+        cur match {
+          case c: nodes.Call if c.name == "<operator>.equals" ||
+                                c.name == "<operator>.strictEquals" ||
+                                c.name == "<operator>.identical" =>
+            val as = c.argument.l
+            val hasEsc = as.exists(isEscapeLiteral)
+            val zeroOffset = as.exists { a =>
+              indexParts(a).flatMap { case (_, idx) => offsetParts(idx) }.exists(_._2 == 0) ||
+              a.isInstanceOf[nodes.Identifier]
+            }
+            if (hasEsc && zeroOffset) found = true
+          case _ => ()
+        }
+        cur._astOut.foreach { case a: nodes.AstNode => stack.push(a); case _ => () }
+      }
+      found
+    }
+    def escapeDrivenToggle(a: nodes.Call): Boolean = {
+      var cur: Option[nodes.AstNode] = Some(a)
+      var found = false
+      var g = 0
+      while (cur.isDefined && !found && g < 300) {
+        cur.get match {
+          case cs: nodes.ControlStructure =>
+            cs.condition.headOption.foreach(c => if (isEscapeEqualityAtZero(c)) found = true)
+          case _ => ()
+        }
+        cur = cur.get._astIn.collectFirst { case x: nodes.AstNode => x }
+        g += 1
+      }
+      found
+    }
+    // group toggles per (method, variable): the variable qualifies when ANY of its
+    // toggles in that method is escape-driven, so the `if (escaped)` consume-branch
+    // counts once the `if (ch == ESCAPE)` branch has established the variable's role.
+    val toggles = scala.collection.mutable.ListBuffer[(Long, String, nodes.Call)]()
     cpg.call.nameExact("<operator>.assignment").l.foreach { a =>
       val lhs = argAt(a, 1).collect { case i: nodes.Identifier => i.name }
       val rhsNeg = argAt(a, 2).collect {
         case c: nodes.Call if c.name == "<operator>.logicalNot" =>
           argAt(c, 1).collect { case i: nodes.Identifier => i.name }
       }.flatten
-      if (lhs.isDefined && lhs == rhsNeg) {
+      if (lhs.isDefined && lhs == rhsNeg)
+        toggles += ((methOf(a).map(_.id).getOrElse(-1L), lhs.get, a))
+    }
+    val qualified = toggles.filter { case (_, _, a) => escapeDrivenToggle(a) }
+      .map { case (m, v, _) => (m, v) }.toSet
+    toggles.foreach { case (mId, v, a) =>
+      if (qualified.contains((mId, v))) {
         val m = methOf(a)
-        pm.println(List(fileOf(a), m.map(_.fullName).getOrElse("?"), m.map(_.id).getOrElse(-1L),
-          ln(a), a.id, "BOOLEAN_TOGGLE").mkString("\t"))
+        pm.println(List(fileOf(a), m.map(_.fullName).getOrElse("?"), mId, ln(a), a.id,
+          "BOOLEAN_TOGGLE").mkString("\t"))
       }
     }
     // (c) a backwards walk over the escape run: a comparison of an indexed char

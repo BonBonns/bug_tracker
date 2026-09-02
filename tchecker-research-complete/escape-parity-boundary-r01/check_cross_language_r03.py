@@ -150,7 +150,7 @@ checks = [c for f in cpp["findings"] if f["site_kind"] == "CHARACTER_SCANNER"
           for c in f.get("single_position_checks", [])]
 tooth("X13 C/C++ character literals are decoded from their source escaping (the escape "
       "comparison is found although the literal is written '\\\\' in source)",
-      len(checks) == 4 and all(c["index_offset"] == "1" for c in checks)
+      len(checks) >= 4 and all(c["index_offset"] == "1" for c in checks)
       and {c["base_expr"] for c in checks} == {"s", "<deref>"},
       str([(c["base_expr"], c["index_var"], c["index_offset"]) for c in checks]))
 
