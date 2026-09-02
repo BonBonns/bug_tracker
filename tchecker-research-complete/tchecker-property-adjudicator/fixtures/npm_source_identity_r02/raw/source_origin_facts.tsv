@@ -1,0 +1,22 @@
+30064771082	application_ingress_field_access.js	6	req.body	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771084	application_ingress_field_access.js	7	request.query	APPLICATION_INGRESS_INPUT	req/request field-access pattern	false	1
+30064771147	cap9_message_item_ingress.js	7	message.text	APPLICATION_INGRESS_INPUT	message/item field-access pattern	false	1
+30064771148	cap9_message_item_ingress.js	11	item.attachments	APPLICATION_INGRESS_INPUT	message/item field-access pattern	false	1
+68719476749	application_ingress_field_access.js	6	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476751	application_ingress_field_access.js	7	request	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	false	1
+68719476758	cap1_module_closure_capture.js	9	state	PACKAGE_API_INPUT	exported_param configure.state	false	1
+68719476793	cap2_shadow_same_name_params.js	6	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	true	2
+68719476793	cap2_shadow_same_name_params.js	6	req	PACKAGE_API_INPUT	exported_param handleAlpha.req	true	2
+68719476794	cap2_shadow_same_name_params.js	10	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	true	2
+68719476794	cap2_shadow_same_name_params.js	10	req	PACKAGE_API_INPUT	exported_param handleBeta.req	true	2
+68719476803	cap4_multiple_origins.js	8	req	APPLICATION_INGRESS_INPUT	bare req/request identifier reference	true	2
+68719476803	cap4_multiple_origins.js	8	req	PACKAGE_API_INPUT	exported_param handleRequest.req	true	2
+68719476809	cap4_single_origin_control.js	6	payload	PACKAGE_API_INPUT	exported_param handlePayload.payload	false	1
+68719476816	cap8_meteor_ingress.js	12	userInput	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userInput	false	1
+68719476817	cap8_meteor_ingress.js	17	userPath	APPLICATION_INGRESS_INPUT	Meteor.methods-registered handler parameter userPath	false	1
+68719476832	class_export_control.js	10	input	PACKAGE_API_INPUT	exported_param module.exports.prototype.process.input	false	1
+68719476837	commonjs_direct_export.js	4	val	PACKAGE_API_INPUT	exported_param module.exports.val	false	1
+68719476848	esm_named_default_export.js	6	value	PACKAGE_API_INPUT	exported_param namedHandler.value	false	1
+68719476849	esm_named_default_export.js	10	value	PACKAGE_API_INPUT	exported_param default.value	false	1
+68719476856	object_literal_export_control.js	4	x	PACKAGE_API_INPUT	exported_param foo.x	false	1
+68719476857	object_literal_export_control.js	8	y	PACKAGE_API_INPUT	exported_param bar.y	false	1
