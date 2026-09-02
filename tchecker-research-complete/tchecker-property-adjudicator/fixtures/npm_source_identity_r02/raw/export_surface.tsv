@@ -1,0 +1,21 @@
+30064771077#0	ambiguous_closure_reassignment.js	22	module.exports	outer	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182404	ambiguous_closure_reassignment.js::program:outer	
+30064771092#0	cap1_module_closure_capture.js	19	module.exports	configure	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182407	cap1_module_closure_capture.js::program:configure	
+30064771092#1	cap1_module_closure_capture.js	19	module.exports	useState	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182409	cap1_module_closure_capture.js::program:useState	
+30064771103#0	cap1_two_level_nested_capture.js	22	module.exports	bump	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182410	cap1_two_level_nested_capture.js::program:bump	
+30064771103#1	cap1_two_level_nested_capture.js	22	module.exports	makeOuter	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182414	cap1_two_level_nested_capture.js::program:makeOuter	
+30064771113#0	cap2_shadow_nested_scope.js	18	module.exports	describeOuter	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182415	cap2_shadow_nested_scope.js::program:describeOuter	
+30064771113#1	cap2_shadow_nested_scope.js	18	module.exports	describeInner	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182418	cap2_shadow_nested_scope.js::program:describeInner	
+30064771123#0	cap2_shadow_same_name_params.js	13	module.exports	handleAlpha	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182419	cap2_shadow_same_name_params.js::program:handleAlpha	
+30064771123#1	cap2_shadow_same_name_params.js	13	module.exports	handleBeta	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182421	cap2_shadow_same_name_params.js::program:handleBeta	
+30064771130#0	cap4_multiple_origins.js	11	module.exports	handleRequest	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182422	cap4_multiple_origins.js::program:handleRequest	
+30064771135#0	cap4_single_origin_control.js	9	module.exports	handlePayload	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182424	cap4_single_origin_control.js::program:handlePayload	
+30064771155#0	class_export_control.js	18	module.exports	module.exports.<init>	CLASS_CONSTRUCTOR	ABSTAINED			CLASS_CONSTRUCTOR_NOT_PUBLIC_API
+30064771155#1	class_export_control.js	18	module.exports	module.exports.prototype.describe	CLASS_INSTANCE_METHOD	RESOLVED	107374182436	class_export_control.js::program:Widget:describe	
+30064771155#2	class_export_control.js	18	module.exports	module.exports.prototype.process	CLASS_INSTANCE_METHOD	RESOLVED	107374182435	class_export_control.js::program:Widget:process	
+30064771157#0	commonjs_direct_export.js	3	module.exports	module.exports	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182437	commonjs_direct_export.js::program:<lambda>0	
+30064771163#0	dynamic_export_key.js	10	module.exports[key]	<dynamic>	NAMED_EXPORT_ASSIGN	ABSTAINED			DYNAMIC_COMPUTED_EXPORT_KEY
+30064771167#0	esm_named_default_export.js	5	exports.namedHandler	namedHandler	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182442	esm_named_default_export.js::program:namedHandler	
+30064771170#0	esm_named_default_export.js	9	exports["default"]	default	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182444	esm_named_default_export.js::program:defaultHandler	
+30064771174#0	object_literal_export_control.js	11	module.exports	foo	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182445	object_literal_export_control.js::program:foo	
+30064771174#1	object_literal_export_control.js	11	module.exports	bar	MODULE_EXPORTS_ASSIGN	RESOLVED	107374182447	object_literal_export_control.js::program:bar	
+30064771182#0	reexport_abstention.js	6	exports.other.js	other.js	NAMED_EXPORT_ASSIGN	ABSTAINED			REEXPORT_UNRESOLVED
