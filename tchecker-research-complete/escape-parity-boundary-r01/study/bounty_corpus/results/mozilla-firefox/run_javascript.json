@@ -1,0 +1,35 @@
+{
+ "target": "mozilla-firefox",
+ "language": "JAVASCRIPT",
+ "commit": "8a99ef927ea16827f2089e2bdf6a1188ddf645e7",
+ "commit_date": "2026-09-01T21:50:16+00:00",
+ "file_set_sha256": "8cee96d9ba91fc54f77c9fe4eeceeaeee22c1a16fa00202042aa0e32e84153c9",
+ "executable_source_files": 33,
+ "started_utc": "2026-09-02T05:20:55Z",
+ "cpg_files_attempts": 1,
+ "cpg": {
+  "files": 29,
+  "methods": 748,
+  "calls": 15934,
+  "literals": 8223
+ },
+ "expected_files": 33,
+ "covered_files": 29,
+ "cpg_files_not_in_manifest": 0,
+ "parse_coverage": 0.8788,
+ "coverage_threshold": 0.8,
+ "parser_producer_attempts": 1,
+ "parser_layer": {
+  "records": 9,
+  "candidates": 0
+ },
+ "reachability_attempts": 1,
+ "reachability_line": "JS_REACHABILITY_FACTS ok: delayed_sources=10 transforms=18 consumers=41 parser_anchors=391 chain_edges=14 timing=0",
+ "status": "ANALYZED",
+ "n_records": 9,
+ "classifications": {
+  "ABSTAINED": 1,
+  "NEGATIVE": 8
+ },
+ "elapsed_s": 81.7
+}

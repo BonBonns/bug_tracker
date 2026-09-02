@@ -25,7 +25,7 @@ record of what the program said at a moment in time.
 
 | # | Repository | Languages | Scope capture | Scan allowed |
 |---|---|---|---|---|
-| 1 | mozilla/gecko-dev | C/C++, JS | `SCOPE_FROZEN` | **yes** |
+| 1 | mozilla-firefox/firefox | C/C++, JS | `SCOPE_FROZEN` | **yes** (scanned) |
 | 2 | nodejs/node | C/C++, JS | `SCOPE_NOT_MACHINE_READABLE` | no |
 | 3 | RocketChat/Rocket.Chat | JS | `PROGRAM_HANDLE_UNRESOLVED` | no |
 | 4 | nextcloud/server | PHP, JS | `SCOPE_NOT_MACHINE_READABLE` | no |
@@ -56,13 +56,16 @@ and 6 needs Ruby modelling for their primary language; each would remain
 partially blocked on capability even with scope frozen. Their JS surface is
 in reach today, their PHP/Ruby surface is not.
 
-Net effect: **mozilla/gecko-dev is the only target scannable right now**, and
-it is scannable because its policy is served as ordinary server-rendered HTML,
-not because it is more likely to yield anything.
+Net effect: **Mozilla is the only target scannable right now**, and it is
+scannable because its policy is served as ordinary server-rendered HTML, not
+because it is more likely to yield anything. The repository actually scanned
+is mozilla-firefox/firefox: the specified mozilla/gecko-dev mirror stopped
+advancing on 2025-07-08, so scanning it would have described source more than
+a year behind what ships.
 
 ## What the Mozilla capture actually says
 
-Quoted from the captured bytes (`scope_evidence/mozilla-gecko-dev.0.html`,
+Quoted from the captured bytes (`scope_evidence/mozilla-firefox.0.html`,
 sha256 recorded in `SCOPE_FREEZE.json`), not from recollection:
 
 - *"Submissions must be either a security bug demonstrating the ability to
@@ -84,6 +87,21 @@ sha256 recorded in `SCOPE_FREEZE.json`), not from recollection:
 These are the program's own words and they set the bar this property's output
 does not currently clear.
 
+## Scan 1 result: mozilla-firefox/firefox
+
+Run and written up in `RESULTS_mozilla-firefox.md`. In short: the frozen
+analyser was run over two pinned commits of the same vendor tree at full
+parse coverage, and produced **1 candidate on the 2025-07-08 snapshot and 0
+on the 2026-09-01 live tree**, with identical site sets and a single
+classification flip at the line that changed.
+
+Mozilla had already fixed it. The public mozilla-central file log records
+changeset `8e738b55`, **Bug 2063814 "Handle \ correctly in SplitMimetype"**,
+landed 2026-08-19 — about two weeks before this scan — and the published diff
+is exactly the pairing correction, citing the same WHATWG *collect an HTTP
+quoted string* clause this property's analysis had identified independently.
+Nothing to report; the value of the run is validation.
+
 ## Standing instruction: the SplitMimetype result is not to be submitted
 
 The `MimeType::SplitMimetype` result in `study/mozilla_probe/` **is not
@@ -97,8 +115,9 @@ a security bug demonstrating an unauthorized action or restricted-information
 access, a reproducible test case, and typically a sec-high or sec-critical
 rating. A parser-correctness deviation, on its own, is none of those.
 
-What would have to change before that position is revisited is a matter for a
-separate decision, not for this document.
+It now also holds for a simpler reason: the code is already corrected
+upstream, by the vendor, from their own independent discovery. There is
+nothing left to submit.
 
 ## Non-bounty regression and precision targets
 
@@ -129,9 +148,11 @@ not folded into any corpus result here.
 
 ## Order of work
 
-1. mozilla/gecko-dev — scope frozen, C/C++ and JS supported: scannable now,
-   over the parser surface (MIME, HTTP headers, cookies, certificate/name
-   parsing, URL and protocol parsing).
+1. mozilla-firefox/firefox — **done**, see `RESULTS_mozilla-firefox.md`.
+   Specified as mozilla/gecko-dev; that mirror stopped advancing at
+   2025-07-08, so the scan target was redirected to the live tree and the
+   redirection recorded. The stale snapshot was frozen and scanned as well,
+   which is what produced the before/after differential.
 2. nodejs/node — blocked on scope capture only; engine is ready.
 3. RocketChat/Rocket.Chat — blocked until the program's existence and location
    are confirmed.

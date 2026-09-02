@@ -1,0 +1,40 @@
+
+# HG changeset patch
+# User Valentin Gosu <valentin.gosu@gmail.com>
+# Date 1787145679 0
+# Node ID 8e738b555997f8685d6b9fbbe3eba1570edfe868
+# Parent  a0efe8bc90331a480e396095c9ebe58b30225cb2
+Bug 2063814 - Handle \ correctly in SplitMimetype r=necko-reviewers,kershaw
+
+Differential Revision: https://phabricator.services.mozilla.com/D319097
+
+
+diff --git a/dom/base/MimeType.cpp b/dom/base/MimeType.cpp
+--- a/dom/base/MimeType.cpp
++++ b/dom/base/MimeType.cpp
+@@ -247,17 +247,23 @@ template <typename char_type>
+ TMimeType<char_type>::SplitMimetype(const nsTSubstring<char_type>& aMimeType) {
+   nsTArray<nsTDependentSubstring<char_type>> mimeTypeParts;
+   bool inQuotes = false;
+   size_t start = 0;
+ 
+   for (size_t i = 0; i < aMimeType.Length(); i++) {
+     char_type c = aMimeType[i];
+ 
+-    if (c == '\"' && (i == 0 || aMimeType[i - 1] != '\\')) {
++    // https://fetch.spec.whatwg.org/#collect-an-http-quoted-string : a
++    // backslash only escapes inside a quoted string, and it consumes the code
++    // point that follows it, so an escaped backslash does not escape the next
++    // character.
++    if (inQuotes && c == '\\') {
++      ++i;
++    } else if (c == '"') {
+       inQuotes = !inQuotes;
+     } else if (c == ',' && !inQuotes) {
+       mimeTypeParts.AppendElement(Substring(aMimeType, start, i - start));
+       start = i + 1;
+     }
+   }
+   if (start < aMimeType.Length()) {
+     mimeTypeParts.AppendElement(Substring(aMimeType, start));
+

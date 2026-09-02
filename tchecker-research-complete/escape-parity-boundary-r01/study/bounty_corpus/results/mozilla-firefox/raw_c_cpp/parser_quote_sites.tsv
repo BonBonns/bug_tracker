@@ -1,0 +1,26 @@
+dom/base/MimeType.cpp	TMimeType.Parse:RefPtr(nsTSubstring&)	107374185225	151	30064820706	30064820707	ACCESSED_CHAR
+dom/base/MimeType.cpp	TMimeType.Parse:RefPtr(nsTSubstring&)	107374185225	158	30064820712	30064820713	ACCESSED_CHAR
+dom/base/MimeType.cpp	TMimeType.SplitMimetype:nsTArray(nsTSubstring&)	107374185227	263	30064820807	68719518098	EXTRACTED_CHAR
+dom/base/MimeType.cpp	TMimeType.GetParameterValue:bool(nsTSubstring&,nsTSubstring&,bool,bool)<const>	107374185233	388	30064820914	30064820915	ACCESSED_CHAR
+dom/base/nsContentUtils.cpp	nsContentUtils.IsCorsUnsafeRequestHeaderValue:bool(nsACString&)	107374187129	9314	30064853131	30064853132	ACCESSED_CHAR
+dom/html/HTMLFormSubmission.cpp	mozilla.dom.EncodingFormSubmission.EncodeVal:nsresult(nsAString&,nsCString&,mozilla.dom.EncodingFormSubmission.EncodeType)	107374190987	752	30064922243	30064922244	ACCESSED_CHAR
+dom/html/input/SingleLineTextInputTypes.cpp	mozilla.dom.EmailInputType.IsValidEmailAddress:bool(nsAString&)	107374192455	207	30064944155	68719625831	EXTRACTED_CHAR
+dom/html/input/SingleLineTextInputTypes.cpp	mozilla.dom.EmailInputType.IsValidEmailAddress:bool(nsAString&)	107374192455	209	30064944164	68719625840	EXTRACTED_CHAR
+netwerk/base/nsURLHelper.cpp	net_ParseMediaType:void(nsACString&,nsACString&,nsACString&,int32_t,bool*,int32_t*,int32_t*,bool)	107374196097	724	30064993459	30064993460	ACCESSED_CHAR
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	nsMIMEHeaderParamImpl.DoParameterInternal:nsresult(nsACString&,char*,nsMIMEHeaderParamImpl.ParamDecoding,char**,char**,char**)	107374197262	530	30065018443	30065018444	ACCESSED_CHAR
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	nsMIMEHeaderParamImpl.DoParameterInternal:nsresult(nsACString&,char*,nsMIMEHeaderParamImpl.ParamDecoding,char**,char**,char**)	107374197262	549	30065018471	30065018472	ACCESSED_CHAR
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	nsMIMEHeaderParamImpl.DecodeRFC5987Param:NS_IMETHODIMP(nsACString&,nsACString&,nsAString&)	107374197267	860	30065018751	68719691424	EXTRACTED_CHAR
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	internalDecodeParameter:nsresult(nsACString&,nsACString&,nsACString&,bool,bool,nsACString&)	107374197268	947	30065018816	30065018817	ACCESSED_CHAR
+netwerk/protocol/http/nsHttp.cpp	mozilla.net.Tokenize:void(char*,uint32_t,char,std.function&)	107374200442	651	30065070643	30065070644	ACCESSED_CHAR
+netwerk/protocol/http/nsHttp.cpp	mozilla.net.ParsedHeaderValueList.ParseNameAndValue:void(char*,bool)	107374200445	730	30065070719	30065070720	ACCESSED_CHAR
+netwerk/protocol/http/nsHttp.cpp	mozilla.net.ParsedHeaderValueList.ParseNameAndValue:void(char*,bool)	107374200445	755	30065070756	30065070757	ACCESSED_CHAR
+netwerk/protocol/http/nsHttpDigestAuth.cpp	mozilla.net.nsHttpDigestAuth.ParseChallenge:nsresult(nsACString&,nsACString&,nsACString&,nsACString&,nsACString&,bool*,uint16_t*,uint16_t*)	107374201252	619	30065093335	30065093336	ACCESSED_CHAR
+netwerk/protocol/http/nsHttpDigestAuth.cpp	mozilla.net.nsHttpDigestAuth.ParseChallenge:nsresult(nsACString&,nsACString&,nsACString&,nsACString&,nsACString&,bool*,uint16_t*,uint16_t*)	107374201252	628	30065093345	30065093346	ACCESSED_CHAR
+netwerk/protocol/http/nsHttpDigestAuth.cpp	mozilla.net.nsHttpDigestAuth.ParseChallenge:nsresult(nsACString&,nsACString&,nsACString&,nsACString&,nsACString&,bool*,uint16_t*,uint16_t*)	107374201252	631	30065093350	30065093351	ACCESSED_CHAR
+netwerk/protocol/http/nsHttpDigestAuth.cpp	mozilla.net.nsHttpDigestAuth.AppendQuotedString:nsresult(nsACString&,nsACString&)	107374201253	730	30065093505	30065093506	ACCESSED_CHAR
+parser/htmlparser/nsParser.cpp	ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)	107374202176	841	30065113706	68719767377	EXTRACTED_CHAR
+parser/htmlparser/nsParser.cpp	ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)	107374202176	841	30065113707	68719767378	EXTRACTED_CHAR
+parser/htmlparser/nsParser.cpp	ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)	107374202176	866	30065113732	68719767399	EXTRACTED_CHAR
+parser/htmlparser/nsParser.cpp	ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)	107374202176	866	30065113733	68719767400	EXTRACTED_CHAR
+xpcom/string/nsTSubstring.cpp	nsTSubstring.Trim:void(std.string_view&,bool,bool,bool)	107374204324	1672	30065145588	30065145589	ACCESSED_CHAR
+xpcom/string/nsTSubstring.cpp	nsTSubstring.Trim:void(std.string_view&,bool,bool,bool)	107374204324	1672	30065145591	30065145592	ACCESSED_CHAR

@@ -1,0 +1,5 @@
+dom/fetch/FetchUtil.cpp	mozilla.dom.JSStreamConsumer.WriteSegment:nsresult(nsIInputStream*,void*,char*,uint32_t,uint32_t,uint32_t*)	462	30064910429	DECODE	inflate	RESOLVED_EXTERNAL
+dom/fetch/FetchUtil.cpp	mozilla.dom.JSStreamConsumer.storeOptimizedEncoding:void(uint8_t*,size_t)	638	30064910600	ENCODE	deflate	RESOLVED_EXTERNAL
+netwerk/protocol/websocket/WebSocketChannel.cpp	mozilla.net.PMCECompression.Deflate:nsresult(uint8_t*,uint32_t,nsACString&)	886	30065104847	ENCODE	deflate	RESOLVED_EXTERNAL
+netwerk/protocol/websocket/WebSocketChannel.cpp	mozilla.net.PMCECompression.Inflate:nsresult(uint8_t*,uint32_t,nsACString&)	935	30065104899	DECODE	inflate	RESOLVED_EXTERNAL
+security/manager/ssl/nsNSSIOLayer.cpp	zlibCertificateDecode:SECStatus(SECItem*,unsigned char*,size_t,size_t*)	1400	30065132973	DECODE	inflate	RESOLVED_EXTERNAL
