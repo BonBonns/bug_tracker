@@ -106,20 +106,18 @@ ADJUDICATOR_DIR = ("/home/user/bug_tracker/tchecker-research-complete/"
                     "tchecker-property-adjudicator/adjudicator")
 SERIALIZE_DOS_PROPERTY_CONFIG = ("/home/user/bug_tracker/tchecker-research-complete/"
                                   "tchecker-property-adjudicator/property_configs/serialize_dos.json")
-# NO_HINTS: same real, empty ({}) hints file redos_verdict.py/path_traversal_verdict.py's own
-# run_adjudicate_one_sink() already passes as TCH_HINTS -- deliberately, never an unset TCH_HINTS.
-# Without it, adjudicate_js.py falls back to ITS OWN hardcoded fixture-only canned hints
-# (keyed "xf0.<property_id_suffix>"/"xf1.<property_id_suffix>", meant only for its own dev-time
-# fixtures) instead of cleanly stopping at round 1 with a real, disclosed llm_input_1.json for
-# semantic review -- confirmed by direct A/B repro against the serialize-dos-r01 fixture
-# demo_member_transform.js (a genuine CANDIDATE_OPEN case): unset TCH_HINTS still lands on the
-# same disposition here (this fixture's real subject_transform name never collides with "xf0"/
-# "xf1"), but only after an extra, unnecessary internal round checking membership in a canned-hint
-# dict that has nothing to do with the real code being adjudicated -- and a package whose own real
-# transform genuinely happens to be named "xf0"/"xf1" would silently inject that fixture's
-# unrelated rationale instead of correctly stopping for real review. TCH_HINTS=NO_HINTS removes
-# both the actual and the latent risk, matching the two other reducers' own established precedent.
-NO_HINTS = os.path.join(ADJUDICATOR_DIR, "no_hints.json")
+# NO_HINTS is no longer referenced directly here: ADJUDICATE-ITERATIVE-R01's
+# adjudicate_iterative.run_adjudicate_sink_iterative() (the Serialize DoS stage's own call
+# below) starts every invocation with its own real, empty {} accumulated-hints file (same
+# content as adjudicator/no_hints.json) and only ever adds a REAL answer to it via ask_fn --
+# unset here (ask_fn=None), so this stage never becomes non-empty either. This constant used to
+# be needed to avoid a real, confirmed bug: without SOME real TCH_HINTS file, adjudicate_js.py
+# falls back to ITS OWN hardcoded fixture-only canned hints (keyed
+# "xf0.<property_id_suffix>"/"xf1.<property_id_suffix>", meant only for its own dev-time
+# fixtures) instead of cleanly stopping for real review -- see adjudicate_iterative.py's own
+# module docstring for the fuller, now-generalized story (every sink is asked about via a real
+# loop, not a single invocation, and any alternative genuinely left unaddressed is disclosed
+# rather than silent).
 # srcPattern="req.body": the same real, already-validated value every fixture and the real
 # motifer@26.1.1 validation in the whole R01-R03 lineage uses (setup_candidate_multisource.sc's
 # own module docstring / check_setup_candidate_multisource.py's M7 control).
@@ -897,6 +895,11 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # verbatim below, rather than re-deriving the same "first path component" logic here.
     sys.path.insert(0, SERIALIZE_DOS_R01_DIR)
     import serialize_dos_r03  # noqa: E402 -- reused, never modified
+    sys.path.insert(0, SCANNER_V2)
+    import adjudicate_iterative  # noqa: E402 -- ADJUDICATE-ITERATIVE-R01, see its own module
+                                  # docstring: drives adjudicate_js.py through every distinct
+                                  # unresolved alternative at a sink, not just the first one a
+                                  # single invocation happens to reach.
 
     # First producer pair (export_serialize_facts.sc + transform_presence.sc, into the SAME
     # sd_facts dir -- required by serialize_dos_r03.py's own derive(), which reads all four
@@ -959,6 +962,10 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # / "evidence_final.json".
     sd_taint_raw_base = os.path.join(work, "sd_taint_raw")
     sd_taint_evidence_base = os.path.join(work, "sd_taint_evidence")
+    sd_adjudication_loop_by_key = {}  # key -> {rounds_asked, rounds_answered,
+                                       #         unaddressed_alternative_count}, for attaching
+                                       # onto serialize_dos_r03.derive()'s own per-finding
+                                       # dicts below (it never computes this itself).
     for key in sorted(sd_qualifying_pkgs):
         taint_raw = os.path.join(sd_taint_raw_base, key)
         rc, secs, mem, err = run_stage(
@@ -984,40 +991,34 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
             record["detail"] = err or f"export_property_propagation rc={rc} (pkg={key})"
             return record
 
-        # adjudicate_js.py (frozen, shared): invoked directly here since serialize_dos_r03.py's
-        # own reducer does NOT call it internally (unlike ReDoS/Path Traversal, whose reducers
-        # handle this themselves). Same real subprocess-invocation shape as
-        # path_traversal_verdict.py's own run_adjudicate_one_sink(): copy os.environ, override
-        # TCH_* keys, cwd=ADJUDICATOR_DIR. TCH_SINK and TCH_SINK_KIND are deliberately left UNSET
-        # -- "first established" sink and "JSON.stringify" are already the documented defaults
-        # every existing Serialize DoS fixture and the real motifer validation rely on (confirmed
-        # against property_configs/serialize_dos.json's own direct_sink_kinds above).
+        # ADJUDICATE-ITERATIVE-R01: invoked here since serialize_dos_r03.py's own reducer does
+        # NOT call adjudicate_js.py internally (unlike ReDoS/Path Traversal, whose reducers
+        # handle this themselves). ask_fn=None keeps external behavior byte-for-byte the same
+        # as the single direct subprocess.run() call this replaced (still asks only the FIRST
+        # unresolved alternative at this sink, still never fabricates an answer) -- the one
+        # real change is that this now discloses, into record["stages"], how many OTHER
+        # distinct alternatives at this sink were never even asked about, instead of that gap
+        # being silent (see adjudicate_iterative.py's own module docstring for why this is a
+        # real gap: a sink fed by more than one distinct unresolved source-to-sink path
+        # otherwise only ever surfaces the first one). TCH_SINK and TCH_SINK_KIND are still
+        # deliberately left unset -- "first established" sink and "JSON.stringify" are already
+        # the documented defaults every existing Serialize DoS fixture and the real motifer
+        # validation rely on (confirmed against property_configs/serialize_dos.json's own
+        # direct_sink_kinds above).
         taint_out_dir = os.path.join(sd_taint_evidence_base, key)
         os.makedirs(taint_out_dir, exist_ok=True)
         t0 = time.time()
-        env = dict(os.environ)
-        env.update({
-            "TCH_RAW": taint_raw,
-            "TCH_SRC": pkg_dir,
-            "TCH_OUT": taint_out_dir,
-            "TCH_PROPERTY_CONFIG": SERIALIZE_DOS_PROPERTY_CONFIG,
-            "TCH_HINTS": NO_HINTS,
-        })
-        try:
-            subprocess.run([sys.executable, "adjudicate_js.py"], cwd=ADJUDICATOR_DIR, env=env,
-                             check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
-                             stderr=subprocess.PIPE)
-        except subprocess.TimeoutExpired:
-            record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
-            record["status"] = "RESOURCE_LIMIT"
-            record["detail"] = f"sd adjudicate_js.py exceeded {SCAN_TIMEOUT}s (pkg={key})"
-            return record
-        except Exception as e:
+        evidence, adj_err = adjudicate_iterative.run_adjudicate_sink_iterative(
+            ADJUDICATOR_DIR, taint_raw, pkg_dir, taint_out_dir, SERIALIZE_DOS_PROPERTY_CONFIG,
+            ask_fn=None, timeout=SCAN_TIMEOUT)
+        if evidence is None:
             record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
             record["status"] = "NORMALIZATION_FAILED"
-            record["detail"] = f"sd adjudicate_js.py failed (pkg={key}): {type(e).__name__}: {e}"
+            record["detail"] = f"sd adjudicate_js.py failed (pkg={key}): {adj_err}"
             return record
-        record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
+        loop_stats = evidence.get("_adjudication_loop", {})
+        record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0, **loop_stats}
+        sd_adjudication_loop_by_key[key] = loop_stats
 
     # Reducer (frozen, unmodified): imported and called directly, never reimplemented, matching
     # run_pilot25_r02.py's own "import and orchestrate" discipline for ReDoS. taint_evidence_dir
@@ -1027,6 +1028,13 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     try:
         sd_taint_evidence_dir = sd_taint_evidence_base if sd_qualifying_pkgs else None
         sd_result = serialize_dos_r03.derive(sd_facts, sd_taint_evidence_dir)
+        # ADJUDICATE-ITERATIVE-R01: serialize_dos_r03.derive() itself is frozen and never
+        # computes this -- attached here, orchestration-only, from the per-key loop stats
+        # already captured above (finding["package"] is derive()'s own real _pkg(file) value,
+        # the same key this stage used for its own sd_taint_evidence/<key> subdirectory).
+        for finding in sd_result.get("findings", []):
+            loop_stats = sd_adjudication_loop_by_key.get(finding.get("package"), {})
+            finding["unaddressed_alternative_count"] = loop_stats.get("unaddressed_alternative_count")
         record["serialize_dos_classification"] = sd_result.get("classification")
         record["serialize_dos_findings"] = sd_result.get("findings", [])
         # serialize_dos_out.json -- same real bundling precedent as redos_out.json/

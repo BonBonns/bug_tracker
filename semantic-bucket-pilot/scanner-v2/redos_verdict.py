@@ -60,11 +60,20 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import adjudicate_iterative  # noqa: E402 -- ADJUDICATE-ITERATIVE-R01, see its own module
+                              # docstring: drives adjudicate_js.py through every distinct
+                              # unresolved alternative at a sink, not just the first one a
+                              # single invocation happens to reach.
 ADJUDICATOR_DIR = ("/home/user/bug_tracker/tchecker-research-complete/"
                     "tchecker-property-adjudicator/adjudicator")
 PROPERTY_CONFIG = ("/home/user/bug_tracker/tchecker-research-complete/"
                     "tchecker-property-adjudicator/property_configs/redos_complexity.json")
-NO_HINTS = os.path.join(ADJUDICATOR_DIR, "no_hints.json")
+# NO_HINTS is no longer referenced directly here: adjudicate_iterative.
+# run_adjudicate_sink_iterative() starts every call with its own real, empty {} accumulated-
+# hints file (same content as adjudicator/no_hints.json) and only ever adds a REAL answer to
+# it via ask_fn -- with ask_fn=None below, this file's own call never becomes non-empty either,
+# so behavior is unchanged.
 
 PACKAGE_API_FAMILY = "PACKAGE_API_INPUT"
 APPLICATION_INGRESS_FAMILY = "APPLICATION_INGRESS"
@@ -112,23 +121,15 @@ def run_adjudicate_one_sink(raw_dir, src_dir, sink_id, out_dir):
         for fn in os.listdir(out_dir):
             os.remove(os.path.join(out_dir, fn))
     os.makedirs(out_dir, exist_ok=True)
-    env = dict(os.environ)
-    env.update({
-        "TCH_RAW": raw_dir,
-        "TCH_SRC": src_dir,
-        "TCH_OUT": out_dir,
-        "TCH_SINK": sink_id,
-        "TCH_PROPERTY_CONFIG": PROPERTY_CONFIG,
-        "TCH_HINTS": NO_HINTS,
-        "TCH_FINDING": "redos_npm_candidate.js",
-    })
-    r = subprocess.run([sys.executable, "adjudicate_js.py"], cwd=ADJUDICATOR_DIR, env=env,
-                        capture_output=True, text=True, timeout=120)
-    evidence_path = os.path.join(out_dir, "evidence_final.json")
-    if not os.path.isfile(evidence_path):
-        return None, r.stdout + r.stderr
-    with open(evidence_path) as f:
-        return json.load(f), None
+    # ADJUDICATE-ITERATIVE-R01: ask_fn=None keeps this byte-for-byte the same external
+    # behavior as the single subprocess.run() call this replaced (still asks only the FIRST
+    # unresolved alternative, still never fabricates an answer) -- the one real change is that
+    # the returned evidence now also carries a real, honest `_adjudication_loop.
+    # unaddressed_alternative_count`: how many OTHER distinct alternatives at this same sink
+    # were never even asked about, instead of that gap being silent.
+    return adjudicate_iterative.run_adjudicate_sink_iterative(
+        ADJUDICATOR_DIR, raw_dir, src_dir, out_dir, PROPERTY_CONFIG,
+        sink=sink_id, finding_file="redos_npm_candidate.js", ask_fn=None)
 
 
 def emit_findings(raw_dir, src_dir, work_dir):
@@ -179,6 +180,13 @@ def emit_findings(raw_dir, src_dir, work_dir):
                                      else "NOT_ESTABLISHED"),
             "adjudicator_disposition": evidence.get("disposition"),
             "adjudicator_property_outcome": evidence.get("property_outcome"),
+            # ADJUDICATE-ITERATIVE-R01: how many OTHER distinct source-to-sink alternatives at
+            # this same sink were never asked about at all (not "reviewed and ruled out" --
+            # genuinely never packaged into an llm_input file), so a consumer of this finding
+            # can tell "fully accounted for" (0) from "part of the real picture is missing"
+            # (>0) instead of that gap being silent.
+            "unaddressed_alternative_count":
+                evidence.get("_adjudication_loop", {}).get("unaddressed_alternative_count"),
             "reportable": False,
         })
     return classification, findings
