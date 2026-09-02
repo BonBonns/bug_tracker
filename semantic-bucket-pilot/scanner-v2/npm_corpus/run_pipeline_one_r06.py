@@ -140,6 +140,19 @@ SERIALIZE_DOS_PROPERTY_CONFIG = ("/home/user/bug_tracker/tchecker-research-compl
 # own module docstring / check_setup_candidate_multisource.py's M7 control).
 SERIALIZE_DOS_SRC_PATTERN = "req.body"
 
+# LLM-INPUT INTEGRATION (roadmap step 8 successor -- discovered mid-session, not one of the
+# originally-tracked 4 JS/TS classes: an already-built, already-gated (gate_llm_input.py, 7/7)
+# OWASP LLM Top-10 property -- LLM02 insecure output handling (model output reaching an
+# eval/exec/SQL/HTML/redirect sink) and LLM01 prompt injection (request data reaching the
+# system-role instruction position) -- that was never wired into any pipeline at all. Real-
+# world-validated already (docs/LLM_INPUT_REALWORLD_PLUGIN_SCAN.md, a genuine RocketChat
+# plugin scan that found and fixed two real producer bugs). export_llm_facts.sc's own
+# signature (cpgFile, outDir) and llm_input_verdict.py's own derive(raw) -- taking only the
+# raw facts dir, no src_dir, no property_config, no semantic-review/adjudicator step at all --
+# are both frozen and reused verbatim, never modified.
+LLM_FACTS_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                       "tchecker-property-adjudicator/producers/export_llm_facts.sc")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -1087,6 +1100,50 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"serialize_dos_r03.derive() failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["sd_reduce"] = {"seconds": time.time() - t0}
+
+    # LLM-INPUT INTEGRATION: producer (frozen, standard cpgFile/outDir signature) against js_bin
+    # -- already reflects the shared entrypoint-coverage correction (see js_frontend_coverage
+    # above), same as every other JS/TS stage -- then the reducer (frozen, unmodified): imported
+    # and called directly, matching the "import and orchestrate, never reimplement" discipline
+    # already established for serialize_dos_r03/ReDoS. Unlike Serialize DoS, no adjudicator/
+    # semantic-review step exists for this property at all -- derive() is fully structural.
+    llm_raw = os.path.join(work, "llm_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", LLM_FACTS_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"outDir={llm_raw}"],
+        os.path.join(work, "llm_facts_producer.log"))
+    record["stages"]["llm_facts_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"llm facts producer rc={rc}"
+        return record
+
+    t0 = time.time()
+    try:
+        sys.path.insert(0, ADJUDICATOR_DIR)
+        import llm_input_verdict  # noqa: E402 -- reused, never modified
+
+        llm_result = llm_input_verdict.derive(llm_raw)
+        # llm_input_verdict.py's own findings carry no "reportable" field at all (it was built
+        # and gated standalone, before this pipeline's own "every finding is reportable=False
+        # pending broader validation" convention existed) -- set here, orchestration-only,
+        # never inside the frozen reducer, same discipline as Serialize DoS's own
+        # unaddressed_alternative_count attachment above.
+        for finding in llm_result.get("findings", []):
+            finding["reportable"] = False
+        record["llm_input_findings"] = llm_result.get("findings", [])
+        # llm_input_out.json -- same real bundling precedent as redos_out.json/
+        # path_traversal_out.json/serialize_dos_out.json (evidence_bundle.py's own
+        # BUNDLED_RELATIVE_PATHS).
+        llm_out = os.path.join(work, "llm_input_out.json")
+        with open(llm_out, "w") as f:
+            json.dump(llm_result, f)
+    except Exception as e:
+        record["stages"]["llm_input_reduce"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"llm_input_verdict.derive() failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["llm_input_reduce"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

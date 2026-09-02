@@ -110,6 +110,30 @@ ck("a record with no serialize_dos_findings key at all still produces a correct,
    and summary1g["serialize_dos_findings"]["raw_count"] == 0
    and summary1g["serialize_dos_findings"]["reportable_count"] == 0)
 
+# --- LLM-input: same discipline as redos_findings/path_traversal_findings/serialize_dos_findings
+# -- always enabled, never gated by staged_enablement.py. Unlike those, llm_input_verdict.py's
+# own derive() does NOT hardcode reportable itself (run_pipeline_one_r06.py's own wiring sets it
+# after calling derive()) -- these findings simulate that already-set state, matching what the
+# real pipeline record actually contains by the time it reaches this aggregator.
+record1h = {"llm_input_findings": [mk(False), mk(False), mk(False)]}
+summary1h = agg.aggregate_record(record1h, enabled_properties=frozenset())
+ck("llm_input_findings is in ALL_PROPERTY_KEYS", "llm_input_findings" in agg.ALL_PROPERTY_KEYS)
+ck("llm_input_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1h["llm_input_findings"]["enabled"] is True
+   and summary1h["llm_input_findings"]["disabled_reason"] is None)
+ck("llm_input_findings raw/reportable counts are read directly, never recomputed -- all three "
+   "findings carry reportable=False (as the real pipeline wiring sets it)",
+   summary1h["llm_input_findings"]["raw_count"] == 3
+   and summary1h["llm_input_findings"]["reportable_count"] == 0)
+record1i = {"r04_findings": [mk(True)]}  # no "llm_input_findings" key at all, the common case
+summary1i = agg.aggregate_record(record1i, enabled_properties=frozenset())
+ck("a record with no llm_input_findings key at all still produces a correct, non-crashing "
+   "summary: enabled=True, raw=0, reportable=0",
+   summary1i["llm_input_findings"]["enabled"] is True
+   and summary1i["llm_input_findings"]["raw_count"] == 0
+   and summary1i["llm_input_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -212,6 +236,10 @@ def load_bundle_record(bundle_path):
                                          # step 8's serialize DoS wiring (record1f/record1g above
                                          # already cover a real non-empty and a real absent-key
                                          # serialize_dos_findings case directly)
+        record["llm_input_findings"] = []  # same reason -- these bundles predate the LLM-input
+                                         # wiring (record1h/record1i above already cover a real
+                                         # non-empty and a real absent-key llm_input_findings
+                                         # case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

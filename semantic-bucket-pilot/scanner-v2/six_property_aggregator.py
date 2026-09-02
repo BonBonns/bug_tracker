@@ -51,6 +51,15 @@ hardcodes every finding's own `"reportable": False` unconditionally (its own mod
 this module's `f.get("reportable") is True` check can never count a Serialize DoS finding as
 reportable no matter how "enabled" is set here.
 
+ADDENDUM 2 (LLM-input integration, discovered mid-session -- an already-built, already-gated
+property never part of the originally-tracked 4 JS/TS classes): `llm_input_findings`
+(llm_input_verdict.py's own `derive()`, frozen) is a 10th key, same discipline as the others
+above. Unlike them, `derive()` itself does NOT set `"reportable"` on its own findings (it
+predates this pipeline's own convention) -- run_pipeline_one_r06.py's own wiring sets it to
+False on every finding right after calling `derive()`, orchestration-only, never inside the
+frozen reducer. Same net effect: this module's `f.get("reportable") is True` check can never
+count an LLM-input finding as reportable no matter how "enabled" is set here.
+
 ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
 into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
 like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
@@ -124,11 +133,24 @@ PATH_TRAVERSAL_KEYS = ("path_traversal_findings",)
 # unconditionally, same as ReDoS's/Path Traversal's own reducers.
 SERIALIZE_DOS_KEYS = ("serialize_dos_findings",)
 
+# LLM-INPUT (roadmap step 8 successor -- an already-built, already-gated (gate_llm_input.py,
+# 7/7), real-world-validated OWASP LLM Top-10 property discovered mid-session, not one of the
+# originally-tracked 4 JS/TS classes): same discipline as REDOS_KEYS/PATH_TRAVERSAL_KEYS/
+# SERIALIZE_DOS_KEYS -- wired into the shared per-package pipeline via run_pipeline_one_r06.py,
+# never routed through staged_enablement.py's reachability-tier mechanism (C/C++-specific).
+# Always "enabled" here; safe regardless, since run_pipeline_one_r06.py's own pipeline wiring
+# sets every finding's own "reportable": False unconditionally right after calling
+# llm_input_verdict.py's own derive() (that frozen reducer itself does not set this field --
+# it predates this pipeline's own reportable convention -- so the pipeline wiring sets it,
+# orchestration-only, same discipline as Serialize DoS's own unaddressed_alternative_count
+# attachment).
+LLM_INPUT_KEYS = ("llm_input_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
 ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
-                      + SERIALIZE_DOS_KEYS + STAGED_KEYS)
+                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + STAGED_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -150,7 +172,8 @@ def aggregate_record(record, enabled_properties):
         items = record.get(key) or []
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
         if (key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS
-                or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS):
+                or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS
+                or key in LLM_INPUT_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]
