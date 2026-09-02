@@ -98,3 +98,80 @@ parity     ->  [text/plain;p="v\\"] [text/html]      (two parts)
 The analyzer changed after the corpus run had started, so per this property's own
 protocol that in-flight run becomes development evidence and is re-run from the start
 with the corrected analyzer against the same pre-registered selection.
+
+---
+
+# Follow-up: is this a real deviation? (investigated after the fact)
+
+Everything below was checked against primary sources, not recalled.
+
+## 1. The specified algorithm requires escape pairing
+
+Fetched from `fetch.spec.whatwg.org`. **"get, decode, and split a header value"** collects
+code points that are not `"` or `,`, and when it meets a `"` it calls **"collect an HTTP
+quoted string"**. That algorithm:
+
+> Let quoteOrBackslash be the code point at position within input. Advance position by 1.
+> If quoteOrBackslash is U+005C (\\), then: ... Append the code point at position within
+> input to value. Advance position by 1.
+
+It consumes a backslash **together with the following code point** — escape pairs, which
+is exactly escape-run parity. `SplitMimetype` implements this step with a one-character
+lookback instead.
+
+## 2. Gecko already implements the pairing correctly, in the same file
+
+`TMimeType::Parse` steps 11.8.2.x use `while (pos < end && *pos != '"' && *pos != '\\')`
+and then pair `\` with the next character. The correct construction sits ~100 lines above
+the splitter that does not use it — an internal inconsistency, not a deliberate
+simplification.
+
+## 3. Demonstrated, and cross-validated against shipped WPT expectations
+
+`split_compare.py` implements both algorithms; `split_comparison.json` has all 39 rows.
+
+- Over **all 38** cases shipped in
+  `testing/web-platform/tests/fetch/content-type/resources/*.json`, the two agree on the
+  boundary decision — **0 differences**. The spec implementation is therefore not
+  producing spurious diffs. (They differ only in leading-whitespace trimming, which Gecko
+  leaves to the downstream parser.)
+- **All 4 shipped WPT cases containing a backslash use a single, ODD-length run** — the
+  one case where the one-position rule is correct. The parity boundary is untested, which
+  is how the deviation can persist with tests green.
+- On an **even** run the two diverge:
+
+  | header value | spec | `SplitMimetype` |
+  |---|---|---|
+  | `x/x;p="a\\",y/y` | `['x/x;p="a\\"', 'y/y']` | `['x/x;p="a\\",y/y']` |
+
+  Per "extract a MIME type" a later value wins, so the extracted essence differs (`y/y`
+  versus `x/x`). The split difference is demonstrated; the resulting essence is a reasoned
+  consequence of it and was **not** executed in Gecko.
+
+## 4. It is reachable from a response header, on by default
+
+```
+netwerk/protocol/http/nsHttpResponseHead.cpp:491
+  } else if (hdr == nsHttp::Content_Type) {
+      if (StaticPrefs::network_standard_content_type_parsing_response_headers() &&
+          CMimeType::Parse(val, mContentType, mContentCharset)) {
+```
+
+`val` is the raw `Content-Type` response header and `CMimeType::Parse` is the overload
+that calls `SplitMimetype`. The gating pref
+`network.standard_content_type_parsing.response_headers` is declared in
+`modules/libpref/init/StaticPrefList.yaml` with **`value: true`**.
+
+## 5. What is still not established
+
+- **Nothing here was run in Firefox.** All of it rests on reading the shipped source and
+  the spec, plus faithful reimplementations of the two algorithms.
+- Bugzilla quicksearch for `SplitMimetype` and for `MimeType.cpp quoted` returned no
+  results — weak evidence of novelty, not proof.
+- **No security assessment of any kind was made**, and none is implied. This is recorded
+  strictly as a spec-conformance and parser-correctness observation. Whether it matters
+  beyond conformance is for Mozilla to triage.
+- The property's own reachability layer still reports `NOT_ESTABLISHED` for this site,
+  because its chain model looks for stored-text sources, not response headers. The
+  finding above came from manual investigation, not from that layer — a gap in the
+  property's source model, recorded as such.
