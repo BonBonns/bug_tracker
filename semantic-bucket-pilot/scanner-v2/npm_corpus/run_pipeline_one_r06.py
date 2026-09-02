@@ -156,6 +156,16 @@ STAGE_TIMEOUT = int(180 * TIMEOUT_MULTIPLIER)     # c2cpg / jssrc2cpg / cpp_expo
 NORMALIZE_TIMEOUT = int(180 * TIMEOUT_MULTIPLIER)  # cpp_normalize / js_normalize (re2's real 127.6s + margin)
 LINK_TIMEOUT = int(90 * TIMEOUT_MULTIPLIER)        # polyglot_link
 SCAN_TIMEOUT = int(90 * TIMEOUT_MULTIPLIER)        # r04_scan (reads raw TSVs directly, not the large normalized JSON)
+# Path Traversal's own R02 producer (export_path_traversal_integ_r02.sc, the second of its two
+# producers) does real per-source-to-sink dataflow/closure-identity resolution -- STAGE_TIMEOUT
+# (180s) was calibrated before the JS_FRONTEND_COVERAGE fix existed, when this producer only ever
+# saw a near-empty, uncorrected CPG and so never took long regardless of a real package's actual
+# size. Once js_bin correctly reflects a package's real content (see js_frontend_coverage above),
+# this producer's own real cost scales with it: reproduced directly on multi-spec-parser's real,
+# corrected CPG (420 real source_origin_facts rows, 17 real sinks) -- 218s, confirmed by manual
+# re-run with a generous timeout, not a hang (same "real, reproduced, not a hang" discipline
+# NORMALIZE_TIMEOUT's own re2 case above already established for this file).
+PATH_TRAVERSAL_PRODUCER_TIMEOUT = int(600 * TIMEOUT_MULTIPLIER)
 
 
 def rss_now():
@@ -875,7 +885,8 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         [f"{JOERN_HOME}/joern", "--script", PATH_TRAVERSAL_PRODUCER,
          "--param", f"cpgFile={js_bin}", "--param", f"rawDir={pt_raw}",
          "--param", f"srcLabel={pkg_name}"],
-        os.path.join(work, "path_traversal_producer.log"))
+        os.path.join(work, "path_traversal_producer.log"),
+        timeout=PATH_TRAVERSAL_PRODUCER_TIMEOUT)
     record["stages"]["path_traversal_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
     if err or rc != 0:
         record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
