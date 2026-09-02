@@ -1,0 +1,312 @@
+{
+  "property": "ESCAPE-PARITY-BOUNDARY",
+  "artifact": "bounty scope freeze",
+  "frozen_at_utc": "2026-09-02T04:55:01Z",
+  "rule": "A scan of a bounty-corpus target is permitted only against a target whose program scope was captured and hashed in this record. Public source availability is not eligibility.",
+  "supported_languages": [
+    "C_CPP",
+    "JAVASCRIPT"
+  ],
+  "min_scope_text_chars": 2000,
+  "targets": [
+    {
+      "key": "mozilla-gecko-dev",
+      "priority": 1,
+      "repo": "mozilla/gecko-dev",
+      "program": "Mozilla Client Bug Bounty",
+      "languages": [
+        "C_CPP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "MIME type parsing",
+        "HTTP header parsing",
+        "cookie parsing",
+        "certificate/name parsing",
+        "URL and protocol parsing"
+      ],
+      "captured_at_utc": "2026-09-02T04:54:59Z",
+      "scope_capture": "SCOPE_FROZEN",
+      "capture_note": "Policy text captured and hashed; scope pinned at fetch time.",
+      "scope_criteria": [
+        {
+          "rule": "eligibility",
+          "status": "QUOTED",
+          "quote": "Submissions must be either a security bug demonstrating the ability to perform an unauthorized action or obtain access to otherwise-restricted information or an exploit mitigation bypass ."
+        },
+        {
+          "rule": "severity_bar",
+          "status": "QUOTED",
+          "quote": "Typically, the security rating given by the Bounty Committee for a bug must be rated a \"sec-high\" or \"sec-critical\" in order for it to be eligible for a bounty."
+        },
+        {
+          "rule": "report_criteria",
+          "status": "QUOTED",
+          "quote": "Report Criteria A report should provide sufficient information to diagnose the vulnerability and produce a fix, and must include a simple, reproducible test case demonstrating the issue and at least one of the following: an ASAN stacktrace or crash dump (typically for memory trespassing/corruption) a root cause analysis of how the bug occurs or where the bug is located Notes: Bounties are not paid for issues which cannot be identified or fixed from the report."
+        },
+        {
+          "rule": "not_actionable",
+          "status": "QUOTED",
+          "quote": "reproducible test case demonstrating the issue and at least one of the following: an ASAN stacktrace or crash dump (typically for memory trespassing/corruption) a root cause analysis of how the bug occurs or where the bug is located Notes: Bounties are not paid for issues which cannot be identified or fixed from the report."
+        },
+        {
+          "rule": "versions_in_scope",
+          "status": "QUOTED",
+          "quote": "All security bugs must follow the following general criteria to be eligible: Eligible security bugs may be present in any of the main development or released versions of Firefox, Firefox for Android, or Firefox for iOS as released by Mozilla Corporation (e.g."
+        },
+        {
+          "rule": "third_party_exclusion",
+          "status": "QUOTED",
+          "quote": "We reserve the right not to pay bounties for security bugs in or caused by additional third party software (e.g."
+        },
+        {
+          "rule": "patch_gap_exclusion",
+          "status": "QUOTED",
+          "quote": "We typically will not pay bounties that point out a patch gap between Firefox and a third party library we vendor, so long as the library has a history of being updated on a cadence."
+        },
+        {
+          "rule": "submission_channel",
+          "status": "QUOTED",
+          "quote": "Use the bugzilla client bug bounty form to file the issue and automatically mark it for bug bounty consideration."
+        }
+      ],
+      "unblock_requirement": null,
+      "attempts": [
+        {
+          "url": "https://www.mozilla.org/en-US/security/client-bug-bounty/",
+          "http_status": "200",
+          "bytes": 55407,
+          "sha256": "4b411de5d41902d1201c0abb31d7336512bca865674f3402579c89afac718023",
+          "visible_text_chars": 16457,
+          "evidence_file": "scope_evidence/mozilla-gecko-dev.0.html"
+        },
+        {
+          "url": "https://www.mozilla.org/en-US/security/bug-bounty/",
+          "http_status": "200",
+          "bytes": 42334,
+          "sha256": "019992f1ea1bd066686b478542a7dbfe0d74de90d7809f887f905125e7ee5359",
+          "visible_text_chars": 7953,
+          "evidence_file": "scope_evidence/mozilla-gecko-dev.1.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": true,
+      "scan_blocked_by": []
+    },
+    {
+      "key": "nodejs-node",
+      "priority": 2,
+      "repo": "nodejs/node",
+      "program": "Node.js (HackerOne)",
+      "languages": [
+        "C_CPP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "HTTP header parsing (llhttp callers)",
+        "URL parsing (ada bindings)",
+        "querystring",
+        "JS-side header and MIME handling"
+      ],
+      "captured_at_utc": "2026-09-02T04:55:00Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/nodejs",
+          "http_status": "200",
+          "bytes": 3563,
+          "sha256": "ec1ab900e1fb3e33772e058c7277b26a7eba5b729467829da9a6677ccd73629b",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/nodejs-node.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "rocketchat",
+      "priority": 3,
+      "repo": "RocketChat/Rocket.Chat",
+      "program": "Rocket.Chat (HackerOne handle unconfirmed)",
+      "languages": [
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "message/markup text transforms",
+        "import pipelines",
+        "webhook payload handling"
+      ],
+      "captured_at_utc": "2026-09-02T04:55:00Z",
+      "scope_capture": "PROGRAM_HANDLE_UNRESOLVED",
+      "capture_note": "Program endpoint returns 404; the assumed handle does not resolve.",
+      "scope_criteria": null,
+      "unblock_requirement": "Confirm the program's real location (or that no public program exists) before any scan of this repository.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/rocketchat",
+          "http_status": "404",
+          "bytes": 1694,
+          "sha256": "c6daf1057dccd092d2d8365569a11416e185a191fde2f84b711203abf0cde8cc",
+          "visible_text_chars": 170,
+          "evidence_file": "scope_evidence/rocketchat.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "nextcloud-server",
+      "priority": 4,
+      "repo": "nextcloud/server",
+      "program": "Nextcloud (HackerOne)",
+      "languages": [
+        "PHP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "PHP"
+      ],
+      "parser_surface": [
+        "PHP text/import pipelines",
+        "JS front-end transforms"
+      ],
+      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/nextcloud",
+          "http_status": "200",
+          "bytes": 3508,
+          "sha256": "a46a473442aeae2985aa6f2c25e7f5a311641d88c1a32752189f79e5e37497aa",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/nextcloud-server.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "wordpress-develop",
+      "priority": 5,
+      "repo": "WordPress/wordpress-develop",
+      "program": "WordPress (HackerOne)",
+      "languages": [
+        "PHP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "PHP"
+      ],
+      "parser_surface": [
+        "import/restore pipelines",
+        "serialized text transforms"
+      ],
+      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/wordpress",
+          "http_status": "200",
+          "bytes": 3582,
+          "sha256": "260338b077a042882159cb7ebbf1cfd4017ef1732de3de6ab788b6cd48199867",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/wordpress-develop.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "gitlab",
+      "priority": 6,
+      "repo": "gitlabhq/gitlabhq",
+      "program": "GitLab (HackerOne)",
+      "languages": [
+        "RUBY",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "RUBY"
+      ],
+      "parser_surface": [
+        "import/export pipelines",
+        "markup transforms"
+      ],
+      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/gitlab",
+          "http_status": "200",
+          "bytes": 3481,
+          "sha256": "b8e6b180553eaee213754df50121f2507926769b061c18e883247fc78f504e7f",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/gitlab.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    }
+  ],
+  "non_bounty_regression_targets": [
+    {
+      "repo": "taozhi8833998/node-sql-parser",
+      "role": "precision",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "nene/sql-parser-cst",
+      "role": "precision",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "mholt/PapaParse",
+      "role": "regression",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "nodemailer/mailparser",
+      "role": "regression",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    }
+  ],
+  "reportable": false
+}
