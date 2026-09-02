@@ -204,6 +204,14 @@ def derive(raw_dir, language=None):
             "parser_call_sites": len(calls),
             "flow_edges_in_unit": sum(len(v) for kind in edges.values()
                                       for v in kind.values()),
+            # Per-segment edge counts let a reader independently verify which
+            # segments of the full source->parser->consumer path were queried
+            # and whether each returned empty or non-empty.  The aggregate
+            # flow_edges_in_unit alone cannot distinguish a unit where
+            # DELAYED_SOURCE2PARSER ran and found nothing from one where
+            # DELAYED_SOURCE2PARSER was never even attempted.
+            "flow_edges_by_kind": {k: sum(len(v) for v in d.values())
+                                   for k, d in edges.items()},
         }
 
         if not calls:

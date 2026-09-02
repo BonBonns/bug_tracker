@@ -62,6 +62,29 @@ import io.shiftleft.codepropertygraph.generated.nodes
   def resolutionFor(name: String): String =
     if (locallyDefined.contains(name)) "AMBIGUOUS_LOCAL_DEFINITION" else "RESOLVED_EXTERNAL"
 
+  // fopen mode filtering: a write-only open (mode starts with 'w' or 'a' without '+')
+  // cannot supply read data to a text parser, so it is not a delayed source.
+  // When the mode argument is a string literal we inspect it; when it is a variable
+  // we conservatively include the call but record AMBIGUOUS_MODE_ARGUMENT so the
+  // resolution is not mistaken for a confirmed read.
+  //
+  // Mode categories:
+  //   read capable: contains 'r' OR contains '+'  ("r", "rb", "r+", "w+", "a+", ...)
+  //   write only:   starts with 'w' or 'a', no '+' ("w", "wb", "a", "ab")
+  def fopenResolution(c: nodes.Call): String = {
+    // mode is the second positional argument (order 2 in c2cpg's 1-based scheme)
+    val modeOpt = c.argument.order(2).collectFirst {
+      case l if l.isInstanceOf[nodes.Literal] => l.asInstanceOf[nodes.Literal].code
+    }
+    modeOpt match {
+      case None        => "AMBIGUOUS_MODE_ARGUMENT"  // mode is a variable; include, but flag
+      case Some(code)  =>
+        val m = code.replaceAll("\"", "")
+        if (m.contains('r') || m.contains('+')) resolutionFor(c.name)  // read capable
+        else "WRITE_ONLY_MODE_EXCLUDED"                                  // 'w', 'wb', 'a', 'ab'
+    }
+  }
+
   val ds = w("delayed_sources.tsv")
   val srcNodes = scala.collection.mutable.ListBuffer[nodes.Expression]()
   try cpg.call.l.foreach { c =>
@@ -70,9 +93,12 @@ import io.shiftleft.codepropertygraph.generated.nodes
       else if (SRC_ARCHIVE.contains(n)) "ARCHIVE_READ"
       else if (SRC_DB.contains(n)) "DATABASE_ROW_READ" else ""
     if (kind.nonEmpty) {
-      val res = resolutionFor(n); val m = methOf(c)
-      ds.println(List(fileOf(c), m.map(_.fullName).getOrElse("?"), ln(c), c.id, n, res, kind).mkString("\t"))
-      if (res == "RESOLVED_EXTERNAL") srcNodes += c
+      val res = if (n == "fopen") fopenResolution(c) else resolutionFor(n)
+      if (res != "WRITE_ONLY_MODE_EXCLUDED") {
+        val m = methOf(c)
+        ds.println(List(fileOf(c), m.map(_.fullName).getOrElse("?"), ln(c), c.id, n, res, kind).mkString("\t"))
+        if (res == "RESOLVED_EXTERNAL") srcNodes += c
+      }
     }
   } finally ds.close()
 

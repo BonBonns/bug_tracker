@@ -1,0 +1,31 @@
+{
+  "revision": "R08",
+  "label": "source-mode-filter",
+  "frozen_at_utc": "2026-09-02T23:49:27Z",
+  "description": "fopen mode-argument filtering added to cpp_reachability_facts.sc: write-only mode opens (wb, ab) excluded from delayed sources. flow_edges_by_kind added to chain search_space.",
+  "files": {
+    "producers/cpp_reachability_facts.sc": {
+      "sha256": "a25dac4a6cf4ba540c69fc48d63b6feba94de25fbb2e38d8b9d826c7a8eb1b7b",
+      "size": 9701
+    },
+    "escape_parity_chain.py": {
+      "sha256": "2129e282da2e38a3c7c6314c9c25f8e79df4ff0ad7876e7b67c9bbb886f0a795",
+      "size": 12299
+    },
+    "check_source_mode_r08.py": {
+      "sha256": "e57990b82ae9eeecc874cc06c2b9dafe433cbda04a632b9f293fd8d8b50620f9",
+      "size": 6154
+    },
+    "fixtures_chain_cpp/src/c07_write_mode_fopen.cpp": {
+      "sha256": "95c8a5f574ae5fd40556638ca856a62090c04438b34a57f444a12a708a579159",
+      "size": 1050
+    },
+    "fixtures_chain_cpp/src/c08_read_mode_fopen.cpp": {
+      "sha256": "7696a8c63f6155000106ffe798587b39ae6fb163197b5be0deae0878962f8683",
+      "size": 1008
+    }
+  },
+  "gate": "check_source_mode_r08.py",
+  "gate_result": "4/4 PASS",
+  "all_gates": "R01-R08 PASS"
+}

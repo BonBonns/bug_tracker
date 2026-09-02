@@ -8,3 +8,5 @@ c05_full_chain_string.cpp	import_one:void(char*,sqlite3*)	22	30064771295	fopen	R
 c05_full_chain_string.cpp	import_one:void(char*,sqlite3*)	24	30064771299	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
 c06_log_only_string.cpp	audit_one:void(char*)	16	30064771338	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
 c06_log_only_string.cpp	audit_one:void(char*)	18	30064771342	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+c08_read_mode_fopen.cpp	load_record:void(char*)	20	30064771391	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+c08_read_mode_fopen.cpp	load_record:void(char*)	22	30064771395	fread	RESOLVED_EXTERNAL	STORED_FILE_READ

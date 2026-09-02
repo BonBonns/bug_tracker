@@ -1,6 +1,8 @@
-c01_full_chain.cpp	split_quoted:vector(std.string&)	107374182400	15	30064771083	30064771084	ACCESSED_CHAR
-c02_log_only.cpp	split_quoted<duplicate>0:vector(std.string&)	107374182403	11	30064771140	30064771141	ACCESSED_CHAR
-c03_immediate.cpp	split_quoted<duplicate>1:vector(std.string&)	107374182406	10	30064771194	30064771195	ACCESSED_CHAR
-c04_scheduled_timing.cpp	split_quoted<duplicate>2:vector(std.string&)	107374182409	13	30064771230	30064771231	ACCESSED_CHAR
-c05_full_chain_string.cpp	first_quoted:string(std.string&)	107374182412	14	30064771279	30064771280	ACCESSED_CHAR
-c06_log_only_string.cpp	first_quoted<duplicate>0:string(std.string&)	107374182415	8	30064771322	30064771323	ACCESSED_CHAR
+c01_full_chain.cpp	split_quoted:vector(std.string&)	107374182400	15	30064771083	30064771084	ACCESSED_CHAR	LITERAL
+c02_log_only.cpp	split_quoted<duplicate>0:vector(std.string&)	107374182403	11	30064771140	30064771141	ACCESSED_CHAR	LITERAL
+c03_immediate.cpp	split_quoted<duplicate>1:vector(std.string&)	107374182406	10	30064771194	30064771195	ACCESSED_CHAR	LITERAL
+c04_scheduled_timing.cpp	split_quoted<duplicate>2:vector(std.string&)	107374182409	13	30064771230	30064771231	ACCESSED_CHAR	LITERAL
+c05_full_chain_string.cpp	first_quoted:string(std.string&)	107374182412	14	30064771279	30064771280	ACCESSED_CHAR	LITERAL
+c06_log_only_string.cpp	first_quoted<duplicate>0:string(std.string&)	107374182415	8	30064771322	30064771323	ACCESSED_CHAR	LITERAL
+c07_write_mode_fopen.cpp	parse_quoted:bool(char*)	107374182418	15	30064771359	30064771360	ACCESSED_CHAR	LITERAL
+c08_read_mode_fopen.cpp	parse_quoted<duplicate>0:bool(char*)	107374182421	14	30064771381	30064771382	ACCESSED_CHAR	LITERAL
