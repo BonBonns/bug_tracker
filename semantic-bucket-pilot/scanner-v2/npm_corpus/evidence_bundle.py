@@ -56,6 +56,34 @@ What is kept (deliberately NOT "normalized only" -- see below) vs. what stays de
   - `path_traversal_out.json` -- the Path Traversal scanner output already computed for this
                                package (roadmap step 8's run_pipeline_one_r06.py wiring, second
                                JS/TS class).
+  - `sd_facts`                -- RAW exported Serialize DoS facts (export_serialize_facts.sc's
+                               own serialize_sinks.tsv/uncaught_handlers.tsv/depth_guards.tsv,
+                               PLUS transform_presence.sc's own transform_presence.tsv -- both
+                               producers write into this SAME directory, and
+                               serialize_dos_r03.py's own derive() reads it directly), same real
+                               requirement and treatment as redos_raw/pt_raw above.
+  - `sd_taint_raw`            -- RAW per-package taint-engine sub-pipeline output
+                               (setup_candidate_multisource.sc's own source_facts.tsv/
+                               propagation_relations.tsv/transform_identity.tsv/
+                               multisource_evidence.tsv/definition_resolution.tsv, PLUS
+                               export_property_propagation.sc's own property_propagation.tsv/
+                               property_outcome.tsv, one subdirectory per distinct sink-file
+                               package key) -- only present when at least one qualifying
+                               attacker-controlled-unbounded-stringify sink existed (the common
+                               case has none, and this directory is legitimately absent/empty).
+                               Listed in `OPTIONAL_RELATIVE_PATHS`, not `BUNDLED_RELATIVE_PATHS`
+                               -- its absence is disclosed (`manifest["optional_missing"]`) but
+                               never counted against `completeness_status`.
+  - `sd_taint_evidence`       -- per-package adjudicate_js.py evidence_final.json output (one
+                               subdirectory per distinct sink-file package key), same
+                               "legitimately absent when nothing qualified, and never penalized"
+                               treatment as sd_taint_raw above (also in `OPTIONAL_RELATIVE_PATHS`).
+  - `serialize_dos_out.json`  -- the Serialize DoS scanner output already computed for this
+                               package (roadmap step 8's run_pipeline_one_r06.py wiring, third
+                               JS/TS class), same real precedent as redos_out.json/
+                               path_traversal_out.json above. Always written on a successful run
+                               (regardless of whether the taint sub-pipeline ran), so this one
+                               stays in `BUNDLED_RELATIVE_PATHS` like every other `*_out.json`.
 
   NOT kept (stays deleted, per the explicit instruction to keep deleting large CPG/work dirs):
   - `cpp.cpg.bin`, `js.cpg.bin` -- the large Joern CPG binaries.
@@ -96,7 +124,11 @@ BUNDLE INTEGRITY (item 4): every manifest records, alongside `included`/`missing
     resource-limited package (a genuinely real, disclosed outcome, not an error in this
     module) still gets whatever real evidence it has bundled -- but is marked so a consumer
     cannot mistake it for complete evidence. See `require_complete_bundle()` below for the
-    loader-side guard that enforces this.
+    loader-side guard that enforces this. `optional_missing` (an absent path from
+    `OPTIONAL_RELATIVE_PATHS` -- see below) is disclosed the same way but deliberately NOT
+    part of this check: an entry there is absent because of a real, expected upstream
+    decision (e.g. Serialize DoS's own taint-engine sub-pipeline correctly not running at
+    all when nothing qualified it), not because anything failed or was skipped.
 """
 import gzip
 import hashlib
@@ -135,6 +167,35 @@ BUNDLED_RELATIVE_PATHS = (
     # precedent as redos_out.json.
     "pt_raw",
     "path_traversal_out.json",
+    # SERIALIZE DOS INTEGRATION (roadmap step 8, third JS/TS class): sd_facts follows the exact
+    # same "bundle the raw-output directory as-is, required" precedent as cpp_raw/redos_raw/
+    # pt_raw above (every successful run writes it); serialize_dos_out.json follows the exact
+    # same precedent as redos_out.json/path_traversal_out.json above. sd_taint_raw/
+    # sd_taint_evidence are NOT here -- see OPTIONAL_RELATIVE_PATHS below, since (unlike every
+    # other entry in this tuple) they are legitimately, expectedly absent on the common-case
+    # successful run (a package with no qualifying attacker-controlled-unbounded-stringify sink
+    # never runs the taint-engine sub-pipeline at all -- see run_pipeline_one_r06.py's own
+    # Serialize DoS stage), and this tuple's own semantics (an absent entry always counts
+    # against `completeness_status`, enforced by write_evidence_bundle() below) would otherwise
+    # incorrectly mark that common, fully-successful case "PARTIAL".
+    "sd_facts",
+    "serialize_dos_out.json",
+)
+
+# Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
+# BUNDLED_RELATIVE_PATHS, but whose absence is a legitimate, expected outcome of a real
+# upstream decision (not a sign anything failed or was skipped) -- so, unlike
+# BUNDLED_RELATIVE_PATHS, an absent entry here is never counted against `completeness_status`.
+# Recorded in the manifest's own `optional_missing` (disclosed, not penalized) rather than
+# `missing` (disclosed AND penalized) when absent.
+OPTIONAL_RELATIVE_PATHS = (
+    # SERIALIZE DOS INTEGRATION (roadmap step 8, third JS/TS class): the taint-engine
+    # sub-pipeline (setup_candidate_multisource.sc + export_property_propagation.sc +
+    # adjudicate_js.py) only runs at all when sd_facts's own serialize_sinks.tsv had at least
+    # one qualifying attacker-controlled-unbounded-stringify sink -- the common case has none,
+    # and both directories are then correctly, entirely absent, not merely empty.
+    "sd_taint_raw",
+    "sd_taint_evidence",
 )
 
 SCHEMA_VERSION = "evidence_bundle/2"
@@ -172,6 +233,13 @@ ANALYZER_FILES = {
     # produces path_traversal_out.json -- same real path-construction convention as
     # redos_verdict.py above.
     "path_traversal_verdict.py": os.path.join(os.path.dirname(_HERE), "path_traversal_verdict.py"),
+    # SERIALIZE DOS INTEGRATION (roadmap step 8, third JS/TS class): serialize_dos_r03.py (frozen,
+    # merged from a separate parallel session's own serialize-dos-r01/ directory) is the analyzer
+    # that produces serialize_dos_out.json -- UNLIKE every other entry in this dict, it does NOT
+    # live under SCANNER_V2 (redos_verdict.py/path_traversal_verdict.py's own base path above), so
+    # its own real absolute path is used directly rather than being built from _HERE.
+    "serialize_dos_r03.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                              "serialize-dos-r01/serialize_dos_r03.py"),
 }
 
 
@@ -255,7 +323,7 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
         "pipeline_status": pipeline_status,
         "analyzer_hashes": _real_analyzer_hashes(),
         "artifact_hashes": {},
-        "included": [], "missing": [],
+        "included": [], "missing": [], "optional_missing": [],
     }
 
     xlb = _extract_cross_language_bindings(work_dir)
@@ -268,7 +336,13 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
     buf = io.BytesIO()
     with gzip.GzipFile(filename="", fileobj=buf, mode="wb", mtime=0) as gz, \
             tarfile.open(fileobj=gz, mode="w") as tf:
-        for rel in BUNDLED_RELATIVE_PATHS:
+        def _bundle_one(rel, absent_bucket):
+            """Bundles work_dir/rel (file or non-empty directory) into tf and records it in
+            manifest["included"]/["artifact_hashes"]; if genuinely absent, records rel into
+            manifest[absent_bucket] instead ("missing" for a required path -- counts against
+            completeness_status below -- or "optional_missing" for one that is legitimately,
+            expectedly sometimes absent on an otherwise fully-successful run -- disclosed but
+            never penalized)."""
             src = os.path.join(work_dir, rel)
             if os.path.isdir(src):
                 inner_files = sorted(
@@ -282,13 +356,18 @@ def write_evidence_bundle(work_root, bundle_dir, pkg_name, version,
                         inner: _sha256_file(os.path.join(src, inner)) for inner in inner_files
                     }
                 else:
-                    manifest["missing"].append(rel)
+                    manifest[absent_bucket].append(rel)
             elif os.path.isfile(src):
                 tf.add(src, arcname=rel, filter=_deterministic_member)
                 manifest["included"].append(rel)
                 manifest["artifact_hashes"][rel] = _sha256_file(src)
             else:
-                manifest["missing"].append(rel)
+                manifest[absent_bucket].append(rel)
+
+        for rel in BUNDLED_RELATIVE_PATHS:
+            _bundle_one(rel, "missing")
+        for rel in OPTIONAL_RELATIVE_PATHS:
+            _bundle_one(rel, "optional_missing")
         if xlb is not None:
             xlb_bytes = json.dumps(xlb, indent=2, sort_keys=True).encode("utf-8")
             info = tarfile.TarInfo(name="cross_language_bindings.json")

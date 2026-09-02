@@ -40,6 +40,17 @@ only ever touches STAGED_KEYS). Its own applicability rule lives in applicabilit
 distinct from R04/R05/R06's build-configuration premise (Nan's own module docstring: that
 premise "does not hold for `Nan::NewBuffer`/`Nan::CopyBuffer`'s real `.ToLocalChecked()` idiom").
 
+ADDENDUM (Serialize DoS integration, roadmap step 8, third of 4 JS/TS classes): `serialize_dos_findings`
+(serialize_dos_r03.py's own `derive()`, frozen -- merged into develop unmodified from a separate,
+parallel session's own serialize-dos-r01/ directory, wired into the shared per-package pipeline
+via run_pipeline_one_r06.py) is a 9th key, same discipline as REDOS_KEYS/PATH_TRAVERSAL_KEYS
+below: always "enabled," never routed through staged_enablement.py's reachability-tier mechanism
+(C/C++-specific). Safe regardless of gating: serialize_dos_r03.py's own `derive()` already
+hardcodes every finding's own `"reportable": False` unconditionally (its own module docstring:
+"pipeline integration is explicitly deferred"), same as ReDoS's/Path Traversal's own reducers --
+this module's `f.get("reportable") is True` check can never count a Serialize DoS finding as
+reportable no matter how "enabled" is set here.
+
 ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
 into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
 like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
@@ -105,10 +116,19 @@ REDOS_KEYS = ("redos_findings",)
 # unconditionally, same as ReDoS's own reducer.
 PATH_TRAVERSAL_KEYS = ("path_traversal_findings",)
 
+# SERIALIZE DOS (roadmap step 8, third of 4 JS/TS classes): same discipline as REDOS_KEYS/
+# PATH_TRAVERSAL_KEYS -- a real, standalone JS/TS-side property, wired into the shared
+# per-package pipeline via run_pipeline_one_r06.py, never routed through staged_enablement.py's
+# reachability-tier mechanism (C/C++-specific). Always "enabled" here; safe regardless, since
+# serialize_dos_r03.py's own derive() already hardcodes every finding's own "reportable": False
+# unconditionally, same as ReDoS's/Path Traversal's own reducers.
+SERIALIZE_DOS_KEYS = ("serialize_dos_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
-ALL_PROPERTY_KEYS = RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS + STAGED_KEYS
+ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
+                      + SERIALIZE_DOS_KEYS + STAGED_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -129,7 +149,8 @@ def aggregate_record(record, enabled_properties):
     for key in ALL_PROPERTY_KEYS:
         items = record.get(key) or []
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
-        if key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS or key in PATH_TRAVERSAL_KEYS:
+        if (key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS
+                or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]

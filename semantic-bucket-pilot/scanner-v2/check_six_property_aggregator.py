@@ -88,6 +88,28 @@ ck("a record with no path_traversal_findings key at all still produces a correct
    and summary1e["path_traversal_findings"]["raw_count"] == 0
    and summary1e["path_traversal_findings"]["reportable_count"] == 0)
 
+# --- Serialize DoS (roadmap step 8, third JS/TS class): same discipline as redos_findings/
+# path_traversal_findings -- always enabled, never gated by staged_enablement.py.
+# serialize_dos_r03.py's own derive() also hardcodes reportable=False on every finding it emits.
+record1f = {"serialize_dos_findings": [mk(False), mk(False), mk(False), mk(False)]}
+summary1f = agg.aggregate_record(record1f, enabled_properties=frozenset())
+ck("serialize_dos_findings is in ALL_PROPERTY_KEYS", "serialize_dos_findings" in agg.ALL_PROPERTY_KEYS)
+ck("serialize_dos_findings always enabled=True in the aggregate, regardless of the passed-in "
+   "enabled_properties set (never routed through staged_enablement.py)",
+   summary1f["serialize_dos_findings"]["enabled"] is True
+   and summary1f["serialize_dos_findings"]["disabled_reason"] is None)
+ck("serialize_dos_findings raw/reportable counts are read directly, never recomputed -- all "
+   "four findings carry serialize_dos_r03.py's own real hardcoded reportable=False",
+   summary1f["serialize_dos_findings"]["raw_count"] == 4
+   and summary1f["serialize_dos_findings"]["reportable_count"] == 0)
+record1g = {"r04_findings": [mk(True)]}  # no "serialize_dos_findings" key at all, the common case
+summary1g = agg.aggregate_record(record1g, enabled_properties=frozenset())
+ck("a record with no serialize_dos_findings key at all still produces a correct, non-crashing "
+   "summary: enabled=True, raw=0, reportable=0",
+   summary1g["serialize_dos_findings"]["enabled"] is True
+   and summary1g["serialize_dos_findings"]["raw_count"] == 0
+   and summary1g["serialize_dos_findings"]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -186,6 +208,10 @@ def load_bundle_record(bundle_path):
                                          # step 8's path traversal wiring (record1d/record1e above
                                          # already cover a real non-empty and a real absent-key
                                          # path_traversal_findings case directly)
+        record["serialize_dos_findings"] = []  # same reason -- these bundles predate roadmap
+                                         # step 8's serialize DoS wiring (record1f/record1g above
+                                         # already cover a real non-empty and a real absent-key
+                                         # serialize_dos_findings case directly)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

@@ -85,6 +85,32 @@ PATH_TRAVERSAL_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
                             "export_path_traversal_integ_r02.sc")
 PATH_TRAVERSAL_VERDICT = os.path.join(SCANNER_V2, "path_traversal_verdict.py")
 
+# SERIALIZE DOS INTEGRATION (roadmap step 8, third of 4 JS/TS classes): Serialize DoS was built
+# by a separate, parallel session and merged into develop as-is under its own directory
+# (tchecker-research-complete/serialize-dos-r01/), NOT the standard producers/ layout -- some of
+# its own producers ARE in that standard location because they are pre-existing/frozen
+# (export_serialize_facts.sc below), but its own newest producer (transform_presence.sc) and its
+# reducer (serialize_dos_r03.py) live under serialize-dos-r01/. Its own module docstring says
+# "reportable is fixed to false on every finding: pipeline integration is explicitly deferred" --
+# this is exactly that deferred integration. All five files below are frozen; never modified here.
+SERIALIZE_DOS_R01_DIR = "/home/user/bug_tracker/tchecker-research-complete/serialize-dos-r01"
+SERIALIZE_FACTS_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                             "tchecker-property-adjudicator/producers/export_serialize_facts.sc")
+TRANSFORM_PRESENCE_PRODUCER = os.path.join(SERIALIZE_DOS_R01_DIR, "producers", "transform_presence.sc")
+SETUP_CANDIDATE_MULTISOURCE_PRODUCER = os.path.join(
+    SERIALIZE_DOS_R01_DIR, "producers", "setup_candidate_multisource.sc")
+PROPERTY_PROPAGATION_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                                  "tchecker-property-adjudicator/producers/"
+                                  "export_property_propagation.sc")
+ADJUDICATOR_DIR = ("/home/user/bug_tracker/tchecker-research-complete/"
+                    "tchecker-property-adjudicator/adjudicator")
+SERIALIZE_DOS_PROPERTY_CONFIG = ("/home/user/bug_tracker/tchecker-research-complete/"
+                                  "tchecker-property-adjudicator/property_configs/serialize_dos.json")
+# srcPattern="req.body": the same real, already-validated value every fixture and the real
+# motifer@26.1.1 validation in the whole R01-R03 lineage uses (setup_candidate_multisource.sc's
+# own module docstring / check_setup_candidate_multisource.py's M7 control).
+SERIALIZE_DOS_SRC_PATTERN = "req.body"
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -841,6 +867,164 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"path_traversal scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["path_traversal_scan"] = {"seconds": time.time() - t0}
+
+    # SERIALIZE DOS INTEGRATION (roadmap step 8, third of 4 JS/TS classes): Serialize DoS was
+    # built by a separate, parallel session and merged into develop unmodified under its own
+    # serialize-dos-r01/ directory; its own module docstring explicitly defers pipeline
+    # integration ("reportable is fixed to false on every finding: pipeline integration is
+    # explicitly deferred"). This is exactly that deferred integration -- orchestration only,
+    # never modifying export_serialize_facts.sc, transform_presence.sc,
+    # setup_candidate_multisource.sc, export_property_propagation.sc, adjudicate_js.py, or
+    # serialize_dos_r03.py. Reuses js_bin/pkg_dir (both already built/extracted above), same as
+    # ReDoS/Path Traversal.
+    #
+    # Import the frozen reducer module now (never modified, never reimplemented -- same
+    # discipline run_pilot25_r02.py used for ReDoS) so its own `_pkg()` helper can be reused
+    # verbatim below, rather than re-deriving the same "first path component" logic here.
+    sys.path.insert(0, SERIALIZE_DOS_R01_DIR)
+    import serialize_dos_r03  # noqa: E402 -- reused, never modified
+
+    # First producer pair (export_serialize_facts.sc + transform_presence.sc, into the SAME
+    # sd_facts dir -- required by serialize_dos_r03.py's own derive(), which reads all four
+    # fact files -- serialize_sinks.tsv/uncaught_handlers.tsv/depth_guards.tsv/
+    # transform_presence.tsv -- from one shared directory).
+    sd_facts = os.path.join(work, "sd_facts")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", SERIALIZE_FACTS_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"outDir={sd_facts}"],
+        os.path.join(work, "sd_facts_producer.log"))
+    record["stages"]["sd_facts_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"serialize facts producer rc={rc}"
+        return record
+
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", TRANSFORM_PRESENCE_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"outDir={sd_facts}"],
+        os.path.join(work, "sd_transform_presence_producer.log"))
+    record["stages"]["sd_transform_presence_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"transform presence producer rc={rc}"
+        return record
+
+    # Read serialize_sinks.tsv (8 cols: file, method, line, callee, arg, attacker, in_try,
+    # bounded_literal) directly, a small local TSV read, to decide whether the (expensive)
+    # taint-engine sub-pipeline is needed at all -- matching serialize_dos_r03.py's own derive()
+    # gating condition exactly (is_attacker and not bounded): "if is_attacker and not bounded
+    # and taint_evidence_dir is not None". Most packages have zero qualifying rows -- the common,
+    # cheap, correct case -- and skip straight to the derive() call below with
+    # taint_evidence_dir=None.
+    sd_qualifying_pkgs = set()
+    sinks_tsv = os.path.join(sd_facts, "serialize_sinks.tsv")
+    try:
+        if os.path.isfile(sinks_tsv):
+            with open(sinks_tsv) as f:
+                for line in f:
+                    if not line.strip():
+                        continue
+                    cols = line.rstrip("\n").split("\t")
+                    if len(cols) != 8:
+                        continue
+                    file_, _meth, _line, _callee, _arg, attacker, _in_try, bounded_lit = cols
+                    if attacker == "true" and bounded_lit == "false":
+                        sd_qualifying_pkgs.add(serialize_dos_r03._pkg(file_))
+    except Exception as e:
+        record["stages"]["sd_sink_scan"] = {"seconds": 0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"serialize_sinks.tsv read failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["sd_sink_scan"] = {"n_qualifying_pkgs": len(sd_qualifying_pkgs)}
+
+    # Taint-engine sub-pipeline: run once per DISTINCT _pkg(file) key among qualifying sinks
+    # (almost always exactly one for a single-package scan, but handled generally). Each key gets
+    # its own sd_taint_raw/<key> (setup_candidate_multisource.sc + export_property_propagation.sc)
+    # and its own sd_taint_evidence/<key>/evidence_final.json (adjudicate_js.py) -- exactly the
+    # subpath serialize_dos_r03.py's own derive() looks up internally via taint_evidence_dir / pkg
+    # / "evidence_final.json".
+    sd_taint_raw_base = os.path.join(work, "sd_taint_raw")
+    sd_taint_evidence_base = os.path.join(work, "sd_taint_evidence")
+    for key in sorted(sd_qualifying_pkgs):
+        taint_raw = os.path.join(sd_taint_raw_base, key)
+        rc, secs, mem, err = run_stage(
+            [f"{JOERN_HOME}/joern", "--script", SETUP_CANDIDATE_MULTISOURCE_PRODUCER,
+             "--param", f"cpgFile={js_bin}", "--param", f"rawDir={taint_raw}",
+             "--param", f"srcPattern={SERIALIZE_DOS_SRC_PATTERN}"],
+            os.path.join(work, f"sd_setup_candidate_multisource_{key.replace(os.sep, '_')}.log"))
+        record["stages"][f"sd_setup_candidate_multisource[{key}]"] = {
+            "seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+        if err or rc != 0:
+            record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+            record["detail"] = err or f"setup_candidate_multisource rc={rc} (pkg={key})"
+            return record
+
+        rc, secs, mem, err = run_stage(
+            [f"{JOERN_HOME}/joern", "--script", PROPERTY_PROPAGATION_PRODUCER,
+             "--param", f"cpgFile={js_bin}", "--param", f"rawDir={taint_raw}"],
+            os.path.join(work, f"sd_property_propagation_{key.replace(os.sep, '_')}.log"))
+        record["stages"][f"sd_property_propagation[{key}]"] = {
+            "seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+        if err or rc != 0:
+            record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+            record["detail"] = err or f"export_property_propagation rc={rc} (pkg={key})"
+            return record
+
+        # adjudicate_js.py (frozen, shared): invoked directly here since serialize_dos_r03.py's
+        # own reducer does NOT call it internally (unlike ReDoS/Path Traversal, whose reducers
+        # handle this themselves). Same real subprocess-invocation shape as
+        # path_traversal_verdict.py's own run_adjudicate_one_sink(): copy os.environ, override
+        # TCH_* keys, cwd=ADJUDICATOR_DIR. TCH_SINK and TCH_SINK_KIND are deliberately left UNSET
+        # -- "first established" sink and "JSON.stringify" are already the documented defaults
+        # every existing Serialize DoS fixture and the real motifer validation rely on (confirmed
+        # against property_configs/serialize_dos.json's own direct_sink_kinds above).
+        taint_out_dir = os.path.join(sd_taint_evidence_base, key)
+        os.makedirs(taint_out_dir, exist_ok=True)
+        t0 = time.time()
+        env = dict(os.environ)
+        env.update({
+            "TCH_RAW": taint_raw,
+            "TCH_SRC": pkg_dir,
+            "TCH_OUT": taint_out_dir,
+            "TCH_PROPERTY_CONFIG": SERIALIZE_DOS_PROPERTY_CONFIG,
+        })
+        try:
+            subprocess.run([sys.executable, "adjudicate_js.py"], cwd=ADJUDICATOR_DIR, env=env,
+                             check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                             stderr=subprocess.PIPE)
+        except subprocess.TimeoutExpired:
+            record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
+            record["status"] = "RESOURCE_LIMIT"
+            record["detail"] = f"sd adjudicate_js.py exceeded {SCAN_TIMEOUT}s (pkg={key})"
+            return record
+        except Exception as e:
+            record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
+            record["status"] = "NORMALIZATION_FAILED"
+            record["detail"] = f"sd adjudicate_js.py failed (pkg={key}): {type(e).__name__}: {e}"
+            return record
+        record["stages"][f"sd_adjudicate[{key}]"] = {"seconds": time.time() - t0}
+
+    # Reducer (frozen, unmodified): imported and called directly, never reimplemented, matching
+    # run_pilot25_r02.py's own "import and orchestrate" discipline for ReDoS. taint_evidence_dir
+    # is the PARENT sd_taint_evidence dir (derive() appends _pkg(...) internally) -- None when no
+    # qualifying sink existed, so the taint-engine sub-pipeline was correctly, cheaply skipped.
+    t0 = time.time()
+    try:
+        sd_taint_evidence_dir = sd_taint_evidence_base if sd_qualifying_pkgs else None
+        sd_result = serialize_dos_r03.derive(sd_facts, sd_taint_evidence_dir)
+        record["serialize_dos_classification"] = sd_result.get("classification")
+        record["serialize_dos_findings"] = sd_result.get("findings", [])
+        # serialize_dos_out.json -- same real bundling precedent as redos_out.json/
+        # path_traversal_out.json (evidence_bundle.py's own BUNDLED_RELATIVE_PATHS).
+        sd_out = os.path.join(work, "serialize_dos_out.json")
+        with open(sd_out, "w") as f:
+            json.dump(sd_result, f)
+    except Exception as e:
+        record["stages"]["sd_reduce"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"serialize_dos_r03.derive() failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["sd_reduce"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record
