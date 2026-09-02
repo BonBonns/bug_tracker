@@ -180,6 +180,13 @@ BUNDLED_RELATIVE_PATHS = (
     # incorrectly mark that common, fully-successful case "PARTIAL".
     "sd_facts",
     "serialize_dos_out.json",
+    # LLM-INPUT INTEGRATION: llm_raw follows the exact same "bundle the raw-output directory
+    # as-is, required" precedent as sd_facts/redos_raw/pt_raw above (this producer, unlike
+    # Serialize DoS's own taint-engine sub-pipeline, always runs unconditionally and always
+    # writes real output on every successful run -- no conditional sub-pipeline shape here);
+    # llm_input_out.json follows the exact same precedent as the other *_out.json entries.
+    "llm_raw",
+    "llm_input_out.json",
 )
 
 # Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
@@ -240,6 +247,11 @@ ANALYZER_FILES = {
     # its own real absolute path is used directly rather than being built from _HERE.
     "serialize_dos_r03.py": ("/home/user/bug_tracker/tchecker-research-complete/"
                               "serialize-dos-r01/serialize_dos_r03.py"),
+    # LLM-INPUT INTEGRATION: llm_input_verdict.py (frozen, already-gated) is the analyzer that
+    # produces llm_input_out.json -- lives under tchecker-property-adjudicator/adjudicator/, not
+    # SCANNER_V2, same "real absolute path used directly" treatment as serialize_dos_r03.py above.
+    "llm_input_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                              "tchecker-property-adjudicator/adjudicator/llm_input_verdict.py"),
 }
 
 
