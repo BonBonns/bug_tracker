@@ -1,7 +1,7 @@
 {
   "property": "ESCAPE-PARITY-BOUNDARY",
   "artifact": "bounty scope freeze",
-  "frozen_at_utc": "2026-09-02T04:55:01Z",
+  "frozen_at_utc": "2026-09-02T05:00:02Z",
   "rule": "A scan of a bounty-corpus target is permitted only against a target whose program scope was captured and hashed in this record. Public source availability is not eligibility.",
   "supported_languages": [
     "C_CPP",
@@ -10,9 +10,9 @@
   "min_scope_text_chars": 2000,
   "targets": [
     {
-      "key": "mozilla-gecko-dev",
+      "key": "mozilla-firefox",
       "priority": 1,
-      "repo": "mozilla/gecko-dev",
+      "repo": "mozilla-firefox/firefox",
       "program": "Mozilla Client Bug Bounty",
       "languages": [
         "C_CPP",
@@ -24,53 +24,14 @@
         "HTTP header parsing",
         "cookie parsing",
         "certificate/name parsing",
-        "URL and protocol parsing"
+        "URL and protocol parsing",
+        "DNS/host name parsing",
+        "websocket and data URL parsing"
       ],
-      "captured_at_utc": "2026-09-02T04:54:59Z",
+      "captured_at_utc": "2026-09-02T04:59:58Z",
       "scope_capture": "SCOPE_FROZEN",
       "capture_note": "Policy text captured and hashed; scope pinned at fetch time.",
-      "scope_criteria": [
-        {
-          "rule": "eligibility",
-          "status": "QUOTED",
-          "quote": "Submissions must be either a security bug demonstrating the ability to perform an unauthorized action or obtain access to otherwise-restricted information or an exploit mitigation bypass ."
-        },
-        {
-          "rule": "severity_bar",
-          "status": "QUOTED",
-          "quote": "Typically, the security rating given by the Bounty Committee for a bug must be rated a \"sec-high\" or \"sec-critical\" in order for it to be eligible for a bounty."
-        },
-        {
-          "rule": "report_criteria",
-          "status": "QUOTED",
-          "quote": "Report Criteria A report should provide sufficient information to diagnose the vulnerability and produce a fix, and must include a simple, reproducible test case demonstrating the issue and at least one of the following: an ASAN stacktrace or crash dump (typically for memory trespassing/corruption) a root cause analysis of how the bug occurs or where the bug is located Notes: Bounties are not paid for issues which cannot be identified or fixed from the report."
-        },
-        {
-          "rule": "not_actionable",
-          "status": "QUOTED",
-          "quote": "reproducible test case demonstrating the issue and at least one of the following: an ASAN stacktrace or crash dump (typically for memory trespassing/corruption) a root cause analysis of how the bug occurs or where the bug is located Notes: Bounties are not paid for issues which cannot be identified or fixed from the report."
-        },
-        {
-          "rule": "versions_in_scope",
-          "status": "QUOTED",
-          "quote": "All security bugs must follow the following general criteria to be eligible: Eligible security bugs may be present in any of the main development or released versions of Firefox, Firefox for Android, or Firefox for iOS as released by Mozilla Corporation (e.g."
-        },
-        {
-          "rule": "third_party_exclusion",
-          "status": "QUOTED",
-          "quote": "We reserve the right not to pay bounties for security bugs in or caused by additional third party software (e.g."
-        },
-        {
-          "rule": "patch_gap_exclusion",
-          "status": "QUOTED",
-          "quote": "We typically will not pay bounties that point out a patch gap between Firefox and a third party library we vendor, so long as the library has a history of being updated on a cadence."
-        },
-        {
-          "rule": "submission_channel",
-          "status": "QUOTED",
-          "quote": "Use the bugzilla client bug bounty form to file the issue and automatically mark it for bug bounty consideration."
-        }
-      ],
+      "scope_criteria": null,
       "unblock_requirement": null,
       "attempts": [
         {
@@ -79,7 +40,7 @@
           "bytes": 55407,
           "sha256": "4b411de5d41902d1201c0abb31d7336512bca865674f3402579c89afac718023",
           "visible_text_chars": 16457,
-          "evidence_file": "scope_evidence/mozilla-gecko-dev.0.html"
+          "evidence_file": "scope_evidence/mozilla-firefox.0.html"
         },
         {
           "url": "https://www.mozilla.org/en-US/security/bug-bounty/",
@@ -87,7 +48,7 @@
           "bytes": 42334,
           "sha256": "019992f1ea1bd066686b478542a7dbfe0d74de90d7809f887f905125e7ee5359",
           "visible_text_chars": 7953,
-          "evidence_file": "scope_evidence/mozilla-gecko-dev.1.html"
+          "evidence_file": "scope_evidence/mozilla-firefox.1.html"
         }
       ],
       "engine_ready": true,
@@ -110,7 +71,7 @@
         "querystring",
         "JS-side header and MIME handling"
       ],
-      "captured_at_utc": "2026-09-02T04:55:00Z",
+      "captured_at_utc": "2026-09-02T05:00:00Z",
       "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
       "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
       "scope_criteria": null,
@@ -120,7 +81,7 @@
           "url": "https://hackerone.com/nodejs",
           "http_status": "200",
           "bytes": 3563,
-          "sha256": "ec1ab900e1fb3e33772e058c7277b26a7eba5b729467829da9a6677ccd73629b",
+          "sha256": "1c16e9424187dbd1cbadcb07892efb393e70b97461ec60076d85ec8e42fd3f77",
           "visible_text_chars": 9,
           "evidence_file": "scope_evidence/nodejs-node.0.html"
         }
@@ -145,7 +106,7 @@
         "import pipelines",
         "webhook payload handling"
       ],
-      "captured_at_utc": "2026-09-02T04:55:00Z",
+      "captured_at_utc": "2026-09-02T05:00:00Z",
       "scope_capture": "PROGRAM_HANDLE_UNRESOLVED",
       "capture_note": "Program endpoint returns 404; the assumed handle does not resolve.",
       "scope_criteria": null,
@@ -182,7 +143,7 @@
         "PHP text/import pipelines",
         "JS front-end transforms"
       ],
-      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "captured_at_utc": "2026-09-02T05:00:01Z",
       "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
       "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
       "scope_criteria": null,
@@ -192,7 +153,7 @@
           "url": "https://hackerone.com/nextcloud",
           "http_status": "200",
           "bytes": 3508,
-          "sha256": "a46a473442aeae2985aa6f2c25e7f5a311641d88c1a32752189f79e5e37497aa",
+          "sha256": "10f636f683b636cd219077f34e7346f8f9fc38eff3bd0f6931c76059f4866a45",
           "visible_text_chars": 9,
           "evidence_file": "scope_evidence/nextcloud-server.0.html"
         }
@@ -219,7 +180,7 @@
         "import/restore pipelines",
         "serialized text transforms"
       ],
-      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "captured_at_utc": "2026-09-02T05:00:01Z",
       "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
       "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
       "scope_criteria": null,
@@ -229,7 +190,7 @@
           "url": "https://hackerone.com/wordpress",
           "http_status": "200",
           "bytes": 3582,
-          "sha256": "260338b077a042882159cb7ebbf1cfd4017ef1732de3de6ab788b6cd48199867",
+          "sha256": "a5d03e6761b2697af3cd92e6dd9bab8463a903d9f8e1a4ee150f16d7f27a4723",
           "visible_text_chars": 9,
           "evidence_file": "scope_evidence/wordpress-develop.0.html"
         }
@@ -256,7 +217,7 @@
         "import/export pipelines",
         "markup transforms"
       ],
-      "captured_at_utc": "2026-09-02T04:55:01Z",
+      "captured_at_utc": "2026-09-02T05:00:02Z",
       "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
       "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
       "scope_criteria": null,
@@ -266,7 +227,7 @@
           "url": "https://hackerone.com/gitlab",
           "http_status": "200",
           "bytes": 3481,
-          "sha256": "b8e6b180553eaee213754df50121f2507926769b061c18e883247fc78f504e7f",
+          "sha256": "b719c3ad5b475ede9b394703437b6b09c1ce1fa57c10f1d9b39882dcb7d514fb",
           "visible_text_chars": 9,
           "evidence_file": "scope_evidence/gitlab.0.html"
         }

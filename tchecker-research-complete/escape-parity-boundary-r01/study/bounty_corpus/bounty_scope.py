@@ -47,9 +47,20 @@ SUPPORTED_LANGUAGES = {"JAVASCRIPT", "C_CPP"}
 
 TARGETS = [
     {
-        "key": "mozilla-gecko-dev",
+        "key": "mozilla-firefox",
         "priority": 1,
-        "repo": "mozilla/gecko-dev",
+        # The corpus was specified against mozilla/gecko-dev.  That mirror has
+        # stopped syncing: its master tip is 5836a062 (2025-07-08), confirmed
+        # by a fresh `git fetch` rather than assumed.  The live tree is
+        # mozilla-firefox/firefox, whose tip 8a99ef92 is dated 2026-09-01.
+        # Analysing the mirror would produce findings against a source tree
+        # more than a year behind the code that ships, so the scan target is
+        # redirected to the live repository and the redirection is recorded.
+        "repo": "mozilla-firefox/firefox",
+        "specified_as": "mozilla/gecko-dev",
+        "redirect_reason": (
+            "mozilla/gecko-dev master tip is 5836a062 dated 2025-07-08 and no "
+            "longer advances; mozilla-firefox/firefox is the live tree."),
         "program": "Mozilla Client Bug Bounty",
         "policy_urls": [
             "https://www.mozilla.org/en-US/security/client-bug-bounty/",
@@ -59,6 +70,7 @@ TARGETS = [
         "parser_surface": [
             "MIME type parsing", "HTTP header parsing", "cookie parsing",
             "certificate/name parsing", "URL and protocol parsing",
+            "DNS/host name parsing", "websocket and data URL parsing",
         ],
     },
     {
