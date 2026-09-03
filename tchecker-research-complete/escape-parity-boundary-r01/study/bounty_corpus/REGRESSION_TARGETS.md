@@ -97,6 +97,108 @@ Everything in the tables above was produced by the pre-R05 analyser and is kept
 as the record of what the gap looked like. Post-R05 results are in
 `results_r05/`.
 
+## C/C++ precision target: alliedmodders/source2mod (R08)
+
+Added at R08 to validate that the analyser finds the structural pattern in a
+live, actively maintained C/C++ codebase beyond the Mozilla corpus.
+`reportable=false`. No security impact or severity is assessed.
+
+**Target key**: `regr-sourcemod-textparsers`  
+**Commit**: `9976b514686d28386cf73b0bb3dc0102827285db` (2023-12-20)  
+**Files analysed**: 114 `C_CPP_SOURCE` + 144 `C_CPP_HEADER` = 258 files  
+**Parse coverage**: 1.00 (258/258)  
+**Records**: 17 (2 `ESCAPE_PARITY_PARSER_CANDIDATE`, 15 `NEGATIVE`)  
+**Results**: `results_r08/sourcemod-textparsers/`
+
+### What was found
+
+Both candidates are in `core/logic/TextParsers.cpp`,
+method `ParseStream_SMC`, lines 457 and 638. The detection trace is:
+
+```cpp
+// line ~430: c extracted from buffer via index access
+c = parse_point[i];
+
+// line 457: quote-boundary rule with single-position escape check
+if ((&parse_point[i] != in_buf) && c == '"' && parse_point[i-1] != '\\')
+```
+
+`c = parse_point[i]` populates `charVarOrigin[("c")] = ("parse_point", "i")`.
+`c == '"'` is traced back to `parse_point[i]` (offset 0).
+`parse_point[i-1] != '\\'` is at offset -1, same base name and index variable.
+The pairing logic records a `SINGLE_POSITION_INDEX_CHECK` row, which is the
+detectable form. Both candidates share the same escape-check node (line 457)
+but arise from different quote-comparison sites (lines 457 and 638).
+
+The two records are the same logical rule instantiated twice: one for the
+opening-quote branch and one for the closing-quote branch.
+
+### Chain: vacuous negative
+
+Chain status: `NOT_ESTABLISHED — NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`
+
+The fopen source IS resolved (line 101, `RESOLVED_EXTERNAL`, mode "r"); the
+buffer is populated by `fread` at line ~173. The consumer — callbacks on
+`ITextListener_SMC` (`ReadSMC_KeyValue`, `ReadSMC_NewSection`,
+`ReadSMC_RawLine`) — is not in the reachability model's consumer vocabulary.
+The chain fails at the consumer end, not because of a flow gap.
+
+One additional fopen in `smn_filesystem.cpp:176` was recorded as
+`AMBIGUOUS_MODE_ARGUMENT` (R08's fopen mode-argument filter could not resolve
+the mode string) and is excluded from the chain but listed under
+`unresolved_source_identities`. That filter is working as intended.
+
+### Why this validates the detector
+
+The pattern in `ParseStream_SMC` is genuinely structural — it is the same
+`buf[i] == '"' && buf[i-1] != '\\'` shape the analyser was built to detect.
+The source and the parse loop are real. The chain is vacuous only because the
+SMC consumer callbacks are an application-framework type not in the model
+vocabulary; this is a scope gap in the chain, not a gap in the parser layer.
+
+The R08 run confirms:
+- `charVarOrigin` correctly links an extracted-char variable to its buffer
+  and index when the RHS is an index access.
+- The pairing logic produces `SINGLE_POSITION_INDEX_CHECK` for the (offset 0,
+  offset −1) pair sharing a base and index variable.
+- The chain layer correctly records `NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`
+  rather than fabricating a positive.
+
+## C/C++ model gap: getc() + prev_char (libspatialite)
+
+`CGX-GROUP/libspatialite src/spatialite/virtualgeojson.c` contains a
+quote-boundary rule that the analyser cannot detect:
+
+```c
+int prev_char = '\0';
+while ((c = getc(parser->in)) != EOF) {
+    if (is_string) {
+        if (c == '"' && prev_char != '\\') {
+            is_string = 0;
+        }
+    }
+    prev_char = c;
+}
+```
+
+`c = getc(parser->in)` is a function call, not an index-subscript access. It
+does not produce an `indexParts` result, so `c` is never added to
+`charVarOrigin`. Without a `charVarOrigin` entry, the pairing between
+`c == '"'` and `prev_char != '\\'` (a loop-carried variable) cannot be
+established by the current producer.
+
+The chain would be complete if the parser were detected: the source is
+`fopen(path, "rb")` (a `STORED_FILE_READ` in the model) and the consumer is
+`sqlite3_exec()` (a `STRUCTURED_DATA_IMPORT` in the model). Both ends are
+modelled; only the parser layer is blind.
+
+**This is a false negative.** A future revision could extend `charVarOrigin`
+to track the `getc()`/`fgetc()`/`fread()` + scalar-assignment pattern
+(`c = getc(f); prev = c;`), analogous to how R05 added support for
+parameterised delimiters and R06 added search-established positions. Until
+then, a "0 candidates" result from C/C++ code that uses `getc()` loops is not
+evidence that no such rule exists.
+
 ## Manifest note
 
 PapaParse and mailparser initially reported `INFRASTRUCTURE_FAILURE` at

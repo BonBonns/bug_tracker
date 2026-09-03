@@ -130,17 +130,28 @@ scope freeze applies to them, and nothing found in them is submitted:
 | nene/sql-parser-cst | precision |
 | mholt/PapaParse | regression |
 | nodemailer/mailparser | regression |
+| alliedmodders/source2mod | precision (C/C++, R08) |
 
-All four have been run; see `REGRESSION_TARGETS.md`. No false positives across
-74 records, every abstention correct — and one real detector gap surfaced: the
-JavaScript layer records a quote site only when the comparison names a quote
-*literal*, so `input[quoteSearch - 1] === escapeChar` in PapaParse — the same
-one-position shape the property flagged in Gecko — was never even considered.
-A "0 candidates" result from the JavaScript layer said nothing about
-hand-written character scanners with parameterised delimiters. R05 fixes that
-(`../../DELIMITER_IDENTITY_R05.md`): those sites are now recorded and abstain,
-`papaparse.js:1506` among them, with no new candidate anywhere and the Mozilla
-differential unchanged.
+All five have been run; see `REGRESSION_TARGETS.md`. No false positives across
+74 JS records, every abstention correct — and one real detector gap surfaced:
+the JavaScript layer records a quote site only when the comparison names a
+quote *literal*, so `input[quoteSearch - 1] === escapeChar` in PapaParse —
+the same one-position shape the property flagged in Gecko — was never even
+considered. A "0 candidates" result from the JavaScript layer said nothing
+about hand-written character scanners with parameterised delimiters. R05 fixes
+that (`../../DELIMITER_IDENTITY_R05.md`): those sites are now recorded and
+abstain, `papaparse.js:1506` among them, with no new candidate anywhere and
+the Mozilla differential unchanged.
+
+The C/C++ precision target (SourceMod, added at R08) produced **2 candidates**
+in `core/logic/TextParsers.cpp:ParseStream_SMC`, both classified
+`ESCAPE_PARITY_PARSER_CANDIDATE`. This validates that the analyser finds the
+structural pattern in live C/C++ code beyond the Mozilla corpus. The chain is
+vacuous (`NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`) because the SMC callback
+type is not in the reachability model vocabulary. A separate model gap was
+identified in `CGX-GROUP/libspatialite` where the `getc()`+`prev_char` pattern
+is invisible to the current `charVarOrigin` logic. Both are documented in
+`REGRESSION_TARGETS.md`.
 
 They are dense in quoted-string boundary handling, which makes them good at
 exposing detector defects — the same way real Gecko code exposed two of them
