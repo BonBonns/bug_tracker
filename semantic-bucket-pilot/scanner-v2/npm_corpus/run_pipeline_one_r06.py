@@ -57,6 +57,7 @@ correction block below for the one real structural difference from frontend_cove
 own check_package(): pass 1 is never rebuilt, since js_bin already IS it.
 """
 import hashlib
+import importlib
 import json
 import os
 import resource
@@ -258,23 +259,21 @@ GATES_DIR = "/home/user/bug_tracker/tchecker-research-complete/gates"
 GUARD_FALLTHROUGH_PRODUCER = os.path.join(
     "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
     "export_guard_facts.sc")
-GUARD_FALLTHROUGH_VERDICT = os.path.join(GATES_DIR, "guard_fallthrough_verdict.py")
 GLOBALMUT_PRODUCER = os.path.join(
     "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
     "export_globalmut_facts.sc")
-GLOBALMUT_VERDICT = os.path.join(GATES_DIR, "globalmut_verdict.py")
 DENYLIST_BYPASS_PRODUCER = os.path.join(
     "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
     "export_denylist_facts.sc")
-DENYLIST_BYPASS_VERDICT = os.path.join(GATES_DIR, "denylist_bypass_verdict.py")
 VALIDATION_BYPASS_PRODUCER = os.path.join(
     "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
     "export_loop_facts.sc")
-VALIDATION_BYPASS_VERDICT = os.path.join(GATES_DIR, "validation_bypass_verdict.py")
 MALICIOUS_NPM_PRODUCER = os.path.join(
     "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
     "export_mal_facts.sc")
-MALICIOUS_NPM_VERDICT = os.path.join(GATES_DIR, "malicious_npm_verdict.py")
+# Each of the five verdict.py files themselves live under GATES_DIR and are imported by module
+# name (not by path) in run_gates_class() below -- GATES_DIR is added to sys.path once, right
+# before that helper is defined, matching ADJUDICATOR_DIR's own role for llm_input_verdict.py.
 
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
@@ -1359,7 +1358,19 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
     # (or root+raw-dir, for Malicious NPM) reducer convention -- orchestration only, no class-
     # specific logic lives here beyond the module_export_identity.sc prerequisite and the extra
     # root argument Malicious NPM's own derive() needs for manifest red flags.
-    def run_gates_class(key, producers, verdict_script, extra_verdict_args=()):
+    #
+    # All five verdict.py's expose the SAME importable derive() shape llm_input_verdict.py does
+    # (confirmed by reading each one: guard_fallthrough_verdict.derive(raw),
+    # globalmut_verdict.derive(raw), denylist_bypass_verdict.derive(raw),
+    # validation_bypass_verdict.derive(raw), malicious_npm_verdict.derive(root, raw) -- their own
+    # `if __name__ == "__main__"` blocks are just a thin CLI wrapper around the same call) -- so
+    # this imports and calls derive() directly, matching the "import and orchestrate, never
+    # shell out to a subprocess" discipline already established for llm_input_verdict.py/
+    # serialize_dos_r03.py, rather than the subprocess+stdout-capture indirection an earlier
+    # draft of this stage used.
+    sys.path.insert(0, GATES_DIR)
+
+    def run_gates_class(key, producers, module_name, needs_pkg_root=False):
         raw_dir = os.path.join(work, f"{key}_raw")
         os.makedirs(raw_dir, exist_ok=True)
         for label, sc in producers:
@@ -1371,29 +1382,29 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
             if err or rc != 0:
                 return ("RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED",
                         err or f"{key} {label} producer rc={rc}")
-        # Each of these five verdict.py's own `if __name__ == "__main__"` prints its derive()
-        # result as JSON to STDOUT (no output-file argument exists on any of them) -- captured
-        # here into out_path, matching the pattern every other reducer's own *_out.json follows.
-        out_path = os.path.join(work, f"{key}_out.json")
         t0 = time.time()
         try:
-            with open(out_path, "w") as out_f:
-                subprocess.run([sys.executable, verdict_script, *extra_verdict_args, raw_dir],
-                                check=True, timeout=SCAN_TIMEOUT, stdout=out_f,
-                                stderr=subprocess.PIPE)
-            with open(out_path) as f:
-                result = json.load(f)
-        except subprocess.TimeoutExpired:
-            record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
-            return ("RESOURCE_LIMIT", f"{key}_reduce exceeded {SCAN_TIMEOUT}s")
+            module = importlib.import_module(module_name)  # reused, never modified
+            result = module.derive(pkg_dir, raw_dir) if needs_pkg_root else module.derive(raw_dir)
         except Exception as e:
             record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
-            return ("NORMALIZATION_FAILED", f"{key} verdict.py failed: {type(e).__name__}: {e}")
+            return ("NORMALIZATION_FAILED", f"{module_name}.derive() failed: {type(e).__name__}: {e}")
         record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
+        # None of these five verdict.py's own findings carry a "reportable" field at all (same
+        # "predates the convention" shape as llm_input_verdict.py) -- set here, orchestration-
+        # only, never inside the frozen reducer. Unlike llm_input, each of these five's own
+        # findings mix CANDIDATE_* and SAFE_* rows together (their derive() doesn't pre-filter),
+        # so the CANDIDATE-only filter has to happen here too, before reportable is attached.
         candidates = [f for f in result.get("findings", []) if str(f.get("verdict", "")).startswith("CANDIDATE")]
         for finding in candidates:
             finding["reportable"] = False
         record[f"{key}_findings"] = candidates
+        # {key}_out.json -- same real bundling precedent as llm_input_out.json/redos_out.json
+        # (evidence_bundle.py's own BUNDLED_RELATIVE_PATHS), written here rather than relying on
+        # any of the five verdict.py's own stdout (none of them take an output-file argument).
+        out_path = os.path.join(work, f"{key}_out.json")
+        with open(out_path, "w") as f:
+            json.dump(result, f, default=str)
         return (None, None)
 
     t0 = time.time()
@@ -1408,7 +1419,7 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = err or f"guard_fallthrough module_export_identity producer rc={rc}"
         return record
     status, detail = run_gates_class(
-        "guard_fallthrough", [("export_guard_facts", GUARD_FALLTHROUGH_PRODUCER)], GUARD_FALLTHROUGH_VERDICT)
+        "guard_fallthrough", [("export_guard_facts", GUARD_FALLTHROUGH_PRODUCER)], "guard_fallthrough_verdict")
     if status:
         record["status"] = status
         record["detail"] = detail
@@ -1428,21 +1439,21 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = err or f"globalmut module_export_identity producer rc={rc}"
         return record
     status, detail = run_gates_class(
-        "globalmut", [("export_globalmut_facts", GLOBALMUT_PRODUCER)], GLOBALMUT_VERDICT)
+        "globalmut", [("export_globalmut_facts", GLOBALMUT_PRODUCER)], "globalmut_verdict")
     if status:
         record["status"] = status
         record["detail"] = detail
         return record
 
     status, detail = run_gates_class(
-        "denylist_bypass", [("export_denylist_facts", DENYLIST_BYPASS_PRODUCER)], DENYLIST_BYPASS_VERDICT)
+        "denylist_bypass", [("export_denylist_facts", DENYLIST_BYPASS_PRODUCER)], "denylist_bypass_verdict")
     if status:
         record["status"] = status
         record["detail"] = detail
         return record
 
     status, detail = run_gates_class(
-        "validation_bypass", [("export_loop_facts", VALIDATION_BYPASS_PRODUCER)], VALIDATION_BYPASS_VERDICT)
+        "validation_bypass", [("export_loop_facts", VALIDATION_BYPASS_PRODUCER)], "validation_bypass_verdict")
     if status:
         record["status"] = status
         record["detail"] = detail
@@ -1450,10 +1461,10 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
 
     # Malicious NPM Install Exfil's own derive(root, raw) needs the package's own source root
     # too (manifest red flags read package.json directly) -- the one class of these five whose
-    # verdict.py takes two positional args, not one.
+    # derive() takes two positional args, not one.
     status, detail = run_gates_class(
-        "malicious_npm", [("export_mal_facts", MALICIOUS_NPM_PRODUCER)], MALICIOUS_NPM_VERDICT,
-        extra_verdict_args=(pkg_dir,))
+        "malicious_npm", [("export_mal_facts", MALICIOUS_NPM_PRODUCER)], "malicious_npm_verdict",
+        needs_pkg_root=True)
     if status:
         record["status"] = status
         record["detail"] = detail
