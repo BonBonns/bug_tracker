@@ -200,6 +200,19 @@ BUNDLED_RELATIVE_PATHS = (
     # precedent as the other *_out.json entries.
     "ssrf_raw",
     "ssrf_out.json",
+    # FIVE-MORE-CLASSES INTEGRATION: same "bundle the raw-output directory as-is, required"
+    # precedent -- each of these five always runs unconditionally on every successful run, same
+    # as every entry above; each _out.json follows the exact same *_out.json precedent.
+    "guard_fallthrough_raw",
+    "guard_fallthrough_out.json",
+    "globalmut_raw",
+    "globalmut_out.json",
+    "denylist_bypass_raw",
+    "denylist_bypass_out.json",
+    "validation_bypass_raw",
+    "validation_bypass_out.json",
+    "malicious_npm_raw",
+    "malicious_npm_out.json",
 )
 
 # Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
@@ -273,6 +286,19 @@ ANALYZER_FILES = {
     # ssrf_out.json -- same real path-construction convention as nosqli_verdict.py/
     # redos_verdict.py/path_traversal_verdict.py above (SCANNER_V2-root-relative).
     "ssrf_verdict.py": os.path.join(os.path.dirname(_HERE), "ssrf_verdict.py"),
+    # FIVE-MORE-CLASSES INTEGRATION: unlike every other entry in this dict, these five live
+    # under tchecker-research-complete/gates/, not SCANNER_V2 -- same "real absolute path used
+    # directly" treatment as serialize_dos_r03.py/llm_input_verdict.py above.
+    "guard_fallthrough_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                                      "gates/guard_fallthrough_verdict.py"),
+    "globalmut_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                              "gates/globalmut_verdict.py"),
+    "denylist_bypass_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                                    "gates/denylist_bypass_verdict.py"),
+    "validation_bypass_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                                      "gates/validation_bypass_verdict.py"),
+    "malicious_npm_verdict.py": ("/home/user/bug_tracker/tchecker-research-complete/"
+                                  "gates/malicious_npm_verdict.py"),
 }
 
 

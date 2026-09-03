@@ -80,6 +80,19 @@ discipline as the others above: `ssrf_verdict.py` hardcodes every finding's own
 `"reportable": False` unconditionally, so this module's `f.get("reportable") is True` check can
 never count an SSRF finding as reportable no matter how "enabled" is set here.
 
+ADDENDUM 5 (five more classes, found via ANALYZER_CLASS_INVENTORY.md's own repository-wide
+audit -- real, gated, self-contained JS/TS properties predating this session, living under
+tchecker-research-complete/gates/, never wired into any pipeline before now): `guard_fallthrough_
+findings`/`globalmut_findings`/`denylist_bypass_findings`/`validation_bypass_findings`/
+`malicious_npm_findings` are the 13th-17th keys, same discipline as the others above -- always
+"enabled," never routed through staged_enablement.py. Unlike every other property in this
+module, each of these five reducers' own derive() returns BOTH CANDIDATE_* and SAFE_* rows;
+run_pipeline_one_r06.py's own wiring filters to verdict.startswith("CANDIDATE") and sets
+`"reportable": False` there, orchestration-only, before these keys ever reach this aggregator
+-- so this module's own `f.get("reportable") is True` check can never count any of these five
+as reportable, same net effect as every other key here, just via a different upstream filter
+step (the frozen reducers themselves don't filter SAFE_* out; the pipeline wiring does).
+
 ADDENDUM (ReDoS integration, roadmap step 8): `redos_findings` (redos_verdict.py, frozen, wired
 into the shared per-package pipeline via run_pipeline_one_r06.py) is a 7th key, treated exactly
 like RESOURCE_GUARD_KEYS/NAN_KEYS -- always "enabled," never routed through
@@ -190,11 +203,30 @@ NOSQLI_KEYS = ("nosqli_findings",)
 # reducer's own module docstring.
 SSRF_KEYS = ("ssrf_findings",)
 
+# FIVE MORE CLASSES (found via ANALYZER_CLASS_INVENTORY.md's own repository-wide audit --
+# real, gated, self-contained JS/TS npm-applicable properties living under
+# tchecker-research-complete/gates/, predating this session, never wired into any pipeline
+# until now): Guard Fallthrough, Global Singleton Mutation, Denylist Pattern Bypass,
+# Validation Bypass, Malicious NPM Install Exfiltration. Same discipline as every other
+# roadmap-step-8 key above -- always "enabled," never routed through staged_enablement.py.
+# Unlike every other property in this pipeline, each of these five verdict.py's own derive()
+# returns BOTH CANDIDATE_* and SAFE_* rows in "findings" -- run_pipeline_one_r06.py's own
+# wiring filters to only verdict.startswith("CANDIDATE") before attaching reportable=False,
+# so what reaches record["..._findings"] (and therefore this aggregator) is already
+# candidate-only, matching every other property's own convention by the time it gets here.
+GUARD_FALLTHROUGH_KEYS = ("guard_fallthrough_findings",)
+GLOBALMUT_KEYS = ("globalmut_findings",)
+DENYLIST_BYPASS_KEYS = ("denylist_bypass_findings",)
+VALIDATION_BYPASS_KEYS = ("validation_bypass_findings",)
+MALICIOUS_NPM_KEYS = ("malicious_npm_findings",)
+
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
 ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
-                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + SSRF_KEYS + STAGED_KEYS)
+                      + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + SSRF_KEYS
+                      + GUARD_FALLTHROUGH_KEYS + GLOBALMUT_KEYS + DENYLIST_BYPASS_KEYS
+                      + VALIDATION_BYPASS_KEYS + MALICIOUS_NPM_KEYS + STAGED_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -217,7 +249,10 @@ def aggregate_record(record, enabled_properties):
         reportable_count = sum(1 for f in items if f.get("reportable") is True)
         if (key in RESOURCE_GUARD_KEYS or key in NAN_KEYS or key in REDOS_KEYS
                 or key in PATH_TRAVERSAL_KEYS or key in SERIALIZE_DOS_KEYS
-                or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS or key in SSRF_KEYS):
+                or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS or key in SSRF_KEYS
+                or key in GUARD_FALLTHROUGH_KEYS or key in GLOBALMUT_KEYS
+                or key in DENYLIST_BYPASS_KEYS or key in VALIDATION_BYPASS_KEYS
+                or key in MALICIOUS_NPM_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]
