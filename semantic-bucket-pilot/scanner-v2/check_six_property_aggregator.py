@@ -181,6 +181,30 @@ ck("a record with no ssrf_findings key at all still produces a correct, non-cras
    and summary1m["ssrf_findings"]["raw_count"] == 0
    and summary1m["ssrf_findings"]["reportable_count"] == 0)
 
+# --- Five more classes: same discipline as every other roadmap-step-8 key above -- always
+# enabled, never gated by staged_enablement.py. Each key's own reducer returns BOTH CANDIDATE_*
+# and SAFE_* rows, but run_pipeline_one_r06.py's own wiring already filters to CANDIDATE-only
+# and sets reportable=False before these keys ever reach a record -- these findings simulate
+# that already-filtered, already-reportable-set state.
+for _key, _n in (("guard_fallthrough_findings", 1), ("globalmut_findings", 1),
+                  ("denylist_bypass_findings", 2), ("validation_bypass_findings", 1),
+                  ("malicious_npm_findings", 3)):
+    _record = {_key: [mk(False)] * _n}
+    _summary = agg.aggregate_record(_record, enabled_properties=frozenset())
+    ck(f"{_key} is in ALL_PROPERTY_KEYS", _key in agg.ALL_PROPERTY_KEYS)
+    ck(f"{_key} always enabled=True in the aggregate, regardless of the passed-in "
+       "enabled_properties set (never routed through staged_enablement.py)",
+       _summary[_key]["enabled"] is True and _summary[_key]["disabled_reason"] is None)
+    ck(f"{_key} raw/reportable counts are read directly, never recomputed -- all {_n} "
+       "finding(s) carry reportable=False (as the pipeline wiring sets it)",
+       _summary[_key]["raw_count"] == _n and _summary[_key]["reportable_count"] == 0)
+    _record_absent = {"r04_findings": [mk(True)]}  # no key at all, the common case
+    _summary_absent = agg.aggregate_record(_record_absent, enabled_properties=frozenset())
+    ck(f"a record with no {_key} key at all still produces a correct, non-crashing summary: "
+       "enabled=True, raw=0, reportable=0",
+       _summary_absent[_key]["enabled"] is True and _summary_absent[_key]["raw_count"] == 0
+       and _summary_absent[_key]["reportable_count"] == 0)
+
 # --- staged property enabled via the passed-in set ---
 record2 = {"lock_balance_findings": [mk(True), mk(False)]}
 summary2 = agg.aggregate_record(record2, enabled_properties=frozenset({"lock_balance_findings"}))
@@ -293,6 +317,11 @@ def load_bundle_record(bundle_path):
         record["ssrf_findings"] = []  # same reason -- these bundles predate the SSRF wiring
                                          # (record1l/record1m above already cover a real non-empty
                                          # and a real absent-key ssrf_findings case directly)
+        for _k in ("guard_fallthrough_findings", "globalmut_findings", "denylist_bypass_findings",
+                   "validation_bypass_findings", "malicious_npm_findings"):
+            record[_k] = []  # same reason -- these bundles predate the five-more-classes wiring
+                              # (the loop above already covers a real non-empty and a real
+                              # absent-key case directly for each)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

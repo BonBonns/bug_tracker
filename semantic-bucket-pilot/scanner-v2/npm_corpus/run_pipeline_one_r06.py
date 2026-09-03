@@ -219,6 +219,63 @@ SSRF_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
                   "tchecker-property-adjudicator/producers/export_ssrf_integ.sc")
 SSRF_VERDICT = os.path.join(SCANNER_V2, "ssrf_verdict.py")
 
+# FIVE MORE CLASSES (found via ANALYZER_CLASS_INVENTORY.md's own repository-wide audit, section
+# 3.5 -- real, gated, self-contained JS/TS npm-applicable properties that predate this session,
+# living under tchecker-research-complete/gates/, never wired into any pipeline): Guard
+# Fallthrough, Global Singleton Mutation, Denylist Pattern Bypass, Validation Bypass (loop-
+# control divergence), Malicious NPM Install Exfiltration. Each already has its own frozen
+# verdict.py (derive()-style reducer, same "predates the reportable convention" shape as
+# llm_input_verdict.py -- reportable is set here, orchestration-only, never inside the frozen
+# reducer) and its own gate script (re-verified fresh this session, not trusted from old
+# self-reported numbers: GUARD_FALLTHROUGH=6/6, DENYLIST_BYPASS=6/6, GLOBALMUT=6/6,
+# VALIDATION_BYPASS=6/6, MALICIOUS_NPM=13/13 -- all reproduced from the bundled fixtures'
+# checked-in cpg.bin via the real producers, not just re-run against static TSVs, and every
+# rebuilt raw/ dir diffed byte-identical against the bundled one, except two tables
+# (loop_collections.tsv/loop_exits.tsv/loop_sink_sites.tsv/loopctl.tsv appearing in the denylist
+# fixture, loopctl.tsv appearing in the loop fixture) that neither verdict.py actually reads --
+# confirmed extraneous, not a real producer gap).
+#
+# Producer convention: `exec(cpgFile: String, outDir: String)` -- same as export_llm_facts.sc,
+# not the rawDir/srcLabel convention of ReDoS/Path Traversal/NoSQLi/SSRF. Two of the five
+# (Guard Fallthrough, Global Singleton Mutation) ALSO require module_export_identity.sc
+# (a shared, portable-engine-full-review-package producer writing require_bindings.tsv/
+# module_exports.tsv/import_calls.tsv/etc.) to run first, into the SAME outDir -- confirmed by
+# rebuild, not assumed from scan_pkg.sh's own reference list (which predates this session and
+# was found, via that same rebuild, to still be complete and correct for these two). Denylist
+# Bypass, Validation Bypass, and Malicious NPM Install Exfil need no such prerequisite.
+#
+# Every one of these five verdict.py's own `derive()` returns findings for BOTH the CANDIDATE_*
+# shape AND every SAFE_* control it evaluated (unlike every other property in this pipeline,
+# whose own reducer already filters down to only the reportable-worthy shape) -- so, unlike
+# every prior wiring in this pipeline, record["..._findings"] here is explicitly filtered to
+# verdict.startswith("CANDIDATE") before reportable=False is attached; the full, unfiltered
+# derive() output (SAFE_* rows included) is still bundled verbatim in each stage's own
+# "*_out.json" file, so nothing is silently lost, only kept out of the aggregator-facing key.
+MODULE_EXPORT_IDENTITY_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/"
+                                    "portable-engine-full-review-package/frontends/"
+                                    "javascript-typescript/joern-ts/module_export_identity.sc")
+GATES_DIR = "/home/user/bug_tracker/tchecker-research-complete/gates"
+GUARD_FALLTHROUGH_PRODUCER = os.path.join(
+    "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
+    "export_guard_facts.sc")
+GUARD_FALLTHROUGH_VERDICT = os.path.join(GATES_DIR, "guard_fallthrough_verdict.py")
+GLOBALMUT_PRODUCER = os.path.join(
+    "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
+    "export_globalmut_facts.sc")
+GLOBALMUT_VERDICT = os.path.join(GATES_DIR, "globalmut_verdict.py")
+DENYLIST_BYPASS_PRODUCER = os.path.join(
+    "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
+    "export_denylist_facts.sc")
+DENYLIST_BYPASS_VERDICT = os.path.join(GATES_DIR, "denylist_bypass_verdict.py")
+VALIDATION_BYPASS_PRODUCER = os.path.join(
+    "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
+    "export_loop_facts.sc")
+VALIDATION_BYPASS_VERDICT = os.path.join(GATES_DIR, "validation_bypass_verdict.py")
+MALICIOUS_NPM_PRODUCER = os.path.join(
+    "/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/producers",
+    "export_mal_facts.sc")
+MALICIOUS_NPM_VERDICT = os.path.join(GATES_DIR, "malicious_npm_verdict.py")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -1295,6 +1352,112 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"ssrf scan failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["ssrf_scan"] = {"seconds": time.time() - t0}
+
+    # FIVE-MORE-CLASSES INTEGRATION (see the module-level comment above for the full
+    # disclosure): a small shared helper runs each class's producer(s) then its verdict.py,
+    # since all five follow the exact same cpgFile/outDir producer convention and single-raw-dir
+    # (or root+raw-dir, for Malicious NPM) reducer convention -- orchestration only, no class-
+    # specific logic lives here beyond the module_export_identity.sc prerequisite and the extra
+    # root argument Malicious NPM's own derive() needs for manifest red flags.
+    def run_gates_class(key, producers, verdict_script, extra_verdict_args=()):
+        raw_dir = os.path.join(work, f"{key}_raw")
+        os.makedirs(raw_dir, exist_ok=True)
+        for label, sc in producers:
+            rc, secs, mem, err = run_stage(
+                [f"{JOERN_HOME}/joern", "--script", sc,
+                 "--param", f"cpgFile={js_bin}", "--param", f"outDir={raw_dir}"],
+                os.path.join(work, f"{key}_{label}_producer.log"))
+            record["stages"][f"{key}_{label}_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+            if err or rc != 0:
+                return ("RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED",
+                        err or f"{key} {label} producer rc={rc}")
+        # Each of these five verdict.py's own `if __name__ == "__main__"` prints its derive()
+        # result as JSON to STDOUT (no output-file argument exists on any of them) -- captured
+        # here into out_path, matching the pattern every other reducer's own *_out.json follows.
+        out_path = os.path.join(work, f"{key}_out.json")
+        t0 = time.time()
+        try:
+            with open(out_path, "w") as out_f:
+                subprocess.run([sys.executable, verdict_script, *extra_verdict_args, raw_dir],
+                                check=True, timeout=SCAN_TIMEOUT, stdout=out_f,
+                                stderr=subprocess.PIPE)
+            with open(out_path) as f:
+                result = json.load(f)
+        except subprocess.TimeoutExpired:
+            record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
+            return ("RESOURCE_LIMIT", f"{key}_reduce exceeded {SCAN_TIMEOUT}s")
+        except Exception as e:
+            record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
+            return ("NORMALIZATION_FAILED", f"{key} verdict.py failed: {type(e).__name__}: {e}")
+        record["stages"][f"{key}_reduce"] = {"seconds": time.time() - t0}
+        candidates = [f for f in result.get("findings", []) if str(f.get("verdict", "")).startswith("CANDIDATE")]
+        for finding in candidates:
+            finding["reportable"] = False
+        record[f"{key}_findings"] = candidates
+        return (None, None)
+
+    t0 = time.time()
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", MODULE_EXPORT_IDENTITY_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"outDir={os.path.join(work, 'guard_fallthrough_raw')}"],
+        os.path.join(work, "guard_fallthrough_module_export_identity_producer.log"))
+    record["stages"]["guard_fallthrough_module_export_identity_producer"] = {
+        "seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"guard_fallthrough module_export_identity producer rc={rc}"
+        return record
+    status, detail = run_gates_class(
+        "guard_fallthrough", [("export_guard_facts", GUARD_FALLTHROUGH_PRODUCER)], GUARD_FALLTHROUGH_VERDICT)
+    if status:
+        record["status"] = status
+        record["detail"] = detail
+        return record
+
+    # Global Singleton Mutation shares the SAME module_export_identity.sc prerequisite, run into
+    # its own separate raw dir (never sharing guard_fallthrough_raw -- each class's own raw dir
+    # stays self-contained, matching every other property in this pipeline).
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", MODULE_EXPORT_IDENTITY_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"outDir={os.path.join(work, 'globalmut_raw')}"],
+        os.path.join(work, "globalmut_module_export_identity_producer.log"))
+    record["stages"]["globalmut_module_export_identity_producer"] = {
+        "seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"globalmut module_export_identity producer rc={rc}"
+        return record
+    status, detail = run_gates_class(
+        "globalmut", [("export_globalmut_facts", GLOBALMUT_PRODUCER)], GLOBALMUT_VERDICT)
+    if status:
+        record["status"] = status
+        record["detail"] = detail
+        return record
+
+    status, detail = run_gates_class(
+        "denylist_bypass", [("export_denylist_facts", DENYLIST_BYPASS_PRODUCER)], DENYLIST_BYPASS_VERDICT)
+    if status:
+        record["status"] = status
+        record["detail"] = detail
+        return record
+
+    status, detail = run_gates_class(
+        "validation_bypass", [("export_loop_facts", VALIDATION_BYPASS_PRODUCER)], VALIDATION_BYPASS_VERDICT)
+    if status:
+        record["status"] = status
+        record["detail"] = detail
+        return record
+
+    # Malicious NPM Install Exfil's own derive(root, raw) needs the package's own source root
+    # too (manifest red flags read package.json directly) -- the one class of these five whose
+    # verdict.py takes two positional args, not one.
+    status, detail = run_gates_class(
+        "malicious_npm", [("export_mal_facts", MALICIOUS_NPM_PRODUCER)], MALICIOUS_NPM_VERDICT,
+        extra_verdict_args=(pkg_dir,))
+    if status:
+        record["status"] = status
+        record["detail"] = detail
+        return record
 
     record["status"] = "ANALYZED"
     return record
