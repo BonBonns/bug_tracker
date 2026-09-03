@@ -188,7 +188,7 @@ ck("a record with no ssrf_findings key at all still produces a correct, non-cras
 # that already-filtered, already-reportable-set state.
 for _key, _n in (("guard_fallthrough_findings", 1), ("globalmut_findings", 1),
                   ("denylist_bypass_findings", 2), ("validation_bypass_findings", 1),
-                  ("malicious_npm_findings", 3)):
+                  ("malicious_npm_findings", 3), ("escape_parity_findings", 1)):
     _record = {_key: [mk(False)] * _n}
     _summary = agg.aggregate_record(_record, enabled_properties=frozenset())
     ck(f"{_key} is in ALL_PROPERTY_KEYS", _key in agg.ALL_PROPERTY_KEYS)
@@ -318,10 +318,10 @@ def load_bundle_record(bundle_path):
                                          # (record1l/record1m above already cover a real non-empty
                                          # and a real absent-key ssrf_findings case directly)
         for _k in ("guard_fallthrough_findings", "globalmut_findings", "denylist_bypass_findings",
-                   "validation_bypass_findings", "malicious_npm_findings"):
-            record[_k] = []  # same reason -- these bundles predate the five-more-classes wiring
-                              # (the loop above already covers a real non-empty and a real
-                              # absent-key case directly for each)
+                   "validation_bypass_findings", "malicious_npm_findings", "escape_parity_findings"):
+            record[_k] = []  # same reason -- these bundles predate the five-more-classes/
+                              # ESCAPE-PARITY-BOUNDARY wiring (the loop above already covers a
+                              # real non-empty and a real absent-key case directly for each)
         js = json.load(open(os.path.join(td, "js_facts.json")))
         cpp = json.load(open(os.path.join(td, "cpp_facts.json")))
         return record, js, cpp

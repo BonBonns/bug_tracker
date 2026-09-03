@@ -223,10 +223,27 @@ MALICIOUS_NPM_KEYS = ("malicious_npm_findings",)
 STAGED_KEYS = ("lock_balance_findings", "protected_field_findings", "oob_write_candidates",
                "oob_index_write_candidates", "oob_read_candidates", "oob_compare_candidates")
 
+# ESCAPE-PARITY-BOUNDARY (a quote-boundary parser rule that cannot establish escape-run parity
+# -- a single fixed-position lookbehind cannot distinguish \" from \\"). Built and gated
+# standalone across nine revisions (R01-R09, 95/95 controls) before being wired into the shared
+# per-package pipeline via run_pipeline_one_r06.py. Same discipline as every other roadmap-
+# step-8-successor key above -- always "enabled" here, never routed through
+# staged_enablement.py's reachability-tier mechanism. Unlike LLM-input/the five more classes,
+# escape_parity_sites.py's own base() helper already hardcodes every finding's own
+# "reportable": False unconditionally, INSIDE the frozen reducer itself, not at the
+# run_pipeline_one_r06.py orchestration layer -- so, same net effect as every property above,
+# this module's `f.get("reportable") is True` check can never count an ESCAPE-PARITY-BOUNDARY
+# finding as reportable no matter how "enabled" is set here. Also unlike SSRF/NoSQLi/ReDoS/
+# Path Traversal, this property has no LLM adjudicator step at all (see
+# tchecker-research-complete/escape-parity-boundary-r01/FREEZE_LINEAGE.md's own "Wired into the
+# shared npm-corpus scan pipeline" section for why that was a deliberate choice, not a gap).
+ESCAPE_PARITY_KEYS = ("escape_parity_findings",)
+
 ALL_PROPERTY_KEYS = (RESOURCE_GUARD_KEYS + NAN_KEYS + REDOS_KEYS + PATH_TRAVERSAL_KEYS
                       + SERIALIZE_DOS_KEYS + LLM_INPUT_KEYS + NOSQLI_KEYS + SSRF_KEYS
                       + GUARD_FALLTHROUGH_KEYS + GLOBALMUT_KEYS + DENYLIST_BYPASS_KEYS
-                      + VALIDATION_BYPASS_KEYS + MALICIOUS_NPM_KEYS + STAGED_KEYS)
+                      + VALIDATION_BYPASS_KEYS + MALICIOUS_NPM_KEYS + STAGED_KEYS
+                      + ESCAPE_PARITY_KEYS)
 
 
 def aggregate_record(record, enabled_properties):
@@ -252,7 +269,7 @@ def aggregate_record(record, enabled_properties):
                 or key in LLM_INPUT_KEYS or key in NOSQLI_KEYS or key in SSRF_KEYS
                 or key in GUARD_FALLTHROUGH_KEYS or key in GLOBALMUT_KEYS
                 or key in DENYLIST_BYPASS_KEYS or key in VALIDATION_BYPASS_KEYS
-                or key in MALICIOUS_NPM_KEYS):
+                or key in MALICIOUS_NPM_KEYS or key in ESCAPE_PARITY_KEYS):
             enabled, reason = True, None
         elif key in DISABLED_PROPERTIES:
             enabled, reason = False, DISABLED_PROPERTIES[key]
