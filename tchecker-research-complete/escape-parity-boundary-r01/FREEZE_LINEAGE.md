@@ -17,7 +17,8 @@ match byte for byte.
 | `DELIMITER_IDENTITY_FREEZE.txt` | R05 delimiter identity | 2 entries superseded by R06 |
 | `SEARCH_POSITION_FREEZE.txt` | R06 search-established positions | intact |
 | `SEARCH_SPACE_FREEZE.txt` | R07 traced vs. vacuous chain negatives | 2 entries superseded by R08 |
-| `SOURCE_MODE_FREEZE.txt` | R08 fopen mode-argument filter | current |
+| `SOURCE_MODE_FREEZE.txt` | R08 fopen mode-argument filter | intact |
+| `SAME_BOUNDARY_SCOPE_FREEZE.txt` | R09 same-boundary-scope pairing fix | current |
 
 ## What R05 supersedes, and why
 
@@ -82,11 +83,42 @@ reason changes from `NO_DELAYED_SOURCE_REACHES_PARSER` (incorrectly implied trac
 to `NO_SOURCE_API_MODELLED_IN_UNIT` (correctly vacuous for an analysis unit that has
 no fopen-for-read calls). All R01–R07 gates still pass.
 
+## What R09 supersedes, and why
+
+R09 changed three artifacts:
+
+- `producers/cpp_escape_parity_facts.sc` (last changed by R08, originally frozen by R03)
+- `producers/escape_parity_facts.sc` (last changed by R06, originally frozen by R01)
+- `escape_parity_sites.py` (last changed by R05, originally frozen by R03)
+
+Both producers previously paired an escape comparison with a quote comparison
+whenever they shared a method, base expression, and index variable — with no
+requirement that they be part of the same conditional. The reducer compounded
+this by attaching every check found anywhere in a method to every quote site
+in that method, not just the site the check actually named. A scanner with
+both an opening-quote branch (no escape check needed) and a closing-quote
+branch (a genuine one-position rule) in the same method had the closing
+branch's check wrongly borrowed as evidence for the opening branch.
+
+Found by re-verifying, not by construction: the R08 SourceMod precision-target
+scan reported 2 candidates in `alliedmodders/source2mod`'s `ParseStream_SMC`,
+and reading the actual source at both lines showed only one was a real
+boundary rule. See `SAME_BOUNDARY_SCOPE_R09.md` for the full trace, the fix
+(structural same-condition-or-nested-guard pairing, never crossing a loop
+boundary), and the two new fixtures (`q10`, `q11`) that pin both the false
+positive and the legitimate nested-if shape going forward.
+
+No previously-reported candidate outside SourceMod moved: the Mozilla
+`SplitMimetype` finding was re-verified against the same gecko-dev CPG under
+the fixed producer and is unchanged (it was always a flat `&&` condition, not
+a cross-branch artifact). All R01–R08 gates still pass on their own controls.
+
 ## Results produced under each revision
 
 Corpus results are labelled by the revision that produced them:
 `study/bounty_corpus/results/` predates R05, `results_r05/` is R05,
-`results_r06/` is R06, `results_r07/` is R07, and `results_r08/` is R08. They are
-kept side by side because the difference between them is itself the evidence that each
-revision does what it claims — nothing is overwritten to make the current revision look
-like it was always right.
+`results_r06/` is R06, `results_r07/` is R07, `results_r08/` is R08, and
+`results_r09/` is R09. They are kept side by side because the difference
+between them is itself the evidence that each revision does what it claims —
+nothing is overwritten to make the current revision look like it was always
+right.

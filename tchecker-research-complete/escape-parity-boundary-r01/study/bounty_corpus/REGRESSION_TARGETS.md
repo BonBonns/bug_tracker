@@ -97,7 +97,7 @@ Everything in the tables above was produced by the pre-R05 analyser and is kept
 as the record of what the gap looked like. Post-R05 results are in
 `results_r05/`.
 
-## C/C++ precision target: alliedmodders/source2mod (R08)
+## C/C++ precision target: alliedmodders/source2mod (R08, corrected at R09)
 
 Added at R08 to validate that the analyser finds the structural pattern in a
 live, actively maintained C/C++ codebase beyond the Mozilla corpus.
@@ -107,31 +107,68 @@ live, actively maintained C/C++ codebase beyond the Mozilla corpus.
 **Commit**: `9976b514686d28386cf73b0bb3dc0102827285db` (2023-12-20)  
 **Files analysed**: 114 `C_CPP_SOURCE` + 144 `C_CPP_HEADER` = 258 files  
 **Parse coverage**: 1.00 (258/258)  
-**Records**: 17 (2 `ESCAPE_PARITY_PARSER_CANDIDATE`, 15 `NEGATIVE`)  
-**Results**: `results_r08/sourcemod-textparsers/`
+**Records**: 17 (**1** `ESCAPE_PARITY_PARSER_CANDIDATE`, 16 `NEGATIVE`)  
+**Results**: `results_r09/sourcemod-textparsers/` (corrected). The original R08
+run, `results_r08/sourcemod-textparsers/`, is kept unmodified as the record of
+what R08 actually produced — see below for why it differed.
 
-### What was found
+### R08 originally over-reported: 2 candidates, not 1
 
-Both candidates are in `core/logic/TextParsers.cpp`,
-method `ParseStream_SMC`, lines 457 and 638. The detection trace is:
+The first run of this target (R08) reported 2 candidates, both attributed to
+`core/logic/TextParsers.cpp:ParseStream_SMC`, at lines 457 and 638. Re-reading
+the actual source at both lines — rather than trusting the tool's field
+dump — showed only line 457 is a real boundary rule:
+
+```cpp
+// line 457, inside `if (in_quote) { ... }`: a genuine one-position rule
+if ((&parse_point[i] != in_buf) && c == '"' && parse_point[i-1] != '\\')
+
+// line 638, a SEPARATE, sibling `else if` branch a few dozen lines later:
+// no escape check anywhere near it, and none is needed -- opening a quoted
+// region has no escape-run to be ambiguous about, only closing one does
+else if (c == '"') {
+    strings[0].ptr = &parse_point[i];
+    in_quote = true;
+    ignoring = true;
+}
+```
+
+The pre-R09 producer paired an escape comparison with **every** quote
+comparison sharing a method, base expression (`parse_point`), and index
+variable (`i`) — with no requirement that the two be part of the same
+conditional. `ParseStream_SMC` is one big state-machine loop using a single
+index `i` throughout, so the one real escape check at line 457 was wrongly
+attached to the unrelated line-638 branch as well. The raw fact rows made
+this legible directly: both entries in `parser_index_checks.tsv` carried the
+identical `check_node_id` / `escape_cmp_node_id` (line 457's check), differing
+only in which `quote_cmp_node_id` they were attached to.
+
+R09 fixes this in both the CPG producers and the reducer — see
+`../../SAME_BOUNDARY_SCOPE_R09.md` for the full trace, the structural fix
+(same-condition-or-nested-guard pairing that never climbs through a loop
+boundary), and the two new fixtures (`q10`, `q11`) that pin both the false
+positive and the legitimate nested-if shape. Re-run under R09, this target
+now reports exactly 1 candidate.
+
+### What was found (post-R09)
+
+The one candidate is in `core/logic/TextParsers.cpp:ParseStream_SMC`, line
+457. The detection trace:
 
 ```cpp
 // line ~430: c extracted from buffer via index access
 c = parse_point[i];
 
-// line 457: quote-boundary rule with single-position escape check
+// line 457: quote-boundary rule with single-position escape check, both
+// comparisons in the SAME condition
 if ((&parse_point[i] != in_buf) && c == '"' && parse_point[i-1] != '\\')
 ```
 
 `c = parse_point[i]` populates `charVarOrigin[("c")] = ("parse_point", "i")`.
 `c == '"'` is traced back to `parse_point[i]` (offset 0).
-`parse_point[i-1] != '\\'` is at offset -1, same base name and index variable.
-The pairing logic records a `SINGLE_POSITION_INDEX_CHECK` row, which is the
-detectable form. Both candidates share the same escape-check node (line 457)
-but arise from different quote-comparison sites (lines 457 and 638).
-
-The two records are the same logical rule instantiated twice: one for the
-opening-quote branch and one for the closing-quote branch.
+`parse_point[i-1] != '\\'` is at offset -1, same base name and index variable,
+same enclosing condition. The pairing logic records a
+`SINGLE_POSITION_INDEX_CHECK` row, which is the detectable form.
 
 ### Chain: vacuous negative
 
@@ -156,11 +193,14 @@ The source and the parse loop are real. The chain is vacuous only because the
 SMC consumer callbacks are an application-framework type not in the model
 vocabulary; this is a scope gap in the chain, not a gap in the parser layer.
 
-The R08 run confirms:
+The R09 run confirms:
 - `charVarOrigin` correctly links an extracted-char variable to its buffer
   and index when the RHS is an index access.
 - The pairing logic produces `SINGLE_POSITION_INDEX_CHECK` for the (offset 0,
-  offset −1) pair sharing a base and index variable.
+  offset −1) pair sharing a base, index variable, and enclosing condition —
+  and, as importantly, does NOT produce one for the unrelated sibling branch
+  that merely shares the base and index variable (this is exactly what R08
+  got wrong; see above).
 - The chain layer correctly records `NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`
   rather than fabricating a positive.
 

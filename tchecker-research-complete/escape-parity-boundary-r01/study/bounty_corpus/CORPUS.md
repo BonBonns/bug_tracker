@@ -143,15 +143,22 @@ that (`../../DELIMITER_IDENTITY_R05.md`): those sites are now recorded and
 abstain, `papaparse.js:1506` among them, with no new candidate anywhere and
 the Mozilla differential unchanged.
 
-The C/C++ precision target (SourceMod, added at R08) produced **2 candidates**
-in `core/logic/TextParsers.cpp:ParseStream_SMC`, both classified
-`ESCAPE_PARITY_PARSER_CANDIDATE`. This validates that the analyser finds the
-structural pattern in live C/C++ code beyond the Mozilla corpus. The chain is
-vacuous (`NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`) because the SMC callback
-type is not in the reachability model vocabulary. A separate model gap was
-identified in `CGX-GROUP/libspatialite` where the `getc()`+`prev_char` pattern
-is invisible to the current `charVarOrigin` logic. Both are documented in
-`REGRESSION_TARGETS.md`.
+The C/C++ precision target (SourceMod, added at R08) initially produced 2
+candidates in `core/logic/TextParsers.cpp:ParseStream_SMC`. Re-reading the
+source at both reported lines found only one was a real boundary rule; the
+other was a false positive from a same-method-only pairing defect the scan
+itself exposed (an escape check on the closing-quote branch was wrongly
+attached to an unrelated opening-quote branch with no escape check of its
+own). The fix, R09 (`../../SAME_BOUNDARY_SCOPE_R09.md`), scopes pairing to
+the same condition or a nested guard and never crosses a loop boundary; the
+corrected run reports **1 candidate**, classified
+`ESCAPE_PARITY_PARSER_CANDIDATE`. This still validates that the analyser
+finds the structural pattern in live C/C++ code beyond the Mozilla corpus.
+The chain is vacuous (`NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT`) because the
+SMC callback type is not in the reachability model vocabulary. A separate
+model gap was identified in `CGX-GROUP/libspatialite` where the
+`getc()`+`prev_char` pattern is invisible to the current `charVarOrigin`
+logic. Both are documented in `REGRESSION_TARGETS.md`.
 
 They are dense in quoted-string boundary handling, which makes them good at
 exposing detector defects — the same way real Gecko code exposed two of them

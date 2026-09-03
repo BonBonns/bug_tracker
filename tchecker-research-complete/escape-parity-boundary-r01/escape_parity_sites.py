@@ -143,7 +143,15 @@ def derive(raw_dir, language=None):
                    delimiter_resolution=delim_res or "LITERAL",
                    pattern_resolution="N/A", pattern="", flags="",
                    regex_dialect=None, evidence_role=CORPUS_ANALYSIS)
-        my_checks = checks_by_method.get(mid, [])
+        # A check row is evidence for THIS site only when it names this site's own
+        # comparison node as its quote_cmp_node_id. Falling back to "any check row
+        # anywhere in the method" (the pre-R09 behaviour) let one genuine one-position
+        # rule elsewhere in the method manufacture a candidate for an unrelated site
+        # that has no escape check of its own -- confirmed on SourceMod's
+        # ParseStream_SMC, where a real closing-quote rule's check was attached to a
+        # separate opening-quote comparison with no escape check anywhere near it.
+        my_checks = [c for c in checks_by_method.get(mid, [])
+                     if c["quote_cmp_node_id"] == cmp_id]
         if delim_res == "UNRESOLVED" or mid in methods_with_unresolved:
             # The scanner compares a character against a delimiter whose value
             # cannot be pinned down -- a configurable quote or escape character.

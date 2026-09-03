@@ -1,0 +1,37 @@
+{
+ "target": "regr-sourcemod-textparsers",
+ "language": "C_CPP",
+ "commit": "9976b514686d28386cf73b0bb3dc0102827285db",
+ "commit_date": "2023-12-20T22:51:20+03:00",
+ "file_set_sha256": "458390f1f48c2c911289e85dc6ae058f8d189764ad93d2b8a9b638ae66208e38",
+ "executable_source_files": 114,
+ "started_utc": "2026-09-03T04:54:52Z",
+ "cpg_files_attempts": 1,
+ "cpg": {
+  "files": 260,
+  "methods": 6695,
+  "calls": 78471,
+  "literals": 30541
+ },
+ "expected_files": 258,
+ "covered_files": 258,
+ "cpg_files_not_in_manifest": 2,
+ "parse_coverage": 1.0,
+ "coverage_threshold": 0.8,
+ "parser_producer_attempts": 1,
+ "parser_layer": {
+  "records": 17,
+  "candidates": 1
+ },
+ "reachability_attempts": 1,
+ "reachability_line": "CPP_REACHABILITY_FACTS ok: delayed_sources=17 transforms=0 consumers=50 parser_anchors=3 chain_edges=2 timing=0",
+ "anchor_rows_total": 3,
+ "anchor_rows_kept": 3,
+ "status": "ANALYZED",
+ "n_records": 17,
+ "classifications": {
+  "ESCAPE_PARITY_PARSER_CANDIDATE": 1,
+  "NEGATIVE": 16
+ },
+ "elapsed_s": 96.0
+}

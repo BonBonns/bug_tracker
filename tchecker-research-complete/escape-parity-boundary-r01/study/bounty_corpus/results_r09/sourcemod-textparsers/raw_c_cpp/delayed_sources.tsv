@@ -1,0 +1,17 @@
+core/logic/GameConfigs.cpp	GameBinPathManager.Init:void()	1095	30064787129	getline	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/GameConfigs.cpp	GameBinPathManager.Init:void()	1112	30064787152	getline	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/GameConfigs.cpp	GameConfigManager.CacheGameBinaryInfo:void(char*)	1293	30064787289	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/GameConfigs.cpp	GameConfigManager.CacheGameBinaryInfo:void(char*)	1307	30064787298	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/Logger.cpp	Logger._OpenNormal:FILE()	372	30064788876	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/Logger.cpp	Logger._OpenError:FILE()	397	30064788900	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/PluginSys.cpp	CPlugin.Create:CPlugin*(char*)	194	30064789433	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/TextParsers.cpp	FileStreamReader:bool(void*,char*,size_t,unsigned int*)	87	30064792304	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/TextParsers.cpp	TextParsers.ParseFile_SMC:SMCError(char*,TextParsers.ITextListener_SMC*,TextParsers.SMCStates*)	101	30064792317	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/TextParsers.cpp	TextParsers.ParseSMCFile:SMCError(char*,TextParsers.ITextListener_SMC*,TextParsers.SMCStates*,char*,TextParsers.size_t)	127	30064792328	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/TextParsers.cpp	TextParsers.ParseFile_INI:bool(char*,TextParsers.ITextListener_INI*,unsigned int*,unsigned int*)	778	30064792873	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/TextParsers.cpp	TextParsers.ParseFile_INI:bool(char*,TextParsers.ITextListener_INI*,unsigned int*,unsigned int*)	802	30064792893	fgets	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/smn_filesystem.cpp	SystemFile.Open:SystemFile*(char*,char*)	176	30064802083	fopen	AMBIGUOUS_MODE_ARGUMENT	STORED_FILE_READ
+core/logic/smn_filesystem.cpp	SystemFile.Read:size_t(void*,int)	187	30064802092	fread	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/smn_filesystem.cpp	SystemFile.ReadLine:char*(char*,int)	190	30064802094	fgets	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/MersenneTwister.h	MTRand.seed:void()	261	30064847176	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+core/logic/MersenneTwister.h	MTRand.seed:void()	269	30064847186	fread	RESOLVED_EXTERNAL	STORED_FILE_READ

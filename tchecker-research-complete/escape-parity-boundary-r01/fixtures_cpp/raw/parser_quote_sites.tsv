@@ -6,3 +6,6 @@ q05_toggle_negative.cpp	split_quoted<duplicate>1:vector(std.string&)	10737418240
 q06_no_escape_awareness.cpp	split_quoted<duplicate>2:vector(std.string&)	107374182410	10	30064771192	30064771193	ACCESSED_CHAR	LITERAL
 q08_guarded_onechar.cpp	split_quoted<duplicate>3:vector(std.string&)	107374182414	10	30064771228	30064771229	ACCESSED_CHAR	LITERAL
 q09_quote_state_toggle.cpp	split_on_commas:vector(std.string&)	107374182416	19	30064771258	68719476905	EXTRACTED_CHAR	LITERAL
+q10_unrelated_branch_negative.cpp	scan_line:void(char*,size_t,ScanState&)	107374182419	33	30064771288	68719476936	EXTRACTED_CHAR	LITERAL
+q10_unrelated_branch_negative.cpp	scan_line:void(char*,size_t,ScanState&)	107374182419	41	30064771297	68719476942	EXTRACTED_CHAR	LITERAL
+q11_nested_if_candidate.cpp	is_unescaped_closing_quote:bool(char*,size_t)	107374182420	10	30064771302	30064771303	ACCESSED_CHAR	LITERAL

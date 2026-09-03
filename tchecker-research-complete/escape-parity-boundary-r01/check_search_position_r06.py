@@ -55,12 +55,23 @@ def unit(findings, prefix):
 
 
 # ------------------------------------------------------------------- S1
+# d08/e05 each establish the quote position with THREE separate search calls:
+# one before the loop, one inside the same `if` as the escape check, and one
+# in a sibling statement of the loop body. Only the one actually nested inside
+# the escape check's guard is part of the boundary rule -- the loop is not a
+# decision, so the other two correctly have no rule of their own (R09: pairing
+# on "reachable via any loop-body ancestor" was a confirmed false positive
+# that made all three candidates; see PARSER_MODEL scope-fix notes).
 d08, e05 = unit(js, "d08-"), unit(cpp, "e05")
-tooth("S1 search position + backward one-position check -> candidate (JS and C/C++)",
-      len(d08) > 0 and len(e05) > 0
-      and all(f["classification"] == CANDIDATE
-              and f["boundary_rule"] == SINGLE_POSITION_INDEX_CHECK
-              for f in d08 + e05),
+d08_cand = [f for f in d08 if f["classification"] == CANDIDATE]
+e05_cand = [f for f in e05 if f["classification"] == CANDIDATE]
+tooth("S1 search position + backward one-position check -> candidate (JS and C/C++), "
+      "and only the search call actually inside the escape check's guard qualifies",
+      len(d08) == 3 and len(e05) == 3
+      and len(d08_cand) == 1 and len(e05_cand) == 1
+      and d08_cand[0]["boundary_rule"] == SINGLE_POSITION_INDEX_CHECK
+      and e05_cand[0]["boundary_rule"] == SINGLE_POSITION_INDEX_CHECK
+      and all(f["classification"] == NEGATIVE for f in d08 + e05 if f not in d08_cand + e05_cand),
       "js=%s cpp=%s" % ([f["classification"] for f in d08],
                         [f["classification"] for f in e05]))
 

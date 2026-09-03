@@ -364,6 +364,79 @@ import io.shiftleft.codepropertygraph.generated.nodes
                       fileOf(a), methOf(a).map(_.fullName).getOrElse("?"))
   }
 
+  // Two comparisons belong to the SAME boundary rule only when one is reachable
+  // from the other's nearest enclosing control structure: either they sit in the
+  // very same condition (a flat `a && b` or `a || b`), or one is nested inside a
+  // branch guarded by the other (`if (a) { if (b) {...} }`, in either order).
+  // Matching on method + base-expression + index-variable alone (as before) pairs
+  // an escape check with EVERY quote comparison anywhere in a function that shares
+  // its buffer and loop index -- including unrelated sibling branches. Confirmed
+  // as a real false positive on the C/C++ side (SourceMod's ParseStream_SMC has a
+  // genuine one-position rule on its CLOSING-quote branch and a wholly separate
+  // OPENING-quote branch with no escape check of its own); fixed here too so both
+  // language producers hold the same precision guarantee.
+  // nearestControlId is scoped to IF-shaped control structures only: a loop
+  // (while/for/do) is not a decision -- its body runs every iteration, so
+  // treating a loop as the "nearest control" would make every statement in
+  // the loop body count as guarded by it.
+  //
+  // isWithinControl climbs through ANY ancestor -- including other, unrelated
+  // `if` nodes -- EXCEPT a loop, which stops the climb. Nested ifs must still
+  // pair (`if (a) { if (b) {...} }` is one boundary rule split across two
+  // guards), so climbing must not stop at the first if that is not the
+  // target. But a loop is not a guard at all: a search-established quote
+  // position taken once per iteration (`p = s.indexOf(quote, cursor)` after
+  // the escape-guarded branch) and the escape check nested in a SIBLING `if`
+  // branch of the SAME while loop both have the loop as a common ancestor
+  // without sharing a decision -- confirmed as a real false positive while
+  // regenerating this fixture's facts under an earlier version of this fix
+  // that had no loop check at all.
+  def isIfNode(n: nodes.AstNode): Boolean = n match {
+    case cs: nodes.ControlStructure => cs.controlStructureType == "IF"
+    case _ => false
+  }
+  def isLoopNode(n: nodes.AstNode): Boolean = n match {
+    case cs: nodes.ControlStructure =>
+      Set("WHILE", "DO", "FOR").contains(cs.controlStructureType)
+    case _ => false
+  }
+  def nearestControlId(n: nodes.AstNode): Option[Long] = {
+    var cur: Option[nodes.AstNode] = n._astIn.collectFirst { case a: nodes.AstNode => a }
+    var res: Option[Long] = None
+    var guard = 0
+    while (cur.isDefined && res.isEmpty && guard < 500) {
+      cur.get match {
+        case cs if isIfNode(cs) => res = Some(cs.id)
+        case _: nodes.Method => cur = None
+        case other => cur = other._astIn.collectFirst { case a: nodes.AstNode => a }
+      }
+      guard += 1
+    }
+    res
+  }
+  def isWithinControl(n: nodes.AstNode, controlId: Long): Boolean = {
+    var cur: Option[nodes.AstNode] = Some(n)
+    var found = false
+    var guard = 0
+    while (cur.isDefined && !found && guard < 500) {
+      if (cur.get.id == controlId) found = true
+      else cur.get match {
+        case _: nodes.Method => cur = None
+        case cs if isLoopNode(cs) => cur = None
+        case other => cur = other._astIn.collectFirst { case a: nodes.AstNode => a }
+      }
+      guard += 1
+    }
+    found
+  }
+  def sameBoundaryScope(qc: nodes.AstNode, ec: nodes.AstNode): Boolean = {
+    val qCtl = nearestControlId(qc)
+    val eCtl = nearestControlId(ec)
+    (qCtl.isDefined && qCtl == eCtl) ||
+    (qCtl.isDefined && isWithinControl(ec, qCtl.get)) ||
+    (eCtl.isDefined && isWithinControl(qc, eCtl.get))
+  }
+
   val pic = w("parser_index_checks.tsv")
   try {
     val quoteCmps = cpg.call.l.flatMap(c =>
@@ -373,18 +446,24 @@ import io.shiftleft.codepropertygraph.generated.nodes
     // method abstains on delimiter identity and must not reach a verdict here.
     val searchQuotePos = searchPositions.filter(_.resolution != UNRESOLVED)
     val escCmps = cpg.call.l.flatMap(c => indexedCharCmp(c, isEscapeDelim).map(r => (c, r)))
+    val callById = cpg.call.l.map(c => c.id -> c).toMap
     escCmps.foreach { case (ec, (eBase, eIdx, eOff, eIdxExprId)) =>
       if (eOff != 0) {
         val em = methOf(ec)
-        // a quote comparison in the SAME method on the SAME base and index variable
+        // a quote comparison in the SAME method on the SAME base and index variable,
+        // AND part of the same boundary rule (same condition, or one nested in the
+        // other's guarded branch)
         val cmpMatches = quoteCmps.collect {
           case (qc, (qBase, qIdx, qOff, _))
             if qBase == eBase && qIdx == eIdx && qOff == 0 &&
-               methOf(qc).map(_.id) == em.map(_.id) => qc.id
+               methOf(qc).map(_.id) == em.map(_.id) &&
+               sameBoundaryScope(qc, ec) => qc.id
         }
         val searchMatches = searchQuotePos.collect {
           case sp if sp.base == eBase && sp.posVar == eIdx &&
-                     Some(sp.methodId) == em.map(_.id) => sp.callId
+                     Some(sp.methodId) == em.map(_.id) &&
+                     callById.get(sp.callId).exists(spNode => sameBoundaryScope(spNode, ec)) =>
+            sp.callId
         }
         (cmpMatches ++ searchMatches).distinct.foreach { qcId =>
           // the enclosing boolean combination, when there is one

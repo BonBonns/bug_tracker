@@ -151,7 +151,7 @@ checks = [c for f in cpp["findings"] if f["site_kind"] == "CHARACTER_SCANNER"
 tooth("X13 C/C++ character literals are decoded from their source escaping (the escape "
       "comparison is found although the literal is written '\\\\' in source)",
       len(checks) >= 4 and all(c["index_offset"] == "1" for c in checks)
-      and {c["base_expr"] for c in checks} == {"s", "<deref>"},
+      and {c["base_expr"] for c in checks} >= {"s", "<deref>"},
       str([(c["base_expr"], c["index_var"], c["index_offset"]) for c in checks]))
 
 # --- X14: site identity ------------------------------------------------------
@@ -171,6 +171,37 @@ tooth("X15 reportable=false on every finding, and no finding carries impact/seve
       all(f["reportable"] is False for f in cpp["findings"] + js["findings"])
       and not [b for b in banned if b in blob],
       str([b for b in banned if b in blob]))
+
+# --- X16 / X17: R09 same-boundary-scope fix (confirmed against SourceMod) ----
+# Two SEPARATE `if`/`else if` branches sharing one buffer and index variable in
+# the same method must not cross-pollinate: only the branch that actually has
+# its own escape check is a candidate. This is the exact shape found in
+# alliedmodders/source2mod core/logic/TextParsers.cpp ParseStream_SMC, where
+# the pre-R09 producer paired the closing-quote branch's real escape check
+# with the unrelated opening-quote branch and produced a false positive.
+q10 = one("q10_unrelated_branch_negative.cpp")
+q10_all = [f for f in cpp_by.get("q10_unrelated_branch_negative.cpp", [])
+           if f["site_kind"] == "CHARACTER_SCANNER"]
+tooth("X16 two unrelated if/else-if branches on the same buffer+index: only the branch "
+      "with its own escape check is a candidate, the other is negative with no borrowed "
+      "single_position_checks",
+      len(q10_all) == 2
+      and sum(1 for f in q10_all if f["classification"] == CANDIDATE) == 1
+      and sum(1 for f in q10_all if f["classification"] == NEGATIVE) == 1
+      and next(f for f in q10_all if f["classification"] == CANDIDATE)["boundary_rule"]
+          == "SINGLE_POSITION_INDEX_CHECK"
+      and next(f for f in q10_all if f["classification"] == NEGATIVE)["boundary_rule"]
+          == "NO_ESCAPE_AWARENESS"
+      and next(f for f in q10_all if f["classification"] == NEGATIVE)
+          .get("single_position_checks", []) == [],
+      str([(f["line"], f["classification"], f.get("boundary_rule")) for f in q10_all]))
+
+f11 = one("q11_nested_if_candidate.cpp", "CHARACTER_SCANNER")
+tooth("X17 a one-position rule split across NESTED ifs (`if (a) { if (b) {...} }`) still "
+      "pairs -- the R09 fix scopes on the nearest IF ancestor, not on flat conditions only",
+      f11 is not None and f11["classification"] == CANDIDATE
+      and f11["boundary_rule"] == "SINGLE_POSITION_INDEX_CHECK",
+      str(f11))
 
 passed = sum(1 for _, ok, _ in results if ok)
 for name, ok, detail in results:

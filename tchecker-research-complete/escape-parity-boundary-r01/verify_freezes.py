@@ -20,9 +20,22 @@ SUPERSEDED = {
     ("FREEZE_HASHES.txt", "producers/escape_parity_facts.sc"): "R05",
     ("CROSS_LANGUAGE_FREEZE.txt", "producers/cpp_escape_parity_facts.sc"): "R05",
     ("CROSS_LANGUAGE_FREEZE.txt", "escape_parity_sites.py"): "R05",
+    ("CROSS_LANGUAGE_FREEZE.txt", "check_cross_language_r03.py"): "R09",
     ("DELIMITER_IDENTITY_FREEZE.txt", "producers/escape_parity_facts.sc"): "R06",
     ("DELIMITER_IDENTITY_FREEZE.txt", "producers/cpp_escape_parity_facts.sc"): "R06",
+    ("DELIMITER_IDENTITY_FREEZE.txt", "escape_parity_sites.py"): "R09",
+    ("DELIMITER_IDENTITY_FREEZE.txt", "check_delimiter_identity_r05.py"): "R09",
     ("REACHABILITY_FREEZE.txt", "escape_parity_chain.py"): "R07",
+    # Pre-existing gap, not introduced here: R08 changed cpp_reachability_facts.sc
+    # (see SOURCE_MODE_R08.md) and this entry was never marked superseded.
+    ("REACHABILITY_FREEZE.txt", "producers/cpp_reachability_facts.sc"): "R08",
+    ("SEARCH_POSITION_FREEZE.txt", "producers/escape_parity_facts.sc"): "R09",
+    ("SEARCH_POSITION_FREEZE.txt", "producers/cpp_escape_parity_facts.sc"): "R09",
+    ("SEARCH_POSITION_FREEZE.txt", "escape_parity_sites.py"): "R09",
+    ("SEARCH_POSITION_FREEZE.txt", "check_search_position_r06.py"): "R09",
+    # Pre-existing gap, not introduced here: R08 changed escape_parity_chain.py
+    # (see SOURCE_MODE_R08.md) and this entry was never marked superseded.
+    ("SEARCH_SPACE_FREEZE.txt", "escape_parity_chain.py"): "R08",
 }
 
 FREEZES = ["FREEZE_HASHES.txt", "PARSER_MODEL_FREEZE.txt",

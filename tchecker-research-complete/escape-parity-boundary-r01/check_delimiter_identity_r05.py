@@ -144,10 +144,18 @@ PRIOR = json.loads((HERE / "fixtures_delim" / "PRE_R05_VERDICTS.json").read_text
 prior_ok, prior_detail = True, []
 for path, expected in PRIOR["baselines"].items():
     lang = "C_CPP" if "cpp" in path else "JAVASCRIPT"
+    # Scope the comparison to the exact sites this baseline pinned (same
+    # discipline as S5 in check_search_position_r06.py). A later revision
+    # adding a NEW fixture file to the same directory for its own, unrelated
+    # regression control introduces sites that were never "already reachable"
+    # under this baseline and must not be compared against it -- only whether
+    # the ORIGINAL sites' verdicts moved is what D11 asserts.
+    seen = {(r["file"], r["line"], r["site_kind"]) for r in expected}
     got = sorted(({"file": f["file"], "line": f["line"], "site_kind": f["site_kind"],
                    "classification": f["classification"],
                    "boundary_rule": f.get("boundary_rule")}
-                  for f in derive(HERE / path, lang)["findings"]),
+                  for f in derive(HERE / path, lang)["findings"]
+                  if (f["file"], f["line"], f["site_kind"]) in seen),
                  key=lambda r: (r["file"], r["line"], r["site_kind"]))
     moved = [(a, b) for a, b in zip(expected, got) if a != b]
     if got != expected:
