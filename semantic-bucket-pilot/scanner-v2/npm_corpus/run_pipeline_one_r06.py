@@ -275,6 +275,38 @@ MALICIOUS_NPM_PRODUCER = os.path.join(
 # name (not by path) in run_gates_class() below -- GATES_DIR is added to sys.path once, right
 # before that helper is defined, matching ADJUDICATOR_DIR's own role for llm_input_verdict.py.
 
+# ESCAPE-PARITY-BOUNDARY INTEGRATION: a quote-boundary parser rule that cannot establish
+# escape-run parity (a single fixed-position lookbehind, e.g. `s[i-1] != '\\'`, cannot
+# distinguish an escaped quote `\"` from an escaped backslash followed by a real quote `\\"`).
+# Built and gated standalone across nine revisions (R01-R09, 95/95 controls across 8 gate
+# scripts -- see tchecker-research-complete/escape-parity-boundary-r01/FREEZE_LINEAGE.md and
+# SAME_BOUNDARY_SCOPE_R09.md for the property's own lineage), never wired into any pipeline
+# until now. Like LLM-input, and unlike ReDoS/Path Traversal/NoSQLi/SSRF, there is no
+# adjudicator/semantic-review step for this property: every classification the frozen reducer
+# emits (SINGLE_POSITION_INDEX_CHECK candidate / PARITY_ESTABLISHED_IN_METHOD negative /
+# UNRESOLVED_DELIMITER_IDENTITY abstention at the parser layer, and REACHABLE /
+# NOT_ESTABLISHED at the reachability-chain layer) is already fully decided by real CPG
+# structure and real dataflow -- there is no genuinely open case here for an LLM to adjudicate,
+# unlike SSRF's "is this on-path guard actually dominant" question. (Considered and rejected
+# deliberately, not an oversight -- see the session's own discussion before this wiring: an
+# LLM re-deriving an already-structurally-proven fact adds no correctness, only a place for
+# occasional disagreement with a fact that was never actually open.)
+#
+# The JS/TS producer (producers/escape_parity_facts.sc) is a SINGLE script -- unlike the C/C++
+# side's two-script split (parser facts + reachability facts separately) -- that emits BOTH
+# the parser-layer facts (regex_sites/parser_quote_sites/parser_index_checks/
+# parity_mechanisms) and the reachability facts (delayed_sources/transform_calls/consumers/
+# chain_edges/execution_timing) in one pass against js_bin, using the SAME cpgFile/rawDir
+# producer convention as ReDoS/Path Traversal/NoSQLi/SSRF (not LLM-input's cpgFile/outDir).
+# escape_parity_chain.derive(raw_dir, "JAVASCRIPT") (frozen, reused verbatim, never modified)
+# is the complete reducer for this property on JS/TS -- it already calls
+# escape_parity_sites.derive() internally and layers the reachability chain on top, so this is
+# one producer run + one derive() call, following LLM-input's own "import and call derive()
+# directly" no-adjudicator discipline, not path_traversal_verdict.py's/ssrf_verdict.py's own
+# adjudicate_iterative-driven template.
+ESCAPE_PARITY_DIR = "/home/user/bug_tracker/tchecker-research-complete/escape-parity-boundary-r01"
+ESCAPE_PARITY_PRODUCER = os.path.join(ESCAPE_PARITY_DIR, "producers", "escape_parity_facts.sc")
+
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
 
@@ -1469,6 +1501,53 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["status"] = status
         record["detail"] = detail
         return record
+
+    # ESCAPE-PARITY-BOUNDARY INTEGRATION (see module-level comment above for the full
+    # disclosure): producer uses the cpgFile/rawDir convention (ReDoS/Path Traversal/NoSQLi/
+    # SSRF's own shape), not run_gates_class()'s hardcoded outDir convention, so this is a
+    # standalone block rather than a run_gates_class() call -- but the reducer side follows
+    # llm_input_verdict's own no-adjudicator "import and call derive(raw_dir) directly"
+    # discipline exactly, not path_traversal_verdict.py's/ssrf_verdict.py's own
+    # adjudicate_iterative-driven template.
+    ep_raw = os.path.join(work, "escape_parity_raw")
+    rc, secs, mem, err = run_stage(
+        [f"{JOERN_HOME}/joern", "--script", ESCAPE_PARITY_PRODUCER,
+         "--param", f"cpgFile={js_bin}", "--param", f"rawDir={ep_raw}"],
+        os.path.join(work, "escape_parity_producer.log"))
+    record["stages"]["escape_parity_producer"] = {"seconds": secs, "maxrss_delta_kb": mem, "rc": rc}
+    if err or rc != 0:
+        record["status"] = "RESOURCE_LIMIT" if err == "TIMEOUT" else "EXPORT_FAILED"
+        record["detail"] = err or f"escape_parity producer rc={rc}"
+        return record
+
+    t0 = time.time()
+    try:
+        sys.path.insert(0, ESCAPE_PARITY_DIR)
+        import escape_parity_chain  # noqa: E402 -- reused, never modified
+
+        ep_result = escape_parity_chain.derive(ep_raw, "JAVASCRIPT")
+        # ep_result["findings"] carries every parser-layer site (CANDIDATE/NEGATIVE/ABSTAINED,
+        # enriched with a `chain` sub-object) -- derive() does not pre-filter, same "filter here"
+        # discipline the five-more-classes stage above already uses for its own derive() calls.
+        # reportable is already False on every record inside the frozen reducer itself
+        # (escape_parity_sites.py's own base() helper sets it directly), so nothing needs
+        # setting here, unlike llm_input/the five more classes, whose own findings predate that
+        # convention.
+        ep_candidates = [f for f in ep_result.get("findings", [])
+                          if f.get("classification") == "ESCAPE_PARITY_PARSER_CANDIDATE"]
+        record["escape_parity_findings"] = ep_candidates
+        # escape_parity_out.json -- same real bundling precedent as every other *_out.json
+        # (evidence_bundle.py's own BUNDLED_RELATIVE_PATHS) -- written here, not relying on any
+        # stdout, matching every prior stage's own convention.
+        ep_out = os.path.join(work, "escape_parity_out.json")
+        with open(ep_out, "w") as f:
+            json.dump(ep_result, f, default=str)
+    except Exception as e:
+        record["stages"]["escape_parity_reduce"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"escape_parity_chain.derive() failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["escape_parity_reduce"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record

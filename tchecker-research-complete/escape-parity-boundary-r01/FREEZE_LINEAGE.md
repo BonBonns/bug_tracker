@@ -122,3 +122,33 @@ Corpus results are labelled by the revision that produced them:
 between them is itself the evidence that each revision does what it claims —
 nothing is overwritten to make the current revision look like it was always
 right.
+
+## Wired into the shared npm-corpus scan pipeline (after R09)
+
+`producers/escape_parity_facts.sc` (JS/TS) + `escape_parity_chain.py` (frozen,
+unmodified, reused verbatim) are now wired into
+`semantic-bucket-pilot/scanner-v2/npm_corpus/run_pipeline_one_r06.py`,
+alongside ReDoS, Path Traversal, Serialize DoS, NoSQLi, SSRF, LLM-input and
+the five-more-classes properties. This is the first time the property runs on
+the shared per-package npm corpus rather than only the bounty-scoped/precision
+targets in `study/bounty_corpus/`.
+
+Deliberately **no LLM adjudicator** for this property, unlike SSRF/NoSQLi/
+ReDoS/Path Traversal — every classification (`SINGLE_POSITION_INDEX_CHECK` /
+`PARITY_ESTABLISHED_IN_METHOD` / `UNRESOLVED_DELIMITER_IDENTITY` at the parser
+layer, `REACHABLE` / `NOT_ESTABLISHED` at the chain layer) is already fully
+decided by real CPG structure and real dataflow, with no genuinely open case
+for an LLM to adjudicate — following the same no-adjudicator precedent
+LLM-input already established in this pipeline (`llm_input_verdict.derive(raw)`,
+no `src_dir`, no `property_config`). Considered and rejected deliberately
+before wiring, not an oversight: an LLM re-deriving an already-structurally-
+proven fact adds no correctness and introduces a place for run-to-run
+disagreement with a fact that was never actually open.
+
+Verified end-to-end against a real package (`node-addon-api@8.9.2`) through
+the full real pipeline (download → jssrc2cpg → every stage → evidence bundle)
+before merge: `status: ANALYZED`, `escape_parity_producer`/`escape_parity_reduce`
+both `rc=0`, `escape_parity_raw`/`escape_parity_out.json` both present and
+correctly bundled (not counted against `completeness_status`). No candidates
+on this package — plausible; it is a small N-API binding wrapper, not a
+hand-rolled text parser.

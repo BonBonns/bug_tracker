@@ -213,6 +213,11 @@ BUNDLED_RELATIVE_PATHS = (
     "validation_bypass_out.json",
     "malicious_npm_raw",
     "malicious_npm_out.json",
+    # ESCAPE-PARITY-BOUNDARY INTEGRATION: same "bundle the raw-output directory as-is,
+    # required" precedent as every entry above -- the producer always runs unconditionally on
+    # every successful run; escape_parity_out.json follows the exact same *_out.json precedent.
+    "escape_parity_raw",
+    "escape_parity_out.json",
 )
 
 # Real per-package facts that are bundled and hashed WHEN PRESENT, exactly like
