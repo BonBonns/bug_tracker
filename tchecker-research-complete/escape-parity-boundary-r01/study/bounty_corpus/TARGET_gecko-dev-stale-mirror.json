@@ -1,0 +1,50 @@
+{
+ "target": "mozilla-gecko-dev",
+ "frozen_at_utc": "2026-09-02T04:58:37Z",
+ "repo_remote": "https://github.com/mozilla/gecko-dev",
+ "commit": "5836a062726f715fda621338a17b51aff30d0a8c",
+ "commit_date": "2025-07-08T20:51:16+00:00",
+ "checkout_mode": "sparse",
+ "sparse_paths": [
+  "dom/base",
+  "dom/fetch",
+  "dom/html",
+  "modules/libpref",
+  "netwerk/base",
+  "netwerk/cookie",
+  "netwerk/dns",
+  "netwerk/mime",
+  "netwerk/protocol/data",
+  "netwerk/protocol/http",
+  "netwerk/protocol/websocket",
+  "parser/htmlparser",
+  "security/manager/ssl",
+  "testing/web-platform/tests/fetch/content-type",
+  "xpcom/ds",
+  "xpcom/string"
+ ],
+ "excluded_dir_names": [
+  "crashtests",
+  "expat",
+  "gtest",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "reftests",
+  "test",
+  "tests",
+  "third_party",
+  "vendor"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "JAVASCRIPT": 31,
+  "C_CPP_SOURCE": 655,
+  "C_CPP_HEADER": 849
+ },
+ "excluded_file_count": 574,
+ "analysed_file_count": 1535,
+ "file_set_sha256": "2e0313a80c062aced4caaa8ef67b35e984e345d54f2bff8efbe75e91ccd65308",
+ "retained_as": "STALE_MIRROR_PROVENANCE",
+ "superseded_by": "TARGET_mozilla-firefox.json"
+}

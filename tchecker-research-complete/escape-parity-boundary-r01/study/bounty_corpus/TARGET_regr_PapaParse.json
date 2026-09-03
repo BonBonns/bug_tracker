@@ -1,0 +1,155 @@
+{
+ "target": "regr-PapaParse",
+ "frozen_at_utc": "2026-09-02T09:48:29Z",
+ "repo_remote": "https://github.com/mholt/PapaParse",
+ "commit": "f88432d3c07718035494e76bd3202199d10eef13",
+ "commit_date": "2026-09-01T16:28:19+02:00",
+ "checkout_mode": "full",
+ "sparse_paths": [],
+ "excluded_dir_names": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "crashtests",
+  "dist",
+  "docs",
+  "examples",
+  "expat",
+  "gtest",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "player",
+  "reftests",
+  "test",
+  "tests",
+  "third_party",
+  "vendor"
+ ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "dist",
+  "docs",
+  "examples",
+  "player"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "JAVASCRIPT": 1
+ },
+ "excluded_file_count": 16,
+ "analysed_file_count": 1,
+ "file_set_sha256": "8369db2ddd5bff51c624773b65d7f6cafb0976b1d292679c37ecd5645fa5f005",
+ "files": [
+  {
+   "path": "papaparse.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "01d32cdc0b8ceced438f078c6859e16c8aefc0d3eb5fb06992df0d3f63666ba0"
+  }
+ ],
+ "excluded_files": [
+  {
+   "path": ".eslintrc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "Gruntfile.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "docs/resources/js/common.js",
+   "kind": "JAVASCRIPT",
+   "reason": "docs"
+  },
+  {
+   "path": "docs/resources/js/demo.js",
+   "kind": "JAVASCRIPT",
+   "reason": "docs"
+  },
+  {
+   "path": "docs/resources/js/highlight.min.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "docs/resources/js/home.js",
+   "kind": "JAVASCRIPT",
+   "reason": "docs"
+  },
+  {
+   "path": "docs/resources/js/jquery.min.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "docs/resources/js/lovers.js",
+   "kind": "JAVASCRIPT",
+   "reason": "docs"
+  },
+  {
+   "path": "docs/resources/js/papaparse.js",
+   "kind": "JAVASCRIPT",
+   "reason": "docs"
+  },
+  {
+   "path": "docs/resources/js/skrollr.min.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "papaparse.min.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "player/player.js",
+   "kind": "JAVASCRIPT",
+   "reason": "player"
+  },
+  {
+   "path": "tests/.eslintrc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "tests/node-tests.js",
+   "kind": "JAVASCRIPT",
+   "reason": "tests"
+  },
+  {
+   "path": "tests/test-cases.js",
+   "kind": "JAVASCRIPT",
+   "reason": "tests"
+  },
+  {
+   "path": "tests/test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "tests"
+  }
+ ]
+}

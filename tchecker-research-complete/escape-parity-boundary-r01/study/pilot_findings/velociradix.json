@@ -1,0 +1,3750 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/client.mjs",
+   "package": "package",
+   "method": "package/client.mjs::program:createClient",
+   "method_node_id": "107374182407",
+   "line": "15",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313283",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/client.mjs",
+      "method": "package/client.mjs::program:createClient",
+      "line": "15",
+      "node_id": "30064771452",
+      "regex_node_id": "90194313283",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313284",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:decodeComp",
+   "method_node_id": "107374182442",
+   "line": "37",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313356",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/express.mjs",
+      "method": "package/express.mjs::program:decodeComp",
+      "line": "37",
+      "node_id": "30064771966",
+      "regex_node_id": "90194313356",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313357",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:parseCookies",
+   "method_node_id": "107374182444",
+   "line": "63",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313369",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ";\\s*",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp:<lambda>0",
+   "method_node_id": "107374182445",
+   "line": "103",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313388",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "([.+*?=^!:${}()[\\]|/\\\\])",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/express.mjs",
+      "method": "package/express.mjs::program:pathToRegexp:<lambda>0",
+      "line": "103",
+      "node_id": "30064772110",
+      "regex_node_id": "90194313388",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313389",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp",
+   "method_node_id": "107374182446",
+   "line": "83",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313395",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\/$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp",
+   "method_node_id": "107374182446",
+   "line": "83",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313396",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\s\\S]*",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp",
+   "method_node_id": "107374182446",
+   "line": "88",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313397",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/express.mjs",
+      "method": "package/express.mjs::program:pathToRegexp",
+      "line": "87",
+      "node_id": "30064772153",
+      "regex_node_id": "90194313397",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313398",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp",
+   "method_node_id": "107374182446",
+   "line": "89",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313399",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/express.mjs",
+      "method": "package/express.mjs::program:pathToRegexp",
+      "line": "87",
+      "node_id": "30064772150",
+      "regex_node_id": "90194313399",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313400",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:parseBytes",
+   "method_node_id": "107374182451",
+   "line": "166",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313441",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(\\d+(?:\\.\\d+)?)(b|kb|mb|gb)?$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeHeaderPart",
+   "method_node_id": "107374182577",
+   "line": "34",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313870",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\r\\n\\0]+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeHeaderPart",
+      "line": "34",
+      "node_id": "30064774603",
+      "regex_node_id": "90194313870",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313871",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064774655",
+     "30064781891",
+     "30064781894"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:htmlEscape",
+   "method_node_id": "107374182581",
+   "line": "50",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313881",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[&<>\"']",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:htmlEscape",
+      "line": "50",
+      "node_id": "30064774638",
+      "regex_node_id": "90194313881",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "120259084459",
+       "kind": "METHOD_REF",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064777839",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:contentDispositionAttachment",
+   "method_node_id": "107374182582",
+   "line": "57",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313883",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\"\\\\]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:contentDispositionAttachment",
+      "line": "57",
+      "node_id": "30064774652",
+      "regex_node_id": "90194313883",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313884",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064774655",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:contentDispositionAttachment",
+   "method_node_id": "107374182582",
+   "line": "57",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313885",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[^\\x20-\\x7E]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:contentDispositionAttachment",
+      "line": "57",
+      "node_id": "30064774649",
+      "regex_node_id": "90194313885",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313886",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064774655",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:formatSseFrame",
+   "method_node_id": "107374182584",
+   "line": "63",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313894",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\r\\n]",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:formatSseFrame",
+   "method_node_id": "107374182584",
+   "line": "65",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313898",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\r?\\n",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:requestHostname",
+   "method_node_id": "107374182585",
+   "line": "76",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313912",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:base64UrlEncode",
+   "method_node_id": "107374182590",
+   "line": "135",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313933",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "=",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:base64UrlEncode",
+      "line": "135",
+      "node_id": "30064774780",
+      "regex_node_id": "90194313933",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313934",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:base64UrlEncode",
+   "method_node_id": "107374182590",
+   "line": "135",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313935",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:base64UrlEncode",
+      "line": "135",
+      "node_id": "30064774777",
+      "regex_node_id": "90194313935",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313936",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:base64UrlEncode",
+   "method_node_id": "107374182590",
+   "line": "135",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313937",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:base64UrlEncode",
+      "line": "135",
+      "node_id": "30064774774",
+      "regex_node_id": "90194313937",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313938",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:base64UrlDecode",
+   "method_node_id": "107374182591",
+   "line": "139",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313939",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:base64UrlDecode",
+      "line": "139",
+      "node_id": "30064774791",
+      "regex_node_id": "90194313939",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313940",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "177",
+      "node_id": "30064774935",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "193",
+      "node_id": "30064775003",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:base64UrlDecode",
+   "method_node_id": "107374182591",
+   "line": "139",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313941",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "_",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:base64UrlDecode",
+      "line": "139",
+      "node_id": "30064774788",
+      "regex_node_id": "90194313941",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313942",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "177",
+      "node_id": "30064774935",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "193",
+      "node_id": "30064775003",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtSign",
+   "method_node_id": "107374182592",
+   "line": "165",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313961",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "=",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtSign",
+      "line": "162",
+      "node_id": "30064774884",
+      "regex_node_id": "90194313961",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313962",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtSign",
+   "method_node_id": "107374182592",
+   "line": "165",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313963",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtSign",
+      "line": "162",
+      "node_id": "30064774881",
+      "regex_node_id": "90194313963",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313964",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtSign",
+   "method_node_id": "107374182592",
+   "line": "165",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313965",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtSign",
+      "line": "162",
+      "node_id": "30064774878",
+      "regex_node_id": "90194313965",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313966",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtVerify",
+   "method_node_id": "107374182593",
+   "line": "190",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313997",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "=",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "187",
+      "node_id": "30064774986",
+      "regex_node_id": "90194313997",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313998",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtVerify",
+   "method_node_id": "107374182593",
+   "line": "190",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313999",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "187",
+      "node_id": "30064774983",
+      "regex_node_id": "90194313999",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314000",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:jwtVerify",
+   "method_node_id": "107374182593",
+   "line": "190",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314001",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:jwtVerify",
+      "line": "187",
+      "node_id": "30064774980",
+      "regex_node_id": "90194314001",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314002",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeString",
+   "method_node_id": "107374182611",
+   "line": "1106",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314190",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "&",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeString",
+      "line": "1105",
+      "node_id": "30064775806",
+      "regex_node_id": "90194314190",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314191",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeString",
+   "method_node_id": "107374182611",
+   "line": "1107",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314192",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "<",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeString",
+      "line": "1105",
+      "node_id": "30064775803",
+      "regex_node_id": "90194314192",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314193",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeString",
+   "method_node_id": "107374182611",
+   "line": "1108",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314194",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ">",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeString",
+      "line": "1105",
+      "node_id": "30064775800",
+      "regex_node_id": "90194314194",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314195",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeString",
+   "method_node_id": "107374182611",
+   "line": "1109",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314196",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\"",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeString",
+      "line": "1105",
+      "node_id": "30064775797",
+      "regex_node_id": "90194314196",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314197",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:sanitizeString",
+   "method_node_id": "107374182611",
+   "line": "1110",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314198",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "'",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:sanitizeString",
+      "line": "1105",
+      "node_id": "30064775794",
+      "regex_node_id": "90194314198",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314199",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:decodeQueryComponent",
+   "method_node_id": "107374182613",
+   "line": "1155",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314234",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:decodeQueryComponent",
+      "line": "1155",
+      "node_id": "30064775885",
+      "regex_node_id": "90194314234",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314235",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:cookieParse",
+   "method_node_id": "107374182615",
+   "line": "1177",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314245",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ";\\s*",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:cacheMiddleware:<lambda>18:<lambda>19",
+   "method_node_id": "107374182635",
+   "line": "1391",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314350",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\bno-store\\b|\\bprivate\\b",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:cacheMiddleware:<lambda>18",
+   "method_node_id": "107374182636",
+   "line": "1374",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314357",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\bno-store\\b|\\bprivate\\b",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:userAgentBlockerMiddleware",
+   "method_node_id": "107374182689",
+   "line": "1785",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314513",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "curl",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:userAgentBlockerMiddleware",
+   "method_node_id": "107374182689",
+   "line": "1785",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314514",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "wget",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:userAgentBlockerMiddleware",
+   "method_node_id": "107374182689",
+   "line": "1785",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314515",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "python-requests",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:userAgentBlockerMiddleware",
+   "method_node_id": "107374182689",
+   "line": "1785",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314516",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "postman",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374182708",
+   "line": "2072",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314613",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "<",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:getPostmanDocHtml",
+      "line": "2072",
+      "node_id": "30064777835",
+      "regex_node_id": "90194314613",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314614",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064777839",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374182708",
+   "line": "2077",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314618",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:getPostmanDocHtml",
+      "line": "2077",
+      "node_id": "30064777841",
+      "regex_node_id": "90194314618",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314619",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064777839",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createEventBus:patternToRegex",
+   "method_node_id": "107374182713",
+   "line": "2123",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314624",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[.+?^${}()|[\\]\\\\]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createEventBus:patternToRegex",
+      "line": "2122",
+      "node_id": "30064777864",
+      "regex_node_id": "90194314624",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314625",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createEventBus:patternToRegex",
+   "method_node_id": "107374182713",
+   "line": "2124",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314626",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\*\\*",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createEventBus:patternToRegex",
+      "line": "2122",
+      "node_id": "30064777861",
+      "regex_node_id": "90194314626",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314627",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createEventBus:patternToRegex",
+   "method_node_id": "107374182713",
+   "line": "2125",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314628",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\*",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createEventBus:patternToRegex",
+      "line": "2122",
+      "node_id": "30064777858",
+      "regex_node_id": "90194314628",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314629",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createEventBus:patternToRegex",
+   "method_node_id": "107374182713",
+   "line": "2126",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314630",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "___DOUBLE_STAR___",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createEventBus:patternToRegex",
+      "line": "2122",
+      "node_id": "30064777855",
+      "regex_node_id": "90194314630",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314631",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:parseMultipartBuffer",
+   "method_node_id": "107374182729",
+   "line": "2215",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314659",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\r\\n]",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:parseMultipartBuffer",
+   "method_node_id": "107374182729",
+   "line": "2236",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314676",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "Content-Disposition:\\s*form-data;\\s*name=\"([^\"]*)\"(?:;\\s*filename=\"([^\"]*)\")?",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:parseMultipartBuffer",
+   "method_node_id": "107374182729",
+   "line": "2247",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314682",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "Content-Type:\\s*([^\\r\\n;]+)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:parseMultipartBuffer",
+   "method_node_id": "107374182729",
+   "line": "2249",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314685",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[^a-zA-Z0-9._-]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:parseMultipartBuffer",
+      "line": "2249",
+      "node_id": "30064778154",
+      "regex_node_id": "90194314685",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314686",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064778191"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:useExpressRouter",
+   "method_node_id": "107374182801",
+   "line": "2760",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314888",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:useExpressRouter",
+      "line": "2760",
+      "node_id": "30064779373",
+      "regex_node_id": "90194314888",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314889",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064775759",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:postman:<lambda>104",
+   "method_node_id": "107374182815",
+   "line": "2892",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314945",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:postman:<lambda>104",
+      "line": "2892",
+      "node_id": "30064779668",
+      "regex_node_id": "90194314945",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314946",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064775759",
+     "30064779592",
+     "30064781271",
+     "30064779729",
+     "30064779594"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:openapi",
+   "method_node_id": "107374182823",
+   "line": "2953",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314982",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":([a-zA-Z0-9_]+)",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:openapi",
+      "line": "2953",
+      "node_id": "30064779883",
+      "regex_node_id": "90194314982",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314983",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:openapi",
+   "method_node_id": "107374182823",
+   "line": "2962",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314987",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ":([a-zA-Z0-9_]+)",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:swagger",
+   "method_node_id": "107374182830",
+   "line": "3046",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315008",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:swagger",
+      "line": "3046",
+      "node_id": "30064780080",
+      "regex_node_id": "90194315008",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315009",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064775759",
+     "30064780984",
+     "30064781271",
+     "30064777849"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:serveStatic:<lambda>121",
+   "method_node_id": "107374182843",
+   "line": "3106",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315023",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:serveStatic:<lambda>121",
+      "line": "3106",
+      "node_id": "30064780203",
+      "regex_node_id": "90194315023",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315024",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064775759",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:serveStatic:<lambda>121",
+   "method_node_id": "107374182843",
+   "line": "3111",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315028",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\/",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:serveStatic:<lambda>121",
+      "line": "3111",
+      "node_id": "30064780218",
+      "regex_node_id": "90194315028",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315029",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064775759",
+     "30064781271"
+    ],
+    "consumers": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:inject:json",
+      "line": "3516",
+      "node_id": "30064781056",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:autoRouteAsync:normalizeSegment",
+   "method_node_id": "107374182847",
+   "line": "3124",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315034",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\[\\.\\.\\.(.+?)\\]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:autoRouteAsync:normalizeSegment",
+      "line": "3124",
+      "node_id": "30064780248",
+      "regex_node_id": "90194315034",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315035",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:autoRouteAsync:normalizeSegment",
+   "method_node_id": "107374182847",
+   "line": "3124",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315036",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\[(.+?)\\]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:autoRouteAsync:normalizeSegment",
+      "line": "3124",
+      "node_id": "30064780245",
+      "regex_node_id": "90194315036",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315037",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:autoRouteAsync:readDirRecursive",
+   "method_node_id": "107374182850",
+   "line": "3132",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315048",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.(js|mjs|ts|mts)$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:autoRouteAsync:readDirRecursive",
+      "line": "3132",
+      "node_id": "30064780310",
+      "regex_node_id": "90194315048",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315049",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:autoRouteAsync:readDirRecursive",
+   "method_node_id": "107374182850",
+   "line": "3134",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315055",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:createApp:autoRouteAsync:readDirRecursive",
+      "line": "3134",
+      "node_id": "30064780320",
+      "regex_node_id": "90194315055",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315056",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createApp:versioning:<lambda>137",
+   "method_node_id": "107374182869",
+   "line": "3243",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315116",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\/(v\\d+)\\/",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:formData",
+   "method_node_id": "107374182987",
+   "line": "802",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315482",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "boundary=(?:[\"']?)([^\"';\\s]+)(?:[\"']?)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:renderHtml",
+   "method_node_id": "107374182990",
+   "line": "845",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315502",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[.*+?^${}()|[\\]\\\\]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.mjs",
+      "method": "package/index.mjs::program:Context:renderHtml",
+      "line": "845",
+      "node_id": "30064782761",
+      "regex_node_id": "90194315502",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315503",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:graphql",
+   "method_node_id": "107374182997",
+   "line": "932",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315556",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(query|mutation|subscription)\\b",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:graphql",
+   "method_node_id": "107374182997",
+   "line": "933",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315559",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(?:query|mutation|subscription)\\s+(\\w+)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:graphql",
+   "method_node_id": "107374182997",
+   "line": "938",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315562",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "(\\w+)\\s*(?:\\(([^)]*)\\))?\\s*\\{([^}]*)\\}|(\\w+)(?:\\s*\\(([^)]*)\\))?",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:escapeHtml",
+   "method_node_id": "107374183014",
+   "line": "13",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315921",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "&",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:escapeHtml",
+      "line": "12",
+      "node_id": "30064784315",
+      "regex_node_id": "90194315921",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315922",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:escapeHtml",
+   "method_node_id": "107374183014",
+   "line": "14",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315923",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "<",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:escapeHtml",
+      "line": "12",
+      "node_id": "30064784312",
+      "regex_node_id": "90194315923",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315924",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:escapeHtml",
+   "method_node_id": "107374183014",
+   "line": "15",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315925",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": ">",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:escapeHtml",
+      "line": "12",
+      "node_id": "30064784309",
+      "regex_node_id": "90194315925",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315926",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:escapeHtml",
+   "method_node_id": "107374183014",
+   "line": "16",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315927",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\"",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:escapeHtml",
+      "line": "12",
+      "node_id": "30064784306",
+      "regex_node_id": "90194315927",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315928",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:escapeHtml",
+   "method_node_id": "107374183014",
+   "line": "17",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315929",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "'",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:escapeHtml",
+      "line": "12",
+      "node_id": "30064784303",
+      "regex_node_id": "90194315929",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315930",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "63",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315971",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*TITLE\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784442",
+      "regex_node_id": "90194315971",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784444",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "64",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315972",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*DESCRIPTION\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784439",
+      "regex_node_id": "90194315972",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784447",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "65",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315974",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*REQUEST_LIST_ITEMS\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784436",
+      "regex_node_id": "90194315974",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "68719489579",
+       "kind": "IDENTIFIER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "66",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315975",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*REQUEST_CARDS\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784433",
+      "regex_node_id": "90194315975",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "68719489581",
+       "kind": "IDENTIFIER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452",
+     "30064784451"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "67",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315976",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\*\\s*\\{\\{\\s*COLLECTION_JSON\\s*\\}\\}\\s*\\*\\/\\s*\\{\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784430",
+      "regex_node_id": "90194315976",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784451",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064784452"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "68",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315979",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*COLLECTION_JSON\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784427",
+      "regex_node_id": "90194315979",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784452",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "69",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315982",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*DOWNLOAD_FILENAME\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "62",
+      "node_id": "30064784424",
+      "regex_node_id": "90194315982",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784453",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+   "method_node_id": "107374183016",
+   "line": "69",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315984",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getPostmanDocHtml",
+      "line": "69",
+      "node_id": "30064784454",
+      "regex_node_id": "90194315984",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315985",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getSwaggerHtml",
+   "method_node_id": "107374183020",
+   "line": "74",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315987",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*TITLE\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getSwaggerHtml",
+      "line": "73",
+      "node_id": "30064784465",
+      "regex_node_id": "90194315987",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315988",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getSwaggerHtml",
+   "method_node_id": "107374183020",
+   "line": "75",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315989",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/\\*\\s*\\{\\{\\s*SPEC_JSON\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getSwaggerHtml",
+      "line": "73",
+      "node_id": "30064784462",
+      "regex_node_id": "90194315989",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315990",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getSwaggerHtml",
+   "method_node_id": "107374183020",
+   "line": "76",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315991",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\{\\{\\s*SPEC_JSON\\s*\\}\\}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getSwaggerHtml",
+      "line": "73",
+      "node_id": "30064784459",
+      "regex_node_id": "90194315991",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "30064784467",
+       "kind": "OTHER",
+       "resolution": "UNRESOLVED_CALLBACK_IDENTITY"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "ABSTAINED",
+    "reasons": [
+     "UNRESOLVED_CALLBACK_IDENTITY",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/templates.mjs",
+   "package": "package",
+   "method": "package/src/templates.mjs::program:getSwaggerHtml",
+   "method_node_id": "107374183020",
+   "line": "76",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315994",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "<",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/src/templates.mjs",
+      "method": "package/src/templates.mjs::program:getSwaggerHtml",
+      "line": "76",
+      "node_id": "30064784467",
+      "regex_node_id": "90194315994",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194315995",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/express.mjs",
+   "package": "package",
+   "method": "package/express.mjs::program:pathToRegexp",
+   "method_node_id": "107374182446",
+   "line": "110",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064772170",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:createEventBus:patternToRegex",
+   "method_node_id": "107374182713",
+   "line": "2127",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064777869",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  },
+  {
+   "file": "package/index.mjs",
+   "package": "package",
+   "method": "package/index.mjs::program:Context:renderHtml",
+   "method_node_id": "107374182990",
+   "line": "846",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064782768",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  }
+ ]
+}

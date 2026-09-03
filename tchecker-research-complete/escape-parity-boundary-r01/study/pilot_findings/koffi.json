@@ -1,0 +1,473 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:pathIsAbsolute",
+   "method_node_id": "107374182404",
+   "line": "202",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313276",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[a-zA-Z]:",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:compareVersions",
+   "method_node_id": "107374182411",
+   "line": "266",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313363",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-.*$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:compareVersions",
+      "line": "266",
+      "node_id": "30064771488",
+      "regex_node_id": "90194313363",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313364",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:compareVersions",
+   "method_node_id": "107374182411",
+   "line": "267",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313367",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-.*$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:compareVersions",
+      "line": "267",
+      "node_id": "30064771499",
+      "regex_node_id": "90194313367",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313368",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder:findParentDirectory",
+   "method_node_id": "107374182415",
+   "line": "602",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313378",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:findParentDirectory",
+      "line": "602",
+      "node_id": "30064771527",
+      "regex_node_id": "90194313378",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313379",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:readCNokeOptions",
+      "line": "678",
+      "node_id": "30064771697",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:checkCMake",
+      "line": "654",
+      "node_id": "30064771645",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder:checkCMake",
+   "method_node_id": "107374182417",
+   "line": "642",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313413",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "InstallDir[ \\t]+REG_[A-Z_]+[ \\t]+(.*)+",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder:expandString",
+   "method_node_id": "107374182421",
+   "line": "696",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313450",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "{{ *([a-zA-Z_][a-zA-Z_0-9]*) *}}",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:expandString",
+      "line": "696",
+      "node_id": "30064771734",
+      "regex_node_id": "90194313450",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "120259084291",
+       "kind": "METHOD_REF",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder",
+   "method_node_id": "107374182414",
+   "line": "450",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313549",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder",
+      "line": "450",
+      "node_id": "30064772071",
+      "regex_node_id": "90194313549",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313550",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:readCNokeOptions",
+      "line": "678",
+      "node_id": "30064771697",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:checkCMake",
+      "line": "654",
+      "node_id": "30064771645",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder",
+   "method_node_id": "107374182414",
+   "line": "454",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313554",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder",
+      "line": "454",
+      "node_id": "30064772078",
+      "regex_node_id": "90194313554",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313555",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:readCNokeOptions",
+      "line": "678",
+      "node_id": "30064771697",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder:checkCMake",
+      "line": "654",
+      "node_id": "30064771645",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:Builder",
+   "method_node_id": "107374182414",
+   "line": "480",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313569",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/cnoke.cjs",
+      "method": "package/cnoke.cjs::program:Builder",
+      "line": "480",
+      "node_id": "30064772133",
+      "regex_node_id": "90194313569",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313570",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/cnoke.cjs",
+   "package": "package",
+   "method": "package/cnoke.cjs::program:main",
+   "method_node_id": "107374182426",
+   "line": "780",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313630",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

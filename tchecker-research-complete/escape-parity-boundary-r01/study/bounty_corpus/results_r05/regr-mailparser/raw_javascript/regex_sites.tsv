@@ -1,0 +1,28 @@
+lib/mail-parser.js	lib/mail-parser.js::program:normalize	107374182405	71	90194313253	RESOLVED_LITERAL	^@		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:getDecoder:decodeStream	107374182422	239	90194313304	RESOLVED_LITERAL	^jis|^iso-?2022-?jp|^EUCJP	i	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:processHeaders:<lambda>15	107374182437	380	90194313324	RESOLVED_LITERAL	\\s+		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:parseListHeader:<lambda>21	107374182443	486	90194313367	RESOLVED_LITERAL	^https?:	i	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:parseListHeader:<lambda>21	107374182443	491	90194313368	RESOLVED_LITERAL	^mailto:		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	559	90194313398	RESOLVED_LITERAL	^(=\\?([^?]+)\\?[Bb]\\?[^?]*\\?=)(\\s*=\\?([^?]+)\\?[Bb]\\?[^?]*\\?=)*$		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	566	90194313399	RESOLVED_LITERAL	<[^<>]+@[^<>]+>		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	596	90194313401	RESOLVED_LITERAL	[=]\\?[^?]+\\?[BbQq]\\?[^?]*\\?[=]		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	599	90194313402	RESOLVED_LITERAL	^[^\\s@]+@[^\\s@]+$		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	599	90194313403	RESOLVED_LITERAL	[=]\\?		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:decodeAddresses	107374182449	608	90194313406	RESOLVED_LITERAL	@xn--		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:createNode	107374182451	641	90194313414	RESOLVED_LITERAL	^multipart\\/	i	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:processChunk:<lambda>32	107374182461	863	90194313480	RESOLVED_LITERAL	-([a-z])	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:processChunk:<lambda>41	107374182470	1001	90194313491	RESOLVED_LITERAL	\\r?\\n	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:processChunk	107374182462	934	90194313523	RESOLVED_LITERAL	^<|>$	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:processChunk	107374182462	975	90194313540	RESOLVED_LITERAL	[^a-z0-9]+	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:updateImageLinks:<lambda>49	107374182482	1124	90194313582	RESOLVED_LITERAL	^image\\/[\\w]+$	i	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:updateImageLinks:processNext	107374182485	1142	90194313583	RESOLVED_LITERAL	\\bcid:([^'"\\s]{1,256})	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:updateImageLinks	107374182481	1122	90194313587	RESOLVED_LITERAL	\\bcid:([^'"\\s]{1,256})	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:canScanSegment	107374182488	1170	90194313589	RESOLVED_LITERAL	[.:@/]		
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:findLinks	107374182489	1204	90194313597	RESOLVED_LITERAL	[\\S\\uFEFF]+	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:textToHtml:<lambda>55	107374182490	1256	90194313603	RESOLVED_LITERAL	"	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:textToHtml	107374182491	1290	90194313616	RESOLVED_LITERAL	\\r?\\n	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:textToHtml	107374182491	1297	90194313618	RESOLVED_LITERAL	(^|[^ \\t])[ \\t]+(?=[\\n\\r\\u2028\\u2029]|$)	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:textToHtml	107374182491	1299	90194313620	RESOLVED_LITERAL	\\n\\n+	g	
+lib/mail-parser.js	lib/mail-parser.js::program:MailParser:textToHtml	107374182491	1301	90194313622	RESOLVED_LITERAL	\\n	g	
+lib/simple-parser.js	lib/simple-parser.js::program:<lambda>1:<lambda>10:<lambda>11	107374182505	91	90194313665	RESOLVED_LITERAL	-([a-z])	g	
+lib/mail-parser.js	lib/mail-parser.js::program:validate	107374182404	58	30064771192	UNRESOLVED_DYNAMIC			pattern_node=30064771193;kind=Call

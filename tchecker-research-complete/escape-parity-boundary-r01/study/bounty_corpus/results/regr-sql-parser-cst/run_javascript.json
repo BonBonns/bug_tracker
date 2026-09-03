@@ -1,0 +1,35 @@
+{
+ "target": "regr-sql-parser-cst",
+ "language": "JAVASCRIPT",
+ "commit": "3e049312f3d0c1ec1fb9f8f2a6010ceb02d83103",
+ "commit_date": "2026-08-23T21:00:39+03:00",
+ "file_set_sha256": "839cc74424c811599f42c037bcdb2ee9871af90c0f8c2a292c726a008b54dac1",
+ "executable_source_files": 128,
+ "started_utc": "2026-09-02T09:50:16Z",
+ "cpg_files_attempts": 1,
+ "cpg": {
+  "files": 127,
+  "methods": 1768,
+  "calls": 17575,
+  "literals": 2392
+ },
+ "expected_files": 128,
+ "covered_files": 127,
+ "cpg_files_not_in_manifest": 0,
+ "parse_coverage": 0.9922,
+ "coverage_threshold": 0.8,
+ "parser_producer_attempts": 1,
+ "parser_layer": {
+  "records": 29,
+  "candidates": 0
+ },
+ "reachability_attempts": 1,
+ "reachability_line": "JS_REACHABILITY_FACTS ok: delayed_sources=2 transforms=22 consumers=1 parser_anchors=760 chain_edges=0 timing=0",
+ "status": "ANALYZED",
+ "n_records": 29,
+ "classifications": {
+  "ABSTAINED": 2,
+  "NEGATIVE": 27
+ },
+ "elapsed_s": 58.0
+}

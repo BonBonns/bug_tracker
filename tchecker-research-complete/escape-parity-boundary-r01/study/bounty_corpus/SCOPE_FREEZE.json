@@ -1,0 +1,273 @@
+{
+  "property": "ESCAPE-PARITY-BOUNDARY",
+  "artifact": "bounty scope freeze",
+  "frozen_at_utc": "2026-09-02T05:00:02Z",
+  "rule": "A scan of a bounty-corpus target is permitted only against a target whose program scope was captured and hashed in this record. Public source availability is not eligibility.",
+  "supported_languages": [
+    "C_CPP",
+    "JAVASCRIPT"
+  ],
+  "min_scope_text_chars": 2000,
+  "targets": [
+    {
+      "key": "mozilla-firefox",
+      "priority": 1,
+      "repo": "mozilla-firefox/firefox",
+      "program": "Mozilla Client Bug Bounty",
+      "languages": [
+        "C_CPP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "MIME type parsing",
+        "HTTP header parsing",
+        "cookie parsing",
+        "certificate/name parsing",
+        "URL and protocol parsing",
+        "DNS/host name parsing",
+        "websocket and data URL parsing"
+      ],
+      "captured_at_utc": "2026-09-02T04:59:58Z",
+      "scope_capture": "SCOPE_FROZEN",
+      "capture_note": "Policy text captured and hashed; scope pinned at fetch time.",
+      "scope_criteria": null,
+      "unblock_requirement": null,
+      "attempts": [
+        {
+          "url": "https://www.mozilla.org/en-US/security/client-bug-bounty/",
+          "http_status": "200",
+          "bytes": 55407,
+          "sha256": "4b411de5d41902d1201c0abb31d7336512bca865674f3402579c89afac718023",
+          "visible_text_chars": 16457,
+          "evidence_file": "scope_evidence/mozilla-firefox.0.html"
+        },
+        {
+          "url": "https://www.mozilla.org/en-US/security/bug-bounty/",
+          "http_status": "200",
+          "bytes": 42334,
+          "sha256": "019992f1ea1bd066686b478542a7dbfe0d74de90d7809f887f905125e7ee5359",
+          "visible_text_chars": 7953,
+          "evidence_file": "scope_evidence/mozilla-firefox.1.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": true,
+      "scan_blocked_by": []
+    },
+    {
+      "key": "nodejs-node",
+      "priority": 2,
+      "repo": "nodejs/node",
+      "program": "Node.js (HackerOne)",
+      "languages": [
+        "C_CPP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "HTTP header parsing (llhttp callers)",
+        "URL parsing (ada bindings)",
+        "querystring",
+        "JS-side header and MIME handling"
+      ],
+      "captured_at_utc": "2026-09-02T05:00:00Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/nodejs",
+          "http_status": "200",
+          "bytes": 3563,
+          "sha256": "1c16e9424187dbd1cbadcb07892efb393e70b97461ec60076d85ec8e42fd3f77",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/nodejs-node.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "rocketchat",
+      "priority": 3,
+      "repo": "RocketChat/Rocket.Chat",
+      "program": "Rocket.Chat (HackerOne handle unconfirmed)",
+      "languages": [
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [],
+      "parser_surface": [
+        "message/markup text transforms",
+        "import pipelines",
+        "webhook payload handling"
+      ],
+      "captured_at_utc": "2026-09-02T05:00:00Z",
+      "scope_capture": "PROGRAM_HANDLE_UNRESOLVED",
+      "capture_note": "Program endpoint returns 404; the assumed handle does not resolve.",
+      "scope_criteria": null,
+      "unblock_requirement": "Confirm the program's real location (or that no public program exists) before any scan of this repository.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/rocketchat",
+          "http_status": "404",
+          "bytes": 1694,
+          "sha256": "c6daf1057dccd092d2d8365569a11416e185a191fde2f84b711203abf0cde8cc",
+          "visible_text_chars": 170,
+          "evidence_file": "scope_evidence/rocketchat.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "nextcloud-server",
+      "priority": 4,
+      "repo": "nextcloud/server",
+      "program": "Nextcloud (HackerOne)",
+      "languages": [
+        "PHP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "PHP"
+      ],
+      "parser_surface": [
+        "PHP text/import pipelines",
+        "JS front-end transforms"
+      ],
+      "captured_at_utc": "2026-09-02T05:00:01Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/nextcloud",
+          "http_status": "200",
+          "bytes": 3508,
+          "sha256": "10f636f683b636cd219077f34e7346f8f9fc38eff3bd0f6931c76059f4866a45",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/nextcloud-server.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "wordpress-develop",
+      "priority": 5,
+      "repo": "WordPress/wordpress-develop",
+      "program": "WordPress (HackerOne)",
+      "languages": [
+        "PHP",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "PHP"
+      ],
+      "parser_surface": [
+        "import/restore pipelines",
+        "serialized text transforms"
+      ],
+      "captured_at_utc": "2026-09-02T05:00:01Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/wordpress",
+          "http_status": "200",
+          "bytes": 3582,
+          "sha256": "a5d03e6761b2697af3cd92e6dd9bab8463a903d9f8e1a4ee150f16d7f27a4723",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/wordpress-develop.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    },
+    {
+      "key": "gitlab",
+      "priority": 6,
+      "repo": "gitlabhq/gitlabhq",
+      "program": "GitLab (HackerOne)",
+      "languages": [
+        "RUBY",
+        "JAVASCRIPT"
+      ],
+      "unsupported_languages": [
+        "RUBY"
+      ],
+      "parser_surface": [
+        "import/export pipelines",
+        "markup transforms"
+      ],
+      "captured_at_utc": "2026-09-02T05:00:02Z",
+      "scope_capture": "SCOPE_NOT_MACHINE_READABLE",
+      "capture_note": "Endpoint reachable but returns a client-rendered shell with no scope text; no public JSON view; the vendor API requires authentication.",
+      "scope_criteria": null,
+      "unblock_requirement": "A human must read the program scope in a browser and record the in-scope assets and exclusions here before any scan.",
+      "attempts": [
+        {
+          "url": "https://hackerone.com/gitlab",
+          "http_status": "200",
+          "bytes": 3481,
+          "sha256": "b719c3ad5b475ede9b394703437b6b09c1ce1fa57c10f1d9b39882dcb7d514fb",
+          "visible_text_chars": 9,
+          "evidence_file": "scope_evidence/gitlab.0.html"
+        }
+      ],
+      "engine_ready": true,
+      "scan_allowed": false,
+      "scan_blocked_by": [
+        "SCOPE_NOT_FROZEN"
+      ]
+    }
+  ],
+  "non_bounty_regression_targets": [
+    {
+      "repo": "taozhi8833998/node-sql-parser",
+      "role": "precision",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "nene/sql-parser-cst",
+      "role": "precision",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "mholt/PapaParse",
+      "role": "regression",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    },
+    {
+      "repo": "nodemailer/mailparser",
+      "role": "regression",
+      "languages": [
+        "JAVASCRIPT"
+      ]
+    }
+  ],
+  "reportable": false
+}

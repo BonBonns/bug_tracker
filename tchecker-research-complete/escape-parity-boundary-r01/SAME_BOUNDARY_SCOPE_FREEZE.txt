@@ -1,0 +1,43 @@
+{
+  "revision": "R09",
+  "label": "same-boundary-scope",
+  "frozen_at_utc": "2026-09-03T05:10:00Z",
+  "description": "Both parser producers and the parser reducer now require a quote comparison and an escape comparison to belong to the SAME boundary rule (same condition, or one nested inside the other's IF-guarded branch, climbing never crosses a loop boundary) before pairing them. Matching on method + base-expression + index-variable alone paired an escape check with EVERY quote comparison sharing a buffer and loop index in a method, including unrelated sibling branches and unrelated sibling statements inside the same loop. Confirmed as a real false positive against alliedmodders/source2mod core/logic/TextParsers.cpp ParseStream_SMC (a genuine one-position rule on the closing-quote branch was borrowed as \"evidence\" for a separate opening-quote branch with no escape check of its own).",
+  "files": {
+    "producers/cpp_escape_parity_facts.sc": {
+      "sha256": "dcc2dacdd7f1882aeece6d6c6a2ab3fb7c5ef1189d00038746a76c60a65144d6",
+      "size": 29535
+    },
+    "producers/escape_parity_facts.sc": {
+      "sha256": "6ec5b64f31550e0aa11cbf33bf912edcce6bc0bc4c5bd16a07d1a2931d69313d",
+      "size": 45489
+    },
+    "escape_parity_sites.py": {
+      "sha256": "a2a8af4e63d1e8e5b67e792e83748410ddf7f44954baf3c0e088b31521279f9e",
+      "size": 9648
+    },
+    "check_cross_language_r03.py": {
+      "sha256": "1fac84e4a2357d80d19f7dceed2760085db04ac5b5b11e01d643f431a80f676e",
+      "size": 11535
+    },
+    "check_search_position_r06.py": {
+      "sha256": "6b59d96d5fb4f11d1f2324e87707aa5b85620c231cb035233f9001e8bc64bc0c",
+      "size": 7234
+    },
+    "check_delimiter_identity_r05.py": {
+      "sha256": "617f61ee9557f03f86364753a141feb493f8344ba2e59ae55c251f8e96670b48",
+      "size": 9432
+    },
+    "fixtures_cpp/src/q10_unrelated_branch_negative.cpp": {
+      "sha256": "b85584d8b1e65d377d4ba5ab97bfa5379f1a8457c6609fe8c1e7964b336c83af",
+      "size": 2148
+    },
+    "fixtures_cpp/src/q11_nested_if_candidate.cpp": {
+      "sha256": "2f881ea1d82ccbc6b4cbef9d42d45888f54d3a757dcc24aa3a78c0254446ac48",
+      "size": 657
+    }
+  },
+  "gate": "check_cross_language_r03.py (X16, X17) + full suite",
+  "gate_result": "17/17 PASS (check_cross_language_r03.py)",
+  "all_gates": "R01-R09 PASS (17+17+17+15+12+6+7+4 = 95/95)"
+}

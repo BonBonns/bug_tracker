@@ -1,0 +1,10 @@
+build.js	build.js::program	107374182400	6	90194313227	RESOLVED_LITERAL	(.*)\\.pegjs$		
+gulp/tasks/render.js	gulp/tasks/render.js::program:getPegFilePath	107374182418	8	90194313261	RESOLVED_LITERAL	@import\\s* '([^']*)';?		
+gulp/tasks/render.js	gulp/tasks/render.js::program	107374182417	6	90194313275	RESOLVED_LITERAL	@import\\s* '([^']*)';?	g	
+plugins/replace-import.ts	plugins/replace-import.ts::program	107374182424	3	90194313292	RESOLVED_LITERAL	import\\s*\\{[^}]*\\}\\s*from\\s*['][^']*'\\s*;?	g	
+src/column.js	src/column.js::program:columnDataType	107374182467	84	90194313552	RESOLVED_LITERAL	^\\[.*\\]$		
+src/column.js	src/column.js::program:asToSQL	107374182475	174	90194313577	RESOLVED_LITERAL	^(`?)[a-z_][0-9a-z_]*(`?)$	i	
+tests-index.js	tests-index.js::program	107374182713	1	90194315103	RESOLVED_LITERAL	\\.spec.js$		
+typegen.js	typegen.js::program:checkCode	107374182714	11	90194315105	RESOLVED_LITERAL	^[\\s$]*\\/\\/\\s*=>\\s*([^$\\r\\n]+)$	m	
+typegen.js	typegen.js::program:checkCode	107374182714	13	90194315107	RESOLVED_LITERAL	^[\\s$]*\\/\\*([^§]+)\\*\\/	m	
+src/parser.js	src/parser.js::program:Parser:whiteListCheck	107374182620	49	30064778795	UNRESOLVED_DYNAMIC		i	pattern_node=30064778796;kind=Call

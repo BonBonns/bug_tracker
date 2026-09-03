@@ -1,0 +1,69 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/native/build.mjs",
+   "package": "package",
+   "method": "package/native/build.mjs::program:readTarSize",
+   "method_node_id": "107374182407",
+   "line": "49",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313233",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[0-7]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/native/build.mjs",
+   "package": "package",
+   "method": "package/native/build.mjs::program",
+   "method_node_id": "107374182400",
+   "line": "20",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313451",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

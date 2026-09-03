@@ -1,0 +1,29 @@
+scripts/move-imports.ts	scripts/move-imports.ts::program	107374182411	14	90194313280	RESOLVED_LITERAL	import\\s*\\{[^}]*\\}\\s*from\\s*"[^"]*"\\s*;	g	
+scripts/rule-templates.ts	scripts/rule-templates.ts::program:matchRuleTemplate	107374182420	58	90194313281	RESOLVED_LITERAL	^(\\w+)\\$__template__$		
+scripts/rule-templates.ts	scripts/rule-templates.ts::program:matchRuleWithTemplate	107374182421	66	90194313283	RESOLVED_LITERAL	^(\\w+)\\$(.+)$		
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:formatError	107374182435	16	90194313317	RESOLVED_LITERAL	\\r\\n|\\n|\\r		
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:expandFound	107374182436	36	90194313334	RESOLVED_LITERAL	^\\w$		
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:expandFound	107374182436	37	90194313336	RESOLVED_LITERAL	\\w+		
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	113	90194313377	RESOLVED_LITERAL	\\\\	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	114	90194313379	RESOLVED_LITERAL	"	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	115	90194313381	RESOLVED_LITERAL	\\0	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	116	90194313383	RESOLVED_LITERAL	\\t	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	117	90194313385	RESOLVED_LITERAL	\\n	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	118	90194313387	RESOLVED_LITERAL	\\r	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	119	90194313389	RESOLVED_LITERAL	[\\x00-\\x0F]	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:literalEscape	107374182442	120	90194313390	RESOLVED_LITERAL	[\\x10-\\x1F\\x7F-\\x9F]	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	125	90194313393	RESOLVED_LITERAL	\\\\	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	126	90194313395	RESOLVED_LITERAL	\\]	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	127	90194313397	RESOLVED_LITERAL	\\^	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	128	90194313399	RESOLVED_LITERAL	-	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	129	90194313401	RESOLVED_LITERAL	\\0	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	130	90194313403	RESOLVED_LITERAL	\\t	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	131	90194313405	RESOLVED_LITERAL	\\n	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	132	90194313407	RESOLVED_LITERAL	\\r	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	133	90194313409	RESOLVED_LITERAL	[\\x00-\\x0F]	g	
+src/FormattedSyntaxError.ts	src/FormattedSyntaxError.ts::program:classEscape	107374182445	134	90194313410	RESOLVED_LITERAL	[\\x10-\\x1F\\x7F-\\x9F]	g	
+src/utils/pgOperators.ts	src/utils/pgOperators.ts::program:isPostgresqlOtherOperator	107374183937	25	90194315557	RESOLVED_LITERAL	--|\\/\\*		
+src/utils/pgOperators.ts	src/utils/pgOperators.ts::program:isPostgresqlOtherOperator	107374183937	29	90194315559	RESOLVED_LITERAL	[+-]$		
+src/utils/pgOperators.ts	src/utils/pgOperators.ts::program:isPostgresqlOtherOperator	107374183937	30	90194315560	RESOLVED_LITERAL	[~!@#%^&|`?]		
+scripts/utils.ts	scripts/utils.ts::program:extractRules	107374182432	36	30064771522	UNRESOLVED_DYNAMIC			pattern_node=30064771523;kind=Call
+scripts/utils.ts	scripts/utils.ts::program:extractRules	107374182432	37	30064771527	UNRESOLVED_DYNAMIC			pattern_node=30064771528;kind=Call

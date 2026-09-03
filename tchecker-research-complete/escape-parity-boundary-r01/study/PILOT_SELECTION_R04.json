@@ -1,0 +1,334 @@
+{
+  "selection_rule": "Deterministic and recorded before any analyzer outcome was viewed. The frozen 494-package corpus was scanned in full by the two-language source-only prefilter. A package is ELIGIBLE FOR A LANGUAGE only if that language shows evidence in ALL FOUR required dimensions. Every eligible package ties at score 4 within its language, so FROZEN CORPUS ORDER is the tie-break. C/C++ is the newly added engine and has only 10 eligible packages, so all 10 are taken; the remaining budget of 20 goes to JavaScript in corpus order, excluding any package already selected for C/C++. A prefilter match is NEVER a finding.",
+  "corpus": "semantic-bucket-pilot/scanner-v2/npm_corpus/eligible_packages.tsv",
+  "corpus_size": 494,
+  "prefilter_sha256": "21ae8e3c09ffb453e6afb5cd275764dc15f06c213b1d3dbb9a6feda668c09990",
+  "scanned": 494,
+  "failed": 0,
+  "eligible_C_CPP": 10,
+  "eligible_JAVASCRIPT": 33,
+  "selected_C_CPP": 10,
+  "selected_JAVASCRIPT": 10,
+  "selection": [
+    {
+      "rank": 1,
+      "language": "C_CPP",
+      "corpus_index": 66,
+      "package": "libxmljs4",
+      "version": "2.0.0",
+      "tarball_sha256": "efdc67078722fc1cbd7b75772ab6cb340ba7dcb6627259b308962120c288bc48",
+      "dimension_hits": {
+        "A": 34,
+        "B": 3,
+        "C": 13,
+        "D": 7
+      },
+      "source_files": 141,
+      "source_bytes": 6873896
+    },
+    {
+      "rank": 2,
+      "language": "C_CPP",
+      "corpus_index": 77,
+      "package": "@confluentinc/kafka-javascript",
+      "version": "1.10.0",
+      "tarball_sha256": "34a088e303707ea995d7453c832920bfd02106488cd055813b7c21fc9e6d337c",
+      "dimension_hits": {
+        "A": 19,
+        "B": 7,
+        "C": 12,
+        "D": 3
+      },
+      "source_files": 241,
+      "source_bytes": 8136660
+    },
+    {
+      "rank": 3,
+      "language": "C_CPP",
+      "corpus_index": 106,
+      "package": "@appthreat/sqlite3",
+      "version": "9.0.1",
+      "tarball_sha256": "9fdf8c792d6547595adb8cccf5148fc430590f4887eb447f63b0609a6f8769cd",
+      "dimension_hits": {
+        "A": 2,
+        "B": 1,
+        "C": 8,
+        "D": 5
+      },
+      "source_files": 22,
+      "source_bytes": 2421955
+    },
+    {
+      "rank": 4,
+      "language": "C_CPP",
+      "corpus_index": 220,
+      "package": "realm",
+      "version": "20.2.0",
+      "tarball_sha256": "54e6c17edc5d94eac00ecc5c5e092dd855def34dc767e58c8546c9f802b85946",
+      "dimension_hits": {
+        "A": 15,
+        "B": 9,
+        "C": 147,
+        "D": 3
+      },
+      "source_files": 1995,
+      "source_bytes": 26798102
+    },
+    {
+      "rank": 5,
+      "language": "C_CPP",
+      "corpus_index": 249,
+      "package": "mariasql",
+      "version": "0.2.6",
+      "tarball_sha256": "4b8dd725c8b884d763e4931186502f9d40ba471740a0adf195469b74882ac7e3",
+      "dimension_hits": {
+        "A": 30,
+        "B": 13,
+        "C": 22,
+        "D": 3
+      },
+      "source_files": 351,
+      "source_bytes": 19134784
+    },
+    {
+      "rank": 6,
+      "language": "C_CPP",
+      "corpus_index": 261,
+      "package": "gdal-async",
+      "version": "3.12.3",
+      "tarball_sha256": "38bd1f5af66c3f85e0b9f219fe78ed3c5c1f81763eeecaff7a1dc9385901ae10",
+      "dimension_hits": {
+        "A": 792,
+        "B": 67,
+        "C": 559,
+        "D": 51
+      },
+      "source_files": 6402,
+      "source_bytes": 140951165
+    },
+    {
+      "rank": 7,
+      "language": "C_CPP",
+      "corpus_index": 304,
+      "package": "nosql-leveldb",
+      "version": "3.0.1",
+      "tarball_sha256": "09e44315e01b00966c5383231c21ebe06d008b5e23153c14933d463065a85e22",
+      "dimension_hits": {
+        "A": 5,
+        "B": 2,
+        "C": 15,
+        "D": 1
+      },
+      "source_files": 172,
+      "source_bytes": 1137079
+    },
+    {
+      "rank": 8,
+      "language": "C_CPP",
+      "corpus_index": 310,
+      "package": "gdal",
+      "version": "0.11.1",
+      "tarball_sha256": "fba16ddf30d035a59ac6a8904279845e06a7cfdc96baf98746efe8a6d85d8b43",
+      "dimension_hits": {
+        "A": 541,
+        "B": 32,
+        "C": 332,
+        "D": 36
+      },
+      "source_files": 3121,
+      "source_bytes": 61733182
+    },
+    {
+      "rank": 9,
+      "language": "C_CPP",
+      "corpus_index": 376,
+      "package": "leveldb-zlib",
+      "version": "1.2.0",
+      "tarball_sha256": "8517f1656d16d9845b55bf83a3a5a22d8f89e99b49bdcf4173710efecca9a893",
+      "dimension_hits": {
+        "A": 5,
+        "B": 5,
+        "C": 14,
+        "D": 1
+      },
+      "source_files": 149,
+      "source_bytes": 907783
+    },
+    {
+      "rank": 10,
+      "language": "C_CPP",
+      "corpus_index": 384,
+      "package": "@8crafter/leveldb-zlib",
+      "version": "1.6.0",
+      "tarball_sha256": "8f2213a074ae4312a03ac9137811bdd3eaa07ccb8af48420b5a08edd02460412",
+      "dimension_hits": {
+        "A": 5,
+        "B": 5,
+        "C": 14,
+        "D": 1
+      },
+      "source_files": 149,
+      "source_bytes": 907783
+    },
+    {
+      "rank": 11,
+      "language": "JAVASCRIPT",
+      "corpus_index": 31,
+      "package": "@lynx-js/weak-node-api",
+      "version": "0.1.0",
+      "tarball_sha256": "f16f203121cf1259a89f073a6459c78a5a12cd73d3bf7c1d5219a199782e60d7",
+      "dimension_hits": {
+        "A": 3,
+        "B": 2,
+        "C": 5,
+        "D": 4
+      },
+      "source_files": 5,
+      "source_bytes": 34914
+    },
+    {
+      "rank": 12,
+      "language": "JAVASCRIPT",
+      "corpus_index": 43,
+      "package": "node-pty",
+      "version": "1.1.0",
+      "tarball_sha256": "c7517f19083ddcb05f276904680eb2b11a6b5ecab778b8e4e5685a6d645b3f60",
+      "dimension_hits": {
+        "A": 9,
+        "B": 10,
+        "C": 11,
+        "D": 1
+      },
+      "source_files": 44,
+      "source_bytes": 187841
+    },
+    {
+      "rank": 13,
+      "language": "JAVASCRIPT",
+      "corpus_index": 50,
+      "package": "ember-one-way-controls",
+      "version": "3.1.0",
+      "tarball_sha256": "85a363e4aee0e3b96ad3147c8379dcc9f0a53913a17a24ef84b6b969b2ffbf56",
+      "dimension_hits": {
+        "A": 1131,
+        "B": 590,
+        "C": 364,
+        "D": 93
+      },
+      "source_files": 7445,
+      "source_bytes": 33065182
+    },
+    {
+      "rank": 14,
+      "language": "JAVASCRIPT",
+      "corpus_index": 68,
+      "package": "nlpplus",
+      "version": "1.3.24",
+      "tarball_sha256": "5d3279a9a7d19ec823cc91766384056afbb9a895ab2ce7dbe8929776871847f6",
+      "dimension_hits": {
+        "A": 5,
+        "B": 3,
+        "C": 7,
+        "D": 3
+      },
+      "source_files": 10,
+      "source_bytes": 164139
+    },
+    {
+      "rank": 15,
+      "language": "JAVASCRIPT",
+      "corpus_index": 76,
+      "package": "node-llama-cpp",
+      "version": "3.20.0",
+      "tarball_sha256": "69e17d87f4d4fedde99cc03599b995a032fb67680e7da2d4f082dfdac4f904c9",
+      "dimension_hits": {
+        "A": 28,
+        "B": 24,
+        "C": 37,
+        "D": 6
+      },
+      "source_files": 560,
+      "source_bytes": 2293245
+    },
+    {
+      "rank": 16,
+      "language": "JAVASCRIPT",
+      "corpus_index": 89,
+      "package": "ibm_db",
+      "version": "4.0.1",
+      "tarball_sha256": "54deb4dad413844e9104f5c099bf3b4fb8a00d40e906da7f275558c1da189774",
+      "dimension_hits": {
+        "A": 1,
+        "B": 2,
+        "C": 2,
+        "D": 1
+      },
+      "source_files": 17,
+      "source_bytes": 178424
+    },
+    {
+      "rank": 17,
+      "language": "JAVASCRIPT",
+      "corpus_index": 91,
+      "package": "@gjsify/node-gi",
+      "version": "0.44.0",
+      "tarball_sha256": "1ed33ac1f78b3255fc958807d4d6de9ca79725f56380ad9f6791caea21e7f95a",
+      "dimension_hits": {
+        "A": 18,
+        "B": 4,
+        "C": 13,
+        "D": 1
+      },
+      "source_files": 25,
+      "source_bytes": 369730
+    },
+    {
+      "rank": 18,
+      "language": "JAVASCRIPT",
+      "corpus_index": 99,
+      "package": "@tensorflow/tfjs-node",
+      "version": "4.22.0",
+      "tarball_sha256": "d38a448a705efc6e655a080f896b3af646ae39dffbfe9c90b06cb9fc3a2b9358",
+      "dimension_hits": {
+        "A": 13,
+        "B": 10,
+        "C": 17,
+        "D": 4
+      },
+      "source_files": 546,
+      "source_bytes": 1910637
+    },
+    {
+      "rank": 19,
+      "language": "JAVASCRIPT",
+      "corpus_index": 100,
+      "package": "node-libcurl",
+      "version": "5.1.2",
+      "tarball_sha256": "ef9498d87d8ec0381abf7876d6aa3e59efe76d5ed54d7947c0a3d7fec3a0900e",
+      "dimension_hits": {
+        "A": 8,
+        "B": 10,
+        "C": 16,
+        "D": 2
+      },
+      "source_files": 158,
+      "source_bytes": 761819
+    },
+    {
+      "rank": 20,
+      "language": "JAVASCRIPT",
+      "corpus_index": 101,
+      "package": "fuse-napi",
+      "version": "2.3.1",
+      "tarball_sha256": "353e1508f3dff57c98da5e36f6b8bcab209ff192303911883451c9d150b26289",
+      "dimension_hits": {
+        "A": 2,
+        "B": 3,
+        "C": 5,
+        "D": 1
+      },
+      "source_files": 8,
+      "source_bytes": 113644
+    }
+  ]
+}

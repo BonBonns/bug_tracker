@@ -1,0 +1,25 @@
+# ESCAPE-PARITY-BOUNDARY -- pinned artifact hashes
+#
+# Published historical source artifacts (PCRE / PHP). These are the ONLY inputs to
+# the historical design differential. They are pinned so the differential is
+# reproducible and so no later version can silently substitute for them.
+
+## plugin distribution archives, as retrieved
+cc592ad8e929d6ddb14b46a70dc840a0571f8bd6addda36a9bbf007d0bb3b72f  v7.109.zip
+bfafe4cb5b662e9455a50759683c5508f98d34a8f04c352cdb1f21af9df13db1  v7.110.zip
+
+## the single source file carrying the quote-boundary rule
+ce141050397789ca08e4ee2dad6385eb178f3f3b70008619490775953bc6d011  x7.109/all-in-one-wp-migration/lib/vendor/servmask/database/class-ai1wm-database.php
+034bb692c099ff381d391bf747b07fd11d94fe9490f2810fc5e84b81669cc930  x7.110/all-in-one-wp-migration/lib/vendor/servmask/database/class-ai1wm-database.php
+
+## behavioural harnesses (engine-specific: PCRE via PHP, ECMAScript via node)
+d72a4c607ceae79a82c1bef92656adfdf146d926e4e74047e36d70d1232d4062  historical/differential.php
+24d837e5ea5992c3d50122569d10005298e28445d75ff4419ae7a06528585028  historical/xcheck_boundary.php
+0e6e86851864c05fb8b8cf19efad770aca9830b293102b7d372ded2bb7dc9aa4  parity_matrix/build_cases.py
+3e84bd5ef7ac9cb19d75a6f68e4f449eddac39728e832232b20eb5e027440724  parity_matrix/run_pcre.php
+34fea5785163439c8b673a32b41a20b2cba549a75ec0509a011871f39aa8a2e8  parity_matrix/run_ecmascript.mjs
+4ce8b9b86dd6c6503897da889c4fd22c2b41767b67511dc0fe8d099ca8b4ea8e  parity_matrix/rules.json
+
+## engine versions used to produce the recorded matrices
+php    8.4.19  (PCRE 10.42 2022-12-11)
+node   v22.22.2

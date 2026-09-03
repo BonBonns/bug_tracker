@@ -1,0 +1,531 @@
+[
+ {
+  "source": "wpt_shipped",
+  "value": ", text/plain",
+  "spec": [
+   "",
+   "text/plain"
+  ],
+  "mozilla": [
+   "",
+   "text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain, ",
+  "spec": [
+   "text/plain",
+   ""
+  ],
+  "mozilla": [
+   "text/plain",
+   ""
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html, text/plain",
+  "spec": [
+   "text/html",
+   "text/plain"
+  ],
+  "mozilla": [
+   "text/html",
+   "text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain;charset=gbk, text/html",
+  "spec": [
+   "text/plain;charset=gbk",
+   "text/html"
+  ],
+  "mozilla": [
+   "text/plain;charset=gbk",
+   "text/html"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain;charset=gbk, text/html;charset=windows-1254",
+  "spec": [
+   "text/plain;charset=gbk",
+   "text/html;charset=windows-1254"
+  ],
+  "mozilla": [
+   "text/plain;charset=gbk",
+   "text/html;charset=windows-1254"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain;charset=gbk, text/plain",
+  "spec": [
+   "text/plain;charset=gbk",
+   "text/plain"
+  ],
+  "mozilla": [
+   "text/plain;charset=gbk",
+   "text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain;charset=gbk, text/plain;charset=windows-1252",
+  "spec": [
+   "text/plain;charset=gbk",
+   "text/plain;charset=windows-1252"
+  ],
+  "mozilla": [
+   "text/plain;charset=gbk",
+   "text/plain;charset=windows-1252"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;charset=gbk, text/html;x=\",text/plain",
+  "spec": [
+   "text/html;charset=gbk",
+   "text/html;x=\",text/plain"
+  ],
+  "mozilla": [
+   "text/html;charset=gbk",
+   "text/html;x=\",text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain;charset=gbk;x=foo, text/plain",
+  "spec": [
+   "text/plain;charset=gbk;x=foo",
+   "text/plain"
+  ],
+  "mozilla": [
+   "text/plain;charset=gbk;x=foo",
+   "text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;charset=gbk, text/plain, text/html",
+  "spec": [
+   "text/html;charset=gbk",
+   "text/plain",
+   "text/html"
+  ],
+  "mozilla": [
+   "text/html;charset=gbk",
+   "text/plain",
+   "text/html"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain, */*",
+  "spec": [
+   "text/plain",
+   "*/*"
+  ],
+  "mozilla": [
+   "text/plain",
+   "*/*"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html, */*",
+  "spec": [
+   "text/html",
+   "*/*"
+  ],
+  "mozilla": [
+   "text/html",
+   "*/*"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "*/*, text/html",
+  "spec": [
+   "*/*",
+   "text/html"
+  ],
+  "mozilla": [
+   "*/*",
+   "text/html"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/plain, */*;charset=gbk",
+  "spec": [
+   "text/plain",
+   "*/*;charset=gbk"
+  ],
+  "mozilla": [
+   "text/plain",
+   "*/*;charset=gbk"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html, */*;charset=gbk",
+  "spec": [
+   "text/html",
+   "*/*;charset=gbk"
+  ],
+  "mozilla": [
+   "text/html",
+   "*/*;charset=gbk"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;x=\", text/plain",
+  "spec": [
+   "text/html;x=\", text/plain"
+  ],
+  "mozilla": [
+   "text/html;x=\", text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;\", text/plain",
+  "spec": [
+   "text/html;\", text/plain"
+  ],
+  "mozilla": [
+   "text/html;\", text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;\", \\\", text/plain",
+  "spec": [
+   "text/html;\", \\\", text/plain"
+  ],
+  "mozilla": [
+   "text/html;\", \\\", text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 1
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;\", \\\", text/plain, \";charset=GBK",
+  "spec": [
+   "text/html;\", \\\", text/plain, \";charset=GBK"
+  ],
+  "mozilla": [
+   "text/html;\", \\\", text/plain, \";charset=GBK"
+  ],
+  "boundary_differs": false,
+  "backslashes": 1
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/html;\", \", text/plain",
+  "spec": [
+   "text/html;\", \"",
+   "text/plain"
+  ],
+  "mozilla": [
+   "text/html;\", \"",
+   "text/plain"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;charset=windows-1252",
+  "spec": [
+   "text/javascript;charset=windows-1252"
+  ],
+  "mozilla": [
+   "text/javascript;charset=windows-1252"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;\";charset=windows-1252",
+  "spec": [
+   "text/javascript;\";charset=windows-1252"
+  ],
+  "mozilla": [
+   "text/javascript;\";charset=windows-1252"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript\f",
+  "spec": [
+   "text/javascript\f"
+  ],
+  "mozilla": [
+   "text/javascript\f"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "\"text/javascript\"",
+  "spec": [
+   "\"text/javascript\""
+  ],
+  "mozilla": [
+   "\"text/javascript\""
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/ javascript",
+  "spec": [
+   "text/ javascript"
+  ],
+  "mozilla": [
+   "text/ javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text /javascript",
+  "spec": [
+   "text /javascript"
+  ],
+  "mozilla": [
+   "text /javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "x/x, text/javascript",
+  "spec": [
+   "x/x",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "x/x",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "x/x;charset=windows-1252, text/javascript",
+  "spec": [
+   "x/x;charset=windows-1252",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "x/x;charset=windows-1252",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript, x/x",
+  "spec": [
+   "text/javascript",
+   "x/x"
+  ],
+  "mozilla": [
+   "text/javascript",
+   "x/x"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript; charset=windows-1252, text/javascript",
+  "spec": [
+   "text/javascript; charset=windows-1252",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "text/javascript; charset=windows-1252",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;\", x/x",
+  "spec": [
+   "text/javascript;\", x/x"
+  ],
+  "mozilla": [
+   "text/javascript;\", x/x"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript, ",
+  "spec": [
+   "text/javascript",
+   ""
+  ],
+  "mozilla": [
+   "text/javascript",
+   ""
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript, error",
+  "spec": [
+   "text/javascript",
+   "error"
+  ],
+  "mozilla": [
+   "text/javascript",
+   "error"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;charset=windows-1252, x/x, text/javascript",
+  "spec": [
+   "text/javascript;charset=windows-1252",
+   "x/x",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "text/javascript;charset=windows-1252",
+   "x/x",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;charset=windows-1252, error, text/javascript",
+  "spec": [
+   "text/javascript;charset=windows-1252",
+   "error",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "text/javascript;charset=windows-1252",
+   "error",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;charset=windows-1252, , text/javascript",
+  "spec": [
+   "text/javascript;charset=windows-1252",
+   "",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "text/javascript;charset=windows-1252",
+   "",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 0
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "text/javascript;charset=windows-1252;\", \\\", x/x",
+  "spec": [
+   "text/javascript;charset=windows-1252;\", \\\", x/x"
+  ],
+  "mozilla": [
+   "text/javascript;charset=windows-1252;\", \\\", x/x"
+  ],
+  "boundary_differs": false,
+  "backslashes": 1
+ },
+ {
+  "source": "wpt_shipped",
+  "value": "x/x;\", x/y;\\\", text/javascript;charset=windows-1252;\", text/javascript",
+  "spec": [
+   "x/x;\", x/y;\\\", text/javascript;charset=windows-1252;\"",
+   "text/javascript"
+  ],
+  "mozilla": [
+   "x/x;\", x/y;\\\", text/javascript;charset=windows-1252;\"",
+   "text/javascript"
+  ],
+  "boundary_differs": false,
+  "backslashes": 1
+ },
+ {
+  "source": "even_run_not_in_wpt",
+  "value": "x/x;p=\"a\\\\\",y/y",
+  "spec": [
+   "x/x;p=\"a\\\\\"",
+   "y/y"
+  ],
+  "mozilla": [
+   "x/x;p=\"a\\\\\",y/y"
+  ],
+  "boundary_differs": true,
+  "backslashes": 2
+ }
+]

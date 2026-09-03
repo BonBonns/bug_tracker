@@ -1,0 +1,644 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:<lambda>21",
+   "method_node_id": "107374182540",
+   "line": "208",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313608",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "(\\d+)\\.(\\d+)\\.(\\d+)",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/increment-version.js",
+   "package": "package",
+   "method": "package/scripts/increment-version.js::program:getNextBetaVersion:<lambda>0",
+   "method_node_id": "107374182583",
+   "line": "36",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313700",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[0-9]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/increment-version.js",
+   "package": "package",
+   "method": "package/scripts/increment-version.js::program:getNextBetaVersion:<lambda>0",
+   "method_node_id": "107374182583",
+   "line": "37",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313701",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[0-9]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/increment-version.js",
+   "package": "package",
+   "method": "package/scripts/increment-version.js::program:getNextBetaVersion",
+   "method_node_id": "107374182584",
+   "line": "24",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313704",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/increment-version.js",
+   "package": "package",
+   "method": "package/scripts/increment-version.js::program:getNextBetaVersion",
+   "method_node_id": "107374182584",
+   "line": "40",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313720",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[0-9]+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:_getWindowsBuildNumber",
+   "method_node_id": "107374182742",
+   "line": "209",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314062",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "(\\d+)\\.(\\d+)\\.(\\d+)",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/increment-version.js",
+   "package": "package",
+   "method": "package/scripts/increment-version.js::program:getPublishedVersions:<lambda>1",
+   "method_node_id": "107374182586",
+   "line": "51",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064773681",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  },
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:argsToCommandLine",
+   "method_node_id": "107374182513",
+   "line": "269",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064772721",
+   "compared_expr_node_id": "30064772722",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/lib/windowsPtyAgent.js",
+      "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:WindowsPtyAgent",
+      "line": "81",
+      "node_id": "30064772907",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:argsToCommandLine",
+   "method_node_id": "107374182513",
+   "line": "269",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064772723",
+   "compared_expr_node_id": "30064772724",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/lib/windowsPtyAgent.js",
+      "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:WindowsPtyAgent",
+      "line": "81",
+      "node_id": "30064772907",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:argsToCommandLine",
+   "method_node_id": "107374182513",
+   "line": "270",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064772729",
+   "compared_expr_node_id": "30064772730",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/lib/windowsPtyAgent.js",
+      "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:WindowsPtyAgent",
+      "line": "81",
+      "node_id": "30064772907",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:argsToCommandLine",
+   "method_node_id": "107374182513",
+   "line": "270",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064772731",
+   "compared_expr_node_id": "30064772732",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/lib/windowsPtyAgent.js",
+      "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:WindowsPtyAgent",
+      "line": "81",
+      "node_id": "30064772907",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/windowsPtyAgent.js",
+   "package": "package",
+   "method": "package/lib/windowsPtyAgent.js::program:argsToCommandLine",
+   "method_node_id": "107374182513",
+   "line": "285",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064772762",
+   "compared_expr_node_id": "68719478208",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/lib/windowsPtyAgent.js",
+      "method": "package/lib/windowsPtyAgent.js::program:<lambda>0:WindowsPtyAgent",
+      "line": "81",
+      "node_id": "30064772907",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:argsToCommandLine",
+   "method_node_id": "107374182749",
+   "line": "271",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064775402",
+   "compared_expr_node_id": "30064775403",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/src/windowsPtyAgent.ts",
+      "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:<init>",
+      "line": "110",
+      "node_id": "30064775156",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:argsToCommandLine",
+   "method_node_id": "107374182749",
+   "line": "271",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064775404",
+   "compared_expr_node_id": "30064775405",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/src/windowsPtyAgent.ts",
+      "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:<init>",
+      "line": "110",
+      "node_id": "30064775156",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:argsToCommandLine",
+   "method_node_id": "107374182749",
+   "line": "272",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064775410",
+   "compared_expr_node_id": "30064775411",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/src/windowsPtyAgent.ts",
+      "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:<init>",
+      "line": "110",
+      "node_id": "30064775156",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:argsToCommandLine",
+   "method_node_id": "107374182749",
+   "line": "272",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064775412",
+   "compared_expr_node_id": "30064775413",
+   "char_access_kind": "INDEXED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/src/windowsPtyAgent.ts",
+      "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:<init>",
+      "line": "110",
+      "node_id": "30064775156",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/src/windowsPtyAgent.ts",
+   "package": "package",
+   "method": "package/src/windowsPtyAgent.ts::program:argsToCommandLine",
+   "method_node_id": "107374182749",
+   "line": "287",
+   "site_kind": "CUSTOM_PARSER",
+   "site_node_id": "30064775443",
+   "compared_expr_node_id": "68719480780",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "escape_char": "\\",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [
+     {
+      "file": "package/src/windowsPtyAgent.ts",
+      "method": "package/src/windowsPtyAgent.ts::program:WindowsPtyAgent:<init>",
+      "line": "110",
+      "node_id": "30064775156",
+      "api_identity": "fs.openSync",
+      "module_identity": "fs",
+      "import_node_id": "73014444142",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "ARCHIVE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "CUSTOM_PARSER_CHAIN_NOT_MODELLED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  }
+ ]
+}

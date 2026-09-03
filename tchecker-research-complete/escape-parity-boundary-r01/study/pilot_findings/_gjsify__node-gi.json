@@ -1,0 +1,474 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:camelToSnake",
+   "method_node_id": "107374182526",
+   "line": "40",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313329",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "([A-Z])",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:camelToSnake",
+      "line": "40",
+      "node_id": "30064771825",
+      "regex_node_id": "90194313329",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313330",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:toKebab",
+   "method_node_id": "107374182527",
+   "line": "45",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313331",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "([A-Z])",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:toKebab",
+      "line": "44",
+      "node_id": "30064771833",
+      "regex_node_id": "90194313331",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313332",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:toKebab",
+   "method_node_id": "107374182527",
+   "line": "46",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313333",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "_",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:toKebab",
+      "line": "44",
+      "node_id": "30064771830",
+      "regex_node_id": "90194313333",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313334",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:assignTemplateChildren",
+   "method_node_id": "107374182613",
+   "line": "788",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313465",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:assignTemplateChildren",
+      "line": "788",
+      "node_id": "30064772587",
+      "regex_node_id": "90194313465",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313466",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:assignTemplateChildren",
+   "method_node_id": "107374182613",
+   "line": "793",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313468",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:assignTemplateChildren",
+      "line": "793",
+      "node_id": "30064772604",
+      "regex_node_id": "90194313468",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313469",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/gi.js",
+   "package": "package",
+   "method": "package/gi.js::program:makeEnum",
+   "method_node_id": "107374182671",
+   "line": "1702",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313627",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "-",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/gi.js",
+      "method": "package/gi.js::program:makeEnum",
+      "line": "1702",
+      "node_id": "30064773349",
+      "regex_node_id": "90194313627",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313628",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/load-diagnostics.js",
+   "package": "package",
+   "method": "package/load-diagnostics.js::program:isResolutionFailure",
+   "method_node_id": "107374182767",
+   "line": "50",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314167",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "cannot find module|module not found",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/overrides/package.js",
+   "package": "package",
+   "method": "package/overrides/package.js::program:makeVprintf:vprintf",
+   "method_node_id": "107374182891",
+   "line": "137",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314542",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "%(?:(\\d+)\\$)?(0)?(\\d+)?(?:\\.(\\d+))?([%sdxf])",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/overrides/package.js",
+      "method": "package/overrides/package.js::program:makeVprintf:vprintf",
+      "line": "136",
+      "node_id": "30064777908",
+      "regex_node_id": "90194314542",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "120259084667",
+       "kind": "METHOD_REF",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/win-gi-gyp-flags.mjs",
+   "package": "package",
+   "method": "package/scripts/win-gi-gyp-flags.mjs::program:tokens",
+   "method_node_id": "107374182918",
+   "line": "50",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314653",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/win-gi-gyp-flags.mjs",
+   "package": "package",
+   "method": "package/scripts/win-gi-gyp-flags.mjs::program:stripQuotes",
+   "method_node_id": "107374182919",
+   "line": "54",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314654",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\"(.*)\"$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/win-gi-gyp-flags.mjs",
+      "method": "package/scripts/win-gi-gyp-flags.mjs::program:stripQuotes",
+      "line": "54",
+      "node_id": "30064778342",
+      "regex_node_id": "90194314654",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314655",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/win-gi-gyp-flags.mjs",
+   "package": "package",
+   "method": "package/scripts/win-gi-gyp-flags.mjs::program:toGyp",
+   "method_node_id": "107374182920",
+   "line": "61",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314656",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/win-gi-gyp-flags.mjs",
+      "method": "package/scripts/win-gi-gyp-flags.mjs::program:toGyp",
+      "line": "61",
+      "node_id": "30064778344",
+      "regex_node_id": "90194314656",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314657",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

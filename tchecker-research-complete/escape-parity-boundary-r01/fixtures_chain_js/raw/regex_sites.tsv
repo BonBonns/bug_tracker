@@ -1,0 +1,14 @@
+c01-lookbehind-even/index.js	c01-lookbehind-even/index.js::program	107374182402	3	90194313216	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c02-lookbehind-odd/index.js	c02-lookbehind-odd/index.js::program	107374182405	4	90194313218	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c05-delayed-source/index.js	c05-delayed-source/index.js::program	107374182415	4	90194313253	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c06-immediate/index.js	c06-immediate/index.js::program	107374182418	3	90194313255	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c07-full-chain/index.js	c07-full-chain/index.js::program	107374182420	4	90194313264	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c08-log-only/index.js	c08-log-only/index.js::program	107374182423	4	90194313271	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c10-unresolved-callback/index.js	c10-unresolved-callback/index.js::program	107374182430	4	90194313277	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c12-ambiguous-consumer/index.js	c12-ambiguous-consumer/index.js::program	107374182436	4	90194313291	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c12-ambiguous-consumer/index.js	c12-ambiguous-consumer/index.js::program	107374182436	5	90194313292	RESOLVED_LITERAL	"(.*?)(?<!\\\\)"	g	
+c13-same-text-two-sites/index.js	c13-same-text-two-sites/index.js::program:first	107374182438	6	90194313294	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c13-same-text-two-sites/index.js	c13-same-text-two-sites/index.js::program:second	107374182441	10	90194313296	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+c14a-historical-faulty/index.js	c14a-historical-faulty/index.js::program	107374182443	3	90194313298	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'		
+c14b-historical-corrected/index.js	c14b-historical-corrected/index.js::program	107374182445	3	90194313299	RESOLVED_LITERAL	'((?:[^'\\\\]++|\\\\.)*+)'	s	
+c09-dynamic-regex/index.js	c09-dynamic-regex/index.js::program:makeParser	107374182427	4	30064771280	UNRESOLVED_DYNAMIC		g	pattern_node=30064771281;kind=Call

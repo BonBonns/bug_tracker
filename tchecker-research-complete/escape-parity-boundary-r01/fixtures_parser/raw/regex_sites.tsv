@@ -1,0 +1,18 @@
+p06-class-backslash/index.js	p06-class-backslash/index.js::program	107374182400	3	90194313216	RESOLVED_LITERAL	'([^'\\\\]*(?:\\\\.[^'\\\\]*)*)'	g	
+p06-class-backslash/index.js	p06-class-backslash/index.js::program	107374182400	4	90194313217	RESOLVED_LITERAL	'((?:\\\\\\\\|[^'\\\\])*)'	g	
+p06-class-backslash/index.js	p06-class-backslash/index.js::program	107374182400	5	90194313218	RESOLVED_LITERAL	'([^'\\\\]*)'	g	
+p08-alternation-quote-branch/index.js	p08-alternation-quote-branch/index.js::program	107374182401	2	90194313219	RESOLVED_LITERAL	(?:\\d+|'(.*?)(?<!\\\\)')	g	
+p08-alternation-quote-branch/index.js	p08-alternation-quote-branch/index.js::program	107374182401	3	90194313220	RESOLVED_LITERAL	(?:'((?:[^'\\\\]|\\\\.)*)'|"((?:[^"\\\\]|\\\\.)*)")	g	
+p09-nested-groups/index.js	p09-nested-groups/index.js::program	107374182402	2	90194313221	RESOLVED_LITERAL	'(((?:(?:[^'\\\\])|(?:\\\\.))*))'	g	
+p09-nested-groups/index.js	p09-nested-groups/index.js::program	107374182402	3	90194313222	RESOLVED_LITERAL	'((?:(.*?)))(?<!\\\\)'	g	
+p10-unrelated-lookbehind/index.js	p10-unrelated-lookbehind/index.js::program	107374182404	3	90194313223	RESOLVED_LITERAL	(?<!\\d)\\w+	g	
+p10-unrelated-lookbehind/index.js	p10-unrelated-lookbehind/index.js::program	107374182404	4	90194313224	RESOLVED_LITERAL	(?<!\\\\)x	g	
+p10-unrelated-lookbehind/index.js	p10-unrelated-lookbehind/index.js::program	107374182404	5	90194313225	RESOLVED_LITERAL	(?<=\\$)\\d+	g	
+p12-regex-in-text/index.js	p12-regex-in-text/index.js::program	107374182414	9	90194313234	RESOLVED_LITERAL	'((?:[^'\\\\]|\\\\.)*)'	g	
+p14-flags/index.js	p14-flags/index.js::program	107374182415	3	90194313235	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'		
+p14-flags/index.js	p14-flags/index.js::program	107374182415	4	90194313236	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	g	
+p14-flags/index.js	p14-flags/index.js::program	107374182415	5	90194313237	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	gs	
+p14-flags/index.js	p14-flags/index.js::program	107374182415	6	90194313238	RESOLVED_LITERAL	'(.*?)(?<!\\\\)'	gimsu	
+p14-flags/index.js	p14-flags/index.js::program	107374182415	7	90194313239	RESOLVED_LITERAL	'((?:[^'\\\\]|\\\\.)*)'	i	
+p11a-dynamic-resolved/index.js	p11a-dynamic-resolved/index.js::program	107374182407	3	30064771127	RESOLVED_CONST_STRING	'(.*?)(?<!\\\\)'	g	pattern_node=90194313226
+p11b-dynamic-unresolved/index.js	p11b-dynamic-unresolved/index.js::program:make	107374182410	4	30064771137	UNRESOLVED_DYNAMIC		g	pattern_node=30064771138;kind=Call
