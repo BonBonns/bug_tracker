@@ -1,0 +1,4649 @@
+{
+ "target": "regr-sourcemod-textparsers",
+ "frozen_at_utc": "2026-09-03T04:13:25Z",
+ "repo_remote": "https://github.com/alliedmodders/source2mod.git",
+ "commit": "9976b514686d28386cf73b0bb3dc0102827285db",
+ "commit_date": "2023-12-20T22:51:20+03:00",
+ "checkout_mode": "full",
+ "sparse_paths": [],
+ "excluded_dir_names": [
+  "configs",
+  "crashtests",
+  "editor",
+  "expat",
+  "extensions",
+  "gamedata",
+  "gtest",
+  "hl2sdk-manifests",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "plugins",
+  "reftests",
+  "sourcepawn",
+  "test",
+  "tests",
+  "third_party",
+  "tools",
+  "translations",
+  "vendor"
+ ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [
+  "configs",
+  "editor",
+  "extensions",
+  "gamedata",
+  "hl2sdk-manifests",
+  "plugins",
+  "sourcepawn",
+  "tools",
+  "translations"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "C_CPP_HEADER": 144,
+  "C_CPP_SOURCE": 114
+ },
+ "excluded_file_count": 658,
+ "analysed_file_count": 258,
+ "file_set_sha256": "458390f1f48c2c911289e85dc6ae058f8d189764ad93d2b8a9b638ae66208e38",
+ "files": [
+  {
+   "path": "bridge/include/BridgeAPI.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "20221214d3ae7679b3566e4a287b5744b4876913476d79545d11f5577cde7151"
+  },
+  {
+   "path": "bridge/include/CoreProvider.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "7d8aea815af5666a3baef8668e77905193d129550c94e6de0f510d6bb0dbcc5c"
+  },
+  {
+   "path": "bridge/include/IExtensionBridge.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f8334c8852e279c07690931de140241adf03c224c88ce64abf4a947425e6aa24"
+  },
+  {
+   "path": "bridge/include/IFileSystemBridge.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "30d67d18d6e042f7d9c71fb8e1e79af4a060bfab770368919a34572dc1b59877"
+  },
+  {
+   "path": "bridge/include/ILogger.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0246ea178e79f083a358fcd544a3fcd5b499bad0a716efa9a95e828de06a13df"
+  },
+  {
+   "path": "bridge/include/IPlayerInfoBridge.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "251d4c73cd4fe0e6463a5c0eb4bfb9ccda9b470b41b6994bfb46ef729c4e9c73"
+  },
+  {
+   "path": "bridge/include/IProviderCallbacks.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "20f94f627b0569d8f465fbe0db5e2aa10d8b4596025afbce95dea129749aa122"
+  },
+  {
+   "path": "bridge/include/IScriptManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3b9756e985e45025645fb364ca3a08c2007fc9425607e82de124126ea5b066da"
+  },
+  {
+   "path": "bridge/include/IVEngineServerBridge.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0a85847a9732fbd8ba85a604bccde7768549a9a7b2c5545f8c493df272547dfb"
+  },
+  {
+   "path": "bridge/include/LogicProvider.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "b99d029bfa5364c975983ced9e4dbab9e25f01867c2bdbbabe106ef6846833b0"
+  },
+  {
+   "path": "core/CellRecipientFilter.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "26f4ea16090de8c890313d320a1b088ea73fdb4423632a278be1744a7a5af7a2"
+  },
+  {
+   "path": "core/ChatTriggers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b69640a625004d484d9fe46dbbcec140728a39040c1b2edc0de42686bf9c362e"
+  },
+  {
+   "path": "core/ChatTriggers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "dc7d2b4812624b539b633f49587086fd8eca5d17f96ee0e3eb064efc4d30d31d"
+  },
+  {
+   "path": "core/ConCmdManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "f535773e31cc4607b1e915e83303c33ff71881c69a95a8245b81a680ba8a0b2c"
+  },
+  {
+   "path": "core/ConCmdManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "19c8d6b1057022781a40bebe79f85b4340d11a70d059bc895a90952d3466c60c"
+  },
+  {
+   "path": "core/ConCommandBaseIterator.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "aebdc0b247cc7fb62bef14f024ec5e7cc82d9c95e9605dc21b3651efe0bd5ef7"
+  },
+  {
+   "path": "core/ConVarManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "6c13d35f63b99b06244121d1d540d8c318c3bd3efd430627e68b435f82174f52"
+  },
+  {
+   "path": "core/ConVarManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "28a64eb3cf2ddc34d14c0bfa79e5ef200f63b1e8b413c284264de6f0845d15e6"
+  },
+  {
+   "path": "core/ConsoleDetours.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "bf3ff17401bebbff2cfd353060c045ea8146da9c55f3711f605a2e79fc5c1ae3"
+  },
+  {
+   "path": "core/ConsoleDetours.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4415ee87fe9511deee29101de9cd887883e80a7a8b15b69e418c34c498342eaf"
+  },
+  {
+   "path": "core/CoreConfig.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "6b5cd814136d37aa6e0bd8197b164a1e29c7080d1a5c17fc7af4b3f1d2e6633f"
+  },
+  {
+   "path": "core/CoreConfig.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c43227645ee5798397faef95e975ab63ee8c5ddede4bc6952ceb86b5206b842c"
+  },
+  {
+   "path": "core/EventManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "068544306c3e9144f115b703371d31d1c3742758f1346fdaa4420cfccb0edbad"
+  },
+  {
+   "path": "core/EventManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "d5beaa72424e0dab322e5ffb42f7f1eff3776187f33d9b6888d5661b2c9c4d2b"
+  },
+  {
+   "path": "core/GameHooks.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "80855302d078af26c63842c20d24432466169a0bdeb522d65ba83b93bfc50816"
+  },
+  {
+   "path": "core/GameHooks.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "911761779bca300d05a1fbe554d44556c299164f5010095921395a7a4d75e554"
+  },
+  {
+   "path": "core/HalfLife2.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "29fae6ada7e93d292cd200a28df50d5d929a7fe59536073de9fc51355078b4be"
+  },
+  {
+   "path": "core/HalfLife2.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c1e5f5980ea53ea6dad7bae8e7bc7fe37056260b16862e0934be4e21bd4be2ce"
+  },
+  {
+   "path": "core/Logger.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "26a34e8a5b271fb2f25b7fab18213cc25a9aae48abf10cb1678c0a97b1a1622e"
+  },
+  {
+   "path": "core/Logger.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "99ee3d450092cb6e163a030661770751bde05ad47487be7d353e206fd4419f88"
+  },
+  {
+   "path": "core/MenuManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b0da84c9dcd16f9d80f3d5dea2ae962fa814371faf1eacd72cee3a2cec65b1fa"
+  },
+  {
+   "path": "core/MenuManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3c669f5ae88c3a8ad6a16e4510421261a4270607fe259545220f8fd790e45aca"
+  },
+  {
+   "path": "core/MenuStyle_Base.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "02529cb96f1af7840c4b9943f8ee1b992bca546c2e1c5c432aef44efa0c84df0"
+  },
+  {
+   "path": "core/MenuStyle_Base.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2ca90de9934e7e19bd0433035b0399ef7df9d62c123960ac1df78519a8891712"
+  },
+  {
+   "path": "core/MenuStyle_Radio.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "2f5384b9f2be3df6cb4ec9fb6c462fc0dc68648220c6f679f4586c8bd41c0de5"
+  },
+  {
+   "path": "core/MenuStyle_Radio.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "682a7bff1658b346a245eb5e00c71a9a9d78fcc650c884dfcfd221da99e085c2"
+  },
+  {
+   "path": "core/MenuStyle_Valve.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "2998d8cfc4e41314396a906b8501d715dfdfe4393739a612ef99060b735d9227"
+  },
+  {
+   "path": "core/MenuStyle_Valve.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "cd8b625190d9054c55d1bd0d3cab9a2299465e95e62a192d82b5380911f3e54c"
+  },
+  {
+   "path": "core/MenuVoting.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "44f95a4cd4746c0e24fc2d6daf7cea805715f5cad9a43c129360b4433b164e12"
+  },
+  {
+   "path": "core/MenuVoting.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "915f595b3d0e467360ba5c22677c2fc12232bdd3e3b0480fd6fa508aa0403cda"
+  },
+  {
+   "path": "core/NextMap.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b13c5af66f5086327ba3d7da72c0973dfb9561b8e2db7790f025b631a90131c7"
+  },
+  {
+   "path": "core/NextMap.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "bd536dc50cfa27d123107672ff3531f45ec0c90ca8fef439e2f3ebe65569f461"
+  },
+  {
+   "path": "core/PlayerManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b73f5d0230584e51be0623826614552c7955bee9f161d90655e52191ed760f88"
+  },
+  {
+   "path": "core/PlayerManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0a65626588459a9f899b24dc8af3fe1379588780ff174f90fb2ca5406b929d92"
+  },
+  {
+   "path": "core/TimerSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "02c7c64f23138bb99e0c3ad79cff9cc349d0186b88f0cc79a87e6c020fc8ce92"
+  },
+  {
+   "path": "core/TimerSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "15c1229be548881f19dd495d0edffcb058511ae7ec32f2db509da1290b5fdc97"
+  },
+  {
+   "path": "core/UserMessagePBHelpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "9c64d2371c6b14b2c9537f24fb60d7dd7df6f373f6b400c03dbf0679fb962b2f"
+  },
+  {
+   "path": "core/UserMessages.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "826e70df3598aec2ed0e06253ca5f03789d542a3ce1c335854c036b98b305d54"
+  },
+  {
+   "path": "core/UserMessages.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "57b380cf2e5cf3167d0c4760abe78ec1cedd5f2c1e56d239e0ab9c14ced56e36"
+  },
+  {
+   "path": "core/command_args.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "8d26b50c470f9d60b6cc72e7c1a0a30760751a364fa422ec0b929fdd633d6080"
+  },
+  {
+   "path": "core/concmd_cleaner.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "d9f10120a3f7daad2b624080feae75e66af3ac945b506c6bfe170e3c6675fa39"
+  },
+  {
+   "path": "core/concmd_cleaner.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "958e212b735cb83f3154fea0936518437c70b72a6ab4fe2dbcb644c0258c73e6"
+  },
+  {
+   "path": "core/frame_hooks.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "338329305ee8daa888c9d40c1750776feb67108dd31b4b41fd52067146f3d5b0"
+  },
+  {
+   "path": "core/frame_hooks.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "80f6ae1b99ae76f5febe4b4fd4022c5f3803d181002ff7a83fb767a33d389cfa"
+  },
+  {
+   "path": "core/logic/ADTFactory.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3edd8da991fc1af1a5cf6a73a642b76ec19db79b27e36a38959cb9d6dd54a669"
+  },
+  {
+   "path": "core/logic/ADTFactory.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5af3a7e7dc3151df0738c0f4605f5de26ab035b1733578e9c8487231e3adca74"
+  },
+  {
+   "path": "core/logic/AdminCache.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "8cffac504e137d45f3f13c8d0936727689569476b974a043f2f25d49887eefc9"
+  },
+  {
+   "path": "core/logic/AdminCache.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "9349924a677872b78520b15fb39f91a73bb480dfbc94026569aade574fd7a8e8"
+  },
+  {
+   "path": "core/logic/BaseWorker.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "d8c0146366c95ccd01255e0925d0d9889fcb3149c2a20254f6f81c4efe4f375b"
+  },
+  {
+   "path": "core/logic/BaseWorker.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "cfd12d527d0d3f817039cb6b8b27025483dc4ca87d778882e391a02e4c8e8cd5"
+  },
+  {
+   "path": "core/logic/CDataPack.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "7bed20577f7c529bc06f723b58e3591782cba9fca4f211af9ca239077be1b01a"
+  },
+  {
+   "path": "core/logic/CDataPack.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "81eba3cc5a58d31841c11bc27331e41289ee0f32b3e1b08cfddde7784a0c0217"
+  },
+  {
+   "path": "core/logic/CellArray.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "8158558560586d5469b0ea5a12963e48613b3e2f517d593796fa247971314764"
+  },
+  {
+   "path": "core/logic/Database.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b57382d3822101aff082d2de7bfb85a0b6ba8defce4e877dadef997924f026bc"
+  },
+  {
+   "path": "core/logic/Database.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "765f9502b15f43c392c27ebe680c97820790c2a5a45121bf3be6185739f9e231"
+  },
+  {
+   "path": "core/logic/DatabaseConfBuilder.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "f55d6fcee276575e077e19c47a76189b16a9b8136e3ceb277893f989e51ea76a"
+  },
+  {
+   "path": "core/logic/DatabaseConfBuilder.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3e5de9a17e8a155bfa8120c09f098777385b087353150a11e84386cf5403a586"
+  },
+  {
+   "path": "core/logic/DebugReporter.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "4dd57c8de494c90fe3a1f0cdfb01738cc0abdc748ddc06e0d46a6fcc2f7da1e8"
+  },
+  {
+   "path": "core/logic/DebugReporter.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "9717465c99352a0abdf42fdf9796780360c0a7a0cd6621f657d2ff18d8e622a9"
+  },
+  {
+   "path": "core/logic/ExtensionSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c31ef95f139614259998d90287a9a47c55dc96cb2579ddf6707034bff799a581"
+  },
+  {
+   "path": "core/logic/ExtensionSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "395e0cba8eda9623c7ea4907ee8c69d006f8d8037e13fcfc22b593f6576e8832"
+  },
+  {
+   "path": "core/logic/ForwardSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c59e7b2f4c4f1ad0db5879d4cb52e43526be62b8d4b084e6cd4e6b513d1265c0"
+  },
+  {
+   "path": "core/logic/ForwardSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "39528415f6f1af1c401e7e44f2a2b929aca3c3bfb25d0bc54f9eda9003eeeba4"
+  },
+  {
+   "path": "core/logic/FrameIterator.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "534eb0d1899c8337b9d0a97c80e3119829ce2409dc22b22f2b87eed6eab2a31c"
+  },
+  {
+   "path": "core/logic/FrameIterator.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5f399a646487b868212ad1a2814eb0589553fd2816163cabdb23da27afd3cad1"
+  },
+  {
+   "path": "core/logic/GameConfigs.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "cc6bebb38adbf0d88ae839007dd11751224db0178f8cc5e27ea5bdb2e9630c94"
+  },
+  {
+   "path": "core/logic/GameConfigs.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "41ae3f80a13df152526a5a251533831b3140c63633d3b0fef6194ea7ce620946"
+  },
+  {
+   "path": "core/logic/HandleSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "7b49d1d65260acd15cdac0873c0c97d2f882f066c543054f40e5b76f649017af"
+  },
+  {
+   "path": "core/logic/HandleSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "43ef12c87be4d7284b0b737d4295950afd0f19c06f366e864d7742b2afaa1ce0"
+  },
+  {
+   "path": "core/logic/LibrarySys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "9a3d3a05bc73ceff11861bd0d773deb56509b1fae00ca0d5c1048f1238aa015d"
+  },
+  {
+   "path": "core/logic/LibrarySys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5315b7d85b820cef2d6f63c30fe60a2f2070c0cd2a3d4c20da10ed3d3c0b5558"
+  },
+  {
+   "path": "core/logic/Logger.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c5b3ef025de1cd96424f8440991644d95d63726a57449cc46ebd7519498c2506"
+  },
+  {
+   "path": "core/logic/Logger.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4b1d5a2eeac1f40c7540a5bcd6b4ea140028238617bfda61d89967bfce5b3e76"
+  },
+  {
+   "path": "core/logic/LumpManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "4926244db3d952c9734f9c5374a716dd5e57ee860b54e225b7bde97779c0e697"
+  },
+  {
+   "path": "core/logic/LumpManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0822948701a7ab5506518590161ed29996279db0ac1d62a8429b6bea6ca3a9ca"
+  },
+  {
+   "path": "core/logic/MemoryUtils.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3849f458288e0f70798f6e256062ee404edfdaa7fa638a37c87c4b525afbfb88"
+  },
+  {
+   "path": "core/logic/MemoryUtils.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2429c0143264266e5f92d221feec1583d968fbc6eb4eccef85d2512fc113911e"
+  },
+  {
+   "path": "core/logic/MersenneTwister.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "50a8278e8e628c9d8862360b653ed48c11bd36d85c6eaf07db73cad93cf54a7b"
+  },
+  {
+   "path": "core/logic/Native.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "d50535a164bf6b62aa9143d08c7c92bf18c912f99925c334523742163843790e"
+  },
+  {
+   "path": "core/logic/NativeOwner.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ac8885aa7fed9388e46865a40988a9712aa576a11ee7272a2adc837782e0a1d6"
+  },
+  {
+   "path": "core/logic/NativeOwner.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4713d529f3015f6d68cc6592fff873fcb90b12f1ae69c079aac547212c557d1c"
+  },
+  {
+   "path": "core/logic/PhraseCollection.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "aec80c19e2d2e6b0fc46bdcc396e0340c173f67f78aabf9c019650fbbd458162"
+  },
+  {
+   "path": "core/logic/PhraseCollection.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "85fec3c875b30c2537f851025df6019a5d9b2b3f05a100312bf01d7b8b13bb27"
+  },
+  {
+   "path": "core/logic/PluginSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "bf49d188970d49f6a4379e45d12445e24925d5fd02d843facb225279caa24475"
+  },
+  {
+   "path": "core/logic/PluginSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "952e11aab00046ba670a2ced614356a3430dc511295f4b22027a8b8f07eac185"
+  },
+  {
+   "path": "core/logic/ProfileTools.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "771001cf5d3acc75f288993907bc15daac673f560f41edcede690bcda01561b8"
+  },
+  {
+   "path": "core/logic/ProfileTools.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c8125b62955c2c5ad428ba58919ed81f0fc7444c57fb9b105d24fbe51523ccbb"
+  },
+  {
+   "path": "core/logic/PseudoAddrManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "9defda2ff90bd1edb5c09523410aa8434f62ae18f9e0694a4ec07ba7281f365b"
+  },
+  {
+   "path": "core/logic/PseudoAddrManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "dacbcb7159e4864b50f8c169abf0f1acb81e020bf52cf30607aaa92087fc6a5f"
+  },
+  {
+   "path": "core/logic/RootConsoleMenu.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "cec3670a88bd08f408113c18226e2bc0ef13a731e34b5221b2dee7f7cf6f61b3"
+  },
+  {
+   "path": "core/logic/RootConsoleMenu.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "18d9f5a0222f1f12e5fd235a15ddc48eec0e1168964cfc6a954e90745e685817"
+  },
+  {
+   "path": "core/logic/ShareSys.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "4c8aa70ef3e638f179548aa5bcfd75744905ad32674429b10ef784165e0639e4"
+  },
+  {
+   "path": "core/logic/ShareSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "a0f1be19ca8c5585972e63eea948c6b651c3f80a89db24f0878f60a158a2405a"
+  },
+  {
+   "path": "core/logic/TextParsers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b581b146b25c1aa51a415250ed33772ce46e62ccd168b3519a8a84b00c0878f6"
+  },
+  {
+   "path": "core/logic/TextParsers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "439a7cf524116a8b1ea8f69a1ea89c88b5e87b426afa8dfcbb952b8f818084e6"
+  },
+  {
+   "path": "core/logic/ThreadSupport.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c1b4421dfdb29f7f36d9a79c63731451898c8b22d7190a66b28dd9e26daa0c30"
+  },
+  {
+   "path": "core/logic/ThreadSupport.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "7989c97ca02266aa3335044e3c0548a698cf8cd705999043eaccc9ed873a29a6"
+  },
+  {
+   "path": "core/logic/Translator.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3cda7b47efb4ec50f509368d70c6a499933f501753cbbdbfe3e4a24b2fada7f5"
+  },
+  {
+   "path": "core/logic/Translator.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5d5f0abf00396e541d55276a5a065a6217572bee10bb08a8790c0b3e2f29ebd2"
+  },
+  {
+   "path": "core/logic/common_logic.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "b02f3579777a323205dfb95321fbf3513c712caf5f4c70d0610ca49999a1b2b6"
+  },
+  {
+   "path": "core/logic/common_logic.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ca6f3244001f1ce06524ac7def606163cf5c73be2006d74397ca856ca67e39b9"
+  },
+  {
+   "path": "core/logic/frame_tasks.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "be1d62d8f0c803ca26a3a1e5aeb0d1d26fff8d1da24a2096448b347e3650f2cc"
+  },
+  {
+   "path": "core/logic/frame_tasks.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "cb8fcb84af08273e01b8645194f2b43a230a5376f7cb998e67f523e73be5e6a1"
+  },
+  {
+   "path": "core/logic/handle_helpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4fa08760aa2ca77277d837659fe1f0aef77052bdaa809b5cf63aa31aca015889"
+  },
+  {
+   "path": "core/logic/sm_crc32.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "bf246a16fcc7f1ccac726a433eade551b7fb7adc3051f1be293dc71ed1dd30ce"
+  },
+  {
+   "path": "core/logic/sm_crc32.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "772ab2db5508abed9a47f83323ecb3e4630f7774b8c1d4ff8d223580728bc509"
+  },
+  {
+   "path": "core/logic/sm_simple_prioqueue.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "885bf8693c17c91803cbeec4bafb9d8bb69775c9479b145fb85bc4633770f321"
+  },
+  {
+   "path": "core/logic/sm_symtable.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3c487af92e4bd05da24384ba9e8e0558c987212049356a54b4c4a439bb6eac9d"
+  },
+  {
+   "path": "core/logic/sm_trie.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "e0c28933152b43a31e44412e9efe1b0f338e11575dd3d26f7307f99706740756"
+  },
+  {
+   "path": "core/logic/sm_trie.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5e40f87c42a13e599003923af121dfb29dd0b9f4d271b3fa645c36367ec44498"
+  },
+  {
+   "path": "core/logic/smn_admin.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "7049a5887531d9a51ea51e2a6df49926367d82c0220246f0441e1f07f52fb516"
+  },
+  {
+   "path": "core/logic/smn_adt_array.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "16faa947d3a83912c5ce24c80143b934ea75277b87e68521ccbcdc2654126f40"
+  },
+  {
+   "path": "core/logic/smn_adt_stack.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "28af91f0cd4d37e8570f7197c8ca992b7fa3682cd1a4283ae04b92070355e487"
+  },
+  {
+   "path": "core/logic/smn_adt_trie.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "a8856e500d151fb976cb4c98555f0f6377a4d41f8a522cf486ad864f80915c66"
+  },
+  {
+   "path": "core/logic/smn_banning.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c98da8d946fde27a7893111860f30e779ef5a2ff6f93191302e19ef31beeabf9"
+  },
+  {
+   "path": "core/logic/smn_console.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "828af48ea09cc8a058373f08b01ee84d5e28c70629bfe0774fd964fd76b5cb7e"
+  },
+  {
+   "path": "core/logic/smn_core.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c973990b319f40d25e4b2591756be2a3326a2f3e4864eda4c89cd2460e79554a"
+  },
+  {
+   "path": "core/logic/smn_database.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "4c1de0afae8c7ad379a8ef3b36b359d5692c13d9d2b2fffe1266bbc3268b020a"
+  },
+  {
+   "path": "core/logic/smn_datapacks.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "0e4461f4270868419103c350dd0e9ae39a02fefd6d924ca4309b8bdcf484c538"
+  },
+  {
+   "path": "core/logic/smn_entitylump.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "fb30c5b6ce494759d4c2d6992c5aa1156f3cf9668076f29dd99bb73e2ea45fe7"
+  },
+  {
+   "path": "core/logic/smn_entitylump.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "563e10773286364b3f2af6ae9b2a3bf8e7b48c62ad2912ae56dacb4207968535"
+  },
+  {
+   "path": "core/logic/smn_fakenatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c584327d433218c4675e19c5381b1b270095269805482c39f09030862ad3cfce"
+  },
+  {
+   "path": "core/logic/smn_filesystem.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "18f5427de26c836f66d7299a2cef8d301194b745dfd3f1a951ded95360e91cfb"
+  },
+  {
+   "path": "core/logic/smn_float.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "c9ff0a2f1ab6b93fe93506995dfc780442af45e43c1638347e74b5a081a19bef"
+  },
+  {
+   "path": "core/logic/smn_functions.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "56d8628a2f668139cc28f2a4481b311cf3990112fb1d97690f005c9c64282dc0"
+  },
+  {
+   "path": "core/logic/smn_gameconfigs.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "397da6ba6bfa761e6724c2a3f7ed2d8f884e86dcc9a046d0d376f8af070992ea"
+  },
+  {
+   "path": "core/logic/smn_halflife.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "8c94e18c2a72452bc7756fe07f93db8631fe736a0e9444d4cbc776c345ee7990"
+  },
+  {
+   "path": "core/logic/smn_handles.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "553a104d1a481e4696fda30c8b7e9725df0ea01df1f8a0e49962e77d4bf4fb7a"
+  },
+  {
+   "path": "core/logic/smn_lang.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "244deb31440f3de2a22d74c180d6c9e8055cd58ccd64d260a2b7a33b25d9d5e2"
+  },
+  {
+   "path": "core/logic/smn_maplists.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ef5adbae65b5193b190e4ca3fbcad874c0e02dc8c93e0844507aaae286e5192d"
+  },
+  {
+   "path": "core/logic/smn_menus.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "8bf75b9d31b5402b1b23f49a8f40e8c251c12e9ddd582fb5eb039456455a3c51"
+  },
+  {
+   "path": "core/logic/smn_players.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "081ff013d7e1387fc9d3c8ce7a5913ec75df4a41732971384cdd008ff6f1039f"
+  },
+  {
+   "path": "core/logic/smn_profiler.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "add7681d37e3b85b5eb55227aa5fa139180791521498280c68ecfa80672e1d87"
+  },
+  {
+   "path": "core/logic/smn_sorting.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "cd3131a2cd1fa15618bf1e5356df24e94b6aafdf0923aa404174271b7c186df2"
+  },
+  {
+   "path": "core/logic/smn_string.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "edb59edc5adff824d1e00cdf6635ba569c964064514452eed6b13bc82780c397"
+  },
+  {
+   "path": "core/logic/smn_textparse.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "a48d1ec652cc7d7aa8576a9c44a319d442af06b7ec03e02ff9606bf7f38c108f"
+  },
+  {
+   "path": "core/logic/smn_timers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "f9f6426203d7cd1375ca5db9bce37cd0c9ea77989af95feabd63dba054d49644"
+  },
+  {
+   "path": "core/logic/sprintf.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "843699fef927ff49cbf4a22376a0f4b6bb149019f9bd84768d12b37973ab4dc4"
+  },
+  {
+   "path": "core/logic/sprintf.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c833dc0bb02b883e2944d4c2e33c25ef088722299d286f009c069f04db83cfad"
+  },
+  {
+   "path": "core/logic/stringutil.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ff6b8d4c1399dd61ee56ed21c4781d04360a667079698a8b523cb3dd41089b6c"
+  },
+  {
+   "path": "core/logic/stringutil.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "1c245cf0d871c8394acab8f39bcef3bc6934133d224203321ce3dc35a26d6eb9"
+  },
+  {
+   "path": "core/logic_bridge.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "1289608fea05860b239c2f3078831d4509a8052f5ac4ab302ddab1f68c52dae7"
+  },
+  {
+   "path": "core/logic_bridge.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5ca4a080db94d751909a37826bff208133c996cfc199cc9b3b777d215e1b3cb0"
+  },
+  {
+   "path": "core/provider.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f450b6d88484e7855f2069443464631260b13b6f743796fe642e4f00cecc7192"
+  },
+  {
+   "path": "core/sm_autonatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3192997d75c923fcbac619a0a12f351bd2e30ccfdc52ed23c9f237e152df57b7"
+  },
+  {
+   "path": "core/sm_autonatives.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4f67b3b6d05d570a1d3fb050eb1809545ce399fdf684bb67a155efc912c28ae6"
+  },
+  {
+   "path": "core/sm_convar.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "d3c8d8daa6b54cfe21a5e75ab2abf70e3184dc59090c46690c87cf76f6692bd4"
+  },
+  {
+   "path": "core/sm_fastlink.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4caf668a1b81da3cd8bae50fab61f9a1268af4fa30a10a273323e0cddc986fd4"
+  },
+  {
+   "path": "core/sm_globals.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "646e06f0ed3705f413822f9c6cbd2632120af37fb679d963668c0c7b86988082"
+  },
+  {
+   "path": "core/sm_memtable.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ff27746ba664bfbf11addec9f2a0c512569d922c3c2bfe42f0c209b09f80327b"
+  },
+  {
+   "path": "core/sm_stringutil.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "58f1035944fe6babc44bcb49abcbd7b121cc5ad4b697cb524e8430520983b928"
+  },
+  {
+   "path": "core/sm_stringutil.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0d3a14e6dba14bb4ca1c72ff627dcd47dc4c5f4924ee07cd2e926ac15b58defb"
+  },
+  {
+   "path": "core/smn_bitbuffer.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "a33996d29c7b7bb553dbfb62bfc5a6e88d763ea648ae82e0063c2e7d053cbe2f"
+  },
+  {
+   "path": "core/smn_commandline.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "a4cd77b9a8ab374143df6aae1d9372a460e02ec5b448644d61b3b3bd57314645"
+  },
+  {
+   "path": "core/smn_console.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "16d4387ff0698a92c66da1df07f7d333598472a8e76eb7c32023557bee246f72"
+  },
+  {
+   "path": "core/smn_entities.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "7526885779f42201671ad5d439320f147fb6b171ff0289104f414663be0bc762"
+  },
+  {
+   "path": "core/smn_events.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ec8c31b525a36556c8524509f42378a582619b4d9e8adfbc0cb7c43689888ab4"
+  },
+  {
+   "path": "core/smn_halflife.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "60b850068c30905fd9dd142a70db606b3951953f68c1799c277e658e8fda746c"
+  },
+  {
+   "path": "core/smn_hudtext.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "aa5d9b89cdfefbf24eb0d9f020042bd109978abe9bc3996b80922851d4ff411e"
+  },
+  {
+   "path": "core/smn_keyvalues.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "2506cc0550b07740a3399e6491c000efe88d9a39cda3e918a4ea505120b28902"
+  },
+  {
+   "path": "core/smn_keyvalues.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c337bdedc2fbcf702a4b17094cd1983890195f8d8a522fc471892a622299d9d2"
+  },
+  {
+   "path": "core/smn_nextmap.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "92c4dba512a7db6e4b58833c88003e1ba64de6d6aa26be3a031a6de88acaa411"
+  },
+  {
+   "path": "core/smn_player.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "557a1894a5a6904bb73c6d1f5afade7a26046e6b9ed4f44569476c6ca2f3b874"
+  },
+  {
+   "path": "core/smn_protobuf.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "6fd493ac314fc8c8a61b771dfc9782dca62fa33747ebd0565fad32ea2272a0f5"
+  },
+  {
+   "path": "core/smn_usermsgs.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "797ef8ea7010cd6e667c9a716a31b1006d113da3c99e92e23f1dfd8d873bb9dd"
+  },
+  {
+   "path": "core/smn_usermsgs.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f7cd50e531ff7d72bf3c5d25169af5e74ec4c2322ac4b87dfd260b29672f7be6"
+  },
+  {
+   "path": "core/smn_vector.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "674ae4ed781387bba3bb5979b12665db56cbe2b66eb6447ef1de1d08e8f33695"
+  },
+  {
+   "path": "core/sourcemm_api.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "842aa2a490b75daace4828e74f3fb36ec6dcb8a96d0b994c3edfe86609622ae1"
+  },
+  {
+   "path": "core/sourcemm_api.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c7cc3ee5bf835aa5ecff0ddd4d25a7d7a1354dee38ed934c255778f8e0a3a6af"
+  },
+  {
+   "path": "core/sourcemod.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "0b969f7b2d496b9cafcdf6fb237eec9acada2fcced26cbeff4057fe2e2fec8aa"
+  },
+  {
+   "path": "core/sourcemod.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2eba583c9996b1d194880212a1df7a8bb1086daa676d42fdf720b7b752577f8c"
+  },
+  {
+   "path": "core/vprof_tool.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "15a8ba69f3cbb0e0025d50d707d8349839a697efb64196588c5e029d62a36508"
+  },
+  {
+   "path": "core/vprof_tool.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0b4543181d952e8af3c60576d85a83dcf641cae12d4447678ad7f474b3ff1f15"
+  },
+  {
+   "path": "loader/loader.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "5b9b71ffa371a2d45f6bc46541d92262da138cc6c526d33fc1f269f6dd17c062"
+  },
+  {
+   "path": "public/AutoHandleRooter.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "7c8f9a2c22e27d37d3d6417ae0e7850cb250968ec322160eeed3e0055e7bc0ad"
+  },
+  {
+   "path": "public/CDetour/detourhelpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "dd473cef17bef85f43bc30348006d244935a14c0327ae55e3799b4975c77d3ee"
+  },
+  {
+   "path": "public/CDetour/detours.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "2675d8c5db04ed7210a31f70089620ecb07a21e74826f7fb3236d0982323e99c"
+  },
+  {
+   "path": "public/CDetour/detours.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4160606dc7a02bef4425be0e742e77fb36884505ef3af1ba3f03642a89c65463"
+  },
+  {
+   "path": "public/IADTFactory.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "85989a6d656471011d2dd0d8e8947af76bb78a6770cb49f7c3d478bef64e91db"
+  },
+  {
+   "path": "public/IAdminSystem.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "4e60ecd21288b6ede4eca23b3b2d0ec0d74e1b5e54c58c0fe7f15414cfe7ae17"
+  },
+  {
+   "path": "public/ICellArray.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "bd0b61c9a0631d29d73d4a13b4528590b59f4638c50449a7b4a48b4a2b5f7c54"
+  },
+  {
+   "path": "public/IDBDriver.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "a732536dc2e245c396bd66cc84225b8205ee2c1a72374284d1ddd1fa21718449"
+  },
+  {
+   "path": "public/IExtensionSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "af49915a262cd2e12379c1717a0dcc718a56dafd18aa48cdc22cc079e5d5a53d"
+  },
+  {
+   "path": "public/IForwardSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "680654b65ef9ca5578ef0f89afdab0ffe4e77c4f571c08b723612fefc5d5595a"
+  },
+  {
+   "path": "public/IGameConfigs.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "a41a3d1b1f7dc02ca13f8c51af84ba342f84ace39cd815115f215eb028ffc225"
+  },
+  {
+   "path": "public/IGameHelpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "80f9b8cc5f9e4a933052e5bcef86bb6a6be16f55be55174b078ff446c748195b"
+  },
+  {
+   "path": "public/IHandleSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2b47e3b1129bc94c59ff6da37c347b4f0257c7e6eaf963613f1c5fc9d7b08e70"
+  },
+  {
+   "path": "public/ILibrarySys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c6ef2e3fca122709ad6b8906bc938a5cca76fc50fa354b34097a42c84d67a147"
+  },
+  {
+   "path": "public/IMemoryUtils.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f01b628ff84157a2b1c75e3d0c046392a6591183c906cd1241cddf070ffdd2a0"
+  },
+  {
+   "path": "public/IMenuManager.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "88526d2f917e8f9f45df16fbb4dddf98b1be3391dfbf9497217ad187dcc843e4"
+  },
+  {
+   "path": "public/IPlayerHelpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "1df39fdd5a91cd154a7220c77af63021c8929311ff6b1824d6d0f946e792eed8"
+  },
+  {
+   "path": "public/IPluginSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "62091aae3c561d6de17391c3d82c2c60fe9280378c7a10a87ed31541e5c6636a"
+  },
+  {
+   "path": "public/IRootConsoleMenu.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "fa318cd698b2a25012f5ffcbfec16c101fea1cc44ed1b23602777f224bcafe55"
+  },
+  {
+   "path": "public/IShareSys.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "bd4cf9a234c41c6eb028f45e8e968e8ffce40b9aeddaa435523f17274793f27d"
+  },
+  {
+   "path": "public/ISourceMod.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "77f746d6878a9167d29dc41184608aa65835f402c2e1dfd64d79fbead442b48d"
+  },
+  {
+   "path": "public/ITextParsers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "b1e533079cdca27af58a0ec3fb6cbb9669e111f23473ef32e9acdac059352368"
+  },
+  {
+   "path": "public/IThreader.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "8fd81f95cfd17b281558336abb2c65772dcc2637d767a93e75b072bab28ec1bb"
+  },
+  {
+   "path": "public/ITimerSystem.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "31c3392e0a90c6c7f7e2cb38e97bd31a06eed149da0e0fe1347ae6fc454a18ad"
+  },
+  {
+   "path": "public/ITranslator.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "5dae66581cba38facfad595d6b9ebb9ec2c3314461c01639b3c54e17e619ccb4"
+  },
+  {
+   "path": "public/IUserMessages.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "46f7c59741a8be1098d2d7a0a635548878616a1a35d2ecf74c64ed6ca67bb574"
+  },
+  {
+   "path": "public/ReentrantList.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f641ec2bd438c949adf7bd86d3e74f7dcd718cd0071d0bb6fc368ef979e399d4"
+  },
+  {
+   "path": "public/asm/asm.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "18b0caf49eba8ceafb3f7b908ab70a82e0695e349ef5c77e6fce073f7fabaf4c"
+  },
+  {
+   "path": "public/asm/asm.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "76c676c274dd23c01684dd5095ea1f80f45f8f9550881fdf52d33fc00e9282dd"
+  },
+  {
+   "path": "public/compat_wrappers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "effded1c3e70082e998ea819d0e5bba6346c5b39fa45e093449f1d1a8718ee1b"
+  },
+  {
+   "path": "public/jit/jit_helpers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ebc164bfc9cf4316ff886bd6ac54da55f848f249392b6e3794e30d692d2be38e"
+  },
+  {
+   "path": "public/jit/x86/x86_macros.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f2c3a21b6c7a3c51cdd774351023a1287516ada8c4a4067a548ed550e4032fe7"
+  },
+  {
+   "path": "public/libudis86/decode.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "f1980d68f26301f0ec97f52140fee0f7b1464d362bf340919e16465bafab652c"
+  },
+  {
+   "path": "public/libudis86/decode.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "bf851e6cb1c7fa5110c648a5c810a1a15f26c121016dbdaf3da633031012f9d1"
+  },
+  {
+   "path": "public/libudis86/extern.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2a7a3bbe4dc2380b5bace6d8f9fac3a441bd0e9b006099b8f35c5cdc99f4bea3"
+  },
+  {
+   "path": "public/libudis86/itab.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ed2029dca78d5b966008145aa5c251da112ee1d663b79747b714fcaefe59bda3"
+  },
+  {
+   "path": "public/libudis86/itab.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "bbf03d38014beeeb6138742d77cc80f747fab4b12aae7a94efae046179f465db"
+  },
+  {
+   "path": "public/libudis86/syn-att.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "d3a4aaf8abfd6b3e40e3bb53c5d740e766dfe7de3c055160daa13ce396794ed6"
+  },
+  {
+   "path": "public/libudis86/syn-intel.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "5d3ec4df44d19d74bbef9a8e214ef0573740fadd521cfe69bcb6cf43ce68a6fc"
+  },
+  {
+   "path": "public/libudis86/syn.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "6c56d57d196b665f6c7b1bf0e9a7302d2367ab9d9e4216388c370d29df082fee"
+  },
+  {
+   "path": "public/libudis86/syn.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "96e1416d8a72ac9b949bd83b629206abce79ca351c692c8270e09d126ffee019"
+  },
+  {
+   "path": "public/libudis86/types.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "b67764b03f9802f9f227e6672a998a323cd63459a5a594d41fc5296c9a91f419"
+  },
+  {
+   "path": "public/libudis86/udint.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2c6dfb4d74fd16c8a1c25909ef621095bf146e783799b377c8bf473caf29ebde"
+  },
+  {
+   "path": "public/libudis86/udis86.c",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "df87d89e2c7b0fad06f29754fa314d9be8fcdf709e52483bd1c373ef369203dc"
+  },
+  {
+   "path": "public/libudis86/udis86.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "7bb20dcac5f1b00313d4dc65f74894e93c40d4edf4e772606386d42a58fc759f"
+  },
+  {
+   "path": "public/metamod_wrappers.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "782076ce2a252aa55a7a17970b27a76b4a8a20f70bb275b72df2928a6950d292"
+  },
+  {
+   "path": "public/mms_sample_ext/sm_ext.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "ae03a1226d280d3eb350af1ffce86b838fe824513449e26ef3015104d4629eff"
+  },
+  {
+   "path": "public/mms_sample_ext/sm_ext.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "358752ac136c28352166035b217d51b42636bb925f682cad3e2c482ed16607be"
+  },
+  {
+   "path": "public/mms_sample_ext/sm_sdk_config.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "4375511fd69d4ad1ef8d5b4dcddd0e068652bf8dbd1f0d5ff8b8454d3280de7c"
+  },
+  {
+   "path": "public/mms_sample_ext/sm_sdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "c9cb5f4ba66fadf43ccdcb90c21bfd25e24c3f4e6755e9949d09f4e7d86be718"
+  },
+  {
+   "path": "public/mms_sample_ext/stub_mm.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3dfda189ed095063df191f34d9e3d3e813046a4be22058666d841fff7b1700f9"
+  },
+  {
+   "path": "public/mms_sample_ext/stub_mm.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "390879f5bd9a18200e476425302c3ac8610fcb62d3463e2f5256eb9124c3fd1c"
+  },
+  {
+   "path": "public/mms_sample_ext/stub_util.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "f83c61df2194c079a9827e03a38683cb257471e2e088d41fd9ae63ef374ce6d9"
+  },
+  {
+   "path": "public/mms_sample_ext/stub_util.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "fcbb18c0c1b4d1a27ba445af8898a72dad2c28542a45863dce7b596e9bed7c50"
+  },
+  {
+   "path": "public/sample_ext/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "271ece7eb1d780e2af8cb1c418b4a9f4bf3d55e5e1d224328d2069227079bcae"
+  },
+  {
+   "path": "public/sample_ext/extension.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3f20706e2808b974bb30846cb52f81d96a5fb76751acc2335d38204b71d0bd33"
+  },
+  {
+   "path": "public/sample_ext/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ca940a980f6f26c636a7949b4f3869cac8906aa43ea6259ed14c0ff26de146f5"
+  },
+  {
+   "path": "public/sample_ext_nosdk/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "271ece7eb1d780e2af8cb1c418b4a9f4bf3d55e5e1d224328d2069227079bcae"
+  },
+  {
+   "path": "public/sample_ext_nosdk/extension.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "3f20706e2808b974bb30846cb52f81d96a5fb76751acc2335d38204b71d0bd33"
+  },
+  {
+   "path": "public/sample_ext_nosdk/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ca940a980f6f26c636a7949b4f3869cac8906aa43ea6259ed14c0ff26de146f5"
+  },
+  {
+   "path": "public/sm_argbuffer.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "cabd51df9f6261c4f694d9a2282f3dca5605e864dbc6f312b542a5f606968d25"
+  },
+  {
+   "path": "public/sm_invalidparamhandler.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "952c5ab89ad507fb31400b99b8472bbe481c2b6ae5af59aa786e3f5dd9110ac3"
+  },
+  {
+   "path": "public/sm_memtable.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "ff27746ba664bfbf11addec9f2a0c512569d922c3c2bfe42f0c209b09f80327b"
+  },
+  {
+   "path": "public/sm_namehashset.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "0bb2ffc454a3b12898aebdef54e51a7e23c040954d92fd63e0da70dd79f4bfab"
+  },
+  {
+   "path": "public/sm_platform.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "1eefeadadb4f6055122fe6643a202b42a10ef60766071aa3269f9f86b251907c"
+  },
+  {
+   "path": "public/sm_queue.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "23199dba989ee482d40391ae1050b6098d38a9f5710e505122f6a69efe6d964c"
+  },
+  {
+   "path": "public/sm_stringhashmap.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "426817ce0316219fa29854a2c0cc4437a042e4985aea5fa9dd31509eb294284e"
+  },
+  {
+   "path": "public/sm_trie_tpl.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2c6e8339b262c88cb959ca889d81d6d130ef6b2694158d2f4b4e412144451af9"
+  },
+  {
+   "path": "public/smsdk_ext.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "65e47a43ecf14a93653badf5c470a1d8a7c7f25b8bb9b9e7dbee1388d73daafb"
+  },
+  {
+   "path": "public/smsdk_ext.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "7100fb30b2f4b0cc58fc19eee9aae9b5a5f1324211f6d0bdf8b4c72930e28534"
+  },
+  {
+   "path": "public/sourcemod_version.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "2befe7a54c23f82dbd79eaecb746bdf47a9c665f2397b18ef3af3e5bfadc77cd"
+  },
+  {
+   "path": "public/vtable_hook_helper.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "a2e1595ff4fd0211ecceef57b04de2feb766e96623f08162fe6b606ed05da51e"
+  },
+  {
+   "path": "versionlib/versionlib.cpp",
+   "kind": "C_CPP_SOURCE",
+   "sha256": "3fc3abea4d3e0a7e44a4d00d255f2a67a23a63b9e2d8d5824d6c5c9a9cd7402a"
+  },
+  {
+   "path": "versionlib/versionlib.h",
+   "kind": "C_CPP_HEADER",
+   "sha256": "f108a0dd723e7ff84eb7af241787f709b3199fc36fc99c9ad82b999000adff69"
+  }
+ ],
+ "excluded_files": [
+  {
+   "path": "extensions/bintools/CallMaker.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/CallMaker.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/CallWrapper.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/CallWrapper.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/HookWrapper.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/HookWrapper.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/jit_call.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/jit_call_x64.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/jit_compile.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/jit_hook.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/bintools/x64_macros.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/cookie.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/cookie.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/menus.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/menus.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/query.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/query.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/clientprefs/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/RegNatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/RegNatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/forwards.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/forwards.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/itemdef-hash.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/rulesfix.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/rulesfix.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/timeleft.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/timeleft.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/util_cstrike.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/cstrike/util_cstrike.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/10-at-a-time.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/anyauthput.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/cacertinmem.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/certinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/cookie_interface.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/curlgtk.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/curlx.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/debug.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/fileupload.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/fopen.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/ftpget.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/ftpgetresp.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/ftpupload.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/ftpuploadresume.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/getinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/getinmemory.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/ghiper.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/hiperfifo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/htmltidy.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/htmltitle.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/http-post.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/httpcustomheader.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/httpput.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/https.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multi-app.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multi-debugcallback.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multi-double.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multi-post.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multi-single.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/multithread.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/opensslthreadlock.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/persistant.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/post-callback.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/postit2.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/sampleconv.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/sendrecv.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/sepheaders.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/simple.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/simplepost.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/simplessl.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/synctime.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/docs/examples/threaded-ssl.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/curl.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/curlbuild.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/curlrules.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/curlver.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/easy.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/mprintf.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/multi.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/stdcheaders.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/typecheck-gcc.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/include/curl/types.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/amigaos.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/amigaos.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/arpa_telnet.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/base64.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-amigaos.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-mac.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-os400.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-riscos.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-sm-linux.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-sm-mac.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-symbian.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-tpf.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-win32.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/config-win32ce.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/connect.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/connect.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/content_encoding.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/content_encoding.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/cookie.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/cookie.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curl_addrinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curl_addrinfo.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curl_base64.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curl_ldap.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curl_md5.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/curlx.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/dict.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/dict.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/easy.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/easyif.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/escape.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/escape.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/file.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/file.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/formdata.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/formdata.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ftp.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ftp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/getenv.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/getinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/getinfo.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/gtls.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/gtls.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hash.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hash.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostares.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostasyn.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostip.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostip.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostip4.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostip6.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostsyn.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/hostthre.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_chunks.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_chunks.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_digest.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_digest.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_negotiate.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_negotiate.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_ntlm.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/http_ntlm.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/if2ip.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/if2ip.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/inet_ntop.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/inet_ntop.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/inet_pton.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/inet_pton.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/krb4.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/krb4.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/krb5.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ldap.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/llist.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/llist.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/md5.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/memdebug.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/memdebug.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/memory.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/mprintf.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/multi.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/multiif.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/netrc.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/netrc.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/nss.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/nssg.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/nwlib.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/nwos.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/parsedate.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/parsedate.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/progress.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/progress.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/qssl.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/qssl.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/rawstr.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/rawstr.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/security.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/select.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/select.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/sendf.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/sendf.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/setup-os400.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/setup.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/setup_once.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/share.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/share.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/sockaddr.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/socks.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/socks.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/speedcheck.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/speedcheck.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/splay.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/splay.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ssh.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ssh.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/sslgen.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/sslgen.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ssluse.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/ssluse.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strdup.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strdup.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strequal.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strequal.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strerror.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strerror.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strtok.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strtok.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strtoofft.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/strtoofft.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/telnet.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/telnet.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/tftp.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/tftp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/timeval.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/timeval.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/transfer.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/transfer.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/url.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/url.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/urldata.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/lib/version.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/OS400/ccsidcurl.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/OS400/ccsidcurl.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/OS400/os400sys.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/OS400/os400sys.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/vms/config-vms.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/vms/curlmsg.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/packages/vms/curlmsg_vms.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/config-amigaos.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/config-mac.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/config-riscos.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/config-win32.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/curlutil.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/curlutil.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/getpass.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/getpass.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/homedir.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/homedir.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/hugehelp.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/hugehelp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/macos/src/curl_GUSIConfig.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/macos/src/macos_main.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/main.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/setup.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/urlglob.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/urlglob.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/version.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/writeenv.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/writeenv.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/writeout.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/src/writeout.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/first.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib500.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib501.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib502.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib503.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib504.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib505.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib506.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib507.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib508.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib510.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib511.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib512.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib513.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib514.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib515.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib516.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib517.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib518.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib519.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib520.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib521.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib523.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib524.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib525.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib526.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib530.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib533.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib536.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib537.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib539.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib540.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib541.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib542.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib543.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib544.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib547.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib549.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib552.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib553.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib554.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib555.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib556.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib557.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib558.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/lib560.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/test.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/testutil.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/libtest/testutil.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/getpart.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/getpart.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/resolve.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/sockfilt.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/sws.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/testpart.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/tftp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/tftpd.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/util.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curl-src/tests/server/util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curlapi.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/curlapi.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/curl/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/convention.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86GccCdecl.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86GccThiscall.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86GccThiscall.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsCdecl.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsCdecl.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsFastcall.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsFastcall.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsStdcall.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsStdcall.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsThiscall.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/conventions/x86MsThiscall.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/hook.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/hook.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/manager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/manager.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/registers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/DynamicHooks/registers.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/dynhooks_sourcepawn.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/dynhooks_sourcepawn.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/listeners.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/listeners.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/natives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/sdk-hacks.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/signatures.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/signatures.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/util.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/vfunc_call.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/vhook.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/dhooks/vhook.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/data-pool.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/data-pool.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/geoip_util.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/geoip_util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/maxminddb-compat-util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/maxminddb.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/maxminddb.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/maxminddb_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/osdefs.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/geoip/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/msvc15hack.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyBasicResults.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyBasicResults.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyBoundResults.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyBoundResults.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyDatabase.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyDatabase.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyDriver.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyDriver.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyStatement.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/mysql/MyStatement.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/mysql/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_darwin/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_darwin64/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_linux/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_linux64/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_win/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/lib_win64/pg_config_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/libpq-fe.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgBasicResults.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgBasicResults.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgDatabase.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgDatabase.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgDriver.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgDriver.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgStatement.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/pgsql/PgStatement.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/postgres_ext.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/pgsql/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/CRegEx.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/CRegEx.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/pcre.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/posix_map.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/regex/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/macros.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/natives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/takedamageinfohack.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/takedamageinfohack.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/util.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdkhooks/util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/CellRecipientFilter.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/clientnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/clientnatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/gamerulesnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/gamerulesnatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/hooks.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/hooks.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/inputnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/output.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/output.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/outputnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/teamnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/teamnatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/tempents.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/tempents.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/tenatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/trnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/variant-t.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/variant-t.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vcallbuilder.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vcallbuilder.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vcaller.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vdecoder.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vdecoder.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vglobals.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vglobals.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vhelpers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vhelpers.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vnatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vnatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/voice.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vsound.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vsound.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sdktools/vstringtable.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqDatabase.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqDatabase.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqDriver.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqDriver.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqQuery.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqQuery.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqResults.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/driver/SqResults.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/sqlite-source/sqlite3.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/sqlite/sqlite-source/sqlite3.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/IStructAbstacter.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/Struct.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/Struct.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/StructHandle.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/StructHandle.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/StructManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/StructManager.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/structs/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/RegNatives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/RegNatives.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/conditions.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/conditions.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/criticals.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/criticals.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/gameplayrules.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/gameplayrules.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/holiday.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/holiday.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/natives.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/teleporter.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/teleporter.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/util.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/tf2/util.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/TopMenu.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/TopMenu.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/TopMenuManager.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/TopMenuManager.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/smn_topmenus.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/smn_topmenus.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/topmenus/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/MemoryDownloader.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/MemoryDownloader.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/Updater.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/Updater.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/extension.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/extension.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/md5.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/md5.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "extensions/updater/smsdk_config.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "public/extensions/IBinTools.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "public/extensions/ISDKHooks.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "public/extensions/ISDKTools.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "public/extensions/ITopMenus.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "public/extensions/IWebternet.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "extensions"
+  },
+  {
+   "path": "tools/crc32/main.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/entlumpparser/console_main.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/TextParsers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/TextParsers.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/main.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/main.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/md5.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/md5.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/sm_memtable.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gamedata_md5/sm_memtable.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/GameConfigs.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/GameConfigs.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/MemoryUtils.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/MemoryUtils.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/TextParsers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/TextParsers.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/gdc.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/gdc.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc-psyfork/sm_symtable.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/GameConfigs.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/GameConfigs.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/MemoryUtils.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/MemoryUtils.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/TextParsers.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/TextParsers.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/gdc.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/gdc.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/gdc/sm_symtable.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/dftables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_byte_order.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_chartables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_config.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_dfa_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_fullinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_get.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_globals.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_jit_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_maketables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_newline.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_ord2utf16.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_printint.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_refcount.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_string_utils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_study.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_tables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_ucd.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_utf16_utils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_valid_utf16.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_version.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre16_xclass.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_byte_order.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_chartables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_config.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_dfa_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_fullinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_get.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_globals.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_jit_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_maketables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_newline.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_ord2utf32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_printint.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_refcount.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_string_utils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_study.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_tables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_ucd.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_utf32_utils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_valid_utf32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_version.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre32_xclass.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_byte_order.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_config.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_dfa_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_exec.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_fullinfo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_get.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_globals.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_internal.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_jit_compile.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_jit_test.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_maketables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_newline.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_ord2utf8.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_printint.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_refcount.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_scanner.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_scanner.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_scanner_unittest.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_string_utils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_stringpiece.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_stringpiece_unittest.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_study.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_tables.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_ucd.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_valid_utf8.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_version.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcre_xclass.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcrecpp.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcrecpp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcrecpp_internal.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcrecpp_unittest.cc",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcredemo.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcregrep.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcreposix.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcreposix.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/pcretest.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitConfig.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitConfigInternal.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitExecAllocator.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitLir.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitLir.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeARM_Thumb2.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeARM_v5.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeMIPS_32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeMIPS_common.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativePPC_32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativePPC_64.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativePPC_common.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeSPARC_32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeSPARC_common.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeX86_32.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeX86_64.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitNativeX86_common.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/sljit/sljitUtils.c",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/pcre/ucp.h",
+   "kind": "C_CPP_HEADER",
+   "reason": "tools"
+  },
+  {
+   "path": "tools/vtable_scanner/main.cpp",
+   "kind": "C_CPP_SOURCE",
+   "reason": "tools"
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "target": "regr-node-sql-parser",
+ "language": "JAVASCRIPT",
+ "commit": "c1be96494794abadb26f3d5d99ddccb942de45a4",
+ "commit_date": "2026-07-19T09:42:17+08:00",
+ "file_set_sha256": "f2228959fa9e2462260cf5f6b59152e7102e889ec6fc98c2042a8c7dd094f242",
+ "executable_source_files": 52,
+ "started_utc": "2026-09-02T21:43:44Z",
+ "cpg_files_attempts": 1,
+ "cpg": {
+  "files": 51,
+  "methods": 636,
+  "calls": 10625,
+  "literals": 1954
+ },
+ "expected_files": 52,
+ "covered_files": 51,
+ "cpg_files_not_in_manifest": 0,
+ "parse_coverage": 0.9808,
+ "coverage_threshold": 0.8,
+ "parser_producer_attempts": 1,
+ "parser_layer": {
+  "records": 10,
+  "candidates": 0
+ },
+ "reachability_attempts": 1,
+ "reachability_line": "JS_REACHABILITY_FACTS ok: delayed_sources=5 transforms=4 consumers=3 parser_anchors=850 chain_edges=14 timing=0",
+ "anchor_rows_total": 850,
+ "anchor_rows_kept": 7,
+ "status": "ANALYZED",
+ "n_records": 10,
+ "classifications": {
+  "ABSTAINED": 1,
+  "NEGATIVE": 9
+ },
+ "elapsed_s": 78.7
+}

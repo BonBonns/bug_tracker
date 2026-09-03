@@ -1,0 +1,34 @@
+{
+ "target": "mozilla-firefox",
+ "language": "C_CPP",
+ "commit": "8a99ef927ea16827f2089e2bdf6a1188ddf645e7",
+ "commit_date": "2026-09-01T21:50:16+00:00",
+ "file_set_sha256": "8d44d240524adfddd93468da29a8d358928a99488b9c1868d35a79a49a3d0d09",
+ "executable_source_files": 665,
+ "started_utc": "2026-09-02T11:44:29Z",
+ "cpg_files_attempts": 1,
+ "cpg": {
+  "files": 1531,
+  "methods": 62011,
+  "calls": 446144,
+  "literals": 68701
+ },
+ "expected_files": 1528,
+ "covered_files": 1528,
+ "cpg_files_not_in_manifest": 2,
+ "parse_coverage": 1.0,
+ "coverage_threshold": 0.8,
+ "parser_producer_attempts": 1,
+ "parser_layer": {
+  "records": 26,
+  "candidates": 0
+ },
+ "reachability_attempts": 1,
+ "reachability_line": "CPP_REACHABILITY_FACTS ok: delayed_sources=4 transforms=5 consumers=5 parser_anchors=31863 chain_edges=2 timing=0",
+ "status": "ANALYZED",
+ "n_records": 26,
+ "classifications": {
+  "NEGATIVE": 26
+ },
+ "elapsed_s": 641.5
+}

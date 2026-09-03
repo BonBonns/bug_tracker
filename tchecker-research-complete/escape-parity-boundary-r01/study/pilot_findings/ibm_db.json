@@ -1,0 +1,249 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:<lambda>0:copyAndExtractCliDriver:<lambda>1",
+   "method_node_id": "107374182404",
+   "line": "391",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313227",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/installer/driverInstall.js",
+      "method": "package/installer/driverInstall.js::program:<lambda>0:copyAndExtractCliDriver:<lambda>1",
+      "line": "391",
+      "node_id": "30064771110",
+      "regex_node_id": "90194313227",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313228",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:<lambda>0:copyAndExtractCliDriver:compress",
+   "method_node_id": "107374182406",
+   "line": "409",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313234",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/installer/driverInstall.js",
+      "method": "package/installer/driverInstall.js::program:<lambda>0:copyAndExtractCliDriver:compress",
+      "line": "409",
+      "node_id": "30064771127",
+      "regex_node_id": "90194313234",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313235",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:<lambda>0:buildBinary:<lambda>3:<lambda>4",
+   "method_node_id": "107374182409",
+   "line": "508",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313248",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "kernel32\\.lib[;\\s]*user32\\.lib[;\\s]*gdi32\\.lib[;\\s]*winspool\\.lib[;\\s]*comdlg32\\.lib[;\\s]*advapi32\\.lib[;\\s]*shell32\\.lib[;\\s]*ole32\\.lib[;\\s]*oleaut32\\.lib[;\\s]*uuid\\.lib[;\\s]*odbc32\\.lib[;\\s]*DelayImp\\.lib[;\\s]*",
+   "flags": "gi",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/installer/driverInstall.js",
+      "method": "package/installer/driverInstall.js::program:<lambda>0:buildBinary:<lambda>3:<lambda>4",
+      "line": "509",
+      "node_id": "30064771167",
+      "regex_node_id": "90194313248",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313249",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:<lambda>0:buildBinary:<lambda>3",
+   "method_node_id": "107374182410",
+   "line": "445",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313259",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "MSBuild.exe",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:install_node_ibm_db",
+   "method_node_id": "107374182407",
+   "line": "174",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313468",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/installer/driverInstall.js",
+      "method": "package/installer/driverInstall.js::program:install_node_ibm_db",
+      "line": "174",
+      "node_id": "30064771773",
+      "regex_node_id": "90194313468",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313469",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/installer/driverInstall.js",
+   "package": "package",
+   "method": "package/installer/driverInstall.js::program:install_node_ibm_db",
+   "method_node_id": "107374182407",
+   "line": "244",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313500",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.h$",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

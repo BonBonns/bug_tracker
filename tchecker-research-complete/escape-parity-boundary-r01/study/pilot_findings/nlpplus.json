@@ -1,0 +1,562 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/lib/cloud.js",
+   "package": "package",
+   "method": "package/lib/cloud.js::program:cloudPlatformKey",
+   "method_node_id": "107374182403",
+   "line": "74",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313233",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\"",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:cloudPlatformKey",
+      "line": "74",
+      "node_id": "30064771107",
+      "regex_node_id": "90194313233",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313234",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:cloudPlatformKey",
+      "line": "71",
+      "node_id": "30064771094",
+      "api_identity": "node:fs.readFileSync",
+      "module_identity": "node:fs",
+      "import_node_id": "73014444077",
+      "resolution": "RESOLVED_IMPORT",
+      "source_kind": "STORED_FILE_READ"
+     }
+    ],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/cloud.js",
+   "package": "package",
+   "method": "package/lib/cloud.js::program:pollJob",
+   "method_node_id": "107374182409",
+   "line": "172",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313273",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:pollJob",
+      "line": "172",
+      "node_id": "30064771294",
+      "regex_node_id": "90194313273",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313274",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064771342"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:pollJob",
+      "line": "186",
+      "node_id": "30064771327",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/cloud.js",
+   "package": "package",
+   "method": "package/lib/cloud.js::program:cloudCompile",
+   "method_node_id": "107374182412",
+   "line": "314",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313346",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\/+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:cloudCompile",
+      "line": "314",
+      "node_id": "30064771571",
+      "regex_node_id": "90194313346",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313347",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064771342"
+    ],
+    "consumers": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:cloudCompile",
+      "line": "321",
+      "node_id": "30064771583",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/lib/cloud.js",
+      "method": "package/lib/cloud.js::program:pollJob",
+      "line": "186",
+      "node_id": "30064771327",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script.ts::program:genAllFileStrings",
+   "method_node_id": "107374182452",
+   "line": "22",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313507",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\r?\\n",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:listZipFiles",
+   "method_node_id": "107374182458",
+   "line": "21",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313549",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\\\",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:listZipFiles",
+      "line": "21",
+      "node_id": "30064772459",
+      "regex_node_id": "90194313549",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313550",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:parseArgs",
+   "method_node_id": "107374182465",
+   "line": "77",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313579",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\/\\\\]+$",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:parseArgs",
+      "line": "77",
+      "node_id": "30064772546",
+      "regex_node_id": "90194313579",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313580",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "96",
+      "node_id": "30064772612",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "167",
+      "node_id": "30064772730",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "178",
+      "node_id": "30064772743",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "135",
+      "node_id": "30064772673",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "172",
+      "node_id": "30064772739",
+      "consumer_identity": "console.warn",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "164",
+      "node_id": "30064772725",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+   "method_node_id": "107374182467",
+   "line": "127",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313601",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\r?\\n",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+   "method_node_id": "107374182467",
+   "line": "130",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313602",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^ports\\/([^\\/]+)",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+   "method_node_id": "107374182467",
+   "line": "148",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313610",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[a-f0-9]{64}$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+   "package": "package",
+   "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+   "method_node_id": "107374182467",
+   "line": "161",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313616",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\/\\\\]+$",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "161",
+      "node_id": "30064772717",
+      "regex_node_id": "90194313616",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313617",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "167",
+      "node_id": "30064772730",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "172",
+      "node_id": "30064772739",
+      "consumer_identity": "console.warn",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "178",
+      "node_id": "30064772743",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts",
+      "method": "package/nlp-engine/vcpkg/scripts/azure-pipelines/owners-db/file_script_from_cache.ts::program:main",
+      "line": "164",
+      "node_id": "30064772725",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/stage-prebuild.js",
+   "package": "package",
+   "method": "package/scripts/stage-prebuild.js::program:<lambda>1",
+   "method_node_id": "107374182691",
+   "line": "41",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194315154",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.(dll)$",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

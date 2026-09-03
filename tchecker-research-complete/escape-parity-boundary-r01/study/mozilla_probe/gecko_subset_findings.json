@@ -1,0 +1,366 @@
+{
+  "schema": "escape-parity-boundary/chain-0.1",
+  "language": "C_CPP",
+  "frontend": "c2cpg",
+  "property": "quoted-string escape-run parity at the quote boundary",
+  "note": "Parser-only layer. Classifies whether a quote-boundary rule can establish the parity of the complete consecutive escape run. Site discovery is structural, from CPG node identities; regexes are never found by searching source text. Regex patterns are parsed by the dialect adapter matching where they run -- ECMAScript for JavaScript regex literals and for std::regex, whose default grammar is ECMAScript. Delayed-source/transform/consumer reachability is a separate layer and is not included here. No impact, severity or exploitability claim is made; reportable is false throughout.",
+  "classification_vocabulary": [
+    "ESCAPE_PARITY_PARSER_CANDIDATE",
+    "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+  ],
+  "findings": [
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "dom/base/MimeType.cpp",
+      "unit": "MimeType.cpp",
+      "method": "TMimeType.Parse:RefPtr(nsTSubstring&)",
+      "method_node_id": "107374184980",
+      "line": "150",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064815446",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "30064815447",
+      "char_access_kind": "ACCESSED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "dom/base/MimeType.cpp",
+      "unit": "MimeType.cpp",
+      "method": "TMimeType.Parse:RefPtr(nsTSubstring&)",
+      "method_node_id": "107374184980",
+      "line": "157",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064815452",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "30064815453",
+      "char_access_kind": "ACCESSED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "dom/base/MimeType.cpp",
+      "unit": "MimeType.cpp",
+      "method": "TMimeType.SplitMimetype:nsTArray(nsTSubstring&)",
+      "method_node_id": "107374184982",
+      "line": "256",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064815545",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "68719514196",
+      "char_access_kind": "EXTRACTED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "single_position_checks": [
+        {
+          "check_node_id": "30064815546",
+          "quote_cmp_node_id": "30064815545",
+          "escape_cmp_node_id": "30064815548",
+          "index_expr_node_id": "30064815549",
+          "index_offset": "1",
+          "base_expr": "aMimeType",
+          "index_var": "i",
+          "line": "256"
+        }
+      ],
+      "boundary_rule": "SINGLE_POSITION_INDEX_CHECK",
+      "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NO_DELAYED_SOURCE_REACHES_PARSER",
+          "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+        ],
+        "parser_calls": [
+          {
+            "call_node_id": "30064815588",
+            "line": "285",
+            "anchor_kind": "PARSER_METHOD"
+          }
+        ],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "dom/base/MimeType.cpp",
+      "unit": "MimeType.cpp",
+      "method": "TMimeType.GetParameterValue:bool(nsTSubstring&,nsTSubstring&,bool,bool)<const>",
+      "method_node_id": "107374184988",
+      "line": "378",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064815668",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "30064815669",
+      "char_access_kind": "ACCESSED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "dom/base/nsContentUtils.cpp",
+      "unit": "nsContentUtils.cpp",
+      "method": "nsContentUtils.IsCorsUnsafeRequestHeaderValue:bool(nsACString&)",
+      "method_node_id": "107374186843",
+      "line": "8551",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064847164",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "30064847165",
+      "char_access_kind": "ACCESSED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "parser/htmlparser/nsParser.cpp",
+      "unit": "nsParser.cpp",
+      "method": "ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)",
+      "method_node_id": "107374190451",
+      "line": "871",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064913829",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "68719601880",
+      "char_access_kind": "EXTRACTED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "parser/htmlparser/nsParser.cpp",
+      "unit": "nsParser.cpp",
+      "method": "ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)",
+      "method_node_id": "107374190451",
+      "line": "871",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064913830",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "68719601881",
+      "char_access_kind": "EXTRACTED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "parser/htmlparser/nsParser.cpp",
+      "unit": "nsParser.cpp",
+      "method": "ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)",
+      "method_node_id": "107374190451",
+      "line": "896",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064913855",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "68719601902",
+      "char_access_kind": "EXTRACTED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    },
+    {
+      "language": "C_CPP",
+      "frontend": "c2cpg",
+      "file": "parser/htmlparser/nsParser.cpp",
+      "unit": "nsParser.cpp",
+      "method": "ExtractCharsetFromXmlDeclaration:bool(unsigned char*,int32_t,nsCString&)",
+      "method_node_id": "107374190451",
+      "line": "896",
+      "site_kind": "CHARACTER_SCANNER",
+      "site_node_id": "30064913856",
+      "escape_char": "\\",
+      "reportable": false,
+      "compared_expr_node_id": "68719601903",
+      "char_access_kind": "EXTRACTED_CHAR",
+      "pattern_resolution": "N/A",
+      "pattern": "",
+      "flags": "",
+      "regex_dialect": null,
+      "evidence_role": "CORPUS_ANALYSIS",
+      "boundary_rule": "NO_ESCAPE_AWARENESS",
+      "classification": "NEGATIVE",
+      "negative_reason": "NO_ESCAPE_AWARENESS",
+      "chain": {
+        "status": "NOT_ESTABLISHED",
+        "reasons": [
+          "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+        ],
+        "parser_calls": [],
+        "delayed_sources": [],
+        "transforms": [],
+        "consumers": [],
+        "logging_only_consumers": []
+      },
+      "execution_timing_evidence": []
+    }
+  ],
+  "chain_note": "The reachability layer promotes a candidate only when a delayed source reaches the parser AND the parser's result reaches a structured-data interpreter or database import routine, by real engine-computed dataflow, with every identity resolved and unambiguous. Execution timing is evidence only and never changes a verdict. Where the chain cannot be proven the site stays a candidate and the chain records why -- the layer under-reports rather than over-reports.",
+  "unresolved_source_identities": [
+    {
+      "node_id": "30064827593",
+      "api_identity": "read",
+      "resolution": "AMBIGUOUS_LOCAL_DEFINITION",
+      "source_kind": "STORED_FILE_READ",
+      "file": "dom/base/StructuredCloneHolder.cpp",
+      "line": "306"
+    },
+    {
+      "node_id": "30064914673",
+      "api_identity": "read",
+      "resolution": "AMBIGUOUS_LOCAL_DEFINITION",
+      "source_kind": "STORED_FILE_READ",
+      "file": "parser/htmlparser/nsScannerString.cpp",
+      "line": "333"
+    }
+  ],
+  "unresolved_consumer_identities": []
+}

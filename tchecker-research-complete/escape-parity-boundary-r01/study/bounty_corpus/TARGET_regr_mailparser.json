@@ -1,0 +1,215 @@
+{
+ "target": "regr-mailparser",
+ "frozen_at_utc": "2026-09-02T09:48:29Z",
+ "repo_remote": "https://github.com/nodemailer/mailparser",
+ "commit": "c5390ac79629f614a4a22c566c60d63f966a1dd8",
+ "commit_date": "2026-09-01T21:51:24+03:00",
+ "checkout_mode": "full",
+ "sparse_paths": [],
+ "excluded_dir_names": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "crashtests",
+  "dist",
+  "docs",
+  "examples",
+  "expat",
+  "gtest",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "player",
+  "reftests",
+  "test",
+  "tests",
+  "third_party",
+  "vendor"
+ ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "dist",
+  "docs",
+  "examples",
+  "player"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "JAVASCRIPT": 5
+ },
+ "excluded_file_count": 24,
+ "analysed_file_count": 5,
+ "file_set_sha256": "a175f96249f5d64bfd59994dcbf1d5fcab304507888d3b50200323aed8cd73db",
+ "files": [
+  {
+   "path": "eslint.config.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "0ac8c7b0912c1673957e3d182654a15a8e9b8c30f2e9c670dcba038d1d4fab65"
+  },
+  {
+   "path": "index.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "c620d3a5b7fb30721a14c97ae5415219c9f1fb9f74d4498ae698ce505df6adb1"
+  },
+  {
+   "path": "lib/mail-parser.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "52e39a51ea0089ddff319cb15d3d949fb4dbc294f294c387ade4febd988598c2"
+  },
+  {
+   "path": "lib/simple-parser.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "7b2cff80bda74ea17c854a169fd95b1c259f7e7fab80febe50f396cacba4dc25"
+  },
+  {
+   "path": "lib/stream-hash.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "457560883b186821d43519ff1db76dafa868bea51e8196bbc636e2143f35450c"
+  }
+ ],
+ "excluded_files": [
+  {
+   "path": ".ncurc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": ".prettierrc.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "Gruntfile.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "bench/parse.js",
+   "kind": "JAVASCRIPT",
+   "reason": "bench"
+  },
+  {
+   "path": "bench/passthrough.js",
+   "kind": "JAVASCRIPT",
+   "reason": "bench"
+  },
+  {
+   "path": "examples/emailtojson.js",
+   "kind": "JAVASCRIPT",
+   "reason": "examples"
+  },
+  {
+   "path": "examples/pipe.js",
+   "kind": "JAVASCRIPT",
+   "reason": "examples"
+  },
+  {
+   "path": "examples/simple-async.js",
+   "kind": "JAVASCRIPT",
+   "reason": "examples"
+  },
+  {
+   "path": "examples/simple-options.js",
+   "kind": "JAVASCRIPT",
+   "reason": "examples"
+  },
+  {
+   "path": "examples/simple.js",
+   "kind": "JAVASCRIPT",
+   "reason": "examples"
+  },
+  {
+   "path": "test/address-security-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/cpanel-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/delivery-status-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/flowed-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/issue-221-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/issue-272-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/issue-337-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/issue-385-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/issue-412-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/linkify-dos-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/long-references-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/mail-parser-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/rfc822-headers-only-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/simple-parser-test.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  }
+ ]
+}

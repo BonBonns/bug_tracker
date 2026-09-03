@@ -1,0 +1,14 @@
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":1,"parity":"odd","recovered":["abc\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":2,"parity":"even","recovered":["abc\\\\', "],"matches_parity_rule":false}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":3,"parity":"odd","recovered":["abc\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":4,"parity":"even","recovered":["abc\\\\\\\\', "],"matches_parity_rule":false}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_faulty","dialect":"PCRE","engine":"php-pcre","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\', "],"matches_parity_rule":false}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":0,"parity":"even","recovered":["abc","next"],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":1,"parity":"odd","recovered":["abc\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":2,"parity":"even","recovered":["abc\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":3,"parity":"odd","recovered":["abc\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":4,"parity":"even","recovered":["abc\\\\\\\\","next"],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":5,"parity":"odd","recovered":["abc\\\\\\\\\\', "],"matches_parity_rule":true}
+{"rule_id":"pcre_historical_corrected","dialect":"PCRE","engine":"php-pcre","run_length":6,"parity":"even","recovered":["abc\\\\\\\\\\\\","next"],"matches_parity_rule":true}

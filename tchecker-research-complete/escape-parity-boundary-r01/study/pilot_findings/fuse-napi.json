@@ -1,0 +1,675 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/index.js",
+   "package": "package",
+   "method": "package/index.js::program:formatHelperError",
+   "method_node_id": "107374182423",
+   "line": "1908",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313380",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/index.js",
+      "method": "package/index.js::program:formatHelperError",
+      "line": "1908",
+      "node_id": "30064771648",
+      "regex_node_id": "90194313380",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313381",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064771553"
+    ],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.js",
+   "package": "package",
+   "method": "package/index.js::program:mountString",
+   "method_node_id": "107374182433",
+   "line": "2055",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313487",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[\\0,\\\\\\r\\n]",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/index.js",
+   "package": "package",
+   "method": "package/index.js::program:Fuse:_fuseOptions",
+   "method_node_id": "107374182464",
+   "line": "442",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313744",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\*|(?:^|,)fuse-(?:bindings|napi)(?:,|$)",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/environment.js",
+   "package": "package",
+   "method": "package/lib/environment.js::program:checkLinux",
+   "method_node_id": "107374182643",
+   "line": "70",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314356",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\s*user_allow_other(?:\\s*(?:#.*)?)?$",
+   "flags": "m",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/environment.js",
+   "package": "package",
+   "method": "package/lib/environment.js::program:parseVersion",
+   "method_node_id": "107374182647",
+   "line": "182",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314415",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(\\d+)\\.(\\d+)\\.(\\d+)(?:[.-]|$)",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/environment.js",
+   "package": "package",
+   "method": "package/lib/environment.js::program:firstLine",
+   "method_node_id": "107374182653",
+   "line": "221",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314428",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\r?\\n",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/fuse3-options.js",
+   "package": "package",
+   "method": "package/lib/fuse3-options.js::program:validateModuleList:<lambda>0",
+   "method_node_id": "107374182656",
+   "line": "112",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314520",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/lib/macfuse.js",
+   "package": "package",
+   "method": "package/lib/macfuse.js::program:wrapMacFuseLoadError",
+   "method_node_id": "107374182662",
+   "line": "5",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314532",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "(?:macfuse|libfuse3(?:\\.\\d+)*\\.dylib)",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/fuse-config.js",
+   "package": "package",
+   "method": "package/scripts/fuse-config.js::program:discover:<lambda>0",
+   "method_node_id": "107374182668",
+   "line": "48",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314570",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^-I",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/fuse-config.js",
+      "method": "package/scripts/fuse-config.js::program:discover:<lambda>0",
+      "line": "48",
+      "node_id": "30064777087",
+      "regex_node_id": "90194314570",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314571",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [
+     {
+      "file": "package/scripts/fuse-config.js",
+      "method": "package/scripts/fuse-config.js::program",
+      "line": "24",
+      "node_id": "30064777288",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/fuse-config.js",
+      "method": "package/scripts/fuse-config.js::program",
+      "line": "18",
+      "node_id": "30064777279",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/fuse-config.js",
+      "method": "package/scripts/fuse-config.js::program",
+      "line": "15",
+      "node_id": "30064777273",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/fuse-config.js",
+   "package": "package",
+   "method": "package/scripts/fuse-config.js::program:words",
+   "method_node_id": "107374182672",
+   "line": "93",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314609",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/fuse-config.js",
+   "package": "package",
+   "method": "package/scripts/fuse-config.js::program:isSupportedVersion",
+   "method_node_id": "107374182673",
+   "line": "97",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314610",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(\\d+)\\.(\\d+)\\.(\\d+)(?:[.-].*)?$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program:isValidVersion:<lambda>0",
+   "method_node_id": "107374182676",
+   "line": "102",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314634",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program:isValidVersion:<lambda>0",
+   "method_node_id": "107374182676",
+   "line": "102",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314635",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^0\\d+",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program:isValidVersion",
+   "method_node_id": "107374182677",
+   "line": "100",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314638",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program:<lambda>1",
+   "method_node_id": "107374182680",
+   "line": "66",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314657",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.node$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:<lambda>1",
+      "line": "66",
+      "node_id": "30064777368",
+      "regex_node_id": "90194314657",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314658",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064777420",
+     "30064777413",
+     "30064777449"
+    ],
+    "consumers": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:readJson",
+      "line": "92",
+      "node_id": "30064777300",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:fail",
+      "line": "116",
+      "node_id": "30064777361",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program:<lambda>2",
+   "method_node_id": "107374182681",
+   "line": "70",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314659",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.node$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:<lambda>2",
+      "line": "70",
+      "node_id": "30064777370",
+      "regex_node_id": "90194314659",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314660",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [
+     "30064777420",
+     "30064777413",
+     "30064777449"
+    ],
+    "consumers": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:readJson",
+      "line": "92",
+      "node_id": "30064777300",
+      "consumer_identity": "JSON.parse",
+      "kind": "STRUCTURED_DATA_INTERPRETER",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "logging_only_consumers": [
+     {
+      "file": "package/scripts/verify-release.js",
+      "method": "package/scripts/verify-release.js::program:fail",
+      "line": "116",
+      "node_id": "30064777361",
+      "consumer_identity": "console.error",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "ABSTAINED",
+    "reasons": [
+     "AMBIGUOUS_CONSUMER_LINKAGE",
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program",
+   "method_node_id": "107374182675",
+   "line": "33",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314687",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "not yet published to npm",
+   "flags": "i",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-release.js",
+   "package": "package",
+   "method": "package/scripts/verify-release.js::program",
+   "method_node_id": "107374182675",
+   "line": "48",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314698",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "(?:^|\\n)###\\s|(?:^|\\n)-\\s",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  }
+ ]
+}

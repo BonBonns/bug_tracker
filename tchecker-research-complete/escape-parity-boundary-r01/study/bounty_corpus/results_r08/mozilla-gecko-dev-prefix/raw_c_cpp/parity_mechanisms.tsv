@@ -1,0 +1,7 @@
+netwerk/dns/DNSPacket.cpp	mozilla.net.DNSPacket.ParseSvcParam:nsresult(unsigned int,uint16_t,mozilla.net.SvcFieldValue&,uint16_t,unsigned char*)	107374196557	64	30065004389	MODULO_TWO
+security/manager/ssl/ContentSignatureVerifier.cpp	VerifyContentSignatureInternal:nsresult(nsACString&,nsACString&,nsACString&,nsACString&,AppTrustedRoot,nsACString&,nsACString&,uint32_t&)	107374201742	357	30065107355	MODULO_TWO
+security/manager/ssl/nsNSSComponent.cpp	ConvertBetweenUCS2andASCII:PRBool(PRBool,unsigned char*,unsigned int,unsigned char*,unsigned int,unsigned int*,PRBool)	107374202443	2219	30065120839	MODULO_TWO
+netwerk/base/nsStandardURL.h	mozilla.net.URLSegmentNumber.CalculateParity:bool()<const>	107374210358	103	30065176885	MODULO_TWO
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	nsMIMEHeaderParamImpl.DoParameterInternal:nsresult(nsACString&,char*,nsMIMEHeaderParamImpl.ParamDecoding,char**,char**,char**)	107374197164	547	30065017436	ESCAPE_RUN_COUNT_LOOP
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	internalDecodeParameter:nsresult(nsACString&,nsACString&,nsACString&,bool,bool,nsACString&)	107374197170	948	30065017789	ESCAPE_RUN_COUNT_LOOP
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	internalDecodeParameter:nsresult(nsACString&,nsACString&,nsACString&,bool,bool,nsACString&)	107374197170	952	30065017805	ESCAPE_RUN_COUNT_LOOP

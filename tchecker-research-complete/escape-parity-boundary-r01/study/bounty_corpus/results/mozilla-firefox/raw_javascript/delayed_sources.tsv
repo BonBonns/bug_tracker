@@ -1,0 +1,10 @@
+eslint.config.mjs	eslint.config.mjs::program:readFile	27	30064778128	fs.readFileSync	RESOLVED_IMPORT	STORED_FILE_READ
+netwerk/base/EssentialDomainsRemoteSettings.sys.mjs	netwerk/base/EssentialDomainsRemoteSettings.sys.mjs::program:EssentialDomainsRemoteSettings:#getFallbackDomains	98	30064781350	(_tmp_8 = this.get	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/base/SimpleURIUnknownSchemesRemoteObserver.sys.mjs	netwerk/base/SimpleURIUnknownSchemesRemoteObserver.sys.mjs::program:SimpleURIUnknownSchemesRemoteObserver:#getBypassListSettings	103	30064781829	(_tmp_7 = this.get	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/base/ascii_pac_utils.js	netwerk/base/ascii_pac_utils.js::program:isValidIpAddress	19	30064781875	(_tmp_0 = /^(\d{1,3})\.exec	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/cookie/ThirdPartyCookieBlockingExceptionListService.sys.mjs	netwerk/cookie/ThirdPartyCookieBlockingExceptionListService.sys.mjs::program:ThirdPartyCookieBlockingExceptionListService:importAllExceptions	172	30064782600	(_tmp_27 = this.get	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/protocol/http/HPKEConfigManager.sys.mjs	netwerk/protocol/http/HPKEConfigManager.sys.mjs::program:HPKEConfigManager:#getInternal	49	30064782750	knownConfigs.get	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/protocol/http/HPKEConfigManager.sys.mjs	netwerk/protocol/http/HPKEConfigManager.sys.mjs::program:HPKEConfigManagerParent:receiveMessage	79	30064782800	HPKEConfigManager.get	UNRESOLVED_SOURCE_IDENTITY	
+netwerk/protocol/http/ObliviousHTTP.sys.mjs	netwerk/protocol/http/ObliviousHTTP.sys.mjs::program:ObliviousHTTP:getOHTTPConfig	83	30064783263	(_tmp_8 = lazy.get	UNRESOLVED_SOURCE_IDENTITY	
+security/manager/ssl/RemoteSecuritySettings.sys.mjs	security/manager/ssl/RemoteSecuritySettings.sys.mjs::program:isFilterOnDisk	544	30064784489	IOUtils.read	UNRESOLVED_SOURCE_IDENTITY	
+security/manager/ssl/RemoteSecuritySettings.sys.mjs	security/manager/ssl/RemoteSecuritySettings.sys.mjs::program:CRLiteFilters:readOrDownloadFilter	582	30064785099	IOUtils.read	UNRESOLVED_SOURCE_IDENTITY	

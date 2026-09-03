@@ -1,0 +1,782 @@
+{
+ "schema": "escape-parity-boundary/chain-0.1",
+ "language": "C_CPP",
+ "frontend": "c2cpg",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Parser-only layer. Classifies whether a quote-boundary rule can establish the parity of the complete consecutive escape run. Site discovery is structural, from CPG node identities; regexes are never found by searching source text. Regex patterns are parsed by the dialect adapter matching where they run -- ECMAScript for JavaScript regex literals and for std::regex, whose default grammar is ECMAScript. Delayed-source/transform/consumer reachability is a separate layer and is not included here. No impact, severity or exploitability claim is made; reportable is false throughout.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.SetChatTrigger:void(ChatTriggers.ChatTriggerType,char*)",
+   "method_node_id": "107374182403",
+   "line": "75",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771117",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "68719476762",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.SetChatTrigger:void(ChatTriggers.ChatTriggerType,char*)",
+   "method_node_id": "107374182403",
+   "line": "75",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771118",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "68719476763",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.OnSayCommand_Pre:bool(int,SourceMod.ICommandArgs*)",
+   "method_node_id": "107374182411",
+   "line": "213",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771241",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064771242",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.OnSayCommand_Pre:bool(int,SourceMod.ICommandArgs*)",
+   "method_node_id": "107374182411",
+   "line": "213",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771243",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064771244",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.OnSayCommand_Pre:bool(int,SourceMod.ICommandArgs*)",
+   "method_node_id": "107374182411",
+   "line": "237",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771259",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064771260",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/ChatTriggers.cpp",
+   "unit": "ChatTriggers.cpp",
+   "method": "ChatTriggers.PreProcessTrigger:bool(edict_t*,char*)",
+   "method_node_id": "107374182413",
+   "line": "349",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064771345",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064771346",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "FixupString:char*(StringInfo&)",
+   "method_node_id": "107374183713",
+   "line": "257",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064792451",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064792452",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "parity_mechanisms": [
+    {
+     "mechanism": "ESCAPE_RUN_COUNT_LOOP",
+     "node_id": "30064792423",
+     "line": "245"
+    },
+    {
+     "mechanism": "ESCAPE_RUN_COUNT_LOOP",
+     "node_id": "30064792448",
+     "line": "256"
+    }
+   ],
+   "boundary_rule": "PARITY_ESTABLISHED_IN_METHOD",
+   "classification": "NEGATIVE",
+   "negative_reason": "PARITY_ESTABLISHED_IN_METHOD",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "TextParsers.ParseStream_SMC:SMCError(void*,STREAMREADER,TextParsers.ITextListener_SMC*,TextParsers.SMCStates*)",
+   "method_node_id": "107374183718",
+   "line": "457",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064792638",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "68719495815",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "single_position_checks": [
+    {
+     "check_node_id": "30064792633",
+     "quote_cmp_node_id": "30064792638",
+     "escape_cmp_node_id": "30064792639",
+     "index_expr_node_id": "30064792640",
+     "index_offset": "1",
+     "base_expr": "parse_point",
+     "index_var": "i",
+     "line": "457"
+    },
+    {
+     "check_node_id": "30064792633",
+     "quote_cmp_node_id": "30064792770",
+     "escape_cmp_node_id": "30064792639",
+     "index_expr_node_id": "30064792640",
+     "index_offset": "1",
+     "base_expr": "parse_point",
+     "index_var": "i",
+     "line": "457"
+    }
+   ],
+   "boundary_rule": "SINGLE_POSITION_INDEX_CHECK",
+   "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT"
+    ],
+    "parser_calls": [
+     {
+      "call_node_id": "30064792325",
+      "line": "113",
+      "anchor_kind": "PARSER_METHOD"
+     },
+     {
+      "call_node_id": "30064792342",
+      "line": "142",
+      "anchor_kind": "PARSER_METHOD"
+     },
+     {
+      "call_node_id": "30064792391",
+      "line": "195",
+      "anchor_kind": "PARSER_METHOD"
+     }
+    ],
+    "delayed_sources": [
+     {
+      "node_id": "30064792317",
+      "api_identity": "fopen",
+      "resolution": "RESOLVED_EXTERNAL",
+      "source_kind": "STORED_FILE_READ",
+      "file": "core/logic/TextParsers.cpp",
+      "line": "101"
+     },
+     {
+      "node_id": "30064792328",
+      "api_identity": "fopen",
+      "resolution": "RESOLVED_EXTERNAL",
+      "source_kind": "STORED_FILE_READ",
+      "file": "core/logic/TextParsers.cpp",
+      "line": "127"
+     }
+    ],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "search_space": {
+     "resolved_sources_in_unit": 16,
+     "unresolved_sources_in_unit": 1,
+     "structured_consumers_in_unit": 0,
+     "logging_only_consumers_in_unit": 50,
+     "parser_call_sites": 3,
+     "flow_edges_in_unit": 2,
+     "flow_edges_by_kind": {
+      "DELAYED_SOURCE2PARSER": 2
+     }
+    }
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "TextParsers.ParseStream_SMC:SMCError(void*,STREAMREADER,TextParsers.ITextListener_SMC*,TextParsers.SMCStates*)",
+   "method_node_id": "107374183718",
+   "line": "638",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064792770",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "68719495938",
+   "char_access_kind": "EXTRACTED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "single_position_checks": [
+    {
+     "check_node_id": "30064792633",
+     "quote_cmp_node_id": "30064792638",
+     "escape_cmp_node_id": "30064792639",
+     "index_expr_node_id": "30064792640",
+     "index_offset": "1",
+     "base_expr": "parse_point",
+     "index_var": "i",
+     "line": "457"
+    },
+    {
+     "check_node_id": "30064792633",
+     "quote_cmp_node_id": "30064792770",
+     "escape_cmp_node_id": "30064792639",
+     "index_expr_node_id": "30064792640",
+     "index_offset": "1",
+     "base_expr": "parse_point",
+     "index_var": "i",
+     "line": "457"
+    }
+   ],
+   "boundary_rule": "SINGLE_POSITION_INDEX_CHECK",
+   "classification": "ESCAPE_PARITY_PARSER_CANDIDATE",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_STRUCTURED_CONSUMER_MODELLED_IN_UNIT"
+    ],
+    "parser_calls": [
+     {
+      "call_node_id": "30064792325",
+      "line": "113",
+      "anchor_kind": "PARSER_METHOD"
+     },
+     {
+      "call_node_id": "30064792342",
+      "line": "142",
+      "anchor_kind": "PARSER_METHOD"
+     },
+     {
+      "call_node_id": "30064792391",
+      "line": "195",
+      "anchor_kind": "PARSER_METHOD"
+     }
+    ],
+    "delayed_sources": [
+     {
+      "node_id": "30064792317",
+      "api_identity": "fopen",
+      "resolution": "RESOLVED_EXTERNAL",
+      "source_kind": "STORED_FILE_READ",
+      "file": "core/logic/TextParsers.cpp",
+      "line": "101"
+     },
+     {
+      "node_id": "30064792328",
+      "api_identity": "fopen",
+      "resolution": "RESOLVED_EXTERNAL",
+      "source_kind": "STORED_FILE_READ",
+      "file": "core/logic/TextParsers.cpp",
+      "line": "127"
+     }
+    ],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "search_space": {
+     "resolved_sources_in_unit": 16,
+     "unresolved_sources_in_unit": 1,
+     "structured_consumers_in_unit": 0,
+     "logging_only_consumers_in_unit": 50,
+     "parser_call_sites": 3,
+     "flow_edges_in_unit": 2,
+     "flow_edges_by_kind": {
+      "DELAYED_SOURCE2PARSER": 2
+     }
+    }
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "TextParsers.ParseFile_INI:bool(char*,TextParsers.ITextListener_INI*,unsigned int*,unsigned int*)",
+   "method_node_id": "107374183719",
+   "line": "861",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064792935",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064792936",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "TextParsers.ParseFile_INI:bool(char*,TextParsers.ITextListener_INI*,unsigned int*,unsigned int*)",
+   "method_node_id": "107374183719",
+   "line": "1026",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064793072",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064793073",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/TextParsers.cpp",
+   "unit": "TextParsers.cpp",
+   "method": "TextParsers.ParseFile_INI:bool(char*,TextParsers.ITextListener_INI*,unsigned int*,unsigned int*)",
+   "method_node_id": "107374183719",
+   "line": "1029",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064793078",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064793079",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/smn_string.cpp",
+   "unit": "smn_string.cpp",
+   "method": "BreakString:cell_t(IPluginContext*,cell_t*)",
+   "method_node_id": "107374184619",
+   "line": "311",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064808610",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064808611",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/smn_string.cpp",
+   "unit": "smn_string.cpp",
+   "method": "BreakString:cell_t(IPluginContext*,cell_t*)",
+   "method_node_id": "107374184619",
+   "line": "317",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064808618",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064808619",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/smn_string.cpp",
+   "unit": "smn_string.cpp",
+   "method": "BreakString:cell_t(IPluginContext*,cell_t*)",
+   "method_node_id": "107374184619",
+   "line": "323",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064808622",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064808623",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/smn_string.cpp",
+   "unit": "smn_string.cpp",
+   "method": "StripQuotes:cell_t(IPluginContext*,cell_t*)",
+   "method_node_id": "107374184631",
+   "line": "600",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064808835",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064808836",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "C_CPP",
+   "frontend": "c2cpg",
+   "file": "core/logic/smn_string.cpp",
+   "unit": "smn_string.cpp",
+   "method": "StripQuotes:cell_t(IPluginContext*,cell_t*)",
+   "method_node_id": "107374184631",
+   "line": "600",
+   "site_kind": "CHARACTER_SCANNER",
+   "site_node_id": "30064808837",
+   "escape_char": "\\",
+   "reportable": false,
+   "compared_expr_node_id": "30064808838",
+   "char_access_kind": "ACCESSED_CHAR",
+   "delimiter_resolution": "LITERAL",
+   "pattern_resolution": "N/A",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": null,
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "NO_ESCAPE_AWARENESS",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_ESCAPE_AWARENESS",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  }
+ ],
+ "chain_note": "The reachability layer promotes a candidate only when a delayed source reaches the parser AND the parser's result reaches a structured-data interpreter or database import routine, by real engine-computed dataflow, with every identity resolved and unambiguous. Execution timing is evidence only and never changes a verdict. Where the chain cannot be proven the site stays a candidate and the chain records why -- the layer under-reports rather than over-reports.",
+ "unresolved_source_identities": [
+  {
+   "node_id": "30064802083",
+   "api_identity": "fopen",
+   "resolution": "AMBIGUOUS_MODE_ARGUMENT",
+   "source_kind": "STORED_FILE_READ",
+   "file": "core/logic/smn_filesystem.cpp",
+   "line": "176"
+  }
+ ],
+ "unresolved_consumer_identities": [],
+ "target": "regr-sourcemod-textparsers",
+ "commit": "9976b514686d28386cf73b0bb3dc0102827285db",
+ "file_set_sha256": "458390f1f48c2c911289e85dc6ae058f8d189764ad93d2b8a9b638ae66208e38"
+}

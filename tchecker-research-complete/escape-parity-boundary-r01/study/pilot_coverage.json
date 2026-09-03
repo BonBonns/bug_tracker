@@ -1,0 +1,505 @@
+[
+ {
+  "rank": 1,
+  "package": "@lynx-js/weak-node-api",
+  "version": "0.1.0",
+  "corpus_index": 31,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 5,
+  "cpg": {
+   "files": 5,
+   "methods": 192,
+   "calls": 1909,
+   "literals": 515
+  },
+  "parse_coverage": 1.0,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=8 index_checks=0 parity_mechanisms=0 delayed_sources=1 consumers=24 chain_edges=1",
+  "n_records": 8,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 7
+  },
+  "status": "OK",
+  "elapsed_s": 24.4,
+  "executable_source_files": 5,
+  "declaration_only_files": 0,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 2,
+  "package": "node-pty",
+  "version": "1.1.0",
+  "corpus_index": 43,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 44,
+  "cpg": {
+   "files": 30,
+   "methods": 763,
+   "calls": 4714,
+   "literals": 952
+  },
+  "parse_coverage": 0.6818,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=7 index_checks=0 parity_mechanisms=0 delayed_sources=18 consumers=22 chain_edges=2",
+  "n_records": 17,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 16
+  },
+  "status": "OK",
+  "elapsed_s": 27.4,
+  "executable_source_files": 42,
+  "declaration_only_files": 2,
+  "parse_coverage_executable": 0.7143
+ },
+ {
+  "rank": 3,
+  "package": "ember-one-way-controls",
+  "version": "3.1.0",
+  "corpus_index": 50,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 7445,
+  "cpg": {
+   "files": 51,
+   "methods": 191,
+   "calls": 945,
+   "literals": 246
+  },
+  "parse_coverage": 0.0069,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=0 index_checks=0 parity_mechanisms=0 delayed_sources=0 consumers=0 chain_edges=0",
+  "n_records": 0,
+  "classifications": {},
+  "status": "OK",
+  "elapsed_s": 25.0,
+  "executable_source_files": 7374,
+  "declaration_only_files": 71,
+  "parse_coverage_executable": 0.0069
+ },
+ {
+  "rank": 4,
+  "package": "nlpplus",
+  "version": "1.3.24",
+  "corpus_index": 68,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 10,
+  "cpg": {
+   "files": 9,
+   "methods": 609,
+   "calls": 8168,
+   "literals": 1962
+  },
+  "parse_coverage": 0.9,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=11 index_checks=0 parity_mechanisms=1 delayed_sources=56 consumers=30 chain_edges=26",
+  "n_records": 11,
+  "classifications": {
+   "NEGATIVE": 11
+  },
+  "status": "OK",
+  "elapsed_s": 35.0,
+  "executable_source_files": 9,
+  "declaration_only_files": 1,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 5,
+  "package": "node-llama-cpp",
+  "version": "3.20.0",
+  "corpus_index": 76,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 560,
+  "cpg": {
+   "files": 0,
+   "methods": 0,
+   "calls": 0,
+   "literals": 0
+  },
+  "parse_coverage": 0.0,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=0 index_checks=0 parity_mechanisms=0 delayed_sources=0 consumers=0 chain_edges=0",
+  "n_records": 0,
+  "classifications": {},
+  "status": "OK",
+  "elapsed_s": 19.2,
+  "executable_source_files": 280,
+  "declaration_only_files": 280,
+  "parse_coverage_executable": 0.0
+ },
+ {
+  "rank": 6,
+  "package": "ibm_db",
+  "version": "4.0.1",
+  "corpus_index": 89,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 17,
+  "cpg": {
+   "files": 4,
+   "methods": 660,
+   "calls": 6446,
+   "literals": 1454
+  },
+  "parse_coverage": 0.2353,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=6 index_checks=0 parity_mechanisms=0 delayed_sources=6 consumers=93 chain_edges=0",
+  "n_records": 6,
+  "classifications": {
+   "NEGATIVE": 6
+  },
+  "status": "OK",
+  "elapsed_s": 29.8,
+  "executable_source_files": 4,
+  "declaration_only_files": 13,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 7,
+  "package": "@gjsify/node-gi",
+  "version": "0.44.0",
+  "corpus_index": 91,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 25,
+  "cpg": {
+   "files": 17,
+   "methods": 1049,
+   "calls": 7930,
+   "literals": 1544
+  },
+  "parse_coverage": 0.68,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=11 index_checks=0 parity_mechanisms=0 delayed_sources=30 consumers=11 chain_edges=0",
+  "n_records": 11,
+  "classifications": {
+   "NEGATIVE": 11
+  },
+  "status": "OK",
+  "elapsed_s": 29.8,
+  "executable_source_files": 17,
+  "declaration_only_files": 8,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 8,
+  "package": "@tensorflow/tfjs-node",
+  "version": "4.22.0",
+  "corpus_index": 99,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 546,
+  "cpg": {
+   "files": 179,
+   "methods": 4452,
+   "calls": 31278,
+   "literals": 5295
+  },
+  "parse_coverage": 0.3278,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=3 index_checks=0 parity_mechanisms=0 delayed_sources=23 consumers=14 chain_edges=2",
+  "n_records": 3,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 2
+  },
+  "status": "OK",
+  "elapsed_s": 67.5,
+  "executable_source_files": 363,
+  "declaration_only_files": 183,
+  "parse_coverage_executable": 0.4931
+ },
+ {
+  "rank": 9,
+  "package": "node-libcurl",
+  "version": "5.1.2",
+  "corpus_index": 100,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 158,
+  "cpg": {
+   "files": 18,
+   "methods": 208,
+   "calls": 2232,
+   "literals": 648
+  },
+  "parse_coverage": 0.1139,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=7 index_checks=0 parity_mechanisms=0 delayed_sources=27 consumers=29 chain_edges=8",
+  "n_records": 7,
+  "classifications": {
+   "ABSTAINED": 2,
+   "NEGATIVE": 5
+  },
+  "status": "OK",
+  "elapsed_s": 24.8,
+  "executable_source_files": 88,
+  "declaration_only_files": 70,
+  "parse_coverage_executable": 0.2045
+ },
+ {
+  "rank": 10,
+  "package": "fuse-napi",
+  "version": "2.3.1",
+  "corpus_index": 101,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 8,
+  "cpg": {
+   "files": 7,
+   "methods": 620,
+   "calls": 6509,
+   "literals": 1499
+  },
+  "parse_coverage": 0.875,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=18 index_checks=0 parity_mechanisms=0 delayed_sources=25 consumers=5 chain_edges=18",
+  "n_records": 18,
+  "classifications": {
+   "NEGATIVE": 18
+  },
+  "status": "OK",
+  "elapsed_s": 29.7,
+  "executable_source_files": 7,
+  "declaration_only_files": 1,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 11,
+  "package": "multi-spec-parser",
+  "version": "0.4.2",
+  "corpus_index": 108,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 34,
+  "cpg": {
+   "files": 2,
+   "methods": 100,
+   "calls": 768,
+   "literals": 264
+  },
+  "parse_coverage": 0.0588,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=2 index_checks=0 parity_mechanisms=0 delayed_sources=3 consumers=3 chain_edges=0",
+  "n_records": 2,
+  "classifications": {
+   "NEGATIVE": 2
+  },
+  "status": "OK",
+  "elapsed_s": 22.1,
+  "executable_source_files": 18,
+  "declaration_only_files": 16,
+  "parse_coverage_executable": 0.1111
+ },
+ {
+  "rank": 12,
+  "package": "@cdktf/node-pty-prebuilt-multiarch",
+  "version": "0.10.2",
+  "corpus_index": 109,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 42,
+  "cpg": {
+   "files": 28,
+   "methods": 613,
+   "calls": 3745,
+   "literals": 763
+  },
+  "parse_coverage": 0.6667,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=7 index_checks=0 parity_mechanisms=0 delayed_sources=20 consumers=16 chain_edges=0",
+  "n_records": 17,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 16
+  },
+  "status": "OK",
+  "elapsed_s": 26.7,
+  "executable_source_files": 40,
+  "declaration_only_files": 2,
+  "parse_coverage_executable": 0.7
+ },
+ {
+  "rank": 13,
+  "package": "velociradix",
+  "version": "8.3.1",
+  "corpus_index": 121,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 11,
+  "cpg": {
+   "files": 7,
+   "methods": 1289,
+   "calls": 13425,
+   "literals": 2788
+  },
+  "parse_coverage": 0.6364,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=87 index_checks=0 parity_mechanisms=0 delayed_sources=74 consumers=51 chain_edges=77",
+  "n_records": 87,
+  "classifications": {
+   "ABSTAINED": 3,
+   "NEGATIVE": 84
+  },
+  "status": "OK",
+  "elapsed_s": 36.4,
+  "executable_source_files": 7,
+  "declaration_only_files": 4,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 14,
+  "package": "pdfium-native",
+  "version": "0.9.1",
+  "corpus_index": 125,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 29,
+  "cpg": {
+   "files": 15,
+   "methods": 435,
+   "calls": 5667,
+   "literals": 1293
+  },
+  "parse_coverage": 0.5172,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=7 index_checks=0 parity_mechanisms=0 delayed_sources=1 consumers=50 chain_edges=22",
+  "n_records": 7,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 6
+  },
+  "status": "OK",
+  "elapsed_s": 28.3,
+  "executable_source_files": 22,
+  "declaration_only_files": 7,
+  "parse_coverage_executable": 0.6818
+ },
+ {
+  "rank": 15,
+  "package": "numbl",
+  "version": "0.4.19",
+  "corpus_index": 177,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 1087,
+  "cpg": {
+   "files": 2,
+   "methods": 74,
+   "calls": 340,
+   "literals": 94
+  },
+  "parse_coverage": 0.0018,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=2 index_checks=0 parity_mechanisms=0 delayed_sources=0 consumers=3 chain_edges=2",
+  "n_records": 2,
+  "classifications": {
+   "NEGATIVE": 2
+  },
+  "status": "OK",
+  "elapsed_s": 22.6,
+  "executable_source_files": 10,
+  "declaration_only_files": 1077,
+  "parse_coverage_executable": 0.2
+ },
+ {
+  "rank": 16,
+  "package": "koffi",
+  "version": "3.1.6",
+  "corpus_index": 202,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 13,
+  "cpg": {
+   "files": 12,
+   "methods": 430,
+   "calls": 4827,
+   "literals": 1406
+  },
+  "parse_coverage": 0.9231,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=10 index_checks=0 parity_mechanisms=0 delayed_sources=17 consumers=12 chain_edges=6",
+  "n_records": 10,
+  "classifications": {
+   "NEGATIVE": 10
+  },
+  "status": "OK",
+  "elapsed_s": 26.7,
+  "executable_source_files": 12,
+  "declaration_only_files": 1,
+  "parse_coverage_executable": 1.0
+ },
+ {
+  "rank": 17,
+  "package": "qpdf-compress",
+  "version": "0.7.1",
+  "corpus_index": 216,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 21,
+  "cpg": {
+   "files": 13,
+   "methods": 185,
+   "calls": 2407,
+   "literals": 836
+  },
+  "parse_coverage": 0.619,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=10 index_checks=0 parity_mechanisms=0 delayed_sources=1 consumers=82 chain_edges=19",
+  "n_records": 10,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 9
+  },
+  "status": "OK",
+  "elapsed_s": 30.8,
+  "executable_source_files": 17,
+  "declaration_only_files": 4,
+  "parse_coverage_executable": 0.7647
+ },
+ {
+  "rank": 18,
+  "package": "@stoprocent/noble",
+  "version": "2.8.0",
+  "corpus_index": 218,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 27,
+  "cpg": {
+   "files": 25,
+   "methods": 1152,
+   "calls": 11290,
+   "literals": 2692
+  },
+  "parse_coverage": 0.9259,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=30 index_checks=0 parity_mechanisms=1 delayed_sources=43 consumers=30 chain_edges=6",
+  "n_records": 30,
+  "classifications": {
+   "NEGATIVE": 30
+  },
+  "status": "OK",
+  "elapsed_s": 32.9,
+  "executable_source_files": 26,
+  "declaration_only_files": 1,
+  "parse_coverage_executable": 0.9615
+ },
+ {
+  "rank": 19,
+  "package": "@flyskywhy/react-native-gcanvas",
+  "version": "6.0.24",
+  "corpus_index": 219,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 174,
+  "cpg": {
+   "files": 171,
+   "methods": 15342,
+   "calls": 187737,
+   "literals": 40670
+  },
+  "parse_coverage": 0.9828,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=26 index_checks=0 parity_mechanisms=20 delayed_sources=17 consumers=228 chain_edges=15",
+  "n_records": 26,
+  "classifications": {
+   "ABSTAINED": 1,
+   "NEGATIVE": 25
+  },
+  "status": "OK",
+  "elapsed_s": 95.4,
+  "executable_source_files": 174,
+  "declaration_only_files": 0,
+  "parse_coverage_executable": 0.9828
+ },
+ {
+  "rank": 20,
+  "package": "realm",
+  "version": "20.2.0",
+  "corpus_index": 220,
+  "tarball_sha256_matches": true,
+  "source_files_extracted": 286,
+  "cpg": {
+   "files": 3,
+   "methods": 15,
+   "calls": 40,
+   "literals": 6
+  },
+  "parse_coverage": 0.0105,
+  "producer_line": "ESCAPE_PARITY_FACTS ok: regex_sites=0 index_checks=0 parity_mechanisms=0 delayed_sources=0 consumers=1 chain_edges=0",
+  "n_records": 0,
+  "classifications": {},
+  "status": "OK",
+  "elapsed_s": 26.2,
+  "executable_source_files": 101,
+  "declaration_only_files": 185,
+  "parse_coverage_executable": 0.0297
+ }
+]

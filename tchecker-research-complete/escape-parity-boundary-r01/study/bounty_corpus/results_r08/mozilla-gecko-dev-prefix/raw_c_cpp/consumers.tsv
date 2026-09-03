@@ -1,0 +1,5 @@
+dom/base/MessageManagerGlobal.cpp	mozilla.dom.MessageManagerGlobal.Dump:void(nsAString&)	38	30064815116	fputs	LOGGING_ONLY	RESOLVED_EXTERNAL
+dom/base/nsGlobalWindowInner.cpp	nsGlobalWindowInner.Dump:void(nsAString&)	3703	30064871395	fputs	LOGGING_ONLY	RESOLVED_EXTERNAL
+dom/base/nsJSEnvironment.cpp	MaybeLogStats:void(mozilla.CycleCollectorResults&,uint32_t)	1038	30064885982	fprintf	LOGGING_ONLY	RESOLVED_EXTERNAL
+modules/libpref/Preferences.cpp	pref_SetPref:nsresult(nsCString&,mozilla.PrefType,mozilla.PrefValueKind,PrefValue,bool,bool,bool)	1834	30064950313	printf	LOGGING_ONLY	RESOLVED_EXTERNAL
+netwerk/protocol/http/HttpBaseChannel.cpp	mozilla.net.HttpBaseChannel.ShouldBlockOpaqueResponse:bool()<const>	3268	30065043872	printf	LOGGING_ONLY	RESOLVED_EXTERNAL

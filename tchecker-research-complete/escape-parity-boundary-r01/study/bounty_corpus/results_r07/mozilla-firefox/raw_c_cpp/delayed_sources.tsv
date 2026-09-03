@@ -1,0 +1,4 @@
+dom/base/StructuredCloneHolder.cpp	StructuredCloneHolderBase.Read:void(JSContext*,JS.MutableHandle,JS.CloneDataPolicy&,mozilla.ErrorResult&)	350	30064833837	read	AMBIGUOUS_LOCAL_DEFINITION	STORED_FILE_READ
+dom/base/nsDOMWindowUtils.cpp	WriteRecordingToDisk:bool(FrameRecording&,double)	4413	30064864399	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+dom/base/nsGlobalWindowInner.cpp	nsGlobalWindowInner.nsGlobalWindowInner:void(nsGlobalWindowOuter*,mozilla.dom.WindowGlobalChild*)	988	30064875817	fopen	RESOLVED_EXTERNAL	STORED_FILE_READ
+parser/htmlparser/nsScannerString.cpp	copy_multifragment_string:char16_t*&(nsScannerIterator&,nsScannerIterator&,ANY&)	331	30065114545	read	AMBIGUOUS_LOCAL_DEFINITION	STORED_FILE_READ

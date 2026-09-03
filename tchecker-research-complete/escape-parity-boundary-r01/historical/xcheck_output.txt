@@ -1,0 +1,6 @@
+{"id":"historical_faulty","even":["abc\\\\', "],"odd":["abc\\', "],"even_ok":false,"odd_ok":true}
+{"id":"historical_corrected","even":["abc\\\\","next"],"odd":["abc\\', "],"even_ok":true,"odd_ok":true}
+{"id":"classic_parity","even":["abc\\\\","next"],"odd":["abc\\\", "],"even_ok":true,"odd_ok":true}
+{"id":"unrolled_parity","even":["abc\\\\","next"],"odd":["abc\\\", "],"even_ok":true,"odd_ok":true}
+{"id":"dq_lookbehind","even":["abc\\\\\", "],"odd":["abc\\\", "],"even_ok":false,"odd_ok":true}
+{"id":"negclass_one_char","even":["abc\\\\\", \"nex"],"odd":["abc\\\", \"nex"],"even_ok":false,"odd_ok":false}

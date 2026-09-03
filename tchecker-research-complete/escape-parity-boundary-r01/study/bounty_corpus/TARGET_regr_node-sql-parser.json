@@ -1,0 +1,461 @@
+{
+ "target": "regr-node-sql-parser",
+ "frozen_at_utc": "2026-09-02T09:48:29Z",
+ "repo_remote": "https://github.com/taozhi8833998/node-sql-parser",
+ "commit": "c1be96494794abadb26f3d5d99ddccb942de45a4",
+ "commit_date": "2026-07-19T09:42:17+08:00",
+ "checkout_mode": "full",
+ "sparse_paths": [],
+ "excluded_dir_names": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "crashtests",
+  "dist",
+  "docs",
+  "examples",
+  "expat",
+  "gtest",
+  "mochitest",
+  "node_modules",
+  "nss",
+  "player",
+  "reftests",
+  "test",
+  "tests",
+  "third_party",
+  "vendor"
+ ],
+ "excluded_basenames": [
+  "babel.config.js",
+  "gruntfile.js",
+  "gulpfile.js",
+  "jest.config.js",
+  "karma.conf.js",
+  "rollup.config.js",
+  "webpack.config.js"
+ ],
+ "excluded_suffixes": [
+  ".bundle.js",
+  ".min.js",
+  ".min.mjs"
+ ],
+ "excluded_dotfiles": true,
+ "extra_exclusions": [
+  "bench",
+  "benchmark",
+  "benchmarks",
+  "build",
+  "bundle",
+  "coverage",
+  "dist",
+  "docs",
+  "examples",
+  "player"
+ ],
+ "exclusion_rationale": "Vendored/third-party and test trees are outside the analysed set. The frozen program policy declines bounties for bugs in or caused by third-party software and for patch gaps against vendored libraries, so they are out of corpus scope by the program's terms.",
+ "file_counts": {
+  "TYPESCRIPT": 2,
+  "JAVASCRIPT": 50
+ },
+ "excluded_file_count": 26,
+ "analysed_file_count": 52,
+ "file_set_sha256": "f2228959fa9e2462260cf5f6b59152e7102e889ec6fc98c2042a8c7dd094f242",
+ "files": [
+  {
+   "path": "ast/postgresql.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "0d99ee2e6e04aff3f3bc6a0acd4ab50deac54d97d545b443154c0e297289263b"
+  },
+  {
+   "path": "build.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "ead4084703c689c7737b8ad27bb80a84efb5311ffc519f37ba3ebdb443c735a8"
+  },
+  {
+   "path": "gulp/common.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "c16404d27771dca30488622aa8e84f8c5ab2b05752d8e8dad83d9a41f9233fbb"
+  },
+  {
+   "path": "gulp/tasks/build.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "011416be6f18e19ca901697bf1e8bf171fe0252ac0d9482895f6d32779c83b10"
+  },
+  {
+   "path": "gulp/tasks/clean.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "487263806f4bac44c51824eb110046cadbf604cb9892a5ac53199f7ed1274d91"
+  },
+  {
+   "path": "gulp/tasks/compile.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "d7e4ba7c0fb3038f7f3fee45cf09c4e1624256fb82e854d08bea0cc3a627449c"
+  },
+  {
+   "path": "gulp/tasks/default.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "a8bbaa5e80c9be3479df16a60e870cbeb5cc9acfd397883e93c9bf0b17b488a1"
+  },
+  {
+   "path": "gulp/tasks/generate.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "1e3e40affb7632c33dec3250773b78f5e46866ba41ec1b57d1d3447a6193d051"
+  },
+  {
+   "path": "gulp/tasks/render.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "5cec1c66a3e7e43578eb4e26b1efb12432538e4a8b0c5946bcd5470b23cd97c9"
+  },
+  {
+   "path": "index.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "ee6517190d4cb8ffc1a53c8407a15be9421078c349315e905b4ba2ecaa436d83"
+  },
+  {
+   "path": "plugins/replace-import.ts",
+   "kind": "TYPESCRIPT",
+   "sha256": "9fe2151e09a188cee58e4d9a39ee5bdbc3df5b8e6ca0d76e56da49add5f9c414"
+  },
+  {
+   "path": "src/aggregation.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "69f7fd3c3d2ad90dc292103ea640daa5829fa3ddf49b9c299e985133eca3b32f"
+  },
+  {
+   "path": "src/alter.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "cfe5e74d02fcca150e35a2bde46db7eae52daad6085e4b0147637fd894c6010f"
+  },
+  {
+   "path": "src/analyze.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "f229c9715b18f3c680f95698d18e646285596cf82bf46484c0afe33205bb2abf"
+  },
+  {
+   "path": "src/array-struct.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "34c956682aee1d3a1326cda20a0c393da0836b51fda5c8dc3f9be3d890cb1abc"
+  },
+  {
+   "path": "src/assign.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "0b0f37c3caff432df1889cc8390e9d6efbf46d2208db3c1cdfc1c2f6bd6cfd56"
+  },
+  {
+   "path": "src/binary.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "96053d776de1d2200e8e34863c669a6e994ee79ab01061b6f0dbd1086565b4fa"
+  },
+  {
+   "path": "src/case.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "8e5636af199948b7d9f88b3f658adeb8e4bb2b3d1f41191f11b17b414c512ea6"
+  },
+  {
+   "path": "src/collate.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "1c5ea2da76b0ad8fd5b78ed8a73563743bd0ee78996208ecf66cf14c9db40a0d"
+  },
+  {
+   "path": "src/column.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "6d11c778fe97ed2eae78d6fa46d9210243e1d083d07f7a6fd450630a5f8bc037"
+  },
+  {
+   "path": "src/command.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "b8ad40c7335fe848c4cb016bc206e2bcc19b4b04e491b6b2d2027e123df6d6b0"
+  },
+  {
+   "path": "src/comment.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "344a737e315a056b8d85d314bfb8de5520ed9bb280d98f260b5c65a460e2b55c"
+  },
+  {
+   "path": "src/constrain.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "425297a601e9725f42a3709ecd6a69a0a095dca24fb878dea737a5c3a5f7e282"
+  },
+  {
+   "path": "src/create.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "ccba9171a642a7ce244b0f5ce9882b5f370dbded0f2b7482515af0df1c825d75"
+  },
+  {
+   "path": "src/delete.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "b7fec292781a34deee1462b0e23534e0f783a451100c329af68413ae08419410"
+  },
+  {
+   "path": "src/exec.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "8082ca3291e4b277aa8d6beb8a5483d08aba25179e79593689d0176e438e9fe1"
+  },
+  {
+   "path": "src/explain.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "9b6b9e305dbbcea1de45d0455ec5ca1654f39a197bae61fee228f8ea3363dd55"
+  },
+  {
+   "path": "src/expr.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "275f8d219f08912814fdb2e9dddc2c8b7fe07b9119fe4a08c5f9116648ef7463"
+  },
+  {
+   "path": "src/func.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "d0aaff731d5c20dcba2713cdaae05a67e81fb51fe42774c19d2a1b9ca78805cb"
+  },
+  {
+   "path": "src/index-definition.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "a00a9dac050ea353e186638c53990278d70f488e55f8e148fbb07cf606f7f280"
+  },
+  {
+   "path": "src/insert.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "8e9b7ab51f1fa1c89e511a43c303c34a31ebab252662e15ff5e4516cfbf21307"
+  },
+  {
+   "path": "src/interval.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "954dc6d4f7f10764679c44165a554d2ee3cbd1e80c9ef355da80ddffc4049c0f"
+  },
+  {
+   "path": "src/json.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "450d41787ca3e024e5617196fbdb2845722aec929a4e8f062c36532d0d15b079"
+  },
+  {
+   "path": "src/limit.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "366678f15e1432f41c9f3d48b832e77644e4b1500d5df44243162a9205e79b9f"
+  },
+  {
+   "path": "src/load.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "e919e92c7f8aa366a9183efe93a2c9e11eb00bac32792a45ba7afbc813eaef66"
+  },
+  {
+   "path": "src/over.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "695e4f44d7636bb2d9f7eb9eac4ffaccc56dff4489689e70811e159b6078c80b"
+  },
+  {
+   "path": "src/parser.all.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "f2d2b26b77fccfce1af5be639c539a7b4a9ac7184ae62b5b7c60c8482e5a7a5c"
+  },
+  {
+   "path": "src/parser.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "a8bce0c9d9477861a18c0af936783edda1719b5cf3aecc9b1300e7c146e5191f"
+  },
+  {
+   "path": "src/parser.single.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "433bd6ee5a035e81ae979f994a7193683cdba6d85b1bb3badd4e541167d7cfed"
+  },
+  {
+   "path": "src/proc.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "c56fbfdb879d587f5aecba44b9976c02cc3df8722b9a93a3d97fb757fb133587"
+  },
+  {
+   "path": "src/select.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "de2f61762adef47f035dd709fa908ebfe34589afc8e8eb6500bf48a2fbefcd25"
+  },
+  {
+   "path": "src/show.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "6c46d8c2ae888e68022df58058c87c08fe1e30e9e19dc152d0e598c60819f029"
+  },
+  {
+   "path": "src/sql.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "9f4b4d0ac94941f48573b87eaf1928b2108d06f07a5e5cf47be6306cfd2c82ea"
+  },
+  {
+   "path": "src/tables.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "75c4ffa1b87d072f2e7600e7dc078f0362ef88536a1d5614a821d548710af6bf"
+  },
+  {
+   "path": "src/transaction.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "2f55f9378d6cb7c881fb61bd45e46656a8167369853b538cac74cbc080d33f22"
+  },
+  {
+   "path": "src/union.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "b4a10b774db1c022782a2bd7f53ea126f0744a9c31fd8ab24ceed71159cfb431"
+  },
+  {
+   "path": "src/update.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "316436a31d2e1b67c2423ad5f54390f3d1c20ee362f4fcdce9af927a66031f19"
+  },
+  {
+   "path": "src/util.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "7332d65fe26e2fd743d19b65e6819240ba8906b30683a8dc755072a75c4d942c"
+  },
+  {
+   "path": "src/window.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "8e53cb9cdf404baaee6416f74b0708b7dd2ffbd45e665d142c648b512229af33"
+  },
+  {
+   "path": "src/with.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "9b6ec64f6e90e1000a18e718d8337691bc904d47c376999a0796226ea55a5c1b"
+  },
+  {
+   "path": "tests-index.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "765a383101e2c70a587d751e5d7f69d478d8145f40ee7852e566586df4c9e797"
+  },
+  {
+   "path": "typegen.js",
+   "kind": "JAVASCRIPT",
+   "sha256": "1917bb75692313d12d9e10f6f21842360917afc8cadbea44ab2554828597a904"
+  }
+ ],
+ "excluded_files": [
+  {
+   "path": "gulpfile.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  },
+  {
+   "path": "test/ast.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/athena.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/bigquery.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/cmd.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/create.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/db2.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/delete.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/flink.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/hive.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/index.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/insert.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/mariadb/mariadb.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/mysql-mariadb.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/noql.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/postgres.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/redshift.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/select.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/show.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/snowflake.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/sqlite.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/transactsql.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/trino.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/update.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "test/util.spec.js",
+   "kind": "JAVASCRIPT",
+   "reason": "test"
+  },
+  {
+   "path": "webpack.config.js",
+   "kind": "JAVASCRIPT",
+   "reason": "not-library-source"
+  }
+ ]
+}

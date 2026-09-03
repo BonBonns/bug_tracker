@@ -1,0 +1,14 @@
+faulty regex   (actual): /'(.*?)(?<!\\)'/S
+corrected regex(actual): /'((?:[^'\\]++|\\.)*+)'/sS
+
+=== INPUT A: even-length escape run (2) before the quote ===
+  raw subject: 'abc\\', 'next'
+  faulty     matches=1 | [0] content='abc\\\\\', '
+  corrected  matches=2 | [0] content='abc\\\\' | [1] content='next'
+  DIFFER: YES
+
+=== INPUT B: odd-length escape run (1) before the quote ===
+  raw subject: 'abc\', 'next'
+  faulty     matches=1 | [0] content='abc\\\', '
+  corrected  matches=1 | [0] content='abc\\\', '
+  DIFFER: no

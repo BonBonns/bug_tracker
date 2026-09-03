@@ -1,0 +1,9 @@
+netwerk/dns/DNSPacket.cpp	mozilla.net.DNSPacket.ParseSvcParam:nsresult(unsigned int,uint16_t,mozilla.net.SvcFieldValue&,uint16_t,unsigned char*,bool)	107374196646	73	30065004997	MODULO_TWO
+parser/htmlparser/nsExpatDriver.cpp	nsExpatDriver.HandleStartElement:void(rlbox_sandbox_expat&,tainted_expat,tainted_expat,tainted_expat)	107374202101	436	30065111685	MODULO_TWO
+security/manager/ssl/ContentSignatureVerifier.cpp	VerifyContentSignatureInternal:nsresult(nsACString&,nsACString&,nsACString&,nsACString&,AppTrustedRoot,nsACString&,nsACString&,uint32_t&)	107374202348	355	30065116419	MODULO_TWO
+security/manager/ssl/nsNSSComponent.cpp	ConvertBetweenUCS2andASCII:PRBool(PRBool,unsigned char*,unsigned int,unsigned char*,unsigned int,unsigned int*,PRBool)	107374203225	2135	30065131961	MODULO_TWO
+netwerk/base/nsStandardURL.h	mozilla.net.URLSegmentNumber.CalculateParity:bool()<const>	107374211224	103	30065187561	MODULO_TWO
+dom/base/MimeType.cpp	TMimeType.SplitMimetype:nsTArray(nsTSubstring&)	107374185227	264	30064820808	BOOLEAN_TOGGLE
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	nsMIMEHeaderParamImpl.DoParameterInternal:nsresult(nsACString&,char*,nsMIMEHeaderParamImpl.ParamDecoding,char**,char**,char**)	107374197262	547	30065018466	ESCAPE_RUN_COUNT_LOOP
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	internalDecodeParameter:nsresult(nsACString&,nsACString&,nsACString&,bool,bool,nsACString&)	107374197268	944	30065018802	ESCAPE_RUN_COUNT_LOOP
+netwerk/mime/nsMIMEHeaderParamImpl.cpp	internalDecodeParameter:nsresult(nsACString&,nsACString&,nsACString&,bool,bool,nsACString&)	107374197268	948	30065018818	ESCAPE_RUN_COUNT_LOOP

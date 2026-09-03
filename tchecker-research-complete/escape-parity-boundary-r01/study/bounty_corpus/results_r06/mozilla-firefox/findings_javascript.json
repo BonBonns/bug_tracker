@@ -1,0 +1,397 @@
+{
+ "schema": "escape-parity-boundary/chain-0.1",
+ "language": "JAVASCRIPT",
+ "frontend": "jssrc2cpg",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Parser-only layer. Classifies whether a quote-boundary rule can establish the parity of the complete consecutive escape run. Site discovery is structural, from CPG node identities; regexes are never found by searching source text. Regex patterns are parsed by the dialect adapter matching where they run -- ECMAScript for JavaScript regex literals and for std::regex, whose default grammar is ECMAScript. Delayed-source/transform/consumer reachability is a separate layer and is not included here. No impact, severity or exploitability claim is made; reportable is false throughout.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "dom/base/ContentAreaDropListener.sys.mjs",
+   "unit": "ContentAreaDropListener.sys.mjs",
+   "method": "dom/base/ContentAreaDropListener.sys.mjs::program:_addLinksFromItem",
+   "method_node_id": "107374182403",
+   "line": "36",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313219",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\s+|\\s+$",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "dom/base/ContentAreaDropListener.sys.mjs",
+   "unit": "ContentAreaDropListener.sys.mjs",
+   "method": "dom/base/ContentAreaDropListener.sys.mjs::program:_addLinksFromItem",
+   "method_node_id": "107374182403",
+   "line": "105",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313235",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s+",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "dom/base/ContentAreaDropListener.sys.mjs",
+   "unit": "ContentAreaDropListener.sys.mjs",
+   "method": "dom/base/ContentAreaDropListener.sys.mjs::program:_validateURI",
+   "method_node_id": "107374182405",
+   "line": "143",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313240",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\s*|\\s*$",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "unit": "ascii_pac_utils.js",
+   "method": "netwerk/base/ascii_pac_utils.js::program:isValidIpAddress",
+   "method_node_id": "107374182504",
+   "line": "19",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194320346",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})$",
+   "flags": "",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "unit": "ascii_pac_utils.js",
+   "method": "netwerk/base/ascii_pac_utils.js::program:shExpMatch",
+   "method_node_id": "107374182510",
+   "line": "73",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194320380",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "unit": "ascii_pac_utils.js",
+   "method": "netwerk/base/ascii_pac_utils.js::program:shExpMatch",
+   "method_node_id": "107374182510",
+   "line": "74",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194320382",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\*",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "unit": "ascii_pac_utils.js",
+   "method": "netwerk/base/ascii_pac_utils.js::program:shExpMatch",
+   "method_node_id": "107374182510",
+   "line": "75",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194320384",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\?",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "security/manager/ssl/RemoteSecuritySettings.sys.mjs",
+   "unit": "RemoteSecuritySettings.sys.mjs",
+   "method": "security/manager/ssl/RemoteSecuritySettings.sys.mjs::program:IntermediatePreloads:maybeDownloadAttachment",
+   "method_node_id": "107374182659",
+   "line": "494",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194320934",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\s",
+   "flags": "g",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "flags_affect_verdict": false,
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  },
+  {
+   "language": "JAVASCRIPT",
+   "frontend": "jssrc2cpg",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "unit": "ascii_pac_utils.js",
+   "method": "netwerk/base/ascii_pac_utils.js::program:shExpMatch",
+   "method_node_id": "107374182510",
+   "line": "76",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064781952",
+   "escape_char": "\\",
+   "reportable": false,
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "",
+   "regex_dialect": "ECMASCRIPT",
+   "evidence_role": "CORPUS_ANALYSIS",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "chain": {
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NOT_A_CANDIDATE_NO_CHAIN_REQUIRED"
+    ],
+    "parser_calls": [],
+    "delayed_sources": [],
+    "transforms": [],
+    "consumers": [],
+    "logging_only_consumers": []
+   },
+   "execution_timing_evidence": []
+  }
+ ],
+ "chain_note": "The reachability layer promotes a candidate only when a delayed source reaches the parser AND the parser's result reaches a structured-data interpreter or database import routine, by real engine-computed dataflow, with every identity resolved and unambiguous. Execution timing is evidence only and never changes a verdict. Where the chain cannot be proven the site stays a candidate and the chain records why -- the layer under-reports rather than over-reports.",
+ "unresolved_source_identities": [
+  {
+   "node_id": "30064781350",
+   "api_identity": "(_tmp_8 = this.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/base/EssentialDomainsRemoteSettings.sys.mjs",
+   "line": "98"
+  },
+  {
+   "node_id": "30064781829",
+   "api_identity": "(_tmp_7 = this.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/base/SimpleURIUnknownSchemesRemoteObserver.sys.mjs",
+   "line": "103"
+  },
+  {
+   "node_id": "30064781875",
+   "api_identity": "(_tmp_0 = /^(\\d{1,3})\\.exec",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/base/ascii_pac_utils.js",
+   "line": "19"
+  },
+  {
+   "node_id": "30064782600",
+   "api_identity": "(_tmp_27 = this.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/cookie/ThirdPartyCookieBlockingExceptionListService.sys.mjs",
+   "line": "172"
+  },
+  {
+   "node_id": "30064782750",
+   "api_identity": "knownConfigs.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/protocol/http/HPKEConfigManager.sys.mjs",
+   "line": "49"
+  },
+  {
+   "node_id": "30064782800",
+   "api_identity": "HPKEConfigManager.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/protocol/http/HPKEConfigManager.sys.mjs",
+   "line": "79"
+  },
+  {
+   "node_id": "30064783263",
+   "api_identity": "(_tmp_8 = lazy.get",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "netwerk/protocol/http/ObliviousHTTP.sys.mjs",
+   "line": "83"
+  },
+  {
+   "node_id": "30064784489",
+   "api_identity": "IOUtils.read",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "security/manager/ssl/RemoteSecuritySettings.sys.mjs",
+   "line": "544"
+  },
+  {
+   "node_id": "30064785099",
+   "api_identity": "IOUtils.read",
+   "resolution": "UNRESOLVED_SOURCE_IDENTITY",
+   "source_kind": "",
+   "file": "security/manager/ssl/RemoteSecuritySettings.sys.mjs",
+   "line": "582"
+  }
+ ],
+ "unresolved_consumer_identities": [],
+ "target": "mozilla-firefox",
+ "commit": "8a99ef927ea16827f2089e2bdf6a1188ddf645e7",
+ "file_set_sha256": "8d44d240524adfddd93468da29a8d358928a99488b9c1868d35a79a49a3d0d09"
+}

@@ -1,0 +1,5 @@
+build.js	build.js::program:<lambda>1	12	30064771083	fs.readFileSync	RESOLVED_IMPORT	STORED_FILE_READ
+gulp/common.js	gulp/common.js::program:readFile	4	30064771120	fs.readFile	RESOLVED_IMPORT	STORED_FILE_READ
+typegen.js	typegen.js::program:checkCode	11	30064781500	(_tmp_0 = /^[\s$]*\/\/\s*=>\s*([^$\r\n]+)$/m).exec	UNRESOLVED_SOURCE_IDENTITY	
+typegen.js	typegen.js::program:checkCode	13	30064781509	(_tmp_2 = /^[\s$]*\/\*([^§]+)\*\//m).exec	UNRESOLVED_SOURCE_IDENTITY	
+typegen.js	typegen.js::program	5	30064781598	fs.readFileSync	RESOLVED_IMPORT	STORED_FILE_READ

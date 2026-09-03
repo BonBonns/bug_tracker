@@ -1,0 +1,438 @@
+{
+ "schema": "escape-parity-boundary-r01/0.1",
+ "property": "quoted-string escape-run parity at the quote boundary",
+ "note": "Software-reliability / data-integrity property. Classifications are derived from CPG node identities and a structural parse of each resolved regex pattern; no classification is derived from source-text substring matching. Delayed, scheduled or administrative execution is recorded as execution-timing evidence only and is never treated as a guard. Abstention is mandatory wherever regex construction, replacement-callback identity, delayed-source identity, transformation order or downstream-consumer identity is unresolved or ambiguous. No impact, severity or exploitability claim of any kind is made; reportable is false on every record.",
+ "classification_vocabulary": [
+  "ESCAPE_PARITY_PARSER_CANDIDATE",
+  "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE"
+ ],
+ "findings": [
+  {
+   "file": "package/scripts/download-harfbuzz.mjs",
+   "package": "package",
+   "method": "package/scripts/download-harfbuzz.mjs::program",
+   "method_node_id": "107374182420",
+   "line": "18",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313315",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/download-mozjpeg.mjs",
+   "package": "package",
+   "method": "package/scripts/download-mozjpeg.mjs::program",
+   "method_node_id": "107374182425",
+   "line": "18",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313448",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/download-qpdf.mjs",
+   "package": "package",
+   "method": "package/scripts/download-qpdf.mjs::program",
+   "method_node_id": "107374182429",
+   "line": "18",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313569",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/gen-prebuild-manifest.mjs",
+   "package": "package",
+   "method": "package/scripts/gen-prebuild-manifest.mjs::program:computePins",
+   "method_node_id": "107374182440",
+   "line": "29",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313733",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "[.]",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/gen-prebuild-manifest.mjs",
+      "method": "package/scripts/gen-prebuild-manifest.mjs::program:computePins",
+      "line": "29",
+      "node_id": "30064772471",
+      "regex_node_id": "90194313733",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313734",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/gen-prebuild-manifest.mjs",
+   "package": "package",
+   "method": "package/scripts/gen-prebuild-manifest.mjs::program:computePins",
+   "method_node_id": "107374182440",
+   "line": "35",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313736",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\.tar\\.gz$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/gen-prebuild-manifest.mjs",
+      "method": "package/scripts/gen-prebuild-manifest.mjs::program:computePins",
+      "line": "35",
+      "node_id": "30064772492",
+      "regex_node_id": "90194313736",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313737",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/install.mjs",
+   "package": "package",
+   "method": "package/scripts/install.mjs::program",
+   "method_node_id": "107374182441",
+   "line": "34",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313835",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/update-native-deps.mjs",
+   "package": "package",
+   "method": "package/scripts/update-native-deps.mjs::program:repoFor",
+   "method_node_id": "107374182455",
+   "line": "37",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313918",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^https:\\/\\/github\\.com\\/([^/]+\\/[^/]+)",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/update-native-deps.mjs",
+   "package": "package",
+   "method": "package/scripts/update-native-deps.mjs::program",
+   "method_node_id": "107374182454",
+   "line": "97",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194313984",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "^[^0-9]*",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "97",
+      "node_id": "30064773252",
+      "regex_node_id": "90194313984",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194313985",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "83",
+      "node_id": "30064773207",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "116",
+      "node_id": "30064773301",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "73",
+      "node_id": "30064773197",
+      "consumer_identity": "console.warn",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "80",
+      "node_id": "30064773203",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "99",
+      "node_id": "30064773256",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "103",
+      "node_id": "30064773266",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "89",
+      "node_id": "30064773236",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     },
+     {
+      "file": "package/scripts/update-native-deps.mjs",
+      "method": "package/scripts/update-native-deps.mjs::program",
+      "line": "112",
+      "node_id": "30064773290",
+      "consumer_identity": "console.log",
+      "kind": "LOGGING_ONLY",
+      "resolution": "RESOLVED"
+     }
+    ],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/verify-checksums.mjs",
+   "package": "package",
+   "method": "package/scripts/verify-checksums.mjs::program",
+   "method_node_id": "107374182459",
+   "line": "41",
+   "site_kind": "REGEX_LITERAL",
+   "site_node_id": "90194314038",
+   "pattern_resolution": "RESOLVED_LITERAL",
+   "pattern": "\\W+",
+   "flags": "g",
+   "escape_char": "\\",
+   "boundary_rule": "NO_QUOTED_STRING_CONSTRUCT",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [
+     {
+      "file": "package/scripts/verify-checksums.mjs",
+      "method": "package/scripts/verify-checksums.mjs::program",
+      "line": "41",
+      "node_id": "30064773441",
+      "regex_node_id": "90194314038",
+      "resolution": "RESOLVED",
+      "callee": "replace",
+      "callback": {
+       "callback_node_id": "90194314039",
+       "kind": "STRING_LITERAL",
+       "resolution": "RESOLVED"
+      }
+     }
+    ],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_DELAYED_SOURCE_REACHES_TRANSFORMATION",
+     "NO_STRUCTURED_TEXT_CONSUMER_REACHED"
+    ]
+   },
+   "classification": "NEGATIVE",
+   "negative_reason": "NO_QUOTED_STRING_CONSTRUCT",
+   "reportable": false
+  },
+  {
+   "file": "package/scripts/gen-prebuild-manifest.mjs",
+   "package": "package",
+   "method": "package/scripts/gen-prebuild-manifest.mjs::program:computePins",
+   "method_node_id": "107374182440",
+   "line": "29",
+   "site_kind": "REGEX_CONSTRUCTED",
+   "site_node_id": "30064772468",
+   "pattern_resolution": "UNRESOLVED_DYNAMIC",
+   "pattern": "",
+   "flags": "",
+   "escape_char": "\\",
+   "boundary_rule": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "classification": "ABSTAINED",
+   "abstention_reason": "UNRESOLVED_REGEX_CONSTRUCTION",
+   "execution_timing_evidence": [],
+   "chain": {
+    "replace_sites": [],
+    "delayed_sources": [],
+    "encodes": [],
+    "consumers": [],
+    "logging_only_consumers": [],
+    "status": "NOT_ESTABLISHED",
+    "reasons": [
+     "NO_TRANSFORMATION_USES_THIS_RULE"
+    ]
+   },
+   "reportable": false
+  }
+ ]
+}

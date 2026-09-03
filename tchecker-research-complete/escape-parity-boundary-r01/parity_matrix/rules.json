@@ -1,0 +1,9 @@
+[
+ {"id":"pcre_historical_faulty",     "dialect":"PCRE",      "quote":"'", "pattern":"'(.*?)(?<!\\\\)'"},
+ {"id":"pcre_historical_corrected",  "dialect":"PCRE",      "quote":"'", "pattern":"'((?:[^'\\\\]++|\\\\.)*+)'"},
+ {"id":"es_one_char_lookbehind",     "dialect":"ECMASCRIPT","quote":"'", "pattern":"'(.*?)(?<!\\\\)'"},
+ {"id":"es_classic_parity",          "dialect":"ECMASCRIPT","quote":"'", "pattern":"'((?:[^'\\\\]|\\\\.)*)'"},
+ {"id":"es_unrolled_parity",         "dialect":"ECMASCRIPT","quote":"'", "pattern":"'([^'\\\\]*(?:\\\\.[^'\\\\]*)*)'"},
+ {"id":"es_negclass_one_char",       "dialect":"ECMASCRIPT","quote":"'", "pattern":"'(.*)[^\\\\]'"},
+ {"id":"es_no_escape_awareness",     "dialect":"ECMASCRIPT","quote":"'", "pattern":"'(.*?)'"}
+]

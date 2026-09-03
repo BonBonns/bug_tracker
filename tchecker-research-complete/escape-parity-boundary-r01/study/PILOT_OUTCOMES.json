@@ -1,0 +1,372 @@
+{
+  "coverage_threshold_executable": 0.8,
+  "coverage_note": "A package counts as PIPELINE_ANALYZED only when the JS frontend parsed at least 80% of its EXECUTABLE source files into the CPG. TypeScript .d.ts declaration files carry no executable code and legitimately produce no CPG nodes, so they are excluded from the denominator. Packages below the threshold are INFRASTRUCTURE_FAILURE: the analyzer ran, but too little of the package reached it for a negative to mean anything.",
+  "buckets": {
+    "PREFILTER_SELECTED": {
+      "count": 20,
+      "packages": [
+        "@cdktf/node-pty-prebuilt-multiarch@0.10.2",
+        "@flyskywhy/react-native-gcanvas@6.0.24",
+        "@gjsify/node-gi@0.44.0",
+        "@lynx-js/weak-node-api@0.1.0",
+        "@stoprocent/noble@2.8.0",
+        "@tensorflow/tfjs-node@4.22.0",
+        "ember-one-way-controls@3.1.0",
+        "fuse-napi@2.3.1",
+        "ibm_db@4.0.1",
+        "koffi@3.1.6",
+        "multi-spec-parser@0.4.2",
+        "nlpplus@1.3.24",
+        "node-libcurl@5.1.2",
+        "node-llama-cpp@3.20.0",
+        "node-pty@1.1.0",
+        "numbl@0.4.19",
+        "pdfium-native@0.9.1",
+        "qpdf-compress@0.7.1",
+        "realm@20.2.0",
+        "velociradix@8.3.1"
+      ]
+    },
+    "PIPELINE_ANALYZED": {
+      "count": 9,
+      "packages": [
+        "@flyskywhy/react-native-gcanvas@6.0.24",
+        "@gjsify/node-gi@0.44.0",
+        "@lynx-js/weak-node-api@0.1.0",
+        "@stoprocent/noble@2.8.0",
+        "fuse-napi@2.3.1",
+        "ibm_db@4.0.1",
+        "koffi@3.1.6",
+        "nlpplus@1.3.24",
+        "velociradix@8.3.1"
+      ]
+    },
+    "ABSTAINED": {
+      "count": 3,
+      "packages": [
+        "@flyskywhy/react-native-gcanvas@6.0.24",
+        "@lynx-js/weak-node-api@0.1.0",
+        "velociradix@8.3.1"
+      ]
+    },
+    "NO_PARSER_CANDIDATE": {
+      "count": 9,
+      "packages": [
+        "@flyskywhy/react-native-gcanvas@6.0.24",
+        "@gjsify/node-gi@0.44.0",
+        "@lynx-js/weak-node-api@0.1.0",
+        "@stoprocent/noble@2.8.0",
+        "fuse-napi@2.3.1",
+        "ibm_db@4.0.1",
+        "koffi@3.1.6",
+        "nlpplus@1.3.24",
+        "velociradix@8.3.1"
+      ]
+    },
+    "INFRASTRUCTURE_FAILURE": {
+      "count": 11,
+      "packages": [
+        "@cdktf/node-pty-prebuilt-multiarch@0.10.2",
+        "@tensorflow/tfjs-node@4.22.0",
+        "ember-one-way-controls@3.1.0",
+        "multi-spec-parser@0.4.2",
+        "node-libcurl@5.1.2",
+        "node-llama-cpp@3.20.0",
+        "node-pty@1.1.0",
+        "numbl@0.4.19",
+        "pdfium-native@0.9.1",
+        "qpdf-compress@0.7.1",
+        "realm@20.2.0"
+      ]
+    },
+    "ESCAPE_PARITY_PARSER_CANDIDATE": {
+      "count": 0,
+      "packages": []
+    },
+    "DELAYED_STRUCTURED_TEXT_CONSUMER_REACHABLE": {
+      "count": 0,
+      "packages": []
+    }
+  },
+  "site_level_totals_over_analyzed_packages": {
+    "NEGATIVE": 202,
+    "ABSTAINED": 5
+  },
+  "negative_reasons": {
+    "NO_QUOTED_STRING_CONSTRUCT": 200,
+    "NO_ESCAPE_AWARENESS": 2
+  },
+  "abstention_reasons": {
+    "UNRESOLVED_REGEX_CONSTRUCTION": 5
+  },
+  "site_kinds": {
+    "REGEX_LITERAL": 202,
+    "REGEX_CONSTRUCTED": 5
+  },
+  "candidate_sites": [],
+  "per_package": [
+    {
+      "package": "@lynx-js/weak-node-api@0.1.0",
+      "corpus_index": 31,
+      "executable_source_files": 5,
+      "declaration_only_files": 0,
+      "cpg_files": 5,
+      "parse_coverage_executable": 1.0,
+      "n_records": 8,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 7
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "node-pty@1.1.0",
+      "corpus_index": 43,
+      "executable_source_files": 42,
+      "declaration_only_files": 2,
+      "cpg_files": 30,
+      "parse_coverage_executable": 0.7143,
+      "n_records": 17,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 16
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "ember-one-way-controls@3.1.0",
+      "corpus_index": 50,
+      "executable_source_files": 7374,
+      "declaration_only_files": 71,
+      "cpg_files": 51,
+      "parse_coverage_executable": 0.0069,
+      "n_records": 0,
+      "classifications": {},
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "nlpplus@1.3.24",
+      "corpus_index": 68,
+      "executable_source_files": 9,
+      "declaration_only_files": 1,
+      "cpg_files": 9,
+      "parse_coverage_executable": 1.0,
+      "n_records": 11,
+      "classifications": {
+        "NEGATIVE": 11
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "node-llama-cpp@3.20.0",
+      "corpus_index": 76,
+      "executable_source_files": 280,
+      "declaration_only_files": 280,
+      "cpg_files": 0,
+      "parse_coverage_executable": 0.0,
+      "n_records": 0,
+      "classifications": {},
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "ibm_db@4.0.1",
+      "corpus_index": 89,
+      "executable_source_files": 4,
+      "declaration_only_files": 13,
+      "cpg_files": 4,
+      "parse_coverage_executable": 1.0,
+      "n_records": 6,
+      "classifications": {
+        "NEGATIVE": 6
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "@gjsify/node-gi@0.44.0",
+      "corpus_index": 91,
+      "executable_source_files": 17,
+      "declaration_only_files": 8,
+      "cpg_files": 17,
+      "parse_coverage_executable": 1.0,
+      "n_records": 11,
+      "classifications": {
+        "NEGATIVE": 11
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "@tensorflow/tfjs-node@4.22.0",
+      "corpus_index": 99,
+      "executable_source_files": 363,
+      "declaration_only_files": 183,
+      "cpg_files": 179,
+      "parse_coverage_executable": 0.4931,
+      "n_records": 3,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 2
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "node-libcurl@5.1.2",
+      "corpus_index": 100,
+      "executable_source_files": 88,
+      "declaration_only_files": 70,
+      "cpg_files": 18,
+      "parse_coverage_executable": 0.2045,
+      "n_records": 7,
+      "classifications": {
+        "ABSTAINED": 2,
+        "NEGATIVE": 5
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "fuse-napi@2.3.1",
+      "corpus_index": 101,
+      "executable_source_files": 7,
+      "declaration_only_files": 1,
+      "cpg_files": 7,
+      "parse_coverage_executable": 1.0,
+      "n_records": 18,
+      "classifications": {
+        "NEGATIVE": 18
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "multi-spec-parser@0.4.2",
+      "corpus_index": 108,
+      "executable_source_files": 18,
+      "declaration_only_files": 16,
+      "cpg_files": 2,
+      "parse_coverage_executable": 0.1111,
+      "n_records": 2,
+      "classifications": {
+        "NEGATIVE": 2
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "@cdktf/node-pty-prebuilt-multiarch@0.10.2",
+      "corpus_index": 109,
+      "executable_source_files": 40,
+      "declaration_only_files": 2,
+      "cpg_files": 28,
+      "parse_coverage_executable": 0.7,
+      "n_records": 17,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 16
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "velociradix@8.3.1",
+      "corpus_index": 121,
+      "executable_source_files": 7,
+      "declaration_only_files": 4,
+      "cpg_files": 7,
+      "parse_coverage_executable": 1.0,
+      "n_records": 87,
+      "classifications": {
+        "ABSTAINED": 3,
+        "NEGATIVE": 84
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "pdfium-native@0.9.1",
+      "corpus_index": 125,
+      "executable_source_files": 22,
+      "declaration_only_files": 7,
+      "cpg_files": 15,
+      "parse_coverage_executable": 0.6818,
+      "n_records": 7,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 6
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "numbl@0.4.19",
+      "corpus_index": 177,
+      "executable_source_files": 10,
+      "declaration_only_files": 1077,
+      "cpg_files": 2,
+      "parse_coverage_executable": 0.2,
+      "n_records": 2,
+      "classifications": {
+        "NEGATIVE": 2
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "koffi@3.1.6",
+      "corpus_index": 202,
+      "executable_source_files": 12,
+      "declaration_only_files": 1,
+      "cpg_files": 12,
+      "parse_coverage_executable": 1.0,
+      "n_records": 10,
+      "classifications": {
+        "NEGATIVE": 10
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "qpdf-compress@0.7.1",
+      "corpus_index": 216,
+      "executable_source_files": 17,
+      "declaration_only_files": 4,
+      "cpg_files": 13,
+      "parse_coverage_executable": 0.7647,
+      "n_records": 10,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 9
+      },
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "package": "@stoprocent/noble@2.8.0",
+      "corpus_index": 218,
+      "executable_source_files": 26,
+      "declaration_only_files": 1,
+      "cpg_files": 25,
+      "parse_coverage_executable": 0.9615,
+      "n_records": 30,
+      "classifications": {
+        "NEGATIVE": 30
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "@flyskywhy/react-native-gcanvas@6.0.24",
+      "corpus_index": 219,
+      "executable_source_files": 174,
+      "declaration_only_files": 0,
+      "cpg_files": 171,
+      "parse_coverage_executable": 0.9828,
+      "n_records": 26,
+      "classifications": {
+        "ABSTAINED": 1,
+        "NEGATIVE": 25
+      },
+      "bucket": "PIPELINE_ANALYZED"
+    },
+    {
+      "package": "realm@20.2.0",
+      "corpus_index": 220,
+      "executable_source_files": 101,
+      "declaration_only_files": 185,
+      "cpg_files": 3,
+      "parse_coverage_executable": 0.0297,
+      "n_records": 0,
+      "classifications": {},
+      "bucket": "INFRASTRUCTURE_FAILURE"
+    }
+  ]
+}
