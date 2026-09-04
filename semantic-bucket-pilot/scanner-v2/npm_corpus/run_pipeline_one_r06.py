@@ -55,11 +55,27 @@ saw) and node-llama-cpp (uncorrected js_bin: 0 functions/0 calls parsed from 560
 JS/TS files; corrected: 280 files/4573 methods/91378 calls). See the inline comments at the
 correction block below for the one real structural difference from frontend_coverage_check.py's
 own check_package(): pass 1 is never rebuilt, since js_bin already IS it.
+
+JS-FRONTEND-INTEGRITY-FIX01 (record["js_frontend_unparsed_entrypoints"]): the correction above
+handles a MISSING entrypoint (never reaches the parser at all, e.g. a folder-name ignore rule);
+it does not handle the parser genuinely CHOKING on an entrypoint's own content once staged for
+recovery (e.g. a single-file webpack bundle with pathologically long lines). The coverage-check
+block already re-verifies pass-2 coverage and records this second failure mode as
+js_frontend_coverage["still_missing_after_correction"] -- real, computed evidence -- but nothing
+previously read it, so a package whose only substantive source file hit this shape (confirmed
+real: addons-linter@10.10.0's dist/addons-linter.js, 937KB/7647 lines/lines up to 111,940 chars)
+silently reported a clean "0 findings" on every one of its JS/TS classes that was, in truth, "0
+findings because nothing was parsed." Fixed by surfacing the already-computed evidence at the
+record's top level, unmissable and always present (empty when nothing is wrong) instead of
+three levels deep and only present when a correction was attempted -- see the inline comment at
+that block for why this deliberately does not fail the whole record (a package can have several
+entrypoints where only one hits this).
 """
 import hashlib
 import importlib
 import json
 import os
+import re
 import resource
 import shutil
 import subprocess
@@ -380,6 +396,108 @@ SCAN_TIMEOUT = int(90 * TIMEOUT_MULTIPLIER)        # r04_scan (reads raw TSVs di
 # re-run with a generous timeout, not a hang (same "real, reproduced, not a hang" discipline
 # NORMALIZE_TIMEOUT's own re2 case above already established for this file).
 PATH_TRAVERSAL_PRODUCER_TIMEOUT = int(600 * TIMEOUT_MULTIPLIER)
+
+
+# SD-ATTRIBUTION-HINT-FIX01 (see the call site in the Serialize DoS stage for the full story):
+# a deliberately simple, best-effort brace-matching function-body extractor -- NOT a JS parser,
+# and not meant to be one. Used only to scope the external-origin heuristic hint below to the
+# actual enclosing function rather than the whole file.
+#
+# Requires a DEFINITION shape, not just any occurrence of `funcName(`: walks each candidate
+# occurrence's own parameter-list parens (paren-depth counted, so a default value like
+# `method = 'GET'` doesn't confuse it) to their real close, then only accepts it if the next
+# non-whitespace character is `{` -- a definition's param list is followed directly by its body,
+# a call site is followed by `;`/`,`/`)`/`.then(`/etc. This is required, not cosmetic: an
+# earlier version matched the FIRST occurrence unconditionally and silently extracted the wrong
+# span on a real file (web-ext's lib/util/submit-addon.js calls `this.fetchJson(...)` at line
+# 122, well before fetchJson's own definition at line 234 -- the naive match grabbed line 122's
+# unrelated trailing brace as the "body" and the hint never fired on the one site this session's
+# own hand-trace flagged as most worth flagging). Still real, disclosed limits after this fix:
+# an arrow function assigned to a property (`fetchJson = (...) => {`) isn't matched at all (no
+# leading keyword/no bare-call-shape assumption holds), and brace-counting inside a template
+# literal or regex containing an unbalanced `{`/`}` can still misplace the closing boundary.
+# Never used to change any verdict -- only to decide what text a keyword search runs over for an
+# annotation that is itself clearly labeled as a hint (see below), so a missed or wrong span
+# just makes the hint's scope too broad or too narrow, never wrong in a way that silently
+# corrupts a verdict field.
+def _js_function_body_span(source_text, func_short_name):
+    if not func_short_name:
+        return None
+    for m in re.finditer(r"\b" + re.escape(func_short_name) + r"\s*\(", source_text):
+        paren_start = source_text.index("(", m.end() - 1)
+        depth, close_paren = 0, None
+        for j in range(paren_start, len(source_text)):
+            if source_text[j] == "(":
+                depth += 1
+            elif source_text[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    close_paren = j
+                    break
+        if close_paren is None:
+            continue
+        k = close_paren + 1
+        while k < len(source_text) and source_text[k] in " \t\r\n":
+            k += 1
+        if k >= len(source_text) or source_text[k] != "{":
+            continue  # not a definition (a call site, or an unrecognized shape) -- keep looking
+        depth = 0
+        for i in range(k, len(source_text)):
+            if source_text[i] == "{":
+                depth += 1
+            elif source_text[i] == "}":
+                depth -= 1
+                if depth == 0:
+                    return source_text[m.start():i + 1]
+        return None  # unbalanced -- best-effort extraction failed, caller falls back to whole file
+    return None  # no definition-shaped occurrence found
+
+
+# Real, disclosed keyword list -- not a taint-source classifier (that logic lives in the frozen
+# Joern producer's own pattern set, untouched by this hint), just literal substrings that, if
+# present in the scoped text, indicate the code touches network I/O or a parsed inbound payload
+# somewhere in the same function. Deliberately coarse and over-inclusive (a real risk of false
+# hints on code that reads network data but demonstrably never lets it reach THIS particular
+# stringify call) -- the hint's own docstring at the call site says exactly that; it prompts a
+# second look, it never asserts a confirmed finding.
+EXTERNAL_ORIGIN_HINT_PATTERNS = (
+    "fetch(", ".json()", "http.request", "https.request", "XMLHttpRequest",
+    ".on('data'", '.on("data"', ".on('message'", '.on("message"',
+    "net.Socket", "net.connect", "tls.connect", "response.body", "res.body",
+)
+
+
+def _possible_external_origin_hint(pkg_dir, file_, method_qualified):
+    """Best-effort, additive-only annotation for a Serialize DoS finding serialize_dos_r03.py's
+    frozen reducer already marked attacker_controlled=false: re-reads the REAL source file
+    (still on disk at this point in run_one(), before work_root cleanup) and checks whether the
+    enclosing function's own body (via _js_function_body_span() above, whole-file fallback if
+    that fails) contains any EXTERNAL_ORIGIN_HINT_PATTERNS substring. Returns None (attach
+    nothing) when no pattern matches -- the common, unremarkable case. Never touches
+    attacker_controlled/crash_dos_classification/size_structure_dos_classification themselves."""
+    if not file_:
+        return None
+    func_short_name = method_qualified.rsplit(":", 1)[-1] if method_qualified else ""
+    try:
+        with open(os.path.join(pkg_dir, file_), errors="replace") as f:
+            source_text = f.read()
+    except OSError:
+        return None
+    body = _js_function_body_span(source_text, func_short_name)
+    scope_text = body if body is not None else source_text
+    matched = [p for p in EXTERNAL_ORIGIN_HINT_PATTERNS if p in scope_text]
+    if not matched:
+        return None
+    return {
+        "note": ("Best-effort keyword hint, not a re-classification: the enclosing function's "
+                 "own source text (or, if the function body couldn't be isolated, the whole "
+                 "file) contains a pattern associated with network I/O or parsed inbound "
+                 "payloads. attacker_controlled above is unchanged and still reflects only the "
+                 "frozen reducer's own classification -- this field exists so a reviewer sees "
+                 "'worth a second look' instead of having to independently rediscover it."),
+        "scope": "function" if body is not None else "whole_file_fallback",
+        "matched_patterns": matched,
+    }
 
 
 def rss_now():
@@ -801,6 +919,40 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"js frontend coverage check failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["js_frontend_coverage"] = {"seconds": time.time() - t0}
+
+    # JS-FRONTEND-INTEGRITY-FIX01: js_frontend_coverage["still_missing_after_correction"]
+    # (set above, inside the `if missing:`/`if ok2:` branches) was already being computed with
+    # real evidence -- fcc.list_cpg_files() re-checked against the PASS-2 (post-recovery-staging)
+    # CPG -- but nothing downstream ever read it. Confirmed as a real, non-hypothetical gap
+    # against a real Mozilla npm package (addons-linter@10.10.0): its one substantive source
+    # file, dist/addons-linter.js (937KB, 7647 lines, containing lines up to 111,940 chars of
+    # embedded WebExtension-API-schema JSON), was correctly detected as a FOLDER_IGNORE-missing
+    # entrypoint, correctly staged into a renamed dir to escape jssrc2cpg's folder-name ignore
+    # rule, and the pass-2 rebuild still didn't produce a single function/call/identifier from it
+    # (confirmed independently: js_facts.json's functions/calls/identifiers/locals/members arrays
+    # were all empty despite the file containing hundreds of real constructs by manual read; a
+    # standalone jssrc2cpg re-run against the same source reproduced the frontend's own "you may
+    # want to check the DEBUG logs for a list of files that are ignored by default" warning) --
+    # i.e. the folder-ignore recovery mechanism above is real and necessary but not sufficient
+    # for this failure shape (a pathologically-long-line file the parser itself chokes on,
+    # unrelated to which folder it lives in). Every one of this package's 11 JS/TS classes
+    # reported a clean "0 findings" that was, in truth, "0 findings because nothing was parsed" --
+    # indistinguishable, before this fix, from a genuinely verified clean scan.
+    #
+    # This is deliberately NOT a hard pipeline failure (unlike every RESOURCE_LIMIT/EXPORT_FAILED/
+    # NORMALIZATION_FAILED status above, which returns the record early): a package can have
+    # several package.json-resolved entrypoints where only one fails recovery, and discarding the
+    # other, genuinely-covered files' real results would throw away good evidence over a partial
+    # gap. Instead this surfaces the ALREADY-COMPUTED evidence at the top level of the record,
+    # unmissable and always present (empty list in the common/clean case) rather than buried three
+    # levels deep inside js_frontend_coverage and only populated when a correction was even
+    # attempted -- so any consumer of this record (a report, the aggregator, a future scan) can
+    # check `if record["js_frontend_unparsed_entrypoints"]:` once instead of independently
+    # rediscovering that a "clean" result may mean "never analyzed."
+    record["js_frontend_unparsed_entrypoints"] = [
+        {"relpath": r, "reason": rs}
+        for r, rs in js_frontend_coverage.get("still_missing_after_correction", [])
+    ]
 
     cpp_raw = os.path.join(work, "cpp_raw")
     rc, secs, mem, err = run_stage(
@@ -1288,6 +1440,31 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         for finding in sd_result.get("findings", []):
             loop_stats = sd_adjudication_loop_by_key.get(finding.get("package"), {})
             finding["unaddressed_alternative_count"] = loop_stats.get("unaddressed_alternative_count")
+            # SD-ATTRIBUTION-HINT-FIX01: serialize_dos_r03.derive() itself is frozen and its
+            # "attacker_controlled" field is read verbatim from the frozen Joern producer's own
+            # source-classification (a fixed pattern list built around classic HTTP-server-input
+            # shapes, e.g. req.body/req.query) -- neither is touched here. Confirmed real on a
+            # real Mozilla npm package (web-ext@10.6.0, this session's own hand-trace audit): 13
+            # of 21 attacker_controlled=false findings had values that genuinely originate
+            # OUTSIDE the local CLI invocation (a debug-protocol socket read, an HTTP API
+            # response) -- the classifier's pattern list was simply never scoped to a CLI tool
+            # acting as a network CLIENT. This does not change any verdict (every one of those
+            # 13 was independently hand-verified still-safe, for reasons the classifier doesn't
+            # state -- a loopback-only socket, JSON.parse's inherent acyclicity, an enclosing
+            # try/catch one level up the call stack the same-function-only detector can't see) --
+            # it is a real gap in what the tool SAYS about its own reasoning, not in the verdict
+            # itself. Attaching a best-effort, clearly-labeled, additive HINT (never overriding
+            # attacker_controlled/crash_dos_classification/size_structure_dos_classification,
+            # which stay exactly as the frozen reducer computed them) so a reviewer sees "this
+            # 'not attacker controlled' call also sits in a function that touches network I/O --
+            # worth a second look" instead of having to independently rediscover it by hand, as
+            # this session's own hand-trace audit had to. See _possible_external_origin_hint()
+            # for exactly what real evidence this checks and its disclosed limits.
+            if not finding.get("attacker_controlled"):
+                hint = _possible_external_origin_hint(
+                    pkg_dir, finding.get("file"), finding.get("method"))
+                if hint is not None:
+                    finding["possible_external_origin_hint"] = hint
         record["serialize_dos_classification"] = sd_result.get("classification")
         record["serialize_dos_findings"] = sd_result.get("findings", [])
         # serialize_dos_out.json -- same real bundling precedent as redos_out.json/
