@@ -78,6 +78,17 @@ JS_FRONTEND = "/home/user/bug_tracker/tchecker-research-complete/portable-engine
 POLYGLOT = "/home/user/bug_tracker/tchecker-research-complete/portable-engine-full-review-package/frontends/polyglot/link_napi_facts.py"
 SCANNER_V2 = "/home/user/bug_tracker/semantic-bucket-pilot/scanner-v2"
 
+# Module-level import, not a local `import X` inside run_one() -- a local import of a name that
+# some earlier-defined nested closure in this same function also references makes that name a
+# function-local cell for the WHOLE enclosing function body (Python resolves locals statically,
+# not by execution order), which breaks the closure's own reference to what it expected to be a
+# global. Confirmed as a real bug this way for `importlib` (run_gates_class()'s own closure) when
+# these three were first wired in as local imports; fixed by moving all three here instead.
+sys.path.insert(0, SCANNER_V2)
+import provenance                       # noqa: E402 -- task #35, LOCK_BALANCE/PROTECTED_FIELD/OOB integration
+import reachability_tier                # noqa: E402 -- task #32, same integration
+import staged_enablement                # noqa: E402 -- tasks #36-40, same integration
+
 # REDOS INTEGRATION (roadmap step 8): the frozen R02 producer + reducer, reused verbatim from
 # study/redos_npm/pilot25/run_pilot25_r02.py's own already-validated paths, never modified here.
 R02_PRODUCER = ("/home/user/bug_tracker/tchecker-research-complete/tchecker-property-adjudicator/"
@@ -306,6 +317,42 @@ MALICIOUS_NPM_PRODUCER = os.path.join(
 # adjudicate_iterative-driven template.
 ESCAPE_PARITY_DIR = "/home/user/bug_tracker/tchecker-research-complete/escape-parity-boundary-r01"
 ESCAPE_PARITY_PRODUCER = os.path.join(ESCAPE_PARITY_DIR, "producers", "escape_parity_facts.sc")
+
+# LOCK_BALANCE / PROTECTED_FIELD / OOB_WRITE / OOB_INDEX_WRITE / OOB_READ / OOB_COMPARE
+# INTEGRATION (tasks #36-40, STAGED-ENABLE-R01): six real, gated, npm-corpus-validated C/C++
+# properties -- task #28's own integration-verification pilot
+# (study/integration_verification_pilot/PILOT_CONCLUSION_AND_FOLLOWUPS.md) already reproduced
+# real historical positives fresh through c2cpg (wolfSSL's own real CVE-2026-5264 recovery for
+# LOCK_BALANCE/PROTECTED_FIELD), root-caused and fixed two real defects along the way (a
+# capacity-derivation sentinel-collision bug in OOB_READ; a missing NAN registration idiom that
+# would have wrongly bucketed every NAN-based native function as unreachable), and a real
+# 100-package diagnostic run (`run_diagnostic_100.py`, a separate, one-off script, never this
+# file) produced 3911 real raw findings, `reportable=False` verified on all of them by design.
+# Every piece of supporting machinery this integration needs -- `provenance.py`'s fail-closed
+# reportable formula (task #35), `reachability_tier.py`'s tiered JS-reachability classifier
+# (task #32), `staged_enablement.py`'s per-property enablement gate (tasks #36-40) -- already
+# exists, is gated, and is already merged into develop (confirmed directly by running every one
+# of those gates fresh before writing any of this, not assumed from documentation). What was
+# missing, confirmed by direct grep before writing this: none of it was ever invoked from this
+# file's own real per-package flow -- only from the separate diagnostic script.
+#
+# Same cpp_raw/cpp_facts this file already builds for R04/R05/R06/Nan -- no new fact-generation
+# work, matching the pilot's own central finding for this whole property family. LOCK_BALANCE/
+# PROTECTED_FIELD run as a CLI subprocess (raw TSV dir in, JSON out -- same convention as R04/
+# R05/R06's own scan stages); the four OOB producers run in-process via their own real
+# `emit_candidates(cpp_facts_path)` function (avoids four extra subprocess spawns per package,
+# matching `run_diagnostic_100.py`'s own `run_scanner_json()` precedent exactly).
+#
+# OOB_COMPARE's own producer still runs here, matching `run_diagnostic_100.py`'s own precedent
+# and `evidence_bundle.py`'s own existing REQUIRED `oob_compare_out.json` entry -- it is
+# deliberately, permanently excluded from `staged_enablement.ENABLED_PROPERTIES` (task #33's own
+# real 33-package corpus survey found the detector sound but the bug shape genuinely rare in
+# this corpus, not a wiring gap), so `enforce_staged_enablement()` below always forces its own
+# findings non-reportable (`STAGE_NOT_ENABLED`) regardless of what this producer finds.
+LOCK_BALANCE_VERDICT = os.path.join(SCANNER_V2, "lock_balance_verdict.py")
+PROTECTED_FIELD_VERDICT = os.path.join(SCANNER_V2, "protected_field_verdict.py")
+OOB_TOOLS_DIR = ("/home/user/bug_tracker/tchecker-research-complete/"
+                  "portable-engine-full-review-package/tools")
 
 JS_TS_EXTS = (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")
 CPP_EXTS = (".c", ".cc", ".cpp", ".cxx")
@@ -1548,6 +1595,110 @@ def run_one(pkg_name, version, tarball_url, exception_config, work_root):
         record["detail"] = f"escape_parity_chain.derive() failed: {type(e).__name__}: {e}"
         return record
     record["stages"]["escape_parity_reduce"] = {"seconds": time.time() - t0}
+
+    # LOCK_BALANCE / PROTECTED_FIELD (see module-level comment above): CLI subprocess, raw TSV
+    # dir in, JSON out -- the same convention R04/R05/R06's own scan stages already use.
+    lb_out = os.path.join(work, "lock_balance_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, LOCK_BALANCE_VERDICT, cpp_raw, lb_out],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(lb_out) as f:
+            lb_doc = json.load(f)
+        record["lock_balance_classification"] = lb_doc.get("classification", {})
+        record["lock_balance_findings"] = lb_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["lock_balance_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"lock_balance_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["lock_balance_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"lock_balance scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["lock_balance_scan"] = {"seconds": time.time() - t0}
+
+    pf_out = os.path.join(work, "protected_field_out.json")
+    t0 = time.time()
+    try:
+        subprocess.run([sys.executable, PROTECTED_FIELD_VERDICT, cpp_raw, pf_out],
+                        check=True, timeout=SCAN_TIMEOUT, stdout=subprocess.DEVNULL,
+                        stderr=subprocess.PIPE)
+        with open(pf_out) as f:
+            pf_doc = json.load(f)
+        record["protected_field_classification"] = pf_doc.get("classification", {})
+        record["protected_field_findings"] = pf_doc.get("findings", [])
+    except subprocess.TimeoutExpired:
+        record["stages"]["protected_field_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "RESOURCE_LIMIT"
+        record["detail"] = f"protected_field_scan exceeded {SCAN_TIMEOUT}s"
+        return record
+    except Exception as e:
+        record["stages"]["protected_field_scan"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"protected_field scan failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["protected_field_scan"] = {"seconds": time.time() - t0}
+
+    # OOB_WRITE / OOB_INDEX_WRITE / OOB_READ / OOB_COMPARE (see module-level comment above):
+    # in-process via each module's own real emit_candidates(cpp_facts_path), matching
+    # run_diagnostic_100.py's own run_scanner_json() precedent -- avoids four extra subprocess
+    # spawns per package. {"candidates": [...]} written to disk for evidence-bundle parity with
+    # every other property's own *_out.json.
+    sys.path.insert(0, OOB_TOOLS_DIR)
+    for _mod_name, _key, _fname in (
+            ("oob_write_verdict", "oob_write_candidates", "oob_write_out.json"),
+            ("oob_index_write_verdict", "oob_index_write_candidates", "oob_index_write_out.json"),
+            ("oob_read_verdict", "oob_read_candidates", "oob_read_out.json"),
+            ("oob_compare_verdict", "oob_compare_candidates", "oob_compare_out.json")):
+        _stage_name = _mod_name.replace("_verdict", "_scan")
+        t0 = time.time()
+        try:
+            # importlib is already imported at module level (line 60) -- a local `import
+            # importlib` here would make it a function-local cell for this whole run_one()
+            # function and break run_gates_class()'s own earlier closure reference to it
+            # (confirmed as a real bug: NameError "cannot access free variable 'importlib'"
+            # on guard_fallthrough_reduce, which runs before this block).
+            _mod = importlib.import_module(_mod_name)
+            _cands = _mod.emit_candidates(cpp_facts)
+            with open(os.path.join(work, _fname), "w") as f:
+                json.dump({"candidates": _cands}, f)
+            record[_key] = _cands
+        except Exception as e:
+            record["stages"][_stage_name] = {"seconds": time.time() - t0}
+            record["status"] = "NORMALIZATION_FAILED"
+            record["detail"] = f"{_mod_name} scan failed: {type(e).__name__}: {e}"
+            return record
+        record["stages"][_stage_name] = {"seconds": time.time() - t0}
+
+    # PROVENANCE + REACHABILITY + STAGED ENABLEMENT (tasks #35, #32, #36-40): applied once, over
+    # the whole record, after every producer above (including R04/R05/R06/Nan) has run. Also
+    # closes a real, previously-disclosed gap: this file has never called provenance.enrich_
+    # record() before, so r04_findings/r05_findings/r06_findings/nan_findings have never had a
+    # `reportable` field at all (resource_guard_verdict_r06.py's own module comment: "reportable
+    # is not yet set at that point" before this call -- confirmed by direct grep before writing
+    # this). finalize_reportability() uses setdefault for scanner_candidate/applicability_status/
+    # adjudication_status (never overwrites an existing value) and only ever narrows -- never
+    # promotes -- an already-affirmative value, so this is safe to introduce here for the first
+    # time rather than a behavior change to something already relied upon.
+    t0 = time.time()
+    try:
+        prov_manifest = provenance.build_source_manifest(pkg_dir, tb, pkg_name, version)
+        provenance.enrich_record(record, cpp_raw, prov_manifest, pkg_dir)
+        with open(js_facts_adapted) as f:
+            js_doc = json.load(f)
+        with open(cpp_facts) as f:
+            cpp_doc = json.load(f)
+        reachability_tier.classify_record_reachability(record, js_doc, cpp_doc)
+        staged_enablement.enforce_staged_enablement(record)
+    except Exception as e:
+        record["stages"]["staged_property_enrichment"] = {"seconds": time.time() - t0}
+        record["status"] = "NORMALIZATION_FAILED"
+        record["detail"] = f"provenance/reachability/staged_enablement failed: {type(e).__name__}: {e}"
+        return record
+    record["stages"]["staged_property_enrichment"] = {"seconds": time.time() - t0}
 
     record["status"] = "ANALYZED"
     return record
